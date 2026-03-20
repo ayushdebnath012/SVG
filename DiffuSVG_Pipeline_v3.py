@@ -162,8 +162,10 @@ def install():
     log.info("Installing Python packages …")
     subprocess.run([
         sys.executable, "-m", "pip", "install", "-q",
-        "diffusers>=0.30", "transformers>=4.40", "accelerate>=0.27",
+        "huggingface_hub>=0.23",
+        "transformers>=4.40", "accelerate>=0.27",
         "bitsandbytes>=0.43", "peft>=0.10", "trl>=0.8",
+        "diffusers>=0.30",   # needed for Qwen2-VL processor internals
         "cairosvg", "pillow", "tqdm", "sentencepiece",
         "open_clip_torch", "vtracer",
         "google-generativeai",
@@ -301,7 +303,7 @@ def mine_failures(path: Optional[str]) -> list[str]:
 # STEP 4 — Generate (prompt, SVG) pairs via FLUX.1-schnell + vtracer
 # ════════════════════════════════════════════════════════════════════════════
 def generate_dataset(prompts: list[str]) -> list[dict]:
-    from diffusers import FluxPipeline
+    from huggingface_hub import InferenceClient
 
     # ── Output dirs ──
     s1_dir  = Path(cfg.WORKING_DIR) / "stage1_generated"
@@ -310,15 +312,12 @@ def generate_dataset(prompts: list[str]) -> list[dict]:
     Path(cfg.OUTPUT_DIR).mkdir(parents=True, exist_ok=True)
     img_dir = Path(cfg.OUTPUT_DIR) / "images";  img_dir.mkdir(exist_ok=True)
 
-    log.info("Loading FLUX.1-schnell …")
-    flux_token = cfg.HF_TOKEN if "MISSING" not in cfg.HF_TOKEN else None
-    pipe = FluxPipeline.from_pretrained(
-        cfg.SD_MODEL, torch_dtype=torch.bfloat16,
-        token=flux_token,
+    # Use HF Inference API — no local download, no VRAM used for FLUX
+    log.info("Using FLUX.1-schnell via HF Inference API (nscale provider) …")
+    client = InferenceClient(
+        provider="nscale",
+        api_key=cfg.HF_TOKEN,
     )
-    pipe.enable_sequential_cpu_offload()
-    pipe.vae.enable_slicing()
-    pipe.vae.enable_tiling()
 
     vec = Vectorizer(
         resolution=cfg.VEC_RESOLUTION,
@@ -333,13 +332,10 @@ def generate_dataset(prompts: list[str]) -> list[dict]:
 
     for i, prompt in enumerate(prompts):
         try:
-            torch.cuda.empty_cache()
-            img = pipe(
+            img = client.text_to_image(
                 cfg.SD_STYLE_PREFIX + prompt,
-                num_inference_steps=cfg.SD_STEPS,
-                guidance_scale=cfg.SD_GUIDANCE,
-                width=512, height=512,
-            ).images[0]
+                model=cfg.SD_MODEL,
+            )
 
             img_path = str(img_dir / f"{i:05d}.png")
             img.save(img_path)
@@ -364,8 +360,6 @@ def generate_dataset(prompts: list[str]) -> list[dict]:
 
     (s1_dir / "prompts.txt").write_text("\n".join(saved_prompts), encoding="utf-8")
     log.info(f"Stage 1 → {s1_dir}  ({len(dataset)} pairs)")
-
-    del pipe; gc.collect(); torch.cuda.empty_cache()
     return dataset
 
 
