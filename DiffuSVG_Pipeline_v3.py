@@ -311,8 +311,10 @@ def generate_dataset(prompts: list[str]) -> list[dict]:
     img_dir = Path(cfg.OUTPUT_DIR) / "images";  img_dir.mkdir(exist_ok=True)
 
     log.info("Loading FLUX.1-schnell …")
+    flux_token = cfg.HF_TOKEN if "MISSING" not in cfg.HF_TOKEN else None
     pipe = FluxPipeline.from_pretrained(
         cfg.SD_MODEL, torch_dtype=torch.bfloat16,
+        token=flux_token,
     )
     pipe.enable_sequential_cpu_offload()
     pipe.vae.enable_slicing()
