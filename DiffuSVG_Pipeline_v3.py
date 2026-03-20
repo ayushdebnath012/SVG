@@ -168,7 +168,7 @@ def install():
         "diffusers>=0.30",   # needed for Qwen2-VL processor internals
         "cairosvg", "pillow", "tqdm", "sentencepiece",
         "open_clip_torch", "vtracer",
-        "google-generativeai",
+        "google-genai",
     ], check=True)
     log.info("All packages installed.")
 
@@ -313,6 +313,9 @@ def generate_dataset(prompts: list[str]) -> list[dict]:
     img_dir = Path(cfg.OUTPUT_DIR) / "images";  img_dir.mkdir(exist_ok=True)
 
     # Use HF Inference API — no local download, no VRAM used for FLUX
+    if "MISSING" in cfg.HF_TOKEN:
+        log.error("HF_TOKEN is missing — cannot call FLUX API. Set it in Colab/Kaggle Secrets.")
+        return []
     log.info("Using FLUX.1-schnell via HF Inference API (nscale provider) …")
     client = InferenceClient(
         provider="nscale",
@@ -369,15 +372,15 @@ def generate_dataset(prompts: list[str]) -> list[dict]:
 def vlm_quality_gate(dataset: list[dict]) -> list[dict]:
     """Use Gemini-1.5-flash to verify SVG ↔ prompt alignment.
     Free tier: 15 req/min, 1500 req/day — more than enough."""
-    import google.generativeai as genai
+    from google import genai
+    from google.genai import types
     import time
 
     if "MISSING" in cfg.GEMINI_API_KEY:
         log.warning("GEMINI_API_KEY missing — skipping gate, keeping all samples.")
         return dataset
 
-    genai.configure(api_key=cfg.GEMINI_API_KEY)
-    gate_model = genai.GenerativeModel(cfg.GEMINI_GATE_MODEL)
+    client = genai.Client(api_key=cfg.GEMINI_API_KEY)
 
     # ── Output dirs ──
     s2_dir      = Path(cfg.WORKING_DIR) / "stage2_filtered"
@@ -396,11 +399,16 @@ def vlm_quality_gate(dataset: list[dict]) -> list[dict]:
             if rendered is None:
                 continue
 
-            response = gate_model.generate_content([
-                rendered,
-                (f"This SVG image was generated for the prompt: \"{item['prompt']}\". "
-                 "Does the image accurately represent the prompt? Answer only YES or NO."),
-            ])
+            buf = io.BytesIO()
+            rendered.save(buf, format="PNG")
+            response = client.models.generate_content(
+                model=cfg.GEMINI_GATE_MODEL,
+                contents=[
+                    types.Part.from_bytes(data=buf.getvalue(), mime_type="image/png"),
+                    (f"This SVG image was generated for the prompt: \"{item['prompt']}\". "
+                     "Does the image accurately represent the prompt? Answer only YES or NO."),
+                ],
+            )
             answer = response.text.strip().upper()
 
             if "YES" in answer:
