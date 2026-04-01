@@ -67,7 +67,7 @@ class PipelineConfig:
     """All parameters from the DiffuSVG Pipeline Architecture diagram."""
 
     # ── Paths ──
-    HF_TOKEN: str         = "YOUR_HF_TOKEN"
+    HF_TOKEN: str         = "YOUR_HF_TOKEN_HERE"
     WORKING_DIR: str      = "./diffusvg_output"
     RESULTS_JSON: str     = ""  # input results.json for failure mining
 
@@ -314,7 +314,7 @@ class PotraceVectorizer:
 
     def __init__(self, threshold: float = 0.45, turdsize: int = 2,
                  alphamax: float = 1.0, opttolerance: float = 0.2,
-                 resolution: int = 512, contrast_stretch: str = "2%x98%", num_colors: int = 8):
+                 resolution: int = 512, contrast_stretch: str = "2%x98%"):
         if not shutil.which("potrace"):
             log.info("potrace not found — attempting auto-install …")
             subprocess.run(
@@ -335,133 +335,32 @@ class PotraceVectorizer:
         self.opttolerance = opttolerance
         self.resolution = resolution
         self.contrast_stretch = contrast_stretch
-        self.num_colors = num_colors
 
     def vectorize(self, image: Image.Image) -> Optional[str]:
-        """Convert a PIL Image to SVG string using multi-pass Potrace."""
-        if not self._has_magick:
-            return self._vectorize_bw(image)
-
-        with tempfile.TemporaryDirectory() as tmpdir:
-            input_path = os.path.join(tmpdir, "input.png")
-            image.convert("RGB").resize(
-                (self.resolution, self.resolution), Image.LANCZOS
-            ).save(input_path)
-
-            quant_path = os.path.join(tmpdir, "quantised.png")
-            subprocess.run(
-                [
-                    "convert", input_path,
-                    "+dither",
-                    "-colors", str(self.num_colors),
-                    quant_path,
-                ],
-                capture_output=True,
-                timeout=30,
-            )
-
-            if not os.path.exists(quant_path):
-                log.warning("ImageMagick quantization failed, using single-pass")
-                return self._vectorize_bw(image)
-
-            result = subprocess.run(
-                ["convert", quant_path, "-format", "%c", "histogram:info:-"],
-                capture_output=True, text=True, timeout=15,
-            )
-            colors = self._parse_palette(result.stdout)
-            if not colors:
-                return self._vectorize_bw(image)
-
-            svg_layers = []
-            quant_img = Image.open(quant_path).convert("RGB")
-            quant_arr = np.array(quant_img)
-
-            for hex_color, rgb in colors:
-                r, g, b = rgb
-                tolerance = 20
-                mask = (
-                    (np.abs(quant_arr[:, :, 0].astype(int) - r) < tolerance) &
-                    (np.abs(quant_arr[:, :, 1].astype(int) - g) < tolerance) &
-                    (np.abs(quant_arr[:, :, 2].astype(int) - b) < tolerance)
-                )
-
-                if mask.sum() < 50:
-                    continue
-
-                bmp_path = os.path.join(tmpdir, f"layer_{hex_color[1:]}.bmp")
-                svg_path = os.path.join(tmpdir, f"layer_{hex_color[1:]}.svg")
-
-                mask_img = Image.fromarray((mask * 255).astype(np.uint8), mode="L").convert("1")
-                mask_img.save(bmp_path, format="BMP")
-
-                if not self._run_potrace(bmp_path, svg_path):
-                    continue
-
-                with open(svg_path, "r") as f:
-                    layer_svg = f.read()
-
-                paths = self._extract_paths(layer_svg, hex_color)
-                svg_layers.extend(paths)
-
-            if not svg_layers:
-                return self._vectorize_bw(image)
-
-            content = "\n".join(svg_layers)
-            scale_xy = 200.0 / self.resolution
-            merged = (
-                '<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">\n'
-                f'<g transform="scale({scale_xy:.4f},{scale_xy:.4f})">\n'
-                f'<g transform="translate(0.000000,{self.resolution}.000000) scale(0.100000,-0.100000)">\n'
-                f'{content}\n'
-                "</g></g></svg>"
-            )
-            return merged
-
-    def _parse_palette(self, histogram_text: str) -> list:
-        """Parse ImageMagick histogram output → list of (hex, (r,g,b))."""
-        colors = []
-        for line in histogram_text.splitlines():
-            m = re.search(r'#([0-9A-Fa-f]{6})', line)
-            if m:
-                hex_color = "#" + m.group(1).upper()
-                r = int(m.group(1)[0:2], 16)
-                g = int(m.group(1)[2:4], 16)
-                b = int(m.group(1)[4:6], 16)
-                colors.append((hex_color, (r, g, b)))
-        seen = set()
-        unique = []
-        for c in colors:
-            if c[0] not in seen:
-                seen.add(c[0])
-                unique.append(c)
-        return unique
-
-    def _extract_paths(self, svg: str, fill_color: str) -> list:
-        """Extract <path> elements from a Potrace SVG and recolour them."""
-        paths = re.findall(r'<path[^>]*/>', svg, re.DOTALL)
-        coloured = []
-        for p in paths:
-            # Remove existing fill, set new fill
-            p = re.sub(r'fill="[^"]*"', '', p)
-            p = p.replace('<path', f'<path fill="{fill_color}"', 1)
-            coloured.append(p)
-        return coloured
-
-    def _vectorize_bw(self, image: Image.Image) -> Optional[str]:
-        """Convert a PIL Image to SVG string via Potrace (single pass fallback)."""
+        """Convert a PIL Image to SVG string via Potrace."""
         with tempfile.TemporaryDirectory() as tmpdir:
             bmp_path = os.path.join(tmpdir, "input.bmp")
             svg_path = os.path.join(tmpdir, "output.svg")
 
+            # Step 1: Preprocess → 1-bit BMP
             self._to_bmp(image, bmp_path)
 
+            # Step 2: Potrace BMP → SVG
             if not self._run_potrace(bmp_path, svg_path):
                 return None
 
+            # Step 3: Read and postprocess
             with open(svg_path, "r", encoding="utf-8") as f:
                 svg = f.read()
 
             return self._postprocess(svg)
+
+    def _to_bmp(self, image: Image.Image, path: str):
+        """Convert PIL Image to 1-bit BMP for Potrace."""
+        if self._has_magick:
+            self._to_bmp_imagemagick(image, path)
+        else:
+            self._to_bmp_pil(image, path)
 
     def _to_bmp_imagemagick(self, image: Image.Image, path: str):
         """ImageMagick preprocessing → 1-bit BMP (matches whiteboard)."""
