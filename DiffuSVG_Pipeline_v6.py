@@ -14,25 +14,45 @@ import subprocess, sys, os, gc, json, logging, re, random, shutil
 from pathlib import Path
 from typing import List, Optional
 
-# ── Install dependencies ─────────────────────────────────────────────────────
-def _install():
-    pkgs = [
-        "transformers>=4.45.0", "accelerate>=0.26.0", "peft>=0.13.0",
-        "bitsandbytes>=0.43.0", "datasets", "open_clip_torch",
-        "cairosvg", "pillow", "scipy",
-    ]
-    for p in pkgs:
-        subprocess.check_call([sys.executable, "-m", "pip", "install", "-q", p])
+# Must be set BEFORE any torch/CUDA import
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+os.environ["CUDA_LAUNCH_BLOCKING"] = "1"
 
-try:
-    import torch, numpy as np
-    from PIL import Image
-    from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training, TaskType
-except ImportError:
-    _install()
-    import torch, numpy as np
-    from PIL import Image
-    from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training, TaskType
+# ── Ensure bitsandbytes >= 0.46.1 (Kaggle ships an older version) ─────────
+def _ensure_deps():
+    """Check bitsandbytes version; upgrade + restart kernel if needed."""
+    need_restart = False
+    try:
+        import bitsandbytes
+        from packaging.version import Version
+        if Version(bitsandbytes.__version__) < Version("0.46.1"):
+            print(f"⚠️  bitsandbytes {bitsandbytes.__version__} is too old, upgrading...")
+            need_restart = True
+    except ImportError:
+        need_restart = True
+
+    if need_restart:
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "-q", "-U",
+            "bitsandbytes>=0.46.1", "peft>=0.13.0", "accelerate>=0.26.0"])
+        # Also install other deps while we're at it
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "-q",
+            "cairosvg", "open_clip_torch"])
+        print("✅ Dependencies upgraded. Restarting kernel...")
+        # Auto-restart on Kaggle/Colab
+        import IPython
+        IPython.Application.instance().kernel.do_shutdown(True)
+        # If we reach here, restart didn't work — tell user
+        raise SystemExit("Please restart the kernel and re-run this cell.")
+
+    # Install non-restart deps quietly
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "-q",
+        "cairosvg", "open_clip_torch", "peft>=0.13.0"])
+
+_ensure_deps()
+
+import torch, numpy as np
+from PIL import Image
+from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training, TaskType
 
 os.environ["PYTORCH_ALLOC_CONF"] = "expandable_segments:True"
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
@@ -70,13 +90,13 @@ class Config:
     MIN_SVG_CHARS: int = 50       # skip trivially short SVGs
     VAL_SPLIT: float = 0.1
 
-    # Model
-    VLM_MODEL: str = "Qwen/Qwen2-VL-7B-Instruct"
-    MAX_SEQ_LEN: int = 2048
+    # Model — 2B fits comfortably on T4; 7B needs >10GB free
+    VLM_MODEL: str = "Qwen/Qwen2-VL-2B-Instruct"
+    MAX_SEQ_LEN: int = 1024  # SVGs are short; saves ~50% VRAM vs 2048
 
     # LoRA
-    LORA_R: int = 16
-    LORA_ALPHA: int = 32
+    LORA_R: int = 8
+    LORA_ALPHA: int = 16
     LORA_DROPOUT: float = 0.05
 
     # Training
@@ -276,12 +296,19 @@ def train_lora(dataset: list):
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
 
+    # Aggressively free GPU before model load
+    gc.collect()
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
+        torch.cuda.reset_peak_memory_stats()
+
     # Check GPU memory
     if torch.cuda.is_available():
         free_gb = torch.cuda.mem_get_info()[0] / 1e9
-        log.info(f"GPU free before model load: {free_gb:.1f} GB")
-        if free_gb < 3.0:
-            log.error(f"Only {free_gb:.1f} GB free — not enough.")
+        total_gb = torch.cuda.mem_get_info()[1] / 1e9
+        log.info(f"GPU: {free_gb:.1f} GB free / {total_gb:.1f} GB total")
+        if free_gb < 1.0:
+            log.error(f"Only {free_gb:.1f} GB free — restart the kernel to free GPU memory.")
             return None, None
 
     # Load model with 4-bit quantization
@@ -344,6 +371,8 @@ def train_lora(dataset: list):
         dataloader_pin_memory=False,
         gradient_checkpointing=True,
         gradient_checkpointing_kwargs={"use_reentrant": False},
+        optim="paged_adamw_8bit",
+        max_grad_norm=0.3,
     )
 
     trainer = Trainer(
