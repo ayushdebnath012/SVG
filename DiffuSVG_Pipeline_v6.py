@@ -550,6 +550,9 @@ def main():
     # ── Configure paths ──────────────────────────────────────────────────
     # Look for training_pairs.json in multiple locations
     candidates = [
+        # Kaggle dataset input path
+        "/kaggle/input/datasets/rkamondal/diffusvg-v5/training_pairs.json",
+        "/kaggle/input/diffusvg-v5/training_pairs.json",
         os.path.join(WORKING_DIR, "diffusvg_v5_output", "training_pairs.json"),
         os.path.join(WORKING_DIR, "dataset", "training_pairs.json"),
         os.path.join(WORKING_DIR, "training_pairs.json"),
