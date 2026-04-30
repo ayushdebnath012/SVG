@@ -23,13 +23,14 @@ SD_GUIDANCE     = 5.0
 SD_SEED         = 42
 USE_VLM_FILTER  = True          # Qwen2VL Y/X gate as shown in whiteboard
 VLM_MODEL       = "Qwen/Qwen2-VL-2B-Instruct"
-EPOCHS          = 10
+EPOCHS          = 3
 FORCE_REGEN     = True          # Clear existing dataset and re-run
 BATCH_SIZE      = 1
 GRAD_ACCUM      = 8   # higher = handles longer sequences (1024 tok) without OOM
 LEARNING_RATE   = 2e-4
-LORA_R          = 32
-LORA_ALPHA      = 64
+LORA_R          = 4
+LORA_ALPHA      = 16
+LORA_DROPOUT    = 0.15
 assert HF_TOKEN, "Set HF_TOKEN above"
 
 # ── STEP 0: Install ───────────────────────────────────────────────────────
@@ -258,7 +259,7 @@ print(f"VRAM free: {torch.cuda.memory_reserved(0)/1e9:.2f} GB reserved, "
       f"{torch.cuda.memory_allocated(0)/1e9:.2f} GB allocated")
 
 # ── STEP 11: Fine-tune (fully inline) ────────────────────────────────────
-from transformers import AutoTokenizer, TrainingArguments, Trainer, Qwen2VLForConditionalGeneration, BitsAndBytesConfig
+from transformers import AutoTokenizer, EarlyStoppingCallback, TrainingArguments, Trainer, Qwen2VLForConditionalGeneration, BitsAndBytesConfig
 from peft import LoraConfig, get_peft_model, TaskType, prepare_model_for_kbit_training
 
 SYSTEM_PROMPT = (
@@ -323,7 +324,7 @@ else:
         trust_remote_code=True, low_cpu_mem_usage=True)
     ft_model = prepare_model_for_kbit_training(ft_model, use_gradient_checkpointing=True)
     ft_model = get_peft_model(ft_model, LoraConfig(
-        task_type=TaskType.CAUSAL_LM, r=LORA_R, lora_alpha=LORA_ALPHA, lora_dropout=0.05,
+        task_type=TaskType.CAUSAL_LM, r=LORA_R, lora_alpha=LORA_ALPHA, lora_dropout=LORA_DROPOUT,
         target_modules=["q_proj","k_proj","v_proj","o_proj","gate_proj","up_proj","down_proj"], bias="none"))
     ft_model.print_trainable_parameters()
 
@@ -346,6 +347,7 @@ else:
             report_to="none", seed=42, remove_unused_columns=False,
             dataloader_pin_memory=False, dataloader_num_workers=0,
         ),
+        callbacks=[EarlyStoppingCallback(early_stopping_patience=1)] if _val_recs else None,
     )
     print("Training ..."); trainer.train()
 

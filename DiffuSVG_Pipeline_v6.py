@@ -95,12 +95,12 @@ class Config:
     MAX_SEQ_LEN: int = 1024  # SVGs are short; saves ~50% VRAM vs 2048
 
     # LoRA
-    LORA_R: int = 8
+    LORA_R: int = 4
     LORA_ALPHA: int = 16
-    LORA_DROPOUT: float = 0.05
+    LORA_DROPOUT: float = 0.15
 
     # Training
-    EPOCHS: int = 5
+    EPOCHS: int = 3
     BATCH_SIZE: int = 1
     GRAD_ACCUM: int = 8
     LEARNING_RATE: float = 1e-4

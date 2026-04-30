@@ -93,15 +93,15 @@ class Config:
 
     VLM_MODEL: str         = "Qwen/Qwen2-VL-7B-Instruct"
     MAX_SEQ_LEN: int       = 1536
-    EPOCHS: int            = 5
+    EPOCHS: int            = 3
     BATCH_SIZE: int        = 1
     GRAD_ACCUM: int        = 8
     LEARNING_RATE: float   = 1e-4
     WARMUP_RATIO: float    = 0.05
     VAL_SPLIT: float       = 0.1
-    LORA_R: int            = 16
-    LORA_ALPHA: int        = 32
-    LORA_DROPOUT: float    = 0.05
+    LORA_R: int            = 4
+    LORA_ALPHA: int        = 16
+    LORA_DROPOUT: float    = 0.15
 
     CLIP_MODEL: str        = "openai/clip-vit-base-patch32"
 
@@ -791,7 +791,7 @@ class SVGCausalDataset(torch.utils.data.Dataset):
 def train_lora(dataset: list[dict]):
     from transformers import (
         AutoTokenizer, Qwen2VLForConditionalGeneration,
-        BitsAndBytesConfig, TrainingArguments, Trainer,
+        BitsAndBytesConfig, EarlyStoppingCallback, TrainingArguments, Trainer,
     )
     from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training, TaskType
 
@@ -871,10 +871,14 @@ def train_lora(dataset: list[dict]):
         gradient_checkpointing_kwargs={"use_reentrant": False},
     )
 
+    callbacks = [GDriveCheckpointCallback()]
+    if val_ds:
+        callbacks.append(EarlyStoppingCallback(early_stopping_patience=1))
+
     trainer = Trainer(
         model=model, args=training_args,
         train_dataset=train_ds, eval_dataset=val_ds,
-        callbacks=[GDriveCheckpointCallback()],
+        callbacks=callbacks,
     )
     log.info(f"Training: {len(train_ds)} train, {len(val_ds) if val_ds else 0} val samples.")
     trainer.train()
