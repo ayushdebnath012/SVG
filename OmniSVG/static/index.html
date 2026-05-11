@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OmniSVG — Text to SVG</title>
+  <style>
+    /* ── Reset & base ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0f1117;
+      --surface:   #1a1d27;
+      --surface2:  #22263a;
+      --border:    #2e3350;
+      --accent:    #7c6ff7;
+      --accent2:   #a78bfa;
+      --green:     #34d399;
+      --red:       #f87171;
+      --yellow:    #fbbf24;
+      --text:      #e2e8f0;
+      --muted:     #7f8db0;
+      --radius:    12px;
+      --shadow:    0 4px 32px rgba(0,0,0,.45);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ── Layout ───────────────────────────────────────────────── */
+    .page {
+      width: 100%;
+      max-width: 1100px;
+      padding: 32px 20px 80px;
+    }
+
+    /* ── Header ───────────────────────────────────────────────── */
+    header {
+      text-align: center;
+      padding: 48px 0 40px;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .logo-icon {
+      width: 52px; height: 52px;
+      background: linear-gradient(135deg, var(--accent), #c084fc);
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px;
+      box-shadow: 0 0 24px rgba(124,111,247,.4);
+    }
+
+    .logo-text {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -.5px;
+      background: linear-gradient(135deg, #fff 30%, var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .tagline {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.55;
+    }
+
+    /* ── Status pill ──────────────────────────────────────────── */
+    #status-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 32px;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .status-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--yellow);
+      animation: pulse 1.4s ease-in-out infinite;
+    }
+    .status-dot.ready  { background: var(--green); animation: none; }
+    .status-dot.error  { background: var(--red);   animation: none; }
+
+    @keyframes pulse {
+      0%,100% { opacity: .4; transform: scale(.8); }
+      50%      { opacity: 1;  transform: scale(1.2); }
+    }
+
+    /* ── Main card grid ───────────────────────────────────────── */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    @media(max-width: 780px) { .grid { grid-template-columns: 1fr; } }
+
+    /* ── Cards ────────────────────────────────────────────────── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+
+    .card-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent2);
+      margin-bottom: 14px;
+    }
+
+    /* ── Prompt input ─────────────────────────────────────────── */
+    .prompt-wrap { position: relative; }
+
+    textarea#prompt {
+      width: 100%;
+      min-height: 110px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 0.97rem;
+      line-height: 1.6;
+      padding: 14px 16px;
+      resize: vertical;
+      outline: none;
+      transition: border-color .2s;
+      font-family: inherit;
+    }
+    textarea#prompt:focus { border-color: var(--accent); }
+    textarea#prompt::placeholder { color: var(--muted); }
+
+    .char-count {
+      text-align: right;
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    /* ── Example chips ────────────────────────────────────────── */
+    .chip-label {
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin: 14px 0 8px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .6px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 5px 13px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all .15s;
+      user-select: none;
+    }
+    .chip:hover {
+      border-color: var(--accent);
+      color: var(--accent2);
+      background: rgba(124,111,247,.1);
+    }
+
+    /* ── Settings ─────────────────────────────────────────────── */
+    details.adv { margin-top: 18px; }
+
+    details.adv summary {
+      cursor: pointer;
+      font-size: 0.8rem;
+      color: var(--muted);
+      user-select: none;
+      list-style: none;
+      display: flex; align-items: center; gap: 6px;
+    }
+    details.adv summary::after { content: '▸'; transition: transform .2s; }
+    details[open].adv summary::after { transform: rotate(90deg); }
+
+    .adv-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+    @media(max-width:500px) { .adv-grid { grid-template-columns: 1fr; } }
+
+    .field label {
+      display: block;
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+
+    .field input[type=range] { width: 100%; accent-color: var(--accent); }
+
+    .field .val {
+      font-size: 0.78rem;
+      color: var(--accent2);
+      float: right;
+    }
+
+    .field select,
+    .field input[type=number] {
+      width: 100%;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      font-size: 0.85rem;
+      padding: 6px 10px;
+      outline: none;
+    }
+
+    /* ── Generate button ──────────────────────────────────────── */
+    .btn-generate {
+      margin-top: 20px;
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, var(--accent) 0%, #a855f7 100%);
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity .2s, transform .15s, box-shadow .2s;
+      letter-spacing: .3px;
+      box-shadow: 0 0 18px rgba(124,111,247,.35);
+    }
+    .btn-generate:hover:not(:disabled) {
+      opacity: .92;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 24px rgba(124,111,247,.55);
+    }
+    .btn-generate:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+    .btn-cancel { background: #374151 !important; margin-top: 8px; }
+
+    /* ── Output panel ─────────────────────────────────────────── */
+    .output-card {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    /* Preview */
+    .preview-box {
+      aspect-ratio: 1;
+      background: #fff;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+      min-height: 220px;
+    }
+
+    .preview-box svg,
+    .preview-box img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .preview-placeholder {
+      text-align: center;
+      color: #aaa;
+    }
+    .preview-placeholder .ph-icon { font-size: 3.5rem; margin-bottom: 10px; opacity: .25; }
+    .preview-placeholder p { font-size: 0.82rem; color: #bbb; }
+
+    /* Spinner overlay */
+    .spinner-overlay {
+      position: absolute; inset: 0;
+      background: rgba(255,255,255,.92);
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      border-radius: 8px;
+    }
+    .spinner-overlay.active { display: flex; }
+
+    .spinner {
+      width: 44px; height: 44px;
+      border: 4px solid #e0d9ff;
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .spinner-text { font-size: 0.82rem; color: #666; font-weight: 600; }
+    .spinner-sub  { font-size: 0.72rem; color: #999; }
+
+    /* Elapsed timer */
+    #elapsed {
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 8px;
+      min-height: 1em;
+    }
+
+    /* ── Tab switcher (SVG / Code) ────────────────────────────── */
+    .tabs { display: flex; gap: 4px; margin: 14px 0 10px; }
+
+    .tab {
+      flex: 1;
+      padding: 7px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-align: center;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      background: transparent;
+      transition: all .15s;
+      user-select: none;
+    }
+    .tab.active {
+      background: rgba(124,111,247,.18);
+      border-color: var(--accent);
+      color: var(--accent2);
+    }
+
+    /* Code view */
+    #code-view {
+      display: none;
+      background: #0d1117;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px;
+      font-family: 'Fira Code', 'Courier New', monospace;
+      font-size: 0.72rem;
+      line-height: 1.6;
+      color: #c9d1d9;
+      overflow-x: auto;
+      white-space: pre;
+      max-height: 260px;
+      overflow-y: auto;
+    }
+    #preview-view { display: block; }
+
+    /* ── Action buttons ───────────────────────────────────────── */
+    .action-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 9px 14px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .15s;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .btn:hover:not(:disabled) { border-color: var(--accent); color: var(--accent2); }
+    .btn:disabled { opacity: .4; cursor: not-allowed; }
+
+    /* ── Error / info toast ───────────────────────────────────── */
+    #toast {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: #1e293b;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 22px;
+      font-size: 0.85rem;
+      color: var(--text);
+      box-shadow: var(--shadow);
+      transition: transform .3s ease;
+      z-index: 999;
+      max-width: 480px;
+      text-align: center;
+    }
+    #toast.show { transform: translateX(-50%) translateY(0); }
+    #toast.error { border-color: var(--red); color: var(--red); }
+    #toast.success { border-color: var(--green); color: var(--green); }
+
+    /* ── Footer ───────────────────────────────────────────────── */
+    footer {
+      margin-top: 60px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.78rem;
+      padding-bottom: 32px;
+    }
+    footer a { color: var(--accent2); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── Scrollbar ────────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <div class="logo-icon">✦</div>
+      <span class="logo-text">OmniSVG</span>
+    </div>
+    <p class="tagline">Generate scalable vector graphics from natural language using a multimodal AI model.</p>
+  </header>
+
+  <!-- Model status -->
+  <div id="status-bar">
+    <div class="status-dot" id="status-dot"></div>
+    <span id="status-text">Checking model status …</span>
+  </div>
+
+  <!-- Main grid -->
+  <div class="grid">
+
+    <!-- ── Left: Input ─────────────────────────────────────────── -->
+    <div class="card">
+      <div class="card-title">Prompt</div>
+
+      <div class="prompt-wrap">
+        <textarea id="prompt" maxlength="500"
+          placeholder="A red heart icon with smooth curved edges, centered on canvas …"></textarea>
+        <div class="char-count"><span id="char-count">0</span> / 500</div>
+      </div>
+
+      <div class="chip-label">Quick examples</div>
+      <div class="chips" id="chips">
+        <span class="chip">Red heart icon</span>
+        <span class="chip">Blue mountain landscape</span>
+        <span class="chip">Simple house with red roof</span>
+        <span class="chip">Cute orange cat sitting</span>
+        <span class="chip">Green star badge</span>
+        <span class="chip">Black arrow pointing right</span>
+        <span class="chip">Coffee mug with steam</span>
+        <span class="chip">Fox logo facing right</span>
+      </div>
+
+      <!-- Advanced settings -->
+      <details class="adv">
+        <summary>Advanced settings</summary>
+        <div class="adv-grid">
+
+          <div class="field">
+            <label>Temperature <span class="val" id="temp-val">0.5</span></label>
+            <input type="range" id="temperature" min="0.1" max="1.2" step="0.05" value="0.5"
+                   oninput="document.getElementById('temp-val').textContent=this.value">
+          </div>
+
+          <div class="field">
+            <label>Top-p <span class="val" id="topp-val">0.88</span></label>
+            <input type="range" id="top_p" min="0.5" max="1.0" step="0.01" value="0.88"
+                   oninput="document.getElementById('topp-val').textContent=this.value">
+          </div>
+
+          <div class="field">
+            <label>Top-k <span class="val" id="topk-val">50</span></label>
+            <input type="range" id="top_k" min="1" max="200" step="1" value="50"
+                   oninput="document.getElementById('topk-val').textContent=this.value">
+          </div>
+
+          <div class="field">
+            <label>Repetition penalty <span class="val" id="rep-val">1.05</span></label>
+            <input type="range" id="repetition_penalty" min="1.0" max="1.5" step="0.01" value="1.05"
+                   oninput="document.getElementById('rep-val').textContent=this.value">
+          </div>
+
+          <div class="field">
+            <label>Max tokens</label>
+            <input type="number" id="max_new_tokens" value="512" min="256" max="4096" step="256" />
+          </div>
+
+          <div class="field">
+            <label>Candidates</label>
+            <input type="number" id="num_candidates" value="1" min="1" max="8" step="1" />
+          </div>
+
+        </div>
+      </details>
+
+      <button class="btn-generate" id="gen-btn" onclick="generate()">
+        ✦ Generate SVG
+      </button>
+      <button class="btn-generate btn-cancel" id="cancel-btn"
+              onclick="cancelGeneration()"
+              style="display:none">
+        ✕ Cancel
+      </button>
+    </div>
+
+    <!-- ── Right: Output ───────────────────────────────────────── -->
+    <div class="card output-card">
+      <div class="card-title">Output</div>
+
+      <!-- Preview box -->
+      <div class="preview-box" id="preview-box">
+        <div class="preview-placeholder" id="placeholder">
+          <div class="ph-icon">✦</div>
+          <p>Your SVG will appear here</p>
+        </div>
+        <div id="svg-container" style="display:none; width:100%; height:100%;
+             display:none; align-items:center; justify-content:center;"></div>
+
+        <!-- Spinner overlay (shown during generation) -->
+        <div class="spinner-overlay" id="spinner">
+          <div class="spinner"></div>
+          <div class="spinner-text">Generating SVG …</div>
+          <div class="spinner-sub" id="spinner-sub">CPU mode: may take 3–10 min · reduce Max tokens to speed up</div>
+        </div>
+      </div>
+
+      <!-- Timer -->
+      <div id="elapsed"></div>
+
+      <!-- Tab switcher -->
+      <div class="tabs" id="tabs" style="display:none">
+        <div class="tab active" id="tab-preview" onclick="switchTab('preview')">Preview</div>
+        <div class="tab"        id="tab-code"    onclick="switchTab('code')">SVG Code</div>
+      </div>
+
+      <!-- Code view -->
+      <pre id="code-view"></pre>
+
+      <!-- Action buttons -->
+      <div class="action-row" id="actions" style="display:none">
+        <button class="btn" id="btn-dl-svg" onclick="downloadSVG()">⬇ Download SVG</button>
+        <button class="btn" id="btn-dl-png" onclick="downloadPNG()">⬇ Download PNG</button>
+        <button class="btn" onclick="copySVG()">⎘ Copy code</button>
+      </div>
+    </div>
+
+  </div><!-- /grid -->
+
+  <footer>
+    <p>
+      <a href="https://arxiv.org/abs/2504.06263" target="_blank">Paper</a> ·
+      <a href="https://huggingface.co/OmniSVG" target="_blank">Model weights</a> ·
+      <a href="https://github.com/OmniSVG/OmniSVG" target="_blank">GitHub</a>
+    </p>
+    <p style="margin-top:8px; opacity:.5;">OmniSVG — NeurIPS 2025</p>
+  </footer>
+
+</div><!-- /page -->
+
+<!-- Toast -->
+<div id="toast"></div>
+
+<script>
+/* ── State ─────────────────────────────────────────────────── */
+let currentSVG     = null;
+let currentJobId   = null;
+let pollTimer      = null;
+let elapsedTimer   = null;
+let startTime      = null;
+let isGenerating   = false;
+const MAX_WAIT_MS  = 15 * 60 * 1000;  // 15-minute timeout
+
+/* ── Status polling ─────────────────────────────────────────── */
+async function checkStatus() {
+  try {
+    const r = await fetch('/api/health');
+    const d = await r.json();
+    const dot  = document.getElementById('status-dot');
+    const text = document.getElementById('status-text');
+
+    if (d.status === 'ready') {
+      dot.className  = 'status-dot ready';
+      text.textContent = `Model ready${d.gpu ? ' · ' + d.gpu : ''}`;
+      document.getElementById('gen-btn').disabled = false;
+    } else if (d.status === 'error') {
+      dot.className  = 'status-dot error';
+      text.textContent = 'Model error: ' + (d.model_error || 'unknown');
+    } else {
+      dot.className  = 'status-dot';
+      text.textContent = 'Model loading …';
+      document.getElementById('gen-btn').disabled = true;
+      setTimeout(checkStatus, 3000);
+    }
+  } catch {
+    setTimeout(checkStatus, 4000);
+  }
+}
+
+/* ── Char counter ───────────────────────────────────────────── */
+document.getElementById('prompt').addEventListener('input', function() {
+  document.getElementById('char-count').textContent = this.value.length;
+});
+
+/* ── Example chips ──────────────────────────────────────────── */
+document.getElementById('chips').addEventListener('click', e => {
+  if (e.target.classList.contains('chip')) {
+    document.getElementById('prompt').value = e.target.textContent;
+    document.getElementById('char-count').textContent = e.target.textContent.length;
+  }
+});
+
+/* ── Tab switch ─────────────────────────────────────────────── */
+function switchTab(tab) {
+  const pv = document.getElementById('preview-view') ||
+             document.getElementById('svg-container');
+  const cv = document.getElementById('code-view');
+
+  document.getElementById('tab-preview').classList.toggle('active', tab==='preview');
+  document.getElementById('tab-code').classList.toggle('active',    tab==='code');
+
+  // preview-view is the svg-container element
+  if (tab === 'preview') {
+    document.getElementById('svg-container').style.display = 'flex';
+    cv.style.display = 'none';
+  } else {
+    document.getElementById('svg-container').style.display = 'none';
+    cv.style.display = 'block';
+  }
+}
+
+/* ── Generate ───────────────────────────────────────────────── */
+async function generate() {
+  const prompt = document.getElementById('prompt').value.trim();
+  if (!prompt) { showToast('Please enter a prompt.', 'error'); return; }
+  if (isGenerating) return;
+
+  isGenerating = true;
+  currentSVG   = null;
+
+  // UI: loading state
+  document.getElementById('gen-btn').disabled = true;
+  document.getElementById('gen-btn').textContent = '⏳ Generating …';
+  document.getElementById('cancel-btn').style.display = 'block';
+  document.getElementById('placeholder').style.display = 'none';
+  document.getElementById('svg-container').style.display  = 'none';
+  document.getElementById('spinner').classList.add('active');
+  document.getElementById('tabs').style.display    = 'none';
+  document.getElementById('actions').style.display = 'none';
+  document.getElementById('code-view').style.display = 'none';
+  document.getElementById('elapsed').textContent = '';
+
+  // Start elapsed timer
+  startTime = Date.now();
+  elapsedTimer = setInterval(() => {
+    const s = ((Date.now() - startTime) / 1000).toFixed(0);
+    document.getElementById('elapsed').textContent = `Elapsed: ${s}s`;
+  }, 500);
+
+  const payload = {
+    prompt:              prompt,
+    temperature:         parseFloat(document.getElementById('temperature').value),
+    top_p:               parseFloat(document.getElementById('top_p').value),
+    top_k:               parseInt(document.getElementById('top_k').value),
+    repetition_penalty:  parseFloat(document.getElementById('repetition_penalty').value),
+    max_new_tokens:      parseInt(document.getElementById('max_new_tokens').value),
+    num_candidates:      parseInt(document.getElementById('num_candidates').value),
+  };
+
+  try {
+    const res  = await fetch('/api/generate', {
+      method:  'POST',
+      headers: {'Content-Type': 'application/json'},
+      body:    JSON.stringify(payload),
+    });
+
+    if (!res.ok) {
+      const err = await res.json();
+      throw new Error(err.detail || 'Server error');
+    }
+
+    const { job_id, subtype } = await res.json();
+    currentJobId = job_id;
+    document.getElementById('spinner-sub').textContent =
+      `Detected as: ${subtype} · This may take 10–60 seconds`;
+
+    pollResult(job_id);
+
+  } catch (e) {
+    finishGeneration(null, e.message);
+  }
+}
+
+/* ── Cancel ─────────────────────────────────────────────────── */
+function cancelGeneration() {
+  finishGeneration(null, 'Cancelled.');
+}
+
+/* ── Poll for result ────────────────────────────────────────── */
+function pollResult(jobId) {
+  // Timeout guard
+  if (Date.now() - startTime > MAX_WAIT_MS) {
+    finishGeneration(null, 'Timed out after 15 minutes. Try fewer tokens or candidates.');
+    return;
+  }
+  pollTimer = setTimeout(async () => {
+    try {
+      const r = await fetch(`/api/job/${jobId}`);
+      if (!r.ok) {
+        const msg = r.status === 404
+          ? 'Generation job expired or the server restarted.'
+          : `Job status request failed (${r.status}).`;
+        finishGeneration(null, msg);
+        return;
+      }
+      const d = await r.json();
+
+      if (d.status === 'done') {
+        finishGeneration(d.svg, null, d.thumbnail);
+      } else if (d.status === 'error') {
+        finishGeneration(null, d.error);
+      } else {
+        pollResult(jobId);  // still running
+      }
+    } catch {
+      pollResult(jobId);
+    }
+  }, 1200);
+}
+
+/* ── Finish generation ──────────────────────────────────────── */
+function finishGeneration(svg, error, thumbnail) {
+  clearInterval(elapsedTimer);
+  clearTimeout(pollTimer);
+  isGenerating = false;
+
+  document.getElementById('spinner').classList.remove('active');
+  document.getElementById('gen-btn').disabled = false;
+  document.getElementById('gen-btn').textContent = '✦ Generate SVG';
+  document.getElementById('cancel-btn').style.display = 'none';
+
+  const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+  document.getElementById('elapsed').textContent = error
+    ? `Failed after ${elapsed}s`
+    : `Generated in ${elapsed}s`;
+
+  if (error) {
+    document.getElementById('placeholder').style.display = 'block';
+    showToast(error, 'error');
+    return;
+  }
+
+  currentSVG = svg;
+
+  // Inject SVG into preview
+  const container = document.getElementById('svg-container');
+  container.innerHTML = svg;
+  const svgEl = container.querySelector('svg');
+  if (svgEl) {
+    svgEl.setAttribute('width',  '100%');
+    svgEl.setAttribute('height', '100%');
+    svgEl.style.maxWidth  = '100%';
+    svgEl.style.maxHeight = '100%';
+  }
+  container.style.display = 'flex';
+
+  // Code view
+  document.getElementById('code-view').textContent = svg;
+
+  // Show controls
+  document.getElementById('tabs').style.display    = 'flex';
+  document.getElementById('actions').style.display = 'flex';
+
+  // Reset to preview tab
+  switchTab('preview');
+
+  showToast('SVG generated successfully!', 'success');
+}
+
+/* ── Downloads ──────────────────────────────────────────────── */
+function downloadSVG() {
+  if (!currentSVG) return;
+  const blob = new Blob([currentSVG], { type: 'image/svg+xml' });
+  triggerDownload(URL.createObjectURL(blob), 'omnisvg-output.svg');
+}
+
+function downloadPNG() {
+  if (!currentSVG) return;
+  const img = new Image();
+  const blob = new Blob([currentSVG], { type: 'image/svg+xml' });
+  const url  = URL.createObjectURL(blob);
+  img.onload = () => {
+    const canvas = document.createElement('canvas');
+    canvas.width  = 1024;
+    canvas.height = 1024;
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(0, 0, 1024, 1024);
+    ctx.drawImage(img, 0, 0, 1024, 1024);
+    triggerDownload(canvas.toDataURL('image/png'), 'omnisvg-output.png');
+    URL.revokeObjectURL(url);
+  };
+  img.src = url;
+}
+
+function triggerDownload(href, filename) {
+  const a = document.createElement('a');
+  a.href     = href;
+  a.download = filename;
+  a.click();
+}
+
+function copySVG() {
+  if (!currentSVG) return;
+  navigator.clipboard.writeText(currentSVG).then(() => {
+    showToast('SVG code copied to clipboard!', 'success');
+  });
+}
+
+/* ── Toast ──────────────────────────────────────────────────── */
+let toastTimer;
+function showToast(msg, type = '') {
+  const t = document.getElementById('toast');
+  t.textContent  = msg;
+  t.className    = 'show ' + type;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { t.className = ''; }, 4500);
+}
+
+/* ── Keyboard shortcut (Ctrl/Cmd + Enter) ───────────────────── */
+document.getElementById('prompt').addEventListener('keydown', e => {
+  if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') generate();
+});
+
+/* ── Init ───────────────────────────────────────────────────── */
+document.getElementById('gen-btn').disabled = true;
+checkStatus();
+</script>
+
+</body>
+</html>
