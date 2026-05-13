@@ -45,6 +45,8 @@ print("WORK_ROOT:", WORK_ROOT)
 
 # %%
 if IS_KAGGLE:
+    # ensure Cairo C library is available (needed by cairosvg)
+    subprocess.run(["apt-get", "install", "-y", "-q", "libcairo2"], check=False)
     req = PROJECT_ROOT / "requirements.txt"
     subprocess.run([sys.executable, "-m", "pip", "install", "-q", "-r", str(req)], check=True)
 
@@ -188,8 +190,11 @@ print(json.dumps({
 cmd = [sys.executable, str(PROJECT_ROOT / "run_text2svg_rlrf.py"), "--config-dir", str(CONFIG_DIR)]
 if os.environ.get("TEXT2SVG_SKIP_EVAL", "0") == "1":
     cmd.append("--skip-eval")
+env = os.environ.copy()
+# ensure the repo root is on PYTHONPATH so `from text2svg_rlrf import ...` resolves
+env["PYTHONPATH"] = str(PROJECT_ROOT) + os.pathsep + env.get("PYTHONPATH", "")
 print("Running:", " ".join(cmd))
-subprocess.run(cmd, check=True)
+subprocess.run(cmd, check=True, cwd=str(PROJECT_ROOT), env=env)
 
 # %% [markdown]
 # ## Show outputs
