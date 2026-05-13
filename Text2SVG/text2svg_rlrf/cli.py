@@ -25,6 +25,16 @@ def main() -> None:
         choices=["4B", "8B"],
         help="OmniSVG model size to use (default: 4B)",
     )
+    parser.add_argument(
+        "--no-lora",
+        action="store_true",
+        help="Skip LoRA attachment (baseline / pretrained-only evaluation)",
+    )
+    parser.add_argument(
+        "--lora-adapter",
+        default=None,
+        help="Load a saved LoRA adapter directory on top of the base model (for post-hoc eval)",
+    )
     args = parser.parse_args()
 
     cfg = load_config(args.config_dir)
@@ -33,13 +43,27 @@ def main() -> None:
     if args.omnisvg_dir:
         from .omnisvg_policy import load_omnisvg_policy
 
-        print(f"[OmniSVG] Loading {args.omnisvg_model_size} model from {args.omnisvg_dir}")
+        lora_cfg = None if args.no_lora else cfg.lora
+        print(f"[OmniSVG] Loading {args.omnisvg_model_size} model from {args.omnisvg_dir}"
+              + (" (baseline, no LoRA)" if args.no_lora else ""))
         bundle = load_omnisvg_policy(
             omnisvg_dir=args.omnisvg_dir,
             model_size=args.omnisvg_model_size,
-            lora_cfg=cfg.lora,
+            lora_cfg=lora_cfg,
             cache_dir=cfg.runtime.cache_dir,
         )
+        if args.lora_adapter:
+            from peft import PeftModel
+            print(f"[OmniSVG] Loading LoRA adapter from {args.lora_adapter}")
+            bundle = bundle.__class__(
+                model=PeftModel.from_pretrained(bundle.model, args.lora_adapter),
+                tokenizer=bundle.tokenizer,
+                svg_tokenizer=bundle.svg_tokenizer,
+                processor=bundle.processor,
+                bos_token_id=bundle.bos_token_id,
+                eos_token_id=bundle.eos_token_id,
+                pad_token_id=bundle.pad_token_id,
+            )
     else:
         bundle = load_policy(cfg.runtime, cfg.policy, cfg.lora)
 
