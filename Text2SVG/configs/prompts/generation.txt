@@ -1,20 +1,22 @@
-Generate a complete SVG image for the following description.
+Generate a complete, detailed SVG image for the following description.
 
-Think step by step: identify the main objects, their positions, shapes, colors, and how to draw them with SVG primitives.
+Think step by step: identify every main object, its position, shape, color, and how to draw it with SVG primitives.
 
 Return exactly this structure:
 <think>
-List the main objects. For each: pick a shape (rect, circle, ellipse, polygon, path), position, size, and fill color.
+List all objects in the scene. For each: pick a shape (rect, circle, ellipse, polygon, path), position, size, and fill color. Consider foreground, midground, and background layers.
 </think>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
-  <!-- draw at least 3 filled shapes that represent the scene -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- draw filled shapes representing every element of the scene -->
 </svg>
 
 Rules:
-- Use solid fill colors on every shape (no transparent or white-only shapes)
-- Place shapes within the 256x256 viewBox
+- Every shape must have a solid fill color — no transparent or white-only shapes
+- Place shapes within the 512x512 viewBox
 - Use rect, circle, ellipse, polygon, polyline, line, or path elements
-- Do NOT use: <text>, <script>, filters, raster images, external links, or href to URLs
+- Draw background first, then midground, then foreground
+- Aim for at least 5 distinct shapes that represent the scene
+- Do NOT use: <text>, <script>, filters, raster images, or href to URLs
 - The SVG must be complete and well-formed XML
 
 Description:

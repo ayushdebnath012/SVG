@@ -99,6 +99,8 @@ class RewardConfig:
     use_clip_as_metric_only: bool
     clip_model_name_or_path: Optional[str]
     clip_aesthetic_model_name_or_path: Optional[str]
+    clip_reward_weight: float
+    judge_load_in_4bit: bool
 
 
 @dataclass(frozen=True)
