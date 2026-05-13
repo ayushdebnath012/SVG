@@ -10,7 +10,10 @@ from tqdm.auto import tqdm
 
 from .config import Text2SVGConfig
 from .data import load_captions
-from .omnisvg_policy import OmniSVGBundle, decode_omnisvg_tokens_to_svg, generate_omnisvg_rollouts
+from .omnisvg_policy import (
+    OmniSVGBundle, OmniSVGRolloutData,
+    decode_omnisvg_tokens_to_svg, generate_omnisvg_rollouts, generate_refinement_rollouts,
+)
 from .policy import PolicyBundle, generate_rollouts, get_pad_id, pad_sequences, sequence_logprobs
 from .prompts import generation_prompt
 from .reward import Text2SVGReward
@@ -30,6 +33,38 @@ def _lr_lambda(step: int, decay: float, every: int, warmup: int) -> float:
     return decay ** (step // every)
 
 
+def _refinement_logprobs(
+    bundle: OmniSVGBundle,
+    rollout_groups: List[List[OmniSVGRolloutData]],
+    pad_id: int,
+) -> torch.Tensor:
+    """Compute per-group sequence logprobs, passing each group's shared pixel_values."""
+    parts = []
+    for group in rollout_groups:
+        seqs = pad_sequences([rd.sequence for rd in group], pad_id)
+        pls = torch.tensor([rd.prompt_len for rd in group], dtype=torch.long)
+        rd0 = group[0]
+        pv = rd0.pixel_values
+        grid = rd0.image_grid_thw
+        if pv is not None:
+            K = len(group)
+            # Normalize to 2D [patches, feat] before repeating
+            if pv.dim() == 3 and pv.size(0) == 1:
+                pv = pv.squeeze(0)
+            pv_batch = pv.repeat(K, 1)
+            if grid is not None:
+                if grid.dim() == 1:
+                    grid = grid.unsqueeze(0)
+                grid_batch = grid.repeat(K, 1)
+            else:
+                grid_batch = None
+        else:
+            pv_batch = None
+            grid_batch = None
+        parts.append(sequence_logprobs(bundle, seqs, pls, pixel_values=pv_batch, image_grid_thw=grid_batch))
+    return torch.cat(parts)
+
+
 def train_grpo(bundle: PolicyBundle, cfg: Text2SVGConfig) -> Dict:
     captions = load_captions(cfg.data, cfg.runtime.seed)
     if not captions:
@@ -37,6 +72,7 @@ def train_grpo(bundle: PolicyBundle, cfg: Text2SVGConfig) -> Dict:
 
     reward_model = Text2SVGReward(cfg.runtime, cfg.svg, cfg.reward)
     is_omnisvg = isinstance(bundle, OmniSVGBundle)
+    use_refinement = is_omnisvg and cfg.policy.use_refinement
     pad_id = get_pad_id(bundle)
     params = [p for p in bundle.model.parameters() if p.requires_grad]
     optimizer = torch.optim.AdamW(params, lr=cfg.grpo.learning_rate, weight_decay=cfg.grpo.weight_decay)
@@ -56,13 +92,39 @@ def train_grpo(bundle: PolicyBundle, cfg: Text2SVGConfig) -> Dict:
         offset = (step * cfg.grpo.batch_size) % len(captions)
         raw_batch = [captions[(offset + idx) % len(captions)] for idx in range(cfg.grpo.batch_size)]
 
-        if is_omnisvg:
-            # OmniSVG: generate coordinate tokens, decode via SVGTokenizer
-            omni_max = cfg.policy.max_new_tokens  # fixed; dynamic length n/a for coord tokens
+        if use_refinement:
+            # Two-stage VFM rollout: draft → render → image-conditioned refine (GRPO target)
+            rollout_groups = generate_refinement_rollouts(
+                bundle, raw_batch, cfg.grpo.rollouts_per_caption,
+                max_new_tokens=cfg.policy.max_new_tokens,
+            )
+            flat_data = [rd for grp in rollout_groups for rd in grp]
+            flat_ids = [rd.sequence for rd in flat_data]
+            decoded: List[str] = [
+                decode_omnisvg_tokens_to_svg(bundle, rd.sequence, rd.prompt_len)
+                for rd in flat_data
+            ]
+            repeated_captions: List[str] = [
+                c for c, grp in zip(raw_batch, rollout_groups) for _ in grp
+            ]
+            prompt_lens: List[int] = [rd.prompt_len for rd in flat_data]
+        elif is_omnisvg:
+            # OmniSVG text-only (no refinement): generate coordinate tokens, decode via SVGTokenizer
+            omni_max = cfg.policy.max_new_tokens
             rollout_ids = generate_omnisvg_rollouts(
                 bundle, raw_batch, cfg.grpo.rollouts_per_caption, max_new_tokens=omni_max
             )
             prompt_batch = [bundle.format_prompt(c) for c in raw_batch]
+            flat_ids = [seq for group in rollout_ids for seq in group]
+            decoded = []
+            repeated_captions = []
+            prompt_lens = []
+            for caption, prompt, group in zip(raw_batch, prompt_batch, rollout_ids):
+                prompt_len = bundle.tokenizer(prompt, return_tensors="pt").input_ids.size(1)
+                for seq in group:
+                    prompt_lens.append(prompt_len)
+                    decoded.append(decode_omnisvg_tokens_to_svg(bundle, seq, prompt_len))
+                    repeated_captions.append(caption)
         else:
             prompt_batch = [generation_prompt(caption, cfg.policy.prompt_template_file) for caption in raw_batch]
             rollout_ids = generate_rollouts(
@@ -72,20 +134,16 @@ def train_grpo(bundle: PolicyBundle, cfg: Text2SVGConfig) -> Dict:
                 cfg.grpo.rollouts_per_caption,
                 max_new_tokens=dynamic_tokens,
             )
-
-        flat_ids = [seq for group in rollout_ids for seq in group]
-        decoded: List[str] = []
-        repeated_captions: List[str] = []
-        prompt_lens: List[int] = []
-        for caption, prompt, group in zip(raw_batch, prompt_batch, rollout_ids):
-            prompt_len = bundle.tokenizer(prompt, return_tensors="pt").input_ids.size(1)
-            for seq in group:
-                prompt_lens.append(prompt_len)
-                if is_omnisvg:
-                    decoded.append(decode_omnisvg_tokens_to_svg(bundle, seq, prompt_len))
-                else:
+            flat_ids = [seq for group in rollout_ids for seq in group]
+            decoded = []
+            repeated_captions = []
+            prompt_lens = []
+            for caption, prompt, group in zip(raw_batch, prompt_batch, rollout_ids):
+                prompt_len = bundle.tokenizer(prompt, return_tensors="pt").input_ids.size(1)
+                for seq in group:
+                    prompt_lens.append(prompt_len)
                     decoded.append(bundle.tokenizer.decode(seq, skip_special_tokens=True))
-                repeated_captions.append(caption)
+                    repeated_captions.append(caption)
 
         reward_results = reward_model.score_many(decoded, repeated_captions)
         rewards = [result.reward for result in reward_results]
@@ -104,15 +162,21 @@ def train_grpo(bundle: PolicyBundle, cfg: Text2SVGConfig) -> Dict:
             cfg.grpo.advantage_normalization,
         ).to(next(bundle.model.parameters()).device)
 
-        sequences = pad_sequences(flat_ids, pad_id)  # pad_id resolved above for both bundle types
-        prompt_lens_tensor = torch.tensor(prompt_lens, dtype=torch.long)
         was_training = bundle.model.training
         bundle.model.eval()
         with torch.no_grad():
-            old_logp = sequence_logprobs(bundle, sequences, prompt_lens_tensor).detach()
+            if use_refinement:
+                old_logp = _refinement_logprobs(bundle, rollout_groups, pad_id).detach()
+            else:
+                sequences = pad_sequences(flat_ids, pad_id)
+                prompt_lens_tensor = torch.tensor(prompt_lens, dtype=torch.long)
+                old_logp = sequence_logprobs(bundle, sequences, prompt_lens_tensor).detach()
         if was_training:
             bundle.model.train()
-        new_logp = sequence_logprobs(bundle, sequences, prompt_lens_tensor)
+        if use_refinement:
+            new_logp = _refinement_logprobs(bundle, rollout_groups, pad_id)
+        else:
+            new_logp = sequence_logprobs(bundle, sequences, prompt_lens_tensor)
         ratio = torch.exp(new_logp - old_logp)
         clipped_ratio = torch.clamp(ratio, 1.0 - cfg.grpo.clip_epsilon, 1.0 + cfg.grpo.clip_epsilon)
         policy_loss = -torch.min(ratio * advantages, clipped_ratio * advantages).mean()

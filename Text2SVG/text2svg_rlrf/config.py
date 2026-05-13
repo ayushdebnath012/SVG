@@ -42,6 +42,7 @@ class PolicyConfig:
     allow_transformers_fallback: bool
     use_think_trace: bool
     prompt_template_file: str
+    use_refinement: bool
 
 
 @dataclass(frozen=True)

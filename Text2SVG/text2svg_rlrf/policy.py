@@ -133,11 +133,24 @@ def generate_rollouts(
     return outputs
 
 
-def sequence_logprobs(bundle, sequences: torch.Tensor, prompt_lens: torch.Tensor) -> torch.Tensor:
+def sequence_logprobs(
+    bundle,
+    sequences: torch.Tensor,
+    prompt_lens: torch.Tensor,
+    pixel_values: Optional[torch.Tensor] = None,
+    image_grid_thw: Optional[torch.Tensor] = None,
+) -> torch.Tensor:
     pad_id = get_pad_id(bundle)
-    sequences = sequences.to(model_device(bundle.model))
+    device = model_device(bundle.model)
+    dtype = next(bundle.model.parameters()).dtype
+    sequences = sequences.to(device)
     attention_mask = (sequences != pad_id).long()
-    logits = bundle.model(input_ids=sequences, attention_mask=attention_mask).logits
+    model_kwargs: dict = {"input_ids": sequences, "attention_mask": attention_mask}
+    if pixel_values is not None:
+        model_kwargs["pixel_values"] = pixel_values.to(device, dtype=dtype)
+    if image_grid_thw is not None:
+        model_kwargs["image_grid_thw"] = image_grid_thw.to(device)
+    logits = bundle.model(**model_kwargs).logits
     shift_logits = logits[:, :-1, :]
     shift_labels = sequences[:, 1:]
     logp = torch.log_softmax(shift_logits, dim=-1).gather(-1, shift_labels.unsqueeze(-1)).squeeze(-1)
