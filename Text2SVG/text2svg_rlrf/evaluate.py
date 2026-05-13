@@ -6,12 +6,15 @@ from typing import Dict, List
 
 from .config import DataConfig, Text2SVGConfig
 from .data import load_captions
+from .omnisvg_policy import OmniSVGBundle, decode_omnisvg_tokens_to_svg, generate_omnisvg_rollouts
 from .policy import PolicyBundle, generate_rollouts
 from .prompts import generation_prompt
 from .reward import Text2SVGReward
 
 
-def evaluate(bundle: PolicyBundle, cfg: Text2SVGConfig) -> Dict:
+def evaluate(bundle, cfg: Text2SVGConfig) -> Dict:
+    is_omnisvg = isinstance(bundle, OmniSVGBundle)
+
     data_cfg = DataConfig(
         caption_files=cfg.eval.caption_files,
         unique_captions=cfg.eval.max_captions,
@@ -30,11 +33,25 @@ def evaluate(bundle: PolicyBundle, cfg: Text2SVGConfig) -> Dict:
     output_dir = Path(cfg.eval.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
     rows: List[Dict] = []
+
     for caption in captions:
-        prompt = generation_prompt(caption, cfg.policy.prompt_template_file)
-        rollout_group = generate_rollouts(bundle, [prompt], cfg.policy, cfg.eval.candidates_per_caption)[0]
+        if is_omnisvg:
+            rollout_group = generate_omnisvg_rollouts(
+                bundle, [caption], cfg.eval.candidates_per_caption,
+                max_new_tokens=cfg.policy.max_new_tokens,
+            )[0]
+            prompt = bundle.format_prompt(caption)
+            prompt_len = bundle.tokenizer(prompt, return_tensors="pt").input_ids.size(1)
+        else:
+            prompt = generation_prompt(caption, cfg.policy.prompt_template_file)
+            rollout_group = generate_rollouts(bundle, [prompt], cfg.policy, cfg.eval.candidates_per_caption)[0]
+            prompt_len = None
+
         for idx, seq in enumerate(rollout_group):
-            text = bundle.tokenizer.decode(seq, skip_special_tokens=True)
+            if is_omnisvg:
+                text = decode_omnisvg_tokens_to_svg(bundle, seq, prompt_len)
+            else:
+                text = bundle.tokenizer.decode(seq, skip_special_tokens=True)
             scored = reward_model.score(text, caption)
             rows.append(
                 {
@@ -49,6 +66,7 @@ def evaluate(bundle: PolicyBundle, cfg: Text2SVGConfig) -> Dict:
                     "svg": scored.render.sanitized_svg,
                 }
             )
+
     (output_dir / "text2svg_eval.json").write_text(json.dumps(rows, indent=2), encoding="utf-8")
     valid = [row for row in rows if row["valid"]]
     return {
