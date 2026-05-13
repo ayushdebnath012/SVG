@@ -29,6 +29,13 @@ def model_device(model: torch.nn.Module) -> torch.device:
     return next(model.parameters()).device
 
 
+def get_pad_id(bundle) -> int:
+    from .omnisvg_policy import OmniSVGBundle
+    if isinstance(bundle, OmniSVGBundle):
+        return bundle.pad_token_id
+    return bundle.tokenizer.pad_token_id
+
+
 def load_policy(runtime: RuntimeConfig, policy: PolicyConfig, lora: LoRAConfig) -> PolicyBundle:
     from transformers import AutoModelForCausalLM, AutoTokenizer
 
@@ -126,16 +133,17 @@ def generate_rollouts(
     return outputs
 
 
-def sequence_logprobs(bundle: PolicyBundle, sequences: torch.Tensor, prompt_lens: torch.Tensor) -> torch.Tensor:
+def sequence_logprobs(bundle, sequences: torch.Tensor, prompt_lens: torch.Tensor) -> torch.Tensor:
+    pad_id = get_pad_id(bundle)
     sequences = sequences.to(model_device(bundle.model))
-    attention_mask = (sequences != bundle.tokenizer.pad_token_id).long()
+    attention_mask = (sequences != pad_id).long()
     logits = bundle.model(input_ids=sequences, attention_mask=attention_mask).logits
     shift_logits = logits[:, :-1, :]
     shift_labels = sequences[:, 1:]
     logp = torch.log_softmax(shift_logits, dim=-1).gather(-1, shift_labels.unsqueeze(-1)).squeeze(-1)
     idxs = torch.arange(logp.size(1), device=logp.device).unsqueeze(0)
     mask = idxs >= (prompt_lens.to(logp.device).unsqueeze(1) - 1)
-    mask = mask & (shift_labels != bundle.tokenizer.pad_token_id)
+    mask = mask & (shift_labels != pad_id)
     return (logp * mask).sum(dim=1) / mask.sum(dim=1).clamp_min(1)
 
 

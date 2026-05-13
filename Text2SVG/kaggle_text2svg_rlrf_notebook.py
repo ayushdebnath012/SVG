@@ -183,16 +183,41 @@ print(json.dumps({
 # %% [markdown]
 # ## Run Text2SVG RLRF
 #
-# For a smoke test, set `TEXT2SVG_SKIP_EVAL=1` or edit `configs/grpo.json` to
-# fewer steps. The main run writes `rlrf_history.json` and the LoRA adapter.
+# Two modes:
+# - **Plain LLM** (default): uses Qwen3-8B generating raw SVG text
+# - **OmniSVG** (recommended): uses OmniSVG's Qwen2.5-VL generating coordinate tokens
+#   decoded to SVG via SVGTokenizer — better quality, near-zero blank rate
+#
+# Set `USE_OMNISVG = True` below to use OmniSVG as the policy.
+# OmniSVG weights are downloaded automatically from HuggingFace on first run.
+#
+# For a smoke test, set `TEXT2SVG_SKIP_EVAL=1` or edit `configs/grpo.json` to fewer steps.
 
 # %%
+USE_OMNISVG = True  # set False to use plain Qwen3-8B LLM instead
+
+# Path to the OmniSVG directory (inside this repo)
+OMNISVG_DIR = str(PROJECT_ROOT.parent / "SVG" / "OmniSVG") if not IS_KAGGLE else "/kaggle/working/SVG_repo/OmniSVG"
+OMNISVG_MODEL_SIZE = "4B"  # "4B" fits on dual T4; use "8B" for A100/H200
+
+if USE_OMNISVG and IS_KAGGLE and not Path(OMNISVG_DIR).exists():
+    print("Cloning SVG repo to get OmniSVG...")
+    subprocess.run(
+        ["git", "clone", "--depth", "1", "https://github.com/ayush31010/SVG.git", "/kaggle/working/SVG_repo"],
+        check=True,
+    )
+
+env = os.environ.copy()
+env["PYTHONPATH"] = str(PROJECT_ROOT) + os.pathsep + env.get("PYTHONPATH", "")
+
 cmd = [sys.executable, str(PROJECT_ROOT / "run_text2svg_rlrf.py"), "--config-dir", str(CONFIG_DIR)]
+if USE_OMNISVG and Path(OMNISVG_DIR).exists():
+    cmd += ["--omnisvg-dir", OMNISVG_DIR, "--omnisvg-model-size", OMNISVG_MODEL_SIZE]
+    print(f"Mode: OmniSVG {OMNISVG_MODEL_SIZE}")
+else:
+    print("Mode: plain LLM (Qwen3-8B)")
 if os.environ.get("TEXT2SVG_SKIP_EVAL", "0") == "1":
     cmd.append("--skip-eval")
-env = os.environ.copy()
-# ensure the repo root is on PYTHONPATH so `from text2svg_rlrf import ...` resolves
-env["PYTHONPATH"] = str(PROJECT_ROOT) + os.pathsep + env.get("PYTHONPATH", "")
 print("Running:", " ".join(cmd))
 subprocess.run(cmd, check=True, cwd=str(PROJECT_ROOT), env=env)
 
