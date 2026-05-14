@@ -173,7 +173,11 @@ def load_omnisvg_policy(
         bin_path = hf_hub_download(repo_id=weight_path, filename="pytorch_model.bin")
 
     state_dict = torch.load(bin_path, map_location="cpu")
-    sketch_decoder.load_state_dict(state_dict)
+    missing, unexpected = sketch_decoder.load_state_dict(state_dict, strict=False)
+    if unexpected:
+        print(f"[OmniSVG] {len(unexpected)} unexpected keys in checkpoint (ignored)")
+    if missing:
+        print(f"[OmniSVG] {len(missing)} keys kept from base model (not in checkpoint)")
 
     transformer = sketch_decoder.transformer
 
