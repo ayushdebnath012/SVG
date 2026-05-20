@@ -198,18 +198,29 @@ def main(args):
 
     processor = AutoProcessor.from_pretrained(args.sft_ckpt)
 
-    # Policy model (trainable)
+    from transformers import BitsAndBytesConfig
+
+    # Policy model — 8-bit to fit alongside ref model on 1 × A100 80 GB
+    policy_quant = BitsAndBytesConfig(
+        load_in_8bit=True,
+        llm_int8_skip_modules=["visual"],
+    )
     policy = Qwen2_5_VLForConditionalGeneration.from_pretrained(
         args.sft_ckpt,
-        torch_dtype=torch.bfloat16,
-        attn_implementation="flash_attention_2",
+        quantization_config=policy_quant,
+        device_map="auto",
     )
     policy.gradient_checkpointing_enable()
 
-    # Reference model (frozen — same weights as M_SFT)
+    # Reference model — also 8-bit (frozen, just needs forward pass)
+    ref_quant = BitsAndBytesConfig(
+        load_in_8bit=True,
+        llm_int8_skip_modules=["visual"],
+    )
     ref_model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
         args.sft_ckpt,
-        torch_dtype=torch.bfloat16,
+        quantization_config=ref_quant,
+        device_map="auto",
     )
     ref_model.eval()
     for p in ref_model.parameters():
