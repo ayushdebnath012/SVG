@@ -30,7 +30,10 @@ torchrun --nproc_per_node="${NPROC}" \
   --dataset_dir           "${DATA_DIR}" \
   --template              qwen2_vl \
   --stage                 sft \
-  --finetuning_type       full \
+  --finetuning_type       lora \
+  --lora_rank             64 \
+  --lora_alpha            128 \
+  --lora_target           all \
   --cutoff_len            4096 \
   --per_device_train_batch_size  1 \
   --gradient_accumulation_steps  128 \
