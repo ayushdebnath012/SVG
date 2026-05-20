@@ -11,7 +11,7 @@ Paper §4.2:
 Run (single node, 8 GPUs):
     accelerate launch \
         --config_file deepspeed_zero3.json \
-        --num_processes 8 \
+        --num_processes 1 \
         05_dpo_train.py
 
 Run (single GPU, for testing):

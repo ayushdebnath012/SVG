@@ -16,7 +16,7 @@
 
 set -euo pipefail
 
-NPROC=${NPROC:-8}
+NPROC=${NPROC:-1}
 MODEL=${BASE_MODEL:-"Qwen/Qwen2.5-VL-7B-Instruct"}
 DATA_DIR="data"
 OUTPUT_DIR="checkpoints/m_sft"
@@ -32,8 +32,8 @@ torchrun --nproc_per_node="${NPROC}" \
   --stage                 sft \
   --finetuning_type       full \
   --cutoff_len            4096 \
-  --per_device_train_batch_size  2 \
-  --gradient_accumulation_steps  8 \
+  --per_device_train_batch_size  1 \
+  --gradient_accumulation_steps  128 \
   --lr_scheduler_type     cosine \
   --warmup_ratio          0.03 \
   --learning_rate         5e-5 \
