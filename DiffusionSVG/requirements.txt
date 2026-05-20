@@ -1,0 +1,33 @@
+# DiffusionSVG — dependencies
+# pip install -r requirements.txt
+
+# Core ML
+torch>=2.5.1
+torchvision>=0.20.0
+transformers>=4.49.0
+accelerate>=0.34.0
+
+# Quantisation (single-GPU steps)
+bitsandbytes>=0.43.0
+
+# Diffusion model (Step 1)
+diffusers>=0.30.0
+safetensors>=0.4.0
+
+# SVG vectorization (Step 2)
+vtracer>=0.6.0
+
+# SVG rendering & utils (shared with IntroSVG)
+cairosvg>=2.7.0
+Pillow>=10.0.0
+lxml>=5.0.0
+
+# CLIP reward model (Step 4)
+# transformers already covers CLIPModel; no extra install needed
+
+# Prompt complexity classification (Step 0, optional)
+# spacy>=3.7.0
+# python -m spacy download en_core_web_sm
+
+# Flash Attention 2 (recommended for A100 40/80 GB):
+#   pip install flash-attn --no-build-isolation
