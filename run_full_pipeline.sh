@@ -15,7 +15,7 @@
 set -euo pipefail
 
 PROMPTS_FILE="${1:-prompts.txt}"   # complex prompt source
-NPROC="${NPROC:-8}"                # GPUs for SFT (DeepSpeed)
+NPROC="${NPROC:-1}"                # single A100 80 GB
 INTROSVG_DIR="IntroSVG"
 DIFFSVG_DIR="DiffusionSVG"
 
