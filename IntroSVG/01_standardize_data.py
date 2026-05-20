@@ -165,14 +165,23 @@ def main(args):
                 if len(batch) >= BATCH:
                     _flush_batch(batch); batch = []
                 _collect()
+                if args.max_samples and total_out >= args.max_samples:
+                    log.info(f"  --max-samples {args.max_samples} reached, stopping.")
+                    break
+            if args.max_samples and total_out >= args.max_samples:
+                break
 
         # Optionally load local directories
         for local_dir in args.local_dirs:
+            if args.max_samples and total_out >= args.max_samples:
+                break
             for prompt, svg_raw in _load_local_dir(local_dir):
                 batch.append((prompt, svg_raw))
                 if len(batch) >= BATCH:
                     _flush_batch(batch); batch = []
                 _collect()
+                if args.max_samples and total_out >= args.max_samples:
+                    break
 
         if batch:
             _flush_batch(batch)
@@ -192,8 +201,10 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--workers",    type=int, default=NUM_WORKERS)
-    parser.add_argument("--local-dirs", nargs="*", default=[],
+    parser.add_argument("--workers",     type=int, default=NUM_WORKERS)
+    parser.add_argument("--max-samples", type=int, default=0,
+                        help="Stop after N accepted samples (0 = no limit; use 5000 for smoke run)")
+    parser.add_argument("--local-dirs",  nargs="*", default=[],
                         help="Optional local directories of .svg + .txt pairs")
     args = parser.parse_args()
     main(args)
