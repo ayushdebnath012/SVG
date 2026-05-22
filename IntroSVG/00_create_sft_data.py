@@ -29,10 +29,10 @@ from pathlib import Path
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 log = logging.getLogger("create_sft")
 
-DATA_DIR = Path("data")
-OUT_FILE = DATA_DIR / "d_sft.jsonl"
+DATA_DIR     = Path("data")
+OUT_FILE     = DATA_DIR / "d_sft_gen.jsonl"   # separate from official d_sft.jsonl
 DATASET_INFO = DATA_DIR / "dataset_info.json"
-MODEL_NAME = "Qwen/Qwen2.5-VL-7B-Instruct"
+MODEL_NAME   = "Qwen/Qwen2.5-VL-7B-Instruct"
 
 # ── Medium-to-hard scene prompts ─────────────────────────────────────────────
 # These are the sweet spot for base-model SFT generation:
@@ -194,8 +194,16 @@ def main(args):
     random.shuffle(base_prompts)
     all_prompts = base_prompts[:args.n_samples]
 
+    # Resume: count rows already in the output file
     n_ok = 0
-    with open(OUT_FILE, "w", encoding="utf-8") as fout:
+    if OUT_FILE.exists():
+        n_ok = sum(1 for line in OUT_FILE.read_text(encoding="utf-8").splitlines() if line.strip())
+        if n_ok >= args.n_samples:
+            log.info(f"Already have {n_ok} samples in {OUT_FILE}, nothing to do.")
+            return
+        log.info(f"Resuming from {n_ok} existing samples")
+
+    with open(OUT_FILE, "a", encoding="utf-8") as fout:
         for i in range(0, len(all_prompts), args.batch_size):
             batch = all_prompts[i:i + args.batch_size]
             results = _generate_svgs(batch, model, processor, device)
@@ -233,22 +241,15 @@ def main(args):
 
     log.info(f"Done: {n_ok} samples → {OUT_FILE}")
 
-    # Write dataset_info.json
-    info = {
-        "d_sft": {
-            "file_name": "d_sft.jsonl",
-            "formatting": "sharegpt",
-            "columns": {"messages": "conversations"},
-        },
-        "d_pref_g": {
-            "file_name": "d_pref_g.jsonl",
-            "formatting": "sharegpt",
-            "ranking": True,
-            "columns": {"messages": "messages", "chosen": "chosen", "rejected": "rejected"},
-        },
+    # Merge d_sft_gen entry into existing dataset_info.json (don't overwrite other entries)
+    info = json.loads(DATASET_INFO.read_text(encoding="utf-8")) if DATASET_INFO.exists() else {}
+    info["d_sft_gen"] = {
+        "file_name": "d_sft_gen.jsonl",
+        "formatting": "sharegpt",
+        "columns": {"messages": "conversations"},
     }
     DATASET_INFO.write_text(json.dumps(info, indent=2, ensure_ascii=False), encoding="utf-8")
-    log.info(f"dataset_info.json → {DATASET_INFO}")
+    log.info(f"dataset_info.json updated with d_sft_gen entry")
 
 
 if __name__ == "__main__":
