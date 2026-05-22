@@ -5,17 +5,16 @@
 # in ~3–4 days while giving ~85–90% of paper quality.
 #
 # Time budget:
-#   Step 1  standardize      50 000 SVGs          ~3–4 hrs
-#   Step 2  build SFT data    5 000 prompts        ~15–20 hrs
-#   Step 3  SFT LoRA          3 epochs             ~8–12 hrs
-#   Step 4  build DPO data    1 500 prompts        ~6–8 hrs
-#   Step 5  DPO               3 epochs             ~4–6 hrs
-#   Step 6  diffusion PNGs    1 000 prompts        ~30 min
-#   Step 7  vectorize         1 000 SVGs           ~20 min
-#   Step 8  GRPO              2 epochs             ~8–12 hrs
-#   Model downloads (first run)                    ~2 hrs
-#   ───────────────────────────────────────────────────────
-#   Total                                          ~50–70 hrs (~3–4 days)
+#   Step 1-2  download IntroSVG-train  5 000 samples   ~20 min (bandwidth)
+#   Step 3    SFT LoRA                 3 epochs         ~8–12 hrs
+#   Step 4    build DPO data           1 500 prompts    ~6–8 hrs
+#   Step 5    DPO                      3 epochs         ~4–6 hrs
+#   Step 6    diffusion PNGs           1 000 prompts    ~30 min
+#   Step 7    vectorize                1 000 SVGs       ~20 min
+#   Step 8    GRPO                     2 epochs         ~8–12 hrs
+#   Model downloads (first run)                        ~2 hrs
+#   ─────────────────────────────────────────────────────────
+#   Total                                              ~30–42 hrs (~1.5–2 days)
 #
 # Resumable: each step checks if its output already exists and skips if so.
 #
@@ -45,7 +44,11 @@ elapsed() { echo "  ⏱  $(date '+%H:%M:%S')"; }
 
 skip_if_exists() {
     local path="$1"; local label="$2"
-    if [ -f "$path" ] || [ -d "$path" ]; then
+    # For files: must exist AND be non-empty. For dirs: must exist.
+    if [ -d "$path" ]; then
+        echo "  [SKIP] $label already exists at $path"
+        return 0
+    elif [ -f "$path" ] && [ -s "$path" ]; then
         echo "  [SKIP] $label already exists at $path"
         return 0
     fi
@@ -60,25 +63,17 @@ echo "════════════════════════�
 echo "  STAGE 1 — IntroSVG"
 echo "══════════════════════════════════════════════════════════"
 
-# Step 1 — Standardise 50K SVGs
+# Steps 1+2 — Download official IntroSVG training data from HuggingFace.
+# gitcat404/IntroSVG-train is the exact dataset used in the paper (high-quality,
+# GPT-4o critiqued SVG pairs). ~5 000 samples downloaded, no GPU required.
+# Expected: ~10-20 min with good bandwidth.
 echo ""
-echo "[1/8] Standardising SVG data (50 000 samples)..."
-elapsed
-skip_if_exists data/d_g_direct.jsonl "d_g_direct.jsonl" || \
-python 01_standardize_data.py \
-    --max-samples 50000 \
-    --workers 8
-elapsed
-
-# Step 2 — Build SFT data: 5K draft generations + GPT-4o critiques
-echo ""
-echo "[2/8] Building SFT data (5 000 prompts + GPT-4o)..."
-echo "  Expected: ~15–20 hrs"
+echo "[1-2/8] Downloading official IntroSVG dataset (gitcat404/IntroSVG-train)..."
+echo "  Expected: ~10–20 min (bandwidth-limited, no GPU needed)"
 elapsed
 skip_if_exists data/d_sft.jsonl "d_sft.jsonl" || \
-python 02_build_sft_data.py \
-    --n-prompts 5000 \
-    --model-name Qwen/Qwen2.5-VL-7B-Instruct
+PYTHONUNBUFFERED=1 python 00_download_official_data.py \
+    --max-samples 5000
 elapsed
 
 # Step 3 — SFT LoRA, 3 epochs
@@ -195,7 +190,7 @@ python 04_grpo_train.py \
     --model      "../IntroSVG/checkpoints/m_final/epoch_3" \
     --data       data/grpo_train.jsonl \
     --output     checkpoints/grpo_svg \
-    --epochs     2 \
+    --epochs     3 \
     --n-samples  4 \
     --beta       0.04 \
     --grad-accum 16
