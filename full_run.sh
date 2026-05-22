@@ -5,7 +5,7 @@
 # in ~3–4 days while giving ~85–90% of paper quality.
 #
 # Time budget:
-#   Step 1-2  SFT base-model gen        500 samples     ~4–6 hrs (A100)
+#   Step 1-2  download IntroSVG-train   5 000 samples   ~20 min (bandwidth)
 #   Step 3    SFT LoRA                 3 epochs         ~8–12 hrs
 #   Step 4    build DPO data           1 500 prompts    ~6–8 hrs
 #   Step 5    DPO                      3 epochs         ~4–6 hrs
@@ -14,7 +14,7 @@
 #   Step 8    GRPO                     2 epochs         ~8–12 hrs
 #   Model downloads (first run)                        ~2 hrs
 #   ─────────────────────────────────────────────────────────
-#   Total                                              ~35–50 hrs (~2–3 days)
+#   Total                                              ~30–42 hrs (~1.5–2 days)
 #
 # Resumable: each step checks if its output already exists and skips if so.
 #
@@ -63,18 +63,17 @@ echo "════════════════════════�
 echo "  STAGE 1 — IntroSVG"
 echo "══════════════════════════════════════════════════════════"
 
-# Steps 1+2 — Generate SFT data via base model using medium-to-hard scene prompts.
-# Prompts loaded from ../prompts.txt (~150 curated landscape/scene prompts).
-# Difficulty sweet spot: clear sky/ground structure, 3-6 named objects.
-# Simple objects and very unusual combos both hurt SFT quality.
+# Steps 1+2 — Download official IntroSVG training data from HuggingFace.
+# gitcat404/IntroSVG-train is the exact dataset used in the paper:
+# GPT-4o generated and critiqued SVG pairs, far higher quality than anything
+# the base model can self-generate. No GPU required; ~10-20 min download.
 echo ""
-echo "[1-2/8] Generating SFT dataset (base model, medium-hard scene prompts)..."
-echo "  Expected: ~4–6 hrs for 500 samples on A100"
+echo "[1-2/8] Downloading official IntroSVG-train dataset (gitcat404/IntroSVG-train)..."
+echo "  Expected: ~10–20 min (bandwidth-limited, no GPU needed)"
 elapsed
 skip_if_exists data/d_sft.jsonl "d_sft.jsonl" || \
-PYTHONUNBUFFERED=1 python 00_create_sft_data.py \
-    --n-samples  500 \
-    --batch-size 1
+PYTHONUNBUFFERED=1 python 00_download_official_data.py \
+    --max-samples 5000
 elapsed
 
 # Step 3 — SFT LoRA, 3 epochs
