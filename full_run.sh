@@ -6,8 +6,7 @@
 #
 # Time budget:
 #   Step 1    download IntroSVG-train   5 000 samples   ~20 min (bandwidth)
-#   Step 2    self-gen medium SVGs       500 samples    ~4–6 hrs (A100)
-#   Step 3    SFT LoRA (both datasets) 3 epochs         ~8–12 hrs
+#   Step 2    SFT LoRA                  3 epochs        ~8–12 hrs
 #   Step 4    build DPO data           1 500 prompts    ~6–8 hrs
 #   Step 5    DPO                      3 epochs         ~4–6 hrs
 #   Step 6    diffusion PNGs           1 000 prompts    ~30 min
@@ -15,7 +14,7 @@
 #   Step 8    GRPO                     2 epochs         ~8–12 hrs
 #   Model downloads (first run)                        ~2 hrs
 #   ─────────────────────────────────────────────────────────
-#   Total                                              ~35–50 hrs (~2–3 days)
+#   Total                                              ~30–42 hrs (~1.5–2 days)
 #
 # Resumable: each step checks if its output already exists and skips if so.
 #
@@ -26,6 +25,9 @@
 #   # Ctrl+B D to detach, tmux attach -t train to resume
 
 set -euo pipefail
+
+# Use the venv that has torch/transformers/llamafactory on this server
+export PATH=/venv/main/bin:$PATH
 
 PROMPTS_FILE="${1:-prompts.txt}"
 LOG_FILE="full_run_$(date +%Y%m%d_%H%M%S).log"
@@ -75,32 +77,19 @@ PYTHONUNBUFFERED=1 python 00_download_official_data.py \
     --max-samples 5000
 elapsed
 
-# Step 2 — Self-generate medium SVGs via base model (appended as d_sft_gen.jsonl).
-# Prompts from prompts.txt: medium-hard scenes the base model can actually draw.
-# Adds diversity on top of the official data. Written to a separate file so
-# the two different formats don't conflict; both loaded at training time.
+# Step 2 — SFT LoRA, 3 epochs on official IntroSVG-train data
 echo ""
-echo "[2/8] Self-generating medium SVGs (500 samples, base model)..."
-echo "  Expected: ~4–6 hrs on A100"
-elapsed
-skip_if_exists data/d_sft_gen.jsonl "d_sft_gen.jsonl" || \
-PYTHONUNBUFFERED=1 python 00_create_sft_data.py \
-    --n-samples  500 \
-    --batch-size 1
-elapsed
-
-# Step 3 — SFT LoRA, 3 epochs
-echo ""
-echo "[3/8] SFT training (LoRA rank=64, 3 epochs, official + self-gen data)..."
+echo "[2/8] SFT training (LoRA rank=64, 3 epochs)..."
 echo "  Expected: ~8–12 hrs"
 elapsed
-skip_if_exists checkpoints/m_sft/epoch_3 "m_sft/epoch_3" || \
+skip_if_exists checkpoints/m_sft/adapter_model.safetensors "m_sft adapter" || \
 llamafactory-cli train \
     --model_name_or_path    Qwen/Qwen2.5-VL-7B-Instruct \
-    --dataset               d_sft,d_sft_gen \
+    --dataset               d_sft \
     --dataset_dir           ./data \
     --template              qwen2_vl \
     --stage                 sft \
+    --do_train              true \
     --finetuning_type       lora \
     --lora_rank             64 \
     --lora_alpha            128 \
@@ -111,13 +100,20 @@ llamafactory-cli train \
     --lr_scheduler_type     cosine \
     --warmup_ratio          0.03 \
     --learning_rate         5e-5 \
-    --num_train_epochs      3.0 \
+    --num_train_epochs      5.0 \
     --bf16                  true \
     --output_dir            checkpoints/m_sft \
-    --save_steps            500 \
-    --logging_steps         50 \
+    --save_steps            50 \
+    --logging_steps         5 \
+    --save_strategy         epoch \
+    --save_total_limit      1 \
+    --save_only_model       true \
     --report_to             none
 elapsed
+
+# Load OpenAI API key if available (needed for DPO data build)
+# shellcheck disable=SC1090
+source ~/.openai_env 2>/dev/null || true
 
 # Step 4 — Build DPO data: 1 500 prompts, 3 candidates each
 echo ""
@@ -126,7 +122,7 @@ echo "  Expected: ~6–8 hrs"
 elapsed
 skip_if_exists data/d_pref_g.jsonl "d_pref_g.jsonl" || \
 python 04_build_dpo_data.py \
-    --sft-ckpt   checkpoints/m_sft/epoch_3 \
+    --sft-ckpt   checkpoints/m_sft \
     --n-prompts  1500 \
     --n-candidates 3 \
     --delta 1
@@ -137,9 +133,9 @@ echo ""
 echo "[5/8] DPO training (3 epochs)..."
 echo "  Expected: ~4–6 hrs"
 elapsed
-skip_if_exists checkpoints/m_final/epoch_3 "m_final/epoch_3" || \
+skip_if_exists checkpoints/m_final/adapter_model.safetensors "m_final adapter" || \
 python 05_dpo_train.py \
-    --sft-ckpt  checkpoints/m_sft/epoch_3 \
+    --sft-ckpt  checkpoints/m_sft \
     --epochs    3 \
     --per-device-batch 1 \
     --grad-accum 16 \
