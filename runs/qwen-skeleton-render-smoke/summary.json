@@ -1,0 +1,117 @@
+{
+  "architecture": "skeleton_patch",
+  "by_task": {
+    "change_color": {
+      "cases": 2,
+      "completion_tokens": 71,
+      "gold_patch_exact_rate": 0.0,
+      "mean_failure_aware_mse": 0.002441012766212225,
+      "mean_model_latency_seconds": 2.085537270497298,
+      "mean_mse_on_rendered": 0.002441012766212225,
+      "model_calls": 2,
+      "prompt_tokens": 2072,
+      "protected_geometry_rate": 1.0,
+      "reference_structure_match_rate": 0.0,
+      "valid_output_rate": 1.0
+    },
+    "crop_to_half": {
+      "cases": 2,
+      "completion_tokens": 118,
+      "gold_patch_exact_rate": 0.0,
+      "mean_failure_aware_mse": 1.0,
+      "mean_model_latency_seconds": 2.774416646003374,
+      "mean_mse_on_rendered": null,
+      "model_calls": 2,
+      "prompt_tokens": 2051,
+      "protected_geometry_rate": 0.0,
+      "reference_structure_match_rate": 0.0,
+      "valid_output_rate": 0.0
+    },
+    "set_contour": {
+      "cases": 2,
+      "completion_tokens": 86,
+      "gold_patch_exact_rate": 0.0,
+      "mean_failure_aware_mse": 1.0,
+      "mean_model_latency_seconds": 2.314632541500032,
+      "mean_mse_on_rendered": null,
+      "model_calls": 2,
+      "prompt_tokens": 2078,
+      "protected_geometry_rate": 0.0,
+      "reference_structure_match_rate": 0.0,
+      "valid_output_rate": 0.0
+    },
+    "transparency": {
+      "cases": 2,
+      "completion_tokens": 71,
+      "gold_patch_exact_rate": 0.0,
+      "mean_failure_aware_mse": 1.0,
+      "mean_model_latency_seconds": 2.0464439170027617,
+      "mean_mse_on_rendered": null,
+      "model_calls": 2,
+      "prompt_tokens": 2045,
+      "protected_geometry_rate": 0.0,
+      "reference_structure_match_rate": 0.0,
+      "valid_output_rate": 0.0
+    },
+    "upside_down": {
+      "cases": 2,
+      "completion_tokens": 115,
+      "gold_patch_exact_rate": 0.0,
+      "mean_failure_aware_mse": 1.0,
+      "mean_model_latency_seconds": 2.903877396020107,
+      "mean_mse_on_rendered": null,
+      "model_calls": 2,
+      "prompt_tokens": 2043,
+      "protected_geometry_rate": 0.0,
+      "reference_structure_match_rate": 0.0,
+      "valid_output_rate": 0.0
+    }
+  },
+  "dataset": {
+    "root": "SVGEditBench",
+    "tasks": {
+      "change_color": 100,
+      "compression": 100,
+      "crop_to_half": 100,
+      "set_contour": 100,
+      "transparency": 100,
+      "upside_down": 100
+    },
+    "total_cases": 600,
+    "unique_emojis": 100
+  },
+  "errors": {
+    "PatchError: attributes are invalid for set_contour: ['fill']": 1,
+    "PatchError: attributes are invalid for transparency: ['fill']": 2,
+    "PatchError: crop_to_half only permits set_attributes operations": 2,
+    "PatchError: set_contour only permits set_attributes operations": 1,
+    "PatchError: upside_down only permits set_attributes operations": 2
+  },
+  "evaluation": {
+    "render": true,
+    "render_size": 72,
+    "results": "runs/qwen-skeleton-render-smoke/results.jsonl"
+  },
+  "model": {
+    "adapter": "openai_compatible",
+    "base_url": "http://localhost:8000/v1",
+    "json_mode": false,
+    "max_tokens": 512,
+    "model": "Qwen/Qwen3.5-0.8B",
+    "temperature": 0.0,
+    "timeout": 120
+  },
+  "overall": {
+    "cases": 10,
+    "completion_tokens": 461,
+    "gold_patch_exact_rate": 0.0,
+    "mean_failure_aware_mse": 0.8004882025532425,
+    "mean_model_latency_seconds": 2.4249815542047144,
+    "mean_mse_on_rendered": 0.002441012766212225,
+    "model_calls": 10,
+    "prompt_tokens": 10289,
+    "protected_geometry_rate": 0.2,
+    "reference_structure_match_rate": 0.0,
+    "valid_output_rate": 0.2
+  }
+}
