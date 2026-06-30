@@ -97,12 +97,17 @@ class Patch:
         if unknown_keys:
             raise PatchError(f"unknown patch fields: {sorted(unknown_keys)}")
         version = value.get("version", 1)
-        if version != 1:
+        if version not in (1, 2):
             raise PatchError(f"unsupported patch version: {version}")
         operations = value.get("operations")
         if not isinstance(operations, list):
             raise PatchError("patch requires an operations list")
-        return cls(tuple(PatchOperation.from_dict(item) for item in operations), version=1)
+        parsed = tuple(PatchOperation.from_dict(item) for item in operations)
+        if version == 1:
+            for op in parsed:
+                if op.op == "remove_element":
+                    raise PatchError("remove_element requires patch version 2")
+        return cls(parsed, version=version)
 
 
 _JSON_FENCE = re.compile(r"```(?:json)?\s*(.*?)\s*```", re.DOTALL | re.IGNORECASE)
@@ -136,36 +141,72 @@ def parse_patch(text: str) -> Patch:
     return Patch.from_dict(extract_json_object(text))
 
 
+def _diff_elements(
+    orig_elem: Any,
+    ans_elem: Any,
+    id_map: dict[int, str],
+    set_groups: dict,
+    remove_groups: dict,
+    remove_elements: list[str],
+) -> None:
+    """Recursively diff two element trees collecting attribute changes and removals."""
+    node_id = id_map[id(orig_elem)]
+    orig_attrs = orig_elem.attrib
+    ans_attrs = ans_elem.attrib
+    changed = tuple(
+        sorted(
+            (name, value)
+            for name, value in ans_attrs.items()
+            if orig_attrs.get(name) != value
+        )
+    )
+    removed_attrs = tuple(sorted(name for name in orig_attrs if name not in ans_attrs))
+    if changed:
+        set_groups.setdefault(changed, []).append(node_id)
+    if removed_attrs:
+        remove_groups.setdefault(removed_attrs, []).append(node_id)
+
+    orig_children = list(orig_elem)
+    ans_children = list(ans_elem)
+    ans_used = [False] * len(ans_children)
+    for orig_child in orig_children:
+        orig_tag = local_name(orig_child.tag)
+        matched = None
+        for j, ans_child in enumerate(ans_children):
+            if ans_used[j]:
+                continue
+            if local_name(ans_child.tag) == orig_tag:
+                ans_used[j] = True
+                matched = ans_child
+                break
+        if matched is None:
+            child_id = id_map.get(id(orig_child))
+            if child_id:
+                remove_elements.append(child_id)
+        else:
+            _diff_elements(orig_child, matched, id_map, set_groups, remove_groups, remove_elements)
+
+
 def derive_patch(original_svg: str, answer_svg: str) -> Patch:
-    """Derive attribute-only gold operations for SVGEditBench cases."""
-    original_nodes = index_tree(parse_svg(original_svg))
-    answer_nodes = index_tree(parse_svg(answer_svg))
-    if len(original_nodes) != len(answer_nodes):
-        raise PatchError("gold derivation currently requires identical tree structure")
+    """Derive gold operations by diffing original and answer SVG trees."""
+    original_root = parse_svg(original_svg)
+    answer_root = parse_svg(answer_svg)
+    original_nodes = index_tree(original_root)
+    id_map: dict[int, str] = {id(node.element): node.node_id for node in original_nodes}
 
     set_groups: dict[tuple[tuple[str, str], ...], list[str]] = {}
     remove_groups: dict[tuple[str, ...], list[str]] = {}
-    for original, answer in zip(original_nodes, answer_nodes):
-        if local_name(original.element.tag) != local_name(answer.element.tag):
-            raise PatchError(f"tag mismatch at {original.node_id}")
-        original_attrs = original.element.attrib
-        answer_attrs = answer.element.attrib
-        changed = tuple(
-            sorted(
-                (name, value)
-                for name, value in answer_attrs.items()
-                if original_attrs.get(name) != value
-            )
-        )
-        removed = tuple(sorted(name for name in original_attrs if name not in answer_attrs))
-        if changed:
-            set_groups.setdefault(changed, []).append(original.node_id)
-        if removed:
-            remove_groups.setdefault(removed, []).append(original.node_id)
+    remove_elements: list[str] = []
+
+    _diff_elements(original_root, answer_root, id_map, set_groups, remove_groups, remove_elements)
 
     operations: list[PatchOperation] = []
     for attributes, targets in set_groups.items():
         operations.append(PatchOperation("set_attributes", tuple(targets), attributes))
     for names, targets in remove_groups.items():
         operations.append(PatchOperation("remove_attributes", tuple(targets), names=names))
-    return Patch(tuple(operations))
+    for node_id in remove_elements:
+        operations.append(PatchOperation("remove_element", (node_id,)))
+
+    version = 2 if remove_elements else 1
+    return Patch(tuple(operations), version=version)

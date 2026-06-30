@@ -48,9 +48,14 @@ TASK_ALLOWED_ATTRIBUTES = {
     "upside_down": frozenset({"transform"}),
     "transparency": frozenset({"opacity"}),
     "crop_to_half": frozenset({"viewBox"}),
+    # Plan B
+    "rotate": frozenset({"transform"}),
+    "flip": frozenset({"transform"}),
+    "delete": frozenset(),
 }
 
 ROOT_ONLY_TASKS = {"upside_down", "transparency", "crop_to_half"}
+DELETE_TASKS = {"delete"}
 BENCHMARK_TASKS = set(TASK_ALLOWED_ATTRIBUTES)
 
 
@@ -75,13 +80,23 @@ def validate_patch(
     for operation in patch.operations:
         if operation.op not in policy.allowed_operations:
             raise PatchError(f"operation is not allowed: {operation.op}")
-        if task in BENCHMARK_TASKS and operation.op != "set_attributes":
-            raise PatchError(f"{task} only permits set_attributes operations")
+        if task in BENCHMARK_TASKS:
+            if task in DELETE_TASKS and operation.op != "remove_element":
+                raise PatchError(f"{task} only permits remove_element operations")
+            elif task not in DELETE_TASKS and operation.op != "set_attributes":
+                raise PatchError(f"{task} only permits set_attributes operations")
         if len(operation.targets) > policy.max_targets:
             raise PatchError("operation exceeds target limit")
         unknown = sorted(set(operation.targets) - node_ids)
         if unknown:
             raise PatchError(f"unknown target IDs: {', '.join(unknown)}")
+
+        if operation.op == "remove_element":
+            root_id = scene["root_id"]
+            for target in operation.targets:
+                if target == root_id:
+                    raise PatchError("cannot remove the root element")
+            continue
 
         names = set(operation.attributes_dict) | set(operation.names)
         forbidden = names & policy.protected_attributes

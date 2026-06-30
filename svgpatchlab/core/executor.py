@@ -39,6 +39,14 @@ def apply_patch(svg: str, patch: Patch) -> str:
                 sibling = by_id[operation.after]
                 children = list(parent)
                 parent.insert(children.index(sibling) + 1, element)
+        elif operation.op == "remove_element":
+            for target in operation.targets:
+                if target not in by_id:
+                    raise PatchError(f"unknown target during execution: {target}")
+                parent_id = parent_by_id.get(target)
+                if parent_id is None:
+                    raise PatchError("cannot remove the root element")
+                by_id[parent_id].remove(by_id[target])
         else:
             raise PatchError(f"unsupported operation during execution: {operation.op}")
 

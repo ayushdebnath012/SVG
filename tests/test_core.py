@@ -66,30 +66,30 @@ class CoreTests(unittest.TestCase):
 
 class PromptTests(unittest.TestCase):
     def test_patch_prompt_templates_are_versioned_files(self):
-        self.assertEqual(PATCH_PROMPT_VERSIONS, (1, 2, 3))
+        self.assertEqual(PATCH_PROMPT_VERSIONS, (1, 2, 3, 4))
         for version in PATCH_PROMPT_VERSIONS:
             with self.subTest(version=version):
                 path = PATCH_PROMPT_TEMPLATE_DIR / f"patch_v{version}.txt"
                 self.assertTrue(path.exists())
                 self.assertIn("$instruction", path.read_text())
 
-    def test_patch_prompt_v3_is_generic_rule_based(self):
+    def test_patch_prompt_v4_is_generic_rule_based(self):
         prompt = patch_prompt(
             "Make the drawing half transparent.",
             "SVG DOM skeleton",
             '{"root_id":"n0","nodes":[{"id":"n0","tag":"svg"}]}',
         )
-        self.assertEqual(PATCH_PROMPT_VERSION, 3)
+        self.assertEqual(PATCH_PROMPT_VERSION, 4)
         self.assertIn(f"svgpatchlab.patch.v{PATCH_PROMPT_VERSION}", prompt)
         for attribute in ("stroke-width", "opacity", "transform", "viewBox"):
             self.assertIn(attribute, prompt)
         self.assertIn("Generic SVG edit rules:", prompt)
         self.assertIn("Compute every target, color, number, and attribute value", prompt)
         self.assertNotIn("insert_primitive", prompt)
-        self.assertNotIn("remove_attributes", prompt)
         self.assertNotIn("NODE_ID", prompt)
         self.assertNotIn("ATTRIBUTE", prompt)
         self.assertNotIn('"VALUE"', prompt)
+        self.assertIn("remove_element", prompt)
         self.assertIn("Actual edit instruction:", prompt)
         self.assertIn("Output the JSON patch object now.", prompt)
 

@@ -5,6 +5,7 @@ from .diagnostic import OraclePatchArchitecture, OracleTargetArchitecture, TwoSt
 from .patching import (
     FullContextPatchArchitecture,
     SkeletonPatchArchitecture,
+    VisualGNNPatchArchitecture,
     VisualSkeletonPatchArchitecture,
 )
 from .rewrite import FullRewriteArchitecture
@@ -18,6 +19,7 @@ ARCHITECTURES: dict[str, type[Architecture]] = {
     "full_context_patch": FullContextPatchArchitecture,
     "skeleton_patch": SkeletonPatchArchitecture,
     "visual_skeleton_patch": VisualSkeletonPatchArchitecture,
+    "visual_gnn_patch": VisualGNNPatchArchitecture,
     "oracle_target_patch": OracleTargetArchitecture,
     "two_stage_patch": TwoStagePatchArchitecture,
 }
