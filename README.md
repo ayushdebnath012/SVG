@@ -67,6 +67,30 @@ For in-process Hugging Face inference:
 python3 -m pip install -r requirements-hf.txt
 ```
 
+## Run Plan A/B/C on Kaggle
+
+The Kaggle preset uses local Hugging Face inference with 4-bit loading for
+`Qwen/Qwen3.5-4B`:
+
+```bash
+git pull
+python3 -m pip install -r requirements-hf.txt
+python3 scripts/run_kaggle_plans.py --limit-per-task 2 --no-render
+```
+
+Outputs are written under `runs/kaggle-plans/`:
+
+```text
+runs/kaggle-plans/plans-summary.json
+runs/kaggle-plans/plan_a_visual_node_understanding/
+runs/kaggle-plans/plan_b_basic_tasks/
+runs/kaggle-plans/plan_c_chain/
+```
+
+Use `--limit-per-task 5` for the same smoke size as the Kaggle run log, or
+remove the limit for a full run. Set `HF_TOKEN` in Kaggle secrets for better
+Hub download limits.
+
 ## Validate the entire benchmark pipeline
 
 The oracle derives the minimal attribute patch from each reference and should

@@ -8,7 +8,7 @@ from pathlib import Path
 from svgpatchlab.architectures.factory import ARCHITECTURES
 from svgpatchlab.config import load_config, load_model_config
 from svgpatchlab.data import SVGEditBench
-from svgpatchlab.eval.runner import run_evaluation
+from svgpatchlab.eval.runner import run_chain_evaluation, run_evaluation
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -54,6 +54,18 @@ def build_parser() -> argparse.ArgumentParser:
     matrix_parser.add_argument("--limit-per-task", type=int)
     matrix_parser.add_argument("--output-root", default="runs/matrix")
     matrix_parser.add_argument(
+        "--render", action=argparse.BooleanOptionalAction, default=None
+    )
+
+    chain_parser = subparsers.add_parser("chain", help="run Plan C chain evaluation")
+    chain_parser.add_argument("--config", default="configs/chains/default.json")
+    chain_parser.add_argument("--decomposer-model-config")
+    chain_parser.add_argument("--patch-model-config")
+    chain_parser.add_argument("--patch-architecture", choices=sorted(ARCHITECTURES))
+    chain_parser.add_argument("--limit", type=int)
+    chain_parser.add_argument("--limit-per-task", type=int)
+    chain_parser.add_argument("--output-dir")
+    chain_parser.add_argument(
         "--render", action=argparse.BooleanOptionalAction, default=None
     )
     return parser
@@ -103,6 +115,23 @@ def main(argv: list[str] | None = None) -> int:
         matrix_path = output_root / "matrix-summary.json"
         matrix_path.write_text(json.dumps(summaries, indent=2, sort_keys=True) + "\n")
         print(json.dumps({"matrix_summary": str(matrix_path), "architectures": list(summaries)}, indent=2))
+    elif args.command == "chain":
+        config = json.loads(Path(args.config).read_text())
+        if args.decomposer_model_config:
+            config.setdefault("decomposer", {})["model_config"] = args.decomposer_model_config
+        if args.patch_model_config:
+            config["patch_model_config"] = args.patch_model_config
+        if args.patch_architecture:
+            config["patch_architecture"] = args.patch_architecture
+        if args.limit is not None:
+            config.setdefault("dataset", {})["limit"] = args.limit
+        if args.limit_per_task is not None:
+            config.setdefault("dataset", {})["limit_per_task"] = args.limit_per_task
+        if args.output_dir:
+            config.setdefault("evaluation", {})["output_dir"] = args.output_dir
+        if args.render is not None:
+            config.setdefault("evaluation", {})["render"] = args.render
+        print(json.dumps(run_chain_evaluation(config), indent=2, sort_keys=True))
     return 0
 
 
