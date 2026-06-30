@@ -44,7 +44,7 @@ class HuggingFaceAdapter(ModelAdapter):
 
         dtype = config.get("dtype")
         if dtype:
-            model_kwargs["torch_dtype"] = getattr(torch, dtype, torch.float16)
+            model_kwargs["dtype"] = getattr(torch, dtype, torch.float16)
 
         if model_kwargs:
             kwargs["model_kwargs"] = model_kwargs

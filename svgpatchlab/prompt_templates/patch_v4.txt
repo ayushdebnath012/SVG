@@ -73,7 +73,9 @@ Flip (horizontal or vertical, scoped):
   * Vertical flip of a node at canvas height H: translate(0,H) scale(1,-1)
 
 Delete / remove element changes:
-  * Use op "remove_element" with targets listing the node IDs to remove.
+  * ONLY use "remove_element" when the instruction explicitly says to delete,
+    remove, or erase a specific element. Never use it for color, opacity,
+    transform, crop, or contour edits.
   * Set version to 2 at the top level.
   * Never target n0. Never remove an ancestor of a node you want to keep.
   * Example: {"version":2,"operations":[{"op":"remove_element","targets":["n5"]}]}
