@@ -1,0 +1,121 @@
+{
+  "architecture": "skeleton_patch",
+  "by_task": {
+    "change_color": {
+      "cases": 100,
+      "completion_tokens": 7347,
+      "gold_patch_exact_rate": 0.9484536082474226,
+      "mean_failure_aware_mse": 0.03009697336354293,
+      "mean_model_latency_seconds": 4.709174490407459,
+      "mean_mse_on_rendered": 9.997253973497865e-05,
+      "model_calls": 100,
+      "prompt_tokens": 249098,
+      "protected_geometry_rate": 0.97,
+      "reference_structure_match_rate": 0.92,
+      "valid_output_rate": 0.97
+    },
+    "crop_to_half": {
+      "cases": 100,
+      "completion_tokens": 7900,
+      "gold_patch_exact_rate": 1.0,
+      "mean_failure_aware_mse": 0.0,
+      "mean_model_latency_seconds": 4.99649618170195,
+      "mean_mse_on_rendered": 0.0,
+      "model_calls": 100,
+      "prompt_tokens": 247777,
+      "protected_geometry_rate": 1.0,
+      "reference_structure_match_rate": 1.0,
+      "valid_output_rate": 1.0
+    },
+    "set_contour": {
+      "cases": 100,
+      "completion_tokens": 8598,
+      "gold_patch_exact_rate": 0.6907216494845361,
+      "mean_failure_aware_mse": 0.039745312912855296,
+      "mean_model_latency_seconds": 5.289174069568108,
+      "mean_mse_on_rendered": 0.010046714343149792,
+      "model_calls": 100,
+      "prompt_tokens": 249263,
+      "protected_geometry_rate": 0.97,
+      "reference_structure_match_rate": 0.67,
+      "valid_output_rate": 0.97
+    },
+    "transparency": {
+      "cases": 100,
+      "completion_tokens": 7166,
+      "gold_patch_exact_rate": 1.0,
+      "mean_failure_aware_mse": 0.0,
+      "mean_model_latency_seconds": 4.608881467100873,
+      "mean_mse_on_rendered": 0.0,
+      "model_calls": 100,
+      "prompt_tokens": 247477,
+      "protected_geometry_rate": 1.0,
+      "reference_structure_match_rate": 1.0,
+      "valid_output_rate": 1.0
+    },
+    "upside_down": {
+      "cases": 100,
+      "completion_tokens": 8001,
+      "gold_patch_exact_rate": 1.0,
+      "mean_failure_aware_mse": 0.0,
+      "mean_model_latency_seconds": 5.015905454150343,
+      "mean_mse_on_rendered": 0.0,
+      "model_calls": 100,
+      "prompt_tokens": 247377,
+      "protected_geometry_rate": 1.0,
+      "reference_structure_match_rate": 1.0,
+      "valid_output_rate": 1.0
+    }
+  },
+  "dataset": {
+    "root": "SVGEditBench",
+    "tasks": {
+      "change_color": 100,
+      "compression": 100,
+      "crop_to_half": 100,
+      "set_contour": 100,
+      "transparency": 100,
+      "upside_down": 100
+    },
+    "total_cases": 600,
+    "unique_emojis": 100
+  },
+  "errors": {
+    "PatchError: model response does not contain a valid JSON object": 2,
+    "PatchError: unknown patch fields: ['attributes', 'op', 'targets']": 4
+  },
+  "evaluation": {
+    "render": true,
+    "render_size": 72,
+    "results": "runs/qwen3.5-4b-prompt-v3-nothink-rendered-full/results.jsonl"
+  },
+  "model": {
+    "adapter": "openai_compatible",
+    "base_url": "http://localhost:8000/v1",
+    "extra_body": {
+      "chat_template_kwargs": {
+        "enable_thinking": false
+      },
+      "presence_penalty": 1.5
+    },
+    "json_mode": false,
+    "max_tokens": 128,
+    "model": "Qwen/Qwen3.5-4B",
+    "temperature": 0.7,
+    "timeout": 240,
+    "top_p": 0.8
+  },
+  "overall": {
+    "cases": 500,
+    "completion_tokens": 39012,
+    "gold_patch_exact_rate": 0.9291497975708503,
+    "mean_failure_aware_mse": 0.013968457255279645,
+    "mean_model_latency_seconds": 4.923926332585746,
+    "mean_mse_on_rendered": 0.0019923656429955924,
+    "model_calls": 500,
+    "prompt_tokens": 1240992,
+    "protected_geometry_rate": 0.988,
+    "reference_structure_match_rate": 0.918,
+    "valid_output_rate": 0.988
+  }
+}

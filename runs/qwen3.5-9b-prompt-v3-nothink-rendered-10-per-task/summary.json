@@ -1,0 +1,120 @@
+{
+  "architecture": "skeleton_patch",
+  "by_task": {
+    "change_color": {
+      "cases": 10,
+      "completion_tokens": 784,
+      "gold_patch_exact_rate": 0.8888888888888888,
+      "mean_failure_aware_mse": 0.1,
+      "mean_model_latency_seconds": 4.959919458196964,
+      "mean_mse_on_rendered": 0.0,
+      "model_calls": 10,
+      "prompt_tokens": 22990,
+      "protected_geometry_rate": 0.9,
+      "reference_structure_match_rate": 0.8,
+      "valid_output_rate": 0.9
+    },
+    "crop_to_half": {
+      "cases": 10,
+      "completion_tokens": 790,
+      "gold_patch_exact_rate": 1.0,
+      "mean_failure_aware_mse": 0.0,
+      "mean_model_latency_seconds": 4.935898991595605,
+      "mean_mse_on_rendered": 0.0,
+      "model_calls": 10,
+      "prompt_tokens": 22859,
+      "protected_geometry_rate": 1.0,
+      "reference_structure_match_rate": 1.0,
+      "valid_output_rate": 1.0
+    },
+    "set_contour": {
+      "cases": 10,
+      "completion_tokens": 892,
+      "gold_patch_exact_rate": 0.2,
+      "mean_failure_aware_mse": 0.023370609898120166,
+      "mean_model_latency_seconds": 5.405964962599683,
+      "mean_mse_on_rendered": 0.023370609898120166,
+      "model_calls": 10,
+      "prompt_tokens": 23005,
+      "protected_geometry_rate": 1.0,
+      "reference_structure_match_rate": 0.2,
+      "valid_output_rate": 1.0
+    },
+    "transparency": {
+      "cases": 10,
+      "completion_tokens": 710,
+      "gold_patch_exact_rate": 1.0,
+      "mean_failure_aware_mse": 0.0,
+      "mean_model_latency_seconds": 4.560581645797356,
+      "mean_mse_on_rendered": 0.0,
+      "model_calls": 10,
+      "prompt_tokens": 22829,
+      "protected_geometry_rate": 1.0,
+      "reference_structure_match_rate": 1.0,
+      "valid_output_rate": 1.0
+    },
+    "upside_down": {
+      "cases": 10,
+      "completion_tokens": 810,
+      "gold_patch_exact_rate": 1.0,
+      "mean_failure_aware_mse": 0.0,
+      "mean_model_latency_seconds": 4.993905954199727,
+      "mean_mse_on_rendered": 0.0,
+      "model_calls": 10,
+      "prompt_tokens": 22819,
+      "protected_geometry_rate": 1.0,
+      "reference_structure_match_rate": 1.0,
+      "valid_output_rate": 1.0
+    }
+  },
+  "dataset": {
+    "root": "SVGEditBench",
+    "tasks": {
+      "change_color": 100,
+      "compression": 100,
+      "crop_to_half": 100,
+      "set_contour": 100,
+      "transparency": 100,
+      "upside_down": 100
+    },
+    "total_cases": 600,
+    "unique_emojis": 100
+  },
+  "errors": {
+    "PatchError: unknown patch fields: ['attributes', 'op', 'targets']": 1
+  },
+  "evaluation": {
+    "render": true,
+    "render_size": 72,
+    "results": "runs/qwen3.5-9b-prompt-v3-nothink-rendered-10-per-task/results.jsonl"
+  },
+  "model": {
+    "adapter": "openai_compatible",
+    "base_url": "http://localhost:8000/v1",
+    "extra_body": {
+      "chat_template_kwargs": {
+        "enable_thinking": false
+      },
+      "presence_penalty": 1.5
+    },
+    "json_mode": false,
+    "max_tokens": 128,
+    "model": "Qwen/Qwen3.5-9B",
+    "temperature": 0.7,
+    "timeout": 240,
+    "top_p": 0.8
+  },
+  "overall": {
+    "cases": 50,
+    "completion_tokens": 3986,
+    "gold_patch_exact_rate": 0.8163265306122449,
+    "mean_failure_aware_mse": 0.02467412197962403,
+    "mean_model_latency_seconds": 4.9712542024778665,
+    "mean_mse_on_rendered": 0.004769512224106156,
+    "model_calls": 50,
+    "prompt_tokens": 114502,
+    "protected_geometry_rate": 0.98,
+    "reference_structure_match_rate": 0.8,
+    "valid_output_rate": 0.98
+  }
+}
