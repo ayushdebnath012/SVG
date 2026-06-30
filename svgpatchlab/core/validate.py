@@ -8,7 +8,7 @@ from .patch import Patch, PatchError
 @dataclass(frozen=True)
 class PatchPolicy:
     allowed_operations: frozenset[str] = frozenset(
-        {"set_attributes", "remove_attributes", "insert_primitive"}
+        {"set_attributes", "remove_attributes", "insert_primitive", "remove_element"}
     )
     allowed_attributes: frozenset[str] = frozenset(
         {
