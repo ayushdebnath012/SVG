@@ -195,7 +195,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--output-root", default="runs/kaggle-plans")
     parser.add_argument("--plans", nargs="+", choices=("a", "b", "c"), default=["a", "b", "c"])
     parser.add_argument("--limit", type=int)
-    parser.add_argument("--limit-per-task", type=int, default=2)
+    parser.add_argument("--limit-per-task", type=int)
     parser.add_argument("--render", action=argparse.BooleanOptionalAction, default=False)
     parser.add_argument("--render-size", type=int, default=72)
     parser.add_argument("--save-outputs", action="store_true")
