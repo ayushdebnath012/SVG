@@ -5,13 +5,13 @@
 # in ~3–4 days while giving ~85–90% of paper quality.
 #
 # Time budget:
-#   Step 1    download IntroSVG-train   5 000 samples   ~20 min (bandwidth)
-#   Step 2    SFT LoRA                  3 epochs        ~8–12 hrs
-#   Step 4    build DPO data           1 500 prompts    ~6–8 hrs
-#   Step 5    DPO                      3 epochs         ~4–6 hrs
-#   Step 6    diffusion PNGs           1 000 prompts    ~30 min
-#   Step 7    vectorize                1 000 SVGs       ~20 min
-#   Step 8    GRPO                     2 epochs         ~8–12 hrs
+#   Step 1    prepare SVGX SFT data     3 000 samples   bundled
+#   Step 2    SFT LoRA                  5 epochs        ~8–12 hrs
+#   Step 3    build DPO data           1 500 prompts    ~6–8 hrs
+#   Step 4    DPO                      3 epochs         ~4–6 hrs
+#   Step 5    diffusion PNGs           1 000 prompts    ~30 min
+#   Step 6    vectorize                1 000 SVGs       ~20 min
+#   Step 7    GRPO                     2 epochs         ~8–12 hrs
 #   Model downloads (first run)                        ~2 hrs
 #   ─────────────────────────────────────────────────────────
 #   Total                                              ~30–42 hrs (~1.5–2 days)
@@ -26,8 +26,10 @@
 
 set -euo pipefail
 
-# Use the venv that has torch/transformers/llamafactory on this server
-export PATH=/venv/main/bin:$PATH
+# Use the server venv when present, while remaining portable elsewhere.
+if [ -d /venv/main/bin ]; then
+    export PATH=/venv/main/bin:$PATH
+fi
 
 PROMPTS_FILE="${1:-prompts.txt}"
 LOG_FILE="full_run_$(date +%Y%m%d_%H%M%S).log"
@@ -66,26 +68,23 @@ echo "════════════════════════�
 echo "  STAGE 1 — IntroSVG"
 echo "══════════════════════════════════════════════════════════"
 
-# Step 1 — Download official IntroSVG-train (GPT-4o critiqued, paper data).
-# No GPU required; ~10-20 min download.
+# Step 1 — Prepare the gradient-filtered SVGX-SFT dataset added to this repo.
 echo ""
-echo "[1/8] Downloading official IntroSVG-train (gitcat404/IntroSVG-train)..."
-echo "  Expected: ~10–20 min (no GPU needed)"
+echo "[1/7] Preparing SVGX-SFT-1M training data..."
 elapsed
-skip_if_exists data/d_sft.jsonl "d_sft.jsonl" || \
-PYTHONUNBUFFERED=1 python 00_download_official_data.py \
-    --max-samples 5000
+skip_if_exists data/d_sft_svgx.jsonl "d_sft_svgx.jsonl" || \
+PYTHONUNBUFFERED=1 python ../get_svgx.py
 elapsed
 
-# Step 2 — SFT LoRA, 3 epochs on official IntroSVG-train data
+# Step 2 — SFT LoRA, 5 epochs on the filtered SVGX data
 echo ""
-echo "[2/8] SFT training (LoRA rank=64, 3 epochs)..."
+echo "[2/7] SFT training (LoRA rank=64, 5 epochs)..."
 echo "  Expected: ~8–12 hrs"
 elapsed
 skip_if_exists checkpoints/m_sft/adapter_model.safetensors "m_sft adapter" || \
 llamafactory-cli train \
     --model_name_or_path    Qwen/Qwen2.5-VL-7B-Instruct \
-    --dataset               d_sft \
+    --dataset               d_sft_svgx \
     --dataset_dir           ./data \
     --template              qwen2_vl \
     --stage                 sft \
@@ -115,9 +114,9 @@ elapsed
 # shellcheck disable=SC1090
 source ~/.openai_env 2>/dev/null || true
 
-# Step 4 — Build DPO data: 1 500 prompts, 3 candidates each
+# Step 3 — Build DPO data: 1 500 prompts, 3 candidates each
 echo ""
-echo "[4/8] Building DPO preference data (1 500 prompts × 3 candidates)..."
+echo "[3/7] Building DPO preference data (1 500 prompts × 3 candidates)..."
 echo "  Expected: ~6–8 hrs"
 elapsed
 skip_if_exists data/d_pref_g.jsonl "d_pref_g.jsonl" || \
@@ -128,12 +127,12 @@ python 04_build_dpo_data.py \
     --delta 1
 elapsed
 
-# Step 5 — DPO, 3 epochs
+# Step 4 — DPO, 3 epochs
 echo ""
-echo "[5/8] DPO training (3 epochs)..."
+echo "[4/7] DPO training (3 epochs)..."
 echo "  Expected: ~4–6 hrs"
 elapsed
-skip_if_exists checkpoints/m_final/adapter_model.safetensors "m_final adapter" || \
+skip_if_exists checkpoints/m_final/epoch_3 "m_final/epoch_3" || \
 python 05_dpo_train.py \
     --sft-ckpt  checkpoints/m_sft \
     --epochs    3 \
@@ -153,9 +152,9 @@ echo "════════════════════════�
 echo "  STAGE 2 — DiffusionSVG"
 echo "══════════════════════════════════════════════════════════"
 
-# Step 6 — Filter complex prompts + generate 1 000 reference PNGs
+# Step 5 — Filter complex prompts + generate 1 000 reference PNGs
 echo ""
-echo "[6/8] Filtering complex prompts..."
+echo "[5/7] Filtering complex prompts..."
 elapsed
 skip_if_exists data/complex_prompts.jsonl "complex_prompts.jsonl" || \
 python 00_filter_prompts.py \
@@ -175,9 +174,9 @@ python 01_generate_pngs.py \
     --output data/ref_pngs/
 elapsed
 
-# Step 7 — Vectorize PNGs → SVGs
+# Step 6 — Vectorize PNGs → SVGs
 echo ""
-echo "[7/8] Vectorizing PNGs → SVGs (~20 min)..."
+echo "[6/7] Vectorizing PNGs → SVGs (~20 min)..."
 elapsed
 skip_if_exists data/vectorized.jsonl "vectorized.jsonl" || \
 python 02_vectorize_svgs.py \
@@ -189,9 +188,9 @@ python 02_vectorize_svgs.py \
 python 03_build_dataset.py
 elapsed
 
-# Step 8 — GRPO, 2 epochs, starting from IntroSVG M_Final
+# Step 7 — GRPO, 2 epochs, starting from IntroSVG M_Final
 echo ""
-echo "[8/8] GRPO training (2 epochs, starting from M_Final)..."
+echo "[7/7] GRPO training (2 epochs, starting from M_Final)..."
 echo "  Expected: ~8–12 hrs"
 elapsed
 skip_if_exists checkpoints/grpo_svg/epoch_2 "grpo_svg/epoch_2" || \
@@ -199,7 +198,7 @@ python 04_grpo_train.py \
     --model      "../IntroSVG/checkpoints/m_final/epoch_3" \
     --data       data/grpo_train.jsonl \
     --output     checkpoints/grpo_svg \
-    --epochs     3 \
+    --epochs     2 \
     --n-samples  4 \
     --beta       0.04 \
     --grad-accum 16

@@ -1,0 +1,115 @@
+{
+  "architecture": "skeleton_patch",
+  "by_task": {
+    "change_color": {
+      "cases": 10,
+      "completion_tokens": 1617,
+      "gold_patch_exact_rate": 0.0,
+      "mean_failure_aware_mse": 0.19319317750632764,
+      "mean_model_latency_seconds": 9.837515675096075,
+      "mean_mse_on_rendered": 0.1035479750070307,
+      "model_calls": 10,
+      "prompt_tokens": 22990,
+      "protected_geometry_rate": 0.9,
+      "reference_structure_match_rate": 0.0,
+      "valid_output_rate": 0.9
+    },
+    "crop_to_half": {
+      "cases": 10,
+      "completion_tokens": 790,
+      "gold_patch_exact_rate": 0.0,
+      "mean_failure_aware_mse": 0.14758511930704116,
+      "mean_model_latency_seconds": 7.44090644159296,
+      "mean_mse_on_rendered": 0.14758511930704116,
+      "model_calls": 10,
+      "prompt_tokens": 22859,
+      "protected_geometry_rate": 1.0,
+      "reference_structure_match_rate": 0.0,
+      "valid_output_rate": 1.0
+    },
+    "set_contour": {
+      "cases": 10,
+      "completion_tokens": 822,
+      "gold_patch_exact_rate": 0.0,
+      "mean_failure_aware_mse": 0.24331434909254313,
+      "mean_model_latency_seconds": 5.920891158204176,
+      "mean_mse_on_rendered": 0.054142936365678906,
+      "model_calls": 10,
+      "prompt_tokens": 23005,
+      "protected_geometry_rate": 0.8,
+      "reference_structure_match_rate": 0.0,
+      "valid_output_rate": 0.8
+    },
+    "transparency": {
+      "cases": 10,
+      "completion_tokens": 720,
+      "gold_patch_exact_rate": 1.0,
+      "mean_failure_aware_mse": 0.0,
+      "mean_model_latency_seconds": 7.941965412403806,
+      "mean_mse_on_rendered": 0.0,
+      "model_calls": 10,
+      "prompt_tokens": 22829,
+      "protected_geometry_rate": 1.0,
+      "reference_structure_match_rate": 1.0,
+      "valid_output_rate": 1.0
+    },
+    "upside_down": {
+      "cases": 10,
+      "completion_tokens": 794,
+      "gold_patch_exact_rate": 0.2,
+      "mean_failure_aware_mse": 0.8,
+      "mean_model_latency_seconds": 7.908216654200805,
+      "mean_mse_on_rendered": 0.0,
+      "model_calls": 10,
+      "prompt_tokens": 22819,
+      "protected_geometry_rate": 0.2,
+      "reference_structure_match_rate": 0.2,
+      "valid_output_rate": 0.2
+    }
+  },
+  "dataset": {
+    "root": "SVGEditBench",
+    "tasks": {
+      "change_color": 100,
+      "compression": 100,
+      "crop_to_half": 100,
+      "set_contour": 100,
+      "transparency": 100,
+      "upside_down": 100
+    },
+    "total_cases": 600,
+    "unique_emojis": 100
+  },
+  "errors": {
+    "PatchError: attributes are invalid for change_color: ['stroke', 'stroke-width']": 1,
+    "PatchError: attributes are invalid for set_contour: ['fill']": 2,
+    "PatchError: attributes are invalid for upside_down: ['viewBox']": 8
+  },
+  "evaluation": {
+    "render": true,
+    "render_size": 72,
+    "results": "runs/qwen0.8b-prompt-v3-rendered-10-per-task/results.jsonl"
+  },
+  "model": {
+    "adapter": "openai_compatible",
+    "base_url": "http://localhost:8000/v1",
+    "json_mode": false,
+    "max_tokens": 512,
+    "model": "Qwen/Qwen3.5-0.8B",
+    "temperature": 0.0,
+    "timeout": 120
+  },
+  "overall": {
+    "cases": 50,
+    "completion_tokens": 4743,
+    "gold_patch_exact_rate": 0.24,
+    "mean_failure_aware_mse": 0.2768185291811824,
+    "mean_model_latency_seconds": 7.809899068299565,
+    "mean_mse_on_rendered": 0.07284426818100306,
+    "model_calls": 50,
+    "prompt_tokens": 114502,
+    "protected_geometry_rate": 0.78,
+    "reference_structure_match_rate": 0.24,
+    "valid_output_rate": 0.78
+  }
+}

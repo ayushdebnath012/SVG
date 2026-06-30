@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "svgpatchlab"
+version = "0.1.0"
+description = "Modular experiments for safe, localized LLM SVG patching"
+readme = "README_SVGPATCHLAB.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+eval = ["cairosvg>=2.7", "numpy>=1.24", "Pillow>=9"]
+hf = ["transformers>=5.0", "torch>=2.0", "torchvision", "accelerate"]
+
+[project.scripts]
+svgpatchlab = "svgpatchlab.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["svgpatchlab*"]
+
+[tool.setuptools.package-data]
+svgpatchlab = ["prompt_templates/*.txt"]

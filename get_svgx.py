@@ -1,6 +1,13 @@
-import json, re, urllib.request, sys
+import json
+import re
+import sys
+import urllib.request
+from pathlib import Path
 
-OUT  = 'd_sft_svgx.jsonl'
+ROOT = Path(__file__).resolve().parent
+DATA_DIR = ROOT / "IntroSVG" / "data"
+OUT = DATA_DIR / "d_sft_svgx.jsonl"
+DATASET_INFO = DATA_DIR / "dataset_info.json"
 N    = 3000
 
 # Both SVGX files — GEN first (GPT-4 creative), then UN for diversity
@@ -84,7 +91,8 @@ if not pairs:
     print('ERROR: 0 pairs collected — check network/URL')
     sys.exit(1)
 
-with open(OUT, 'w', encoding='utf-8') as f:
+DATA_DIR.mkdir(parents=True, exist_ok=True)
+with OUT.open('w', encoding='utf-8') as f:
     for desc, svg in pairs:
         row = {
             'conversations': [
@@ -93,5 +101,20 @@ with open(OUT, 'w', encoding='utf-8') as f:
             ]
         }
         f.write(json.dumps(row, ensure_ascii=False) + '\n')
+
+dataset_info = (
+    json.loads(DATASET_INFO.read_text(encoding="utf-8"))
+    if DATASET_INFO.exists()
+    else {}
+)
+dataset_info["d_sft_svgx"] = {
+    "file_name": OUT.name,
+    "formatting": "sharegpt",
+    "columns": {"messages": "conversations"},
+}
+DATASET_INFO.write_text(
+    json.dumps(dataset_info, indent=2, ensure_ascii=False) + "\n",
+    encoding="utf-8",
+)
 
 print(f'Written {len(pairs)} rows -> {OUT}')
