@@ -75,7 +75,7 @@ The Kaggle preset uses local Hugging Face inference with 4-bit loading for
 ```bash
 git pull
 python3 -m pip install -r requirements-hf.txt
-python3 scripts/run_kaggle_plans.py --limit-per-task 2 --no-render
+python3 scripts/run_kaggle_plans.py --no-render
 ```
 
 Outputs are written under `runs/kaggle-plans/`:
@@ -87,9 +87,8 @@ runs/kaggle-plans/plan_b_basic_tasks/
 runs/kaggle-plans/plan_c_chain/
 ```
 
-Use `--limit-per-task 5` for the same smoke size as the Kaggle run log, or
-remove the limit for a full run. Set `HF_TOKEN` in Kaggle secrets for better
-Hub download limits.
+Use `--limit-per-task 5` for the same smoke size as the Kaggle run log. Set
+`HF_TOKEN` in Kaggle secrets for better Hub download limits.
 
 ## Validate the entire benchmark pipeline
 
