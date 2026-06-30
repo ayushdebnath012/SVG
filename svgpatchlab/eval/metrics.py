@@ -8,6 +8,41 @@ from svgpatchlab.core.xml import index_tree, local_name, normalized_tree, parse_
 from .render import image_mse
 
 
+def chain_metrics(
+    steps_predicted: list[str],
+    steps_gold: list[str],
+) -> dict[str, Any]:
+    """Compute step-level precision, recall, and exact match for Plan C decomposer.
+
+    steps_predicted / steps_gold are lists of task-type strings
+    (e.g. ["change_color", "transparency"]).
+    Order is considered: precision and recall are sequence-aware.
+    """
+    pred_set = list(steps_predicted)
+    gold_set = list(steps_gold)
+
+    matched_gold = [False] * len(gold_set)
+    hits = 0
+    for p in pred_set:
+        for j, g in enumerate(gold_set):
+            if not matched_gold[j] and p == g:
+                matched_gold[j] = True
+                hits += 1
+                break
+
+    precision = hits / len(pred_set) if pred_set else float(not gold_set)
+    recall = hits / len(gold_set) if gold_set else float(not pred_set)
+    exact = pred_set == gold_set
+
+    return {
+        "step_precision": precision,
+        "step_recall": recall,
+        "step_exact": exact,
+        "predicted_steps": len(pred_set),
+        "gold_steps": len(gold_set),
+    }
+
+
 def _patch_signature(patch: Patch) -> set[tuple[str, str, str, str]]:
     signature: set[tuple[str, str, str, str]] = set()
     for operation in patch.operations:

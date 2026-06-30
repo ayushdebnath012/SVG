@@ -7,8 +7,8 @@ from string import Template
 
 
 PATCH_PROMPT_TEMPLATE_DIR = Path(__file__).resolve().parents[1] / "prompt_templates"
-PATCH_PROMPT_VERSION = 3
-PATCH_PROMPT_VERSIONS = (1, 2, 3)
+PATCH_PROMPT_VERSION = 4
+PATCH_PROMPT_VERSIONS = (1, 2, 3, 4)
 
 # Active v3 is intentionally zero-shot. Tiny models copied concrete constants
 # from v2 examples, especially crop viewBox values, so the baseline prompt now

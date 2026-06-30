@@ -37,8 +37,15 @@ def _parse_style(value: str) -> dict[str, str]:
     return result
 
 
-def build_scene(svg: str) -> dict[str, Any]:
-    """Create a compact DOM skeleton without exposing path coordinate data."""
+def build_scene(
+    svg: str,
+    visual_embeddings: dict[str, list[float]] | None = None,
+) -> dict[str, Any]:
+    """Create a compact DOM skeleton without exposing path coordinate data.
+
+    Pass visual_embeddings (node_id → vector) from the Plan A vision module
+    to include per-node visual context in the returned scene.
+    """
     root = parse_svg(svg)
     indexed = index_tree(root)
     resolved_by_id: dict[str, dict[str, str]] = {}
@@ -81,6 +88,8 @@ def build_scene(svg: str) -> dict[str, Any]:
         text = (element.text or "").strip()
         if text:
             item["text"] = text[:160]
+        if visual_embeddings and node.node_id in visual_embeddings:
+            item["visual_embedding"] = visual_embeddings[node.node_id]
         nodes.append(item)
 
     return {
