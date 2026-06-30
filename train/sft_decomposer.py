@@ -160,7 +160,7 @@ def train(config: dict[str, Any]) -> None:
         raise SystemExit(f"SFT training requires additional dependencies: {exc}")
 
     tokenizer = AutoTokenizer.from_pretrained(config["base_model"])
-    model = AutoModelForCausalLM.from_pretrained(config["base_model"], torch_dtype=torch.bfloat16)
+    model = AutoModelForCausalLM.from_pretrained(config["base_model"], dtype=torch.bfloat16)
 
     lora_config = LoraConfig(
         r=config.get("lora_r", 16),

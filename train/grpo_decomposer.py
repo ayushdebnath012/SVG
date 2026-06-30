@@ -119,7 +119,7 @@ def train(config: dict[str, Any]) -> None:
 
     tokenizer = AutoTokenizer.from_pretrained(config["sft_checkpoint"])
     model = AutoModelForCausalLM.from_pretrained(
-        config["sft_checkpoint"], torch_dtype=torch.bfloat16
+        config["sft_checkpoint"], dtype=torch.bfloat16
     )
 
     patch_model = RecordingModelAdapter(
