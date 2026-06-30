@@ -1,48 +1,163 @@
-# DiffuSVG
+# SVG Patch Lab
 
-DiffuSVG is a text-to-SVG training pipeline. It fine-tunes an SVG generator with
-filtered SVGX data, improves it with preference training, then applies
-render-aware GRPO rewards against diffusion-generated reference images.
+SVG Patch Lab tests whether a small language model can edit SVGs more reliably
+by emitting constrained DOM patches instead of regenerating complete files. The
+official `SVGEditBench/` clone is treated as read-only evaluation data.
 
-This checkout also includes `svgpatchlab/`, merged from
-`DebdanSamanta02/EditSVG`. SVG Patch Lab evaluates localized SVG editing through
-constrained DOM patches, SVGEditBench cases, model adapters, and committed run
-summaries. See `README_SVGPATCHLAB.md` for that workflow.
+## What is implemented
 
-## Current pipeline
+- Loader for all 600 SVGEditBench prompt/answer pairs.
+- Deterministic preorder node IDs (`n0`, `n1`, ...).
+- Compact DOM skeletons that replace `d` and `points` values with hashes and
+  character counts.
+- Versioned JSON patch schema, task-specific allowlists, and protected geometry.
+- Deterministic patch executor.
+- Gold-patch derivation from SVGEditBench references.
+- Full-rewrite, full-context patch, skeleton patch, visual skeleton, two-stage,
+  oracle-target, rule-based, and deterministic oracle architectures.
+- Interchangeable local Transformers, OpenAI-compatible server, and replay
+  model adapters.
+- Structural, locality, patch precision/recall, and SVGEditBench-compatible MSE
+  evaluation.
 
-1. `IntroSVG/data/d_sft_svgx.jsonl` provides 3,000 gradient- and detail-filtered
-   SVGX-SFT examples.
-2. `IntroSVG/` runs SFT and DPO training for direct SVG generation.
-3. `DiffusionSVG/` generates reference PNGs, vectorizes them, builds the GRPO
-   dataset, and trains with rendering feedback.
+Compression is kept in the full-rewrite and oracle evaluations. It is excluded
+from localized patch presets because compression is an inherently global edit.
 
-The canonical end-to-end entry point is:
+## Layout
 
-```bash
-bash full_run.sh prompts.txt
+```text
+svgpatchlab/
+  architectures/  Experiment strategies and prompts
+  core/           SVG parsing, skeletons, patches, policies, executor
+  data/           SVGEditBench adapter
+  eval/           Rendering, metrics, experiment runner
+  models/         Swappable model adapters
+configs/
+  experiments/    Architecture presets
+  models/         Model/runtime presets
+docs/              Rendered architecture document
+tests/             Standard-library regression tests
+SVGEditBench/      Unmodified official benchmark clone
 ```
 
-It targets one A100 80 GB GPU, is resumable, and writes checkpoints and generated
-data into ignored directories. Install the dependencies listed in
-`IntroSVG/requirements_training.txt` and `DiffusionSVG/requirements.txt` first.
+## Setup
 
-For a reduced validation run, use `smoke_run.sh`. The large
-`kaggle_patchsvg_t4_smoke.py` runner is the self-contained Colab/Kaggle path for
-a T4 GPU.
+If you cloned this repository normally, fetch the benchmark submodule first:
 
-## Repository layout
+```bash
+git submodule update --init --recursive
+```
 
-- `IntroSVG/`: SFT, DPO, inference, and SVG utilities.
-- `DiffusionSVG/`: diffusion references, vectorization, rewards, and GRPO.
-- `Hybrid/`: experimental combined pipeline.
-- `OmniSVG/` and `Text2SVG/`: comparison and baseline implementations.
-- `svgpatchlab/`, `configs/`, `tests/`, and `runs/`: SVG Patch Lab package,
-  experiment presets, regression tests, and imported evaluation artifacts.
-- `SVGEditBench/`: benchmark submodule used by SVG Patch Lab.
-- `dataset_samples/` and `svgx_samples/`: small, reviewable SVG examples.
-- `DiffuSVG_Project_Report.md`: methodology and evaluation notes.
+Core and structural evaluation have no third-party dependencies:
 
-Root-level versioned `DiffuSVG_Pipeline_v*.py` files are retained as historical
-experiments; new work should use `full_run.sh` and the two maintained pipeline
-directories above.
+```bash
+python3 -m svgpatchlab.cli inspect SVGEditBench
+python3 -m unittest discover -s tests -v
+```
+
+Install raster evaluation support for CairoSVG MSE:
+
+```bash
+python3 -m pip install -r requirements-eval.txt
+```
+
+For in-process Hugging Face inference:
+
+```bash
+python3 -m pip install -r requirements-hf.txt
+```
+
+## Validate the entire benchmark pipeline
+
+The oracle derives the minimal attribute patch from each reference and should
+score perfectly:
+
+```bash
+python3 -m svgpatchlab.cli evaluate --config configs/experiments/oracle.json
+```
+
+Use `--no-render` for structural-only development checks when CairoSVG is not
+installed.
+
+Results are written as per-case JSONL plus a summary under `runs/oracle/`.
+Invalid model outputs are retained as failures and receive failure-aware MSE 1,
+rather than being omitted from averages.
+
+## Run Qwen3.5-4B through an OpenAI-compatible server
+
+Start Qwen using vLLM, SGLang, llama.cpp, or another compatible server at
+`http://localhost:8000/v1`, then run:
+
+```bash
+python3 -m svgpatchlab.cli evaluate \
+  --config configs/experiments/skeleton_patch.json \
+  --limit 10
+```
+
+Run all principal comparisons by changing only the experiment config:
+
+```bash
+configs/experiments/full_rewrite.json
+configs/experiments/rule_based.json
+configs/experiments/full_context_patch.json
+configs/experiments/skeleton_patch.json
+configs/experiments/two_stage_patch.json
+configs/experiments/visual_skeleton_patch.json
+configs/experiments/oracle_target_patch.json
+```
+
+## Switch models
+
+Model configuration is isolated from architecture configuration. Override it at
+the command line:
+
+```bash
+python3 -m svgpatchlab.cli evaluate \
+  --config configs/experiments/skeleton_patch.json \
+  --model-config configs/models/qwen3.5-4b-huggingface.json
+```
+
+To add another model, either create a JSON preset using an existing adapter or
+implement one class conforming to `svgpatchlab.models.base.ModelAdapter`, then
+register it in `svgpatchlab/models/factory.py`. No architecture, SVG, or metric
+code needs to change.
+
+Useful CLI overrides:
+
+```bash
+python3 -m svgpatchlab.cli evaluate \
+  --config configs/experiments/skeleton_patch.json \
+  --architecture full_context_patch \
+  --model-config configs/models/my-model.json \
+  --limit 25 \
+  --output-dir runs/my-model-full-context
+```
+
+Run the complete architecture matrix against one model endpoint:
+
+```bash
+python3 -m svgpatchlab.cli matrix \
+  --model-config configs/models/qwen3.5-4b-openai.json \
+  --limit-per-task 2 \
+  --output-root runs/qwen3.5-4b-smoke
+```
+
+Remove `--limit-per-task` for the complete five-task localized-edit evaluation.
+The matrix deliberately uses the same cases for every architecture so results
+are paired.
+
+## Evaluation protocol
+
+Use the committed 100 SVGEditBench emoji IDs only for final testing. If SFT or
+LoRA is added, generate training and validation examples from other Twemoji
+files and split by emoji identity. Do not place different tasks for the same SVG
+across train and test.
+
+Primary reported metrics should include:
+
+- valid and executable output rate;
+- gold-patch exactness and patch precision/recall;
+- protected-geometry preservation;
+- number of changed nodes;
+- per-task MSE and failure-aware MSE;
+- latency, model calls, and token usage where available.
