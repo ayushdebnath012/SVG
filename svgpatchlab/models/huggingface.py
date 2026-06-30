@@ -25,6 +25,27 @@ class HuggingFaceAdapter(ModelAdapter):
         for name in ("device", "device_map", "torch_dtype", "trust_remote_code"):
             if name in config:
                 kwargs[name] = config[name]
+
+        quantization = config.get("quantization")
+        if quantization in ("4bit", "8bit"):
+            try:
+                from transformers import BitsAndBytesConfig
+                import torch
+            except ImportError as exc:
+                raise RuntimeError("quantization requires bitsandbytes: pip install bitsandbytes") from exc
+            bnb_config = BitsAndBytesConfig(
+                load_in_4bit=(quantization == "4bit"),
+                load_in_8bit=(quantization == "8bit"),
+                bnb_4bit_compute_dtype=torch.float16,
+            )
+            kwargs["quantization_config"] = bnb_config
+            kwargs.setdefault("device_map", "auto")
+
+        dtype = config.get("dtype")
+        if dtype and "torch_dtype" not in kwargs:
+            import torch
+            kwargs["torch_dtype"] = getattr(torch, dtype, torch.float16)
+
         self.pipeline = pipeline(self.task, **kwargs)
         self.generation = {
             "max_new_tokens": int(config.get("max_new_tokens", 512)),
