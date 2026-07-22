@@ -115,7 +115,7 @@ def _run_plan_a(
     model_config: dict[str, Any],
 ) -> dict[str, Any]:
     tasks = list(LOCALIZED_TASKS)
-    architectures = ["visual_skeleton_patch"]
+    architectures = ["visual_stats_patch", "visual_skeleton_patch"]
     if args.include_visual_gnn:
         architectures.append("visual_gnn_patch")
 

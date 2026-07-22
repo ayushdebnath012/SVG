@@ -86,6 +86,7 @@ These all produce a JSON patch, validate it, and apply it via the executor.
 - **`full_context_patch`** — includes the complete original SVG as context. High token cost but maximum information.
 - **`skeleton_patch`** — replaces the full SVG with the compact JSON skeleton. Dramatically reduces token count while preserving structural and style context. **Primary architecture.**
 - **`visual_skeleton_patch`** — skeleton + a base64-encoded rendered PNG of the original SVG as an image input. Enables vision-capable models to use pixel-level cues.
+- **`visual_stats_patch`** — skeleton where each node carries a compact human-readable `visual` field: bounding box in viewBox units, area %, a 3×3-grid position word, dominant rendered color, and `visible: false` for fully occluded or non-rendering nodes. Stats come from diffing the full render against a render with that node hidden (occlusion-aware, inheritance-faithful; N+1 rasterizations at 64 px), and are disk-cached by SVG content (`.cache/visual_stats/`), so each benchmark input is rasterized once ever. This is the cheap, training-free path of Plan A: it targets node selection for frozen text models without embedding vectors.
 
 ### 3.4 Diagnostic Architectures
 

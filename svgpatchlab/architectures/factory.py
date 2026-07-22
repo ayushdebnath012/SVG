@@ -7,6 +7,7 @@ from .patching import (
     SkeletonPatchArchitecture,
     VisualGNNPatchArchitecture,
     VisualSkeletonPatchArchitecture,
+    VisualStatsPatchArchitecture,
 )
 from .rewrite import FullRewriteArchitecture
 from .rules import RuleBasedPatchArchitecture
@@ -19,6 +20,7 @@ ARCHITECTURES: dict[str, type[Architecture]] = {
     "full_context_patch": FullContextPatchArchitecture,
     "skeleton_patch": SkeletonPatchArchitecture,
     "visual_skeleton_patch": VisualSkeletonPatchArchitecture,
+    "visual_stats_patch": VisualStatsPatchArchitecture,
     "visual_gnn_patch": VisualGNNPatchArchitecture,
     "oracle_target_patch": OracleTargetArchitecture,
     "two_stage_patch": TwoStagePatchArchitecture,
