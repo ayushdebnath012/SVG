@@ -83,6 +83,11 @@ class SVGEditBench:
                     return
                 if limit_per_task is not None and task_yielded >= limit_per_task:
                     break
+            if task_yielded == 0:
+                raise DatasetError(
+                    f"no cases found for task '{task}' in {query_dir}; "
+                    "if SVGEditBench is a git submodule, run: git submodule update --init"
+                )
 
     def summary(self) -> dict[str, object]:
         counts = Counter(case.task for case in self.iter_cases())

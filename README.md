@@ -74,6 +74,7 @@ The Kaggle preset uses local Hugging Face inference with 4-bit loading for
 
 ```bash
 git pull
+git submodule update --init
 python3 -m pip install -r requirements-hf.txt
 python3 scripts/run_kaggle_plans.py --no-render
 ```
