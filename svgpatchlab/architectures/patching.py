@@ -23,10 +23,13 @@ class PatchArchitecture(Architecture):
             return "Original SVG", case.source_svg
         return "SVG DOM skeleton", json.dumps(scene, indent=2, sort_keys=True)
 
+    def scene_for(self, case: BenchmarkCase) -> dict:
+        return build_scene(case.source_svg)
+
     def run(self, case: BenchmarkCase, model: ModelAdapter) -> ArchitectureResult:
         result = ArchitectureResult(model_calls=1)
         try:
-            scene = build_scene(case.source_svg)
+            scene = self.scene_for(case)
             context_name, context = self.context(case, scene)
             images = (render_svg_data_url(case.source_svg),) if self.include_image else ()
             response = model.generate(
@@ -58,6 +61,34 @@ class SkeletonPatchArchitecture(PatchArchitecture):
 class VisualSkeletonPatchArchitecture(SkeletonPatchArchitecture):
     name = "visual_skeleton_patch"
     include_image = True
+
+
+class VisualStatsPatchArchitecture(SkeletonPatchArchitecture):
+    """Plan A, cheap path: skeleton plus per-node rendered visual stats.
+
+    Each node gains a compact human-readable "visual" field (bbox in viewBox
+    units, area %, position word, dominant color, occlusion flag) computed by
+    diffing full vs node-hidden renders. Stats are disk-cached by SVG content,
+    so each benchmark input is rasterized once across all runs.
+    """
+
+    name = "visual_stats_patch"
+
+    def __init__(
+        self,
+        policy: PatchPolicy | None = None,
+        cache_dir: str = ".cache/visual_stats",
+        render_size: int = 64,
+    ):
+        super().__init__(policy)
+        from svgpatchlab.eval.render import VisualStatsCache
+
+        self._cache = VisualStatsCache(cache_dir)
+        self.render_size = render_size
+
+    def scene_for(self, case: BenchmarkCase) -> dict:
+        stats = self._cache.get_or_compute(case.source_svg, size=self.render_size)
+        return build_scene(case.source_svg, visual_stats=stats)
 
 
 class VisualGNNPatchArchitecture(Architecture):
