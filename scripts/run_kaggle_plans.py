@@ -73,6 +73,7 @@ def _evaluation_config(args: argparse.Namespace, output_dir: Path) -> dict[str, 
         "render_size": args.render_size,
         "save_outputs": args.save_outputs,
         "output_dir": str(output_dir),
+        "progress": True,
     }
 
 

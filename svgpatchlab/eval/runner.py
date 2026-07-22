@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import statistics
+import time
 from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any
@@ -78,6 +79,7 @@ def run_evaluation(config: dict[str, Any]) -> dict[str, Any]:
     render = bool(evaluation_config.get("render", True))
     render_size = int(evaluation_config.get("render_size", 72))
     save_outputs = bool(evaluation_config.get("save_outputs", False))
+    progress = bool(evaluation_config.get("progress", False))
     output_dir = Path(evaluation_config.get("output_dir", "runs/latest"))
     if render:
         ensure_renderer()
@@ -90,6 +92,9 @@ def run_evaluation(config: dict[str, Any]) -> dict[str, Any]:
     limit_per_task = dataset_config.get("limit_per_task")
     records: list[dict[str, Any]] = []
     results_path = output_dir / "results.jsonl"
+    started = time.perf_counter()
+    if progress:
+        print(f"[{architecture.name}] starting evaluation", flush=True)
     with results_path.open("w") as results_file:
         for case in benchmark.iter_cases(
             tasks=tasks,
@@ -124,6 +129,13 @@ def run_evaluation(config: dict[str, Any]) -> dict[str, Any]:
                 (output_path / f"{case.emoji_id}.svg").write_text(result.output_svg)
             records.append(record)
             results_file.write(json.dumps(record, sort_keys=True) + "\n")
+            if progress and len(records) % 10 == 0:
+                elapsed = time.perf_counter() - started
+                print(
+                    f"[{architecture.name}] {len(records)} cases done, "
+                    f"{elapsed / 60:.1f} min elapsed, last: {case.task}/{case.emoji_id}",
+                    flush=True,
+                )
 
     public_model_config = dict(config.get("model", {"adapter": "none"}))
     if "api_key" in public_model_config:
