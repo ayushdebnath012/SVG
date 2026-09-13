@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 900">
+  <defs>
+    <marker id="arrow-dark" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#253b53"/>
+    </marker>
+    <marker id="arrow-red" markerWidth="12" markerHeight="10" refX="11" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L12,5 L0,10 Z" fill="#bd3030"/>
+    </marker>
+    <marker id="arrow-teal" markerWidth="11" markerHeight="9" refX="10" refY="4.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L11,4.5 L0,9 Z" fill="#087b70"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1120" height="900" fill="#ffffff"/>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#172b40">
+    <text x="40" y="39" font-size="25" font-weight="bold">Triangular truss — reactions and member forces</text>
+    <text x="40" y="65" font-size="15" fill="#536273">Ideal pin-connected members • downward load at C • dimensions in metres</text>
+  </g>
+  <line x1="40" y1="80" x2="1080" y2="80" stroke="#c7d0d9" stroke-width="1"/>
+
+  <!-- Truss: scale 60 SVG units per metre. -->
+  <text x="40" y="108" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="bold" fill="#172b40">1  Truss and support reactions</text>
+
+  <!-- Height dimension and extension lines. -->
+  <g stroke="#84909b" stroke-width="1" fill="none">
+    <line x1="378" y1="210" x2="685" y2="210" stroke-dasharray="5 5"/>
+    <line x1="617" y1="390" x2="685" y2="390"/>
+    <line x1="675" y1="210" x2="675" y2="390"/>
+    <line x1="669" y1="216" x2="681" y2="204"/>
+    <line x1="669" y1="396" x2="681" y2="384"/>
+  </g>
+  <text x="688" y="306" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#536273">3 m</text>
+
+  <!-- Members. -->
+  <g stroke="#253b53" stroke-width="5" fill="none" stroke-linecap="round">
+    <line x1="120" y1="390" x2="600" y2="390"/>
+    <line x1="120" y1="390" x2="360" y2="210"/>
+    <line x1="600" y1="390" x2="360" y2="210"/>
+  </g>
+
+  <!-- Pin A. -->
+  <polygon points="120,397 102,424 138,424" fill="#eef2f5" stroke="#253b53" stroke-width="2"/>
+  <line x1="94" y1="431" x2="146" y2="431" stroke="#253b53" stroke-width="2"/>
+  <path d="M96,439 l8,-8 M108,439 l8,-8 M120,439 l8,-8 M132,439 l8,-8" fill="none" stroke="#84909b" stroke-width="1.2"/>
+
+  <!-- Roller B. -->
+  <polygon points="600,397 582,416 618,416" fill="#eef2f5" stroke="#253b53" stroke-width="2"/>
+  <circle cx="588" cy="424" r="6" fill="#ffffff" stroke="#253b53" stroke-width="1.6"/>
+  <circle cx="612" cy="424" r="6" fill="#ffffff" stroke="#253b53" stroke-width="1.6"/>
+  <line x1="574" y1="433" x2="626" y2="433" stroke="#253b53" stroke-width="2"/>
+  <path d="M576,441 l8,-8 M588,441 l8,-8 M600,441 l8,-8 M612,441 l8,-8" fill="none" stroke="#84909b" stroke-width="1.2"/>
+
+  <!-- Applied load and upward reactions. -->
+  <line x1="360" y1="124" x2="360" y2="202" stroke="#bd3030" stroke-width="3" marker-end="url(#arrow-red)"/>
+  <line x1="120" y1="385" x2="120" y2="300" stroke="#087b70" stroke-width="2.5" marker-end="url(#arrow-teal)"/>
+  <line x1="600" y1="385" x2="600" y2="300" stroke="#087b70" stroke-width="2.5" marker-end="url(#arrow-teal)"/>
+
+  <g fill="#ffffff" stroke="#253b53" stroke-width="2">
+    <circle cx="120" cy="390" r="6"/>
+    <circle cx="600" cy="390" r="6"/>
+    <circle cx="360" cy="210" r="6"/>
+  </g>
+
+  <g font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#172b40">
+    <text x="376" y="150" fill="#bd3030" font-size="19" font-weight="bold">24 kN</text>
+    <text x="75" y="285" fill="#087b70">Aᵧ = 12 kN ↑</text>
+    <text x="551" y="285" fill="#087b70">Bᵧ = 12 kN ↑</text>
+    <text x="64" y="385" font-size="21" font-weight="bold">A</text>
+    <text x="620" y="385" font-size="21" font-weight="bold">B</text>
+    <text x="330" y="197" font-size="21" font-weight="bold">C</text>
+    <text x="375" y="237" font-size="14" fill="#536273">(4, 3)</text>
+    <text x="120" y="462" text-anchor="middle" font-size="14">Pin A (0, 0)</text>
+    <text x="600" y="462" text-anchor="middle" font-size="14">Roller B (8, 0)</text>
+    <text x="120" y="482" text-anchor="middle" font-size="14" fill="#087b70">Aₓ = 0</text>
+    <text x="224" y="280" text-anchor="middle" transform="rotate(-36.8699 224 280)" font-weight="bold">AC = 20 kN (C)</text>
+    <text x="496" y="280" text-anchor="middle" transform="rotate(36.8699 496 280)" font-weight="bold">BC = 20 kN (C)</text>
+    <text x="360" y="423" text-anchor="middle" font-weight="bold">AB = 16 kN (T)</text>
+  </g>
+
+  <!-- Span dimension, split at the apex projection. -->
+  <g stroke="#84909b" stroke-width="1" fill="none">
+    <line x1="120" y1="490" x2="120" y2="541"/>
+    <line x1="360" y1="445" x2="360" y2="516" stroke-dasharray="4 4"/>
+    <line x1="600" y1="474" x2="600" y2="541"/>
+    <line x1="120" y1="505" x2="600" y2="505"/>
+    <line x1="114" y1="511" x2="126" y2="499"/>
+    <line x1="354" y1="511" x2="366" y2="499"/>
+    <line x1="594" y1="511" x2="606" y2="499"/>
+    <line x1="120" y1="535" x2="600" y2="535"/>
+    <line x1="114" y1="541" x2="126" y2="529"/>
+    <line x1="594" y1="541" x2="606" y2="529"/>
+  </g>
+  <g font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#536273" text-anchor="middle">
+    <text x="240" y="498">4 m</text>
+    <text x="480" y="498">4 m</text>
+    <text x="360" y="556">8 m</text>
+  </g>
+
+  <!-- Free-body diagram of joint C. -->
+  <rect x="740" y="100" width="340" height="452" rx="5" fill="#f8fafc" stroke="#c7d0d9" stroke-width="1"/>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#172b40">
+    <text x="760" y="129" font-size="17" font-weight="bold">2  Joint C — free-body diagram</text>
+    <text x="910" y="154" text-anchor="middle" font-size="14" fill="#536273">Actual member-force directions</text>
+  </g>
+
+  <!-- Compression acts toward the isolated joint. -->
+  <line x1="810" y1="325" x2="903" y2="255.25" stroke="#253b53" stroke-width="2.8" marker-end="url(#arrow-dark)"/>
+  <line x1="1010" y1="325" x2="917" y2="255.25" stroke="#253b53" stroke-width="2.8" marker-end="url(#arrow-dark)"/>
+  <line x1="910" y1="250" x2="910" y2="379" stroke="#bd3030" stroke-width="3" marker-end="url(#arrow-red)"/>
+  <circle cx="910" cy="250" r="6" fill="#ffffff" stroke="#253b53" stroke-width="2"/>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#172b40" font-size="15">
+    <text x="910" y="231" text-anchor="middle" font-size="20" font-weight="bold">C</text>
+    <text x="810" y="346" text-anchor="middle" font-weight="bold">AC: 20 kN (C)</text>
+    <text x="1010" y="346" text-anchor="middle" font-weight="bold">BC: 20 kN (C)</text>
+    <text x="927" y="383" fill="#bd3030" font-size="18" font-weight="bold">24 kN</text>
+  </g>
+
+  <!-- Member slope triangle. -->
+  <path d="M783,462 L863,462 L863,402 Z" fill="none" stroke="#84909b" stroke-width="1.5"/>
+  <path d="M853,462 L853,452 L863,452" fill="none" stroke="#84909b" stroke-width="1"/>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#536273" font-size="14">
+    <text x="823" y="480" text-anchor="middle">4</text>
+    <text x="873" y="437">3</text>
+    <text x="814" y="426">5</text>
+    <text x="924" y="430">sin θ = 3/5</text>
+    <text x="924" y="456">cos θ = 4/5</text>
+    <text x="910" y="512" text-anchor="middle">Compression forces push into the joint.</text>
+    <text x="910" y="534" text-anchor="middle">Horizontal components cancel.</text>
+  </g>
+
+  <!-- Calculation block. -->
+  <line x1="40" y1="577" x2="1080" y2="577" stroke="#c7d0d9" stroke-width="1"/>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#172b40">
+    <text x="40" y="608" font-size="18" font-weight="bold">3  Equilibrium calculations</text>
+    <text x="40" y="633" font-size="14" fill="#536273">Take +x right, +y up and positive moments counterclockwise. Joint equations assume member tension positive.</text>
+
+    <text x="40" y="669" font-size="16" font-weight="bold">Whole-truss equilibrium</text>
+    <text x="40" y="698" font-size="16">ΣM_A = 0:  8Bᵧ − 24(4) = 0</text>
+    <text x="40" y="725" font-size="16" fill="#087b70">Bᵧ = 12 kN ↑</text>
+    <text x="40" y="752" font-size="16">ΣF_y = 0:  Aᵧ + 12 − 24 = 0</text>
+    <text x="40" y="779" font-size="16" fill="#087b70">Aᵧ = 12 kN ↑</text>
+    <text x="40" y="806" font-size="16">ΣF_x = 0:  Aₓ = 0</text>
+
+    <text x="525" y="669" font-size="16" font-weight="bold">Joint C</text>
+    <text x="525" y="698" font-size="16">ΣF_x = 0:  −(4/5)F_AC + (4/5)F_BC = 0</text>
+    <text x="525" y="725" font-size="16">ΣF_y = 0:  −(3/5)(F_AC + F_BC) − 24 = 0</text>
+    <text x="525" y="752" font-size="16" font-weight="bold">F_AC = F_BC = −20 kN → 20 kN compression</text>
+
+    <text x="525" y="788" font-size="16" font-weight="bold">Joint A</text>
+    <text x="525" y="815" font-size="16">ΣF_x = 0:  F_AB + (4/5)(−20) = 0</text>
+    <text x="525" y="842" font-size="16" font-weight="bold">F_AB = +16 kN → 16 kN tension</text>
+  </g>
+
+  <line x1="40" y1="861" x2="1080" y2="861" stroke="#c7d0d9" stroke-width="1"/>
+  <text x="40" y="885" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#536273">T = tension • C = compression • Inclined member lengths: AC = BC = √(4² + 3²) = 5 m</text>
+</svg>

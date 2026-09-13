@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540">
+  <defs>
+    <marker id="loadArrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L8 4 L0 8 Z" fill="#245d86" stroke="#245d86"/>
+    </marker>
+    <marker id="dimArrow" markerWidth="8" markerHeight="8" refX="0" refY="4" orient="auto-start-reverse" markerUnits="userSpaceOnUse">
+      <path d="M8 0 L0 4 L8 8" fill="none" stroke="#505963" stroke-width="1"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="960" height="540" fill="#ffffff" stroke="none"/>
+
+  <g font-family="Arial, sans-serif" fill="#202830" stroke="none">
+    <text x="40" y="40" font-size="21" font-weight="bold">WARREN TRUSS — ELEVATION</text>
+    <text x="40" y="65" font-size="14">6 panels • Span 24 m • Truss height 3 m</text>
+    <text x="450" y="112" text-anchor="middle" font-size="15" fill="#245d86">Uniformly distributed load, q</text>
+  </g>
+
+  <!-- Uniform load applied to the full top chord. -->
+  <g fill="none" stroke="#245d86" stroke-width="1.6">
+    <line x1="150" y1="135" x2="750" y2="135"/>
+    <g marker-end="url(#loadArrow)">
+      <line x1="150" y1="135" x2="150" y2="228"/>
+      <line x1="200" y1="135" x2="200" y2="228"/>
+      <line x1="250" y1="135" x2="250" y2="228"/>
+      <line x1="300" y1="135" x2="300" y2="228"/>
+      <line x1="350" y1="135" x2="350" y2="228"/>
+      <line x1="400" y1="135" x2="400" y2="228"/>
+      <line x1="450" y1="135" x2="450" y2="228"/>
+      <line x1="500" y1="135" x2="500" y2="228"/>
+      <line x1="550" y1="135" x2="550" y2="228"/>
+      <line x1="600" y1="135" x2="600" y2="228"/>
+      <line x1="650" y1="135" x2="650" y2="228"/>
+      <line x1="700" y1="135" x2="700" y2="228"/>
+      <line x1="750" y1="135" x2="750" y2="228"/>
+    </g>
+  </g>
+
+  <!-- Geometry at 30 drawing units per metre. -->
+  <g fill="none" stroke="#202830" stroke-linejoin="round">
+    <path d="M90 330 L150 240 L210 330 L270 240 L330 330 L390 240 L450 330 L510 240 L570 330 L630 240 L690 330 L750 240 L810 330"
+          stroke-width="3"/>
+    <line x1="150" y1="240" x2="750" y2="240" stroke-width="4"/>
+    <line x1="90" y1="330" x2="810" y2="330" stroke-width="4"/>
+  </g>
+
+  <!-- Panel points. -->
+  <g fill="#ffffff" stroke="#202830" stroke-width="1.8">
+    <circle cx="90" cy="330" r="4"/>
+    <circle cx="210" cy="330" r="4"/>
+    <circle cx="330" cy="330" r="4"/>
+    <circle cx="450" cy="330" r="4"/>
+    <circle cx="570" cy="330" r="4"/>
+    <circle cx="690" cy="330" r="4"/>
+    <circle cx="810" cy="330" r="4"/>
+    <circle cx="150" cy="240" r="4"/>
+    <circle cx="270" cy="240" r="4"/>
+    <circle cx="390" cy="240" r="4"/>
+    <circle cx="510" cy="240" r="4"/>
+    <circle cx="630" cy="240" r="4"/>
+    <circle cx="750" cy="240" r="4"/>
+  </g>
+
+  <!-- Standard pin and roller supports. -->
+  <g stroke="#202830" stroke-width="1.6" fill="#ffffff">
+    <polygon points="90,336 73,363 107,363"/>
+    <line x1="65" y1="367" x2="115" y2="367"/>
+    <path d="M69 367 l-7 8 M79 367 l-7 8 M89 367 l-7 8 M99 367 l-7 8 M109 367 l-7 8" fill="none"/>
+
+    <polygon points="810,336 793,361 827,361"/>
+    <circle cx="800" cy="367" r="5"/>
+    <circle cx="820" cy="367" r="5"/>
+    <line x1="785" y1="375" x2="835" y2="375"/>
+    <path d="M789 375 l-7 8 M799 375 l-7 8 M809 375 l-7 8 M819 375 l-7 8 M829 375 l-7 8" fill="none"/>
+  </g>
+
+  <!-- Member labels and leaders. -->
+  <g fill="none" stroke="#66717b" stroke-width="1">
+    <polyline points="790,207 771,207 720,240"/>
+    <polyline points="585,366 555,366 535,330"/>
+    <polyline points="329,380 310,380 300,285"/>
+  </g>
+  <g font-family="Arial, sans-serif" font-size="14" fill="#202830" stroke="none">
+    <text x="793" y="211">Top chord</text>
+    <text x="590" y="371">Bottom chord</text>
+    <text x="335" y="385">Diagonal members</text>
+    <text x="90" y="402" text-anchor="middle">A — Pin</text>
+    <text x="810" y="409" text-anchor="middle">B — Roller</text>
+  </g>
+
+  <!-- Span dimension, measured between support centre lines. -->
+  <g fill="none" stroke="#505963" stroke-width="1">
+    <line x1="90" y1="414" x2="90" y2="469"/>
+    <line x1="810" y1="421" x2="810" y2="469"/>
+    <line x1="90" y1="455" x2="810" y2="455" marker-start="url(#dimArrow)" marker-end="url(#dimArrow)"/>
+    <line x1="762" y1="240" x2="899" y2="240"/>
+    <line x1="824" y1="330" x2="899" y2="330"/>
+    <line x1="885" y1="240" x2="885" y2="330" marker-start="url(#dimArrow)" marker-end="url(#dimArrow)"/>
+  </g>
+
+  <g font-family="Arial, sans-serif" fill="#202830" stroke="none">
+    <text x="450" y="445" font-size="16" text-anchor="middle">24 m = 6 × 4 m panels</text>
+    <text x="907" y="285" font-size="16" text-anchor="middle" transform="rotate(-90 907 285)">3 m</text>
+    <text x="40" y="501" font-size="13">Geometry note: the specified span, six 4 m panels and 3 m height give isosceles triangles.</text>
+    <text x="40" y="522" font-size="13">Equilateral triangles on 4 m bases require a height of 2√3 ≈ 3.464 m; specified dimensions are retained.</text>
+  </g>
+</svg>

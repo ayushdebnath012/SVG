@@ -1,0 +1,183 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900">
+  <defs>
+    <marker id="fieldArrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M 0 0 L 8 4 L 0 8 Z" fill="#157047" stroke="#157047"/>
+    </marker>
+    <marker id="dimArrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse" markerUnits="userSpaceOnUse">
+      <path d="M 0 1 L 7 4 L 0 7" fill="none" stroke="#59636e" stroke-width="1.2"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1200" height="900" fill="#ffffff" stroke="none"/>
+
+  <g font-family="sans-serif">
+    <text x="600" y=" forty" fill="#17212b" font-size="24" text-anchor="middle"></text>
+    <text x="600" y="44" fill="#17212b" font-size="24" text-anchor="middle">Parallel conducting plates in air</text>
+    <text x="600" y="73" fill="#59636e" font-size="15" text-anchor="middle">Equipotentials and electric field lines — finite-end fringing</text>
+  </g>
+
+  <!-- Plate length dimension and extension lines. -->
+  <g fill="none" stroke="#89939d" stroke-width="1">
+    <line x1="300" y1="115" x2="300" y2="380"/>
+    <line x1="900" y1="115" x2="900" y2="380"/>
+    <line x1="300" y1="125" x2="900" y2="125" marker-start="url(#dimArrow)" marker-end="url(#dimArrow)"/>
+  </g>
+  <rect x="550" y="111" width="100" height="27" fill="#ffffff" stroke="none"/>
+  <text x="600" y="131" fill="#394550" font-family="sans-serif" font-size="17" text-anchor="middle">100 mm</text>
+
+  <!-- Positive equipotentials. End curves follow the local conformal
+       geometry of a thin, open-ended parallel-plate capacitor. -->
+  <g fill="none" stroke="#b84d33" stroke-width="1.8">
+    <path d="M 397.8 240.5
+             C 363 274 315 332 300 365
+             C 289 389 292 399 321 403.2
+             C 340 405.9 367 405 400 405
+             L 800 405
+             C 833 405 860 405.9 879 403.2
+             C 908 399 911 389 900 365
+             C 885 332 837 274 802.2 240.5"/>
+    <path d="M 233.2 187.3
+             C 238 246 249 328 261.8 368.1
+             C 271 397 281 412 319.1 417.4
+             C 342 420.6 368 420 400 420
+             L 800 420
+             C 832 420 858 420.6 880.9 417.4
+             C 919 412 929 397 938.2 368.1
+             C 951 328 962 246 966.8 187.3"/>
+    <path d="M 68.6 270.5
+             C 101 301 150 345 185 372
+             C 223 402 258 424 295 430
+             C 329 435.5 360 435 400 435
+             L 800 435
+             C 840 435 871 435.5 905 430
+             C 942 424 977 402 1015 372
+             C 1050 345 1099 301 1131.4 270.5"/>
+  </g>
+
+  <!-- Negative equipotentials: reflection in the symmetry plane. -->
+  <g transform="translate(0 900) scale(1 -1)" fill="none" stroke="#3264ae" stroke-width="1.8">
+    <path d="M 397.8 240.5
+             C 363 274 315 332 300 365
+             C 289 389 292 399 321 403.2
+             C 340 405.9 367 405 400 405
+             L 800 405
+             C 833 405 860 405.9 879 403.2
+             C 908 399 911 389 900 365
+             C 885 332 837 274 802.2 240.5"/>
+    <path d="M 233.2 187.3
+             C 238 246 249 328 261.8 368.1
+             C 271 397 281 412 319.1 417.4
+             C 342 420.6 368 420 400 420
+             L 800 420
+             C 832 420 858 420.6 880.9 417.4
+             C 919 412 929 397 938.2 368.1
+             C 951 328 962 246 966.8 187.3"/>
+    <path d="M 68.6 270.5
+             C 101 301 150 345 185 372
+             C 223 402 258 424 295 430
+             C 329 435.5 360 435 400 435
+             L 800 435
+             C 840 435 871 435.5 905 430
+             C 942 424 977 402 1015 372
+             C 1050 345 1099 301 1131.4 270.5"/>
+  </g>
+
+  <!-- The midplane is exactly the zero-potential equipotential. -->
+  <line x1="60" y1="450" x2="1120" y2="450" stroke="#6b5395" stroke-width="2" stroke-dasharray="9 5"/>
+
+  <!-- Six field lines in the approximately uniform central region. -->
+  <g fill="none" stroke="#157047" stroke-width="1.8" marker-mid="url(#fieldArrow)">
+    <path d="M 390 390 L 390 450 L 390 510"/>
+    <path d="M 470 390 L 470 450 L 470 510"/>
+    <path d="M 550 390 L 550 450 L 550 510"/>
+    <path d="M 650 390 L 650 450 L 650 510"/>
+    <path d="M 730 390 L 730 450 L 730 510"/>
+    <path d="M 810 390 L 810 450 L 810 510"/>
+  </g>
+
+  <!-- Right-hand fringe field lines, orthogonal to the end contours. -->
+  <g fill="none" stroke="#157047" stroke-width="1.8">
+    <path d="M 893 390
+             C 893 407 907 423 907 450
+             C 907 477 893 493 893 510"/>
+    <path d="M 886.3 390
+             C 886.3 376 899 360 919 361
+             C 954 363 990.1 400 990.1 450
+             C 990.1 500 954 537 919 539
+             C 899 540 886.3 524 886.3 510"/>
+    <path d="M 838 390
+             C 838 350 873 296 919 298
+             C 996 301 1069 365 1069 450
+             C 1069 535 996 599 919 602
+             C 873 604 838 550 838 510"/>
+    <line x1="907" y1="443" x2="907" y2="457" marker-end="url(#fieldArrow)"/>
+    <line x1="990.1" y1="443" x2="990.1" y2="457" marker-end="url(#fieldArrow)"/>
+    <line x1="1069" y1="443" x2="1069" y2="457" marker-end="url(#fieldArrow)"/>
+  </g>
+
+  <!-- Left-hand fringe field lines. -->
+  <g transform="translate(1200 0) scale(-1 1)" fill="none" stroke="#157047" stroke-width="1.8">
+    <path d="M 893 390
+             C 893 407 907 423 907 450
+             C 907 477 893 493 893 510"/>
+    <path d="M 886.3 390
+             C 886.3 376 899 360 919 361
+             C 954 363 990.1 400 990.1 450
+             C 990.1 500 954 537 919 539
+             C 899 540 886.3 524 886.3 510"/>
+    <path d="M 838 390
+             C 838 350 873 296 919 298
+             C 996 301 1069 365 1069 450
+             C 1069 535 996 599 919 602
+             C 873 604 838 550 838 510"/>
+    <line x1="907" y1="443" x2="907" y2="457" marker-end="url(#fieldArrow)"/>
+    <line x1="990.1" y1="443" x2="990.1" y2="457" marker-end="url(#fieldArrow)"/>
+    <line x1="1069" y1="443" x2="1069" y2="457" marker-end="url(#fieldArrow)"/>
+  </g>
+
+  <!-- Conducting plates; thickness is symbolic. -->
+  <line x1="300" y1="390" x2="900" y2="390" stroke="#982e20" stroke-width="7"/>
+  <line x1="300" y1="510" x2="900" y2="510" stroke="#234c8b" stroke-width="7"/>
+
+  <g font-family="sans-serif" font-size="18" text-anchor="middle">
+    <text x="600" y="374" fill="#982e20">Conducting plate · +100 V</text>
+    <text x="600" y="541" fill="#234c8b">Conducting plate · −100 V</text>
+  </g>
+
+  <!-- Separation dimension. -->
+  <g fill="none" stroke="#89939d" stroke-width="1">
+    <line x1="911" y1="390" x2="1164" y2="390"/>
+    <line x1="911" y1="510" x2="1164" y2="510"/>
+    <line x1="1155" y1="390" x2="1155" y2="510" marker-start="url(#dimArrow)" marker-end="url(#dimArrow)"/>
+  </g>
+  <text x="1180" y="450" transform="rotate(-90 1180 450)" fill="#394550" font-family="sans-serif" font-size="17" text-anchor="middle">20 mm</text>
+
+  <!-- Contour values positioned at their open ends. -->
+  <g font-family="sans-serif" font-size="17">
+    <text x="808" y="229" fill="#b84d33">+75 V</text>
+    <text x="977" y="188" fill="#b84d33">+50 V</text>
+    <text x="1128" y="258" fill="#b84d33" text-anchor="end">+25 V</text>
+    <text x="808" y="684" fill="#3264ae">−75 V</text>
+    <text x="977" y="723" fill="#3264ae">−50 V</text>
+    <text x="1128" y="653" fill="#3264ae" text-anchor="end">−25 V</text>
+  </g>
+
+  <rect x="953" y="465" width="178" height="26" fill="#ffffff" stroke="none"/>
+  <text x="1042" y="484" fill="#6b5395" font-family="sans-serif" font-size="16" text-anchor="middle">0 V equipotential</text>
+  <path d="M 1101 466 L 1115 450" fill="none" stroke="#6b5395" stroke-width="1.2"/>
+  <circle cx="1115" cy="450" r="2.5" fill="#6b5395" stroke="none"/>
+
+  <g font-family="sans-serif" text-anchor="middle">
+    <text x="600" y="739" fill="#17212b" font-size="21">Uniform central field: E ≈ 10 kV/m</text>
+    <text x="600" y="769" fill="#59636e" font-size="17">ΔV / d = 200 V / 0.020 m = 10,000 V/m</text>
+    <text x="600" y="797" fill="#157047" font-size="16">Direction: from +100 V to −100 V</text>
+  </g>
+
+  <g font-family="sans-serif" font-size="14">
+    <line x1="240" y1="850" x2="290" y2="850" stroke="#b84d33" stroke-width="1.8"/>
+    <text x="302" y="855" fill="#59636e">Equipotentials (25 V steps)</text>
+    <line x1="565" y1="850" x2="615" y2="850" stroke="#157047" stroke-width="1.8" marker-end="url(#fieldArrow)"/>
+    <text x="628" y="855" fill="#59636e">Electric field lines</text>
+    <text x="960" y="855" fill="#59636e" text-anchor="end">End contours schematic</text>
+  </g>
+</svg>

@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 830">
+  <defs>
+    <marker id="loadArrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <polygon points="0,0 10,5 0,10" fill="#172b3a"/>
+    </marker>
+    <marker id="dimArrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse">
+      <polygon points="0,0 8,4 0,8" fill="#526573"/>
+    </marker>
+    <pattern id="hatch" width="9" height="9" patternUnits="userSpaceOnUse">
+      <rect width="9" height="9" fill="#edf1f4"/>
+      <path d="M-2,2 L2,-2 M0,9 L9,0 M7,11 L11,7" fill="none" stroke="#788995" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect x="0" y="0" width="1200" height="830" fill="#ffffff"/>
+
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="40" y="48" font-size="27" font-weight="700" fill="#172b3a">STEEL CANTILEVER — TIP POINT LOAD</text>
+    <text x="40" y="78" font-size="16" fill="#526573">Euler–Bernoulli bending · L = 2 m · b × h = 50 × 100 mm · E = 200 GPa · P = 5 kN</text>
+    <line x1="40" y1="96" x2="1160" y2="96" stroke="#cbd5dc" stroke-width="1"/>
+
+    <!-- Overall length -->
+    <line x1="190" y1="137" x2="190" y2="197" stroke="#84939d" stroke-width="1"/>
+    <line x1="830" y1="137" x2="830" y2="166" stroke="#84939d" stroke-width="1"/>
+    <line x1="190" y1="145" x2="830" y2="145" stroke="#526573" stroke-width="1.2" marker-start="url(#dimArrow)" marker-end="url(#dimArrow)"/>
+    <rect x="455" y="130" width="110" height="27" fill="#ffffff"/>
+    <text x="510" y="149" text-anchor="middle" font-size="17" fill="#172b3a">L = 2.000 m</text>
+
+    <!-- Fixed support and undeformed beam -->
+    <rect x="148" y="204" width="42" height="92" fill="url(#hatch)" stroke="#788995" stroke-width="1"/>
+    <rect x="190" y="234" width="640" height="32" fill="#e8eef2" stroke="#172b3a" stroke-width="2"/>
+    <line x1="190" y1="202" x2="190" y2="298" stroke="#172b3a" stroke-width="4"/>
+    <line x1="180" y1="250" x2="888" y2="250" stroke="#788995" stroke-width="1" stroke-dasharray="8 5"/>
+    <text x="137" y="231" text-anchor="end" font-size="16" fill="#172b3a">Fixed</text>
+    <text x="137" y="252" text-anchor="end" font-size="16" fill="#172b3a">support</text>
+    <text x="137" y="278" text-anchor="end" font-size="14" fill="#526573">x = 0</text>
+    <text x="340" y="216" font-size="16" fill="#172b3a">Undeformed beam</text>
+
+    <!-- Applied tip load -->
+    <line x1="830" y1="176" x2="830" y2="229" stroke="#172b3a" stroke-width="2.5" marker-end="url(#loadArrow)"/>
+    <text x="850" y="191" font-size="18" font-weight="700" fill="#172b3a">P = 5 kN</text>
+    <text x="850" y="212" font-size="14" fill="#526573">downward</text>
+
+    <!-- Exact cubic elastic curve: v/vtip = (3t² − t³)/2.
+         Horizontal scale 320 px/m; vertical displacement magnified 25 times. -->
+    <path d="M190,250 C403.333333,250 616.666667,314 830,378"
+          fill="none" stroke="#bc4f16" stroke-width="3.5"/>
+    <circle cx="510" cy="290" r="4" fill="#bc4f16" stroke="#ffffff" stroke-width="1"/>
+    <circle cx="830" cy="378" r="4.5" fill="#bc4f16" stroke="#ffffff" stroke-width="1"/>
+
+    <!-- Mid-length displacement -->
+    <line x1="510" y1="250" x2="510" y2="290" stroke="#526573" stroke-width="1.2" marker-start="url(#dimArrow)" marker-end="url(#dimArrow)"/>
+    <path d="M514,292 L535,325 L570,325" fill="none" stroke="#bc4f16" stroke-width="1.2"/>
+    <text x="580" y="330" font-size="17" font-weight="700" fill="#bc4f16">v(L/2) = 5.00 mm ↓</text>
+
+    <!-- Tip displacement -->
+    <line x1="835" y1="378" x2="888" y2="378" stroke="#84939d" stroke-width="1"/>
+    <line x1="875" y1="250" x2="875" y2="378" stroke="#526573" stroke-width="1.2" marker-start="url(#dimArrow)" marker-end="url(#dimArrow)"/>
+    <text x="891" y="302" font-size="15" fill="#526573">Tip deflection</text>
+    <text x="891" y="326" font-size="18" font-weight="700" fill="#bc4f16">16.00 mm ↓</text>
+
+    <!-- Root stress callout -->
+    <path d="M203,267 L226,345 L250,345" fill="none" stroke="#526573" stroke-width="1.2"/>
+    <text x="260" y="351" font-size="17" font-weight="700" fill="#172b3a">Root: |σ|max = 120.0 MPa</text>
+    <text x="260" y="374" font-size="14" fill="#526573">Top: tension · Bottom: compression</text>
+
+    <!-- Reference positions -->
+    <line x1="190" y1="403" x2="190" y2="452" stroke="#84939d" stroke-width="1"/>
+    <line x1="510" y1="403" x2="510" y2="452" stroke="#84939d" stroke-width="1"/>
+    <line x1="190" y1="439" x2="510" y2="439" stroke="#526573" stroke-width="1.2" marker-start="url(#dimArrow)" marker-end="url(#dimArrow)"/>
+    <rect x="291" y="425" width="118" height="26" fill="#ffffff"/>
+    <text x="350" y="444" text-anchor="middle" font-size="16" fill="#172b3a">x = L/2 = 1 m</text>
+
+    <line x1="589" y1="422" x2="629" y2="422" stroke="#bc4f16" stroke-width="3.5"/>
+    <text x="641" y="428" font-size="16" fill="#bc4f16">Deflected neutral axis</text>
+    <text x="641" y="451" font-size="14" fill="#526573">Vertical displacement exaggerated ×25</text>
+    <text x="641" y="473" font-size="14" fill="#526573">Displacement labels are actual values.</text>
+
+    <!-- Cross-section inset -->
+    <text x="1060" y="167" text-anchor="middle" font-size="16" font-weight="700" fill="#172b3a">SECTION</text>
+    <text x="1060" y="189" text-anchor="middle" font-size="13" fill="#526573">Viewed along beam</text>
+    <rect x="1035" y="225" width="50" height="100" fill="#e8eef2" stroke="#172b3a" stroke-width="2"/>
+    <line x1="1023" y1="275" x2="1097" y2="275" stroke="#788995" stroke-width="1" stroke-dasharray="5 3"/>
+    <line x1="1035" y1="331" x2="1035" y2="359" stroke="#84939d" stroke-width="1"/>
+    <line x1="1085" y1="331" x2="1085" y2="359" stroke="#84939d" stroke-width="1"/>
+    <line x1="1035" y1="351" x2="1085" y2="351" stroke="#526573" stroke-width="1" marker-start="url(#dimArrow)" marker-end="url(#dimArrow)"/>
+    <text x="1060" y="378" text-anchor="middle" font-size="15" fill="#172b3a">b = 50 mm</text>
+    <line x1="1091" y1="225" x2="1127" y2="225" stroke="#84939d" stroke-width="1"/>
+    <line x1="1091" y1="325" x2="1127" y2="325" stroke="#84939d" stroke-width="1"/>
+    <line x1="1118" y1="225" x2="1118" y2="325" stroke="#526573" stroke-width="1" marker-start="url(#dimArrow)" marker-end="url(#dimArrow)"/>
+    <text x="1143" y="275" transform="rotate(-90 1143 275)" text-anchor="middle" font-size="15" fill="#172b3a">h = 100 mm</text>
+
+    <!-- Calculation panel -->
+    <rect x="40" y="508" width="1120" height="281" rx="4" fill="#f5f7f9" stroke="#cbd5dc" stroke-width="1"/>
+    <line x1="615" y1="530" x2="615" y2="767" stroke="#cbd5dc" stroke-width="1"/>
+
+    <text x="62" y="542" font-size="18" font-weight="700" fill="#172b3a">SECTION PROPERTIES &amp; ELASTIC CURVE</text>
+    <text x="62" y="576" font-size="17" fill="#172b3a">I = bh³/12 = 50 × 100³/12</text>
+    <text x="62" y="603" font-size="17" fill="#172b3a">  = 4.1667 × 10⁶ mm⁴ = 4.1667 × 10⁻⁶ m⁴</text>
+    <text x="62" y="636" font-size="16" fill="#172b3a">E = 200,000 N/mm²;  c = h/2 = 50 mm</text>
+    <text x="62" y="675" font-size="19" font-weight="700" fill="#bc4f16">v(x) = Px²(3L − x)/(6EI)</text>
+    <text x="62" y="704" font-size="15" fill="#526573">x measured from the root; downward v is positive.</text>
+    <text x="62" y="730" font-size="15" fill="#526573">Fixed-end conditions: v(0) = 0, v′(0) = 0.</text>
+    <text x="62" y="756" font-size="15" fill="#526573">Use P = 5,000 N and L = 2,000 mm below.</text>
+
+    <text x="639" y="542" font-size="18" font-weight="700" fill="#172b3a">COMPUTED RESPONSE</text>
+    <text x="639" y="579" font-size="18" fill="#172b3a">v(L) = PL³/(3EI) = 16.00 mm ↓</text>
+    <text x="639" y="618" font-size="18" fill="#172b3a">v(L/2) = 5PL³/(48EI) = 5.00 mm ↓</text>
+    <text x="639" y="657" font-size="17" fill="#172b3a">|M|max = PL = 10.00 kN·m  (at the root)</text>
+    <text x="639" y="696" font-size="18" fill="#172b3a">|σ|max = |M|max c/I = 6PL/(bh²)</text>
+    <text x="639" y="733" font-size="23" font-weight="700" fill="#172b3a">|σ|max = 120.0 MPa</text>
+    <text x="639" y="761" font-size="14" fill="#526573">Maximum stress occurs at the outer fibers of the root.</text>
+
+    <text x="40" y="815" font-size="13" fill="#526573">Assumptions: prismatic, linearly elastic beam; small deflections; ideal fixed support; shear deformation and self-weight neglected.</text>
+  </g>
+</svg>

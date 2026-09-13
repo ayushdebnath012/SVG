@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 850">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 1 1 L 9 5 L 1 9 Z" fill="#111111" stroke="#111111" stroke-width="0.6"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1000" height="850" fill="#ffffff" stroke="none"/>
+  <text x="500" y="38" text-anchor="middle" font-family="sans-serif" font-size="23" fill="#111111" stroke="none">HYDRAULIC CIRCUIT</text>
+  <text x="500" y="64" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#444444" stroke="none">ISO 1219 symbols · closed-centre, spring-centred control</text>
+
+  <!-- Double-acting, single-rod cylinder -->
+  <g fill="none" stroke="#111111" stroke-width="2.5" stroke-linejoin="miter">
+    <path d="M 425 195 H 390 V 105 H 610 V 142 M 610 158 V 195 H 565"/>
+    <line x1="425" y1="195" x2="565" y2="195"/>
+    <rect x="526" y="105" width="12" height="90" fill="#ffffff"/>
+    <rect x="538" y="142" width="192" height="16" fill="#ffffff"/>
+    <path d="M 425 195 V 250 H 440 V 370"/>
+    <path d="M 565 195 V 270 H 500 V 370"/>
+  </g>
+  <text x="500" y="91" text-anchor="middle" font-family="sans-serif" font-size="17" fill="#111111" stroke="none">C1 — Double-acting cylinder</text>
+  <text x="740" y="155" font-family="sans-serif" font-size="13" fill="#444444" stroke="none">Piston rod</text>
+
+  <!-- Directional valve: three adjacent position envelopes -->
+  <text x="470" y="316" text-anchor="middle" font-family="sans-serif" font-size="17" fill="#111111" stroke="none">V1 — 4/3 directional control valve</text>
+  <text x="470" y="338" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#444444" stroke="none">Dual solenoid · closed centre</text>
+
+  <g fill="none" stroke="#111111" stroke-width="2.5">
+    <rect x="290" y="370" width="120" height="120"/>
+    <rect x="410" y="370" width="120" height="120"/>
+    <rect x="530" y="370" width="120" height="120"/>
+
+    <!-- Left position: P to A, B to T -->
+    <path d="M 320 479 V 382" marker-end="url(#arrow)"/>
+    <path d="M 380 382 V 479" marker-end="url(#arrow)"/>
+
+    <!-- Centre position: all four ports blocked -->
+    <path d="M 440 370 V 399 M 429 399 H 451"/>
+    <path d="M 500 370 V 399 M 489 399 H 511"/>
+    <path d="M 440 490 V 461 M 429 461 H 451"/>
+    <path d="M 500 490 V 461 M 489 461 H 511"/>
+
+    <!-- Right position: P to B, A to T; crossing without junction -->
+    <path d="M 560 479 L 620 382" marker-end="url(#arrow)"/>
+    <path d="M 560 382 L 583 419 M 597 441 L 620 479" marker-end="url(#arrow)"/>
+
+    <!-- Solenoid actuators -->
+    <line x1="275" y1="430" x2="290" y2="430"/>
+    <rect x="235" y="410" width="40" height="40"/>
+    <line x1="239" y1="446" x2="271" y2="414"/>
+    <line x1="650" y1="430" x2="665" y2="430"/>
+    <rect x="665" y="410" width="40" height="40"/>
+    <line x1="669" y1="446" x2="701" y2="414"/>
+
+    <!-- Opposed centring springs -->
+    <path d="M 290 473 H 282 L 276 465 L 268 481 L 260 465 L 252 481 L 244 465 L 238 473 H 230"/>
+    <path d="M 650 473 H 658 L 664 465 L 672 481 L 680 465 L 688 481 L 696 465 L 702 473 H 710"/>
+  </g>
+  <g font-family="sans-serif" font-size="15" fill="#111111" stroke="none">
+    <text x="424" y="363">A</text>
+    <text x="509" y="363">B</text>
+    <text x="422" y="513">P</text>
+    <text x="508" y="513">T</text>
+    <text x="255" y="397" text-anchor="middle">Y1</text>
+    <text x="685" y="397" text-anchor="middle">Y2</text>
+  </g>
+
+  <!-- Pressure, suction and return lines -->
+  <g fill="none" stroke="#111111" stroke-width="2.5" stroke-linejoin="round">
+    <path d="M 440 610 V 490"/>
+    <path d="M 440 680 V 757"/>
+    <path d="M 500 490 V 530 H 740 V 757 H 580"/>
+    <path d="M 440 565 H 190 V 610"/>
+    <path d="M 190 685 V 715 H 740"/>
+  </g>
+  <circle cx="440" cy="565" r="4" fill="#111111" stroke="#111111"/>
+  <circle cx="740" cy="715" r="4" fill="#111111" stroke="#111111"/>
+
+  <!-- Fixed-displacement pump and electric motor -->
+  <circle cx="440" cy="645" r="35" fill="#ffffff" stroke="#111111" stroke-width="2.5"/>
+  <polygon points="440,614 428,637 452,637" fill="#111111" stroke="#111111" stroke-width="1"/>
+  <line x1="475" y1="641" x2="543" y2="641" stroke="#111111" stroke-width="2" fill="none"/>
+  <line x1="475" y1="649" x2="543" y2="649" stroke="#111111" stroke-width="2" fill="none"/>
+  <circle cx="575" cy="645" r="32" fill="#ffffff" stroke="#111111" stroke-width="2.5"/>
+  <text x="575" y="654" text-anchor="middle" font-family="sans-serif" font-size="27" fill="#111111" stroke="none">M</text>
+  <text x="458" y="701" font-family="sans-serif" font-size="16" fill="#111111" stroke="none">P1 — Fixed-displacement pump</text>
+  <text x="620" y="650" font-family="sans-serif" font-size="15" fill="#111111" stroke="none">M1</text>
+  <text x="575" y="592" text-anchor="middle" font-family="sans-serif" font-size="15" fill="#111111" stroke="none">Electric motor</text>
+
+  <!-- Adjustable, pressure-operated relief valve -->
+  <g fill="none" stroke="#111111" stroke-width="2.5">
+    <rect x="160" y="610" width="60" height="75" fill="#ffffff"/>
+    <path d="M 190 610 V 620 L 190 675 V 685" marker-end="url(#arrow)"/>
+    <path d="M 220 648 H 230 L 236 638 L 244 658 L 252 638 L 260 658 L 268 638 L 274 648 H 287"/>
+    <path d="M 232 676 L 279 622" marker-end="url(#arrow)"/>
+    <path d="M 190 588 H 140 V 648 H 160" stroke-dasharray="6 5"/>
+  </g>
+  <circle cx="190" cy="588" r="3.5" fill="#111111" stroke="#111111"/>
+  <text x="70" y="543" font-family="sans-serif" font-size="16" fill="#111111" stroke="none">RV1 — Pressure relief valve</text>
+  <text x="70" y="736" font-family="sans-serif" font-size="14" fill="#444444" stroke="none">Adjustable · discharge to tank</text>
+
+  <!-- Open, vented reservoir; both lines terminate inside -->
+  <path d="M 350 735 V 795 H 650 V 735" fill="none" stroke="#111111" stroke-width="3"/>
+  <text x="500" y="824" text-anchor="middle" font-family="sans-serif" font-size="17" fill="#111111" stroke="none">T1 — Vented reservoir</text>
+  <text x="759" y="552" font-family="sans-serif" font-size="14" fill="#444444" stroke="none">Tank return</text>
+</svg>

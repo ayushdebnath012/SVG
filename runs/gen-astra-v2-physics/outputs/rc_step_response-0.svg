@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 650">
+  <rect x="0" y="0" width="1000" height="650" fill="#ffffff"/>
+
+  <g font-family="Arial, Helvetica, sans-serif" fill="#182430">
+    <text x="100" y="32" font-size="23" font-weight="bold">RC low-pass filter — step response</text>
+    <text x="100" y="58" font-size="16">R = 10 kΩ · C = 100 nF · Input step: 0 → 5 V · Initially uncharged capacitor</text>
+  </g>
+
+  <g font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#182430">
+    <line x1="100" y1="82" x2="137" y2="82" stroke="#c45b12" stroke-width="3" stroke-dasharray="9 5"/>
+    <text x="147" y="87">Input voltage, Vᵢₙ</text>
+    <line x1="350" y1="82" x2="387" y2="82" stroke="#1266ad" stroke-width="3"/>
+    <text x="397" y="87">Capacitor voltage, V꜀</text>
+  </g>
+
+  <!-- Plot: x = 100 + 140 t(ms); y = 485 - 70 V -->
+  <rect x="100" y="100" width="840" height="385" fill="#fafcfe" stroke="#bac5ce" stroke-width="1"/>
+
+  <g stroke="#e8edf2" stroke-width="1">
+    <path d="M170 100V485 M310 100V485 M450 100V485 M590 100V485 M730 100V485 M870 100V485" fill="none"/>
+    <path d="M100 450H940 M100 380H940 M100 310H940 M100 240H940 M100 170H940" fill="none"/>
+  </g>
+  <g stroke="#cfd8e0" stroke-width="1">
+    <path d="M240 100V485 M380 100V485 M520 100V485 M660 100V485 M800 100V485 M940 100V485" fill="none"/>
+    <path d="M100 415H940 M100 345H940 M100 275H940 M100 205H940 M100 135H940" fill="none"/>
+  </g>
+
+  <!-- Reference lines at the specified response times -->
+  <g stroke="#829bb0" stroke-width="1.2" stroke-dasharray="4 5" fill="none">
+    <path d="M240 485V263.758H100"/>
+    <path d="M519.403 485V152.5"/>
+    <path d="M744.724 485V138.5"/>
+  </g>
+
+  <g stroke="#263746" stroke-width="1.6" fill="none">
+    <path d="M100 100V485H940"/>
+    <path d="M100 485V491 M240 485V491 M380 485V491 M520 485V491 M660 485V491 M800 485V491 M940 485V491"/>
+    <path d="M94 485H100 M94 415H100 M94 345H100 M94 275H100 M94 205H100 M94 135H100"/>
+  </g>
+
+  <g font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#263746">
+    <g text-anchor="middle">
+      <text x="100" y="511">0</text>
+      <text x="240" y="511">1</text>
+      <text x="380" y="511">2</text>
+      <text x="520" y="511">3</text>
+      <text x="660" y="511">4</text>
+      <text x="800" y="511">5</text>
+      <text x="940" y="511">6</text>
+      <text x="520" y="542" font-size="17">Time, t (ms)</text>
+    </g>
+    <g text-anchor="end">
+      <text x="84" y="490">0</text>
+      <text x="84" y="420">1</text>
+      <text x="84" y="350">2</text>
+      <text x="84" y="280">3</text>
+      <text x="84" y="210">4</text>
+      <text x="84" y="140">5</text>
+    </g>
+    <text x="35" y="295" font-size="17" text-anchor="middle" transform="rotate(-90 35 295)">Voltage (V)</text>
+  </g>
+
+  <!-- Ideal input step at t = 0 -->
+  <path d="M76 485H100V135H940" fill="none" stroke="#c45b12" stroke-width="3" stroke-dasharray="9 5"/>
+
+  <!-- Vc = 5(1 - exp(-t/1 ms)); cubic interpolation at 0.5 ms intervals -->
+  <path d="M100 485
+    C123.333 426.667 146.667 382.666 170 347.286
+    C193.333 311.905 216.667 285.218 240 263.758
+    C263.333 242.298 286.667 226.112 310 213.096
+    C333.333 200.080 356.667 190.261 380 182.367
+    C403.333 174.472 426.667 168.518 450 163.730
+    C473.333 158.942 496.667 155.329 520 152.425
+    C543.333 149.521 566.667 147.330 590 145.569
+    C613.333 143.807 636.667 142.478 660 141.410
+    C683.333 140.342 706.667 139.536 730 138.888
+    C753.333 138.240 776.667 137.751 800 137.358
+    C823.333 136.965 846.667 136.669 870 136.430
+    C893.333 136.192 916.667 136.012 940 135.868"
+    fill="none" stroke="#1266ad" stroke-width="3.5" stroke-linecap="round"/>
+
+  <!-- Point markers and annotation leaders -->
+  <g fill="none" stroke="#1266ad" stroke-width="1.4">
+    <path d="M240 263.758L265 302H284"/>
+    <path d="M519.403 152.5V211"/>
+    <path d="M744.724 138.5L779 241"/>
+  </g>
+  <g fill="#ffffff" stroke="#1266ad" stroke-width="2.5">
+    <circle cx="240" cy="263.758" r="5"/>
+    <circle cx="519.403" cy="152.5" r="5"/>
+    <circle cx="744.724" cy="138.5" r="5"/>
+  </g>
+
+  <g font-family="Arial, Helvetica, sans-serif">
+    <rect x="284" y="289" width="182" height="82" rx="4" fill="#ffffff" stroke="#b7cadb"/>
+    <text x="296" y="313" fill="#1266ad" font-size="17" font-weight="bold">τ = 1.000 ms</text>
+    <text x="296" y="337" fill="#182430" font-size="16">V꜀(τ) = 3.16 V</text>
+    <text x="296" y="359" fill="#182430" font-size="15">63.2% of final value</text>
+
+    <rect x="446" y="211" width="183" height="60" rx="4" fill="#ffffff" stroke="#b7cadb"/>
+    <text x="458" y="235" fill="#1266ad" font-size="16" font-weight="bold">95% · 4.75 V</text>
+    <text x="458" y="257" fill="#182430" font-size="16">t₉₅ = 2.996 ms</text>
+
+    <rect x="748" y="241" width="180" height="60" rx="4" fill="#ffffff" stroke="#b7cadb"/>
+    <text x="760" y="265" fill="#1266ad" font-size="16" font-weight="bold">99% · 4.95 V</text>
+    <text x="760" y="287" fill="#182430" font-size="16">t₉₉ = 4.605 ms</text>
+
+    <text x="931" y="120" fill="#c45b12" font-size="14" text-anchor="end">Final value: 5 V</text>
+  </g>
+
+  <line x1="100" y1="562" x2="940" y2="562" stroke="#cfd8e0" stroke-width="1"/>
+  <g font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#263746">
+    <text x="100" y="590">τ = RC = (10 kΩ)(100 nF) = 1 ms</text>
+    <text x="560" y="590">V꜀(t) = 5[1 − exp(−t/τ)] V,  t ≥ 0</text>
+    <text x="100" y="620">Time to fraction p of final voltage: tₚ = −τ ln(1 − p)</text>
+  </g>
+</svg>

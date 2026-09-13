@@ -1,0 +1,644 @@
+<!doctype html><meta charset=utf-8><title>SVG generation eval</title>
+<style>
+body{font:14px system-ui;margin:24px;background:#fafafa;color:#222}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:16px}
+.card{background:#fff;border:1px solid #ddd;border-radius:8px;padding:12px;border-left:6px solid #2a9d4a}
+.card:not(.ok){border-left-color:#d33} header{display:flex;gap:8px;align-items:center}
+.badge{font-size:11px;padding:2px 6px;border-radius:4px;background:#2a9d4a;color:#fff} .badge:not(.ok){background:#d33}
+.prompt{color:#555;font-size:12px;max-height:5em;overflow:auto} img,.inline svg{width:100%;max-height:320px;background:#fff;border:1px solid #eee}
+.checks{padding-left:18px;margin:8px 0} .bad{color:#b00} pre{font-size:11px;white-space:pre-wrap;background:#f4f4f4;padding:6px;max-height:8em;overflow:auto}
+footer{font-size:11px;color:#777}
+</style>
+<h1>SVG generation eval</h1>
+<p><b>5/6 ok</b> · failures — truncated: 1 · check pass rate 1.0 ·
+2361 in / 71616 out tokens · est. $3.6044</p>
+<div class=grid><section class="card truncated"><header><b>plate_convective_edges</b><span class="badge truncated">truncated</span> </header><p class=prompt>Steady two-dimensional heat conduction in a rectangular plate 0 &lt;= x &lt;= 2, 0 &lt;= y &lt;= 1 with conductivity k. The left edge x = 0 is held at 100 C. The other three edges lose heat by convection to a 0 C ambient with h/k = 5 per unit length (Robin condition: dT/dn = -5 T on those edges). Draw the plate and the isotherms at 10, 20, 40, 60 and 80 C, which must meet the convective edges at the correct oblique angles rather than perpendicular to them. Use viewBox=&quot;0 0 1000 1000&quot;. Map plate coordinates to drawing coordinates as X = 100 + 400 x and Y = 700 - 400 y. Draw every contour as its own &lt;path&gt; or &lt;polyline&gt; element carrying a data-level attribute with its numeric level (for example data-level=&quot;40&quot;), and label it. Contours must satisfy the boundary conditions exactly: they may not cross a boundary held at a different value.</p><ul class=checks><li>0/0 checks passed</li></ul><footer>382 in / 16000 out · 407.707s · finish=length · ink=None</footer></section><section class="card ok"><header><b>channel_step_streamlines</b><span class="badge ok">ok</span> <a href="outputs/channel_step_streamlines-0.svg">svg</a></header><p class=prompt>Ideal (potential) flow through a two-dimensional channel with a sudden contraction: the channel occupies 0 &lt;= x &lt;= 3, 0 &lt;= y &lt;= 1, and a solid block occupies 1.5 &lt;= x &lt;= 3, 0 &lt;= y &lt;= 0.5 (the lower half of the downstream section). Flow enters uniformly at x = 0 and leaves uniformly at x = 3. The stream function psi is 0 on the bottom wall and the block, 1 on the top wall, psi = y at the inlet and psi = 2(y - 0.5) at the outlet. Draw the channel, the block, and the streamlines psi = 0.2, 0.4, 0.6 and 0.8 (data-level is psi times 100: 20, 40, 60, 80), including the correct crowding over the corner of the step. Use viewBox=&quot;0 0 1000 1000&quot;. Map channel coordinates to drawing coordinates as X = 50 + 300 x and Y = 700 - 300 y. Draw every contour as its own &lt;path&gt; or &lt;polyline&gt; element carrying a data-level attribute with its numeric level (for example data-level=&quot;40&quot;), and label it. Contours must satisfy the boundary conditions exactly: they may not cross a boundary held at a different value.</p><div class=inline><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
+  <defs>
+    <pattern id="solid-hatch" width="12" height="12" patternUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="12" height="12" fill="#edf0f2"/>
+      <path d="M-3 3 L3 -3 M0 12 L12 0 M9 15 L15 9" fill="none" stroke="#c7cdd2" stroke-width="1"/>
+    </pattern>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0 0 L8 4 L0 8 Z" fill="#334155" stroke="none"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1000" height="1000" fill="#ffffff"/>
+
+  <text x="50" y="125" fill="#17212b" font-family="sans-serif" font-size="30" font-weight="600">Potential flow through a sudden contraction</text>
+  <text x="50" y="162" fill="#52616f" font-family="sans-serif" font-size="18">Two-dimensional ideal flow · stream-function contours · contraction ratio 2:1</text>
+
+  <text x="500" y="270" text-anchor="middle" fill="#334155" font-family="sans-serif" font-size="18">Flow direction</text>
+  <line x1="410" y1="292" x2="590" y2="292" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="50" y="400" width="900" height="300" fill="#f8fbfd"/>
+  <rect x="500" y="550" width="450" height="150" fill="url(#solid-hatch)" stroke="#25313c" stroke-width="2"/>
+
+  <!-- Each contour is a separate, labelled element; endpoints match the prescribed stream function. -->
+  <path id="psi20" data-level="20"
+        d="M50 640
+           C80 639.64 110 639.23 140 638.69
+           C174.95 638.05 209.91 637.15 244.86 635.25
+           C276.99 633.50 309.12 631.05 341.25 624.92
+           C365.84 620.23 390.42 613.61 415.01 598.96
+           C430.78 589.57 446.54 575.50 462.31 559.33
+           C471.34 550.06 480.38 540.98 489.41 535.60
+           C498.13 530.41 506.85 528.05 515.57 526.38
+           C525.35 524.50 535.12 523.59 544.90 522.89
+           C566.04 521.37 587.17 520.98 608.31 520.67
+           C630.15 520.35 651.98 520.24 673.82 520.17
+           C705.88 520.05 737.94 520.03 770 520.02
+           C830 520.00 890 520.00 950 520"
+        fill="none" stroke="#176a96" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <path id="psi40" data-level="40"
+        d="M50 580
+           C80 579.40 110 578.80 140 577.93
+           C173.54 576.97 207.07 575.58 240.61 573.03
+           C269.87 570.80 299.13 567.54 328.39 561.77
+           C348.80 557.75 369.21 552.36 389.62 545.02
+           C406.02 539.12 422.41 531.81 438.81 524.29
+           C451.45 518.49 464.10 512.69 476.74 508.14
+           C487.82 504.16 498.89 501.44 509.97 499.26
+           C520.77 497.13 531.58 495.43 542.38 494.39
+           C564.16 492.28 585.95 491.57 607.73 491.07
+           C629.71 490.57 651.69 490.39 673.67 490.27
+           C705.78 490.09 737.89 490.04 770 490.04
+           C830 490.00 890 490.00 950 490"
+        fill="none" stroke="#176a96" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <path id="psi60" data-level="60"
+        d="M50 520
+           C80 519.40 110 518.89 140 518.05
+           C172.10 517.15 204.19 515.79 236.29 513.69
+           C263.79 511.89 291.29 509.31 318.79 505.48
+           C337.78 502.84 356.77 499.50 375.76 495.54
+           C392.26 492.10 408.75 488.16 425.25 484.16
+           C439.29 480.76 453.33 477.34 467.37 474.41
+           C479.81 471.82 492.25 469.61 504.69 467.88
+           C516.34 466.25 528.00 465.03 539.65 464.10
+           C562.11 462.31 584.58 461.55 607.04 461.06
+           C629.19 460.58 651.35 460.39 673.50 460.27
+           C705.67 460.09 737.83 460.04 770 460.04
+           C830 460.00 890 460.00 950 460"
+        fill="none" stroke="#176a96" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <path id="psi80" data-level="80"
+        d="M50 460
+           C80 459.64 110 459.31 140 458.77
+           C171.10 458.21 202.20 457.50 233.30 456.37
+           C259.93 455.40 286.55 454.03 313.18 452.17
+           C331.63 450.88 350.09 449.30 368.54 447.52
+           C385.06 445.93 401.57 444.15 418.09 442.36
+           C432.68 440.78 447.28 439.18 461.87 437.77
+           C474.98 436.50 488.09 435.37 501.20 434.47
+           C513.35 433.64 525.51 432.92 537.66 432.42
+           C560.61 431.47 583.55 430.94 606.50 430.64
+           C628.79 430.35 651.08 430.24 673.37 430.16
+           C705.58 430.05 737.79 430.03 770 430.02
+           C830 430.00 890 430.00 950 430"
+        fill="none" stroke="#176a96" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Impermeable walls and open inlet/outlet sections. -->
+  <path d="M50 400 H950 M50 700 H500 V550 H950" fill="none" stroke="#25313c" stroke-width="3.5" stroke-linejoin="miter"/>
+  <line x1="50" y1="400" x2="50" y2="700" stroke="#788793" stroke-width="1.5" stroke-dasharray="6 5"/>
+  <line x1="950" y1="400" x2="950" y2="550" stroke="#788793" stroke-width="1.5" stroke-dasharray="6 5"/>
+
+  <text x="500" y="382" text-anchor="middle" fill="#25313c" font-family="sans-serif" font-size="18">Top wall: ψ = 1</text>
+  <text x="90" y="725" fill="#25313c" font-family="sans-serif" font-size="17">Bottom wall: ψ = 0</text>
+
+  <text x="725" y="615" text-anchor="middle" fill="#25313c" font-family="sans-serif" font-size="23" font-weight="600">SOLID BLOCK</text>
+  <text x="725" y="646" text-anchor="middle" fill="#25313c" font-family="sans-serif" font-size="18">Impermeable boundary: ψ = 0</text>
+
+  <text x="806" y="513" fill="#176a96" font-family="sans-serif" font-size="16">ψ = 0.2</text>
+  <text x="806" y="483" fill="#176a96" font-family="sans-serif" font-size="16">ψ = 0.4</text>
+  <text x="806" y="453" fill="#176a96" font-family="sans-serif" font-size="16">ψ = 0.6</text>
+  <text x="806" y="423" fill="#176a96" font-family="sans-serif" font-size="16">ψ = 0.8</text>
+
+  <text x="50" y="349" fill="#52616f" font-family="sans-serif" font-size="17">Inlet · x = 0</text>
+  <text x="950" y="349" text-anchor="end" fill="#52616f" font-family="sans-serif" font-size="17">Outlet · x = 3</text>
+
+  <!-- Dimensions in channel-coordinate units. -->
+  <path d="M43 400 H20 M43 700 H20 M27 400 V700
+           M22 405 L32 395 M22 705 L32 695"
+        fill="none" stroke="#788793" stroke-width="1.2"/>
+  <text x="17" y="550" text-anchor="middle" transform="rotate(-90 17 550)" fill="#52616f" font-family="sans-serif" font-size="16">1.0</text>
+
+  <path d="M957 400 H980 M957 550 H980 M973 400 V550
+           M968 405 L978 395 M968 555 L978 545"
+        fill="none" stroke="#788793" stroke-width="1.2"/>
+  <text x="990" y="475" text-anchor="middle" transform="rotate(-90 990 475)" fill="#52616f" font-family="sans-serif" font-size="16">0.5</text>
+
+  <path d="M50 738 V791 M500 710 V791 M950 710 V791
+           M50 771 H950
+           M45 776 L55 766 M495 776 L505 766 M945 776 L955 766"
+        fill="none" stroke="#788793" stroke-width="1.2"/>
+  <rect x="256" y="758" width="38" height="24" fill="#ffffff"/>
+  <rect x="706" y="758" width="38" height="24" fill="#ffffff"/>
+  <text x="275" y="776" text-anchor="middle" fill="#52616f" font-family="sans-serif" font-size="17">1.5</text>
+  <text x="725" y="776" text-anchor="middle" fill="#52616f" font-family="sans-serif" font-size="17">1.5</text>
+  <text x="50" y="813" text-anchor="middle" fill="#52616f" font-family="sans-serif" font-size="16">0</text>
+  <text x="500" y="813" text-anchor="middle" fill="#52616f" font-family="sans-serif" font-size="16">1.5</text>
+  <text x="950" y="813" text-anchor="middle" fill="#52616f" font-family="sans-serif" font-size="16">3</text>
+
+  <text x="50" y="866" fill="#334155" font-family="sans-serif" font-size="18">Inlet: ψ = y</text>
+  <text x="500" y="866" fill="#334155" font-family="sans-serif" font-size="18">Outlet: ψ = 2(y − 0.5)</text>
+  <text x="50" y="902" fill="#52616f" font-family="sans-serif" font-size="16">Equal stream-function increments Δψ = 0.2; streamline crowding indicates acceleration.</text>
+  <text x="50" y="932" fill="#52616f" font-family="sans-serif" font-size="16">Coordinates: X = 50 + 300x, Y = 700 − 300y. Dimensions are in channel-coordinate units.</text>
+</svg></div><ul class=checks><li>3/3 checks passed</li></ul><footer>449 in / 11121 out · 244.59s · finish=stop · ink=None</footer></section><section class="card ok"><header><b>laplace_L_shape</b><span class="badge ok">ok</span> <a href="outputs/laplace_L_shape-0.svg">svg</a></header><p class=prompt>Steady two-dimensional heat conduction (Laplace&#x27;s equation, no generation) in an L-shaped plate: the unit square [0,1]x[0,1] with the top-right quadrant [0.5,1]x[0.5,1] removed. The left edge x = 0 is held at 100 C; every other boundary, including the two re-entrant edges of the notch, is held at 0 C. Draw the plate outline and the isotherms at 10, 20, 30, 40, 50, 60 and 80 C, with correct crowding at the re-entrant corner (0.5, 0.5). Use viewBox=&quot;0 0 1000 1000&quot;. Map plate coordinates to drawing coordinates as X = 100 + 800 x and Y = 900 - 800 y. Draw every contour as its own &lt;path&gt; or &lt;polyline&gt; element carrying a data-level attribute with its numeric level (for example data-level=&quot;40&quot;), and label it. Contours must satisfy the boundary conditions exactly: they may not cross a boundary held at a different value.</p><div class=inline><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
+  <defs>
+    <marker id="dimension-arrow" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto-start-reverse" markerUnits="userSpaceOnUse">
+      <path d="M 8,1 L 0,4 L 8,7" fill="none" stroke="#64748b" stroke-width="1.2"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1000" height="1000" fill="#ffffff"/>
+
+  <g font-family="sans-serif" fill="#172b3a">
+    <text x="500" y="35" text-anchor="middle" font-size="25">Steady two-dimensional heat conduction</text>
+    <text x="500" y="62" text-anchor="middle" font-size="17">L-shaped plate · no heat generation · isotherms in °C</text>
+  </g>
+
+  <path d="M 100,900 L 900,900 L 900,500 L 500,500 L 500,100 L 100,100 Z"
+        fill="#f8fafc" stroke="#172b3a" stroke-width="2.5"/>
+
+  <g fill="none" stroke="#126b94" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <path data-level="10" d="
+      M 100,900
+      C 137.8825,894 259,873.333 308,860
+      C 373,841 417,820 448,800
+      C 476,780 489,766.667 500,750
+      C 511,733.333 520,716.667 524,700
+      C 530,680 530,658 527,640
+      C 525,625 521,612 516,600
+      C 511,586 505,575 500,565
+      C 496,555 490,548 486,540
+      C 480,532 477,526 474,520
+      C 471,514 469,507 467,500
+      C 463,488 461,474 460,460
+      C 457,440 455,420 453,400
+      C 450,365 446,330 440,300
+      C 434,267 419,225 398,200
+      C 374,180 342,155 298,140
+      C 251,127 137.8825,106 100,100"/>
+
+    <path data-level="20" d="
+      M 100,900
+      C 124.6215,892 181,873.333 216,860
+      C 266,841 306,820 333,800
+      C 375,770 405,733.333 420,700
+      C 435,666.667 440,630 437,600
+      C 435,569 426,531 420,500
+      C 414,469 410,433.333 406,400
+      C 402,366.667 394,333.333 383,300
+      C 371,264 349,227 318,200
+      C 291,177 252,153.333 214,140
+      C 177,127 124.6215,108 100,100"/>
+
+    <path data-level="30" d="
+      M 100,900
+      C 119.6261,890 151,873.333 176,860
+      C 213,840 241,820 267,800
+      C 306,770 333,733.333 351,700
+      C 369,666.667 376,633.333 377,600
+      C 379,566.667 376,533.333 373,500
+      C 370,466.667 367,433.333 360,400
+      C 353,366.667 345,333.333 332,300
+      C 318,264 290,226 261,200
+      C 237,178 202,153.333 176,140
+      C 149,126 119.6261,110 100,100"/>
+
+    <path data-level="40" d="
+      M 100,900
+      C 113.7638,890 136,873.333 154,860
+      C 181,840 203,820 224,800
+      C 257,770 281,733.333 297,700
+      C 313,666.667 323,633.333 326,600
+      C 329,566.667 331,533.333 328,500
+      C 326,466.667 322,433.333 316,400
+      C 310,366.667 300,333.333 287,300
+      C 273,264 248,226 221,200
+      C 199,178 172,153.333 154,140
+      C 135,126 113.7638,110 100,100"/>
+
+    <path data-level="50" d="
+      M 100,900
+      C 110,890 126.5,873.333 139.5,860
+      C 159,840 177,820 193,800
+      C 218,770 241,733.333 254,700
+      C 268,666.667 278,633.333 282,600
+      C 286,566.667 288,533.333 286,500
+      C 284,466.667 281,433.333 275,400
+      C 269,366.667 259,333.333 248,300
+      C 235,264 213,226 191,200
+      C 173,178 152.4,153.333 139.4,140
+      C 126,126 110,110 100,100"/>
+
+    <path data-level="60" d="
+      M 100,900
+      C 107.2654,890 119.3,873.333 128.8,860
+      C 143,840 156,820 168,800
+      C 188,768 206,733.333 217,700
+      C 228,666.667 237,633.333 241,600
+      C 245,566.667 248,533.333 246,500
+      C 244,466.667 242,433.333 237,400
+      C 232,366.667 223,333.333 213,300
+      C 202,264 184,226 167,200
+      C 153,178 138.5,153.333 129,140
+      C 119,126 107.2654,110 100,100"/>
+
+    <path data-level="80" d="
+      M 100,900
+      C 103.2492,890 108.7,873.333 113,860
+      C 119.4,840 125,820 131,800
+      C 140,768 149,733.333 155,700
+      C 161,666.667 166,633.333 168,600
+      C 170,566.667 172,533.333 171,500
+      C 170,466.667 169,433.333 166,400
+      C 163,366.667 158,333.333 153,300
+      C 147,264 138,226 131,200
+      C 125,178 117.3,153.333 113,140
+      C 108.5,126 103.2492,110 100,100"/>
+  </g>
+
+  <g font-family="sans-serif" font-size="19" text-anchor="middle"
+     fill="#126b94" stroke="#f8fafc" stroke-width="6" stroke-linejoin="round" paint-order="stroke">
+    <text x="170" y="483">80</text>
+    <text x="240" y="622">60</text>
+    <text x="282" y="465">50</text>
+    <text x="324" y="634">40</text>
+    <text x="364" y="435">30</text>
+    <text x="436" y="590">20</text>
+    <text x="528" y="675">10</text>
+  </g>
+
+  <path d="M 100,900 L 900,900 L 900,500 L 500,500 L 500,100 L 100,100"
+        fill="none" stroke="#172b3a" stroke-width="3"/>
+  <line x1="100" y1="100" x2="100" y2="900" stroke="#b7432b" stroke-width="5"/>
+
+  <g font-family="sans-serif" font-size="19" fill="#172b3a">
+    <text x="300" y="89" text-anchor="middle">0 °C</text>
+    <text x="500" y="931" text-anchor="middle">0 °C</text>
+    <text x="930" y="700" text-anchor="middle" transform="rotate(-90 930 700)">0 °C</text>
+    <text x="700" y="483" text-anchor="middle">0 °C</text>
+    <text x="530" y="300" text-anchor="middle" transform="rotate(-90 530 300)">0 °C</text>
+    <text x="68" y="500" text-anchor="middle" fill="#b7432b" transform="rotate(-90 68 500)">100 °C · x = 0</text>
+  </g>
+
+  <g font-family="sans-serif" text-anchor="middle" fill="#475569">
+    <text x="724" y="159" font-size="18">REMOVED QUADRANT</text>
+    <text x="724" y="188" font-size="17">0.5 × 0.5</text>
+    <text x="724" y="274" font-size="25" fill="#172b3a">∇²T = 0</text>
+    <text x="724" y="307" font-size="17">All non-heated edges: T = 0 °C</text>
+    <text x="724" y="356" font-size="16">Contours approach the hot–cold</text>
+    <text x="724" y="379" font-size="16">junctions as corner limits.</text>
+  </g>
+
+  <path d="M 505,505 L 545,541 L 619,541" fill="none" stroke="#64748b" stroke-width="1.2"/>
+  <g font-family="sans-serif" fill="#475569">
+    <text x="626" y="546" font-size="16">Re-entrant corner (0.5, 0.5)</text>
+    <text x="626" y="568" font-size="15">270° interior angle</text>
+  </g>
+
+  <g fill="none" stroke="#64748b" stroke-width="1.2">
+    <line x1="100" y1="940" x2="100" y2="980"/>
+    <line x1="900" y1="915" x2="900" y2="980"/>
+    <line x1="100" y1="966" x2="900" y2="966" marker-start="url(#dimension-arrow)" marker-end="url(#dimension-arrow)"/>
+    <line x1="20" y1="100" x2="85" y2="100"/>
+    <line x1="20" y1="900" x2="85" y2="900"/>
+    <line x1="30" y1="100" x2="30" y2="900" marker-start="url(#dimension-arrow)" marker-end="url(#dimension-arrow)"/>
+  </g>
+  <g font-family="sans-serif" font-size="17" fill="#475569" text-anchor="middle">
+    <text x="500" y="989">1.0</text>
+    <text x="19" y="500" transform="rotate(-90 19 500)">1.0</text>
+  </g>
+</svg></div><ul class=checks><li>3/3 checks passed</li></ul><footer>401 in / 14616 out · 345.255s · finish=stop · ink=None</footer></section><section class="card ok"><header><b>square_conductor_in_shell</b><span class="badge ok">ok</span> <a href="outputs/square_conductor_in_shell-0.svg">svg</a></header><p class=prompt>Electrostatics: a square conductor of side 0.6 (occupying [-0.3,0.3]x[-0.3,0.3]) held at 100 V sits at the centre of a grounded circular shell of radius 1 (0 V). Draw the shell, the conductor, and the equipotentials at 20, 40, 60 and 80 V from the two-dimensional Laplace solution in the gap; they must be closed curves that are square-like near the conductor and circle-like near the shell. Use viewBox=&quot;0 0 1000 1000&quot;. Map coordinates to drawing coordinates as X = 500 + 400 x and Y = 500 - 400 y. Draw every contour as its own &lt;path&gt; or &lt;polyline&gt; element carrying a data-level attribute with its numeric level (for example data-level=&quot;40&quot;), and label it. Contours must satisfy the boundary conditions exactly: they may not cross a boundary held at a different value.</p><div class=inline><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto-start-reverse" markerUnits="userSpaceOnUse">
+      <path d="M 8,4 L 0,0 L 0,8 Z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1000" height="1000" fill="#ffffff"/>
+
+  <text x="500" y="57" text-anchor="middle" font-family="sans-serif" font-size="24" fill="#172a3a">Grounded circular shell · 0 V</text>
+  <line x1="500" y1="70" x2="500" y2="100" stroke="#475569" stroke-width="1.5"/>
+
+  <!-- Boundary: x² + y² = 1; X = 500 + 400x, Y = 500 - 400y. -->
+  <path data-level="0"
+        d="M 900,500 A 400,400 0 1 0 100,500 A 400,400 0 1 0 900,500 Z"
+        fill="#f8fbfd" stroke="#172a3a" stroke-width="3"/>
+
+  <!-- Smooth approximations of the square-in-circle Laplace level sets. -->
+  <path data-level="20"
+        d="M 500,176.6
+           C 588.1,176.6 671.4,209.6 730.9,269.1
+           C 790.4,328.6 823.4,411.9 823.4,500
+           C 823.4,588.1 790.4,671.4 730.9,730.9
+           C 671.4,790.4 588.1,823.4 500,823.4
+           C 411.9,823.4 328.6,790.4 269.1,730.9
+           C 209.6,671.4 176.6,588.1 176.6,500
+           C 176.6,411.9 209.6,328.6 269.1,269.1
+           C 328.6,209.6 411.9,176.6 500,176.6 Z"
+        fill="none" stroke="#377fa8" stroke-width="2.5"/>
+
+  <path data-level="40"
+        d="M 500,239.4
+           C 573.1,239.4 642.2,263.8 689.2,310.8
+           C 736.2,357.8 760.6,426.9 760.6,500
+           C 760.6,573.1 736.2,642.2 689.2,689.2
+           C 642.2,736.2 573.1,760.6 500,760.6
+           C 426.9,760.6 357.8,736.2 310.8,689.2
+           C 263.8,642.2 239.4,573.1 239.4,500
+           C 239.4,426.9 263.8,357.8 310.8,310.8
+           C 357.8,263.8 426.9,239.4 500,239.4 Z"
+        fill="none" stroke="#286d99" stroke-width="2.5"/>
+
+  <path data-level="60"
+        d="M 500,292.1
+           C 562,292.1 621.3,308.1 656.6,343.4
+           C 691.9,378.7 707.9,438 707.9,500
+           C 707.9,562 691.9,621.3 656.6,656.6
+           C 621.3,691.9 562,707.9 500,707.9
+           C 438,707.9 378.7,691.9 343.4,656.6
+           C 308.1,621.3 292.1,562 292.1,500
+           C 292.1,438 308.1,378.7 343.4,343.4
+           C 378.7,308.1 438,292.1 500,292.1 Z"
+        fill="none" stroke="#205b88" stroke-width="2.5"/>
+
+  <path data-level="80"
+        d="M 500,337.8
+           C 553.4,337.8 610.7,345.3 632.7,367.3
+           C 654.7,389.3 662.2,446.6 662.2,500
+           C 662.2,553.4 654.7,610.7 632.7,632.7
+           C 610.7,654.7 553.4,662.2 500,662.2
+           C 446.6,662.2 389.3,654.7 367.3,632.7
+           C 345.3,610.7 337.8,553.4 337.8,500
+           C 337.8,446.6 345.3,389.3 367.3,367.3
+           C 389.3,345.3 446.6,337.8 500,337.8 Z"
+        fill="none" stroke="#174775" stroke-width="2.5"/>
+
+  <text x="500" y="165" text-anchor="middle" font-family="sans-serif" font-size="21" fill="#377fa8">20 V</text>
+  <text x="500" y="228" text-anchor="middle" font-family="sans-serif" font-size="21" fill="#286d99">40 V</text>
+  <text x="500" y="281" text-anchor="middle" font-family="sans-serif" font-size="21" fill="#205b88">60 V</text>
+  <text x="500" y="327" text-anchor="middle" font-family="sans-serif" font-size="21" fill="#174775">80 V</text>
+
+  <!-- Exact square boundary: [-0.3,0.3] × [-0.3,0.3]. -->
+  <path data-level="100"
+        d="M 380,380 H 620 V 620 H 380 Z"
+        fill="#f0e6dc" stroke="#854b2b" stroke-width="3"/>
+  <text x="500" y="460" text-anchor="middle" font-family="sans-serif" font-size="21" fill="#65391f">Square conductor</text>
+  <text x="500" y="501" text-anchor="middle" font-family="sans-serif" font-size="30" fill="#65391f">100 V</text>
+  <text x="500" y="531" text-anchor="middle" font-family="sans-serif" font-size="16" fill="#65391f">centre (0, 0)</text>
+
+  <!-- Side dimension, measured between the exact square faces. -->
+  <line x1="380" y1="567" x2="380" y2="603" stroke="#475569" stroke-width="1.3"/>
+  <line x1="620" y1="567" x2="620" y2="603" stroke="#475569" stroke-width="1.3"/>
+  <line x1="385" y1="592" x2="615" y2="592" stroke="#475569" stroke-width="1.3"
+        marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <text x="500" y="583" text-anchor="middle" font-family="sans-serif" font-size="19" fill="#475569">0.6</text>
+
+  <path d="M 782.843,782.843 L 824,820 H 892"
+        fill="none" stroke="#475569" stroke-width="1.5"/>
+  <circle cx="782.843" cy="782.843" r="3" fill="#475569"/>
+  <text x="854" y="809" text-anchor="middle" font-family="sans-serif" font-size="21" fill="#172a3a">R = 1</text>
+
+  <text x="500" y="949" text-anchor="middle" font-family="sans-serif" font-size="23" fill="#172a3a">2-D Laplace equipotentials</text>
+  <text x="500" y="979" text-anchor="middle" font-family="sans-serif" font-size="17" fill="#475569">∇²V = 0 in the gap · contour interval 20 V</text>
+</svg></div><ul class=checks><li>3/3 checks passed</li></ul><footer>368 in / 6687 out · 143.667s · finish=stop · ink=None</footer></section><section class="card ok"><header><b>square_hole_plate</b><span class="badge ok">ok</span> <a href="outputs/square_hole_plate-0.svg">svg</a></header><p class=prompt>Steady two-dimensional heat conduction (Laplace&#x27;s equation) in the unit square plate [0,1]x[0,1] that has a concentric square hole [0.4,0.6]x[0.4,0.6]. The hole boundary is held at 100 C and the outer boundary at 0 C. Draw the plate, the hole, and the isotherms at 20, 40, 60 and 80 C. Use viewBox=&quot;0 0 1000 1000&quot;. Map plate coordinates to drawing coordinates as X = 100 + 800 x and Y = 900 - 800 y. Draw every contour as its own &lt;path&gt; or &lt;polyline&gt; element carrying a data-level attribute with its numeric level (for example data-level=&quot;40&quot;), and label it. Contours must satisfy the boundary conditions exactly: they may not cross a boundary held at a different value.</p><div class=inline><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
+  <rect x="0" y="0" width="1000" height="1000" fill="#ffffff"/>
+
+  <text x="500" y="35" text-anchor="middle" font-family="sans-serif" font-size="25" font-weight="bold" fill="#202830">Steady two-dimensional heat conduction</text>
+  <text x="500" y="63" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#46515b">∇²T = 0 · Unit square plate with concentric square hole</text>
+  <text x="500" y="90" text-anchor="middle" font-family="sans-serif" font-size="17" fill="#202830">Outer boundary: T = 0 °C</text>
+
+  <!-- Plate: X = 100 + 800x; Y = 900 - 800y. -->
+  <rect x="100" y="100" width="800" height="800" fill="#ffffff" stroke="#202830" stroke-width="3"/>
+
+  <!-- Each closed isotherm is a separate, explicitly level-tagged path. -->
+  <path data-level="20"
+        d="M 500,190.45
+           C 576,190.45 672.35,206.13 733.11,266.89
+           C 793.87,327.65 809.55,424 809.55,500
+           C 809.55,576 793.87,672.35 733.11,733.11
+           C 672.35,793.87 576,809.55 500,809.55
+           C 424,809.55 327.65,793.87 266.89,733.11
+           C 206.13,672.35 190.45,576 190.45,500
+           C 190.45,424 206.13,327.65 266.89,266.89
+           C 327.65,206.13 424,190.45 500,190.45 Z"
+        fill="none" stroke="#2166ac" stroke-width="2.6"/>
+
+  <path data-level="40"
+        d="M 500,268.04
+           C 561.94,268.04 624.26,287.48 668.39,331.61
+           C 712.52,375.74 731.96,438.06 731.96,500
+           C 731.96,561.94 712.52,624.26 668.39,668.39
+           C 624.26,712.52 561.94,731.96 500,731.96
+           C 438.06,731.96 375.74,712.52 331.61,668.39
+           C 287.48,624.26 268.04,561.94 268.04,500
+           C 268.04,438.06 287.48,375.74 331.61,331.61
+           C 375.74,287.48 438.06,268.04 500,268.04 Z"
+        fill="none" stroke="#187b83" stroke-width="2.6"/>
+
+  <path data-level="60"
+        d="M 500,329.56
+           C 547.89,329.56 593.73,344.23 624.75,375.25
+           C 655.77,406.27 670.44,452.11 670.44,500
+           C 670.44,547.89 655.77,593.73 624.75,624.75
+           C 593.73,655.77 547.89,670.44 500,670.44
+           C 452.11,670.44 406.27,655.77 375.25,624.75
+           C 344.23,593.73 329.56,547.89 329.56,500
+           C 329.56,452.11 344.23,406.27 375.25,375.25
+           C 406.27,344.23 452.11,329.56 500,329.56 Z"
+        fill="none" stroke="#aa7010" stroke-width="2.6"/>
+
+  <path data-level="80"
+        d="M 500,378.28
+           C 538.18,378.28 576.04,385.68 595.18,404.82
+           C 614.32,423.96 621.72,461.82 621.72,500
+           C 621.72,538.18 614.32,576.04 595.18,595.18
+           C 576.04,614.32 538.18,621.72 500,621.72
+           C 461.82,621.72 423.96,614.32 404.82,595.18
+           C 385.68,576.04 378.28,538.18 378.28,500
+           C 378.28,461.82 385.68,423.96 404.82,404.82
+           C 423.96,385.68 461.82,378.28 500,378.28 Z"
+        fill="none" stroke="#b73b36" stroke-width="2.6"/>
+
+  <!-- Hole: [0.4,0.6] × [0.4,0.6], excluded from the conducting plate. -->
+  <rect x="420" y="420" width="160" height="160" fill="#f0f1f3" stroke="#202830" stroke-width="3"/>
+  <text x="500" y="467" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#202830">Square hole</text>
+  <text x="500" y="495" text-anchor="middle" font-family="sans-serif" font-size="16" fill="#202830">Boundary:</text>
+  <text x="500" y="520" text-anchor="middle" font-family="sans-serif" font-size="20" font-weight="bold" fill="#b73b36">T = 100 °C</text>
+  <text x="500" y="549" text-anchor="middle" font-family="sans-serif" font-size="16" fill="#46515b">0.2 × 0.2</text>
+
+  <!-- Inline contour labels. -->
+  <text x="500" y="197" text-anchor="middle" font-family="sans-serif" font-size="19" font-weight="bold" fill="#2166ac" stroke="#ffffff" stroke-width="7" stroke-linejoin="round" paint-order="stroke">20 °C</text>
+  <text x="500" y="275" text-anchor="middle" font-family="sans-serif" font-size="19" font-weight="bold" fill="#187b83" stroke="#ffffff" stroke-width="7" stroke-linejoin="round" paint-order="stroke">40 °C</text>
+  <text x="500" y="336" text-anchor="middle" font-family="sans-serif" font-size="19" font-weight="bold" fill="#aa7010" stroke="#ffffff" stroke-width="7" stroke-linejoin="round" paint-order="stroke">60 °C</text>
+  <text x="500" y="385" text-anchor="middle" font-family="sans-serif" font-size="19" font-weight="bold" fill="#b73b36" stroke="#ffffff" stroke-width="7" stroke-linejoin="round" paint-order="stroke">80 °C</text>
+
+  <!-- Overall dimensions, in plate-coordinate units. -->
+  <line x1="100" y1="908" x2="100" y2="964" stroke="#69737c" stroke-width="1.2"/>
+  <line x1="900" y1="908" x2="900" y2="964" stroke="#69737c" stroke-width="1.2"/>
+  <line x1="100" y1="950" x2="464" y2="950" stroke="#46515b" stroke-width="1.4"/>
+  <line x1="536" y1="950" x2="900" y2="950" stroke="#46515b" stroke-width="1.4"/>
+  <path d="M 100,950 L 112,945 L 112,955 Z M 900,950 L 888,945 L 888,955 Z" fill="#46515b"/>
+  <text x="500" y="957" text-anchor="middle" font-family="sans-serif" font-size="19" fill="#202830">1.0</text>
+  <text x="113" y="927" font-family="sans-serif" font-size="15" fill="#46515b">x = 0</text>
+  <text x="887" y="927" text-anchor="end" font-family="sans-serif" font-size="15" fill="#46515b">x = 1</text>
+
+  <line x1="92" y1="100" x2="36" y2="100" stroke="#69737c" stroke-width="1.2"/>
+  <line x1="92" y1="900" x2="36" y2="900" stroke="#69737c" stroke-width="1.2"/>
+  <line x1="50" y1="100" x2="50" y2="464" stroke="#46515b" stroke-width="1.4"/>
+  <line x1="50" y1="536" x2="50" y2="900" stroke="#46515b" stroke-width="1.4"/>
+  <path d="M 50,100 L 45,112 L 55,112 Z M 50,900 L 45,888 L 55,888 Z" fill="#46515b"/>
+  <text x="50" y="500" text-anchor="middle" transform="rotate(-90 50 500)" font-family="sans-serif" font-size="19" fill="#202830">1.0</text>
+
+  <text x="500" y="988" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#46515b">Hole extent: 0.4 ≤ x ≤ 0.6, 0.4 ≤ y ≤ 0.6 · Dimensions in plate-coordinate units</text>
+</svg></div><ul class=checks><li>3/3 checks passed</li></ul><footer>354 in / 7194 out · 164.38s · finish=stop · ink=None</footer></section><section class="card ok"><header><b>torsion_square_prandtl</b><span class="badge ok">ok</span> <a href="outputs/torsion_square_prandtl-0.svg">svg</a></header><p class=prompt>Saint-Venant torsion of a solid square shaft of side a = 1 (dimensionless, G*theta = 1): the Prandtl stress function phi satisfies Laplacian(phi) = -2 inside the square [0,1]x[0,1] with phi = 0 on the boundary. Draw the section and the contours of phi at 20 percent, 40 percent, 60 percent and 80 percent of its maximum value (data-level is the percentage: 20, 40, 60, 80), label the maximum value of phi at the centre, mark where the shear stress is greatest and where it is zero, and label the torsion constant J/a^4 for a square section. Use viewBox=&quot;0 0 1000 1000&quot;. Map section coordinates to drawing coordinates as X = 100 + 800 x and Y = 900 - 800 y. Draw every contour as its own &lt;path&gt; or &lt;polyline&gt; element carrying a data-level attribute with its numeric level (for example data-level=&quot;40&quot;), and label it. Contours must satisfy the boundary conditions exactly: they may not cross a boundary held at a different value.</p><div class=inline><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
+  <defs>
+    <marker id="dimension-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse" markerUnits="userSpaceOnUse">
+      <path d="M 0 0 L 7 4 L 0 8 Z" fill="#374151" stroke="none"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1000" height="1000" fill="#ffffff" stroke="none"/>
+
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="500" y="32" text-anchor="middle" font-size="25" font-weight="bold" fill="#17212b">Saint-Venant torsion — solid square shaft</text>
+    <text x="500" y="59" text-anchor="middle" font-size="18" fill="#374151">∇²φ = −2  ·  a = 1  ·  Gθ = 1</text>
+    <text x="500" y="85" text-anchor="middle" font-size="17" fill="#374151">φ = 0 on all four sides</text>
+
+    <!-- Section: X = 100 + 800x; Y = 900 - 800y. -->
+    <rect x="100" y="100" width="800" height="800" fill="#ffffff" stroke="#17212b" stroke-width="3"/>
+
+    <!-- Closed, positive-value contours, wholly inside the zero-value boundary. -->
+    <path data-level="20" transform="translate(500 500)"
+      d="M 0 -362.564
+         C 66.667 -362.564 133.333 -361.738 200 -353.557
+         C 221.333 -350.939 242.667 -347.604 264 -340.945
+         C 280.455 -335.809 296.911 -329.821 313.366 -313.366
+         C 329.821 -296.911 335.809 -280.455 340.945 -264
+         C 347.604 -242.667 350.939 -221.333 353.557 -200
+         C 361.738 -133.333 362.564 -66.667 362.564 0
+         C 362.564 66.667 361.738 133.333 353.557 200
+         C 350.939 221.333 347.604 242.667 340.945 264
+         C 335.809 280.455 329.821 296.911 313.366 313.366
+         C 296.911 329.821 280.455 335.809 264 340.945
+         C 242.667 347.604 221.333 350.939 200 353.557
+         C 133.333 361.738 66.667 362.564 0 362.564
+         C -66.667 362.564 -133.333 361.738 -200 353.557
+         C -221.333 350.939 -242.667 347.604 -264 340.945
+         C -280.455 335.809 -296.911 329.821 -313.366 313.366
+         C -329.821 296.911 -335.809 280.455 -340.945 264
+         C -347.604 242.667 -350.939 221.333 -353.557 200
+         C -361.738 133.333 -362.564 66.667 -362.564 0
+         C -362.564 -66.667 -361.738 -133.333 -353.557 -200
+         C -350.939 -221.333 -347.604 -242.667 -340.945 -264
+         C -335.809 -280.455 -329.821 -296.911 -313.366 -313.366
+         C -296.911 -329.821 -280.455 -335.809 -264 -340.945
+         C -242.667 -347.604 -221.333 -350.939 -200 -353.557
+         C -133.333 -361.738 -66.667 -362.564 0 -362.564 Z"
+      fill="none" stroke="#438da8" stroke-width="2.5"/>
+
+    <path data-level="40" transform="translate(500 500)"
+      d="M 0 -318.608
+         C 53.333 -318.608 106.667 -316.389 160 -305.102
+         C 192.921 -298.134 225.842 -291.684 258.763 -258.763
+         C 291.684 -225.842 298.134 -192.921 305.102 -160
+         C 316.389 -106.667 318.608 -53.333 318.608 0
+         C 318.608 53.333 316.389 106.667 305.102 160
+         C 298.134 192.921 291.684 225.842 258.763 258.763
+         C 225.842 291.684 192.921 298.134 160 305.102
+         C 106.667 316.389 53.333 318.608 0 318.608
+         C -53.333 318.608 -106.667 316.389 -160 305.102
+         C -192.921 298.134 -225.842 291.684 -258.763 258.763
+         C -291.684 225.842 -298.134 192.921 -305.102 160
+         C -316.389 106.667 -318.608 53.333 -318.608 0
+         C -318.608 -53.333 -316.389 -106.667 -305.102 -160
+         C -298.134 -192.921 -291.684 -225.842 -258.763 -258.763
+         C -225.842 -291.684 -192.921 -298.134 -160 -305.102
+         C -106.667 -316.389 -53.333 -318.608 0 -318.608 Z"
+      fill="none" stroke="#26788f" stroke-width="2.5"/>
+
+    <path data-level="60" transform="translate(500 500)"
+      d="M 0 -264.374
+         C 42.667 -264.374 85.333 -260.838 128 -247.604
+         C 153.409 -239.723 178.817 -229.635 204.226 -204.226
+         C 229.635 -178.817 239.723 -153.409 247.604 -128
+         C 260.838 -85.333 264.374 -42.667 264.374 0
+         C 264.374 42.667 260.838 85.333 247.604 128
+         C 239.723 153.409 229.635 178.817 204.226 204.226
+         C 178.817 229.635 153.409 239.723 128 247.604
+         C 85.333 260.838 42.667 264.374 0 264.374
+         C -42.667 264.374 -85.333 260.838 -128 247.604
+         C -153.409 239.723 -178.817 229.635 -204.226 204.226
+         C -229.635 178.817 -239.723 153.409 -247.604 128
+         C -260.838 85.333 -264.374 42.667 -264.374 0
+         C -264.374 -42.667 -260.838 -85.333 -247.604 -128
+         C -239.723 -153.409 -229.635 -178.817 -204.226 -204.226
+         C -178.817 -229.635 -153.409 -239.723 -128 -247.604
+         C -85.333 -260.838 -42.667 -264.374 0 -264.374 Z"
+      fill="none" stroke="#155c78" stroke-width="2.5"/>
+
+    <path data-level="80" transform="translate(500 500)"
+      d="M 0 -190.330
+         C 29.333 -190.330 58.667 -186.304 88 -174.532
+         C 105.512 -167.505 123.023 -158.047 140.535 -140.535
+         C 158.047 -123.023 167.505 -105.512 174.532 -88
+         C 186.304 -58.667 190.330 -29.333 190.330 0
+         C 190.330 29.333 186.304 58.667 174.532 88
+         C 167.505 105.512 158.047 123.023 140.535 140.535
+         C 123.023 158.047 105.512 167.505 88 174.532
+         C 58.667 186.304 29.333 190.330 0 190.330
+         C -29.333 190.330 -58.667 186.304 -88 174.532
+         C -105.512 167.505 -123.023 158.047 -140.535 140.535
+         C -158.047 123.023 -167.505 105.512 -174.532 88
+         C -186.304 58.667 -190.330 29.333 -190.330 0
+         C -190.330 -29.333 -186.304 -58.667 -174.532 -88
+         C -167.505 -105.512 -158.047 -123.023 -140.535 -140.535
+         C -123.023 -158.047 -105.512 -167.505 -88 -174.532
+         C -58.667 -186.304 -29.333 -190.330 0 -190.330 Z"
+      fill="none" stroke="#183f66" stroke-width="2.5"/>
+
+    <text x="500" y="130" text-anchor="middle" font-size="17" fill="#438da8">20%</text>
+    <text x="500" y="174" text-anchor="middle" font-size="17" fill="#26788f">40%</text>
+    <text x="500" y="228" text-anchor="middle" font-size="17" fill="#155c78">60%</text>
+    <text x="500" y="302" text-anchor="middle" font-size="17" fill="#183f66">80%</text>
+
+    <!-- Maximum stress-function value and zero shear at the centre. -->
+    <text x="500" y="467" text-anchor="middle" font-size="22" font-weight="bold" fill="#17212b">φmax ≈ 0.147343</text>
+    <line x1="488" y1="500" x2="512" y2="500" stroke="#244d91" stroke-width="1.5"/>
+    <line x1="500" y1="488" x2="500" y2="512" stroke="#244d91" stroke-width="1.5"/>
+    <circle cx="500" cy="500" r="5" fill="#ffffff" stroke="#244d91" stroke-width="2.5"/>
+    <text x="500" y="537" text-anchor="middle" font-size="19" fill="#244d91">τ = 0</text>
+    <text x="500" y="562" text-anchor="middle" font-size="16" fill="#536170">(x, y) = (½, ½)</text>
+
+    <!-- Greatest shear occurs at all four side midpoints. -->
+    <circle cx="500" cy="100" r="6" fill="#c44932" stroke="#c44932" stroke-width="2"/>
+    <circle cx="900" cy="500" r="6" fill="#c44932" stroke="#c44932" stroke-width="2"/>
+    <circle cx="500" cy="900" r="6" fill="#c44932" stroke="#c44932" stroke-width="2"/>
+    <circle cx="100" cy="500" r="6" fill="#c44932" stroke="#c44932" stroke-width="2"/>
+    <text x="500" y="885" text-anchor="middle" font-size="17" fill="#c44932">max |τ|</text>
+    <text x="939" y="500" transform="rotate(-90 939 500)" text-anchor="middle" font-size="19" fill="#c44932">max |τ| / (Gθa) ≈ 0.675314</text>
+    <text x="964" y="500" transform="rotate(-90 964 500)" text-anchor="middle" font-size="16" fill="#c44932">at the four side midpoints</text>
+
+    <!-- Zero shear at the four corners. -->
+    <circle cx="100" cy="100" r="5.5" fill="#ffffff" stroke="#244d91" stroke-width="2.5"/>
+    <circle cx="900" cy="100" r="5.5" fill="#ffffff" stroke="#244d91" stroke-width="2.5"/>
+    <circle cx="900" cy="900" r="5.5" fill="#ffffff" stroke="#244d91" stroke-width="2.5"/>
+    <circle cx="100" cy="900" r="5.5" fill="#ffffff" stroke="#244d91" stroke-width="2.5"/>
+    <path d="M 105 894 L 119 876 L 132 876" fill="none" stroke="#244d91" stroke-width="1.3"/>
+    <text x="139" y="882" font-size="17" fill="#244d91">τ = 0 at all corners</text>
+
+    <!-- Side dimension. -->
+    <line x1="45" y1="100" x2="88" y2="100" stroke="#374151" stroke-width="1.2"/>
+    <line x1="45" y1="900" x2="88" y2="900" stroke="#374151" stroke-width="1.2"/>
+    <line x1="57" y1="102" x2="57" y2="898" stroke="#374151" stroke-width="1.2" marker-start="url(#dimension-arrow)" marker-end="url(#dimension-arrow)"/>
+    <text x="38" y="500" transform="rotate(-90 38 500)" text-anchor="middle" font-size="21" fill="#17212b">a = 1</text>
+
+    <text x="500" y="933" text-anchor="middle" font-size="16" fill="#536170">Contours: φ / φmax  ·  Shear magnitude: |τ| = |∇φ|</text>
+    <text x="500" y="964" text-anchor="middle" font-size="23" font-weight="bold" fill="#17212b">Square torsion constant: J/a⁴ ≈ 0.140577</text>
+    <text x="500" y="989" text-anchor="middle" font-size="15" fill="#536170">J = 2∫∫ φ dA for Gθ = 1</text>
+  </g>
+</svg></div><ul class=checks><li>4/4 checks passed</li></ul><footer>407 in / 15998 out · 414.182s · finish=stop · ink=None</footer></section></div>
