@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 760">
+  <defs>
+    <pattern id="concrete" width="24" height="24" patternUnits="userSpaceOnUse">
+      <rect width="24" height="24" fill="#e6e8eb"/>
+      <path d="M2 8l5-3 M15 18l5 3 M17 4l2 3" fill="none" stroke="#aeb5bd" stroke-width="1"/>
+    </pattern>
+    <marker id="pressureArrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0L8 4L0 8Z" fill="#245ba0"/>
+    </marker>
+    <marker id="forceArrow" markerWidth="17" markerHeight="14" refX="16" refY="7" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0L17 7L0 14Z" fill="#bd302b"/>
+    </marker>
+    <marker id="dimensionArrow" markerWidth="9" markerHeight="8" refX="8" refY="4" orient="auto-start-reverse" markerUnits="userSpaceOnUse">
+      <path d="M0 0L9 4L0 8Z" fill="#303b47"/>
+    </marker>
+  </defs>
+
+  <rect width="1000" height="760" fill="#ffffff"/>
+
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="50" y="48" font-size="26" font-weight="bold" fill="#182c40">Hydrostatic loading on a vertical concrete dam</text>
+    <text x="50" y="78" font-size="16" fill="#536170">Section normal to dam • forces evaluated per metre width into the page</text>
+
+    <!-- Water and concrete section -->
+    <rect x="175" y="150" width="445" height="360" fill="#e7f4fc"/>
+    <rect x="620" y="130" width="140" height="435" fill="url(#concrete)" stroke="#46515b" stroke-width="2"/>
+    <line x1="620" y1="150" x2="620" y2="510" stroke="#182c40" stroke-width="4"/>
+    <line x1="175" y1="150" x2="620" y2="150" stroke="#2581ae" stroke-width="2.5"/>
+    <line x1="175" y1="510" x2="620" y2="510" stroke="#46515b" stroke-width="2"/>
+    <path d="M175 520l10-10 M195 520l10-10 M215 520l10-10 M235 520l10-10 M255 520l10-10 M275 520l10-10 M295 520l10-10 M315 520l10-10 M335 520l10-10 M355 520l10-10 M375 520l10-10 M395 520l10-10 M415 520l10-10 M435 520l10-10 M455 520l10-10 M475 520l10-10 M495 520l10-10 M515 520l10-10 M535 520l10-10 M555 520l10-10 M575 520l10-10 M595 520l10-10"
+          fill="none" stroke="#9ba6af" stroke-width="1"/>
+
+    <text x="190" y="135" font-size="17" fill="#176289">Free surface</text>
+    <text x="190" y="195" font-size="20" font-weight="bold" fill="#176289">Fresh water</text>
+    <text x="190" y="220" font-size="16" fill="#176289">ρ = 1000 kg/m³</text>
+    <text x="690" y="235" text-anchor="middle" font-size="19" font-weight="bold" fill="#394550">Concrete</text>
+    <text x="690" y="260" text-anchor="middle" font-size="19" fill="#394550">dam</text>
+
+    <!-- Triangular pressure diagram: arrow length proportional to depth -->
+    <polygon points="620,150 350,510 620,510" fill="#245ba0" fill-opacity="0.06" stroke="#245ba0" stroke-width="2"/>
+    <g stroke="#245ba0" stroke-width="2" fill="none" marker-end="url(#pressureArrow)">
+      <line x1="586.25" y1="195" x2="616" y2="195"/>
+      <line x1="552.5" y1="240" x2="616" y2="240"/>
+      <line x1="518.75" y1="285" x2="616" y2="285"/>
+      <line x1="485" y1="330" x2="616" y2="330"/>
+      <line x1="417.5" y1="420" x2="616" y2="420"/>
+      <line x1="383.75" y1="465" x2="616" y2="465"/>
+      <line x1="350" y1="510" x2="616" y2="510"/>
+    </g>
+    <text x="540" y="126" font-size="16" fill="#245ba0">p = 0</text>
+    <text x="205" y="283" font-size="18" font-weight="bold" fill="#245ba0">Pressure distribution</text>
+    <text x="205" y="307" font-size="17" fill="#245ba0">p(z) = ρgz</text>
+    <path d="M393 285H450L515 290" fill="none" stroke="#245ba0" stroke-width="1.3"/>
+    <text x="345" y="550" font-size="19" font-weight="bold" fill="#245ba0">p at base = 58.86 kPa</text>
+
+    <!-- Total water depth -->
+    <g stroke="#303b47" stroke-width="1.2" fill="none">
+      <line x1="110" y1="150" x2="166" y2="150"/>
+      <line x1="110" y1="510" x2="166" y2="510"/>
+      <line x1="125" y1="150" x2="125" y2="510" marker-start="url(#dimensionArrow)" marker-end="url(#dimensionArrow)"/>
+    </g>
+    <text x="100" y="330" transform="rotate(-90 100 330)" text-anchor="middle" font-size="20" fill="#303b47">Water depth h = 6.00 m</text>
+
+    <!-- Resultant at z = 4 m below the free surface -->
+    <line x1="420" y1="390" x2="795" y2="390" stroke="#bd302b" stroke-width="5" marker-end="url(#forceArrow)"/>
+    <circle cx="620" cy="390" r="6" fill="#ffffff" stroke="#bd302b" stroke-width="3"/>
+    <text x="442" y="371" font-size="17" font-weight="bold" fill="#bd302b">Resultant R</text>
+    <text x="774" y="427" font-size="18" font-weight="bold" fill="#bd302b">R = 176.58 kN/m</text>
+    <text x="774" y="451" font-size="15" fill="#bd302b">Horizontal, into dam</text>
+
+    <!-- Centre-of-pressure depth -->
+    <g stroke="#303b47" stroke-width="1.2" fill="none">
+      <line x1="770" y1="150" x2="865" y2="150"/>
+      <line x1="805" y1="390" x2="865" y2="390"/>
+      <line x1="850" y1="150" x2="850" y2="390" marker-start="url(#dimensionArrow)" marker-end="url(#dimensionArrow)"/>
+    </g>
+    <text x="880" y="270" transform="rotate(-90 880 270)" text-anchor="middle" font-size="19" fill="#303b47">Centre of pressure: 4.00 m</text>
+
+    <!-- Calculation summary -->
+    <line x1="50" y1="593" x2="950" y2="593" stroke="#bdc7d0" stroke-width="1"/>
+    <text x="50" y="624" font-size="17" fill="#182c40">Base pressure:  pᵦ = ρgh = 1000 × 9.81 × 6 = 58,860 Pa = 58.86 kPa</text>
+    <text x="50" y="655" font-size="17" fill="#182c40">Resultant per metre width:  R = ½ρgh² = ½ × 58.86 × 6 = 176.58 kN/m</text>
+    <text x="50" y="686" font-size="17" fill="#182c40">Centre of pressure:  z = 2h/3 = 4.00 m below surface (2.00 m above base)</text>
+    <text x="50" y="726" font-size="15" fill="#536170">Assumptions: static fresh water; g = 9.81 m/s²; gauge pressures; no downstream water pressure.</text>
+  </g>
+</svg>

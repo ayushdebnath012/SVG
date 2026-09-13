@@ -1,0 +1,2727 @@
+<!doctype html><meta charset=utf-8><title>SVG generation eval</title>
+<style>
+body{font:14px system-ui;margin:24px;background:#fafafa;color:#222}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:16px}
+.card{background:#fff;border:1px solid #ddd;border-radius:8px;padding:12px;border-left:6px solid #2a9d4a}
+.card:not(.ok){border-left-color:#d33} header{display:flex;gap:8px;align-items:center}
+.badge{font-size:11px;padding:2px 6px;border-radius:4px;background:#2a9d4a;color:#fff} .badge:not(.ok){background:#d33}
+.prompt{color:#555;font-size:12px;max-height:5em;overflow:auto} img,.inline svg{width:100%;max-height:320px;background:#fff;border:1px solid #eee}
+.checks{padding-left:18px;margin:8px 0} .bad{color:#b00} pre{font-size:11px;white-space:pre-wrap;background:#f4f4f4;padding:6px;max-height:8em;overflow:auto}
+footer{font-size:11px;color:#777}
+</style>
+<h1>SVG generation eval</h1>
+<p><b>20/20 ok</b> · failures — none · check pass rate 1.0 ·
+5175 in / 95248 out tokens · est. $4.8142</p>
+<div class=grid><section class="card ok"><header><b>cantilever_deflection</b><span class="badge ok">ok</span> <a href="outputs/cantilever_deflection-0.svg">svg</a></header><p class=prompt>Steel cantilever beam, length 2 m, rectangular section 50 mm wide x 100 mm deep, E = 200 GPa, point load 5 kN at the free tip. Draw the undeformed beam and the deflected shape (exaggerated) from Euler-Bernoulli theory, with the fixed support symbol. Compute and label: the tip deflection in mm, the deflection at mid-length in mm, and the maximum bending stress at the root in MPa. Show the formula used.</p><div class=inline><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 830">
+  <defs>
+    <marker id="loadArrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <polygon points="0,0 10,5 0,10" fill="#172b3a"/>
+    </marker>
+    <marker id="dimArrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse">
+      <polygon points="0,0 8,4 0,8" fill="#526573"/>
+    </marker>
+    <pattern id="hatch" width="9" height="9" patternUnits="userSpaceOnUse">
+      <rect width="9" height="9" fill="#edf1f4"/>
+      <path d="M-2,2 L2,-2 M0,9 L9,0 M7,11 L11,7" fill="none" stroke="#788995" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect x="0" y="0" width="1200" height="830" fill="#ffffff"/>
+
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="40" y="48" font-size="27" font-weight="700" fill="#172b3a">STEEL CANTILEVER — TIP POINT LOAD</text>
+    <text x="40" y="78" font-size="16" fill="#526573">Euler–Bernoulli bending · L = 2 m · b × h = 50 × 100 mm · E = 200 GPa · P = 5 kN</text>
+    <line x1="40" y1="96" x2="1160" y2="96" stroke="#cbd5dc" stroke-width="1"/>
+
+    <!-- Overall length -->
+    <line x1="190" y1="137" x2="190" y2="197" stroke="#84939d" stroke-width="1"/>
+    <line x1="830" y1="137" x2="830" y2="166" stroke="#84939d" stroke-width="1"/>
+    <line x1="190" y1="145" x2="830" y2="145" stroke="#526573" stroke-width="1.2" marker-start="url(#dimArrow)" marker-end="url(#dimArrow)"/>
+    <rect x="455" y="130" width="110" height="27" fill="#ffffff"/>
+    <text x="510" y="149" text-anchor="middle" font-size="17" fill="#172b3a">L = 2.000 m</text>
+
+    <!-- Fixed support and undeformed beam -->
+    <rect x="148" y="204" width="42" height="92" fill="url(#hatch)" stroke="#788995" stroke-width="1"/>
+    <rect x="190" y="234" width="640" height="32" fill="#e8eef2" stroke="#172b3a" stroke-width="2"/>
+    <line x1="190" y1="202" x2="190" y2="298" stroke="#172b3a" stroke-width="4"/>
+    <line x1="180" y1="250" x2="888" y2="250" stroke="#788995" stroke-width="1" stroke-dasharray="8 5"/>
+    <text x="137" y="231" text-anchor="end" font-size="16" fill="#172b3a">Fixed</text>
+    <text x="137" y="252" text-anchor="end" font-size="16" fill="#172b3a">support</text>
+    <text x="137" y="278" text-anchor="end" font-size="14" fill="#526573">x = 0</text>
+    <text x="340" y="216" font-size="16" fill="#172b3a">Undeformed beam</text>
+
+    <!-- Applied tip load -->
+    <line x1="830" y1="176" x2="830" y2="229" stroke="#172b3a" stroke-width="2.5" marker-end="url(#loadArrow)"/>
+    <text x="850" y="191" font-size="18" font-weight="700" fill="#172b3a">P = 5 kN</text>
+    <text x="850" y="212" font-size="14" fill="#526573">downward</text>
+
+    <!-- Exact cubic elastic curve: v/vtip = (3t² − t³)/2.
+         Horizontal scale 320 px/m; vertical displacement magnified 25 times. -->
+    <path d="M190,250 C403.333333,250 616.666667,314 830,378"
+          fill="none" stroke="#bc4f16" stroke-width="3.5"/>
+    <circle cx="510" cy="290" r="4" fill="#bc4f16" stroke="#ffffff" stroke-width="1"/>
+    <circle cx="830" cy="378" r="4.5" fill="#bc4f16" stroke="#ffffff" stroke-width="1"/>
+
+    <!-- Mid-length displacement -->
+    <line x1="510" y1="250" x2="510" y2="290" stroke="#526573" stroke-width="1.2" marker-start="url(#dimArrow)" marker-end="url(#dimArrow)"/>
+    <path d="M514,292 L535,325 L570,325" fill="none" stroke="#bc4f16" stroke-width="1.2"/>
+    <text x="580" y="330" font-size="17" font-weight="700" fill="#bc4f16">v(L/2) = 5.00 mm ↓</text>
+
+    <!-- Tip displacement -->
+    <line x1="835" y1="378" x2="888" y2="378" stroke="#84939d" stroke-width="1"/>
+    <line x1="875" y1="250" x2="875" y2="378" stroke="#526573" stroke-width="1.2" marker-start="url(#dimArrow)" marker-end="url(#dimArrow)"/>
+    <text x="891" y="302" font-size="15" fill="#526573">Tip deflection</text>
+    <text x="891" y="326" font-size="18" font-weight="700" fill="#bc4f16">16.00 mm ↓</text>
+
+    <!-- Root stress callout -->
+    <path d="M203,267 L226,345 L250,345" fill="none" stroke="#526573" stroke-width="1.2"/>
+    <text x="260" y="351" font-size="17" font-weight="700" fill="#172b3a">Root: |σ|max = 120.0 MPa</text>
+    <text x="260" y="374" font-size="14" fill="#526573">Top: tension · Bottom: compression</text>
+
+    <!-- Reference positions -->
+    <line x1="190" y1="403" x2="190" y2="452" stroke="#84939d" stroke-width="1"/>
+    <line x1="510" y1="403" x2="510" y2="452" stroke="#84939d" stroke-width="1"/>
+    <line x1="190" y1="439" x2="510" y2="439" stroke="#526573" stroke-width="1.2" marker-start="url(#dimArrow)" marker-end="url(#dimArrow)"/>
+    <rect x="291" y="425" width="118" height="26" fill="#ffffff"/>
+    <text x="350" y="444" text-anchor="middle" font-size="16" fill="#172b3a">x = L/2 = 1 m</text>
+
+    <line x1="589" y1="422" x2="629" y2="422" stroke="#bc4f16" stroke-width="3.5"/>
+    <text x="641" y="428" font-size="16" fill="#bc4f16">Deflected neutral axis</text>
+    <text x="641" y="451" font-size="14" fill="#526573">Vertical displacement exaggerated ×25</text>
+    <text x="641" y="473" font-size="14" fill="#526573">Displacement labels are actual values.</text>
+
+    <!-- Cross-section inset -->
+    <text x="1060" y="167" text-anchor="middle" font-size="16" font-weight="700" fill="#172b3a">SECTION</text>
+    <text x="1060" y="189" text-anchor="middle" font-size="13" fill="#526573">Viewed along beam</text>
+    <rect x="1035" y="225" width="50" height="100" fill="#e8eef2" stroke="#172b3a" stroke-width="2"/>
+    <line x1="1023" y1="275" x2="1097" y2="275" stroke="#788995" stroke-width="1" stroke-dasharray="5 3"/>
+    <line x1="1035" y1="331" x2="1035" y2="359" stroke="#84939d" stroke-width="1"/>
+    <line x1="1085" y1="331" x2="1085" y2="359" stroke="#84939d" stroke-width="1"/>
+    <line x1="1035" y1="351" x2="1085" y2="351" stroke="#526573" stroke-width="1" marker-start="url(#dimArrow)" marker-end="url(#dimArrow)"/>
+    <text x="1060" y="378" text-anchor="middle" font-size="15" fill="#172b3a">b = 50 mm</text>
+    <line x1="1091" y1="225" x2="1127" y2="225" stroke="#84939d" stroke-width="1"/>
+    <line x1="1091" y1="325" x2="1127" y2="325" stroke="#84939d" stroke-width="1"/>
+    <line x1="1118" y1="225" x2="1118" y2="325" stroke="#526573" stroke-width="1" marker-start="url(#dimArrow)" marker-end="url(#dimArrow)"/>
+    <text x="1143" y="275" transform="rotate(-90 1143 275)" text-anchor="middle" font-size="15" fill="#172b3a">h = 100 mm</text>
+
+    <!-- Calculation panel -->
+    <rect x="40" y="508" width="1120" height="281" rx="4" fill="#f5f7f9" stroke="#cbd5dc" stroke-width="1"/>
+    <line x1="615" y1="530" x2="615" y2="767" stroke="#cbd5dc" stroke-width="1"/>
+
+    <text x="62" y="542" font-size="18" font-weight="700" fill="#172b3a">SECTION PROPERTIES &amp; ELASTIC CURVE</text>
+    <text x="62" y="576" font-size="17" fill="#172b3a">I = bh³/12 = 50 × 100³/12</text>
+    <text x="62" y="603" font-size="17" fill="#172b3a">  = 4.1667 × 10⁶ mm⁴ = 4.1667 × 10⁻⁶ m⁴</text>
+    <text x="62" y="636" font-size="16" fill="#172b3a">E = 200,000 N/mm²;  c = h/2 = 50 mm</text>
+    <text x="62" y="675" font-size="19" font-weight="700" fill="#bc4f16">v(x) = Px²(3L − x)/(6EI)</text>
+    <text x="62" y="704" font-size="15" fill="#526573">x measured from the root; downward v is positive.</text>
+    <text x="62" y="730" font-size="15" fill="#526573">Fixed-end conditions: v(0) = 0, v′(0) = 0.</text>
+    <text x="62" y="756" font-size="15" fill="#526573">Use P = 5,000 N and L = 2,000 mm below.</text>
+
+    <text x="639" y="542" font-size="18" font-weight="700" fill="#172b3a">COMPUTED RESPONSE</text>
+    <text x="639" y="579" font-size="18" fill="#172b3a">v(L) = PL³/(3EI) = 16.00 mm ↓</text>
+    <text x="639" y="618" font-size="18" fill="#172b3a">v(L/2) = 5PL³/(48EI) = 5.00 mm ↓</text>
+    <text x="639" y="657" font-size="17" fill="#172b3a">|M|max = PL = 10.00 kN·m  (at the root)</text>
+    <text x="639" y="696" font-size="18" fill="#172b3a">|σ|max = |M|max c/I = 6PL/(bh²)</text>
+    <text x="639" y="733" font-size="23" font-weight="700" fill="#172b3a">|σ|max = 120.0 MPa</text>
+    <text x="639" y="761" font-size="14" fill="#526573">Maximum stress occurs at the outer fibers of the root.</text>
+
+    <text x="40" y="815" font-size="13" fill="#526573">Assumptions: prismatic, linearly elastic beam; small deflections; ideal fixed support; shear deformation and self-weight neglected.</text>
+  </g>
+</svg></div><ul class=checks><li>6/6 checks passed</li></ul><footer>266 in / 3994 out · 75.718s · finish=stop · ink=None</footer></section><section class="card ok"><header><b>cantilever_mode_shapes</b><span class="badge ok">ok</span> <a href="outputs/cantilever_mode_shapes-0.svg">svg</a></header><p class=prompt>First three bending mode shapes of a uniform steel cantilever (E = 200 GPa, density 7850 kg/m3), length 1 m, square section 10 mm x 10 mm. Draw the three normalised mode shapes stacked and aligned, with the clamped end on the left and node positions marked. Label each mode with its beta_n*L eigenvalue and its natural frequency in Hz.</p><div class=inline><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1030">
+  <defs>
+    <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="8" height="8" fill="#edf0f3"/>
+      <path d="M-2 2 L2-2 M0 8 L8 0 M6 10 L10 6" fill="none" stroke="#87939e" stroke-width="1"/>
+    </pattern>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L8 4 L0 8 Z" fill="#465563"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1200" height="1030" fill="#ffffff"/>
+
+  <g font-family="Arial, Helvetica, sans-serif" fill="#172b3a">
+    <text x="50" y="48" font-size="27" font-weight="700">UNIFORM STEEL CANTILEVER</text>
+    <text x="50" y="77" font-size="18">First three bending modes · Euler–Bernoulli beam</text>
+    <text x="50" y="106" font-size="16">L = 1 m   |   Section: 10 × 10 mm   |   E = 200 GPa   |   ρ = 7850 kg/m³</text>
+    <text x="1150" y="48" text-anchor="end" font-size="14" fill="#536575">CLAMPED–FREE</text>
+    <text x="1150" y="77" text-anchor="end" font-size="14" fill="#536575">Tip-normalised: φₙ(1) = +1</text>
+    <text x="1150" y="106" text-anchor="end" font-size="14" fill="#536575">Equal amplitude scale · displacement exaggerated</text>
+  </g>
+
+  <line x1="50" y1="125" x2="1150" y2="125" stroke="#a9b4bd" stroke-width="1"/>
+
+  <!-- Common longitudinal alignment grid -->
+  <g fill="none" stroke="#e1e6ea" stroke-width="1" stroke-dasharray="3 7">
+    <line x1="210" y1="180" x2="210" y2="835"/>
+    <line x1="420" y1="180" x2="420" y2="835"/>
+    <line x1="630" y1="180" x2="630" y2="835"/>
+    <line x1="840" y1="180" x2="840" y2="835"/>
+    <line x1="1050" y1="180" x2="1050" y2="835"/>
+  </g>
+
+  <!-- Mode 1 -->
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="50" y="163" fill="#172b3a" font-size="20" font-weight="700">MODE 1</text>
+    <text x="260" y="163" fill="#172b3a" font-size="18">β₁L = 1.875104</text>
+    <text x="630" y="163" fill="#172b3a" font-size="18" font-weight="700">f₁ = 8.154 Hz</text>
+
+    <line x1="210" y1="275" x2="1050" y2="275" stroke="#8b99a5" stroke-width="1.2" stroke-dasharray="7 5"/>
+    <rect x="185" y="237" width="25" height="76" fill="url(#hatch)" stroke="#465563" stroke-width="1"/>
+    <line x1="210" y1="237" x2="210" y2="313" stroke="#263c4d" stroke-width="3"/>
+
+    <path d="M210 275
+      C245 275 280 274.286 315 272.980
+      C350 271.675 385 269.778 420 267.412
+      C455 265.045 490 262.210 525 259.023
+      C560 255.835 595 252.297 630 248.517
+      C665 244.737 700 240.716 735 236.550
+      C770 232.383 805 228.073 840 223.695
+      C875 219.317 910 214.872 945 210.411
+      C980 205.949 1015 201.474 1050 197"
+      fill="none" stroke="#126a94" stroke-width="3" stroke-linecap="round"/>
+
+    <circle cx="210" cy="275" r="4" fill="#263c4d" stroke="#263c4d"/>
+    <circle cx="1050" cy="197" r="4" fill="#126a94" stroke="#126a94"/>
+    <text x="1070" y="202" fill="#126a94" font-size="14">φ = +1</text>
+    <text x="1070" y="280" fill="#536575" font-size="14">0</text>
+    <text x="630" y="342" text-anchor="middle" fill="#536575" font-size="15">No internal displacement nodes</text>
+  </g>
+
+  <line x1="50" y1="370" x2="1150" y2="370" stroke="#d9e0e5" stroke-width="1"/>
+
+  <!-- Mode 2 -->
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="50" y="408" fill="#172b3a" font-size="20" font-weight="700">MODE 2</text>
+    <text x="260" y="408" fill="#172b3a" font-size="18">β₂L = 4.694091</text>
+    <text x="630" y="408" fill="#172b3a" font-size="18" font-weight="700">f₂ = 51.099 Hz</text>
+
+    <line x1="210" y1="520" x2="1050" y2="520" stroke="#8b99a5" stroke-width="1.2" stroke-dasharray="7 5"/>
+    <rect x="185" y="482" width="25" height="76" fill="url(#hatch)" stroke="#465563" stroke-width="1"/>
+    <line x1="210" y1="482" x2="210" y2="558" stroke="#263c4d" stroke-width="3"/>
+
+    <path d="M210 520
+      C245 520 280 524.472 315 530.757
+      C350 537.042 385 545.115 420 552.546
+      C455 559.977 490 566.737 525 571.031
+      C560 575.326 595 577.139 630 575.666
+      C665 574.193 700 569.442 735 561.680
+      C770 553.919 805 543.180 840 530.532
+      C875 517.884 910 503.377 945 488.277
+      C980 473.177 1015 457.538 1050 442"
+      fill="none" stroke="#126a94" stroke-width="3" stroke-linecap="round"/>
+
+    <circle cx="210" cy="520" r="4" fill="#263c4d" stroke="#263c4d"/>
+    <circle cx="1050" cy="442" r="4" fill="#126a94" stroke="#126a94"/>
+    <text x="1070" y="447" fill="#126a94" font-size="14">φ = +1</text>
+    <text x="1070" y="525" fill="#536575" font-size="14">0</text>
+
+    <line x1="868.093" y1="527" x2="868.093" y2="573" stroke="#b15d23" stroke-width="1.2"/>
+    <circle cx="868.093" cy="520" r="5" fill="#ffffff" stroke="#b15d23" stroke-width="2"/>
+    <text x="868.093" y="593" text-anchor="middle" fill="#91491b" font-size="15">Node: x/L = 0.78344</text>
+  </g>
+
+  <line x1="50" y1="615" x2="1150" y2="615" stroke="#d9e0e5" stroke-width="1"/>
+
+  <!-- Mode 3 -->
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="50" y="653" fill="#172b3a" font-size="20" font-weight="700">MODE 3</text>
+    <text x="260" y="653" fill="#172b3a" font-size="18">β₃L = 7.854757</text>
+    <text x="630" y="653" fill="#172b3a" font-size="18" font-weight="700">f₃ = 143.078 Hz</text>
+
+    <line x1="210" y1="765" x2="1050" y2="765" stroke="#8b99a5" stroke-width="1.2" stroke-dasharray="7 5"/>
+    <rect x="185" y="727" width="25" height="76" fill="url(#hatch)" stroke="#465563" stroke-width="1"/>
+    <line x1="210" y1="727" x2="210" y2="803" stroke="#263c4d" stroke-width="3"/>
+
+    <path d="M210 765
+      C245 765 280 752.547 315 739.615
+      C350 726.683 385 713.642 420 708.489
+      C455 703.336 490 706.218 525 716.819
+      C560 727.419 595 745.421 630 763.464
+      C665 781.508 700 799.061 735 808.508
+      C770 817.954 805 819.018 840 810.355
+      C875 801.692 910 783.562 945 761.098
+      C980 738.634 1015 712.508 1050 687"
+      fill="none" stroke="#126a94" stroke-width="3" stroke-linecap="round"/>
+
+    <circle cx="210" cy="765" r="4" fill="#263c4d" stroke="#263c4d"/>
+    <circle cx="1050" cy="687" r="4" fill="#126a94" stroke="#126a94"/>
+    <text x="1070" y="692" fill="#126a94" font-size="14">φ = +1</text>
+    <text x="1070" y="770" fill="#536575" font-size="14">0</text>
+
+    <line x1="632.980" y1="772" x2="632.980" y2="826" stroke="#b15d23" stroke-width="1.2"/>
+    <circle cx="632.980" cy="765" r="5" fill="#ffffff" stroke="#b15d23" stroke-width="2"/>
+    <text x="632.980" y="847" text-anchor="middle" fill="#91491b" font-size="15">Node: x/L = 0.50355</text>
+
+    <line x1="938.850" y1="772" x2="938.850" y2="826" stroke="#b15d23" stroke-width="1.2"/>
+    <circle cx="938.850" cy="765" r="5" fill="#ffffff" stroke="#b15d23" stroke-width="2"/>
+    <text x="938.850" y="847" text-anchor="middle" fill="#91491b" font-size="15">Node: x/L = 0.86768</text>
+  </g>
+
+  <!-- Shared beam dimension -->
+  <g stroke="#465563" fill="none" stroke-width="1.1">
+    <line x1="210" y1="835" x2="210" y2="905"/>
+    <line x1="1050" y1="835" x2="1050" y2="905"/>
+    <line x1="212" y1="895" x2="1048" y2="895" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  </g>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#172b3a">
+    <text x="630" y="883" text-anchor="middle" font-size="16">L = 1 000 mm</text>
+    <text x="210" y="922" text-anchor="middle" font-size="14">Clamp · x/L = 0</text>
+    <text x="1050" y="922" text-anchor="middle" font-size="14">Free tip · x/L = 1</text>
+  </g>
+
+  <line x1="50" y1="943" x2="1150" y2="943" stroke="#a9b4bd" stroke-width="1"/>
+
+  <g font-family="Arial, Helvetica, sans-serif" fill="#536575" font-size="14">
+    <text x="50" y="969">A = 1.000 × 10⁻⁴ m²   ·   I = 8.333 × 10⁻¹⁰ m⁴   ·   fₙ = (βₙL)² √[EI/(ρA)] / (2πL²)</text>
+    <text x="50" y="997">Eigenvalues satisfy cosh(βₙL) cos(βₙL) = −1. Clamp: φₙ(0) = φ′ₙ(0) = 0.</text>
+    <circle cx="925" cy="968" r="5" fill="#ffffff" stroke="#b15d23" stroke-width="2"/>
+    <text x="940" y="973" fill="#91491b">Internal node: φₙ = 0</text>
+    <text x="920" y="997">Node positions measured from clamp.</text>
+  </g>
+</svg></div><ul class=checks><li>8/8 checks passed</li></ul><footer>244 in / 8507 out · 189.383s · finish=stop · ink=None</footer></section><section class="card ok"><header><b>capacitor_fringe_field</b><span class="badge ok">ok</span> <a href="outputs/capacitor_fringe_field-0.svg">svg</a></header><p class=prompt>Two parallel conducting plates 100 mm long and 20 mm apart at +100 V and -100 V, in air. Draw the plates and the equipotential lines at -75, -50, -25, 0, +25, +50 and +75 V, including realistic fringing curvature near the plate ends, plus at least six electric field lines perpendicular to the equipotentials. Label the uniform field strength between the plates in kV/m and mark the 0 V equipotential.</p><div class=inline><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900">
+  <defs>
+    <marker id="fieldArrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M 0 0 L 8 4 L 0 8 Z" fill="#157047" stroke="#157047"/>
+    </marker>
+    <marker id="dimArrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse" markerUnits="userSpaceOnUse">
+      <path d="M 0 1 L 7 4 L 0 7" fill="none" stroke="#59636e" stroke-width="1.2"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1200" height="900" fill="#ffffff" stroke="none"/>
+
+  <g font-family="sans-serif">
+    <text x="600" y=" forty" fill="#17212b" font-size="24" text-anchor="middle"></text>
+    <text x="600" y="44" fill="#17212b" font-size="24" text-anchor="middle">Parallel conducting plates in air</text>
+    <text x="600" y="73" fill="#59636e" font-size="15" text-anchor="middle">Equipotentials and electric field lines — finite-end fringing</text>
+  </g>
+
+  <!-- Plate length dimension and extension lines. -->
+  <g fill="none" stroke="#89939d" stroke-width="1">
+    <line x1="300" y1="115" x2="300" y2="380"/>
+    <line x1="900" y1="115" x2="900" y2="380"/>
+    <line x1="300" y1="125" x2="900" y2="125" marker-start="url(#dimArrow)" marker-end="url(#dimArrow)"/>
+  </g>
+  <rect x="550" y="111" width="100" height="27" fill="#ffffff" stroke="none"/>
+  <text x="600" y="131" fill="#394550" font-family="sans-serif" font-size="17" text-anchor="middle">100 mm</text>
+
+  <!-- Positive equipotentials. End curves follow the local conformal
+       geometry of a thin, open-ended parallel-plate capacitor. -->
+  <g fill="none" stroke="#b84d33" stroke-width="1.8">
+    <path d="M 397.8 240.5
+             C 363 274 315 332 300 365
+             C 289 389 292 399 321 403.2
+             C 340 405.9 367 405 400 405
+             L 800 405
+             C 833 405 860 405.9 879 403.2
+             C 908 399 911 389 900 365
+             C 885 332 837 274 802.2 240.5"/>
+    <path d="M 233.2 187.3
+             C 238 246 249 328 261.8 368.1
+             C 271 397 281 412 319.1 417.4
+             C 342 420.6 368 420 400 420
+             L 800 420
+             C 832 420 858 420.6 880.9 417.4
+             C 919 412 929 397 938.2 368.1
+             C 951 328 962 246 966.8 187.3"/>
+    <path d="M 68.6 270.5
+             C 101 301 150 345 185 372
+             C 223 402 258 424 295 430
+             C 329 435.5 360 435 400 435
+             L 800 435
+             C 840 435 871 435.5 905 430
+             C 942 424 977 402 1015 372
+             C 1050 345 1099 301 1131.4 270.5"/>
+  </g>
+
+  <!-- Negative equipotentials: reflection in the symmetry plane. -->
+  <g transform="translate(0 900) scale(1 -1)" fill="none" stroke="#3264ae" stroke-width="1.8">
+    <path d="M 397.8 240.5
+             C 363 274 315 332 300 365
+             C 289 389 292 399 321 403.2
+             C 340 405.9 367 405 400 405
+             L 800 405
+             C 833 405 860 405.9 879 403.2
+             C 908 399 911 389 900 365
+             C 885 332 837 274 802.2 240.5"/>
+    <path d="M 233.2 187.3
+             C 238 246 249 328 261.8 368.1
+             C 271 397 281 412 319.1 417.4
+             C 342 420.6 368 420 400 420
+             L 800 420
+             C 832 420 858 420.6 880.9 417.4
+             C 919 412 929 397 938.2 368.1
+             C 951 328 962 246 966.8 187.3"/>
+    <path d="M 68.6 270.5
+             C 101 301 150 345 185 372
+             C 223 402 258 424 295 430
+             C 329 435.5 360 435 400 435
+             L 800 435
+             C 840 435 871 435.5 905 430
+             C 942 424 977 402 1015 372
+             C 1050 345 1099 301 1131.4 270.5"/>
+  </g>
+
+  <!-- The midplane is exactly the zero-potential equipotential. -->
+  <line x1="60" y1="450" x2="1120" y2="450" stroke="#6b5395" stroke-width="2" stroke-dasharray="9 5"/>
+
+  <!-- Six field lines in the approximately uniform central region. -->
+  <g fill="none" stroke="#157047" stroke-width="1.8" marker-mid="url(#fieldArrow)">
+    <path d="M 390 390 L 390 450 L 390 510"/>
+    <path d="M 470 390 L 470 450 L 470 510"/>
+    <path d="M 550 390 L 550 450 L 550 510"/>
+    <path d="M 650 390 L 650 450 L 650 510"/>
+    <path d="M 730 390 L 730 450 L 730 510"/>
+    <path d="M 810 390 L 810 450 L 810 510"/>
+  </g>
+
+  <!-- Right-hand fringe field lines, orthogonal to the end contours. -->
+  <g fill="none" stroke="#157047" stroke-width="1.8">
+    <path d="M 893 390
+             C 893 407 907 423 907 450
+             C 907 477 893 493 893 510"/>
+    <path d="M 886.3 390
+             C 886.3 376 899 360 919 361
+             C 954 363 990.1 400 990.1 450
+             C 990.1 500 954 537 919 539
+             C 899 540 886.3 524 886.3 510"/>
+    <path d="M 838 390
+             C 838 350 873 296 919 298
+             C 996 301 1069 365 1069 450
+             C 1069 535 996 599 919 602
+             C 873 604 838 550 838 510"/>
+    <line x1="907" y1="443" x2="907" y2="457" marker-end="url(#fieldArrow)"/>
+    <line x1="990.1" y1="443" x2="990.1" y2="457" marker-end="url(#fieldArrow)"/>
+    <line x1="1069" y1="443" x2="1069" y2="457" marker-end="url(#fieldArrow)"/>
+  </g>
+
+  <!-- Left-hand fringe field lines. -->
+  <g transform="translate(1200 0) scale(-1 1)" fill="none" stroke="#157047" stroke-width="1.8">
+    <path d="M 893 390
+             C 893 407 907 423 907 450
+             C 907 477 893 493 893 510"/>
+    <path d="M 886.3 390
+             C 886.3 376 899 360 919 361
+             C 954 363 990.1 400 990.1 450
+             C 990.1 500 954 537 919 539
+             C 899 540 886.3 524 886.3 510"/>
+    <path d="M 838 390
+             C 838 350 873 296 919 298
+             C 996 301 1069 365 1069 450
+             C 1069 535 996 599 919 602
+             C 873 604 838 550 838 510"/>
+    <line x1="907" y1="443" x2="907" y2="457" marker-end="url(#fieldArrow)"/>
+    <line x1="990.1" y1="443" x2="990.1" y2="457" marker-end="url(#fieldArrow)"/>
+    <line x1="1069" y1="443" x2="1069" y2="457" marker-end="url(#fieldArrow)"/>
+  </g>
+
+  <!-- Conducting plates; thickness is symbolic. -->
+  <line x1="300" y1="390" x2="900" y2="390" stroke="#982e20" stroke-width="7"/>
+  <line x1="300" y1="510" x2="900" y2="510" stroke="#234c8b" stroke-width="7"/>
+
+  <g font-family="sans-serif" font-size="18" text-anchor="middle">
+    <text x="600" y="374" fill="#982e20">Conducting plate · +100 V</text>
+    <text x="600" y="541" fill="#234c8b">Conducting plate · −100 V</text>
+  </g>
+
+  <!-- Separation dimension. -->
+  <g fill="none" stroke="#89939d" stroke-width="1">
+    <line x1="911" y1="390" x2="1164" y2="390"/>
+    <line x1="911" y1="510" x2="1164" y2="510"/>
+    <line x1="1155" y1="390" x2="1155" y2="510" marker-start="url(#dimArrow)" marker-end="url(#dimArrow)"/>
+  </g>
+  <text x="1180" y="450" transform="rotate(-90 1180 450)" fill="#394550" font-family="sans-serif" font-size="17" text-anchor="middle">20 mm</text>
+
+  <!-- Contour values positioned at their open ends. -->
+  <g font-family="sans-serif" font-size="17">
+    <text x="808" y="229" fill="#b84d33">+75 V</text>
+    <text x="977" y="188" fill="#b84d33">+50 V</text>
+    <text x="1128" y="258" fill="#b84d33" text-anchor="end">+25 V</text>
+    <text x="808" y="684" fill="#3264ae">−75 V</text>
+    <text x="977" y="723" fill="#3264ae">−50 V</text>
+    <text x="1128" y="653" fill="#3264ae" text-anchor="end">−25 V</text>
+  </g>
+
+  <rect x="953" y="465" width="178" height="26" fill="#ffffff" stroke="none"/>
+  <text x="1042" y="484" fill="#6b5395" font-family="sans-serif" font-size="16" text-anchor="middle">0 V equipotential</text>
+  <path d="M 1101 466 L 1115 450" fill="none" stroke="#6b5395" stroke-width="1.2"/>
+  <circle cx="1115" cy="450" r="2.5" fill="#6b5395" stroke="none"/>
+
+  <g font-family="sans-serif" text-anchor="middle">
+    <text x="600" y="739" fill="#17212b" font-size="21">Uniform central field: E ≈ 10 kV/m</text>
+    <text x="600" y="769" fill="#59636e" font-size="17">ΔV / d = 200 V / 0.020 m = 10,000 V/m</text>
+    <text x="600" y="797" fill="#157047" font-size="16">Direction: from +100 V to −100 V</text>
+  </g>
+
+  <g font-family="sans-serif" font-size="14">
+    <line x1="240" y1="850" x2="290" y2="850" stroke="#b84d33" stroke-width="1.8"/>
+    <text x="302" y="855" fill="#59636e">Equipotentials (25 V steps)</text>
+    <line x1="565" y1="850" x2="615" y2="850" stroke="#157047" stroke-width="1.8" marker-end="url(#fieldArrow)"/>
+    <text x="628" y="855" fill="#59636e">Electric field lines</text>
+    <text x="960" y="855" fill="#59636e" text-anchor="end">End contours schematic</text>
+  </g>
+</svg></div><ul class=checks><li>4/4 checks passed</li></ul><footer>261 in / 5873 out · 127.937s · finish=stop · ink=None</footer></section><section class="card ok"><header><b>composite_wall_conduction</b><span class="badge ok">ok</span> <a href="outputs/composite_wall_conduction-0.svg">svg</a></header><p class=prompt>One-dimensional steady heat conduction through a three-layer wall, inside to outside: 20 mm plaster (k = 0.5 W/m.K), 50 mm insulation (k = 0.04 W/m.K), 100 mm brick (k = 0.7 W/m.K). Inside surface 20 C, outside surface -5 C. Draw the wall section to scale with the layers hatched differently and, aligned above it, the temperature profile through the wall (piecewise linear). Compute and label the heat flux in W/m2 and the temperature at each of the two internal interfaces in C.</p><div class=inline><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 880">
+  <defs>
+    <pattern id="plaster" width="10" height="10" patternUnits="userSpaceOnUse">
+      <rect width="10" height="10" fill="#ffffff"/>
+      <path d="M-2 2 L2 -2 M0 10 L10 0 M8 12 L12 8" fill="none" stroke="#a0a8af" stroke-width="1"/>
+    </pattern>
+    <pattern id="insulation" width="16" height="16" patternUnits="userSpaceOnUse">
+      <rect width="16" height="16" fill="#ffffff"/>
+      <path d="M0 0 L16 16 M0 16 L16 0" fill="none" stroke="#a0a8af" stroke-width="0.8"/>
+    </pattern>
+    <pattern id="brick" width="40" height="24" patternUnits="userSpaceOnUse">
+      <rect width="40" height="24" fill="#ffffff"/>
+      <path d="M0 0 H40 M0 12 H40 M0 24 H40 M20 0 V12 M0 12 V24 M40 12 V24" fill="none" stroke="#a0a8af" stroke-width="1"/>
+    </pattern>
+    <marker id="fluxArrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0 0 L10 4 L0 8 Z" fill="#b64028"/>
+    </marker>
+    <marker id="dimArrow" markerWidth="7" markerHeight="6" refX="0" refY="3" orient="auto-start-reverse">
+      <path d="M7 0 L0 3 L7 6" fill="none" stroke="#263440" stroke-width="1"/>
+    </marker>
+  </defs>
+
+  <rect width="1040" height="880" fill="#ffffff"/>
+
+  <g font-family="Arial, Helvetica, sans-serif" fill="#263440">
+    <text x="60" y="43" font-size="25" font-weight="bold">Steady heat conduction through a three-layer wall</text>
+    <text x="60" y="72" font-size="15">Inside → outside · One-dimensional conduction · Prescribed surface temperatures</text>
+
+    <text x="60" y="109" font-size="15" font-weight="bold">T (°C)</text>
+    <text x="715" y="106" font-size="14" fill="#b64028">Temperature profile</text>
+
+    <!-- Temperature grid: 10 drawing units per degree Celsius. -->
+    <g stroke="#e0e5e9" stroke-width="1">
+      <line x1="145" y1="120" x2="880" y2="120"/>
+      <line x1="145" y1="170" x2="880" y2="170"/>
+      <line x1="145" y1="220" x2="880" y2="220"/>
+      <line x1="145" y1="270" x2="880" y2="270"/>
+      <line x1="145" y1="320" x2="880" y2="320"/>
+      <line x1="145" y1="370" x2="880" y2="370"/>
+    </g>
+    <line x1="145" y1="113" x2="145" y2="380" stroke="#263440" stroke-width="1.3"/>
+    <g stroke="#263440" stroke-width="1">
+      <line x1="139" y1="120" x2="145" y2="120"/>
+      <line x1="139" y1="170" x2="145" y2="170"/>
+      <line x1="139" y1="220" x2="145" y2="220"/>
+      <line x1="139" y1="270" x2="145" y2="270"/>
+      <line x1="139" y1="320" x2="145" y2="320"/>
+      <line x1="139" y1="370" x2="145" y2="370"/>
+    </g>
+    <g font-size="14" text-anchor="end">
+      <text x="131" y="125">20</text>
+      <text x="131" y="175">15</text>
+      <text x="131" y="225">10</text>
+      <text x="131" y="275">5</text>
+      <text x="131" y="325">0</text>
+      <text x="131" y="375">−5</text>
+    </g>
+
+    <!-- Shared horizontal scale: 4 drawing units per millimetre. -->
+    <g stroke="#89959f" stroke-width="1" stroke-dasharray="5 5">
+      <line x1="200" y1="120" x2="200" y2="440"/>
+      <line x1="280" y1="126.9791" x2="280" y2="440"/>
+      <line x1="480" y1="345.0748" x2="480" y2="440"/>
+      <line x1="880" y1="370" x2="880" y2="440"/>
+    </g>
+
+    <polyline points="200,120 280,126.9791 480,345.0748 880,370"
+              fill="none" stroke="#b64028" stroke-width="3"/>
+    <g fill="#ffffff" stroke="#b64028" stroke-width="2">
+      <circle cx="200" cy="120" r="4"/>
+      <circle cx="280" cy="126.9791" r="4"/>
+      <circle cx="480" cy="345.0748" r="4"/>
+      <circle cx="880" cy="370" r="4"/>
+    </g>
+    <g font-size="16" font-weight="bold" fill="#b64028">
+      <text x="200" y="107">20.00 °C</text>
+      <text x="319" y="153">19.30 °C</text>
+      <text x="499" y="329">−2.51 °C</text>
+      <text x="895" y="375">−5.00 °C</text>
+    </g>
+    <path d="M285 129 L308 148" fill="none" stroke="#b64028" stroke-width="1"/>
+    <path d="M484 342 L494 331" fill="none" stroke="#b64028" stroke-width="1"/>
+
+    <rect x="474" y="384" width="272" height="23" fill="#ffffff"/>
+    <text x="610" y="401" text-anchor="middle" font-size="16" font-weight="bold" fill="#b64028">Heat flux q″ = 17.45 W/m²</text>
+    <line x1="355" y1="417" x2="745" y2="417" stroke="#b64028" stroke-width="2" marker-end="url(#fluxArrow)"/>
+
+    <!-- Wall section: 20 mm plaster, 50 mm insulation, 100 mm brick. -->
+    <rect x="200" y="440" width="80" height="210" fill="url(#plaster)" stroke="#263440" stroke-width="1.6"/>
+    <rect x="280" y="440" width="200" height="210" fill="url(#insulation)" stroke="#263440" stroke-width="1.6"/>
+    <rect x="480" y="440" width="400" height="210" fill="url(#brick)" stroke="#263440" stroke-width="1.6"/>
+
+    <g transform="translate(240 545) rotate(-90)" text-anchor="middle">
+      <rect x="-94" y="-26" width="188" height="52" fill="#ffffff"/>
+      <text x="0" y="-5" font-size="16" font-weight="bold">PLASTER</text>
+      <text x="0" y="16" font-size="14">k = 0.5 W/(m·K)</text>
+    </g>
+    <g text-anchor="middle">
+      <rect x="293" y="519" width="174" height="52" fill="#ffffff"/>
+      <text x="380" y="540" font-size="16" font-weight="bold">INSULATION</text>
+      <text x="380" y="561" font-size="14">k = 0.04 W/(m·K)</text>
+      <rect x="593" y="519" width="174" height="52" fill="#ffffff"/>
+      <text x="680" y="540" font-size="16" font-weight="bold">BRICK</text>
+      <text x="680" y="561" font-size="14">k = 0.7 W/(m·K)</text>
+    </g>
+    <text x="184" y="543" text-anchor="end" font-size="15" font-weight="bold">INSIDE</text>
+    <text x="184" y="566" text-anchor="end" font-size="14">20 °C surface</text>
+    <text x="896" y="543" font-size="15" font-weight="bold">OUTSIDE</text>
+    <text x="896" y="566" font-size="14">−5 °C surface</text>
+
+    <!-- Thickness dimensions. -->
+    <g stroke="#263440" stroke-width="1" fill="none">
+      <line x1="200" y1="658" x2="200" y2="746"/>
+      <line x1="280" y1="658" x2="280" y2="706"/>
+      <line x1="480" y1="658" x2="480" y2="706"/>
+      <line x1="880" y1="658" x2="880" y2="746"/>
+      <line x1="200" y1="695" x2="280" y2="695" marker-start="url(#dimArrow)" marker-end="url(#dimArrow)"/>
+      <line x1="280" y1="695" x2="480" y2="695" marker-start="url(#dimArrow)" marker-end="url(#dimArrow)"/>
+      <line x1="480" y1="695" x2="880" y2="695" marker-start="url(#dimArrow)" marker-end="url(#dimArrow)"/>
+      <line x1="200" y1="735" x2="880" y2="735" marker-start="url(#dimArrow)" marker-end="url(#dimArrow)"/>
+    </g>
+    <g font-size="15" text-anchor="middle">
+      <text x="240" y="683">20 mm</text>
+      <text x="380" y="683">50 mm</text>
+      <text x="680" y="683">100 mm</text>
+      <rect x="475" y="721" width="130" height="23" fill="#ffffff"/>
+      <text x="540" y="738">170 mm total</text>
+      <text x="540" y="772" font-size="14">Wall thicknesses drawn to scale; profile uses the same horizontal coordinates.</text>
+    </g>
+
+    <line x1="60" y1="793" x2="980" y2="793" stroke="#c8d0d6" stroke-width="1"/>
+    <text x="60" y="819" font-size="15">R″ = Σ(L/k) = 0.020/0.5 + 0.050/0.04 + 0.100/0.7 = 1.43286 m²·K/W</text>
+    <text x="60" y="845" font-size="15">q″ = [20 − (−5)] / R″ = 17.4477 W/m²;   T(x) = 20 − q″ · R″(0 → x)</text>
+    <text x="980" y="867" text-anchor="end" font-size="12" fill="#586774">Perfect interlayer contact · No internal heat generation</text>
+  </g>
+</svg></div><ul class=checks><li>6/6 checks passed</li></ul><footer>284 in / 3456 out · 66.967s · finish=stop · ink=None</footer></section><section class="card ok"><header><b>dam_hydrostatic</b><span class="badge ok">ok</span> <a href="outputs/dam_hydrostatic-0.svg">svg</a></header><p class=prompt>A vertical concrete dam face retains fresh water 6 m deep. Draw the dam and the water, the triangular hydrostatic pressure distribution on the face with pressure arrows, the resultant force vector at its point of action, and dimension the depth. Compute and label the pressure at the base in kPa, the resultant force per metre width in kN/m, and the depth of the centre of pressure below the surface in m.</p><div class=inline><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 760">
+  <defs>
+    <pattern id="concrete" width="24" height="24" patternUnits="userSpaceOnUse">
+      <rect width="24" height="24" fill="#e6e8eb"/>
+      <path d="M2 8l5-3 M15 18l5 3 M17 4l2 3" fill="none" stroke="#aeb5bd" stroke-width="1"/>
+    </pattern>
+    <marker id="pressureArrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0L8 4L0 8Z" fill="#245ba0"/>
+    </marker>
+    <marker id="forceArrow" markerWidth="17" markerHeight="14" refX="16" refY="7" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0L17 7L0 14Z" fill="#bd302b"/>
+    </marker>
+    <marker id="dimensionArrow" markerWidth="9" markerHeight="8" refX="8" refY="4" orient="auto-start-reverse" markerUnits="userSpaceOnUse">
+      <path d="M0 0L9 4L0 8Z" fill="#303b47"/>
+    </marker>
+  </defs>
+
+  <rect width="1000" height="760" fill="#ffffff"/>
+
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="50" y="48" font-size="26" font-weight="bold" fill="#182c40">Hydrostatic loading on a vertical concrete dam</text>
+    <text x="50" y="78" font-size="16" fill="#536170">Section normal to dam • forces evaluated per metre width into the page</text>
+
+    <!-- Water and concrete section -->
+    <rect x="175" y="150" width="445" height="360" fill="#e7f4fc"/>
+    <rect x="620" y="130" width="140" height="435" fill="url(#concrete)" stroke="#46515b" stroke-width="2"/>
+    <line x1="620" y1="150" x2="620" y2="510" stroke="#182c40" stroke-width="4"/>
+    <line x1="175" y1="150" x2="620" y2="150" stroke="#2581ae" stroke-width="2.5"/>
+    <line x1="175" y1="510" x2="620" y2="510" stroke="#46515b" stroke-width="2"/>
+    <path d="M175 520l10-10 M195 520l10-10 M215 520l10-10 M235 520l10-10 M255 520l10-10 M275 520l10-10 M295 520l10-10 M315 520l10-10 M335 520l10-10 M355 520l10-10 M375 520l10-10 M395 520l10-10 M415 520l10-10 M435 520l10-10 M455 520l10-10 M475 520l10-10 M495 520l10-10 M515 520l10-10 M535 520l10-10 M555 520l10-10 M575 520l10-10 M595 520l10-10"
+          fill="none" stroke="#9ba6af" stroke-width="1"/>
+
+    <text x="190" y="135" font-size="17" fill="#176289">Free surface</text>
+    <text x="190" y="195" font-size="20" font-weight="bold" fill="#176289">Fresh water</text>
+    <text x="190" y="220" font-size="16" fill="#176289">ρ = 1000 kg/m³</text>
+    <text x="690" y="235" text-anchor="middle" font-size="19" font-weight="bold" fill="#394550">Concrete</text>
+    <text x="690" y="260" text-anchor="middle" font-size="19" fill="#394550">dam</text>
+
+    <!-- Triangular pressure diagram: arrow length proportional to depth -->
+    <polygon points="620,150 350,510 620,510" fill="#245ba0" fill-opacity="0.06" stroke="#245ba0" stroke-width="2"/>
+    <g stroke="#245ba0" stroke-width="2" fill="none" marker-end="url(#pressureArrow)">
+      <line x1="586.25" y1="195" x2="616" y2="195"/>
+      <line x1="552.5" y1="240" x2="616" y2="240"/>
+      <line x1="518.75" y1="285" x2="616" y2="285"/>
+      <line x1="485" y1="330" x2="616" y2="330"/>
+      <line x1="417.5" y1="420" x2="616" y2="420"/>
+      <line x1="383.75" y1="465" x2="616" y2="465"/>
+      <line x1="350" y1="510" x2="616" y2="510"/>
+    </g>
+    <text x="540" y="126" font-size="16" fill="#245ba0">p = 0</text>
+    <text x="205" y="283" font-size="18" font-weight="bold" fill="#245ba0">Pressure distribution</text>
+    <text x="205" y="307" font-size="17" fill="#245ba0">p(z) = ρgz</text>
+    <path d="M393 285H450L515 290" fill="none" stroke="#245ba0" stroke-width="1.3"/>
+    <text x="345" y="550" font-size="19" font-weight="bold" fill="#245ba0">p at base = 58.86 kPa</text>
+
+    <!-- Total water depth -->
+    <g stroke="#303b47" stroke-width="1.2" fill="none">
+      <line x1="110" y1="150" x2="166" y2="150"/>
+      <line x1="110" y1="510" x2="166" y2="510"/>
+      <line x1="125" y1="150" x2="125" y2="510" marker-start="url(#dimensionArrow)" marker-end="url(#dimensionArrow)"/>
+    </g>
+    <text x="100" y="330" transform="rotate(-90 100 330)" text-anchor="middle" font-size="20" fill="#303b47">Water depth h = 6.00 m</text>
+
+    <!-- Resultant at z = 4 m below the free surface -->
+    <line x1="420" y1="390" x2="795" y2="390" stroke="#bd302b" stroke-width="5" marker-end="url(#forceArrow)"/>
+    <circle cx="620" cy="390" r="6" fill="#ffffff" stroke="#bd302b" stroke-width="3"/>
+    <text x="442" y="371" font-size="17" font-weight="bold" fill="#bd302b">Resultant R</text>
+    <text x="774" y="427" font-size="18" font-weight="bold" fill="#bd302b">R = 176.58 kN/m</text>
+    <text x="774" y="451" font-size="15" fill="#bd302b">Horizontal, into dam</text>
+
+    <!-- Centre-of-pressure depth -->
+    <g stroke="#303b47" stroke-width="1.2" fill="none">
+      <line x1="770" y1="150" x2="865" y2="150"/>
+      <line x1="805" y1="390" x2="865" y2="390"/>
+      <line x1="850" y1="150" x2="850" y2="390" marker-start="url(#dimensionArrow)" marker-end="url(#dimensionArrow)"/>
+    </g>
+    <text x="880" y="270" transform="rotate(-90 880 270)" text-anchor="middle" font-size="19" fill="#303b47">Centre of pressure: 4.00 m</text>
+
+    <!-- Calculation summary -->
+    <line x1="50" y1="593" x2="950" y2="593" stroke="#bdc7d0" stroke-width="1"/>
+    <text x="50" y="624" font-size="17" fill="#182c40">Base pressure:  pᵦ = ρgh = 1000 × 9.81 × 6 = 58,860 Pa = 58.86 kPa</text>
+    <text x="50" y="655" font-size="17" fill="#182c40">Resultant per metre width:  R = ½ρgh² = ½ × 58.86 × 6 = 176.58 kN/m</text>
+    <text x="50" y="686" font-size="17" fill="#182c40">Centre of pressure:  z = 2h/3 = 4.00 m below surface (2.00 m above base)</text>
+    <text x="50" y="726" font-size="15" fill="#536170">Assumptions: static fresh water; g = 9.81 m/s²; gauge pressures; no downstream water pressure.</text>
+  </g>
+</svg></div><ul class=checks><li>6/6 checks passed</li></ul><footer>245 in / 2704 out · 53.272s · finish=stop · ink=None</footer></section><section class="card ok"><header><b>euler_buckling</b><span class="badge ok">ok</span> <a href="outputs/euler_buckling-0.svg">svg</a></header><p class=prompt>Pinned-pinned steel column (E = 200 GPa), solid circular section 40 mm diameter, length 3 m. Draw the straight column with pin symbols and the first Euler buckling mode shape (half sine) beside it. Compute and label the critical load in kN, the slenderness ratio, and the critical stress in MPa.</p><div class=inline><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 900">
+  <defs>
+    <marker id="loadArrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#172b40"/>
+    </marker>
+    <marker id="dimArrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse" markerUnits="userSpaceOnUse">
+      <path d="M 0 0 L 8 4 L 0 8 Z" fill="#526171"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1100" height="900" fill="#ffffff"/>
+  <text x="45" y="45" font-family="sans-serif" font-size="26" font-weight="bold" fill="#172b40">PINNED–PINNED STEEL COLUMN</text>
+  <text x="45" y="75" font-family="sans-serif" font-size="17" fill="#526171">E = 200 GPa  •  Solid circular section, d = 40 mm  •  L = 3 m  •  Effective-length factor K = 1</text>
+  <line x1="45" y1="94" x2="1055" y2="94" stroke="#bbc4cd" stroke-width="1"/>
+
+  <text x="255" y="122" text-anchor="middle" font-family="sans-serif" font-size="19" font-weight="bold" fill="#172b40">Straight column</text>
+  <text x="760" y="122" text-anchor="middle" font-family="sans-serif" font-size="19" font-weight="bold" fill="#172b40">First Euler buckling mode</text>
+
+  <!-- Length dimension measured between pin centers -->
+  <line x1="90" y1="200" x2="232" y2="200" stroke="#8793a0" stroke-width="1"/>
+  <line x1="90" y1="600" x2="232" y2="600" stroke="#8793a0" stroke-width="1"/>
+  <line x1="105" y1="204" x2="105" y2="596" stroke="#526171" stroke-width="1.4" marker-start="url(#dimArrow)" marker-end="url(#dimArrow)"/>
+  <text x="82" y="400" transform="rotate(-90 82 400)" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#172b40">L = 3 m = 3000 mm</text>
+
+  <!-- Straight member and centerline -->
+  <rect x="245" y="200" width="20" height="400" fill="#e0e6ec" stroke="#172b40" stroke-width="2"/>
+  <line x1="255" y1="188" x2="255" y2="612" stroke="#8793a0" stroke-width="1" stroke-dasharray="9 4 2 4"/>
+
+  <!-- Top pin support -->
+  <polygon points="255,200 234,170 276,170" fill="#ffffff" stroke="#172b40" stroke-width="2"/>
+  <line x1="224" y1="170" x2="286" y2="170" stroke="#172b40" stroke-width="2"/>
+  <path d="M 226 170 l 8 -8 M 238 170 l 8 -8 M 250 170 l 8 -8 M 262 170 l 8 -8 M 274 170 l 8 -8" fill="none" stroke="#526171" stroke-width="1.2"/>
+  <circle cx="255" cy="200" r="6" fill="#ffffff" stroke="#172b40" stroke-width="2"/>
+
+  <!-- Bottom pin support -->
+  <polygon points="255,600 234,630 276,630" fill="#ffffff" stroke="#172b40" stroke-width="2"/>
+  <line x1="224" y1="630" x2="286" y2="630" stroke="#172b40" stroke-width="2"/>
+  <path d="M 234 630 l -8 8 M 246 630 l -8 8 M 258 630 l -8 8 M 270 630 l -8 8 M 282 630 l -8 8" fill="none" stroke="#526171" stroke-width="1.2"/>
+  <circle cx="255" cy="600" r="6" fill="#ffffff" stroke="#172b40" stroke-width="2"/>
+
+  <!-- Axial compression -->
+  <line x1="255" y1="133" x2="255" y2="158" stroke="#172b40" stroke-width="2.5" marker-end="url(#loadArrow)"/>
+  <text x="280" y="152" font-family="sans-serif" font-size="18" fill="#172b40">P</text>
+  <line x1="255" y1="672" x2="255" y2="642" stroke="#172b40" stroke-width="2.5" marker-end="url(#loadArrow)"/>
+  <text x="280" y="664" font-family="sans-serif" font-size="18" fill="#172b40">P</text>
+
+  <!-- Part leaders -->
+  <path d="M 265 200 L 316 223 L 383 223" fill="none" stroke="#526171" stroke-width="1.2"/>
+  <text x="321" y="214" font-family="sans-serif" font-size="16" fill="#172b40">Pin joint</text>
+  <path d="M 265 377 L 319 350 L 429 350" fill="none" stroke="#526171" stroke-width="1.2"/>
+  <text x="323" y="320" font-family="sans-serif" font-size="16" fill="#172b40">Steel column</text>
+  <text x="323" y="341" font-family="sans-serif" font-size="16" fill="#526171">Ø40 mm, solid</text>
+  <path d="M 265 600 L 316 577 L 383 577" fill="none" stroke="#526171" stroke-width="1.2"/>
+  <text x="321" y="568" font-family="sans-serif" font-size="16" fill="#172b40">Pin joint</text>
+
+  <!-- Mode reference axis -->
+  <line x1="730" y1="190" x2="730" y2="610" stroke="#8793a0" stroke-width="1.5" stroke-dasharray="8 6"/>
+  <line x1="686" y1="400" x2="875" y2="400" stroke="#bbc4cd" stroke-width="1" stroke-dasharray="4 5"/>
+
+  <!-- Half-sine centerline, four cubic segments -->
+  <path d="M 730 200
+           C 758.798 233.333, 787.419 266.667, 807.782 300
+           C 828.145 333.333, 840 366.667, 840 400
+           C 840 433.333, 828.145 466.667, 807.782 500
+           C 787.419 533.333, 758.798 566.667, 730 600"
+        fill="none" stroke="#176ba0" stroke-width="4"/>
+
+  <!-- Mode pin supports -->
+  <polygon points="730,200 709,170 751,170" fill="#ffffff" stroke="#172b40" stroke-width="2"/>
+  <line x1="699" y1="170" x2="761" y2="170" stroke="#172b40" stroke-width="2"/>
+  <path d="M 701 170 l 8 -8 M 713 170 l 8 -8 M 725 170 l 8 -8 M 737 170 l 8 -8 M 749 170 l 8 -8" fill="none" stroke="#526171" stroke-width="1.2"/>
+  <circle cx="730" cy="200" r="6" fill="#ffffff" stroke="#172b40" stroke-width="2"/>
+  <polygon points="730,600 709,630 751,630" fill="#ffffff" stroke="#172b40" stroke-width="2"/>
+  <line x1="699" y1="630" x2="761" y2="630" stroke="#172b40" stroke-width="2"/>
+  <path d="M 709 630 l -8 8 M 721 630 l -8 8 M 733 630 l -8 8 M 745 630 l -8 8 M 757 630 l -8 8" fill="none" stroke="#526171" stroke-width="1.2"/>
+  <circle cx="730" cy="600" r="6" fill="#ffffff" stroke="#172b40" stroke-width="2"/>
+  <line x1="730" y1="133" x2="730" y2="158" stroke="#172b40" stroke-width="2.5" marker-end="url(#loadArrow)"/>
+  <text x="756" y="152" font-family="sans-serif" font-size="17" fill="#172b40">P = Pcr</text>
+  <line x1="730" y1="672" x2="730" y2="642" stroke="#172b40" stroke-width="2.5" marker-end="url(#loadArrow)"/>
+  <text x="756" y="664" font-family="sans-serif" font-size="17" fill="#172b40">P = Pcr</text>
+
+  <!-- Deflection annotations -->
+  <line x1="734" y1="400" x2="836" y2="400" stroke="#526171" stroke-width="1.3" marker-start="url(#dimArrow)" marker-end="url(#dimArrow)"/>
+  <text x="784" y="388" text-anchor="middle" font-family="sans-serif" font-size="17" fill="#176ba0">δmax</text>
+  <path d="M 821 330 L 874 290 L 1018 290" fill="none" stroke="#176ba0" stroke-width="1.2"/>
+  <text x="871" y="257" font-family="sans-serif" font-size="16" fill="#176ba0">v(x) = δmax sin(πx/L)</text>
+  <text x="871" y="280" font-family="sans-serif" font-size="14" fill="#526171">x measured from top pin</text>
+  <path d="M 730 499 L 669 474 L 544 474" fill="none" stroke="#8793a0" stroke-width="1.2"/>
+  <text x="544" y="462" font-family="sans-serif" font-size="15" fill="#526171">Undeformed axis</text>
+
+  <text x="255" y="700" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#526171">Pin-to-pin length; schematic member width</text>
+  <text x="760" y="700" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#526171">Half-sine mode • Lateral deflection exaggerated</text>
+  <line x1="45" y1="721" x2="1055" y2="721" stroke="#bbc4cd" stroke-width="1"/>
+
+  <!-- Circular section detail -->
+  <text x="145" y="749" text-anchor="middle" font-family="sans-serif" font-size="17" font-weight="bold" fill="#172b40">SECTION</text>
+  <circle cx="145" cy="789" r="27" fill="#e0e6ec" stroke="#172b40" stroke-width="2"/>
+  <line x1="109" y1="789" x2="181" y2="789" stroke="#8793a0" stroke-width="1" stroke-dasharray="7 3 2 3"/>
+  <line x1="145" y1="755" x2="145" y2="823" stroke="#8793a0" stroke-width="1" stroke-dasharray="7 3 2 3"/>
+  <line x1="118" y1="792" x2="118" y2="843" stroke="#8793a0" stroke-width="1"/>
+  <line x1="172" y1="792" x2="172" y2="843" stroke="#8793a0" stroke-width="1"/>
+  <line x1="121" y1="838" x2="169" y2="838" stroke="#526171" stroke-width="1.2" marker-start="url(#dimArrow)" marker-end="url(#dimArrow)"/>
+  <text x="145" y="863" text-anchor="middle" font-family="sans-serif" font-size="16" fill="#172b40">Ø40 mm</text>
+
+  <!-- Calculation summary -->
+  <rect x="290" y="738" width="765" height="137" rx="4" fill="#f3f6f8" stroke="#bbc4cd" stroke-width="1"/>
+  <text x="308" y="762" font-family="sans-serif" font-size="16" fill="#172b40">A = πd²/4 = 1256.64 mm²     I = πd⁴/64 = 125663.71 mm⁴     r = √(I/A) = 10 mm</text>
+  <text x="308" y="792" font-family="sans-serif" font-size="18" fill="#172b40">Slenderness ratio:   λ = KL/r = 3000/10 = 300</text>
+  <text x="308" y="823" font-family="sans-serif" font-size="18" font-weight="bold" fill="#176ba0">Critical load:   Pcr = π²EI/(KL)² = 27.56 kN</text>
+  <text x="308" y="854" font-family="sans-serif" font-size="18" font-weight="bold" fill="#176ba0">Critical stress:   σcr = Pcr/A = π²E/λ² = 21.93 MPa</text>
+  <text x="1055" y="893" text-anchor="end" font-family="sans-serif" font-size="12" fill="#526171">Ideal, initially straight column • Concentric compression • Elastic Euler buckling • Not to scale</text>
+</svg></div><ul class=checks><li>6/6 checks passed</li></ul><footer>231 in / 4163 out · 74.625s · finish=stop · ink=None</footer></section><section class="card ok"><header><b>ibeam_shear_stress</b><span class="badge ok">ok</span> <a href="outputs/ibeam_shear_stress-0.svg">svg</a></header><p class=prompt>W250x33 steel I-beam section: depth 258 mm, flange width 146 mm, flange thickness 9.1 mm, web thickness 6.1 mm, carrying a vertical shear force of 100 kN. Draw the section and, beside it, the transverse shear stress distribution over the depth from tau = VQ/(I t): parabolic in the web with the jump at the web-flange junction. Compute and label the second moment of area in mm4, the maximum shear stress at the neutral axis in MPa, and the shear stress on the web side of the junction in MPa.</p><div class=inline><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 910">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse" markerUnits="userSpaceOnUse">
+      <path d="M 0 0 L 8 4 L 0 8 Z" fill="#263746"/>
+    </marker>
+    <marker id="forceArrow" markerWidth="12" markerHeight="12" refX="11" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M 0 0 L 12 6 L 0 12 Z" fill="#b4472c"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1200" height="910" fill="#ffffff"/>
+
+  <g font-family="Arial, Helvetica, sans-serif" fill="#263746">
+    <text x="60" y="43" font-size="27" font-weight="700">W250×33 — transverse shear stress</text>
+    <text x="60" y="73" font-size="16">V = 100 kN   •   Dimensions in mm   •   Rectangular flange/web idealization; root fillets neglected</text>
+
+    <!-- Applied vertical shear -->
+    <line x1="300" y1="99" x2="300" y2="155" stroke="#b4472c" stroke-width="3" marker-end="url(#forceArrow)"/>
+    <text x="322" y="126" font-size="18" fill="#b4472c">V = 100 kN</text>
+
+    <!-- Section: scale 1.65 drawing units per mm -->
+    <path d="M 179.55 170
+             H 420.45 V 185.015 H 305.0325
+             V 580.685 H 420.45 V 595.7
+             H 179.55 V 580.685 H 294.9675
+             V 185.015 H 179.55 Z"
+          fill="#dbe2e8" stroke="#263746" stroke-width="2"/>
+
+    <!-- Neutral axis and common depth reference lines -->
+    <line x1="150" y1="382.85" x2="1075" y2="382.85" stroke="#83919d" stroke-width="1" stroke-dasharray="9 5 2 5"/>
+    <text x="161" y="373" font-size="14">N.A.</text>
+    <text x="521" y="373" font-size="14">y = 0</text>
+    <line x1="500" y1="170" x2="1050" y2="170" stroke="#c6ced5" stroke-width="1" stroke-dasharray="5 5"/>
+    <line x1="500" y1="185.015" x2="965" y2="185.015" stroke="#c6ced5" stroke-width="1" stroke-dasharray="5 5"/>
+    <line x1="500" y1="580.685" x2="965" y2="580.685" stroke="#c6ced5" stroke-width="1" stroke-dasharray="5 5"/>
+    <line x1="500" y1="595.7" x2="1050" y2="595.7" stroke="#c6ced5" stroke-width="1" stroke-dasharray="5 5"/>
+
+    <!-- Overall depth dimension -->
+    <line x1="95" y1="170" x2="169" y2="170" stroke="#637380" stroke-width="1"/>
+    <line x1="95" y1="595.7" x2="169" y2="595.7" stroke="#637380" stroke-width="1"/>
+    <line x1="108" y1="170" x2="108" y2="595.7" stroke="#263746" stroke-width="1.2" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+    <text x="88" y="382.85" font-size="17" text-anchor="middle" transform="rotate(-90 88 382.85)">258 mm</text>
+
+    <!-- Flange width dimension -->
+    <line x1="179.55" y1="605" x2="179.55" y2="651" stroke="#637380" stroke-width="1"/>
+    <line x1="420.45" y1="605" x2="420.45" y2="651" stroke="#637380" stroke-width="1"/>
+    <line x1="179.55" y1="636" x2="420.45" y2="636" stroke="#263746" stroke-width="1.2" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+    <text x="300" y="626" font-size="17" text-anchor="middle">146 mm</text>
+
+    <!-- Part and thickness leaders -->
+    <circle cx="395" cy="177.5" r="2.6" fill="#263746"/>
+    <polyline points="395,177.5 457,226 492,226" fill="none" stroke="#263746" stroke-width="1.2"/>
+    <text x="463" y="249" font-size="16">Flange</text>
+    <text x="463" y="271" font-size="16">t<tspan></tspan> = 9.1 mm</text>
+
+    <circle cx="300" cy="456" r="2.6" fill="#263746"/>
+    <polyline points="300,456 414,493 480,493" fill="none" stroke="#263746" stroke-width="1.2"/>
+    <text x="418" y="518" font-size="16">Web</text>
+    <text x="418" y="540" font-size="16">t = 6.1 mm</text>
+
+    <text x="300" y="685" font-size="18" text-anchor="middle" font-weight="700">Steel section</text>
+
+    <!-- Shear stress diagram; horizontal scale 4 units per MPa -->
+    <text x="720" y="121" font-size="19" font-weight="700">τ = VQ / (Iₓ t)</text>
+    <text x="720" y="145" font-size="14">Stress magnitude, aligned with section depth</text>
+
+    <path d="M 720 170
+             Q 724.873 177.5075 729.402 185.015
+             H 945.026
+             Q 1004.6997 283.9325 1004.6997 382.85
+             Q 1004.6997 481.7675 945.026 580.685
+             H 729.402
+             Q 724.873 588.1925 720 595.7 Z"
+          fill="#dceef9" stroke="#1674aa" stroke-width="2.5"/>
+
+    <line x1="720" y1="160" x2="720" y2="609" stroke="#263746" stroke-width="1.4"/>
+    <text x="703" y="166" font-size="14" text-anchor="end">0</text>
+    <text x="703" y="610" font-size="14" text-anchor="end">0</text>
+
+    <!-- Junction and maximum annotations -->
+    <circle cx="945.026" cy="185.015" r="3.5" fill="#1674aa"/>
+    <polyline points="945.026,185.015 976,215 986,215" fill="none" stroke="#1674aa" stroke-width="1.3"/>
+    <text x="990" y="218" font-size="16" fill="#12618e">τj,web = 56.26 MPa</text>
+    <text x="990" y="240" font-size="14">At |y| = 119.9 mm</text>
+
+    <circle cx="1004.6997" cy="382.85" r="3.5" fill="#1674aa"/>
+    <polyline points="1004.6997,382.85 1026,356 1035,356" fill="none" stroke="#1674aa" stroke-width="1.3"/>
+    <text x="1036" y="332" font-size="16" fill="#12618e">τmax = 71.17</text>
+    <text x="1036" y="353" font-size="16" fill="#12618e">MPa</text>
+
+    <text x="765" y="443" font-size="16" fill="#12618e">Parabolic in web</text>
+    <text x="765" y="467" font-size="14">t = 6.1 mm</text>
+
+    <polyline points="822,580.685 850,548 865,548" fill="none" stroke="#1674aa" stroke-width="1.2"/>
+    <text x="755" y="526" font-size="14" fill="#12618e">Jump as t changes:</text>
+    <text x="755" y="547" font-size="14" fill="#12618e">146 → 6.1 mm</text>
+
+    <!-- Stress scale -->
+    <line x1="720" y1="636" x2="1070" y2="636" stroke="#263746" stroke-width="1.2" marker-end="url(#arrow)"/>
+    <g stroke="#263746" stroke-width="1">
+      <line x1="720" y1="630" x2="720" y2="642"/>
+      <line x1="800" y1="630" x2="800" y2="642"/>
+      <line x1="880" y1="630" x2="880" y2="642"/>
+      <line x1="960" y1="630" x2="960" y2="642"/>
+      <line x1="1040" y1="630" x2="1040" y2="642"/>
+    </g>
+    <g font-size="14" text-anchor="middle">
+      <text x="720" y="660">0</text>
+      <text x="800" y="660">20</text>
+      <text x="880" y="660">40</text>
+      <text x="960" y="660">60</text>
+      <text x="1040" y="660">80</text>
+    </g>
+    <text x="1080" y="641" font-size="16">τ (MPa)</text>
+    <text x="885" y="685" font-size="18" text-anchor="middle" font-weight="700">Transverse shear stress</text>
+
+    <!-- Calculation summary -->
+    <rect x="60" y="719" width="1080" height="157" fill="#f4f7f9" stroke="#c6ced5" stroke-width="1"/>
+    <text x="80" y="746" font-size="17" font-weight="700">Section properties and calculated stresses</text>
+    <text x="80" y="775" font-size="17">Iₓ = [146(258)³ − (146 − 6.1)(239.8)³] / 12 = 48,182,172 mm⁴</text>
+    <text x="80" y="803" font-size="16">Qj = (146 × 9.1)(124.45) = 165,344.27 mm³</text>
+    <text x="80" y="830" font-size="16">QNA = Qj + (6.1 / 2)(119.9)² = 209,191.10 mm³</text>
+    <text x="80" y="857" font-size="14">V = 100,000 N; t = 6.1 mm in the web and 146 mm in the flanges. Flange-side junction stress = 2.35 MPa.</text>
+  </g>
+</svg></div><ul class=checks><li>6/6 checks passed</li></ul><footer>287 in / 4176 out · 79.47s · finish=stop · ink=None</footer></section><section class="card ok"><header><b>laplace_plate_isotherms</b><span class="badge ok">ok</span> <a href="outputs/laplace_plate_isotherms-0.svg">svg</a></header><p class=prompt>Two-dimensional steady heat conduction in a 1 m x 1 m square plate with no internal generation. The top edge is held at 100 C and the other three edges at 0 C. Draw the plate and the isotherms at 10, 20, 40, 60 and 80 C as smooth curves that satisfy the boundary conditions (they must meet the top edge and stay off the cold edges), label each isotherm, and label the exact temperature at the plate centre.</p><div class=inline><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 850">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto-start-reverse" markerUnits="userSpaceOnUse">
+      <path d="M 8,0 L 0,4 L 8,8" fill="none" stroke="#475569" stroke-width="1.3"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="960" height="850" fill="#ffffff"/>
+
+  <g font-family="Arial, Helvetica, sans-serif" fill="#172b3a">
+    <text x="460" y="35" text-anchor="middle" font-size="23" font-weight="bold">Steady heat conduction in a square plate</text>
+    <text x="460" y="60" text-anchor="middle" font-size="15">Uniform isotropic material · No internal heat generation · ∇²T = 0</text>
+  </g>
+
+  <rect x="160" y="110" width="600" height="600" fill="#fafcfe"/>
+
+  <!-- Contours approach the two upper corners, where the boundary data jump. -->
+  <g fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="#2563a6" d="
+      M160,110
+      C172.5,188.922 185,258.727 197.5,306.20
+      C210,353.673 222.5,385.648 235,411.159
+      C260,462.181 285,487.883 310,506.94
+      C335,525.996 360,536.835 385,543.90
+      C410,550.965 435,554.02 460,554.02
+      C485,554.02 510,550.965 535,543.90
+      C560,536.835 585,525.996 610,506.94
+      C635,487.883 660,462.181 685,411.159
+      C697.5,385.648 710,353.673 722.5,306.20
+      C735,258.727 747.5,188.922 760,110"/>
+
+    <path stroke="#087e8b" d="
+      M160,110
+      C185,186.942 210,254.889 235,299.66
+      C260,344.431 285,372.86 310,393.83
+      C335,414.80 360,427.997 385,436.60
+      C410,445.203 435,449.10 460,449.10
+      C485,449.10 510,445.203 535,436.60
+      C560,427.997 585,414.80 610,393.83
+      C635,372.86 660,344.431 685,299.66
+      C710,254.889 735,186.942 760,110"/>
+
+    <path stroke="#40813b" d="
+      M160,110
+      C185,144.410 210,178.279 235,206.16
+      C260,234.041 285,256.296 310,273.27
+      C335,290.244 360,302.134 385,309.93
+      C410,317.726 435,321.45 460,321.45
+      C485,321.45 510,317.726 535,309.93
+      C560,302.134 585,290.244 610,273.27
+      C635,256.296 660,234.041 685,206.16
+      C710,178.279 735,144.410 760,110"/>
+
+    <path stroke="#b66b08" d="
+      M160,110
+      C185,128.164 210,146.265 235,162.353
+      C260,178.441 285,192.506 310,203.75
+      C335,214.994 360,223.472 385,229.095
+      C410,234.718 435,237.49 460,237.49
+      C485,237.49 510,234.718 535,229.095
+      C560,223.472 585,214.994 610,203.75
+      C635,192.506 660,178.441 685,162.353
+      C710,146.265 735,128.164 760,110"/>
+
+    <path stroke="#bc4035" d="
+      M160,110
+      C185,118.123 210,126.24 235,133.66
+      C260,141.08 285,147.80 310,153.33
+      C335,158.86 360,163.20 385,166.12
+      C410,169.04 435,170.53 460,170.53
+      C485,170.53 510,169.04 535,166.12
+      C560,163.20 585,158.86 610,153.33
+      C635,147.80 660,141.08 685,133.66
+      C710,126.24 735,118.123 760,110"/>
+  </g>
+
+  <!-- Plate boundary -->
+  <path d="M160,110 V710 H760 V110" fill="none" stroke="#263746" stroke-width="3"/>
+  <line x1="160" y1="110" x2="760" y2="110" stroke="#b42318" stroke-width="4"/>
+
+  <!-- Isotherm labels -->
+  <g font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" stroke="#fafcfe" stroke-width="7" stroke-linejoin="round" paint-order="stroke fill">
+    <text x="460" y="176.5" fill="#bc4035">80 °C</text>
+    <text x="460" y="243.5" fill="#b66b08">60 °C</text>
+    <text x="460" y="327.5" fill="#40813b">40 °C</text>
+    <text x="460" y="455.1" fill="#087e8b">20 °C</text>
+    <text x="460" y="560" fill="#2563a6">10 °C</text>
+  </g>
+
+  <!-- Exact centre temperature -->
+  <line x1="460" y1="394" x2="460" y2="405" stroke="#172b3a" stroke-width="1.2"/>
+  <circle cx="460" cy="410" r="4" fill="#172b3a" stroke="#ffffff" stroke-width="1.2"/>
+  <text x="460" y="382" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="bold" fill="#172b3a">Centre: 25 °C (exact)</text>
+
+  <g font-family="Arial, Helvetica, sans-serif" font-size="19" text-anchor="middle">
+    <text x="460" y="94" fill="#b42318" font-weight="bold">100 °C</text>
+    <text x="124" y="410" transform="rotate(-90 124 410)" fill="#263746">0 °C</text>
+    <text x="796" y="410" transform="rotate(90 796 410)" fill="#263746">0 °C</text>
+    <text x="460" y="740" fill="#263746">0 °C</text>
+  </g>
+
+  <!-- Overall dimensions -->
+  <g fill="none" stroke="#475569" stroke-width="1.1">
+    <line x1="160" y1="722" x2="160" y2="798"/>
+    <line x1="760" y1="722" x2="760" y2="798"/>
+    <line x1="160" y1="782" x2="760" y2="782" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+    <line x1="772" y1="110" x2="866" y2="110"/>
+    <line x1="772" y1="710" x2="866" y2="710"/>
+    <line x1="850" y1="110" x2="850" y2="710" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  </g>
+  <rect x="434" y="768" width="52" height="27" fill="#ffffff"/>
+  <rect x="836" y="384" width="28" height="52" fill="#ffffff"/>
+  <g font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" fill="#334155">
+    <text x="460" y="789">1 m</text>
+    <text x="857" y="410" transform="rotate(-90 857 410)">1 m</text>
+  </g>
+
+  <text x="460" y="829" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#475569">Isotherms meet the top only in the upper-corner limits, where the hot and cold boundary values jump.</text>
+</svg></div><ul class=checks><li>4/4 checks passed</li></ul><footer>262 in / 7860 out · 177.489s · finish=stop · ink=None</footer></section><section class="card ok"><header><b>lbracket_von_mises</b><span class="badge ok">ok</span> <a href="outputs/lbracket_von_mises-0.svg">svg</a></header><p class=prompt>The L-shaped steel bracket (80 mm wide, 60 mm tall, 40 mm deep, 8 mm thick) is bolted down through its base flange and loaded with 2 kN horizontally at the top edge of the upright. Draw the bracket in side elevation with a colour-mapped von Mises stress field as you would expect from a finite element analysis: a stress concentration at the inner corner, low stress at the free tip, and a legend with a MPa scale. Estimate and label the peak stress in MPa and state the bending stress at the base of the upright from simple beam theory as a check.</p><div class=inline><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 840">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0 L9 5 L0 10 Z" fill="#182b40"/>
+    </marker>
+    <marker id="dim" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto-start-reverse">
+      <path d="M8 1 L0 4 L8 7" fill="none" stroke="#526274" stroke-width="1"/>
+    </marker>
+    <pattern id="hatch" width="10" height="10" patternUnits="userSpaceOnUse">
+      <rect width="10" height="10" fill="#edf1f5"/>
+      <path d="M-2 10 L10 -2 M8 12 L12 8" fill="none" stroke="#a0adba" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1120" height="840" fill="#ffffff"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="48" y="46" font-size="25" font-weight="700" fill="#182b40">L-shaped steel bracket — side elevation</text>
+    <text x="48" y="75" font-size="15" fill="#526274">Illustrative von Mises stress contours · engineering estimate, not a solved FE model</text>
+    <line x1="48" y1="94" x2="1072" y2="94" stroke="#cbd3dc" stroke-width="1"/>
+
+    <!-- Dimension lines: geometry is drawn at 6 drawing units per mm. -->
+    <g fill="none" stroke="#526274" stroke-width="1">
+      <line x1="210" y1="190" x2="150" y2="190"/>
+      <line x1="210" y1="550" x2="150" y2="550"/>
+      <line x1="165" y1="190" x2="165" y2="550" marker-start="url(#dim)" marker-end="url(#dim)"/>
+      <line x1="220" y1="182" x2="220" y2="130"/>
+      <line x1="268" y1="182" x2="268" y2="130"/>
+      <line x1="220" y1="143" x2="268" y2="143" marker-start="url(#dim)" marker-end="url(#dim)"/>
+      <line x1="220" y1="580" x2="220" y2="620"/>
+      <line x1="460" y1="558" x2="460" y2="620"/>
+      <line x1="220" y1="603" x2="460" y2="603" marker-start="url(#dim)" marker-end="url(#dim)"/>
+      <line x1="466" y1="502" x2="523" y2="502"/>
+      <line x1="466" y1="550" x2="523" y2="550"/>
+      <line x1="510" y1="502" x2="510" y2="550" marker-start="url(#dim)" marker-end="url(#dim)"/>
+    </g>
+    <text x="142" y="378" font-size="16" text-anchor="middle" transform="rotate(-90 142 378)" fill="#34465a">60 mm overall</text>
+    <text x="244" y="126" text-anchor="middle" font-size="15" fill="#34465a">8 mm</text>
+    <text x="340" y="627" text-anchor="middle" font-size="16" fill="#34465a">40 mm depth</text>
+    <text x="529" y="532" font-size="15" fill="#34465a">8 mm</text>
+
+    <!-- Rigid supporting surface. -->
+    <rect x="197" y="551" width="287" height="27" fill="url(#hatch)" stroke="#8291a2" stroke-width="1"/>
+    <line x1="197" y1="551" x2="484" y2="551" stroke="#34465a" stroke-width="2"/>
+
+    <!-- Bracket silhouette and discrete, illustrative stress contours. -->
+    <path d="M220 190 H268 V490 Q268 502 280 502 H460 V550 H220 Z" fill="#243b8e"/>
+
+    <path d="M220 231 H268 V490 Q268 502 280 502 H449 V516 L414 535 H260 L220 550 Z" fill="#245fbd"/>
+    <path d="M220 286 H268 V490 Q268 502 280 502 H425 L412 516 L370 532 H250 L220 550 Z" fill="#008bd0"/>
+    <path d="M220 334 H268 V490 Q268 502 280 502 H391 L366 518 L311 533 L252 535 L220 550 Z" fill="#00b8ce"/>
+    <path d="M220 384 H268 V490 Q268 502 280 502 H350 L324 519 L280 534 L243 539 L220 550 Z" fill="#36c891"/>
+    <path d="M220 433 H268 V490 Q268 502 280 502 H319 L303 518 L270 531 L239 539 L220 550 Z" fill="#8ed34f"/>
+    <path d="M220 477 L231 487 L238 520 L220 542 Z" fill="#d3dd35"/>
+    <path d="M259 430 L268 442 V490 Q268 502 280 502 H308 L292 517 L277 523 L262 509 L253 477 Z" fill="#d3dd35"/>
+    <path d="M263 455 L268 460 V490 Q268 502 280 502 H300 L286 515 L275 518 L262 503 L257 479 Z" fill="#f5ce32"/>
+    <path d="M265 474 L268 476 V490 Q268 502 280 502 H292 L282 513 L274 511 L264 501 L261 487 Z" fill="#f6a52b"/>
+    <path d="M266 484 L268 484 V490 Q268 502 280 502 H285 L280 509 L274 507 L267 502 L264 494 Z" fill="#ef7428"/>
+    <path d="M267 490 H268 Q268 502 280 502 L279 506 L273 504 L267 499 Z" fill="#df422c"/>
+    <path d="M268 495 Q270 501 277 502 L275 504 L271 502 L268 500 Z" fill="#bd202e"/>
+
+    <!-- Low bending stress near the neutral axis of the upright. -->
+    <path d="M224 231 H264 L258 286 L254 334 L252 384 L250 434 L249 477 L251 501 L257 518 L245 524 L239 509 L239 477 L238 434 L236 384 L234 334 L230 286 Z" fill="#245fbd"/>
+    <path d="M235 231 H253 L249 300 L247 395 L247 475 L250 503 L245 511 L241 500 L241 475 L241 395 L239 300 Z" fill="#243b8e"/>
+    <path d="M220 190 H268 V490 Q268 502 280 502 H460 V550 H220 Z" fill="none" stroke="#182b40" stroke-width="2.2"/>
+
+    <!-- Representative hold-down bolt in side projection. -->
+    <rect x="386" y="497" width="41" height="5" fill="#dbe2e9" stroke="#34465a" stroke-width="1.4"/>
+    <path d="M391 497 V482 H422 V497 Z" fill="#eef2f6" stroke="#34465a" stroke-width="1.5"/>
+    <line x1="399" y1="502" x2="399" y2="571" stroke="#34465a" stroke-width="1.4" stroke-dasharray="5 4"/>
+    <line x1="414" y1="502" x2="414" y2="571" stroke="#34465a" stroke-width="1.4" stroke-dasharray="5 4"/>
+    <line x1="406.5" y1="473" x2="406.5" y2="581" stroke="#8291a2" stroke-width="1" stroke-dasharray="9 3 2 3"/>
+
+    <!-- Applied resultant. -->
+    <line x1="268" y1="190" x2="453" y2="190" stroke="#182b40" stroke-width="3" marker-end="url(#arrow)"/>
+    <text x="342" y="173" text-anchor="middle" font-size="19" font-weight="700" fill="#182b40">F = 2 kN</text>
+    <text x="319" y="216" font-size="13" fill="#526274">Horizontal top-edge resultant</text>
+
+    <!-- Part labels and peak callout. -->
+    <text x="90" y="267" font-size="15" fill="#34465a">Upright</text>
+    <polyline points="145,273 190,273 220,295" fill="none" stroke="#526274" stroke-width="1.2"/>
+    <text x="326" y="578" font-size="14" fill="#34465a">Base flange</text>
+    <text x="455" y="451" font-size="14" fill="#34465a">Hold-down bolt</text>
+    <polyline points="455,459 436,459 418,484" fill="none" stroke="#526274" stroke-width="1.2"/>
+    <text x="331" y="286" font-size="14" fill="#34465a">Low stress at free top</text>
+    <polyline points="332,294 302,294 261,216" fill="none" stroke="#526274" stroke-width="1.2"/>
+
+    <circle cx="273" cy="500" r="4" fill="#ffffff" stroke="#8c1728" stroke-width="1.5"/>
+    <polyline points="277,496 331,391 555,391" fill="none" stroke="#8c1728" stroke-width="1.5"/>
+    <text x="334" y="350" font-size="19" font-weight="700" fill="#8c1728">Peak ≈ 220 MPa</text>
+    <text x="334" y="372" font-size="14" fill="#34465a">Inner-corner concentration</text>
+    <text x="334" y="410" font-size="13" fill="#526274">Assumed root fillet R = 2 mm</text>
+
+    <text x="220" y="654" font-size="14" fill="#34465a">Width b = 80 mm, perpendicular to this view</text>
+
+    <!-- Discrete legend with explicit MPa boundaries. -->
+    <text x="650" y="144" font-size="19" font-weight="700" fill="#182b40">von Mises stress</text>
+    <text x="650" y="169" font-size="15" fill="#526274">σᵥₘ [MPa] · contour bands</text>
+    <g stroke="#ffffff" stroke-width="0.7">
+      <rect x="650" y="195" width="45" height="25" fill="#bd202e"/>
+      <rect x="650" y="220" width="45" height="25" fill="#df422c"/>
+      <rect x="650" y="245" width="45" height="25" fill="#ef7428"/>
+      <rect x="650" y="270" width="45" height="25" fill="#f6a52b"/>
+      <rect x="650" y="295" width="45" height="25" fill="#f5ce32"/>
+      <rect x="650" y="320" width="45" height="25" fill="#d3dd35"/>
+      <rect x="650" y="345" width="45" height="25" fill="#8ed34f"/>
+      <rect x="650" y="370" width="45" height="25" fill="#36c891"/>
+      <rect x="650" y="395" width="45" height="25" fill="#00b8ce"/>
+      <rect x="650" y="420" width="45" height="25" fill="#008bd0"/>
+      <rect x="650" y="445" width="45" height="25" fill="#245fbd"/>
+      <rect x="650" y="470" width="45" height="25" fill="#243b8e"/>
+    </g>
+    <rect x="650" y="195" width="45" height="300" fill="none" stroke="#526274" stroke-width="1"/>
+    <g font-size="13" fill="#34465a">
+      <text x="707" y="200">240</text>
+      <text x="707" y="225">220</text>
+      <text x="707" y="250">200</text>
+      <text x="707" y="275">180</text>
+      <text x="707" y="300">160</text>
+      <text x="707" y="325">140</text>
+      <text x="707" y="350">120</text>
+      <text x="707" y="375">100</text>
+      <text x="707" y="400">80</text>
+      <text x="707" y="425">60</text>
+      <text x="707" y="450">40</text>
+      <text x="707" y="475">20</text>
+      <text x="707" y="500">0</text>
+    </g>
+
+    <text x="780" y="214" font-size="16" font-weight="700" fill="#182b40">Model assumptions</text>
+    <g font-size="14" fill="#526274">
+      <text x="780" y="242">Linear-elastic steel.</text>
+      <text x="780" y="267">Load distributed across width;</text>
+      <text x="780" y="288">no point-load singularity shown.</text>
+      <text x="780" y="321">Base restrained by bolts and</text>
+      <text x="780" y="342">contact with a rigid support.</text>
+      <text x="780" y="375">Bolt layout is schematic;</text>
+      <text x="780" y="396">local hole stresses omitted.</text>
+      <text x="780" y="429">Peak uses an illustrative</text>
+      <text x="780" y="450">concentration factor K ≈ 1.8.</text>
+    </g>
+    <text x="650" y="538" font-size="14" font-weight="700" fill="#8c1728">Peak is geometry- and restraint-dependent.</text>
+    <text x="650" y="561" font-size="14" fill="#526274">A perfectly sharp inner corner is singular:</text>
+    <text x="650" y="582" font-size="14" fill="#526274">no finite, mesh-independent peak exists.</text>
+
+    <!-- Hand calculation: root section is at the flange top. -->
+    <rect x="48" y="685" width="1024" height="121" rx="4" fill="#f3f6f9" stroke="#cbd3dc" stroke-width="1"/>
+    <text x="68" y="711" font-size="17" font-weight="700" fill="#182b40">Simple beam check — nominal bending at the upright root</text>
+    <text x="68" y="736" font-size="15" fill="#34465a">Root at flange top: h = 60 − 8 = 52 mm; M = Fh = 2,000 × 52 = 104,000 N·mm.</text>
+    <text x="68" y="761" font-size="15" fill="#34465a">Z = bt²/6 = 80 × 8²/6 = 853.3 mm³;  σᵦ = M/Z = 121.9 MPa ≈ 122 MPa.</text>
+    <text x="68" y="786" font-size="14" fill="#526274">Outer-fibre nominal stress, excluding fillet concentration; estimated local peak ≈ 1.8 × 122 ≈ 220 MPa. Not a strength certification.</text>
+  </g>
+</svg></div><ul class=checks><li>5/5 checks passed</li></ul><footer>287 in / 4852 out · 101.381s · finish=stop · ink=None</footer></section><section class="card ok"><header><b>mohr_circle</b><span class="badge ok">ok</span> <a href="outputs/mohr_circle-0.svg">svg</a></header><p class=prompt>Plane stress state: sigma_x = 80 MPa, sigma_y = -20 MPa, tau_xy = 30 MPa. Draw Mohr&#x27;s circle to scale with labelled sigma and tau axes, the plotted points for the x and y faces, the centre and radius, and label the principal stresses sigma_1 and sigma_2, the maximum in-plane shear stress, and the principal angle theta_p in degrees. Also draw the element rotated to the principal orientation.</p><div class=inline><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 790">
+  <defs>
+    <marker id="axisArrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M 0 0 L 8 4 L 0 8 Z" fill="#334155"/>
+    </marker>
+    <marker id="stressArrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
+      <path d="M 0 0 L 9 4.5 L 0 9 Z" fill="#0369a1"/>
+    </marker>
+    <marker id="angleArrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <path d="M 0 0 L 6 3 L 0 6 Z" fill="#b45309"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1200" height="790" fill="#ffffff"/>
+
+  <g font-family="Arial, Helvetica, sans-serif" fill="#172033">
+    <text x="30" y="38" font-size="25" font-weight="700">Plane stress — Mohr’s circle and principal orientation</text>
+    <text x="30" y="69" font-size="18">σₓ = 80 MPa     σᵧ = −20 MPa     τₓᵧ = +30 MPa</text>
+    <text x="1170" y="69" font-size="14" text-anchor="end" fill="#475569">Tensile normal stress positive • All stresses in MPa</text>
+
+    <rect x="30" y="94" width="650" height="580" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+    <rect x="710" y="94" width="460" height="580" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="48" y="122" font-size="18" font-weight="700">Mohr’s circle</text>
+    <text x="728" y="122" font-size="18" font-weight="700">Principal stress element</text>
+
+    <!-- Circle geometry: 3.4 drawing units per MPa on both axes. -->
+    <line x1="340" y1="161.748" x2="340" y2="558.252" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="5 5"/>
+    <circle cx="340" cy="360" r="198.252365" fill="none" stroke="#0369a1" stroke-width="2.5"/>
+
+    <!-- Stress axes: sigma = 0 at x = 238; tau = 0 at y = 360. -->
+    <line x1="66" y1="360" x2="640" y2="360" stroke="#334155" stroke-width="1.5" marker-end="url(#axisArrow)"/>
+    <line x1="238" y1="615" x2="238" y2="132" stroke="#334155" stroke-width="1.5" marker-end="url(#axisArrow)"/>
+    <text x="610" y="342" font-size="17">σ</text>
+    <text x="249" y="148" font-size="17">τ</text>
+
+    <g stroke="#64748b" stroke-width="1">
+      <line x1="102" y1="356" x2="102" y2="364"/>
+      <line x1="170" y1="356" x2="170" y2="364"/>
+      <line x1="238" y1="356" x2="238" y2="364"/>
+      <line x1="306" y1="356" x2="306" y2="364"/>
+      <line x1="374" y1="356" x2="374" y2="364"/>
+      <line x1="442" y1="356" x2="442" y2="364"/>
+      <line x1="510" y1="356" x2="510" y2="364"/>
+      <line x1="578" y1="356" x2="578" y2="364"/>
+      <line x1="234" y1="224" x2="242" y2="224"/>
+      <line x1="234" y1="292" x2="242" y2="292"/>
+      <line x1="234" y1="428" x2="242" y2="428"/>
+      <line x1="234" y1="496" x2="242" y2="496"/>
+    </g>
+    <g font-size="12" fill="#475569" text-anchor="middle">
+      <text x="102" y="380">−40</text>
+      <text x="170" y="380">−20</text>
+      <text x="238" y="380">0</text>
+      <text x="306" y="380">20</text>
+      <text x="374" y="380">40</text>
+      <text x="442" y="380">60</text>
+      <text x="510" y="380">80</text>
+      <text x="578" y="380">100</text>
+    </g>
+    <g font-size="12" fill="#475569" text-anchor="end">
+      <text x="226" y="228">40</text>
+      <text x="226" y="296">20</text>
+      <text x="226" y="432">−20</text>
+      <text x="226" y="500">−40</text>
+    </g>
+
+    <!-- Opposite face points form a diameter. -->
+    <line x1="170" y1="462" x2="510" y2="258" stroke="#64748b" stroke-width="1.5" stroke-dasharray="7 4"/>
+    <circle cx="510" cy="258" r="5" fill="#0369a1" stroke="#ffffff" stroke-width="1.3"/>
+    <circle cx="170" cy="462" r="5" fill="#0369a1" stroke="#ffffff" stroke-width="1.3"/>
+    <text x="518" y="235" font-size="16" font-weight="700" fill="#0369a1">X (80, +30)</text>
+    <text x="518" y="254" font-size="13" fill="#475569">x face</text>
+    <text x="77" y="491" font-size="16" font-weight="700" fill="#0369a1">Y (−20, −30)</text>
+    <text x="77" y="510" font-size="13" fill="#475569">y face</text>
+
+    <!-- Radius and centre. -->
+    <line x1="340" y1="360" x2="480.185591" y2="500.185591" stroke="#0369a1" stroke-width="1.6"/>
+    <text x="380" y="389" transform="rotate(45 380 389)" font-size="15" fill="#0369a1">R = 58.31 MPa</text>
+    <circle cx="340" cy="360" r="4.5" fill="#172033"/>
+    <line x1="337" y1="369" x2="324" y2="389" stroke="#64748b" stroke-width="1"/>
+    <text x="332" y="409" text-anchor="end" font-size="15">C (30, 0)</text>
+
+    <!-- Principal stresses and extreme in-plane shear. -->
+    <circle cx="141.747635" cy="360" r="5" fill="#172033" stroke="#ffffff" stroke-width="1"/>
+    <circle cx="538.252365" cy="360" r="5" fill="#172033" stroke="#ffffff" stroke-width="1"/>
+    <line x1="141.748" y1="367" x2="141.748" y2="394" stroke="#64748b" stroke-width="1"/>
+    <line x1="538.252" y1="367" x2="553" y2="394" stroke="#64748b" stroke-width="1"/>
+    <text x="80" y="415" font-size="16" font-weight="700">σ₂ = −28.31</text>
+    <text x="549" y="415" font-size="16" font-weight="700">σ₁ = 88.31</text>
+
+    <circle cx="340" cy="161.747635" r="4.5" fill="#7c3aed"/>
+    <circle cx="340" cy="558.252365" r="4.5" fill="#7c3aed"/>
+    <text x="355" y="151" font-size="16" font-weight="700" fill="#7c3aed">τmax,in-plane = 58.31</text>
+    <text x="355" y="173" font-size="13" fill="#475569">at σ = 30</text>
+    <text x="355" y="584" font-size="15" fill="#7c3aed">τmin,in-plane = −58.31</text>
+
+    <!-- Clockwise Mohr rotation from the x-face point to sigma_1. -->
+    <path d="M 412.029 316.783 A 84 84 0 0 1 424 360" fill="none" stroke="#b45309" stroke-width="1.8" marker-end="url(#angleArrow)"/>
+    <text x="446" y="331" font-size="15" fill="#b45309">2θₚ = 30.96°</text>
+
+    <text x="48" y="623" font-size="13" fill="#475569">Equal axis scale: 20 MPa per tick interval.</text>
+    <text x="48" y="647" font-size="13" fill="#475569">τ plotted positive upward; X → σ₁ is clockwise on this circle.</text>
+
+    <!-- Principal element, physically rotated 15.4819 degrees CCW. -->
+    <g transform="translate(940 360) rotate(-15.481878)">
+      <rect x="-72" y="-72" width="144" height="144" fill="#f0f9ff" stroke="#0369a1" stroke-width="2.2"/>
+      <line x1="77" y1="0" x2="165" y2="0" stroke="#0369a1" stroke-width="2.5" marker-end="url(#stressArrow)"/>
+      <line x1="-77" y1="0" x2="-165" y2="0" stroke="#0369a1" stroke-width="2.5" marker-end="url(#stressArrow)"/>
+      <line x1="0" y1="-154" x2="0" y2="-78" stroke="#0369a1" stroke-width="2.5" marker-end="url(#stressArrow)"/>
+      <line x1="0" y1="154" x2="0" y2="78" stroke="#0369a1" stroke-width="2.5" marker-end="url(#stressArrow)"/>
+      <line x1="-34" y1="0" x2="55" y2="0" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4 3"/>
+      <line x1="0" y1="34" x2="0" y2="-55" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4 3"/>
+    </g>
+
+    <line x1="940" y1="360" x2="1130" y2="360" stroke="#64748b" stroke-width="1.2" stroke-dasharray="5 4" marker-end="url(#axisArrow)"/>
+    <circle cx="940" cy="360" r="3" fill="#172033"/>
+    <text x="1137" y="365" font-size="16">x</text>
+    <text x="1110" y="315" font-size="16" fill="#0369a1">x′</text>
+    <text x="877" y="225" font-size="16" fill="#0369a1">y′</text>
+
+    <path d="M 1055 360 A 115 115 0 0 0 1050.827 329.304" fill="none" stroke="#b45309" stroke-width="1.8" marker-end="url(#angleArrow)"/>
+    <text x="1048" y="390" font-size="15" fill="#b45309">θₚ = 15.48°</text>
+    <text x="1048" y="410" font-size="13" fill="#b45309">CCW</text>
+
+    <text x="1004" y="266" font-size="17" font-weight="700" fill="#0369a1">σ₁ = +88.31</text>
+    <text x="1004" y="287" font-size="13" fill="#475569">tension</text>
+    <text x="924" y="183" font-size="17" font-weight="700" fill="#0369a1">σ₂ = −28.31</text>
+    <text x="924" y="204" font-size="13" fill="#475569">compression</text>
+
+    <text x="940" y="560" text-anchor="middle" font-size="18" font-weight="700">θₚ = 15.48° CCW from x to x′</text>
+    <text x="940" y="591" text-anchor="middle" font-size="17">σx′ = σ₁     σy′ = σ₂     τx′y′ = 0</text>
+    <text x="940" y="625" text-anchor="middle" font-size="13" fill="#475569">Outward arrows: tension • Inward arrows: compression</text>
+    <text x="940" y="647" text-anchor="middle" font-size="13" fill="#475569">Orientation to scale; stress-arrow lengths schematic.</text>
+
+    <text x="30" y="713" font-size="17">C = (σₓ + σᵧ)/2 = 30 MPa;    R = √[((σₓ − σᵧ)/2)² + τₓᵧ²] = √3400 = 58.31 MPa</text>
+    <text x="30" y="748" font-size="17">σ₁,₂ = C ± R;    τmax,in-plane = R;    θₚ = ½ atan2(2τₓᵧ, σₓ − σᵧ) = ½ atan2(60, 100) = 15.48°</text>
+  </g>
+</svg></div><ul class=checks><li>7/7 checks passed</li></ul><footer>256 in / 4936 out · 87.188s · finish=stop · ink=None</footer></section><section class="card ok"><header><b>pin_fin_temperature</b><span class="badge ok">ok</span> <a href="outputs/pin_fin_temperature-0.svg">svg</a></header><p class=prompt>Aluminium pin fin (k = 200 W/m.K), diameter 5 mm, length 50 mm, base at 100 C, ambient 20 C, convection coefficient 50 W/m2.K, adiabatic tip. Draw the fin in section with convection arrows and, aligned below it, the temperature distribution along the fin from the one-dimensional fin equation. Label the fin parameter m in 1/m, the tip temperature in C, the fin efficiency in percent, and the heat dissipated in W.</p><div class=inline><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 910">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse" markerUnits="userSpaceOnUse">
+      <path d="M 0 0 L 8 4 L 0 8 Z" fill="#263746" stroke="#263746"/>
+    </marker>
+    <marker id="convection" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M 0 0 L 9 4.5 L 0 9 Z" fill="#247a9b" stroke="#247a9b"/>
+    </marker>
+    <pattern id="hatch" width="10" height="10" patternUnits="userSpaceOnUse">
+      <rect width="10" height="10" fill="#eef1f3" stroke="none"/>
+      <path d="M -2 2 L 2 -2 M 0 10 L 10 0 M 8 12 L 12 8" fill="none" stroke="#a4adb5" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect x="0" y="0" width="1120" height="910" fill="#ffffff" stroke="none"/>
+
+  <g font-family="Arial, Helvetica, sans-serif" fill="#263746" stroke="none">
+    <text x="40" y="43" font-size="25" font-weight="bold">ALUMINIUM PIN FIN</text>
+    <text x="40" y="70" font-size="15">Longitudinal section • steady one-dimensional conduction • adiabatic tip</text>
+    <text x="1080" y="43" font-size="15" text-anchor="end">k = 200 W/(m·K)</text>
+  </g>
+  <line x1="40" y1="84" x2="1080" y2="84" stroke="#bcc5cc" stroke-width="1"/>
+
+  <!-- Length dimension -->
+  <g fill="none" stroke="#263746" stroke-width="1">
+    <line x1="230" y1="135" x2="230" y2="206"/>
+    <line x1="910" y1="135" x2="910" y2="206"/>
+    <line x1="230" y1="145" x2="910" y2="145" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  </g>
+  <text x="570" y="132" font-family="Arial, Helvetica, sans-serif" font-size="16" text-anchor="middle" fill="#263746" stroke="none">L = 50 mm</text>
+  <text x="570" y="108" font-family="Arial, Helvetica, sans-serif" font-size="16" text-anchor="middle" fill="#247a9b" stroke="none">Ambient: T∞ = 20 °C   |   h = 50 W/(m²·K)</text>
+
+  <!-- Isothermal support and axial section -->
+  <rect x="174" y="184" width="56" height="141" fill="url(#hatch)" stroke="#263746" stroke-width="1.5"/>
+  <rect x="230" y="215" width="680" height="68" fill="#dce3e8" stroke="#263746" stroke-width="2"/>
+  <line x1="230" y1="184" x2="230" y2="325" stroke="#263746" stroke-width="3"/>
+  <line x1="214" y1="249" x2="928" y2="249" stroke="#87939e" stroke-width="1" stroke-dasharray="12 4 2 4"/>
+
+  <g font-family="Arial, Helvetica, sans-serif" fill="#263746" stroke="none">
+    <text x="42" y="223" font-size="16" font-weight="bold">Base</text>
+    <text x="42" y="247" font-size="16">Tb = 100 °C</text>
+    <text x="570" y="239" font-size="16" text-anchor="middle">Aluminium • circular pin</text>
+    <text x="230" y="355" font-size="14" text-anchor="middle">x = 0</text>
+  </g>
+  <line x1="137" y1="242" x2="174" y2="242" stroke="#263746" stroke-width="1"/>
+
+  <!-- Convection from the lateral surface only -->
+  <g fill="none" stroke="#247a9b" stroke-width="2" marker-end="url(#convection)">
+    <path d="M 340 207 L 340 164"/>
+    <path d="M 470 207 L 470 164"/>
+    <path d="M 600 207 L 600 164"/>
+    <path d="M 730 207 L 730 164"/>
+    <path d="M 860 207 L 860 164"/>
+    <path d="M 340 291 L 340 334"/>
+    <path d="M 470 291 L 470 334"/>
+    <path d="M 600 291 L 600 334"/>
+    <path d="M 730 291 L 730 334"/>
+    <path d="M 860 291 L 860 334"/>
+  </g>
+  <text x="570" y="357" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" fill="#247a9b" stroke="none">Convection to ambient along the lateral surface</text>
+
+  <!-- Diameter and insulated-tip callout -->
+  <g fill="none" stroke="#263746" stroke-width="1">
+    <line x1="919" y1="215" x2="978" y2="215"/>
+    <line x1="919" y1="283" x2="978" y2="283"/>
+    <line x1="964" y1="215" x2="964" y2="283" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+    <path d="M 910 266 L 931 307 L 1028 307"/>
+  </g>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#263746" stroke="none">
+    <text x="987" y="254" font-size="16">⌀ 5 mm</text>
+    <text x="943" y="329" font-size="15" font-weight="bold">Adiabatic tip</text>
+    <text x="943" y="351" font-size="14">dT/dx at L = 0</text>
+  </g>
+
+  <!-- Aligned temperature plot -->
+  <text x="40" y="403" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="bold" fill="#263746" stroke="none">TEMPERATURE DISTRIBUTION</text>
+
+  <g fill="none" stroke="#dce2e7" stroke-width="1">
+    <line x1="230" y1="445" x2="910" y2="445"/>
+    <line x1="230" y1="505" x2="910" y2="505"/>
+    <line x1="230" y1="565" x2="910" y2="565"/>
+    <line x1="230" y1="625" x2="910" y2="625"/>
+    <line x1="366" y1="445" x2="366" y2="685"/>
+    <line x1="502" y1="445" x2="502" y2="685"/>
+    <line x1="638" y1="445" x2="638" y2="685"/>
+    <line x1="774" y1="445" x2="774" y2="685"/>
+  </g>
+  <g fill="none" stroke="#a6b1ba" stroke-width="1" stroke-dasharray="5 5">
+    <line x1="230" y1="368" x2="230" y2="425"/>
+    <line x1="910" y1="368" x2="910" y2="685"/>
+  </g>
+  <line x1="230" y1="685" x2="910" y2="685" stroke="#247a9b" stroke-width="1.5" stroke-dasharray="7 5"/>
+  <g fill="none" stroke="#263746" stroke-width="1.4">
+    <line x1="230" y1="699" x2="230" y2="426" marker-end="url(#arrow)"/>
+    <line x1="230" y1="697" x2="932" y2="697" marker-end="url(#arrow)"/>
+    <path d="M 224 445 H 230 M 224 505 H 230 M 224 565 H 230 M 224 625 H 230 M 224 685 H 230"/>
+    <path d="M 230 697 V 703 M 366 697 V 703 M 502 697 V 703 M 638 697 V 703 M 774 697 V 703 M 910 697 V 703"/>
+  </g>
+
+  <g font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#263746" stroke="none">
+    <text x="179" y="431" font-size="16">T (°C)</text>
+    <text x="213" y="450" text-anchor="end">100</text>
+    <text x="213" y="510" text-anchor="end">80</text>
+    <text x="213" y="570" text-anchor="end">60</text>
+    <text x="213" y="630" text-anchor="end">40</text>
+    <text x="213" y="690" text-anchor="end">20</text>
+    <text x="230" y="723" text-anchor="middle">0</text>
+    <text x="366" y="723" text-anchor="middle">10</text>
+    <text x="502" y="723" text-anchor="middle">20</text>
+    <text x="638" y="723" text-anchor="middle">30</text>
+    <text x="774" y="723" text-anchor="middle">40</text>
+    <text x="910" y="723" text-anchor="middle">50</text>
+    <text x="950" y="703" font-size="16">x (mm)</text>
+    <text x="929" y="679" fill="#247a9b">T∞ = 20 °C</text>
+  </g>
+
+  <!-- Fin-equation curve: T = 20 + 80 cosh[m(L-x)] / cosh(mL) -->
+  <path d="M 230 445
+           C 343.333 462.221, 456.667 474.491, 570 482.590
+           C 683.333 490.689, 796.667 494.613, 910 494.613"
+        fill="none" stroke="#c14d24" stroke-width="3"/>
+  <circle cx="230" cy="445" r="4" fill="#c14d24" stroke="#c14d24"/>
+  <circle cx="910" cy="494.613" r="4" fill="#c14d24" stroke="#c14d24"/>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#c14d24" stroke="none">
+    <text x="250" y="433" font-size="15">100 °C</text>
+    <text x="932" y="482" font-size="16" font-weight="bold">83.46 °C</text>
+    <text x="932" y="505" font-size="14">Tip temperature</text>
+    <text x="590" y="548" font-size="16">T(x) — adiabatic-tip solution</text>
+  </g>
+
+  <text x="230" y="760" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#263746" stroke="none">T(x) = T∞ + (Tb − T∞) cosh[m(L − x)] / cosh(mL)</text>
+  <text x="230" y="786" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#596975" stroke="none">Ac = πd²/4;  P = πd;  x and L in metres in the equation;  mL = 0.7071</text>
+
+  <!-- Calculated engineering quantities -->
+  <g fill="#f4f6f8" stroke="#ccd4db" stroke-width="1">
+    <rect x="40" y="814" width="247" height="72"/>
+    <rect x="304" y="814" width="247" height="72"/>
+    <rect x="568" y="814" width="247" height="72"/>
+    <rect x="832" y="814" width="248" height="72"/>
+  </g>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#263746" stroke="none" text-anchor="middle">
+    <text x="163.5" y="839" font-size="14">m = √[hP/(kAc)]</text>
+    <text x="163.5" y="871" font-size="23" font-weight="bold">14.14 1/m</text>
+    <text x="427.5" y="839" font-size="14">Tip temperature, T(L)</text>
+    <text x="427.5" y="871" font-size="23" font-weight="bold">83.46 °C</text>
+    <text x="691.5" y="839" font-size="14">ηf = tanh(mL)/(mL)</text>
+    <text x="691.5" y="871" font-size="23" font-weight="bold">86.11%</text>
+    <text x="956" y="839" font-size="14">Q = ηf hPL(Tb − T∞)</text>
+    <text x="956" y="871" font-size="23" font-weight="bold">2.705 W</text>
+  </g>
+</svg></div><ul class=checks><li>7/7 checks passed</li></ul><footer>265 in / 4288 out · 85.404s · finish=stop · ink=None</footer></section><section class="card ok"><header><b>plate_hole_kirsch</b><span class="badge ok">ok</span> <a href="outputs/plate_hole_kirsch-0.svg">svg</a></header><p class=prompt>A large thin plate with a central circular hole of radius 10 mm under remote uniaxial tension of 100 MPa along x. Draw the plate with the hole and the applied stress arrows, and plot the tangential stress sigma_theta along the y-axis from the hole edge out to 4 radii (Kirsch solution). Label the stress at the hole edge on the y-axis, at 2 radii, and the stress at the hole edge on the x-axis (theta = 0). Mark the stress concentration factor.</p><div class=inline><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 790">
+  <defs>
+    <marker id="loadArrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M 0 0 L 9 5 L 0 10 Z" fill="#245c91"/>
+    </marker>
+    <marker id="axisArrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M 0 0 L 8 4 L 0 8 Z" fill="#586675"/>
+    </marker>
+    <marker id="dimArrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M 0 0 L 7 3.5 L 0 7 Z" fill="#354454"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1280" height="790" fill="#ffffff"/>
+  <text x="48" y="49" font-family="sans-serif" font-size="27" font-weight="700" fill="#182b3b">Circular hole in a thin plate — Kirsch stress field</text>
+  <text x="48" y="80" font-family="sans-serif" font-size="16" fill="#526170">Hole radius a = 10 mm  •  Remote uniaxial tension σ∞ = 100 MPa along x  •  Tensile stress positive</text>
+  <line x1="48" y1="103" x2="1232" y2="103" stroke="#cbd3db" stroke-width="1"/>
+
+  <text x="48" y="140" font-family="sans-serif" font-size="19" font-weight="700" fill="#182b3b">Loading and hole-edge stresses</text>
+  <text x="708" y="140" font-family="sans-serif" font-size="19" font-weight="700" fill="#182b3b">Tangential stress on the positive y-axis</text>
+  <text x="708" y="167" font-family="sans-serif" font-size="15" fill="#526170">θ = π/2; radial distance r measured from the hole center</text>
+
+  <!-- Plate and traction-free circular hole -->
+  <rect x="110" y="210" width="410" height="360" fill="#edf2f6" stroke="#354454" stroke-width="2"/>
+  <circle cx="315" cy="390" r="38" fill="#ffffff" stroke="#182b3b" stroke-width="2.5"/>
+
+  <!-- Remote tensile loading -->
+  <text x="88" y="191" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700" fill="#245c91">100 MPa</text>
+  <text x="551" y="191" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700" fill="#245c91">100 MPa</text>
+  <line x1="110" y1="245" x2="48" y2="245" stroke="#245c91" stroke-width="2.2" marker-end="url(#loadArrow)"/>
+  <line x1="110" y1="310" x2="48" y2="310" stroke="#245c91" stroke-width="2.2" marker-end="url(#loadArrow)"/>
+  <line x1="110" y1="375" x2="48" y2="375" stroke="#245c91" stroke-width="2.2" marker-end="url(#loadArrow)"/>
+  <line x1="110" y1="440" x2="48" y2="440" stroke="#245c91" stroke-width="2.2" marker-end="url(#loadArrow)"/>
+  <line x1="110" y1="535" x2="48" y2="535" stroke="#245c91" stroke-width="2.2" marker-end="url(#loadArrow)"/>
+  <line x1="520" y1="245" x2="582" y2="245" stroke="#245c91" stroke-width="2.2" marker-end="url(#loadArrow)"/>
+  <line x1="520" y1="310" x2="582" y2="310" stroke="#245c91" stroke-width="2.2" marker-end="url(#loadArrow)"/>
+  <line x1="520" y1="375" x2="582" y2="375" stroke="#245c91" stroke-width="2.2" marker-end="url(#loadArrow)"/>
+  <line x1="520" y1="440" x2="582" y2="440" stroke="#245c91" stroke-width="2.2" marker-end="url(#loadArrow)"/>
+  <line x1="520" y1="535" x2="582" y2="535" stroke="#245c91" stroke-width="2.2" marker-end="url(#loadArrow)"/>
+
+  <!-- Coordinate axes and sampled radial line -->
+  <line x1="88" y1="390" x2="609" y2="390" stroke="#8794a1" stroke-width="1" stroke-dasharray="9 4 2 4" marker-end="url(#axisArrow)"/>
+  <line x1="315" y1="592" x2="315" y2="182" stroke="#8794a1" stroke-width="1" stroke-dasharray="9 4 2 4" marker-end="url(#axisArrow)"/>
+  <text x="607" y="412" font-family="sans-serif" font-size="17" font-style="italic" fill="#354454">x</text>
+  <text x="326" y="191" font-family="sans-serif" font-size="17" font-style="italic" fill="#354454">y</text>
+  <text x="295" y="409" font-family="sans-serif" font-size="13" fill="#354454">O</text>
+  <line x1="315" y1="352" x2="315" y2="238" stroke="#087f8c" stroke-width="3"/>
+  <line x1="308" y1="238" x2="322" y2="238" stroke="#087f8c" stroke-width="2"/>
+  <line x1="308" y1="314" x2="322" y2="314" stroke="#087f8c" stroke-width="2"/>
+  <text x="328" y="243" font-family="sans-serif" font-size="14" fill="#087f8c">r = 4a</text>
+  <text x="328" y="319" font-family="sans-serif" font-size="14" fill="#087f8c">2a</text>
+  <text x="139" y="239" font-family="sans-serif" font-size="14" fill="#526170">Thin plate</text>
+
+  <!-- Hole-edge stress callouts -->
+  <circle cx="315" cy="352" r="4" fill="#087f8c"/>
+  <polyline points="315,352 258,334 147,334" fill="none" stroke="#087f8c" stroke-width="1.3"/>
+  <text x="140" y="295" font-family="sans-serif" font-size="17" font-weight="700" fill="#087f8c">σθ = 300 MPa</text>
+  <text x="140" y="318" font-family="sans-serif" font-size="14" fill="#087f8c">r = a, θ = π/2</text>
+
+  <circle cx="353" cy="390" r="4" fill="#a44837"/>
+  <polyline points="353,390 397,365 486,365" fill="none" stroke="#a44837" stroke-width="1.3"/>
+  <text x="390" y="337" font-family="sans-serif" font-size="17" font-weight="700" fill="#a44837">−100 MPa</text>
+  <text x="399" y="356" font-family="sans-serif" font-size="13" fill="#a44837">σθ(a, 0)</text>
+
+  <!-- Radius dimension -->
+  <line x1="315" y1="390" x2="341.87" y2="416.87" stroke="#354454" stroke-width="1.2" marker-end="url(#dimArrow)"/>
+  <polyline points="341.87,416.87 380,473 455,473" fill="none" stroke="#354454" stroke-width="1"/>
+  <text x="381" y="495" font-family="sans-serif" font-size="16" fill="#182b3b">a = 10 mm</text>
+  <text x="139" y="551" font-family="sans-serif" font-size="13" fill="#526170">Traction-free hole boundary</text>
+  <text x="110" y="615" font-family="sans-serif" font-size="14" fill="#526170">Schematic: plate dimensions ≫ a; finite-edge effects neglected.</text>
+
+  <!-- Plot grid: x = 770 + 140(r/a - 1); y = 550 - σθ [MPa] -->
+  <text x="710" y="207" font-family="sans-serif" font-size="16" fill="#182b3b">σθ (MPa)</text>
+  <line x1="770" y1="250" x2="1190" y2="250" stroke="#dce2e7" stroke-width="1"/>
+  <line x1="770" y1="350" x2="1190" y2="350" stroke="#dce2e7" stroke-width="1"/>
+  <line x1="770" y1="450" x2="1190" y2="450" stroke="#dce2e7" stroke-width="1"/>
+  <line x1="910" y1="220" x2="910" y2="550" stroke="#e4e9ed" stroke-width="1"/>
+  <line x1="1050" y1="220" x2="1050" y2="550" stroke="#e4e9ed" stroke-width="1"/>
+  <line x1="1190" y1="220" x2="1190" y2="550" stroke="#e4e9ed" stroke-width="1"/>
+
+  <line x1="770" y1="550" x2="770" y2="218" stroke="#586675" stroke-width="1.5" marker-end="url(#axisArrow)"/>
+  <line x1="770" y1="550" x2="1212" y2="550" stroke="#586675" stroke-width="1.5" marker-end="url(#axisArrow)"/>
+  <line x1="764" y1="550" x2="770" y2="550" stroke="#586675" stroke-width="1"/>
+  <line x1="764" y1="450" x2="770" y2="450" stroke="#586675" stroke-width="1"/>
+  <line x1="764" y1="350" x2="770" y2="350" stroke="#586675" stroke-width="1"/>
+  <line x1="764" y1="250" x2="770" y2="250" stroke="#586675" stroke-width="1"/>
+  <text x="755" y="555" text-anchor="end" font-family="sans-serif" font-size="14" fill="#354454">0</text>
+  <text x="755" y="455" text-anchor="end" font-family="sans-serif" font-size="14" fill="#354454">100</text>
+  <text x="755" y="355" text-anchor="end" font-family="sans-serif" font-size="14" fill="#354454">200</text>
+  <text x="755" y="255" text-anchor="end" font-family="sans-serif" font-size="14" fill="#354454">300</text>
+
+  <line x1="770" y1="550" x2="770" y2="557" stroke="#586675" stroke-width="1"/>
+  <line x1="910" y1="550" x2="910" y2="557" stroke="#586675" stroke-width="1"/>
+  <line x1="1050" y1="550" x2="1050" y2="557" stroke="#586675" stroke-width="1"/>
+  <line x1="1190" y1="550" x2="1190" y2="557" stroke="#586675" stroke-width="1"/>
+  <text x="770" y="578" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#354454">1</text>
+  <text x="910" y="578" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#354454">2</text>
+  <text x="1050" y="578" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#354454">3</text>
+  <text x="1190" y="578" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#354454">4</text>
+  <text x="1208" y="578" font-family="sans-serif" font-size="15" fill="#182b3b">r/a</text>
+  <text x="770" y="601" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#526170">hole edge</text>
+  <text x="980" y="625" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#526170">Center distance r: 10 mm → 40 mm</text>
+
+  <!-- Far-field asymptote -->
+  <line x1="770" y1="450" x2="1195" y2="450" stroke="#8d99a4" stroke-width="1.5" stroke-dasharray="6 5"/>
+  <text x="950" y="485" font-family="sans-serif" font-size="14" fill="#687583">σθ → σ∞ = 100 MPa as r → ∞</text>
+
+  <!-- Kirsch curve, sampled with short straight segments -->
+  <polyline points="770,250 777,281.318 784,306.225 791,326.396 798,342.940 805,356.560 812,367.893 819,377.411 826,385.444 833,392.289 840,398.148 854,407.580 875,417.680 896,424.622 910,428.125 927.5,431.558 945,434.271 962.5,436.428 980,438.160 997.5,439.585 1015,440.767 1032.5,441.758 1050,442.593 1085,443.924 1120,444.919 1155,445.684 1190,446.289" fill="none" stroke="#087f8c" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+
+  <circle cx="770" cy="250" r="5" fill="#087f8c" stroke="#ffffff" stroke-width="1.5"/>
+  <text x="788" y="240" font-family="sans-serif" font-size="16" font-weight="700" fill="#087f8c">300 MPa</text>
+  <text x="788" y="261" font-family="sans-serif" font-size="13" fill="#087f8c">r = a = 10 mm</text>
+
+  <line x1="910" y1="428.125" x2="910" y2="550" stroke="#087f8c" stroke-width="1" stroke-dasharray="4 4"/>
+  <circle cx="910" cy="428.125" r="5" fill="#087f8c" stroke="#ffffff" stroke-width="1.5"/>
+  <polyline points="910,428.125 940,392 1002,392" fill="none" stroke="#087f8c" stroke-width="1"/>
+  <text x="945" y="361" font-family="sans-serif" font-size="17" font-weight="700" fill="#087f8c">121.875 MPa</text>
+  <text x="945" y="383" font-family="sans-serif" font-size="14" fill="#087f8c">r = 2a = 20 mm</text>
+
+  <circle cx="1190" cy="446.289" r="4" fill="#087f8c"/>
+  <text x="1188" y="424" text-anchor="end" font-family="sans-serif" font-size="13" fill="#087f8c">103.711 MPa at 4a</text>
+
+  <!-- Governing relation and stress concentration -->
+  <rect x="48" y="652" width="1184" height="104" rx="4" fill="#f5f8fa" stroke="#cbd3db" stroke-width="1"/>
+  <text x="70" y="681" font-family="sans-serif" font-size="14" font-weight="700" fill="#526170">KIRSCH SOLUTION ON y-AXIS, r ≥ a</text>
+  <text x="70" y="716" font-family="sans-serif" font-size="21" fill="#182b3b">σθ(r, π/2) = σ∞ [1 + ½(a/r)² + ³⁄₂(a/r)⁴]</text>
+  <line x1="696" y1="671" x2="696" y2="738" stroke="#cbd3db" stroke-width="1"/>
+  <text x="722" y="681" font-family="sans-serif" font-size="14" font-weight="700" fill="#526170">ELASTIC STRESS CONCENTRATION FACTOR</text>
+  <text x="722" y="716" font-family="sans-serif" font-size="23" font-weight="700" fill="#087f8c">Kₜ = σθ,max / σ∞ = 300 / 100 = 3</text>
+  <text x="722" y="739" font-family="sans-serif" font-size="13" fill="#526170">Maximum at r = a, θ = ±π/2; hole-edge x-axis stress is compressive.</text>
+</svg></div><ul class=checks><li>7/7 checks passed</li></ul><footer>269 in / 5218 out · 92.569s · finish=stop · ink=None</footer></section><section class="card ok"><header><b>poiseuille_profile</b><span class="badge ok">ok</span> <a href="outputs/poiseuille_profile-0.svg">svg</a></header><p class=prompt>Fully developed laminar flow of oil (viscosity 0.1 Pa.s, density 900 kg/m3) in a 20 mm diameter pipe with a pressure gradient of 200 Pa/m. Draw a longitudinal section of the pipe with the parabolic velocity profile as velocity arrows and the profile envelope curve, and the linear shear-stress distribution beside it. Compute and label the centreline velocity in m/s, the mean velocity in m/s, the volumetric flow rate in litres per minute, and the Reynolds number.</p><div class=inline><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 840">
+  <defs>
+    <marker id="velocityArrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M 0 0 L 7 3.5 L 0 7 Z" fill="#1265a8"/>
+    </marker>
+    <marker id="axisArrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M 0 0 L 8 4 L 0 8 Z" fill="#374151"/>
+    </marker>
+    <marker id="dimensionArrow" markerWidth="8" markerHeight="8" refX="0" refY="4" orient="auto-start-reverse" markerUnits="userSpaceOnUse">
+      <path d="M 8 0 L 0 4 L 8 8" fill="none" stroke="#374151" stroke-width="1.2"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1200" height="840" fill="#ffffff"/>
+
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="40" y="42" font-size="27" font-weight="bold" fill="#172635">Fully developed laminar oil flow</text>
+    <text x="40" y="72" font-size="16" fill="#526171">Circular pipe • longitudinal diametral section • steady, Newtonian flow</text>
+
+    <rect x="40" y="94" width="1120" height="54" rx="4" fill="#f2f5f8" stroke="#cbd5df"/>
+    <text x="60" y="127" font-size="18" fill="#172635">μ = 0.1 Pa·s</text>
+    <text x="270" y="127" font-size="18" fill="#172635">ρ = 900 kg/m³</text>
+    <text x="510" y="127" font-size="18" fill="#172635">D = 20 mm; R = 0.010 m</text>
+    <text x="835" y="127" font-size="18" fill="#172635">G = −dp/dx = 200 Pa/m</text>
+
+    <text x="110" y="184" font-size="20" font-weight="bold" fill="#172635">Velocity distribution</text>
+    <text x="810" y="184" font-size="20" font-weight="bold" fill="#172635">Shear-stress distribution</text>
+
+    <!-- Pipe walls and fluid region -->
+    <rect x="110" y="220" width="610" height="300" fill="#f7fbff"/>
+    <rect x="110" y="204" width="610" height="16" fill="#d7dfe6" stroke="#657587" stroke-width="1"/>
+    <rect x="110" y="520" width="610" height="16" fill="#d7dfe6" stroke="#657587" stroke-width="1"/>
+    <line x1="110" y1="220" x2="720" y2="220" stroke="#172635" stroke-width="2.5"/>
+    <line x1="110" y1="520" x2="720" y2="520" stroke="#172635" stroke-width="2.5"/>
+
+    <!-- Diameter dimension -->
+    <line x1="68" y1="220" x2="104" y2="220" stroke="#657587" stroke-width="1"/>
+    <line x1="68" y1="520" x2="104" y2="520" stroke="#657587" stroke-width="1"/>
+    <line x1="78" y1="220" x2="78" y2="520" stroke="#374151" stroke-width="1.2" marker-start="url(#dimensionArrow)" marker-end="url(#dimensionArrow)"/>
+    <text x="54" y="370" transform="rotate(-90 54 370)" text-anchor="middle" font-size="17" fill="#172635">D = 20 mm</text>
+
+    <!-- Centreline and velocity reference station -->
+    <line x1="110" y1="370" x2="734" y2="370" stroke="#7c8b99" stroke-width="1" stroke-dasharray="10 5 2 5"/>
+    <line x1="280" y1="220" x2="280" y2="520" stroke="#9baab8" stroke-width="1" stroke-dasharray="4 4"/>
+    <text x="125" y="360" font-size="14" fill="#526171">Centreline</text>
+
+    <!-- Arrow lengths are proportional to u(r) -->
+    <g stroke="#1265a8" stroke-width="2" fill="none" marker-end="url(#velocityArrow)">
+      <line x1="280" y1="250" x2="388" y2="250"/>
+      <line x1="280" y1="280" x2="472" y2="280"/>
+      <line x1="280" y1="310" x2="532" y2="310"/>
+      <line x1="280" y1="340" x2="568" y2="340"/>
+      <line x1="280" y1="370" x2="580" y2="370"/>
+      <line x1="280" y1="400" x2="568" y2="400"/>
+      <line x1="280" y1="430" x2="532" y2="430"/>
+      <line x1="280" y1="460" x2="472" y2="460"/>
+      <line x1="280" y1="490" x2="388" y2="490"/>
+    </g>
+
+    <!-- Exact quadratic envelope: x = 280 + 300[1 - ((y - 370)/150)^2] -->
+    <path d="M 280 220 Q 880 370 280 520" fill="none" stroke="#1265a8" stroke-width="2.6"/>
+    <circle cx="280" cy="220" r="3.5" fill="#1265a8"/>
+    <circle cx="280" cy="520" r="3.5" fill="#1265a8"/>
+
+    <text x="126" y="246" font-size="14" fill="#526171">No slip: u = 0</text>
+    <text x="126" y="508" font-size="14" fill="#526171">No slip: u = 0</text>
+    <text x="598" y="346" font-size="15" font-weight="bold" fill="#1265a8">u_max</text>
+    <text x="598" y="365" font-size="15" fill="#1265a8">0.050 m/s</text>
+    <text x="545" y="264" font-size="14" fill="#1265a8">Parabolic envelope</text>
+    <path d="M 555 272 L 515 293" fill="none" stroke="#1265a8" stroke-width="1.1"/>
+    <line x1="602" y1="470" x2="690" y2="470" stroke="#374151" stroke-width="1.5" marker-end="url(#axisArrow)"/>
+    <text x="618" y="493" font-size="14" fill="#374151">Flow, +x</text>
+
+    <!-- Signed shear stress, using a signed transverse coordinate r -->
+    <line x1="825" y1="220" x2="1145" y2="220" stroke="#ccd5dd" stroke-width="1" stroke-dasharray="5 4"/>
+    <line x1="825" y1="520" x2="1145" y2="520" stroke="#ccd5dd" stroke-width="1" stroke-dasharray="5 4"/>
+    <line x1="980" y1="548" x2="980" y2="200" stroke="#374151" stroke-width="1.4" marker-end="url(#axisArrow)"/>
+    <line x1="835" y1="370" x2="1135" y2="370" stroke="#374151" stroke-width="1.4" marker-end="url(#axisArrow)"/>
+    <text x="995" y="209" font-size="16" fill="#374151">r</text>
+    <text x="1135" y="353" text-anchor="end" font-size="16" fill="#374151">τ_rx (Pa)</text>
+
+    <line x1="890" y1="220" x2="890" y2="376" stroke="#c38b7c" stroke-width="1" stroke-dasharray="4 4"/>
+    <line x1="1070" y1="364" x2="1070" y2="520" stroke="#c38b7c" stroke-width="1" stroke-dasharray="4 4"/>
+    <line x1="890" y1="220" x2="1070" y2="520" stroke="#bd4b31" stroke-width="3"/>
+    <circle cx="890" cy="220" r="4" fill="#bd4b31"/>
+    <circle cx="1070" cy="520" r="4" fill="#bd4b31"/>
+    <circle cx="980" cy="370" r="3" fill="#bd4b31"/>
+
+    <text x="890" y="397" text-anchor="middle" font-size="15" fill="#374151">−1.0</text>
+    <text x="993" y="397" font-size="15" fill="#374151">0</text>
+    <text x="1070" y="397" text-anchor="middle" font-size="15" fill="#374151">+1.0</text>
+    <text x="1136" y="243" text-anchor="end" font-size="14" fill="#526171">r = +R</text>
+    <text x="1136" y="511" text-anchor="end" font-size="14" fill="#526171">r = −R</text>
+    <text x="837" y="283" font-size="14" fill="#bd4b31">Linear</text>
+    <text x="837" y="302" font-size="14" fill="#bd4b31">variation</text>
+
+    <text x="110" y="571" font-size="18" fill="#1265a8">u(r) = G(R² − r²)/(4μ)</text>
+    <text x="110" y="595" font-size="14" fill="#526171">Arrow length represents axial speed; the envelope is not a streamline.</text>
+    <text x="810" y="571" font-size="17" fill="#bd4b31">τ_rx = μ du/dr = −Gr/2</text>
+    <text x="810" y="595" font-size="14" fill="#526171">Signed transverse r; wall magnitude |τ_w| = 1.00 Pa</text>
+
+    <!-- Computed quantities -->
+    <g>
+      <rect x="40" y="622" width="265" height="150" rx="4" fill="#f7f9fb" stroke="#cbd5df"/>
+      <text x="58" y="651" font-size="16" font-weight="bold" fill="#172635">Centreline velocity</text>
+      <text x="58" y="680" font-size="16" fill="#526171">u_max = GR²/(4μ)</text>
+      <text x="58" y="724" font-size="29" font-weight="bold" fill="#1265a8">0.050 m/s</text>
+      <text x="58" y="751" font-size="14" fill="#526171">Maximum at r = 0</text>
+
+      <rect x="325" y="622" width="265" height="150" rx="4" fill="#f7f9fb" stroke="#cbd5df"/>
+      <text x="343" y="651" font-size="16" font-weight="bold" fill="#172635">Mean velocity</text>
+      <text x="343" y="680" font-size="16" fill="#526171">u_mean = u_max/2</text>
+      <text x="343" y="724" font-size="29" font-weight="bold" fill="#1265a8">0.025 m/s</text>
+      <text x="343" y="751" font-size="14" fill="#526171">Cross-sectional area average</text>
+
+      <rect x="610" y="622" width="265" height="150" rx="4" fill="#f7f9fb" stroke="#cbd5df"/>
+      <text x="628" y="651" font-size="16" font-weight="bold" fill="#172635">Volumetric flow rate</text>
+      <text x="628" y="680" font-size="16" fill="#526171">Q = πR² u_mean</text>
+      <text x="628" y="724" font-size="29" font-weight="bold" fill="#1265a8">0.471 L/min</text>
+      <text x="628" y="751" font-size="14" fill="#526171">7.854 × 10⁻⁶ m³/s</text>
+
+      <rect x="895" y="622" width="265" height="150" rx="4" fill="#f7f9fb" stroke="#cbd5df"/>
+      <text x="913" y="651" font-size="16" font-weight="bold" fill="#172635">Reynolds number</text>
+      <text x="913" y="680" font-size="16" fill="#526171">Re = ρ u_mean D/μ</text>
+      <text x="913" y="724" font-size="29" font-weight="bold" fill="#1265a8">4.50</text>
+      <text x="913" y="751" font-size="14" fill="#526171">Well within the laminar regime</text>
+    </g>
+
+    <text x="40" y="812" font-size="14" fill="#526171">Hagen–Poiseuille flow • pressure decreases in the +x direction • longitudinal length schematic</text>
+  </g>
+</svg></div><ul class=checks><li>7/7 checks passed</li></ul><footer>267 in / 3911 out · 66.243s · finish=stop · ink=None</footer></section><section class="card ok"><header><b>potential_flow_cylinder</b><span class="badge ok">ok</span> <a href="outputs/potential_flow_cylinder-0.svg">svg</a></header><p class=prompt>Ideal (potential) flow of a uniform stream U = 1 m/s past a circular cylinder of radius 0.5 m, no circulation. Draw at least eight streamlines that divide correctly around the cylinder (the dividing streamline meets the surface at the stagnation points), mark both stagnation points, label the maximum surface speed in m/s and where it occurs, and label the minimum pressure coefficient Cp on the surface.</p><div class=inline><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 760">
+  <defs>
+    <marker id="flowArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 9 5 L 0 9 Z" fill="#19758b"/>
+    </marker>
+    <marker id="dimensionArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 9 5 L 0 9 Z" fill="#48545e"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1100" height="760" fill="#ffffff"/>
+
+  <text x="55" y="49" font-family="sans-serif" font-size="27" font-weight="bold" fill="#182b38">Potential flow past a circular cylinder</text>
+  <text x="55" y="79" font-family="sans-serif" font-size="16" fill="#48545e">Uniform stream · incompressible, inviscid, irrotational · no circulation</text>
+
+  <line x1="90" y1="124" x2="240" y2="124" stroke="#19758b" stroke-width="2.5" marker-end="url(#flowArrow)"/>
+  <text x="90" y="111" font-family="sans-serif" font-size="18" font-weight="bold" fill="#182b38">U = 1 m/s</text>
+  <text x="990" y="124" text-anchor="end" font-family="sans-serif" font-size="15" fill="#48545e">Cylinder radius a = 0.5 m</text>
+
+  <!-- Four positive-streamfunction streamlines, flowing left to right. -->
+  <path d="M 110 354.83
+           C 146.67 354.45 183.33 353.86 220 352.93
+           C 256.67 352.00 293.33 350.85 330 346.54
+           C 348.33 344.38 366.67 340.50 385 333.99
+           C 403.33 327.48 421.67 317.58 440 304.49
+           C 458.33 291.40 476.67 280.68 495 273.62
+           C 513.33 266.56 531.67 262.27 550 262.27
+           C 568.33 262.27 586.67 266.56 605 273.62
+           C 623.33 280.68 641.67 291.40 660 304.49
+           C 678.33 317.58 696.67 327.48 715 333.99
+           C 733.33 340.50 751.67 344.38 770 346.54
+           C 806.67 350.85 843.33 352.00 880 352.93
+           C 916.67 353.86 953.33 354.45 990 354.83"
+        fill="none" stroke="#19758b" stroke-width="1.8" marker-end="url(#flowArrow)"/>
+
+  <path d="M 110 319.72
+           C 146.67 319.00 183.33 317.95 220 316.19
+           C 256.67 314.43 293.33 312.00 330 305.62
+           C 366.67 299.24 403.33 281.26 440 266.05
+           C 458.33 258.44 476.67 252.96 495 248.28
+           C 513.33 243.60 531.67 242.15 550 242.15
+           C 568.33 242.15 586.67 243.60 605 248.28
+           C 623.33 252.96 641.67 258.44 660 266.05
+           C 696.67 281.26 733.33 299.24 770 305.62
+           C 806.67 312.00 843.33 314.43 880 316.19
+           C 916.67 317.95 953.33 319.00 990 319.72"
+        fill="none" stroke="#19758b" stroke-width="1.8" marker-end="url(#flowArrow)"/>
+
+  <path d="M 110 273.18
+           C 146.67 272.09 183.33 270.46 220 267.97
+           C 256.67 265.48 293.33 260.62 330 254.17
+           C 366.67 247.72 403.33 236.43 440 226.90
+           C 476.67 217.37 513.33 212.02 550 212.02
+           C 586.67 212.02 623.33 217.37 660 226.90
+           C 696.67 236.43 733.33 247.72 770 254.17
+           C 806.67 260.62 843.33 265.48 880 267.97
+           C 916.67 270.46 953.33 272.09 990 273.18"
+        fill="none" stroke="#19758b" stroke-width="1.8" marker-end="url(#flowArrow)"/>
+
+  <path d="M 110 215.58
+           C 146.67 214.22 183.33 211.88 220 209.57
+           C 256.67 207.26 293.33 203.62 330 198.52
+           C 366.67 193.42 403.33 185.88 440 179.83
+           C 476.67 173.78 513.33 169.65 550 169.65
+           C 586.67 169.65 623.33 173.78 660 179.83
+           C 696.67 185.88 733.33 193.42 770 198.52
+           C 806.67 203.62 843.33 207.26 880 209.57
+           C 916.67 211.88 953.33 214.22 990 215.58"
+        fill="none" stroke="#19758b" stroke-width="1.8" marker-end="url(#flowArrow)"/>
+
+  <!-- Reflection supplies four negative-streamfunction streamlines. -->
+  <g transform="translate(0 780) scale(1 -1)">
+    <path d="M 110 354.83
+             C 146.67 354.45 183.33 353.86 220 352.93
+             C 256.67 352.00 293.33 350.85 330 346.54
+             C 348.33 344.38 366.67 340.50 385 333.99
+             C 403.33 327.48 421.67 317.58 440 304.49
+             C 458.33 291.40 476.67 280.68 495 273.62
+             C 513.33 266.56 531.67 262.27 550 262.27
+             C 568.33 262.27 586.67 266.56 605 273.62
+             C 623.33 280.68 641.67 291.40 660 304.49
+             C 678.33 317.58 696.67 327.48 715 333.99
+             C 733.33 340.50 751.67 344.38 770 346.54
+             C 806.67 350.85 843.33 352.00 880 352.93
+             C 916.67 353.86 953.33 354.45 990 354.83"
+          fill="none" stroke="#19758b" stroke-width="1.8" marker-end="url(#flowArrow)"/>
+    <path d="M 110 319.72
+             C 146.67 319.00 183.33 317.95 220 316.19
+             C 256.67 314.43 293.33 312.00 330 305.62
+             C 366.67 299.24 403.33 281.26 440 266.05
+             C 458.33 258.44 476.67 252.96 495 248.28
+             C 513.33 243.60 531.67 242.15 550 242.15
+             C 568.33 242.15 586.67 243.60 605 248.28
+             C 623.33 252.96 641.67 258.44 660 266.05
+             C 696.67 281.26 733.33 299.24 770 305.62
+             C 806.67 312.00 843.33 314.43 880 316.19
+             C 916.67 317.95 953.33 319.00 990 319.72"
+          fill="none" stroke="#19758b" stroke-width="1.8" marker-end="url(#flowArrow)"/>
+    <path d="M 110 273.18
+             C 146.67 272.09 183.33 270.46 220 267.97
+             C 256.67 265.48 293.33 260.62 330 254.17
+             C 366.67 247.72 403.33 236.43 440 226.90
+             C 476.67 217.37 513.33 212.02 550 212.02
+             C 586.67 212.02 623.33 217.37 660 226.90
+             C 696.67 236.43 733.33 247.72 770 254.17
+             C 806.67 260.62 843.33 265.48 880 267.97
+             C 916.67 270.46 953.33 272.09 990 273.18"
+          fill="none" stroke="#19758b" stroke-width="1.8" marker-end="url(#flowArrow)"/>
+    <path d="M 110 215.58
+             C 146.67 214.22 183.33 211.88 220 209.57
+             C 256.67 207.26 293.33 203.62 330 198.52
+             C 366.67 193.42 403.33 185.88 440 179.83
+             C 476.67 173.78 513.33 169.65 550 169.65
+             C 586.67 169.65 623.33 173.78 660 179.83
+             C 696.67 185.88 733.33 193.42 770 198.52
+             C 806.67 203.62 843.33 207.26 880 209.57
+             C 916.67 211.88 953.33 214.22 990 215.58"
+          fill="none" stroke="#19758b" stroke-width="1.8" marker-end="url(#flowArrow)"/>
+  </g>
+
+  <!-- The zero-streamfunction separatrix meets both stagnation points
+       and follows both semicircles of the impermeable surface. -->
+  <line x1="110" y1="390" x2="440" y2="390" stroke="#19758b" stroke-width="2.5"/>
+  <line x1="660" y1="390" x2="990" y2="390" stroke="#19758b" stroke-width="2.5" marker-end="url(#flowArrow)"/>
+  <line x1="200" y1="390" x2="255" y2="390" stroke="#19758b" stroke-width="2.5" marker-end="url(#flowArrow)"/>
+  <line x1="845" y1="390" x2="900" y2="390" stroke="#19758b" stroke-width="2.5" marker-end="url(#flowArrow)"/>
+
+  <circle cx="550" cy="390" r="110" fill="#f4f7f8" stroke="#19758b" stroke-width="2.5"/>
+  <path d="M 595 289.63 A 110 110 0 0 1 627.78 312.22" fill="none" stroke="#19758b" stroke-width="2.5" marker-end="url(#flowArrow)"/>
+  <path d="M 595 490.37 A 110 110 0 0 0 627.78 467.78" fill="none" stroke="#19758b" stroke-width="2.5" marker-end="url(#flowArrow)"/>
+
+  <text x="160" y="377" font-family="sans-serif" font-size="14" fill="#19758b">Dividing streamline: ψ = 0</text>
+  <text x="815" y="377" font-family="sans-serif" font-size="14" fill="#19758b">ψ = 0</text>
+
+  <text x="550" y="362" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="bold" fill="#182b38">Circular cylinder</text>
+  <text x="550" y="380" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#48545e">no flow inside</text>
+  <circle cx="550" cy="390" r="2.5" fill="#48545e"/>
+  <line x1="553" y1="390" x2="654" y2="390" stroke="#48545e" stroke-width="1.2" marker-end="url(#dimensionArrow)"/>
+  <text x="585" y="413" text-anchor="middle" font-family="sans-serif" font-size="15" fill="#182b38">a = 0.5 m</text>
+
+  <!-- Maximum-speed / minimum-pressure locations. -->
+  <circle cx="550" cy="280" r="4.5" fill="#182b38" stroke="#ffffff" stroke-width="1"/>
+  <line x1="550" y1="285" x2="550" y2="296" stroke="#48545e" stroke-width="1"/>
+  <text x="550" y="314" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="bold" fill="#182b38">Vmax = 2 m/s</text>
+  <text x="550" y="333" text-anchor="middle" font-family="sans-serif" font-size="15" fill="#182b38">Cp,min = −3</text>
+
+  <circle cx="550" cy="500" r="4.5" fill="#182b38" stroke="#ffffff" stroke-width="1"/>
+  <line x1="550" y1="484" x2="550" y2="495" stroke="#48545e" stroke-width="1"/>
+  <text x="550" y="458" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="bold" fill="#182b38">Vmax = 2 m/s</text>
+  <text x="550" y="477" text-anchor="middle" font-family="sans-serif" font-size="15" fill="#182b38">Cp,min = −3</text>
+
+  <!-- Surface stagnation points. -->
+  <path d="M 440 390 L 420 416 L 400 416" fill="none" stroke="#ad4437" stroke-width="1.2"/>
+  <path d="M 660 390 L 680 416 L 700 416" fill="none" stroke="#ad4437" stroke-width="1.2"/>
+  <circle cx="440" cy="390" r="5" fill="#ad4437" stroke="#ffffff" stroke-width="1.2"/>
+  <circle cx="660" cy="390" r="5" fill="#ad4437" stroke="#ffffff" stroke-width="1.2"/>
+
+  <text x="394" y="418" text-anchor="end" font-family="sans-serif" font-size="15" font-weight="bold" fill="#ad4437">Stagnation: θ = 180°</text>
+  <text x="394" y="438" text-anchor="end" font-family="sans-serif" font-size="14" fill="#182b38">V = 0 m/s; Cp = 1</text>
+  <text x="706" y="418" font-family="sans-serif" font-size="15" font-weight="bold" fill="#ad4437">Stagnation: θ = 0°</text>
+  <text x="706" y="438" font-family="sans-serif" font-size="14" fill="#182b38">V = 0 m/s; Cp = 1</text>
+
+  <line x1="55" y1="650" x2="1045" y2="650" stroke="#cbd4da" stroke-width="1"/>
+  <text x="55" y="680" font-family="sans-serif" font-size="16" font-weight="bold" fill="#182b38">Surface extrema: top and bottom, θ = 90° and 270°</text>
+  <text x="55" y="705" font-family="sans-serif" font-size="15" fill="#48545e">Vsurface = 2U |sin θ|;   Cp = 1 − (V/U)² = 1 − 4 sin²θ.</text>
+  <text x="55" y="731" font-family="sans-serif" font-size="14" fill="#48545e">θ measured counterclockwise from the downstream radius. Streamlines: ψ = U y (1 − a²/r²) = constant.</text>
+</svg></div><ul class=checks><li>6/6 checks passed</li></ul><footer>245 in / 6717 out · 132.045s · finish=stop · ink=None</footer></section><section class="card ok"><header><b>rc_bode_plot</b><span class="badge ok">ok</span> <a href="outputs/rc_bode_plot-0.svg">svg</a></header><p class=prompt>Bode magnitude and phase plots of the first-order RC low-pass filter with R = 10 kOhm and C = 100 nF, from 1 Hz to 100 kHz on a log frequency axis. Draw both plots stacked and aligned with gridlines at each decade. Label the corner frequency in Hz, the gain at the corner in dB, the high-frequency slope in dB/decade, and the phase at the corner in degrees.</p><div class=inline><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 850">
+  <rect x="0" y="0" width="1100" height="850" fill="#ffffff"/>
+
+  <text x="100" y="38" font-family="sans-serif" font-size="25" font-weight="bold" fill="#172b3a">First-order RC low-pass filter</text>
+  <text x="100" y="68" font-family="sans-serif" font-size="17" fill="#405565">R = 10 kΩ   ·   C = 100 nF   ·   RC = 1 ms   ·   H(jω) = 1 / (1 + jωRC)</text>
+
+  <text x="100" y="110" font-family="sans-serif" font-size="18" font-weight="bold" fill="#172b3a">Magnitude (dB)</text>
+  <line x1="744" y1="104" x2="779" y2="104" stroke="#1268ad" stroke-width="3"/>
+  <text x="790" y="110" font-family="sans-serif" font-size="14" fill="#405565">Exact response</text>
+  <line x1="744" y1="125" x2="779" y2="125" stroke="#b66a17" stroke-width="2" stroke-dasharray="7 5"/>
+  <text x="790" y="131" font-family="sans-serif" font-size="14" fill="#405565">HF asymptote</text>
+
+  <!-- Aligned decade grids -->
+  <path d="M100 140V460 M280 140V460 M460 140V460 M640 140V460 M820 140V460 M1000 140V460
+           M100 550V750 M280 550V750 M460 550V750 M640 550V750 M820 550V750 M1000 550V750"
+        fill="none" stroke="#d5dee5" stroke-width="1"/>
+  <path d="M100 140H1000 M100 190H1000 M100 240H1000 M100 290H1000 M100 340H1000 M100 390H1000 M100 440H1000
+           M100 550H1000 M100 610H1000 M100 670H1000 M100 730H1000"
+        fill="none" stroke="#d5dee5" stroke-width="1"/>
+  <line x1="100" y1="640" x2="1000" y2="640" stroke="#e4e9ee" stroke-width="1" stroke-dasharray="3 4"/>
+
+  <rect x="100" y="140" width="900" height="320" fill="none" stroke="#7c8d99" stroke-width="1.2"/>
+  <rect x="100" y="550" width="900" height="200" fill="none" stroke="#7c8d99" stroke-width="1.2"/>
+
+  <!-- Magnitude axis labels -->
+  <g font-family="sans-serif" font-size="14" text-anchor="end" fill="#405565">
+    <text x="86" y="145">0</text>
+    <text x="86" y="195">−10</text>
+    <text x="86" y="245">−20</text>
+    <text x="86" y="295">−30</text>
+    <text x="86" y="345">−40</text>
+    <text x="86" y="395">−50</text>
+    <text x="86" y="445">−60</text>
+  </g>
+
+  <!-- Corner-frequency reference -->
+  <path d="M496.328 140V460 M496.328 550V750" fill="none" stroke="#758797" stroke-width="1.5" stroke-dasharray="5 5"/>
+  <text x="496.328" y="492" text-anchor="middle" font-family="sans-serif" font-size="17" font-weight="bold" fill="#172b3a">f_c = 1 / (2πRC) = 159.15 Hz</text>
+
+  <!-- High-frequency asymptote, -20 dB per decade -->
+  <path d="M496.328 140L1000 419.818" fill="none" stroke="#b66a17" stroke-width="2" stroke-dasharray="7 5"/>
+
+  <!-- Exact magnitude response, smoothly interpolated on the logarithmic axis -->
+  <path d="M100 140.001
+           C124 140.001 139 140.002 154.185 140.003
+           C178 140.004 202 140.008 225.815 140.021
+           C244 140.031 262 140.046 280 140.086
+           C298.062 140.125 316.123 140.184 334.185 140.340
+           C344.751 140.431 355.316 140.557 365.882 140.758
+           C379.193 141.012 392.504 141.379 405.815 142.043
+           C414.583 142.481 423.35 143.049 432.118 143.839
+           C441.412 144.676 450.706 145.764 460 147.225
+           C464.751 147.972 469.502 148.821 474.253 149.778
+           C481.612 151.260 488.970 153.007 496.328 155.051
+           C502.280 156.704 508.233 158.549 514.185 160.574
+           C524.751 164.168 535.316 168.334 545.882 172.915
+           C559.193 178.686 572.504 185.096 585.815 191.811
+           C594.583 196.234 603.350 200.792 612.118 205.424
+           C621.412 210.333 630.706 215.325 640 220.361
+           C658.062 230.148 676.123 240.092 694.185 250.063
+           C718.062 263.244 741.938 276.485 765.815 289.737
+           C783.877 299.761 801.938 309.791 820 319.823
+           C838.062 329.855 856.123 339.888 874.185 349.922
+           C898.062 363.187 921.938 376.450 945.815 389.715
+           C963.877 399.749 981.938 409.784 1000 419.818"
+        fill="none" stroke="#1268ad" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+
+  <circle cx="496.328" cy="155.051" r="4.5" fill="#ffffff" stroke="#1268ad" stroke-width="2.5"/>
+  <path d="M501 159L536 199H552" fill="none" stroke="#405565" stroke-width="1.2"/>
+  <text x="561" y="204" font-family="sans-serif" font-size="17" font-weight="bold" fill="#1268ad">−3.01 dB at f_c</text>
+
+  <text x="742" y="259" font-family="sans-serif" font-size="17" font-weight="bold" fill="#9a5610">−20 dB/decade</text>
+  <text x="742" y="280" font-family="sans-serif" font-size="14" fill="#9a5610">High-frequency slope</text>
+  <path d="M827 289L853 338" fill="none" stroke="#b66a17" stroke-width="1.3"/>
+
+  <text x="100" y="522" font-family="sans-serif" font-size="18" font-weight="bold" fill="#172b3a">Phase (°)</text>
+  <g font-family="sans-serif" font-size="14" text-anchor="end" fill="#405565">
+    <text x="86" y="555">0°</text>
+    <text x="86" y="615">−30°</text>
+    <text x="86" y="645">−45°</text>
+    <text x="86" y="675">−60°</text>
+    <text x="86" y="735">−90°</text>
+  </g>
+
+  <!-- Exact phase response -->
+  <path d="M100 550.720
+           C118.062 550.886 136.123 551.107 154.185 551.440
+           C178.062 551.880 201.938 552.500 225.815 553.599
+           C243.877 554.430 261.938 555.534 280 557.191
+           C298.062 558.848 316.123 561.050 334.185 564.325
+           C344.751 566.241 355.316 568.530 365.882 571.349
+           C379.193 574.901 392.504 579.302 405.815 584.881
+           C414.583 588.556 423.350 592.747 432.118 597.483
+           C441.412 602.503 450.706 608.147 460 614.284
+           C464.751 617.421 469.502 620.684 474.253 624.032
+           C481.612 629.217 488.970 634.607 496.328 640
+           C502.280 644.362 508.233 648.725 514.185 652.976
+           C524.751 660.522 535.316 667.695 545.882 674.107
+           C559.193 682.185 572.504 689.047 585.815 694.686
+           C594.583 698.401 603.350 701.602 612.118 704.381
+           C621.412 707.326 630.706 709.799 640 711.914
+           C658.062 716.024 676.123 718.806 694.185 720.900
+           C718.062 723.668 741.938 725.241 765.815 726.354
+           C783.877 727.196 801.938 727.755 820 728.176
+           C838.062 728.597 856.123 728.877 874.185 729.088
+           C898.062 729.366 921.938 729.524 945.815 729.635
+           C963.877 729.719 981.938 729.776 1000 729.818"
+        fill="none" stroke="#1268ad" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+
+  <circle cx="496.328" cy="640" r="4.5" fill="#ffffff" stroke="#1268ad" stroke-width="2.5"/>
+  <path d="M500 636L532 602H547" fill="none" stroke="#405565" stroke-width="1.2"/>
+  <text x="556" y="607" font-family="sans-serif" font-size="17" font-weight="bold" fill="#1268ad">−45° at f_c</text>
+
+  <path d="M100 750V756 M280 750V756 M460 750V756 M640 750V756 M820 750V756 M1000 750V756"
+        fill="none" stroke="#7c8d99" stroke-width="1.2"/>
+  <g font-family="sans-serif" font-size="15" text-anchor="middle" fill="#405565">
+    <text x="100" y="779">1 Hz</text>
+    <text x="280" y="779">10 Hz</text>
+    <text x="460" y="779">100 Hz</text>
+    <text x="640" y="779">1 kHz</text>
+    <text x="820" y="779">10 kHz</text>
+    <text x="1000" y="779">100 kHz</text>
+  </g>
+  <text x="550" y="817" text-anchor="middle" font-family="sans-serif" font-size="17" fill="#172b3a">Frequency — logarithmic scale</text>
+</svg></div><ul class=checks><li>7/7 checks passed</li></ul><footer>254 in / 4447 out · 85.067s · finish=stop · ink=None</footer></section><section class="card ok"><header><b>rc_step_response</b><span class="badge ok">ok</span> <a href="outputs/rc_step_response-0.svg">svg</a></header><p class=prompt>Step response of the RC low-pass filter with R = 10 kOhm and C = 100 nF to a 0 to 5 V input step. Draw the input step and the capacitor voltage versus time from 0 to 6 ms on a labelled, gridded plot. Label the time constant in ms, the voltage reached at one time constant in V and as a percentage, and the times to reach 95 percent and 99 percent of the final value in ms.</p><div class=inline><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 650">
+  <rect x="0" y="0" width="1000" height="650" fill="#ffffff"/>
+
+  <g font-family="Arial, Helvetica, sans-serif" fill="#182430">
+    <text x="100" y="32" font-size="23" font-weight="bold">RC low-pass filter — step response</text>
+    <text x="100" y="58" font-size="16">R = 10 kΩ · C = 100 nF · Input step: 0 → 5 V · Initially uncharged capacitor</text>
+  </g>
+
+  <g font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#182430">
+    <line x1="100" y1="82" x2="137" y2="82" stroke="#c45b12" stroke-width="3" stroke-dasharray="9 5"/>
+    <text x="147" y="87">Input voltage, Vᵢₙ</text>
+    <line x1="350" y1="82" x2="387" y2="82" stroke="#1266ad" stroke-width="3"/>
+    <text x="397" y="87">Capacitor voltage, V꜀</text>
+  </g>
+
+  <!-- Plot: x = 100 + 140 t(ms); y = 485 - 70 V -->
+  <rect x="100" y="100" width="840" height="385" fill="#fafcfe" stroke="#bac5ce" stroke-width="1"/>
+
+  <g stroke="#e8edf2" stroke-width="1">
+    <path d="M170 100V485 M310 100V485 M450 100V485 M590 100V485 M730 100V485 M870 100V485" fill="none"/>
+    <path d="M100 450H940 M100 380H940 M100 310H940 M100 240H940 M100 170H940" fill="none"/>
+  </g>
+  <g stroke="#cfd8e0" stroke-width="1">
+    <path d="M240 100V485 M380 100V485 M520 100V485 M660 100V485 M800 100V485 M940 100V485" fill="none"/>
+    <path d="M100 415H940 M100 345H940 M100 275H940 M100 205H940 M100 135H940" fill="none"/>
+  </g>
+
+  <!-- Reference lines at the specified response times -->
+  <g stroke="#829bb0" stroke-width="1.2" stroke-dasharray="4 5" fill="none">
+    <path d="M240 485V263.758H100"/>
+    <path d="M519.403 485V152.5"/>
+    <path d="M744.724 485V138.5"/>
+  </g>
+
+  <g stroke="#263746" stroke-width="1.6" fill="none">
+    <path d="M100 100V485H940"/>
+    <path d="M100 485V491 M240 485V491 M380 485V491 M520 485V491 M660 485V491 M800 485V491 M940 485V491"/>
+    <path d="M94 485H100 M94 415H100 M94 345H100 M94 275H100 M94 205H100 M94 135H100"/>
+  </g>
+
+  <g font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#263746">
+    <g text-anchor="middle">
+      <text x="100" y="511">0</text>
+      <text x="240" y="511">1</text>
+      <text x="380" y="511">2</text>
+      <text x="520" y="511">3</text>
+      <text x="660" y="511">4</text>
+      <text x="800" y="511">5</text>
+      <text x="940" y="511">6</text>
+      <text x="520" y="542" font-size="17">Time, t (ms)</text>
+    </g>
+    <g text-anchor="end">
+      <text x="84" y="490">0</text>
+      <text x="84" y="420">1</text>
+      <text x="84" y="350">2</text>
+      <text x="84" y="280">3</text>
+      <text x="84" y="210">4</text>
+      <text x="84" y="140">5</text>
+    </g>
+    <text x="35" y="295" font-size="17" text-anchor="middle" transform="rotate(-90 35 295)">Voltage (V)</text>
+  </g>
+
+  <!-- Ideal input step at t = 0 -->
+  <path d="M76 485H100V135H940" fill="none" stroke="#c45b12" stroke-width="3" stroke-dasharray="9 5"/>
+
+  <!-- Vc = 5(1 - exp(-t/1 ms)); cubic interpolation at 0.5 ms intervals -->
+  <path d="M100 485
+    C123.333 426.667 146.667 382.666 170 347.286
+    C193.333 311.905 216.667 285.218 240 263.758
+    C263.333 242.298 286.667 226.112 310 213.096
+    C333.333 200.080 356.667 190.261 380 182.367
+    C403.333 174.472 426.667 168.518 450 163.730
+    C473.333 158.942 496.667 155.329 520 152.425
+    C543.333 149.521 566.667 147.330 590 145.569
+    C613.333 143.807 636.667 142.478 660 141.410
+    C683.333 140.342 706.667 139.536 730 138.888
+    C753.333 138.240 776.667 137.751 800 137.358
+    C823.333 136.965 846.667 136.669 870 136.430
+    C893.333 136.192 916.667 136.012 940 135.868"
+    fill="none" stroke="#1266ad" stroke-width="3.5" stroke-linecap="round"/>
+
+  <!-- Point markers and annotation leaders -->
+  <g fill="none" stroke="#1266ad" stroke-width="1.4">
+    <path d="M240 263.758L265 302H284"/>
+    <path d="M519.403 152.5V211"/>
+    <path d="M744.724 138.5L779 241"/>
+  </g>
+  <g fill="#ffffff" stroke="#1266ad" stroke-width="2.5">
+    <circle cx="240" cy="263.758" r="5"/>
+    <circle cx="519.403" cy="152.5" r="5"/>
+    <circle cx="744.724" cy="138.5" r="5"/>
+  </g>
+
+  <g font-family="Arial, Helvetica, sans-serif">
+    <rect x="284" y="289" width="182" height="82" rx="4" fill="#ffffff" stroke="#b7cadb"/>
+    <text x="296" y="313" fill="#1266ad" font-size="17" font-weight="bold">τ = 1.000 ms</text>
+    <text x="296" y="337" fill="#182430" font-size="16">V꜀(τ) = 3.16 V</text>
+    <text x="296" y="359" fill="#182430" font-size="15">63.2% of final value</text>
+
+    <rect x="446" y="211" width="183" height="60" rx="4" fill="#ffffff" stroke="#b7cadb"/>
+    <text x="458" y="235" fill="#1266ad" font-size="16" font-weight="bold">95% · 4.75 V</text>
+    <text x="458" y="257" fill="#182430" font-size="16">t₉₅ = 2.996 ms</text>
+
+    <rect x="748" y="241" width="180" height="60" rx="4" fill="#ffffff" stroke="#b7cadb"/>
+    <text x="760" y="265" fill="#1266ad" font-size="16" font-weight="bold">99% · 4.95 V</text>
+    <text x="760" y="287" fill="#182430" font-size="16">t₉₉ = 4.605 ms</text>
+
+    <text x="931" y="120" fill="#c45b12" font-size="14" text-anchor="end">Final value: 5 V</text>
+  </g>
+
+  <line x1="100" y1="562" x2="940" y2="562" stroke="#cfd8e0" stroke-width="1"/>
+  <g font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#263746">
+    <text x="100" y="590">τ = RC = (10 kΩ)(100 nF) = 1 ms</text>
+    <text x="560" y="590">V꜀(t) = 5[1 − exp(−t/τ)] V,  t ≥ 0</text>
+    <text x="100" y="620">Time to fraction p of final voltage: tₚ = −τ ln(1 − p)</text>
+  </g>
+</svg></div><ul class=checks><li>8/8 checks passed</li></ul><footer>260 in / 3111 out · 58.229s · finish=stop · ink=None</footer></section><section class="card ok"><header><b>shaft_torsion</b><span class="badge ok">ok</span> <a href="outputs/shaft_torsion-0.svg">svg</a></header><p class=prompt>Solid steel shaft (G = 80 GPa), diameter 50 mm, length 1 m, transmitting a torque of 2 kN.m. Draw the shaft with the applied torque arrows, a cross-section showing the linear shear-stress distribution from the centre to the surface, and the angle of twist between the ends. Compute and label the polar second moment of area in mm4, the maximum shear stress in MPa, and the total angle of twist in degrees.</p><div class=inline><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 940">
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L9 4.5 L0 9 Z" fill="#243746"/>
+    </marker>
+    <marker id="blueArrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#126b9c"/>
+    </marker>
+    <marker id="redArrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L9 4.5 L0 9 Z" fill="#b44732"/>
+    </marker>
+    <marker id="dim" markerWidth="8" markerHeight="8" refX="0" refY="4" orient="auto-start-reverse" markerUnits="userSpaceOnUse">
+      <path d="M0 4 L8 0 L8 8 Z" fill="#526674"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1200" height="940" fill="#ffffff"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="40" y="47" font-size="27" font-weight="700" fill="#182e3d">SOLID STEEL SHAFT — ELASTIC TORSION</text>
+    <text x="40" y="79" font-size="17" fill="#526674">G = 80 GPa = 80,000 N/mm²    |    d = 50 mm    |    L = 1,000 mm    |    T = 2 kN·m = 2,000,000 N·mm</text>
+
+    <rect x="35" y="105" width="1130" height="315" rx="5" fill="#ffffff" stroke="#c5d0d7" stroke-width="1.2"/>
+    <text x="55" y="134" font-size="16" font-weight="700" fill="#182e3d">01  SHAFT AND END TORQUES</text>
+    <text x="1145" y="134" text-anchor="end" font-size="13" fill="#526674">Schematic • not to scale</text>
+
+    <!-- Shaft, shown in an oblique projection -->
+    <path d="M240 182 L925 182 A29 68 0 0 1 925 318 L240 318 A29 68 0 0 1 240 182 Z"
+          fill="#e8eef2" stroke="#243746" stroke-width="2"/>
+    <path d="M240 182 A29 68 0 0 1 240 318" fill="none" stroke="#8b9ba6" stroke-width="1.3" stroke-dasharray="6 5"/>
+    <ellipse cx="925" cy="250" rx="29" ry="68" fill="#d8e5ed" stroke="#243746" stroke-width="2"/>
+    <line x1="120" y1="250" x2="1040" y2="250" stroke="#8b9ba6" stroke-width="1" stroke-dasharray="14 5 3 5"/>
+    <text x="545" y="239" font-size="21" font-weight="700" fill="#243746">Solid steel</text>
+    <text x="546" y="270" font-size="17" fill="#526674">Ø50 mm</text>
+
+    <!-- Opposing end couples -->
+    <path d="M205 178 A43 79 0 1 0 205 322" fill="none" stroke="#126b9c" stroke-width="3" marker-end="url(#blueArrow)"/>
+    <path d="M975 322 A43 79 0 1 1 975 178" fill="none" stroke="#126b9c" stroke-width="3" marker-end="url(#blueArrow)"/>
+    <text x="62" y="172" font-size="18" font-weight="700" fill="#126b9c">T = 2 kN·m</text>
+    <text x="62" y="194" font-size="13" fill="#526674">Reaction couple</text>
+    <text x="1027" y="172" font-size="18" font-weight="700" fill="#126b9c">T = 2 kN·m</text>
+    <text x="1030" y="194" font-size="13" fill="#526674">Applied couple</text>
+
+    <!-- Reference and twisted end radii -->
+    <line x1="925" y1="250" x2="925" y2="182" stroke="#526674" stroke-width="1.5" stroke-dasharray="5 4"/>
+    <line x1="925" y1="250" x2="936" y2="187" stroke="#b44732" stroke-width="2.5"/>
+    <circle cx="925" cy="250" r="3" fill="#243746"/>
+    <polyline points="939,202 1014,220 1078,220" fill="none" stroke="#b44732" stroke-width="1.2"/>
+    <text x="1027" y="242" font-size="15" fill="#b44732">Relative twist φ</text>
+    <text x="1027" y="263" font-size="13" fill="#526674">See end view below</text>
+
+    <!-- End identification and length dimension -->
+    <text x="240" y="345" text-anchor="middle" font-size="14" fill="#243746">End A: reference</text>
+    <text x="925" y="345" text-anchor="middle" font-size="14" fill="#243746">End B: loaded</text>
+    <line x1="240" y1="354" x2="240" y2="398" stroke="#526674" stroke-width="1"/>
+    <line x1="925" y1="354" x2="925" y2="398" stroke="#526674" stroke-width="1"/>
+    <line x1="240" y1="384" x2="925" y2="384" stroke="#526674" stroke-width="1.2" marker-start="url(#dim)" marker-end="url(#dim)"/>
+    <rect x="497" y="371" width="171" height="25" fill="#ffffff"/>
+    <text x="582.5" y="389" text-anchor="middle" font-size="17" fill="#243746">L = 1 m = 1,000 mm</text>
+
+    <!-- Cross-section and linear stress law -->
+    <rect x="35" y="440" width="550" height="330" rx="5" fill="#ffffff" stroke="#c5d0d7" stroke-width="1.2"/>
+    <text x="55" y="470" font-size="16" font-weight="700" fill="#182e3d">02  CROSS-SECTION AND SHEAR STRESS</text>
+    <text x="55" y="495" font-size="13" fill="#526674">Tangential shear on a transverse section; τ(r) = Tr/J</text>
+
+    <circle cx="155" cy="606" r="72" fill="#eff5f8" stroke="#243746" stroke-width="2"/>
+    <line x1="69" y1="606" x2="241" y2="606" stroke="#8b9ba6" stroke-width="1" stroke-dasharray="7 4"/>
+    <line x1="155" y1="520" x2="155" y2="688" stroke="#8b9ba6" stroke-width="1" stroke-dasharray="7 4"/>
+    <line x1="155" y1="606" x2="227" y2="606" stroke="#243746" stroke-width="1.6"/>
+    <circle cx="155" cy="606" r="3" fill="#243746"/>
+    <line x1="173" y1="606" x2="173" y2="589" stroke="#b44732" stroke-width="2" marker-end="url(#redArrow)"/>
+    <line x1="191" y1="606" x2="191" y2="572" stroke="#b44732" stroke-width="2" marker-end="url(#redArrow)"/>
+    <line x1="209" y1="606" x2="209" y2="555" stroke="#b44732" stroke-width="2" marker-end="url(#redArrow)"/>
+    <line x1="227" y1="606" x2="227" y2="538" stroke="#b44732" stroke-width="2" marker-end="url(#redArrow)"/>
+    <line x1="155" y1="606" x2="227" y2="538" stroke="#b44732" stroke-width="1" stroke-dasharray="4 4"/>
+    <text x="143" y="625" text-anchor="end" font-size="14" fill="#243746">τ = 0</text>
+    <text x="181" y="628" font-size="14" fill="#243746">r →</text>
+    <text x="202" y="525" font-size="14" font-weight="700" fill="#b44732">τmax</text>
+    <line x1="83" y1="682" x2="83" y2="713" stroke="#526674" stroke-width="1"/>
+    <line x1="227" y1="682" x2="227" y2="713" stroke="#526674" stroke-width="1"/>
+    <line x1="83" y1="704" x2="227" y2="704" stroke="#526674" stroke-width="1" marker-start="url(#dim)" marker-end="url(#dim)"/>
+    <rect x="118" y="693" width="74" height="22" fill="#ffffff"/>
+    <text x="155" y="709" text-anchor="middle" font-size="15" fill="#243746">Ø50 mm</text>
+    <text x="155" y="742" text-anchor="middle" font-size="13" fill="#526674">Arrow length ∝ shear stress</text>
+
+    <!-- Stress versus radius plot -->
+    <line x1="343" y1="674" x2="552" y2="674" stroke="#243746" stroke-width="1.5" marker-end="url(#arrow)"/>
+    <line x1="343" y1="674" x2="343" y2="524" stroke="#243746" stroke-width="1.5" marker-end="url(#arrow)"/>
+    <text x="341" y="516" font-size="14" fill="#243746">τ (MPa)</text>
+    <line x1="343" y1="549" x2="525" y2="549" stroke="#a4b2bc" stroke-width="1" stroke-dasharray="4 4"/>
+    <line x1="525" y1="549" x2="525" y2="674" stroke="#a4b2bc" stroke-width="1" stroke-dasharray="4 4"/>
+    <line x1="343" y1="674" x2="525" y2="549" stroke="#b44732" stroke-width="3"/>
+    <circle cx="525" cy="549" r="4" fill="#b44732"/>
+    <text x="332" y="554" text-anchor="end" font-size="14" fill="#b44732">81.49</text>
+    <text x="332" y="691" text-anchor="end" font-size="13" fill="#243746">0</text>
+    <text x="525" y="696" text-anchor="middle" font-size="14" fill="#243746">25</text>
+    <text x="439" y="720" text-anchor="middle" font-size="14" fill="#243746">Radius r (mm)</text>
+    <text x="439" y="743" text-anchor="middle" font-size="13" fill="#526674">Linear: zero at centre, peak at surface</text>
+
+    <!-- Twist diagram -->
+    <rect x="605" y="440" width="560" height="330" rx="5" fill="#ffffff" stroke="#c5d0d7" stroke-width="1.2"/>
+    <text x="625" y="470" font-size="16" font-weight="700" fill="#182e3d">03  RELATIVE ROTATION OF THE ENDS</text>
+    <text x="625" y="495" font-size="13" fill="#526674">End radii superimposed, viewed along the shaft axis</text>
+
+    <circle cx="740" cy="605" r="81" fill="#eff5f8" stroke="#243746" stroke-width="2"/>
+    <line x1="646" y1="605" x2="834" y2="605" stroke="#8b9ba6" stroke-width="1" stroke-dasharray="7 4"/>
+    <line x1="740" y1="699" x2="740" y2="512" stroke="#8b9ba6" stroke-width="1" stroke-dasharray="7 4"/>
+    <line x1="740" y1="605" x2="740" y2="524" stroke="#526674" stroke-width="2" stroke-dasharray="6 4"/>
+    <line x1="740" y1="605" x2="770.3" y2="529.9" stroke="#b44732" stroke-width="3"/>
+    <circle cx="740" cy="605" r="3.5" fill="#243746"/>
+    <path d="M740 553 A52 52 0 0 1 759.5 556.8" fill="none" stroke="#b44732" stroke-width="1.8" marker-end="url(#redArrow)"/>
+    <text x="753" y="582" font-size="19" font-style="italic" fill="#b44732">φ</text>
+
+    <polyline points="740,524 841,524 862,542" fill="none" stroke="#526674" stroke-width="1.1"/>
+    <text x="875" y="547" font-size="15" fill="#526674">End A reference radius</text>
+    <polyline points="770.3,529.9 846,570 862,570" fill="none" stroke="#b44732" stroke-width="1.1"/>
+    <text x="875" y="575" font-size="15" fill="#b44732">End B rotated radius</text>
+    <text x="875" y="617" font-size="22" font-weight="700" fill="#b44732">φ = 2.334°</text>
+    <text x="875" y="644" font-size="14" fill="#526674">= 0.040744 rad</text>
+    <text x="875" y="672" font-size="13" fill="#526674">Angle exaggerated for clarity</text>
+    <text x="635" y="730" font-size="16" fill="#243746">φ = TL/(GJ) = (2,000,000 × 1,000)/(80,000 × J)</text>
+    <text x="635" y="752" font-size="13" fill="#526674">Uniform circular shaft • linear elastic response • end effects neglected</text>
+
+    <!-- Computed results, consistent N-mm units -->
+    <rect x="35" y="790" width="1130" height="112" rx="5" fill="#f2f6f8" stroke="#c5d0d7" stroke-width="1.2"/>
+    <line x1="410" y1="807" x2="410" y2="885" stroke="#c5d0d7" stroke-width="1"/>
+    <line x1="787" y1="807" x2="787" y2="885" stroke="#c5d0d7" stroke-width="1"/>
+
+    <text x="55" y="816" font-size="13" font-weight="700" fill="#526674">POLAR SECOND MOMENT OF AREA</text>
+    <text x="55" y="846" font-size="22" font-weight="700" fill="#182e3d">J = 613,592 mm⁴</text>
+    <text x="55" y="878" font-size="16" fill="#243746">J = πd⁴/32 = π(50)⁴/32</text>
+
+    <text x="432" y="816" font-size="13" font-weight="700" fill="#526674">MAXIMUM SHEAR STRESS</text>
+    <text x="432" y="846" font-size="22" font-weight="700" fill="#b44732">τmax = 81.49 MPa</text>
+    <text x="432" y="878" font-size="16" fill="#243746">τmax = T(d/2)/J = 2,000,000 × 25/J</text>
+
+    <text x="809" y="816" font-size="13" font-weight="700" fill="#526674">TOTAL ANGLE OF TWIST</text>
+    <text x="809" y="846" font-size="22" font-weight="700" fill="#126b9c">φ = 2.334°</text>
+    <text x="809" y="878" font-size="16" fill="#243746">φ = [TL/(GJ)] × 180/π</text>
+
+    <text x="40" y="925" font-size="12" fill="#526674">Stress and twist values are magnitudes. Equal and opposite end torques maintain torsional equilibrium.</text>
+  </g>
+</svg></div><ul class=checks><li>6/6 checks passed</li></ul><footer>256 in / 4894 out · 90.387s · finish=stop · ink=None</footer></section><section class="card ok"><header><b>thick_cylinder_lame</b><span class="badge ok">ok</span> <a href="outputs/thick_cylinder_lame-0.svg">svg</a></header><p class=prompt>Thick-walled cylinder, inner radius 50 mm, outer radius 100 mm, internal pressure 50 MPa, no external pressure. Draw the cross-section and plot the radial and tangential (hoop) stress distributions through the wall thickness from Lame&#x27;s equations. Label the hoop stress at the inner and outer surfaces in MPa and the radial stress at the inner and outer surfaces in MPa.</p><div class=inline><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 800">
+  <defs>
+    <pattern id="wallHatch" width="10" height="10" patternUnits="userSpaceOnUse">
+      <rect width="10" height="10" fill="#eef2f5"/>
+      <path d="M-2 2 L2 -2 M0 10 L10 0 M8 12 L12 8" fill="none" stroke="#c4cdd5" stroke-width="1"/>
+    </pattern>
+    <marker id="dimensionArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#334155"/>
+    </marker>
+    <marker id="pressureArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#b45309"/>
+    </marker>
+  </defs>
+
+  <rect width="1240" height="800" fill="#ffffff"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="45" y="44" fill="#142536" font-size="26" font-weight="bold">Thick-walled cylinder — Lamé stress distributions</text>
+    <text x="45" y="75" fill="#475569" font-size="16">Inner radius 50 mm · Outer radius 100 mm · Internal pressure 50 MPa · External pressure 0 MPa</text>
+    <line x1="45" y1="94" x2="1195" y2="94" stroke="#cbd5e1" stroke-width="1"/>
+    <line x1="605" y1="115" x2="605" y2="695" stroke="#dbe2e8" stroke-width="1"/>
+
+    <text x="45" y="131" fill="#142536" font-size="19" font-weight="bold">Cross-section</text>
+    <text x="45" y="155" fill="#64748b" font-size="14">Concentric bore and wall; radii drawn to scale</text>
+
+    <circle cx="290" cy="355" r="180" fill="url(#wallHatch)" stroke="#243746" stroke-width="2.5"/>
+    <circle cx="290" cy="355" r="90" fill="#ffffff" stroke="#243746" stroke-width="2.5"/>
+
+    <line x1="90" y1="355" x2="490" y2="355" stroke="#94a3b8" stroke-width="1" stroke-dasharray="12 5 2 5"/>
+    <line x1="290" y1="155" x2="290" y2="555" stroke="#94a3b8" stroke-width="1" stroke-dasharray="12 5 2 5"/>
+
+    <g fill="none" stroke="#b45309" stroke-width="2" marker-end="url(#pressureArrow)">
+      <line x1="290" y1="301" x2="290" y2="269"/>
+      <line x1="344" y1="355" x2="376" y2="355"/>
+      <line x1="290" y1="409" x2="290" y2="441"/>
+      <line x1="236" y1="355" x2="204" y2="355"/>
+      <line x1="328" y1="393" x2="351" y2="416"/>
+      <line x1="252" y1="393" x2="229" y2="416"/>
+    </g>
+
+    <line x1="290" y1="355" x2="417.28" y2="227.72" stroke="#334155" stroke-width="1.6" marker-end="url(#dimensionArrow)"/>
+    <text x="348" y="276" fill="#243746" font-size="16" transform="rotate(-45 348 276)">rₒ = 100 mm</text>
+
+    <line x1="290" y1="355" x2="212.06" y2="310" stroke="#334155" stroke-width="1.6" marker-end="url(#dimensionArrow)"/>
+    <path d="M212 310 L187 285 L109 285" fill="none" stroke="#334155" stroke-width="1.2"/>
+    <text x="109" y="276" fill="#243746" font-size="16">rᵢ = 50 mm</text>
+    <circle cx="290" cy="355" r="3" fill="#243746"/>
+
+    <rect x="239" y="366" width="102" height="25" fill="#ffffff"/>
+    <text x="290" y="384" fill="#b45309" font-size="15" text-anchor="middle" font-weight="bold">pᵢ = 50 MPa</text>
+
+    <path d="M452 433 L493 453 L551 453" fill="none" stroke="#475569" stroke-width="1.2"/>
+    <text x="490" y="443" fill="#475569" font-size="15">Wall</text>
+    <path d="M444 262 L488 228 L553 228" fill="none" stroke="#475569" stroke-width="1.2"/>
+    <text x="476" y="216" fill="#475569" font-size="15">pₒ = 0 MPa</text>
+
+    <text x="290" y="584" fill="#243746" font-size="17" text-anchor="middle">Wall thickness: t = rₒ − rᵢ = 50 mm</text>
+    <text x="290" y="612" fill="#b45309" font-size="14" text-anchor="middle">Pressure arrows act outward on the bore surface.</text>
+    <text x="290" y="640" fill="#64748b" font-size="14" text-anchor="middle">Stress sign convention: tension +, compression −</text>
+
+    <text x="680" y="131" fill="#142536" font-size="19" font-weight="bold">Stress through the wall</text>
+    <text x="645" y="163" fill="#475569" font-size="14">MPa</text>
+
+    <g fill="none" stroke="#e2e8f0" stroke-width="1">
+      <line x1="720" y1="150" x2="1150" y2="150"/>
+      <line x1="720" y1="225" x2="1150" y2="225"/>
+      <line x1="720" y1="300" x2="1150" y2="300"/>
+      <line x1="720" y1="375" x2="1150" y2="375"/>
+      <line x1="720" y1="525" x2="1150" y2="525"/>
+      <line x1="720" y1="600" x2="1150" y2="600"/>
+      <line x1="806" y1="150" x2="806" y2="620"/>
+      <line x1="892" y1="150" x2="892" y2="620"/>
+      <line x1="978" y1="150" x2="978" y2="620"/>
+      <line x1="1064" y1="150" x2="1064" y2="620"/>
+      <line x1="1150" y1="150" x2="1150" y2="620"/>
+    </g>
+
+    <line x1="720" y1="150" x2="720" y2="620" stroke="#475569" stroke-width="1.5"/>
+    <line x1="720" y1="620" x2="1150" y2="620" stroke="#475569" stroke-width="1.5"/>
+    <line x1="720" y1="450" x2="1150" y2="450" stroke="#94a3b8" stroke-width="1.5"/>
+
+    <g fill="#475569" font-size="14" text-anchor="end">
+      <text x="707" y="155">100</text>
+      <text x="707" y="230">75</text>
+      <text x="707" y="305">50</text>
+      <text x="707" y="380">25</text>
+      <text x="707" y="455">0</text>
+      <text x="707" y="530">−25</text>
+      <text x="707" y="605">−50</text>
+    </g>
+
+    <g stroke="#475569" stroke-width="1.2">
+      <line x1="720" y1="620" x2="720" y2="627"/>
+      <line x1="806" y1="620" x2="806" y2="627"/>
+      <line x1="892" y1="620" x2="892" y2="627"/>
+      <line x1="978" y1="620" x2="978" y2="627"/>
+      <line x1="1064" y1="620" x2="1064" y2="627"/>
+      <line x1="1150" y1="620" x2="1150" y2="627"/>
+    </g>
+    <g fill="#475569" font-size="14" text-anchor="middle">
+      <text x="720" y="649">50</text>
+      <text x="806" y="649">60</text>
+      <text x="892" y="649">70</text>
+      <text x="978" y="649">80</text>
+      <text x="1064" y="649">90</text>
+      <text x="1150" y="649">100</text>
+      <text x="935" y="677" font-size="16">Radius, r (mm)</text>
+      <text x="720" y="678" font-size="12">Inner surface</text>
+      <text x="1150" y="678" font-size="12">Outer surface</text>
+    </g>
+
+    <path d="M720 200
+      C734.333 213.333 748.667 224.693 763 234.711
+      C777.333 244.729 791.667 253.395 806 261.111
+      C820.333 268.827 834.667 275.588 849 281.657
+      C863.333 287.726 877.667 293.100 892 297.959
+      C906.333 302.818 920.667 307.160 935 311.111
+      C949.333 315.062 963.667 318.620 978 321.875
+      C992.333 325.130 1006.667 328.082 1021 330.796
+      C1035.333 333.510 1049.667 335.986 1064 338.272
+      C1078.333 340.558 1092.667 342.654 1107 344.598
+      C1121.333 346.542 1135.667 348.333 1150 350"
+      fill="none" stroke="#b42335" stroke-width="3"/>
+
+    <path d="M720 600
+      C734.333 586.667 748.667 575.307 763 565.289
+      C777.333 555.271 791.667 546.605 806 538.889
+      C820.333 531.173 834.667 524.412 849 518.343
+      C863.333 512.274 877.667 506.900 892 502.041
+      C906.333 497.182 920.667 492.840 935 488.889
+      C949.333 484.938 963.667 481.380 978 478.125
+      C992.333 474.870 1006.667 471.918 1021 469.204
+      C1035.333 466.490 1049.667 464.014 1064 461.728
+      C1078.333 459.442 1092.667 457.346 1107 455.402
+      C1121.333 453.458 1135.667 451.667 1150 450"
+      fill="none" stroke="#1769aa" stroke-width="3"/>
+
+    <g fill="#b42335" stroke="#ffffff" stroke-width="1.5">
+      <circle cx="720" cy="200" r="5"/>
+      <circle cx="1150" cy="350" r="5"/>
+    </g>
+    <g fill="#1769aa" stroke="#ffffff" stroke-width="1.5">
+      <circle cx="720" cy="600" r="5"/>
+      <circle cx="1150" cy="450" r="5"/>
+    </g>
+
+    <g font-size="16" font-weight="bold">
+      <text x="737" y="190" fill="#b42335">σθ(rᵢ) = +83.33 MPa</text>
+      <text x="1144" y="330" fill="#b42335" text-anchor="end">σθ(rₒ) = +33.33 MPa</text>
+      <text x="757" y="590" fill="#1769aa">σr(rᵢ) = −50.00 MPa</text>
+      <text x="1144" y="430" fill="#1769aa" text-anchor="end">σr(rₒ) = 0.00 MPa</text>
+    </g>
+    <text x="851" y="254" fill="#b42335" font-size="15">Tangential / hoop, σθ</text>
+    <text x="922" y="541" fill="#1769aa" font-size="15">Radial, σr</text>
+
+    <rect x="45" y="709" width="1150" height="69" rx="4" fill="#f1f5f9" stroke="#dbe2e8" stroke-width="1"/>
+    <text x="62" y="737" fill="#243746" font-size="16" font-weight="bold">Lamé equations</text>
+    <text x="240" y="737" fill="#243746" font-size="16">σr = A − B/r²</text>
+    <text x="452" y="737" fill="#243746" font-size="16">σθ = A + B/r²</text>
+    <text x="672" y="737" fill="#243746" font-size="15">A = 16.6667 MPa;  B = 166,666.6667 MPa·mm²</text>
+    <text x="62" y="763" fill="#475569" font-size="14">For pₒ = 0:  A = pᵢrᵢ²/(rₒ² − rᵢ²),  B = pᵢrᵢ²rₒ²/(rₒ² − rᵢ²).  Use r in mm; plotted domain: 50 ≤ r ≤ 100 mm.</text>
+  </g>
+</svg></div><ul class=checks><li>7/7 checks passed</li></ul><footer>243 in / 4556 out · 84.508s · finish=stop · ink=None</footer></section><section class="card ok"><header><b>truss_member_forces</b><span class="badge ok">ok</span> <a href="outputs/truss_member_forces-0.svg">svg</a></header><p class=prompt>A triangular truss: pin support A at (0, 0), roller support B at (8 m, 0), apex C at (4 m, 3 m), members AB, AC, BC. A vertical load of 24 kN acts at C. Draw the truss with supports and load, compute the reactions and every member force by the method of joints, and label each member with its force in kN and T for tension or C for compression. Include a free-body diagram of joint C.</p><div class=inline><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 900">
+  <defs>
+    <marker id="arrow-dark" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#253b53"/>
+    </marker>
+    <marker id="arrow-red" markerWidth="12" markerHeight="10" refX="11" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L12,5 L0,10 Z" fill="#bd3030"/>
+    </marker>
+    <marker id="arrow-teal" markerWidth="11" markerHeight="9" refX="10" refY="4.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L11,4.5 L0,9 Z" fill="#087b70"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1120" height="900" fill="#ffffff"/>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#172b40">
+    <text x="40" y="39" font-size="25" font-weight="bold">Triangular truss — reactions and member forces</text>
+    <text x="40" y="65" font-size="15" fill="#536273">Ideal pin-connected members • downward load at C • dimensions in metres</text>
+  </g>
+  <line x1="40" y1="80" x2="1080" y2="80" stroke="#c7d0d9" stroke-width="1"/>
+
+  <!-- Truss: scale 60 SVG units per metre. -->
+  <text x="40" y="108" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="bold" fill="#172b40">1  Truss and support reactions</text>
+
+  <!-- Height dimension and extension lines. -->
+  <g stroke="#84909b" stroke-width="1" fill="none">
+    <line x1="378" y1="210" x2="685" y2="210" stroke-dasharray="5 5"/>
+    <line x1="617" y1="390" x2="685" y2="390"/>
+    <line x1="675" y1="210" x2="675" y2="390"/>
+    <line x1="669" y1="216" x2="681" y2="204"/>
+    <line x1="669" y1="396" x2="681" y2="384"/>
+  </g>
+  <text x="688" y="306" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#536273">3 m</text>
+
+  <!-- Members. -->
+  <g stroke="#253b53" stroke-width="5" fill="none" stroke-linecap="round">
+    <line x1="120" y1="390" x2="600" y2="390"/>
+    <line x1="120" y1="390" x2="360" y2="210"/>
+    <line x1="600" y1="390" x2="360" y2="210"/>
+  </g>
+
+  <!-- Pin A. -->
+  <polygon points="120,397 102,424 138,424" fill="#eef2f5" stroke="#253b53" stroke-width="2"/>
+  <line x1="94" y1="431" x2="146" y2="431" stroke="#253b53" stroke-width="2"/>
+  <path d="M96,439 l8,-8 M108,439 l8,-8 M120,439 l8,-8 M132,439 l8,-8" fill="none" stroke="#84909b" stroke-width="1.2"/>
+
+  <!-- Roller B. -->
+  <polygon points="600,397 582,416 618,416" fill="#eef2f5" stroke="#253b53" stroke-width="2"/>
+  <circle cx="588" cy="424" r="6" fill="#ffffff" stroke="#253b53" stroke-width="1.6"/>
+  <circle cx="612" cy="424" r="6" fill="#ffffff" stroke="#253b53" stroke-width="1.6"/>
+  <line x1="574" y1="433" x2="626" y2="433" stroke="#253b53" stroke-width="2"/>
+  <path d="M576,441 l8,-8 M588,441 l8,-8 M600,441 l8,-8 M612,441 l8,-8" fill="none" stroke="#84909b" stroke-width="1.2"/>
+
+  <!-- Applied load and upward reactions. -->
+  <line x1="360" y1="124" x2="360" y2="202" stroke="#bd3030" stroke-width="3" marker-end="url(#arrow-red)"/>
+  <line x1="120" y1="385" x2="120" y2="300" stroke="#087b70" stroke-width="2.5" marker-end="url(#arrow-teal)"/>
+  <line x1="600" y1="385" x2="600" y2="300" stroke="#087b70" stroke-width="2.5" marker-end="url(#arrow-teal)"/>
+
+  <g fill="#ffffff" stroke="#253b53" stroke-width="2">
+    <circle cx="120" cy="390" r="6"/>
+    <circle cx="600" cy="390" r="6"/>
+    <circle cx="360" cy="210" r="6"/>
+  </g>
+
+  <g font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#172b40">
+    <text x="376" y="150" fill="#bd3030" font-size="19" font-weight="bold">24 kN</text>
+    <text x="75" y="285" fill="#087b70">Aᵧ = 12 kN ↑</text>
+    <text x="551" y="285" fill="#087b70">Bᵧ = 12 kN ↑</text>
+    <text x="64" y="385" font-size="21" font-weight="bold">A</text>
+    <text x="620" y="385" font-size="21" font-weight="bold">B</text>
+    <text x="330" y="197" font-size="21" font-weight="bold">C</text>
+    <text x="375" y="237" font-size="14" fill="#536273">(4, 3)</text>
+    <text x="120" y="462" text-anchor="middle" font-size="14">Pin A (0, 0)</text>
+    <text x="600" y="462" text-anchor="middle" font-size="14">Roller B (8, 0)</text>
+    <text x="120" y="482" text-anchor="middle" font-size="14" fill="#087b70">Aₓ = 0</text>
+    <text x="224" y="280" text-anchor="middle" transform="rotate(-36.8699 224 280)" font-weight="bold">AC = 20 kN (C)</text>
+    <text x="496" y="280" text-anchor="middle" transform="rotate(36.8699 496 280)" font-weight="bold">BC = 20 kN (C)</text>
+    <text x="360" y="423" text-anchor="middle" font-weight="bold">AB = 16 kN (T)</text>
+  </g>
+
+  <!-- Span dimension, split at the apex projection. -->
+  <g stroke="#84909b" stroke-width="1" fill="none">
+    <line x1="120" y1="490" x2="120" y2="541"/>
+    <line x1="360" y1="445" x2="360" y2="516" stroke-dasharray="4 4"/>
+    <line x1="600" y1="474" x2="600" y2="541"/>
+    <line x1="120" y1="505" x2="600" y2="505"/>
+    <line x1="114" y1="511" x2="126" y2="499"/>
+    <line x1="354" y1="511" x2="366" y2="499"/>
+    <line x1="594" y1="511" x2="606" y2="499"/>
+    <line x1="120" y1="535" x2="600" y2="535"/>
+    <line x1="114" y1="541" x2="126" y2="529"/>
+    <line x1="594" y1="541" x2="606" y2="529"/>
+  </g>
+  <g font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#536273" text-anchor="middle">
+    <text x="240" y="498">4 m</text>
+    <text x="480" y="498">4 m</text>
+    <text x="360" y="556">8 m</text>
+  </g>
+
+  <!-- Free-body diagram of joint C. -->
+  <rect x="740" y="100" width="340" height="452" rx="5" fill="#f8fafc" stroke="#c7d0d9" stroke-width="1"/>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#172b40">
+    <text x="760" y="129" font-size="17" font-weight="bold">2  Joint C — free-body diagram</text>
+    <text x="910" y="154" text-anchor="middle" font-size="14" fill="#536273">Actual member-force directions</text>
+  </g>
+
+  <!-- Compression acts toward the isolated joint. -->
+  <line x1="810" y1="325" x2="903" y2="255.25" stroke="#253b53" stroke-width="2.8" marker-end="url(#arrow-dark)"/>
+  <line x1="1010" y1="325" x2="917" y2="255.25" stroke="#253b53" stroke-width="2.8" marker-end="url(#arrow-dark)"/>
+  <line x1="910" y1="250" x2="910" y2="379" stroke="#bd3030" stroke-width="3" marker-end="url(#arrow-red)"/>
+  <circle cx="910" cy="250" r="6" fill="#ffffff" stroke="#253b53" stroke-width="2"/>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#172b40" font-size="15">
+    <text x="910" y="231" text-anchor="middle" font-size="20" font-weight="bold">C</text>
+    <text x="810" y="346" text-anchor="middle" font-weight="bold">AC: 20 kN (C)</text>
+    <text x="1010" y="346" text-anchor="middle" font-weight="bold">BC: 20 kN (C)</text>
+    <text x="927" y="383" fill="#bd3030" font-size="18" font-weight="bold">24 kN</text>
+  </g>
+
+  <!-- Member slope triangle. -->
+  <path d="M783,462 L863,462 L863,402 Z" fill="none" stroke="#84909b" stroke-width="1.5"/>
+  <path d="M853,462 L853,452 L863,452" fill="none" stroke="#84909b" stroke-width="1"/>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#536273" font-size="14">
+    <text x="823" y="480" text-anchor="middle">4</text>
+    <text x="873" y="437">3</text>
+    <text x="814" y="426">5</text>
+    <text x="924" y="430">sin θ = 3/5</text>
+    <text x="924" y="456">cos θ = 4/5</text>
+    <text x="910" y="512" text-anchor="middle">Compression forces push into the joint.</text>
+    <text x="910" y="534" text-anchor="middle">Horizontal components cancel.</text>
+  </g>
+
+  <!-- Calculation block. -->
+  <line x1="40" y1="577" x2="1080" y2="577" stroke="#c7d0d9" stroke-width="1"/>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#172b40">
+    <text x="40" y="608" font-size="18" font-weight="bold">3  Equilibrium calculations</text>
+    <text x="40" y="633" font-size="14" fill="#536273">Take +x right, +y up and positive moments counterclockwise. Joint equations assume member tension positive.</text>
+
+    <text x="40" y="669" font-size="16" font-weight="bold">Whole-truss equilibrium</text>
+    <text x="40" y="698" font-size="16">ΣM_A = 0:  8Bᵧ − 24(4) = 0</text>
+    <text x="40" y="725" font-size="16" fill="#087b70">Bᵧ = 12 kN ↑</text>
+    <text x="40" y="752" font-size="16">ΣF_y = 0:  Aᵧ + 12 − 24 = 0</text>
+    <text x="40" y="779" font-size="16" fill="#087b70">Aᵧ = 12 kN ↑</text>
+    <text x="40" y="806" font-size="16">ΣF_x = 0:  Aₓ = 0</text>
+
+    <text x="525" y="669" font-size="16" font-weight="bold">Joint C</text>
+    <text x="525" y="698" font-size="16">ΣF_x = 0:  −(4/5)F_AC + (4/5)F_BC = 0</text>
+    <text x="525" y="725" font-size="16">ΣF_y = 0:  −(3/5)(F_AC + F_BC) − 24 = 0</text>
+    <text x="525" y="752" font-size="16" font-weight="bold">F_AC = F_BC = −20 kN → 20 kN compression</text>
+
+    <text x="525" y="788" font-size="16" font-weight="bold">Joint A</text>
+    <text x="525" y="815" font-size="16">ΣF_x = 0:  F_AB + (4/5)(−20) = 0</text>
+    <text x="525" y="842" font-size="16" font-weight="bold">F_AB = +16 kN → 16 kN tension</text>
+  </g>
+
+  <line x1="40" y1="861" x2="1080" y2="861" stroke="#c7d0d9" stroke-width="1"/>
+  <text x="40" y="885" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#536273">T = tension • C = compression • Inclined member lengths: AC = BC = √(4² + 3²) = 5 m</text>
+</svg></div><ul class=checks><li>6/6 checks passed</li></ul><footer>266 in / 4246 out · 74.693s · finish=stop · ink=None</footer></section><section class="card ok"><header><b>udl_beam_shear_moment</b><span class="badge ok">ok</span> <a href="outputs/udl_beam_shear_moment-0.svg">svg</a></header><p class=prompt>Simply supported beam of span 8 m carrying a uniformly distributed load of 10 kN/m over its full length. Draw the loaded beam, the shear force diagram (linear) and the bending moment diagram (parabolic), stacked and aligned. Label the reactions, the maximum shear force, and the maximum bending moment with its location.</p><div class=inline><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 920">
+  <defs>
+    <marker id="loadArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#b63b32" stroke="none"/>
+    </marker>
+    <marker id="reactionArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#246a48" stroke="none"/>
+    </marker>
+    <marker id="dimensionArrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 10 0 L 0 5 L 10 10" fill="none" stroke="#4b5563" stroke-width="1.5"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="960" height="920" fill="#ffffff" stroke="none"/>
+
+  <g font-family="Arial, sans-serif" fill="#202b36" stroke="none">
+    <text x="40" y="45" font-size="25" font-weight="bold">Simply supported beam</text>
+    <text x="40" y="73" font-size="15">Full-span uniformly distributed load • Span L = 8 m</text>
+    <text x="500" y="108" text-anchor="middle" font-size="20" fill="#b63b32">w = 10 kN/m</text>
+  </g>
+
+  <!-- Uniformly distributed load -->
+  <g stroke="#b63b32" stroke-width="2" fill="none">
+    <line x1="180" y1="125" x2="820" y2="125"/>
+    <g marker-end="url(#loadArrow)">
+      <line x1="180" y1="125" x2="180" y2="219"/>
+      <line x1="220" y1="125" x2="220" y2="219"/>
+      <line x1="260" y1="125" x2="260" y2="219"/>
+      <line x1="300" y1="125" x2="300" y2="219"/>
+      <line x1="340" y1="125" x2="340" y2="219"/>
+      <line x1="380" y1="125" x2="380" y2="219"/>
+      <line x1="420" y1="125" x2="420" y2="219"/>
+      <line x1="460" y1="125" x2="460" y2="219"/>
+      <line x1="500" y1="125" x2="500" y2="219"/>
+      <line x1="540" y1="125" x2="540" y2="219"/>
+      <line x1="580" y1="125" x2="580" y2="219"/>
+      <line x1="620" y1="125" x2="620" y2="219"/>
+      <line x1="660" y1="125" x2="660" y2="219"/>
+      <line x1="700" y1="125" x2="700" y2="219"/>
+      <line x1="740" y1="125" x2="740" y2="219"/>
+      <line x1="780" y1="125" x2="780" y2="219"/>
+      <line x1="820" y1="125" x2="820" y2="219"/>
+    </g>
+  </g>
+
+  <!-- Beam and supports: pin at A, roller at B -->
+  <line x1="180" y1="230" x2="820" y2="230" stroke="#202b36" stroke-width="7" fill="none"/>
+  <g stroke="#202b36" stroke-width="2">
+    <polygon points="180,235 160,261 200,261" fill="#ffffff"/>
+    <line x1="152" y1="267" x2="208" y2="267" fill="none"/>
+    <path d="M 158 267 l -7 8 M 170 267 l -7 8 M 182 267 l -7 8 M 194 267 l -7 8 M 206 267 l -7 8" fill="none"/>
+    <polygon points="820,235 800,255 840,255" fill="#ffffff"/>
+    <circle cx="808" cy="261" r="5" fill="#ffffff"/>
+    <circle cx="832" cy="261" r="5" fill="#ffffff"/>
+    <line x1="792" y1="269" x2="848" y2="269" fill="none"/>
+    <path d="M 798 269 l -7 8 M 810 269 l -7 8 M 822 269 l -7 8 M 834 269 l -7 8 M 846 269 l -7 8" fill="none"/>
+  </g>
+  <g font-family="Arial, sans-serif" font-size="17" fill="#202b36" stroke="none">
+    <text x="139" y="251">A</text>
+    <text x="852" y="251">B</text>
+  </g>
+
+  <!-- Vertical reactions -->
+  <g stroke="#246a48" stroke-width="2.5" fill="none" marker-end="url(#reactionArrow)">
+    <line x1="180" y1="328" x2="180" y2="280"/>
+    <line x1="820" y1="328" x2="820" y2="282"/>
+  </g>
+  <g font-family="Arial, sans-serif" font-size="18" fill="#246a48" stroke="none">
+    <text x="195" y="314">R_A = 40 kN ↑</text>
+    <text x="805" y="314" text-anchor="end">R_B = 40 kN ↑</text>
+  </g>
+
+  <!-- Span dimension -->
+  <g stroke="#4b5563" stroke-width="1.2" fill="none">
+    <line x1="180" y1="337" x2="180" y2="368"/>
+    <line x1="820" y1="337" x2="820" y2="368"/>
+    <line x1="180" y1="352" x2="468" y2="352" marker-start="url(#dimensionArrow)"/>
+    <line x1="532" y1="352" x2="820" y2="352" marker-end="url(#dimensionArrow)"/>
+  </g>
+  <text x="500" y="358" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" fill="#202b36" stroke="none">8 m</text>
+
+  <!-- Shared alignment guides -->
+  <g stroke="#c4ccd3" stroke-width="1" stroke-dasharray="5 6" fill="none">
+    <line x1="180" y1="413" x2="180" y2="858"/>
+    <line x1="500" y1="413" x2="500" y2="858"/>
+    <line x1="820" y1="413" x2="820" y2="858"/>
+  </g>
+
+  <!-- Shear force diagram: V(x) = 40 - 10x -->
+  <g font-family="Arial, sans-serif" fill="#202b36" stroke="none">
+    <text x="40" y="401" font-size="17" font-weight="bold">SHEAR FORCE DIAGRAM</text>
+    <text x="820" y="401" font-size="15" text-anchor="end">Maximum |V| = 40 kN at the supports</text>
+  </g>
+  <polygon points="180,510 180,430 500,510" fill="#dcecf7" stroke="none"/>
+  <polygon points="500,510 820,590 820,510" fill="#e8eef3" stroke="none"/>
+  <line x1="160" y1="510" x2="850" y2="510" stroke="#596675" stroke-width="1.4" fill="none"/>
+  <path d="M 180 510 L 180 430 L 820 590 L 820 510" fill="none" stroke="#21618c" stroke-width="3"/>
+  <circle cx="500" cy="510" r="3.5" fill="#21618c" stroke="none"/>
+  <g font-family="Arial, sans-serif" font-size="16" stroke="none">
+    <text x="165" y="436" text-anchor="end" fill="#21618c">+40 kN</text>
+    <text x="835" y="596" fill="#21618c">−40 kN</text>
+    <text x="147" y="516" text-anchor="end" fill="#596675">0</text>
+    <text x="852" y="501" fill="#596675">x</text>
+    <text x="515" y="492" fill="#21618c">V = 0 at x = 4 m</text>
+    <text x="280" y="490" font-size="22" fill="#21618c">+</text>
+    <text x="695" y="551" font-size="22" fill="#21618c">−</text>
+    <text x="500" y="622" text-anchor="middle" fill="#596675">V(x) = 40 − 10x  [kN]</text>
+  </g>
+
+  <!-- Bending moment diagram: M(x) = 40x - 5x² -->
+  <text x="40" y="656" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#202b36" stroke="none">BENDING MOMENT DIAGRAM</text>
+  <path d="M 180 830 Q 500 590 820 830 Z" fill="#e1efe8" stroke="none"/>
+  <line x1="160" y1="830" x2="850" y2="830" stroke="#596675" stroke-width="1.4" fill="none"/>
+  <path d="M 180 830 Q 500 590 820 830" fill="none" stroke="#246a48" stroke-width="3"/>
+  <line x1="500" y1="710" x2="500" y2="830" stroke="#246a48" stroke-width="1.5" stroke-dasharray="4 4" fill="none"/>
+  <circle cx="500" cy="710" r="4" fill="#246a48" stroke="none"/>
+  <g font-family="Arial, sans-serif" stroke="none">
+    <text x="500" y="676" font-size="19" font-weight="bold" text-anchor="middle" fill="#246a48">M_max = +80 kN·m</text>
+    <text x="500" y="698" font-size="16" text-anchor="middle" fill="#246a48">at x = 4 m (midspan)</text>
+    <text x="530" y="783" font-size="17" fill="#246a48">+ sagging</text>
+    <text x="165" y="822" font-size="15" text-anchor="end" fill="#246a48">0</text>
+    <text x="834" y="822" font-size="15" fill="#246a48">0</text>
+    <text x="852" y="847" font-size="16" fill="#596675">x</text>
+    <text x="180" y="862" font-size="16" text-anchor="middle" fill="#596675">0 m</text>
+    <text x="500" y="862" font-size="16" text-anchor="middle" fill="#596675">4 m</text>
+    <text x="820" y="862" font-size="16" text-anchor="middle" fill="#596675">8 m</text>
+    <text x="500" y="895" font-size="16" text-anchor="middle" fill="#596675">M(x) = 40x − 5x²  [kN·m]   •   x measured from A in metres</text>
+  </g>
+</svg></div><ul class=checks><li>5/5 checks passed</li></ul><footer>227 in / 3339 out · 53.35s · finish=stop · ink=None</footer></section></div>

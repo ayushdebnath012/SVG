@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 880">
+  <defs>
+    <pattern id="plaster" width="10" height="10" patternUnits="userSpaceOnUse">
+      <rect width="10" height="10" fill="#ffffff"/>
+      <path d="M-2 2 L2 -2 M0 10 L10 0 M8 12 L12 8" fill="none" stroke="#a0a8af" stroke-width="1"/>
+    </pattern>
+    <pattern id="insulation" width="16" height="16" patternUnits="userSpaceOnUse">
+      <rect width="16" height="16" fill="#ffffff"/>
+      <path d="M0 0 L16 16 M0 16 L16 0" fill="none" stroke="#a0a8af" stroke-width="0.8"/>
+    </pattern>
+    <pattern id="brick" width="40" height="24" patternUnits="userSpaceOnUse">
+      <rect width="40" height="24" fill="#ffffff"/>
+      <path d="M0 0 H40 M0 12 H40 M0 24 H40 M20 0 V12 M0 12 V24 M40 12 V24" fill="none" stroke="#a0a8af" stroke-width="1"/>
+    </pattern>
+    <marker id="fluxArrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0 0 L10 4 L0 8 Z" fill="#b64028"/>
+    </marker>
+    <marker id="dimArrow" markerWidth="7" markerHeight="6" refX="0" refY="3" orient="auto-start-reverse">
+      <path d="M7 0 L0 3 L7 6" fill="none" stroke="#263440" stroke-width="1"/>
+    </marker>
+  </defs>
+
+  <rect width="1040" height="880" fill="#ffffff"/>
+
+  <g font-family="Arial, Helvetica, sans-serif" fill="#263440">
+    <text x="60" y="43" font-size="25" font-weight="bold">Steady heat conduction through a three-layer wall</text>
+    <text x="60" y="72" font-size="15">Inside → outside · One-dimensional conduction · Prescribed surface temperatures</text>
+
+    <text x="60" y="109" font-size="15" font-weight="bold">T (°C)</text>
+    <text x="715" y="106" font-size="14" fill="#b64028">Temperature profile</text>
+
+    <!-- Temperature grid: 10 drawing units per degree Celsius. -->
+    <g stroke="#e0e5e9" stroke-width="1">
+      <line x1="145" y1="120" x2="880" y2="120"/>
+      <line x1="145" y1="170" x2="880" y2="170"/>
+      <line x1="145" y1="220" x2="880" y2="220"/>
+      <line x1="145" y1="270" x2="880" y2="270"/>
+      <line x1="145" y1="320" x2="880" y2="320"/>
+      <line x1="145" y1="370" x2="880" y2="370"/>
+    </g>
+    <line x1="145" y1="113" x2="145" y2="380" stroke="#263440" stroke-width="1.3"/>
+    <g stroke="#263440" stroke-width="1">
+      <line x1="139" y1="120" x2="145" y2="120"/>
+      <line x1="139" y1="170" x2="145" y2="170"/>
+      <line x1="139" y1="220" x2="145" y2="220"/>
+      <line x1="139" y1="270" x2="145" y2="270"/>
+      <line x1="139" y1="320" x2="145" y2="320"/>
+      <line x1="139" y1="370" x2="145" y2="370"/>
+    </g>
+    <g font-size="14" text-anchor="end">
+      <text x="131" y="125">20</text>
+      <text x="131" y="175">15</text>
+      <text x="131" y="225">10</text>
+      <text x="131" y="275">5</text>
+      <text x="131" y="325">0</text>
+      <text x="131" y="375">−5</text>
+    </g>
+
+    <!-- Shared horizontal scale: 4 drawing units per millimetre. -->
+    <g stroke="#89959f" stroke-width="1" stroke-dasharray="5 5">
+      <line x1="200" y1="120" x2="200" y2="440"/>
+      <line x1="280" y1="126.9791" x2="280" y2="440"/>
+      <line x1="480" y1="345.0748" x2="480" y2="440"/>
+      <line x1="880" y1="370" x2="880" y2="440"/>
+    </g>
+
+    <polyline points="200,120 280,126.9791 480,345.0748 880,370"
+              fill="none" stroke="#b64028" stroke-width="3"/>
+    <g fill="#ffffff" stroke="#b64028" stroke-width="2">
+      <circle cx="200" cy="120" r="4"/>
+      <circle cx="280" cy="126.9791" r="4"/>
+      <circle cx="480" cy="345.0748" r="4"/>
+      <circle cx="880" cy="370" r="4"/>
+    </g>
+    <g font-size="16" font-weight="bold" fill="#b64028">
+      <text x="200" y="107">20.00 °C</text>
+      <text x="319" y="153">19.30 °C</text>
+      <text x="499" y="329">−2.51 °C</text>
+      <text x="895" y="375">−5.00 °C</text>
+    </g>
+    <path d="M285 129 L308 148" fill="none" stroke="#b64028" stroke-width="1"/>
+    <path d="M484 342 L494 331" fill="none" stroke="#b64028" stroke-width="1"/>
+
+    <rect x="474" y="384" width="272" height="23" fill="#ffffff"/>
+    <text x="610" y="401" text-anchor="middle" font-size="16" font-weight="bold" fill="#b64028">Heat flux q″ = 17.45 W/m²</text>
+    <line x1="355" y1="417" x2="745" y2="417" stroke="#b64028" stroke-width="2" marker-end="url(#fluxArrow)"/>
+
+    <!-- Wall section: 20 mm plaster, 50 mm insulation, 100 mm brick. -->
+    <rect x="200" y="440" width="80" height="210" fill="url(#plaster)" stroke="#263440" stroke-width="1.6"/>
+    <rect x="280" y="440" width="200" height="210" fill="url(#insulation)" stroke="#263440" stroke-width="1.6"/>
+    <rect x="480" y="440" width="400" height="210" fill="url(#brick)" stroke="#263440" stroke-width="1.6"/>
+
+    <g transform="translate(240 545) rotate(-90)" text-anchor="middle">
+      <rect x="-94" y="-26" width="188" height="52" fill="#ffffff"/>
+      <text x="0" y="-5" font-size="16" font-weight="bold">PLASTER</text>
+      <text x="0" y="16" font-size="14">k = 0.5 W/(m·K)</text>
+    </g>
+    <g text-anchor="middle">
+      <rect x="293" y="519" width="174" height="52" fill="#ffffff"/>
+      <text x="380" y="540" font-size="16" font-weight="bold">INSULATION</text>
+      <text x="380" y="561" font-size="14">k = 0.04 W/(m·K)</text>
+      <rect x="593" y="519" width="174" height="52" fill="#ffffff"/>
+      <text x="680" y="540" font-size="16" font-weight="bold">BRICK</text>
+      <text x="680" y="561" font-size="14">k = 0.7 W/(m·K)</text>
+    </g>
+    <text x="184" y="543" text-anchor="end" font-size="15" font-weight="bold">INSIDE</text>
+    <text x="184" y="566" text-anchor="end" font-size="14">20 °C surface</text>
+    <text x="896" y="543" font-size="15" font-weight="bold">OUTSIDE</text>
+    <text x="896" y="566" font-size="14">−5 °C surface</text>
+
+    <!-- Thickness dimensions. -->
+    <g stroke="#263440" stroke-width="1" fill="none">
+      <line x1="200" y1="658" x2="200" y2="746"/>
+      <line x1="280" y1="658" x2="280" y2="706"/>
+      <line x1="480" y1="658" x2="480" y2="706"/>
+      <line x1="880" y1="658" x2="880" y2="746"/>
+      <line x1="200" y1="695" x2="280" y2="695" marker-start="url(#dimArrow)" marker-end="url(#dimArrow)"/>
+      <line x1="280" y1="695" x2="480" y2="695" marker-start="url(#dimArrow)" marker-end="url(#dimArrow)"/>
+      <line x1="480" y1="695" x2="880" y2="695" marker-start="url(#dimArrow)" marker-end="url(#dimArrow)"/>
+      <line x1="200" y1="735" x2="880" y2="735" marker-start="url(#dimArrow)" marker-end="url(#dimArrow)"/>
+    </g>
+    <g font-size="15" text-anchor="middle">
+      <text x="240" y="683">20 mm</text>
+      <text x="380" y="683">50 mm</text>
+      <text x="680" y="683">100 mm</text>
+      <rect x="475" y="721" width="130" height="23" fill="#ffffff"/>
+      <text x="540" y="738">170 mm total</text>
+      <text x="540" y="772" font-size="14">Wall thicknesses drawn to scale; profile uses the same horizontal coordinates.</text>
+    </g>
+
+    <line x1="60" y1="793" x2="980" y2="793" stroke="#c8d0d6" stroke-width="1"/>
+    <text x="60" y="819" font-size="15">R″ = Σ(L/k) = 0.020/0.5 + 0.050/0.04 + 0.100/0.7 = 1.43286 m²·K/W</text>
+    <text x="60" y="845" font-size="15">q″ = [20 − (−5)] / R″ = 17.4477 W/m²;   T(x) = 20 − q″ · R″(0 → x)</text>
+    <text x="980" y="867" text-anchor="end" font-size="12" fill="#586774">Perfect interlayer contact · No internal heat generation</text>
+  </g>
+</svg>
