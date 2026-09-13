@@ -1,0 +1,354 @@
+{
+  "runs": [
+    {
+      "seed": 17,
+      "manifest": {
+        "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+        "model_revision": "2e1fd397ee46e1388853d2af2c993145b0f1098a",
+        "seed": 17,
+        "epochs": 3,
+        "gpu": "NVIDIA A100-SXM4-40GB",
+        "torch": "2.11.0+cu128",
+        "status": "completed",
+        "micro_batch_size": 4,
+        "gradient_accumulation_steps": 3,
+        "effective_batch_size": 12,
+        "data_manifest": {
+          "version": "controlled-editing-pilot-v1",
+          "seed": 2027,
+          "splits": {
+            "train": {
+              "cases": 60,
+              "examples": 360,
+              "sha256": "67966b4aa2a57ecac63370369d6d63587ea5e788a05fae91d3abdca979d98b99"
+            },
+            "validation": {
+              "cases": 10,
+              "examples": 60,
+              "sha256": "4d49c445cf9266400c1d0be58325cf8fd7e0b1e0197839ace073050a26ca7a14"
+            },
+            "test": {
+              "cases": 10,
+              "examples": 60,
+              "sha256": "fac6981074b1a637078dd8566764313654d567eeb21c8b495383548980599dfe"
+            },
+            "ood": {
+              "cases": 10,
+              "examples": 60,
+              "sha256": "a2169eeef0285219049c3203adbf1543a1548ed28d853adc6fe72c49778d9ae7"
+            }
+          },
+          "limitations": [
+            "synthetic shared instruction templates",
+            "compact DOM index, not vision input",
+            "simple manufactured heat equations",
+            "recompute is routing only",
+            "not evidence of CVPR-level novelty or complete SVG verification"
+          ]
+        },
+        "training_script_sha256": "bf3df5a632b29075f59edc96df2310eb3ba24f7ab5f7166b116404c75c8fa29b",
+        "data_script_sha256": "c119b81dccb707bab003fef47ec89ed87b06d77acf36db78746703fb5fc02f11",
+        "selection": "fixed final epoch, no test-based model selection",
+        "training_seconds": 94.93722961200001,
+        "global_steps": 90,
+        "max_gpu_memory_allocated_bytes": 6926140928
+      },
+      "adapter": {
+        "sha256": "ad5ffafeb81e9e1e0a8408d299e70d64e564911d47b965d5354ce283282e5c7f",
+        "bytes": 17462432,
+        "tensors": 224,
+        "parameters": 4358144
+      },
+      "scores": {
+        "base": {
+          "test": {
+            "n": 60,
+            "json_valid": 0.0,
+            "action_correct": 0.0,
+            "exact_action": 0.0,
+            "executor_accepts": 0.0,
+            "unsafe_edit": 0.0,
+            "fence_normalized_exact_action": 0.43333333333333335
+          },
+          "ood": {
+            "n": 60,
+            "json_valid": 0.0,
+            "action_correct": 0.0,
+            "exact_action": 0.0,
+            "executor_accepts": 0.0,
+            "unsafe_edit": 0.0,
+            "fence_normalized_exact_action": 0.4166666666666667
+          }
+        },
+        "sft": {
+          "test": {
+            "n": 60,
+            "json_valid": 1.0,
+            "action_correct": 1.0,
+            "exact_action": 1.0,
+            "executor_accepts": 1.0,
+            "unsafe_edit": 0.0,
+            "fence_normalized_exact_action": 1.0
+          },
+          "ood": {
+            "n": 60,
+            "json_valid": 1.0,
+            "action_correct": 1.0,
+            "exact_action": 1.0,
+            "executor_accepts": 1.0,
+            "unsafe_edit": 0.0,
+            "fence_normalized_exact_action": 1.0
+          }
+        },
+        "rule": {
+          "test": {
+            "n": 60,
+            "exact_action": 1.0
+          },
+          "ood": {
+            "n": 60,
+            "exact_action": 1.0
+          }
+        }
+      }
+    },
+    {
+      "seed": 29,
+      "manifest": {
+        "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+        "model_revision": "2e1fd397ee46e1388853d2af2c993145b0f1098a",
+        "seed": 29,
+        "epochs": 3,
+        "gpu": "NVIDIA A100-SXM4-40GB",
+        "torch": "2.11.0+cu128",
+        "status": "completed",
+        "micro_batch_size": 4,
+        "gradient_accumulation_steps": 3,
+        "effective_batch_size": 12,
+        "data_manifest": {
+          "version": "controlled-editing-pilot-v1",
+          "seed": 2027,
+          "splits": {
+            "train": {
+              "cases": 60,
+              "examples": 360,
+              "sha256": "67966b4aa2a57ecac63370369d6d63587ea5e788a05fae91d3abdca979d98b99"
+            },
+            "validation": {
+              "cases": 10,
+              "examples": 60,
+              "sha256": "4d49c445cf9266400c1d0be58325cf8fd7e0b1e0197839ace073050a26ca7a14"
+            },
+            "test": {
+              "cases": 10,
+              "examples": 60,
+              "sha256": "fac6981074b1a637078dd8566764313654d567eeb21c8b495383548980599dfe"
+            },
+            "ood": {
+              "cases": 10,
+              "examples": 60,
+              "sha256": "a2169eeef0285219049c3203adbf1543a1548ed28d853adc6fe72c49778d9ae7"
+            }
+          },
+          "limitations": [
+            "synthetic shared instruction templates",
+            "compact DOM index, not vision input",
+            "simple manufactured heat equations",
+            "recompute is routing only",
+            "not evidence of CVPR-level novelty or complete SVG verification"
+          ]
+        },
+        "training_script_sha256": "bf3df5a632b29075f59edc96df2310eb3ba24f7ab5f7166b116404c75c8fa29b",
+        "data_script_sha256": "c119b81dccb707bab003fef47ec89ed87b06d77acf36db78746703fb5fc02f11",
+        "selection": "fixed final epoch, no test-based model selection",
+        "training_seconds": 98.60733579600003,
+        "global_steps": 90,
+        "max_gpu_memory_allocated_bytes": 6926140928
+      },
+      "adapter": {
+        "sha256": "bfcbb55fa8752ce02939940af2b9c26c911a6c5566e7ea3d38589fc86889c953",
+        "bytes": 17462432,
+        "tensors": 224,
+        "parameters": 4358144
+      },
+      "scores": {
+        "base": {
+          "test": {
+            "n": 60,
+            "json_valid": 0.0,
+            "action_correct": 0.0,
+            "exact_action": 0.0,
+            "executor_accepts": 0.0,
+            "unsafe_edit": 0.0,
+            "fence_normalized_exact_action": 0.43333333333333335
+          },
+          "ood": {
+            "n": 60,
+            "json_valid": 0.0,
+            "action_correct": 0.0,
+            "exact_action": 0.0,
+            "executor_accepts": 0.0,
+            "unsafe_edit": 0.0,
+            "fence_normalized_exact_action": 0.4166666666666667
+          }
+        },
+        "sft": {
+          "test": {
+            "n": 60,
+            "json_valid": 1.0,
+            "action_correct": 1.0,
+            "exact_action": 1.0,
+            "executor_accepts": 1.0,
+            "unsafe_edit": 0.0,
+            "fence_normalized_exact_action": 1.0
+          },
+          "ood": {
+            "n": 60,
+            "json_valid": 1.0,
+            "action_correct": 1.0,
+            "exact_action": 1.0,
+            "executor_accepts": 1.0,
+            "unsafe_edit": 0.0,
+            "fence_normalized_exact_action": 1.0
+          }
+        },
+        "rule": {
+          "test": {
+            "n": 60,
+            "exact_action": 1.0
+          },
+          "ood": {
+            "n": 60,
+            "exact_action": 1.0
+          }
+        }
+      }
+    },
+    {
+      "seed": 41,
+      "manifest": {
+        "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+        "model_revision": "2e1fd397ee46e1388853d2af2c993145b0f1098a",
+        "seed": 41,
+        "epochs": 3,
+        "gpu": "NVIDIA A100-SXM4-40GB",
+        "torch": "2.11.0+cu128",
+        "status": "completed",
+        "micro_batch_size": 4,
+        "gradient_accumulation_steps": 3,
+        "effective_batch_size": 12,
+        "data_manifest": {
+          "version": "controlled-editing-pilot-v1",
+          "seed": 2027,
+          "splits": {
+            "train": {
+              "cases": 60,
+              "examples": 360,
+              "sha256": "67966b4aa2a57ecac63370369d6d63587ea5e788a05fae91d3abdca979d98b99"
+            },
+            "validation": {
+              "cases": 10,
+              "examples": 60,
+              "sha256": "4d49c445cf9266400c1d0be58325cf8fd7e0b1e0197839ace073050a26ca7a14"
+            },
+            "test": {
+              "cases": 10,
+              "examples": 60,
+              "sha256": "fac6981074b1a637078dd8566764313654d567eeb21c8b495383548980599dfe"
+            },
+            "ood": {
+              "cases": 10,
+              "examples": 60,
+              "sha256": "a2169eeef0285219049c3203adbf1543a1548ed28d853adc6fe72c49778d9ae7"
+            }
+          },
+          "limitations": [
+            "synthetic shared instruction templates",
+            "compact DOM index, not vision input",
+            "simple manufactured heat equations",
+            "recompute is routing only",
+            "not evidence of CVPR-level novelty or complete SVG verification"
+          ]
+        },
+        "training_script_sha256": "bf3df5a632b29075f59edc96df2310eb3ba24f7ab5f7166b116404c75c8fa29b",
+        "data_script_sha256": "c119b81dccb707bab003fef47ec89ed87b06d77acf36db78746703fb5fc02f11",
+        "selection": "fixed final epoch, no test-based model selection",
+        "training_seconds": 99.42115963100014,
+        "global_steps": 90,
+        "max_gpu_memory_allocated_bytes": 6926140928
+      },
+      "adapter": {
+        "sha256": "f022a0d669b3761e83588a4a6a4e48fde9876d50632f6398633f309743171b2a",
+        "bytes": 17462432,
+        "tensors": 224,
+        "parameters": 4358144
+      },
+      "scores": {
+        "base": {
+          "test": {
+            "n": 60,
+            "json_valid": 0.0,
+            "action_correct": 0.0,
+            "exact_action": 0.0,
+            "executor_accepts": 0.0,
+            "unsafe_edit": 0.0,
+            "fence_normalized_exact_action": 0.43333333333333335
+          },
+          "ood": {
+            "n": 60,
+            "json_valid": 0.0,
+            "action_correct": 0.0,
+            "exact_action": 0.0,
+            "executor_accepts": 0.0,
+            "unsafe_edit": 0.0,
+            "fence_normalized_exact_action": 0.4166666666666667
+          }
+        },
+        "sft": {
+          "test": {
+            "n": 60,
+            "json_valid": 1.0,
+            "action_correct": 1.0,
+            "exact_action": 1.0,
+            "executor_accepts": 1.0,
+            "unsafe_edit": 0.0,
+            "fence_normalized_exact_action": 1.0
+          },
+          "ood": {
+            "n": 60,
+            "json_valid": 1.0,
+            "action_correct": 1.0,
+            "exact_action": 1.0,
+            "executor_accepts": 1.0,
+            "unsafe_edit": 0.0,
+            "fence_normalized_exact_action": 1.0
+          }
+        },
+        "rule": {
+          "test": {
+            "n": 60,
+            "exact_action": 1.0
+          },
+          "ood": {
+            "n": 60,
+            "exact_action": 1.0
+          }
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "Shared instruction templates; ten physical cases per evaluation split.",
+    "Repeated seeds are not independent evaluation cases.",
+    "Compact DOM input; no raster reasoning or actual solver recomputation.",
+    "Perfect rule baseline: this is pipeline validation, not a novelty result."
+  ],
+  "model_revision": "2e1fd397ee46e1388853d2af2c993145b0f1098a",
+  "split_sha256": {
+    "train": "67966b4aa2a57ecac63370369d6d63587ea5e788a05fae91d3abdca979d98b99",
+    "validation": "4d49c445cf9266400c1d0be58325cf8fd7e0b1e0197839ace073050a26ca7a14",
+    "test": "fac6981074b1a637078dd8566764313654d567eeb21c8b495383548980599dfe",
+    "ood": "a2169eeef0285219049c3203adbf1543a1548ed28d853adc6fe72c49778d9ae7"
+  },
+  "verification": "complete; raw predictions rescored and adapter structure checked"
+}

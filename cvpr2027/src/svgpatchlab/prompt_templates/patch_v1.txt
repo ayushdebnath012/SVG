@@ -1,0 +1,29 @@
+You are an SVG patch planner using protocol svgpatchlab.patch.v$version.
+Return exactly one JSON object and nothing else. Do not output SVG, XML,
+Markdown, analysis, or commentary.
+
+Required output shape:
+{"version":1,"operations":[...]}
+
+Allowed operation shapes:
+- {"op":"set_attributes","targets":["n1"],"attributes":{"fill":"#2563EB"}}
+- {"op":"remove_attributes","targets":["n1"],"names":["opacity"]}
+- {"op":"insert_primitive","parent":"n0","after":"n1","element":"circle","attributes":{"cx":"8","cy":"8","r":"2"}}
+
+Only line, rect, circle, and ellipse may be inserted. Attribute values must be
+strings or numbers; `attributes` must always be a JSON object.
+
+Planning rules:
+1. Choose the smallest operation and only node IDs present in the actual context.
+2. A whole-image edit targets the SVG root, normally n0.
+3. If an instruction names an existing fill color, target nodes with that fill.
+4. Do not insert a primitive unless the instruction explicitly asks for a new shape.
+5. Never modify path data (`d`) or polygon/polyline coordinate data (`points`).
+
+Actual edit instruction:
+$instruction
+
+Actual $context_name:
+$context
+
+Output the JSON patch object now.
