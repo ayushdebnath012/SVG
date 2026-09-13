@@ -1,0 +1,889 @@
+{
+  "version": 2,
+  "description": "Physics-bearing engineering prompts. Labels must carry computed results; ground_truth holds the closed-form values the number_near checks test against. kind=field_solver marks problems that need a field solution (FEM/PINN) to draw faithfully.",
+  "cases": [
+    {
+      "id": "cantilever_deflection",
+      "kind": "closed_form",
+      "prompt": "Steel cantilever beam, length 2 m, rectangular section 50 mm wide x 100 mm deep, E = 200 GPa, point load 5 kN at the free tip. Draw the undeformed beam and the deflected shape (exaggerated) from Euler-Bernoulli theory, with the fixed support symbol. Compute and label: the tip deflection in mm, the deflection at mid-length in mm, and the maximum bending stress at the root in MPa. Show the formula used.",
+      "ground_truth": {
+        "tip_mm": 15.999999999999996,
+        "mid_mm": 4.999999999999999,
+        "sigma_root_MPa": 119.99999999999997
+      },
+      "checks": [
+        {
+          "number_near": [
+            16.0
+          ],
+          "tol": 0.02
+        },
+        {
+          "number_near": [
+            5.0
+          ],
+          "tol": 0.02
+        },
+        {
+          "number_near": [
+            120.0
+          ],
+          "tol": 0.02
+        },
+        {
+          "tag": "text",
+          "min": 4
+        },
+        {
+          "tag": "path",
+          "min": 1
+        },
+        {
+          "root_attr": "viewBox"
+        }
+      ]
+    },
+    {
+      "id": "composite_wall_conduction",
+      "kind": "closed_form",
+      "prompt": "One-dimensional steady heat conduction through a three-layer wall, inside to outside: 20 mm plaster (k = 0.5 W/m.K), 50 mm insulation (k = 0.04 W/m.K), 100 mm brick (k = 0.7 W/m.K). Inside surface 20 C, outside surface -5 C. Draw the wall section to scale with the layers hatched differently and, aligned above it, the temperature profile through the wall (piecewise linear). Compute and label the heat flux in W/m2 and the temperature at each of the two internal interfaces in C.",
+      "ground_truth": {
+        "q_W_m2": 17.44765702891326,
+        "T_plaster_insulation": 19.30209371884347,
+        "T_insulation_brick": -2.5074775672981033
+      },
+      "checks": [
+        {
+          "number_near": [
+            17.4477
+          ],
+          "tol": 0.02
+        },
+        {
+          "number_near": [
+            19.3021
+          ],
+          "tol": 0.01
+        },
+        {
+          "number_near": [
+            -2.5075
+          ],
+          "tol": 0.05
+        },
+        {
+          "tag": "text",
+          "min": 5
+        },
+        {
+          "any_tag": [
+            "polyline",
+            "path",
+            "line"
+          ],
+          "min": 3
+        },
+        {
+          "root_attr": "viewBox"
+        }
+      ]
+    },
+    {
+      "id": "plate_hole_kirsch",
+      "kind": "closed_form",
+      "prompt": "A large thin plate with a central circular hole of radius 10 mm under remote uniaxial tension of 100 MPa along x. Draw the plate with the hole and the applied stress arrows, and plot the tangential stress sigma_theta along the y-axis from the hole edge out to 4 radii (Kirsch solution). Label the stress at the hole edge on the y-axis, at 2 radii, and the stress at the hole edge on the x-axis (theta = 0). Mark the stress concentration factor.",
+      "ground_truth": {
+        "sigma_edge_y": 300.0,
+        "sigma_2a": 121.875,
+        "sigma_edge_x": -100.0,
+        "Kt": 3.0
+      },
+      "checks": [
+        {
+          "number_near": [
+            300.0
+          ],
+          "tol": 0.02
+        },
+        {
+          "number_near": [
+            121.875
+          ],
+          "tol": 0.02
+        },
+        {
+          "number_near": [
+            -100.0
+          ],
+          "tol": 0.02
+        },
+        {
+          "number_near": [
+            3.0
+          ],
+          "tol": 0.01
+        },
+        {
+          "tag": "text",
+          "min": 4
+        },
+        {
+          "tag": "circle",
+          "min": 1
+        },
+        {
+          "root_attr": "viewBox"
+        }
+      ]
+    },
+    {
+      "id": "truss_member_forces",
+      "kind": "closed_form",
+      "prompt": "A triangular truss: pin support A at (0, 0), roller support B at (8 m, 0), apex C at (4 m, 3 m), members AB, AC, BC. A vertical load of 24 kN acts at C. Draw the truss with supports and load, compute the reactions and every member force by the method of joints, and label each member with its force in kN and T for tension or C for compression. Include a free-body diagram of joint C.",
+      "ground_truth": {
+        "reaction_kN": 12.0,
+        "F_AC_kN_C": 20.0,
+        "F_BC_kN_C": 20.0,
+        "F_AB_kN_T": 16.0
+      },
+      "checks": [
+        {
+          "number_near": [
+            12.0
+          ],
+          "tol": 0.02
+        },
+        {
+          "number_near": [
+            20.0
+          ],
+          "tol": 0.02
+        },
+        {
+          "number_near": [
+            16.0
+          ],
+          "tol": 0.02
+        },
+        {
+          "text_contains": "kN"
+        },
+        {
+          "tag": "text",
+          "min": 5
+        },
+        {
+          "root_attr": "viewBox"
+        }
+      ]
+    },
+    {
+      "id": "mohr_circle",
+      "kind": "closed_form",
+      "prompt": "Plane stress state: sigma_x = 80 MPa, sigma_y = -20 MPa, tau_xy = 30 MPa. Draw Mohr's circle to scale with labelled sigma and tau axes, the plotted points for the x and y faces, the centre and radius, and label the principal stresses sigma_1 and sigma_2, the maximum in-plane shear stress, and the principal angle theta_p in degrees. Also draw the element rotated to the principal orientation.",
+      "ground_truth": {
+        "sigma1": 88.309518948453,
+        "sigma2": -28.309518948453004,
+        "tau_max": 58.309518948453004,
+        "theta_p_deg": 15.48187826603676
+      },
+      "checks": [
+        {
+          "number_near": [
+            88.3095
+          ],
+          "tol": 0.02
+        },
+        {
+          "number_near": [
+            -28.3095
+          ],
+          "tol": 0.02
+        },
+        {
+          "number_near": [
+            58.3095
+          ],
+          "tol": 0.02
+        },
+        {
+          "number_near": [
+            15.4819
+          ],
+          "tol": 0.03
+        },
+        {
+          "tag": "circle",
+          "min": 1
+        },
+        {
+          "tag": "text",
+          "min": 5
+        },
+        {
+          "root_attr": "viewBox"
+        }
+      ]
+    },
+    {
+      "id": "cantilever_mode_shapes",
+      "kind": "closed_form",
+      "prompt": "First three bending mode shapes of a uniform steel cantilever (E = 200 GPa, density 7850 kg/m3), length 1 m, square section 10 mm x 10 mm. Draw the three normalised mode shapes stacked and aligned, with the clamped end on the left and node positions marked. Label each mode with its beta_n*L eigenvalue and its natural frequency in Hz.",
+      "ground_truth": {
+        "betaL": [
+          1.87510407,
+          4.69409113,
+          7.85475744
+        ],
+        "f_Hz": [
+          8.15380706587884,
+          51.09903649968154,
+          143.0787820723696
+        ]
+      },
+      "checks": [
+        {
+          "number_near": [
+            1.8751
+          ],
+          "tol": 0.005
+        },
+        {
+          "number_near": [
+            4.6941
+          ],
+          "tol": 0.005
+        },
+        {
+          "number_near": [
+            7.8548
+          ],
+          "tol": 0.005
+        },
+        {
+          "number_near": [
+            8.1538
+          ],
+          "tol": 0.03
+        },
+        {
+          "number_near": [
+            51.099
+          ],
+          "tol": 0.03
+        },
+        {
+          "number_near": [
+            143.0788
+          ],
+          "tol": 0.03
+        },
+        {
+          "tag": "path",
+          "min": 3
+        },
+        {
+          "root_attr": "viewBox"
+        }
+      ]
+    },
+    {
+      "id": "poiseuille_profile",
+      "kind": "closed_form",
+      "prompt": "Fully developed laminar flow of oil (viscosity 0.1 Pa.s, density 900 kg/m3) in a 20 mm diameter pipe with a pressure gradient of 200 Pa/m. Draw a longitudinal section of the pipe with the parabolic velocity profile as velocity arrows and the profile envelope curve, and the linear shear-stress distribution beside it. Compute and label the centreline velocity in m/s, the mean velocity in m/s, the volumetric flow rate in litres per minute, and the Reynolds number.",
+      "ground_truth": {
+        "u_max": 0.049999999999999996,
+        "u_mean": 0.024999999999999998,
+        "Q_L_min": 0.471238898038469,
+        "Re": 4.499999999999999
+      },
+      "checks": [
+        {
+          "number_near": [
+            0.05
+          ],
+          "tol": 0.02
+        },
+        {
+          "number_near": [
+            0.025
+          ],
+          "tol": 0.02
+        },
+        {
+          "number_near": [
+            0.4712,
+            7.854,
+            28.2743,
+            0.0079
+          ],
+          "tol": 0.03
+        },
+        {
+          "number_near": [
+            4.5
+          ],
+          "tol": 0.05
+        },
+        {
+          "tag": "text",
+          "min": 4
+        },
+        {
+          "tag": "path",
+          "min": 1
+        },
+        {
+          "root_attr": "viewBox"
+        }
+      ]
+    },
+    {
+      "id": "rc_bode_plot",
+      "kind": "closed_form",
+      "prompt": "Bode magnitude and phase plots of the first-order RC low-pass filter with R = 10 kOhm and C = 100 nF, from 1 Hz to 100 kHz on a log frequency axis. Draw both plots stacked and aligned with gridlines at each decade. Label the corner frequency in Hz, the gain at the corner in dB, the high-frequency slope in dB/decade, and the phase at the corner in degrees.",
+      "ground_truth": {
+        "fc_Hz": 159.15494309189535,
+        "gain_fc_dB": -3.01,
+        "slope_dB_dec": -20,
+        "phase_fc_deg": -45
+      },
+      "checks": [
+        {
+          "number_near": [
+            159.1549
+          ],
+          "tol": 0.02
+        },
+        {
+          "number_near": [
+            -3.01
+          ],
+          "tol": 0.05
+        },
+        {
+          "number_near": [
+            -20
+          ],
+          "tol": 0.01
+        },
+        {
+          "number_near": [
+            -45
+          ],
+          "tol": 0.01
+        },
+        {
+          "tag": "text",
+          "min": 6
+        },
+        {
+          "any_tag": [
+            "path",
+            "polyline"
+          ],
+          "min": 2
+        },
+        {
+          "root_attr": "viewBox"
+        }
+      ]
+    },
+    {
+      "id": "udl_beam_shear_moment",
+      "kind": "closed_form",
+      "prompt": "Simply supported beam of span 8 m carrying a uniformly distributed load of 10 kN/m over its full length. Draw the loaded beam, the shear force diagram (linear) and the bending moment diagram (parabolic), stacked and aligned. Label the reactions, the maximum shear force, and the maximum bending moment with its location.",
+      "ground_truth": {
+        "reaction_kN": 40.0,
+        "Mmax_kNm": 80.0
+      },
+      "checks": [
+        {
+          "number_near": [
+            40.0
+          ],
+          "tol": 0.02
+        },
+        {
+          "number_near": [
+            80.0
+          ],
+          "tol": 0.02
+        },
+        {
+          "tag": "text",
+          "min": 5
+        },
+        {
+          "any_tag": [
+            "path",
+            "polygon",
+            "polyline"
+          ],
+          "min": 2
+        },
+        {
+          "root_attr": "viewBox"
+        }
+      ]
+    },
+    {
+      "id": "pin_fin_temperature",
+      "kind": "closed_form",
+      "prompt": "Aluminium pin fin (k = 200 W/m.K), diameter 5 mm, length 50 mm, base at 100 C, ambient 20 C, convection coefficient 50 W/m2.K, adiabatic tip. Draw the fin in section with convection arrows and, aligned below it, the temperature distribution along the fin from the one-dimensional fin equation. Label the fin parameter m in 1/m, the tip temperature in C, the fin efficiency in percent, and the heat dissipated in W.",
+      "ground_truth": {
+        "m_per_m": 14.142135623730951,
+        "T_tip_C": 83.46225453971095,
+        "eta_pct": 86.10571715805476,
+        "q_W": 2.705090884558255
+      },
+      "checks": [
+        {
+          "number_near": [
+            14.1421
+          ],
+          "tol": 0.02
+        },
+        {
+          "number_near": [
+            83.4623
+          ],
+          "tol": 0.01
+        },
+        {
+          "number_near": [
+            86.1057
+          ],
+          "tol": 0.02
+        },
+        {
+          "number_near": [
+            2.7051
+          ],
+          "tol": 0.03
+        },
+        {
+          "tag": "text",
+          "min": 4
+        },
+        {
+          "tag": "path",
+          "min": 1
+        },
+        {
+          "root_attr": "viewBox"
+        }
+      ]
+    },
+    {
+      "id": "euler_buckling",
+      "kind": "closed_form",
+      "prompt": "Pinned-pinned steel column (E = 200 GPa), solid circular section 40 mm diameter, length 3 m. Draw the straight column with pin symbols and the first Euler buckling mode shape (half sine) beside it. Compute and label the critical load in kN, the slenderness ratio, and the critical stress in MPa.",
+      "ground_truth": {
+        "Pcr_kN": 27.56113482693317,
+        "slenderness": 300.0,
+        "sigma_cr_MPa": 21.932454224643013
+      },
+      "checks": [
+        {
+          "number_near": [
+            27.5611,
+            27561.1348
+          ],
+          "tol": 0.02
+        },
+        {
+          "number_near": [
+            300.0
+          ],
+          "tol": 0.01
+        },
+        {
+          "number_near": [
+            21.9325
+          ],
+          "tol": 0.02
+        },
+        {
+          "tag": "text",
+          "min": 3
+        },
+        {
+          "tag": "path",
+          "min": 1
+        },
+        {
+          "root_attr": "viewBox"
+        }
+      ]
+    },
+    {
+      "id": "laplace_plate_isotherms",
+      "kind": "field_solver",
+      "prompt": "Two-dimensional steady heat conduction in a 1 m x 1 m square plate with no internal generation. The top edge is held at 100 C and the other three edges at 0 C. Draw the plate and the isotherms at 10, 20, 40, 60 and 80 C as smooth curves that satisfy the boundary conditions (they must meet the top edge and stay off the cold edges), label each isotherm, and label the exact temperature at the plate centre.",
+      "ground_truth": {
+        "T_centre_C": 25.0,
+        "note": "series solution; centre exactly 25 C by symmetry"
+      },
+      "checks": [
+        {
+          "number_near": [
+            25.0
+          ],
+          "tol": 0.01
+        },
+        {
+          "tag": "text",
+          "min": 5
+        },
+        {
+          "tag": "path",
+          "min": 4
+        },
+        {
+          "root_attr": "viewBox"
+        }
+      ]
+    },
+    {
+      "id": "potential_flow_cylinder",
+      "kind": "field_solver",
+      "prompt": "Ideal (potential) flow of a uniform stream U = 1 m/s past a circular cylinder of radius 0.5 m, no circulation. Draw at least eight streamlines that divide correctly around the cylinder (the dividing streamline meets the surface at the stagnation points), mark both stagnation points, label the maximum surface speed in m/s and where it occurs, and label the minimum pressure coefficient Cp on the surface.",
+      "ground_truth": {
+        "u_max": 2.0,
+        "Cp_min": -3.0
+      },
+      "checks": [
+        {
+          "number_near": [
+            -3.0
+          ],
+          "tol": 0.01
+        },
+        {
+          "number_near": [
+            2.0
+          ],
+          "tol": 0.01
+        },
+        {
+          "text_contains": "stagnation"
+        },
+        {
+          "tag": "path",
+          "min": 8
+        },
+        {
+          "tag": "circle",
+          "min": 1
+        },
+        {
+          "root_attr": "viewBox"
+        }
+      ]
+    },
+    {
+      "id": "ibeam_shear_stress",
+      "kind": "closed_form",
+      "prompt": "W250x33 steel I-beam section: depth 258 mm, flange width 146 mm, flange thickness 9.1 mm, web thickness 6.1 mm, carrying a vertical shear force of 100 kN. Draw the section and, beside it, the transverse shear stress distribution over the depth from tau = VQ/(I t): parabolic in the web with the jump at the web-flange junction. Compute and label the second moment of area in mm4, the maximum shear stress at the neutral axis in MPa, and the shear stress on the web side of the junction in MPa.",
+      "ground_truth": {
+        "I_mm4": 48182172.33326664,
+        "tau_NA_MPa": 71.17492087236046,
+        "tau_junction_web_MPa": 56.25652958381087,
+        "tau_junction_flange_MPa": 2.3504440442551116
+      },
+      "checks": [
+        {
+          "number_near": [
+            71.1749
+          ],
+          "tol": 0.02
+        },
+        {
+          "number_near": [
+            56.2565
+          ],
+          "tol": 0.02
+        },
+        {
+          "number_near": [
+            48182172.3333,
+            48.1822,
+            4818.2172
+          ],
+          "tol": 0.03
+        },
+        {
+          "tag": "text",
+          "min": 4
+        },
+        {
+          "any_tag": [
+            "path",
+            "polygon",
+            "polyline"
+          ],
+          "min": 2
+        },
+        {
+          "root_attr": "viewBox"
+        }
+      ]
+    },
+    {
+      "id": "capacitor_fringe_field",
+      "kind": "field_solver",
+      "prompt": "Two parallel conducting plates 100 mm long and 20 mm apart at +100 V and -100 V, in air. Draw the plates and the equipotential lines at -75, -50, -25, 0, +25, +50 and +75 V, including realistic fringing curvature near the plate ends, plus at least six electric field lines perpendicular to the equipotentials. Label the uniform field strength between the plates in kV/m and mark the 0 V equipotential.",
+      "ground_truth": {
+        "E_kV_m": 10.0
+      },
+      "checks": [
+        {
+          "number_near": [
+            10.0,
+            10000.0,
+            0.1
+          ],
+          "tol": 0.01
+        },
+        {
+          "tag": "text",
+          "min": 7
+        },
+        {
+          "tag": "path",
+          "min": 8
+        },
+        {
+          "root_attr": "viewBox"
+        }
+      ]
+    },
+    {
+      "id": "thick_cylinder_lame",
+      "kind": "closed_form",
+      "prompt": "Thick-walled cylinder, inner radius 50 mm, outer radius 100 mm, internal pressure 50 MPa, no external pressure. Draw the cross-section and plot the radial and tangential (hoop) stress distributions through the wall thickness from Lame's equations. Label the hoop stress at the inner and outer surfaces in MPa and the radial stress at the inner and outer surfaces in MPa.",
+      "ground_truth": {
+        "hoop_inner": 83.33333333333333,
+        "hoop_outer": 33.333333333333336,
+        "radial_inner": -50.0,
+        "radial_outer": 0.0
+      },
+      "checks": [
+        {
+          "number_near": [
+            83.3333
+          ],
+          "tol": 0.02
+        },
+        {
+          "number_near": [
+            33.3333
+          ],
+          "tol": 0.02
+        },
+        {
+          "number_near": [
+            -50.0
+          ],
+          "tol": 0.01
+        },
+        {
+          "tag": "text",
+          "min": 4
+        },
+        {
+          "tag": "circle",
+          "min": 2
+        },
+        {
+          "tag": "path",
+          "min": 2
+        },
+        {
+          "root_attr": "viewBox"
+        }
+      ]
+    },
+    {
+      "id": "shaft_torsion",
+      "kind": "closed_form",
+      "prompt": "Solid steel shaft (G = 80 GPa), diameter 50 mm, length 1 m, transmitting a torque of 2 kN.m. Draw the shaft with the applied torque arrows, a cross-section showing the linear shear-stress distribution from the centre to the surface, and the angle of twist between the ends. Compute and label the polar second moment of area in mm4, the maximum shear stress in MPa, and the total angle of twist in degrees.",
+      "ground_truth": {
+        "J_mm4": 613592.3151542565,
+        "tau_max_MPa": 81.4873308630504,
+        "twist_deg": 2.334440071119462
+      },
+      "checks": [
+        {
+          "number_near": [
+            81.4873
+          ],
+          "tol": 0.02
+        },
+        {
+          "number_near": [
+            2.3344
+          ],
+          "tol": 0.03
+        },
+        {
+          "number_near": [
+            613592.3152,
+            0.6136,
+            61.3592
+          ],
+          "tol": 0.03
+        },
+        {
+          "tag": "text",
+          "min": 4
+        },
+        {
+          "tag": "circle",
+          "min": 1
+        },
+        {
+          "root_attr": "viewBox"
+        }
+      ]
+    },
+    {
+      "id": "rc_step_response",
+      "kind": "closed_form",
+      "prompt": "Step response of the RC low-pass filter with R = 10 kOhm and C = 100 nF to a 0 to 5 V input step. Draw the input step and the capacitor voltage versus time from 0 to 6 ms on a labelled, gridded plot. Label the time constant in ms, the voltage reached at one time constant in V and as a percentage, and the times to reach 95 percent and 99 percent of the final value in ms.",
+      "ground_truth": {
+        "tau_ms": 1.0,
+        "V_tau": 3.1606027941427883,
+        "pct_tau": 63.2,
+        "t95_ms": 2.995732273553991,
+        "t99_ms": 4.605170185988091
+      },
+      "checks": [
+        {
+          "number_near": [
+            1.0
+          ],
+          "tol": 0.01
+        },
+        {
+          "number_near": [
+            63.2
+          ],
+          "tol": 0.01
+        },
+        {
+          "number_near": [
+            3.16
+          ],
+          "tol": 0.03
+        },
+        {
+          "number_near": [
+            3.0
+          ],
+          "tol": 0.03
+        },
+        {
+          "number_near": [
+            4.6
+          ],
+          "tol": 0.03
+        },
+        {
+          "tag": "text",
+          "min": 5
+        },
+        {
+          "tag": "path",
+          "min": 1
+        },
+        {
+          "root_attr": "viewBox"
+        }
+      ]
+    },
+    {
+      "id": "lbracket_von_mises",
+      "kind": "field_solver",
+      "prompt": "The L-shaped steel bracket (80 mm wide, 60 mm tall, 40 mm deep, 8 mm thick) is bolted down through its base flange and loaded with 2 kN horizontally at the top edge of the upright. Draw the bracket in side elevation with a colour-mapped von Mises stress field as you would expect from a finite element analysis: a stress concentration at the inner corner, low stress at the free tip, and a legend with a MPa scale. Estimate and label the peak stress in MPa and state the bending stress at the base of the upright from simple beam theory as a check.",
+      "ground_truth": {
+        "beam_theory_sigma_MPa_h52": 121.875,
+        "beam_theory_sigma_MPa_h60": 140.625,
+        "note": "M/Z with Z = 80 x 8^2 / 6; lever arm 52 or 60 mm"
+      },
+      "checks": [
+        {
+          "number_near": [
+            121.875,
+            140.625
+          ],
+          "tol": 0.05
+        },
+        {
+          "text_contains": "MPa"
+        },
+        {
+          "any_tag": [
+            "linearGradient",
+            "radialGradient",
+            "path",
+            "polygon"
+          ],
+          "min": 6
+        },
+        {
+          "tag": "text",
+          "min": 4
+        },
+        {
+          "root_attr": "viewBox"
+        }
+      ]
+    },
+    {
+      "id": "dam_hydrostatic",
+      "kind": "closed_form",
+      "prompt": "A vertical concrete dam face retains fresh water 6 m deep. Draw the dam and the water, the triangular hydrostatic pressure distribution on the face with pressure arrows, the resultant force vector at its point of action, and dimension the depth. Compute and label the pressure at the base in kPa, the resultant force per metre width in kN/m, and the depth of the centre of pressure below the surface in m.",
+      "ground_truth": {
+        "p_base_kPa": 58.86,
+        "F_kN_per_m": 176.58,
+        "centre_of_pressure_m": 4.0
+      },
+      "checks": [
+        {
+          "number_near": [
+            58.86
+          ],
+          "tol": 0.02
+        },
+        {
+          "number_near": [
+            176.58
+          ],
+          "tol": 0.02
+        },
+        {
+          "number_near": [
+            4.0
+          ],
+          "tol": 0.01
+        },
+        {
+          "tag": "text",
+          "min": 4
+        },
+        {
+          "any_tag": [
+            "polygon",
+            "path"
+          ],
+          "min": 1
+        },
+        {
+          "root_attr": "viewBox"
+        }
+      ]
+    }
+  ]
+}

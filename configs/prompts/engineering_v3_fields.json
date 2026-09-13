@@ -1,0 +1,179 @@
+{
+  "version": 3,
+  "description": "Non-analytic field problems with a finite-difference reference (scripts/fd_reference.py). Drawn contours are compared to the reference by scripts/field_fidelity.py.",
+  "cases": [
+    {
+      "id": "laplace_L_shape",
+      "kind": "field_solver",
+      "prompt": "Steady two-dimensional heat conduction (Laplace's equation, no generation) in an L-shaped plate: the unit square [0,1]x[0,1] with the top-right quadrant [0.5,1]x[0.5,1] removed. The left edge x = 0 is held at 100 C; every other boundary, including the two re-entrant edges of the notch, is held at 0 C. Draw the plate outline and the isotherms at 10, 20, 30, 40, 50, 60 and 80 C, with correct crowding at the re-entrant corner (0.5, 0.5). Use viewBox=\"0 0 1000 1000\". Map plate coordinates to drawing coordinates as X = 100 + 800 x and Y = 900 - 800 y. Draw every contour as its own <path> or <polyline> element carrying a data-level attribute with its numeric level (for example data-level=\"40\"), and label it. Contours must satisfy the boundary conditions exactly: they may not cross a boundary held at a different value.",
+      "levels": [
+        10,
+        20,
+        30,
+        40,
+        50,
+        60,
+        80
+      ],
+      "checks": [
+        {
+          "root_attr": "viewBox"
+        },
+        {
+          "any_tag": [
+            "path",
+            "polyline"
+          ],
+          "min": 7
+        },
+        {
+          "tag": "text",
+          "min": 7
+        }
+      ]
+    },
+    {
+      "id": "torsion_square_prandtl",
+      "kind": "field_solver",
+      "prompt": "Saint-Venant torsion of a solid square shaft of side a = 1 (dimensionless, G*theta = 1): the Prandtl stress function phi satisfies Laplacian(phi) = -2 inside the square [0,1]x[0,1] with phi = 0 on the boundary. Draw the section and the contours of phi at 20 percent, 40 percent, 60 percent and 80 percent of its maximum value (data-level is the percentage: 20, 40, 60, 80), label the maximum value of phi at the centre, mark where the shear stress is greatest and where it is zero, and label the torsion constant J/a^4 for a square section. Use viewBox=\"0 0 1000 1000\". Map section coordinates to drawing coordinates as X = 100 + 800 x and Y = 900 - 800 y. Draw every contour as its own <path> or <polyline> element carrying a data-level attribute with its numeric level (for example data-level=\"40\"), and label it. Contours must satisfy the boundary conditions exactly: they may not cross a boundary held at a different value.",
+      "levels": [
+        20,
+        40,
+        60,
+        80
+      ],
+      "checks": [
+        {
+          "root_attr": "viewBox"
+        },
+        {
+          "any_tag": [
+            "path",
+            "polyline"
+          ],
+          "min": 4
+        },
+        {
+          "tag": "text",
+          "min": 4
+        },
+        {
+          "number_near": [
+            0.1406,
+            0.141
+          ],
+          "tol": 0.03
+        }
+      ]
+    },
+    {
+      "id": "square_hole_plate",
+      "kind": "field_solver",
+      "prompt": "Steady two-dimensional heat conduction (Laplace's equation) in the unit square plate [0,1]x[0,1] that has a concentric square hole [0.4,0.6]x[0.4,0.6]. The hole boundary is held at 100 C and the outer boundary at 0 C. Draw the plate, the hole, and the isotherms at 20, 40, 60 and 80 C. Use viewBox=\"0 0 1000 1000\". Map plate coordinates to drawing coordinates as X = 100 + 800 x and Y = 900 - 800 y. Draw every contour as its own <path> or <polyline> element carrying a data-level attribute with its numeric level (for example data-level=\"40\"), and label it. Contours must satisfy the boundary conditions exactly: they may not cross a boundary held at a different value.",
+      "levels": [
+        20,
+        40,
+        60,
+        80
+      ],
+      "checks": [
+        {
+          "root_attr": "viewBox"
+        },
+        {
+          "any_tag": [
+            "path",
+            "polyline"
+          ],
+          "min": 4
+        },
+        {
+          "tag": "text",
+          "min": 4
+        }
+      ]
+    },
+    {
+      "id": "channel_step_streamlines",
+      "kind": "field_solver",
+      "prompt": "Ideal (potential) flow through a two-dimensional channel with a sudden contraction: the channel occupies 0 <= x <= 3, 0 <= y <= 1, and a solid block occupies 1.5 <= x <= 3, 0 <= y <= 0.5 (the lower half of the downstream section). Flow enters uniformly at x = 0 and leaves uniformly at x = 3. The stream function psi is 0 on the bottom wall and the block, 1 on the top wall, psi = y at the inlet and psi = 2(y - 0.5) at the outlet. Draw the channel, the block, and the streamlines psi = 0.2, 0.4, 0.6 and 0.8 (data-level is psi times 100: 20, 40, 60, 80), including the correct crowding over the corner of the step. Use viewBox=\"0 0 1000 1000\". Map channel coordinates to drawing coordinates as X = 50 + 300 x and Y = 700 - 300 y. Draw every contour as its own <path> or <polyline> element carrying a data-level attribute with its numeric level (for example data-level=\"40\"), and label it. Contours must satisfy the boundary conditions exactly: they may not cross a boundary held at a different value.",
+      "levels": [
+        20,
+        40,
+        60,
+        80
+      ],
+      "checks": [
+        {
+          "root_attr": "viewBox"
+        },
+        {
+          "any_tag": [
+            "path",
+            "polyline"
+          ],
+          "min": 4
+        },
+        {
+          "tag": "text",
+          "min": 4
+        }
+      ]
+    },
+    {
+      "id": "square_conductor_in_shell",
+      "kind": "field_solver",
+      "prompt": "Electrostatics: a square conductor of side 0.6 (occupying [-0.3,0.3]x[-0.3,0.3]) held at 100 V sits at the centre of a grounded circular shell of radius 1 (0 V). Draw the shell, the conductor, and the equipotentials at 20, 40, 60 and 80 V from the two-dimensional Laplace solution in the gap; they must be closed curves that are square-like near the conductor and circle-like near the shell. Use viewBox=\"0 0 1000 1000\". Map coordinates to drawing coordinates as X = 500 + 400 x and Y = 500 - 400 y. Draw every contour as its own <path> or <polyline> element carrying a data-level attribute with its numeric level (for example data-level=\"40\"), and label it. Contours must satisfy the boundary conditions exactly: they may not cross a boundary held at a different value.",
+      "levels": [
+        20,
+        40,
+        60,
+        80
+      ],
+      "checks": [
+        {
+          "root_attr": "viewBox"
+        },
+        {
+          "any_tag": [
+            "path",
+            "polyline"
+          ],
+          "min": 4
+        },
+        {
+          "tag": "text",
+          "min": 4
+        }
+      ]
+    },
+    {
+      "id": "plate_convective_edges",
+      "kind": "field_solver",
+      "prompt": "Steady two-dimensional heat conduction in a rectangular plate 0 <= x <= 2, 0 <= y <= 1 with conductivity k. The left edge x = 0 is held at 100 C. The other three edges lose heat by convection to a 0 C ambient with h/k = 5 per unit length (Robin condition: dT/dn = -5 T on those edges). Draw the plate and the isotherms at 10, 20, 40, 60 and 80 C, which must meet the convective edges at the correct oblique angles rather than perpendicular to them. Use viewBox=\"0 0 1000 1000\". Map plate coordinates to drawing coordinates as X = 100 + 400 x and Y = 700 - 400 y. Draw every contour as its own <path> or <polyline> element carrying a data-level attribute with its numeric level (for example data-level=\"40\"), and label it. Contours must satisfy the boundary conditions exactly: they may not cross a boundary held at a different value.",
+      "levels": [
+        10,
+        20,
+        40,
+        60,
+        80
+      ],
+      "checks": [
+        {
+          "root_attr": "viewBox"
+        },
+        {
+          "any_tag": [
+            "path",
+            "polyline"
+          ],
+          "min": 5
+        },
+        {
+          "tag": "text",
+          "min": 5
+        }
+      ]
+    }
+  ]
+}
