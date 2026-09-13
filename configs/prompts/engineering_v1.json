@@ -1,0 +1,540 @@
+{
+  "version": 1,
+  "description": "Complex engineering drawing prompts for text-to-SVG generation. Checks are structural must-haves, not a quality judgment.",
+  "cases": [
+    {
+      "id": "flange_bolt_circle",
+      "prompt": "Top view of a circular pipe flange: outer diameter 200 mm, bore 100 mm, 8 bolt holes of 18 mm on a 160 mm pitch circle. Show the pitch circle as a dashed centerline, a horizontal and vertical centerline, and dimension the OD, bore, PCD and one hole with leader lines and arrowheads.",
+      "checks": [
+        {
+          "tag": "circle",
+          "min": 10
+        },
+        {
+          "tag": "text",
+          "min": 4
+        },
+        {
+          "text_contains": "200"
+        },
+        {
+          "text_contains": "160"
+        },
+        {
+          "root_attr": "viewBox"
+        }
+      ]
+    },
+    {
+      "id": "rc_lowpass_schematic",
+      "prompt": "Electrical schematic of a first-order RC low-pass filter: voltage source Vin on the left, series resistor R1 = 10 kΩ, shunt capacitor C1 = 100 nF to ground, output node labelled Vout on the right. Use standard schematic symbols (zigzag resistor, parallel-plate capacitor, ground symbol), junction dots, and component labels.",
+      "checks": [
+        {
+          "any_tag": [
+            "path",
+            "polyline",
+            "line"
+          ],
+          "min": 8
+        },
+        {
+          "tag": "text",
+          "min": 4
+        },
+        {
+          "text_contains": "vout"
+        },
+        {
+          "text_contains": "10"
+        },
+        {
+          "root_attr": "viewBox"
+        }
+      ]
+    },
+    {
+      "id": "spur_gear_12t",
+      "prompt": "A 12-tooth spur gear viewed along its axis, pitch diameter 120 mm, with a 20 mm bore and a 6 mm keyway. Draw the tooth profile as a closed outline (trapezoidal teeth are acceptable), show the pitch circle as a dashed line, and dimension the pitch diameter and bore.",
+      "checks": [
+        {
+          "any_tag": [
+            "path",
+            "polygon"
+          ],
+          "min": 1
+        },
+        {
+          "any_tag": [
+            "circle",
+            "path",
+            "ellipse"
+          ],
+          "min": 2
+        },
+        {
+          "tag": "text",
+          "min": 2
+        },
+        {
+          "text_contains": "120"
+        },
+        {
+          "root_attr": "viewBox"
+        }
+      ]
+    },
+    {
+      "id": "warren_truss",
+      "prompt": "Elevation of a Warren truss bridge span with 6 panels, span 24 m, height 3 m. Draw top and bottom chords, diagonal members forming equilateral triangles, pin support at the left and roller support at the right (standard symbols), a uniformly distributed load shown as an arrow row on the top chord, and dimension the span and height.",
+      "checks": [
+        {
+          "any_tag": [
+            "line",
+            "path",
+            "polyline"
+          ],
+          "min": 14
+        },
+        {
+          "tag": "text",
+          "min": 2
+        },
+        {
+          "text_contains": "24"
+        },
+        {
+          "root_attr": "viewBox"
+        }
+      ]
+    },
+    {
+      "id": "bracket_three_view",
+      "prompt": "Third-angle orthographic projection (front, top, right side views) of an L-shaped steel bracket: 80 mm wide, 60 mm tall, 40 mm deep, 8 mm thick, with two 9 mm through-holes in the base flange. Align the views correctly, use hidden lines (dashed) for the holes where appropriate, and dimension the overall sizes.",
+      "checks": [
+        {
+          "any_tag": [
+            "rect",
+            "path",
+            "polygon",
+            "polyline",
+            "line"
+          ],
+          "min": 12
+        },
+        {
+          "tag": "text",
+          "min": 4
+        },
+        {
+          "text_contains": "80"
+        },
+        {
+          "min_elements": 25
+        },
+        {
+          "root_attr": "viewBox"
+        }
+      ]
+    },
+    {
+      "id": "pid_pump_loop",
+      "prompt": "P&ID of a simple pumped loop: storage tank T-101 feeding centrifugal pump P-101, discharge through gate valve V-1, check valve V-2, flow indicator FI-101, and a control valve FCV-101 back to the tank. Use ISA-style symbols (tank outline, pump circle with triangle, valve bowties, instrument bubbles with tag text) and label every item.",
+      "checks": [
+        {
+          "tag": "text",
+          "min": 6
+        },
+        {
+          "text_contains": "p-101"
+        },
+        {
+          "text_contains": "fcv"
+        },
+        {
+          "any_tag": [
+            "circle",
+            "path",
+            "polygon",
+            "line",
+            "rect"
+          ],
+          "min": 12
+        },
+        {
+          "root_attr": "viewBox"
+        }
+      ]
+    },
+    {
+      "id": "beam_shear_moment",
+      "prompt": "A simply supported beam of length 6 m with a 12 kN point load at 2 m from the left support. Draw three vertically stacked, aligned diagrams: the loaded beam with reactions labelled RA and RB, the shear force diagram, and the bending moment diagram, each with axis labels and the key values (reactions, maximum moment) annotated.",
+      "checks": [
+        {
+          "tag": "text",
+          "min": 6
+        },
+        {
+          "text_contains": "kn"
+        },
+        {
+          "any_tag": [
+            "path",
+            "polygon",
+            "polyline",
+            "line",
+            "rect"
+          ],
+          "min": 8
+        },
+        {
+          "root_attr": "viewBox"
+        }
+      ]
+    },
+    {
+      "id": "half_adder_logic",
+      "prompt": "Logic diagram of a half adder: inputs A and B, an XOR gate producing SUM and an AND gate producing CARRY. Use distinct IEEE/ANSI gate shapes (curved-back XOR with the extra input arc, D-shaped AND), wire fan-out with junction dots, and label inputs and outputs.",
+      "checks": [
+        {
+          "any_tag": [
+            "path"
+          ],
+          "min": 2
+        },
+        {
+          "tag": "text",
+          "min": 4
+        },
+        {
+          "text_contains": "sum"
+        },
+        {
+          "text_contains": "carry"
+        },
+        {
+          "root_attr": "viewBox"
+        }
+      ]
+    },
+    {
+      "id": "ibeam_section",
+      "prompt": "Cross-section of a W250x33 steel I-beam: depth 258 mm, flange width 146 mm, flange thickness 9.1 mm, web thickness 6.1 mm. Draw the section with section-line hatching (45° lines clipped to the shape), the centroidal axes as dash-dot lines, and dimension depth, flange width, and both thicknesses.",
+      "checks": [
+        {
+          "any_tag": [
+            "path",
+            "polygon",
+            "rect"
+          ],
+          "min": 1
+        },
+        {
+          "any_tag": [
+            "line",
+            "path",
+            "pattern"
+          ],
+          "min": 6
+        },
+        {
+          "tag": "text",
+          "min": 4
+        },
+        {
+          "text_contains": "258"
+        },
+        {
+          "root_attr": "viewBox"
+        }
+      ]
+    },
+    {
+      "id": "hydraulic_circuit",
+      "prompt": "ISO 1219 hydraulic circuit: reservoir, fixed-displacement pump driven by an electric motor, pressure relief valve back to tank, a 4/3 directional control valve (closed-centre, solenoid operated), and a double-acting cylinder. Draw the valve envelope as three adjacent boxes with flow-path arrows, use proper reservoir and cylinder symbols, and label each component.",
+      "checks": [
+        {
+          "tag": "text",
+          "min": 5
+        },
+        {
+          "any_tag": [
+            "rect",
+            "path",
+            "polygon",
+            "line",
+            "circle"
+          ],
+          "min": 15
+        },
+        {
+          "text_contains": "pump"
+        },
+        {
+          "root_attr": "viewBox"
+        }
+      ]
+    },
+    {
+      "id": "floor_plan_studio",
+      "prompt": "Architectural floor plan of a 6 m x 8 m studio apartment: exterior walls 200 mm thick drawn as double lines, an entry door with swing arc, two windows, a bathroom 2 m x 2.4 m in one corner with toilet, basin and shower, a kitchenette counter along one wall, and overall dimension strings on two sides.",
+      "checks": [
+        {
+          "any_tag": [
+            "rect",
+            "path",
+            "polygon",
+            "line"
+          ],
+          "min": 12
+        },
+        {
+          "tag": "text",
+          "min": 3
+        },
+        {
+          "any_tag": [
+            "path",
+            "circle",
+            "ellipse"
+          ],
+          "min": 1
+        },
+        {
+          "min_elements": 25
+        },
+        {
+          "root_attr": "viewBox"
+        }
+      ]
+    },
+    {
+      "id": "hex_bolt_side",
+      "prompt": "Side elevation of an M12 x 60 hex head bolt: hex head 8 mm tall with the middle facet visible as a rectangle and the two outer facets as narrower rectangles, a 12 mm shank, 30 mm of thread shown as the conventional thread representation (alternating full and thin lines), and a chamfered tip. Dimension the length, thread length, and head height.",
+      "checks": [
+        {
+          "any_tag": [
+            "rect",
+            "path",
+            "polygon",
+            "line"
+          ],
+          "min": 10
+        },
+        {
+          "tag": "text",
+          "min": 3
+        },
+        {
+          "text_contains": "60"
+        },
+        {
+          "root_attr": "viewBox"
+        }
+      ]
+    },
+    {
+      "id": "pcb_footprint_soic8",
+      "prompt": "PCB land pattern for an SOIC-8 package: 8 rectangular copper pads 1.55 mm x 0.6 mm at 1.27 mm pitch in two rows 5.4 mm apart, a silkscreen outline of the body, a pin-1 indicator dot, courtyard boundary as a dashed rectangle, and pad numbers. Use a 0.1 mm grid scale and dimension the pitch and row spacing.",
+      "checks": [
+        {
+          "tag": "rect",
+          "min": 9
+        },
+        {
+          "tag": "text",
+          "min": 8
+        },
+        {
+          "text_contains": "1.27"
+        },
+        {
+          "root_attr": "viewBox"
+        }
+      ]
+    },
+    {
+      "id": "planetary_gearset",
+      "prompt": "Schematic front view of a planetary gear set: a sun gear in the centre, three equally spaced planet gears, a ring gear as an internal-toothed annulus, and a planet carrier drawn as thin arms connecting planet centres. Teeth may be simplified to notches. Label sun, planet, ring and carrier.",
+      "checks": [
+        {
+          "tag": "circle",
+          "min": 5
+        },
+        {
+          "tag": "text",
+          "min": 4
+        },
+        {
+          "text_contains": "ring"
+        },
+        {
+          "root_attr": "viewBox"
+        }
+      ]
+    },
+    {
+      "id": "pipe_isometric",
+      "prompt": "Isometric piping sketch: a 4-inch line runs 3 m in the +X direction, rises 1.5 m vertically, then runs 2 m in the +Y direction, ending at a flanged gate valve. Use single-line isometric convention with 30° axes, show the flanges as short perpendicular double ticks, put a north arrow, and dimension each run.",
+      "checks": [
+        {
+          "any_tag": [
+            "line",
+            "path",
+            "polyline"
+          ],
+          "min": 6
+        },
+        {
+          "tag": "text",
+          "min": 3
+        },
+        {
+          "text_contains": "3"
+        },
+        {
+          "root_attr": "viewBox"
+        }
+      ]
+    },
+    {
+      "id": "shell_tube_hx",
+      "prompt": "Process schematic of a shell-and-tube heat exchanger: horizontal shell with two tube-side nozzles on the end heads and two shell-side nozzles on top and bottom of the shell, a tube bundle drawn as several parallel lines, baffles as vertical segments, and flow arrows with stream labels (hot in, hot out, cold in, cold out) and temperatures.",
+      "checks": [
+        {
+          "any_tag": [
+            "line",
+            "path",
+            "rect"
+          ],
+          "min": 10
+        },
+        {
+          "tag": "text",
+          "min": 4
+        },
+        {
+          "text_contains": "hot"
+        },
+        {
+          "text_contains": "cold"
+        },
+        {
+          "root_attr": "viewBox"
+        }
+      ]
+    },
+    {
+      "id": "staircase_section",
+      "prompt": "Section through a straight residential staircase with 14 risers of 180 mm and treads of 260 mm, a handrail at 900 mm above the nosing line, and floor slabs 200 mm thick at top and bottom. Draw the stringer profile, hatch the slabs, and dimension total rise, total going, one riser and one tread.",
+      "checks": [
+        {
+          "any_tag": [
+            "path",
+            "polyline",
+            "polygon",
+            "line",
+            "rect"
+          ],
+          "min": 8
+        },
+        {
+          "tag": "text",
+          "min": 4
+        },
+        {
+          "text_contains": "180"
+        },
+        {
+          "text_contains": "260"
+        },
+        {
+          "root_attr": "viewBox"
+        }
+      ]
+    },
+    {
+      "id": "compression_spring",
+      "prompt": "Side view of a helical compression spring with 8 active coils, wire diameter 4 mm, outer diameter 40 mm, free length 100 mm, with closed and ground ends. Draw the coils as a continuous sinuous outline (not just a zigzag), and dimension free length, OD and wire diameter.",
+      "checks": [
+        {
+          "tag": "path",
+          "min": 1
+        },
+        {
+          "tag": "text",
+          "min": 3
+        },
+        {
+          "text_contains": "100"
+        },
+        {
+          "root_attr": "viewBox"
+        }
+      ]
+    },
+    {
+      "id": "three_phase_motor_starter",
+      "prompt": "Power circuit for a three-phase direct-on-line motor starter: L1, L2, L3 supply, a three-pole isolator, three fuses, a three-pole contactor KM1, a thermal overload relay F1, and motor M1 drawn as a circle with the M~ symbol. Use IEC symbols, draw the three phases as parallel vertical lines, and label all components and terminals.",
+      "checks": [
+        {
+          "any_tag": [
+            "line",
+            "path",
+            "polyline"
+          ],
+          "min": 12
+        },
+        {
+          "tag": "circle",
+          "min": 1
+        },
+        {
+          "tag": "text",
+          "min": 6
+        },
+        {
+          "text_contains": "km1"
+        },
+        {
+          "root_attr": "viewBox"
+        }
+      ]
+    },
+    {
+      "id": "dimensioned_plate",
+      "prompt": "A rectangular mounting plate 150 mm x 100 mm with 10 mm corner radii, four 6.5 mm holes 12 mm in from each edge, and a central 30 mm x 20 mm rectangular slot with full-radius ends. Fully dimension it to a datum at the lower-left corner using baseline dimensioning with extension lines, dimension lines and filled arrowheads.",
+      "checks": [
+        {
+          "any_tag": [
+            "rect",
+            "path"
+          ],
+          "min": 2
+        },
+        {
+          "tag": "circle",
+          "min": 4
+        },
+        {
+          "tag": "text",
+          "min": 6
+        },
+        {
+          "text_contains": "150"
+        },
+        {
+          "any_tag": [
+            "line",
+            "path",
+            "marker",
+            "polygon"
+          ],
+          "min": 8
+        },
+        {
+          "root_attr": "viewBox"
+        }
+      ]
+    }
+  ]
+}
