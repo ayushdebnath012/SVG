@@ -1,0 +1,46 @@
+{
+  "target": "CVPR 2027 research project; not submission-ready",
+  "updated_date": "2026-09-13",
+  "primary_reports": [
+    "reports/FEM_LITERATURE_AND_EXTENSION.md",
+    "reports/ASTRA_FEM_FAILURE_RECHECK.md",
+    "reports/TRAINING_RESULTS.md",
+    "reports/RESEARCH_STATUS.md"
+  ],
+  "training": {
+    "status": "completed and locally verified",
+    "gpu": "NVIDIA A100-SXM4-40GB",
+    "seeds": [
+      17,
+      29,
+      41
+    ],
+    "epochs_each": 3,
+    "runs": "runs/a100",
+    "verification": "reports/training_verified.json",
+    "gpu_session": "disconnected",
+    "adapter_inference_reload": "not run"
+  },
+  "astra_api": {
+    "status": "4 calls completed",
+    "runs": "runs/astra-api-recheck-20260913",
+    "numerical_reference": "runs/robin-fem-reference",
+    "fem_contour_comparison": "runs/astra-api-recheck-20260913/fem_comparison.json"
+  },
+  "upstream_extension": {
+    "project": "FEM-Bench",
+    "commit": "d370aef5dbe023b0b86eb3548d24d11fd69328ee",
+    "status": "2 upstream reference tests passed; 24 actual bar solves",
+    "results": "runs/fem-bench-svg-anchor/summary.json"
+  },
+  "checks": {
+    "regression_tests_passed": 30,
+    "new_numerical_checks": "analytic Robin anchor, mesh convergence, heat balance; upstream bar tests, analytic displacement, force balance"
+  },
+  "outstanding": [
+    "Main well-posed FEM and visual editing benchmark beyond simple anchors",
+    "Published solver-agent reproduction under comparable inputs",
+    "Actual multimodal contribution and strong deterministic baselines",
+    "Complete paper, author review and venue submission"
+  ]
+}
