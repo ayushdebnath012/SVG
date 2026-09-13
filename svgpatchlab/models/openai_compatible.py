@@ -17,8 +17,14 @@ class OpenAICompatibleAdapter(ModelAdapter):
     def __init__(self, config: dict[str, Any]):
         self.base_url = str(config.get("base_url", "http://localhost:8000/v1")).rstrip("/")
         self.model = str(config["model"])
-        self.temperature = float(config.get("temperature", 0.0))
+        # None omits the field: some gateway routes (e.g. reasoning models) reject it.
+        temperature = config.get("temperature", 0.0)
+        self.temperature = None if temperature is None else float(temperature)
         self.max_tokens = int(config.get("max_tokens", 512))
+        # OpenAI reasoning models reject "max_tokens" and want "max_completion_tokens".
+        self.max_tokens_param = str(config.get("max_tokens_param", "max_tokens"))
+        if self.max_tokens_param not in {"max_tokens", "max_completion_tokens"}:
+            raise ValueError(f"unknown max_tokens_param: {self.max_tokens_param}")
         self.timeout = float(config.get("timeout", 120))
         self.json_mode = bool(config.get("json_mode", False))
         self.top_p = config.get("top_p")
@@ -66,9 +72,10 @@ class OpenAICompatibleAdapter(ModelAdapter):
         payload = {
             "model": self.model,
             "prompt": request.prompt,
-            "temperature": self.temperature,
             "max_tokens": self.max_tokens,
         }
+        if self.temperature is not None:
+            payload["temperature"] = self.temperature
         if self.top_p is not None:
             payload["top_p"] = float(self.top_p)
         result = self._read_json("completions", payload)
@@ -95,9 +102,10 @@ class OpenAICompatibleAdapter(ModelAdapter):
         payload = {
             "model": self.model,
             "messages": [{"role": "user", "content": content}],
-            "temperature": self.temperature,
-            "max_tokens": self.max_tokens,
+            self.max_tokens_param: self.max_tokens,
         }
+        if self.temperature is not None:
+            payload["temperature"] = self.temperature
         if self.top_p is not None:
             payload["top_p"] = float(self.top_p)
         if self.json_mode:
@@ -105,6 +113,10 @@ class OpenAICompatibleAdapter(ModelAdapter):
         result = self._read_json("chat/completions", payload)
         choice = result["choices"][0]
         return ModelResponse(
-            text=choice["message"]["content"],
-            metadata={"usage": result.get("usage", {}), "model": result.get("model")},
+            text=choice["message"]["content"] or "",
+            metadata={
+                "usage": result.get("usage", {}),
+                "model": result.get("model"),
+                "finish_reason": choice.get("finish_reason"),
+            },
         )
