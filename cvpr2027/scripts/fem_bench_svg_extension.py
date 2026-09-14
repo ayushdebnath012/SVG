@@ -37,7 +37,7 @@ def draw(record):
 
 def main():
     p=argparse.ArgumentParser();p.add_argument('--output', type=Path, required=True)
-    p.add_argument('--upstream',type=Path, default=Path(__file__).resolve().parents[1]/'third_party/FEM-bench')
+    p.add_argument('--upstream',type=Path, default=Path(__file__).resolve().parents[1]/'vendor/FEM-bench')
     a=p.parse_args();a.output.mkdir(parents=True,exist_ok=True)
     path=a.upstream/'tasks/FEM_1D_linear_elastic_CC0_H0_T0.py'
     spec=importlib.util.spec_from_file_location('upstream_bar',path)
@@ -45,7 +45,8 @@ def main():
     solver=upstream.FEM_1D_linear_elastic_CC0_H0_T0
     upstream.test_no_load_self_contained(solver)
     upstream.test_analytical_solution(solver)
-    commit=subprocess.check_output(['git','-C',str(a.upstream),'rev-parse','HEAD'],text=True).strip()
+    provenance=a.upstream/'UPSTREAM.json'
+    commit=json.loads(provenance.read_text())['commit'] if provenance.exists() else subprocess.check_output(['git','-C',str(a.upstream),'rev-parse','HEAD'],text=True).strip()
     rng=np.random.default_rng(20270913);records=[];pairs=[]
     for case in range(12):
         length=float(rng.uniform(.5,2));E=float(rng.uniform(50,210)*1e9)

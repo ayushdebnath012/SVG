@@ -1,0 +1,232 @@
+{
+  "schema_version": 1,
+  "experiments": [
+    {
+      "id": "C01",
+      "title": "Evaluator and edit-policy tests",
+      "status": "completed",
+      "command": [
+        "{python}",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "{root}/tests",
+        "-v"
+      ],
+      "evidence": "tests"
+    },
+    {
+      "id": "C02",
+      "title": "Manufactured contour controls",
+      "status": "completed",
+      "command": [
+        "{python}",
+        "{root}/scripts/benchmark_contour_audit.py",
+        "--output",
+        "{out}/results"
+      ],
+      "evidence": "runs/contour-controls"
+    },
+    {
+      "id": "C03",
+      "title": "Historical v3 re-audit",
+      "status": "completed",
+      "command": [
+        "{python}",
+        "{root}/scripts/field_fidelity.py",
+        "--run-dir",
+        "{root}/runs/historical-v3",
+        "--reference-dir",
+        "{root}/runs/reference-v3",
+        "--prompts",
+        "{root}/configs/prompts/engineering_v3_fields.json",
+        "--output-dir",
+        "{out}/results"
+      ],
+      "evidence": "runs/rescore-v3"
+    },
+    {
+      "id": "C04",
+      "title": "Deterministic rule baseline",
+      "status": "completed",
+      "command": [
+        "{python}",
+        "{root}/scripts/eval_controlled_rule_baseline.py",
+        "--data",
+        "{root}/data/controlled-editing",
+        "--output",
+        "{out}/results"
+      ],
+      "evidence": "runs/rule-baseline"
+    },
+    {
+      "id": "C05",
+      "title": "Verify saved three-seed A100 training",
+      "status": "completed",
+      "command": [
+        "{python}",
+        "{root}/scripts/summarize_training.py",
+        "--runs",
+        "{root}/runs/a100",
+        "--output",
+        "{out}/training_verified.json"
+      ],
+      "evidence": "reports/TRAINING_RESULTS.md"
+    },
+    {
+      "id": "C06",
+      "title": "Four completed Astra API calls",
+      "status": "completed",
+      "command": null,
+      "evidence": "runs/astra-api-recheck-20260913/summary.json"
+    },
+    {
+      "id": "C07",
+      "title": "Independent Robin FEM reference",
+      "status": "completed",
+      "command": [
+        "{python}",
+        "{root}/scripts/robin_fem_reference.py",
+        "--output",
+        "{out}/reference",
+        "--fd-reference",
+        "{root}/runs/reference-v3/plate_convective_edges.npz"
+      ],
+      "evidence": "runs/robin-fem-reference"
+    },
+    {
+      "id": "C08",
+      "title": "Direct FEM scoring of saved Astra curves",
+      "status": "completed",
+      "command": [
+        "{python}",
+        "{root}/scripts/score_astra_robin_fem.py",
+        "--runs",
+        "{out}/drawings",
+        "--reference",
+        "{root}/runs/robin-fem-reference"
+      ],
+      "evidence": "runs/astra-api-recheck-20260913/fem_comparison.json",
+      "copy_inputs": [
+        [
+          "runs/astra-api-recheck-20260913",
+          "drawings"
+        ]
+      ]
+    },
+    {
+      "id": "C09",
+      "title": "Historical capacitor path audit",
+      "status": "completed",
+      "command": [
+        "{python}",
+        "{root}/scripts/audit_historical_capacitor.py",
+        "--svg",
+        "{root}/runs/astra-historical-audit/capacitor_fringe_field.svg",
+        "--output",
+        "{out}/capacitor_geometry.json"
+      ],
+      "evidence": "runs/astra-historical-audit/capacitor_geometry.json"
+    },
+    {
+      "id": "C10",
+      "title": "Vendored FEM-Bench SVG bridge",
+      "status": "completed",
+      "command": [
+        "{python}",
+        "{root}/scripts/fem_bench_svg_extension.py",
+        "--output",
+        "{out}/results"
+      ],
+      "evidence": "runs/fem-bench-svg-anchor"
+    },
+    {
+      "id": "P01",
+      "title": "Numerical reference suite",
+      "status": "partial",
+      "command": null,
+      "depends_on": [],
+      "protocol": "docs/source/experiment_protocol.md",
+      "results": null
+    },
+    {
+      "id": "P02",
+      "title": "Claim schema and complete verifier",
+      "status": "partial",
+      "command": null,
+      "depends_on": [],
+      "protocol": "docs/source/experiment_protocol.md",
+      "results": null
+    },
+    {
+      "id": "P03",
+      "title": "Main case and edit collection",
+      "status": "designed",
+      "command": null,
+      "depends_on": [
+        "P01",
+        "P02"
+      ],
+      "protocol": "docs/source/experiment_protocol.md",
+      "results": null
+    },
+    {
+      "id": "P04",
+      "title": "Primary model and deterministic comparisons",
+      "status": "designed",
+      "command": null,
+      "depends_on": [
+        "P03"
+      ],
+      "protocol": "docs/source/experiment_protocol.md",
+      "results": null
+    },
+    {
+      "id": "P05",
+      "title": "Training on a nontrivial benchmark",
+      "status": "designed",
+      "command": null,
+      "depends_on": [
+        "P04"
+      ],
+      "protocol": "docs/source/experiment_protocol.md",
+      "results": null
+    },
+    {
+      "id": "P06",
+      "title": "Sequential physical and visual edits",
+      "status": "designed",
+      "command": null,
+      "depends_on": [
+        "P01",
+        "P02",
+        "P03"
+      ],
+      "protocol": "docs/source/experiment_protocol.md",
+      "results": null
+    },
+    {
+      "id": "P07",
+      "title": "Ablations and robustness",
+      "status": "designed",
+      "command": null,
+      "depends_on": [
+        "P04"
+      ],
+      "protocol": "docs/source/experiment_protocol.md",
+      "results": null
+    },
+    {
+      "id": "P08",
+      "title": "Drafting and visible correctness assessment",
+      "status": "designed",
+      "command": null,
+      "depends_on": [
+        "P04"
+      ],
+      "protocol": "docs/source/experiment_protocol.md",
+      "results": null
+    }
+  ]
+}

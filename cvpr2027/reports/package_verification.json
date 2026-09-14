@@ -1,0 +1,135 @@
+{
+  "date": "2026-09-14",
+  "branch": "codex/cvpr2027-research-package",
+  "cpu_reproductions": [
+    {
+      "id": "C01",
+      "returncode": 0,
+      "command": [
+        "/Users/ayushdebnath/SVG/.venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/Users/ayushdebnath/SVG/cvpr2027/tests",
+        "-v"
+      ],
+      "recorded_utc": "20260914T044600304018Z"
+    },
+    {
+      "id": "C02",
+      "returncode": 0,
+      "command": [
+        "/Users/ayushdebnath/SVG/.venv/bin/python",
+        "/Users/ayushdebnath/SVG/cvpr2027/scripts/benchmark_contour_audit.py",
+        "--output",
+        "/Users/ayushdebnath/SVG/cvpr2027/tmp/reproduction/C02-20260914T044638978978Z/results"
+      ],
+      "recorded_utc": "20260914T044638978978Z"
+    },
+    {
+      "id": "C03",
+      "returncode": 0,
+      "command": [
+        "/Users/ayushdebnath/SVG/.venv/bin/python",
+        "/Users/ayushdebnath/SVG/cvpr2027/scripts/field_fidelity.py",
+        "--run-dir",
+        "/Users/ayushdebnath/SVG/cvpr2027/runs/historical-v3",
+        "--reference-dir",
+        "/Users/ayushdebnath/SVG/cvpr2027/runs/reference-v3",
+        "--prompts",
+        "/Users/ayushdebnath/SVG/cvpr2027/configs/prompts/engineering_v3_fields.json",
+        "--output-dir",
+        "/Users/ayushdebnath/SVG/cvpr2027/tmp/reproduction/C03-20260914T044639431573Z/results"
+      ],
+      "recorded_utc": "20260914T044639431573Z"
+    },
+    {
+      "id": "C04",
+      "returncode": 0,
+      "command": [
+        "/Users/ayushdebnath/SVG/.venv/bin/python",
+        "/Users/ayushdebnath/SVG/cvpr2027/scripts/eval_controlled_rule_baseline.py",
+        "--data",
+        "/Users/ayushdebnath/SVG/cvpr2027/data/controlled-editing",
+        "--output",
+        "/Users/ayushdebnath/SVG/cvpr2027/tmp/reproduction/C04-20260914T044639667928Z/results"
+      ],
+      "recorded_utc": "20260914T044639667928Z"
+    },
+    {
+      "id": "C05",
+      "returncode": 0,
+      "command": [
+        "/Users/ayushdebnath/SVG/.venv/bin/python",
+        "/Users/ayushdebnath/SVG/cvpr2027/scripts/summarize_training.py",
+        "--runs",
+        "/Users/ayushdebnath/SVG/cvpr2027/runs/a100",
+        "--output",
+        "/Users/ayushdebnath/SVG/cvpr2027/tmp/reproduction/C05-20260914T044601033786Z/training_verified.json"
+      ],
+      "recorded_utc": "20260914T044601033786Z"
+    },
+    {
+      "id": "C07",
+      "returncode": 0,
+      "command": [
+        "/Users/ayushdebnath/SVG/.venv/bin/python",
+        "/Users/ayushdebnath/SVG/cvpr2027/scripts/robin_fem_reference.py",
+        "--output",
+        "/Users/ayushdebnath/SVG/cvpr2027/tmp/reproduction/C07-20260914T044647441493Z/reference",
+        "--fd-reference",
+        "/Users/ayushdebnath/SVG/cvpr2027/runs/reference-v3/plate_convective_edges.npz"
+      ],
+      "recorded_utc": "20260914T044647441493Z"
+    },
+    {
+      "id": "C08",
+      "returncode": 0,
+      "command": [
+        "/Users/ayushdebnath/SVG/.venv/bin/python",
+        "/Users/ayushdebnath/SVG/cvpr2027/scripts/score_astra_robin_fem.py",
+        "--runs",
+        "/Users/ayushdebnath/SVG/cvpr2027/tmp/reproduction/C08-20260914T044648581871Z/drawings",
+        "--reference",
+        "/Users/ayushdebnath/SVG/cvpr2027/runs/robin-fem-reference"
+      ],
+      "recorded_utc": "20260914T044648581871Z"
+    },
+    {
+      "id": "C09",
+      "returncode": 0,
+      "command": [
+        "/Users/ayushdebnath/SVG/.venv/bin/python",
+        "/Users/ayushdebnath/SVG/cvpr2027/scripts/audit_historical_capacitor.py",
+        "--svg",
+        "/Users/ayushdebnath/SVG/cvpr2027/runs/astra-historical-audit/capacitor_fringe_field.svg",
+        "--output",
+        "/Users/ayushdebnath/SVG/cvpr2027/tmp/reproduction/C09-20260914T044639800029Z/capacitor_geometry.json"
+      ],
+      "recorded_utc": "20260914T044639800029Z"
+    },
+    {
+      "id": "C10",
+      "returncode": 0,
+      "command": [
+        "/Users/ayushdebnath/SVG/.venv/bin/python",
+        "/Users/ayushdebnath/SVG/cvpr2027/scripts/fem_bench_svg_extension.py",
+        "--output",
+        "/Users/ayushdebnath/SVG/cvpr2027/tmp/reproduction/C10-20260914T044601216098Z/results"
+      ],
+      "recorded_utc": "20260914T044601216098Z"
+    }
+  ],
+  "regression_tests_passed": 30,
+  "planned_job_refusal_checked": "P01 exits 2 without launching",
+  "index_links": "README, docs index and paper index all resolve",
+  "credential_pattern_scan": "passed; no long sk-* credential patterns in nonbinary package files",
+  "files_over_100_MiB": [],
+  "adapter_reload_inference": "not run",
+  "new_api_or_training_jobs": "none during packaging",
+  "limitations": [
+    "Main experiments P01-P08 remain partial or designed.",
+    "GPU checkpoints beyond final adapters remain local ignored files."
+  ]
+}

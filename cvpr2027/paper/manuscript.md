@@ -34,13 +34,15 @@ The follow-up FEM survey adds important direct precedents. FEABench [17] evaluat
 
 ## 3. Problem formulation
 
-Let a physical problem be specified by domain geometry Ω, governing equation P, boundary conditions B, material parameters θ and quantity q. A numerical solution record R stores these inputs together with solver version, mesh or grid, units, convergence diagnostics and an identifier. Let u_R be its scalar field and D an SVG drawing associated with R.
+Let a physical problem be specified by domain geometry Ω, governing equation P, boundary conditions B, material parameters θ and quantity q. A numerical solution record R stores these inputs together with solver version, mesh or grid, units, convergence diagnostics and an identifier. Let $u_R$ be its scalar field and $D$ an SVG drawing associated with $R$.
 
 A contour claim consists of an SVG element identifier, a declared field level c, a quantity and unit, and a mapping from SVG coordinates to physical coordinates. The complete claim also includes its associated label and legend entry. A physical input edit produces a new problem and must invalidate the association with R until a new solution is available. A presentation edit should preserve the claims while changing only their visual arrangement or permitted style.
 
-For a sampled contour with physical points x_i and arc-length weights w_i, define the mean normalized geometric error as
+For a sampled contour with physical points $x_i$ and arc-length weights $w_i$, define the mean normalized geometric error as
 
-`E_mean = 100 × sum_i w_i |u_R(x_i) − c| / (range_R × sum_i w_i)`.
+$$
+E_{\mathrm{mean}} = 100\,\frac{\sum_i w_i\,|u_R(x_i)-c|}{\operatorname{range}_R\,\sum_i w_i}.
+$$
 
 We also report the maximum sampled error, required-level coverage, invalid-reference samples and unsupported rendering features. The field range is explicitly specified by the benchmark; it is not inferred differently for each edited output. A strict pass requires every required level, valid support for all checked samples, no flagged unsupported condition, and maximum sampled error below the stated tolerance.
 

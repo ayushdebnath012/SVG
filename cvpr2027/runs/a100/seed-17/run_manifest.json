@@ -1,0 +1,51 @@
+{
+  "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+  "model_revision": "2e1fd397ee46e1388853d2af2c993145b0f1098a",
+  "seed": 17,
+  "epochs": 3,
+  "gpu": "NVIDIA A100-SXM4-40GB",
+  "torch": "2.11.0+cu128",
+  "status": "completed",
+  "micro_batch_size": 4,
+  "gradient_accumulation_steps": 3,
+  "effective_batch_size": 12,
+  "data_manifest": {
+    "version": "controlled-editing-pilot-v1",
+    "seed": 2027,
+    "splits": {
+      "train": {
+        "cases": 60,
+        "examples": 360,
+        "sha256": "67966b4aa2a57ecac63370369d6d63587ea5e788a05fae91d3abdca979d98b99"
+      },
+      "validation": {
+        "cases": 10,
+        "examples": 60,
+        "sha256": "4d49c445cf9266400c1d0be58325cf8fd7e0b1e0197839ace073050a26ca7a14"
+      },
+      "test": {
+        "cases": 10,
+        "examples": 60,
+        "sha256": "fac6981074b1a637078dd8566764313654d567eeb21c8b495383548980599dfe"
+      },
+      "ood": {
+        "cases": 10,
+        "examples": 60,
+        "sha256": "a2169eeef0285219049c3203adbf1543a1548ed28d853adc6fe72c49778d9ae7"
+      }
+    },
+    "limitations": [
+      "synthetic shared instruction templates",
+      "compact DOM index, not vision input",
+      "simple manufactured heat equations",
+      "recompute is routing only",
+      "not evidence of CVPR-level novelty or complete SVG verification"
+    ]
+  },
+  "training_script_sha256": "bf3df5a632b29075f59edc96df2310eb3ba24f7ab5f7166b116404c75c8fa29b",
+  "data_script_sha256": "c119b81dccb707bab003fef47ec89ed87b06d77acf36db78746703fb5fc02f11",
+  "selection": "fixed final epoch, no test-based model selection",
+  "training_seconds": 94.93722961200001,
+  "global_steps": 90,
+  "max_gpu_memory_allocated_bytes": 6926140928
+}

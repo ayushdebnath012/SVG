@@ -1,0 +1,134 @@
+2026-09-13 05:49:41.647418: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+Sliding Window Attention is enabled but not implemented for `sdpa`; unexpected results may be encountered.
+trainable params: 4,358,144 || all params: 1,548,072,448 || trainable%: 0.2815
+/usr/local/lib/python3.13/dist-packages/transformers/generation/configuration_utils.py:631: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.7` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+/usr/local/lib/python3.13/dist-packages/transformers/generation/configuration_utils.py:636: UserWarning: `do_sample` is set to `False`. However, `top_p` is set to `0.8` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `top_p`.
+  warnings.warn(
+/usr/local/lib/python3.13/dist-packages/transformers/generation/configuration_utils.py:653: UserWarning: `do_sample` is set to `False`. However, `top_k` is set to `20` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `top_k`.
+  warnings.warn(
+base test 4 / 60
+base test 8 / 60
+base test 12 / 60
+base test 16 / 60
+base test 20 / 60
+base test 24 / 60
+base test 28 / 60
+base test 32 / 60
+base test 36 / 60
+base test 40 / 60
+base test 44 / 60
+base test 48 / 60
+base test 52 / 60
+base test 56 / 60
+base test 60 / 60
+base ood 4 / 60
+base ood 8 / 60
+base ood 12 / 60
+base ood 16 / 60
+base ood 20 / 60
+base ood 24 / 60
+base ood 28 / 60
+base ood 32 / 60
+base ood 36 / 60
+base ood 40 / 60
+base ood 44 / 60
+base ood 48 / 60
+base ood 52 / 60
+base ood 56 / 60
+base ood 60 / 60
+base {"test": {"n": 60, "json_valid": 0.0, "action_correct": 0.0, "exact_action": 0.0, "executor_accepts": 0.0, "unsafe_edit": 0.0, "exact_by_task": {"recompute": {"n": 10, "rate": 0.0}, "style:stroke": {"n": 10, "rate": 0.0}, "style:stroke-width": {"n": 10, "rate": 0.0}, "reject:missing_required_contour": {"n": 10, "rate": 0.0}, "move_label": {"n": 10, "rate": 0.0}, "reject:numerical_claim": {"n": 10, "rate": 0.0}}}, "ood": {"n": 60, "json_valid": 0.0, "action_correct": 0.0, "exact_action": 0.0, "executor_accepts": 0.0, "unsafe_edit": 0.0, "exact_by_task": {"style:stroke": {"n": 10, "rate": 0.0}, "move_label": {"n": 10, "rate": 0.0}, "style:stroke-width": {"n": 10, "rate": 0.0}, "reject:numerical_claim": {"n": 10, "rate": 0.0}, "recompute": {"n": 10, "rate": 0.0}, "reject:missing_required_contour": {"n": 10, "rate": 0.0}}}}
+No label_names provided for model class `PeftModelForCausalLM`. Since `PeftModel` hides base models input arguments, if label_names is not given, label_names can't be set automatically within `Trainer`. Note that empty label_names list will be used instead.
+
+  0%|          | 0/66 [00:00<?, ?it/s]
+  2%|▏         | 1/66 [00:06<06:39,  6.14s/it]
+  3%|▎         | 2/66 [00:12<06:28,  6.07s/it]
+  5%|▍         | 3/66 [00:18<06:22,  6.07s/it]
+  6%|▌         | 4/66 [00:24<06:14,  6.04s/it]
+  8%|▊         | 5/66 [00:30<06:03,  5.96s/it]
+                                              
+{'loss': 0.1172, 'grad_norm': 0.18901227414608002, 'learning_rate': 0.0002, 'epoch': 0.22}
+
+  8%|▊         | 5/66 [00:30<06:03,  5.96s/it]
+  9%|▉         | 6/66 [00:35<05:51,  5.86s/it]
+ 11%|█         | 7/66 [00:41<05:39,  5.76s/it]
+ 12%|█▏        | 8/66 [00:46<05:28,  5.66s/it]
+ 14%|█▎        | 9/66 [00:52<05:19,  5.60s/it]
+ 15%|█▌        | 10/66 [00:57<05:11,  5.56s/it]
+                                               
+{'loss': 0.0168, 'grad_norm': 0.13349197804927826, 'learning_rate': 0.00019680771188662044, 'epoch': 0.44}
+
+ 15%|█▌        | 10/66 [00:57<05:11,  5.56s/it]
+ 17%|█▋        | 11/66 [01:03<05:04,  5.53s/it]
+ 18%|█▊        | 12/66 [01:08<04:57,  5.52s/it]
+ 20%|█▉        | 13/66 [01:14<04:51,  5.51s/it]
+ 21%|██        | 14/66 [01:19<04:47,  5.52s/it]
+ 23%|██▎       | 15/66 [01:25<04:42,  5.54s/it]
+                                               
+{'loss': 0.0024, 'grad_norm': 0.008642725646495819, 'learning_rate': 0.00018743466161445823, 'epoch': 0.67}
+
+ 23%|██▎       | 15/66 [01:25<04:42,  5.54s/it]
+ 24%|██▍       | 16/66 [01:30<04:37,  5.55s/it]
+ 26%|██▌       | 17/66 [01:36<04:32,  5.57s/it]
+ 27%|██▋       | 18/66 [01:42<04:28,  5.59s/it]
+ 29%|██▉       | 19/66 [01:47<04:22,  5.59s/it]
+ 30%|███       | 20/66 [01:53<04:15,  5.56s/it]
+                                               
+{'loss': 0.0003, 'grad_norm': 0.0036542199086397886, 'learning_rate': 0.000172479278722912, 'epoch': 0.89}
+
+ 30%|███       | 20/66 [01:53<04:15,  5.56s/it]
+ 32%|███▏      | 21/66 [01:58<04:09,  5.55s/it]
+ 33%|███▎      | 22/66 [02:04<04:03,  5.54s/it]
+ 35%|███▍      | 23/66 [02:06<03:22,  4.71s/it]
+
+  0%|          | 0/30 [00:00<?, ?it/s][A
+
+  7%|▋         | 2/30 [00:00<00:03,  8.04it/s][A
+
+ 10%|█         | 3/30 [00:00<00:04,  5.70it/s][A
+
+ 13%|█▎        | 4/30 [00:00<00:05,  4.93it/s][A
+
+ 17%|█▋        | 5/30 [00:00<00:05,  4.57it/s][A
+
+ 20%|██        | 6/30 [00:01<00:05,  4.43it/s][A
+
+ 23%|██▎       | 7/30 [00:01<00:05,  4.29it/s][A
+
+ 27%|██▋       | 8/30 [00:01<00:05,  4.16it/s][A
+
+ 30%|███       | 9/30 [00:01<00:05,  4.10it/s][A
+
+ 33%|███▎      | 10/30 [00:02<00:04,  4.07it/s][A
+
+ 37%|███▋      | 11/30 [00:02<00:04,  4.03it/s][A
+
+ 40%|████      | 12/30 [00:02<00:04,  3.99it/s][A
+
+ 43%|████▎     | 13/30 [00:02<00:04,  4.01it/s][A
+
+ 47%|████▋     | 14/30 [00:03<00:03,  4.04it/s][A
+
+ 50%|█████     | 15/30 [00:03<00:03,  4.05it/s][A
+
+ 53%|█████▎    | 16/30 [00:03<00:03,  4.00it/s][A
+
+ 57%|█████▋    | 17/30 [00:03<00:03,  4.02it/s][A
+
+ 60%|██████    | 18/30 [00:04<00:02,  4.04it/s][A
+
+ 63%|██████▎   | 19/30 [00:04<00:02,  4.08it/s][A
+
+ 67%|██████▋   | 20/30 [00:04<00:02,  4.05it/s][A
+
+ 70%|███████   | 21/30 [00:04<00:02,  4.08it/s][A
+
+ 73%|███████▎  | 22/30 [00:05<00:01,  4.08it/s][A
+
+ 77%|███████▋  | 23/30 [00:05<00:01,  4.09it/s][A
+
+ 80%|████████  | 24/30 [00:05<00:01,  4.06it/s][A
+
+ 83%|████████▎ | 25/30 [00:05<00:01,  4.08it/s][A
+

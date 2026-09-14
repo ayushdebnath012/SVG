@@ -1,0 +1,402 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+\documentclass[
+  11pt,
+  a4paper,
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=24mm]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{5}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{longtable,booktabs,array}
+\newcounter{none} % for unnumbered tables
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+% Shared style; used by generated, standalone LaTeX sources.
+\usepackage{xcolor}
+\usepackage{xurl}
+\usepackage{fvextra}
+\usepackage{etoolbox}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\definecolor{researchblue}{HTML}{173B58}
+\AtBeginDocument{\hypersetup{linkcolor=researchblue,urlcolor=researchblue}}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily SVG PATCH LAB}
+\fancyhead[R]{\small\sffamily CVPR 2027 research package}
+\fancyfoot[L]{\small Working documents; results and proposals distinguished}
+\fancyfoot[R]{\thepage}
+\setlength{\headheight}{15pt}
+\setlength{\emergencystretch}{3em}
+\titleformat{\section}{\Large\bfseries\color{researchblue}}{\thesection}{0.7em}{}
+\titleformat{\subsection}{\large\bfseries\color{researchblue}}{\thesubsection}{0.7em}{}
+\DefineVerbatimEnvironment{verbatim}{Verbatim}{breaklines=true,breakanywhere=true,fontsize=\small}
+\AtBeginEnvironment{longtable}{\small\setlength{\tabcolsep}{4pt}}
+\let\originaltableofcontents\tableofcontents
+\renewcommand{\tableofcontents}{\originaltableofcontents\clearpage}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Literature Survey and Reuse Decisions},
+  pdfauthor={SVG Patch Lab - Research Working Package},
+  colorlinks=true,
+  linkcolor={Maroon},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Literature Survey and Reuse Decisions}
+\author{SVG Patch Lab - Research Working Package}
+\date{14 September 2026 \textbar{} CVPR 2027 target}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+Updated 13 September 2026. This supplements the earlier graphics survey
+with the user's clarified focus: engineering problems solved using
+physics and FEM.
+
+\section{Conclusion}\label{conclusion}
+
+\textbf{The broad idea already exists, including FEM agents, solver
+verification, and fine-tuning on verified FEM programs.} A paper cannot
+claim those combinations as new. The candidate extension is maintaining
+numerical and semantic correctness in the final editable engineering
+drawing, including after physical and presentation edits. This remains a
+hypothesis to test against existing simulation and graphics systems; the
+search does not establish unique novelty.
+
+\section{Closest primary sources}\label{closest-primary-sources}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Work
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+What overlaps
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+What to reuse or compare
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{MechAgents}, Ni \& Buehler, Extreme Mechanics Letters, 2024 &
+LLM agents formulate, execute and correct FEM elasticity programs. & A
+historical solver-agent baseline; published Colab notebooks require
+older FEniCS/AutoGen dependencies. Do not call a modern reimplementation
+an exact reproduction. \href{https://arxiv.org/abs/2311.08166}{Paper},
+\href{https://github.com/lamm-mit/MechAgents}{author code}. \\
+\textbf{MCP-SIM}, npj Artificial Intelligence, 2026 & Language-driven
+simulation through tools and solver workflows. & Closest earlier
+simulation orchestration comparison from the first survey;
+runnable-release limitations are recorded there.
+\href{https://www.nature.com/articles/s44387-025-00057-z}{Paper},
+\href{https://github.com/KAIST-M4/MCP-SIM}{code}. \\
+\textbf{FEABench}, Mudur et al., arXiv 2025; paper notes NeurIPS 2024
+workshop acceptance & End-to-end natural-language engineering problems
+solved through COMSOL APIs, with iterative tool feedback. & Reuse the
+distinction between an executable solver call and a quantitatively
+correct solution. COMSOL availability is a dependency for faithful
+reproduction. \href{https://arxiv.org/abs/2504.06260}{Paper and linked
+code}. \\
+\textbf{FEM-Bench}, Mohammadzadeh et al., December 2025, revised May
+2026 & FEM function generation and test generation against reference and
+deliberately broken implementations. & \textbf{Selected for immediate
+code reuse.} MIT-licensed tasks provide auditable numerical anchors. Its
+33-task results are not directly comparable to our SVG editing scores.
+\href{https://arxiv.org/abs/2512.20732}{Paper},
+\href{https://github.com/elejeune11/FEM-bench}{repository}. \\
+\textbf{ALL-FEM}, Deotale et al., CMAME 457:118985, 2026 & Fine-tuned
+models generate FEniCS code in an agentic, feedback-driven workflow. The
+authors report over 1,000 verified scripts, models from 3B to 120B, and
+39 engineering benchmarks. & The most direct precedent for the proposed
+training component. Training a small solver agent alone is not a new
+contribution. Its reported code-level success is not a final-drawing
+correctness metric. \href{https://arxiv.org/abs/2603.21011}{Paper},
+\href{https://fenics-llm.github.io/}{author project and journal
+citation}. \\
+\textbf{PDEAgent-Bench}, May 2026 & 645 PDE instances across 11
+families, with DOLFINx, Firedrake and deal.II tracks; numerical accuracy
+and efficiency beyond mere execution. & Use its calibrated-reference
+philosophy and PDE families when expanding beyond elementary anchors.
+Keep benchmark test cases out of training.
+\href{https://arxiv.org/abs/2605.09636}{Paper},
+\href{https://github.com/YusanX/pde-agent-bench}{code}. \\
+\textbf{OASiS / Open FEM Agent}, 2026 software & MCP access to multiple
+FEM solvers, numerical verification, convergence studies and
+visualization. & A current open-source orchestration baseline; its
+scikit-fem backend matches our local solver ecosystem. This is software
+prior art, not an assumed peer-reviewed performance result. We have
+inspected its documentation, not reproduced its full agent evaluation.
+\href{https://github.com/Hereon-InstituteMS/OASiS}{Repository and
+citation}, \href{https://zenodo.org/records/20388035}{archived earlier
+release}. \\
+\textbf{VFEAgent}, May 2026, revised August 2026, preprint & Images and
+text are converted into structured FEA specifications, then simulation
+code with verification and debugging. & Directly relevant to CVPR
+positioning: multimodal engineering-drawing-to-FEA workflows already
+exist. Compare perception, physical specification and final artifact
+separately. \href{https://arxiv.org/abs/2605.28978}{Paper}. \\
+\textbf{ModSolAgent}, IEEE Transactions on Industrial Informatics, June
+2026 & Abaqus script generation with retrieval and iterative
+verification, plus distilled fine-tuning data. & Another direct
+precedent for training engineering code models. Abaqus licensing and
+released assets must be checked before reproduction.
+\href{https://ieeexplore.ieee.org/document/11452232/}{Publisher}. \\
+\end{longtable}
+}
+
+The prior \href{../../reports/PRIOR_ART.md}{graphics survey} remains
+relevant for Penrose, scientific SVG generation and diagram editing. The
+engineering papers establish the solver side; graphics papers establish
+the editable-artifact side. Their combination still needs a precisely
+defined, experimentally justified contribution.
+
+\section{What has actually been built on top of prior
+work}\label{what-has-actually-been-built-on-top-of-prior-work}
+
+The vendored source snapshot \texttt{vendor/FEM-bench} is pinned to
+commit \nolinkurl{d370aef5dbe023b0b86eb3548d24d11fd69328ee}; its MIT
+license is retained. The new
+\nolinkurl{scripts/fem_bench_svg_extension.py} directly imports the
+author's unchanged \nolinkurl{FEM_1D_linear_elastic_CC0_H0_T0} reference
+function.
+
+The bridge passes both upstream reference tests, solves 12 generated
+axial-bar cases, and performs 12 additional FEM solves after a 50\% load
+increase. It writes displacements, reactions, provenance IDs and
+editable SVG plots for both states. All 24 solves agree with the
+analytic bar solution to below 2 \(\times\) 10\(^{-18}\) m in this run;
+maximum relative force imbalance is below 4.2 \(\times\) 10\(^{-14}\).
+These are elementary numerical checks, not evidence of general
+engineering capability. A stale old tip displacement would be 33.3\% low
+relative to the edited-load solution.
+
+This is a working integration anchor. It does not reproduce the full
+FEM-Bench leaderboard, train a model on FEM-Bench, or demonstrate a new
+visual reasoning result. No upstream agent framework has been silently
+relabeled as ours. Results are in \texttt{runs/fem-bench-svg-anchor/}.
+
+Separately, \nolinkurl{scripts/robin_fem_reference.py} uses scikit-fem
+to implement the weak form for the exact historical convective-plate
+problem. It checks an analytic Robin anchor, discrete heat balance and
+five mesh resolutions. This is an independent FEM implementation, not a
+reproduction of MechAgents or ALL-FEM. See the
+\href{../../reports/ASTRA_FEM_FAILURE_RECHECK.md}{Astra recheck}.
+
+\section{Next contribution to test}\label{next-contribution-to-test}
+
+Use a structured physical specification and solver-produced numerical
+record as the source for an editable drawing. A physical change must
+cause an actual new solve; a presentation change must preserve the
+numerical claim and visible meaning. Measure errors after the final SVG
+is rendered and edited, not only in a solver array or API response.
+
+The main comparison should include direct Astra SVG generation, a
+published solver-agent workflow, deterministic solver plotting,
+unrestricted solver-informed SVG editing, and protected
+numerical/semantic editing. Equalize available physical information and
+count every attempted case. Test real geometry and material changes, not
+only load scaling. Include human-written requests, multi-step edits,
+quantity/unit/legend errors, and visual layout quality. Training is
+justified only after a stronger task shows a gap that simple prompting
+or a deterministic parser does not already close.
+
+Prioritize well-posed Robin heat transfer, finite-domain elasticity with
+explicit material/support/load assumptions, and electrostatics with a
+stated dimensional and far-boundary model. A sharp-corner stress
+singularity has no finite mesh-independent peak, so it is a
+disclosure/identifiability test unless a fillet and load/support model
+are specified. Reference uncertainty and singular regions must be
+declared before model scoring.
+
+For CVPR, a language-only code router is insufficient evidence. The
+study needs an actual visual or graphics contribution and comparisons to
+multimodal FEA and scientific diagram-editing work. The completed A100
+pilot is useful infrastructure; it is not the main FEM experiment.
+
+\clearpage
+
+\section{Graphics and adjacent prior
+art}\label{graphics-and-adjacent-prior-art}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Work
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Verified overlap
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+How this project could extend it
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{MechAgents}, Ni and Buehler, preprint 2023; Extreme Mechanics
+Letters 2024 & Agents write, execute, and correct FEM code for
+elasticity. Its examples explicitly include plotting the wrong stress
+quantity and subsequently correcting it. & Reuse its elasticity tasks
+and solver-agent baseline; automatically check that the displayed
+quantity and contours agree with the solution, including after user
+edits. \href{https://arxiv.org/abs/2311.08166}{Paper},
+\href{https://github.com/lamm-mit/MechAgents}{author code and Colab
+notebooks}. \\
+\textbf{MCP-SIM}, Park, Moon and Ryu, npj Artificial Intelligence,
+January 2026 & Natural-language specifications become simulations and
+explanations through clarification, execution, and correction. Its
+reported twelve-task success is specific to that evaluation. & Use its
+workflow as a named simulation baseline. Add explicit solver-to-SVG
+provenance and post-edit verification.
+\href{https://www.nature.com/articles/s44387-025-00057-z}{Paper},
+\href{https://github.com/KAIST-M4/MCP-SIM}{author repository}. \\
+\textbf{SSVG-Bench / LOOP}, \emph{Towards the Generation of Structured
+Scientific Vector Graphics with Large Language Models}, inspected ICLR
+2026 submission & Scripted structural evaluation for plane geometry and
+molecular diagrams, spanning TikZ, SVG and EPS; reasoning-oriented
+prompting. The accessed manuscript is labeled under review; acceptance
+and released code were not verified. & Extend structural checks to
+numerical PDE fields and edit sequences; do not claim to invent
+non-visual correctness metrics for scientific diagrams.
+\href{https://openreview.net/pdf?id=aWypD2TAaC}{Manuscript}. \\
+\textbf{Penrose}, SIGGRAPH 2020 & Separates mathematical meaning and
+visual styling, uses constraints for layout, and exports SVG. & Borrow
+the separation of semantics from layout. Physical contours must be
+computed and bound to the solution; layout constraints alone do not
+establish PDE accuracy.
+\href{https://penrose.ink/media/Penrose_SIGGRAPH2020.pdf}{Author-hosted
+paper}, \href{https://github.com/penrose/penrose}{code}. \\
+\textbf{AutoFigure-Edit}, ACL system demonstrations 2026 & Generates
+editable scientific illustrations with reference-guided styling and an
+SVG editing interface. & Strong available graphics baseline: test
+whether its edits preserve solver-derived geometry, field labels and
+units. \href{https://aclanthology.org/2026.acl-demo.6/}{Published
+paper}, \href{https://github.com/ResearAI/AutoFigure-Edit}{author
+code}. \\
+\textbf{SciDiagramEdit}, July 2026 preprint & Edits scientific vector
+sources using instructions derived from paper revisions; improves an
+editor through skill evolution over execution traces. & Closest
+editing-learning comparison. Add numerical verification to the editing
+objective. Its skill evolution is not the same as weight fine-tuning. No
+official code release was verified in this audit.
+\href{https://arxiv.org/abs/2607.15272}{Paper}. \\
+\textbf{SVGEditBench V2}, February 2025 preprint & Instruction-based SVG
+editing on emoji-derived examples, evaluated with visual, semantic and
+geometric metrics. & Retain it as a general editing control, and add
+physical-claim checks on engineering cases. It is not a physics
+benchmark. \href{https://arxiv.org/abs/2502.19453}{Paper}. \\
+\textbf{FMforME}, \emph{A Three-Layer Runtime Constraint Verification
+Framework\ldots{}}, Applied Sciences 2026 & Validates structured CAD
+specifications and feeds detected defects back to the LLM. Its stated
+future work includes extending through FEA solving. & Compare
+specification validity with actual solved-field fidelity. Do not copy
+its domain-specific engineering rules as universal physical laws.
+\href{https://www.mdpi.com/2076-3417/16/15/7396}{Article}. \\
+\textbf{SciForma}, July 2026 preprint & Scientific methodology-diagram
+generation with component, arrow and text evaluation and
+multidimensional preference training. & Borrow the idea that all
+required correctness dimensions must pass. Its released renderer is a
+diffusion image model, so it is an adjacent visual baseline rather than
+a native SVG/PDE implementation.
+\href{https://arxiv.org/abs/2607.18091}{Paper},
+\href{https://github.com/microsoft/SciForma}{author repository}. \\
+\textbf{Text2PDE}, October 2024 preprint & Text-conditioned
+latent-diffusion physics simulation. & Relevant if extending into
+learned simulation, but much broader than the current need for
+trustworthy SVG export and editing.
+\href{https://arxiv.org/abs/2410.01153}{Paper}. \\
+\end{longtable}
+}
+
+\section{Public-code feasibility}\label{public-code-feasibility}
+
+The inspected MCP-SIM main tree has six agent modules, a README and an
+MIT license. Several modules import \texttt{utils.setup\_logger}, but
+\texttt{utils.py} is absent from that tree. A complete orchestration
+entry point and dependency manifest were also absent. Its executor runs
+generated Python and scans output for error patterns; that module does
+not itself establish numerical correctness. The release needs
+integration work before it can be treated as a reproducible baseline.
+This observation concerns the public code, not a claim that the paper's
+private experiments were invalid.
+\href{https://github.com/KAIST-M4/MCP-SIM}{Repository},
+\href{https://github.com/KAIST-M4/MCP-SIM/blob/main/simulation_executor_agent.py}{executor}.
+
+MechAgents supplies Colab notebooks, but its README specifies older
+FEniCS, AutoGen and OpenAI versions. Use it as a reproduction source
+with a separately recorded environment, rather than silently mixing its
+dependencies into this project.
+\href{https://github.com/lamm-mit/MechAgents}{Repository}.
+
+SciForma's README describes a 9B diffusion backbone and an eight-B200
+training setup, with other distributed configurations in its tree. A
+single Colab GPU would be a reduced adaptation experiment, not an
+equivalent reproduction of that training setup.
+\href{https://github.com/microsoft/SciForma}{Repository}.
+
+\section{Paper archive}\label{paper-archive}
+
+The catalog and bibliography are in \texttt{papers/}. Downloaded PDFs
+retain their original authorship and publication notices. The download
+manifest distinguishes bundled PDFs from source links and unavailable
+downloads. This package does not bypass publisher access controls.
+
+\end{document}

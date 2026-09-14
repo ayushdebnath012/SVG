@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 740">
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
+      <path d="M0 0 L9 4.5 L0 9 Z" fill="#182b3a"/>
+    </marker>
+    <marker id="dim" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto-start-reverse">
+      <path d="M7 0 L0 3.5 L7 7" fill="none" stroke="#52616b" stroke-width="1"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1000" height="740" fill="#ffffff"/>
+  <text x="40" y="43" font-family="sans-serif" font-size="23" font-weight="bold" fill="#182b3a">L-bracket — side elevation / stress estimate</text>
+  <text x="40" y="70" font-family="sans-serif" font-size="14" fill="#52616b">Steel · 80 mm width out of plane · 60 mm height · 40 mm depth · 8 mm wall</text>
+
+  <!-- Discrete stress contours; schematic, not computed finite elements. -->
+  <path d="M200 140 H248 V452 H440 V500 H200 Z" fill="#204fc4"/>
+  <path d="M200 215 H248 V452 H399 Q391 475 370 500 H200 Z" fill="#168ecb"/>
+  <path d="M200 294 H248 V452 H362 Q354 481 326 500 H200 Z" fill="#14bec2"/>
+  <path d="M200 360 H248 V452 H329 Q322 480 293 500 H200 Z" fill="#70d15a"/>
+  <path d="M200 414 Q224 395 248 400 V452 H304 Q298 481 269 491 Q220 503 200 471 Z" fill="#d5df43"/>
+  <path d="M212 430 Q227 413 248 421 V452 H285 Q283 473 261 481 Q235 489 217 471 Q206 453 212 430 Z" fill="#ffc13a"/>
+  <path d="M226 443 Q231 430 248 436 V452 H270 Q269 468 253 474 Q235 476 228 464 Z" fill="#f47b29"/>
+  <path d="M237 446 Q242 441 248 445 V452 H258 Q258 461 249 466 Q238 465 237 456 Z" fill="#d92f32"/>
+  <path d="M244 448 L248 448 V452 H253 Q253 458 248 460 Q242 457 244 448 Z" fill="#941c43"/>
+  <path d="M200 140 H248 V452 H440 V500 H200 Z" fill="none" stroke="#182b3a" stroke-width="2.5"/>
+
+  <!-- Foundation and projected bolt. -->
+  <rect x="182" y="503" width="279" height="18" fill="#e5e9ed" stroke="#52616b" stroke-width="1.5"/>
+  <g stroke="#89959e" stroke-width="1" fill="none">
+    <path d="M186 534 L198 521 M212 534 L224 521 M238 534 L250 521 M264 534 L276 521 M290 534 L302 521 M316 534 L328 521 M342 534 L354 521 M368 534 L380 521 M394 534 L406 521 M420 534 L432 521 M446 534 L458 521"/>
+  </g>
+  <rect x="362" y="444" width="40" height="8" fill="#d8dfe5" stroke="#182b3a" stroke-width="1.5"/>
+  <path d="M368 444 V427 H396 V444 Z" fill="#f0f3f5" stroke="#182b3a" stroke-width="1.5"/>
+  <path d="M375 452 V520 M389 452 V520" fill="none" stroke="#182b3a" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <line x1="382" y1="417" x2="382" y2="535" stroke="#52616b" stroke-width="1" stroke-dasharray="9 3 2 3"/>
+  <path d="M401 435 L469 407 H513" fill="none" stroke="#52616b" stroke-width="1.2"/>
+  <text x="411" y="379" font-family="sans-serif" font-size="14" fill="#182b3a">Base bolts</text>
+  <text x="411" y="397" font-family="sans-serif" font-size="12" fill="#52616b">(projected)</text>
+  <text x="207" y="611" font-family="sans-serif" font-size="14" fill="#182b3a">Rigid support; base flange restrained</text>
+
+  <!-- Applied load. -->
+  <line x1="224" y1="140" x2="410" y2="140" stroke="#182b3a" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="303" y="120" font-family="sans-serif" font-size="19" font-weight="bold" fill="#182b3a">2 kN →</text>
+  <text x="294" y="165" font-family="sans-serif" font-size="12" fill="#52616b">Distributed across 80 mm width</text>
+
+  <!-- Dimensions. -->
+  <g fill="none" stroke="#52616b" stroke-width="1">
+    <path d="M190 140 H119 M190 500 H119"/>
+    <line x1="132" y1="140" x2="132" y2="500" marker-start="url(#dim)" marker-end="url(#dim)"/>
+    <path d="M200 539 V575 M440 532 V575"/>
+    <line x1="200" y1="562" x2="440" y2="562" marker-start="url(#dim)" marker-end="url(#dim)"/>
+    <path d="M200 130 V94 M248 130 V94"/>
+    <line x1="200" y1="102" x2="248" y2="102" marker-start="url(#dim)" marker-end="url(#dim)"/>
+    <path d="M447 452 H493 M447 500 H493"/>
+    <line x1="484" y1="452" x2="484" y2="500" marker-start="url(#dim)" marker-end="url(#dim)"/>
+  </g>
+  <text x="115" y="337" transform="rotate(-90 115 337)" font-family="sans-serif" font-size="15" fill="#182b3a">60 mm</text>
+  <text x="294" y="586" font-family="sans-serif" font-size="15" fill="#182b3a">40 mm</text>
+  <text x="213" y="92" font-family="sans-serif" font-size="13" fill="#182b3a">8</text>
+  <text x="498" y="481" font-family="sans-serif" font-size="13" fill="#182b3a">8 mm</text>
+
+  <path d="M258 263 H302" fill="none" stroke="#52616b" stroke-width="1.2"/>
+  <text x="310" y="268" font-family="sans-serif" font-size="15" fill="#182b3a">Upright</text>
+  <path d="M434 465 L455 333 H506" fill="none" stroke="#52616b" stroke-width="1.2"/>
+  <text x="380" y="310" font-family="sans-serif" font-size="13" fill="#182b3a">Low stress at free tip</text>
+
+  <!-- Hotspot callout. -->
+  <circle cx="248" cy="452" r="5" fill="none" stroke="#182b3a" stroke-width="1.5"/>
+  <path d="M252 448 L325 202 H549" fill="none" stroke="#182b3a" stroke-width="1.2"/>
+  <text x="563" y="193" font-family="sans-serif" font-size="18" font-weight="bold" fill="#941c43">Estimated peak ≈ 220 MPa</text>
+  <text x="563" y="217" font-family="sans-serif" font-size="13" fill="#52616b">Inner-corner hotspot; ≈ 1.8 × nominal.</text>
+
+  <!-- Legend: explicit discrete color scale. -->
+  <text x="563" y="265" font-family="sans-serif" font-size="17" font-weight="bold" fill="#182b3a">von Mises stress</text>
+  <text x="563" y="287" font-family="sans-serif" font-size="13" fill="#52616b">Illustrative contour bands · MPa</text>
+  <g stroke="#ffffff" stroke-width="0.6">
+    <rect x="563" y="305" width="33" height="24" fill="#941c43"/>
+    <rect x="563" y="329" width="33" height="24" fill="#d92f32"/>
+    <rect x="563" y="353" width="33" height="24" fill="#f47b29"/>
+    <rect x="563" y="377" width="33" height="24" fill="#ffc13a"/>
+    <rect x="563" y="401" width="33" height="24" fill="#d5df43"/>
+    <rect x="563" y="425" width="33" height="24" fill="#70d15a"/>
+    <rect x="563" y="449" width="33" height="24" fill="#14bec2"/>
+    <rect x="563" y="473" width="33" height="24" fill="#168ecb"/>
+    <rect x="563" y="497" width="33" height="24" fill="#204fc4"/>
+  </g>
+  <g font-family="sans-serif" font-size="13" fill="#182b3a">
+    <text x="605" y="316">220</text>
+    <text x="605" y="353">180</text>
+    <text x="605" y="401">130</text>
+    <text x="605" y="449">80</text>
+    <text x="605" y="497">25</text>
+    <text x="605" y="525">0</text>
+  </g>
+
+  <!-- Beam-theory check. -->
+  <text x="684" y="326" font-family="sans-serif" font-size="16" font-weight="bold" fill="#182b3a">Upright base: beam check</text>
+  <g font-family="sans-serif" font-size="14" fill="#182b3a">
+    <text x="684" y="355">Lever arm h = 60 − 8 = 52 mm</text>
+    <text x="684" y="383">M = Fh = 104,000 N·mm</text>
+    <text x="684" y="411">Z = bt²/6 = 80 × 8²/6</text>
+    <text x="684" y="433">   = 853.3 mm³</text>
+    <text x="684" y="465" font-weight="bold">σb = M/Z ≈ 122 MPa</text>
+    <text x="684" y="493" fill="#52616b">Nominal extreme-fibre stress;</text>
+    <text x="684" y="513" fill="#52616b">excludes corner concentration.</text>
+  </g>
+
+  <line x1="40" y1="638" x2="960" y2="638" stroke="#c8d0d7" stroke-width="1"/>
+  <text x="40" y="663" font-family="sans-serif" font-size="14" font-weight="bold" fill="#182b3a">Interpretation / limitations</text>
+  <text x="40" y="686" font-family="sans-serif" font-size="13" fill="#52616b">Expected elastic stress pattern, not a solved FEA result. The 220 MPa hotspot is an engineering illustration, not a design value.</text>
+  <text x="40" y="707" font-family="sans-serif" font-size="13" fill="#52616b">A perfectly sharp inner corner is singular: a finite peak requires a specified fillet radius, bolt/contact model and converged mesh.</text>
+</svg>
