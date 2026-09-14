@@ -24,7 +24,7 @@ The prior [graphics survey](PRIOR_ART.md) remains relevant for Penrose, scientif
 
 ## What has actually been built on top of prior work
 
-The local checkout `third_party/FEM-bench` is pinned to commit `d370aef5dbe023b0b86eb3548d24d11fd69328ee`; its MIT license is retained. The new `scripts/fem_bench_svg_extension.py` directly imports the author's unchanged `FEM_1D_linear_elastic_CC0_H0_T0` reference function.
+The vendored source snapshot `vendor/FEM-bench` is pinned to commit `d370aef5dbe023b0b86eb3548d24d11fd69328ee`; its MIT license is retained. The new `scripts/fem_bench_svg_extension.py` directly imports the author's unchanged `FEM_1D_linear_elastic_CC0_H0_T0` reference function.
 
 The bridge passes both upstream reference tests, solves 12 generated axial-bar cases, and performs 12 additional FEM solves after a 50% load increase. It writes displacements, reactions, provenance IDs and editable SVG plots for both states. All 24 solves agree with the analytic bar solution to below 2 × 10⁻¹⁸ m in this run; maximum relative force imbalance is below 4.2 × 10⁻¹⁴. These are elementary numerical checks, not evidence of general engineering capability. A stale old tip displacement would be 33.3% low relative to the edited-load solution.
 
