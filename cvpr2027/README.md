@@ -1,6 +1,6 @@
 # CVPR 2027 — engineering SVG research package
 
-Branch: `codex/cvpr2027-research-package`. This folder contains the proposal, literature survey, working paper, completed diagnostic evidence, saved A100 adapters and experiment plans for physics-consistent editing of engineering vector drawings. The main benchmark and paper are unfinished; no submission has been made.
+Branch: `cvpr2027-research-package`. This folder contains the proposal, literature survey, working paper, completed diagnostic evidence, saved A100 adapters and experiment plans for physics-consistent editing of engineering vector drawings. The main benchmark and paper are unfinished; no submission has been made.
 
 ## Read the documents
 
