@@ -1,0 +1,23 @@
+% Shared style; used by generated, standalone LaTeX sources.
+\usepackage{xcolor}
+\usepackage{xurl}
+\usepackage{fvextra}
+\usepackage{etoolbox}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\definecolor{researchblue}{HTML}{173B58}
+\AtBeginDocument{\hypersetup{linkcolor=researchblue,urlcolor=researchblue}}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily SVG PATCH LAB}
+\fancyhead[R]{\small\sffamily CVPR 2027 research package}
+\fancyfoot[L]{\small Working documents; results and proposals distinguished}
+\fancyfoot[R]{\thepage}
+\setlength{\headheight}{15pt}
+\setlength{\emergencystretch}{3em}
+\titleformat{\section}{\Large\bfseries\color{researchblue}}{\thesection}{0.7em}{}
+\titleformat{\subsection}{\large\bfseries\color{researchblue}}{\thesubsection}{0.7em}{}
+\DefineVerbatimEnvironment{verbatim}{Verbatim}{breaklines=true,breakanywhere=true,fontsize=\small}
+\AtBeginEnvironment{longtable}{\small\setlength{\tabcolsep}{4pt}}
+\let\originaltableofcontents\tableofcontents
+\renewcommand{\tableofcontents}{\originaltableofcontents\clearpage}

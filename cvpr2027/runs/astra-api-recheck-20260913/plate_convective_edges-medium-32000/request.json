@@ -1,0 +1,12 @@
+{
+  "model": "gpt-6-astra",
+  "messages": [
+    {
+      "role": "user",
+      "content": "You are an engineering drafter producing SVG drawings.\n\nDraw the following as a single, self-contained SVG document:\n\nSteady two-dimensional heat conduction in a rectangular plate 0 <= x <= 2, 0 <= y <= 1 with conductivity k. The left edge x = 0 is held at 100 C. The other three edges lose heat by convection to a 0 C ambient with h/k = 5 per unit length (Robin condition: dT/dn = -5 T on those edges). Draw the plate and the isotherms at 10, 20, 40, 60 and 80 C, which must meet the convective edges at the correct oblique angles rather than perpendicular to them. Use viewBox=\"0 0 1000 1000\". Map plate coordinates to drawing coordinates as X = 100 + 400 x and Y = 700 - 400 y. Draw every contour as its own <path> or <polyline> element carrying a data-level attribute with its numeric level (for example data-level=\"40\"), and label it. Contours must satisfy the boundary conditions exactly: they may not cross a boundary held at a different value.\n\nRequirements:\n- Output ONLY the SVG document. No markdown fences, no prose before or after.\n- The root <svg> must declare xmlns=\"http://www.w3.org/2000/svg\" and a viewBox.\n- Use only built-in SVG elements (path, line, rect, circle, ellipse, polygon,\n  polyline, text, g, defs, marker, pattern). No external images, scripts,\n  fonts, or stylesheets.\n- Every visible element must be stroked or filled with an explicit color.\n- Label parts and dimensions with <text>; keep text inside the viewBox.\n- Prefer clean, precise geometry over decoration.\n"
+    }
+  ],
+  "reasoning_effort": "medium",
+  "max_completion_tokens": 32000,
+  "store": false
+}

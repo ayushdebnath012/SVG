@@ -1,6 +1,6 @@
 # Verified A100 training results
 
-Three Qwen2.5-Coder-1.5B-Instruct LoRA runs completed on an NVIDIA A100-SXM4-40GB: seeds 17, 29 and 41, three full epochs and 90 optimizer steps each. Adapter weights, final/previous optimizer checkpoints, exact data, raw predictions, package versions and source hashes are saved locally in `runs/a100/`. The original downloaded archive is `runs/a100-completed.zip` (350,830,393 bytes).
+Three Qwen2.5-Coder-1.5B-Instruct LoRA runs completed on an NVIDIA A100-SXM4-40GB: seeds 17, 29 and 41, three full epochs and 90 optimizer steps each. Adapter weights, final/previous optimizer checkpoints, exact data, raw predictions, package versions and source hashes are saved locally in `runs/a100/`. Final adapters, predictions and manifests are versioned in this branch; intermediate optimizer checkpoints and ZIP downloads remain local ignored files. The original downloaded archive is `runs/a100-completed.zip` (350,830,393 bytes).
 
 `scripts/summarize_training.py` verified completion, data and source hashes, case-disjoint splits, all 720 raw base/final predictions, and the three safetensors adapter structures. Each adapter contains 4,358,144 parameters. Model revision: `2e1fd397ee46e1388853d2af2c993145b0f1098a`. The separate saved-adapter inference reload check was prepared but was **not run** before Colab disconnected; no reload result is claimed.
 

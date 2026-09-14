@@ -26,12 +26,19 @@ def main():
         key = next(line.split('=', 1)[1].strip().strip('\"\'')
                    for line in (a.project / '.env').read_text().splitlines()
                    if line.startswith('OPENAI_API_KEY='))
-    template = (a.project / 'svgpatchlab/prompt_templates/generation_v1.txt').read_text()
+    template_path = a.project / 'src/svgpatchlab/prompt_templates/generation_v1.txt'
+    if not template_path.exists():
+        template_path = a.project / 'svgpatchlab/prompt_templates/generation_v1.txt'
+    template = template_path.read_text()
+    inputs = a.project / 'data/astra_historical_inputs.json'
     previous = {}
-    for name in ('gen-astra-v2-physics', 'gen-astra-v3-fields'):
-        path = a.project / 'runs' / name / 'results.jsonl'
-        for row in map(json.loads, path.read_text().splitlines()):
-            previous[row['id']] = row
+    if inputs.exists():
+        previous = {row['id']: row for row in json.loads(inputs.read_text())}
+    else:
+        for name in ('gen-astra-v2-physics', 'gen-astra-v3-fields'):
+            path = a.project / 'runs' / name / 'results.jsonl'
+            for row in map(json.loads, path.read_text().splitlines()):
+                previous[row['id']] = row
     specs = [('plate_convective_edges', 'medium', 16000),
              ('plate_convective_edges', 'medium', 32000),
              ('capacitor_fringe_field', 'low', 16000),

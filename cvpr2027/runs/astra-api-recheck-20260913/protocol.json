@@ -1,0 +1,46 @@
+{
+  "created_utc": "2026-09-13T11:27:41.184471+00:00",
+  "model": "gpt-6-astra",
+  "endpoint": "https://api.openai.com/v1/chat/completions",
+  "jobs": [
+    {
+      "id": "plate_convective_edges-medium-16000",
+      "case_id": "plate_convective_edges",
+      "effort": "medium",
+      "max_completion_tokens": 16000,
+      "prompt": "You are an engineering drafter producing SVG drawings.\n\nDraw the following as a single, self-contained SVG document:\n\nSteady two-dimensional heat conduction in a rectangular plate 0 <= x <= 2, 0 <= y <= 1 with conductivity k. The left edge x = 0 is held at 100 C. The other three edges lose heat by convection to a 0 C ambient with h/k = 5 per unit length (Robin condition: dT/dn = -5 T on those edges). Draw the plate and the isotherms at 10, 20, 40, 60 and 80 C, which must meet the convective edges at the correct oblique angles rather than perpendicular to them. Use viewBox=\"0 0 1000 1000\". Map plate coordinates to drawing coordinates as X = 100 + 400 x and Y = 700 - 400 y. Draw every contour as its own <path> or <polyline> element carrying a data-level attribute with its numeric level (for example data-level=\"40\"), and label it. Contours must satisfy the boundary conditions exactly: they may not cross a boundary held at a different value.\n\nRequirements:\n- Output ONLY the SVG document. No markdown fences, no prose before or after.\n- The root <svg> must declare xmlns=\"http://www.w3.org/2000/svg\" and a viewBox.\n- Use only built-in SVG elements (path, line, rect, circle, ellipse, polygon,\n  polyline, text, g, defs, marker, pattern). No external images, scripts,\n  fonts, or stylesheets.\n- Every visible element must be stroked or filled with an explicit color.\n- Label parts and dimensions with <text>; keep text inside the viewBox.\n- Prefer clean, precise geometry over decoration.\n"
+    },
+    {
+      "id": "plate_convective_edges-medium-32000",
+      "case_id": "plate_convective_edges",
+      "effort": "medium",
+      "max_completion_tokens": 32000,
+      "prompt": "You are an engineering drafter producing SVG drawings.\n\nDraw the following as a single, self-contained SVG document:\n\nSteady two-dimensional heat conduction in a rectangular plate 0 <= x <= 2, 0 <= y <= 1 with conductivity k. The left edge x = 0 is held at 100 C. The other three edges lose heat by convection to a 0 C ambient with h/k = 5 per unit length (Robin condition: dT/dn = -5 T on those edges). Draw the plate and the isotherms at 10, 20, 40, 60 and 80 C, which must meet the convective edges at the correct oblique angles rather than perpendicular to them. Use viewBox=\"0 0 1000 1000\". Map plate coordinates to drawing coordinates as X = 100 + 400 x and Y = 700 - 400 y. Draw every contour as its own <path> or <polyline> element carrying a data-level attribute with its numeric level (for example data-level=\"40\"), and label it. Contours must satisfy the boundary conditions exactly: they may not cross a boundary held at a different value.\n\nRequirements:\n- Output ONLY the SVG document. No markdown fences, no prose before or after.\n- The root <svg> must declare xmlns=\"http://www.w3.org/2000/svg\" and a viewBox.\n- Use only built-in SVG elements (path, line, rect, circle, ellipse, polygon,\n  polyline, text, g, defs, marker, pattern). No external images, scripts,\n  fonts, or stylesheets.\n- Every visible element must be stroked or filled with an explicit color.\n- Label parts and dimensions with <text>; keep text inside the viewBox.\n- Prefer clean, precise geometry over decoration.\n"
+    },
+    {
+      "id": "capacitor_fringe_field-low-16000",
+      "case_id": "capacitor_fringe_field",
+      "effort": "low",
+      "max_completion_tokens": 16000,
+      "prompt": "You are an engineering drafter producing SVG drawings.\n\nDraw the following as a single, self-contained SVG document:\n\nTwo parallel conducting plates 100 mm long and 20 mm apart at +100 V and -100 V, in air. Draw the plates and the equipotential lines at -75, -50, -25, 0, +25, +50 and +75 V, including realistic fringing curvature near the plate ends, plus at least six electric field lines perpendicular to the equipotentials. Label the uniform field strength between the plates in kV/m and mark the 0 V equipotential.\n\nRequirements:\n- Output ONLY the SVG document. No markdown fences, no prose before or after.\n- The root <svg> must declare xmlns=\"http://www.w3.org/2000/svg\" and a viewBox.\n- Use only built-in SVG elements (path, line, rect, circle, ellipse, polygon,\n  polyline, text, g, defs, marker, pattern). No external images, scripts,\n  fonts, or stylesheets.\n- Every visible element must be stroked or filled with an explicit color.\n- Label parts and dimensions with <text>; keep text inside the viewBox.\n- Prefer clean, precise geometry over decoration.\n"
+    },
+    {
+      "id": "lbracket_von_mises-low-16000",
+      "case_id": "lbracket_von_mises",
+      "effort": "low",
+      "max_completion_tokens": 16000,
+      "prompt": "You are an engineering drafter producing SVG drawings.\n\nDraw the following as a single, self-contained SVG document:\n\nThe L-shaped steel bracket (80 mm wide, 60 mm tall, 40 mm deep, 8 mm thick) is bolted down through its base flange and loaded with 2 kN horizontally at the top edge of the upright. Draw the bracket in side elevation with a colour-mapped von Mises stress field as you would expect from a finite element analysis: a stress concentration at the inner corner, low stress at the free tip, and a legend with a MPa scale. Estimate and label the peak stress in MPa and state the bending stress at the base of the upright from simple beam theory as a check.\n\nRequirements:\n- Output ONLY the SVG document. No markdown fences, no prose before or after.\n- The root <svg> must declare xmlns=\"http://www.w3.org/2000/svg\" and a viewBox.\n- Use only built-in SVG elements (path, line, rect, circle, ellipse, polygon,\n  polyline, text, g, defs, marker, pattern). No external images, scripts,\n  fonts, or stylesheets.\n- Every visible element must be stroked or filled with an explicit color.\n- Label parts and dimensions with <text>; keep text inside the viewBox.\n- Prefer clean, precise geometry over decoration.\n"
+    }
+  ],
+  "workers": 2,
+  "samples_per_condition": 1,
+  "source_sha256": "dae0271404e5b8389dda827cef53ca29a93d6e26ac90da45b0ade40bc07e74b6",
+  "notes": [
+    "Targeted diagnostic, not a failure-rate estimate.",
+    "Original task prompts and generation wrapper retained.",
+    "The paired Robin conditions change output-token budget only.",
+    "Old report qualitative claims must be checked against saved SVGs.",
+    "Model alias and service may differ from historical runs.",
+    "API errors are not model capability failures."
+  ]
+}
