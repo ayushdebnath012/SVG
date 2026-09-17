@@ -1,0 +1,149 @@
+Sliding Window Attention is enabled but not implemented for `sdpa`; unexpected results may be encountered.
+/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/.venv-remote/lib/python3.12/site-packages/transformers/generation/configuration_utils.py:631: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.7` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/.venv-remote/lib/python3.12/site-packages/transformers/generation/configuration_utils.py:636: UserWarning: `do_sample` is set to `False`. However, `top_p` is set to `0.8` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `top_p`.
+  warnings.warn(
+/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/.venv-remote/lib/python3.12/site-packages/transformers/generation/configuration_utils.py:653: UserWarning: `do_sample` is set to `False`. However, `top_k` is set to `20` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `top_k`.
+  warnings.warn(
+/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/.venv-remote/lib/python3.12/site-packages/triton/backends/nvidia/driver.c:9:10: fatal error: Python.h: No such file or directory
+    9 | #include <Python.h>
+      |          ^~~~~~~~~~
+compilation terminated.
+Traceback (most recent call last):
+  File "/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/scripts/check_adapter_reload.py", line 59, in <module>
+    main()
+  File "/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/scripts/check_adapter_reload.py", line 41, in main
+    generated = model.generate(**inputs, max_new_tokens=128,
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/.venv-remote/lib/python3.12/site-packages/peft/peft_model.py", line 1875, in generate
+    outputs = self.base_model.generate(*args, **kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/.venv-remote/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/.venv-remote/lib/python3.12/site-packages/transformers/generation/utils.py", line 2465, in generate
+    result = self._sample(
+             ^^^^^^^^^^^^^
+  File "/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/.venv-remote/lib/python3.12/site-packages/transformers/generation/utils.py", line 3431, in _sample
+    outputs = self(**model_inputs, return_dict=True)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/.venv-remote/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/.venv-remote/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/.venv-remote/lib/python3.12/site-packages/transformers/utils/generic.py", line 965, in wrapper
+    output = func(self, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/.venv-remote/lib/python3.12/site-packages/transformers/utils/deprecation.py", line 172, in wrapped_func
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/.venv-remote/lib/python3.12/site-packages/transformers/models/qwen2/modeling_qwen2.py", line 823, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+                                       ^^^^^^^^^^^
+  File "/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/.venv-remote/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/.venv-remote/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/.venv-remote/lib/python3.12/site-packages/transformers/utils/generic.py", line 965, in wrapper
+    output = func(self, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/.venv-remote/lib/python3.12/site-packages/transformers/models/qwen2/modeling_qwen2.py", line 526, in forward
+    position_embeddings = self.rotary_emb(hidden_states, position_ids)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/.venv-remote/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/.venv-remote/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/.venv-remote/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/.venv-remote/lib/python3.12/site-packages/transformers/modeling_rope_utils.py", line 87, in wrapper
+    return rope_forward(self, x, position_ids)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/.venv-remote/lib/python3.12/site-packages/transformers/models/qwen2/modeling_qwen2.py", line 314, in forward
+    freqs = (inv_freq_expanded.float() @ position_ids_expanded.float()).transpose(1, 2)
+             ~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  File "/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/.venv-remote/lib/python3.12/site-packages/torch/_native/registry.py", line 956, in eager_router
+    result = _dispatch(args, kwargs, swallow_cond_exceptions=False)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/.venv-remote/lib/python3.12/site-packages/torch/_native/registry.py", line 935, in _dispatch
+    return getattr(torch.ops._native, impl_name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/.venv-remote/lib/python3.12/site-packages/torch/_ops.py", line 1350, in __call__
+    return self._op(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/.venv-remote/lib/python3.12/site-packages/torch/_native/ops/bmm_outer_product/triton_impl.py", line 27, in _bmm_outer_product_impl
+    return bmm_outer_product(a, b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/.venv-remote/lib/python3.12/site-packages/torch/_native/ops/bmm_outer_product/triton_kernels.py", line 87, in bmm_outer_product
+    _bmm_outer_product_kernel[(B * triton.cdiv(M, BLOCK_M) * triton.cdiv(N, BLOCK_N),)](
+  File "/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/.venv-remote/lib/python3.12/site-packages/torch/_native/instrumentation.py", line 208, in wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/.venv-remote/lib/python3.12/site-packages/triton/runtime/jit.py", line 374, in <lambda>
+    return lambda *args, **kwargs: self.run(grid=grid, warmup=False, *args, **kwargs)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/.venv-remote/lib/python3.12/site-packages/triton/runtime/jit.py", line 731, in run
+    device = driver.active.get_current_device()
+             ^^^^^^^^^^^^^
+  File "/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/.venv-remote/lib/python3.12/site-packages/triton/runtime/driver.py", line 39, in active
+    self._active = self.default
+                   ^^^^^^^^^^^^
+  File "/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/.venv-remote/lib/python3.12/site-packages/triton/runtime/driver.py", line 33, in default
+    self._default = _create_driver()
+                    ^^^^^^^^^^^^^^^^
+  File "/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/.venv-remote/lib/python3.12/site-packages/triton/runtime/driver.py", line 21, in _create_driver
+    return active_drivers[0]()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/.venv-remote/lib/python3.12/site-packages/triton/backends/nvidia/driver.py", line 342, in __init__
+    self.utils = CudaUtils()  # TODO: make static
+                 ^^^^^^^^^^^
+  File "/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/.venv-remote/lib/python3.12/site-packages/triton/backends/nvidia/driver.py", line 101, in __init__
+    mod = compile_module_from_file(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/.venv-remote/lib/python3.12/site-packages/triton/runtime/build.py", line 196, in compile_module_from_file
+    return _compile_so_from_file(src_path, name, library_dirs, include_dirs, libraries, ccflags, load_module=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/.venv-remote/lib/python3.12/site-packages/triton/runtime/build.py", line 165, in _compile_so_from_file
+    return _compile_so(src=src, src_path=src_path, name=name, library_dirs=library_dirs, include_dirs=include_dirs,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/.venv-remote/lib/python3.12/site-packages/triton/runtime/build.py", line 149, in _compile_so
+    so = _build(name, src_path, tmpdir, library_dirs or [], include_dirs or [], libraries or [], ccflags or [],
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/.venv-remote/lib/python3.12/site-packages/triton/runtime/build.py", line 83, in _build
+    subprocess.check_call(cc_cmd, stdout=subprocess.DEVNULL)
+  File "/usr/lib/python3.12/subprocess.py", line 413, in check_call
+    raise CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command '['/usr/bin/gcc', '/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/.venv-remote/lib/python3.12/site-packages/triton/backends/nvidia/driver.c', '-O3', '-shared', '-fPIC', '-Wno-psabi', '-o', '/tmp/tmp34yujddq/cuda_utils.cpython-312-x86_64-linux-gnu.so', '-l:libcuda.so.1', '-L/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/.venv-remote/lib/python3.12/site-packages/triton/backends/nvidia/lib', '-L/lib/x86_64-linux-gnu', '-I/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/.venv-remote/lib/python3.12/site-packages/triton/backends/nvidia/include', '-I/tmp/tmp34yujddq', '-I/usr/include/python3.12']' returned non-zero exit status 1.
+Sliding Window Attention is enabled but not implemented for `sdpa`; unexpected results may be encountered.
+/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/.venv-remote/lib/python3.12/site-packages/transformers/generation/configuration_utils.py:631: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.7` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/.venv-remote/lib/python3.12/site-packages/transformers/generation/configuration_utils.py:636: UserWarning: `do_sample` is set to `False`. However, `top_p` is set to `0.8` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `top_p`.
+  warnings.warn(
+/home/iit/svg-compute/20260917T153529557690Z/cvpr2027/.venv-remote/lib/python3.12/site-packages/transformers/generation/configuration_utils.py:653: UserWarning: `do_sample` is set to `False`. However, `top_k` is set to `20` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `top_k`.
+  warnings.warn(
+17 test-0006-3 True
+17 test-0007-0 True
+17 test-0001-1 True
+17 test-0007-5 True
+17 test-0004-2 True
+17 test-0008-4 True
+29 test-0006-3 True
+29 test-0007-0 True
+29 test-0001-1 True
+29 test-0007-5 True
+29 test-0004-2 True
+29 test-0008-4 True
+41 test-0006-3 True
+41 test-0007-0 True
+41 test-0001-1 True
+41 test-0007-5 True
+41 test-0004-2 True
+41 test-0008-4 True
+ADAPTER RELOAD VERIFIED

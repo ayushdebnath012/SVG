@@ -1,0 +1,129 @@
+{
+  "solver": "scikit-fem P2 triangular Galerkin",
+  "skfem_version": "12.0.2",
+  "source_sha256": "9c7de63f40f1842095444de51c33dea639371118da4a9f40c611976505e415a6",
+  "problem": {
+    "domain": [
+      0,
+      2,
+      0,
+      1
+    ],
+    "left_C": 100,
+    "ambient_C": 0,
+    "h_over_k": 5
+  },
+  "anchor": {
+    "n": 8,
+    "elements": 256,
+    "dofs": 561,
+    "solve_seconds": 0.009385586999997031,
+    "free_residual_max": 2.2737367544323206e-13,
+    "convective_outflow_over_k": 45.45454545454304,
+    "left_reaction_inflow_over_k": 45.454545454551074,
+    "discrete_heat_balance_relative": 1.7679724351183753e-13,
+    "max_error_linear_manufactured_C": 2.1884716261411086e-12
+  },
+  "meshes": [
+    {
+      "n": 12,
+      "elements": 576,
+      "dofs": 1225,
+      "solve_seconds": 0.006456726999999773,
+      "free_residual_max": 2.5579538487363607e-13,
+      "convective_outflow_over_k": 260.8156924367439,
+      "left_reaction_inflow_over_k": 260.81569243674755,
+      "discrete_heat_balance_relative": 1.39484659573313e-14,
+      "min_temperature_C": 0.32344316041309584,
+      "max_temperature_C": 100.00000000000003
+    },
+    {
+      "n": 24,
+      "elements": 2304,
+      "dofs": 4753,
+      "solve_seconds": 0.035140777000037815,
+      "free_residual_max": 5.400124791776761e-13,
+      "convective_outflow_over_k": 260.16131086286265,
+      "left_reaction_inflow_over_k": 260.1613108628691,
+      "discrete_heat_balance_relative": 2.468970620561328e-14,
+      "min_temperature_C": 0.32344096065613137,
+      "max_temperature_C": 100.00000000000003
+    },
+    {
+      "n": 48,
+      "elements": 9216,
+      "dofs": 18721,
+      "solve_seconds": 0.2321281250000311,
+      "free_residual_max": 6.110667527536862e-13,
+      "convective_outflow_over_k": 259.97911558324273,
+      "left_reaction_inflow_over_k": 259.979115583263,
+      "discrete_heat_balance_relative": 7.805665654251683e-14,
+      "min_temperature_C": 0.32344082129435614,
+      "max_temperature_C": 100.00000000000003
+    },
+    {
+      "n": 96,
+      "elements": 36864,
+      "dofs": 74305,
+      "solve_seconds": 1.7310745629999928,
+      "free_residual_max": 1.2221335055073723e-12,
+      "convective_outflow_over_k": 259.930616904308,
+      "left_reaction_inflow_over_k": 259.93061690445336,
+      "discrete_heat_balance_relative": 5.591823839690088e-13,
+      "min_temperature_C": 0.32344081252729195,
+      "max_temperature_C": 100.00000000000003
+    },
+    {
+      "n": 192,
+      "elements": 147456,
+      "dofs": 296065,
+      "solve_seconds": 21.254069584000035,
+      "free_residual_max": 2.1600499167107046e-12,
+      "convective_outflow_over_k": 259.9180616929218,
+      "left_reaction_inflow_over_k": 259.91806169381493,
+      "discrete_heat_balance_relative": 3.4361744286789496e-12,
+      "min_temperature_C": 0.32344081197371066,
+      "max_temperature_C": 100.00000000000003
+    }
+  ],
+  "mesh_differences": [
+    {
+      "coarse_n": 12,
+      "fine_n": 24,
+      "max_C": 2.561328122008831,
+      "mean_C": 0.007142300822658449,
+      "rms_C": 0.0684800549680206
+    },
+    {
+      "coarse_n": 24,
+      "fine_n": 48,
+      "max_C": 1.355048095631119,
+      "mean_C": 0.0011965703317638075,
+      "rms_C": 0.021766956428478503
+    },
+    {
+      "coarse_n": 48,
+      "fine_n": 96,
+      "max_C": 0.19588221247597914,
+      "mean_C": 0.00015236453625806968,
+      "rms_C": 0.0031113622865886086
+    },
+    {
+      "coarse_n": 96,
+      "fine_n": 192,
+      "max_C": 0.020533115401590862,
+      "mean_C": 1.7035397490155928e-05,
+      "rms_C": 0.00033823556399218823
+    }
+  ],
+  "notes": [
+    "Mesh differences estimate numerical sensitivity, not certified error bounds.",
+    "Global balance uses the assembled boundary reaction.",
+    "Mixed-boundary corner singularities can slow convergence.",
+    "Stored regular grid adds interpolation error to SVG auditing."
+  ],
+  "historical_fd_difference_C": {
+    "max": 1.9770798823310258,
+    "mean": 0.07854887698687871
+  }
+}

@@ -87,6 +87,15 @@ def main():
         built.append({'pdf':str((out/f'{stem}.pdf').relative_to(ROOT)),
                       'latex':str(tex.relative_to(ROOT)),'title':title})
         print('BUILT',stem,flush=True)
+    # Hand-authored LaTeX (not generated from Markdown); compiled with the same engine and style.
+    for stem,title in [('research_overview','Consolidated Research Overview: Problem, Theory, Architecture, Experiments and Plan')]:
+        tex=texdir/f'{stem}.tex'
+        log=ROOT/'tmp/pdfs'/f'{stem}.build.txt'
+        with log.open('w') as stream:
+            result=subprocess.run([a.tectonic,str(tex),'--outdir',str(out),'--keep-logs'],cwd=ROOT,stdout=stream,stderr=subprocess.STDOUT)
+        if result.returncode:raise RuntimeError(f'Build failed: {log}')
+        built.append({'pdf':str((out/f'{stem}.pdf').relative_to(ROOT)),'latex':str(tex.relative_to(ROOT)),'title':title,'source':'hand-authored LaTeX'})
+        print('BUILT',stem,flush=True)
     (ROOT/'docs/build_manifest.json').write_text(json.dumps(built,indent=2)+'\n')
 
 if __name__=='__main__':main()

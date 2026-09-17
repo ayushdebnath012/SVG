@@ -142,6 +142,46 @@
       "evidence": "runs/fem-bench-svg-anchor"
     },
     {
+      "id": "C11",
+      "title": "Colab A100 reproduction batch and adapter reload",
+      "status": "completed",
+      "command": [
+        "{python}",
+        "{root}/scripts/compare_reproduction.py",
+        "--new",
+        "{root}/runs/colab-a100-20260916",
+        "--saved-training",
+        "{root}/runs/a100",
+        "--saved-fem",
+        "{root}/runs/fem-bench-svg-anchor/summary.json",
+        "--saved-robin",
+        "{root}/runs/robin-fem-reference/summary.json",
+        "--output",
+        "{out}/colab_reproduction.json"
+      ],
+      "evidence": "runs/colab-a100-20260916"
+    },
+    {
+      "id": "C12",
+      "title": "Remote Blackwell reproduction batch (cross-architecture)",
+      "status": "completed",
+      "command": [
+        "{python}",
+        "{root}/scripts/compare_reproduction.py",
+        "--new",
+        "{root}/runs/blackwell-20260917",
+        "--saved-training",
+        "{root}/runs/a100",
+        "--saved-fem",
+        "{root}/runs/fem-bench-svg-anchor/summary.json",
+        "--saved-robin",
+        "{root}/runs/robin-fem-reference/summary.json",
+        "--output",
+        "{out}/blackwell_reproduction.json"
+      ],
+      "evidence": "runs/blackwell-20260917"
+    },
+    {
       "id": "P01",
       "title": "Numerical reference suite",
       "status": "partial",

@@ -191,9 +191,10 @@ than being dropped from averages.
   checkpoint archives, the nested `third_party/` checkout, LaTeX build
   binaries, virtual environments and temporary reproduction output are
   ignored (see `.gitignore`).
-- No API credentials are included. A fresh inference reload of the saved
-  adapters has not been run; `cvpr2027/scripts/check_adapter_reload.py` is the
-  GPU smoke check for that.
+- No API credentials are included. `cvpr2027/scripts/check_adapter_reload.py`
+  is the GPU smoke check for the saved adapters; it passed 18/18 on a Colab
+  A100 on 2026-09-16, in a batch that also re-trained all three seeds to
+  byte-identical adapters (`cvpr2027/reports/COLAB_REPRODUCTION_20260916.md`).
 
 ## Related branches
 

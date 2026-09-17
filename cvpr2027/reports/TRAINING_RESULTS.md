@@ -2,7 +2,7 @@
 
 Three Qwen2.5-Coder-1.5B-Instruct LoRA runs completed on an NVIDIA A100-SXM4-40GB: seeds 17, 29 and 41, three full epochs and 90 optimizer steps each. Adapter weights, final/previous optimizer checkpoints, exact data, raw predictions, package versions and source hashes are saved locally in `runs/a100/`. Final adapters, predictions and manifests are versioned in this branch; intermediate optimizer checkpoints and ZIP downloads remain local ignored files. The original downloaded archive is `runs/a100-completed.zip` (350,830,393 bytes).
 
-`scripts/summarize_training.py` verified completion, data and source hashes, case-disjoint splits, all 720 raw base/final predictions, and the three safetensors adapter structures. Each adapter contains 4,358,144 parameters. Model revision: `2e1fd397ee46e1388853d2af2c993145b0f1098a`. The separate saved-adapter inference reload check was prepared but was **not run** before Colab disconnected; no reload result is claimed.
+`scripts/summarize_training.py` verified completion, data and source hashes, case-disjoint splits, all 720 raw base/final predictions, and the three safetensors adapter structures. Each adapter contains 4,358,144 parameters. Model revision: `2e1fd397ee46e1388853d2af2c993145b0f1098a`. The separate saved-adapter inference reload check was not run in that session; it has since passed 18/18 held-out actions in the [Colab reproduction batch of 2026-09-16](COLAB_REPRODUCTION_20260916.md), which also re-trained all three seeds to byte-identical adapters.
 
 | Model / policy | Test strict exact action | Annulus strict exact action | Test fence-normalized | Annulus fence-normalized |
 |---|---:|---:|---:|---:|
@@ -30,4 +30,4 @@ Recheck from `cvpr2027/`:
 ../.venv/bin/python scripts/summarize_training.py --runs runs/a100 --output reports/training_verified.json
 ```
 
-Machine-readable evidence: `reports/training_verified.json`. Completed notebook: `notebooks/A100_completed_runs.ipynb`. The Colab runtime is disconnected; no GPU training remains active.
+Machine-readable evidence: `reports/training_verified.json`. Completed notebook: `notebooks/A100_completed_runs.ipynb`. No GPU training remains active; the independent reproductions are recorded in `reports/colab_reproduction.json` (same architecture, bitwise identical) and `reports/blackwell_reproduction.json` (different architecture, identical predictions).

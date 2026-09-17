@@ -1,6 +1,6 @@
 # Research documents
 
-Five review PDFs are in `../output/pdf/`; corresponding standalone LaTeX files are in `latex/`. Markdown is the canonical authoring format. The builder combines the proposal/protocol sources here with `../reports/` and `../paper/manuscript.md`; editing generated LaTeX directly is possible but a rebuild replaces it.
+Six review PDFs are in `../output/pdf/`; corresponding standalone LaTeX files are in `latex/`. Markdown is the canonical authoring format for five of them; `latex/research_overview.tex` (the consolidated overview) is hand-authored LaTeX that reuses `header.tex` and is compiled by the same builder without a Markdown source. The builder combines the proposal/protocol sources here with `../reports/` and `../paper/manuscript.md`; editing generated LaTeX directly is possible but a rebuild replaces it.
 
 From the `cvpr2027` folder:
 

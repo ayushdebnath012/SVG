@@ -11,6 +11,7 @@ Branch: `cvpr2027-research-package`. This folder contains the proposal, literatu
 | Literature survey and reuse decisions | [PDF](output/pdf/literature_survey.pdf) | [LaTeX](docs/latex/literature_survey.tex) | [FEM survey](reports/FEM_LITERATURE_AND_EXTENSION.md), [graphics survey](reports/PRIOR_ART.md) |
 | Completed results and failure audit | [PDF](output/pdf/results_and_failure_audit.pdf) | [LaTeX](docs/latex/results_and_failure_audit.tex) | [Astra/FEM](reports/ASTRA_FEM_FAILURE_RECHECK.md), [training](reports/TRAINING_RESULTS.md), [status](reports/RESEARCH_STATUS.md) |
 | Working research paper | [PDF](output/pdf/working_paper.pdf) | [LaTeX](docs/latex/working_paper.tex) | [Markdown](paper/manuscript.md) |
+| Consolidated overview: problem, theory, architecture, all experiments and plans | [PDF](output/pdf/research_overview.pdf) | [LaTeX](docs/latex/research_overview.tex) | hand-authored LaTeX (17 Sep 2026) |
 
 [Paper library](papers/README.md): 20 source records, 15 downloaded PDFs, BibTeX and download provenance. Five sources remain links; unavailable downloads are recorded. [Document build instructions](docs/README.md) explain how to regenerate all PDFs.
 
@@ -42,9 +43,20 @@ The runner sets `PYTHONPATH=src`, uses argument lists without a shell, and write
 
 ## GPU training and explicit API repeats
 
+[The Colab reproduction report](reports/COLAB_REPRODUCTION_20260916.md) records a
+complete A100 run of the packaged batch on 2026-09-16: regression tests, both
+adapter inference reload checks, three fresh LoRA seeds, the FEM references and
+the rule baseline. The re-trained adapters are byte-identical to `runs/a100`
+and every prediction matches; artifacts are in `runs/colab-a100-20260916/`.
+[The remote reproduction report](reports/REMOTE_REPRODUCTION_20260917.md) records
+the same batch on the Serveo SSH host's RTX PRO 6000 Blackwell on 2026-09-17: all
+stages passed, every final prediction matches the A100 run, and the adapter
+weights differ only by cross-architecture rounding (`runs/blackwell-20260917/`).
+[The remote batch guide](reports/REMOTE_COMPUTE.md) documents that host.
+
 [The self-contained Colab notebook](notebooks/CVPR2027_controlled_editing.ipynb) embeds the training/data scripts, installs the recorded training dependencies, runs three seeds and exports artifacts. Select an available A100 runtime. The completed runs used NVIDIA A100-SXM4-40GB; the previous runtime is disconnected. GPU availability is not guaranteed by the notebook. [Completed execution logs](notebooks/A100_completed_runs.ipynb) are retained separately.
 
-Training requires CUDA PyTorch plus `requirements-colab.txt`. The saved adapter files have passed structural and checksum validation. A fresh inference reload of those adapters has **not** been run; `scripts/check_adapter_reload.py` provides that GPU smoke check. No new training is claimed by this packaging commit.
+Training requires CUDA PyTorch plus `requirements-colab.txt`. The saved adapter files have passed structural and checksum validation. `scripts/check_adapter_reload.py` is the GPU smoke check for those adapters; it passed 18/18 on 2026-09-16 (see the Colab reproduction report). No new training is claimed by this packaging commit.
 
 A deliberately requested repeat of the four-case API diagnostic can use:
 
