@@ -22,6 +22,33 @@ sys.path.insert(0, str(ROOT / 'scripts'))
 sys.path.insert(0, str(ROOT / 'src'))
 
 
+def training_arguments(TrainingArguments, **desired):
+    """Build TrainingArguments with only the keywords this transformers version accepts.
+
+    The signature has churned across versions: `evaluation_strategy` became `eval_strategy`, and
+    `warmup_ratio` is absent in some builds. Passing an unknown keyword is a hard TypeError, and the
+    Colab image is not pinned, so filter against the actual signature and say what was dropped
+    rather than let a cosmetic scheduling option abort a GPU run.
+    """
+    import inspect
+    accepted = set(inspect.signature(TrainingArguments.__init__).parameters)
+    aliases = {'eval_strategy': ('eval_strategy', 'evaluation_strategy'),
+               'save_strategy': ('save_strategy', 'save_strategy'),
+               'logging_steps': ('logging_steps',)}
+    kwargs, dropped = {}, []
+    for key, value in desired.items():
+        for name in aliases.get(key, (key,)):
+            if name in accepted:
+                kwargs[name] = value
+                break
+        else:
+            dropped.append(key)
+    if dropped:
+        print(f'note: this transformers build does not accept {dropped}; proceeding without them',
+              flush=True)
+    return TrainingArguments(**kwargs)
+
+
 def load(split, data, arms):
     rows = [json.loads(l) for l in (data / f'{split}.jsonl').read_text().splitlines()]
     return [r for r in rows if r['arm'] in arms]
@@ -135,12 +162,13 @@ def main():
                                             target_modules=['q_proj', 'k_proj', 'v_proj', 'o_proj'],
                                             task_type='CAUSAL_LM'))
     model.print_trainable_parameters()
-    args = TrainingArguments(output_dir=str(a.out / 'checkpoints'), num_train_epochs=a.epochs,
-                             per_device_train_batch_size=1, gradient_accumulation_steps=8,
-                             per_device_eval_batch_size=1, learning_rate=2e-4, lr_scheduler_type='cosine',
-                             warmup_ratio=0.05, logging_steps=10, eval_strategy='epoch',
-                             save_strategy='no', bf16=True, report_to=[], seed=a.seed,
-                             gradient_checkpointing=True)
+    args = training_arguments(TrainingArguments,
+                              output_dir=str(a.out / 'checkpoints'), num_train_epochs=a.epochs,
+                              per_device_train_batch_size=1, gradient_accumulation_steps=8,
+                              per_device_eval_batch_size=1, learning_rate=2e-4,
+                              lr_scheduler_type='cosine', warmup_ratio=0.05, logging_steps=10,
+                              eval_strategy='epoch', save_strategy='no', bf16=True, report_to=[],
+                              seed=a.seed, gradient_checkpointing=True)
     trainer = Trainer(model=model, args=args, train_dataset=enc_train, eval_dataset=enc_val,
                       data_collator=collate)
     started = time.perf_counter()
