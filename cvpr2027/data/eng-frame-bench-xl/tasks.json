@@ -1,0 +1,3220 @@
+{
+  "version": "eng-frame-bench-v1",
+  "set": "xl",
+  "controls": "in the companion main manifest; this set deliberately holds only the high indeterminacy region and must be read alongside it",
+  "scope": "Procedurally generated dimensioned structural elevations of planar building frames, generation and editing, ordered by degree of static indeterminacy. Not general 3D CAD.",
+  "rationale": "Concentrated at indeterminacy 9 and above, where the 20 September pilot recorded its only failure. The pilot families ordered 0 (pass), 3 (pass), 9 (fail).",
+  "criteria": {
+    "geometry_tolerance_mm": 1.0,
+    "dimension_tolerance_mm": 1.0,
+    "numeric_rtol": 0.02,
+    "displacement_atol_mm": 0.01,
+    "stress_atol_mpa": 0.05,
+    "selection": "Three completed non-truncated samples all showing the same substantive analysis or geometry error. Format-only, missing output, API and token-budget failures are excluded rather than counted as failures."
+  },
+  "tasks": [
+    {
+      "id": "fourbay_generate",
+      "family": "fourbay",
+      "mode": "generate",
+      "model": {
+        "name": "Four-bay two-storey frame elevation",
+        "nodes": {
+          "N0_0": [
+            0,
+            0
+          ],
+          "N1_0": [
+            3200,
+            0
+          ],
+          "N2_0": [
+            6400,
+            0
+          ],
+          "N3_0": [
+            9600,
+            0
+          ],
+          "N4_0": [
+            12800,
+            0
+          ],
+          "N0_1": [
+            0,
+            2900
+          ],
+          "N1_1": [
+            3200,
+            2900
+          ],
+          "N2_1": [
+            6400,
+            2900
+          ],
+          "N3_1": [
+            9600,
+            2900
+          ],
+          "N4_1": [
+            12800,
+            2900
+          ],
+          "N0_2": [
+            0,
+            5800
+          ],
+          "N1_2": [
+            3200,
+            5800
+          ],
+          "N2_2": [
+            6400,
+            5800
+          ],
+          "N3_2": [
+            9600,
+            5800
+          ],
+          "N4_2": [
+            12800,
+            5800
+          ]
+        },
+        "members": [
+          {
+            "id": "col_0_0",
+            "a": "N0_0",
+            "b": "N0_1",
+            "b_mm": 160,
+            "h_mm": 200,
+            "E": 200000
+          },
+          {
+            "id": "col_1_0",
+            "a": "N1_0",
+            "b": "N1_1",
+            "b_mm": 160,
+            "h_mm": 200,
+            "E": 200000
+          },
+          {
+            "id": "col_2_0",
+            "a": "N2_0",
+            "b": "N2_1",
+            "b_mm": 160,
+            "h_mm": 200,
+            "E": 200000
+          },
+          {
+            "id": "col_3_0",
+            "a": "N3_0",
+            "b": "N3_1",
+            "b_mm": 160,
+            "h_mm": 200,
+            "E": 200000
+          },
+          {
+            "id": "col_4_0",
+            "a": "N4_0",
+            "b": "N4_1",
+            "b_mm": 160,
+            "h_mm": 200,
+            "E": 200000
+          },
+          {
+            "id": "beam_0_1",
+            "a": "N0_1",
+            "b": "N1_1",
+            "b_mm": 140,
+            "h_mm": 260,
+            "E": 200000
+          },
+          {
+            "id": "beam_1_1",
+            "a": "N1_1",
+            "b": "N2_1",
+            "b_mm": 140,
+            "h_mm": 260,
+            "E": 200000
+          },
+          {
+            "id": "beam_2_1",
+            "a": "N2_1",
+            "b": "N3_1",
+            "b_mm": 140,
+            "h_mm": 260,
+            "E": 200000
+          },
+          {
+            "id": "beam_3_1",
+            "a": "N3_1",
+            "b": "N4_1",
+            "b_mm": 140,
+            "h_mm": 260,
+            "E": 200000
+          },
+          {
+            "id": "col_0_1",
+            "a": "N0_1",
+            "b": "N0_2",
+            "b_mm": 140,
+            "h_mm": 180,
+            "E": 200000
+          },
+          {
+            "id": "col_1_1",
+            "a": "N1_1",
+            "b": "N1_2",
+            "b_mm": 140,
+            "h_mm": 180,
+            "E": 200000
+          },
+          {
+            "id": "col_2_1",
+            "a": "N2_1",
+            "b": "N2_2",
+            "b_mm": 140,
+            "h_mm": 180,
+            "E": 200000
+          },
+          {
+            "id": "col_3_1",
+            "a": "N3_1",
+            "b": "N3_2",
+            "b_mm": 140,
+            "h_mm": 180,
+            "E": 200000
+          },
+          {
+            "id": "col_4_1",
+            "a": "N4_1",
+            "b": "N4_2",
+            "b_mm": 140,
+            "h_mm": 180,
+            "E": 200000
+          },
+          {
+            "id": "beam_0_2",
+            "a": "N0_2",
+            "b": "N1_2",
+            "b_mm": 140,
+            "h_mm": 240,
+            "E": 200000
+          },
+          {
+            "id": "beam_1_2",
+            "a": "N1_2",
+            "b": "N2_2",
+            "b_mm": 140,
+            "h_mm": 240,
+            "E": 200000
+          },
+          {
+            "id": "beam_2_2",
+            "a": "N2_2",
+            "b": "N3_2",
+            "b_mm": 140,
+            "h_mm": 240,
+            "E": 200000
+          },
+          {
+            "id": "beam_3_2",
+            "a": "N3_2",
+            "b": "N4_2",
+            "b_mm": 140,
+            "h_mm": 240,
+            "E": 200000
+          }
+        ],
+        "supports": {
+          "N0_0": [
+            0,
+            1,
+            2
+          ],
+          "N1_0": [
+            0,
+            1,
+            2
+          ],
+          "N2_0": [
+            0,
+            1,
+            2
+          ],
+          "N3_0": [
+            0,
+            1,
+            2
+          ],
+          "N4_0": [
+            0,
+            1,
+            2
+          ]
+        },
+        "loads": {
+          "N0_1": [
+            10500,
+            -30000,
+            0
+          ],
+          "N4_1": [
+            0,
+            -43000,
+            0
+          ],
+          "N0_2": [
+            12000,
+            -34000,
+            0
+          ],
+          "N4_2": [
+            0,
+            -48000,
+            0
+          ]
+        },
+        "probe": "N4_2",
+        "limits": {
+          "abs_uy_mm": 12.0,
+          "peak_stress_mpa": 180.0
+        }
+      },
+      "mapping": [
+        0.0625,
+        100,
+        610
+      ],
+      "dimensions": {
+        "length_col_0_0": 2900.0,
+        "length_col_1_0": 2900.0,
+        "length_col_2_0": 2900.0,
+        "length_col_3_0": 2900.0,
+        "length_col_4_0": 2900.0,
+        "length_beam_0_1": 3200.0,
+        "length_beam_1_1": 3200.0,
+        "length_beam_2_1": 3200.0,
+        "length_beam_3_1": 3200.0,
+        "length_col_0_1": 2900.0,
+        "length_col_1_1": 2900.0,
+        "length_col_2_1": 2900.0,
+        "length_col_3_1": 2900.0,
+        "length_col_4_1": 2900.0,
+        "length_beam_0_2": 3200.0,
+        "length_beam_1_2": 3200.0,
+        "length_beam_2_2": 3200.0,
+        "length_beam_3_2": 3200.0
+      },
+      "limits": {
+        "abs_uy_mm": 12.0,
+        "peak_stress_mpa": 180.0
+      },
+      "indeterminacy": 24,
+      "members": 18,
+      "prompt": "Object: Four-bay two-storey frame elevation. Make a dimensioned structural elevation. All sections are solid rectangles; h is in the frame plane and b is out of plane. The idealised column bases are clamped, not freely resting on a floor. This task concerns only the stated 2D frame, not complete product/building validation. \nPhysical model:\n{\"name\": \"Four-bay two-storey frame elevation\", \"nodes\": {\"N0_0\": [0, 0], \"N1_0\": [3200, 0], \"N2_0\": [6400, 0], \"N3_0\": [9600, 0], \"N4_0\": [12800, 0], \"N0_1\": [0, 2900], \"N1_1\": [3200, 2900], \"N2_1\": [6400, 2900], \"N3_1\": [9600, 2900], \"N4_1\": [12800, 2900], \"N0_2\": [0, 5800], \"N1_2\": [3200, 5800], \"N2_2\": [6400, 5800], \"N3_2\": [9600, 5800], \"N4_2\": [12800, 5800]}, \"members\": [{\"id\": \"col_0_0\", \"a\": \"N0_0\", \"b\": \"N0_1\", \"b_mm\": 160, \"h_mm\": 200, \"E\": 200000}, {\"id\": \"col_1_0\", \"a\": \"N1_0\", \"b\": \"N1_1\", \"b_mm\": 160, \"h_mm\": 200, \"E\": 200000}, {\"id\": \"col_2_0\", \"a\": \"N2_0\", \"b\": \"N2_1\", \"b_mm\": 160, \"h_mm\": 200, \"E\": 200000}, {\"id\": \"col_3_0\", \"a\": \"N3_0\", \"b\": \"N3_1\", \"b_mm\": 160, \"h_mm\": 200, \"E\": 200000}, {\"id\": \"col_4_0\", \"a\": \"N4_0\", \"b\": \"N4_1\", \"b_mm\": 160, \"h_mm\": 200, \"E\": 200000}, {\"id\": \"beam_0_1\", \"a\": \"N0_1\", \"b\": \"N1_1\", \"b_mm\": 140, \"h_mm\": 260, \"E\": 200000}, {\"id\": \"beam_1_1\", \"a\": \"N1_1\", \"b\": \"N2_1\", \"b_mm\": 140, \"h_mm\": 260, \"E\": 200000}, {\"id\": \"beam_2_1\", \"a\": \"N2_1\", \"b\": \"N3_1\", \"b_mm\": 140, \"h_mm\": 260, \"E\": 200000}, {\"id\": \"beam_3_1\", \"a\": \"N3_1\", \"b\": \"N4_1\", \"b_mm\": 140, \"h_mm\": 260, \"E\": 200000}, {\"id\": \"col_0_1\", \"a\": \"N0_1\", \"b\": \"N0_2\", \"b_mm\": 140, \"h_mm\": 180, \"E\": 200000}, {\"id\": \"col_1_1\", \"a\": \"N1_1\", \"b\": \"N1_2\", \"b_mm\": 140, \"h_mm\": 180, \"E\": 200000}, {\"id\": \"col_2_1\", \"a\": \"N2_1\", \"b\": \"N2_2\", \"b_mm\": 140, \"h_mm\": 180, \"E\": 200000}, {\"id\": \"col_3_1\", \"a\": \"N3_1\", \"b\": \"N3_2\", \"b_mm\": 140, \"h_mm\": 180, \"E\": 200000}, {\"id\": \"col_4_1\", \"a\": \"N4_1\", \"b\": \"N4_2\", \"b_mm\": 140, \"h_mm\": 180, \"E\": 200000}, {\"id\": \"beam_0_2\", \"a\": \"N0_2\", \"b\": \"N1_2\", \"b_mm\": 140, \"h_mm\": 240, \"E\": 200000}, {\"id\": \"beam_1_2\", \"a\": \"N1_2\", \"b\": \"N2_2\", \"b_mm\": 140, \"h_mm\": 240, \"E\": 200000}, {\"id\": \"beam_2_2\", \"a\": \"N2_2\", \"b\": \"N3_2\", \"b_mm\": 140, \"h_mm\": 240, \"E\": 200000}, {\"id\": \"beam_3_2\", \"a\": \"N3_2\", \"b\": \"N4_2\", \"b_mm\": 140, \"h_mm\": 240, \"E\": 200000}], \"supports\": {\"N0_0\": [0, 1, 2], \"N1_0\": [0, 1, 2], \"N2_0\": [0, 1, 2], \"N3_0\": [0, 1, 2], \"N4_0\": [0, 1, 2]}, \"loads\": {\"N0_1\": [10500, -30000, 0], \"N4_1\": [0, -43000, 0], \"N0_2\": [12000, -34000, 0], \"N4_2\": [0, -48000, 0]}, \"probe\": \"N4_2\", \"limits\": {\"abs_uy_mm\": 12.0, \"peak_stress_mpa\": 180.0}}\nKeep viewBox=\"0 0 1100 850\". Map physical (x,y) mm to SVG (X,Y) as X=100+0.0625*x, Y=610-0.0625*y. Draw exactly the listed members. Retain member IDs. Required dimensions are the physical centreline length of every member, tagged data-dimension=\"length_MEMBERID\". Recompute dimensions and analysis after any edit. Report signed ux and uy at N4_2, plus peak extreme-fibre normal stress across member ends. Give at least three significant digits. Check against the limits in the model; no other safety claims.",
+      "reference": {
+        "ux_mm": 1.0939471589908445,
+        "uy_mm": -0.07200436197397053,
+        "peak_stress_mpa": 9.110189837560252,
+        "member_stress_mpa": {
+          "col_0_0": 8.181647488303513,
+          "col_1_0": 7.214861193426515,
+          "col_2_0": 6.924451857239961,
+          "col_3_0": 6.98938327219211,
+          "col_4_0": 9.110189837560252,
+          "beam_0_1": 5.200688667635667,
+          "beam_1_1": 3.3074449812294495,
+          "beam_2_1": 3.3628745530175603,
+          "beam_3_1": 4.4385709066723615,
+          "col_0_1": 5.643247482068702,
+          "col_1_1": 5.817346617617561,
+          "col_2_1": 5.323657440032242,
+          "col_3_1": 5.29500851645724,
+          "col_4_1": 5.442122513715045,
+          "beam_0_2": 2.75301065346446,
+          "beam_1_2": 1.6002813023776796,
+          "beam_2_2": 1.782317158778905,
+          "beam_3_2": 2.0087895200599037
+        },
+        "reactions": {
+          "N0_0": [
+            -4114.870173538405,
+            57689.099016787215,
+            6804120.686964175
+          ],
+          "N1_0": [
+            -4979.578915493671,
+            2241.2174906436785,
+            7621144.689966828
+          ],
+          "N2_0": [
+            -4735.825347473623,
+            -444.5649851540932,
+            7371263.148217488
+          ],
+          "N3_0": [
+            -4809.037489463515,
+            -687.8748490724743,
+            7432412.995369169
+          ],
+          "N4_0": [
+            -3860.6880740284932,
+            96202.12332679614,
+            6510798.382504397
+          ]
+        },
+        "equilibrium_residual_N_Nmm": [
+          1.5934347175061703e-09,
+          4.3655745685100555e-11,
+          -6.318092346191406e-06
+        ],
+        "free_residual_max_N_Nmm": 2.7939677238464355e-09,
+        "subdivision_relative_difference": {
+          "ux_mm": 5.971542796382082e-13,
+          "uy_mm": 2.0429949898870197e-14,
+          "peak_stress_mpa": 5.315310471622273e-13
+        }
+      },
+      "validation_techniques": [
+        "SVG geometry and connectivity constraints",
+        "dimension consistency",
+        "global force and moment equilibrium",
+        "linear frame FEM",
+        "member-subdivision reference check"
+      ],
+      "model_sha256": "38d542b50254aa94f89840356db9654228e280a19a7759e825ec1b90a22aecc0"
+    },
+    {
+      "id": "fourbay_edit",
+      "family": "fourbay",
+      "mode": "edit",
+      "model": {
+        "name": "Four-bay two-storey frame elevation",
+        "nodes": {
+          "N0_0": [
+            0,
+            0
+          ],
+          "N1_0": [
+            3900,
+            0
+          ],
+          "N2_0": [
+            6400,
+            0
+          ],
+          "N3_0": [
+            9600,
+            0
+          ],
+          "N4_0": [
+            12800,
+            0
+          ],
+          "N0_1": [
+            0,
+            2900
+          ],
+          "N1_1": [
+            3900,
+            2900
+          ],
+          "N2_1": [
+            6400,
+            2900
+          ],
+          "N3_1": [
+            9600,
+            2900
+          ],
+          "N4_1": [
+            12800,
+            2900
+          ],
+          "N0_2": [
+            0,
+            5800
+          ],
+          "N1_2": [
+            3900,
+            5800
+          ],
+          "N2_2": [
+            6400,
+            5800
+          ],
+          "N3_2": [
+            9600,
+            5800
+          ],
+          "N4_2": [
+            12800,
+            5800
+          ]
+        },
+        "members": [
+          {
+            "id": "col_0_0",
+            "a": "N0_0",
+            "b": "N0_1",
+            "b_mm": 160,
+            "h_mm": 200,
+            "E": 200000
+          },
+          {
+            "id": "col_1_0",
+            "a": "N1_0",
+            "b": "N1_1",
+            "b_mm": 160,
+            "h_mm": 200,
+            "E": 200000
+          },
+          {
+            "id": "col_2_0",
+            "a": "N2_0",
+            "b": "N2_1",
+            "b_mm": 160,
+            "h_mm": 200,
+            "E": 200000
+          },
+          {
+            "id": "col_3_0",
+            "a": "N3_0",
+            "b": "N3_1",
+            "b_mm": 160,
+            "h_mm": 200,
+            "E": 200000
+          },
+          {
+            "id": "col_4_0",
+            "a": "N4_0",
+            "b": "N4_1",
+            "b_mm": 160,
+            "h_mm": 200,
+            "E": 200000
+          },
+          {
+            "id": "beam_0_1",
+            "a": "N0_1",
+            "b": "N1_1",
+            "b_mm": 140,
+            "h_mm": 260,
+            "E": 200000
+          },
+          {
+            "id": "beam_1_1",
+            "a": "N1_1",
+            "b": "N2_1",
+            "b_mm": 140,
+            "h_mm": 260,
+            "E": 200000
+          },
+          {
+            "id": "beam_2_1",
+            "a": "N2_1",
+            "b": "N3_1",
+            "b_mm": 140,
+            "h_mm": 260,
+            "E": 200000
+          },
+          {
+            "id": "beam_3_1",
+            "a": "N3_1",
+            "b": "N4_1",
+            "b_mm": 140,
+            "h_mm": 260,
+            "E": 200000
+          },
+          {
+            "id": "col_0_1",
+            "a": "N0_1",
+            "b": "N0_2",
+            "b_mm": 140,
+            "h_mm": 180,
+            "E": 200000
+          },
+          {
+            "id": "col_1_1",
+            "a": "N1_1",
+            "b": "N1_2",
+            "b_mm": 140,
+            "h_mm": 180,
+            "E": 200000
+          },
+          {
+            "id": "col_2_1",
+            "a": "N2_1",
+            "b": "N2_2",
+            "b_mm": 140,
+            "h_mm": 180,
+            "E": 200000
+          },
+          {
+            "id": "col_3_1",
+            "a": "N3_1",
+            "b": "N3_2",
+            "b_mm": 140,
+            "h_mm": 180,
+            "E": 200000
+          },
+          {
+            "id": "col_4_1",
+            "a": "N4_1",
+            "b": "N4_2",
+            "b_mm": 140,
+            "h_mm": 180,
+            "E": 200000
+          },
+          {
+            "id": "beam_0_2",
+            "a": "N0_2",
+            "b": "N1_2",
+            "b_mm": 140,
+            "h_mm": 240,
+            "E": 200000
+          },
+          {
+            "id": "beam_1_2",
+            "a": "N1_2",
+            "b": "N2_2",
+            "b_mm": 140,
+            "h_mm": 240,
+            "E": 200000
+          },
+          {
+            "id": "beam_2_2",
+            "a": "N2_2",
+            "b": "N3_2",
+            "b_mm": 140,
+            "h_mm": 240,
+            "E": 200000
+          },
+          {
+            "id": "beam_3_2",
+            "a": "N3_2",
+            "b": "N4_2",
+            "b_mm": 140,
+            "h_mm": 240,
+            "E": 200000
+          }
+        ],
+        "supports": {
+          "N0_0": [
+            0,
+            1,
+            2
+          ],
+          "N1_0": [
+            0,
+            1,
+            2
+          ],
+          "N2_0": [
+            0,
+            1,
+            2
+          ],
+          "N3_0": [
+            0,
+            1,
+            2
+          ],
+          "N4_0": [
+            0,
+            1,
+            2
+          ]
+        },
+        "loads": {
+          "N0_1": [
+            10500,
+            -30000,
+            0
+          ],
+          "N4_1": [
+            0,
+            -43000,
+            0
+          ],
+          "N0_2": [
+            12000,
+            -34000,
+            0
+          ],
+          "N4_2": [
+            0,
+            -63000,
+            0
+          ]
+        },
+        "probe": "N4_2",
+        "limits": {
+          "abs_uy_mm": 12.0,
+          "peak_stress_mpa": 180.0
+        }
+      },
+      "mapping": [
+        0.0625,
+        100,
+        610
+      ],
+      "dimensions": {
+        "length_col_0_0": 2900.0,
+        "length_col_1_0": 2900.0,
+        "length_col_2_0": 2900.0,
+        "length_col_3_0": 2900.0,
+        "length_col_4_0": 2900.0,
+        "length_beam_0_1": 3900.0,
+        "length_beam_1_1": 2500.0,
+        "length_beam_2_1": 3200.0,
+        "length_beam_3_1": 3200.0,
+        "length_col_0_1": 2900.0,
+        "length_col_1_1": 2900.0,
+        "length_col_2_1": 2900.0,
+        "length_col_3_1": 2900.0,
+        "length_col_4_1": 2900.0,
+        "length_beam_0_2": 3900.0,
+        "length_beam_1_2": 2500.0,
+        "length_beam_2_2": 3200.0,
+        "length_beam_3_2": 3200.0
+      },
+      "limits": {
+        "abs_uy_mm": 12.0,
+        "peak_stress_mpa": 180.0
+      },
+      "indeterminacy": 24,
+      "members": 18,
+      "source_model": {
+        "name": "Four-bay two-storey frame elevation",
+        "nodes": {
+          "N0_0": [
+            0,
+            0
+          ],
+          "N1_0": [
+            3200,
+            0
+          ],
+          "N2_0": [
+            6400,
+            0
+          ],
+          "N3_0": [
+            9600,
+            0
+          ],
+          "N4_0": [
+            12800,
+            0
+          ],
+          "N0_1": [
+            0,
+            2900
+          ],
+          "N1_1": [
+            3200,
+            2900
+          ],
+          "N2_1": [
+            6400,
+            2900
+          ],
+          "N3_1": [
+            9600,
+            2900
+          ],
+          "N4_1": [
+            12800,
+            2900
+          ],
+          "N0_2": [
+            0,
+            5800
+          ],
+          "N1_2": [
+            3200,
+            5800
+          ],
+          "N2_2": [
+            6400,
+            5800
+          ],
+          "N3_2": [
+            9600,
+            5800
+          ],
+          "N4_2": [
+            12800,
+            5800
+          ]
+        },
+        "members": [
+          {
+            "id": "col_0_0",
+            "a": "N0_0",
+            "b": "N0_1",
+            "b_mm": 160,
+            "h_mm": 200,
+            "E": 200000
+          },
+          {
+            "id": "col_1_0",
+            "a": "N1_0",
+            "b": "N1_1",
+            "b_mm": 160,
+            "h_mm": 200,
+            "E": 200000
+          },
+          {
+            "id": "col_2_0",
+            "a": "N2_0",
+            "b": "N2_1",
+            "b_mm": 160,
+            "h_mm": 200,
+            "E": 200000
+          },
+          {
+            "id": "col_3_0",
+            "a": "N3_0",
+            "b": "N3_1",
+            "b_mm": 160,
+            "h_mm": 200,
+            "E": 200000
+          },
+          {
+            "id": "col_4_0",
+            "a": "N4_0",
+            "b": "N4_1",
+            "b_mm": 160,
+            "h_mm": 200,
+            "E": 200000
+          },
+          {
+            "id": "beam_0_1",
+            "a": "N0_1",
+            "b": "N1_1",
+            "b_mm": 140,
+            "h_mm": 260,
+            "E": 200000
+          },
+          {
+            "id": "beam_1_1",
+            "a": "N1_1",
+            "b": "N2_1",
+            "b_mm": 140,
+            "h_mm": 260,
+            "E": 200000
+          },
+          {
+            "id": "beam_2_1",
+            "a": "N2_1",
+            "b": "N3_1",
+            "b_mm": 140,
+            "h_mm": 260,
+            "E": 200000
+          },
+          {
+            "id": "beam_3_1",
+            "a": "N3_1",
+            "b": "N4_1",
+            "b_mm": 140,
+            "h_mm": 260,
+            "E": 200000
+          },
+          {
+            "id": "col_0_1",
+            "a": "N0_1",
+            "b": "N0_2",
+            "b_mm": 140,
+            "h_mm": 180,
+            "E": 200000
+          },
+          {
+            "id": "col_1_1",
+            "a": "N1_1",
+            "b": "N1_2",
+            "b_mm": 140,
+            "h_mm": 180,
+            "E": 200000
+          },
+          {
+            "id": "col_2_1",
+            "a": "N2_1",
+            "b": "N2_2",
+            "b_mm": 140,
+            "h_mm": 180,
+            "E": 200000
+          },
+          {
+            "id": "col_3_1",
+            "a": "N3_1",
+            "b": "N3_2",
+            "b_mm": 140,
+            "h_mm": 180,
+            "E": 200000
+          },
+          {
+            "id": "col_4_1",
+            "a": "N4_1",
+            "b": "N4_2",
+            "b_mm": 140,
+            "h_mm": 180,
+            "E": 200000
+          },
+          {
+            "id": "beam_0_2",
+            "a": "N0_2",
+            "b": "N1_2",
+            "b_mm": 140,
+            "h_mm": 240,
+            "E": 200000
+          },
+          {
+            "id": "beam_1_2",
+            "a": "N1_2",
+            "b": "N2_2",
+            "b_mm": 140,
+            "h_mm": 240,
+            "E": 200000
+          },
+          {
+            "id": "beam_2_2",
+            "a": "N2_2",
+            "b": "N3_2",
+            "b_mm": 140,
+            "h_mm": 240,
+            "E": 200000
+          },
+          {
+            "id": "beam_3_2",
+            "a": "N3_2",
+            "b": "N4_2",
+            "b_mm": 140,
+            "h_mm": 240,
+            "E": 200000
+          }
+        ],
+        "supports": {
+          "N0_0": [
+            0,
+            1,
+            2
+          ],
+          "N1_0": [
+            0,
+            1,
+            2
+          ],
+          "N2_0": [
+            0,
+            1,
+            2
+          ],
+          "N3_0": [
+            0,
+            1,
+            2
+          ],
+          "N4_0": [
+            0,
+            1,
+            2
+          ]
+        },
+        "loads": {
+          "N0_1": [
+            10500,
+            -30000,
+            0
+          ],
+          "N4_1": [
+            0,
+            -43000,
+            0
+          ],
+          "N0_2": [
+            12000,
+            -34000,
+            0
+          ],
+          "N4_2": [
+            0,
+            -48000,
+            0
+          ]
+        },
+        "probe": "N4_2",
+        "limits": {
+          "abs_uy_mm": 12.0,
+          "peak_stress_mpa": 180.0
+        }
+      },
+      "source_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1100 850\" width=\"1100\" height=\"850\">\n<rect width=\"1100\" height=\"850\" fill=\"white\"/>\n<text x=\"35\" y=\"40\" font-size=\"23\">Four-bay two-storey frame elevation</text>\n<text x=\"35\" y=\"66\" font-size=\"14\">Structural centreline elevation \u2014 dimensions mm; sections b \u00d7 h mm</text>\n<line data-member=\"col_0_0\" x1=\"100.0\" y1=\"610.0\" x2=\"100.0\" y2=\"428.75\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_0_0\" x=\"108.0\" y=\"509.375\" font-size=\"12\">2900.000 mm</text>\n<text x=\"35\" y=\"695\" font-size=\"12\">col_0_0: 160 \u00d7 200</text>\n<line data-member=\"col_1_0\" x1=\"300.0\" y1=\"610.0\" x2=\"300.0\" y2=\"428.75\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_1_0\" x=\"308.0\" y=\"509.375\" font-size=\"12\">2900.000 mm</text>\n<text x=\"300\" y=\"695\" font-size=\"12\">col_1_0: 160 \u00d7 200</text>\n<line data-member=\"col_2_0\" x1=\"500.0\" y1=\"610.0\" x2=\"500.0\" y2=\"428.75\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_2_0\" x=\"508.0\" y=\"509.375\" font-size=\"12\">2900.000 mm</text>\n<text x=\"565\" y=\"695\" font-size=\"12\">col_2_0: 160 \u00d7 200</text>\n<line data-member=\"col_3_0\" x1=\"700.0\" y1=\"610.0\" x2=\"700.0\" y2=\"428.75\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_3_0\" x=\"708.0\" y=\"509.375\" font-size=\"12\">2900.000 mm</text>\n<text x=\"830\" y=\"695\" font-size=\"12\">col_3_0: 160 \u00d7 200</text>\n<line data-member=\"col_4_0\" x1=\"900.0\" y1=\"610.0\" x2=\"900.0\" y2=\"428.75\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_4_0\" x=\"908.0\" y=\"509.375\" font-size=\"12\">2900.000 mm</text>\n<text x=\"35\" y=\"717\" font-size=\"12\">col_4_0: 160 \u00d7 200</text>\n<line data-member=\"beam_0_1\" x1=\"100.0\" y1=\"428.75\" x2=\"300.0\" y2=\"428.75\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_0_1\" x=\"208.0\" y=\"418.75\" font-size=\"12\">3200.000 mm</text>\n<text x=\"300\" y=\"717\" font-size=\"12\">beam_0_1: 140 \u00d7 260</text>\n<line data-member=\"beam_1_1\" x1=\"300.0\" y1=\"428.75\" x2=\"500.0\" y2=\"428.75\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_1_1\" x=\"408.0\" y=\"418.75\" font-size=\"12\">3200.000 mm</text>\n<text x=\"565\" y=\"717\" font-size=\"12\">beam_1_1: 140 \u00d7 260</text>\n<line data-member=\"beam_2_1\" x1=\"500.0\" y1=\"428.75\" x2=\"700.0\" y2=\"428.75\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_2_1\" x=\"608.0\" y=\"418.75\" font-size=\"12\">3200.000 mm</text>\n<text x=\"830\" y=\"717\" font-size=\"12\">beam_2_1: 140 \u00d7 260</text>\n<line data-member=\"beam_3_1\" x1=\"700.0\" y1=\"428.75\" x2=\"900.0\" y2=\"428.75\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_3_1\" x=\"808.0\" y=\"418.75\" font-size=\"12\">3200.000 mm</text>\n<text x=\"35\" y=\"739\" font-size=\"12\">beam_3_1: 140 \u00d7 260</text>\n<line data-member=\"col_0_1\" x1=\"100.0\" y1=\"428.75\" x2=\"100.0\" y2=\"247.5\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_0_1\" x=\"108.0\" y=\"328.125\" font-size=\"12\">2900.000 mm</text>\n<text x=\"300\" y=\"739\" font-size=\"12\">col_0_1: 140 \u00d7 180</text>\n<line data-member=\"col_1_1\" x1=\"300.0\" y1=\"428.75\" x2=\"300.0\" y2=\"247.5\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_1_1\" x=\"308.0\" y=\"328.125\" font-size=\"12\">2900.000 mm</text>\n<text x=\"565\" y=\"739\" font-size=\"12\">col_1_1: 140 \u00d7 180</text>\n<line data-member=\"col_2_1\" x1=\"500.0\" y1=\"428.75\" x2=\"500.0\" y2=\"247.5\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_2_1\" x=\"508.0\" y=\"328.125\" font-size=\"12\">2900.000 mm</text>\n<text x=\"830\" y=\"739\" font-size=\"12\">col_2_1: 140 \u00d7 180</text>\n<line data-member=\"col_3_1\" x1=\"700.0\" y1=\"428.75\" x2=\"700.0\" y2=\"247.5\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_3_1\" x=\"708.0\" y=\"328.125\" font-size=\"12\">2900.000 mm</text>\n<text x=\"35\" y=\"761\" font-size=\"12\">col_3_1: 140 \u00d7 180</text>\n<line data-member=\"col_4_1\" x1=\"900.0\" y1=\"428.75\" x2=\"900.0\" y2=\"247.5\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_4_1\" x=\"908.0\" y=\"328.125\" font-size=\"12\">2900.000 mm</text>\n<text x=\"300\" y=\"761\" font-size=\"12\">col_4_1: 140 \u00d7 180</text>\n<line data-member=\"beam_0_2\" x1=\"100.0\" y1=\"247.5\" x2=\"300.0\" y2=\"247.5\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_0_2\" x=\"208.0\" y=\"237.5\" font-size=\"12\">3200.000 mm</text>\n<text x=\"565\" y=\"761\" font-size=\"12\">beam_0_2: 140 \u00d7 240</text>\n<line data-member=\"beam_1_2\" x1=\"300.0\" y1=\"247.5\" x2=\"500.0\" y2=\"247.5\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_1_2\" x=\"408.0\" y=\"237.5\" font-size=\"12\">3200.000 mm</text>\n<text x=\"830\" y=\"761\" font-size=\"12\">beam_1_2: 140 \u00d7 240</text>\n<line data-member=\"beam_2_2\" x1=\"500.0\" y1=\"247.5\" x2=\"700.0\" y2=\"247.5\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_2_2\" x=\"608.0\" y=\"237.5\" font-size=\"12\">3200.000 mm</text>\n<text x=\"35\" y=\"783\" font-size=\"12\">beam_2_2: 140 \u00d7 240</text>\n<line data-member=\"beam_3_2\" x1=\"700.0\" y1=\"247.5\" x2=\"900.0\" y2=\"247.5\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_3_2\" x=\"808.0\" y=\"237.5\" font-size=\"12\">3200.000 mm</text>\n<text x=\"300\" y=\"783\" font-size=\"12\">beam_3_2: 140 \u00d7 240</text>\n<circle cx=\"100.0\" cy=\"610.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"108.0\" y=\"627.0\" font-size=\"13\">N0_0</text>\n<path d=\"M88.0,616.0 H112.0 M88.0,616.0 l-6,9 M100.0,616.0 l-6,9 M112.0,616.0 l-6,9\" stroke=\"black\" fill=\"none\"/>\n<circle cx=\"300.0\" cy=\"610.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"308.0\" y=\"627.0\" font-size=\"13\">N1_0</text>\n<path d=\"M288.0,616.0 H312.0 M288.0,616.0 l-6,9 M300.0,616.0 l-6,9 M312.0,616.0 l-6,9\" stroke=\"black\" fill=\"none\"/>\n<circle cx=\"500.0\" cy=\"610.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"508.0\" y=\"627.0\" font-size=\"13\">N2_0</text>\n<path d=\"M488.0,616.0 H512.0 M488.0,616.0 l-6,9 M500.0,616.0 l-6,9 M512.0,616.0 l-6,9\" stroke=\"black\" fill=\"none\"/>\n<circle cx=\"700.0\" cy=\"610.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"708.0\" y=\"627.0\" font-size=\"13\">N3_0</text>\n<path d=\"M688.0,616.0 H712.0 M688.0,616.0 l-6,9 M700.0,616.0 l-6,9 M712.0,616.0 l-6,9\" stroke=\"black\" fill=\"none\"/>\n<circle cx=\"900.0\" cy=\"610.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"908.0\" y=\"627.0\" font-size=\"13\">N4_0</text>\n<path d=\"M888.0,616.0 H912.0 M888.0,616.0 l-6,9 M900.0,616.0 l-6,9 M912.0,616.0 l-6,9\" stroke=\"black\" fill=\"none\"/>\n<circle cx=\"100.0\" cy=\"428.75\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"108.0\" y=\"445.75\" font-size=\"13\">N0_1</text>\n<circle cx=\"300.0\" cy=\"428.75\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"308.0\" y=\"445.75\" font-size=\"13\">N1_1</text>\n<circle cx=\"500.0\" cy=\"428.75\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"508.0\" y=\"445.75\" font-size=\"13\">N2_1</text>\n<circle cx=\"700.0\" cy=\"428.75\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"708.0\" y=\"445.75\" font-size=\"13\">N3_1</text>\n<circle cx=\"900.0\" cy=\"428.75\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"908.0\" y=\"445.75\" font-size=\"13\">N4_1</text>\n<circle cx=\"100.0\" cy=\"247.5\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"108.0\" y=\"264.5\" font-size=\"13\">N0_2</text>\n<circle cx=\"300.0\" cy=\"247.5\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"308.0\" y=\"264.5\" font-size=\"13\">N1_2</text>\n<circle cx=\"500.0\" cy=\"247.5\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"508.0\" y=\"264.5\" font-size=\"13\">N2_2</text>\n<circle cx=\"700.0\" cy=\"247.5\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"708.0\" y=\"264.5\" font-size=\"13\">N3_2</text>\n<circle cx=\"900.0\" cy=\"247.5\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"908.0\" y=\"264.5\" font-size=\"13\">N4_2</text>\n<text x=\"35\" y=\"790\" font-size=\"14\">ux_mm: <tspan data-result=\"ux_mm\">1.093947 mm</tspan></text>\n<text x=\"380\" y=\"790\" font-size=\"14\">uy_mm: <tspan data-result=\"uy_mm\">-0.072004 mm</tspan></text>\n<text x=\"725\" y=\"790\" font-size=\"14\">peak_stress_mpa: <tspan data-result=\"peak_stress_mpa\">9.110190 MPa</tspan></text>\n</svg>",
+      "prompt": "Object: Four-bay two-storey frame elevation. Make a dimensioned structural elevation. All sections are solid rectangles; h is in the frame plane and b is out of plane. The idealised column bases are clamped, not freely resting on a floor. This task concerns only the stated 2D frame, not complete product/building validation. \nOriginal physical model:\n{\"name\": \"Four-bay two-storey frame elevation\", \"nodes\": {\"N0_0\": [0, 0], \"N1_0\": [3200, 0], \"N2_0\": [6400, 0], \"N3_0\": [9600, 0], \"N4_0\": [12800, 0], \"N0_1\": [0, 2900], \"N1_1\": [3200, 2900], \"N2_1\": [6400, 2900], \"N3_1\": [9600, 2900], \"N4_1\": [12800, 2900], \"N0_2\": [0, 5800], \"N1_2\": [3200, 5800], \"N2_2\": [6400, 5800], \"N3_2\": [9600, 5800], \"N4_2\": [12800, 5800]}, \"members\": [{\"id\": \"col_0_0\", \"a\": \"N0_0\", \"b\": \"N0_1\", \"b_mm\": 160, \"h_mm\": 200, \"E\": 200000}, {\"id\": \"col_1_0\", \"a\": \"N1_0\", \"b\": \"N1_1\", \"b_mm\": 160, \"h_mm\": 200, \"E\": 200000}, {\"id\": \"col_2_0\", \"a\": \"N2_0\", \"b\": \"N2_1\", \"b_mm\": 160, \"h_mm\": 200, \"E\": 200000}, {\"id\": \"col_3_0\", \"a\": \"N3_0\", \"b\": \"N3_1\", \"b_mm\": 160, \"h_mm\": 200, \"E\": 200000}, {\"id\": \"col_4_0\", \"a\": \"N4_0\", \"b\": \"N4_1\", \"b_mm\": 160, \"h_mm\": 200, \"E\": 200000}, {\"id\": \"beam_0_1\", \"a\": \"N0_1\", \"b\": \"N1_1\", \"b_mm\": 140, \"h_mm\": 260, \"E\": 200000}, {\"id\": \"beam_1_1\", \"a\": \"N1_1\", \"b\": \"N2_1\", \"b_mm\": 140, \"h_mm\": 260, \"E\": 200000}, {\"id\": \"beam_2_1\", \"a\": \"N2_1\", \"b\": \"N3_1\", \"b_mm\": 140, \"h_mm\": 260, \"E\": 200000}, {\"id\": \"beam_3_1\", \"a\": \"N3_1\", \"b\": \"N4_1\", \"b_mm\": 140, \"h_mm\": 260, \"E\": 200000}, {\"id\": \"col_0_1\", \"a\": \"N0_1\", \"b\": \"N0_2\", \"b_mm\": 140, \"h_mm\": 180, \"E\": 200000}, {\"id\": \"col_1_1\", \"a\": \"N1_1\", \"b\": \"N1_2\", \"b_mm\": 140, \"h_mm\": 180, \"E\": 200000}, {\"id\": \"col_2_1\", \"a\": \"N2_1\", \"b\": \"N2_2\", \"b_mm\": 140, \"h_mm\": 180, \"E\": 200000}, {\"id\": \"col_3_1\", \"a\": \"N3_1\", \"b\": \"N3_2\", \"b_mm\": 140, \"h_mm\": 180, \"E\": 200000}, {\"id\": \"col_4_1\", \"a\": \"N4_1\", \"b\": \"N4_2\", \"b_mm\": 140, \"h_mm\": 180, \"E\": 200000}, {\"id\": \"beam_0_2\", \"a\": \"N0_2\", \"b\": \"N1_2\", \"b_mm\": 140, \"h_mm\": 240, \"E\": 200000}, {\"id\": \"beam_1_2\", \"a\": \"N1_2\", \"b\": \"N2_2\", \"b_mm\": 140, \"h_mm\": 240, \"E\": 200000}, {\"id\": \"beam_2_2\", \"a\": \"N2_2\", \"b\": \"N3_2\", \"b_mm\": 140, \"h_mm\": 240, \"E\": 200000}, {\"id\": \"beam_3_2\", \"a\": \"N3_2\", \"b\": \"N4_2\", \"b_mm\": 140, \"h_mm\": 240, \"E\": 200000}], \"supports\": {\"N0_0\": [0, 1, 2], \"N1_0\": [0, 1, 2], \"N2_0\": [0, 1, 2], \"N3_0\": [0, 1, 2], \"N4_0\": [0, 1, 2]}, \"loads\": {\"N0_1\": [10500, -30000, 0], \"N4_1\": [0, -43000, 0], \"N0_2\": [12000, -34000, 0], \"N4_2\": [0, -48000, 0]}, \"probe\": \"N4_2\", \"limits\": {\"abs_uy_mm\": 12.0, \"peak_stress_mpa\": 180.0}}\nOriginal SVG:\n<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1100 850\" width=\"1100\" height=\"850\">\n<rect width=\"1100\" height=\"850\" fill=\"white\"/>\n<text x=\"35\" y=\"40\" font-size=\"23\">Four-bay two-storey frame elevation</text>\n<text x=\"35\" y=\"66\" font-size=\"14\">Structural centreline elevation \u2014 dimensions mm; sections b \u00d7 h mm</text>\n<line data-member=\"col_0_0\" x1=\"100.0\" y1=\"610.0\" x2=\"100.0\" y2=\"428.75\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_0_0\" x=\"108.0\" y=\"509.375\" font-size=\"12\">2900.000 mm</text>\n<text x=\"35\" y=\"695\" font-size=\"12\">col_0_0: 160 \u00d7 200</text>\n<line data-member=\"col_1_0\" x1=\"300.0\" y1=\"610.0\" x2=\"300.0\" y2=\"428.75\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_1_0\" x=\"308.0\" y=\"509.375\" font-size=\"12\">2900.000 mm</text>\n<text x=\"300\" y=\"695\" font-size=\"12\">col_1_0: 160 \u00d7 200</text>\n<line data-member=\"col_2_0\" x1=\"500.0\" y1=\"610.0\" x2=\"500.0\" y2=\"428.75\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_2_0\" x=\"508.0\" y=\"509.375\" font-size=\"12\">2900.000 mm</text>\n<text x=\"565\" y=\"695\" font-size=\"12\">col_2_0: 160 \u00d7 200</text>\n<line data-member=\"col_3_0\" x1=\"700.0\" y1=\"610.0\" x2=\"700.0\" y2=\"428.75\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_3_0\" x=\"708.0\" y=\"509.375\" font-size=\"12\">2900.000 mm</text>\n<text x=\"830\" y=\"695\" font-size=\"12\">col_3_0: 160 \u00d7 200</text>\n<line data-member=\"col_4_0\" x1=\"900.0\" y1=\"610.0\" x2=\"900.0\" y2=\"428.75\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_4_0\" x=\"908.0\" y=\"509.375\" font-size=\"12\">2900.000 mm</text>\n<text x=\"35\" y=\"717\" font-size=\"12\">col_4_0: 160 \u00d7 200</text>\n<line data-member=\"beam_0_1\" x1=\"100.0\" y1=\"428.75\" x2=\"300.0\" y2=\"428.75\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_0_1\" x=\"208.0\" y=\"418.75\" font-size=\"12\">3200.000 mm</text>\n<text x=\"300\" y=\"717\" font-size=\"12\">beam_0_1: 140 \u00d7 260</text>\n<line data-member=\"beam_1_1\" x1=\"300.0\" y1=\"428.75\" x2=\"500.0\" y2=\"428.75\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_1_1\" x=\"408.0\" y=\"418.75\" font-size=\"12\">3200.000 mm</text>\n<text x=\"565\" y=\"717\" font-size=\"12\">beam_1_1: 140 \u00d7 260</text>\n<line data-member=\"beam_2_1\" x1=\"500.0\" y1=\"428.75\" x2=\"700.0\" y2=\"428.75\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_2_1\" x=\"608.0\" y=\"418.75\" font-size=\"12\">3200.000 mm</text>\n<text x=\"830\" y=\"717\" font-size=\"12\">beam_2_1: 140 \u00d7 260</text>\n<line data-member=\"beam_3_1\" x1=\"700.0\" y1=\"428.75\" x2=\"900.0\" y2=\"428.75\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_3_1\" x=\"808.0\" y=\"418.75\" font-size=\"12\">3200.000 mm</text>\n<text x=\"35\" y=\"739\" font-size=\"12\">beam_3_1: 140 \u00d7 260</text>\n<line data-member=\"col_0_1\" x1=\"100.0\" y1=\"428.75\" x2=\"100.0\" y2=\"247.5\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_0_1\" x=\"108.0\" y=\"328.125\" font-size=\"12\">2900.000 mm</text>\n<text x=\"300\" y=\"739\" font-size=\"12\">col_0_1: 140 \u00d7 180</text>\n<line data-member=\"col_1_1\" x1=\"300.0\" y1=\"428.75\" x2=\"300.0\" y2=\"247.5\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_1_1\" x=\"308.0\" y=\"328.125\" font-size=\"12\">2900.000 mm</text>\n<text x=\"565\" y=\"739\" font-size=\"12\">col_1_1: 140 \u00d7 180</text>\n<line data-member=\"col_2_1\" x1=\"500.0\" y1=\"428.75\" x2=\"500.0\" y2=\"247.5\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_2_1\" x=\"508.0\" y=\"328.125\" font-size=\"12\">2900.000 mm</text>\n<text x=\"830\" y=\"739\" font-size=\"12\">col_2_1: 140 \u00d7 180</text>\n<line data-member=\"col_3_1\" x1=\"700.0\" y1=\"428.75\" x2=\"700.0\" y2=\"247.5\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_3_1\" x=\"708.0\" y=\"328.125\" font-size=\"12\">2900.000 mm</text>\n<text x=\"35\" y=\"761\" font-size=\"12\">col_3_1: 140 \u00d7 180</text>\n<line data-member=\"col_4_1\" x1=\"900.0\" y1=\"428.75\" x2=\"900.0\" y2=\"247.5\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_4_1\" x=\"908.0\" y=\"328.125\" font-size=\"12\">2900.000 mm</text>\n<text x=\"300\" y=\"761\" font-size=\"12\">col_4_1: 140 \u00d7 180</text>\n<line data-member=\"beam_0_2\" x1=\"100.0\" y1=\"247.5\" x2=\"300.0\" y2=\"247.5\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_0_2\" x=\"208.0\" y=\"237.5\" font-size=\"12\">3200.000 mm</text>\n<text x=\"565\" y=\"761\" font-size=\"12\">beam_0_2: 140 \u00d7 240</text>\n<line data-member=\"beam_1_2\" x1=\"300.0\" y1=\"247.5\" x2=\"500.0\" y2=\"247.5\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_1_2\" x=\"408.0\" y=\"237.5\" font-size=\"12\">3200.000 mm</text>\n<text x=\"830\" y=\"761\" font-size=\"12\">beam_1_2: 140 \u00d7 240</text>\n<line data-member=\"beam_2_2\" x1=\"500.0\" y1=\"247.5\" x2=\"700.0\" y2=\"247.5\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_2_2\" x=\"608.0\" y=\"237.5\" font-size=\"12\">3200.000 mm</text>\n<text x=\"35\" y=\"783\" font-size=\"12\">beam_2_2: 140 \u00d7 240</text>\n<line data-member=\"beam_3_2\" x1=\"700.0\" y1=\"247.5\" x2=\"900.0\" y2=\"247.5\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_3_2\" x=\"808.0\" y=\"237.5\" font-size=\"12\">3200.000 mm</text>\n<text x=\"300\" y=\"783\" font-size=\"12\">beam_3_2: 140 \u00d7 240</text>\n<circle cx=\"100.0\" cy=\"610.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"108.0\" y=\"627.0\" font-size=\"13\">N0_0</text>\n<path d=\"M88.0,616.0 H112.0 M88.0,616.0 l-6,9 M100.0,616.0 l-6,9 M112.0,616.0 l-6,9\" stroke=\"black\" fill=\"none\"/>\n<circle cx=\"300.0\" cy=\"610.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"308.0\" y=\"627.0\" font-size=\"13\">N1_0</text>\n<path d=\"M288.0,616.0 H312.0 M288.0,616.0 l-6,9 M300.0,616.0 l-6,9 M312.0,616.0 l-6,9\" stroke=\"black\" fill=\"none\"/>\n<circle cx=\"500.0\" cy=\"610.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"508.0\" y=\"627.0\" font-size=\"13\">N2_0</text>\n<path d=\"M488.0,616.0 H512.0 M488.0,616.0 l-6,9 M500.0,616.0 l-6,9 M512.0,616.0 l-6,9\" stroke=\"black\" fill=\"none\"/>\n<circle cx=\"700.0\" cy=\"610.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"708.0\" y=\"627.0\" font-size=\"13\">N3_0</text>\n<path d=\"M688.0,616.0 H712.0 M688.0,616.0 l-6,9 M700.0,616.0 l-6,9 M712.0,616.0 l-6,9\" stroke=\"black\" fill=\"none\"/>\n<circle cx=\"900.0\" cy=\"610.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"908.0\" y=\"627.0\" font-size=\"13\">N4_0</text>\n<path d=\"M888.0,616.0 H912.0 M888.0,616.0 l-6,9 M900.0,616.0 l-6,9 M912.0,616.0 l-6,9\" stroke=\"black\" fill=\"none\"/>\n<circle cx=\"100.0\" cy=\"428.75\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"108.0\" y=\"445.75\" font-size=\"13\">N0_1</text>\n<circle cx=\"300.0\" cy=\"428.75\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"308.0\" y=\"445.75\" font-size=\"13\">N1_1</text>\n<circle cx=\"500.0\" cy=\"428.75\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"508.0\" y=\"445.75\" font-size=\"13\">N2_1</text>\n<circle cx=\"700.0\" cy=\"428.75\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"708.0\" y=\"445.75\" font-size=\"13\">N3_1</text>\n<circle cx=\"900.0\" cy=\"428.75\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"908.0\" y=\"445.75\" font-size=\"13\">N4_1</text>\n<circle cx=\"100.0\" cy=\"247.5\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"108.0\" y=\"264.5\" font-size=\"13\">N0_2</text>\n<circle cx=\"300.0\" cy=\"247.5\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"308.0\" y=\"264.5\" font-size=\"13\">N1_2</text>\n<circle cx=\"500.0\" cy=\"247.5\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"508.0\" y=\"264.5\" font-size=\"13\">N2_2</text>\n<circle cx=\"700.0\" cy=\"247.5\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"708.0\" y=\"264.5\" font-size=\"13\">N3_2</text>\n<circle cx=\"900.0\" cy=\"247.5\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"908.0\" y=\"264.5\" font-size=\"13\">N4_2</text>\n<text x=\"35\" y=\"790\" font-size=\"14\">ux_mm: <tspan data-result=\"ux_mm\">1.093947 mm</tspan></text>\n<text x=\"380\" y=\"790\" font-size=\"14\">uy_mm: <tspan data-result=\"uy_mm\">-0.072004 mm</tspan></text>\n<text x=\"725\" y=\"790\" font-size=\"14\">peak_stress_mpa: <tspan data-result=\"peak_stress_mpa\">9.110190 MPa</tspan></text>\n</svg>\nEDIT: Move the column grid at x=3200 mm to x=3900 mm. Change the vertical load at N4_2 to -63000 N. Keep every other node, section and load unchanged.\nKeep viewBox=\"0 0 1100 850\". Map physical (x,y) mm to SVG (X,Y) as X=100+0.0625*x, Y=610-0.0625*y. Draw exactly the listed members. Retain member IDs. Required dimensions are the physical centreline length of every member, tagged data-dimension=\"length_MEMBERID\". Recompute dimensions and analysis after any edit. Report signed ux and uy at N4_2, plus peak extreme-fibre normal stress across member ends. Give at least three significant digits. Check against the limits in the model; no other safety claims.",
+      "reference": {
+        "ux_mm": 1.1072960023417677,
+        "uy_mm": -0.08740692950713592,
+        "peak_stress_mpa": 9.610130765046085,
+        "member_stress_mpa": {
+          "col_0_0": 8.066554818369328,
+          "col_1_0": 7.24420172665667,
+          "col_2_0": 7.125015184273115,
+          "col_3_0": 7.0151868541699685,
+          "col_4_0": 9.610130765046085,
+          "beam_0_1": 4.724669476011342,
+          "beam_1_1": 3.8234471855135665,
+          "beam_2_1": 3.2477414878683093,
+          "beam_3_1": 4.443824697770457,
+          "col_0_1": 5.30294071688586,
+          "col_1_1": 5.861581862374114,
+          "col_2_1": 5.622785589366948,
+          "col_3_1": 5.304601154251138,
+          "col_4_1": 6.002647167353845,
+          "beam_0_2": 2.556773658513462,
+          "beam_1_2": 1.81860957306892,
+          "beam_2_2": 1.8371237084774503,
+          "beam_3_2": 1.9896777202561566
+        },
+        "reactions": {
+          "N0_0": [
+            -3906.4991519311907,
+            59378.437699485374,
+            6625043.882944437
+          ],
+          "N1_0": [
+            -5016.757023886838,
+            -1555.4541047504256,
+            7675300.038275436
+          ],
+          "N2_0": [
+            -4889.928022043034,
+            1753.8761977897034,
+            7541553.656631666
+          ],
+          "N3_0": [
+            -4813.01553093977,
+            -759.724570926571,
+            7457541.825417082
+          ],
+          "N4_0": [
+            -3873.8002712022103,
+            111182.86477840233,
+            6544710.65676908
+          ]
+        },
+        "equilibrium_residual_N_Nmm": [
+          1.3787939678877592e-09,
+          3.637978807091713e-11,
+          -5.0067901611328125e-06
+        ],
+        "free_residual_max_N_Nmm": 1.862645149230957e-09,
+        "subdivision_relative_difference": {
+          "ux_mm": 4.780603714108679e-13,
+          "uy_mm": 2.794390179300302e-14,
+          "peak_stress_mpa": 1.1090526546389187e-13
+        }
+      },
+      "validation_techniques": [
+        "SVG geometry and connectivity constraints",
+        "dimension consistency",
+        "global force and moment equilibrium",
+        "linear frame FEM",
+        "member-subdivision reference check"
+      ],
+      "model_sha256": "ac362b2cd0ab004d0044d08f4c3ff96b27104cfbb1c33a07224ba11ea0ea0d9e"
+    },
+    {
+      "id": "twobay_four_generate",
+      "family": "twobay_four",
+      "mode": "generate",
+      "model": {
+        "name": "Two-bay four-storey frame elevation",
+        "nodes": {
+          "N0_0": [
+            0,
+            0
+          ],
+          "N1_0": [
+            3500,
+            0
+          ],
+          "N2_0": [
+            7000,
+            0
+          ],
+          "N0_1": [
+            0,
+            2800
+          ],
+          "N1_1": [
+            3500,
+            2800
+          ],
+          "N2_1": [
+            7000,
+            2800
+          ],
+          "N0_2": [
+            0,
+            5600
+          ],
+          "N1_2": [
+            3500,
+            5600
+          ],
+          "N2_2": [
+            7000,
+            5600
+          ],
+          "N0_3": [
+            0,
+            8400
+          ],
+          "N1_3": [
+            3500,
+            8400
+          ],
+          "N2_3": [
+            7000,
+            8400
+          ],
+          "N0_4": [
+            0,
+            11200
+          ],
+          "N1_4": [
+            3500,
+            11200
+          ],
+          "N2_4": [
+            7000,
+            11200
+          ]
+        },
+        "members": [
+          {
+            "id": "col_0_0",
+            "a": "N0_0",
+            "b": "N0_1",
+            "b_mm": 160,
+            "h_mm": 200,
+            "E": 200000
+          },
+          {
+            "id": "col_1_0",
+            "a": "N1_0",
+            "b": "N1_1",
+            "b_mm": 160,
+            "h_mm": 200,
+            "E": 200000
+          },
+          {
+            "id": "col_2_0",
+            "a": "N2_0",
+            "b": "N2_1",
+            "b_mm": 160,
+            "h_mm": 200,
+            "E": 200000
+          },
+          {
+            "id": "beam_0_1",
+            "a": "N0_1",
+            "b": "N1_1",
+            "b_mm": 140,
+            "h_mm": 260,
+            "E": 200000
+          },
+          {
+            "id": "beam_1_1",
+            "a": "N1_1",
+            "b": "N2_1",
+            "b_mm": 140,
+            "h_mm": 260,
+            "E": 200000
+          },
+          {
+            "id": "col_0_1",
+            "a": "N0_1",
+            "b": "N0_2",
+            "b_mm": 140,
+            "h_mm": 180,
+            "E": 200000
+          },
+          {
+            "id": "col_1_1",
+            "a": "N1_1",
+            "b": "N1_2",
+            "b_mm": 140,
+            "h_mm": 180,
+            "E": 200000
+          },
+          {
+            "id": "col_2_1",
+            "a": "N2_1",
+            "b": "N2_2",
+            "b_mm": 140,
+            "h_mm": 180,
+            "E": 200000
+          },
+          {
+            "id": "beam_0_2",
+            "a": "N0_2",
+            "b": "N1_2",
+            "b_mm": 140,
+            "h_mm": 240,
+            "E": 200000
+          },
+          {
+            "id": "beam_1_2",
+            "a": "N1_2",
+            "b": "N2_2",
+            "b_mm": 140,
+            "h_mm": 240,
+            "E": 200000
+          },
+          {
+            "id": "col_0_2",
+            "a": "N0_2",
+            "b": "N0_3",
+            "b_mm": 140,
+            "h_mm": 160,
+            "E": 200000
+          },
+          {
+            "id": "col_1_2",
+            "a": "N1_2",
+            "b": "N1_3",
+            "b_mm": 140,
+            "h_mm": 160,
+            "E": 200000
+          },
+          {
+            "id": "col_2_2",
+            "a": "N2_2",
+            "b": "N2_3",
+            "b_mm": 140,
+            "h_mm": 160,
+            "E": 200000
+          },
+          {
+            "id": "beam_0_3",
+            "a": "N0_3",
+            "b": "N1_3",
+            "b_mm": 140,
+            "h_mm": 220,
+            "E": 200000
+          },
+          {
+            "id": "beam_1_3",
+            "a": "N1_3",
+            "b": "N2_3",
+            "b_mm": 140,
+            "h_mm": 220,
+            "E": 200000
+          },
+          {
+            "id": "col_0_3",
+            "a": "N0_3",
+            "b": "N0_4",
+            "b_mm": 140,
+            "h_mm": 140,
+            "E": 200000
+          },
+          {
+            "id": "col_1_3",
+            "a": "N1_3",
+            "b": "N1_4",
+            "b_mm": 140,
+            "h_mm": 140,
+            "E": 200000
+          },
+          {
+            "id": "col_2_3",
+            "a": "N2_3",
+            "b": "N2_4",
+            "b_mm": 140,
+            "h_mm": 140,
+            "E": 200000
+          },
+          {
+            "id": "beam_0_4",
+            "a": "N0_4",
+            "b": "N1_4",
+            "b_mm": 140,
+            "h_mm": 200,
+            "E": 200000
+          },
+          {
+            "id": "beam_1_4",
+            "a": "N1_4",
+            "b": "N2_4",
+            "b_mm": 140,
+            "h_mm": 200,
+            "E": 200000
+          }
+        ],
+        "supports": {
+          "N0_0": [
+            0,
+            1,
+            2
+          ],
+          "N1_0": [
+            0,
+            1,
+            2
+          ],
+          "N2_0": [
+            0,
+            1,
+            2
+          ]
+        },
+        "loads": {
+          "N0_1": [
+            10500,
+            -30000,
+            0
+          ],
+          "N2_1": [
+            0,
+            -43000,
+            0
+          ],
+          "N0_2": [
+            12000,
+            -34000,
+            0
+          ],
+          "N2_2": [
+            0,
+            -48000,
+            0
+          ],
+          "N0_3": [
+            13500,
+            -38000,
+            0
+          ],
+          "N2_3": [
+            0,
+            -53000,
+            0
+          ],
+          "N0_4": [
+            15000,
+            -42000,
+            0
+          ],
+          "N2_4": [
+            0,
+            -58000,
+            0
+          ]
+        },
+        "probe": "N2_4",
+        "limits": {
+          "abs_uy_mm": 12.0,
+          "peak_stress_mpa": 180.0
+        }
+      },
+      "mapping": [
+        0.038135593220338986,
+        100,
+        610
+      ],
+      "dimensions": {
+        "length_col_0_0": 2800.0,
+        "length_col_1_0": 2800.0,
+        "length_col_2_0": 2800.0,
+        "length_beam_0_1": 3500.0,
+        "length_beam_1_1": 3500.0,
+        "length_col_0_1": 2800.0,
+        "length_col_1_1": 2800.0,
+        "length_col_2_1": 2800.0,
+        "length_beam_0_2": 3500.0,
+        "length_beam_1_2": 3500.0,
+        "length_col_0_2": 2800.0,
+        "length_col_1_2": 2800.0,
+        "length_col_2_2": 2800.0,
+        "length_beam_0_3": 3500.0,
+        "length_beam_1_3": 3500.0,
+        "length_col_0_3": 2800.0,
+        "length_col_1_3": 2800.0,
+        "length_col_2_3": 2800.0,
+        "length_beam_0_4": 3500.0,
+        "length_beam_1_4": 3500.0
+      },
+      "limits": {
+        "abs_uy_mm": 12.0,
+        "peak_stress_mpa": 180.0
+      },
+      "indeterminacy": 24,
+      "members": 20,
+      "prompt": "Object: Two-bay four-storey frame elevation. Make a dimensioned structural elevation. All sections are solid rectangles; h is in the frame plane and b is out of plane. The idealised column bases are clamped, not freely resting on a floor. This task concerns only the stated 2D frame, not complete product/building validation. \nPhysical model:\n{\"name\": \"Two-bay four-storey frame elevation\", \"nodes\": {\"N0_0\": [0, 0], \"N1_0\": [3500, 0], \"N2_0\": [7000, 0], \"N0_1\": [0, 2800], \"N1_1\": [3500, 2800], \"N2_1\": [7000, 2800], \"N0_2\": [0, 5600], \"N1_2\": [3500, 5600], \"N2_2\": [7000, 5600], \"N0_3\": [0, 8400], \"N1_3\": [3500, 8400], \"N2_3\": [7000, 8400], \"N0_4\": [0, 11200], \"N1_4\": [3500, 11200], \"N2_4\": [7000, 11200]}, \"members\": [{\"id\": \"col_0_0\", \"a\": \"N0_0\", \"b\": \"N0_1\", \"b_mm\": 160, \"h_mm\": 200, \"E\": 200000}, {\"id\": \"col_1_0\", \"a\": \"N1_0\", \"b\": \"N1_1\", \"b_mm\": 160, \"h_mm\": 200, \"E\": 200000}, {\"id\": \"col_2_0\", \"a\": \"N2_0\", \"b\": \"N2_1\", \"b_mm\": 160, \"h_mm\": 200, \"E\": 200000}, {\"id\": \"beam_0_1\", \"a\": \"N0_1\", \"b\": \"N1_1\", \"b_mm\": 140, \"h_mm\": 260, \"E\": 200000}, {\"id\": \"beam_1_1\", \"a\": \"N1_1\", \"b\": \"N2_1\", \"b_mm\": 140, \"h_mm\": 260, \"E\": 200000}, {\"id\": \"col_0_1\", \"a\": \"N0_1\", \"b\": \"N0_2\", \"b_mm\": 140, \"h_mm\": 180, \"E\": 200000}, {\"id\": \"col_1_1\", \"a\": \"N1_1\", \"b\": \"N1_2\", \"b_mm\": 140, \"h_mm\": 180, \"E\": 200000}, {\"id\": \"col_2_1\", \"a\": \"N2_1\", \"b\": \"N2_2\", \"b_mm\": 140, \"h_mm\": 180, \"E\": 200000}, {\"id\": \"beam_0_2\", \"a\": \"N0_2\", \"b\": \"N1_2\", \"b_mm\": 140, \"h_mm\": 240, \"E\": 200000}, {\"id\": \"beam_1_2\", \"a\": \"N1_2\", \"b\": \"N2_2\", \"b_mm\": 140, \"h_mm\": 240, \"E\": 200000}, {\"id\": \"col_0_2\", \"a\": \"N0_2\", \"b\": \"N0_3\", \"b_mm\": 140, \"h_mm\": 160, \"E\": 200000}, {\"id\": \"col_1_2\", \"a\": \"N1_2\", \"b\": \"N1_3\", \"b_mm\": 140, \"h_mm\": 160, \"E\": 200000}, {\"id\": \"col_2_2\", \"a\": \"N2_2\", \"b\": \"N2_3\", \"b_mm\": 140, \"h_mm\": 160, \"E\": 200000}, {\"id\": \"beam_0_3\", \"a\": \"N0_3\", \"b\": \"N1_3\", \"b_mm\": 140, \"h_mm\": 220, \"E\": 200000}, {\"id\": \"beam_1_3\", \"a\": \"N1_3\", \"b\": \"N2_3\", \"b_mm\": 140, \"h_mm\": 220, \"E\": 200000}, {\"id\": \"col_0_3\", \"a\": \"N0_3\", \"b\": \"N0_4\", \"b_mm\": 140, \"h_mm\": 140, \"E\": 200000}, {\"id\": \"col_1_3\", \"a\": \"N1_3\", \"b\": \"N1_4\", \"b_mm\": 140, \"h_mm\": 140, \"E\": 200000}, {\"id\": \"col_2_3\", \"a\": \"N2_3\", \"b\": \"N2_4\", \"b_mm\": 140, \"h_mm\": 140, \"E\": 200000}, {\"id\": \"beam_0_4\", \"a\": \"N0_4\", \"b\": \"N1_4\", \"b_mm\": 140, \"h_mm\": 200, \"E\": 200000}, {\"id\": \"beam_1_4\", \"a\": \"N1_4\", \"b\": \"N2_4\", \"b_mm\": 140, \"h_mm\": 200, \"E\": 200000}], \"supports\": {\"N0_0\": [0, 1, 2], \"N1_0\": [0, 1, 2], \"N2_0\": [0, 1, 2]}, \"loads\": {\"N0_1\": [10500, -30000, 0], \"N2_1\": [0, -43000, 0], \"N0_2\": [12000, -34000, 0], \"N2_2\": [0, -48000, 0], \"N0_3\": [13500, -38000, 0], \"N2_3\": [0, -53000, 0], \"N0_4\": [15000, -42000, 0], \"N2_4\": [0, -58000, 0]}, \"probe\": \"N2_4\", \"limits\": {\"abs_uy_mm\": 12.0, \"peak_stress_mpa\": 180.0}}\nKeep viewBox=\"0 0 1100 850\". Map physical (x,y) mm to SVG (X,Y) as X=100+0.038135593220339*x, Y=610-0.038135593220339*y. Draw exactly the listed members. Retain member IDs. Required dimensions are the physical centreline length of every member, tagged data-dimension=\"length_MEMBERID\". Recompute dimensions and analysis after any edit. Report signed ux and uy at N2_4, plus peak extreme-fibre normal stress across member ends. Give at least three significant digits. Check against the limits in the model; no other safety claims.",
+      "reference": {
+        "ux_mm": 10.754284825190757,
+        "uy_mm": -0.32568942239779736,
+        "peak_stress_mpa": 33.31620899174621,
+        "member_stress_mpa": {
+          "col_0_0": 27.54950180942204,
+          "col_1_0": 28.86201684261431,
+          "col_2_0": 31.58812792583724,
+          "beam_0_1": 21.67291424453785,
+          "beam_1_1": 20.470435769050674,
+          "col_0_1": 25.22122497238735,
+          "col_1_1": 33.31620899174621,
+          "col_2_1": 27.719148493708985,
+          "beam_0_2": 21.11316209480402,
+          "beam_1_2": 19.05375756110219,
+          "col_0_2": 23.581912308028535,
+          "col_1_2": 29.440456356483033,
+          "col_2_2": 23.647298542627354,
+          "beam_0_3": 16.614845582326208,
+          "beam_1_3": 14.023109962721138,
+          "col_0_3": 17.84099630659905,
+          "col_1_3": 20.476052522777323,
+          "col_2_3": 15.62695855000223,
+          "beam_0_4": 8.152977917274548,
+          "beam_1_4": 6.2777355016560765
+        },
+        "reactions": {
+          "N0_0": [
+            -15537.705313474626,
+            98738.7855744562,
+            26094842.410901632
+          ],
+          "N1_0": [
+            -20366.984790703853,
+            6046.130665337383,
+            30584613.60994402
+          ],
+          "N2_0": [
+            -15095.309895806526,
+            241215.0837602115,
+            25653500.328886013
+          ]
+        },
+        "equilibrium_residual_N_Nmm": [
+          -1.7680577002465725e-09,
+          5.093170329928398e-11,
+          6.4373016357421875e-06
+        ],
+        "free_residual_max_N_Nmm": 1.1175870895385742e-08,
+        "subdivision_relative_difference": {
+          "ux_mm": 1.2267670478024228e-12,
+          "uy_mm": 1.4760275790459442e-13,
+          "peak_stress_mpa": 1.0667884707868552e-12
+        }
+      },
+      "validation_techniques": [
+        "SVG geometry and connectivity constraints",
+        "dimension consistency",
+        "global force and moment equilibrium",
+        "linear frame FEM",
+        "member-subdivision reference check"
+      ],
+      "model_sha256": "722ee6ded2a6cb9fabb6f64fb4b573452487c1e517349c9a10a8c7a3634baada"
+    },
+    {
+      "id": "twobay_four_edit",
+      "family": "twobay_four",
+      "mode": "edit",
+      "model": {
+        "name": "Two-bay four-storey frame elevation",
+        "nodes": {
+          "N0_0": [
+            0,
+            0
+          ],
+          "N1_0": [
+            3500,
+            0
+          ],
+          "N2_0": [
+            7000,
+            0
+          ],
+          "N0_1": [
+            0,
+            2800
+          ],
+          "N1_1": [
+            3500,
+            2800
+          ],
+          "N2_1": [
+            7000,
+            2800
+          ],
+          "N0_2": [
+            0,
+            5600
+          ],
+          "N1_2": [
+            3500,
+            5600
+          ],
+          "N2_2": [
+            7000,
+            5600
+          ],
+          "N0_3": [
+            0,
+            8400
+          ],
+          "N1_3": [
+            3500,
+            8400
+          ],
+          "N2_3": [
+            7000,
+            8400
+          ],
+          "N0_4": [
+            0,
+            11800
+          ],
+          "N1_4": [
+            3500,
+            11800
+          ],
+          "N2_4": [
+            7000,
+            11800
+          ]
+        },
+        "members": [
+          {
+            "id": "col_0_0",
+            "a": "N0_0",
+            "b": "N0_1",
+            "b_mm": 160,
+            "h_mm": 200,
+            "E": 200000
+          },
+          {
+            "id": "col_1_0",
+            "a": "N1_0",
+            "b": "N1_1",
+            "b_mm": 160,
+            "h_mm": 200,
+            "E": 200000
+          },
+          {
+            "id": "col_2_0",
+            "a": "N2_0",
+            "b": "N2_1",
+            "b_mm": 160,
+            "h_mm": 200,
+            "E": 200000
+          },
+          {
+            "id": "beam_0_1",
+            "a": "N0_1",
+            "b": "N1_1",
+            "b_mm": 140,
+            "h_mm": 260,
+            "E": 200000
+          },
+          {
+            "id": "beam_1_1",
+            "a": "N1_1",
+            "b": "N2_1",
+            "b_mm": 140,
+            "h_mm": 260,
+            "E": 200000
+          },
+          {
+            "id": "col_0_1",
+            "a": "N0_1",
+            "b": "N0_2",
+            "b_mm": 140,
+            "h_mm": 180,
+            "E": 200000
+          },
+          {
+            "id": "col_1_1",
+            "a": "N1_1",
+            "b": "N1_2",
+            "b_mm": 140,
+            "h_mm": 180,
+            "E": 200000
+          },
+          {
+            "id": "col_2_1",
+            "a": "N2_1",
+            "b": "N2_2",
+            "b_mm": 140,
+            "h_mm": 180,
+            "E": 200000
+          },
+          {
+            "id": "beam_0_2",
+            "a": "N0_2",
+            "b": "N1_2",
+            "b_mm": 140,
+            "h_mm": 240,
+            "E": 200000
+          },
+          {
+            "id": "beam_1_2",
+            "a": "N1_2",
+            "b": "N2_2",
+            "b_mm": 140,
+            "h_mm": 240,
+            "E": 200000
+          },
+          {
+            "id": "col_0_2",
+            "a": "N0_2",
+            "b": "N0_3",
+            "b_mm": 140,
+            "h_mm": 160,
+            "E": 200000
+          },
+          {
+            "id": "col_1_2",
+            "a": "N1_2",
+            "b": "N1_3",
+            "b_mm": 140,
+            "h_mm": 160,
+            "E": 200000
+          },
+          {
+            "id": "col_2_2",
+            "a": "N2_2",
+            "b": "N2_3",
+            "b_mm": 140,
+            "h_mm": 160,
+            "E": 200000
+          },
+          {
+            "id": "beam_0_3",
+            "a": "N0_3",
+            "b": "N1_3",
+            "b_mm": 140,
+            "h_mm": 220,
+            "E": 200000
+          },
+          {
+            "id": "beam_1_3",
+            "a": "N1_3",
+            "b": "N2_3",
+            "b_mm": 140,
+            "h_mm": 220,
+            "E": 200000
+          },
+          {
+            "id": "col_0_3",
+            "a": "N0_3",
+            "b": "N0_4",
+            "b_mm": 140,
+            "h_mm": 140,
+            "E": 200000
+          },
+          {
+            "id": "col_1_3",
+            "a": "N1_3",
+            "b": "N1_4",
+            "b_mm": 140,
+            "h_mm": 140,
+            "E": 200000
+          },
+          {
+            "id": "col_2_3",
+            "a": "N2_3",
+            "b": "N2_4",
+            "b_mm": 140,
+            "h_mm": 140,
+            "E": 200000
+          },
+          {
+            "id": "beam_0_4",
+            "a": "N0_4",
+            "b": "N1_4",
+            "b_mm": 140,
+            "h_mm": 200,
+            "E": 200000
+          },
+          {
+            "id": "beam_1_4",
+            "a": "N1_4",
+            "b": "N2_4",
+            "b_mm": 140,
+            "h_mm": 200,
+            "E": 200000
+          }
+        ],
+        "supports": {
+          "N0_0": [
+            0,
+            1,
+            2
+          ],
+          "N1_0": [
+            0,
+            1,
+            2
+          ],
+          "N2_0": [
+            0,
+            1,
+            2
+          ]
+        },
+        "loads": {
+          "N0_1": [
+            10500,
+            -30000,
+            0
+          ],
+          "N2_1": [
+            0,
+            -43000,
+            0
+          ],
+          "N0_2": [
+            12000,
+            -34000,
+            0
+          ],
+          "N2_2": [
+            0,
+            -48000,
+            0
+          ],
+          "N0_3": [
+            13500,
+            -38000,
+            0
+          ],
+          "N2_3": [
+            0,
+            -53000,
+            0
+          ],
+          "N0_4": [
+            15000,
+            -42000,
+            0
+          ],
+          "N2_4": [
+            0,
+            -73000,
+            0
+          ]
+        },
+        "probe": "N2_4",
+        "limits": {
+          "abs_uy_mm": 12.0,
+          "peak_stress_mpa": 180.0
+        }
+      },
+      "mapping": [
+        0.038135593220338986,
+        100,
+        610
+      ],
+      "dimensions": {
+        "length_col_0_0": 2800.0,
+        "length_col_1_0": 2800.0,
+        "length_col_2_0": 2800.0,
+        "length_beam_0_1": 3500.0,
+        "length_beam_1_1": 3500.0,
+        "length_col_0_1": 2800.0,
+        "length_col_1_1": 2800.0,
+        "length_col_2_1": 2800.0,
+        "length_beam_0_2": 3500.0,
+        "length_beam_1_2": 3500.0,
+        "length_col_0_2": 2800.0,
+        "length_col_1_2": 2800.0,
+        "length_col_2_2": 2800.0,
+        "length_beam_0_3": 3500.0,
+        "length_beam_1_3": 3500.0,
+        "length_col_0_3": 3400.0,
+        "length_col_1_3": 3400.0,
+        "length_col_2_3": 3400.0,
+        "length_beam_0_4": 3500.0,
+        "length_beam_1_4": 3500.0
+      },
+      "limits": {
+        "abs_uy_mm": 12.0,
+        "peak_stress_mpa": 180.0
+      },
+      "indeterminacy": 24,
+      "members": 20,
+      "source_model": {
+        "name": "Two-bay four-storey frame elevation",
+        "nodes": {
+          "N0_0": [
+            0,
+            0
+          ],
+          "N1_0": [
+            3500,
+            0
+          ],
+          "N2_0": [
+            7000,
+            0
+          ],
+          "N0_1": [
+            0,
+            2800
+          ],
+          "N1_1": [
+            3500,
+            2800
+          ],
+          "N2_1": [
+            7000,
+            2800
+          ],
+          "N0_2": [
+            0,
+            5600
+          ],
+          "N1_2": [
+            3500,
+            5600
+          ],
+          "N2_2": [
+            7000,
+            5600
+          ],
+          "N0_3": [
+            0,
+            8400
+          ],
+          "N1_3": [
+            3500,
+            8400
+          ],
+          "N2_3": [
+            7000,
+            8400
+          ],
+          "N0_4": [
+            0,
+            11200
+          ],
+          "N1_4": [
+            3500,
+            11200
+          ],
+          "N2_4": [
+            7000,
+            11200
+          ]
+        },
+        "members": [
+          {
+            "id": "col_0_0",
+            "a": "N0_0",
+            "b": "N0_1",
+            "b_mm": 160,
+            "h_mm": 200,
+            "E": 200000
+          },
+          {
+            "id": "col_1_0",
+            "a": "N1_0",
+            "b": "N1_1",
+            "b_mm": 160,
+            "h_mm": 200,
+            "E": 200000
+          },
+          {
+            "id": "col_2_0",
+            "a": "N2_0",
+            "b": "N2_1",
+            "b_mm": 160,
+            "h_mm": 200,
+            "E": 200000
+          },
+          {
+            "id": "beam_0_1",
+            "a": "N0_1",
+            "b": "N1_1",
+            "b_mm": 140,
+            "h_mm": 260,
+            "E": 200000
+          },
+          {
+            "id": "beam_1_1",
+            "a": "N1_1",
+            "b": "N2_1",
+            "b_mm": 140,
+            "h_mm": 260,
+            "E": 200000
+          },
+          {
+            "id": "col_0_1",
+            "a": "N0_1",
+            "b": "N0_2",
+            "b_mm": 140,
+            "h_mm": 180,
+            "E": 200000
+          },
+          {
+            "id": "col_1_1",
+            "a": "N1_1",
+            "b": "N1_2",
+            "b_mm": 140,
+            "h_mm": 180,
+            "E": 200000
+          },
+          {
+            "id": "col_2_1",
+            "a": "N2_1",
+            "b": "N2_2",
+            "b_mm": 140,
+            "h_mm": 180,
+            "E": 200000
+          },
+          {
+            "id": "beam_0_2",
+            "a": "N0_2",
+            "b": "N1_2",
+            "b_mm": 140,
+            "h_mm": 240,
+            "E": 200000
+          },
+          {
+            "id": "beam_1_2",
+            "a": "N1_2",
+            "b": "N2_2",
+            "b_mm": 140,
+            "h_mm": 240,
+            "E": 200000
+          },
+          {
+            "id": "col_0_2",
+            "a": "N0_2",
+            "b": "N0_3",
+            "b_mm": 140,
+            "h_mm": 160,
+            "E": 200000
+          },
+          {
+            "id": "col_1_2",
+            "a": "N1_2",
+            "b": "N1_3",
+            "b_mm": 140,
+            "h_mm": 160,
+            "E": 200000
+          },
+          {
+            "id": "col_2_2",
+            "a": "N2_2",
+            "b": "N2_3",
+            "b_mm": 140,
+            "h_mm": 160,
+            "E": 200000
+          },
+          {
+            "id": "beam_0_3",
+            "a": "N0_3",
+            "b": "N1_3",
+            "b_mm": 140,
+            "h_mm": 220,
+            "E": 200000
+          },
+          {
+            "id": "beam_1_3",
+            "a": "N1_3",
+            "b": "N2_3",
+            "b_mm": 140,
+            "h_mm": 220,
+            "E": 200000
+          },
+          {
+            "id": "col_0_3",
+            "a": "N0_3",
+            "b": "N0_4",
+            "b_mm": 140,
+            "h_mm": 140,
+            "E": 200000
+          },
+          {
+            "id": "col_1_3",
+            "a": "N1_3",
+            "b": "N1_4",
+            "b_mm": 140,
+            "h_mm": 140,
+            "E": 200000
+          },
+          {
+            "id": "col_2_3",
+            "a": "N2_3",
+            "b": "N2_4",
+            "b_mm": 140,
+            "h_mm": 140,
+            "E": 200000
+          },
+          {
+            "id": "beam_0_4",
+            "a": "N0_4",
+            "b": "N1_4",
+            "b_mm": 140,
+            "h_mm": 200,
+            "E": 200000
+          },
+          {
+            "id": "beam_1_4",
+            "a": "N1_4",
+            "b": "N2_4",
+            "b_mm": 140,
+            "h_mm": 200,
+            "E": 200000
+          }
+        ],
+        "supports": {
+          "N0_0": [
+            0,
+            1,
+            2
+          ],
+          "N1_0": [
+            0,
+            1,
+            2
+          ],
+          "N2_0": [
+            0,
+            1,
+            2
+          ]
+        },
+        "loads": {
+          "N0_1": [
+            10500,
+            -30000,
+            0
+          ],
+          "N2_1": [
+            0,
+            -43000,
+            0
+          ],
+          "N0_2": [
+            12000,
+            -34000,
+            0
+          ],
+          "N2_2": [
+            0,
+            -48000,
+            0
+          ],
+          "N0_3": [
+            13500,
+            -38000,
+            0
+          ],
+          "N2_3": [
+            0,
+            -53000,
+            0
+          ],
+          "N0_4": [
+            15000,
+            -42000,
+            0
+          ],
+          "N2_4": [
+            0,
+            -58000,
+            0
+          ]
+        },
+        "probe": "N2_4",
+        "limits": {
+          "abs_uy_mm": 12.0,
+          "peak_stress_mpa": 180.0
+        }
+      },
+      "source_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1100 850\" width=\"1100\" height=\"850\">\n<rect width=\"1100\" height=\"850\" fill=\"white\"/>\n<text x=\"35\" y=\"40\" font-size=\"23\">Two-bay four-storey frame elevation</text>\n<text x=\"35\" y=\"66\" font-size=\"14\">Structural centreline elevation \u2014 dimensions mm; sections b \u00d7 h mm</text>\n<line data-member=\"col_0_0\" x1=\"100.0\" y1=\"610.0\" x2=\"100.0\" y2=\"503.22033898305085\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_0_0\" x=\"108.0\" y=\"546.6101694915254\" font-size=\"12\">2800.000 mm</text>\n<text x=\"35\" y=\"695\" font-size=\"12\">col_0_0: 160 \u00d7 200</text>\n<line data-member=\"col_1_0\" x1=\"233.47457627118644\" y1=\"610.0\" x2=\"233.47457627118644\" y2=\"503.22033898305085\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_1_0\" x=\"241.47457627118644\" y=\"546.6101694915254\" font-size=\"12\">2800.000 mm</text>\n<text x=\"300\" y=\"695\" font-size=\"12\">col_1_0: 160 \u00d7 200</text>\n<line data-member=\"col_2_0\" x1=\"366.9491525423729\" y1=\"610.0\" x2=\"366.9491525423729\" y2=\"503.22033898305085\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_2_0\" x=\"374.9491525423729\" y=\"546.6101694915254\" font-size=\"12\">2800.000 mm</text>\n<text x=\"565\" y=\"695\" font-size=\"12\">col_2_0: 160 \u00d7 200</text>\n<line data-member=\"beam_0_1\" x1=\"100.0\" y1=\"503.22033898305085\" x2=\"233.47457627118644\" y2=\"503.22033898305085\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_0_1\" x=\"174.73728813559322\" y=\"493.22033898305085\" font-size=\"12\">3500.000 mm</text>\n<text x=\"830\" y=\"695\" font-size=\"12\">beam_0_1: 140 \u00d7 260</text>\n<line data-member=\"beam_1_1\" x1=\"233.47457627118644\" y1=\"503.22033898305085\" x2=\"366.9491525423729\" y2=\"503.22033898305085\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_1_1\" x=\"308.2118644067797\" y=\"493.22033898305085\" font-size=\"12\">3500.000 mm</text>\n<text x=\"35\" y=\"717\" font-size=\"12\">beam_1_1: 140 \u00d7 260</text>\n<line data-member=\"col_0_1\" x1=\"100.0\" y1=\"503.22033898305085\" x2=\"100.0\" y2=\"396.4406779661017\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_0_1\" x=\"108.0\" y=\"439.8305084745763\" font-size=\"12\">2800.000 mm</text>\n<text x=\"300\" y=\"717\" font-size=\"12\">col_0_1: 140 \u00d7 180</text>\n<line data-member=\"col_1_1\" x1=\"233.47457627118644\" y1=\"503.22033898305085\" x2=\"233.47457627118644\" y2=\"396.4406779661017\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_1_1\" x=\"241.47457627118644\" y=\"439.8305084745763\" font-size=\"12\">2800.000 mm</text>\n<text x=\"565\" y=\"717\" font-size=\"12\">col_1_1: 140 \u00d7 180</text>\n<line data-member=\"col_2_1\" x1=\"366.9491525423729\" y1=\"503.22033898305085\" x2=\"366.9491525423729\" y2=\"396.4406779661017\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_2_1\" x=\"374.9491525423729\" y=\"439.8305084745763\" font-size=\"12\">2800.000 mm</text>\n<text x=\"830\" y=\"717\" font-size=\"12\">col_2_1: 140 \u00d7 180</text>\n<line data-member=\"beam_0_2\" x1=\"100.0\" y1=\"396.4406779661017\" x2=\"233.47457627118644\" y2=\"396.4406779661017\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_0_2\" x=\"174.73728813559322\" y=\"386.4406779661017\" font-size=\"12\">3500.000 mm</text>\n<text x=\"35\" y=\"739\" font-size=\"12\">beam_0_2: 140 \u00d7 240</text>\n<line data-member=\"beam_1_2\" x1=\"233.47457627118644\" y1=\"396.4406779661017\" x2=\"366.9491525423729\" y2=\"396.4406779661017\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_1_2\" x=\"308.2118644067797\" y=\"386.4406779661017\" font-size=\"12\">3500.000 mm</text>\n<text x=\"300\" y=\"739\" font-size=\"12\">beam_1_2: 140 \u00d7 240</text>\n<line data-member=\"col_0_2\" x1=\"100.0\" y1=\"396.4406779661017\" x2=\"100.0\" y2=\"289.6610169491525\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_0_2\" x=\"108.0\" y=\"333.0508474576271\" font-size=\"12\">2800.000 mm</text>\n<text x=\"565\" y=\"739\" font-size=\"12\">col_0_2: 140 \u00d7 160</text>\n<line data-member=\"col_1_2\" x1=\"233.47457627118644\" y1=\"396.4406779661017\" x2=\"233.47457627118644\" y2=\"289.6610169491525\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_1_2\" x=\"241.47457627118644\" y=\"333.0508474576271\" font-size=\"12\">2800.000 mm</text>\n<text x=\"830\" y=\"739\" font-size=\"12\">col_1_2: 140 \u00d7 160</text>\n<line data-member=\"col_2_2\" x1=\"366.9491525423729\" y1=\"396.4406779661017\" x2=\"366.9491525423729\" y2=\"289.6610169491525\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_2_2\" x=\"374.9491525423729\" y=\"333.0508474576271\" font-size=\"12\">2800.000 mm</text>\n<text x=\"35\" y=\"761\" font-size=\"12\">col_2_2: 140 \u00d7 160</text>\n<line data-member=\"beam_0_3\" x1=\"100.0\" y1=\"289.6610169491525\" x2=\"233.47457627118644\" y2=\"289.6610169491525\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_0_3\" x=\"174.73728813559322\" y=\"279.6610169491525\" font-size=\"12\">3500.000 mm</text>\n<text x=\"300\" y=\"761\" font-size=\"12\">beam_0_3: 140 \u00d7 220</text>\n<line data-member=\"beam_1_3\" x1=\"233.47457627118644\" y1=\"289.6610169491525\" x2=\"366.9491525423729\" y2=\"289.6610169491525\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_1_3\" x=\"308.2118644067797\" y=\"279.6610169491525\" font-size=\"12\">3500.000 mm</text>\n<text x=\"565\" y=\"761\" font-size=\"12\">beam_1_3: 140 \u00d7 220</text>\n<line data-member=\"col_0_3\" x1=\"100.0\" y1=\"289.6610169491525\" x2=\"100.0\" y2=\"182.88135593220335\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_0_3\" x=\"108.0\" y=\"226.27118644067792\" font-size=\"12\">2800.000 mm</text>\n<text x=\"830\" y=\"761\" font-size=\"12\">col_0_3: 140 \u00d7 140</text>\n<line data-member=\"col_1_3\" x1=\"233.47457627118644\" y1=\"289.6610169491525\" x2=\"233.47457627118644\" y2=\"182.88135593220335\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_1_3\" x=\"241.47457627118644\" y=\"226.27118644067792\" font-size=\"12\">2800.000 mm</text>\n<text x=\"35\" y=\"783\" font-size=\"12\">col_1_3: 140 \u00d7 140</text>\n<line data-member=\"col_2_3\" x1=\"366.9491525423729\" y1=\"289.6610169491525\" x2=\"366.9491525423729\" y2=\"182.88135593220335\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_2_3\" x=\"374.9491525423729\" y=\"226.27118644067792\" font-size=\"12\">2800.000 mm</text>\n<text x=\"300\" y=\"783\" font-size=\"12\">col_2_3: 140 \u00d7 140</text>\n<line data-member=\"beam_0_4\" x1=\"100.0\" y1=\"182.88135593220335\" x2=\"233.47457627118644\" y2=\"182.88135593220335\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_0_4\" x=\"174.73728813559322\" y=\"172.88135593220335\" font-size=\"12\">3500.000 mm</text>\n<text x=\"565\" y=\"783\" font-size=\"12\">beam_0_4: 140 \u00d7 200</text>\n<line data-member=\"beam_1_4\" x1=\"233.47457627118644\" y1=\"182.88135593220335\" x2=\"366.9491525423729\" y2=\"182.88135593220335\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_1_4\" x=\"308.2118644067797\" y=\"172.88135593220335\" font-size=\"12\">3500.000 mm</text>\n<text x=\"830\" y=\"783\" font-size=\"12\">beam_1_4: 140 \u00d7 200</text>\n<circle cx=\"100.0\" cy=\"610.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"108.0\" y=\"627.0\" font-size=\"13\">N0_0</text>\n<path d=\"M88.0,616.0 H112.0 M88.0,616.0 l-6,9 M100.0,616.0 l-6,9 M112.0,616.0 l-6,9\" stroke=\"black\" fill=\"none\"/>\n<circle cx=\"233.47457627118644\" cy=\"610.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"241.47457627118644\" y=\"627.0\" font-size=\"13\">N1_0</text>\n<path d=\"M221.47457627118644,616.0 H245.47457627118644 M221.47457627118644,616.0 l-6,9 M233.47457627118644,616.0 l-6,9 M245.47457627118644,616.0 l-6,9\" stroke=\"black\" fill=\"none\"/>\n<circle cx=\"366.9491525423729\" cy=\"610.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"374.9491525423729\" y=\"627.0\" font-size=\"13\">N2_0</text>\n<path d=\"M354.9491525423729,616.0 H378.9491525423729 M354.9491525423729,616.0 l-6,9 M366.9491525423729,616.0 l-6,9 M378.9491525423729,616.0 l-6,9\" stroke=\"black\" fill=\"none\"/>\n<circle cx=\"100.0\" cy=\"503.22033898305085\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"108.0\" y=\"520.2203389830509\" font-size=\"13\">N0_1</text>\n<circle cx=\"233.47457627118644\" cy=\"503.22033898305085\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"241.47457627118644\" y=\"520.2203389830509\" font-size=\"13\">N1_1</text>\n<circle cx=\"366.9491525423729\" cy=\"503.22033898305085\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"374.9491525423729\" y=\"520.2203389830509\" font-size=\"13\">N2_1</text>\n<circle cx=\"100.0\" cy=\"396.4406779661017\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"108.0\" y=\"413.4406779661017\" font-size=\"13\">N0_2</text>\n<circle cx=\"233.47457627118644\" cy=\"396.4406779661017\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"241.47457627118644\" y=\"413.4406779661017\" font-size=\"13\">N1_2</text>\n<circle cx=\"366.9491525423729\" cy=\"396.4406779661017\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"374.9491525423729\" y=\"413.4406779661017\" font-size=\"13\">N2_2</text>\n<circle cx=\"100.0\" cy=\"289.6610169491525\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"108.0\" y=\"306.6610169491525\" font-size=\"13\">N0_3</text>\n<circle cx=\"233.47457627118644\" cy=\"289.6610169491525\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"241.47457627118644\" y=\"306.6610169491525\" font-size=\"13\">N1_3</text>\n<circle cx=\"366.9491525423729\" cy=\"289.6610169491525\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"374.9491525423729\" y=\"306.6610169491525\" font-size=\"13\">N2_3</text>\n<circle cx=\"100.0\" cy=\"182.88135593220335\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"108.0\" y=\"199.88135593220335\" font-size=\"13\">N0_4</text>\n<circle cx=\"233.47457627118644\" cy=\"182.88135593220335\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"241.47457627118644\" y=\"199.88135593220335\" font-size=\"13\">N1_4</text>\n<circle cx=\"366.9491525423729\" cy=\"182.88135593220335\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"374.9491525423729\" y=\"199.88135593220335\" font-size=\"13\">N2_4</text>\n<text x=\"35\" y=\"790\" font-size=\"14\">ux_mm: <tspan data-result=\"ux_mm\">10.754285 mm</tspan></text>\n<text x=\"380\" y=\"790\" font-size=\"14\">uy_mm: <tspan data-result=\"uy_mm\">-0.325689 mm</tspan></text>\n<text x=\"725\" y=\"790\" font-size=\"14\">peak_stress_mpa: <tspan data-result=\"peak_stress_mpa\">33.316209 MPa</tspan></text>\n</svg>",
+      "prompt": "Object: Two-bay four-storey frame elevation. Make a dimensioned structural elevation. All sections are solid rectangles; h is in the frame plane and b is out of plane. The idealised column bases are clamped, not freely resting on a floor. This task concerns only the stated 2D frame, not complete product/building validation. \nOriginal physical model:\n{\"name\": \"Two-bay four-storey frame elevation\", \"nodes\": {\"N0_0\": [0, 0], \"N1_0\": [3500, 0], \"N2_0\": [7000, 0], \"N0_1\": [0, 2800], \"N1_1\": [3500, 2800], \"N2_1\": [7000, 2800], \"N0_2\": [0, 5600], \"N1_2\": [3500, 5600], \"N2_2\": [7000, 5600], \"N0_3\": [0, 8400], \"N1_3\": [3500, 8400], \"N2_3\": [7000, 8400], \"N0_4\": [0, 11200], \"N1_4\": [3500, 11200], \"N2_4\": [7000, 11200]}, \"members\": [{\"id\": \"col_0_0\", \"a\": \"N0_0\", \"b\": \"N0_1\", \"b_mm\": 160, \"h_mm\": 200, \"E\": 200000}, {\"id\": \"col_1_0\", \"a\": \"N1_0\", \"b\": \"N1_1\", \"b_mm\": 160, \"h_mm\": 200, \"E\": 200000}, {\"id\": \"col_2_0\", \"a\": \"N2_0\", \"b\": \"N2_1\", \"b_mm\": 160, \"h_mm\": 200, \"E\": 200000}, {\"id\": \"beam_0_1\", \"a\": \"N0_1\", \"b\": \"N1_1\", \"b_mm\": 140, \"h_mm\": 260, \"E\": 200000}, {\"id\": \"beam_1_1\", \"a\": \"N1_1\", \"b\": \"N2_1\", \"b_mm\": 140, \"h_mm\": 260, \"E\": 200000}, {\"id\": \"col_0_1\", \"a\": \"N0_1\", \"b\": \"N0_2\", \"b_mm\": 140, \"h_mm\": 180, \"E\": 200000}, {\"id\": \"col_1_1\", \"a\": \"N1_1\", \"b\": \"N1_2\", \"b_mm\": 140, \"h_mm\": 180, \"E\": 200000}, {\"id\": \"col_2_1\", \"a\": \"N2_1\", \"b\": \"N2_2\", \"b_mm\": 140, \"h_mm\": 180, \"E\": 200000}, {\"id\": \"beam_0_2\", \"a\": \"N0_2\", \"b\": \"N1_2\", \"b_mm\": 140, \"h_mm\": 240, \"E\": 200000}, {\"id\": \"beam_1_2\", \"a\": \"N1_2\", \"b\": \"N2_2\", \"b_mm\": 140, \"h_mm\": 240, \"E\": 200000}, {\"id\": \"col_0_2\", \"a\": \"N0_2\", \"b\": \"N0_3\", \"b_mm\": 140, \"h_mm\": 160, \"E\": 200000}, {\"id\": \"col_1_2\", \"a\": \"N1_2\", \"b\": \"N1_3\", \"b_mm\": 140, \"h_mm\": 160, \"E\": 200000}, {\"id\": \"col_2_2\", \"a\": \"N2_2\", \"b\": \"N2_3\", \"b_mm\": 140, \"h_mm\": 160, \"E\": 200000}, {\"id\": \"beam_0_3\", \"a\": \"N0_3\", \"b\": \"N1_3\", \"b_mm\": 140, \"h_mm\": 220, \"E\": 200000}, {\"id\": \"beam_1_3\", \"a\": \"N1_3\", \"b\": \"N2_3\", \"b_mm\": 140, \"h_mm\": 220, \"E\": 200000}, {\"id\": \"col_0_3\", \"a\": \"N0_3\", \"b\": \"N0_4\", \"b_mm\": 140, \"h_mm\": 140, \"E\": 200000}, {\"id\": \"col_1_3\", \"a\": \"N1_3\", \"b\": \"N1_4\", \"b_mm\": 140, \"h_mm\": 140, \"E\": 200000}, {\"id\": \"col_2_3\", \"a\": \"N2_3\", \"b\": \"N2_4\", \"b_mm\": 140, \"h_mm\": 140, \"E\": 200000}, {\"id\": \"beam_0_4\", \"a\": \"N0_4\", \"b\": \"N1_4\", \"b_mm\": 140, \"h_mm\": 200, \"E\": 200000}, {\"id\": \"beam_1_4\", \"a\": \"N1_4\", \"b\": \"N2_4\", \"b_mm\": 140, \"h_mm\": 200, \"E\": 200000}], \"supports\": {\"N0_0\": [0, 1, 2], \"N1_0\": [0, 1, 2], \"N2_0\": [0, 1, 2]}, \"loads\": {\"N0_1\": [10500, -30000, 0], \"N2_1\": [0, -43000, 0], \"N0_2\": [12000, -34000, 0], \"N2_2\": [0, -48000, 0], \"N0_3\": [13500, -38000, 0], \"N2_3\": [0, -53000, 0], \"N0_4\": [15000, -42000, 0], \"N2_4\": [0, -58000, 0]}, \"probe\": \"N2_4\", \"limits\": {\"abs_uy_mm\": 12.0, \"peak_stress_mpa\": 180.0}}\nOriginal SVG:\n<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1100 850\" width=\"1100\" height=\"850\">\n<rect width=\"1100\" height=\"850\" fill=\"white\"/>\n<text x=\"35\" y=\"40\" font-size=\"23\">Two-bay four-storey frame elevation</text>\n<text x=\"35\" y=\"66\" font-size=\"14\">Structural centreline elevation \u2014 dimensions mm; sections b \u00d7 h mm</text>\n<line data-member=\"col_0_0\" x1=\"100.0\" y1=\"610.0\" x2=\"100.0\" y2=\"503.22033898305085\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_0_0\" x=\"108.0\" y=\"546.6101694915254\" font-size=\"12\">2800.000 mm</text>\n<text x=\"35\" y=\"695\" font-size=\"12\">col_0_0: 160 \u00d7 200</text>\n<line data-member=\"col_1_0\" x1=\"233.47457627118644\" y1=\"610.0\" x2=\"233.47457627118644\" y2=\"503.22033898305085\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_1_0\" x=\"241.47457627118644\" y=\"546.6101694915254\" font-size=\"12\">2800.000 mm</text>\n<text x=\"300\" y=\"695\" font-size=\"12\">col_1_0: 160 \u00d7 200</text>\n<line data-member=\"col_2_0\" x1=\"366.9491525423729\" y1=\"610.0\" x2=\"366.9491525423729\" y2=\"503.22033898305085\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_2_0\" x=\"374.9491525423729\" y=\"546.6101694915254\" font-size=\"12\">2800.000 mm</text>\n<text x=\"565\" y=\"695\" font-size=\"12\">col_2_0: 160 \u00d7 200</text>\n<line data-member=\"beam_0_1\" x1=\"100.0\" y1=\"503.22033898305085\" x2=\"233.47457627118644\" y2=\"503.22033898305085\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_0_1\" x=\"174.73728813559322\" y=\"493.22033898305085\" font-size=\"12\">3500.000 mm</text>\n<text x=\"830\" y=\"695\" font-size=\"12\">beam_0_1: 140 \u00d7 260</text>\n<line data-member=\"beam_1_1\" x1=\"233.47457627118644\" y1=\"503.22033898305085\" x2=\"366.9491525423729\" y2=\"503.22033898305085\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_1_1\" x=\"308.2118644067797\" y=\"493.22033898305085\" font-size=\"12\">3500.000 mm</text>\n<text x=\"35\" y=\"717\" font-size=\"12\">beam_1_1: 140 \u00d7 260</text>\n<line data-member=\"col_0_1\" x1=\"100.0\" y1=\"503.22033898305085\" x2=\"100.0\" y2=\"396.4406779661017\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_0_1\" x=\"108.0\" y=\"439.8305084745763\" font-size=\"12\">2800.000 mm</text>\n<text x=\"300\" y=\"717\" font-size=\"12\">col_0_1: 140 \u00d7 180</text>\n<line data-member=\"col_1_1\" x1=\"233.47457627118644\" y1=\"503.22033898305085\" x2=\"233.47457627118644\" y2=\"396.4406779661017\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_1_1\" x=\"241.47457627118644\" y=\"439.8305084745763\" font-size=\"12\">2800.000 mm</text>\n<text x=\"565\" y=\"717\" font-size=\"12\">col_1_1: 140 \u00d7 180</text>\n<line data-member=\"col_2_1\" x1=\"366.9491525423729\" y1=\"503.22033898305085\" x2=\"366.9491525423729\" y2=\"396.4406779661017\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_2_1\" x=\"374.9491525423729\" y=\"439.8305084745763\" font-size=\"12\">2800.000 mm</text>\n<text x=\"830\" y=\"717\" font-size=\"12\">col_2_1: 140 \u00d7 180</text>\n<line data-member=\"beam_0_2\" x1=\"100.0\" y1=\"396.4406779661017\" x2=\"233.47457627118644\" y2=\"396.4406779661017\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_0_2\" x=\"174.73728813559322\" y=\"386.4406779661017\" font-size=\"12\">3500.000 mm</text>\n<text x=\"35\" y=\"739\" font-size=\"12\">beam_0_2: 140 \u00d7 240</text>\n<line data-member=\"beam_1_2\" x1=\"233.47457627118644\" y1=\"396.4406779661017\" x2=\"366.9491525423729\" y2=\"396.4406779661017\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_1_2\" x=\"308.2118644067797\" y=\"386.4406779661017\" font-size=\"12\">3500.000 mm</text>\n<text x=\"300\" y=\"739\" font-size=\"12\">beam_1_2: 140 \u00d7 240</text>\n<line data-member=\"col_0_2\" x1=\"100.0\" y1=\"396.4406779661017\" x2=\"100.0\" y2=\"289.6610169491525\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_0_2\" x=\"108.0\" y=\"333.0508474576271\" font-size=\"12\">2800.000 mm</text>\n<text x=\"565\" y=\"739\" font-size=\"12\">col_0_2: 140 \u00d7 160</text>\n<line data-member=\"col_1_2\" x1=\"233.47457627118644\" y1=\"396.4406779661017\" x2=\"233.47457627118644\" y2=\"289.6610169491525\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_1_2\" x=\"241.47457627118644\" y=\"333.0508474576271\" font-size=\"12\">2800.000 mm</text>\n<text x=\"830\" y=\"739\" font-size=\"12\">col_1_2: 140 \u00d7 160</text>\n<line data-member=\"col_2_2\" x1=\"366.9491525423729\" y1=\"396.4406779661017\" x2=\"366.9491525423729\" y2=\"289.6610169491525\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_2_2\" x=\"374.9491525423729\" y=\"333.0508474576271\" font-size=\"12\">2800.000 mm</text>\n<text x=\"35\" y=\"761\" font-size=\"12\">col_2_2: 140 \u00d7 160</text>\n<line data-member=\"beam_0_3\" x1=\"100.0\" y1=\"289.6610169491525\" x2=\"233.47457627118644\" y2=\"289.6610169491525\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_0_3\" x=\"174.73728813559322\" y=\"279.6610169491525\" font-size=\"12\">3500.000 mm</text>\n<text x=\"300\" y=\"761\" font-size=\"12\">beam_0_3: 140 \u00d7 220</text>\n<line data-member=\"beam_1_3\" x1=\"233.47457627118644\" y1=\"289.6610169491525\" x2=\"366.9491525423729\" y2=\"289.6610169491525\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_1_3\" x=\"308.2118644067797\" y=\"279.6610169491525\" font-size=\"12\">3500.000 mm</text>\n<text x=\"565\" y=\"761\" font-size=\"12\">beam_1_3: 140 \u00d7 220</text>\n<line data-member=\"col_0_3\" x1=\"100.0\" y1=\"289.6610169491525\" x2=\"100.0\" y2=\"182.88135593220335\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_0_3\" x=\"108.0\" y=\"226.27118644067792\" font-size=\"12\">2800.000 mm</text>\n<text x=\"830\" y=\"761\" font-size=\"12\">col_0_3: 140 \u00d7 140</text>\n<line data-member=\"col_1_3\" x1=\"233.47457627118644\" y1=\"289.6610169491525\" x2=\"233.47457627118644\" y2=\"182.88135593220335\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_1_3\" x=\"241.47457627118644\" y=\"226.27118644067792\" font-size=\"12\">2800.000 mm</text>\n<text x=\"35\" y=\"783\" font-size=\"12\">col_1_3: 140 \u00d7 140</text>\n<line data-member=\"col_2_3\" x1=\"366.9491525423729\" y1=\"289.6610169491525\" x2=\"366.9491525423729\" y2=\"182.88135593220335\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_2_3\" x=\"374.9491525423729\" y=\"226.27118644067792\" font-size=\"12\">2800.000 mm</text>\n<text x=\"300\" y=\"783\" font-size=\"12\">col_2_3: 140 \u00d7 140</text>\n<line data-member=\"beam_0_4\" x1=\"100.0\" y1=\"182.88135593220335\" x2=\"233.47457627118644\" y2=\"182.88135593220335\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_0_4\" x=\"174.73728813559322\" y=\"172.88135593220335\" font-size=\"12\">3500.000 mm</text>\n<text x=\"565\" y=\"783\" font-size=\"12\">beam_0_4: 140 \u00d7 200</text>\n<line data-member=\"beam_1_4\" x1=\"233.47457627118644\" y1=\"182.88135593220335\" x2=\"366.9491525423729\" y2=\"182.88135593220335\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_1_4\" x=\"308.2118644067797\" y=\"172.88135593220335\" font-size=\"12\">3500.000 mm</text>\n<text x=\"830\" y=\"783\" font-size=\"12\">beam_1_4: 140 \u00d7 200</text>\n<circle cx=\"100.0\" cy=\"610.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"108.0\" y=\"627.0\" font-size=\"13\">N0_0</text>\n<path d=\"M88.0,616.0 H112.0 M88.0,616.0 l-6,9 M100.0,616.0 l-6,9 M112.0,616.0 l-6,9\" stroke=\"black\" fill=\"none\"/>\n<circle cx=\"233.47457627118644\" cy=\"610.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"241.47457627118644\" y=\"627.0\" font-size=\"13\">N1_0</text>\n<path d=\"M221.47457627118644,616.0 H245.47457627118644 M221.47457627118644,616.0 l-6,9 M233.47457627118644,616.0 l-6,9 M245.47457627118644,616.0 l-6,9\" stroke=\"black\" fill=\"none\"/>\n<circle cx=\"366.9491525423729\" cy=\"610.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"374.9491525423729\" y=\"627.0\" font-size=\"13\">N2_0</text>\n<path d=\"M354.9491525423729,616.0 H378.9491525423729 M354.9491525423729,616.0 l-6,9 M366.9491525423729,616.0 l-6,9 M378.9491525423729,616.0 l-6,9\" stroke=\"black\" fill=\"none\"/>\n<circle cx=\"100.0\" cy=\"503.22033898305085\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"108.0\" y=\"520.2203389830509\" font-size=\"13\">N0_1</text>\n<circle cx=\"233.47457627118644\" cy=\"503.22033898305085\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"241.47457627118644\" y=\"520.2203389830509\" font-size=\"13\">N1_1</text>\n<circle cx=\"366.9491525423729\" cy=\"503.22033898305085\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"374.9491525423729\" y=\"520.2203389830509\" font-size=\"13\">N2_1</text>\n<circle cx=\"100.0\" cy=\"396.4406779661017\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"108.0\" y=\"413.4406779661017\" font-size=\"13\">N0_2</text>\n<circle cx=\"233.47457627118644\" cy=\"396.4406779661017\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"241.47457627118644\" y=\"413.4406779661017\" font-size=\"13\">N1_2</text>\n<circle cx=\"366.9491525423729\" cy=\"396.4406779661017\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"374.9491525423729\" y=\"413.4406779661017\" font-size=\"13\">N2_2</text>\n<circle cx=\"100.0\" cy=\"289.6610169491525\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"108.0\" y=\"306.6610169491525\" font-size=\"13\">N0_3</text>\n<circle cx=\"233.47457627118644\" cy=\"289.6610169491525\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"241.47457627118644\" y=\"306.6610169491525\" font-size=\"13\">N1_3</text>\n<circle cx=\"366.9491525423729\" cy=\"289.6610169491525\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"374.9491525423729\" y=\"306.6610169491525\" font-size=\"13\">N2_3</text>\n<circle cx=\"100.0\" cy=\"182.88135593220335\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"108.0\" y=\"199.88135593220335\" font-size=\"13\">N0_4</text>\n<circle cx=\"233.47457627118644\" cy=\"182.88135593220335\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"241.47457627118644\" y=\"199.88135593220335\" font-size=\"13\">N1_4</text>\n<circle cx=\"366.9491525423729\" cy=\"182.88135593220335\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"374.9491525423729\" y=\"199.88135593220335\" font-size=\"13\">N2_4</text>\n<text x=\"35\" y=\"790\" font-size=\"14\">ux_mm: <tspan data-result=\"ux_mm\">10.754285 mm</tspan></text>\n<text x=\"380\" y=\"790\" font-size=\"14\">uy_mm: <tspan data-result=\"uy_mm\">-0.325689 mm</tspan></text>\n<text x=\"725\" y=\"790\" font-size=\"14\">peak_stress_mpa: <tspan data-result=\"peak_stress_mpa\">33.316209 MPa</tspan></text>\n</svg>\nEDIT: Raise the top floor from y=11200 mm to y=11800 mm. Change the vertical load at N2_4 to -73000 N. Keep every other node, section and load unchanged.\nKeep viewBox=\"0 0 1100 850\". Map physical (x,y) mm to SVG (X,Y) as X=100+0.038135593220339*x, Y=610-0.038135593220339*y. Draw exactly the listed members. Retain member IDs. Required dimensions are the physical centreline length of every member, tagged data-dimension=\"length_MEMBERID\". Recompute dimensions and analysis after any edit. Report signed ux and uy at N2_4, plus peak extreme-fibre normal stress across member ends. Give at least three significant digits. Check against the limits in the model; no other safety claims.",
+      "reference": {
+        "ux_mm": 12.286765546530468,
+        "uy_mm": -0.3746432353069919,
+        "peak_stress_mpa": 33.32090330475905,
+        "member_stress_mpa": {
+          "col_0_0": 27.520054218480382,
+          "col_1_0": 28.881216289417587,
+          "col_2_0": 32.09224954556683,
+          "beam_0_1": 21.700691119177264,
+          "beam_1_1": 20.449798694747905,
+          "col_0_1": 25.217993228654603,
+          "col_1_1": 33.32090330475905,
+          "col_2_1": 28.355955398338068,
+          "beam_0_2": 21.201042641477173,
+          "beam_1_2": 19.04214462333102,
+          "col_0_2": 23.185508738777386,
+          "col_1_2": 29.772019575884933,
+          "col_2_2": 23.819865638351757,
+          "beam_0_3": 17.851754092580965,
+          "beam_1_3": 15.200262112450757,
+          "col_0_3": 20.739964602698315,
+          "col_1_3": 23.657612126196806,
+          "col_2_3": 19.473449950131048,
+          "beam_0_4": 9.58820497767313,
+          "beam_1_4": 7.7815795875234235
+        },
+        "reactions": {
+          "N0_0": [
+            -15544.668376641519,
+            97332.56256523967,
+            26110305.747537754
+          ],
+          "N1_0": [
+            -20370.493721585746,
+            6294.804790581995,
+            30596803.882359363
+          ],
+          "N2_0": [
+            -15084.837901767081,
+            257372.63264418347,
+            25652645.0937985
+          ]
+        },
+        "equilibrium_residual_N_Nmm": [
+          1.928128767758608e-09,
+          2.9103830456733704e-11,
+          -9.179115295410156e-06
+        ],
+        "free_residual_max_N_Nmm": 1.4901161193847656e-08,
+        "subdivision_relative_difference": {
+          "ux_mm": 5.190235810471429e-13,
+          "uy_mm": 1.4328106897923885e-13,
+          "peak_stress_mpa": 7.448554900537613e-13
+        }
+      },
+      "validation_techniques": [
+        "SVG geometry and connectivity constraints",
+        "dimension consistency",
+        "global force and moment equilibrium",
+        "linear frame FEM",
+        "member-subdivision reference check"
+      ],
+      "model_sha256": "8db6d166053b509d89a5d8b4c042c7d23940d25a9041becc38d1be4feba2b21f"
+    },
+    {
+      "id": "threebay_three_generate",
+      "family": "threebay_three",
+      "mode": "generate",
+      "model": {
+        "name": "Three-bay three-storey frame elevation",
+        "nodes": {
+          "N0_0": [
+            0,
+            0
+          ],
+          "N1_0": [
+            3300,
+            0
+          ],
+          "N2_0": [
+            6600,
+            0
+          ],
+          "N3_0": [
+            9900,
+            0
+          ],
+          "N0_1": [
+            0,
+            2800
+          ],
+          "N1_1": [
+            3300,
+            2800
+          ],
+          "N2_1": [
+            6600,
+            2800
+          ],
+          "N3_1": [
+            9900,
+            2800
+          ],
+          "N0_2": [
+            0,
+            5600
+          ],
+          "N1_2": [
+            3300,
+            5600
+          ],
+          "N2_2": [
+            6600,
+            5600
+          ],
+          "N3_2": [
+            9900,
+            5600
+          ],
+          "N0_3": [
+            0,
+            8400
+          ],
+          "N1_3": [
+            3300,
+            8400
+          ],
+          "N2_3": [
+            6600,
+            8400
+          ],
+          "N3_3": [
+            9900,
+            8400
+          ]
+        },
+        "members": [
+          {
+            "id": "col_0_0",
+            "a": "N0_0",
+            "b": "N0_1",
+            "b_mm": 160,
+            "h_mm": 200,
+            "E": 200000
+          },
+          {
+            "id": "col_1_0",
+            "a": "N1_0",
+            "b": "N1_1",
+            "b_mm": 160,
+            "h_mm": 200,
+            "E": 200000
+          },
+          {
+            "id": "col_2_0",
+            "a": "N2_0",
+            "b": "N2_1",
+            "b_mm": 160,
+            "h_mm": 200,
+            "E": 200000
+          },
+          {
+            "id": "col_3_0",
+            "a": "N3_0",
+            "b": "N3_1",
+            "b_mm": 160,
+            "h_mm": 200,
+            "E": 200000
+          },
+          {
+            "id": "beam_0_1",
+            "a": "N0_1",
+            "b": "N1_1",
+            "b_mm": 140,
+            "h_mm": 260,
+            "E": 200000
+          },
+          {
+            "id": "beam_1_1",
+            "a": "N1_1",
+            "b": "N2_1",
+            "b_mm": 140,
+            "h_mm": 260,
+            "E": 200000
+          },
+          {
+            "id": "beam_2_1",
+            "a": "N2_1",
+            "b": "N3_1",
+            "b_mm": 140,
+            "h_mm": 260,
+            "E": 200000
+          },
+          {
+            "id": "col_0_1",
+            "a": "N0_1",
+            "b": "N0_2",
+            "b_mm": 140,
+            "h_mm": 180,
+            "E": 200000
+          },
+          {
+            "id": "col_1_1",
+            "a": "N1_1",
+            "b": "N1_2",
+            "b_mm": 140,
+            "h_mm": 180,
+            "E": 200000
+          },
+          {
+            "id": "col_2_1",
+            "a": "N2_1",
+            "b": "N2_2",
+            "b_mm": 140,
+            "h_mm": 180,
+            "E": 200000
+          },
+          {
+            "id": "col_3_1",
+            "a": "N3_1",
+            "b": "N3_2",
+            "b_mm": 140,
+            "h_mm": 180,
+            "E": 200000
+          },
+          {
+            "id": "beam_0_2",
+            "a": "N0_2",
+            "b": "N1_2",
+            "b_mm": 140,
+            "h_mm": 240,
+            "E": 200000
+          },
+          {
+            "id": "beam_1_2",
+            "a": "N1_2",
+            "b": "N2_2",
+            "b_mm": 140,
+            "h_mm": 240,
+            "E": 200000
+          },
+          {
+            "id": "beam_2_2",
+            "a": "N2_2",
+            "b": "N3_2",
+            "b_mm": 140,
+            "h_mm": 240,
+            "E": 200000
+          },
+          {
+            "id": "col_0_2",
+            "a": "N0_2",
+            "b": "N0_3",
+            "b_mm": 140,
+            "h_mm": 160,
+            "E": 200000
+          },
+          {
+            "id": "col_1_2",
+            "a": "N1_2",
+            "b": "N1_3",
+            "b_mm": 140,
+            "h_mm": 160,
+            "E": 200000
+          },
+          {
+            "id": "col_2_2",
+            "a": "N2_2",
+            "b": "N2_3",
+            "b_mm": 140,
+            "h_mm": 160,
+            "E": 200000
+          },
+          {
+            "id": "col_3_2",
+            "a": "N3_2",
+            "b": "N3_3",
+            "b_mm": 140,
+            "h_mm": 160,
+            "E": 200000
+          },
+          {
+            "id": "beam_0_3",
+            "a": "N0_3",
+            "b": "N1_3",
+            "b_mm": 140,
+            "h_mm": 220,
+            "E": 200000
+          },
+          {
+            "id": "beam_1_3",
+            "a": "N1_3",
+            "b": "N2_3",
+            "b_mm": 140,
+            "h_mm": 220,
+            "E": 200000
+          },
+          {
+            "id": "beam_2_3",
+            "a": "N2_3",
+            "b": "N3_3",
+            "b_mm": 140,
+            "h_mm": 220,
+            "E": 200000
+          }
+        ],
+        "supports": {
+          "N0_0": [
+            0,
+            1,
+            2
+          ],
+          "N1_0": [
+            0,
+            1,
+            2
+          ],
+          "N2_0": [
+            0,
+            1,
+            2
+          ],
+          "N3_0": [
+            0,
+            1,
+            2
+          ]
+        },
+        "loads": {
+          "N0_1": [
+            10500,
+            -30000,
+            0
+          ],
+          "N3_1": [
+            0,
+            -43000,
+            0
+          ],
+          "N0_2": [
+            12000,
+            -34000,
+            0
+          ],
+          "N3_2": [
+            0,
+            -48000,
+            0
+          ],
+          "N0_3": [
+            13500,
+            -38000,
+            0
+          ],
+          "N3_3": [
+            0,
+            -53000,
+            0
+          ]
+        },
+        "probe": "N3_3",
+        "limits": {
+          "abs_uy_mm": 12.0,
+          "peak_stress_mpa": 180.0
+        }
+      },
+      "mapping": [
+        0.05357142857142857,
+        100,
+        610
+      ],
+      "dimensions": {
+        "length_col_0_0": 2800.0,
+        "length_col_1_0": 2800.0,
+        "length_col_2_0": 2800.0,
+        "length_col_3_0": 2800.0,
+        "length_beam_0_1": 3300.0,
+        "length_beam_1_1": 3300.0,
+        "length_beam_2_1": 3300.0,
+        "length_col_0_1": 2800.0,
+        "length_col_1_1": 2800.0,
+        "length_col_2_1": 2800.0,
+        "length_col_3_1": 2800.0,
+        "length_beam_0_2": 3300.0,
+        "length_beam_1_2": 3300.0,
+        "length_beam_2_2": 3300.0,
+        "length_col_0_2": 2800.0,
+        "length_col_1_2": 2800.0,
+        "length_col_2_2": 2800.0,
+        "length_col_3_2": 2800.0,
+        "length_beam_0_3": 3300.0,
+        "length_beam_1_3": 3300.0,
+        "length_beam_2_3": 3300.0
+      },
+      "limits": {
+        "abs_uy_mm": 12.0,
+        "peak_stress_mpa": 180.0
+      },
+      "indeterminacy": 27,
+      "members": 21,
+      "prompt": "Object: Three-bay three-storey frame elevation. Make a dimensioned structural elevation. All sections are solid rectangles; h is in the frame plane and b is out of plane. The idealised column bases are clamped, not freely resting on a floor. This task concerns only the stated 2D frame, not complete product/building validation. \nPhysical model:\n{\"name\": \"Three-bay three-storey frame elevation\", \"nodes\": {\"N0_0\": [0, 0], \"N1_0\": [3300, 0], \"N2_0\": [6600, 0], \"N3_0\": [9900, 0], \"N0_1\": [0, 2800], \"N1_1\": [3300, 2800], \"N2_1\": [6600, 2800], \"N3_1\": [9900, 2800], \"N0_2\": [0, 5600], \"N1_2\": [3300, 5600], \"N2_2\": [6600, 5600], \"N3_2\": [9900, 5600], \"N0_3\": [0, 8400], \"N1_3\": [3300, 8400], \"N2_3\": [6600, 8400], \"N3_3\": [9900, 8400]}, \"members\": [{\"id\": \"col_0_0\", \"a\": \"N0_0\", \"b\": \"N0_1\", \"b_mm\": 160, \"h_mm\": 200, \"E\": 200000}, {\"id\": \"col_1_0\", \"a\": \"N1_0\", \"b\": \"N1_1\", \"b_mm\": 160, \"h_mm\": 200, \"E\": 200000}, {\"id\": \"col_2_0\", \"a\": \"N2_0\", \"b\": \"N2_1\", \"b_mm\": 160, \"h_mm\": 200, \"E\": 200000}, {\"id\": \"col_3_0\", \"a\": \"N3_0\", \"b\": \"N3_1\", \"b_mm\": 160, \"h_mm\": 200, \"E\": 200000}, {\"id\": \"beam_0_1\", \"a\": \"N0_1\", \"b\": \"N1_1\", \"b_mm\": 140, \"h_mm\": 260, \"E\": 200000}, {\"id\": \"beam_1_1\", \"a\": \"N1_1\", \"b\": \"N2_1\", \"b_mm\": 140, \"h_mm\": 260, \"E\": 200000}, {\"id\": \"beam_2_1\", \"a\": \"N2_1\", \"b\": \"N3_1\", \"b_mm\": 140, \"h_mm\": 260, \"E\": 200000}, {\"id\": \"col_0_1\", \"a\": \"N0_1\", \"b\": \"N0_2\", \"b_mm\": 140, \"h_mm\": 180, \"E\": 200000}, {\"id\": \"col_1_1\", \"a\": \"N1_1\", \"b\": \"N1_2\", \"b_mm\": 140, \"h_mm\": 180, \"E\": 200000}, {\"id\": \"col_2_1\", \"a\": \"N2_1\", \"b\": \"N2_2\", \"b_mm\": 140, \"h_mm\": 180, \"E\": 200000}, {\"id\": \"col_3_1\", \"a\": \"N3_1\", \"b\": \"N3_2\", \"b_mm\": 140, \"h_mm\": 180, \"E\": 200000}, {\"id\": \"beam_0_2\", \"a\": \"N0_2\", \"b\": \"N1_2\", \"b_mm\": 140, \"h_mm\": 240, \"E\": 200000}, {\"id\": \"beam_1_2\", \"a\": \"N1_2\", \"b\": \"N2_2\", \"b_mm\": 140, \"h_mm\": 240, \"E\": 200000}, {\"id\": \"beam_2_2\", \"a\": \"N2_2\", \"b\": \"N3_2\", \"b_mm\": 140, \"h_mm\": 240, \"E\": 200000}, {\"id\": \"col_0_2\", \"a\": \"N0_2\", \"b\": \"N0_3\", \"b_mm\": 140, \"h_mm\": 160, \"E\": 200000}, {\"id\": \"col_1_2\", \"a\": \"N1_2\", \"b\": \"N1_3\", \"b_mm\": 140, \"h_mm\": 160, \"E\": 200000}, {\"id\": \"col_2_2\", \"a\": \"N2_2\", \"b\": \"N2_3\", \"b_mm\": 140, \"h_mm\": 160, \"E\": 200000}, {\"id\": \"col_3_2\", \"a\": \"N3_2\", \"b\": \"N3_3\", \"b_mm\": 140, \"h_mm\": 160, \"E\": 200000}, {\"id\": \"beam_0_3\", \"a\": \"N0_3\", \"b\": \"N1_3\", \"b_mm\": 140, \"h_mm\": 220, \"E\": 200000}, {\"id\": \"beam_1_3\", \"a\": \"N1_3\", \"b\": \"N2_3\", \"b_mm\": 140, \"h_mm\": 220, \"E\": 200000}, {\"id\": \"beam_2_3\", \"a\": \"N2_3\", \"b\": \"N3_3\", \"b_mm\": 140, \"h_mm\": 220, \"E\": 200000}], \"supports\": {\"N0_0\": [0, 1, 2], \"N1_0\": [0, 1, 2], \"N2_0\": [0, 1, 2], \"N3_0\": [0, 1, 2]}, \"loads\": {\"N0_1\": [10500, -30000, 0], \"N3_1\": [0, -43000, 0], \"N0_2\": [12000, -34000, 0], \"N3_2\": [0, -48000, 0], \"N0_3\": [13500, -38000, 0], \"N3_3\": [0, -53000, 0]}, \"probe\": \"N3_3\", \"limits\": {\"abs_uy_mm\": 12.0, \"peak_stress_mpa\": 180.0}}\nKeep viewBox=\"0 0 1100 850\". Map physical (x,y) mm to SVG (X,Y) as X=100+0.0535714285714286*x, Y=610-0.0535714285714286*y. Draw exactly the listed members. Retain member IDs. Required dimensions are the physical centreline length of every member, tagged data-dimension=\"length_MEMBERID\". Recompute dimensions and analysis after any edit. Report signed ux and uy at N3_3, plus peak extreme-fibre normal stress across member ends. Give at least three significant digits. Check against the limits in the model; no other safety claims.",
+      "reference": {
+        "ux_mm": 3.461852490985991,
+        "uy_mm": -0.16430881155583069,
+        "peak_stress_mpa": 17.18538150777609,
+        "member_stress_mpa": {
+          "col_0_0": 15.147031313242618,
+          "col_1_0": 14.44699394703182,
+          "col_2_0": 14.13591326066183,
+          "col_3_0": 17.18538150777609,
+          "beam_0_1": 10.886907723138256,
+          "beam_1_1": 6.880587356360331,
+          "beam_2_1": 9.95682802763192,
+          "col_0_1": 12.820763746519415,
+          "col_1_1": 14.70800142707763,
+          "col_2_1": 13.762999425182933,
+          "col_3_1": 13.527894089403581,
+          "beam_0_2": 9.002002564216584,
+          "beam_1_2": 5.843870801797255,
+          "beam_2_2": 7.521157428454794,
+          "col_0_2": 9.460633864016588,
+          "col_1_2": 10.459156836882219,
+          "col_2_2": 9.18218316941488,
+          "col_3_2": 8.548859897624064,
+          "beam_0_3": 4.506057739440117,
+          "beam_1_3": 2.878736131556331,
+          "beam_2_3": 3.3039717817095484
+        },
+        "reactions": {
+          "N0_0": [
+            -8149.105255986325,
+            83674.61860685713,
+            13367679.447230222
+          ],
+          "N1_0": [
+            -10147.551368607174,
+            5892.404645949979,
+            15213713.38863561
+          ],
+          "N2_0": [
+            -9898.722043967766,
+            -3306.8825280039628,
+            14968078.060439153
+          ],
+          "N3_0": [
+            -7804.621331439664,
+            159739.85927519682,
+            13006411.632454598
+          ]
+        },
+        "equilibrium_residual_N_Nmm": [
+          -4.187313606962562e-09,
+          -5.820766091346741e-11,
+          3.0279159545898438e-05
+        ],
+        "free_residual_max_N_Nmm": 9.313225746154785e-09,
+        "subdivision_relative_difference": {
+          "ux_mm": 1.8526313253826497e-12,
+          "uy_mm": 1.5828106907709785e-13,
+          "peak_stress_mpa": 1.1091001313028881e-12
+        }
+      },
+      "validation_techniques": [
+        "SVG geometry and connectivity constraints",
+        "dimension consistency",
+        "global force and moment equilibrium",
+        "linear frame FEM",
+        "member-subdivision reference check"
+      ],
+      "model_sha256": "22f47cb8b094ab52f4bc711a08121c2f72634a462bb937791f448d779a465465"
+    },
+    {
+      "id": "threebay_three_edit",
+      "family": "threebay_three",
+      "mode": "edit",
+      "model": {
+        "name": "Three-bay three-storey frame elevation",
+        "nodes": {
+          "N0_0": [
+            0,
+            0
+          ],
+          "N1_0": [
+            4000,
+            0
+          ],
+          "N2_0": [
+            6600,
+            0
+          ],
+          "N3_0": [
+            9900,
+            0
+          ],
+          "N0_1": [
+            0,
+            2800
+          ],
+          "N1_1": [
+            4000,
+            2800
+          ],
+          "N2_1": [
+            6600,
+            2800
+          ],
+          "N3_1": [
+            9900,
+            2800
+          ],
+          "N0_2": [
+            0,
+            5600
+          ],
+          "N1_2": [
+            4000,
+            5600
+          ],
+          "N2_2": [
+            6600,
+            5600
+          ],
+          "N3_2": [
+            9900,
+            5600
+          ],
+          "N0_3": [
+            0,
+            8400
+          ],
+          "N1_3": [
+            4000,
+            8400
+          ],
+          "N2_3": [
+            6600,
+            8400
+          ],
+          "N3_3": [
+            9900,
+            8400
+          ]
+        },
+        "members": [
+          {
+            "id": "col_0_0",
+            "a": "N0_0",
+            "b": "N0_1",
+            "b_mm": 160,
+            "h_mm": 200,
+            "E": 200000
+          },
+          {
+            "id": "col_1_0",
+            "a": "N1_0",
+            "b": "N1_1",
+            "b_mm": 160,
+            "h_mm": 200,
+            "E": 200000
+          },
+          {
+            "id": "col_2_0",
+            "a": "N2_0",
+            "b": "N2_1",
+            "b_mm": 160,
+            "h_mm": 200,
+            "E": 200000
+          },
+          {
+            "id": "col_3_0",
+            "a": "N3_0",
+            "b": "N3_1",
+            "b_mm": 160,
+            "h_mm": 200,
+            "E": 200000
+          },
+          {
+            "id": "beam_0_1",
+            "a": "N0_1",
+            "b": "N1_1",
+            "b_mm": 140,
+            "h_mm": 260,
+            "E": 200000
+          },
+          {
+            "id": "beam_1_1",
+            "a": "N1_1",
+            "b": "N2_1",
+            "b_mm": 140,
+            "h_mm": 260,
+            "E": 200000
+          },
+          {
+            "id": "beam_2_1",
+            "a": "N2_1",
+            "b": "N3_1",
+            "b_mm": 140,
+            "h_mm": 260,
+            "E": 200000
+          },
+          {
+            "id": "col_0_1",
+            "a": "N0_1",
+            "b": "N0_2",
+            "b_mm": 140,
+            "h_mm": 180,
+            "E": 200000
+          },
+          {
+            "id": "col_1_1",
+            "a": "N1_1",
+            "b": "N1_2",
+            "b_mm": 140,
+            "h_mm": 180,
+            "E": 200000
+          },
+          {
+            "id": "col_2_1",
+            "a": "N2_1",
+            "b": "N2_2",
+            "b_mm": 140,
+            "h_mm": 180,
+            "E": 200000
+          },
+          {
+            "id": "col_3_1",
+            "a": "N3_1",
+            "b": "N3_2",
+            "b_mm": 140,
+            "h_mm": 180,
+            "E": 200000
+          },
+          {
+            "id": "beam_0_2",
+            "a": "N0_2",
+            "b": "N1_2",
+            "b_mm": 140,
+            "h_mm": 240,
+            "E": 200000
+          },
+          {
+            "id": "beam_1_2",
+            "a": "N1_2",
+            "b": "N2_2",
+            "b_mm": 140,
+            "h_mm": 240,
+            "E": 200000
+          },
+          {
+            "id": "beam_2_2",
+            "a": "N2_2",
+            "b": "N3_2",
+            "b_mm": 140,
+            "h_mm": 240,
+            "E": 200000
+          },
+          {
+            "id": "col_0_2",
+            "a": "N0_2",
+            "b": "N0_3",
+            "b_mm": 140,
+            "h_mm": 160,
+            "E": 200000
+          },
+          {
+            "id": "col_1_2",
+            "a": "N1_2",
+            "b": "N1_3",
+            "b_mm": 140,
+            "h_mm": 160,
+            "E": 200000
+          },
+          {
+            "id": "col_2_2",
+            "a": "N2_2",
+            "b": "N2_3",
+            "b_mm": 140,
+            "h_mm": 160,
+            "E": 200000
+          },
+          {
+            "id": "col_3_2",
+            "a": "N3_2",
+            "b": "N3_3",
+            "b_mm": 140,
+            "h_mm": 160,
+            "E": 200000
+          },
+          {
+            "id": "beam_0_3",
+            "a": "N0_3",
+            "b": "N1_3",
+            "b_mm": 140,
+            "h_mm": 220,
+            "E": 200000
+          },
+          {
+            "id": "beam_1_3",
+            "a": "N1_3",
+            "b": "N2_3",
+            "b_mm": 140,
+            "h_mm": 220,
+            "E": 200000
+          },
+          {
+            "id": "beam_2_3",
+            "a": "N2_3",
+            "b": "N3_3",
+            "b_mm": 140,
+            "h_mm": 220,
+            "E": 200000
+          }
+        ],
+        "supports": {
+          "N0_0": [
+            0,
+            1,
+            2
+          ],
+          "N1_0": [
+            0,
+            1,
+            2
+          ],
+          "N2_0": [
+            0,
+            1,
+            2
+          ],
+          "N3_0": [
+            0,
+            1,
+            2
+          ]
+        },
+        "loads": {
+          "N0_1": [
+            10500,
+            -30000,
+            0
+          ],
+          "N3_1": [
+            0,
+            -43000,
+            0
+          ],
+          "N0_2": [
+            12000,
+            -34000,
+            0
+          ],
+          "N3_2": [
+            0,
+            -48000,
+            0
+          ],
+          "N0_3": [
+            13500,
+            -38000,
+            0
+          ],
+          "N3_3": [
+            0,
+            -68000,
+            0
+          ]
+        },
+        "probe": "N3_3",
+        "limits": {
+          "abs_uy_mm": 12.0,
+          "peak_stress_mpa": 180.0
+        }
+      },
+      "mapping": [
+        0.05357142857142857,
+        100,
+        610
+      ],
+      "dimensions": {
+        "length_col_0_0": 2800.0,
+        "length_col_1_0": 2800.0,
+        "length_col_2_0": 2800.0,
+        "length_col_3_0": 2800.0,
+        "length_beam_0_1": 4000.0,
+        "length_beam_1_1": 2600.0,
+        "length_beam_2_1": 3300.0,
+        "length_col_0_1": 2800.0,
+        "length_col_1_1": 2800.0,
+        "length_col_2_1": 2800.0,
+        "length_col_3_1": 2800.0,
+        "length_beam_0_2": 4000.0,
+        "length_beam_1_2": 2600.0,
+        "length_beam_2_2": 3300.0,
+        "length_col_0_2": 2800.0,
+        "length_col_1_2": 2800.0,
+        "length_col_2_2": 2800.0,
+        "length_col_3_2": 2800.0,
+        "length_beam_0_3": 4000.0,
+        "length_beam_1_3": 2600.0,
+        "length_beam_2_3": 3300.0
+      },
+      "limits": {
+        "abs_uy_mm": 12.0,
+        "peak_stress_mpa": 180.0
+      },
+      "indeterminacy": 27,
+      "members": 21,
+      "source_model": {
+        "name": "Three-bay three-storey frame elevation",
+        "nodes": {
+          "N0_0": [
+            0,
+            0
+          ],
+          "N1_0": [
+            3300,
+            0
+          ],
+          "N2_0": [
+            6600,
+            0
+          ],
+          "N3_0": [
+            9900,
+            0
+          ],
+          "N0_1": [
+            0,
+            2800
+          ],
+          "N1_1": [
+            3300,
+            2800
+          ],
+          "N2_1": [
+            6600,
+            2800
+          ],
+          "N3_1": [
+            9900,
+            2800
+          ],
+          "N0_2": [
+            0,
+            5600
+          ],
+          "N1_2": [
+            3300,
+            5600
+          ],
+          "N2_2": [
+            6600,
+            5600
+          ],
+          "N3_2": [
+            9900,
+            5600
+          ],
+          "N0_3": [
+            0,
+            8400
+          ],
+          "N1_3": [
+            3300,
+            8400
+          ],
+          "N2_3": [
+            6600,
+            8400
+          ],
+          "N3_3": [
+            9900,
+            8400
+          ]
+        },
+        "members": [
+          {
+            "id": "col_0_0",
+            "a": "N0_0",
+            "b": "N0_1",
+            "b_mm": 160,
+            "h_mm": 200,
+            "E": 200000
+          },
+          {
+            "id": "col_1_0",
+            "a": "N1_0",
+            "b": "N1_1",
+            "b_mm": 160,
+            "h_mm": 200,
+            "E": 200000
+          },
+          {
+            "id": "col_2_0",
+            "a": "N2_0",
+            "b": "N2_1",
+            "b_mm": 160,
+            "h_mm": 200,
+            "E": 200000
+          },
+          {
+            "id": "col_3_0",
+            "a": "N3_0",
+            "b": "N3_1",
+            "b_mm": 160,
+            "h_mm": 200,
+            "E": 200000
+          },
+          {
+            "id": "beam_0_1",
+            "a": "N0_1",
+            "b": "N1_1",
+            "b_mm": 140,
+            "h_mm": 260,
+            "E": 200000
+          },
+          {
+            "id": "beam_1_1",
+            "a": "N1_1",
+            "b": "N2_1",
+            "b_mm": 140,
+            "h_mm": 260,
+            "E": 200000
+          },
+          {
+            "id": "beam_2_1",
+            "a": "N2_1",
+            "b": "N3_1",
+            "b_mm": 140,
+            "h_mm": 260,
+            "E": 200000
+          },
+          {
+            "id": "col_0_1",
+            "a": "N0_1",
+            "b": "N0_2",
+            "b_mm": 140,
+            "h_mm": 180,
+            "E": 200000
+          },
+          {
+            "id": "col_1_1",
+            "a": "N1_1",
+            "b": "N1_2",
+            "b_mm": 140,
+            "h_mm": 180,
+            "E": 200000
+          },
+          {
+            "id": "col_2_1",
+            "a": "N2_1",
+            "b": "N2_2",
+            "b_mm": 140,
+            "h_mm": 180,
+            "E": 200000
+          },
+          {
+            "id": "col_3_1",
+            "a": "N3_1",
+            "b": "N3_2",
+            "b_mm": 140,
+            "h_mm": 180,
+            "E": 200000
+          },
+          {
+            "id": "beam_0_2",
+            "a": "N0_2",
+            "b": "N1_2",
+            "b_mm": 140,
+            "h_mm": 240,
+            "E": 200000
+          },
+          {
+            "id": "beam_1_2",
+            "a": "N1_2",
+            "b": "N2_2",
+            "b_mm": 140,
+            "h_mm": 240,
+            "E": 200000
+          },
+          {
+            "id": "beam_2_2",
+            "a": "N2_2",
+            "b": "N3_2",
+            "b_mm": 140,
+            "h_mm": 240,
+            "E": 200000
+          },
+          {
+            "id": "col_0_2",
+            "a": "N0_2",
+            "b": "N0_3",
+            "b_mm": 140,
+            "h_mm": 160,
+            "E": 200000
+          },
+          {
+            "id": "col_1_2",
+            "a": "N1_2",
+            "b": "N1_3",
+            "b_mm": 140,
+            "h_mm": 160,
+            "E": 200000
+          },
+          {
+            "id": "col_2_2",
+            "a": "N2_2",
+            "b": "N2_3",
+            "b_mm": 140,
+            "h_mm": 160,
+            "E": 200000
+          },
+          {
+            "id": "col_3_2",
+            "a": "N3_2",
+            "b": "N3_3",
+            "b_mm": 140,
+            "h_mm": 160,
+            "E": 200000
+          },
+          {
+            "id": "beam_0_3",
+            "a": "N0_3",
+            "b": "N1_3",
+            "b_mm": 140,
+            "h_mm": 220,
+            "E": 200000
+          },
+          {
+            "id": "beam_1_3",
+            "a": "N1_3",
+            "b": "N2_3",
+            "b_mm": 140,
+            "h_mm": 220,
+            "E": 200000
+          },
+          {
+            "id": "beam_2_3",
+            "a": "N2_3",
+            "b": "N3_3",
+            "b_mm": 140,
+            "h_mm": 220,
+            "E": 200000
+          }
+        ],
+        "supports": {
+          "N0_0": [
+            0,
+            1,
+            2
+          ],
+          "N1_0": [
+            0,
+            1,
+            2
+          ],
+          "N2_0": [
+            0,
+            1,
+            2
+          ],
+          "N3_0": [
+            0,
+            1,
+            2
+          ]
+        },
+        "loads": {
+          "N0_1": [
+            10500,
+            -30000,
+            0
+          ],
+          "N3_1": [
+            0,
+            -43000,
+            0
+          ],
+          "N0_2": [
+            12000,
+            -34000,
+            0
+          ],
+          "N3_2": [
+            0,
+            -48000,
+            0
+          ],
+          "N0_3": [
+            13500,
+            -38000,
+            0
+          ],
+          "N3_3": [
+            0,
+            -53000,
+            0
+          ]
+        },
+        "probe": "N3_3",
+        "limits": {
+          "abs_uy_mm": 12.0,
+          "peak_stress_mpa": 180.0
+        }
+      },
+      "source_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1100 850\" width=\"1100\" height=\"850\">\n<rect width=\"1100\" height=\"850\" fill=\"white\"/>\n<text x=\"35\" y=\"40\" font-size=\"23\">Three-bay three-storey frame elevation</text>\n<text x=\"35\" y=\"66\" font-size=\"14\">Structural centreline elevation \u2014 dimensions mm; sections b \u00d7 h mm</text>\n<line data-member=\"col_0_0\" x1=\"100.0\" y1=\"610.0\" x2=\"100.0\" y2=\"460.0\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_0_0\" x=\"108.0\" y=\"525.0\" font-size=\"12\">2800.000 mm</text>\n<text x=\"35\" y=\"695\" font-size=\"12\">col_0_0: 160 \u00d7 200</text>\n<line data-member=\"col_1_0\" x1=\"276.7857142857143\" y1=\"610.0\" x2=\"276.7857142857143\" y2=\"460.0\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_1_0\" x=\"284.7857142857143\" y=\"525.0\" font-size=\"12\">2800.000 mm</text>\n<text x=\"300\" y=\"695\" font-size=\"12\">col_1_0: 160 \u00d7 200</text>\n<line data-member=\"col_2_0\" x1=\"453.57142857142856\" y1=\"610.0\" x2=\"453.57142857142856\" y2=\"460.0\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_2_0\" x=\"461.57142857142856\" y=\"525.0\" font-size=\"12\">2800.000 mm</text>\n<text x=\"565\" y=\"695\" font-size=\"12\">col_2_0: 160 \u00d7 200</text>\n<line data-member=\"col_3_0\" x1=\"630.3571428571428\" y1=\"610.0\" x2=\"630.3571428571428\" y2=\"460.0\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_3_0\" x=\"638.3571428571428\" y=\"525.0\" font-size=\"12\">2800.000 mm</text>\n<text x=\"830\" y=\"695\" font-size=\"12\">col_3_0: 160 \u00d7 200</text>\n<line data-member=\"beam_0_1\" x1=\"100.0\" y1=\"460.0\" x2=\"276.7857142857143\" y2=\"460.0\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_0_1\" x=\"196.39285714285714\" y=\"450.0\" font-size=\"12\">3300.000 mm</text>\n<text x=\"35\" y=\"717\" font-size=\"12\">beam_0_1: 140 \u00d7 260</text>\n<line data-member=\"beam_1_1\" x1=\"276.7857142857143\" y1=\"460.0\" x2=\"453.57142857142856\" y2=\"460.0\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_1_1\" x=\"373.17857142857144\" y=\"450.0\" font-size=\"12\">3300.000 mm</text>\n<text x=\"300\" y=\"717\" font-size=\"12\">beam_1_1: 140 \u00d7 260</text>\n<line data-member=\"beam_2_1\" x1=\"453.57142857142856\" y1=\"460.0\" x2=\"630.3571428571428\" y2=\"460.0\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_2_1\" x=\"549.9642857142857\" y=\"450.0\" font-size=\"12\">3300.000 mm</text>\n<text x=\"565\" y=\"717\" font-size=\"12\">beam_2_1: 140 \u00d7 260</text>\n<line data-member=\"col_0_1\" x1=\"100.0\" y1=\"460.0\" x2=\"100.0\" y2=\"310.0\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_0_1\" x=\"108.0\" y=\"375.0\" font-size=\"12\">2800.000 mm</text>\n<text x=\"830\" y=\"717\" font-size=\"12\">col_0_1: 140 \u00d7 180</text>\n<line data-member=\"col_1_1\" x1=\"276.7857142857143\" y1=\"460.0\" x2=\"276.7857142857143\" y2=\"310.0\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_1_1\" x=\"284.7857142857143\" y=\"375.0\" font-size=\"12\">2800.000 mm</text>\n<text x=\"35\" y=\"739\" font-size=\"12\">col_1_1: 140 \u00d7 180</text>\n<line data-member=\"col_2_1\" x1=\"453.57142857142856\" y1=\"460.0\" x2=\"453.57142857142856\" y2=\"310.0\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_2_1\" x=\"461.57142857142856\" y=\"375.0\" font-size=\"12\">2800.000 mm</text>\n<text x=\"300\" y=\"739\" font-size=\"12\">col_2_1: 140 \u00d7 180</text>\n<line data-member=\"col_3_1\" x1=\"630.3571428571428\" y1=\"460.0\" x2=\"630.3571428571428\" y2=\"310.0\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_3_1\" x=\"638.3571428571428\" y=\"375.0\" font-size=\"12\">2800.000 mm</text>\n<text x=\"565\" y=\"739\" font-size=\"12\">col_3_1: 140 \u00d7 180</text>\n<line data-member=\"beam_0_2\" x1=\"100.0\" y1=\"310.0\" x2=\"276.7857142857143\" y2=\"310.0\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_0_2\" x=\"196.39285714285714\" y=\"300.0\" font-size=\"12\">3300.000 mm</text>\n<text x=\"830\" y=\"739\" font-size=\"12\">beam_0_2: 140 \u00d7 240</text>\n<line data-member=\"beam_1_2\" x1=\"276.7857142857143\" y1=\"310.0\" x2=\"453.57142857142856\" y2=\"310.0\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_1_2\" x=\"373.17857142857144\" y=\"300.0\" font-size=\"12\">3300.000 mm</text>\n<text x=\"35\" y=\"761\" font-size=\"12\">beam_1_2: 140 \u00d7 240</text>\n<line data-member=\"beam_2_2\" x1=\"453.57142857142856\" y1=\"310.0\" x2=\"630.3571428571428\" y2=\"310.0\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_2_2\" x=\"549.9642857142857\" y=\"300.0\" font-size=\"12\">3300.000 mm</text>\n<text x=\"300\" y=\"761\" font-size=\"12\">beam_2_2: 140 \u00d7 240</text>\n<line data-member=\"col_0_2\" x1=\"100.0\" y1=\"310.0\" x2=\"100.0\" y2=\"160.0\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_0_2\" x=\"108.0\" y=\"225.0\" font-size=\"12\">2800.000 mm</text>\n<text x=\"565\" y=\"761\" font-size=\"12\">col_0_2: 140 \u00d7 160</text>\n<line data-member=\"col_1_2\" x1=\"276.7857142857143\" y1=\"310.0\" x2=\"276.7857142857143\" y2=\"160.0\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_1_2\" x=\"284.7857142857143\" y=\"225.0\" font-size=\"12\">2800.000 mm</text>\n<text x=\"830\" y=\"761\" font-size=\"12\">col_1_2: 140 \u00d7 160</text>\n<line data-member=\"col_2_2\" x1=\"453.57142857142856\" y1=\"310.0\" x2=\"453.57142857142856\" y2=\"160.0\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_2_2\" x=\"461.57142857142856\" y=\"225.0\" font-size=\"12\">2800.000 mm</text>\n<text x=\"35\" y=\"783\" font-size=\"12\">col_2_2: 140 \u00d7 160</text>\n<line data-member=\"col_3_2\" x1=\"630.3571428571428\" y1=\"310.0\" x2=\"630.3571428571428\" y2=\"160.0\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_3_2\" x=\"638.3571428571428\" y=\"225.0\" font-size=\"12\">2800.000 mm</text>\n<text x=\"300\" y=\"783\" font-size=\"12\">col_3_2: 140 \u00d7 160</text>\n<line data-member=\"beam_0_3\" x1=\"100.0\" y1=\"160.0\" x2=\"276.7857142857143\" y2=\"160.0\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_0_3\" x=\"196.39285714285714\" y=\"150.0\" font-size=\"12\">3300.000 mm</text>\n<text x=\"565\" y=\"783\" font-size=\"12\">beam_0_3: 140 \u00d7 220</text>\n<line data-member=\"beam_1_3\" x1=\"276.7857142857143\" y1=\"160.0\" x2=\"453.57142857142856\" y2=\"160.0\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_1_3\" x=\"373.17857142857144\" y=\"150.0\" font-size=\"12\">3300.000 mm</text>\n<text x=\"830\" y=\"783\" font-size=\"12\">beam_1_3: 140 \u00d7 220</text>\n<line data-member=\"beam_2_3\" x1=\"453.57142857142856\" y1=\"160.0\" x2=\"630.3571428571428\" y2=\"160.0\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_2_3\" x=\"549.9642857142857\" y=\"150.0\" font-size=\"12\">3300.000 mm</text>\n<text x=\"35\" y=\"805\" font-size=\"12\">beam_2_3: 140 \u00d7 220</text>\n<circle cx=\"100.0\" cy=\"610.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"108.0\" y=\"627.0\" font-size=\"13\">N0_0</text>\n<path d=\"M88.0,616.0 H112.0 M88.0,616.0 l-6,9 M100.0,616.0 l-6,9 M112.0,616.0 l-6,9\" stroke=\"black\" fill=\"none\"/>\n<circle cx=\"276.7857142857143\" cy=\"610.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"284.7857142857143\" y=\"627.0\" font-size=\"13\">N1_0</text>\n<path d=\"M264.7857142857143,616.0 H288.7857142857143 M264.7857142857143,616.0 l-6,9 M276.7857142857143,616.0 l-6,9 M288.7857142857143,616.0 l-6,9\" stroke=\"black\" fill=\"none\"/>\n<circle cx=\"453.57142857142856\" cy=\"610.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"461.57142857142856\" y=\"627.0\" font-size=\"13\">N2_0</text>\n<path d=\"M441.57142857142856,616.0 H465.57142857142856 M441.57142857142856,616.0 l-6,9 M453.57142857142856,616.0 l-6,9 M465.57142857142856,616.0 l-6,9\" stroke=\"black\" fill=\"none\"/>\n<circle cx=\"630.3571428571428\" cy=\"610.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"638.3571428571428\" y=\"627.0\" font-size=\"13\">N3_0</text>\n<path d=\"M618.3571428571428,616.0 H642.3571428571428 M618.3571428571428,616.0 l-6,9 M630.3571428571428,616.0 l-6,9 M642.3571428571428,616.0 l-6,9\" stroke=\"black\" fill=\"none\"/>\n<circle cx=\"100.0\" cy=\"460.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"108.0\" y=\"477.0\" font-size=\"13\">N0_1</text>\n<circle cx=\"276.7857142857143\" cy=\"460.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"284.7857142857143\" y=\"477.0\" font-size=\"13\">N1_1</text>\n<circle cx=\"453.57142857142856\" cy=\"460.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"461.57142857142856\" y=\"477.0\" font-size=\"13\">N2_1</text>\n<circle cx=\"630.3571428571428\" cy=\"460.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"638.3571428571428\" y=\"477.0\" font-size=\"13\">N3_1</text>\n<circle cx=\"100.0\" cy=\"310.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"108.0\" y=\"327.0\" font-size=\"13\">N0_2</text>\n<circle cx=\"276.7857142857143\" cy=\"310.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"284.7857142857143\" y=\"327.0\" font-size=\"13\">N1_2</text>\n<circle cx=\"453.57142857142856\" cy=\"310.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"461.57142857142856\" y=\"327.0\" font-size=\"13\">N2_2</text>\n<circle cx=\"630.3571428571428\" cy=\"310.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"638.3571428571428\" y=\"327.0\" font-size=\"13\">N3_2</text>\n<circle cx=\"100.0\" cy=\"160.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"108.0\" y=\"177.0\" font-size=\"13\">N0_3</text>\n<circle cx=\"276.7857142857143\" cy=\"160.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"284.7857142857143\" y=\"177.0\" font-size=\"13\">N1_3</text>\n<circle cx=\"453.57142857142856\" cy=\"160.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"461.57142857142856\" y=\"177.0\" font-size=\"13\">N2_3</text>\n<circle cx=\"630.3571428571428\" cy=\"160.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"638.3571428571428\" y=\"177.0\" font-size=\"13\">N3_3</text>\n<text x=\"35\" y=\"790\" font-size=\"14\">ux_mm: <tspan data-result=\"ux_mm\">3.461852 mm</tspan></text>\n<text x=\"380\" y=\"790\" font-size=\"14\">uy_mm: <tspan data-result=\"uy_mm\">-0.164309 mm</tspan></text>\n<text x=\"725\" y=\"790\" font-size=\"14\">peak_stress_mpa: <tspan data-result=\"peak_stress_mpa\">17.185382 MPa</tspan></text>\n</svg>",
+      "prompt": "Object: Three-bay three-storey frame elevation. Make a dimensioned structural elevation. All sections are solid rectangles; h is in the frame plane and b is out of plane. The idealised column bases are clamped, not freely resting on a floor. This task concerns only the stated 2D frame, not complete product/building validation. \nOriginal physical model:\n{\"name\": \"Three-bay three-storey frame elevation\", \"nodes\": {\"N0_0\": [0, 0], \"N1_0\": [3300, 0], \"N2_0\": [6600, 0], \"N3_0\": [9900, 0], \"N0_1\": [0, 2800], \"N1_1\": [3300, 2800], \"N2_1\": [6600, 2800], \"N3_1\": [9900, 2800], \"N0_2\": [0, 5600], \"N1_2\": [3300, 5600], \"N2_2\": [6600, 5600], \"N3_2\": [9900, 5600], \"N0_3\": [0, 8400], \"N1_3\": [3300, 8400], \"N2_3\": [6600, 8400], \"N3_3\": [9900, 8400]}, \"members\": [{\"id\": \"col_0_0\", \"a\": \"N0_0\", \"b\": \"N0_1\", \"b_mm\": 160, \"h_mm\": 200, \"E\": 200000}, {\"id\": \"col_1_0\", \"a\": \"N1_0\", \"b\": \"N1_1\", \"b_mm\": 160, \"h_mm\": 200, \"E\": 200000}, {\"id\": \"col_2_0\", \"a\": \"N2_0\", \"b\": \"N2_1\", \"b_mm\": 160, \"h_mm\": 200, \"E\": 200000}, {\"id\": \"col_3_0\", \"a\": \"N3_0\", \"b\": \"N3_1\", \"b_mm\": 160, \"h_mm\": 200, \"E\": 200000}, {\"id\": \"beam_0_1\", \"a\": \"N0_1\", \"b\": \"N1_1\", \"b_mm\": 140, \"h_mm\": 260, \"E\": 200000}, {\"id\": \"beam_1_1\", \"a\": \"N1_1\", \"b\": \"N2_1\", \"b_mm\": 140, \"h_mm\": 260, \"E\": 200000}, {\"id\": \"beam_2_1\", \"a\": \"N2_1\", \"b\": \"N3_1\", \"b_mm\": 140, \"h_mm\": 260, \"E\": 200000}, {\"id\": \"col_0_1\", \"a\": \"N0_1\", \"b\": \"N0_2\", \"b_mm\": 140, \"h_mm\": 180, \"E\": 200000}, {\"id\": \"col_1_1\", \"a\": \"N1_1\", \"b\": \"N1_2\", \"b_mm\": 140, \"h_mm\": 180, \"E\": 200000}, {\"id\": \"col_2_1\", \"a\": \"N2_1\", \"b\": \"N2_2\", \"b_mm\": 140, \"h_mm\": 180, \"E\": 200000}, {\"id\": \"col_3_1\", \"a\": \"N3_1\", \"b\": \"N3_2\", \"b_mm\": 140, \"h_mm\": 180, \"E\": 200000}, {\"id\": \"beam_0_2\", \"a\": \"N0_2\", \"b\": \"N1_2\", \"b_mm\": 140, \"h_mm\": 240, \"E\": 200000}, {\"id\": \"beam_1_2\", \"a\": \"N1_2\", \"b\": \"N2_2\", \"b_mm\": 140, \"h_mm\": 240, \"E\": 200000}, {\"id\": \"beam_2_2\", \"a\": \"N2_2\", \"b\": \"N3_2\", \"b_mm\": 140, \"h_mm\": 240, \"E\": 200000}, {\"id\": \"col_0_2\", \"a\": \"N0_2\", \"b\": \"N0_3\", \"b_mm\": 140, \"h_mm\": 160, \"E\": 200000}, {\"id\": \"col_1_2\", \"a\": \"N1_2\", \"b\": \"N1_3\", \"b_mm\": 140, \"h_mm\": 160, \"E\": 200000}, {\"id\": \"col_2_2\", \"a\": \"N2_2\", \"b\": \"N2_3\", \"b_mm\": 140, \"h_mm\": 160, \"E\": 200000}, {\"id\": \"col_3_2\", \"a\": \"N3_2\", \"b\": \"N3_3\", \"b_mm\": 140, \"h_mm\": 160, \"E\": 200000}, {\"id\": \"beam_0_3\", \"a\": \"N0_3\", \"b\": \"N1_3\", \"b_mm\": 140, \"h_mm\": 220, \"E\": 200000}, {\"id\": \"beam_1_3\", \"a\": \"N1_3\", \"b\": \"N2_3\", \"b_mm\": 140, \"h_mm\": 220, \"E\": 200000}, {\"id\": \"beam_2_3\", \"a\": \"N2_3\", \"b\": \"N3_3\", \"b_mm\": 140, \"h_mm\": 220, \"E\": 200000}], \"supports\": {\"N0_0\": [0, 1, 2], \"N1_0\": [0, 1, 2], \"N2_0\": [0, 1, 2], \"N3_0\": [0, 1, 2]}, \"loads\": {\"N0_1\": [10500, -30000, 0], \"N3_1\": [0, -43000, 0], \"N0_2\": [12000, -34000, 0], \"N3_2\": [0, -48000, 0], \"N0_3\": [13500, -38000, 0], \"N3_3\": [0, -53000, 0]}, \"probe\": \"N3_3\", \"limits\": {\"abs_uy_mm\": 12.0, \"peak_stress_mpa\": 180.0}}\nOriginal SVG:\n<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1100 850\" width=\"1100\" height=\"850\">\n<rect width=\"1100\" height=\"850\" fill=\"white\"/>\n<text x=\"35\" y=\"40\" font-size=\"23\">Three-bay three-storey frame elevation</text>\n<text x=\"35\" y=\"66\" font-size=\"14\">Structural centreline elevation \u2014 dimensions mm; sections b \u00d7 h mm</text>\n<line data-member=\"col_0_0\" x1=\"100.0\" y1=\"610.0\" x2=\"100.0\" y2=\"460.0\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_0_0\" x=\"108.0\" y=\"525.0\" font-size=\"12\">2800.000 mm</text>\n<text x=\"35\" y=\"695\" font-size=\"12\">col_0_0: 160 \u00d7 200</text>\n<line data-member=\"col_1_0\" x1=\"276.7857142857143\" y1=\"610.0\" x2=\"276.7857142857143\" y2=\"460.0\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_1_0\" x=\"284.7857142857143\" y=\"525.0\" font-size=\"12\">2800.000 mm</text>\n<text x=\"300\" y=\"695\" font-size=\"12\">col_1_0: 160 \u00d7 200</text>\n<line data-member=\"col_2_0\" x1=\"453.57142857142856\" y1=\"610.0\" x2=\"453.57142857142856\" y2=\"460.0\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_2_0\" x=\"461.57142857142856\" y=\"525.0\" font-size=\"12\">2800.000 mm</text>\n<text x=\"565\" y=\"695\" font-size=\"12\">col_2_0: 160 \u00d7 200</text>\n<line data-member=\"col_3_0\" x1=\"630.3571428571428\" y1=\"610.0\" x2=\"630.3571428571428\" y2=\"460.0\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_3_0\" x=\"638.3571428571428\" y=\"525.0\" font-size=\"12\">2800.000 mm</text>\n<text x=\"830\" y=\"695\" font-size=\"12\">col_3_0: 160 \u00d7 200</text>\n<line data-member=\"beam_0_1\" x1=\"100.0\" y1=\"460.0\" x2=\"276.7857142857143\" y2=\"460.0\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_0_1\" x=\"196.39285714285714\" y=\"450.0\" font-size=\"12\">3300.000 mm</text>\n<text x=\"35\" y=\"717\" font-size=\"12\">beam_0_1: 140 \u00d7 260</text>\n<line data-member=\"beam_1_1\" x1=\"276.7857142857143\" y1=\"460.0\" x2=\"453.57142857142856\" y2=\"460.0\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_1_1\" x=\"373.17857142857144\" y=\"450.0\" font-size=\"12\">3300.000 mm</text>\n<text x=\"300\" y=\"717\" font-size=\"12\">beam_1_1: 140 \u00d7 260</text>\n<line data-member=\"beam_2_1\" x1=\"453.57142857142856\" y1=\"460.0\" x2=\"630.3571428571428\" y2=\"460.0\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_2_1\" x=\"549.9642857142857\" y=\"450.0\" font-size=\"12\">3300.000 mm</text>\n<text x=\"565\" y=\"717\" font-size=\"12\">beam_2_1: 140 \u00d7 260</text>\n<line data-member=\"col_0_1\" x1=\"100.0\" y1=\"460.0\" x2=\"100.0\" y2=\"310.0\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_0_1\" x=\"108.0\" y=\"375.0\" font-size=\"12\">2800.000 mm</text>\n<text x=\"830\" y=\"717\" font-size=\"12\">col_0_1: 140 \u00d7 180</text>\n<line data-member=\"col_1_1\" x1=\"276.7857142857143\" y1=\"460.0\" x2=\"276.7857142857143\" y2=\"310.0\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_1_1\" x=\"284.7857142857143\" y=\"375.0\" font-size=\"12\">2800.000 mm</text>\n<text x=\"35\" y=\"739\" font-size=\"12\">col_1_1: 140 \u00d7 180</text>\n<line data-member=\"col_2_1\" x1=\"453.57142857142856\" y1=\"460.0\" x2=\"453.57142857142856\" y2=\"310.0\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_2_1\" x=\"461.57142857142856\" y=\"375.0\" font-size=\"12\">2800.000 mm</text>\n<text x=\"300\" y=\"739\" font-size=\"12\">col_2_1: 140 \u00d7 180</text>\n<line data-member=\"col_3_1\" x1=\"630.3571428571428\" y1=\"460.0\" x2=\"630.3571428571428\" y2=\"310.0\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_3_1\" x=\"638.3571428571428\" y=\"375.0\" font-size=\"12\">2800.000 mm</text>\n<text x=\"565\" y=\"739\" font-size=\"12\">col_3_1: 140 \u00d7 180</text>\n<line data-member=\"beam_0_2\" x1=\"100.0\" y1=\"310.0\" x2=\"276.7857142857143\" y2=\"310.0\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_0_2\" x=\"196.39285714285714\" y=\"300.0\" font-size=\"12\">3300.000 mm</text>\n<text x=\"830\" y=\"739\" font-size=\"12\">beam_0_2: 140 \u00d7 240</text>\n<line data-member=\"beam_1_2\" x1=\"276.7857142857143\" y1=\"310.0\" x2=\"453.57142857142856\" y2=\"310.0\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_1_2\" x=\"373.17857142857144\" y=\"300.0\" font-size=\"12\">3300.000 mm</text>\n<text x=\"35\" y=\"761\" font-size=\"12\">beam_1_2: 140 \u00d7 240</text>\n<line data-member=\"beam_2_2\" x1=\"453.57142857142856\" y1=\"310.0\" x2=\"630.3571428571428\" y2=\"310.0\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_2_2\" x=\"549.9642857142857\" y=\"300.0\" font-size=\"12\">3300.000 mm</text>\n<text x=\"300\" y=\"761\" font-size=\"12\">beam_2_2: 140 \u00d7 240</text>\n<line data-member=\"col_0_2\" x1=\"100.0\" y1=\"310.0\" x2=\"100.0\" y2=\"160.0\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_0_2\" x=\"108.0\" y=\"225.0\" font-size=\"12\">2800.000 mm</text>\n<text x=\"565\" y=\"761\" font-size=\"12\">col_0_2: 140 \u00d7 160</text>\n<line data-member=\"col_1_2\" x1=\"276.7857142857143\" y1=\"310.0\" x2=\"276.7857142857143\" y2=\"160.0\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_1_2\" x=\"284.7857142857143\" y=\"225.0\" font-size=\"12\">2800.000 mm</text>\n<text x=\"830\" y=\"761\" font-size=\"12\">col_1_2: 140 \u00d7 160</text>\n<line data-member=\"col_2_2\" x1=\"453.57142857142856\" y1=\"310.0\" x2=\"453.57142857142856\" y2=\"160.0\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_2_2\" x=\"461.57142857142856\" y=\"225.0\" font-size=\"12\">2800.000 mm</text>\n<text x=\"35\" y=\"783\" font-size=\"12\">col_2_2: 140 \u00d7 160</text>\n<line data-member=\"col_3_2\" x1=\"630.3571428571428\" y1=\"310.0\" x2=\"630.3571428571428\" y2=\"160.0\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_col_3_2\" x=\"638.3571428571428\" y=\"225.0\" font-size=\"12\">2800.000 mm</text>\n<text x=\"300\" y=\"783\" font-size=\"12\">col_3_2: 140 \u00d7 160</text>\n<line data-member=\"beam_0_3\" x1=\"100.0\" y1=\"160.0\" x2=\"276.7857142857143\" y2=\"160.0\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_0_3\" x=\"196.39285714285714\" y=\"150.0\" font-size=\"12\">3300.000 mm</text>\n<text x=\"565\" y=\"783\" font-size=\"12\">beam_0_3: 140 \u00d7 220</text>\n<line data-member=\"beam_1_3\" x1=\"276.7857142857143\" y1=\"160.0\" x2=\"453.57142857142856\" y2=\"160.0\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_1_3\" x=\"373.17857142857144\" y=\"150.0\" font-size=\"12\">3300.000 mm</text>\n<text x=\"830\" y=\"783\" font-size=\"12\">beam_1_3: 140 \u00d7 220</text>\n<line data-member=\"beam_2_3\" x1=\"453.57142857142856\" y1=\"160.0\" x2=\"630.3571428571428\" y2=\"160.0\" stroke=\"#1f3348\" stroke-width=\"4\"/>\n<text data-dimension=\"length_beam_2_3\" x=\"549.9642857142857\" y=\"150.0\" font-size=\"12\">3300.000 mm</text>\n<text x=\"35\" y=\"805\" font-size=\"12\">beam_2_3: 140 \u00d7 220</text>\n<circle cx=\"100.0\" cy=\"610.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"108.0\" y=\"627.0\" font-size=\"13\">N0_0</text>\n<path d=\"M88.0,616.0 H112.0 M88.0,616.0 l-6,9 M100.0,616.0 l-6,9 M112.0,616.0 l-6,9\" stroke=\"black\" fill=\"none\"/>\n<circle cx=\"276.7857142857143\" cy=\"610.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"284.7857142857143\" y=\"627.0\" font-size=\"13\">N1_0</text>\n<path d=\"M264.7857142857143,616.0 H288.7857142857143 M264.7857142857143,616.0 l-6,9 M276.7857142857143,616.0 l-6,9 M288.7857142857143,616.0 l-6,9\" stroke=\"black\" fill=\"none\"/>\n<circle cx=\"453.57142857142856\" cy=\"610.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"461.57142857142856\" y=\"627.0\" font-size=\"13\">N2_0</text>\n<path d=\"M441.57142857142856,616.0 H465.57142857142856 M441.57142857142856,616.0 l-6,9 M453.57142857142856,616.0 l-6,9 M465.57142857142856,616.0 l-6,9\" stroke=\"black\" fill=\"none\"/>\n<circle cx=\"630.3571428571428\" cy=\"610.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"638.3571428571428\" y=\"627.0\" font-size=\"13\">N3_0</text>\n<path d=\"M618.3571428571428,616.0 H642.3571428571428 M618.3571428571428,616.0 l-6,9 M630.3571428571428,616.0 l-6,9 M642.3571428571428,616.0 l-6,9\" stroke=\"black\" fill=\"none\"/>\n<circle cx=\"100.0\" cy=\"460.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"108.0\" y=\"477.0\" font-size=\"13\">N0_1</text>\n<circle cx=\"276.7857142857143\" cy=\"460.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"284.7857142857143\" y=\"477.0\" font-size=\"13\">N1_1</text>\n<circle cx=\"453.57142857142856\" cy=\"460.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"461.57142857142856\" y=\"477.0\" font-size=\"13\">N2_1</text>\n<circle cx=\"630.3571428571428\" cy=\"460.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"638.3571428571428\" y=\"477.0\" font-size=\"13\">N3_1</text>\n<circle cx=\"100.0\" cy=\"310.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"108.0\" y=\"327.0\" font-size=\"13\">N0_2</text>\n<circle cx=\"276.7857142857143\" cy=\"310.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"284.7857142857143\" y=\"327.0\" font-size=\"13\">N1_2</text>\n<circle cx=\"453.57142857142856\" cy=\"310.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"461.57142857142856\" y=\"327.0\" font-size=\"13\">N2_2</text>\n<circle cx=\"630.3571428571428\" cy=\"310.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"638.3571428571428\" y=\"327.0\" font-size=\"13\">N3_2</text>\n<circle cx=\"100.0\" cy=\"160.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"108.0\" y=\"177.0\" font-size=\"13\">N0_3</text>\n<circle cx=\"276.7857142857143\" cy=\"160.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"284.7857142857143\" y=\"177.0\" font-size=\"13\">N1_3</text>\n<circle cx=\"453.57142857142856\" cy=\"160.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"461.57142857142856\" y=\"177.0\" font-size=\"13\">N2_3</text>\n<circle cx=\"630.3571428571428\" cy=\"160.0\" r=\"4\" fill=\"#1f3348\"/>\n<text x=\"638.3571428571428\" y=\"177.0\" font-size=\"13\">N3_3</text>\n<text x=\"35\" y=\"790\" font-size=\"14\">ux_mm: <tspan data-result=\"ux_mm\">3.461852 mm</tspan></text>\n<text x=\"380\" y=\"790\" font-size=\"14\">uy_mm: <tspan data-result=\"uy_mm\">-0.164309 mm</tspan></text>\n<text x=\"725\" y=\"790\" font-size=\"14\">peak_stress_mpa: <tspan data-result=\"peak_stress_mpa\">17.185382 MPa</tspan></text>\n</svg>\nEDIT: Move the column grid at x=3300 mm to x=4000 mm. Change the vertical load at N3_3 to -68000 N. Keep every other node, section and load unchanged.\nKeep viewBox=\"0 0 1100 850\". Map physical (x,y) mm to SVG (X,Y) as X=100+0.0535714285714286*x, Y=610-0.0535714285714286*y. Draw exactly the listed members. Retain member IDs. Required dimensions are the physical centreline length of every member, tagged data-dimension=\"length_MEMBERID\". Recompute dimensions and analysis after any edit. Report signed ux and uy at N3_3, plus peak extreme-fibre normal stress across member ends. Give at least three significant digits. Check against the limits in the model; no other safety claims.",
+      "reference": {
+        "ux_mm": 3.511934935906487,
+        "uy_mm": -0.1882318261986952,
+        "peak_stress_mpa": 17.683704774617233,
+        "member_stress_mpa": {
+          "col_0_0": 14.96547469947736,
+          "col_1_0": 14.559605010970733,
+          "col_2_0": 14.47561819810903,
+          "col_3_0": 17.683704774617233,
+          "beam_0_1": 9.877165755425482,
+          "beam_1_1": 7.979394115152565,
+          "beam_2_1": 9.910415310237514,
+          "col_0_1": 11.992957011160454,
+          "col_1_1": 14.90333656080151,
+          "col_2_1": 14.51364400801562,
+          "col_3_1": 14.079965622622996,
+          "beam_0_2": 8.200182896832027,
+          "beam_1_2": 6.795581416884333,
+          "beam_2_2": 7.484774861603208,
+          "col_0_2": 8.940729265038454,
+          "col_1_2": 10.582716186762847,
+          "col_2_2": 9.656038342803566,
+          "col_3_2": 9.167583129107744,
+          "beam_0_3": 4.224593427756675,
+          "beam_1_3": 3.3164791793463873,
+          "beam_2_3": 3.278200967237942
+        },
+        "reactions": {
+          "N0_0": [
+            -7715.694017976051,
+            88454.47076096557,
+            13014690.654076995
+          ],
+          "N1_0": [
+            -10253.269853192101,
+            -5105.300641321343,
+            15360068.656991405
+          ],
+          "N2_0": [
+            -10231.995331329292,
+            3326.774566539658,
+            15329766.92576498
+          ],
+          "N3_0": [
+            -7799.0407974950585,
+            174324.05531381842,
+            13051816.582464436
+          ]
+        },
+        "equilibrium_residual_N_Nmm": [
+          3.3032847568392754e-09,
+          -5.820766091346741e-11,
+          -2.0265579223632812e-05
+        ],
+        "free_residual_max_N_Nmm": 9.313225746154785e-09,
+        "subdivision_relative_difference": {
+          "ux_mm": 5.735837060318253e-13,
+          "uy_mm": 3.6126281953249314e-14,
+          "peak_stress_mpa": 7.111974884926791e-14
+        }
+      },
+      "validation_techniques": [
+        "SVG geometry and connectivity constraints",
+        "dimension consistency",
+        "global force and moment equilibrium",
+        "linear frame FEM",
+        "member-subdivision reference check"
+      ],
+      "model_sha256": "ce6c6cd1618aa48dc7990286903eb87bd68451abaadac083a40256107789a5e6"
+    }
+  ]
+}
