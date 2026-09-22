@@ -117,7 +117,13 @@ def main():
     import cad_astra_benchmark as cad
 
     set_seed(a.seed)
-    print(torch.__version__, torch.cuda.get_device_name(0), flush=True)
+    import subprocess as _sp
+    try:
+        sha = _sp.run(['git', 'rev-parse', '--short', 'HEAD'], cwd=str(ROOT), capture_output=True,
+                      text=True).stdout.strip()
+    except Exception:
+        sha = 'unknown'
+    print(f'commit {sha} | torch {torch.__version__} | {torch.cuda.get_device_name(0)}', flush=True)
     train, val, test = (load(s, a.data, arms) for s in ('train', 'validation', 'test'))
     print(f'{len(train)} train / {len(val)} val / {len(test)} test  arms={arms}', flush=True)
 
@@ -158,6 +164,10 @@ def main():
         before = evaluate(base, tokenizer, test, cad, a.eval_count, a.max_new, 'base')
         print(json.dumps({k: v for k, v in before.items() if k != 'rows'}, indent=2), flush=True)
 
+    if hasattr(base, 'enable_input_require_grads'):
+        base.enable_input_require_grads()      # gradient checkpointing + LoRA needs this, or the
+    if hasattr(base, 'config'):                # backward pass sees no input requiring grad
+        base.config.use_cache = False
     model = get_peft_model(base, LoraConfig(r=16, lora_alpha=32, lora_dropout=0.05,
                                             target_modules=['q_proj', 'k_proj', 'v_proj', 'o_proj'],
                                             task_type='CAUSAL_LM'))
@@ -168,7 +178,8 @@ def main():
                               per_device_eval_batch_size=1, learning_rate=2e-4,
                               lr_scheduler_type='cosine', warmup_ratio=0.05, logging_steps=10,
                               eval_strategy='epoch', save_strategy='no', bf16=True, report_to=[],
-                              seed=a.seed, gradient_checkpointing=True)
+                              seed=a.seed, gradient_checkpointing=True,
+                              remove_unused_columns=False)
     trainer = Trainer(model=model, args=args, train_dataset=enc_train, eval_dataset=enc_val,
                       data_collator=collate)
     started = time.perf_counter()
@@ -178,6 +189,8 @@ def main():
     tokenizer.save_pretrained(a.out / 'adapter')
 
     print('--- trained model ---', flush=True)
+    if hasattr(model, 'config'):
+        model.config.use_cache = True
     after = evaluate(model, tokenizer, test, cad, a.eval_count, a.max_new, 'trained')
     print(json.dumps({k: v for k, v in after.items() if k != 'rows'}, indent=2), flush=True)
 
