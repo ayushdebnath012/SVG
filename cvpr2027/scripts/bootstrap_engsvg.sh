@@ -6,5 +6,6 @@ cd "$(dirname "$0")/.."
 export PYTHONPATH=src:scripts
 python scripts/eng_svg_trainset.py build --n "${PAIRS:-400}"
 python scripts/eng_svg_trainset.py verify
+pip uninstall -y -q torchao 2>/dev/null || true
 python scripts/colab_train_engsvg.py --arms "${ARMS:-text2svg}" --epochs "${EPOCHS:-2}" \
     --eval-count "${EVAL:-24}" --out "${OUT:-/content/engsvg-run}"
