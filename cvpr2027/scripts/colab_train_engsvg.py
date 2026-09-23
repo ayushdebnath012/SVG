@@ -89,8 +89,20 @@ def evaluate(model, tokenizer, rows, cad, limit, max_new, tag, out_dir=None):
             out['parsed'] += 1
             task = dict(model=r['model'], mapping=r['mapping'], dimensions=r['dimensions'],
                         limits=r['limits'], reference=r['reference_full'])
-            row = cad.score(task, json.dumps({'svg': m.group(), 'analysis':
-                                              dict(r['reference'], status='calculated')}))
+            # The model's own numbers, read back out of its data-result elements. Passing the
+            # reference values here instead would make the analysis check vacuous: it would pass
+            # whenever the SVG parsed, measuring nothing about what the model actually claimed.
+            claimed = {}
+            for key in ('ux_mm', 'uy_mm', 'peak_stress_mpa'):
+                found = re.search(rf'data-result="{key}"[^>]*>([^<]*)<', m.group())
+                if found:
+                    try:
+                        claimed[key] = cad.first_number(found.group(1))
+                    except ValueError:
+                        pass
+            rec['claimed'] = claimed
+            row = cad.score(task, json.dumps({'svg': m.group(),
+                                              'analysis': dict(claimed, status='estimated')}))
             rec['geometry'] = not row['geometry_errors']
             rec['dimensions'] = not row['dimension_errors']
             rec['analysis'] = not row['analysis_errors']
