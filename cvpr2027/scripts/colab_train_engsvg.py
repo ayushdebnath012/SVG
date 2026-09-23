@@ -103,6 +103,16 @@ def evaluate(model, tokenizer, rows, cad, limit, max_new, tag, out_dir=None):
             rec['claimed'] = claimed
             row = cad.score(task, json.dumps({'svg': m.group(),
                                               'analysis': dict(claimed, status='estimated')}))
+            # Record how wrong the geometry is, not merely that it is wrong. If the endpoints are
+            # off by a consistent scale or offset the model mis-applied the affine map, which is
+            # arithmetic; if they are scattered it failed to place the frame at all. Those call for
+            # opposite fixes, and a pass/fail column cannot tell them apart.
+            errs = [e for e in row['geometry_errors'] if 'endpoint_error_mm' in e]
+            if errs:
+                vals = sorted(e['endpoint_error_mm'] for e in errs)
+                rec['geometry_error_mm'] = {'members_off': len(errs), 'median': vals[len(vals) // 2],
+                                            'min': vals[0], 'max': vals[-1]}
+            rec['joint_gaps'] = sum('joint_gap_mm' in e for e in row['geometry_errors'])
             rec['geometry'] = not row['geometry_errors']
             rec['dimensions'] = not row['dimension_errors']
             rec['analysis'] = not row['analysis_errors']
@@ -118,10 +128,16 @@ def evaluate(model, tokenizer, rows, cad, limit, max_new, tag, out_dir=None):
                         for k in ('parsed', 'geometry', 'dimensions', 'analysis', 'drawn_fem'))
         print(f'  [{tag} {index + 1}/{min(limit, len(rows))}] {flags} '
               f'{_t.perf_counter() - t0:.1f}s  tokens={len(answer)//4}', flush=True)
+        if out_dir is not None and rec.get('geometry_error_mm'):
+            g = rec['geometry_error_mm']
+            print(f"        geometry off by {g['median']:.0f} mm median "
+                  f"({g['min']:.0f}-{g['max']:.0f} mm over {g['members_off']} members)", flush=True)
         if out_dir is not None:                       # survive a lost session
             (Path(out_dir) / f'partial-{tag}.json').write_text(
                 json.dumps({k: v for k, v in out.items() if k != 'rows'} |
-                           {'completed': len(out['rows'])}, indent=2) + '\n')
+                           {'completed': len(out['rows']), 'rows': out['rows']}, indent=2) + '\n')
+            if m:
+                (Path(out_dir) / f'svg-{tag}-{index:02d}.svg').write_text(m.group())
     out['wall_seconds'] = _t.perf_counter() - started_all
     return out
 
