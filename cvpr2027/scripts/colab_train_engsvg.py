@@ -221,9 +221,18 @@ def main():
     tokenizer.save_pretrained(a.out / 'adapter')
 
     print('--- trained model ---', flush=True)
-    if hasattr(model, 'config'):
-        model.config.use_cache = True
-    after = evaluate(model, tokenizer, test, cad, a.eval_count, a.max_new, 'trained', a.out)
+    # Decoding through the LoRA wrapper ran 2.8x slower than the base model on the A100 (120.4s vs
+    # 42.5s median per drawing), which is adapter overhead on every forward pass, not compute. The
+    # adapter is already saved above, so fold it into the weights and generate at base speed.
+    try:
+        merged = model.merge_and_unload()
+        print('adapter merged for generation', flush=True)
+    except Exception as exc:
+        print(f'could not merge adapter ({type(exc).__name__}), generating through the wrapper', flush=True)
+        merged = model
+    if hasattr(merged, 'config'):
+        merged.config.use_cache = True
+    after = evaluate(merged, tokenizer, test, cad, a.eval_count, a.max_new, 'trained', a.out)
     print(json.dumps({k: v for k, v in after.items() if k != 'rows'}, indent=2), flush=True)
 
     summary = {'created_utc': datetime.now(timezone.utc).isoformat(), 'model': a.model, 'arms': arms,
