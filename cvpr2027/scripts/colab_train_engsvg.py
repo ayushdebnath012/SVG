@@ -54,13 +54,26 @@ def load(split, data, arms):
     return [r for r in rows if r['arm'] in arms]
 
 
-def evaluate(model, tokenizer, rows, cad, limit, max_new, tag):
-    """Generate a drawing per prompt and score it exactly as the benchmark does."""
+def evaluate(model, tokenizer, rows, cad, limit, max_new, tag, out_dir=None):
+    """Generate a drawing per prompt and score it exactly as the benchmark does.
+
+    Generation must not run under gradient checkpointing with the cache disabled: that is the
+    training configuration and it makes every token recompute its segment, turning a few minutes of
+    decoding into a long stall. Disable it and restore the cache before decoding, and write partial
+    results after each sample so a lost session does not discard the work already done.
+    """
+    import time as _t
     import torch
     model.eval()
+    if hasattr(model, 'gradient_checkpointing_disable'):
+        model.gradient_checkpointing_disable()
+    if hasattr(model, 'config'):
+        model.config.use_cache = True
     out = {'tag': tag, 'n': 0, 'strict_pass': 0, 'geometry_ok': 0, 'dimensions_ok': 0,
            'analysis_ok': 0, 'drawn_fem_ok': 0, 'parsed': 0, 'rows': []}
-    for r in rows[:limit]:
+    started_all = _t.perf_counter()
+    for index, r in enumerate(rows[:limit]):
+        t0 = _t.perf_counter()
         messages = [{'role': 'user', 'content': r['prompt']}]
         text = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
         ids = tokenizer(text, return_tensors='pt', truncation=True, max_length=7000).to(model.device)
@@ -89,8 +102,15 @@ def evaluate(model, tokenizer, rows, cad, limit, max_new, tag):
             out['analysis_ok'] += rec['analysis']; out['drawn_fem_ok'] += rec['drawn_fem']
             out['strict_pass'] += all((rec['geometry'], rec['dimensions'], rec['analysis'], rec['drawn_fem']))
         out['rows'].append(rec)
-        print('.', end='', flush=True)
-    print()
+        flags = ''.join(k[0].upper() if rec.get(k) else '-'
+                        for k in ('parsed', 'geometry', 'dimensions', 'analysis', 'drawn_fem'))
+        print(f'  [{tag} {index + 1}/{min(limit, len(rows))}] {flags} '
+              f'{_t.perf_counter() - t0:.1f}s  tokens={len(answer)//4}', flush=True)
+        if out_dir is not None:                       # survive a lost session
+            (Path(out_dir) / f'partial-{tag}.json').write_text(
+                json.dumps({k: v for k, v in out.items() if k != 'rows'} |
+                           {'completed': len(out['rows'])}, indent=2) + '\n')
+    out['wall_seconds'] = _t.perf_counter() - started_all
     return out
 
 
@@ -161,7 +181,7 @@ def main():
         print('--- base model evaluation skipped ---', flush=True)
     else:
         print('--- base model, before training ---', flush=True)
-        before = evaluate(base, tokenizer, test, cad, a.eval_count, a.max_new, 'base')
+        before = evaluate(base, tokenizer, test, cad, a.eval_count, a.max_new, 'base', a.out)
         print(json.dumps({k: v for k, v in before.items() if k != 'rows'}, indent=2), flush=True)
 
     if hasattr(base, 'enable_input_require_grads'):
@@ -191,7 +211,7 @@ def main():
     print('--- trained model ---', flush=True)
     if hasattr(model, 'config'):
         model.config.use_cache = True
-    after = evaluate(model, tokenizer, test, cad, a.eval_count, a.max_new, 'trained')
+    after = evaluate(model, tokenizer, test, cad, a.eval_count, a.max_new, 'trained', a.out)
     print(json.dumps({k: v for k, v in after.items() if k != 'rows'}, indent=2), flush=True)
 
     summary = {'created_utc': datetime.now(timezone.utc).isoformat(), 'model': a.model, 'arms': arms,
