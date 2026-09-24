@@ -34,6 +34,11 @@ def parse_svg(svg: str, max_bytes: int = 2_000_000) -> ET.Element:
 
 
 def serialize_svg(root: ET.Element) -> str:
+    # ET._namespace_map is global and any import can overwrite it: svgpathtools registers the SVG
+    # namespace under the prefix "svg", which turns every serialised tag into <svg:line> and makes a
+    # patched document compare unequal to an identical target. Re-assert the default here, where it
+    # is needed, rather than relying on import order.
+    ET.register_namespace("", SVG_NAMESPACE)
     return ET.tostring(root, encoding="unicode", short_empty_elements=True)
 
 

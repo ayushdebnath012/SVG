@@ -39,6 +39,11 @@ def apply_patch(svg: str, patch: Patch) -> str:
                 sibling = by_id[operation.after]
                 children = list(parent)
                 parent.insert(children.index(sibling) + 1, element)
+        elif operation.op == "set_text":
+            for target in operation.targets:
+                if target not in by_id:
+                    raise PatchError(f"unknown target during execution: {target}")
+                by_id[target].text = operation.text or ""
         elif operation.op == "remove_element":
             for target in operation.targets:
                 if target not in by_id:

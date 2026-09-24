@@ -21,6 +21,7 @@ class PatchOperation:
     parent: str | None = None
     after: str | None = None
     element: str | None = None
+    text: str | None = None
 
     @property
     def attributes_dict(self) -> dict[str, str]:
@@ -34,6 +35,8 @@ class PatchOperation:
             result["attributes"] = dict(self.attributes)
         if self.names:
             result["names"] = list(self.names)
+        if self.text is not None:
+            result["text"] = self.text
         if self.parent is not None:
             result["parent"] = self.parent
         if self.after is not None:
@@ -148,6 +151,7 @@ def _diff_elements(
     set_groups: dict,
     remove_groups: dict,
     remove_elements: list[str],
+    text_changes: list | None = None,
 ) -> None:
     """Recursively diff two element trees collecting attribute changes and removals."""
     node_id = id_map[id(orig_elem)]
@@ -165,6 +169,11 @@ def _diff_elements(
         set_groups.setdefault(changed, []).append(node_id)
     if removed_attrs:
         remove_groups.setdefault(removed_attrs, []).append(node_id)
+    # Engineering drawings carry much of their meaning as text: section sizes, loads, material and
+    # dimension values. Diffing attributes alone reported no operations for those edits and applied
+    # nothing, which fails silently rather than loudly.
+    if text_changes is not None and (orig_elem.text or "") != (ans_elem.text or ""):
+        text_changes.append((node_id, ans_elem.text or ""))
 
     orig_children = list(orig_elem)
     ans_children = list(ans_elem)
@@ -184,7 +193,8 @@ def _diff_elements(
             if child_id:
                 remove_elements.append(child_id)
         else:
-            _diff_elements(orig_child, matched, id_map, set_groups, remove_groups, remove_elements)
+            _diff_elements(orig_child, matched, id_map, set_groups, remove_groups, remove_elements,
+                           text_changes)
 
 
 def derive_patch(original_svg: str, answer_svg: str) -> Patch:
@@ -197,8 +207,10 @@ def derive_patch(original_svg: str, answer_svg: str) -> Patch:
     set_groups: dict[tuple[tuple[str, str], ...], list[str]] = {}
     remove_groups: dict[tuple[str, ...], list[str]] = {}
     remove_elements: list[str] = []
+    text_changes: list[tuple[str, str]] = []
 
-    _diff_elements(original_root, answer_root, id_map, set_groups, remove_groups, remove_elements)
+    _diff_elements(original_root, answer_root, id_map, set_groups, remove_groups, remove_elements,
+                   text_changes)
 
     operations: list[PatchOperation] = []
     for attributes, targets in set_groups.items():
@@ -207,6 +219,8 @@ def derive_patch(original_svg: str, answer_svg: str) -> Patch:
         operations.append(PatchOperation("remove_attributes", tuple(targets), names=names))
     for node_id in remove_elements:
         operations.append(PatchOperation("remove_element", (node_id,)))
+    for node_id, value in text_changes:
+        operations.append(PatchOperation("set_text", (node_id,), text=value))
 
     version = 2 if remove_elements else 1
     return Patch(tuple(operations), version=version)
