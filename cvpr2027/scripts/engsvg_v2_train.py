@@ -124,6 +124,10 @@ def main():
     ap.add_argument('--max-new', type=int, default=2200)
     ap.add_argument('--seed', type=int, default=17)
     ap.add_argument('--skip-base', action='store_true')
+    ap.add_argument('--save-steps', type=int, default=100,
+                    help='checkpoint every N optimiser steps; point --out at Drive to survive the VM')
+    ap.add_argument('--keep-checkpoints', type=int, default=2)
+    ap.add_argument('--no-resume', action='store_true', help='ignore checkpoints already in --out')
     a = ap.parse_args()
     tasks = tuple(a.tasks.split(','))
 
@@ -173,16 +177,26 @@ def main():
                                             target_modules=['q_proj', 'k_proj', 'v_proj', 'o_proj'],
                                             task_type='CAUSAL_LM'))
     model.print_trainable_parameters()
-    args = training_arguments(TrainingArguments, output_dir=str(a.out / 'checkpoints'),
+    ckpt_dir = a.out / 'checkpoints'
+    args = training_arguments(TrainingArguments, output_dir=str(ckpt_dir),
                               num_train_epochs=a.epochs, per_device_train_batch_size=1,
                               gradient_accumulation_steps=8, per_device_eval_batch_size=1,
                               learning_rate=2e-4, lr_scheduler_type='cosine', logging_steps=20,
-                              eval_strategy='epoch', save_strategy='no', bf16=True, report_to=[],
+                              eval_strategy='epoch', save_strategy='steps', save_steps=a.save_steps,
+                              save_total_limit=a.keep_checkpoints, bf16=True, report_to=[],
                               seed=a.seed, gradient_checkpointing=True, remove_unused_columns=False)
     trainer = Trainer(model=model, args=args, train_dataset=enc_train, eval_dataset=enc_val,
                       data_collator=collate)
+    # A recycled Colab VM takes its filesystem with it. With --out on Drive the optimiser state
+    # survives, so a lost session resumes from the last checkpoint instead of starting over.
+    resume = None
+    if not a.no_resume and ckpt_dir.exists():
+        found = sorted(ckpt_dir.glob('checkpoint-*'), key=lambda p: int(p.name.split('-')[1]))
+        if found:
+            resume = str(found[-1])
+            print(f'resuming from {found[-1].name}', flush=True)
     started = time.perf_counter()
-    history = trainer.train()
+    history = trainer.train(resume_from_checkpoint=resume)
     model.save_pretrained(a.out / 'adapter'); tokenizer.save_pretrained(a.out / 'adapter')
     try:
         merged = model.merge_and_unload()
