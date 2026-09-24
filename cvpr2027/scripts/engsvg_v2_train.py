@@ -25,6 +25,7 @@ ROOT = Path(os.environ.get('ENGSVG_ROOT', Path(__file__).resolve().parents[1]))
 sys.path.insert(0, str(ROOT / 'scripts'))
 sys.path.insert(0, str(ROOT / 'src'))
 import engsvg_svg_geometry as G   # noqa: E402
+import engsvg_truss as TRUSS      # noqa: E402
 
 SVG_TASKS = ('text_to_svg', 'svg_edit')
 
@@ -39,6 +40,33 @@ def load(data, splits, tasks, limit=None):
         if limit and all(len(v) >= limit for v in out.values()):
             break
     return {k: (v[:limit] if limit else v) for k, v in out.items()}
+
+
+def physics(generated, family, stored):
+    """Re-solve the truss the model actually drew, and compare it with the reference solution.
+
+    Matching endpoints says the lines landed in the right place; it does not say the structure is
+    sound. `import_untagged` recovers a truss from the drawing with no embedded metadata, inverting
+    the coordinate mapping from the visible scale annotations, so the same linear axial FEM that
+    certified the dataset can be run on the model's own output.
+
+    Plates carry manufacturing-geometry checks rather than a solve, so they return None here rather
+    than a pass that was never earned.
+    """
+    if not family.startswith('truss') or not stored:
+        return None
+    try:
+        recovered = TRUSS.import_untagged(generated)
+        solved = TRUSS.solve(recovered)
+    except Exception as exc:
+        return {'solved': False, 'reason': f'{type(exc).__name__}: {exc}'[:120]}
+    want = stored.get('peak_abs_stress_mpa')
+    got = solved['peak_abs_stress_mpa']
+    residual = max(abs(x) for x in solved['equilibrium_residual_N_Nmm'])
+    rel = abs(got - want) / max(abs(want), 1e-9) if want is not None else None
+    return {'solved': True, 'peak_abs_stress_mpa': round(got, 8), 'reference_mpa': want,
+            'relative_error': rel, 'equilibrium_residual': residual,
+            'pass': bool(rel is not None and rel <= 2e-3 and residual < 1e-5)}
 
 
 def compare(generated, reference, tolerance=1.0):
@@ -76,7 +104,8 @@ def evaluate(model, tokenizer, rows, limit, max_new, tag, out_dir):
         model.gradient_checkpointing_disable()
     if hasattr(model, 'config'):
         model.config.use_cache = True
-    agg = {'tag': tag, 'n': 0, 'parsed': 0, 'count': 0, 'geometry': 0, 'exact': 0, 'rows': []}
+    agg = {'tag': tag, 'n': 0, 'parsed': 0, 'count': 0, 'geometry': 0, 'exact': 0,
+           'physics_checked': 0, 'physics_pass': 0, 'rows': []}
     for index, r in enumerate(rows[:limit]):
         t0 = time.perf_counter()
         text = tokenizer.apply_chat_template([{'role': 'user', 'content': r['prompt']}],
@@ -90,15 +119,22 @@ def evaluate(model, tokenizer, rows, limit, max_new, tag, out_dir):
         rec = {'task': r['task'], 'family': r['family']}
         if m:
             rec.update(compare(m.group(), r['target']))
+            rec['physics'] = physics(m.group(), r['family'], (r.get('target_verification') or {}))
         else:
             rec['parsed'] = False
             rec['reason'] = 'no svg in output'
         agg['n'] += 1
         for k in ('parsed', 'count', 'geometry', 'exact'):
             agg[k] += bool(rec.get(k))
+        ph = rec.get('physics')
+        if ph:
+            agg['physics_checked'] += 1
+            agg['physics_pass'] += bool(ph.get('pass'))
         agg['rows'].append(rec)
+        ph = rec.get('physics')
         flag = ''.join(c if rec.get(k) else '-' for k, c in
                        (('parsed', 'P'), ('count', 'C'), ('geometry', 'G'), ('exact', 'X')))
+        flag += 'F' if (ph or {}).get('pass') else ('f' if ph else '-')
         extra = (f" {rec.get('matched','?')}/{rec.get('expected','?')} members"
                  if rec.get('parsed') and 'expected' in rec else f" {rec.get('reason','')}")
         print(f'  [{tag} {index + 1}/{min(limit, len(rows))}] {flag} {time.perf_counter() - t0:.0f}s'
@@ -209,14 +245,17 @@ def main():
                'tasks': tasks, 'train_rows': len(enc_train), 'epochs': a.epochs,
                'train_wall_seconds': time.perf_counter() - started,
                'train_metrics': history.metrics, 'gpu': torch.cuda.get_device_name(0),
-               'scoring': 'segment-endpoint match against the reference drawing, 1.0 unit tolerance',
+               'scoring': ('segment-endpoint match against the reference drawing at 1.0 unit '
+                           'tolerance, plus a linear axial truss FEM re-solve of the drawing itself '
+                           'recovered by import_untagged, passing at 2e-3 relative peak stress'),
                'before': before, 'after': after}
     a.out.mkdir(parents=True, exist_ok=True)
     (a.out / 'summary.json').write_text(json.dumps(summary, indent=2) + '\n')
     for tag, r in (('base', before), ('trained', after)):
         n = max(r['n'], 1)
         print(f"{tag:8s} parsed {r['parsed']:2d}/{r['n']}  count {r['count']:2d}/{n}  "
-              f"geometry {r['geometry']:2d}/{n}  exact {r['exact']:2d}/{n}")
+              f"geometry {r['geometry']:2d}/{n}  exact {r['exact']:2d}/{n}  "
+              f"FEM {r['physics_pass']:2d}/{r['physics_checked']} solved")
     print('wrote', a.out / 'summary.json')
 
 
