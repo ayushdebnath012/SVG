@@ -22,6 +22,8 @@ class PatchOperation:
     after: str | None = None
     element: str | None = None
     text: str | None = None
+    subtree: str | None = None
+    index: int | None = None
 
     @property
     def attributes_dict(self) -> dict[str, str]:
@@ -43,13 +45,18 @@ class PatchOperation:
             result["after"] = self.after
         if self.element is not None:
             result["element"] = self.element
+        if self.subtree is not None:
+            result["subtree"] = self.subtree
+        if self.index is not None:
+            result["index"] = self.index
         return result
 
     @classmethod
     def from_dict(cls, value: dict[str, Any]) -> "PatchOperation":
         if not isinstance(value, dict) or not isinstance(value.get("op"), str):
             raise PatchError("every operation requires a string 'op'")
-        allowed_keys = {"op", "targets", "attributes", "names", "parent", "after", "element"}
+        allowed_keys = {"op", "targets", "attributes", "names", "parent", "after", "element",
+                        "text", "subtree", "index"}
         unknown_keys = set(value) - allowed_keys
         if unknown_keys:
             raise PatchError(f"unknown operation fields: {sorted(unknown_keys)}")
@@ -67,6 +74,15 @@ class PatchOperation:
             raise PatchError("operation attributes must be a scalar-valued object")
         if not isinstance(names, list) or not all(isinstance(item, str) for item in names):
             raise PatchError("operation names must be a list of attribute names")
+        text = value.get("text")
+        if text is not None and not isinstance(text, str):
+            raise PatchError("operation text must be a string")
+        subtree = value.get("subtree")
+        if subtree is not None and not isinstance(subtree, str):
+            raise PatchError("operation subtree must be an SVG XML string")
+        index = value.get("index")
+        if index is not None and (isinstance(index, bool) or not isinstance(index, int) or index < 0):
+            raise PatchError("operation index must be a non-negative integer")
         return cls(
             op=value["op"],
             targets=tuple(targets),
@@ -75,6 +91,9 @@ class PatchOperation:
             parent=value.get("parent"),
             after=value.get("after"),
             element=value.get("element"),
+            text=text,
+            subtree=subtree,
+            index=index,
         )
 
 
@@ -100,7 +119,7 @@ class Patch:
         if unknown_keys:
             raise PatchError(f"unknown patch fields: {sorted(unknown_keys)}")
         version = value.get("version", 1)
-        if version not in (1, 2):
+        if version not in (1, 2, 3):
             raise PatchError(f"unsupported patch version: {version}")
         operations = value.get("operations")
         if not isinstance(operations, list):
@@ -108,8 +127,12 @@ class Patch:
         parsed = tuple(PatchOperation.from_dict(item) for item in operations)
         if version == 1:
             for op in parsed:
-                if op.op == "remove_element":
-                    raise PatchError("remove_element requires patch version 2")
+                if op.op in {"remove_element", "set_text"}:
+                    raise PatchError(f"{op.op} requires patch version 2")
+        if version < 3:
+            for op in parsed:
+                if op.op in {"insert_subtree", "replace_geometry"}:
+                    raise PatchError(f"{op.op} requires patch version 3")
         return cls(parsed, version=version)
 
 
@@ -222,5 +245,5 @@ def derive_patch(original_svg: str, answer_svg: str) -> Patch:
     for node_id, value in text_changes:
         operations.append(PatchOperation("set_text", (node_id,), text=value))
 
-    version = 2 if remove_elements else 1
+    version = 2 if remove_elements or text_changes else 1
     return Patch(tuple(operations), version=version)

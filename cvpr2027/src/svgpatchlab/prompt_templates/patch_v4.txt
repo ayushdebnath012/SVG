@@ -4,16 +4,20 @@ Markdown, analysis, or commentary.
 
 Required output shape:
 - one JSON object
-- top-level integer field: version = 1 (or 2 when using remove_element)
+- top-level integer field: version = 1 (or 2 when using remove_element or set_text)
 - top-level array field: operations
 - each operation has:
-  - op: one of "set_attributes", "remove_attributes", "remove_element"
+  - op: one of "set_attributes", "remove_attributes", "remove_element", "set_text"
   - for set_attributes / remove_attributes:
     - targets: array of actual node IDs from the context
     - attributes (set_attributes): SVG attribute key-value pairs
     - names (remove_attributes): list of attribute names to delete
   - for remove_element:
     - targets: array of node IDs to remove entirely from the tree
+    - version at top level must be 2
+  - for set_text:
+    - targets: array containing actual text, tspan, title, or desc node IDs
+    - text: the complete replacement text content
     - version at top level must be 2
 
 Strict JSON rules:
@@ -79,6 +83,12 @@ Delete / remove element changes:
   * Set version to 2 at the top level.
   * Never target n0. Never remove an ancestor of a node you want to keep.
   * Example: {"version":2,"operations":[{"op":"remove_element","targets":["n5"]}]}
+
+Visible text changes:
+  * Use "set_text" only when the instruction changes text already present in the drawing.
+  * Target only text, tspan, title, or desc nodes. Preserve all unrequested wording.
+  * Set version to 2 at the top level.
+  * Example: {"version":2,"operations":[{"op":"set_text","targets":["n8"],"text":"Section: 40 x 40 mm"}]}
 
 Compute every target, color, number, and attribute value from the actual
 instruction and actual context below.
