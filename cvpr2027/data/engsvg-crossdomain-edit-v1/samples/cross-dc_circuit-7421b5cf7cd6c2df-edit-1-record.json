@@ -1,0 +1,56 @@
+{
+  "id": "cross-dc_circuit-7421b5cf7cd6c2df:edit-1",
+  "family": "dc_circuit",
+  "instruction": "Increase the supply voltage to 54 V.",
+  "engineering_status": "verified_with_violations",
+  "target_patch": {
+    "version": 2,
+    "operations": [
+      {
+        "op": "set_text",
+        "targets": [
+          "n15"
+        ],
+        "text": "54 V"
+      }
+    ]
+  },
+  "before_verification": {
+    "method": "dc_series_kcl_kvl_and_power",
+    "pass": true,
+    "violations": [],
+    "current_A": 0.8,
+    "voltage_drops_V": [
+      28.0,
+      8.0
+    ],
+    "resistor_powers_W": [
+      22.4,
+      6.4
+    ],
+    "kvl_residual_V": 0.0,
+    "criteria": {
+      "resistor_power_rating_W": 25
+    }
+  },
+  "after_verification": {
+    "method": "dc_series_kcl_kvl_and_power",
+    "pass": false,
+    "violations": [
+      "R1 exceeds 25 W rating"
+    ],
+    "current_A": 1.2,
+    "voltage_drops_V": [
+      42.0,
+      12.0
+    ],
+    "resistor_powers_W": [
+      50.4,
+      14.4
+    ],
+    "kvl_residual_V": 0.0,
+    "criteria": {
+      "resistor_power_rating_W": 25
+    }
+  }
+}

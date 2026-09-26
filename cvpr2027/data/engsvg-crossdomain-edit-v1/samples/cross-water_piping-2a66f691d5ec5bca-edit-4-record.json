@@ -1,0 +1,57 @@
+{
+  "id": "cross-water_piping-2a66f691d5ec5bca:edit-4",
+  "family": "water_piping",
+  "instruction": "Add a second valve with loss coefficient K=2.",
+  "engineering_status": "verified_safe",
+  "target_patch": {
+    "version": 3,
+    "operations": [
+      {
+        "op": "insert_subtree",
+        "parent": "n8",
+        "subtree": "<g xmlns=\"http://www.w3.org/2000/svg\" id=\"valve-2\"><path id=\"valve-2-symbol\" d=\"M580.0 310 L600.0 330 L580.0 350 M620.0 310 L600.0 330 L620.0 350\" />\n<text id=\"valve-2-label\" x=\"600.0\" y=\"390\" font-size=\"15\" text-anchor=\"middle\" fill=\"#172b4d\" stroke=\"none\">K=2</text></g>\n",
+        "index": 1
+      }
+    ]
+  },
+  "before_verification": {
+    "method": "darcy_weisbach_continuity_and_minor_losses",
+    "pass": true,
+    "violations": [],
+    "velocity_m_s": 2.29183118,
+    "reynolds_number": 228268.22,
+    "friction_factor": 0.01844073,
+    "head_loss_m": 9.42485757,
+    "pressure_drop_pa": 92241.4269,
+    "continuity_residual_m3_s": 0.0,
+    "criteria": {
+      "maximum_velocity_m_s": 3,
+      "maximum_pressure_drop_pa": 200000
+    },
+    "assumptions": [
+      "steady incompressible water flow",
+      "constant circular diameter",
+      "Darcy-Weisbach with explicit friction-factor approximation"
+    ]
+  },
+  "after_verification": {
+    "method": "darcy_weisbach_continuity_and_minor_losses",
+    "pass": true,
+    "violations": [],
+    "velocity_m_s": 2.29183118,
+    "reynolds_number": 228268.22,
+    "friction_factor": 0.01844073,
+    "head_loss_m": 9.96046251,
+    "pressure_drop_pa": 97483.4121,
+    "continuity_residual_m3_s": 0.0,
+    "criteria": {
+      "maximum_velocity_m_s": 3,
+      "maximum_pressure_drop_pa": 200000
+    },
+    "assumptions": [
+      "steady incompressible water flow",
+      "constant circular diameter",
+      "Darcy-Weisbach with explicit friction-factor approximation"
+    ]
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "id": "cross-furniture_table-9588e53b00f865cd:edit-3",
+  "family": "furniture_table",
+  "instruction": "Extend the table width to 1650 mm.",
+  "engineering_status": "verified_safe",
+  "target_patch": {
+    "version": 2,
+    "operations": [
+      {
+        "op": "set_attributes",
+        "targets": [
+          "n3"
+        ],
+        "attributes": {
+          "height": "34.54545454545455",
+          "width": "760.0",
+          "y": "146.2424242424242"
+        }
+      },
+      {
+        "op": "set_attributes",
+        "targets": [
+          "n4"
+        ],
+        "attributes": {
+          "height": "389.21212121212125",
+          "width": "43.75757575757576",
+          "x": "170.66666666666669",
+          "y": "180.78787878787875"
+        }
+      },
+      {
+        "op": "set_attributes",
+        "targets": [
+          "n5"
+        ],
+        "attributes": {
+          "height": "389.21212121212125",
+          "width": "43.75757575757576",
+          "x": "785.5757575757576",
+          "y": "180.78787878787875"
+        }
+      },
+      {
+        "op": "set_text",
+        "targets": [
+          "n7"
+        ],
+        "text": "Width 1650 mm"
+      },
+      {
+        "op": "set_attributes",
+        "targets": [
+          "n8"
+        ],
+        "attributes": {
+          "transform": "rotate(-90 70 358.1212121212121)",
+          "y": "358.1212121212121"
+        }
+      }
+    ]
+  },
+  "before_verification": {
+    "method": "beam_bending_and_euler_buckling",
+    "pass": true,
+    "violations": [],
+    "top_bending_stress_mpa": 0.581885,
+    "top_deflection_mm": 0.187629,
+    "leg_compression_stress_mpa": 0.196491,
+    "leg_buckling_factor": 305.995394,
+    "criteria": {
+      "bending_limit_mpa": 35,
+      "deflection_limit": "L/180",
+      "compression_limit_mpa": 18,
+      "minimum_buckling_factor": 2
+    },
+    "assumptions": [
+      "simply supported uniform-load tabletop",
+      "two identical pin-ended legs",
+      "linear elastic small deflection"
+    ]
+  },
+  "after_verification": {
+    "method": "beam_bending_and_euler_buckling",
+    "pass": true,
+    "violations": [],
+    "top_bending_stress_mpa": 0.736368,
+    "top_deflection_mm": 0.380252,
+    "leg_compression_stress_mpa": 0.196491,
+    "leg_buckling_factor": 305.995394,
+    "criteria": {
+      "bending_limit_mpa": 35,
+      "deflection_limit": "L/180",
+      "compression_limit_mpa": 18,
+      "minimum_buckling_factor": 2
+    },
+    "assumptions": [
+      "simply supported uniform-load tabletop",
+      "two identical pin-ended legs",
+      "linear elastic small deflection"
+    ]
+  }
+}

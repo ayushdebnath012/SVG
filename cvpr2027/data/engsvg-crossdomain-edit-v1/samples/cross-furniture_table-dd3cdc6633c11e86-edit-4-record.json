@@ -1,0 +1,92 @@
+{
+  "id": "cross-furniture_table-dd3cdc6633c11e86:edit-4",
+  "family": "furniture_table",
+  "instruction": "Raise the table height to 980 mm.",
+  "engineering_status": "verified_safe",
+  "target_patch": {
+    "version": 2,
+    "operations": [
+      {
+        "op": "set_attributes",
+        "targets": [
+          "n3"
+        ],
+        "attributes": {
+          "height": "26.93877551020408",
+          "width": "612.2448979591836"
+        }
+      },
+      {
+        "op": "set_attributes",
+        "targets": [
+          "n4"
+        ],
+        "attributes": {
+          "height": "453.0612244897959",
+          "width": "29.387755102040817",
+          "x": "198.3673469387755",
+          "y": "116.93877551020408"
+        }
+      },
+      {
+        "op": "set_attributes",
+        "targets": [
+          "n5"
+        ],
+        "attributes": {
+          "height": "453.0612244897959",
+          "width": "29.387755102040817",
+          "x": "624.4897959183673",
+          "y": "116.93877551020408"
+        }
+      },
+      {
+        "op": "set_text",
+        "targets": [
+          "n8"
+        ],
+        "text": "Height 980 mm"
+      }
+    ]
+  },
+  "before_verification": {
+    "method": "beam_bending_and_euler_buckling",
+    "pass": true,
+    "violations": [],
+    "top_bending_stress_mpa": 0.667883,
+    "top_deflection_mm": 0.198916,
+    "leg_compression_stress_mpa": 0.184211,
+    "leg_buckling_factor": 256.651057,
+    "criteria": {
+      "bending_limit_mpa": 35,
+      "deflection_limit": "L/180",
+      "compression_limit_mpa": 18,
+      "minimum_buckling_factor": 2
+    },
+    "assumptions": [
+      "simply supported uniform-load tabletop",
+      "two identical pin-ended legs",
+      "linear elastic small deflection"
+    ]
+  },
+  "after_verification": {
+    "method": "beam_bending_and_euler_buckling",
+    "pass": true,
+    "violations": [],
+    "top_bending_stress_mpa": 0.667883,
+    "top_deflection_mm": 0.198916,
+    "leg_compression_stress_mpa": 0.184211,
+    "leg_buckling_factor": 184.097161,
+    "criteria": {
+      "bending_limit_mpa": 35,
+      "deflection_limit": "L/180",
+      "compression_limit_mpa": 18,
+      "minimum_buckling_factor": 2
+    },
+    "assumptions": [
+      "simply supported uniform-load tabletop",
+      "two identical pin-ended legs",
+      "linear elastic small deflection"
+    ]
+  }
+}

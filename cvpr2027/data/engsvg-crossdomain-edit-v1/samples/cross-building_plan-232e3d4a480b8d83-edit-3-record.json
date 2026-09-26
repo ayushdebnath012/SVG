@@ -1,0 +1,84 @@
+{
+  "id": "cross-building_plan-232e3d4a480b8d83:edit-3",
+  "family": "building_plan",
+  "instruction": "Set the exterior door clear width to 850 mm.",
+  "engineering_status": "verified_safe",
+  "target_patch": {
+    "version": 3,
+    "operations": [
+      {
+        "op": "set_attributes",
+        "targets": [
+          "n12"
+        ],
+        "attributes": {
+          "x": "337.8030303030303"
+        }
+      },
+      {
+        "op": "set_text",
+        "targets": [
+          "n12"
+        ],
+        "text": "Door 850 mm"
+      },
+      {
+        "op": "replace_geometry",
+        "targets": [
+          "n4"
+        ],
+        "attributes": {
+          "d": "M120 100 H677.5757575757576 V560.0 H367.42424242424244 M308.1818181818182 560.0 H120 Z"
+        }
+      },
+      {
+        "op": "set_attributes",
+        "targets": [
+          "n7"
+        ],
+        "attributes": {
+          "y2": "500.75757575757575"
+        }
+      },
+      {
+        "op": "replace_geometry",
+        "targets": [
+          "n8"
+        ],
+        "attributes": {
+          "d": "M367.42424242424244 560.0 A59.24242424242425 59.24242424242425 0 0 0 308.1818181818182 500.75757575757575"
+        }
+      }
+    ]
+  },
+  "before_verification": {
+    "method": "building_plan_geometry_and_clearance_rules",
+    "pass": true,
+    "violations": [],
+    "room_widths_mm": [
+      4500,
+      3500
+    ],
+    "door_clear_width_mm": 800,
+    "criteria": {
+      "minimum_room_width_mm": 2400,
+      "minimum_door_width_mm": 800,
+      "minimum_corner_clearance_mm": 300
+    }
+  },
+  "after_verification": {
+    "method": "building_plan_geometry_and_clearance_rules",
+    "pass": true,
+    "violations": [],
+    "room_widths_mm": [
+      4500,
+      3500
+    ],
+    "door_clear_width_mm": 850,
+    "criteria": {
+      "minimum_room_width_mm": 2400,
+      "minimum_door_width_mm": 800,
+      "minimum_corner_clearance_mm": 300
+    }
+  }
+}

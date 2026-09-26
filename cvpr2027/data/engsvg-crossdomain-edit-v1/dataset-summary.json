@@ -1,0 +1,54 @@
+{
+  "version": "engsvg-crossdomain-edit-v1",
+  "seed": 260925,
+  "source_designs": 2500,
+  "edit_examples": 10000,
+  "families": [
+    "building_plan",
+    "furniture_table",
+    "mechanical_part",
+    "dc_circuit",
+    "water_piping"
+  ],
+  "family_counts": {
+    "building_plan": 2000,
+    "furniture_table": 2000,
+    "mechanical_part": 2000,
+    "dc_circuit": 2000,
+    "water_piping": 2000
+  },
+  "split_examples": {
+    "train": 8000,
+    "validation": 1000,
+    "test": 1000
+  },
+  "split_source_designs": {
+    "train": 2000,
+    "validation": 250,
+    "test": 250
+  },
+  "lineage_overlap_between_splits": 0,
+  "rows_with_source_svg": 10000,
+  "rows_with_target_svg": 10000,
+  "rows_with_gold_patch": 10000,
+  "exact_patch_roundtrips": 10000,
+  "verified_safe": 9042,
+  "verified_with_violations": 958,
+  "patch_operation_coverage": {
+    "insert_subtree": 1000,
+    "replace_geometry": 1500,
+    "set_attributes": 4500,
+    "set_text": 8500
+  },
+  "verifier_coverage": {
+    "dc_series_kcl_kvl_and_power": 2000,
+    "building_plan_geometry_and_clearance_rules": 2000,
+    "darcy_weisbach_continuity_and_minor_losses": 2000,
+    "manufacturing_feature_geometry": 2000,
+    "beam_bending_and_euler_buckling": 2000
+  },
+  "sample_svgs": 30,
+  "sample_pngs": 30,
+  "training_objective": "source SVG + natural-language instruction -> constrained patch JSON",
+  "claim_boundary": "procedural 2D examples with family-specific idealised checks; not construction, manufacturing, electrical or piping approval"
+}
