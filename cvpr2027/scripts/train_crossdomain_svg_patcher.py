@@ -127,13 +127,25 @@ def evaluate(model, tokenizer, rows: list[dict], label: str, out: Path, max_new_
 
 
 def _training_arguments(cls, **kwargs):
-    """Accept both the older evaluation_strategy and newer eval_strategy names."""
+    """Build TrainingArguments with only the keywords this transformers build accepts.
+
+    The Colab image is not pinned and its signature has churned: evaluation_strategy was renamed to
+    eval_strategy, and warmup_ratio is absent from some builds. An unknown keyword is a hard
+    TypeError, so a cosmetic scheduling option aborted a run after the baseline had already been
+    measured. Drop what the signature will not take and say so, rather than losing the run.
+    """
     import inspect
     parameters = inspect.signature(cls.__init__).parameters
     if "eval_strategy" not in parameters and "eval_strategy" in kwargs:
         kwargs["evaluation_strategy"] = kwargs.pop("eval_strategy")
     if "report_to" in kwargs and kwargs["report_to"] == []:
         kwargs["report_to"] = "none"
+    dropped = sorted(k for k in kwargs if k not in parameters)
+    for key in dropped:
+        kwargs.pop(key)
+    if dropped:
+        print(f"note: this transformers build does not accept {dropped}; proceeding without them",
+              flush=True)
     return cls(**kwargs)
 
 
