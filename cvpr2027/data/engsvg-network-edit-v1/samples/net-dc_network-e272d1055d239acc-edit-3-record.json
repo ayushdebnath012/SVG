@@ -1,0 +1,92 @@
+{
+  "id": "net-dc_network-e272d1055d239acc:edit-3",
+  "family": "dc_network",
+  "edit_kind": "open_branch",
+  "instruction": "Remove R1 and leave its branch open.",
+  "engineering_status": "verified_safe",
+  "target_patch": {
+    "version": 2,
+    "operations": [
+      {
+        "op": "remove_element",
+        "targets": [
+          "n6"
+        ]
+      },
+      {
+        "op": "remove_element",
+        "targets": [
+          "n44"
+        ]
+      }
+    ]
+  },
+  "before_verification": {
+    "method": "modified_nodal_analysis_of_recovered_drawing",
+    "pass": true,
+    "violations": [],
+    "recovered_matches_model": true,
+    "nodes": 6,
+    "independent_loops": 3,
+    "source_currents_A": {
+      "V1": 0.019681226412
+    },
+    "resistor_currents_A": {
+      "R1": 7.4850516e-05,
+      "R2": 0.011052926131,
+      "R3": 0.010978075615,
+      "R4": 0.019681226412,
+      "R5": 0.008628300281,
+      "R6": 0.011052926131,
+      "R7": 0.019681226412
+    },
+    "resistor_powers_W": {
+      "R1": 1.2325719e-05,
+      "R2": 0.040315168097,
+      "R3": 0.001807772163,
+      "R4": 0.005810260096,
+      "R5": 0.0349903559,
+      "R6": 0.002687677873,
+      "R7": 0.012782572212
+    },
+    "kcl_residual_A": 4.5102810375396984e-17,
+    "power_balance_residual_W": 1.8041124150158794e-16,
+    "criteria": {
+      "resistor_rating_W": 1.0,
+      "fuse_A": 0.25
+    }
+  },
+  "after_verification": {
+    "method": "modified_nodal_analysis_of_recovered_drawing",
+    "pass": true,
+    "violations": [],
+    "recovered_matches_model": true,
+    "nodes": 6,
+    "independent_loops": 2,
+    "source_currents_A": {
+      "V1": 0.019678745074
+    },
+    "resistor_currents_A": {
+      "R2": 0.01105019138,
+      "R3": 0.01105019138,
+      "R4": 0.019678745074,
+      "R5": 0.008628553695,
+      "R6": 0.01105019138,
+      "R7": 0.019678745074
+    },
+    "resistor_powers_W": {
+      "R2": 0.040295220746,
+      "R3": 0.001831600943,
+      "R4": 0.005808795116,
+      "R5": 0.034992411264,
+      "R6": 0.00268634805,
+      "R7": 0.012779349254
+    },
+    "kcl_residual_A": 5.551115123125783e-17,
+    "power_balance_residual_W": 1.3877787807814457e-17,
+    "criteria": {
+      "resistor_rating_W": 1.0,
+      "fuse_A": 0.25
+    }
+  }
+}

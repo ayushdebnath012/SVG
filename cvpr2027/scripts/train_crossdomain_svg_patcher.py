@@ -32,6 +32,12 @@ from svgpatchlab.core.xml import normalized_tree, parse_svg  # noqa: E402
 
 DEFAULT_MODEL = "Qwen/Qwen2.5-Coder-1.5B-Instruct"
 
+sys.path.insert(0, str(ROOT / "scripts"))
+try:  # network families are scored by re-solving the edited drawing
+    import engsvg_networks as networks
+except ImportError as error:  # other families never need it
+    networks, NETWORK_IMPORT_ERROR = None, error
+
 
 def load_rows(path: Path) -> list[dict]:
     opener = gzip.open if path.suffix == ".gz" else open
@@ -49,7 +55,13 @@ def _strict_json(text: str):
 
 def score(row: dict, prediction: str) -> dict:
     result = {"json_valid": False, "patch_valid": False, "exact_patch": False,
-              "target_tree_equal": False, "reference_integrity": False, "error": None}
+              "target_tree_equal": False, "reference_integrity": False, "error": None,
+              "physics_equal": None}
+    physics = "target_model" in row and row.get("physics_from_drawing")
+    if physics:
+        if networks is None:
+            raise RuntimeError(f"network rows need engsvg_networks: {NETWORK_IMPORT_ERROR}")
+        result["physics_equal"] = False
     direct = _strict_json(prediction)
     result["json_valid"] = direct is not None
     if direct is not None:
@@ -67,6 +79,10 @@ def score(row: dict, prediction: str) -> dict:
             not scene["duplicate_xml_ids"] and
             not any(edge["to"] is None for edge in scene["reference_edges"])
         )
+        if physics:
+            # Same network, same solution: credit it even if the markup differs from the gold patch.
+            match = networks.physics_match(output, row["family"], row["target_model"])
+            result["physics_equal"] = bool(match.get("topology_equal") and match["physics_equal"])
     except Exception as exc:
         result["error"] = f"{type(exc).__name__}: {exc}"[:300]
     return result
@@ -88,7 +104,8 @@ def _balanced_eval(rows: list[dict], count: int) -> list[dict]:
     return chosen
 
 
-def evaluate(model, tokenizer, rows: list[dict], label: str, out: Path, max_new_tokens: int) -> dict:
+def evaluate(model, tokenizer, rows: list[dict], label: str, out: Path, max_new_tokens: int,
+             batch_size: int = 1) -> dict:
     import torch
     model.eval()
     if hasattr(model, "gradient_checkpointing_disable"):
@@ -96,32 +113,55 @@ def evaluate(model, tokenizer, rows: list[dict], label: str, out: Path, max_new_
     model.config.use_cache = True
     records = []
     destination = out / f"{label}-predictions.jsonl"
-    for index, row in enumerate(rows, 1):
-        rendered = tokenizer.apply_chat_template(
-            [{"role": "user", "content": row["prompt"]}], tokenize=False,
-            add_generation_prompt=True)
-        inputs = tokenizer(rendered, return_tensors="pt", add_special_tokens=False).to("cuda")
-        with torch.inference_mode():
-            generated = model.generate(**inputs, max_new_tokens=max_new_tokens, do_sample=False,
-                                       pad_token_id=tokenizer.pad_token_id)
-        raw = tokenizer.decode(generated[0][inputs["input_ids"].shape[1]:], skip_special_tokens=True)
-        record = {"id": row["id"], "family": row["family"], "edit_kind": row["edit_kind"],
-                  "instruction": row["instruction"], "engineering_status": row["engineering_status"],
-                  "prediction": raw, "metrics": score(row, raw)}
-        records.append(record)
-        with destination.open("a", encoding="utf-8") as handle:
-            handle.write(json.dumps(record, separators=(",", ":")) + "\n")
-        print(label, index, "/", len(rows), row["family"],
-              "tree=", record["metrics"]["target_tree_equal"], flush=True)
+    side = tokenizer.padding_side
+    tokenizer.padding_side = "left"  # generation continues from the right edge of every prompt
+    try:
+        for start in range(0, len(rows), batch_size):
+            batch = rows[start:start + batch_size]
+            rendered = [tokenizer.apply_chat_template(
+                [{"role": "user", "content": row["prompt"]}], tokenize=False,
+                add_generation_prompt=True) for row in batch]
+            inputs = tokenizer(rendered, return_tensors="pt", add_special_tokens=False,
+                               padding=True).to("cuda")
+            with torch.inference_mode():
+                generated = model.generate(**inputs, max_new_tokens=max_new_tokens, do_sample=False,
+                                           pad_token_id=tokenizer.pad_token_id)
+            width = inputs["input_ids"].shape[1]
+            for offset, row in enumerate(batch):
+                raw = tokenizer.decode(generated[offset][width:], skip_special_tokens=True)
+                record = {"id": row["id"], "family": row["family"], "edit_kind": row["edit_kind"],
+                          "instruction": row["instruction"], "engineering_status": row["engineering_status"],
+                          "prediction": raw, "metrics": score(row, raw)}
+                records.append(record)
+                with destination.open("a", encoding="utf-8") as handle:
+                    handle.write(json.dumps(record, separators=(",", ":")) + "\n")
+                physics = record["metrics"]["physics_equal"]
+                print(label, len(records), "/", len(rows), row["family"],
+                      "tree=", record["metrics"]["target_tree_equal"],
+                      "" if physics is None else f"physics= {physics}", flush=True)
+    finally:
+        tokenizer.padding_side = side
     metrics = {}
     for name in ("json_valid", "patch_valid", "exact_patch", "target_tree_equal", "reference_integrity"):
         metrics[name] = sum(record["metrics"][name] for record in records)
     metrics["n"] = len(records)
-    metrics["by_family"] = {}
-    for family in sorted({record["family"] for record in records}):
-        subset = [record for record in records if record["family"] == family]
-        metrics["by_family"][family] = {"n": len(subset), "target_tree_equal": sum(
-            record["metrics"]["target_tree_equal"] for record in subset)}
+    scored = [record for record in records if record["metrics"]["physics_equal"] is not None]
+    if scored:
+        metrics["physics_scored"] = len(scored)
+        metrics["physics_equal"] = sum(record["metrics"]["physics_equal"] for record in scored)
+
+    def breakdown(key):
+        table = {}
+        for value in sorted({record[key] for record in records}):
+            subset = [record for record in records if record[key] == value]
+            table[value] = {"n": len(subset), "target_tree_equal": sum(
+                record["metrics"]["target_tree_equal"] for record in subset)}
+            if any(record["metrics"]["physics_equal"] is not None for record in subset):
+                table[value]["physics_equal"] = sum(bool(record["metrics"]["physics_equal"]) for record in subset)
+        return table
+
+    metrics["by_family"] = breakdown("family")
+    metrics["by_edit_kind"] = breakdown("edit_kind")
     (out / f"{label}-metrics.json").write_text(json.dumps(metrics, indent=2) + "\n")
     return metrics
 
@@ -160,6 +200,12 @@ def main() -> None:
     parser.add_argument("--eval-count", type=int, default=100)
     parser.add_argument("--seed", type=int, default=260925)
     parser.add_argument("--resume", action="store_true")
+    parser.add_argument("--batch-size", type=int, default=1,
+                        help="per-device batch; effective batch is batch-size x grad-accum")
+    parser.add_argument("--grad-accum", type=int, default=16)
+    parser.add_argument("--eval-batch", type=int, default=1, help="prompts generated together")
+    parser.add_argument("--no-gradient-checkpointing", action="store_true",
+                        help="trade memory for speed on large GPUs")
     args = parser.parse_args()
 
     import torch
@@ -183,6 +229,8 @@ def main() -> None:
         "status": "started", "created_utc": datetime.now(timezone.utc).isoformat(),
         "model": args.model, "model_revision": revision, "seed": args.seed,
         "epochs": args.epochs, "max_length": args.max_length,
+        "batch_size": args.batch_size, "grad_accum": args.grad_accum,
+        "gradient_checkpointing": not args.no_gradient_checkpointing,
         "train_examples": len(rows["train"]), "validation_examples": len(rows["validation"]),
         "test_examples": len(rows["test"]), "test_evaluated": len(evaluation),
         "dataset_summary": json.loads((args.data / "dataset-summary.json").read_text()),
@@ -199,7 +247,12 @@ def main() -> None:
     tokenizer.pad_token = tokenizer.pad_token or tokenizer.eos_token
     tokenizer.padding_side = "right"
     dtype = torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float16
-    base = AutoModelForCausalLM.from_pretrained(args.model, revision=revision, dtype=dtype,
+    import transformers
+    # transformers renamed torch_dtype to dtype in 4.56; older builds silently load float32
+    # when given the new name, so pick the keyword this build understands.
+    major, minor = (int(part) for part in transformers.__version__.split(".")[:2])
+    dtype_keyword = "dtype" if (major, minor) >= (4, 56) else "torch_dtype"
+    base = AutoModelForCausalLM.from_pretrained(args.model, revision=revision, **{dtype_keyword: dtype},
                                                device_map={"": 0}, attn_implementation="sdpa")
     if hasattr(base, "enable_input_require_grads"):
         base.enable_input_require_grads()
@@ -250,19 +303,21 @@ def main() -> None:
     print("--- base evaluation ---", flush=True)
     context = model.disable_adapter() if hasattr(model, "disable_adapter") else nullcontext()
     with context:
-        before = evaluate(model, tokenizer, evaluation, "base", args.out, args.max_new_tokens)
+        before = evaluate(model, tokenizer, evaluation, "base", args.out, args.max_new_tokens,
+                          args.eval_batch)
 
     model.train(); model.config.use_cache = False
     training_args = _training_arguments(
         TrainingArguments,
         output_dir=str(args.out / "checkpoints"), num_train_epochs=args.epochs,
-        per_device_train_batch_size=1, gradient_accumulation_steps=16,
+        per_device_train_batch_size=args.batch_size, gradient_accumulation_steps=args.grad_accum,
         per_device_eval_batch_size=1, learning_rate=2e-4,
         lr_scheduler_type="cosine", warmup_ratio=.05, weight_decay=.01,
         logging_steps=10, eval_strategy="epoch", save_strategy="steps", save_steps=250,
         save_total_limit=1, bf16=dtype == torch.bfloat16, fp16=dtype == torch.float16,
         report_to=[], seed=args.seed, data_seed=args.seed,
-        gradient_checkpointing=True, gradient_checkpointing_kwargs={"use_reentrant": False},
+        gradient_checkpointing=not args.no_gradient_checkpointing,
+        gradient_checkpointing_kwargs={"use_reentrant": False},
         remove_unused_columns=False, label_names=["labels"], optim="adamw_torch",
         dataloader_num_workers=0,
     )
@@ -280,7 +335,11 @@ def main() -> None:
     (args.out / "training-metrics.json").write_text(json.dumps(history.metrics, indent=2) + "\n")
 
     print("--- trained evaluation ---", flush=True)
-    after = evaluate(model, tokenizer, evaluation, "trained", args.out, args.max_new_tokens)
+    # Merged weights decode several times faster than an unmerged LoRA wrapper; the saved
+    # adapter above is unaffected.
+    merged = model.merge_and_unload() if hasattr(model, "merge_and_unload") else model
+    after = evaluate(merged, tokenizer, evaluation, "trained", args.out, args.max_new_tokens,
+                     args.eval_batch)
     summary = {
         "status": "complete", "completed_utc": datetime.now(timezone.utc).isoformat(),
         "model": args.model, "model_revision": revision, "gpu": torch.cuda.get_device_name(0),

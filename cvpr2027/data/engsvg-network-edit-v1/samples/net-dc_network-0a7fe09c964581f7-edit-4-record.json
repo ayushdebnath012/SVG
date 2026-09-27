@@ -1,0 +1,90 @@
+{
+  "id": "net-dc_network-0a7fe09c964581f7:edit-4",
+  "family": "dc_network",
+  "edit_kind": "parallel_branch",
+  "instruction": "Add R6 = 330 Ω in parallel with R4.",
+  "engineering_status": "verified_safe",
+  "target_patch": {
+    "version": 3,
+    "operations": [
+      {
+        "op": "insert_subtree",
+        "parent": "n3",
+        "subtree": "<g xmlns=\"http://www.w3.org/2000/svg\" id=\"R6\">\n<line id=\"R6-w1\" x1=\"170\" y1=\"320\" x2=\"170\" y2=\"360\" />\n<line id=\"R6-w2\" x1=\"170\" y1=\"360\" x2=\"207\" y2=\"360\" />\n<line id=\"R6-w3\" x1=\"263\" y1=\"360\" x2=\"300\" y2=\"360\" />\n<line id=\"R6-w4\" x1=\"300\" y1=\"360\" x2=\"300\" y2=\"320\" />\n<rect id=\"R6-body\" x=\"207\" y=\"350\" width=\"56\" height=\"20\" />\n<circle id=\"R6-tap-a\" cx=\"170\" cy=\"320\" r=\"5\" fill=\"#172b4d\" stroke=\"none\" />\n<circle id=\"R6-tap-b\" cx=\"300\" cy=\"320\" r=\"5\" fill=\"#172b4d\" stroke=\"none\" />\n</g>\n",
+        "index": 7
+      },
+      {
+        "op": "insert_subtree",
+        "parent": "n35",
+        "subtree": "<text xmlns=\"http://www.w3.org/2000/svg\" id=\"R6-label\" x=\"235\" y=\"382\">R6 330 Ω</text>\n",
+        "index": 11
+      }
+    ]
+  },
+  "before_verification": {
+    "method": "modified_nodal_analysis_of_recovered_drawing",
+    "pass": true,
+    "violations": [],
+    "recovered_matches_model": true,
+    "nodes": 6,
+    "independent_loops": 2,
+    "source_currents_A": {
+      "V1": 0.053581395349,
+      "V2": 0.005581395349
+    },
+    "resistor_currents_A": {
+      "R1": 0.048,
+      "R2": 0.048,
+      "R3": 0.005581395349,
+      "R4": 0.048,
+      "R5": 0.005581395349
+    },
+    "resistor_powers_W": {
+      "R1": 0.50688,
+      "R2": 0.03456,
+      "R3": 0.03115197404,
+      "R4": 0.03456,
+      "R5": 0.102801514332
+    },
+    "kcl_residual_A": 1.3877787807814457e-16,
+    "power_balance_residual_W": 7.771561172376096e-16,
+    "criteria": {
+      "resistor_rating_W": 1.0,
+      "fuse_A": 0.1
+    }
+  },
+  "after_verification": {
+    "method": "modified_nodal_analysis_of_recovered_drawing",
+    "pass": true,
+    "violations": [],
+    "recovered_matches_model": true,
+    "nodes": 6,
+    "independent_loops": 3,
+    "source_currents_A": {
+      "V1": 0.053706940249,
+      "V2": 0.005581395349
+    },
+    "resistor_currents_A": {
+      "R1": 0.0481255449,
+      "R2": 0.0481255449,
+      "R3": 0.005581395349,
+      "R4": 0.046033129904,
+      "R5": 0.005581395349,
+      "R6": 0.002092414996
+    },
+    "resistor_powers_W": {
+      "R1": 0.509534975817,
+      "R2": 0.034741021078,
+      "R3": 0.03115197404,
+      "R4": 0.031785735732,
+      "R5": 0.102801514332,
+      "R6": 0.00144480617
+    },
+    "kcl_residual_A": 7.632783294297951e-17,
+    "power_balance_residual_W": 8.881784197001252e-16,
+    "criteria": {
+      "resistor_rating_W": 1.0,
+      "fuse_A": 0.1
+    }
+  }
+}

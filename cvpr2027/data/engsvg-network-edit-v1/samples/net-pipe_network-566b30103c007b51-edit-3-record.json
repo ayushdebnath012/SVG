@@ -1,0 +1,113 @@
+{
+  "id": "net-pipe_network-566b30103c007b51:edit-3",
+  "family": "pipe_network",
+  "edit_kind": "remove_pipe",
+  "instruction": "Remove pipe P3.",
+  "engineering_status": "verified_with_violations",
+  "target_patch": {
+    "version": 2,
+    "operations": [
+      {
+        "op": "remove_element",
+        "targets": [
+          "n6"
+        ]
+      },
+      {
+        "op": "remove_element",
+        "targets": [
+          "n13"
+        ]
+      }
+    ]
+  },
+  "before_verification": {
+    "method": "newton_flow_head_solve_of_recovered_drawing",
+    "pass": false,
+    "violations": [
+      "J2 pressure head 16.534 m < 20 m"
+    ],
+    "recovered_matches_model": true,
+    "independent_loops": 2,
+    "pipe_flows_L_s": {
+      "P1": 35.0,
+      "P2": 6.349170043,
+      "P3": 13.650829957,
+      "P4": 2.876981991,
+      "P5": 0.773847966,
+      "P6": 2.0
+    },
+    "pipe_velocities_m_s": {
+      "P1": 0.713014145,
+      "P2": 0.51737692,
+      "P3": 0.434519413,
+      "P4": 0.234437583,
+      "P5": 0.153952161,
+      "P6": 0.162974662
+    },
+    "pressure_heads_m": {
+      "J1": 23.398082019,
+      "J2": 16.534034779,
+      "J3": 34.148572137,
+      "J4": 29.886860646
+    },
+    "energy_residual_m": 2.208344618281899e-12,
+    "continuity_residual_m3_s": 3.469446951953614e-18,
+    "mass_balance_residual_m3_s": 0.0,
+    "hardy_cross_max_flow_gap_m3_s": 3.0747973611688906e-15,
+    "criteria": {
+      "max_velocity_m_s": 2.5,
+      "min_pressure_head_m": 20.0
+    },
+    "assumptions": [
+      "steady incompressible water at 20 C",
+      "Churchill friction factor",
+      "tee and junction losses neglected",
+      "90 degree elbows counted from the drawing"
+    ]
+  },
+  "after_verification": {
+    "method": "newton_flow_head_solve_of_recovered_drawing",
+    "pass": false,
+    "violations": [
+      "J2 pressure head 3.17665 m < 20 m",
+      "J4 pressure head 19.513 m < 20 m"
+    ],
+    "recovered_matches_model": true,
+    "independent_loops": 1,
+    "pipe_flows_L_s": {
+      "P1": 35.0,
+      "P2": 20.0,
+      "P4": -7.852874747,
+      "P5": -2.147125253,
+      "P6": 2.0
+    },
+    "pipe_velocities_m_s": {
+      "P1": 0.713014145,
+      "P2": 1.629746617,
+      "P4": 0.639909803,
+      "P5": 0.427156997,
+      "P6": 0.162974662
+    },
+    "pressure_heads_m": {
+      "J1": 23.398082019,
+      "J2": 3.176647198,
+      "J3": 23.774676246,
+      "J4": 19.512964754
+    },
+    "energy_residual_m": 1.7763568394002505e-15,
+    "continuity_residual_m3_s": 3.469446951953614e-18,
+    "mass_balance_residual_m3_s": 6.938893903907228e-18,
+    "hardy_cross_max_flow_gap_m3_s": 6.938893903907228e-18,
+    "criteria": {
+      "max_velocity_m_s": 2.5,
+      "min_pressure_head_m": 20.0
+    },
+    "assumptions": [
+      "steady incompressible water at 20 C",
+      "Churchill friction factor",
+      "tee and junction losses neglected",
+      "90 degree elbows counted from the drawing"
+    ]
+  }
+}

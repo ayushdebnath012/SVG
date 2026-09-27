@@ -1,0 +1,132 @@
+{
+  "id": "net-pipe_network-6dd761b17f205f90:edit-4",
+  "family": "pipe_network",
+  "edit_kind": "add_pipe",
+  "instruction": "Add pipe P10 (170 m, Ø250 mm) between J3 and J5.",
+  "engineering_status": "verified_with_violations",
+  "target_patch": {
+    "version": 3,
+    "operations": [
+      {
+        "op": "insert_subtree",
+        "parent": "n13",
+        "subtree": "<text xmlns=\"http://www.w3.org/2000/svg\" id=\"P10-label\" x=\"432\" y=\"409\" text-anchor=\"start\">P10 170 m Ø250</text>\n",
+        "index": 9
+      },
+      {
+        "op": "insert_subtree",
+        "parent": "n3",
+        "subtree": "<path xmlns=\"http://www.w3.org/2000/svg\" id=\"P10\" d=\"M420 330 L420 480\" />\n",
+        "index": 9
+      }
+    ]
+  },
+  "before_verification": {
+    "method": "newton_flow_head_solve_of_recovered_drawing",
+    "pass": false,
+    "violations": [
+      "P1 velocity 2.84022 m/s > 2.5 m/s"
+    ],
+    "recovered_matches_model": true,
+    "independent_loops": 3,
+    "pipe_flows_L_s": {
+      "P1": 34.854689955,
+      "P2": 30.854689955,
+      "P3": -4.594260957,
+      "P4": -16.145310045,
+      "P5": -1.551049089,
+      "P6": 5.646500344,
+      "P7": 15.208189611,
+      "P8": 19.353499656,
+      "P9": -9.353499656
+    },
+    "pipe_velocities_m_s": {
+      "P1": 2.840215652,
+      "P2": 1.746018284,
+      "P3": 0.093593516,
+      "P4": 1.315638222,
+      "P5": 0.087771424,
+      "P6": 1.123335551,
+      "P7": 0.860607485,
+      "P8": 0.273796012,
+      "P9": 1.190924564
+    },
+    "pressure_heads_m": {
+      "J1": 50.208228497,
+      "J2": 43.082854203,
+      "J3": 22.410792071,
+      "J4": 33.072467974,
+      "J5": 26.955324748,
+      "J6": 25.027732984
+    },
+    "energy_residual_m": 2.0469563544178726e-13,
+    "continuity_residual_m3_s": 3.469446951953614e-18,
+    "mass_balance_residual_m3_s": 1.3877787807814457e-17,
+    "hardy_cross_max_flow_gap_m3_s": 1.1308879180327303e-14,
+    "criteria": {
+      "max_velocity_m_s": 2.5,
+      "min_pressure_head_m": 10.0
+    },
+    "assumptions": [
+      "steady incompressible water at 20 C",
+      "Churchill friction factor",
+      "tee and junction losses neglected",
+      "90 degree elbows counted from the drawing"
+    ]
+  },
+  "after_verification": {
+    "method": "newton_flow_head_solve_of_recovered_drawing",
+    "pass": false,
+    "violations": [
+      "P1 velocity 2.89757 m/s > 2.5 m/s"
+    ],
+    "recovered_matches_model": true,
+    "independent_loops": 4,
+    "pipe_flows_L_s": {
+      "P1": 35.558500821,
+      "P10": 15.749823869,
+      "P2": 31.558500821,
+      "P3": -4.06941777,
+      "P4": -15.441499179,
+      "P5": -1.37208141,
+      "P6": 0.42553161,
+      "P7": 5.383145341,
+      "P8": 8.824644521,
+      "P9": 1.175355479
+    },
+    "pipe_velocities_m_s": {
+      "P1": 2.897567321,
+      "P10": 0.320852777,
+      "P2": 1.785845832,
+      "P3": 0.082901498,
+      "P4": 1.258286553,
+      "P5": 0.077643925,
+      "P6": 0.084656824,
+      "P7": 0.304623712,
+      "P8": 0.124843182,
+      "P9": 0.149650908
+    },
+    "pressure_heads_m": {
+      "J1": 49.823492748,
+      "J2": 43.318217499,
+      "J3": 21.508057354,
+      "J4": 33.309843859,
+      "J5": 33.437567207,
+      "J6": 25.298979222
+    },
+    "energy_residual_m": 4.3073704325546913e-13,
+    "continuity_residual_m3_s": 6.938893903907228e-18,
+    "mass_balance_residual_m3_s": 6.938893903907228e-18,
+    "hardy_cross_max_flow_gap_m3_s": 2.6726884594374667e-14,
+    "criteria": {
+      "max_velocity_m_s": 2.5,
+      "min_pressure_head_m": 10.0
+    },
+    "assumptions": [
+      "steady incompressible water at 20 C",
+      "Churchill friction factor",
+      "tee and junction losses neglected",
+      "90 degree elbows counted from the drawing"
+    ]
+  }
+}
