@@ -1,0 +1,39 @@
+\section{Introduction}
+\label{sec:intro}
+
+Circuit schematics and water-network plans are routinely exchanged as vector drawings, and language models
+are now asked to create and edit them directly as SVG markup. An edit that looks correct can still change the
+physics. Adding a resistor in parallel with one component redistributes current through the whole network
+(\cref{fig:teaser}); removing a pipe reroutes flow and can drop the pressure at a distant junction below its
+service minimum. Whether an edit is acceptable is a property of the network the drawing \emph{describes},
+not of its markup.
+
+Existing evaluations do not measure that property. SVG-editing benchmarks compare the output with a
+reference by markup or pixel similarity~\cite{svgeditbench,scidiagramedit}, which penalises harmless
+re-formatting and cannot tell a correctly drawn but dangerous design from a safe one. Engineering-reasoning
+benchmarks score numerical answers to problems stated in text or
+code~\cite{feabench,fem_bench,pdeagent_bench}, not the drawing a model hands back. Between the two sits the
+question an engineer actually asks of an edited schematic: \emph{if I read this drawing as built, what does it
+do, and is it safe?}
+
+We answer that question mechanically. \ours recovers the network from the visible SVG alone: wire and pipe
+endpoints, T-junctions, junction dots, component symbols and their labels, read under standard drafting
+conventions and with no access to identifiers or metadata. It then solves the recovered network by modified
+nodal analysis for circuits and by a Newton solve of flows and heads for pipe networks, and compares the
+solution with the intended design. Because the score depends only on the network, any drawing can be graded
+the same way, whether it comes from a patch, a re-typed SVG or a human drafter.
+
+\paragraph{Contributions.}
+\begin{itemize}
+\item \textbf{A drawing-grounded verifier} for resistor and water-distribution networks. It is invariant to
+      identifiers, element order and uniform scaling, it respects crossing and junction conventions, and it is
+      validated against \numControls{} analytical controls and \roundTripTotal{} generated drawings, every one of
+      which recovers exactly to its source design (\cref{sec:method}).
+\item \textbf{Two physics-verified edit datasets}: \netEdits{} text-guided edits over \netDesigns{} networks
+      for training and evaluation, and a harder evaluation-only tier of \hardEdits{} edits on networks with up to
+      \hardMaxLoopsDC{} independent loops. Every gold patch reproduces its target exactly, and every safety
+      verdict is computed from the drawing (\cref{sec:data}).
+\item \textbf{A measurement of a frontier model} (\astra) under this scoring, alongside a small patch-emitting
+      editor paired with the verifier. It shows where the frontier model's own analysis can be relied upon and
+      where it cannot (\cref{sec:experiments}).
+\end{itemize}

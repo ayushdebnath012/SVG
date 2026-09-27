@@ -45,6 +45,79 @@ def load_rows(path: Path) -> list[dict]:
         return [json.loads(line) for line in handle if line.strip()]
 
 
+ADDRESS = "nodes"  # "ids": the model reads and writes '#<svg id>' instead of positional node ids
+
+
+def _address_maps(svg: str):
+    scene = build_scene(svg)
+    to_xml, children = {}, {}
+    for node in scene["nodes"]:
+        if node["attributes"].get("id"):
+            to_xml[node["id"]] = node["attributes"]["id"]
+        if node["parent"] is not None:
+            children[node["parent"]] = children.get(node["parent"], 0) + 1
+    return to_xml, {xml: node for node, xml in to_xml.items()}, children
+
+
+def to_id_addressed(patch: dict, svg: str) -> dict:
+    """Name elements by their SVG id; an insertion at the end of its parent becomes index "end".
+
+    Positional node ids (n77 = the 77th element) make the model count through the whole document,
+    which it does badly; an id such as #R5-label is written on the element it refers to.
+    """
+    to_xml, _, children = _address_maps(svg)
+    name = lambda node: "#" + to_xml[node] if node in to_xml else node  # noqa: E731
+    operations = []
+    for operation in patch["operations"]:
+        operation = dict(operation)
+        if "targets" in operation:
+            operation["targets"] = [name(target) for target in operation["targets"]]
+        if operation.get("op") == "insert_subtree":
+            if operation.get("index") == children.get(operation["parent"], 0):
+                operation["index"] = "end"
+            operation["parent"] = name(operation["parent"])
+        operations.append(operation)
+    return {**patch, "operations": operations}
+
+
+def from_id_addressed(text: str, svg: str) -> str:
+    """Translate an id-addressed prediction back to the executor's positional form."""
+    start = text.find("{")
+    if start < 0:
+        return text
+    try:
+        value, _ = json.JSONDecoder().raw_decode(text[start:])
+    except ValueError:
+        return text
+    if not isinstance(value, dict) or not isinstance(value.get("operations"), list):
+        return text
+    _, from_xml, children = _address_maps(svg)
+    resolve = lambda ref: from_xml.get(ref[1:], ref) if isinstance(ref, str) and ref.startswith("#") else ref  # noqa: E731
+    for operation in value["operations"]:
+        if not isinstance(operation, dict):
+            continue
+        if isinstance(operation.get("targets"), list):
+            operation["targets"] = [resolve(target) for target in operation["targets"]]
+        if "parent" in operation:
+            operation["parent"] = resolve(operation["parent"])
+            if operation.get("index") == "end":
+                operation["index"] = children.get(operation["parent"], 0)
+                children[operation["parent"]] = operation["index"] + 1
+    return json.dumps(value)
+
+
+def target_answer(row: dict) -> dict:
+    return to_id_addressed(row["target_patch"], row["source_svg"]) if ADDRESS == "ids" else row["target_patch"]
+
+
+def prompt_text(row: dict) -> str:
+    if ADDRESS != "ids":
+        return row["prompt"]
+    return row["prompt"].replace("Return only an SVGPatchLab patch JSON.",
+                                 "Return only an SVGPatchLab patch JSON. Refer to elements as '#' followed by their "
+                                 "id attribute; use index \"end\" to append to a group.", 1)
+
+
 def _strict_json(text: str):
     try:
         value = json.loads(text)
@@ -65,7 +138,9 @@ def score(row: dict, prediction: str) -> dict:
     direct = _strict_json(prediction)
     result["json_valid"] = direct is not None
     if direct is not None:
-        result["exact_patch"] = direct == row["target_patch"]
+        result["exact_patch"] = direct == target_answer(row)
+    if ADDRESS == "ids":
+        prediction = from_id_addressed(prediction, row["source_svg"])
     try:
         patch = parse_patch(prediction)
         validate_patch(patch, build_scene(row["source_svg"]), generic_svg_policy(max_operations=500))
@@ -119,7 +194,7 @@ def evaluate(model, tokenizer, rows: list[dict], label: str, out: Path, max_new_
         for start in range(0, len(rows), batch_size):
             batch = rows[start:start + batch_size]
             rendered = [tokenizer.apply_chat_template(
-                [{"role": "user", "content": row["prompt"]}], tokenize=False,
+                [{"role": "user", "content": prompt_text(row)}], tokenize=False,
                 add_generation_prompt=True) for row in batch]
             inputs = tokenizer(rendered, return_tensors="pt", add_special_tokens=False,
                                padding=True).to("cuda")
@@ -206,7 +281,11 @@ def main() -> None:
     parser.add_argument("--eval-batch", type=int, default=1, help="prompts generated together")
     parser.add_argument("--no-gradient-checkpointing", action="store_true",
                         help="trade memory for speed on large GPUs")
+    parser.add_argument("--address", choices=["nodes", "ids"], default="nodes",
+                        help="how patches name elements: positional node ids or '#<svg id>'")
     args = parser.parse_args()
+    global ADDRESS
+    ADDRESS = args.address
 
     import torch
     from huggingface_hub import model_info
@@ -230,7 +309,7 @@ def main() -> None:
         "model": args.model, "model_revision": revision, "seed": args.seed,
         "epochs": args.epochs, "max_length": args.max_length,
         "batch_size": args.batch_size, "grad_accum": args.grad_accum,
-        "gradient_checkpointing": not args.no_gradient_checkpointing,
+        "gradient_checkpointing": not args.no_gradient_checkpointing, "address": args.address,
         "train_examples": len(rows["train"]), "validation_examples": len(rows["validation"]),
         "test_examples": len(rows["test"]), "test_evaluated": len(evaluation),
         "dataset_summary": json.loads((args.data / "dataset-summary.json").read_text()),
@@ -262,14 +341,14 @@ def main() -> None:
     model.print_trainable_parameters()
 
     def render_prompt(row):
-        return tokenizer.apply_chat_template([{"role": "user", "content": row["prompt"]}],
+        return tokenizer.apply_chat_template([{"role": "user", "content": prompt_text(row)}],
                                              tokenize=False, add_generation_prompt=True)
 
     def encode(items):
         encoded, omitted, lengths = [], 0, []
         for row in items:
             prefix = tokenizer(render_prompt(row), add_special_tokens=False)["input_ids"]
-            answer_text = json.dumps(row["target_patch"], separators=(",", ":")) + tokenizer.eos_token
+            answer_text = json.dumps(target_answer(row), separators=(",", ":"), ensure_ascii=False) + tokenizer.eos_token
             answer = tokenizer(answer_text, add_special_tokens=False)["input_ids"]
             lengths.append(len(prefix) + len(answer))
             if len(prefix) + len(answer) > args.max_length:

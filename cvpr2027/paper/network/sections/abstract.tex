@@ -1,0 +1,14 @@
+\begin{abstract}
+Language models now create and edit engineering schematics directly as SVG, but current evaluations score
+the markup or the pixels, not what the edited drawing means physically. We introduce \ours, a verifier that
+reads a circuit or water-distribution drawing \emph{as built}. It recovers the network from visible geometry
+and labels alone, respecting junction and crossing conventions, and re-solves it by nodal analysis or a
+Newton flow--head solve cross-checked by Hardy Cross. It then grades an edit by whether the drawing describes the
+intended network and whether that network meets the criteria printed on it. The verifier passes
+\numControls{} analytical controls and recovers all \roundTripTotal{} of \roundTripTotal{} generated test
+drawings exactly. It is invariant to identifiers, element order and scale. We release \netEdits{} physics-verified
+text-guided edits and a harder evaluation tier with up to \hardMaxLoopsDC{} independent loops. Under this
+grading, a frontier model (\astra) edits every completed task correctly and analyses circuits exactly, but
+declares an unsafe pipe network safe without any sign of doubt. Replacing its analysis with a solve of its
+own drawing removes that error. \abstractOurs
+\end{abstract}

@@ -1,0 +1,125 @@
+\section{Drawing-grounded verification}
+\label{sec:method}
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[font=\scriptsize, node distance=3mm and 3mm,
+  box/.style={draw, rounded corners=2pt, align=center, minimum height=7mm, fill=#1},
+  box/.default={white}, >={Stealth[length=1.6mm]}]
+\node[box=blue!6] (svg) {Edited SVG\\(any source)};
+\node[box=orange!10, right=of svg] (geo) {Visible geometry\\and text only};
+\node[box=orange!10, right=of geo] (net) {Recovered\\network};
+\node[box=green!8, below=of net] (solve) {MNA / Newton\\$+$ Hardy Cross};
+\node[box=green!8, left=of solve] (check) {Criteria from\\drawing notes};
+\node[box=gray!10, left=of check] (score) {Edit score:\\same network?};
+\draw[->] (svg) -- (geo);
+\draw[->] (geo) -- node[above]{\tiny nodes} (net);
+\draw[->] (net) -- (solve);
+\draw[->] (solve) -- (check);
+\draw[->] (check) -- (score);
+\node[box=blue!6, above=2mm of svg] (editor) {Editor: source SVG $+$ instruction $\to$ patch};
+\draw[->] (editor) -- (svg);
+\end{tikzpicture}
+\caption{\textbf{\ours.} Any edited drawing is read as built: geometry and labels become a network, the
+network is solved, and the result is checked against the criteria printed on the drawing and compared with
+the intended design. Identifiers and metadata are never read.}
+\label{fig:pipeline}
+\end{figure}
+
+\paragraph{Task.} A source drawing $S$ of a network and an instruction $u$ (\eg ``Add R7 = 10\,$\Omega$ in
+parallel with R1'') define a target design $D^\star$. An editor returns a drawing $\hat S$. We ask two
+questions of $\hat S$: does it describe $D^\star$ (\emph{edit correctness}), and does the network it describes
+satisfy the criteria stated on the drawing (\emph{verdict})? Both are decided by recovering a network
+$\mathcal{R}(\hat S)$ from the drawing and solving it.
+
+\subsection{Recovering a network from a drawing}
+Recovery parses the SVG with transforms applied and rejects scripts, external references, clipping and
+masking. It then reads only what is visibly drawn.
+
+\paragraph{Connectivity.} Stroked straight segments are candidate conductors (for pipe networks, only heavy
+strokes). A segment endpoint lying in the interior of another segment is a T-junction and splits it; a filled
+junction dot splits every segment passing through its centre. Two segments that merely cross stay
+unconnected, which is the drafting convention for both schematics and piping plans. Endpoints closer than
+$\tau = 10^{-3}$ drawing units are merged. For circuits, all points joined by wire form one electrical node.
+For pipe networks, nodes are points of degree $\neq 2$, dotted points and points on a reservoir outline, and
+every chain of segments between two nodes is one pipe. A $90^\circ$ turn along a chain is an elbow; other
+bend angles are rejected.
+
+\paragraph{Components.} A rectangle whose two short-side midpoints coincide with conductor endpoints is a
+resistor between the corresponding nodes. A circle is classified by where conductors meet it, not by its size:
+if a conductor passes through its centre it is a junction dot, and if exactly two conductors end on its rim it
+is a voltage source, whose positive terminal is the one nearer the ``$+$'' mark inside it. Filled rectangles
+touched by pipe ends are reservoirs. Classifying by incidence rather than radius or stroke width keeps recovery
+unchanged under uniform scaling of the drawing.
+
+\paragraph{Values and criteria.} Labels are parsed with fixed grammars (\eg \code{R3 4.7 k$\Omega$},
+\code{P5 320 m \O 150}, \code{J2 q=6 L/s z=10 m}) and assigned one-to-one to the nearest component or pipe,
+within a reach proportional to the drawing's own scale (the median resistor body or pipe segment). Design
+criteria are read from the drawing's notes: the resistor power rating and supply fuse; the pipe roughness,
+elbow loss coefficient, minimum pressure head and maximum velocity. A drawing that leaves any component
+unlabelled, or has two labels competing for one component, is reported as unreadable rather than guessed at.
+
+\subsection{Solving the recovered network}
+\paragraph{Circuits.} We use modified nodal analysis~\cite{ho1975mna} with one grounded node per connected
+part of the network, so a floating fragment carries no current and does not make the system singular. A source
+whose terminals share a node, or a loop made only of sources, makes the system singular; such a drawing is
+reported as ill-posed. The outputs are every branch current, every resistor's dissipation and every source's
+current; the criteria are $P_R \le P_\text{rated}$ for each resistor and $|I_V| \le I_\text{fuse}$ for each
+source.
+
+\paragraph{Pipe networks.} For pipe $p$ from node $a$ to node $b$ with flow $Q_p$, the head loss is
+\begin{equation}
+h_p(Q_p) = \Big(f(\mathrm{Re}_p,\varepsilon/D_p)\,\frac{L_p}{D_p} + n_p K_\text{elbow}\Big)
+\frac{v_p |v_p|}{2g},
+\end{equation}
+where $v_p = 4Q_p/(\pi D_p^2)$, $f$ is Churchill's friction factor~\cite{churchill1977} and $n_p$ is the number
+of elbows counted from the drawing. We solve jointly for pipe flows and junction heads,
+\begin{equation}
+h_p(Q_p) = H_a - H_b \;\;\forall p, \qquad
+\textstyle\sum_{\text{in}} Q_p - \sum_{\text{out}} Q_p = q_j \;\;\forall j,
+\end{equation}
+with reservoir heads fixed, by Newton's method with backtracking~\cite{todini1988}, stopping at residuals below
+$10^{-10}$\,m and $10^{-13}$\,m$^3$/s. Because Churchill's $f$ tends to $64/\mathrm{Re}$ in laminar flow, $h_p$
+has a finite, non-zero slope at $Q_p = 0$ and the Jacobian stays regular when a flow reverses. As an independent
+check, every network is also solved by Hardy Cross loop corrections~\cite{hardycross1936}, with multiple
+reservoirs joined through a virtual datum node. The criteria are $|v_p| \le v_\text{max}$ for each pipe and
+$H_j - z_j \ge p_\text{min}$ for each junction.
+
+\subsection{Scoring an edited drawing}
+An edit is \emph{correct} when $\mathcal{R}(\hat S)$ equals the target network $D^\star$ in two senses. The
+first is topological: we compare, for every node, the multiset of named component terminals it touches, which
+is a complete invariant of a network with named components, together with every component value and every
+criterion. The second is physical: the two solutions agree, with currents within $10^{-9}$ relative plus
+1\,pA, flows within $10^{-9}$\,m$^3$/s and heads within $10^{-7}$\,m. Markup is irrelevant: a drawing that
+re-orders elements, renames identifiers or re-formats numbers is credited if it describes the same network,
+and a drawing that is byte-for-byte plausible but disconnects a wire by $0.01$ units is not.
+
+\subsection{Validating the verifier}
+\label{sec:validation}
+\Cref{tab:controls} lists the analytical controls. They include a balanced and an unbalanced Wheatstone
+bridge; we initially chose bridge values that happened to balance, which made the ``unbalanced'' control
+vacuous and hid a sign error, and we record this as a caution. Beyond the controls, \roundTripTotal{}
+independently generated drawings (source designs and all their edits, over two seeds) recover to exactly
+the network they were drawn from, as do all \datasetDrawings{} drawings in the released datasets.
+Unit tests confirm four further properties: recovery is unchanged by stripping identifiers, shuffling
+elements, translating and uniformly scaling the drawing by $\times0.25$ to $\times4$; a T-junction joins,
+while a crossing joins only when dotted; moving only the ``$+$'' mark reverses every branch current; and moving
+one wire endpoint by $0.01$ units breaks the connection. Two of these tests found real defects in the first
+version. A fixed-radius rule for junction dots misclassified dots once the drawing was scaled up, and an
+absolute current tolerance misjudged an edit whose two sources exactly cancel.
+
+\begin{table}[t]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}p{4.55cm}rr@{}}
+\toprule
+Control & \ours & Reference \\
+\midrule
+\controlRows
+\bottomrule
+\end{tabular}
+\caption{\textbf{Analytical controls} for the two solvers. References are closed forms, an independent
+bisection, or a second algorithm.}
+\label{tab:controls}
+\end{table}

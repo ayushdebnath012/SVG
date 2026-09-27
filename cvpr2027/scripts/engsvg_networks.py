@@ -442,12 +442,13 @@ def compare_circuits(reference: dict, other: dict, rel: float = 1e-9) -> dict:
     return {"topology_equal": same, "physics_equal": equal_physics, "max_current_gap_A": max(gaps + [0.0])}
 
 
-def circuit_model(rng: random.Random, index: int = 0) -> dict:
+def circuit_model(rng: random.Random, index: int = 0, rows_choices=(2, 3), cols_choices=(3, 4, 5),
+                  loops=(2, 6)) -> dict:
     while True:
-        rows, cols = rng.choice((2, 3)), rng.choice((3, 4, 5))
+        rows, cols = rng.choice(rows_choices), rng.choice(cols_choices)
         vertices = [(r, c) for r in range(rows) for c in range(cols)]
         edges = _grid_edges(rows, cols)
-        target = rng.randint(2, min(6, (rows - 1) * (cols - 1)))
+        target = rng.randint(loops[0], min(loops[1], (rows - 1) * (cols - 1)))
         order = edges[:]
         rng.shuffle(order)
         for edge in order:
@@ -550,8 +551,9 @@ def _parallel_parts(branch: dict, across: dict) -> tuple[list[str], list[str]]:
 def render_circuit(model: dict) -> str:
     rows, cols = model["grid"]
     height = C_Y0 + (rows - 1) * C_DY + 190
-    parts = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 {height}" width="1000" height="{height}">',
-             f'<rect id="background" width="1000" height="{height}" fill="white"/>',
+    width = max(1000, C_X0 + (cols - 1) * C_DX + 100)  # 1000 for the five-column v1 grids
+    parts = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" width="{width}" height="{height}">',
+             f'<rect id="background" width="{width}" height="{height}" fill="white"/>',
              f'<g id="wires" stroke="{C_STROKE}" stroke-width="3" fill="none">']
     degree = {}
     for edge in model["edges"]:
@@ -1084,15 +1086,16 @@ def _random_tree(vertices, edges, rng):
     return chosen
 
 
-def pipe_model(rng: random.Random, index: int = 0) -> dict:
+def pipe_model(rng: random.Random, index: int = 0, rows_choices=(2, 3), cols_choices=(3, 4, 5),
+               chords=(1, 3)) -> dict:
     while True:
-        rows, cols = rng.choice((2, 3)), rng.choice((3, 4, 5))
+        rows, cols = rng.choice(rows_choices), rng.choice(cols_choices)
         vertices = [(r, c) for r in range(rows) for c in range(cols)]
         grid = _grid_edges(rows, cols)
         edges = _random_tree(vertices, grid, rng)
         spare = [e for e in grid if e not in edges]
         rng.shuffle(spare)
-        edges += spare[:rng.randint(1, min(3, len(spare)))]
+        edges += spare[:rng.randint(chords[0], min(chords[1], len(spare)))]
         degree = {}
         for a, b in edges:
             degree[a] = degree.get(a, 0) + 1
@@ -1184,8 +1187,9 @@ def _label_anchor(route, cols):
 def render_pipes(model: dict) -> str:
     rows, cols = model["grid"]
     height = P_Y0 + (rows - 1) * P_DY + 200
-    parts = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 {height}" width="1100" height="{height}">',
-             f'<rect id="background" width="1100" height="{height}" fill="white"/>',
+    width = max(1100, P_X0 + (cols - 1) * P_DX + P_RES + 90)  # 1100 for the five-column v1 grids
+    parts = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" width="{width}" height="{height}">',
+             f'<rect id="background" width="{width}" height="{height}" fill="white"/>',
              f'<text id="title" x="40" y="50" font-size="22" font-weight="bold" fill="{P_STROKE}">'
              'Water distribution network</text>',
              f'<g id="pipes" fill="none" stroke="{P_STROKE}" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">']

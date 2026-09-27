@@ -38,6 +38,13 @@ DESIGNS_PER_FAMILY = 1250
 EDITS_PER_DESIGN = 4
 FAMILIES = tuple(networks.FAMILIES)
 HARDY_CROSS_LIMIT_M3_S = 1e-9
+# The hard tier is evaluation-only: larger grids and many more independent loops than training saw.
+PROFILES = {
+    "v1": {"version": VERSION, "sizes": {family: {} for family in FAMILIES}},
+    "hard": {"version": "engsvg-network-edit-hard-v1",
+             "sizes": {"dc_network": {"rows_choices": (4, 5), "cols_choices": (5, 6), "loops": (8, 16)},
+                       "pipe_network": {"rows_choices": (4,), "cols_choices": (5, 6), "chords": (4, 8)}}},
+}
 
 
 def _report(family: str, svg: str, model: dict) -> dict:
@@ -50,7 +57,7 @@ def _report(family: str, svg: str, model: dict) -> dict:
 
 
 def _make_row(family: str, split: str, design_index: int, edit_index: int, source: dict,
-              target: dict, instruction: str, edit_kind: str) -> dict:
+              target: dict, instruction: str, edit_kind: str, version: str = VERSION) -> dict:
     render = networks.FAMILIES[family][2]
     source_svg, target_svg = render(source), render(target)
     build_scene_graph(source_svg)
@@ -69,7 +76,7 @@ def _make_row(family: str, split: str, design_index: int, edit_index: int, sourc
     prompt = ("Edit the engineering SVG according to the instruction. Return only an SVGPatchLab patch JSON.\n"
               f"Instruction: {instruction}\nSource SVG:\n{source_svg}")
     return {
-        "version": VERSION,
+        "version": version,
         "id": f"{lineage}:edit-{edit_index}",
         "lineage_id": lineage,
         "family": family,
@@ -95,18 +102,20 @@ def _make_row(family: str, split: str, design_index: int, edit_index: int, sourc
     }
 
 
-def dataset(designs_per_family: int = DESIGNS_PER_FAMILY, seed: int = SEED):
+def dataset(designs_per_family: int = DESIGNS_PER_FAMILY, seed: int = SEED, profile: str = "v1"):
     rng = random.Random(seed)
     rows = {"train": [], "validation": [], "test": []}
     seen = set()
     for family in FAMILIES:
         make_model, make_edits = networks.FAMILIES[family][:2]
         train_end, validation_end = int(designs_per_family * .8), int(designs_per_family * .9)
+        if profile != "v1":
+            train_end = validation_end = 0  # evaluation-only tier
         for design_index in range(designs_per_family):
             split = ("train" if design_index < train_end else
                      "validation" if design_index < validation_end else "test")
             while True:
-                source = make_model(rng, design_index)
+                source = make_model(rng, design_index, **PROFILES[profile]["sizes"][family])
                 digest = _sha(_canonical(source))
                 if digest not in seen:
                     seen.add(digest)
@@ -116,7 +125,7 @@ def dataset(designs_per_family: int = DESIGNS_PER_FAMILY, seed: int = SEED):
                 raise AssertionError("each design must supply four edit tasks")
             for edit_index, (instruction, target, kind) in enumerate(edits, 1):
                 rows[split].append(_make_row(family, split, design_index, edit_index, source, target,
-                                             instruction, kind))
+                                             instruction, kind, PROFILES[profile]["version"]))
         print(family, "done", flush=True)
     for split in rows:
         rng.shuffle(rows[split])
@@ -126,7 +135,7 @@ def dataset(designs_per_family: int = DESIGNS_PER_FAMILY, seed: int = SEED):
 def _write_samples(out: Path, rows: dict, per_family: int = 4) -> tuple[int, int]:
     sample_dir = out / "samples"
     sample_dir.mkdir()
-    candidates = rows["test"] + rows["validation"]
+    candidates = rows.get("test", []) + rows.get("validation", [])
     chosen = []
     for family in FAMILIES:
         kinds_seen, picked = set(), []
@@ -153,14 +162,15 @@ def _write_samples(out: Path, rows: dict, per_family: int = 4) -> tuple[int, int
     return len(chosen) * 2, pngs
 
 
-def build(out: Path, designs_per_family: int = DESIGNS_PER_FAMILY, seed: int = SEED) -> dict:
+def build(out: Path, designs_per_family: int = DESIGNS_PER_FAMILY, seed: int = SEED, profile: str = "v1") -> dict:
     if out.exists() and any(out.iterdir()):
         raise ValueError("output directory is not empty; dataset versions are immutable")
     out.mkdir(parents=True, exist_ok=True)
     controls = networks.controls()
     if not all(row["pass"] for row in controls):
         raise AssertionError("analytical controls failed; refusing to build")
-    rows = dataset(designs_per_family, seed)
+    rows = dataset(designs_per_family, seed, profile)
+    rows = {split: items for split, items in rows.items() if items}
     for split, items in rows.items():
         _write_jsonl_gz(out / f"{split}.jsonl.gz", items)
     svg_samples, png_samples = _write_samples(out, rows)
@@ -179,7 +189,8 @@ def build(out: Path, designs_per_family: int = DESIGNS_PER_FAMILY, seed: int = S
     loops = {family: sorted(row["before_verification"]["independent_loops"] for row in all_rows
                             if row["family"] == family and row["id"].endswith("edit-1")) for family in FAMILIES}
     summary = {
-        "version": VERSION, "seed": seed,
+        "version": PROFILES[profile]["version"], "seed": seed, "profile": profile,
+        "network_sizes": PROFILES[profile]["sizes"],
         "source_designs": len({row["lineage_id"] for row in all_rows}),
         "edit_examples": len(all_rows), "families": list(FAMILIES),
         "family_counts": count("family"), "edit_kind_counts": count("edit_kind"),
@@ -210,7 +221,9 @@ def build(out: Path, designs_per_family: int = DESIGNS_PER_FAMILY, seed: int = S
     }
     (out / "dataset-summary.json").write_text(json.dumps(summary, indent=2, ensure_ascii=False) + "\n")
     (out / "README.md").write_text(
-        "# Circuit and pipe-network SVG edit dataset v1\n\n"
+        f"# {summary['version']}: circuit and pipe-network SVG edits\n\n"
+        + ("Evaluation-only hard tier: larger grids and many more independent loops than the v1 training data. "
+           "Every row is in the test split.\n\n" if profile != "v1" else "") +
         "Resistor networks (bridges, ladders, one or two sources) and looped water-distribution networks "
         "(one or two reservoirs, tees, elbows, dead ends), each with four text-guided edits. Every row has "
         "the source SVG, instruction, target SVG, a gold patch that reproduces the target exactly, and "
@@ -233,6 +246,7 @@ if __name__ == "__main__":
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--designs-per-family", type=int, default=DESIGNS_PER_FAMILY)
     parser.add_argument("--seed", type=int, default=SEED)
+    parser.add_argument("--profile", choices=sorted(PROFILES), default="v1")
     args = parser.parse_args()
-    summary = build(args.out, args.designs_per_family, args.seed)
+    summary = build(args.out, args.designs_per_family, args.seed, args.profile)
     print(json.dumps({k: v for k, v in summary.items() if k != "analytical_controls"}, indent=2, ensure_ascii=False))

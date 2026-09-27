@@ -1,0 +1,49 @@
+\section{Datasets}
+\label{sec:data}
+
+\paragraph{Resistor networks.} A design starts from a grid of $2$--$3 \times 3$--$5$ nodes. Edges are removed
+at random while the graph stays connected and bridgeless (a bridge would carry no current), until $2$--$6$
+independent cycles remain. Each edge becomes a resistor (E6 series, 10\,$\Omega$--6.8\,k$\Omega$), a plain wire
+(20\,\%), or one of one or two DC sources (5--48\,V, random polarity). Designs are rejected if a resistor is
+shorted, if sources form a loop, or if no current flows. Notes state a resistor power rating (0.25--2\,W) and a
+supply fuse (0.1--1\,A). Drawings use standard symbols, with junction dots at nodes of degree three or more.
+
+\paragraph{Water-distribution networks.} A random spanning tree of a $2$--$3 \times 3$--$5$ grid receives one to
+three extra pipes to close loops. Some dead ends are pruned, and one or two reservoirs attach at the boundary.
+Grid points of degree $\neq 2$, plus about a third of the rest, become junctions carrying a demand
+(0--15\,L/s) and an elevation (0--30\,m). The remaining pass-through points become straight runs or
+$90^\circ$ elbows. Pipes have lengths of 100--800\,m and nominal diameters of 80--300\,mm, and notes state the
+roughness, elbow loss coefficient ($K=0.9$), minimum pressure head (10--20\,m) and maximum velocity
+(1.5--2.5\,m/s).
+
+\paragraph{Edits.} Each design receives four instructions. For circuits these are a resistor value change, a
+source voltage change, a polarity reversal (two-source designs) or opening a branch (one-source designs,
+provided the network stays solvable), and adding a resistor in parallel with an existing one, drawn as a
+tapped branch. For pipe networks they are a diameter change, a demand change, removing a pipe (provided every
+junction stays supplied and no reservoir is cut off), and adding a pipe between adjacent junctions (or, if
+none exist, a length change). Target drawings are rendered from the edited design. The gold edit is a tree patch
+derived between source and target SVG, applied with a validating executor and required to reproduce the
+target exactly. A row is kept only if both drawings recover to their designs and, for pipes, Newton and Hardy
+Cross agree to $10^{-9}$\,m$^3$/s.
+
+\paragraph{Statistics.} \Cref{tab:data} summarises both tiers. The \emph{hard} tier uses $4$--$5 \times
+5$--$6$ grids with $8$--$16$ independent loops for circuits and four to eight added pipes for water networks.
+It is evaluation-only: no model is trained on networks of that size. Splits are by source design, so the four
+edits of one drawing never cross splits.
+
+\begin{table}[t]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3.2pt}
+\begin{tabular}{lrr}
+\toprule
+ & Main (v1) & Hard \\
+\midrule
+\dataRows
+\bottomrule
+\end{tabular}
+\caption{\textbf{Datasets.} Loops are independent cycles of the recovered network (median, range). ``Verdict
+flips'' are edits that turn a safe design unsafe or the reverse. All patches reproduce their targets and all
+drawings recover to their designs.}
+\label{tab:data}
+\end{table}

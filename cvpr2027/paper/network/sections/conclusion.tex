@@ -1,0 +1,19 @@
+\section{Limitations and conclusion}
+\label{sec:conclusion}
+
+\paragraph{Limitations.} The networks are procedural: rectilinear layouts, a fixed symbol vocabulary and
+label grammar, steady DC circuits with ideal sources, and steady incompressible pipe flow with elbow losses
+only. Recovery is strict by design. A drawing that uses other symbols, draws a resistor as a zig-zag, or
+places labels far from their components is reported as unreadable, not interpreted. The frontier-model
+study covers one model at one reasoning effort with one sample per task, and its pipe-network arm is
+incomplete because the API account ran out of credit, so the hard pipe tier in particular is under-measured.
+The single wrong verdict is a demonstrated failure mode, not an estimated rate. The numerical tolerance for
+\astra's reported velocities gained an absolute floor of 0.01\,m/s after we saw that three-decimal rounding of
+near-zero velocities was being scored as error. Verdicts and edits are unaffected by this change.
+
+\paragraph{Conclusion.} An edited engineering drawing can be graded by reading it as built and solving what it
+describes. This removes the dependence on markup that makes current SVG-editing metrics fragile, and it turns
+``is this edit safe?'' into a computation instead of a claim. Under that grading a frontier model is a
+strong editor and usually a strong analyst, but its rare analysis errors are silent. Pairing any editor with a
+drawing-grounded solve makes the verdict exact whenever the edit is right.
+\conclusionOurs

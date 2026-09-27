@@ -1,0 +1,36 @@
+{
+  "id": "chatcmpl-ESbusKzQwbqfsmhjNZJuyRYnKKu6w",
+  "object": "chat.completion",
+  "created": 1790487642,
+  "model": "gpt-6-astra",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "```svg\n<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1100 530\" width=\"1100\" height=\"530\">\n<rect id=\"background\" width=\"1100\" height=\"530\" fill=\"white\"/>\n<text id=\"title\" x=\"40\" y=\"50\" font-size=\"22\" font-weight=\"bold\" fill=\"#1f4e79\">Water distribution network</text>\n<g id=\"pipes\" fill=\"none\" stroke=\"#1f4e79\" stroke-width=\"6\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n<path id=\"P1\" d=\"M260 180 L420 180\"/>\n<path id=\"P2\" d=\"M260 180 L260 330\"/>\n<path id=\"P3\" d=\"M420 180 L580 180\"/>\n<path id=\"P4\" d=\"M580 180 L690 180\"/>\n<path id=\"P5\" d=\"M580 180 L580 330\"/>\n<path id=\"P6\" d=\"M150 330 L260 330\"/>\n<path id=\"P7\" d=\"M260 330 L420 330 L580 330\"/>\n</g>\n<g id=\"pipe-labels\" font-size=\"12\" fill=\"#1f4e79\">\n<text id=\"P1-label\" x=\"340\" y=\"168\" text-anchor=\"middle\">P1 450 m Ø100</text>\n<text id=\"P2-label\" x=\"272\" y=\"259\" text-anchor=\"start\">P2 230 m Ø100</text>\n<text id=\"P3-label\" x=\"500\" y=\"168\" text-anchor=\"middle\">P3 140 m Ø80</text>\n<text id=\"P4-label\" x=\"635\" y=\"168\" text-anchor=\"middle\">P4 160 m Ø100</text>\n<text id=\"P5-label\" x=\"592\" y=\"259\" text-anchor=\"start\">P5 200 m Ø125</text>\n<text id=\"P6-label\" x=\"205\" y=\"318\" text-anchor=\"middle\">P6 120 m Ø100</text>\n<text id=\"P7-label\" x=\"340\" y=\"318\" text-anchor=\"middle\">P7 620 m Ø80</text>\n</g>\n<g id=\"reservoirs\" stroke=\"#1f4e79\">\n<g id=\"R1\">\n<rect id=\"R1-body\" x=\"80\" y=\"305\" width=\"70\" height=\"50\" fill=\"#cfe8ff\" stroke-width=\"2\"/>\n<line id=\"R1-level\" x1=\"88\" y1=\"318\" x2=\"142\" y2=\"318\" stroke-width=\"1.5\"/>\n<text id=\"R1-label\" x=\"115\" y=\"294\" font-size=\"13\" text-anchor=\"middle\" stroke=\"none\" fill=\"#1f4e79\">R1 H=76 m</text>\n</g>\n<g id=\"R2\">\n<rect id=\"R2-body\" x=\"690\" y=\"155\" width=\"70\" height=\"50\" fill=\"#cfe8ff\" stroke-width=\"2\"/>\n<line id=\"R2-level\" x1=\"698\" y1=\"168\" x2=\"752\" y2=\"168\" stroke-width=\"1.5\"/>\n<text id=\"R2-label\" x=\"725\" y=\"144\" font-size=\"13\" text-anchor=\"middle\" stroke=\"none\" fill=\"#1f4e79\">R2 H=60 m</text>\n</g>\n</g>\n<g id=\"junctions\" fill=\"#1f4e79\">\n<g id=\"J1\">\n<circle id=\"J1-dot\" cx=\"260\" cy=\"180\" r=\"6\"/>\n<text id=\"J1-label\" x=\"268\" y=\"202\" font-size=\"11\">J1 q=0 L/s z=24 m</text>\n</g>\n<g id=\"J2\">\n<circle id=\"J2-dot\" cx=\"420\" cy=\"180\" r=\"6\"/>\n<text id=\"J2-label\" x=\"428\" y=\"202\" font-size=\"11\">J2 q=15 L/s z=30 m</text>\n</g>\n<g id=\"J3\">\n<circle id=\"J3-dot\" cx=\"580\" cy=\"180\" r=\"6\"/>\n<text id=\"J3-label\" x=\"588\" y=\"202\" font-size=\"11\">J3 q=10 L/s z=10 m</text>\n</g>\n<g id=\"J4\">\n<circle id=\"J4-dot\" cx=\"260\" cy=\"330\" r=\"6\"/>\n<text id=\"J4-label\" x=\"268\" y=\"352\" font-size=\"11\">J4 q=8 L/s z=2 m</text>\n</g>\n<g id=\"J5\">\n<circle id=\"J5-dot\" cx=\"580\" cy=\"330\" r=\"6\"/>\n<text id=\"J5-label\" x=\"588\" y=\"352\" font-size=\"11\">J5 q=2 L/s z=26 m</text>\n</g>\n</g>\n<text id=\"roughness-note\" x=\"40\" y=\"440\" font-size=\"14\" fill=\"#1f4e79\">Pipe roughness ε = 0.26 mm</text>\n<text id=\"elbow-note\" x=\"560\" y=\"440\" font-size=\"14\" fill=\"#1f4e79\">Minor loss: 90° elbow K = 0.9</text>\n<text id=\"pressure-note\" x=\"40\" y=\"466\" font-size=\"14\" fill=\"#1f4e79\">Minimum pressure head 10 m</text>\n<text id=\"velocity-note\" x=\"560\" y=\"466\" font-size=\"14\" fill=\"#1f4e79\">Maximum velocity 1.5 m/s</text>\n</svg>\n```\n```json\n{\n  \"verdict\": \"fail\",\n  \"violations\": [\"P4\", \"P6\"],\n  \"pipe_velocities_m_s\": {\n    \"P1\": 1.18,\n    \"P2\": 1.18,\n    \"P3\": 1.14,\n    \"P4\": 1.67,\n    \"P5\": 0.21,\n    \"P6\": 2.79,\n    \"P7\": 0.92\n  },\n  \"min_pressure_head_m\": {\n    \"name\": \"J2\",\n    \"value\": 20.8\n  }\n}\n```",
+        "refusal": null,
+        "annotations": []
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 1677,
+    "completion_tokens": 3315,
+    "total_tokens": 4992,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 1674,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 1862,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": null
+}

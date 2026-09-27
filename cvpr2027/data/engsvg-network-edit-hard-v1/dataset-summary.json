@@ -1,0 +1,155 @@
+{
+  "version": "engsvg-network-edit-hard-v1",
+  "seed": 260928,
+  "profile": "hard",
+  "network_sizes": {
+    "dc_network": {
+      "rows_choices": [
+        4,
+        5
+      ],
+      "cols_choices": [
+        5,
+        6
+      ],
+      "loops": [
+        8,
+        16
+      ]
+    },
+    "pipe_network": {
+      "rows_choices": [
+        4
+      ],
+      "cols_choices": [
+        5,
+        6
+      ],
+      "chords": [
+        4,
+        8
+      ]
+    }
+  },
+  "source_designs": 100,
+  "edit_examples": 400,
+  "families": [
+    "dc_network",
+    "pipe_network"
+  ],
+  "family_counts": {
+    "dc_network": 200,
+    "pipe_network": 200
+  },
+  "edit_kind_counts": {
+    "add_pipe": 41,
+    "component_value": 50,
+    "junction_demand": 50,
+    "open_branch": 32,
+    "parallel_branch": 50,
+    "pipe_diameter": 50,
+    "pipe_length": 9,
+    "polarity": 18,
+    "remove_pipe": 50,
+    "source_value": 50
+  },
+  "split_examples": {
+    "test": 400
+  },
+  "split_source_designs": {
+    "test": 100
+  },
+  "lineage_overlap_between_splits": 0,
+  "exact_patch_roundtrips": 400,
+  "drawings_recovered_to_model": 800,
+  "verified_safe": 118,
+  "verified_with_violations": 282,
+  "edits_that_change_the_verdict": 22,
+  "patch_operation_coverage": {
+    "insert_subtree": 91,
+    "remove_element": 82,
+    "set_attributes": 18,
+    "set_text": 209
+  },
+  "independent_loops_per_design": {
+    "dc_network": {
+      "min": 8,
+      "median": 11,
+      "max": 16
+    },
+    "pipe_network": {
+      "min": 4,
+      "median": 7,
+      "max": 9
+    }
+  },
+  "max_hardy_cross_gap_m3_s": 2.279903696389418e-12,
+  "max_kcl_residual_A": 2.3314683517128287e-15,
+  "analytical_controls": [
+    {
+      "control": "series current V/(R1+R2)",
+      "value": 0.0375,
+      "expected": 0.0375,
+      "pass": true
+    },
+    {
+      "control": "parallel current V(1/R1+1/R2)",
+      "value": 0.17454545454545456,
+      "expected": 0.17454545454545453,
+      "pass": true
+    },
+    {
+      "control": "balanced Wheatstone bridge current",
+      "value": -1.345724878333523e-18,
+      "expected": 0.0,
+      "pass": true
+    },
+    {
+      "control": "unbalanced bridge vs Thevenin",
+      "value": -0.0030752468983938483,
+      "expected": -0.0030752468983938426,
+      "pass": true
+    },
+    {
+      "control": "superposition of two sources",
+      "value": 0.2636363636363636,
+      "expected": 0.26363636363636367,
+      "pass": true
+    },
+    {
+      "control": "two reservoirs vs bisection (m3/s)",
+      "value": 0.03246677101159359,
+      "expected": 0.03246677101159359,
+      "pass": true
+    },
+    {
+      "control": "laminar loss vs Hagen-Poiseuille (m)",
+      "value": 4.171349716343485e-05,
+      "expected": 4.171349716343483e-05,
+      "pass": true
+    },
+    {
+      "control": "Churchill vs Colebrook at Re=1e6 (relative gap)",
+      "value": 1.0049671066556773,
+      "expected": 1.0,
+      "pass": true
+    },
+    {
+      "control": "Newton vs Hardy Cross, two loops + two reservoirs (m3/s)",
+      "value": 1.2155207396169487e-14,
+      "expected": 0.0,
+      "pass": true
+    },
+    {
+      "control": "mass balance: reservoir supply = demand (m3/s)",
+      "value": 1.3877787807814457e-17,
+      "expected": 0.0,
+      "pass": true
+    }
+  ],
+  "sample_svgs": 16,
+  "sample_pngs": 16,
+  "training_objective": "source SVG + natural-language instruction -> constrained patch JSON",
+  "scoring": "apply the predicted patch, recover the network from the edited drawing with engsvg_networks.physics_match, and compare its solution with the target design",
+  "claim_boundary": "procedural 2D schematics with idealised steady-state DC and pipe-flow checks; not electrical or water-supply approval"
+}
