@@ -74,8 +74,11 @@ def verify_svg(row: dict, edited: str | None) -> dict:
     return result
 
 
-def our_answer(row: dict, prediction: str) -> dict:
+def our_answer(row: dict, prediction: str, address: str = "nodes") -> dict:
     """Apply a predicted patch and score the edited drawing exactly as Astra's drawings are scored."""
+    if address == "ids":
+        from train_crossdomain_svg_patcher import from_id_addressed
+        prediction = from_id_addressed(prediction, row["source_svg"])
     try:
         patch = parse_patch(prediction)
         validate_patch(patch, build_scene(row["source_svg"]), generic_svg_policy(max_operations=500))
@@ -85,7 +88,7 @@ def our_answer(row: dict, prediction: str) -> dict:
     return verify_svg(row, edited)
 
 
-def ours(run: Path, rows: dict, prediction_file: str, ids=None) -> list[dict] | None:
+def ours(run: Path, rows: dict, prediction_file: str, ids=None, address: str = "nodes") -> list[dict] | None:
     path = run / prediction_file
     if not path.exists():
         return None
@@ -97,7 +100,7 @@ def ours(run: Path, rows: dict, prediction_file: str, ids=None) -> list[dict] | 
         row = rows[record["id"]]
         records.append({"id": record["id"], "family": row["family"], "edit_kind": row["edit_kind"],
                         "loops": row["before_verification"]["independent_loops"],
-                        **our_answer(row, record["prediction"])})
+                        **our_answer(row, record["prediction"], address)})
     return records
 
 
@@ -136,7 +139,8 @@ def _cell(records, key, family=None):
     if not subset:
         return "--"
     hits = sum(bool(r.get(key)) for r in subset)
-    return f"{100 * hits / len(subset):.0f} ({hits}/{len(subset)})"
+    share = "100" if hits == len(subset) else f"{100 * hits / len(subset):.1f}"  # never round a miss up to 100
+    return f"{share} ({hits}/{len(subset)})"
 
 
 def comparison_rows(systems: list[tuple[str, list[dict] | None]]) -> str:
@@ -145,8 +149,7 @@ def comparison_rows(systems: list[tuple[str, list[dict] | None]]) -> str:
         lines.append(rf"\multicolumn{{5}}{{l}}{{\itshape {FAMILY_NAME[family]}}} \\")
         for name, records in systems:
             if records is None:
-                lines.append(rf"{name} & \multicolumn{{4}}{{c}}{{pending}} \\")
-                continue
+                continue  # a run that has not finished is left out, never shown as a placeholder
             cells = [_cell(records, key, family) for key in ("edit_correct", "verdict_correct",
                                                                "violations_correct", "end_to_end")]
             lines.append(f"{name} & " + " & ".join(cells) + r" \\")
@@ -162,9 +165,14 @@ def main() -> None:
 
     controls = N.controls()
     macros["numControls"] = str(len(controls))
+    def number(value):
+        if value != 0 and abs(value) < 1e-3:
+            mantissa, exponent = f"{value:.2e}".split("e")
+            return rf"${mantissa}{{\times}}10^{{{int(exponent)}}}$"
+        return f"{value:.6g}"
     macros["controlRows"] = "\n".join(
-        f"{row['control'].replace('&', 'and')} & {row['value']:.6g} & {row['expected']:.6g} \\\\"
-        .replace("Ω", r"$\Omega$") for row in controls)
+        f"{row['control'].replace('&', 'and')} & {number(row['value'])} & {number(row['expected'])} \\\\"
+        for row in controls)
     if not all(row["pass"] for row in controls):
         raise AssertionError("a control failed")
     total = round_trips()
@@ -200,19 +208,35 @@ def main() -> None:
     macros["dataRows"] = "\n".join(" & ".join(r) + r" \\" for r in rows)
 
     main_rows, hard_rows = _load(MAIN), _load(HARD)
+    import time
+    for tier, rows_ in (("Main", main_rows), ("Hard", hard_rows)):
+        spent = []
+        for row in rows_.values():
+            started = time.perf_counter()
+            verify_svg(row, row["target_svg"])
+            spent.append(time.perf_counter() - started)
+        macros[f"verifierMs{tier}"] = f"{1000 * statistics.median(spent):.0f}"
+        macros[f"verifierMsMax{tier}"] = f"{1000 * max(spent):.0f}"
     astra_main = astra(ROOT / "runs/network-astra-20260927", ROOT / "data/network-astra-bench-v1")
     astra_hard = astra(ROOT / "runs/network-astra-hard-20260927", ROOT / "data/network-astra-bench-hard-v1")
     main_ids = {r["id"] for r in astra_main[0]} if astra_main else None
     hard_ids = {r["id"] for r in astra_hard[0]} if astra_hard else None
 
     ours_runs = {}
-    for size in ("1.5b", "7b"):
-        run = args.remote / f"net-qwen-coder-{size}"
-        ours_runs[size] = {
-            "main_subset": ours(run, main_rows, "trained-predictions.jsonl", main_ids),
-            "main_all": ours(run, main_rows, "trained-predictions.jsonl"),
-            "hard_subset": ours(args.remote / f"net-qwen-coder-{size}-hard", hard_rows, "adapter-predictions.jsonl", hard_ids),
-            "hard_all": ours(args.remote / f"net-qwen-coder-{size}-hard", hard_rows, "adapter-predictions.jsonl"),
+    # "1.5b"/"7b": id-addressed editors (the system); "1.5b-pos": positional addressing (ablation).
+    for key, name in (("1.5b", "net-ids-qwen-coder-1.5b"), ("7b", "net-ids-qwen-coder-7b"),
+                      ("1.5b-pos", "net-qwen-coder-1.5b")):
+        run = args.remote / name
+        address = "ids" if "-ids-" in name else "nodes"
+        manifest = run / "run-manifest.json"
+        if manifest.exists() and json.loads(manifest.read_text()).get("address", "nodes") != address:
+            raise AssertionError(f"{name}: addressing does not match its manifest")
+        ours_runs[key] = {
+            "main_subset": ours(run, main_rows, "trained-predictions.jsonl", main_ids, address),
+            "main_all": ours(run, main_rows, "trained-predictions.jsonl", None, address),
+            "hard_subset": ours(args.remote / f"{name}-hard", hard_rows, "adapter-predictions.jsonl", hard_ids, address),
+            "hard_all": ours(args.remote / f"{name}-hard", hard_rows, "adapter-predictions.jsonl", None, address),
+            "timing": json.loads((run / "timing.json").read_text()) if (run / "timing.json").exists() else None,
         }
     base = ours(args.remote / "net-qwen-coder-1.5b", main_rows, "base-predictions.jsonl", main_ids)
 
@@ -241,19 +265,18 @@ def main() -> None:
             macros[f"astra{tier}Reasoning"] = _n(int(meta["reasoning_tokens_median"]))
 
     full_lines = []
-    for size in ("1.5b", "7b"):
+    for size, title in (("1.5b-pos", "1.5B pos."), ("1.5b", "1.5B id"), ("7b", "7B id")):
         for tier in ("main_all", "hard_all"):
             records = ours_runs[size][tier]
-            label = f"{size.upper()} {'main test' if tier == 'main_all' else 'hard tier'}"
+            label = f"{title}, {'main' if tier == 'main_all' else 'hard'}"
             if records is None:
-                full_lines.append(rf"{label} & \multicolumn{{3}}{{c}}{{pending}} \\")
                 continue
             full_lines.append(f"{label} & {_cell(records, 'edit_correct', 'dc_network')} & "
                               f"{_cell(records, 'edit_correct', 'pipe_network')} & {_cell(records, 'end_to_end')} \\\\")
     macros["oursFullRows"] = "\n".join(full_lines)
 
     kind_lines = []
-    reference = ours_runs["1.5b"]["main_all"]
+    reference = ours_runs["1.5b-pos"]["main_all"]
     kinds = sorted({(r["family"], r["edit_kind"]) for r in (reference or [])} |
                    {(r["family"], r["edit_kind"]) for r in (astra_main[0] if astra_main else [])})
     for family, kind in kinds:
@@ -263,9 +286,43 @@ def main() -> None:
             return _cell([r for r in records if r["edit_kind"] == kind], key, family)
         kind_lines.append(f"{FAMILY_NAME[family]}: {kind.replace('_', ' ')} & "
                           f"{cell(astra_main[0] if astra_main else None, 'end_to_end')} & "
+                          f"{cell(ours_runs['1.5b-pos']['main_all'], 'end_to_end')} & "
                           f"{cell(ours_runs['1.5b']['main_all'], 'end_to_end')} & "
                           f"{cell(ours_runs['7b']['main_all'], 'end_to_end')} \\\\")
     macros["kindRows"] = "\n".join(kind_lines)
+
+    for key, tag in (("1.5b", "OneFive"), ("7b", "Seven"), ("1.5b-pos", "OneFivePos")):
+        timing = ours_runs[key]["timing"]
+        if timing:
+            macros[f"gpuSecondsPerEdit{tag}"] = f"{timing['trained_eval_seconds'] / timing['trained_eval_rows']:.2f}"
+            macros[f"trainMinutes{tag}"] = f"{timing['training_seconds'] / 60:.0f}"
+        for tier in ("main_all", "hard_all"):
+            records = ours_runs[key][tier]
+            if records:
+                label = tag + ("Main" if tier == "main_all" else "Hard")
+                macros[f"edit{label}"] = f"{100 * sum(r['edit_correct'] for r in records) / len(records):.1f}"
+                for family, short in (("dc_network", "DC"), ("pipe_network", "Pipe")):
+                    sub = [r for r in records if r["family"] == family]
+                    macros[f"edit{label}{short}"] = f"{100 * sum(r['edit_correct'] for r in sub) / len(sub):.1f}"
+                macros[f"all{label}"] = f"{100 * sum(r['end_to_end'] for r in records) / len(records):.1f}"
+
+    from svgpatchlab.core import build_scene as _scene
+    size = {}
+    def elements(row):
+        if row["id"] not in size:
+            size[row["id"]] = _scene(row["source_svg"])["node_count"]
+        return size[row["id"]]
+    points = {}
+    for label, key in (("1.5B positional", "1.5b-pos"), ("1.5B id", "1.5b"), ("7B id", "7b")):
+        records = (ours_runs[key]["main_all"] or []) + (ours_runs[key]["hard_all"] or [])
+        if records:
+            lookup = {**main_rows, **hard_rows}
+            points[label] = [[elements(lookup[r["id"]]), r["family"], bool(r["edit_correct"])] for r in records]
+    astra_records = (astra_main[0] if astra_main else []) + (astra_hard[0] if astra_hard else [])
+    if astra_records:
+        lookup = {**main_rows, **hard_rows}
+        points["Astra"] = [[elements(lookup[r["id"]]), r["family"], bool(r["edit_correct"])] for r in astra_records]
+    (PAPER / "figure-data.json").write_text(json.dumps(points) + "\n")
 
     text = ["% Generated by scripts/network_paper_results.py -- do not edit by hand."]
     for name, value in macros.items():

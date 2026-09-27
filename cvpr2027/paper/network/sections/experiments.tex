@@ -17,7 +17,11 @@ dropped connection (12), and they are excluded rather than counted as failures.
 at 1.5B and 7B parameters, fine-tuned with LoRA~\cite{hu2022lora} (rank 16 on the attention projections) for two
 epochs on the \netEdits{}-edit training split to map \emph{source SVG $+$ instruction} to a tree patch. The patch
 is applied by a validating executor, and the resulting drawing is recovered and solved, so the verdict is
-computed, not generated. Decoding is greedy. The hard tier is never seen in training.
+computed, not generated. Decoding is greedy. The hard tier is never seen in training. We compare two ways for
+a patch to name the elements it changes. \emph{Positional} addressing uses the executor's native node
+identifiers, where \code{n77} is the 77th element in document order. \emph{Id} addressing uses the element's own
+SVG identifier (\code{\#R5-label}) and writes insertion at the end of a group as \code{"end"}. It is
+translated to positional form before execution, so the two differ only in what the model must write.
 
 \paragraph{Metrics.} \emph{Edit}: the edited drawing recovers to the target network. \emph{Verdict}: the stated
 pass/fail matches the solver's. \emph{Violations}: the set of violating components matches exactly. \emph{All}: all
@@ -75,20 +79,28 @@ limit, and it cannot be detected from the answer itself. Replacing \astra's anal
 own drawing removes it (\cref{tab:compare}, second row).
 
 \subsection{The small editor}
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{figures/size-curve.pdf}
+\caption{\textbf{Edit accuracy against drawing size}, pooled over both tiers and binned by the number of SVG
+elements in the source drawing (bins with at least five edits). The grey line marks the largest drawing in
+the training split.}
+\label{fig:size}
+\end{figure}
 \oursDiscussion
 
 \begin{table}[t]
 \centering
-\footnotesize
-\setlength{\tabcolsep}{3pt}
-\begin{tabular}{lccc}
+\scriptsize
+\setlength{\tabcolsep}{1.8pt}
+\begin{tabular}{@{}lccc@{}}
 \toprule
-\ours editor & Edit (circuits) & Edit (pipes) & All \\
+Editor & Circuits & Pipes & All \\
 \midrule
 \oursFullRows
 \bottomrule
 \end{tabular}
-\caption{\textbf{Our editor on the full test sets}: 1{,}000 main-tier and \hardEdits{} hard-tier edits.}
+\caption{\textbf{Our editor on the full test sets}: edit correctness by family and end-to-end accuracy (``pos.'' = positional, ``id'' = id addressing) on all 1{,}000 main-tier and \hardEdits{} hard-tier edits, \% (count).}
 \label{tab:ours}
 \end{table}
 

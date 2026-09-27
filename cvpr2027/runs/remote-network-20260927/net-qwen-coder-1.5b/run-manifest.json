@@ -1,0 +1,152 @@
+{
+  "status": "complete",
+  "created_utc": "2026-09-27T05:55:38.156763+00:00",
+  "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+  "model_revision": "2e1fd397ee46e1388853d2af2c993145b0f1098a",
+  "seed": 260925,
+  "epochs": 2.0,
+  "max_length": 6144,
+  "batch_size": 2,
+  "grad_accum": 8,
+  "gradient_checkpointing": false,
+  "train_examples": 8000,
+  "validation_examples": 1000,
+  "test_examples": 1000,
+  "test_evaluated": 1000,
+  "dataset_summary": {
+    "version": "engsvg-network-edit-v1",
+    "seed": 260927,
+    "source_designs": 2500,
+    "edit_examples": 10000,
+    "families": [
+      "dc_network",
+      "pipe_network"
+    ],
+    "family_counts": {
+      "dc_network": 5000,
+      "pipe_network": 5000
+    },
+    "edit_kind_counts": {
+      "add_pipe": 529,
+      "component_value": 1251,
+      "junction_demand": 1250,
+      "open_branch": 759,
+      "parallel_branch": 1250,
+      "pipe_diameter": 1250,
+      "pipe_length": 721,
+      "polarity": 490,
+      "remove_pipe": 1250,
+      "source_value": 1250
+    },
+    "split_examples": {
+      "train": 8000,
+      "validation": 1000,
+      "test": 1000
+    },
+    "split_source_designs": {
+      "train": 2000,
+      "validation": 250,
+      "test": 250
+    },
+    "lineage_overlap_between_splits": 0,
+    "exact_patch_roundtrips": 10000,
+    "drawings_recovered_to_model": 20000,
+    "verified_safe": 5368,
+    "verified_with_violations": 4632,
+    "edits_that_change_the_verdict": 780,
+    "patch_operation_coverage": {
+      "insert_subtree": 1779,
+      "remove_element": 2009,
+      "set_attributes": 490,
+      "set_text": 5722
+    },
+    "independent_loops_per_design": {
+      "dc_network": {
+        "min": 1,
+        "median": 3,
+        "max": 6
+      },
+      "pipe_network": {
+        "min": 1,
+        "median": 2,
+        "max": 4
+      }
+    },
+    "max_hardy_cross_gap_m3_s": 1.772261645164447e-11,
+    "max_kcl_residual_A": 4.6629367034256575e-15,
+    "analytical_controls": [
+      {
+        "control": "series current V/(R1+R2)",
+        "value": 0.0375,
+        "expected": 0.0375,
+        "pass": true
+      },
+      {
+        "control": "parallel current V(1/R1+1/R2)",
+        "value": 0.17454545454545456,
+        "expected": 0.17454545454545453,
+        "pass": true
+      },
+      {
+        "control": "balanced Wheatstone bridge current",
+        "value": -1.345724878333523e-18,
+        "expected": 0.0,
+        "pass": true
+      },
+      {
+        "control": "unbalanced bridge vs Thevenin",
+        "value": -0.0030752468983938483,
+        "expected": -0.0030752468983938426,
+        "pass": true
+      },
+      {
+        "control": "superposition of two sources",
+        "value": 0.2636363636363636,
+        "expected": 0.26363636363636367,
+        "pass": true
+      },
+      {
+        "control": "two reservoirs vs bisection (m3/s)",
+        "value": 0.03246677101159359,
+        "expected": 0.03246677101159359,
+        "pass": true
+      },
+      {
+        "control": "laminar loss vs Hagen-Poiseuille (m)",
+        "value": 4.171349716343485e-05,
+        "expected": 4.171349716343483e-05,
+        "pass": true
+      },
+      {
+        "control": "Churchill vs Colebrook at Re=1e6 (relative gap)",
+        "value": 1.0049671066556773,
+        "expected": 1.0,
+        "pass": true
+      },
+      {
+        "control": "Newton vs Hardy Cross, two loops + two reservoirs (m3/s)",
+        "value": 1.2155207396169487e-14,
+        "expected": 0.0,
+        "pass": true
+      },
+      {
+        "control": "mass balance: reservoir supply = demand (m3/s)",
+        "value": 1.3877787807814457e-17,
+        "expected": 0.0,
+        "pass": true
+      }
+    ],
+    "sample_svgs": 16,
+    "sample_pngs": 16,
+    "training_objective": "source SVG + natural-language instruction -> constrained patch JSON",
+    "scoring": "apply the predicted patch, recover the network from the edited drawing with engsvg_networks.physics_match, and compare its solution with the target design",
+    "claim_boundary": "procedural 2D schematics with idealised steady-state DC and pipe-flow checks; not electrical or water-supply approval"
+  },
+  "dataset_manifest_sha256": "0d11367e887787f14300aedacffa5b160f1ec82aa7a1e591d923c60ffdba99b0",
+  "training_script_sha256": "cdddb7d4eb1449f6baf5d23d925cdcbf6f51988c4b0bab14511bca0d97d74861",
+  "gpu": "NVIDIA RTX PRO 6000 Blackwell Workstation Edition",
+  "selection": "fixed final epoch; no test-based checkpoint selection",
+  "completed_utc": "2026-09-27T07:04:51.439250+00:00",
+  "training_seconds": 2146.902336378029,
+  "global_steps": 1000
+}

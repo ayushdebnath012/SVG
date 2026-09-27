@@ -33,7 +33,11 @@ the same way, whether it comes from a patch, a re-typed SVG or a human drafter.
       for training and evaluation, and a harder evaluation-only tier of \hardEdits{} edits on networks with up to
       \hardMaxLoopsDC{} independent loops. Every gold patch reproduces its target exactly, and every safety
       verdict is computed from the drawing (\cref{sec:data}).
-\item \textbf{A measurement of a frontier model} (\astra) under this scoring, alongside a small patch-emitting
-      editor paired with the verifier. It shows where the frontier model's own analysis can be relied upon and
-      where it cannot (\cref{sec:experiments}).
+\item \textbf{A measurement of a frontier model} (\astra) under this scoring. It edits every completed task
+      correctly and analyses circuits exactly, but its rare analysis error is silent: it declares an unsafe pipe
+      network safe (\cref{sec:experiments}).
+\item \textbf{A small verified editor.} A 1.5B model emitting tree patches, paired with the verifier, is correct on all
+      1{,}000 held-out edits and on \editOneFiveHard\,\% of larger, unseen networks, with exact verdicts. How the patch
+      names elements decides the outcome. Addressing by document position reaches \editOneFivePosMain\,\%, while
+      addressing by SVG identifier reaches 100\,\%.
 \end{itemize}

@@ -1,0 +1,38 @@
+\clearpage
+\appendix
+\section{Supplementary material}
+\subsection{Prompt given to \astra}
+System message: \emph{You are an engineering drafting and analysis assistant. Use your own reasoning; no external tools are provided. Do not claim you ran a solver.}
+
+User message for a circuit task (the source SVG follows verbatim):
+
+{\scriptsize\ttfamily\raggedright Instruction: Set R3 to 150 $\Omega$.\par
+Drawing conventions: straight lines are ideal wires. A wire that ends on another wire (a T) is connected to it; a filled dot also marks a connection; wires that cross without a dot are NOT connected. Rectangles are resistors and circles are ideal DC voltage sources; the '+' inside a source marks its positive terminal. Labels give component names and values.\\
+Criteria (from the drawing notes): every resistor's dissipated power must not exceed the stated rating, and the magnitude of every source's current must not exceed the stated supply fuse rating.\par
+Tasks:\\
+1. Apply the instruction to the drawing, changing nothing else, and return the complete edited SVG.\\
+2. Analyse the EDITED design and report whether it meets every criterion.\par
+Answer with exactly two fenced blocks and nothing else: first ```svg containing the full edited SVG, then ```json containing \{"verdict": "pass" or "fail", "violations": [names of every resistor or source that violates a criterion], "source\_currents\_A": \{"V1": current delivered out of its + terminal, ...\}, "max\_resistor\_power\_W": \{"name": "R?", "value": watts\}\}\par
+Source SVG: \textit{[complete SVG]}\par}
+
+For pipe networks the conventions paragraph and JSON schema are replaced by:
+
+{\scriptsize\ttfamily\raggedright Drawing conventions: heavy lines are pipes; filled dots are junctions. A pipe runs between junctions or reservoirs and may turn through 90-degree elbows; each elbow adds the minor-loss coefficient K given in the notes. 'P\# L m \O{}D' gives a pipe's length (m) and internal diameter (mm); 'J\# q=.. L/s z=.. m' gives the demand withdrawn at a junction and its elevation; 'R\# H=.. m' is a reservoir's fixed total head.\\
+Analysis model: steady incompressible water, density 998 kg/m3, dynamic viscosity 1.002e-3 Pa s, g = 9.80665 m/s2; Darcy-Weisbach head loss with the Churchill (1977) friction factor and the pipe roughness in the notes; tee and junction losses neglected; pressure head at a junction = hydraulic head minus elevation.\\
+Criteria (from the drawing notes): every pipe velocity must not exceed the maximum velocity, and every junction pressure head must be at least the minimum pressure head.\par JSON: \{"verdict": "pass" or "fail", "violations": [names of every pipe or junction that violates a criterion], "pipe\_velocities\_m\_s": \{"P1": speed, ...\}, "min\_pressure\_head\_m": \{"name": "J?", "value": metres\}\}\par}
+
+\subsection{Results by edit type}
+\begin{table}[h]
+\centering
+\tiny
+\setlength{\tabcolsep}{2pt}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Edit type & \astra & 1.5B pos. & 1.5B id & 7B id \\
+\midrule
+\kindRows
+\bottomrule
+\end{tabular}
+\caption{End-to-end accuracy (edit, verdict and violations all correct), \% (count). \astra on its completed main-tier tasks; \ours editors (positional or id addressing) on the full 1{,}000-edit main test set.}
+\label{tab:kinds}
+\end{table}

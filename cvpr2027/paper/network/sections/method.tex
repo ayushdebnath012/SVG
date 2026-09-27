@@ -3,22 +3,22 @@
 
 \begin{figure}[t]
 \centering
-\begin{tikzpicture}[font=\scriptsize, node distance=3mm and 3mm,
-  box/.style={draw, rounded corners=2pt, align=center, minimum height=7mm, fill=#1},
+\begin{tikzpicture}[font=\scriptsize, node distance=2.5mm and 4mm,
+  box/.style={draw, rounded corners=2pt, align=center, minimum height=7.5mm, text width=17mm, fill=#1},
   box/.default={white}, >={Stealth[length=1.6mm]}]
 \node[box=blue!6] (svg) {Edited SVG\\(any source)};
-\node[box=orange!10, right=of svg] (geo) {Visible geometry\\and text only};
+\node[box=orange!10, right=of svg] (geo) {Geometry $+$ text\\(no ids, no metadata)};
 \node[box=orange!10, right=of geo] (net) {Recovered\\network};
 \node[box=green!8, below=of net] (solve) {MNA / Newton\\$+$ Hardy Cross};
 \node[box=green!8, left=of solve] (check) {Criteria from\\drawing notes};
-\node[box=gray!10, left=of check] (score) {Edit score:\\same network?};
+\node[box=gray!10, left=of check] (score) {Same network\\as intended?};
 \draw[->] (svg) -- (geo);
-\draw[->] (geo) -- node[above]{\tiny nodes} (net);
+\draw[->] (geo) -- (net);
 \draw[->] (net) -- (solve);
 \draw[->] (solve) -- (check);
 \draw[->] (check) -- (score);
-\node[box=blue!6, above=2mm of svg] (editor) {Editor: source SVG $+$ instruction $\to$ patch};
-\draw[->] (editor) -- (svg);
+\node[box=blue!6, text width=58mm, above=2.5mm of geo] (editor) {Editor: source SVG $+$ instruction $\to$ edited SVG};
+\draw[->] (editor.west) -| (svg.north);
 \end{tikzpicture}
 \caption{\textbf{\ours.} Any edited drawing is read as built: geometry and labels become a network, the
 network is solved, and the result is checked against the criteria printed on the drawing and compared with

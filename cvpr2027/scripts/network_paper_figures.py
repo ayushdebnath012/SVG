@@ -104,10 +104,45 @@ def teaser(out: Path, data: Path) -> dict:
     return made
 
 
+def size_curve(out: Path, data: Path) -> None:
+    """Edit accuracy against drawing size (SVG elements), from paper/network/figure-data.json."""
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    points = json.loads(data.read_text())
+    edges = [0, 50, 75, 100, 130, 170, 240]
+    styles = {"Astra": ("#555555", "o", "--"), "1.5B positional": ("#d95f02", "s", ":"),
+              "1.5B id": ("#1b9e77", "^", "-"), "7B id": ("#7570b3", "D", "-")}
+    fig, ax = plt.subplots(figsize=(3.4, 2.3), dpi=200)
+    for label, rows in points.items():
+        xs, ys, ns = [], [], []
+        for lo, hi in zip(edges, edges[1:]):
+            subset = [ok for n, _, ok in rows if lo <= n < hi]
+            if len(subset) >= 5:
+                xs.append((lo + hi) / 2); ys.append(100 * sum(subset) / len(subset)); ns.append(len(subset))
+        colour, marker, line = styles.get(label, ("black", "o", "-"))
+        ax.plot(xs, ys, color=colour, marker=marker, linestyle=line, markersize=3.5, linewidth=1.2, label=label)
+    ax.axvline(121, color="#bbbbbb", linewidth=0.8)  # largest source drawing in the training split
+    ax.text(123, 8, "larger than any\ntraining drawing", fontsize=5.5, color="#777777")
+    ax.set_xlabel("SVG elements in the source drawing", fontsize=7)
+    ax.set_ylabel("edit correct (%)", fontsize=7)
+    ax.set_ylim(-3, 103)
+    ax.tick_params(labelsize=6)
+    ax.legend(fontsize=5.5, frameon=False, loc="lower left")
+    ax.spines[["top", "right"]].set_visible(False)
+    fig.tight_layout()
+    fig.savefig(out / "size-curve.pdf")
+    fig.savefig(out / "size-curve.png")
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--out", type=Path, default=ROOT / "paper/network/figures")
     parser.add_argument("--data", type=Path, default=ROOT / "data/engsvg-network-edit-v1")
+    parser.add_argument("--curve", action="store_true", help="only redraw the size curve")
     args = parser.parse_args()
     args.out.mkdir(parents=True, exist_ok=True)
-    print(json.dumps(teaser(args.out, args.data), indent=2, ensure_ascii=False))
+    if args.curve:
+        size_curve(args.out, ROOT / "paper/network/figure-data.json")
+    else:
+        print(json.dumps(teaser(args.out, args.data), indent=2, ensure_ascii=False))

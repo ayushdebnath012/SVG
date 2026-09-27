@@ -1,5 +1,39 @@
-% Prose that depends on our editor's results; written after the numbers are in.
-\newcommand{\oursDiscussion}{\textit{[Pending: the id-addressed 1.5B and 7B editors are training.]}}
-\newcommand{\costDiscussion}{\textit{[Pending.]}}
-\newcommand{\conclusionOurs}{}
-\newcommand{\abstractOurs}{}
+% Prose that depends on our editor's results. Numbers come from results.tex (generated); wording is by hand.
+
+\newcommand{\oursDiscussion}{%
+\Cref{tab:ours} and \cref{fig:size} show the editor's results. With id addressing, the 1.5B editor is correct on every
+one of the 1{,}000 main-tier test edits, and on \editOneFiveHard\,\% of the hard tier, whose networks are larger
+than anything in training. On the tasks \astra completed it matches \astra's edits exactly
+(\cref{tab:compare}). Because its verdict is computed from its own drawing, its verdicts are correct whenever its
+edits are.
+
+\paragraph{Addressing matters more than scale.} The same model and data with positional addressing reaches
+only \editOneFivePosMain\,\% (circuits \editOneFivePosMainDC\,\%, pipes \editOneFivePosMainPipe\,\%) and
+collapses to \editOneFivePosHard\,\% on the hard tier. Accuracy falls steadily with the number of elements in
+the drawing (\cref{fig:size}): to name a label as \code{n77} the model must count through the document. In
+pipe drawings a pipe's label position follows from its number and the pipe count, while in circuits it
+depends on how many sources precede it (each contributes three text elements), and circuits are where
+positional addressing fails. Naming elements by their SVG identifier removes the counting and costs nothing at inference.
+
+\paragraph{Remaining errors and markup.} The two hard-tier misses both add a parallel branch to the largest
+circuits: the model misplaces the branch's vertical coordinates by 8--30 units, so it no longer taps the
+intended wires, on rows lower in the drawing than any seen in training. The verifier rejects both because the recovered network differs. In the other direction, 22 main-tier
+edits are correct networks but not byte-identical to the gold drawing: 18 leave a junction dot that the gold
+drawing removes after opening a branch, and 4 place an added pipe's label 1--12 units from the gold position. A markup metric would
+count these as failures. Scoring by the recovered network credits them.}
+
+\newcommand{\costDiscussion}{%
+An \astra answer costs \$\astraMainCost{} (main tier) to \$\astraHardCost{} (hard tier) at list price and takes
+a median of \astraMainSeconds{}\,s to \astraHardSeconds{}\,s. Our 1.5B editor trains in \trainMinutesOneFivePos{}
+minutes on one RTX PRO 6000 GPU and then needs \gpuSecondsPerEditOneFivePos{}\,s of GPU time per edit when batched
+sixteen at a time. The id-addressed run shared the GPU with another user's jobs, which stretched its training to
+\trainMinutesOneFive{} minutes and inference to \gpuSecondsPerEditOneFive{}\,s per edit. The verifier needs a median of
+\verifierMsMain{}\,ms (main) and \verifierMsHard{}\,ms (hard) of laptop CPU time per drawing to recover, solve,
+check and compare it. It is cheap enough to run on every edit from any source, including \astra's.}
+
+\newcommand{\conclusionOurs}{A 1.5B editor that names elements by identifier, paired with the verifier, matches the
+frontier model's edits on the tasks both attempted. It is correct on all 1{,}000 main-tier and \editOneFiveHard\,\% of
+unseen hard-tier edits, its verdicts are exact by construction, and it runs locally in about a second per edit.}
+
+\newcommand{\abstractOurs}{A 1.5B editor that addresses elements by identifier, paired with the verifier, is correct on
+all 1{,}000 held-out edits and \editOneFiveHard\,\% of the larger unseen networks, at about a second of GPU time per edit.}
