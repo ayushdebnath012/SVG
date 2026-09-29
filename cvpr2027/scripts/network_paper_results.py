@@ -158,9 +158,18 @@ def comparison_rows(systems: list[tuple[str, list[dict] | None]]) -> str:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--remote", type=Path, default=ROOT / "runs/remote-network-20260927",
-                        help="fetched copy of the host's network runs directory")
+    parser.add_argument("--remote", type=Path, nargs="+",
+                        default=[ROOT / "runs/remote-network-20260927", ROOT / "runs/remote-network-h100-20260930"],
+                        help="fetched run directories, searched in order; VOID-* directories are never read")
     args = parser.parse_args()
+    if any(path.name.startswith("VOID") for path in args.remote):
+        raise SystemExit("refusing to read a VOID run directory")
+
+    def locate(name: str) -> Path:
+        for folder in args.remote:
+            if (folder / name).exists():
+                return folder / name
+        return args.remote[0] / name  # absent everywhere: ours() then reports the run as missing
     macros, facts = {}, {}
 
     controls = N.controls()
@@ -226,7 +235,7 @@ def main() -> None:
     # "1.5b"/"7b": id-addressed editors (the system); "1.5b-pos": positional addressing (ablation).
     for key, name in (("1.5b", "net-ids-qwen-coder-1.5b"), ("7b", "net-ids-qwen-coder-7b"),
                       ("1.5b-pos", "net-qwen-coder-1.5b")):
-        run = args.remote / name
+        run = locate(name)
         address = "ids" if "-ids-" in name else "nodes"
         manifest = run / "run-manifest.json"
         if manifest.exists() and json.loads(manifest.read_text()).get("address", "nodes") != address:
@@ -234,11 +243,11 @@ def main() -> None:
         ours_runs[key] = {
             "main_subset": ours(run, main_rows, "trained-predictions.jsonl", main_ids, address),
             "main_all": ours(run, main_rows, "trained-predictions.jsonl", None, address),
-            "hard_subset": ours(args.remote / f"{name}-hard", hard_rows, "adapter-predictions.jsonl", hard_ids, address),
-            "hard_all": ours(args.remote / f"{name}-hard", hard_rows, "adapter-predictions.jsonl", None, address),
+            "hard_subset": ours(locate(f"{name}-hard"), hard_rows, "adapter-predictions.jsonl", hard_ids, address),
+            "hard_all": ours(locate(f"{name}-hard"), hard_rows, "adapter-predictions.jsonl", None, address),
             "timing": json.loads((run / "timing.json").read_text()) if (run / "timing.json").exists() else None,
         }
-    base = ours(args.remote / "net-qwen-coder-1.5b", main_rows, "base-predictions.jsonl", main_ids)
+    base = ours(locate("net-qwen-coder-1.5b"), main_rows, "base-predictions.jsonl", main_ids)
 
     def hybrid(records):
         # Astra's own drawing, but the verdict computed by our verifier from that drawing.

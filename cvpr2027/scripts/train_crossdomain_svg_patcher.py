@@ -8,6 +8,7 @@ from datetime import datetime, timezone
 import gzip
 import hashlib
 import json
+import math
 from pathlib import Path
 import re
 import shutil
@@ -283,6 +284,10 @@ def main() -> None:
                         help="trade memory for speed on large GPUs")
     parser.add_argument("--address", choices=["nodes", "ids"], default="nodes",
                         help="how patches name elements: positional node ids or '#<svg id>'")
+    parser.add_argument("--disable-cudnn-attention", action="store_true",
+                        help="keep SDPA off the cuDNN kernel (NaN gradients on H100 in one 7B run)")
+    parser.add_argument("--skip-base-eval", action="store_true",
+                        help="skip the untrained-model evaluation (e.g. when it was already recorded)")
     args = parser.parse_args()
     global ADDRESS
     ADDRESS = args.address
@@ -290,10 +295,22 @@ def main() -> None:
     import torch
     from huggingface_hub import model_info
     from peft import LoraConfig, get_peft_model
-    from transformers import AutoModelForCausalLM, AutoTokenizer, Trainer, TrainingArguments, set_seed
+    from transformers import (AutoModelForCausalLM, AutoTokenizer, Trainer, TrainerCallback, TrainingArguments,
+                              set_seed)
 
     if not torch.cuda.is_available():
         raise RuntimeError("CUDA GPU required")
+    if args.disable_cudnn_attention:
+        torch.backends.cuda.enable_cudnn_sdp(False)
+
+    class StopOnNonFinite(TrainerCallback):
+        """Fail at the first non-finite loss or gradient norm instead of training a NaN model for hours."""
+
+        def on_log(self, _args, state, _control, logs=None, **_kwargs):
+            for key in ("loss", "grad_norm"):
+                value = (logs or {}).get(key)
+                if isinstance(value, float) and not math.isfinite(value):
+                    raise RuntimeError(f"non-finite {key} at step {state.global_step}; stopping")
     args.out.mkdir(parents=True, exist_ok=True)
     set_seed(args.seed)
     rows = {split: load_rows(args.data / f"{split}.jsonl.gz")
@@ -310,6 +327,7 @@ def main() -> None:
         "epochs": args.epochs, "max_length": args.max_length,
         "batch_size": args.batch_size, "grad_accum": args.grad_accum,
         "gradient_checkpointing": not args.no_gradient_checkpointing, "address": args.address,
+        "cudnn_attention": not args.disable_cudnn_attention, "base_eval": not args.skip_base_eval,
         "train_examples": len(rows["train"]), "validation_examples": len(rows["validation"]),
         "test_examples": len(rows["test"]), "test_evaluated": len(evaluation),
         "dataset_summary": json.loads((args.data / "dataset-summary.json").read_text()),
@@ -379,11 +397,13 @@ def main() -> None:
                                             (length-len(item["input_ids"])) for item in batch]),
         }
 
-    print("--- base evaluation ---", flush=True)
-    context = model.disable_adapter() if hasattr(model, "disable_adapter") else nullcontext()
-    with context:
-        before = evaluate(model, tokenizer, evaluation, "base", args.out, args.max_new_tokens,
-                          args.eval_batch)
+    before = {"skipped": True}
+    if not args.skip_base_eval:
+        print("--- base evaluation ---", flush=True)
+        context = model.disable_adapter() if hasattr(model, "disable_adapter") else nullcontext()
+        with context:
+            before = evaluate(model, tokenizer, evaluation, "base", args.out, args.max_new_tokens,
+                              args.eval_batch)
 
     model.train(); model.config.use_cache = False
     training_args = _training_arguments(
@@ -401,7 +421,7 @@ def main() -> None:
         dataloader_num_workers=0,
     )
     trainer = Trainer(model=model, args=training_args, train_dataset=encoded_train,
-                      eval_dataset=encoded_validation, data_collator=collate)
+                      eval_dataset=encoded_validation, data_collator=collate, callbacks=[StopOnNonFinite()])
     checkpoints = sorted((args.out / "checkpoints").glob("checkpoint-*"),
                          key=lambda path: int(path.name.split("-")[-1]))
     started = time.perf_counter()
