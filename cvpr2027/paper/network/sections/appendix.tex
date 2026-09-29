@@ -22,10 +22,10 @@ Analysis model: steady incompressible water, density 998 kg/m3, dynamic viscosit
 Criteria (from the drawing notes): every pipe velocity must not exceed the maximum velocity, and every junction pressure head must be at least the minimum pressure head.\par JSON: \{"verdict": "pass" or "fail", "violations": [names of every pipe or junction that violates a criterion], "pipe\_velocities\_m\_s": \{"P1": speed, ...\}, "min\_pressure\_head\_m": \{"name": "J?", "value": metres\}\}\par}
 
 \subsection{Results by edit type}
-\begin{table}[h]
+\begin{table*}[h]
 \centering
-\tiny
-\setlength{\tabcolsep}{2pt}
+\footnotesize
+\setlength{\tabcolsep}{5pt}
 \begin{tabular}{@{}lcccc@{}}
 \toprule
 Edit type & \astra & 1.5B pos. & 1.5B id & 7B id \\
@@ -35,4 +35,13 @@ Edit type & \astra & 1.5B pos. & 1.5B id & 7B id \\
 \end{tabular}
 \caption{End-to-end accuracy (edit, verdict and violations all correct), \% (count). \astra on its completed main-tier tasks; \ours editors (positional or id addressing) on the full 1{,}000-edit main test set.}
 \label{tab:kinds}
-\end{table}
+\end{table*}
+
+\subsection{Training stability}
+The first 7B training run, on an H100 NVL, diverged: the loss rose from 0.65 at step 20 to $3.0{\times}10^{4}$
+at step 30 with a non-finite gradient norm, and the resulting adapter emits only ``\texttt{!}'' characters. Two
+50-step reruns with identical code, settings and data order isolate the cause to PyTorch's cuDNN kernel for
+scaled dot-product attention. With it enabled the gradient norm again became non-finite at step 30. With it disabled
+all 50 steps were finite and the loss fell from 0.55 to 0.026. The reported 7B editor was retrained with that kernel
+disabled. The 1.5B editors, trained on an RTX PRO 6000, never used it. The diverged run is retained,
+marked void, and excluded from every table, and the trainer now stops at the first non-finite loss or gradient.
