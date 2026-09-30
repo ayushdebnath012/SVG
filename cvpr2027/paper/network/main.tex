@@ -9,6 +9,12 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta,positioning,fit}
 \usepackage{xspace}
+\usepackage{listings}
+\renewcommand{\ttdefault}{lmtt}  % Courier (pcr) is unavailable under XeTeX; use Latin Modern Mono for code
+\usepackage{upquote}
+\lstset{basicstyle=\ttfamily\scriptsize, breaklines=true, columns=fullflexible, upquote=true,
+  keepspaces=true, extendedchars=true, frame=none, xleftmargin=0pt,
+  literate={"}{{\textquotedbl}}1}
 \newcommand{\astra}{\textsc{Astra}\xspace}
 \newcommand{\ours}{\textsc{ReSolve}\xspace}
 \newcommand{\code}[1]{\texttt{\small #1}}
