@@ -1,0 +1,43 @@
+{
+  "model": "gpt-6-astra",
+  "input": [
+    {
+      "role": "system",
+      "content": "Edit the supplied CadQuery model to satisfy the instruction while preserving unrelated geometry. Units are mm.\nYou have a CadQuery 2.8 execution tool, evaluate_cad. Submit complete Python CAD code with result assigned.\nThe tool reports validity, solid count, envelope, volume and change relative to the source; it does NOT have the reference target.\nIt accepts import cadquery as cq, variables, numeric arithmetic, literal tuple/list loops and CadQuery modeling methods.\nNo filesystem, network, other imports, functions, comprehensions or introspection are supported. Unsupported syntax is an interface limitation, not a modeling failure.\nUse evaluate_cad at least once, up to three times. The final deliverable must be JSON with code and explanation.\nAn automatic exporter will produce linked top/front/right SVG views and envelope dimensions from your final model.\nDo not manually transcribe projection paths. Do not claim physical verification: no materials, loads or supports are specified.\nThe task is generation/editing of the physical part geometry and its drawing, not a fluid-flow field."
+    },
+    {
+      "role": "user",
+      "content": "Add 3 more identical spokes between the existing 3 spokes, so the wheel has 6 evenly-spaced spokes in total instead of 3, with the new spokes matching the existing spoke profile and thickness.\nSource CAD:\nimport cadquery as cq\n\nresult = (\n    cq.Workplane(\"XY\")\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, 0.0), rotate=cq.Vector(0.0, 0.0, 0.0))\n            .cylinder(28.0, 14.0)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, 18.0), rotate=cq.Vector(0.0, 0.0, 0.0))\n            .cylinder(18.0, 62.5)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, 0.0), rotate=cq.Vector(0.0, 0.0, 0.0))\n            .cylinder(32.0, 5.5)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, 18.0), rotate=cq.Vector(0.0, 0.0, 0.0))\n            .cylinder(22.0, 47.5)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, 0.0), rotate=cq.Vector(0.0, 0.0, 0.0))\n            .transformed(offset=cq.Vector(0.0, 0.0, 0.0), rotate=cq.Vector(90.0, 0.0, 0.0))\n            .polyline([[12.0, -12.0], [12.0, 12.0], [49.5, 25.0], [49.5, 11.0]])\n            .close()\n            .extrude(3.5, both=True)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, 0.0), rotate=cq.Vector(0.0, 0.0, 120.0))\n            .transformed(offset=cq.Vector(0.0, 0.0, 0.0), rotate=cq.Vector(90.0, 0.0, 0.0))\n            .polyline([[12.0, -12.0], [12.0, 12.0], [49.5, 25.0], [49.5, 11.0]])\n            .close()\n            .extrude(3.5, both=True)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, 0.0), rotate=cq.Vector(0.0, 0.0, 240.0))\n            .transformed(offset=cq.Vector(0.0, 0.0, 0.0), rotate=cq.Vector(90.0, 0.0, 0.0))\n            .polyline([[12.0, -12.0], [12.0, 12.0], [49.5, 25.0], [49.5, 11.0]])\n            .close()\n            .extrude(3.5, both=True)\n    )\n    .edges(\">Z\")\n    .chamfer(1.8)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(55.0, 0.0, 31.0), rotate=cq.Vector(0.0, 0.0, 0.0))\n            .cylinder(8.0, 6.0)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(55.0, 0.0, 63.5), rotate=cq.Vector(0.0, 0.0, 0.0))\n            .cylinder(57.0, 9.6)\n    )\n    .edges(\">Z\")\n    .chamfer(3.2)\n)\n\n# Export\nshow_object(result)\nSource measurements:\n{\"valid\": true, \"solids\": 1, \"volume_mm3\": 133887.28895481906, \"bbox_mm\": {\"xmin\": -62.5, \"xmax\": 64.6, \"ymin\": -62.5, \"ymax\": 62.5, \"zmin\": -14.0, \"zmax\": 92.0}, \"faces\": 32, \"edges\": 89, \"status\": \"completed\"}"
+    }
+  ],
+  "reasoning": {
+    "effort": "high"
+  },
+  "max_output_tokens": 10000,
+  "store": false,
+  "include": [
+    "reasoning.encrypted_content"
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "name": "evaluate_cad",
+      "description": "Execute a CAD candidate and inspect actual geometry. Does not compare against a hidden target.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "code"
+        ],
+        "additionalProperties": false
+      },
+      "strict": true
+    }
+  ],
+  "tool_choice": "required",
+  "parallel_tool_calls": false
+}

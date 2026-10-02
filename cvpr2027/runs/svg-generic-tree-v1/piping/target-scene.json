@@ -1,0 +1,229 @@
+{
+  "format": "svgpatchlab.scene-graph.v1",
+  "root_id": "n0",
+  "nodes": [
+    {
+      "id": "n0",
+      "xml_id": null,
+      "tag": "svg",
+      "parent": null,
+      "child_index": 0,
+      "children": [
+        "n1",
+        "n4"
+      ],
+      "attributes": {},
+      "text": "",
+      "bbox_hint": null,
+      "geometry_sha256": null,
+      "references": []
+    },
+    {
+      "id": "n1",
+      "xml_id": null,
+      "tag": "defs",
+      "parent": "n0",
+      "child_index": 0,
+      "children": [
+        "n2"
+      ],
+      "attributes": {},
+      "text": "",
+      "bbox_hint": null,
+      "geometry_sha256": null,
+      "references": []
+    },
+    {
+      "id": "n2",
+      "xml_id": "flow",
+      "tag": "marker",
+      "parent": "n1",
+      "child_index": 0,
+      "children": [
+        "n3"
+      ],
+      "attributes": {
+        "id": "flow"
+      },
+      "text": "",
+      "bbox_hint": null,
+      "geometry_sha256": null,
+      "references": []
+    },
+    {
+      "id": "n3",
+      "xml_id": null,
+      "tag": "path",
+      "parent": "n2",
+      "child_index": 0,
+      "children": [],
+      "attributes": {
+        "d": "M0 0 L5 2 L0 4 Z"
+      },
+      "text": "",
+      "bbox_hint": null,
+      "geometry_sha256": "932aa854fbacda29e6214e3c38a88b756f474d676ca336d888f9fd10e8385e6d",
+      "references": []
+    },
+    {
+      "id": "n4",
+      "xml_id": "pipe",
+      "tag": "g",
+      "parent": "n0",
+      "child_index": 1,
+      "children": [
+        "n5",
+        "n6"
+      ],
+      "attributes": {
+        "id": "pipe"
+      },
+      "text": "",
+      "bbox_hint": null,
+      "geometry_sha256": null,
+      "references": []
+    },
+    {
+      "id": "n5",
+      "xml_id": "run",
+      "tag": "path",
+      "parent": "n4",
+      "child_index": 0,
+      "children": [],
+      "attributes": {
+        "id": "run",
+        "d": "M5 30 H120",
+        "fill": "none",
+        "stroke": "blue",
+        "marker-end": "url(#flow)"
+      },
+      "text": "",
+      "bbox_hint": null,
+      "geometry_sha256": "72cf9c5bf0ca6cc7aa28e0689e8a2875d3d73c15895a75e5c3ccc97839c73734",
+      "references": [
+        {
+          "attribute": "marker-end",
+          "target_xml_id": "flow"
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "xml_id": "valve",
+      "tag": "g",
+      "parent": "n4",
+      "child_index": 1,
+      "children": [
+        "n7",
+        "n8"
+      ],
+      "attributes": {
+        "id": "valve"
+      },
+      "text": "",
+      "bbox_hint": null,
+      "geometry_sha256": null,
+      "references": []
+    },
+    {
+      "id": "n7",
+      "xml_id": null,
+      "tag": "circle",
+      "parent": "n6",
+      "child_index": 0,
+      "children": [],
+      "attributes": {
+        "cx": "60",
+        "cy": "30",
+        "r": "7",
+        "fill": "white",
+        "stroke": "blue"
+      },
+      "text": "",
+      "bbox_hint": [
+        53.0,
+        23.0,
+        67.0,
+        37.0
+      ],
+      "geometry_sha256": null,
+      "references": []
+    },
+    {
+      "id": "n8",
+      "xml_id": null,
+      "tag": "line",
+      "parent": "n6",
+      "child_index": 1,
+      "children": [],
+      "attributes": {
+        "x1": "55",
+        "y1": "25",
+        "x2": "65",
+        "y2": "35",
+        "stroke": "blue"
+      },
+      "text": "",
+      "bbox_hint": [
+        55.0,
+        25.0,
+        65.0,
+        35.0
+      ],
+      "geometry_sha256": null,
+      "references": []
+    }
+  ],
+  "duplicate_xml_ids": [],
+  "hierarchy_edges": [
+    {
+      "from": "n0",
+      "to": "n1",
+      "kind": "parent_child"
+    },
+    {
+      "from": "n1",
+      "to": "n2",
+      "kind": "parent_child"
+    },
+    {
+      "from": "n2",
+      "to": "n3",
+      "kind": "parent_child"
+    },
+    {
+      "from": "n0",
+      "to": "n4",
+      "kind": "parent_child"
+    },
+    {
+      "from": "n4",
+      "to": "n5",
+      "kind": "parent_child"
+    },
+    {
+      "from": "n4",
+      "to": "n6",
+      "kind": "parent_child"
+    },
+    {
+      "from": "n6",
+      "to": "n7",
+      "kind": "parent_child"
+    },
+    {
+      "from": "n6",
+      "to": "n8",
+      "kind": "parent_child"
+    }
+  ],
+  "reference_edges": [
+    {
+      "from": "n5",
+      "to": "n2",
+      "kind": "svg_reference",
+      "attribute": "marker-end",
+      "target_xml_id": "flow"
+    }
+  ]
+}

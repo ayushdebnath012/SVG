@@ -1,16 +1,28 @@
 {
   "target": "CVPR 2027 research project; not submission-ready",
-  "updated_date": "2026-09-17",
+  "updated_date": "2026-10-01",
   "primary_reports": [
+    "reports/ENGINEERING_EDITOR_OVERVIEW_20261001.md",
+    "reports/ASTRA_CROSSDOMAIN_VALIDATION_20261001.md",
+    "reports/ENGSVG_SVG2SVG_VERIFIED_20260925.md",
+    "reports/ENGSVG_CROSSDOMAIN_7B_A100_20260928.md",
+    "reports/NETWORK_ID_BLIND_ROBUSTNESS_20260930.md",
+    "reports/ASTRA_DRAWING_ROUTING_DISCOVERY_20260922.md",
+    "reports/CAD_FUNCTIONAL_DISCOVERY_20260921.md",
+    "reports/CAD_EXTENDED_DISCOVERY_20260921.md",
+    "reports/PROJECT_FOUNDATION_20260921.md",
     "reports/FEM_LITERATURE_AND_EXTENSION.md",
     "reports/ASTRA_FEM_FAILURE_RECHECK.md",
     "reports/TRAINING_RESULTS.md",
+    "reports/ASTRA_CONTROLLED_EDITING_BASELINE.md",
+    "reports/ASTRA_HARD_TASKS_20260918.md",
     "reports/COLAB_REPRODUCTION_20260916.md",
     "reports/REMOTE_REPRODUCTION_20260917.md",
-    "reports/RESEARCH_STATUS.md"
+    "reports/RESEARCH_STATUS.md",
+    "docs/latex/roadmap.tex"
   ],
   "training": {
-    "status": "completed and locally verified",
+    "status": "completed and locally verified; matched by the rule parser and by zero-shot Astra, so no learned advantage",
     "gpu": "NVIDIA A100-SXM4-40GB",
     "seeds": [
       17,
@@ -27,7 +39,20 @@
     "status": "4 calls completed",
     "runs": "runs/astra-api-recheck-20260913",
     "numerical_reference": "runs/robin-fem-reference",
-    "fem_contour_comparison": "runs/astra-api-recheck-20260913/fem_comparison.json"
+    "fem_contour_comparison": "runs/astra-api-recheck-20260913/fem_comparison.json",
+    "controlled_editing_baseline": {
+      "status": "120/120 strict exact actions, zero-shot, 2026-09-17",
+      "runs": "runs/astra-controlled-editing-20260918",
+      "report": "reports/ASTRA_CONTROLLED_EDITING_BASELINE.md",
+      "meaning": "benchmark reference for the pilot: prompting alone solves it, so no learning gap exists on this task (H4 untestable here)"
+    },
+    "hard_tasks": {
+      "status": "12 tasks, one sample each, 2026-09-18; 6/10 geometric passes, 2/2 ill-posed tasks disclosed, no false-solved",
+      "runs": "runs/astra-hard-20260918",
+      "references": "runs/reference-v4",
+      "report": "reports/ASTRA_HARD_TASKS_20260918.md",
+      "failures": "procedural polygon (4.5 pp mean), L-shape (0.66 pp mean, corner-dominated), Robin Bi=10 (0.75 pp max), Kirsch (0.53 pp max, missing far-field branches)"
+    }
   },
   "upstream_extension": {
     "project": "FEM-Bench",
@@ -41,7 +66,7 @@
     "new_numerical_checks": "analytic Robin anchor, mesh convergence, heat balance; upstream bar tests, analytic displacement, force balance; Colab reproduction agreement (adapter bytes, predictions, FEM tolerances); cross-architecture functional equivalence (Blackwell vs A100)"
   },
   "outstanding": [
-    "Main well-posed FEM and visual editing benchmark beyond simple anchors",
+    "Main well-posed FEM and visual editing benchmark beyond simple anchors (first twelve-task batch run; n=3, multi-model and budget sweeps pending)",
     "Published solver-agent reproduction under comparable inputs",
     "Actual multimodal contribution and strong deterministic baselines",
     "Complete paper, author review and venue submission"
@@ -76,5 +101,49 @@
       "reports/blackwell_training_verified.json",
       "reports/blackwell_reproduction.json"
     ]
+  },
+  "engineering_svg_foundation": {
+    "date": "2026-09-21",
+    "report": "reports/PROJECT_FOUNDATION_20260921.md",
+    "literature_sources": 54,
+    "runs": "runs/astra-cad-intent-20260921",
+    "source_objects": 1,
+    "conditions": 4,
+    "astra_passes": 4,
+    "rule_baseline_passes": 4,
+    "confirmed_hard_cases": 0,
+    "query_evidence": "runs/astra-cad-intent-20260921/query-evidence.json",
+    "regression_tests_passed": 11,
+    "status": "Executable controls and prospective research protocol; novelty and learned advantage not established"
+  },
+  "extended_cad_discovery": {
+    "report": "reports/CAD_EXTENDED_DISCOVERY_20260921.md",
+    "development_runs": "runs/astra-cad-development-20260921",
+    "multiview_runs": "runs/astra-cad-multiview-20260921",
+    "released_drawing_runs": "runs/astra-cad-released-20260921",
+    "source_records": 62,
+    "status": "Five custom cases pass. Two released cases pass partial checks; full shapes unscored. Zero admitted hard cases. Novelty not established.",
+    "released_summary": "runs/astra-cad-released-20260921/summary.json"
+  },
+  "functional_sizing_discovery": {
+    "report": "reports/CAD_FUNCTIONAL_DISCOVERY_20260921.md",
+    "audit": "runs/astra-functional-sizing-20260921/audited-summary.json",
+    "completed": 6,
+    "passes": 6,
+    "confirmed_hard": 0,
+    "reported_tokens": 128046,
+    "new_training": false,
+    "source_records": 67,
+    "status": "Complete bounded screen; novelty and requested Astra-hard premise not established."
+  },
+  "current_editor_paper": {
+    "title": "ReSolve: Parse, Patch, and Check Engineering SVGs",
+    "pdf": "paper/network/main.pdf",
+    "latex": "paper/network/main.tex",
+    "overview": "reports/ENGINEERING_EDITOR_OVERVIEW_20261001.md",
+    "examples": "runs/paper-engineering-examples-20261001/summary.json",
+    "example_provenance": "runs/paper-engineering-examples-20261001/provenance.json",
+    "crossdomain_audit": "reports/ASTRA_CROSSDOMAIN_VALIDATION_20261001.json",
+    "note": "Protocols remain separate; saved deterministic edit audit is not learned accuracy. No fresh API call or training in this revision."
   }
 }

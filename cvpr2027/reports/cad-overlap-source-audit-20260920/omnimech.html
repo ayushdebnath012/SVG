@@ -1,0 +1,909 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="OmniMech is OmniEDA's 251K-scale multimodal mechanical benchmark for engineering-drawing understanding, precise 3D CAD reconstruction, and agentic CAD generation.">
+  <meta name="keywords" content="OmniMech, OmniEDA, OmniCAD, mechanical CAD benchmark, 3D CAD reconstruction, engineering drawings, SolidWorks, parametric CAD, multimodal reasoning, agentic CAD, geometric fidelity, Taiting Lu, Runze Liu, Ziwei Dong, Sisong Bei, Jingying Zeng, Mingjia Wang, Zhenghao Li, Kaiyuan Lin, Yi-Shan Wu, Yangshoudu Zheng, Hongxing Pan, Kai Zhang, Guoliang Shi, Ling Ma, Yifan Yang, Jiaying Lu, Qi He, Sung-Liang Chen, Yi-Chao Chen, Yincheng Jin, Mahanth Gowda">
+  <meta name="author" content="Taiting Lu, Runze Liu, Ziwei Dong, Sisong Bei, Jingying Zeng, Mingjia Wang, Zhenghao Li, Kaiyuan Lin, Yi-Shan Wu, Yangshoudu Zheng, Hongxing Pan, Kai Zhang, Guoliang Shi, Ling Ma, Yifan Yang, Jiaying Lu, Qi He, Sung-Liang Chen, Yi-Chao Chen, Yincheng Jin, Mahanth Gowda">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <link rel="canonical" href="https://omnimech.dev/">
+  <link rel="alternate" type="text/html" title="OmniLayout" href="https://www.omnieda.com/">
+  <link rel="alternate" type="text/html" title="OmniRouting" href="https://www.omnieda.com/routing/">
+  <meta property="og:site_name" content="OmniMech">
+  <meta property="og:title" content="OmniMech | Multimodal Mechanical CAD Benchmark">
+  <meta property="og:description" content="A 251K-scale benchmark for precise, editable 3D CAD reconstruction from real engineering drawings.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://omnimech.dev/">
+  <meta property="og:image" content="https://omnimech.dev/public/media/overview.png">
+  <meta property="og:image:width" content="7000">
+  <meta property="og:image:height" content="2500">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:alt" content="Overview of the OmniMech mechanical CAD reconstruction benchmark">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="OmniMech | Multimodal Mechanical CAD Benchmark">
+  <meta name="twitter:description" content="Engineering drawings to precise, editable 3D CAD with multimodal and agentic evaluation.">
+  <meta name="twitter:image" content="https://omnimech.dev/public/media/overview.png">
+  <meta name="twitter:image:alt" content="Overview of the OmniMech mechanical CAD reconstruction benchmark">
+  <title>OmniMech | 3D CAD Reconstruction Benchmark · OmniEDA</title>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ScholarlyArticle","@id":"https://omnimech.dev/#paper","headline":"OmniMech: All-in-one Multimodal Mechanical Benchmark for 3D Reconstruction","description":"A 251K-scale multimodal benchmark for engineering-drawing understanding, precise 3D CAD reconstruction, and agentic CAD generation.","url":"https://omnimech.dev/","mainEntityOfPage":"https://omnimech.dev/","image":"https://omnimech.dev/public/media/overview.png","datePublished":"2026","identifier":"arXiv:2608.05539","sameAs":"https://arxiv.org/abs/2608.05539","keywords":["OmniMech","OmniEDA","OmniCAD","3D CAD reconstruction","engineering drawings","mechanical design","multimodal reasoning","agentic CAD"],"author":[{"@type":"Person","name":"Taiting Lu"},{"@type":"Person","name":"Runze Liu"},{"@type":"Person","name":"Ziwei Dong"},{"@type":"Person","name":"Sisong Bei"},{"@type":"Person","name":"Jingying Zeng"},{"@type":"Person","name":"Mingjia Wang"},{"@type":"Person","name":"Zhenghao Li"},{"@type":"Person","name":"Kaiyuan Lin"},{"@type":"Person","name":"Yi-Shan Wu"},{"@type":"Person","name":"Yangshoudu Zheng"},{"@type":"Person","name":"Hongxing Pan"},{"@type":"Person","name":"Kai Zhang"},{"@type":"Person","name":"Guoliang Shi"},{"@type":"Person","name":"Ling Ma"},{"@type":"Person","name":"Yifan Yang"},{"@type":"Person","name":"Jiaying Lu"},{"@type":"Person","name":"Qi He"},{"@type":"Person","name":"Sung-Liang Chen"},{"@type":"Person","name":"Yi-Chao Chen"},{"@type":"Person","name":"Yincheng Jin"},{"@type":"Person","name":"Mahanth Gowda"}],"publisher":{"@type":"Organization","name":"OmniEDA","url":"https://www.omnieda.com/"},"isPartOf":{"@type":"CollectionPage","name":"OmniEDA Research Benchmarks","url":"https://www.omnieda.com/"},"about":{"@id":"https://omnimech.dev/#dataset"},"relatedLink":["https://www.omnieda.com/","https://www.omnieda.com/routing/"]},{"@type":"Dataset","@id":"https://omnimech.dev/#dataset","name":"OmniMech Dataset","description":"A 251K-scale multimodal mechanical CAD dataset pairing native SolidWorks parts, orthographic engineering drawings, B-Rep geometry, rendered views, dimensions, and feature information.","url":"https://omnimech.dev/","mainEntity":{"@id":"https://omnimech.dev/#paper"},"creator":{"@type":"Organization","name":"OmniEDA","url":"https://www.omnieda.com/"},"keywords":["mechanical CAD","engineering drawing","3D reconstruction","SolidWorks","B-Rep","multimodal benchmark"]}]}</script>
+  <style>
+    :root{--ink:#10151b;--muted:#606870;--paper:#f4f2ec;--blue:#155eef;--line:#ccd1d5;--acid:#c8ff3d}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:var(--paper);font-family:Arial,Helvetica,sans-serif}a{color:inherit;text-decoration:none}img{display:block;max-width:100%}.shell{width:min(1180px,calc(100% - 48px));margin:auto}.nav{height:84px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #c8cbc9}.wordmark{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:-.03em}.mark{display:grid;place-items:center;width:35px;height:35px;background:var(--ink);color:#fff;font:bold 10px monospace}.navlinks{display:flex;gap:31px;color:#515962;font-size:13px}.navpaper{font-size:13px;font-weight:700;border-bottom:1px solid;padding-bottom:4px}.hero{min-height:690px;display:grid;grid-template-columns:1.03fr .97fr;align-items:center;gap:58px;padding:68px 0 78px}.eyebrow,.kicker{font:600 11px monospace;letter-spacing:.11em;text-transform:uppercase}.eyebrow{color:#49535c}.eyebrow:before{content:"";display:inline-block;width:24px;height:2px;background:var(--blue);vertical-align:middle;margin-right:10px}h1{font-size:clamp(58px,6vw,86px);line-height:.93;letter-spacing:-.065em;margin:28px 0 30px;font-weight:600}h1 em{color:var(--blue);font-family:Georgia,serif;font-weight:400}.lede{max-width:640px;font-size:18px;line-height:1.6;color:#3f484f}.actions{display:flex;gap:13px;flex-wrap:wrap;margin-top:35px}.button{background:var(--ink);color:#fff;padding:15px 19px;font-size:13px;font-weight:700}.button:hover{background:var(--blue)}.ghost{border:1px solid #bec3c4;color:#737a7f;padding:14px 17px;font-size:12px}.heroart{height:520px;position:relative;background-color:#e9e9e4;background-image:linear-gradient(#b9c2ca50 1px,transparent 1px),linear-gradient(90deg,#b9c2ca50 1px,transparent 1px);background-size:28px 28px;border:1px solid #c8cdcf;overflow:hidden;padding:56px 28px 82px;display:flex;align-items:center}.heroart img{width:100%;box-shadow:0 22px 60px #1a263321}.badge{position:absolute;background:var(--blue);color:#fff;padding:9px 12px;font:bold 15px monospace}.badge small{display:block;font-size:8px;text-transform:uppercase;opacity:.8}.b1{left:18px;bottom:18px}.b2{right:18px;top:18px;background:var(--acid);color:var(--ink)}.statsband{background:var(--blue);color:#fff}.stats{min-height:146px;display:grid;grid-template-columns:repeat(4,1fr);align-items:center}.stat{display:flex;align-items:center;gap:17px;padding:0 24px;border-right:1px solid #ffffff3d}.stat:first-child{padding-left:0}.stat:last-child{border:0}.stat strong{font-size:36px;letter-spacing:-.05em}.stat span{color:#dce8ff;font:10px/1.5 monospace;text-transform:uppercase}.section{padding:118px 0}.kicker{color:var(--blue);margin-bottom:32px}.kicker.light{color:var(--acid)}h2{font-size:clamp(38px,4.7vw,62px);line-height:1.02;letter-spacing:-.055em;font-weight:600;margin:0}.twocol{display:grid;grid-template-columns:1.15fr .85fr;gap:90px}.copy{color:var(--muted);font-size:16px;line-height:1.75;margin:0 0 18px}.card{background:#fff;margin-top:78px;border:1px solid #d2d5d5;padding:30px}.card img{width:100%;max-height:480px;object-fit:contain}.legend{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);margin-top:25px;padding-top:22px}.legend div{padding:0 21px;border-right:1px solid var(--line)}.legend div:first-child{padding-left:0}.legend div:last-child{border:0}.legend b,.legend small{display:block}.legend small{color:var(--muted);margin-top:5px}.dark{background:var(--ink);color:#fff}.taskhead{display:grid;grid-template-columns:1fr 420px;gap:90px;align-items:end}.taskgrid{display:grid;grid-template-columns:repeat(4,1fr);margin-top:72px;border-top:1px solid #495057}.task{min-height:300px;padding:27px 26px 20px;border-right:1px solid #495057}.task:first-child{padding-left:0}.task:last-child{border:0}.task>span{color:var(--acid);font:600 11px monospace}.task h3{font-size:21px;line-height:1.25;margin:80px 0 18px}.task p{color:#aeb6bc;font-size:13px;line-height:1.65}.results{display:grid;grid-template-columns:1fr 1fr;gap:88px;align-items:center}.figure{background:#fff;border:1px solid #d2d5d5;padding:22px}.resultcopy h2{font-size:clamp(38px,4vw,55px);margin-bottom:30px}.finding{display:grid;grid-template-columns:170px 1fr;align-items:center;border-top:1px solid var(--line);padding:18px 0}.finding b{color:var(--blue);font:bold 18px monospace}.finding span{color:var(--muted);font-size:13px}.people{border-top:1px solid var(--line);padding-top:90px}.authors{color:#394149;line-height:1.85;margin:43px 0 30px}.institutions{display:flex;gap:9px;flex-wrap:wrap}.institutions span{border:1px solid #bfc4c4;padding:10px 13px;font:10px monospace;text-transform:uppercase}.citation{background:var(--blue);color:#fff;padding:95px 0}.citegrid{display:grid;grid-template-columns:.8fr 1.2fr;gap:90px;align-items:center}pre{margin:0;overflow:auto;background:#0e214d;color:#e5edff;padding:27px;border-left:3px solid var(--acid);font:12px/1.65 monospace}footer{min-height:145px;display:flex;align-items:center;gap:36px}footer p{color:var(--muted);font-size:12px;flex:1}
+    @media(max-width:900px){.navlinks{display:none}.hero,.twocol,.taskhead,.results,.citegrid{grid-template-columns:1fr}.hero{padding-top:55px}.stats,.taskgrid,.legend{grid-template-columns:1fr 1fr}.stat{min-height:82px;border:0}.task{border-bottom:1px solid #495057}.twocol,.taskhead,.results,.citegrid{gap:38px}}
+    @media(max-width:560px){.shell{width:calc(100% - 28px)}.nav{height:70px}.hero{min-height:0;padding:44px 0 60px}h1{font-size:51px}.lede{font-size:16px}.heroart{height:330px;padding-inline:14px}.stats,.taskgrid,.legend{grid-template-columns:1fr}.stat{padding:18px 0;border-bottom:1px solid #ffffff35}.section{padding:80px 0}.card{margin-top:48px;padding:12px}.task{border-right:0;min-height:250px;padding-left:0}.task h3{margin-top:55px}.finding{grid-template-columns:1fr;gap:7px}footer{align-items:flex-start;flex-direction:column;padding:35px 0;gap:16px}}
+  </style>
+  <style>
+    /* Alternative B: dark technical blueprint */
+    :root{--ink:#e8f7ff;--muted:#92adbd;--paper:#071723;--blue:#3ee8ff;--line:#244455;--acid:#ffdf4d}
+    body{background-color:var(--paper);background-image:linear-gradient(#17314355 1px,transparent 1px),linear-gradient(90deg,#17314355 1px,transparent 1px);background-size:32px 32px;color:var(--ink);font-family:"Courier New",monospace}.nav{border-color:#2d596d;background:#071723e8;position:sticky;top:0;z-index:20;backdrop-filter:blur(12px)}.mark{background:var(--blue);color:#03131d}.navlinks{color:#91bacc}.navpaper{color:var(--blue)}
+    .eyebrow{color:#80a9ba}h1{font-weight:400;letter-spacing:-.07em;text-transform:uppercase}h1 em{font-family:"Courier New",monospace;color:var(--blue);font-style:normal;text-shadow:0 0 18px #3ee8ff55}.lede{color:#a8c2d0}.button{background:var(--blue);color:#00131c}.ghost{border-color:#31566a;color:#7598a9}.heroart{background-color:#0d2634;background-image:linear-gradient(#3ee8ff20 1px,transparent 1px),linear-gradient(90deg,#3ee8ff20 1px,transparent 1px);border-color:#3ee8ff70}.heroart img{filter:grayscale(1) invert(.9) hue-rotate(150deg) contrast(1.2);mix-blend-mode:screen}.badge{background:var(--blue);color:#03131d}.b2{background:var(--acid)}
+    .statsband{background:#0b2b3a;border-block:1px solid var(--blue)}.stat{border-color:#3ee8ff44}.section{padding:125px 0}.kicker{color:var(--blue)}h2{text-transform:uppercase;font-weight:400}.copy{color:var(--muted)}.card,.figure{background:#0b2230;border-color:#31576a}.legend{border-color:#31576a}.legend small{color:#8eabb9}.dark{background:#020b10}.taskgrid,.task{border-color:#244455}.task h3{color:var(--blue);font-weight:400}.citation{background:#071018;border-top:1px solid var(--blue)}.citation pre{background:#001018;color:#bfeef7;border-color:var(--acid)}.people{border-color:#31576a}.institutions span{border-color:#31576a}.finding{border-color:#31576a}.finding b{color:var(--acid)}footer{border-top:1px solid #244455}
+  </style>
+  <style>
+    /* Model comparison matrix - 3 cases x GT + 4 methods */
+    .heroart{height:390px;padding:0;align-items:flex-start}
+    .heroart img{width:100%;height:auto;transform:scale(1.18);transform-origin:top center}
+    .showcase{background:#020b10;border-block:1px solid #244455}
+    .showcase-head{display:grid;grid-template-columns:1fr 420px;gap:80px;align-items:end;margin-bottom:52px}
+    .model-matrix{display:grid;grid-template-columns:repeat(5,minmax(210px,1fr));gap:1px;background:#244455;border:1px solid #244455;overflow-x:auto}
+    .model-card{min-width:210px;background:#071723;position:relative}
+    .model-card.gt{background:#092534}
+    .model-label{height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;border-bottom:1px solid #244455;font:600 10px "Courier New",monospace;letter-spacing:.08em;text-transform:uppercase;color:#90adbd}
+    .model-card.gt .model-label{color:#3ee8ff}.model-label span{color:#526f7e;font-size:9px}
+    model-viewer{display:block;width:100%;height:250px;background:radial-gradient(circle at 50% 45%,#123647 0,#071723 66%);--poster-color:transparent}
+    .model-placeholder{height:100%;display:grid;place-items:center;text-align:center;color:#577587;font:10px/1.6 "Courier New",monospace;letter-spacing:.08em;text-transform:uppercase}
+    .model-placeholder.is-failed{color:#d9f8ff;font-size:14px;font-weight:900;line-height:1.12;letter-spacing:.14em;text-shadow:0 0 16px #3ee8ff55}
+    body.bright .model-placeholder.is-failed{color:#164c5d;text-shadow:none}
+    .model-placeholder b{display:block;color:#3ee8ff;font-size:28px;font-weight:400;margin-bottom:8px}
+    .model-meta{display:flex;justify-content:space-between;padding:10px 14px;border-top:1px solid #173b4d;color:#526f7e;font:9px "Courier New",monospace;text-transform:uppercase}
+    .format-note{margin-top:24px;color:#6f8e9e;font:10px/1.7 "Courier New",monospace;letter-spacing:.04em}
+    .format-note strong{color:#ffdf4d;font-weight:500}
+    @media(max-width:900px){.showcase-head{grid-template-columns:1fr;gap:24px}.model-matrix{grid-template-columns:repeat(5,220px)}}
+    @media(max-width:560px){.heroart{height:270px}.model-matrix{grid-template-columns:repeat(5,200px)}model-viewer{height:220px}}
+  </style>
+  <style>
+    .nav>.wordmark{font-size:27px;font-weight:900;letter-spacing:-.045em}
+    .model-card:not(:has(.model-label)) model-viewer{height:270px}
+  </style>
+  <style>
+    model-viewer{height:170px}
+    .model-card:not(:has(.model-label)) model-viewer{height:185px}
+    .model-label{height:42px}
+  </style>
+  <style>
+    .three-viewer{display:block;width:100%;height:170px;position:relative;overflow:hidden;background:radial-gradient(circle at 50% 45%,#123647 0,#071723 66%);touch-action:none}
+    .model-card:not(:has(.model-label)) .three-viewer{height:185px}
+    .three-viewer canvas{display:block;width:100%;height:100%;cursor:grab}
+    .three-viewer canvas:active{cursor:grabbing}
+    .three-viewer .model-placeholder{position:absolute;inset:0;z-index:0;pointer-events:none}
+    @media(max-width:560px){.three-viewer,.model-card:not(:has(.model-label)) .three-viewer{height:155px}}
+  </style>
+  <script type="module">
+    import * as THREE from "https://esm.sh/three@0.170.0";
+    import { GLTFLoader } from "https://esm.sh/three@0.170.0/examples/jsm/loaders/GLTFLoader.js";
+    import { OrbitControls } from "https://esm.sh/three@0.170.0/examples/jsm/controls/OrbitControls.js";
+    import { RoomEnvironment } from "https://esm.sh/three@0.170.0/examples/jsm/environments/RoomEnvironment.js";
+
+    const canvas = document.createElement("canvas");
+    canvas.id = "shared-model-canvas";
+    canvas.setAttribute("aria-hidden", "true");
+    Object.assign(canvas.style, { position: "fixed", inset: "0", width: "100vw", height: "100vh", pointerEvents: "none", zIndex: "12" });
+    document.body.appendChild(canvas);
+
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: "high-performance" });
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.15;
+    renderer.autoClear = false;
+
+    const pmrem = new THREE.PMREMGenerator(renderer);
+    const environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+    pmrem.dispose();
+    const loader = new GLTFLoader();
+    const views = [];
+    let isBrightTheme = document.body.classList.contains("bright");
+    let modelBackground = isBrightTheme ? 0xffffff : 0x071723;
+    const updateModelTheme = bright => {
+      isBrightTheme = bright;
+      modelBackground = bright ? 0xffffff : 0x071723;
+      views.forEach(view => view.materials?.forEach(material => {
+        material.color.setHex(bright ? 0x173f4b : 0x5593a1);
+        material.emissive.setHex(bright ? 0x031419 : 0x123f49);
+        material.emissiveIntensity = bright ? 0.12 : 0.46;
+        material.metalness = bright ? 0.38 : 0.24;
+        material.roughness = bright ? 0.38 : 0.32;
+      }));
+    };
+    window.addEventListener("omnimech-themechange", event => updateModelTheme(event.detail.bright));
+
+    document.querySelectorAll(".three-viewer").forEach(host => {
+      const scene = new THREE.Scene();
+      scene.environment = environment;
+      scene.add(new THREE.HemisphereLight(0xc8f6ff, 0x07121a, 2.2));
+      const key = new THREE.DirectionalLight(0xffffff, 4.2); key.position.set(4, 6, 5);
+      const fill = new THREE.DirectionalLight(0x58d9ff, 2.0); fill.position.set(-5, 2, 3);
+      const rim = new THREE.DirectionalLight(0x8fa8ff, 2.6); rim.position.set(1, 4, -5);
+      scene.add(key, fill, rim);
+
+      const camera = new THREE.PerspectiveCamera(38, 1, 0.01, 1000);
+      const controls = new OrbitControls(camera, host);
+      controls.enableDamping = true;
+      controls.dampingFactor = 0.08;
+      controls.enablePan = false;
+
+      const pivot = new THREE.Group();
+      scene.add(pivot);
+      const view = { host, scene, camera, controls, pivot, materials: [], loadToken: 0, idle: true, resumeTimer: 0, loaded: false };
+      views.push(view);
+
+      const pause = () => { view.idle = false; clearTimeout(view.resumeTimer); };
+      const resume = () => { clearTimeout(view.resumeTimer); view.resumeTimer = setTimeout(() => view.idle = true, 1600); };
+      host.addEventListener("pointerdown", pause);
+      host.addEventListener("pointerup", resume);
+      host.addEventListener("pointercancel", resume);
+      host.addEventListener("wheel", () => { pause(); resume(); }, { passive: true });
+
+      const loadModel = src => {
+        const token = ++view.loadToken;
+        view.loaded = false;
+        while (pivot.children.length) pivot.remove(pivot.children[0]);
+        view.materials.forEach(item => item.dispose());
+        view.materials.length = 0;
+        host.querySelector(".model-placeholder")?.remove();
+        const placeholder = document.createElement("div");
+        placeholder.className = `model-placeholder${src ? "" : " is-failed"}`;
+        placeholder.innerHTML = src ? "Loading model..." : "Failed<br>to<br>generate";
+        host.appendChild(placeholder);
+        if (!src) return;
+        loader.load(src, gltf => {
+        if (token !== view.loadToken) return;
+        const model = gltf.scene;
+        const material = new THREE.MeshPhysicalMaterial({
+          color: isBrightTheme ? 0x173f4b : 0x5593a1,
+          emissive: isBrightTheme ? 0x031419 : 0x123f49,
+          emissiveIntensity: isBrightTheme ? 0.12 : 0.46,
+          metalness: isBrightTheme ? 0.38 : 0.24,
+          roughness: isBrightTheme ? 0.38 : 0.32,
+          clearcoat: 0.55,
+          clearcoatRoughness: 0.2,
+          envMapIntensity: 1.5,
+          side: THREE.DoubleSide
+        });
+        model.traverse(node => {
+          if (!node.isMesh) return;
+          node.geometry.computeVertexNormals();
+          node.geometry.normalizeNormals();
+          node.material = material.clone();
+          view.materials.push(node.material);
+        });
+        const box = new THREE.Box3().setFromObject(model);
+        const center = box.getCenter(new THREE.Vector3());
+        model.position.sub(center);
+        pivot.add(model);
+        const radius = box.getBoundingSphere(new THREE.Sphere()).radius || 1;
+        const distance = radius / Math.sin(THREE.MathUtils.degToRad(camera.fov * 0.5)) * 1.35;
+        camera.position.copy(new THREE.Vector3(1.2, 0.85, 1.6).normalize().multiplyScalar(distance));
+        camera.near = Math.max(radius / 100, 0.001);
+        camera.far = radius * 100;
+        camera.updateProjectionMatrix();
+        controls.minDistance = radius * 1.1;
+        controls.maxDistance = radius * 8;
+        controls.update();
+        view.loaded = true;
+        host.querySelector(".model-placeholder")?.remove();
+      }, undefined, () => {
+          if (token !== view.loadToken) return;
+          const placeholder = host.querySelector(".model-placeholder");
+          if (placeholder) {
+            placeholder.classList.add("is-failed");
+            placeholder.innerHTML = "Failed<br>to<br>generate";
+          }
+        });
+      };
+      view.loadModel = loadModel;
+      loadModel(host.dataset.src);
+    });
+    window.omniModelViews = views;
+    window.dispatchEvent(new Event("omniviewsready"));
+
+    function render() {
+      requestAnimationFrame(render);
+      const width = innerWidth;
+      const height = innerHeight;
+      renderer.setSize(width, height, false);
+      renderer.setScissorTest(false);
+      renderer.setClearColor(0x000000, 0);
+      renderer.clear(true, true, true);
+      renderer.setScissorTest(true);
+
+      views.forEach(view => {
+        const rect = view.host.getBoundingClientRect();
+        if (!view.loaded || rect.bottom <= 0 || rect.top >= height || rect.right <= 0 || rect.left >= width) return;
+        const left = Math.max(0, rect.left);
+        const right = Math.min(width, rect.right);
+        const top = Math.max(0, rect.top);
+        const bottom = Math.min(height, rect.bottom);
+        const viewWidth = Math.max(1, right - left);
+        const viewHeight = Math.max(1, bottom - top);
+        view.camera.aspect = rect.width / rect.height;
+        view.camera.updateProjectionMatrix();
+        if (view.idle) view.pivot.rotation.y += 0.006;
+        view.controls.update();
+        renderer.setViewport(left, height - bottom, viewWidth, viewHeight);
+        renderer.setScissor(left, height - bottom, viewWidth, viewHeight);
+        renderer.setClearColor(modelBackground, 1);
+        renderer.clear(true, true, true);
+        renderer.render(view.scene, view.camera);
+      });
+    }
+    render();
+  </script>
+
+  <style>
+    .three-viewer{height:118px}
+    .model-card:not(:has(.model-label)) .three-viewer{height:128px}
+    .model-label{height:36px;padding-inline:11px}
+    @media(max-width:560px){.three-viewer,.model-card:not(:has(.model-label)) .three-viewer{height:115px}}
+  </style>
+  <style>
+    .model-label{height:40px;font-size:13px;font-weight:900;letter-spacing:.1em;padding-inline:14px}
+  </style>
+  <style>
+    /* Full-width figure hero with left-side content overlay */
+    .hero{display:block;position:relative;min-height:640px;margin-top:38px;margin-bottom:72px;padding:0;overflow:hidden;border:1px solid #31576a}
+    .hero::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(2,11,16,.99) 0%,rgba(4,18,27,.95) 27%,rgba(5,24,35,.76) 48%,rgba(5,24,35,.28) 68%,rgba(5,24,35,0) 88%)}
+    .hero>div:first-child{position:relative;z-index:2;width:min(660px,58%);min-height:640px;display:flex;flex-direction:column;justify-content:center;padding:62px 0 62px 58px}
+    .hero h1{margin-top:24px;margin-bottom:27px;text-shadow:0 3px 26px #000}
+    .hero .lede{color:#c0d4de;text-shadow:0 2px 14px #000}
+    .hero .eyebrow{color:#8fc6d7}
+    .heroart{position:absolute;inset:0;z-index:0;width:100%;height:100%;padding:0;border:0;overflow:hidden;display:block}
+    .heroart img{width:100%;height:100%;object-fit:cover;object-position:center;transform:none;mix-blend-mode:screen}
+    .heroart .badge{display:none}
+    @media(max-width:900px){.hero{min-height:620px}.hero>div:first-child{width:72%;min-height:620px;padding-left:42px}.hero::before{background:linear-gradient(90deg,rgba(2,11,16,.99) 0%,rgba(4,18,27,.92) 48%,rgba(5,24,35,.28) 82%,transparent 100%)}}
+    @media(max-width:560px){.hero{min-height:680px;margin-top:20px;margin-bottom:46px}.hero>div:first-child{width:100%;min-height:680px;padding:44px 22px;justify-content:flex-end}.hero::before{background:linear-gradient(180deg,rgba(2,11,16,.24) 0%,rgba(2,11,16,.56) 34%,rgba(2,11,16,.98) 68%,rgba(2,11,16,1) 100%)}.heroart img{object-position:center top}}
+  </style>
+  <style>
+    /* Replacement Figure 1 is 2.488:1, so the desktop hero follows that ratio. */
+    .hero{aspect-ratio:2.488/1;min-height:0;max-height:520px}
+    .hero>div:first-child{height:100%;min-height:0;padding:34px 0 34px 48px}
+    .hero h1{font-size:clamp(52px,5.35vw,76px)}
+    @media(max-width:900px){.hero{aspect-ratio:auto;min-height:540px;max-height:none}.hero>div:first-child{height:auto;min-height:540px}}
+    @media(max-width:560px){.hero{min-height:620px}.hero>div:first-child{min-height:620px}}
+  </style>
+  <style>
+    /* Frameless hero: page background and grid dissolve into Figure 1. */
+    .hero{border:0;background:#071723}
+    .hero::before{background:linear-gradient(90deg,#071723 0%,rgba(7,23,35,.98) 33%,rgba(7,23,35,.85) 48%,rgba(7,23,35,.7) 68%,rgba(7,23,35,0) 88%)}
+    .hero::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background-image:linear-gradient(#17314355 1px,transparent 1px),linear-gradient(90deg,#17314355 1px,transparent 1px);background-size:32px 32px;-webkit-mask-image:linear-gradient(90deg,#000 0%,rgba(0,0,0,.92) 42%,rgba(0,0,0,.35) 68%,transparent 88%);mask-image:linear-gradient(90deg,#000 0%,rgba(0,0,0,.92) 42%,rgba(0,0,0,.35) 68%,transparent 88%)}
+    @media(max-width:900px){.hero::before{background:linear-gradient(90deg,#071723 0%,rgba(7,23,35,.96) 44%,rgba(7,23,35,.35) 82%,transparent 100%)}}
+    @media(max-width:560px){.hero::before{background:linear-gradient(180deg,rgba(7,23,35,.15) 0%,rgba(7,23,35,.5) 34%,rgba(7,23,35,.97) 68%,#071723 100%)}.hero::after{-webkit-mask-image:linear-gradient(180deg,transparent 8%,rgba(0,0,0,.25) 36%,#000 78%);mask-image:linear-gradient(180deg,transparent 8%,rgba(0,0,0,.25) 36%,#000 78%)}}
+  </style>
+  <style>
+    /* Current replacement Figure 1: 13,628 x 6,586 (2.069:1). */
+    .hero{aspect-ratio:2.069238/1;max-height:none}
+    .heroart img{object-fit:cover;object-position:center}
+    @media(max-width:900px){.hero{aspect-ratio:auto}}
+  </style>
+  <style>
+    /* Current Figure 1: 7,000 x 3,000 (7:3). */
+    .hero{aspect-ratio:7/3}
+    @media(max-width:900px){.hero{aspect-ratio:auto}}
+  </style>
+  <style>
+    .hero::after{display:none}
+  </style>
+  <style>
+    .heroart{background-color:#071723;background-image:none}
+  </style>
+  <style>
+    .hero{aspect-ratio:2/1}
+    @media(max-width:900px){.hero{aspect-ratio:auto}}
+  </style>
+  <style>
+    /* Benchmark figure panel: taller presentation with near edge-to-edge image. */
+    #benchmark .card{min-height:720px;padding:14px 14px 24px;display:flex;flex-direction:column;justify-content:space-between}
+    #benchmark .card>img{width:100%;max-height:610px;min-height:560px;object-fit:contain}
+    #benchmark .legend{margin-top:12px;padding-top:16px}
+    @media(max-width:900px){#benchmark .card{min-height:620px}#benchmark .card>img{min-height:460px;max-height:520px}}
+    @media(max-width:560px){#benchmark .card{min-height:0;padding:8px 8px 18px}#benchmark .card>img{min-height:0;max-height:none}}
+  </style>
+  <style>
+    /* Bright blueprint theme and persistent header switch. */
+    .theme-toggle{display:inline-flex;align-items:center;gap:8px;border:1px solid #31576a;background:#0b2230;color:#bfeef7;padding:8px 11px;font:700 10px "Courier New",monospace;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+    .theme-toggle::before{content:"";width:20px;height:10px;border:1px solid currentColor;border-radius:10px;background:linear-gradient(90deg,transparent 50%,var(--blue) 50%);box-shadow:inset 0 0 0 2px #0b2230}
+    .nav-actions{display:flex;align-items:center;gap:18px}
+    body.bright{--ink:#102f3d;--muted:#4e6e7b;--paper:#f3f9f8;--blue:#087f96;--line:#b9d2d7;--acid:#d79b00;background-color:var(--paper);background-image:linear-gradient(#91bdc52b 1px,transparent 1px),linear-gradient(90deg,#91bdc52b 1px,transparent 1px);color:var(--ink)}
+    body.bright .nav{background:#f3f9f8ed;border-color:#a9cbd1}
+    body.bright .navlinks{color:#365f6e}
+    body.bright .navpaper{color:#087f96}
+    body.bright .theme-toggle{background:#fff;color:#087f96;border-color:#92bdc5}
+    body.bright .theme-toggle::before{background:linear-gradient(90deg,var(--blue) 50%,transparent 50%);box-shadow:inset 0 0 0 2px #fff}
+    body.bright .hero{background:#f3f9f8}
+    body.bright .hero::before{background:linear-gradient(90deg,#f3f9f8 0%,rgba(243,249,248,.98) 25%,rgba(243,249,248,.84) 48%,rgba(243,249,248,.3) 68%,rgba(243,249,248,0) 88%)}
+    body.bright .hero h1{color:#102f3d;text-shadow:0 3px 26px #fff}
+    body.bright .hero h1 em{color:#087f96;text-shadow:none}
+    body.bright .hero .eyebrow{color:#356c79}
+    body.bright .hero .lede{color:#365f6e;text-shadow:0 2px 14px #fff}
+    body.bright .heroart{background-color:#f3f9f8}
+    body.bright .heroart img{filter:none;mix-blend-mode:multiply;opacity:.9}
+    body.bright .button{background:#087f96;color:#fff}
+    body.bright .ghost{border-color:#9fc2c9;color:#496d79;background:#f6fbfacf}
+    body.bright .statsband{background:#dceff0;color:#102f3d;border-color:#75afba}
+    body.bright .stat{border-color:#80b2bb66}
+    body.bright .stat span{color:#496d79}
+    body.bright .showcase,body.bright .dark{background:#e7f2f2;color:#102f3d}
+    body.bright .model-matrix{background:#93b9c0;border-color:#93b9c0}
+    body.bright .model-card,body.bright .model-card.gt,body.bright .three-viewer{background:#fff}
+    body.bright .model-label{color:#315d69;border-color:#93b9c0;background:#edf6f5}
+    body.bright .model-card.gt .model-label{color:#087f96}
+    body.bright .card,body.bright .figure{background:#fff;border-color:#b9d2d7}
+    body.bright .taskgrid,body.bright .task{border-color:#a9c7cc}
+    body.bright .task h3{color:#087f96}
+    body.bright .task p{color:#526f79}
+    body.bright .authors{color:#365f6e}
+    body.bright .citation{background:#d9edef;color:#102f3d;border-color:#75afba}
+    body.bright .citation pre{background:#fff;color:#234d5a;border-color:#d79b00}
+    body.bright footer{border-color:#b9d2d7}
+    @media(max-width:900px){.nav-actions{gap:10px}.theme-toggle span{display:none}.theme-toggle{padding:8px}}
+    @media(max-width:560px){.navpaper{display:none}body.bright .hero::before{background:linear-gradient(180deg,rgba(243,249,248,.12) 0%,rgba(243,249,248,.5) 34%,rgba(243,249,248,.97) 68%,#f3f9f8 100%)}}
+  </style>
+  <style>
+    /* Paginated drawing-to-3D qualitative viewer. */
+    .case-toolbar{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px;align-items:stretch;margin-bottom:18px}
+    .drawing-panel{position:relative;height:330px;overflow:hidden;border:1px solid #31576a;background:#071723;cursor:zoom-in}
+    .drawing-panel img{width:100%;height:100%;object-fit:contain;transform:scale(1);transform-origin:var(--zoom-x,50%) var(--zoom-y,50%);transition:transform .18s ease;will-change:transform}
+    .drawing-panel:hover img{transform:scale(2.15)}
+    .drawing-fallback{position:absolute;inset:0;display:none;place-items:center;text-align:center;color:#6f95a6;font:700 11px/1.8 "Courier New",monospace;letter-spacing:.08em;text-transform:uppercase;padding:24px}
+    .drawing-fallback.show{display:grid}
+    .case-pager{min-width:132px;border:1px solid #31576a;background:#071723;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:15px}
+    .case-pager strong{color:var(--blue);font-size:24px}.case-pager small{color:var(--muted);font:700 9px monospace;text-transform:uppercase;letter-spacing:.1em}
+    .pager-controls{display:flex;align-items:center;gap:7px}.pager-controls button{width:34px;height:34px;border:1px solid #31576a;background:#0b2230;color:var(--ink);font:700 16px monospace;cursor:pointer}.pager-controls button:hover{border-color:var(--blue);color:var(--blue)}
+    .case-model-grid{display:grid;grid-template-columns:repeat(5,minmax(170px,1fr));gap:1px;background:#244455;border:1px solid #244455;overflow-x:auto}
+    .case-model-grid .model-card{min-width:170px}.case-model-grid .model-label{position:absolute;z-index:2;left:8px;top:8px;width:auto;height:auto;padding:5px 7px;border:1px solid #31576a;background:#071723dd;color:#91bacc;font-size:9px}.case-model-grid .model-card.gt .model-label{color:var(--blue)}
+    .case-model-grid .three-viewer,.case-model-grid .model-card:not(:has(.model-label)) .three-viewer{height:142px}
+    body.bright .drawing-panel,body.bright .case-pager{background:#fff;border-color:#93b9c0}
+    body.bright .drawing-fallback{color:#688791}
+    body.bright .pager-controls button{background:#f3f9f8;border-color:#93b9c0;color:#173f4b}
+    body.bright .case-model-grid{background:#93b9c0;border-color:#93b9c0}
+    body.bright .case-model-grid .model-label{background:#fffffff0;border-color:#93b9c0;color:#315d69}
+    @media(max-width:700px){.case-toolbar{grid-template-columns:1fr}.drawing-panel{height:240px}.case-pager{min-height:82px;flex-direction:row}.case-model-grid{grid-template-columns:repeat(5,190px)}}
+  </style>
+  <style>
+    /* Drawing left; square 3 x 5 reconstruction matrix right. */
+    .showcase-browser{display:grid;grid-template-columns:minmax(230px,30%) minmax(0,1fr);gap:18px;align-items:stretch}
+    .case-toolbar{display:flex;flex-direction:column;gap:1px;margin:0;min-width:0}
+    .drawing-panel{height:auto;flex:1;min-height:0}
+    .case-pager{min-width:0;min-height:78px;align-items:flex-start;padding:13px 15px;gap:7px;position:relative}
+    .case-pager strong{font-size:18px}.case-pager small{font-size:8px}
+    .pager-controls{position:absolute;left:15px;bottom:12px;gap:5px}.pager-controls button{width:28px;height:26px}
+    .case-model-grid{grid-template-columns:repeat(5,minmax(0,1fr));overflow:visible;align-self:start}
+    .case-model-grid .model-card{min-width:0;aspect-ratio:1/1}
+    .case-model-grid .three-viewer,.case-model-grid .model-card:not(:has(.model-label)) .three-viewer{width:100%;height:100%;aspect-ratio:1/1}
+    @media(max-width:900px){.showcase-browser{grid-template-columns:1fr}.case-toolbar{display:grid;grid-template-columns:minmax(0,1fr) 132px;gap:1px}.drawing-panel{height:300px}.case-pager{min-height:0}.case-model-grid{overflow-x:auto;grid-template-columns:repeat(5,190px)}.case-model-grid .model-card{min-width:190px}}
+    @media(max-width:560px){.case-toolbar{grid-template-columns:1fr}.drawing-panel{height:260px}.case-pager{min-height:76px}}
+  </style>
+  <style>
+    .case-toolbar{justify-content:flex-start}
+    .drawing-panel{flex:none;width:100%;height:auto;min-height:0;aspect-ratio:3/2}
+    .case-pager{min-height:64px;flex-direction:row;align-items:center;justify-content:flex-start;padding:10px 12px;gap:8px}
+    .case-pager strong{font-size:16px}
+    .pager-controls{position:static;margin-left:auto}
+    @media(max-width:900px){.case-toolbar{display:flex}.drawing-panel{height:auto;aspect-ratio:3/2}.case-pager{min-height:64px}}
+    @media(max-width:560px){.drawing-panel{height:auto}}
+  </style>
+  <style>
+    .sidebar-model-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:#244455;border:1px solid #244455}
+    .sidebar-model-grid .model-card{min-width:0;aspect-ratio:1/1}
+    .sidebar-model-grid .three-viewer,.sidebar-model-grid .model-card:not(:has(.model-label)) .three-viewer{width:100%;height:100%;aspect-ratio:1/1}
+    .sidebar-model-grid .model-label{position:absolute;z-index:2;left:6px;top:6px;width:auto;height:auto;padding:4px 6px;border:1px solid #31576a;background:#071723dd;color:#91bacc;font-size:8px}
+    .sidebar-model-grid .model-card.gt .model-label{color:var(--blue)}
+    .case-model-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+    body.bright .sidebar-model-grid{background:#93b9c0;border-color:#93b9c0}
+    body.bright .sidebar-model-grid .model-label{background:#fffffff0;border-color:#93b9c0;color:#315d69}
+    @media(max-width:900px){.case-model-grid{grid-template-columns:repeat(4,190px)}}
+  </style>
+  <style>
+    /* 3 units on the left and 4 on the right keep every square cell identical. */
+    .showcase-browser{grid-template-columns:minmax(0,3fr) minmax(0,4fr)}
+    @media(max-width:900px){.showcase-browser{grid-template-columns:1fr}}
+  </style>
+  <style>
+    /* One continuous 7-column table with a 3 x 2 drawing cutout. */
+    .showcase-browser{gap:1px;padding:1px;background:#244455;border:0;align-items:start}
+    .case-toolbar{position:relative;gap:1px;background:#244455}
+    .drawing-panel{order:1;border:0;aspect-ratio:3/2}
+    .case-pager{position:absolute;z-index:4;left:10px;right:10px;top:10px;width:auto;min-height:46px;border:1px solid #31576a;background:#071723e8;backdrop-filter:blur(10px);padding:7px 9px}
+    .sidebar-model-grid{order:2;border:0}
+    .case-model-grid{border:0}
+    body.bright .showcase-browser,body.bright .case-toolbar{background:#93b9c0}
+    body.bright .case-pager{background:#fffffff0}
+    @media(max-width:900px){.showcase-browser{gap:12px;padding:0;background:transparent}.case-toolbar{background:transparent}.case-model-grid,.sidebar-model-grid{border:1px solid #244455}body.bright .showcase-browser,body.bright .case-toolbar{background:transparent}body.bright .case-model-grid,body.bright .sidebar-model-grid{border-color:#93b9c0}}
+  </style>
+  <style>
+    /* Pagination sits outside the table without changing its geometry. */
+    .showcase-browser{margin-top:58px}
+    .case-pager{top:-57px;left:0;right:0;min-height:48px;background:#071723;border-color:#31576a;backdrop-filter:none}
+    body.bright .case-pager{background:#fff}
+    @media(max-width:900px){.showcase-browser{margin-top:58px}.case-pager{top:-57px}}
+  </style>
+  <style>
+    /* Current Figure 1: 7,000 x 2,500 (2.8:1). */
+    .hero{aspect-ratio:2.8/1}
+    @media(max-width:900px){.hero{aspect-ratio:auto}}
+  </style>
+  <style>
+    /* Figure 1 text width: adjust 760px and 68% here. */
+    .hero>div:first-child{width:min(760px,68%)}
+    @media(max-width:900px){.hero>div:first-child{width:78%}}
+    @media(max-width:560px){.hero>div:first-child{width:100%}}
+  </style>
+  <style>
+    /* Figure 1 gradient reach: larger stop percentages extend it rightward. */
+    .hero::before{background:linear-gradient(90deg,#071723 0%,rgba(7,23,35,.98) 35%,rgba(7,23,35,.82) 58%,rgba(7,23,35,.38) 78%,rgba(7,23,35,0) 96%)}
+    body.bright .hero::before{background:linear-gradient(90deg,#f3f9f8 0%,rgba(243,249,248,.98) 35%,rgba(243,249,248,.86) 58%,rgba(243,249,248,.4) 78%,rgba(243,249,248,0) 96%)}
+    @media(max-width:900px){.hero::before{background:linear-gradient(90deg,#071723 0%,rgba(7,23,35,.96) 52%,rgba(7,23,35,.38) 88%,transparent 100%)}body.bright .hero::before{background:linear-gradient(90deg,#f3f9f8 0%,rgba(243,249,248,.96) 52%,rgba(243,249,248,.38) 88%,transparent 100%)}}
+    @media(max-width:560px){.hero::before{background:linear-gradient(180deg,rgba(7,23,35,.15) 0%,rgba(7,23,35,.5) 34%,rgba(7,23,35,.97) 68%,#071723 100%)}body.bright .hero::before{background:linear-gradient(180deg,rgba(243,249,248,.12) 0%,rgba(243,249,248,.5) 34%,rgba(243,249,248,.97) 68%,#f3f9f8 100%)}}
+  </style>
+  <style>
+    /* Evaluation-tracks section removed from the current page. */
+    #tasks,.navlinks a[href="#tasks"]{display:none}
+  </style>
+  <style>
+    .results.metrics-results{display:block}
+    .metrics-intro{display:grid;grid-template-columns:1.15fr .85fr;gap:70px;align-items:end;margin-bottom:42px}
+    .metrics-intro h2{max-width:760px}.metrics-intro .copy{margin:0}
+    .metrics-table{display:grid;gap:1px;background:var(--line);border:1px solid var(--line)}
+    .metrics-row{display:grid;gap:1px;background:var(--line)}
+    .metrics-row.two{grid-template-columns:repeat(2,1fr)}
+    .metrics-row.three{grid-template-columns:repeat(3,1fr)}
+    .metrics-row.four{grid-template-columns:repeat(4,1fr)}
+    .metric-figure{margin:0;background:#fff;min-width:0;display:flex;flex-direction:column}
+    .metric-figure img{width:100%;aspect-ratio:1.195/1;object-fit:contain;background:#fff}
+    .metrics-row.two .metric-figure img{aspect-ratio:1/1}
+    .metric-figure figcaption{padding:11px 13px;border-top:1px solid var(--line);color:#315d69;font:800 10px "Courier New",monospace;letter-spacing:.08em;text-transform:uppercase}
+    body:not(.bright) .metric-figure{background:#071723}body:not(.bright) .metric-figure img{mix-blend-mode:screen}
+    @media(max-width:900px){.metrics-intro{grid-template-columns:1fr;gap:24px}.metrics-row.four{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:560px){.metrics-row.two,.metrics-row.three,.metrics-row.four{grid-template-columns:1fr}.metric-figure img,.metrics-row.two .metric-figure img{aspect-ratio:auto}}
+  </style>
+  <style>
+    /* Compact findings mosaic: figures left, explanation right. */
+    .results.metrics-results{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(260px,.45fr);gap:52px;align-items:center}
+    .metrics-table{order:1;gap:10px;background:transparent;border:0}
+    .metrics-intro{order:2;display:block;margin:0}
+    .metrics-intro .kicker{margin-bottom:24px}
+    .metrics-intro h2{font-size:clamp(32px,3.5vw,50px);margin-bottom:24px}
+    .metrics-row{gap:10px;background:transparent}
+    .metric-figure{overflow:hidden;border:1px solid var(--line)}
+    .metric-figure figcaption{display:none}
+    .metric-figure img,.metrics-row.two .metric-figure img{aspect-ratio:auto;height:auto}
+    @media(max-width:900px){.results.metrics-results{grid-template-columns:1fr;gap:36px}.metrics-intro{order:1}.metrics-table{order:2}}
+  </style>
+  <style>
+    /* Alternating section rhythm: grid -> cyan -> grid -> cyan. */
+    .metrics-results{position:relative;isolation:isolate}
+    .metrics-results::before{content:"";position:absolute;z-index:-1;top:0;bottom:0;left:50%;width:100vw;transform:translateX(-50%);background:#0b2b3a;border-block:1px solid #31576a}
+    body.bright .metrics-results::before{background:#dceff0;border-color:#93b9c0}
+  </style>
+  <style>
+    /* Compact upper plots; final four plots span beneath figures and text. */
+    .results.metrics-results{grid-template-columns:minmax(0,1.15fr) minmax(300px,.85fr);column-gap:58px;row-gap:16px;align-items:center}
+    .metrics-table{display:contents}
+    .metrics-intro{grid-column:2;grid-row:1 / span 2;align-self:center}
+    .metrics-row.two{grid-column:1;grid-row:1}
+    .metrics-row.three{grid-column:1;grid-row:2}
+    .metrics-row.four{grid-column:1 / -1;grid-row:3;margin-top:8px}
+    @media(max-width:900px){.results.metrics-results{grid-template-columns:1fr;row-gap:18px}.metrics-intro{grid-column:1;grid-row:1}.metrics-row.two{grid-column:1;grid-row:2}.metrics-row.three{grid-column:1;grid-row:3}.metrics-row.four{grid-column:1;grid-row:4}}
+  </style>
+  <style>
+    /* Raster plots adapt to the active theme. */
+    .metric-figure img{filter:none;mix-blend-mode:normal;background:#fff;transition:filter .2s ease}
+    body:not(.bright) .metric-figure{background:#071723}
+    body:not(.bright) .metric-figure img{filter:invert(.9) hue-rotate(180deg) brightness(1.28) saturate(1.3) contrast(1.05);mix-blend-mode:normal;background:transparent}
+  </style>
+  <style>
+    /* Theme-aware author and institution contrast. */
+    body:not(.bright) .authors{color:#b7d0db}
+    body:not(.bright) .institutions span{color:#a9c8d4}
+    body.bright .authors{color:#365f6e}
+  </style>
+  <style>
+    /* Transparent word clouds blend directly into the findings band. */
+    .metrics-row.two .metric-figure{border:0;background:transparent}
+    .metrics-row.two .metric-figure img,
+    body:not(.bright) .metrics-row.two .metric-figure img,
+    body.bright .metrics-row.two .metric-figure img{background:transparent}
+  </style>
+  <style>
+    /* Keep model names above the shared fixed WebGL canvas (z-index 12). */
+    .case-model-grid .model-label,.sidebar-model-grid .model-label{z-index:30;background:#071723f2;pointer-events:none;box-shadow:0 1px 8px #0005}
+    body.bright .case-model-grid .model-label,body.bright .sidebar-model-grid .model-label{background:#fffffff5;box-shadow:0 1px 8px #31576a26}
+  </style>
+  <style>
+    /* Engineering drawings adapt to the active theme without affecting zoom. */
+    .drawing-panel img{filter:none;mix-blend-mode:normal;background:#fff;transition:transform .18s ease,filter .2s ease}
+    body:not(.bright) .drawing-panel img{filter:invert(.92) hue-rotate(180deg) brightness(1.08) contrast(1.08);background:transparent}
+  </style>
+  <style>
+    /* Larger top tabs and icon-only theme control. */
+    .navlinks{font-size:15px;font-weight:700;gap:clamp(30px,2.5vw,46px)}
+    .navpaper{font-size:14px}
+    .theme-toggle{width:38px;height:38px;padding:0;display:grid;place-items:center;border-radius:50%;font-size:0}
+    .theme-toggle span,.theme-toggle::before{display:none}
+    .theme-toggle::after{content:"☀";font:700 20px/1 Arial,sans-serif;color:var(--acid)}
+    body.bright .theme-toggle::after{content:"☾";color:#087f96}
+    @media(max-width:900px){.theme-toggle{padding:0}}
+  </style>
+  <style>
+    /* Full-width translucent sticky header with content kept on the page grid. */
+    .nav{width:100%;max-width:none;padding-inline:max(24px,calc((100vw - 1380px)/2));margin:0;gap:clamp(30px,3vw,54px);background:#071723b8;border-color:#2d596d99;box-shadow:0 1px 0 #3ee8ff12;backdrop-filter:blur(14px) saturate(1.15);-webkit-backdrop-filter:blur(14px) saturate(1.15)}
+    body.bright .nav{background:#f3f9f8b8;border-color:#a9cbd199;box-shadow:0 1px 0 #087f9614}
+    .navlinks a,.nav-actions a,.nav>.wordmark{white-space:nowrap}
+    .navlinks{flex:1;justify-content:space-between}
+    .nav-actions{gap:clamp(18px,1.8vw,30px)}
+    @media(max-width:1400px){
+      .nav{height:auto;min-height:84px;display:grid;grid-template-columns:auto 1fr auto;grid-template-rows:auto auto;gap:16px 28px;padding-top:15px;padding-bottom:13px}
+      .nav>.wordmark{grid-column:1;grid-row:1}
+      .nav-actions{grid-column:3;grid-row:1}
+      .navlinks{display:flex;grid-column:1/-1;grid-row:2;justify-content:space-between;gap:clamp(24px,4vw,54px);font-size:14px}
+    }
+    @media(max-width:700px){
+      .nav{grid-template-columns:auto 1fr;padding-block:12px 10px;gap:13px 12px}
+      .nav-actions{grid-column:2;justify-self:end;justify-content:flex-end;flex-wrap:wrap;gap:9px}
+      .nav-actions>a{display:inline-flex}
+      .theme-toggle{display:grid;width:32px;height:32px}
+      .nav>.wordmark{font-size:clamp(19px,5.5vw,24px)}
+      .nav-actions>a{font-size:clamp(10px,2.8vw,12px)}
+      .nav-actions .omnieda-link{padding:7px 8px}
+      .arxiv-id{display:none}
+      .navlinks{justify-content:center;flex-wrap:wrap;overflow:visible;column-gap:28px;row-gap:13px;padding-bottom:3px}
+    }
+    @media(max-width:560px){.nav{padding-inline:14px}.nav-actions{gap:6px}.navlinks{column-gap:24px;row-gap:12px}}
+  </style>
+  <style>
+    /* Quantitative benchmark tables from Tables 2 and 3 of the paper. */
+    .quant-section{position:relative;isolation:isolate}
+    .quant-section.shell{width:fit-content;max-width:calc(100% - 48px)}
+    .quant-section.band::before{content:"";position:absolute;z-index:-1;inset:0 50%;width:100vw;transform:translateX(-50%);background:#0b2b3a;border-block:1px solid #31576a}
+    body.bright .quant-section.band::before{background:#dceff0;border-color:#93b9c0}
+    .quant-head{display:grid;grid-template-columns:1fr minmax(280px,420px);gap:60px;align-items:end;margin-bottom:34px}
+    .quant-head .copy{margin:0}.quant-meta{color:var(--acid);font:800 11px "Courier New",monospace;letter-spacing:.08em;text-transform:uppercase;margin-top:14px}
+    body.bright .quant-meta{color:#9a7000}
+    .quant-frame{position:relative}
+    .quant-wrap{overflow-x:auto;border:1px solid var(--line);background:#071723}
+    .quant-scroll-hint{position:absolute;right:12px;top:50%;display:grid;place-items:center;width:42px;height:42px;border:1px solid #3ee8ff99;border-radius:50%;background:#071723e8;color:#d9f8ff;font:900 22px/1 "Courier New",monospace;box-shadow:0 0 22px #3ee8ff35;pointer-events:none;opacity:0;transform:translate(8px,-50%);transition:opacity .2s ease,transform .2s ease;z-index:4}
+    .quant-frame.is-overflowing:not(.has-scrolled) .quant-scroll-hint{opacity:1;transform:translate(0,-50%)}
+    .quant-table{width:max-content;min-width:1040px;border-collapse:collapse;font:700 11px/1.35 "Courier New",monospace;font-variant-numeric:tabular-nums}
+    .quant-table th,.quant-table td{padding:10px 9px;border-right:1px solid #244455;border-bottom:1px solid #244455;text-align:right;white-space:nowrap}
+    .quant-table th{position:sticky;top:0;z-index:2;background:#0b2b3a;color:#9fc4d3;text-transform:uppercase;letter-spacing:.05em}
+    .quant-table th[data-sortable="true"]{cursor:pointer;user-select:none;transition:color .16s ease,background .16s ease}
+    .quant-table th[data-sortable="true"]:hover,.quant-table th[aria-sort]:not([aria-sort="none"]){color:#d9f8ff;background:#104054}
+    .quant-table th:focus-visible{outline:2px solid var(--blue);outline-offset:-3px}
+    .quant-table th:first-child,.quant-table th:nth-child(2){text-align:left}
+    .quant-table tbody td{vertical-align:middle}
+    .quant-table tbody td.model-name,.quant-table tbody td.variant{text-align:left!important}
+    .quant-table th:first-child,.quant-table td.model-name{position:sticky;left:0;z-index:3}
+    .quant-table th:nth-child(2),.quant-table td.variant{position:sticky;left:var(--model-column-width,180px);z-index:3;box-shadow:10px 0 14px -14px #3ee8ff}
+    .quant-table th:first-child,.quant-table th:nth-child(2){z-index:6}
+    .quant-table td.variant{background:#071723}
+    .quant-table tbody td.model-name{font-weight:900;color:var(--blue);background:#0a202c;border-bottom-color:#315666}
+    .model-rank{display:inline-grid;place-items:center;min-width:31px;height:20px;margin-left:8px;font-size:9px;font-weight:900;letter-spacing:.04em;vertical-align:middle}
+    .model-rank.rank-1{color:#fff1ad;background:#493706;border:1px solid #e1b83f;box-shadow:0 0 12px #e1b83f2c}
+    .model-rank.rank-2{color:#edf7fa;background:#293a42;border:1px solid #aebfc8;box-shadow:0 0 12px #aebfc824}
+    .model-rank.rank-3{color:#ffd6be;background:#47281a;border:1px solid #bd7852;box-shadow:0 0 12px #bd785228}
+    body.bright .quant-table tbody td.model-name{color:#087f96;background:#edf7f7;border-bottom-color:#93b9c0}
+    body.bright .quant-table td.variant{background:#fff;box-shadow:10px 0 14px -14px #087f96}
+    body.bright .model-rank.rank-1{color:#745500;background:#fff4c9;border-color:#c99914;box-shadow:none}
+    body.bright .model-rank.rank-2{color:#4c626c;background:#edf3f5;border-color:#91a5ae;box-shadow:none}
+    body.bright .model-rank.rank-3{color:#814425;background:#f8e4d8;border-color:#b86d45;box-shadow:none}
+    .quant-table tbody tr:hover{background:#3ee8ff0b}.quant-table .group td{background:#020b10;color:var(--blue);text-align:left;text-transform:uppercase;letter-spacing:.09em;padding-block:8px}
+    .quant-table .best{color:var(--acid)}
+    body.bright .quant-wrap{background:#fff;border-color:#93b9c0}
+    body.bright .quant-scroll-hint{background:#f3f9f8ee;border-color:#087f9699;color:#087f96;box-shadow:0 0 20px #087f9628}
+    body.bright .quant-table th{background:#dceff0;color:#315d69}
+    body.bright .quant-table th[data-sortable="true"]:hover,body.bright .quant-table th[aria-sort]:not([aria-sort="none"]){color:#075f72;background:#c9e4e7}
+    body.bright .quant-table th,body.bright .quant-table td{border-color:#b9d2d7;color:#31515d}
+    body.bright .quant-table .group td{background:#edf6f5;color:#087f96}
+    body.bright .quant-table .best{color:#9a7000}
+    @media(max-width:900px){.quant-head{grid-template-columns:1fr;gap:22px}}
+    @media(max-width:560px){.quant-section.shell{max-width:calc(100% - 28px)}}
+  </style>
+  <style>
+    /* Figure 1 retains its original blueprint treatment. */
+    .hero,.heroart{background-color:transparent;background-image:none}
+    body.bright .hero,body.bright .heroart{background-color:transparent;background-image:none}
+    .heroart img{filter:grayscale(1) invert(.9) hue-rotate(150deg) contrast(1.2);mix-blend-mode:screen;opacity:1}
+    body.bright .heroart img{filter:none;mix-blend-mode:multiply;opacity:.9}
+    .citegrid{grid-template-columns:.55fr 1.45fr;gap:52px}
+    .citation pre{white-space:pre-wrap;overflow-wrap:anywhere;word-break:normal;overflow-x:hidden}
+    .dataset-button{background:#147487;color:#e9fbff}
+    .dataset-button:hover{background:#1a8fa4}
+    body.bright .dataset-button{background:#12a0b9;color:#fff}
+    body.bright .dataset-button:hover{background:#0b899f}
+    .omnieda-link{display:inline-flex;align-items:center;padding:8px 11px;border:1px solid #a5b4fc77;background:#a5b4fc18;color:#cdd4ff;font:800 15px "Courier New",monospace;letter-spacing:.08em;text-transform:uppercase;transition:color .18s ease,background .18s ease,border-color .18s ease}
+    .omnieda-link:hover{color:#17132f;background:#a5b4fc;border-color:#a5b4fc}
+    body.bright .omnieda-link{color:#4f46a8;background:#eeefff;border-color:#818cf888}
+    body.bright .omnieda-link:hover{color:#fff;background:#4f46a8;border-color:#4f46a8}
+    .omnicad-link{color:#8ef3ff;background:#3ee8ff14;border-color:#3ee8ff88}
+    .omnicad-link:hover{color:#03131d;background:#3ee8ff;border-color:#3ee8ff}
+    body.bright .omnicad-link{color:#087f96;background:#dff7f9;border-color:#12a0b999}
+    body.bright .omnicad-link:hover{color:#fff;background:#087f96;border-color:#087f96}
+    .arxiv-link{position:relative;padding-bottom:4px;transition:color .18s ease}
+    .arxiv-link::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--acid);transform:scaleX(0);transform-origin:right;transition:transform .22s ease}
+    .arxiv-link:hover,.arxiv-link:focus-visible{color:var(--acid)}
+    .arxiv-link:hover::after,.arxiv-link:focus-visible::after{transform:scaleX(1);transform-origin:left}
+    @media(max-width:900px){.citegrid{grid-template-columns:1fr;gap:38px}}
+  </style>
+  <style>
+    /* Benchmark artwork is authored for bright mode and adapted for dark mode. */
+    #benchmark .card>img{filter:none;mix-blend-mode:normal;background:#fff;transition:filter .2s ease}
+    body:not(.bright) #benchmark .card>img{filter:invert(.9) hue-rotate(180deg) brightness(1.12) saturate(1.18) contrast(1.06);background:transparent}
+  </style>
+</head>
+<body>
+  <nav class="nav shell"><a class="wordmark" href="#top">OmniMech</a><div class="navlinks"><a href="#showcase">3D Showcase</a><a href="#benchmark">Benchmark</a><a href="#tasks">Tasks</a><a href="#zeroshot-results">Zeroshot Results</a><a href="#agentic-results">Agentic Results</a><a href="#citation">Citation</a></div><div class="nav-actions"><a class="omnieda-link omnicad-link" href="https://www.omnieda.com/omnicad/">OmniCAD ↗</a><a class="omnieda-link" href="https://www.omnieda.com/">OmniEDA ↗</a><button class="theme-toggle" type="button" aria-label="Switch to bright theme" aria-pressed="false"><span>Bright</span></button><a class="arxiv-link" href="https://arxiv.org/abs/2608.05539">arXiv<span class="arxiv-id">:2608.05539</span> ↗</a></div></nav>
+  <main>
+    <section class="hero shell" id="top"><div><h1>OmniMech</h1><h2>All-in-one Multimodal Mechanical Benchmark for 3D Reconstruction</h2><div class="actions"><a class="button" href="https://arxiv.org/pdf/2608.05539v1" download="omnimech-paper.pdf">Download paper ↓</a><a class="button dataset-button" href="./res/omnimech_samples.zip" download>Dataset Samples ↓</a><a class="button dataset-button" href="./res/omnimech_code.zip" download>Code ↓</a></div></div><div class="heroart"><img src="./public/media/overview.png" alt="Mechanical parts and reconstruction examples from OmniMech"><div class="badge b1">251K<small>paired models</small></div><div class="badge b2">28<small>views / model</small></div></div></section>
+    <!-- <section class="statsband"><div class="shell stats"><div class="stat"><strong>251K</strong><span>drawing and<br>model pairs</span></div><div class="stat"><strong>15.62</strong><span>annotations<br>per drawing</span></div><div class="stat"><strong>28</strong><span>renders<br>per model</span></div><div class="stat"><strong>4</strong><span>evaluation<br>tasks</span></div></div></section> -->
+    
+    
+        <section class="section showcase" id="showcase">
+      <div class="shell">
+        <div class="kicker light">Tested Upon State-of-the-Art LLMs</div>
+        <div class="showcase-head"><h2>Qualititive Results</h2><p class="copy">Hover the input drawing to inspect details. Drag models to orbit and scroll to zoom.</p></div>
+        <div class="showcase-browser"><div class="case-toolbar">
+          <aside class="case-pager" aria-label="Test case pagination"><small>Test case</small><strong><span id="case-current">01</span> / <span id="case-total">05</span></strong><div class="pager-controls"><button id="case-prev" type="button" aria-label="Previous test case">←</button><button id="case-next" type="button" aria-label="Next test case">→</button></div></aside>
+          <div class="drawing-panel" id="case-drawing"><img alt="Input engineering drawing for test case 1"><div class="drawing-fallback">Add input drawing<br>drawings/case-01.png</div></div>
+          <div class="sidebar-model-grid" aria-label="Ground truth and first two reconstruction results">
+            <article class="model-card"><div class="model-label">LLaMA4 Maverick</div><div class="three-viewer" data-slot="8"></div></article>
+            <article class="model-card"><div class="model-label">Ministral 14B 2512</div><div class="three-viewer" data-slot="9"></div></article>
+            <article class="model-card"><div class="model-label">Hunyuan 3D 2</div><div class="three-viewer" data-slot="10"></div></article>
+          </div>
+        </div>
+        <div class="case-model-grid" aria-label="Twelve interactive reconstruction results">
+          <article class="model-card gt"><div class="model-label">Ground Truth</div><div class="three-viewer" data-slot="0" data-src="./models/case-01-gt.glb"></div></article>
+          <article class="model-card"><div class="model-label">GPT 5.5</div><div class="three-viewer" data-slot="1" data-src="./models/case-01-m1.glb"></div></article>
+          <article class="model-card"><div class="model-label">GPT 5.4 Mini</div><div class="three-viewer" data-slot="2" data-src="./models/case-01-m2.glb"></div></article>
+          <article class="model-card"><div class="model-label">Claude Opus 4.8</div><div class="three-viewer" data-slot="3" data-src="./models/case-01-m3.glb"></div></article>
+          <article class="model-card"><div class="model-label">Gemini 3.1 Pro</div><div class="three-viewer" data-slot="4" data-src="./models/case-01-m4.glb"></div></article>
+          <article class="model-card"><div class="model-label">Gemini 3.5 Flash</div><div class="three-viewer" data-slot="5"></div></article>
+          <article class="model-card"><div class="model-label">Qwen 3.7 Plus</div><div class="three-viewer" data-slot="6"></div></article>
+          <article class="model-card"><div class="model-label">Qwen 3.5 9B</div><div class="three-viewer" data-slot="7"></div></article>
+          <article class="model-card"><div class="model-label">InstantMesh</div><div class="three-viewer" data-slot="11"></div></article>
+          <article class="model-card"><div class="model-label">SAM 3D</div><div class="three-viewer" data-slot="12"></div></article>
+          <article class="model-card"><div class="model-label">TRELLIS</div><div class="three-viewer" data-slot="13"></div></article>
+          <article class="model-card"><div class="model-label">Cad Coder</div><div class="three-viewer" data-slot="14"></div></article>
+        </div></div>
+      </div>
+    </section>
+<section class="section shell" id="benchmark"><div class="kicker">The benchmark</div><div class="twocol"><h2>Industrial geometry deserves industrial precision.</h2><div><p class="copy">General-purpose 3D benchmarks reward visual plausibility. Mechanical engineering demands something stricter: exact dimensions, valid topology, manufacturable features, and programs that remain editable.</p><p class="copy">Every OmniMech sample starts from a native SolidWorks part and its orthographic drawing, then expands into a rich multimodal record for training and evaluation.</p></div></div><div class="card"><img src="./public/media/benchmark.png" alt="OmniMech drawing, ground-truth model, spherical renders, and video"><div class="legend"><div><b>Engineering Drawing</b><small>2D CAD</small></div><div><b>Geometric</b><small>STEP B-Rep + OBJ</small></div><div><b>Visual</b><small>28 renders + video</small></div><div><b>Semantic</b><small>Dimensions + feature graph</small></div></div></div></section>
+<section class="section dark" id="tasks"><div class="shell"><div class="kicker light">Four evaluation tracks</div><div class="taskhead"><h2>A benchmark for the complete reconstruction loop.</h2><p class="copy">From reading a drawing to verifying a manufactured form, OmniMech evaluates the capabilities that must work together.</p></div><div class="taskgrid"><article class="task"><span>01</span><h3>Parametric CAD program synthesis</h3><p>Generate executable programs that construct valid, editable 3D objects directly from mechanical drawings.</p></article><article class="task"><span>02</span><h3>Diagram-to-3D reasoning</h3><p>Recover geometry, topology, occluded structure, and cross-view consistency from orthographic evidence.</p></article><article class="task"><span>03</span><h3>Annotation-grounded reasoning</h3><p>Interpret dimensions, symbols, and feature callouts, then enforce them as geometric constraints.</p></article><article class="task"><span>04</span><h3>Tool-augmented reconstruction</h3><p>Use visualization, measurement, CAD execution, and verification tools to iteratively refine a model.</p></article></div></div></section>
+<section class="section shell results metrics-results" id="results"><div class="metrics-intro"><div><div class="kicker">Dataset statistics</div><h2>Today&apos;s models see the shape. They miss the design intent.</h2></div><p class="copy">OmniMech spans diverse mechanical applications, part types, geometric complexity, and richly annotated engineering drawings.</p></div><div class="metrics-table"><div class="metrics-row two"><figure class="metric-figure"><img src="./public/media/findings/application-keywords.png" alt="Application keyword word cloud"><figcaption>Application keywords</figcaption></figure><figure class="metric-figure"><img src="./public/media/findings/type-keywords.png" alt="Part type keyword word cloud"><figcaption>Type keywords</figcaption></figure></div><div class="metrics-row three"><figure class="metric-figure"><img src="./public/media/findings/faces.png" alt="Distribution of B-Rep faces"><figcaption>Faces</figcaption></figure><figure class="metric-figure"><img src="./public/media/findings/edges.png" alt="Distribution of B-Rep edges"><figcaption>Edges</figcaption></figure><figure class="metric-figure"><img src="./public/media/findings/vertices.png" alt="Distribution of B-Rep vertices"><figcaption>Vertices</figcaption></figure></div><div class="metrics-row four"><figure class="metric-figure"><img src="./public/media/findings/volume.png" alt="Distribution of part volume"><figcaption>Volume</figcaption></figure><figure class="metric-figure"><img src="./public/media/findings/surface-area.png" alt="Distribution of part surface area"><figcaption>Surface area</figcaption></figure><figure class="metric-figure"><img src="./public/media/findings/views.png" alt="Distribution of drawing view counts"><figcaption>Views</figcaption></figure><figure class="metric-figure"><img src="./public/media/findings/dimensions.png" alt="Distribution of drawing dimension labels"><figcaption>Dimensions</figcaption></figure></div></div></section>
+    <section class="section people shell"><div class="kicker">Authors & institutions</div><h2>OmniMech: All-in-one Multimodal Mechanical Benchmark for 3D Reconstruction</h2><p class="authors">Taiting Lu* · Runze Liu* · Ziwei Dong · Sisong Bei · Jingying Zeng · Mingjia Wang · Zhenghao Li · Kaiyuan Lin · Yi-Shan Wu · Yangshoudu Zheng · Hongxing Pan · Kai Zhang · Guoliang Shi · Ling Ma · Yifan Yang · Jiaying Lu · Qi He · Sung-Liang Chen · Yi-Chao Chen · Yincheng Jin · Mahanth Gowda†</p><div class="institutions"><span>Pennsylvania State University</span><span>Shanghai Jiao Tong University</span><span>Binghamton University</span><span>Microsoft Research</span></div></section>
+    <section class="citation" id="citation"><div class="shell citegrid"><div><div class="kicker light">Citation</div><h2>BibTex</h2></div><pre>@article{lu2026omnimechallinonemultimodalmechanical,
+      title={OmniMech: All-in-one Multimodal Mechanical Benchmark for 3D Reconstruction}, 
+      author={Taiting Lu and Runze Liu and Ziwei Dong and Sisong Bei and Jingying Zeng and Mingjia Wang and Zhenghao Li and Kaiyuan Lin and Yi-Shan Wu and Yangshoudu Zheng and Hongxing Pan and Kai Zhang and Guoliang Shi and Ling Ma and Yifan Yang and Jiaying Lu and Qi He and Sung-Liang Chen and Yi-Chao Chen and Yincheng Jin and Mahanth Gowda},
+      year={2026},
+      eprint={2608.05539},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2608.05539},
+}</pre></div></section>
+  </main>
+  <footer class="shell"><div class="wordmark"><span class="mark">OM</span>OmniMech</div><p>All-in-one multimodal mechanical benchmark for 3D reconstruction.</p><a href="https://arxiv.org/abs/2608.05539">arXiv:2608.05539 ↗</a></footer>
+  <script>
+    (() => {
+      const toggle = document.querySelector('.theme-toggle');
+      const label = toggle.querySelector('span');
+      const applyTheme = bright => {
+        document.body.classList.toggle('bright', bright);
+        toggle.setAttribute('aria-pressed', String(bright));
+        toggle.setAttribute('aria-label', bright ? 'Switch to dark theme' : 'Switch to bright theme');
+        label.textContent = bright ? 'Dark' : 'Bright';
+        localStorage.setItem('omnimech-theme', bright ? 'bright' : 'dark');
+        window.dispatchEvent(new CustomEvent('omnimech-themechange', {detail:{bright}}));
+      };
+      applyTheme(localStorage.getItem('omnimech-theme') === 'bright');
+      toggle.addEventListener('click', () => applyTheme(!document.body.classList.contains('bright')));
+    })();
+  </script>
+  <script>
+    (() => {
+      const composition = document.querySelector('.metrics-intro');
+      if (composition) {
+        composition.querySelector('.kicker').textContent = 'Benchmark composition';
+        composition.querySelector('h2').textContent = 'A broad cross-section of real mechanical design.';
+        composition.querySelector('.copy').textContent = 'OmniMech brings together parts from vast engineering domains. Its samples span varied part types and complexity across faces, edges, vertices, volume, and surface area, paired with multi-view drawings and dense dimensional annotations.';
+      }
+      const zeroRows = [
+        ['GPT 5.5','2D Drawing','3.34','.59','.80','.74','39450','12.5','480810','41.6','309.7','92.6','2010','14864','9.1'],['GPT 5.5','Draw. + 8 renders','2.86','.60','.81','.75','27572','9.6','513727','25.8','288.1','91.5','10001','15687','9.2'],['GPT 5.5','Draw. + 20 renders','2.80','.62','.82','.76','29395','9.2','664111','31.5','307.5','90.8','21745','15186','9.3'],
+        ['GPT 5.4 Mini','2D Drawing','7.25','.38','.60','.55','96050','26.1','2489940','126.7','7.5','60.0','2058','1192','16.3'],['GPT 5.4 Mini','Draw. + 8 renders','6.19','.39','.62','.56','54420','24.7','912537','97.0','8.4','53.0','9963','1134','17.0'],['GPT 5.4 Mini','Draw. + 20 renders','6.56','.40','.63','.57','118089','27.3','1701826','145.8','10.0','48.9','21607','1122','17.1'],
+        ['Claude Opus 4.8','2D Drawing','4.18','.52','.73','.68','49150','12.0','488890','36.9','35.8','92.7','5045','2774','11.0'],['Claude Opus 4.8','Draw. + 8 renders','3.88','.52','.75','.69','45954','11.6','486893','36.2','37.3','94.2','18370','2935','11.7'],['Claude Opus 4.8','Draw. + 20 renders','3.72','.52','.75','.69','30769','10.6','367522','31.8','38.8','94.6','36369','2925','11.7'],
+        ['Gemini 3.1 Pro','2D Drawing','3.46','.64','.83','.78','41110','11.1','1132270','23.7','171.7','81.1','2172','22037','12.9'],['Gemini 3.1 Pro','Draw. + 8 renders','3.59','.62','.82','.76','46574','9.2','926373','19.0','175.9','82.3','11342','22628','13.3'],['Gemini 3.1 Pro','Draw. + video','3.12','.66','.84','.80','34493','12.4','1324694','22.0','182.0','80.1','2855','21917','13.1'],
+        ['Gemini 3.5 Flash','2D Drawing','3.49','.63','.84','.77','41320','9.7','276720','18.1','57.2','70.6','2192','13541','13.5'],['Gemini 3.5 Flash','Draw. + 8 renders','3.01','.66','.84','.79','41321','10.8','993169','17.7','92.1','68.0','11458','14465','13.6'],['Gemini 3.5 Flash','Draw. + video','3.95','.64','.84','.78','37989','16.8','1071291','20.9','62.9','69.3','2885','14771','13.8'],
+        ['Qwen 3.7 Plus','2D Drawing','6.41','.45','.68','.61','79300','19.1','500940','56.0','226.6','66.8','3306','12203','14.5'],['Qwen 3.7 Plus','Draw. + 8 renders','6.19','.45','.68','.61','51614','16.8','1546826','55.0','293.1','71.2','13649','15658','14.0'],['Qwen 3.7 Plus','Draw. + 20 renders','6.97','.46','.71','.63','56536','14.0','1535596','79.4','322.4','70.9','28973','17223','13.6'],
+        ['Qwen 3.5 9B','2D Drawing','22.2','.40','.60','.55','139390','237.4','3208810','448.1','403.6','1.3','3354','19773','14.7'],['Qwen 3.5 9B','Draw. + 8 renders','7.35','.64','.80','.78','60451','17.6','7943561','153.1','329.1','1.0','14037','19533','16.2'],['Qwen 3.5 9B','Draw. + 20 renders','5.79','.32','.65','.48','84406','37.7','2002554','277.4','350.5','1.2','29608','13342','14.2'],
+        ['LLaMA4 Maverick','2D Drawing','10.3','.33','.52','.48','90250','39.6','3927090','283.4','9.6','61.0','5320','757','8.6'],['LLaMA4 Maverick','Draw. + 8 renders','6.41','.36','.57','.52','50580','27.7','1645873','186.8','110.7','45.9','14547','10427','7.9'],['LLaMA4 Maverick','Draw. + 20 renders','7.68','.35','.57','.51','67597','30.4','3107624','184.4','18.9','55.4','19067','751','8.2'],
+        ['Ministral 14B 2512','2D Drawing','13.9','.29','.52','.44','49910','23.2','391620','102.5','17.2','.4','3351','1977','14.7'],['Ministral 14B 2512','Draw. + 8 renders','5.87','.31','.46','.45','19298','77.2','123961','191.0','25.7','.6','15169','2028','15.1'],['Ministral 14B 2512','Draw. + 20 renders','7.95','.35','.48','.52','45539','104.7','818068','287.0','28.2','.4','15166','1923','14.9'],
+        ['HY3D-2','Image-to-3D','18.4','.10','.07','.15','144070','76.2','1233644','109.4','56.3','100','—','—','—'],['InstantMesh','Image-to-3D','34.1','.04','.05','.06','326796','200.5','42453471','5515.5','110.9','100','—','—','—'],['SAM 3D','Image-to-3D','15.0','.18','.15','.26','206808','130.1','2426019','218.3','34.5','100','—','—','—'],['TRELLIS','Image-to-3D','20.4','.10','.10','.15','201123','115.4','10019880','317.9','10.2','100','—','—','—'],['Cad Coder','Image-to-CAD','16.3','.14','.20','.21','107364','171.8','2275856','1395.1','126.8','28.9','—','—','—']
+      ];
+      const agentRows = [
+        ['GPT 5.5','Adaptive renders','3.44','.60','.81','.75','24298','9.0','616315','37.68','288.0','94.40','15879','15842','9.8','99.80','2.75'],['GPT 5.5','Fixed 8 renders','2.92','.63','.82','.77','22496','8.4','203721','15.91','217.6','92.37','29821','12850','9.8','99.80','2.31'],
+        ['GPT 5.4 Mini','Adaptive renders','6.60','.39','.61','.55','49616','20.7','2869741','131.81','48.5','80.77','43936','8203','9.8','43.00','7.73'],['GPT 5.4 Mini','Fixed 8 renders','7.63','.40','.62','.56','64983','21.3','2479906','95.74','76.1','77.07','115308','7998','9.9','40.40','7.83'],
+        ['Claude Opus 4.8','Adaptive renders','4.18','.53','.74','.69','35581','10.0','2435589','32.76','93.5','95.09','38343','8420','10.1','97.80','3.54'],['Claude Opus 4.8','Fixed 8 renders','4.14','.51','.73','.67','24238','12.1','253217','31.20','99.0','96.93','40023','9550','9.9','99.20','4.17'],
+        ['Gemini 3.1 Pro','Adaptive renders','3.06','.63','.82','.77','29560','7.4','1605669','35.64','381.2','82.31','11044','49609','13.5','99.60','2.11'],['Gemini 3.1 Pro','Fixed 8 renders','3.54','.62','.82','.76','30162','9.0','1469850','30.34','339.8','81.70','14771','45364','13.2','98.00','1.94'],
+        ['Gemini 3.5 Flash','Adaptive renders','2.70','.63','.83','.77','21740','8.2','3480815','39.85','149.0','71.71','12559','36338','14.3','99.80','2.50'],['Gemini 3.5 Flash','Fixed 8 renders','2.81','.62','.83','.77','29483','7.5','2398220','30.30','141.2','70.71','15343','32689','13.9','100.0','2.19'],
+        ['Qwen 3.7 Plus','Adaptive renders','4.77','.50','.71','.66','35485','19.6','1786931','58.22','907.5','81.93','48059','48527','13.0','73.80','6.39'],['Qwen 3.7 Plus','Fixed 8 renders','4.69','.47','.70','.64','37806','17.4','241526','54.21','934.6','79.90','71658','49112','13.3','83.80','5.41'],
+        ['Qwen 3.5 9B','Adaptive renders','3.25','.68','.82','.81','13890','7.4','683288','138.16','1270','5.18','42677','57711','9.1','1.40','4.02'],['Qwen 3.5 9B','Fixed 8 renders','8.74','.38','.59','.54','278081','20.0','6239513','269.39','1729','4.67','56437','70450','12.1','3.00','4.80'],
+        ['LLaMA4 Maverick','Adaptive renders','—','—','—','—','—','—','—','—','49.5','0.00','74407','6065','8.1','0.00','10.00'],['LLaMA4 Maverick','Fixed 8 renders','—','—','—','—','—','—','—','—','49.0','0.00','73697','5837','8.1','0.00','10.00'],
+        ['Ministral 14B 2512','Adaptive renders','—','—','—','—','—','—','—','—','100.9','.02','76805','13966','14.9','0.00','9.85'],['Ministral 14B 2512','Fixed 8 renders','3.76','.06','.22','.10','626','8.1','21505','177.80','107.0','.02','76440','13952','15.5','0.00','9.98']
+      ];
+      const cells = (rows, ranks = new Map()) => rows.map((row, index) => {
+        const startsModel = index === 0 || rows[index - 1][0] !== row[0];
+        let modelCell = '';
+        if (startsModel) {
+          let span = 1;
+          while (index + span < rows.length && rows[index + span][0] === row[0]) span += 1;
+          const rank = ranks.get(row[0]);
+          const badge = rank ? `<span class="model-rank rank-${rank}">${rank === 1 ? '1st' : rank === 2 ? '2nd' : '3rd'}</span>` : '';
+          modelCell = `<td class="model-name" rowspan="${span}">${row[0]}${badge}</td>`;
+        }
+        const values = row.slice(1).map((value, valueIndex) => `<td${valueIndex === 0 ? ' class="variant"' : ''}>${value}</td>`).join('');
+        return `<tr>${modelCell}${values}</tr>`;
+      }).join('');
+      const people = document.querySelector('.people');
+      people.insertAdjacentHTML('beforebegin', `<section class="section shell quant-section" id="zeroshot-results"><div class="quant-head"><div><div class="kicker">Quantitative results</div><h2>Zero-shot Results</h2><div class="quant-meta">Sample N = 5,000</div></div><p class="copy">Representative best-performing visual input setting for each model. Lower is better for CD and dimensional error; higher is better for overlap, F-score, and pass rate.</p></div><div class="quant-wrap"><table class="quant-table"><thead><tr><th>Model</th><th>Input</th><th>CD ↓</th><th>SIoU ↑</th><th>VIoU ↑</th><th>F-score ↑</th><th>Surface err. % ↓</th><th>Volume err. % ↓</th><th>Pass % ↑</th></tr></thead><tbody>${cells(zeroRows)}</tbody></table></div></section><section class="section shell quant-section band" id="agentic-results"><div class="quant-head"><div><div class="kicker">Quantitative results</div><h2>Agentic Results</h2><div class="quant-meta">Sample N = 2,000</div></div><p class="copy">Iterative CAD generation with adaptive or fixed rendering feedback. Agentic refinement primarily improves reliability; geometric gains remain model-dependent.</p></div><div class="quant-wrap"><table class="quant-table"><thead><tr><th>Model</th><th>Feedback</th><th>CD ↓</th><th>SIoU ↑</th><th>VIoU ↑</th><th>F-score ↑</th><th>Surface err. % ↓</th><th>Volume err. % ↓</th><th>Pass % ↑</th><th>Self-stop % ↑</th><th>Avg. iter. ↓</th></tr></thead><tbody>${cells(agentRows)}</tbody></table></div></section>`);
+      const setHeaders = (selector, labels) => { document.querySelector(selector).innerHTML = labels.map(label => `<th>${label}</th>`).join(''); };
+      setHeaders('#zeroshot-results thead tr',['Model','Input','CD ↓','SIoU ↑','VIoU ↑','F-score ↑','Surf. err. mm² ↓','Surf. err. % ↓','Vol. err. mm³ ↓','Vol. err. % ↓','Time s ↓','Pass % ↑','Input tokens','Output tokens','CAD ops']);
+      setHeaders('#agentic-results thead tr',['Model','Feedback','CD ↓','SIoU ↑','VIoU ↑','F-score ↑','Surf. err. mm² ↓','Surf. err. % ↓','Vol. err. mm³ ↓','Vol. err. % ↓','Time s ↓','Pass % ↑','Input tokens','Output tokens','CAD ops','Self-stop % ↑','Avg. iter. ↓']);
+      const enableModelRanking = (selector, rows) => {
+        const table = document.querySelector(selector);
+        const headers = [...table.querySelectorAll('th')];
+        const tbody = table.querySelector('tbody');
+        let activeColumn = -1;
+        let activeDirection = 'none';
+        const grouped = () => {
+          const groups = [];
+          const byModel = new Map();
+          rows.forEach((row, sourceIndex) => {
+            if (!byModel.has(row[0])) {
+              const group = { model: row[0], rows: [], sourceIndex };
+              byModel.set(row[0], group);
+              groups.push(group);
+            }
+            byModel.get(row[0]).rows.push(row);
+          });
+          return groups;
+        };
+        const meanValue = (group, column) => {
+          const values = group.rows.map(row => Number.parseFloat(String(row[column]).replace(/,/g, ''))).filter(Number.isFinite);
+          return values.length ? values.reduce((sum, value) => sum + value, 0) / values.length : null;
+        };
+        const renderRanking = (column, direction) => {
+          const groups = grouped();
+          const compare = sortDirection => (a, b) => {
+            if (column === 0) {
+              const result = a.model.localeCompare(b.model, undefined, { numeric: true, sensitivity: 'base' });
+              return sortDirection === 'ascending' ? result : -result;
+            }
+            const aMean = meanValue(a, column);
+            const bMean = meanValue(b, column);
+            if (aMean === null && bMean === null) return a.sourceIndex - b.sourceIndex;
+            if (aMean === null) return 1;
+            if (bMean === null) return -1;
+            const result = aMean - bMean;
+            return sortDirection === 'ascending' ? result : -result;
+          };
+          groups.sort(compare(direction));
+          const preferredDirection = headers[column].textContent.includes('↑') ? 'descending' : 'ascending';
+          const bestGroups = column === 0 ? [] : [...groups].sort(compare(preferredDirection)).filter(group => meanValue(group, column) !== null);
+          const ranks = new Map(bestGroups.slice(0, 3).map((group, index) => [group.model, index + 1]));
+          tbody.innerHTML = cells(groups.flatMap(group => group.rows), ranks);
+          requestAnimationFrame(() => {
+            const modelHeader = table.querySelector('th:first-child');
+            if (modelHeader) table.style.setProperty('--model-column-width', `${modelHeader.getBoundingClientRect().width}px`);
+          });
+        };
+        headers.forEach((header, column) => {
+          const sortable = column === 0 || column > 1;
+          if (!sortable) return;
+          header.dataset.sortable = 'true';
+          header.tabIndex = 0;
+          header.setAttribute('role', 'button');
+          header.setAttribute('aria-sort', 'none');
+          header.title = column === 0 ? 'Sort models alphabetically' : 'Rank models by the mean across ablations';
+          const activate = () => {
+            const preferred = header.textContent.includes('↑') ? 'descending' : 'ascending';
+            activeDirection = activeColumn === column ? (activeDirection === 'ascending' ? 'descending' : 'ascending') : preferred;
+            activeColumn = column;
+            headers.forEach(item => item.hasAttribute('aria-sort') && item.setAttribute('aria-sort', 'none'));
+            header.setAttribute('aria-sort', activeDirection);
+            renderRanking(column, activeDirection);
+          };
+          header.addEventListener('click', activate);
+          header.addEventListener('keydown', event => {
+            if (event.key === 'Enter' || event.key === ' ') {
+              event.preventDefault();
+              activate();
+            }
+          });
+        });
+        const defaultColumn = headers.findIndex(header => header.textContent.trim().startsWith('Vol. err. %'));
+        if (defaultColumn >= 0) {
+          activeColumn = defaultColumn;
+          activeDirection = 'ascending';
+          headers[defaultColumn].setAttribute('aria-sort', activeDirection);
+          renderRanking(defaultColumn, activeDirection);
+        }
+      };
+      enableModelRanking('#zeroshot-results .quant-table', zeroRows);
+      enableModelRanking('#agentic-results .quant-table', agentRows);
+      document.querySelectorAll('.quant-wrap').forEach(wrap => {
+        const table = wrap.querySelector('.quant-table');
+        const updateStickyOffset = () => {
+          const modelHeader = table.querySelector('th:first-child');
+          if (modelHeader) table.style.setProperty('--model-column-width', `${modelHeader.getBoundingClientRect().width}px`);
+        };
+        const frame = document.createElement('div');
+        frame.className = 'quant-frame';
+        wrap.before(frame);
+        frame.appendChild(wrap);
+        const hint = document.createElement('span');
+        hint.className = 'quant-scroll-hint';
+        hint.setAttribute('aria-hidden', 'true');
+        hint.textContent = '→';
+        frame.appendChild(hint);
+        const updateOverflow = () => frame.classList.toggle('is-overflowing', wrap.scrollWidth > wrap.clientWidth + 1);
+        wrap.addEventListener('scroll', () => {
+          if (wrap.scrollLeft > 4) frame.classList.add('has-scrolled');
+        }, { passive: true });
+        window.addEventListener('resize', () => {
+          updateOverflow();
+          updateStickyOffset();
+        }, { passive: true });
+        requestAnimationFrame(() => {
+          updateOverflow();
+          updateStickyOffset();
+        });
+      });
+      const cases = [1, 2, 3, 4, 5];
+      let page = 0;
+      const drawing = document.querySelector('#case-drawing');
+      const image = drawing.querySelector('img');
+      const fallback = drawing.querySelector('.drawing-fallback');
+      const current = document.querySelector('#case-current');
+      const total = document.querySelector('#case-total');
+      total.textContent = String(cases.length).padStart(2, '0');
+
+      drawing.addEventListener('pointermove', event => {
+        const rect = drawing.getBoundingClientRect();
+        drawing.style.setProperty('--zoom-x', `${((event.clientX - rect.left) / rect.width) * 100}%`);
+        drawing.style.setProperty('--zoom-y', `${((event.clientY - rect.top) / rect.height) * 100}%`);
+      });
+      drawing.addEventListener('pointerleave', () => {
+        drawing.style.setProperty('--zoom-x', '50%');
+        drawing.style.setProperty('--zoom-y', '50%');
+      });
+      image.addEventListener('load', () => fallback.classList.remove('show'));
+      image.addEventListener('error', () => fallback.classList.add('show'));
+
+      const renderCase = () => {
+        const caseNumber = String(cases[page]).padStart(2, '0');
+        current.textContent = caseNumber;
+        fallback.innerHTML = `Add input drawing<br>drawings/case-${caseNumber}.png`;
+        fallback.classList.remove('show');
+        image.alt = `Input engineering drawing for test case ${cases[page]}`;
+        image.src = `./drawings/case-${caseNumber}.png`;
+        if (!window.omniModelViews) return;
+        const sources = [`./models/case-${caseNumber}-gt.glb`];
+        for (let result = 1; result <= 14; result++) sources.push(`./models/case-${caseNumber}-m${result}.glb`);
+        window.omniModelViews.forEach(view => view.loadModel(sources[Number(view.host.dataset.slot)]));
+      };
+      document.querySelector('#case-prev').addEventListener('click', () => { page = (page - 1 + cases.length) % cases.length; renderCase(); });
+      document.querySelector('#case-next').addEventListener('click', () => { page = (page + 1) % cases.length; renderCase(); });
+      window.addEventListener('omniviewsready', renderCase, {once:true});
+      renderCase();
+    })();
+  </script>
+</body>
+</html>

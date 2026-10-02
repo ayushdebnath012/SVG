@@ -1,0 +1,16 @@
+{
+  "model": "gpt-6-astra",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Return a JSON object with svg (a complete SVG string) and analysis (an object, may be empty).\nDraw a precise CAD section/top view of the specified real mechanical part. This is geometry, not a field plot.\nUse viewBox=\"0 0 1000 1000\", width=\"1000\", height=\"1000\". Physical coordinates in mm are mapped to\nSVG X=500+4*x, Y=500-4*y. Put the entire material silhouette in ONE direct child <g data-geometry=\"part\">.\nThat group must display all solid material in black and all holes/removed material in white on a white background.\nIt must contain no dimensions, labels, axes, hatching, decorative strokes or construction curves. Curves should\nbe accurate within 0.5 mm; smooth Beziers or sufficiently fine polygon approximations are both acceptable.\nPlace readable dimensions, explanatory labels and centre marks OUTSIDE that geometry group. Give every required\nnumeric dimension a visible text element tagged data-dimension=\"its specified key\", containing its value and mm.\nAny native SVG shapes, transforms, local use references, clipping and masks are allowed. Definitions may be in defs.\nNo scripts, animation, raster images, foreignObject, external resources or CSS stylesheets. Inline styles are allowed.\nThe drawing must represent the actual specified profile, including intersecting features. Do not substitute a generic\nsymbolic gear/cam/section. No external tools are provided. Do not claim to have executed CAD or analysis software."
+    },
+    {
+      "role": "user",
+      "content": "Ideal spur gear, zero profile shift/backlash, no root fillets or trochoids. Pitch radius rp=m*z/2, base rb=rp*cos(alpha), tip ra=rp+m, root rf=rp-1.25*m. Tooth k is centred on phase+360*k/z degrees. At radius r>=rb its half-thickness angle is pi/(2*z)+inv(alpha)-inv(acos(rb/r)), where inv(t)=tan(t)-t and angles in this formula are radians. The two flanks are exact involutes; connect them by a circular tip arc. Between rf and rb extend each base-end flank radially at its base angle; connect adjacent teeth by circular root arcs. Subtract the union of a centred circular bore and a keyway rectangle -key_width/2<=x<=key_width/2, 0<=y<=key_top. This explicitly defined ideal profile overrides other gear conventions.\nAll lengths mm. Required named dimensions: pitch_diameter, tip_diameter, root_diameter, bore_diameter.\nSpecification:\n{\"teeth\": 23, \"module_mm\": 4.0, \"pressure_deg\": 25.0, \"phase_deg\": 7.0, \"bore_radius_mm\": 10.0, \"key_width_mm\": 6.0, \"key_top_mm\": 14.0}"
+    }
+  ],
+  "reasoning_effort": "medium",
+  "max_completion_tokens": 16000,
+  "store": false
+}

@@ -1,0 +1,46 @@
+{
+  "source_url": "https://raw.githubusercontent.com/microsoft/CAD-Editor/main/data/processed.zip",
+  "source_archive_sha256": "98d01e2b1881f44f38518e43cad7796904ce4a795785569f3e48b87160107f4f",
+  "upstream_counts": {
+    "train": 120000,
+    "test": 2000
+  },
+  "split_rule": "Exact normalized original/edited sequence connected components; all upstream-test components excluded from train/validation; deterministic component holdout for validation.",
+  "limitation": "Source archive lacks native CAD design IDs. Equivalent geometry with different sequences is not deduplicated. This is a training feasibility pilot, not the final geometric-generalization evaluation.",
+  "selection": "Seed 17 shuffle after split; source/target <=2600 characters; bounded counts; no Astra benchmark samples.",
+  "counts": {
+    "train": {
+      "n": 2048,
+      "components": 1504,
+      "edit_types": {
+        "add": 509,
+        "modify": 1021,
+        "delete": 518
+      }
+    },
+    "validation": {
+      "n": 128,
+      "components": 111,
+      "edit_types": {
+        "add": 27,
+        "modify": 63,
+        "delete": 38
+      }
+    },
+    "test": {
+      "n": 128,
+      "components": 121,
+      "edit_types": {
+        "delete": 35,
+        "add": 34,
+        "modify": 59
+      }
+    }
+  },
+  "system": "You edit parametric CAD construction sequences. Apply the instruction to the original sequence. Return only the complete edited sequence in the same command syntax. Preserve all unrelated geometry. Do not add explanation or Markdown.",
+  "files": {
+    "train": "651f18ce86fcf947d58926ec66336aeb443c5ad8997998ddc8bce76e46c2821b",
+    "validation": "21c829808c62b60d6ce243ca8ffcc6cb8c57fdb0260118132217e6097816a694",
+    "test": "9d1bb2558488dff0d84eb74f6ce42606c6dc713aa2df3ecc212bab36cdc775bd"
+  }
+}

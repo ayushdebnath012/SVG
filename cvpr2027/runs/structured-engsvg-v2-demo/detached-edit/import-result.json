@@ -1,0 +1,127 @@
+{
+  "import": {
+    "status": "recovered",
+    "mode": "detached_visible_evidence",
+    "design": {
+      "width_mm": 1400,
+      "height_mm": 850,
+      "section_b_mm": 50,
+      "section_h_mm": 90,
+      "E_mpa": 200000,
+      "vertical_load_N": 1200,
+      "horizontal_load_N": 150
+    },
+    "partial_design": {
+      "width_mm": 1400,
+      "height_mm": 850,
+      "section_b_mm": 50,
+      "section_h_mm": 90,
+      "E_mpa": 200000,
+      "vertical_load_N": 1200,
+      "horizontal_load_N": 150
+    },
+    "missing": [],
+    "ambiguities": [],
+    "confidence": {
+      "width_mm": 0.98,
+      "height_mm": 0.98,
+      "section_b_mm": 0.95,
+      "section_h_mm": 0.95,
+      "E_mpa": 0.98,
+      "vertical_load_N": 0.98,
+      "horizontal_load_N": 0.98
+    },
+    "evidence": {
+      "width_mm": "visible data-dimension length_top",
+      "height_mm": "visible data-dimension length_right",
+      "section_b_mm": "visible section note: top: 50 \u00d7 90",
+      "section_h_mm": "visible section note: top: 50 \u00d7 90",
+      "E_mpa": "visible data-parameter E_mpa",
+      "vertical_load_N": "visible data-parameter vertical_load_N",
+      "horizontal_load_N": "visible data-parameter horizontal_load_N"
+    },
+    "topology": {
+      "members": [
+        "left",
+        "right",
+        "top"
+      ],
+      "connected": true,
+      "layout": "two-leg portal"
+    }
+  },
+  "edit": {
+    "request": "Make it 0.2 m wider and remove the lateral load.",
+    "source": {
+      "width_mm": 1400,
+      "height_mm": 850,
+      "section_b_mm": 50,
+      "section_h_mm": 90,
+      "E_mpa": 200000,
+      "vertical_load_N": 1200,
+      "horizontal_load_N": 150
+    },
+    "action": {
+      "action": "edit",
+      "changes": {
+        "width_mm": 1600,
+        "horizontal_load_N": 0
+      }
+    },
+    "change_summary": [
+      "width_mm: 1400 -> 1600",
+      "horizontal_load_N: 150 -> 0"
+    ],
+    "design": {
+      "width_mm": 1600,
+      "height_mm": 850,
+      "section_b_mm": 50,
+      "section_h_mm": 90,
+      "E_mpa": 200000,
+      "vertical_load_N": 1200,
+      "horizontal_load_N": 0
+    },
+    "engineering": {
+      "design": {
+        "width_mm": 1600,
+        "height_mm": 850,
+        "section_b_mm": 50,
+        "section_h_mm": 90,
+        "E_mpa": 200000,
+        "vertical_load_N": 1200,
+        "horizontal_load_N": 0
+      },
+      "revision": "5614c5bd7653812245d4c7455e19d5a43c66d748ec3ea1a60b6e5e4a98975e90",
+      "analysis": {
+        "ux_mm": 0.00022896729945700903,
+        "uy_mm": -0.0011328787659005879,
+        "peak_stress_mpa": 0.2722640852502786,
+        "member_stress_mpa": {
+          "left": 0.005811332669609768,
+          "right": 0.2722640852502786,
+          "top": 0.005704375626610141
+        },
+        "reactions": {
+          "A": [
+            -5.68270901771402e-14,
+            0.4813066934951389,
+            385.04535479623223
+          ],
+          "B": [
+            -5.647307007798366e-14,
+            1199.518693306505,
+            385.0453547962319
+          ]
+        },
+        "equilibrium_residual_N_Nmm": [
+          -5.645674139431584e-14,
+          -2.2737367544323206e-13,
+          0.0
+        ],
+        "free_residual_max_N_Nmm": 2.2737367544323206e-13
+      },
+      "method": "2D Euler-Bernoulli frame FEM",
+      "scope": "Planar linear frame only; excludes buckling, tipping, joints and out-of-plane behaviour."
+    }
+  }
+}

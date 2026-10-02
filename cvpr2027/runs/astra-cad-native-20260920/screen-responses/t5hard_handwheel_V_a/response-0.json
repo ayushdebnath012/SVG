@@ -1,0 +1,114 @@
+{
+  "id": "resp_064dea4195fcad56016aafd7bd5fe887d2a2f15432f20fb6de",
+  "object": "response",
+  "created_at": 1789908925,
+  "status": "completed",
+  "background": false,
+  "billing": {
+    "payer": "openai"
+  },
+  "completed_at": 1789908934,
+  "error": null,
+  "frequency_penalty": 0.0,
+  "incomplete_details": null,
+  "instructions": null,
+  "max_output_tokens": 10000,
+  "max_tool_calls": null,
+  "model": "gpt-6-astra",
+  "moderation": null,
+  "output": [
+    {
+      "id": "rs_064dea4195fcad56016aafd7befe4487d28aa167645ffb9473",
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqr9fGKoPApWkJw7X_wViU4AqFWctHTnoMDOdmx6rZRsCCniuwlCJlsEgWFSd0Rw01ChquCAaHEwLxtiuv5mss5DmuEyBYwhVFdqi8Re9rcU4F665v74m4XefVahiVQQvImmIWBDwNn8CUAxP4gax9_2nOfC-tZ0MsVVPRhqaIAUd-TGiwRhXFvhfNpsHEMH9b00foeCBOp3RDm3Li7el0M-Mfwy1E3EhqZTy8MerM-fuRbk2vaASLly5NrSzrkL7KALBKcuVF7IiA40djxTVGeRxVhiPD0UIsN609QiupuZHBJVMyaWFFtmSD8cRQx2wDswN1QrnM98_qWZx9g6yPdRkzzgJ_NI96Q-qLScOlDOxN7yAilzgQPJWnqMVM0cAe72KyOBkrwC-8WFEJrL1RzNWxeAFG3gv_uB8QMOiK1nKirtIlPFanKNfGUEHd-Nq5LyqXR2KFPtdJyRGc14SffsbFbYDnx1BW9We44ErDIQLjMT-6LYzK1w2DG31kwzN-bu-QME944QIS33zG2LcEtDNhDPH_gHXj6vuq66SDDJ2v6a8wI4qDfC-5-BR_FxGBCkuVJrWv4djdxTCrRkDB7kiu99gbk1ckzN8lUoqb3k_jFRSqgd0SaiIfVZWL9swnCnJAvdi0OnmNKYmXnfZaGCrOFK7P3HZUHYqJSRkPn5EZbUGZ1gPZEVgX5NqdO1PV85qhe9Rg08KpjOelqhzlhE7SKvIIXXGy15BO9ahArkhbSorT2Z0g3ZgK_gOf4LjSs6QQhKIxcNXajvnSbm-qPXcDqDRndC86qv7_6TMzv2rUHUpXAQzrIGfotzPTdPt5XSqxbD0IAjVlngzFYMzmZorTeqSDBcMJLSVOPLYR_DcpdrYU-KT5Bgr1cZm13PP9HakBVUl5L5f8EtRjDDb5xggLlQ_cVRM6HsB3IStAExAxpIXR_TQRgR_-_TnVeZSBtki2I19BMiaZrVHZ7zwpXPglh-zArIQbcZeD3XXf2doM_ZyL_rbGeslcvQv1oYnwHrp3EpEU8X8vV2B7t32yVgj6wXmHdsDte-i22UAqzP9DwWCzcFoXGDzFScLhtppFhmeSNy6uc3JYEnWo5seuzhkp7E37ZLgdQEMR0KEIuKoICkGdYqRwNfbGtganuTj4YOLEDplhU0NPwfE8Db2XPgev0KqvXMwA1fUkxIcxqH_0Okxu0cEjOmOWJe5m6OhWU1nWnPOpR-AwgW6s3DBRyYILKGA8y2GP1IZ6HLNsAenvD7nz5o4bbUr2iYzlAHUKDo8uWnG6AMhZExRnckU9lRq06rlmKrhXhyuEW7WjdvlznamWms6F1c3nIh-tSiWE4rI1ycEPq758-9yuy9OqxCRUCjH2sQZ0UzV_jahtFKndXdCksXUEr2l6XOEoXBmlsBBU6Ugzy2zVfiT951OivG6I8iuR1WbywCimcBXK1EMqrqUIovtiZQPfEVoOlUDQ76ZmLE0WWmfMxBzGOdyC0cvFPAMmOJX7yguUkimcEcVusnMb62yyo9CNPaLJXCve7E4tC2W-Le2Rn-iS5DwqxGFaFDg0e0emdjnek_HGEMpc4SfQbOoWo5V8eiE_NzYyvcNVfW33zqetYL0ybER6tyelwQ==",
+      "summary": []
+    },
+    {
+      "id": "fc_064dea4195fcad56016aafd7c0813487d287c967ee8e4e8f0b",
+      "type": "function_call",
+      "status": "completed",
+      "arguments": "{\"code\":\"import cadquery as cq\\n\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .union(cq.Workplane(\\\"XY\\\").cylinder(28.0, 14.0))\\n    .union(cq.Workplane(\\\"XY\\\").transformed(offset=cq.Vector(0.0, 0.0, 18.0)).cylinder(18.0, 62.5))\\n    .cut(cq.Workplane(\\\"XY\\\").cylinder(32.0, 5.5))\\n    .cut(cq.Workplane(\\\"XY\\\").transformed(offset=cq.Vector(0.0, 0.0, 18.0)).cylinder(22.0, 47.5))\\n)\\n\\nfor angle in [0.0, 60.0, 120.0, 180.0, 240.0, 300.0]:\\n    spoke = (\\n        cq.Workplane(\\\"XY\\\")\\n        .transformed(offset=cq.Vector(0.0, 0.0, 0.0), rotate=cq.Vector(0.0, 0.0, angle))\\n        .transformed(offset=cq.Vector(0.0, 0.0, 0.0), rotate=cq.Vector(90.0, 0.0, 0.0))\\n        .polyline([[12.0, -12.0], [12.0, 12.0], [49.5, 25.0], [49.5, 11.0]])\\n        .close()\\n        .extrude(3.5, both=True)\\n    )\\n    result = result.union(spoke)\\n\\nresult = (\\n    result.edges(\\\">Z\\\").chamfer(1.8)\\n    .union(cq.Workplane(\\\"XY\\\").transformed(offset=cq.Vector(55.0, 0.0, 31.0)).cylinder(8.0, 6.0))\\n    .union(cq.Workplane(\\\"XY\\\").transformed(offset=cq.Vector(55.0, 0.0, 63.5)).cylinder(57.0, 9.6))\\n    .edges(\\\">Z\\\").chamfer(3.2)\\n)\\n\"}",
+      "call_id": "call_cZG0LBbLVryEwWwXpV9XB6xR",
+      "name": "evaluate_cad"
+    }
+  ],
+  "parallel_tool_calls": false,
+  "presence_penalty": 0.0,
+  "previous_response_id": null,
+  "prompt_cache_key": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "high",
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "store": false,
+  "temperature": 1.0,
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "tool_choice": "required",
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  },
+  "tools": [
+    {
+      "type": "function",
+      "description": "Execute a CAD candidate and inspect actual geometry. Does not compare against a hidden target.",
+      "name": "evaluate_cad",
+      "output_schema": null,
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "code"
+        ],
+        "additionalProperties": false
+      },
+      "strict": true
+    }
+  ],
+  "top_logprobs": 0,
+  "top_p": 0.98,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 1437,
+    "input_tokens_details": {
+      "cache_write_tokens": 1311,
+      "cached_tokens": 0
+    },
+    "output_tokens": 601,
+    "output_tokens_details": {
+      "reasoning_tokens": 72
+    },
+    "total_tokens": 2038
+  },
+  "user": null,
+  "metadata": {}
+}

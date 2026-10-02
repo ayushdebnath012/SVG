@@ -1,0 +1,104 @@
+{
+  "protocol": {
+    "model": "gpt-6-astra",
+    "endpoint": "https://api.openai.com/v1/chat/completions",
+    "reasoning_effort": "low",
+    "max_completion_tokens": 4096,
+    "samples_per_example": 1,
+    "system_prompt_sha256": "fe971970b70c601c7e2613ca21aaf69de3b5559c28224fb70fa3381e31c64994",
+    "scorer": "train_controlled_editing.score_action",
+    "store": false,
+    "notes": [
+      "Same system prompt and compact-DOM input as the LoRA pilot; no examples, no images.",
+      "One sample per example; strict JSON exact action is the primary metric.",
+      "API errors are operational outcomes, not model capability failures; they stay in the denominator."
+    ]
+  },
+  "scope": "direct API baseline on the shared-template pilot; one sample per example",
+  "test": {
+    "n": 60,
+    "attempted": 60,
+    "api_errors": 0,
+    "finish_length": 0,
+    "json_valid": 1.0,
+    "action_correct": 1.0,
+    "exact_action": 1.0,
+    "executor_accepts": 1.0,
+    "unsafe_edit": 0.0,
+    "fence_normalized_exact_action": 1.0,
+    "exact_by_task": {
+      "recompute": {
+        "n": 10,
+        "rate": 1.0
+      },
+      "style:stroke": {
+        "n": 10,
+        "rate": 1.0
+      },
+      "style:stroke-width": {
+        "n": 10,
+        "rate": 1.0
+      },
+      "reject:missing_required_contour": {
+        "n": 10,
+        "rate": 1.0
+      },
+      "move_label": {
+        "n": 10,
+        "rate": 1.0
+      },
+      "reject:numerical_claim": {
+        "n": 10,
+        "rate": 1.0
+      }
+    },
+    "wall_seconds_total": 133.30690012598643
+  },
+  "ood": {
+    "n": 60,
+    "attempted": 60,
+    "api_errors": 0,
+    "finish_length": 0,
+    "json_valid": 1.0,
+    "action_correct": 1.0,
+    "exact_action": 1.0,
+    "executor_accepts": 1.0,
+    "unsafe_edit": 0.0,
+    "fence_normalized_exact_action": 1.0,
+    "exact_by_task": {
+      "style:stroke": {
+        "n": 10,
+        "rate": 1.0
+      },
+      "move_label": {
+        "n": 10,
+        "rate": 1.0
+      },
+      "style:stroke-width": {
+        "n": 10,
+        "rate": 1.0
+      },
+      "reject:numerical_claim": {
+        "n": 10,
+        "rate": 1.0
+      },
+      "recompute": {
+        "n": 10,
+        "rate": 1.0
+      },
+      "reject:missing_required_contour": {
+        "n": 10,
+        "rate": 1.0
+      }
+    },
+    "wall_seconds_total": 125.21298245502112
+  },
+  "usage": {
+    "prompt_tokens": 48831,
+    "completion_tokens": 2373,
+    "total_tokens": 51204,
+    "reasoning_tokens": 0
+  },
+  "estimated_cost_usd": 0.607,
+  "completed_utc": "2026-09-17T20:08:11.482869+00:00"
+}

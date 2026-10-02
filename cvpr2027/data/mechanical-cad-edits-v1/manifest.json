@@ -1,0 +1,85 @@
+{
+  "source": "BenchCAD/BenchCAD",
+  "revision": "5919f578ab09ec283603a082fab07c7639ab56eb",
+  "license": "CC-BY-4.0",
+  "attribution": "BenchCAD: Zhang et al., 2026, https://huggingface.co/datasets/BenchCAD/BenchCAD",
+  "system": "Edit the supplied mechanical CadQuery program. Return only a JSON object with line (1-based), old (exact source line), and new (replacement line). Change only the requested numeric feature argument. Preserve all other lines.",
+  "source_rows": 2000,
+  "excluded": {
+    "complexity_or_edit_filter": 1276,
+    "external_benchmark_template_overlap": 366,
+    "out_of_scope": 118
+  },
+  "counts": {
+    "train": 108,
+    "validation": 22,
+    "test": 20
+  },
+  "families": {
+    "train": [
+      "battery_holder",
+      "bearing_retainer_cap",
+      "bevel_gear",
+      "bucket",
+      "cam",
+      "chair",
+      "clevis",
+      "clevis_pin",
+      "dome_cap",
+      "double_simplex_sprocket",
+      "dovetail_slide",
+      "eyebolt",
+      "grease_nipple",
+      "gridfinity_bin",
+      "grommet",
+      "handwheel",
+      "helical_gear",
+      "keyhole_plate",
+      "knob",
+      "lathe_turned_part",
+      "ratchet_sector",
+      "spacer_ring",
+      "spur_gear",
+      "table",
+      "taper_pin",
+      "tee_nut",
+      "threaded_adapter",
+      "torsion_spring",
+      "wall_anchor",
+      "wing_nut",
+      "wire_grid"
+    ],
+    "validation": [
+      "f_bracket",
+      "nozzle",
+      "rivet",
+      "round_flange"
+    ],
+    "test": [
+      "impeller",
+      "lobed_knob",
+      "propeller",
+      "shaft_collar",
+      "spline_hub"
+    ]
+  },
+  "split_policy": "Whole family holdout before edit augmentation; exact AST deduplication; external BenchCAD edit program templates excluded regardless of literal values.",
+  "verification": "Both solids valid and positive volume; changed volume; original and edited STEP plus four linked SVG projections. This checks executable geometry, not engineering strength.",
+  "fem_status": "not_evaluated_missing_material_loads_supports_and_units_contract",
+  "limitations": [
+    "Synthetic single-feature numeric edits with explicit source-line localization.",
+    "Training input is CAD code linked to SVG views, not image or SVG perception.",
+    "Geometric equivalence across different program templates and external benchmark ancestry not proven.",
+    "Family holdout can still share operation patterns; standards compliance not independently certified."
+  ],
+  "files": {
+    "train": "9bf214c50afa5aae8104fb7e96cb66d02f1004d2530b1bcaa1fdfb76172c7498",
+    "validation": "81896060b36667d2c77155305b78602bb4f0370838dac6dda5057c77dab87e36",
+    "test": "8afda44cba9d9db9c125ea3c03d67642f27c23a7d42f22d9352a8b4e16172742"
+  },
+  "source_files": {
+    "code-gen-0.parquet": "e5ec5483b22d53909d058b0024656c471bfe0080025905b65fe64466a884a43f",
+    "code-gen-9.parquet": "979aca1abe7bf06f1c103f25c948468eb0396cf23fd996ed06bdd3b83d1e0d1b",
+    "edit-bench.parquet": "99a6c8756eabee2b818518c8003b87025d2868e2e681f4bc31488f146b5513c4"
+  }
+}

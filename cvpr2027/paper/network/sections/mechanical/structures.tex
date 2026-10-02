@@ -1,0 +1,32 @@
+\section{Separate structural and clearance controls}
+\label{sec:structures}
+The full CAD benchmark above checks mechanical shape. A separate six-case FEM audit is described in the supplement. We retain a separately identified deterministic SVG route to show what physical or manufacturing checks require when a drawing does supply a contract. These synthetic controls are not training data or accuracy evidence for the learned BenchCAD model.
+
+\paragraph{Axial trusses.}
+An importer reads supported untagged truss geometry, section dimensions, material notes, nodal loads and supports. A bounded request interpreter generates validated SVG tree patches. Re-importing the actual patched SVG determines member lengths, orientations and axial areas. Linear-elastic pin-jointed elements use $EA/L$ stiffness; assembled displacements, stresses and reactions are recomputed. The numerical verdict checks equilibrium under small-displacement and nodal-load assumptions, not buckling, fatigue, joints or material strength.
+
+\paragraph{Plate clearances.}
+A separate importer recovers a rectangular boundary and circular-hole centres, diameters, thickness and stated limits. It computes overlap, edge distance and ligament. A faithful hole-enlargement request can reduce clearance below the printed minimum. A geometric violation is an engineering consequence of a correctly executed request, not necessarily an edit error; no continuum plate stress follows from a clearance score.
+
+\begin{table}[t]
+\centering\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lrr@{}}
+\toprule
+Route & Edits & Outcome \\
+\midrule
+Axial trusses & 20,008 & Equilibrium passes \\
+Perforated plates & 19,992 & 699 clearance violations \\
+\bottomrule
+\end{tabular}
+\caption{\textbf{Historical structural pipeline audit.} All 40,000 supported edits match their stored target trees. These counts describe a deterministic synthetic pipeline, not a learned CAD benchmark. The plate violations are faithful edits flagged by the geometric checker.}
+\label{tab:structural}
+\end{table}
+
+For example, increasing all truss member depths from 20 to 40\,mm changes the recovered area and reduces peak axial stress from 11.861 to 5.930\,MPa under the same load. Enlarging plate holes from 10 to 16\,mm at fixed centres 20\,mm from a boundary reduces edge clearance from 15 to 12\,mm and fails a 15\,mm rule. These are distinct checks with explicitly stated assumptions. The saved audit and replayed source/edited SVGs remain separate from the new online training run.
+
+\paragraph{When FEM is applicable.}
+A stress, stiffness, buckling, thermal or contact request needs physical units, constitutive properties, loads and boundary conditions, followed by solver and mesh checks. The inspected BenchCAD edit pairs do not provide this analysis contract. We retain \emph{not evaluated} for the full released benchmark and distinguish the added six-case, synthetic-load FEM audit from validation under actual operating conditions.
+
+\paragraph{Verification coverage.}
+All six illustrated H100 cases are actual learned CAD program edits, followed by execution and comparison with released STEP targets. Each is now submitted to a separate 3D FEM response and mesh audit under the documented synthetic contract. The online benchmark and localized mechanical pilot check geometry; the plate controls check clearances. The six-case supplement solves 3D linear-elastic FEM problems, while the separate truss controls solve axial FEM equilibrium. Geometry agreement does not establish stress, stiffness or safety. FEM for a mechanical part would require an explicitly specified material, unit system, load case, supports and a validated mesh/solver setup, which are absent from these released edit pairs.

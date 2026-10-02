@@ -1,0 +1,4 @@
+{
+  "code": "import cadquery as cq\n\nresult = (\n    cq.Workplane(\"XY\")\n    .box(125.1, 69.5, 7.3)\n    .faces(\">Z\").workplane()\n    .rarray(1, 59.88 / 5, 1, 6)\n    .rect(123.1, 5.6)\n    .extrude(11.0)\n    .faces(\">Z\")\n    .chamfer(1.2)\n    .faces(\"<Z\").workplane()\n    .pushPoints([(-51.05, -18.65), (-51.05, 18.65), (51.05, -18.65), (51.05, 18.65)])\n    .hole(3.5)\n)",
+  "explanation": "Changed the array to six fins at 11.976 mm centre spacing, keeping the outer fin centres fixed at y = ±29.94 mm (59.88 mm span). Fin dimensions remain 123.1 × 5.6 × 11.0 mm. The base, 1.2 mm chamfers, and hole operations are unchanged. The model evaluates as one valid solid with an unchanged overall envelope."
+}

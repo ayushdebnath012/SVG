@@ -1,0 +1,258 @@
+{
+  "version": "functional-sizing-braced-v1",
+  "tasks": [
+    {
+      "id": "braced_frame_catalog_1",
+      "model": {
+        "nodes": {
+          "N00": [
+            0.0,
+            0.0
+          ],
+          "N10": [
+            3100.0,
+            0.0
+          ],
+          "N20": [
+            6200.0,
+            0.0
+          ],
+          "N01": [
+            110.0,
+            2700.0
+          ],
+          "N11": [
+            3210.0,
+            2700.0
+          ],
+          "N21": [
+            6310.0,
+            2700.0
+          ],
+          "N02": [
+            220.0,
+            5400.0
+          ],
+          "N12": [
+            3320.0,
+            5400.0
+          ],
+          "N22": [
+            6420.0,
+            5400.0
+          ]
+        },
+        "supports": {
+          "N00": [
+            0,
+            1,
+            2
+          ],
+          "N10": [
+            0,
+            1,
+            2
+          ],
+          "N20": [
+            0,
+            1,
+            2
+          ]
+        },
+        "members": [
+          {
+            "id": "M1",
+            "a": "N00",
+            "b": "N01",
+            "E": 200000.0,
+            "b_mm": 60.0
+          },
+          {
+            "id": "M2",
+            "a": "N10",
+            "b": "N11",
+            "E": 200000.0,
+            "b_mm": 60.0
+          },
+          {
+            "id": "M3",
+            "a": "N20",
+            "b": "N21",
+            "E": 200000.0,
+            "b_mm": 60.0
+          },
+          {
+            "id": "M4",
+            "a": "N01",
+            "b": "N02",
+            "E": 200000.0,
+            "b_mm": 60.0
+          },
+          {
+            "id": "M5",
+            "a": "N11",
+            "b": "N12",
+            "E": 200000.0,
+            "b_mm": 60.0
+          },
+          {
+            "id": "M6",
+            "a": "N21",
+            "b": "N22",
+            "E": 200000.0,
+            "b_mm": 60.0
+          },
+          {
+            "id": "M7",
+            "a": "N01",
+            "b": "N11",
+            "E": 200000.0,
+            "b_mm": 60.0
+          },
+          {
+            "id": "M8",
+            "a": "N11",
+            "b": "N21",
+            "E": 200000.0,
+            "b_mm": 60.0
+          },
+          {
+            "id": "M9",
+            "a": "N02",
+            "b": "N12",
+            "E": 200000.0,
+            "b_mm": 60.0
+          },
+          {
+            "id": "M10",
+            "a": "N12",
+            "b": "N22",
+            "E": 200000.0,
+            "b_mm": 60.0
+          },
+          {
+            "id": "M11",
+            "a": "N00",
+            "b": "N11",
+            "E": 200000.0,
+            "b_mm": 60.0
+          },
+          {
+            "id": "M12",
+            "a": "N11",
+            "b": "N22",
+            "E": 200000.0,
+            "b_mm": 60.0
+          }
+        ]
+      },
+      "load_cases": [
+        {
+          "N02": [
+            180000,
+            -160000,
+            0
+          ],
+          "N12": [
+            20000,
+            -280000,
+            0
+          ],
+          "N22": [
+            120000,
+            -360000,
+            0
+          ],
+          "N21": [
+            80000,
+            -120000,
+            0
+          ]
+        },
+        {
+          "N02": [
+            -220000,
+            -320000,
+            0
+          ],
+          "N12": [
+            0,
+            -360000,
+            0
+          ],
+          "N22": [
+            -80000,
+            -140000,
+            0
+          ],
+          "N01": [
+            -60000,
+            -240000,
+            0
+          ]
+        },
+        {
+          "N02": [
+            48000,
+            -400000,
+            0
+          ],
+          "N12": [
+            0,
+            -600000,
+            0
+          ],
+          "N22": [
+            32000,
+            -320000,
+            0
+          ]
+        }
+      ],
+      "catalog_h_mm": [
+        80.0,
+        140.0,
+        240.0
+      ],
+      "density_kg_mm3": 7.85e-06,
+      "buckling_factor": 2.0,
+      "limits": {
+        "stress_mpa": 120.0,
+        "ux_mm": 4.6,
+        "uy_mm": 2.0
+      },
+      "scope": "Idealized linear 2D rigid-jointed rectangular-section steel frame, nodal forces, all support DOFs clamped. No self-weight, shear deformation, connection compliance, global buckling, plasticity, out-of-plane behavior or code compliance. Euler member check uses K=1 and factor 2, independently from linear FEM.",
+      "mass_cap_kg": 2766.588949,
+      "oracle": {
+        "best": {
+          "mass_kg": 2739.196978989372,
+          "stress_mpa": 80.53533037265841,
+          "ux_mm": 4.572336489894089,
+          "uy_mm": 1.983310486354775,
+          "buckling_utilization": 0.8227776166284618,
+          "max_utilization": 0.9939861934552368,
+          "design": [
+            1,
+            1,
+            2,
+            1,
+            1,
+            2,
+            0,
+            0,
+            0,
+            0,
+            2,
+            2
+          ],
+          "structurally_feasible": true
+        },
+        "mass_cap_kg": 2766.588949,
+        "feasible_before_mass_cap": 2972,
+        "feasible_after_mass_cap": 1,
+        "enumerated": 531441
+      }
+    }
+  ],
+  "selection_policy": "Separate adaptive-discovery extension after two unbraced cases passed. Three fresh independent completed functional failures required, with no reference/interface defect. Resource bounded; not proof of permanent inability or a new shape class."
+}

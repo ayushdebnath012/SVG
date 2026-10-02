@@ -1,6 +1,10 @@
 # Research documents
 
-Six review PDFs are in `../output/pdf/`; corresponding standalone LaTeX files are in `latex/`. Markdown is the canonical authoring format for five of them; `latex/research_overview.tex` (the consolidated overview) is hand-authored LaTeX that reuses `header.tex` and is compiled by the same builder without a Markdown source. The builder combines the proposal/protocol sources here with `../reports/` and `../paper/manuscript.md`; editing generated LaTeX directly is possible but a rebuild replaces it.
+**Current editor and paper — 1 October 2026.** Editing now uses source-tree parsing and parsed, validated patches throughout, including version-3 structural patches for bridge topology changes. [Evidence, examples and reproduction](../reports/ENGINEERING_EDITOR_OVERVIEW_20261001.md); [updated paper](../paper/network/main.pdf). The manuscript now shows SVG editing with circuit/hydraulic checks, axial-truss FEM, plate-clearance checks and a separately audited structural-frame example. Five concrete edits were replayed, including a 21-to-29-member bridge and a correctly edited plate that fails its clearance rule. The saved deterministic 40,000-edit audit and the learned network/cross-domain model results are reported separately.
+
+Earlier dated material below is retained as history. Serpentine routing and nesting attempts ended incomplete or with API errors; they are no longer running and provide no confirmed failure claim.
+
+Eight review PDFs are in `../output/pdf/`; corresponding standalone LaTeX files are in `latex/`. Markdown is the canonical authoring format for five of them; `latex/research_overview.tex` (the consolidated overview), `latex/plain_language_summary.tex` (the jargon-free summary) and `latex/roadmap.tex` (the phased plan) are hand-authored LaTeX that reuse `header.tex` and are compiled by the same builder without a Markdown source. The builder combines the proposal/protocol sources here with `../reports/` and `../paper/manuscript.md`; editing generated LaTeX directly is possible but a rebuild replaces it.
 
 From the `cvpr2027` folder:
 

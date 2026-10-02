@@ -1,11 +1,29 @@
 # SVG — physics-consistent generation and editing of engineering vector drawings
 
+**Current editor and paper — 1 October 2026.** Editing now uses source-tree parsing and parsed, validated patches throughout, including version-3 structural patches for bridge topology changes. [Evidence, examples and reproduction](cvpr2027/reports/ENGINEERING_EDITOR_OVERVIEW_20261001.md); [updated paper](cvpr2027/paper/network/main.pdf). The manuscript now shows SVG editing with circuit/hydraulic checks, axial-truss FEM, plate-clearance checks and a separately audited structural-frame example. Five concrete edits were replayed, including a 21-to-29-member bridge and a correctly edited plate that fails its clearance rule. The saved deterministic 40,000-edit audit and the learned network/cross-domain model results are reported separately.
+
+Earlier dated material below is retained as history. Serpentine routing and nesting attempts ended incomplete or with API errors; they are no longer running and provide no confirmed failure claim.
+
+**Continuing 22 September:** [Harder drawing, routing and nesting prompts](cvpr2027/reports/ASTRA_DRAWING_ROUTING_DISCOVERY_20260922.md) have verified feasible reference SVGs and independent geometry checks. Six completed conditions pass; dense serpentine routing and irregular-part nesting later ended incomplete or with API errors. No repeatable failure has been admitted yet. The literature registry now has 72 records; no new training has started.
+
+**Completed 22 September:** [Functional design discovery](cvpr2027/reports/CAD_FUNCTIONAL_DISCOVERY_20260921.md) tested six new catalog-section designs with FEM, Euler buckling, mass constraints and SVG readback. All six passed Astra; 5,576,554 reference assignments were enumerated. The registry contains 67 records with review levels. No repeatable hard case, established novelty claim or new training. Further API screening stopped to conserve credits.
+
+
 Branch `cvpr2027-research-package` packages a research programme on getting
-language models to produce and edit engineering SVG drawings whose numerical
-content (field contours, labelled values, geometry) is actually correct and
-stays correct across edits. Target venue: CVPR 2027. Nothing has been
+language models to produce and edit CAD-style SVG drawings of physical objects
+such as tables, buildings, frames and parts, with geometry and dimensions
+linked to an explicit physical model and checked with appropriate analysis,
+including FEM, across edits. Target venue: CVPR 2027. Nothing has been
 submitted; the novelty claim is provisional and the main benchmark is
 unfinished. Read the status documents before citing any number.
+
+**Latest evidence (21 September):** [Extended drawing tests and 62-source literature audit](cvpr2027/reports/CAD_EXTENDED_DISCOVERY_20260921.md). Five new custom cases passed Astra. Two complex released drawings produced valid CAD solids and passed 38/11 local checks respectively; their full geometry remains unscored. No repeatable Astra-hard shape or established novelty claim was found. New close prior work also covers semantic SVG edit propagation and uncertainty-aware mechanical drawing audit. No new training was started. [Earlier foundation and proposed method](cvpr2027/reports/PROJECT_FOUNDATION_20260921.md).
+
+**Scope clarified on 20 September 2026:** the target is object design and
+editing, with analysis supporting the drawing. Existing field-contour
+experiments are preliminary diagnostics. The [CAD drawing scope](cvpr2027/reports/CAD_DRAWING_SCOPE.md)
+supersedes the field-first future-work framing in the earlier plans and PDFs;
+the first object-drawing pilot now covers idealised frames and solid plates; general CAD generation and validation remain unfinished.
 
 The repository has grown in three layers, oldest first:
 
@@ -15,7 +33,13 @@ The repository has grown in three layers, oldest first:
 | **Engineering generation harness** | `scripts/eval_generation.py`, `configs/prompts/engineering_v*.json`, `scripts/fd_reference.py`, `scripts/field_fidelity.py`, `runs/gen-astra-*` | When a frontier LM (`gpt-6-astra`) is asked to draw a physics problem, does the drawing carry the right physics? Contours are scored against finite-difference references. |
 | **CVPR 2027 research package** | [`cvpr2027/`](cvpr2027/README.md) | Proposal, literature survey, working paper, repaired evaluator, corruption controls, FEM references, A100 LoRA pilot, and a registry of completed vs. planned experiments. |
 
+**New CAD work (20 September):** [25-source internet literature and dataset audit](cvpr2027/reports/CAD_WEB_LITERATURE_AND_DATASETS_20260920.md), [Astra CAD pilot results](cvpr2027/reports/ASTRA_CAD_PILOT_20260920.md), and [released-data training pilot](cvpr2027/data/cad-editor-pilot/README.md). Eight screened drawings passed the implemented geometry checks; one analysis error remains unconfirmed. The failure-only shape benchmark is currently empty.
+
+**Follow-up discovery:** [39-source novelty stress test](cvpr2027/reports/CAD_NOVELTY_OVERLAP_20260920.md) finds substantial prior-art overlap. [Ten harder CAD prompt conditions](cvpr2027/reports/ASTRA_CAD_HARD_DISCOVERY_20260920.md), including 0.05 mm inspection templates, all passed Astra screening and are excluded from the hard subset. No repeatable shape failure or distinct research contribution has been established yet.
+
 ## Start here
+
+**Native CAD follow-up:** [49-source novelty audit and four tool-enabled Astra edits](cvpr2027/reports/CAD_NATIVE_AND_NOVELTY_20260920.md). All four final edits passed; a transient sweep error was repaired using execution feedback. [Actual SVG projection sheets](cvpr2027/runs/astra-cad-native-20260920/screen-responses/gallery.html) and raw API traces are retained. The hard subset remains empty. Recovering lost engineering relationships from detached SVGs is a narrower hypothesis, not an established contribution.
 
 | Read this | For |
 |---|---|

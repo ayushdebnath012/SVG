@@ -1,0 +1,20 @@
+\section{Mechanical edit--execute--check workflow}
+\label{sec:method}
+\subsection{Program and patch contract}
+Let $C$ be a CadQuery program and $u$ an edit instruction. The model predicts a patch $p$, and the executor produces $\hat C=\mathcal{E}(C,p)$. Each patch operation contains a zero-based original line index, a deletion count and a list of replacement lines. All coordinates refer to the original source, not an intermediate revision. Operations must be ordered, non-overlapping, within bounds and well typed. Parsing the executed program provides a second syntax check.
+
+Training targets are line diffs between the published source and edited programs after removing comments and empty lines. Comment normalization avoids supervising changes to the upstream parameter-comment block as geometric edits. A round-trip check requires that applying every target patch reproduces its normalized target exactly. The online instructions are preserved; source-line answers are not added to the prompt.
+
+\subsection{Execution and vector views}
+CadQuery executes the patched program to a boundary-representation solid $\hat B$. The scorer requires valid geometry, at least one solid and positive volume. Downloaded programs run through a restricted executor with permitted imports, no private-attribute access or file-I/O builtins, and a 45-second per-case subprocess budget. This restriction is defense in depth, not a general Python sandbox. Unsupported constructs, invalid programs and timeouts are recorded separately.
+
+For the verified drawing pilot, front, top, right and isometric SVG projections of both original and edited solids are saved alongside STEP exports. A before/after sheet binds these views to the request and geometry measurements. The projections share a three-dimensional source; they are not independently generated views. They are CAD-derived line drawings with edit annotations, not fully dimensioned production blueprints. Automatic projection scaling can differ between views, so rendered pixel size is not a physical measurement.
+
+\subsection{Independent solid scoring}
+The online test reference is the author's released STEP solid $B^\star$, pinned by content hash. We report volumetric intersection-over-union,
+\begin{equation}
+\operatorname{IoU}(\hat B,B^\star)=\frac{V(\hat B\cap B^\star)}{V(\hat B)+V(B^\star)-V(\hat B\cap B^\star)}.
+\end{equation}
+Our local thresholds are 0.95 for broad volume agreement and 0.99999 for strict agreement. Neither is presented as an official BenchCAD acceptance rule. Exact normalized-program AST equality is complementary: IoU may overlook a small but important feature, and multiple programs can produce the same shape. The current scorer does not certify feature-specific tolerances, preserved constraints, assembly joints, dimensions, standards compliance or manufacturing suitability.
+
+Verification is post-edit evaluation. The QLoRA loss is supervised token prediction, not FEM or solver feedback; the experiment does not evaluate iterative repair after a failed check.

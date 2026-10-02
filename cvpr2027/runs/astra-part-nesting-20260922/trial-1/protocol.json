@@ -1,0 +1,52 @@
+{
+  "model": "gpt-6-astra",
+  "effort": "high",
+  "sample": 1,
+  "max_output_tokens": 32000,
+  "max_checker_calls": 4,
+  "system": "Create a stock nesting CAD drawing of 14 irregular laser-cut parts. Return JSON {\"placements\":{\"P01\":{\"x\":0,\"y\":0,\"rotation\":90},...},\"explanation\":\"...\"}. Every part must appear once, unchanged, inside 64 x 48 mm stock with at least 0.4 mm gap to other parts. No scaling, reflection, trimming or omissions. Each supplied cell is a 4 x 4 mm square indexed by its top-left integer coordinate in page axes (x right, y down). A part is the union of its cells, offset inward 0.2 mm with mitred corners; this offset is already part of the specified shape, do not apply it again. Pose x,y are integer cell translations of the normalized rotated cell footprint. Rotation is 0,90,180 or 270: one 90-degree turn maps each cell index (x,y) to (-y,x), then subtract the minimum x and minimum y so the rotated footprint starts at (0,0), then add pose x,y. Thus non-overlapping in-bounds cell footprints guarantee the physical gap. A feasible full layout exists. Any valid layout passes, not just a hidden reference. You may call check_nesting up to four times on partial or complete candidates. It reports violations, not solution placements. No general code execution or packing solver is provided. Your placements are exported as physical-scale SVG part outlines and independently checked.",
+  "tool": {
+    "type": "function",
+    "name": "check_nesting",
+    "description": "Check proposed poses for missing parts, stock bounds, overlap and physical clearance. No solution placements are supplied.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "placements": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "x": {
+                "type": "integer"
+              },
+              "y": {
+                "type": "integer"
+              },
+              "rotation": {
+                "type": "integer",
+                "enum": [
+                  0,
+                  90,
+                  180,
+                  270
+                ]
+              }
+            },
+            "required": [
+              "x",
+              "y",
+              "rotation"
+            ]
+          }
+        }
+      },
+      "required": [
+        "placements"
+      ]
+    },
+    "strict": false
+  },
+  "manifest_sha256": "7f8d74b823daa8ccf6098ca8e0657861ad05bdd59267d005186763e9b7bcb4c4",
+  "script_sha256": "084cc5cb52debaf75d758ce664e7b05ba4388b3ae9ec721349b0f154a2c2e792"
+}

@@ -1,0 +1,63 @@
+{
+  "model": "gpt-6-astra",
+  "input": [
+    {
+      "role": "system",
+      "content": "Edit the supplied CadQuery model to satisfy the instruction while preserving unrelated geometry. Units are mm.\nYou have a CadQuery 2.8 execution tool, evaluate_cad. Submit complete Python CAD code with result assigned.\nThe tool reports validity, solid count, envelope, volume and change relative to the source; it does NOT have the reference target.\nIt accepts import cadquery as cq, variables, numeric arithmetic, literal tuple/list loops and CadQuery modeling methods.\nNo filesystem, network, other imports, functions, comprehensions or introspection are supported. Unsupported syntax is an interface limitation, not a modeling failure.\nUse evaluate_cad at least once, up to three times. The final deliverable must be JSON with code and explanation.\nAn automatic exporter will produce linked top/front/right SVG views and envelope dimensions from your final model.\nDo not manually transcribe projection paths. Do not claim physical verification: no materials, loads or supports are specified.\nThe task is generation/editing of the physical part geometry and its drawing, not a fluid-flow field."
+    },
+    {
+      "role": "user",
+      "content": "Replace the three round cylindrical hinge knuckles along the joining edge with three square cross-section knuckles of the same overall length and the same outer span, keeping the central pin holes through them unchanged.\nSource CAD:\nimport cadquery as cq\n\nresult = (\n    cq.Workplane(\"XY\")\n    .box(20.0, 30.0, 1.5)\n    .faces(\">Z\").workplane()\n    .pushPoints([[-5.0, -7.5], [-5.0, 0.0], [-5.0, 7.5]])\n    .cskHole(2.5, 5.0, 82.0)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(12.5, -9.643, 0.0), rotate=cq.Vector(-90.0, 0.0, 0.0))\n            .cylinder(8.57, 2.5)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(12.5, -0.001, 0.0), rotate=cq.Vector(-90.0, 0.0, 0.0))\n            .cylinder(8.57, 2.5)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(12.5, 9.641, 0.0), rotate=cq.Vector(-90.0, 0.0, 0.0))\n            .cylinder(8.57, 2.5)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(12.5, -9.643, 0.0), rotate=cq.Vector(-90.0, 0.0, 0.0))\n            .cylinder(10.57, 1.25)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(12.5, -0.001, 0.0), rotate=cq.Vector(-90.0, 0.0, 0.0))\n            .cylinder(10.57, 1.25)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(12.5, 9.641, 0.0), rotate=cq.Vector(-90.0, 0.0, 0.0))\n            .cylinder(10.57, 1.25)\n    )\n)\n\n# Export\nshow_object(result)\nSource measurements:\n{\"valid\": true, \"solids\": 4, \"volume_mm3\": 1228.287390226547, \"bbox_mm\": {\"xmin\": -10.0, \"xmax\": 15.0, \"ymin\": -15.0, \"ymax\": 15.0, \"zmin\": -2.5000000000000004, \"zmax\": 2.5000000000000004}, \"faces\": 27, \"edges\": 54, \"status\": \"completed\"}"
+    },
+    {
+      "id": "rs_0db355cf72d3b307016aafd7ce732087d28d8e513119aa6f84",
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqr9fTrx5srFCtPfgicPiM890QdxEdqhn-EDWt0fLOZMl5ClY_XqJbSNupm2ldd_a_e-GIxyiiaqQjRwnWxoRtxz4djqVw5XQru4kKGVKGaVyevAR7IiA4uflw1N7Euj_bx5KgUVnmh0tzpXnnOzf2JggFZVVo-4q4yQMvPlb9gHTV89h9PQDmBowkjWCePzcsvCQ8QIadinXhOQitSeJ-6OAHQ8wqZ59G73GKmqqwZpoWDbPMh2uchm5gOvleGZSBt8XRi6mi8Tc7zQHyrFd1xwicwsuJ4aclTTdnbzIGtEJOfwSZiFyG0IPUMgwv3PIcmPqgop9BlWLuullHATTdivPBkjXb_C8EX3AbFa93mqf_UuL1td4WAWRGXZOlvbq0U6MOqLJDfVOcpve-fNF9AqOTQbSKmN5TVldoUqr-PM77pYUGplkDVWSdDDDhj-vBXxnezh59XJB4tNm2FLTcbda9Qjzr1uKKVKpDwm7y_21x1_zbGrM_y-KthXtCUSZRKH1rFLseKj61TcclKhQ3hWR0U_QdXRA6C8Uey63eXhDMkJk7vRR6q9i754kWStlkBglH-OJ8oyNJDPtZcu_UmPmqOQJV83LpQOROsAIpGMsyoSqOl7LMaNmFlLNYnfMluL3zkWJiFEwriecIc3XeHzGD-2czjh36WFFmkgmwfYU_Q93E9CVjRIGNDmFzN6ocoxpW49PTse1J2YwIS-xbbI_XOmRbUHnJzvvaKfgSnGHEShLXJCJ8TnDq3uBk8VRndU9MvEzS_AYRAgkXRckSanXd4uvDjvaSplJAMUPLLIoQwxJdxbPTs7nKqh4doNH1LnXj5ZwXsHouL-9yYn32TE6rpjHhmTEMkNhSrua6VgnreerHiFyulCFN3WhlXMhH9hqNDKW4_ZPGLUHKnli_xgaMhXxi-Iox4hpp8xSGuaL82zASEpHj8pzpeuld5SWzAS9RBkXv0J9chpGW6Qoul2PNwWB7SvU6dv7y9bouXfcOt29nPQfruSsJuzR9ceoJ_p2urVnPYKbUccbkZe5ciZYyDyCwO_4y-BsqfuzzjFDO8wlNccyAgIm--QUmjE9sbetLpPTUmdrM8pqhraq2H213U_RbqmM7-yXqcBU3C033GcmL_tg2pfWJtyY_m9E_br2s0J-BaSaoy8VrLsTgvCjaGxB6dWpSQ5xssm4n82rzDDXWYpu1JM7NB7Xnj3a6AemzpNejIPi9Kv_R_75zeTReOFbSUrlg8-yRsGu2jmPRqOD4DXyFzQU7hJSqZhwDYIpwss27qqpgHY0IMPt7LymMS8_dv2iAGy_mvXowDWNSlntaei9WYZu2a6rWLyhxsbkeDGiTZwtHBjy-gxo99mjqnBzeXuZpmgN1m07EL7gjj8LT3Ts9tJC6FeZI2BdMqZq1hRlULbmJcrL0EIM1tsekV9FzqjnVQ9ckGhj8sOndXRSE0XCRIeAvibhPIeTXpACbFnoTb1cAudUdYTGB11U3S07UBhRK0IAFxAbUXmo5N4_JXlxkBnHMSxdcdQu0ddLT2O8VQE6KigUvCmYXcszUvVXgfm63tmTer_CqJIWTtvskmh8PKfQnAH3UB0iNQcbjEqrqu5vUAGDRfJIFvNyes9fEbvRpaAbjs03rtcVgjLA=",
+      "summary": []
+    },
+    {
+      "id": "fc_0db355cf72d3b307016aafd7cfc43c87d2826f65d9fa085fdb",
+      "type": "function_call",
+      "status": "completed",
+      "arguments": "{\"code\":\"import cadquery as cq\\n\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .box(20.0, 30.0, 1.5)\\n    .faces(\\\">Z\\\").workplane()\\n    .pushPoints([[-5.0, -7.5], [-5.0, 0.0], [-5.0, 7.5]])\\n    .cskHole(2.5, 5.0, 82.0)\\n)\\n\\nfor y in [-9.643, -0.001, 9.641]:\\n    result = result.union(\\n        cq.Workplane(\\\"XY\\\")\\n        .transformed(offset=cq.Vector(12.5, y, 0.0), rotate=cq.Vector(-90.0, 0.0, 0.0))\\n        .box(5.0, 5.0, 8.57)\\n    )\\n\\nfor y in [-9.643, -0.001, 9.641]:\\n    result = result.cut(\\n        cq.Workplane(\\\"XY\\\")\\n        .transformed(offset=cq.Vector(12.5, y, 0.0), rotate=cq.Vector(-90.0, 0.0, 0.0))\\n        .cylinder(10.57, 1.25)\\n    )\"}",
+      "call_id": "call_aHx1nSlCtZr3KtG64CjiCX45",
+      "name": "evaluate_cad"
+    },
+    {
+      "type": "function_call_output",
+      "call_id": "call_aHx1nSlCtZr3KtG64CjiCX45",
+      "output": "{\"valid\": true, \"solids\": 1, \"volume_mm3\": 1366.2227207028368, \"bbox_mm\": {\"xmin\": -10.0, \"xmax\": 15.0, \"ymin\": -15.0, \"ymax\": 15.0, \"zmin\": -2.5000000000000004, \"zmax\": 2.5000000000000004}, \"faces\": 39, \"edges\": 96, \"change_from_source\": {\"removed_mm3\": 0.0, \"added_mm3\": 137.93533047629003, \"symmetric_difference_fraction\": 0.10096108664137196}, \"status\": \"completed\"}"
+    }
+  ],
+  "reasoning": {
+    "effort": "high"
+  },
+  "max_output_tokens": 10000,
+  "store": false,
+  "include": [
+    "reasoning.encrypted_content"
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "name": "evaluate_cad",
+      "description": "Execute a CAD candidate and inspect actual geometry. Does not compare against a hidden target.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "code"
+        ],
+        "additionalProperties": false
+      },
+      "strict": true
+    }
+  ],
+  "tool_choice": "auto",
+  "parallel_tool_calls": false
+}

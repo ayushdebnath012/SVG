@@ -1,0 +1,16 @@
+[
+  {
+    "record_id": "t2med_torsion_spring",
+    "instruction": "Set the wire radius equal to one quarter of the helix pitch; the coil radius, height, and leg lengths are unchanged.",
+    "orig_code": "import cadquery as cq\n\n# --- parameters ---\n# wire_diameter\n# wire_radius\n# spring_index\n# coil_radius\n# mean_coil_diameter\n# n_coils\n# pitch\n# height\n# leg_length\n\nresult = (\n    cq.Workplane(\"XY\")\n    .transformed(offset=cq.Vector(8.0, 0, 0), rotate=cq.Vector(-85.2803, 0, 0))\n    .circle(0.8)\n    .sweep(cq.Wire.makeHelix(4.15, 12.45, 8.0), isFrenet=True)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(8.0, 0, 0), rotate=cq.Vector(-85.2803, 0, 0))\n            .circle(0.8)\n            .extrude(-20.1)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(8.0, 0, 12.45), rotate=cq.Vector(-85.2803, 0, 0))\n            .circle(0.8)\n            .extrude(20.1)\n    )\n)\n\n# Export\nshow_object(result)",
+    "gt_code": "import cadquery as cq\n\n# --- parameters ---\n# wire_diameter = 4.0\n# wire_radius = 2.0\n# spring_index = 2.075\n# coil_radius = 4.15\n# mean_coil_diameter = 8.3\n# n_coils = 1.56\n# pitch = 8.0\n# height = 12.45\n# leg_length = 20.1\n\nresult = (\n    cq.Workplane(\"XY\")\n    .transformed(offset=cq.Vector(8.0, 0, 0), rotate=cq.Vector(-85.2803, 0, 0))\n    .circle(2.0)\n    .sweep(cq.Wire.makeHelix(4.15, 12.45, 8.0), isFrenet=True)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(8.0, 0, 0), rotate=cq.Vector(-85.2803, 0, 0))\n            .circle(2.0)\n            .extrude(-20.1)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(8.0, 0, 12.45), rotate=cq.Vector(-85.2803, 0, 0))\n            .circle(2.0)\n            .extrude(20.1)\n    )\n)\n\n# Export\nshow_object(result)\n",
+    "audit": "Instruction requires 4.15/4=1.0375 mm; target has circle radius 2.0 mm. Not tested."
+  },
+  {
+    "record_id": "t5hard_heat_sink_V_a",
+    "instruction": "Change the heat sink from 4 long fins to 6 long fins of the same length, width, and height, keeping the same total span across the base plate.",
+    "orig_code": "import cadquery as cq\n\nresult = (\n    cq.Workplane(\"XY\")\n    .box(125.1, 69.5, 7.3)\n    .faces(\">Z\").workplane()\n    .rarray(1, 19.96, 1, 4)\n    .rect(123.1, 5.6)\n    .extrude(11.0)\n    .faces(\">Z\")\n    .chamfer(1.2)\n    .faces(\"<Z\").workplane()\n    .pushPoints([(-51.05, -18.65), (-51.05, 18.65), (51.05, -18.65), (51.05, 18.65)])\n    .hole(3.5)\n)\n\n# Export\nshow_object(result)",
+    "gt_code": "import cadquery as cq\n\nresult = (\n    cq.Workplane(\"XY\")\n    .box(125.1, 69.5, 7.3)\n    .faces(\">Z\").workplane()\n    .rarray(1, 13.3, 1, 6)\n    .rect(123.1, 5.6)\n    .extrude(11.0)\n    .faces(\">Z\")\n    .chamfer(1.2)\n    .faces(\"<Z\").workplane()\n    .pushPoints([(-51.05, -18.65), (-51.05, 18.65), (51.05, -18.65), (51.05, 18.65)])\n    .hole(3.5)\n)\n\n# Export\nshow_object(result)",
+    "audit": "Upstream span 5*13.3=66.5 mm differs from source 3*19.96=59.88 mm. Explicitly corrected derived probe used."
+  }
+]

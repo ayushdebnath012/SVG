@@ -1,0 +1,109 @@
+import cadquery as cq
+
+result = (
+    cq.Workplane("XY")
+    .circle(10.65)
+    .sweep(
+        cq.Workplane("XZ").moveTo(0.0,0.0).lineTo(0.0,25.0).radiusArc((19.1,44.1),19.1).lineTo(44.1,44.1),
+        isFrenet=True)
+    .cut(
+        cq.Workplane("XY")
+            .circle(7.88)
+            .sweep(
+        cq.Workplane("XZ").moveTo(0.0,0.0).lineTo(0.0,25.0).radiusArc((19.1,44.1),19.1).lineTo(44.1,44.1),
+        isFrenet=True)
+    )
+    .union(
+        cq.Workplane("XY")
+            .transformed(offset=cq.Vector(0, 0, -2.117), rotate=cq.Vector(0, 0, 0))
+            .cylinder(6.365, 13.3)
+    )
+    .union(
+        cq.Workplane("XY")
+            .transformed(offset=cq.Vector(0, 0, -6.917), rotate=cq.Vector(0, 0, 0))
+            .cylinder(4.3, 21.3)
+    )
+    .union(
+        cq.Workplane("XY")
+            .transformed(offset=cq.Vector(46.75, 0, 44.1), rotate=cq.Vector(0, 90, 0))
+            .cylinder(6.365, 13.3)
+    )
+    .union(
+        cq.Workplane("XY")
+            .transformed(offset=cq.Vector(51.55, 0, 44.1), rotate=cq.Vector(0, 90, 0))
+            .cylinder(4.3, 21.3)
+    )
+    .cut(
+        cq.Workplane("XY")
+            .transformed(offset=cq.Vector(0, 0, -10.6), rotate=cq.Vector(0, 0, 0))
+            .cylinder(36.6, 7.88)
+    )
+    .cut(
+        cq.Workplane("XY")
+            .transformed(offset=cq.Vector(43.1, 0, 44.1), rotate=cq.Vector(0, 90, 0))
+            .cylinder(36.6, 7.88)
+    )
+    .cut(
+        cq.Workplane("XY")
+            .transformed(offset=cq.Vector(17.3, 0.0, -10.1), rotate=cq.Vector(0, 0, 0))
+            .cylinder(5.3, 1.3)
+    )
+    .cut(
+        cq.Workplane("XY")
+            .transformed(offset=cq.Vector(53.2, 17.3, 44.1), rotate=cq.Vector(0, 90, 0))
+            .cylinder(5.3, 1.3)
+    )
+    .cut(
+        cq.Workplane("XY")
+            .transformed(offset=cq.Vector(8.65, 14.982, -10.1), rotate=cq.Vector(0, 0, 0))
+            .cylinder(5.3, 1.3)
+    )
+    .cut(
+        cq.Workplane("XY")
+            .transformed(offset=cq.Vector(53.2, 8.65, 59.082), rotate=cq.Vector(0, 90, 0))
+            .cylinder(5.3, 1.3)
+    )
+    .cut(
+        cq.Workplane("XY")
+            .transformed(offset=cq.Vector(-8.65, 14.982, -10.1), rotate=cq.Vector(0, 0, 0))
+            .cylinder(5.3, 1.3)
+    )
+    .cut(
+        cq.Workplane("XY")
+            .transformed(offset=cq.Vector(53.2, -8.65, 59.082), rotate=cq.Vector(0, 90, 0))
+            .cylinder(5.3, 1.3)
+    )
+    .cut(
+        cq.Workplane("XY")
+            .transformed(offset=cq.Vector(-17.3, 0.0, -10.1), rotate=cq.Vector(0, 0, 0))
+            .cylinder(5.3, 1.3)
+    )
+    .cut(
+        cq.Workplane("XY")
+            .transformed(offset=cq.Vector(53.2, -17.3, 44.1), rotate=cq.Vector(0, 90, 0))
+            .cylinder(5.3, 1.3)
+    )
+    .cut(
+        cq.Workplane("XY")
+            .transformed(offset=cq.Vector(-8.65, -14.982, -10.1), rotate=cq.Vector(0, 0, 0))
+            .cylinder(5.3, 1.3)
+    )
+    .cut(
+        cq.Workplane("XY")
+            .transformed(offset=cq.Vector(53.2, -8.65, 29.118), rotate=cq.Vector(0, 90, 0))
+            .cylinder(5.3, 1.3)
+    )
+    .cut(
+        cq.Workplane("XY")
+            .transformed(offset=cq.Vector(8.65, -14.982, -10.1), rotate=cq.Vector(0, 0, 0))
+            .cylinder(5.3, 1.3)
+    )
+    .cut(
+        cq.Workplane("XY")
+            .transformed(offset=cq.Vector(53.2, 8.65, 29.118), rotate=cq.Vector(0, 90, 0))
+            .cylinder(5.3, 1.3)
+    )
+)
+
+# Export
+show_object(result)

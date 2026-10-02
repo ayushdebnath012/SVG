@@ -1,0 +1,85 @@
+{
+  "status": "verified_safe",
+  "mode": "tree_patch",
+  "request": "Increase all hole diameters by 4 mm.",
+  "family": "plate",
+  "style": "canonical",
+  "action": {
+    "action": "edit",
+    "changes": {
+      "holes.*.diameter_mm": 30.0
+    }
+  },
+  "patch": {
+    "version": 2,
+    "operations": [
+      {
+        "op": "set_attributes",
+        "targets": [
+          "n6",
+          "n7",
+          "n8",
+          "n9",
+          "n10",
+          "n11"
+        ],
+        "attributes": {
+          "r": "30.0"
+        }
+      },
+      {
+        "op": "set_text",
+        "targets": [
+          "n20"
+        ],
+        "text": "6x \u00d830 mm THRU"
+      }
+    ]
+  },
+  "patch_operation_count": 2,
+  "patch_operation_types": [
+    "set_attributes",
+    "set_text"
+  ],
+  "target_tree_equal": true,
+  "edit_fidelity_pass": true,
+  "engineering_check_pass": true,
+  "recovered_output_family": "plate",
+  "recovered_output_style": "canonical",
+  "before_verification": {
+    "method": "manufacturing_geometry_checks",
+    "pass": true,
+    "minimum_edge_distance_mm": 25.0,
+    "minimum_ligament_mm": 58.0,
+    "net_area_mm2": 40014.42504925995,
+    "volume_mm3": 720259.6508866792,
+    "violations": [],
+    "criteria": {
+      "min_edge_distance_mm": 15,
+      "min_ligament_mm": 20
+    },
+    "assumptions": [
+      "flat rectangular plate",
+      "six circular through holes",
+      "geometry and manufacturing checks only"
+    ]
+  },
+  "after_verification": {
+    "method": "manufacturing_geometry_checks",
+    "pass": true,
+    "minimum_edge_distance_mm": 23.0,
+    "minimum_ligament_mm": 54.0,
+    "net_area_mm2": 38958.84991765378,
+    "volume_mm3": 701259.298517768,
+    "violations": [],
+    "criteria": {
+      "min_edge_distance_mm": 15,
+      "min_ligament_mm": 20
+    },
+    "assumptions": [
+      "flat rectangular plate",
+      "six circular through holes",
+      "geometry and manufacturing checks only"
+    ]
+  }
+}

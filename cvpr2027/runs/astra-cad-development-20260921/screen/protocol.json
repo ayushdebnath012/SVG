@@ -1,0 +1,25 @@
+{
+  "model": "gpt-6-astra",
+  "effort": "high",
+  "max_output_tokens": 16000,
+  "max_tool_calls": 3,
+  "manifest_sha256": "9afc2fb6adff08bd3e59913096e37336f2b5a1ca82e5a5bb59dca97e462a1096",
+  "tool": {
+    "type": "function",
+    "name": "evaluate_pattern",
+    "description": "Run numerical SVG generator; returns execution and SVG inventory only; no target answer.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "code"
+      ],
+      "additionalProperties": false
+    },
+    "strict": true
+  }
+}

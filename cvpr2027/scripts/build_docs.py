@@ -88,7 +88,9 @@ def main():
                       'latex':str(tex.relative_to(ROOT)),'title':title})
         print('BUILT',stem,flush=True)
     # Hand-authored LaTeX (not generated from Markdown); compiled with the same engine and style.
-    for stem,title in [('research_overview','Consolidated Research Overview: Problem, Theory, Architecture, Experiments and Plan')]:
+    for stem,title in [('research_overview','Consolidated Research Overview: Problem, Theory, Architecture, Experiments and Plan'),
+                       ('plain_language_summary','In Plain Words: What This Project Does, What It Tested, and What It Found'),
+                       ('roadmap','Roadmap: Solver-in-the-Loop SVG Engineering Drawings from Text, Images and SVG')]:
         tex=texdir/f'{stem}.tex'
         log=ROOT/'tmp/pdfs'/f'{stem}.build.txt'
         with log.open('w') as stream:

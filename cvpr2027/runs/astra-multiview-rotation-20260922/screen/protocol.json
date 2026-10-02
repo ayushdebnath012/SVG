@@ -1,0 +1,73 @@
+{
+  "model": "gpt-6-astra",
+  "effort": "high",
+  "max_output_tokens": 24000,
+  "max_tool_calls": 4,
+  "sample": 0,
+  "system": "Edit the provided detached engineering SVG. Return JSON {\"patches\":[{\"id\":\"...\",\"set\":{\"x1\":123},\"text\":\"optional\"},{\"id\":\"...\",\"remove\":true}],\"explanation\":\"...\"}. Use numeric-coordinate patches for rect/circle/line/text, text changes, or deletion. Styles, transforms and IDs are fixed; do not add objects. Deleted blind-end lines are explicitly permitted. The input has exact coordinates, visible feature labels and view definitions. Correctly update the physical part across all views. You may use four calls total to inspect_svg and calculate. Inspection shows geometry after your patches, never a target answer. Calculate accepts up to 100 arithmetic expressions per call, including sin, cos, radians and pi. You may solve directly. Do not mistake page-axis directions for physical XY directions.",
+  "tools": [
+    {
+      "type": "function",
+      "name": "inspect_svg",
+      "description": "Inspect resulting world/page-space SVG geometry after applying patches; no hidden target or constraint oracle.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "patches": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "set": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "number"
+                  }
+                },
+                "text": {
+                  "type": "string"
+                },
+                "remove": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "id"
+              ]
+            }
+          }
+        },
+        "required": [
+          "patches"
+        ]
+      },
+      "strict": false
+    },
+    {
+      "type": "function",
+      "name": "calculate",
+      "description": "Evaluate numeric arithmetic/trigonometry expressions; list literals supported. No hidden geometry or reference.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "expressions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "expressions"
+        ],
+        "additionalProperties": false
+      },
+      "strict": true
+    }
+  ],
+  "manifest_sha256": "ea3a215cd1d811e18e7ce7308d81002b8c9488924ed8c925430130400443490b",
+  "script_sha256": "51aef1c6260b51eb33debd75fe26f5ac21027a998d4a5ea67c411c334fdb13be"
+}

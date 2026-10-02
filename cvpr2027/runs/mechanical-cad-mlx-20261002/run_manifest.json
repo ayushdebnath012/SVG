@@ -1,0 +1,268 @@
+{
+  "status": "completed",
+  "model": "/Users/ayushdebnath/.cache/huggingface/hub/models--mlx-community--Qwen2.5-Coder-1.5B-Instruct-4bit/snapshots/b3252a2f97102b1fb1571fec2c9b27219a8536be",
+  "model_repo": "mlx-community/Qwen2.5-Coder-1.5B-Instruct-4bit",
+  "model_revision": "b3252a2f97102b1fb1571fec2c9b27219a8536be",
+  "source_manifest": {
+    "source": "BenchCAD/BenchCAD",
+    "revision": "5919f578ab09ec283603a082fab07c7639ab56eb",
+    "license": "CC-BY-4.0",
+    "attribution": "BenchCAD: Zhang et al., 2026, https://huggingface.co/datasets/BenchCAD/BenchCAD",
+    "system": "Edit the supplied mechanical CadQuery program. Return only a JSON object with line (1-based), old (exact source line), and new (replacement line). Change only the requested numeric feature argument. Preserve all other lines.",
+    "source_rows": 2000,
+    "excluded": {
+      "complexity_or_edit_filter": 1276,
+      "external_benchmark_template_overlap": 366,
+      "out_of_scope": 118
+    },
+    "counts": {
+      "train": 108,
+      "validation": 22,
+      "test": 20
+    },
+    "families": {
+      "train": [
+        "battery_holder",
+        "bearing_retainer_cap",
+        "bevel_gear",
+        "bucket",
+        "cam",
+        "chair",
+        "clevis",
+        "clevis_pin",
+        "dome_cap",
+        "double_simplex_sprocket",
+        "dovetail_slide",
+        "eyebolt",
+        "grease_nipple",
+        "gridfinity_bin",
+        "grommet",
+        "handwheel",
+        "helical_gear",
+        "keyhole_plate",
+        "knob",
+        "lathe_turned_part",
+        "ratchet_sector",
+        "spacer_ring",
+        "spur_gear",
+        "table",
+        "taper_pin",
+        "tee_nut",
+        "threaded_adapter",
+        "torsion_spring",
+        "wall_anchor",
+        "wing_nut",
+        "wire_grid"
+      ],
+      "validation": [
+        "f_bracket",
+        "nozzle",
+        "rivet",
+        "round_flange"
+      ],
+      "test": [
+        "impeller",
+        "lobed_knob",
+        "propeller",
+        "shaft_collar",
+        "spline_hub"
+      ]
+    },
+    "split_policy": "Whole family holdout before edit augmentation; exact AST deduplication; external BenchCAD edit program templates excluded regardless of literal values.",
+    "verification": "Both solids valid and positive volume; changed volume; original and edited STEP plus four linked SVG projections. This checks executable geometry, not engineering strength.",
+    "fem_status": "not_evaluated_missing_material_loads_supports_and_units_contract",
+    "limitations": [
+      "Synthetic single-feature numeric edits with explicit source-line localization.",
+      "Training input is CAD code linked to SVG views, not image or SVG perception.",
+      "Geometric equivalence across different program templates and external benchmark ancestry not proven.",
+      "Family holdout can still share operation patterns; standards compliance not independently certified."
+    ],
+    "files": {
+      "train": "9bf214c50afa5aae8104fb7e96cb66d02f1004d2530b1bcaa1fdfb76172c7498",
+      "validation": "81896060b36667d2c77155305b78602bb4f0370838dac6dda5057c77dab87e36",
+      "test": "8afda44cba9d9db9c125ea3c03d67642f27c23a7d42f22d9352a8b4e16172742"
+    },
+    "source_files": {
+      "code-gen-0.parquet": "e5ec5483b22d53909d058b0024656c471bfe0080025905b65fe64466a884a43f",
+      "code-gen-9.parquet": "979aca1abe7bf06f1c103f25c948468eb0396cf23fd996ed06bdd3b83d1e0d1b",
+      "edit-bench.parquet": "99a6c8756eabee2b818518c8003b87025d2868e2e681f4bc31488f146b5513c4"
+    }
+  },
+  "packages": {
+    "mlx": "0.32.3",
+    "mlx-lm": "0.32.0",
+    "transformers": "5.18.0"
+  },
+  "iterations": 100,
+  "seed": 17,
+  "max_sequence_length": 3072,
+  "batch_size": 1,
+  "learning_rate": 0.0001,
+  "lora_layers": 8,
+  "counts": {
+    "train": 92,
+    "validation": 22,
+    "test": 12
+  },
+  "omissions": [
+    {
+      "id": "d5e941823f963ace98a4d064bdf41640a45916347fb94822f02aa0d9cbf0a485",
+      "split": "train",
+      "tokens": 7675
+    },
+    {
+      "id": "e0ca57358c8486fe73532fdda763be67ff9fb34384f38af43fcf0b6261e86fe5",
+      "split": "train",
+      "tokens": 7675
+    },
+    {
+      "id": "666a3ad82546c7b003a948997d42f86a735d8608b9755d447dd2ae876403f864",
+      "split": "train",
+      "tokens": 8465
+    },
+    {
+      "id": "1628f5451b13c43c249f662b429588b5d3ced61c1255956605e230b9822841f6",
+      "split": "train",
+      "tokens": 8465
+    },
+    {
+      "id": "123a100f634d0d682d8ae1e9002767aa76f172976bc0773ee423d76408ecd39f",
+      "split": "train",
+      "tokens": 5232
+    },
+    {
+      "id": "293052993698fce54a2cac93489d2fb9c7eef4a4b5022d1cce5620b44ee2a189",
+      "split": "train",
+      "tokens": 5232
+    },
+    {
+      "id": "046947446e017409b39d0ef30fd8aedf896a6fb2cde4a6af6d328444bbd5ea5f",
+      "split": "train",
+      "tokens": 6439
+    },
+    {
+      "id": "02b098c21a12a361e229df2536685e9cee7798cedb969361b02302d0faecc661",
+      "split": "train",
+      "tokens": 6441
+    },
+    {
+      "id": "a796ab873b6ac35ab1a6c855ac4634b9e100395f37a96e6836ccaf2dc9c30770",
+      "split": "train",
+      "tokens": 7412
+    },
+    {
+      "id": "eec085770868d41f4823f82554575fe2cfa4c765537d9885fb029d7105577d64",
+      "split": "train",
+      "tokens": 7412
+    },
+    {
+      "id": "aba6543b52d7cd4a581be036d41bab9b05a8285279e0a848a15f8f92dd373d51",
+      "split": "train",
+      "tokens": 8407
+    },
+    {
+      "id": "eb512ed1794757a646605dda871cdbf48c9750342a3e7d881b2f7d5da150d536",
+      "split": "train",
+      "tokens": 8407
+    },
+    {
+      "id": "64692c0c1156323749c018dc99e1834b92ea32fae143e9ed32775944f2b542d9",
+      "split": "train",
+      "tokens": 11241
+    },
+    {
+      "id": "4b48bf916b06d1f0bd1bd2dab3df7bbb65081df6d71b8be93b623167b82c2629",
+      "split": "train",
+      "tokens": 11241
+    },
+    {
+      "id": "e47452773d37c871a023366b29cc0c000ab7772045d6f9ca749fb5754208475b",
+      "split": "train",
+      "tokens": 28258
+    },
+    {
+      "id": "ce16367e2942d2ceb219693300cb806fff1fa8bd205fccb8a02be56124500804",
+      "split": "train",
+      "tokens": 28258
+    },
+    {
+      "id": "268496ef9117f093f4708a41754d8d4873f8d5e495b4228c58310ed373eb125c",
+      "split": "test",
+      "tokens": 7384
+    },
+    {
+      "id": "44678c04c05c4b250558d472071e87647ff628dfe584f38e1353f6d9fc5a4cec",
+      "split": "test",
+      "tokens": 7384
+    },
+    {
+      "id": "29adae7e0730af3aafde47122c50423b7bfdf1475b20f23af694fbf970abc5f8",
+      "split": "test",
+      "tokens": 8559
+    },
+    {
+      "id": "4d646564ee1072aa913a898d736d28a1a7f86853b480bb866b8ffdb32fa2310b",
+      "split": "test",
+      "tokens": 8559
+    },
+    {
+      "id": "da43e4f3dedae4ecfd26425c6cfedd233f9157b6bf7784b5e572048a44cbf8bc",
+      "split": "test",
+      "tokens": 9978
+    },
+    {
+      "id": "6cc07a039fad30817f9bd5e90bec61a2a29f3e1a26f123b64a42273ede7b1bff",
+      "split": "test",
+      "tokens": 9978
+    },
+    {
+      "id": "45fed538eaa264daa76acc20392c051e11b8aee7af8a348e35576a81c74c4238",
+      "split": "test",
+      "tokens": 6103
+    },
+    {
+      "id": "f4911ad46915ec77f8e85e6acbb3d70a48c299dd8493e9560c9312e793b4e22d",
+      "split": "test",
+      "tokens": 6103
+    }
+  ],
+  "evaluation": "First fixed held-out family test rows; exact JSON patch and source-line validity. CAD correctness assessed separately.",
+  "script_sha256": "bd98d59ac470fa2d77fa7cdfffb362118cc90bffb1c406630f42a08ff4758cc6",
+  "command": [
+    "/Users/ayushdebnath/SVG/cvpr2027/tmp/mechanical-training/bin/python",
+    "-m",
+    "mlx_lm",
+    "lora",
+    "--model",
+    "/Users/ayushdebnath/.cache/huggingface/hub/models--mlx-community--Qwen2.5-Coder-1.5B-Instruct-4bit/snapshots/b3252a2f97102b1fb1571fec2c9b27219a8536be",
+    "--train",
+    "--mask-prompt",
+    "--data",
+    "cvpr2027/runs/mechanical-cad-mlx-20261002/data",
+    "--adapter-path",
+    "cvpr2027/runs/mechanical-cad-mlx-20261002/adapter",
+    "--iters",
+    "100",
+    "--batch-size",
+    "1",
+    "--num-layers",
+    "8",
+    "--learning-rate",
+    "0.0001",
+    "--max-seq-length",
+    "3072",
+    "--grad-checkpoint",
+    "--steps-per-report",
+    "10",
+    "--steps-per-eval",
+    "50",
+    "--val-batches",
+    "4",
+    "--save-every",
+    "50",
+    "--seed",
+    "17"
+  ],
+  "training_and_final_eval_seconds": 78.53795958300088,
+  "adapter_sha256": "6064bf6624587ea8825e9c2b66f366c782faf50e47af4416e4e74804662f8266"
+}

@@ -1,0 +1,85 @@
+{
+  "model": "gpt-6-astra",
+  "effort": "high",
+  "cap": 16000,
+  "max_api_turns": 5,
+  "tools": [
+    {
+      "type": "function",
+      "name": "inspect_svg",
+      "description": "Inspect resulting world/page-space SVG geometry after applying patches; no hidden target or constraint oracle.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "patches": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "set": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "number"
+                  }
+                },
+                "text": {
+                  "type": "string"
+                },
+                "remove": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "id"
+              ]
+            }
+          }
+        },
+        "required": [
+          "patches"
+        ]
+      },
+      "strict": false
+    },
+    {
+      "type": "function",
+      "name": "solve_linear",
+      "description": "Solve a numeric linear system A x = b and report residual.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "A": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            }
+          },
+          "b": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          }
+        },
+        "required": [
+          "A",
+          "b"
+        ],
+        "additionalProperties": false
+      },
+      "strict": true
+    }
+  ],
+  "system": "You edit detached engineering SVG drawings. Interpret visible feature labels, leaders, view conventions and notes; no native CAD history is available.\nUse patches to existing opaque element IDs. Format: {\"patches\":[{\"id\":\"...\",\"set\":{\"x1\":123},\"text\":\"optional text for a text element\"}],\"explanation\":\"...\"}. set can modify only numeric geometry attributes of rect/circle/line/text, not IDs, styles or transforms. Preserve objects except obsolete blind-bottom lines, which may be deleted with remove:true. Text positions and dimension endpoints should follow their attached features. All physical edits are in mm; SVG ancestor transforms map them into page coordinates.\nYou may use inspect_svg up to two times and solve_linear up to two times. inspect_svg returns page-space numeric geometry after candidate patches; it does NOT have reference answers or engineering constraints. solve_linear is a generic linear algebra tool. You can also compute directly. Return the final JSON when done.",
+  "ids": [
+    "fixture_plate_1",
+    "fixture_plate_2"
+  ],
+  "manifest_sha256": "b25dc0dc4f5ee1f536a748503d51961e58dec6e94b641c7f469c64be59c9e0db"
+}

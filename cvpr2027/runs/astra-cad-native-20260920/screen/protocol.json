@@ -1,0 +1,36 @@
+{
+  "model": "gpt-6-astra",
+  "effort": "high",
+  "max_completion_tokens": 10000,
+  "max_tool_calls": 3,
+  "manifest_sha256": "f14a62d64b32cdd904b508e55aa443bfdd87025052ed7893e7c18a1cd72ce969",
+  "task_ids": [
+    "t5hard_handwheel_V_a",
+    "t5hard_heat_sink_V_a",
+    "t5hard_hinge_U_a",
+    "t5hard_pipe_elbow_U_a"
+  ],
+  "system": "Edit the supplied CadQuery model to satisfy the instruction while preserving unrelated geometry. Units are mm.\nYou have a CadQuery 2.8 execution tool, evaluate_cad. Submit complete Python CAD code with result assigned.\nThe tool reports validity, solid count, envelope, volume and change relative to the source; it does NOT have the reference target.\nIt accepts import cadquery as cq, variables, numeric arithmetic, literal tuple/list loops and CadQuery modeling methods.\nNo filesystem, network, other imports, functions, comprehensions or introspection are supported. Unsupported syntax is an interface limitation, not a modeling failure.\nUse evaluate_cad at least once, up to three times. The final deliverable must be JSON with code and explanation.\nAn automatic exporter will produce linked top/front/right SVG views and envelope dimensions from your final model.\nDo not manually transcribe projection paths. Do not claim physical verification: no materials, loads or supports are specified.\nThe task is generation/editing of the physical part geometry and its drawing, not a fluid-flow field.",
+  "tool": {
+    "type": "function",
+    "function": {
+      "name": "evaluate_cad",
+      "description": "Execute a CAD candidate and inspect actual geometry. Does not compare against a hidden target.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "code"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "sample": 0,
+  "feedback": "No ground truth in tool",
+  "store": false
+}

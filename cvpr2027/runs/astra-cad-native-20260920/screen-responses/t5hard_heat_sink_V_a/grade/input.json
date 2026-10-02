@@ -1,0 +1,7 @@
+{
+  "code": "import cadquery as cq\n\nresult = (\n    cq.Workplane(\"XY\")\n    .box(125.1, 69.5, 7.3)\n    .faces(\">Z\").workplane()\n    .rarray(1, 59.88 / 5, 1, 6)\n    .rect(123.1, 5.6)\n    .extrude(11.0)\n    .faces(\">Z\")\n    .chamfer(1.2)\n    .faces(\"<Z\").workplane()\n    .pushPoints([(-51.05, -18.65), (-51.05, 18.65), (51.05, -18.65), (51.05, 18.65)])\n    .hole(3.5)\n)",
+  "target_code": "import cadquery as cq\n\nresult = (\n    cq.Workplane(\"XY\")\n    .box(125.1, 69.5, 7.3)\n    .faces(\">Z\").workplane()\n    .rarray(1, 11.976, 1, 6)\n    .rect(123.1, 5.6)\n    .extrude(11.0)\n    .faces(\">Z\")\n    .chamfer(1.2)\n    .faces(\"<Z\").workplane()\n    .pushPoints([(-51.05, -18.65), (-51.05, 18.65), (51.05, -18.65), (51.05, 18.65)])\n    .hole(3.5)\n)\n\n# Export\nshow_object(result)",
+  "source_code": "import cadquery as cq\n\nresult = (\n    cq.Workplane(\"XY\")\n    .box(125.1, 69.5, 7.3)\n    .faces(\">Z\").workplane()\n    .rarray(1, 19.96, 1, 4)\n    .rect(123.1, 5.6)\n    .extrude(11.0)\n    .faces(\">Z\")\n    .chamfer(1.2)\n    .faces(\"<Z\").workplane()\n    .pushPoints([(-51.05, -18.65), (-51.05, 18.65), (51.05, -18.65), (51.05, 18.65)])\n    .hole(3.5)\n)\n\n# Export\nshow_object(result)",
+  "svg": "cvpr2027/runs/astra-cad-native-20260920/screen-responses/t5hard_heat_sink_V_a/final.svg",
+  "title": "t5hard_heat_sink_V_a / Astra"
+}

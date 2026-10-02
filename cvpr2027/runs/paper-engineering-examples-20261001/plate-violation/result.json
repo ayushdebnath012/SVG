@@ -1,0 +1,88 @@
+{
+  "status": "verified_with_violations",
+  "mode": "tree_patch",
+  "request": "Increase all hole diameters by 6 mm.",
+  "family": "plate",
+  "style": "blueprint",
+  "action": {
+    "action": "edit",
+    "changes": {
+      "holes.*.diameter_mm": 16.0
+    }
+  },
+  "patch": {
+    "version": 2,
+    "operations": [
+      {
+        "op": "set_attributes",
+        "targets": [
+          "n6",
+          "n7",
+          "n8",
+          "n9"
+        ],
+        "attributes": {
+          "r": "16.0"
+        }
+      },
+      {
+        "op": "set_text",
+        "targets": [
+          "n18"
+        ],
+        "text": "4x \u00d816 mm THRU"
+      }
+    ]
+  },
+  "patch_operation_count": 2,
+  "patch_operation_types": [
+    "set_attributes",
+    "set_text"
+  ],
+  "target_tree_equal": true,
+  "edit_fidelity_pass": true,
+  "engineering_check_pass": false,
+  "recovered_output_family": "plate",
+  "recovered_output_style": "blueprint",
+  "before_verification": {
+    "method": "manufacturing_geometry_checks",
+    "pass": true,
+    "minimum_edge_distance_mm": 15.0,
+    "minimum_ligament_mm": 210.0,
+    "net_area_mm2": 77685.84073464102,
+    "volume_mm3": 699172.5666117693,
+    "violations": [],
+    "criteria": {
+      "min_edge_distance_mm": 15,
+      "min_ligament_mm": 20
+    },
+    "assumptions": [
+      "flat rectangular plate",
+      "four circular through holes",
+      "geometry and manufacturing checks only"
+    ]
+  },
+  "after_verification": {
+    "method": "manufacturing_geometry_checks",
+    "pass": false,
+    "minimum_edge_distance_mm": 12.0,
+    "minimum_ligament_mm": 204.0,
+    "net_area_mm2": 77195.75228068102,
+    "volume_mm3": 694761.7705261292,
+    "violations": [
+      "H1 edge distance 12 mm is below 15 mm",
+      "H2 edge distance 12 mm is below 15 mm",
+      "H3 edge distance 12 mm is below 15 mm",
+      "H4 edge distance 12 mm is below 15 mm"
+    ],
+    "criteria": {
+      "min_edge_distance_mm": 15,
+      "min_ligament_mm": 20
+    },
+    "assumptions": [
+      "flat rectangular plate",
+      "four circular through holes",
+      "geometry and manufacturing checks only"
+    ]
+  }
+}

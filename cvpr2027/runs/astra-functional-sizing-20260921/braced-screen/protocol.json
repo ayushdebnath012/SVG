@@ -1,0 +1,69 @@
+{
+  "model": "gpt-6-astra",
+  "reasoning_effort": "high",
+  "max_output_tokens": 16000,
+  "max_tool_calls": 4,
+  "design_evaluations_per_call": 256,
+  "sample": 0,
+  "system": "Design a dimensioned structural-frame SVG by choosing each member cross-section from the given finite catalog. Your chosen dimensions must meet ALL stated limits for ALL load cases, including the total mass cap. The exact geometry and sections you choose will be automatically exported to an SVG elevation plus section schedule, then independently re-analyzed. This is shape/design synthesis, not merely predicting an analysis number. A valid design exists. No particular hidden design is required: every design satisfying all constraints passes.\nYou have evaluate_designs to analyze designs. Four calls, at most 256 designs per call (1024 FEM design evaluations total). Use this budget strategically. Each call can evaluate explicit designs or a Cartesian grid: fix a base vector, give axes and the choices for those axes. Returned results include the best feasible designs by mass and best infeasible designs by maximum constraint utilization. No hidden reference, mass-optimal answer, or future samples are provided. Unreturned candidates count against the evaluation budget. Indices are 0-based. Use at least one call.\nThe tool executes the supplied idealized 2D frame model using linear Euler-Bernoulli frame FEM. Max absolute horizontal/vertical displacements are over all nodes and load cases. Stress is max end-fibre |N|/A+|M|h/(2I). The separate per-member Euler check is 2*N_compression/(pi^2*E*I/L^2)<=1. Member K=1, I=b*h^3/12, A=b*h, density as given. Changing h changes the physical section, not just a note.\nReturn JSON {\"design\":[catalog indices in member order],\"explanation\":\"design/checks and any limitations\"}. Do not claim whole-building safety. The mass cap is a requirement, not a request to prove global optimality.",
+  "tool": {
+    "type": "function",
+    "name": "evaluate_designs",
+    "description": "Analyze explicit designs or a Cartesian grid of catalog selections; 256 designs max per call. Use mode explicit with designs, or mode grid with base, axes and choices. Irrelevant arrays must be empty. Returns top 8 feasible and top 8 infeasible; no target answer.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": [
+            "explicit",
+            "grid"
+          ]
+        },
+        "designs": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        },
+        "base": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "axes": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "choices": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "required": [
+        "mode",
+        "designs",
+        "base",
+        "axes",
+        "choices"
+      ],
+      "additionalProperties": false
+    },
+    "strict": true
+  },
+  "task_sha256": "71b0a976b3a22a22c7ffe66f11284d56ce692c40950a4b277a87841077e85db9",
+  "ids": [
+    "braced_frame_catalog_1"
+  ]
+}

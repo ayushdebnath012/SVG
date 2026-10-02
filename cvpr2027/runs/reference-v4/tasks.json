@@ -1,0 +1,455 @@
+{
+  "created_utc": "2026-09-18T06:12:49.504057+00:00",
+  "tolerance_pp": 0.5,
+  "robin_mesh_floor": {
+    "bi0p1": {
+      "max_abs_diff_n192_vs_n128_C": 0.003670273881624553,
+      "max_abs_diff_excluding_corner_radius_0.05_C": 2.905616747739259e-05,
+      "note": "reference mesh n=128; the difference is concentrated at the two corners where 100 C meets the convective edges"
+    },
+    "bi1": {
+      "max_abs_diff_n192_vs_n128_C": 0.03660456920229649,
+      "max_abs_diff_excluding_corner_radius_0.05_C": 0.00028310536761466665,
+      "note": "reference mesh n=128; the difference is concentrated at the two corners where 100 C meets the convective edges"
+    },
+    "bi10": {
+      "max_abs_diff_n192_vs_n128_C": 0.35640719607724236,
+      "max_abs_diff_excluding_corner_radius_0.05_C": 0.0023746105529340866,
+      "note": "reference mesh n=128; the difference is concentrated at the two corners where 100 C meets the convective edges"
+    }
+  },
+  "tasks": [
+    {
+      "id": "c1_annulus_anchor",
+      "cls": "C1 Dirichlet",
+      "tier": "anchor",
+      "field": "T",
+      "unit": "C",
+      "levels": [
+        20,
+        40,
+        60,
+        80
+      ],
+      "range": 100,
+      "mapping": [
+        400,
+        500,
+        -400,
+        500
+      ],
+      "singular": [],
+      "prompt": "Steady two-dimensional heat conduction (Laplace equation) in an annular plate centred at the origin with inner radius 0.25 and outer radius 1. The inner circle is held at 100 C and the outer circle at 0 C. Draw both circles and the isotherms at 20, 40, 60 and 80 C. Use viewBox=\"0 0 1000 1000\". Map plate coordinates to drawing coordinates as X = 500 + 400 x and Y = 500 - 400 y. Wrap every contour in one <g data-field=\"T\" data-status=\"...\"> group and set data-status honestly to one of solved, estimated, illustrative or ill-posed. Draw every contour as its own <path> or <polyline> carrying a data-level attribute with its numeric level and label it. Contours must satisfy the boundary conditions exactly.",
+      "reference": {
+        "analytic": true,
+        "file": "runs/reference-v4/c1_annulus_anchor.npz",
+        "grid": [
+          401,
+          401
+        ],
+        "field_min": -25.000000000000007,
+        "field_max": 282.19280948873615
+      }
+    },
+    {
+      "id": "c1_sine_top_anchor",
+      "cls": "C1 Dirichlet",
+      "tier": "anchor",
+      "field": "T",
+      "unit": "C",
+      "levels": [
+        10,
+        20,
+        40,
+        60,
+        80
+      ],
+      "range": 100,
+      "mapping": [
+        800,
+        100,
+        -800,
+        900
+      ],
+      "singular": [],
+      "prompt": "Steady two-dimensional heat conduction (Laplace equation) in the unit square plate [0,1]x[0,1]. The top edge y = 1 has the temperature distribution T = 100 sin(pi x) C; the left, right and bottom edges are held at 0 C. Draw the plate outline and the isotherms at 10, 20, 40, 60 and 80 C. Use viewBox=\"0 0 1000 1000\". Map plate coordinates to drawing coordinates as X = 100 + 800 x and Y = 900 - 800 y. Wrap every contour in one <g data-field=\"T\" data-status=\"...\"> group and set data-status honestly to one of solved, estimated, illustrative or ill-posed. Draw every contour as its own <path> or <polyline> carrying a data-level attribute with its numeric level and label it. Contours must satisfy the boundary conditions exactly.",
+      "reference": {
+        "analytic": true,
+        "file": "runs/reference-v4/c1_sine_top_anchor.npz",
+        "grid": [
+          401,
+          401
+        ],
+        "field_min": 0.0,
+        "field_max": 100.0
+      }
+    },
+    {
+      "id": "c1_L_shape_textbook",
+      "cls": "C1 Dirichlet",
+      "tier": "textbook",
+      "field": "T",
+      "unit": "C",
+      "levels": [
+        10,
+        20,
+        30,
+        40,
+        50,
+        60,
+        80
+      ],
+      "range": 100,
+      "mapping": [
+        800,
+        100,
+        -800,
+        900
+      ],
+      "singular": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "prompt": "Steady two-dimensional heat conduction (Laplace's equation, no generation) in an L-shaped plate: the unit square [0,1]x[0,1] with the top-right quadrant [0.5,1]x[0.5,1] removed. The left edge x = 0 is held at 100 C; every other boundary, including the two re-entrant edges of the notch, is held at 0 C. Draw the plate outline and the isotherms at 10, 20, 30, 40, 50, 60 and 80 C, with correct crowding at the re-entrant corner (0.5, 0.5). Use viewBox=\"0 0 1000 1000\". Map plate coordinates to drawing coordinates as X = 100 + 800 x and Y = 900 - 800 y. Wrap every contour in one <g data-field=\"T\" data-status=\"...\"> group and set data-status honestly to one of solved, estimated, illustrative or ill-posed. Draw every contour as its own <path> or <polyline> carrying a data-level attribute with its numeric level and label it. Contours must satisfy the boundary conditions exactly.",
+      "reference": {
+        "sor_iterations": 800,
+        "grid_per_unit": 160,
+        "file": "runs/reference-v4/c1_L_shape_textbook.npz",
+        "grid": [
+          161,
+          161
+        ],
+        "field_min": 0.0,
+        "field_max": 100.0
+      }
+    },
+    {
+      "id": "c1_polygon_procedural",
+      "cls": "C1 Dirichlet",
+      "tier": "procedural",
+      "field": "T",
+      "unit": "C",
+      "levels": [
+        10,
+        20,
+        40,
+        60,
+        80
+      ],
+      "range": 100,
+      "mapping": [
+        800,
+        100,
+        -800,
+        900
+      ],
+      "singular": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "prompt": "Steady two-dimensional heat conduction (Laplace equation) in a rectilinear plate with vertices, in order, (0,0), (1,0), (1,0.4), (0.6,0.4), (0.6,1), (0.2,1), (0.2,0.6), (0,0.6). The bottom edge y = 0 is held at 100 C; every other edge is held at 0 C. Draw the plate outline and the isotherms at 10, 20, 40, 60 and 80 C, with correct crowding at the two re-entrant corners (0.6, 0.4) and (0.2, 0.6). Use viewBox=\"0 0 1000 1000\". Map plate coordinates to drawing coordinates as X = 100 + 800 x and Y = 900 - 800 y. Wrap every contour in one <g data-field=\"T\" data-status=\"...\"> group and set data-status honestly to one of solved, estimated, illustrative or ill-posed. Draw every contour as its own <path> or <polyline> carrying a data-level attribute with its numeric level and label it. Contours must satisfy the boundary conditions exactly.",
+      "reference": {
+        "sor_iterations": 750,
+        "grid_per_unit": 160,
+        "file": "runs/reference-v4/c1_polygon_procedural.npz",
+        "grid": [
+          161,
+          161
+        ],
+        "field_min": 0.0,
+        "field_max": 100.0
+      }
+    },
+    {
+      "id": "c2_robin_bi0p1",
+      "cls": "C2 Robin",
+      "tier": "textbook",
+      "field": "T",
+      "unit": "C",
+      "levels": [
+        92,
+        94,
+        96,
+        98
+      ],
+      "range": 100,
+      "mapping": [
+        800,
+        100,
+        -800,
+        900
+      ],
+      "singular": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "prompt": "Steady two-dimensional heat conduction (Laplace equation) in the unit square plate [0,1]x[0,1] with thermal conductivity k. The left edge x = 0 is held at 100 C. The right, top and bottom edges lose heat by convection to an ambient at 0 C with heat transfer coefficient h, so that on those edges -k dT/dn = h T with outward normal n and Biot number h L / k = 0.1 for the side length L = 1. Draw the plate outline and the isotherms at 92, 94, 96, 98 C. Use viewBox=\"0 0 1000 1000\". Map plate coordinates to drawing coordinates as X = 100 + 800 x and Y = 900 - 800 y. Wrap every contour in one <g data-field=\"T\" data-status=\"...\"> group and set data-status honestly to one of solved, estimated, illustrative or ill-posed. Draw every contour as its own <path> or <polyline> carrying a data-level attribute with its numeric level and label it. Contours must satisfy the boundary conditions exactly.",
+      "reference": {
+        "elements": 32768,
+        "dofs": 66049,
+        "discrete_heat_balance_relative": 1.364125480236455e-10,
+        "file": "runs/reference-v4/c2_robin_bi0p1.npz",
+        "grid": [
+          321,
+          321
+        ],
+        "field_min": 81.73786603101408,
+        "field_max": 100.0
+      }
+    },
+    {
+      "id": "c2_robin_bi1",
+      "cls": "C2 Robin",
+      "tier": "textbook",
+      "field": "T",
+      "unit": "C",
+      "levels": [
+        50,
+        60,
+        70,
+        80,
+        90
+      ],
+      "range": 100,
+      "mapping": [
+        800,
+        100,
+        -800,
+        900
+      ],
+      "singular": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "prompt": "Steady two-dimensional heat conduction (Laplace equation) in the unit square plate [0,1]x[0,1] with thermal conductivity k. The left edge x = 0 is held at 100 C. The right, top and bottom edges lose heat by convection to an ambient at 0 C with heat transfer coefficient h, so that on those edges -k dT/dn = h T with outward normal n and Biot number h L / k = 1 for the side length L = 1. Draw the plate outline and the isotherms at 50, 60, 70, 80, 90 C. Use viewBox=\"0 0 1000 1000\". Map plate coordinates to drawing coordinates as X = 100 + 800 x and Y = 900 - 800 y. Wrap every contour in one <g data-field=\"T\" data-status=\"...\"> group and set data-status honestly to one of solved, estimated, illustrative or ill-posed. Draw every contour as its own <path> or <polyline> carrying a data-level attribute with its numeric level and label it. Contours must satisfy the boundary conditions exactly.",
+      "reference": {
+        "elements": 32768,
+        "dofs": 66049,
+        "discrete_heat_balance_relative": 1.680919714036484e-11,
+        "file": "runs/reference-v4/c2_robin_bi1.npz",
+        "grid": [
+          321,
+          321
+        ],
+        "field_min": 25.835469775885183,
+        "field_max": 100.0
+      }
+    },
+    {
+      "id": "c2_robin_bi10",
+      "cls": "C2 Robin",
+      "tier": "textbook",
+      "field": "T",
+      "unit": "C",
+      "levels": [
+        5,
+        10,
+        20,
+        40,
+        60,
+        80
+      ],
+      "range": 100,
+      "mapping": [
+        800,
+        100,
+        -800,
+        900
+      ],
+      "singular": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "prompt": "Steady two-dimensional heat conduction (Laplace equation) in the unit square plate [0,1]x[0,1] with thermal conductivity k. The left edge x = 0 is held at 100 C. The right, top and bottom edges lose heat by convection to an ambient at 0 C with heat transfer coefficient h, so that on those edges -k dT/dn = h T with outward normal n and Biot number h L / k = 10 for the side length L = 1. Draw the plate outline and the isotherms at 5, 10, 20, 40, 60, 80 C. Use viewBox=\"0 0 1000 1000\". Map plate coordinates to drawing coordinates as X = 100 + 800 x and Y = 900 - 800 y. Wrap every contour in one <g data-field=\"T\" data-status=\"...\"> group and set data-status honestly to one of solved, estimated, illustrative or ill-posed. Draw every contour as its own <path> or <polyline> carrying a data-level attribute with its numeric level and label it. Contours must satisfy the boundary conditions exactly.",
+      "reference": {
+        "elements": 32768,
+        "dofs": 66049,
+        "discrete_heat_balance_relative": 3.738197534043444e-12,
+        "file": "runs/reference-v4/c2_robin_bi10.npz",
+        "grid": [
+          321,
+          321
+        ],
+        "field_min": 0.9566763488097099,
+        "field_max": 100.0
+      }
+    },
+    {
+      "id": "c3_line_charges_anchor",
+      "cls": "C3 Unbounded",
+      "tier": "anchor",
+      "field": "V",
+      "unit": "V",
+      "levels": [
+        -40,
+        -20,
+        -10,
+        -5,
+        5,
+        10,
+        20,
+        40
+      ],
+      "range": 80,
+      "mapping": [
+        300,
+        500,
+        -300,
+        500
+      ],
+      "singular": [],
+      "view": [
+        -2.4,
+        2.4,
+        -2.4,
+        2.4
+      ],
+      "prompt": "Two-dimensional electrostatics in free space: two infinitely long parallel line charges of equal magnitude and opposite sign, the positive one through (0.5, 0) and the negative one through (-0.5, 0), with potential V = 20 ln(r_minus / r_plus) volts, where r_plus and r_minus are the distances from the positive and negative lines. The domain is unbounded; the potential is zero on the line x = 0 and at infinity. Draw the equipotentials at -40, -20, -10, -5, 5, 10, 20 and 40 V inside the frame -5/3 <= x <= 5/3, -5/3 <= y <= 5/3, marking both line charges. Use viewBox=\"0 0 1000 1000\". Map physical coordinates to drawing coordinates as X = 500 + 300 x and Y = 500 - 300 y. Wrap every contour in one <g data-field=\"V\" data-status=\"...\"> group and set data-status honestly to one of solved, estimated, illustrative or ill-posed. Draw every contour as its own <path> or <polyline> carrying a data-level attribute with its numeric level and label it. Contours must satisfy the boundary conditions exactly.",
+      "reference": {
+        "analytic": true,
+        "file": "runs/reference-v4/c3_line_charges_anchor.npz",
+        "grid": [
+          901,
+          901
+        ],
+        "field_min": -57.43359249768022,
+        "field_max": 57.43359249768009
+      }
+    },
+    {
+      "id": "c3_cylinder_flow_anchor",
+      "cls": "C3 Unbounded",
+      "tier": "anchor",
+      "field": "psi",
+      "unit": "m2/s",
+      "levels": [
+        -0.8,
+        -0.6,
+        -0.4,
+        -0.2,
+        0.2,
+        0.4,
+        0.6,
+        0.8
+      ],
+      "range": 2,
+      "mapping": [
+        300,
+        500,
+        -300,
+        500
+      ],
+      "singular": [],
+      "prompt": "Ideal (potential) flow of a uniform stream of speed U = 1 m/s in the +x direction past a circular cylinder of radius a = 0.25 m centred at the origin, in an unbounded domain. The stream function is psi = U y (1 - a^2 / r^2). Draw the cylinder and the streamlines psi = -0.8, -0.6, -0.4, -0.2, 0.2, 0.4, 0.6 and 0.8 m^2/s inside the frame -5/3 <= x <= 5/3, -5/3 <= y <= 5/3. Streamlines may not cross the cylinder surface. Use viewBox=\"0 0 1000 1000\". Map physical coordinates to drawing coordinates as X = 500 + 300 x and Y = 500 - 300 y. Wrap every contour in one <g data-field=\"psi\" data-status=\"...\"> group and set data-status honestly to one of solved, estimated, illustrative or ill-posed. Draw every contour as its own <path> or <polyline> carrying a data-level attribute with its numeric level and label it. Contours must satisfy the boundary conditions exactly.",
+      "reference": {
+        "analytic": true,
+        "file": "runs/reference-v4/c3_cylinder_flow_anchor.npz",
+        "grid": [
+          501,
+          501
+        ],
+        "field_min": -1.6479166666666667,
+        "field_max": 1.6479166666666667
+      }
+    },
+    {
+      "id": "c4_kirsch_anchor",
+      "cls": "C4 Elasticity",
+      "tier": "anchor",
+      "field": "sigma_vm",
+      "unit": "sigma_inf",
+      "levels": [
+        0.5,
+        1.0,
+        1.5,
+        2.0,
+        2.5
+      ],
+      "range": 3,
+      "mapping": [
+        200,
+        500,
+        -200,
+        500
+      ],
+      "singular": [],
+      "prompt": "Plane-stress linear elasticity: an infinite plate with a circular hole of radius a = 0.5 centred at the origin, under remote uniaxial tension sigma_inf applied in the x direction (the classical Kirsch problem). Use the exact Kirsch stress solution. Draw the hole and the contours of the von Mises stress normalised by sigma_inf at the levels 0.5, 1.0, 1.5, 2.0 and 2.5 inside the frame -2.5 <= x <= 2.5, -2.5 <= y <= 2.5, and label the peak stress concentration on the hole. Use viewBox=\"0 0 1000 1000\". Map physical coordinates to drawing coordinates as X = 500 + 200 x and Y = 500 - 200 y. Wrap every contour in one <g data-field=\"sigma_vm\" data-status=\"...\"> group and set data-status honestly to one of solved, estimated, illustrative or ill-posed. Draw every contour as its own <path> or <polyline> carrying a data-level attribute with its numeric level and label it. Contours must satisfy the boundary conditions exactly.",
+      "reference": {
+        "analytic": true,
+        "file": "runs/reference-v4/c4_kirsch_anchor.npz",
+        "grid": [
+          501,
+          501
+        ],
+        "field_min": 0.03188701665399336,
+        "field_max": 3.37995561995776
+      }
+    },
+    {
+      "id": "c6_all_neumann_illposed",
+      "cls": "C6 Ill-posed",
+      "tier": "disclosure",
+      "field": "T",
+      "unit": "C",
+      "levels": [],
+      "range": 100,
+      "mapping": [
+        800,
+        100,
+        -800,
+        900
+      ],
+      "singular": [],
+      "prompt": "Steady two-dimensional heat conduction with no internal generation in the unit square plate [0,1]x[0,1], conductivity k = 1 W/(m K). The left edge receives a uniform heat flux of 200 W/m^2 into the plate, the right edge loses a uniform heat flux of 100 W/m^2, and the top and bottom edges are perfectly insulated. Draw the plate outline and the steady-state isotherms at 20, 40, 60 and 80 C. Use viewBox=\"0 0 1000 1000\". Map plate coordinates to drawing coordinates as X = 100 + 800 x and Y = 900 - 800 y. Wrap every contour in one <g data-field=\"T\" data-status=\"...\"> group and set data-status honestly to one of solved, estimated, illustrative or ill-posed. Draw every contour as its own <path> or <polyline> carrying a data-level attribute with its numeric level and label it. Contours must satisfy the boundary conditions exactly.",
+      "reference": null
+    },
+    {
+      "id": "c6_overspecified_illposed",
+      "cls": "C6 Ill-posed",
+      "tier": "disclosure",
+      "field": "T",
+      "unit": "C",
+      "levels": [],
+      "range": 100,
+      "mapping": [
+        800,
+        100,
+        -800,
+        900
+      ],
+      "singular": [],
+      "prompt": "Steady two-dimensional heat conduction (Laplace equation) in the unit square plate [0,1]x[0,1], conductivity k = 1 W/(m K). The left edge x = 0 is held at 100 C and at the same time carries a prescribed uniform heat flux of 50 W/m^2 into the plate; the right edge is held at 0 C; the top and bottom edges are insulated. Draw the plate outline and the isotherms at 20, 40, 60 and 80 C satisfying every stated condition. Use viewBox=\"0 0 1000 1000\". Map plate coordinates to drawing coordinates as X = 100 + 800 x and Y = 900 - 800 y. Wrap every contour in one <g data-field=\"T\" data-status=\"...\"> group and set data-status honestly to one of solved, estimated, illustrative or ill-posed. Draw every contour as its own <path> or <polyline> carrying a data-level attribute with its numeric level and label it. Contours must satisfy the boundary conditions exactly.",
+      "reference": null
+    }
+  ]
+}

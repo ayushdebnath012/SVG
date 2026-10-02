@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BenchCAD — a benchmark for programmatic CAD</title>
+  <meta name="description" content="BenchCAD: the entrance to AI for hardware and a frontier multimodal benchmark — 17,900 execution-verified CadQuery programs across 106 industrial families, scored on executed geometry.">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://benchcad.com/">
+  <meta property="og:title" content="BenchCAD — a benchmark for programmatic CAD">
+  <meta property="og:description" content="The entrance to AI for hardware, and a frontier multimodal benchmark — image–text–code alignment and 3D spatial reasoning, execution-graded across 106 industrial families.">
+  <meta property="og:image" content="https://benchcad.com/assets/img/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="BenchCAD — a benchmark for programmatic CAD">
+  <meta name="twitter:image" content="https://benchcad.com/assets/img/og-image.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css?v=14">
+  <script>(function(){try{var t=localStorage.getItem('bench-theme');document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'light');}catch(e){document.documentElement.setAttribute('data-theme','light');}})();</script>
+</head>
+<body>
+
+<!-- ===================== NAV ===================== -->
+<header class="nav">
+  <div class="nav__inner">
+    <a class="brand" href="./"><svg class="brand__cube" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M32 12 52 22 32 32 12 22Z"/><path d="M12 22V42L32 52 52 42V22"/><path d="M32 32V52"/></svg>BenchCAD</a>
+    <nav class="nav__links" data-nav aria-label="primary"></nav>
+    <span class="nav__spacer"></span>
+    <div class="nav__right">
+      <button class="theme-btn" aria-label="Toggle light or dark theme" title="Light / dark"><svg class="ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg><svg class="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+      <a class="iconlink" href="https://github.com/BenchCAD/BenchCAD-main" target="_blank" rel="noopener" title="GitHub" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 5 18.3 5.3 18.3 5.3c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg></a>
+      <a class="iconlink" href="https://discord.gg/be9AtvrDyK" target="_blank" rel="noopener" title="Discord" aria-label="Discord"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg></a>
+      <button class="nav__burger" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <div class="container hero__grid">
+    <div class="hero__text">
+      <div class="hero__kicker">the entrance to AI for hardware</div>
+      <h1>A Benchmark for Programmatic <span class="accent">CAD</span></h1>
+      <p class="hero__sub">
+        Four orthographic views in, a CadQuery program out — graded on executed geometry, not
+        appearances. 17,900 verified parts across 106 industrial families.
+      </p>
+      <div class="dimline">
+        <span class="dimline__bar"></span>
+        <span class="dimline__label">4 matched tasks</span>
+        <span class="dimline__bar"></span>
+      </div>
+      <div class="btn-row">
+        <a class='btn btn--primary' href='/leaderboard'>view the leaderboard</a>
+        <a class="btn" href="https://github.com/BenchCAD/BenchCAD-main" target="_blank" rel="noopener">run the benchmark <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        <a class="btn" href="https://huggingface.co/datasets/BenchCAD/BenchCAD" target="_blank" rel="noopener">🤗 dataset</a>
+      </div>
+    </div>
+
+    <div class="hero__visual">
+      <div class="sheet">
+        <span class="sheet__corner sheet__corner--tl"></span>
+        <span class="sheet__corner sheet__corner--tr"></span>
+        <span class="sheet__corner sheet__corner--bl"></span>
+        <span class="sheet__corner sheet__corner--br"></span>
+        <span class="sheet__tag">BenchCAD · part #074 · ISO 606</span>
+        <div class="sheet__inner"><img class="sheet__part" src="assets/img/cases/double_simplex_sprocket.webp?v=3" alt="double_simplex_sprocket — a dimensioned BenchCAD part (ISO 606 duplex roller-chain sprocket)"></div>
+        <svg class="sheet__dims" viewBox="0 0 400 300" aria-hidden="true">
+          <defs>
+            <marker id="dimar" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="8" refX="8.5" refY="3" orient="auto">
+              <path d="M0 0 L8.5 3 L0 6 Z" fill="#6f675a"/>
+            </marker>
+          </defs>
+          <g stroke="#6f675a" stroke-width="0.9" fill="none">
+            <!-- bore diameter — leader to the central hole -->
+            <line x1="328" y1="92" x2="300" y2="92"/>
+            <line x1="300" y1="92" x2="203" y2="138" marker-end="url(#dimar)"/>
+            <!-- tip diameter — leader to the toothed rim -->
+            <line x1="328" y1="212" x2="300" y2="212"/>
+            <line x1="300" y1="212" x2="250" y2="185" marker-end="url(#dimar)"/>
+          </g>
+          <text class="dimtxt" x="332" y="92" text-anchor="start" dominant-baseline="middle">&#8960;25.0</text>
+          <text class="dimtxt" x="332" y="212" text-anchor="start" dominant-baseline="middle">&#8960;152.4</text>
+        </svg>
+        <div class="sheet__tb"><div>part<b>simplex_sprocket</b></div><div>teeth<b>z 24×2</b></div><div>rev<b>0.1</b></div></div>
+      </div>
+      <p class="sheet__note">Schematic — annotations are illustrative, not the part's actual dimensions.</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="trustedby">
+      <span class="trustedby__label">developed by:</span>
+      <a class="affil__item" href="https://www.rice.edu/" target="_blank" rel="noopener" aria-label="Rice University"><span class="affil__logo affil__logo--rice"></span></a>
+      <a class="affil__item" href="https://www.virginia.edu/" target="_blank" rel="noopener" aria-label="University of Virginia"><span class="affil__logo affil__logo--uva"></span></a>
+      <a class="affil__item" href="https://ucsd.edu/" target="_blank" rel="noopener" aria-label="UC San Diego"><span class="affil__logo affil__logo--ucsd"></span></a>
+      <span class="trustedby__sep"></span>
+      <span class="trustedby__label">chosen by:</span>
+      <a class="affil__item affil__item--lock" href="https://www.anthropic.com/" target="_blank" rel="noopener" aria-label="Anthropic"><svg class="wm" viewBox="0 0 182 24" fill="currentColor" aria-hidden="true"><path d="M38.247 15.874L29.553 2.338H24.86v19.337h4.002V8.139l8.694 13.536h4.693V2.338h-4.003v13.536zm7.313-9.807h6.487v15.608h4.14V6.067h6.487v-3.73H45.56v3.73zm33.686 3.978h-9.109V2.338h-4.14v19.337h4.14v-7.9h9.109v7.9h4.14V2.338h-4.14v7.707zm13.39-3.978h5.108c2.043 0 3.12.746 3.12 2.155 0 1.408-1.077 2.154-3.12 2.154h-5.107v-4.31zm12.37 2.155c0-3.647-2.679-5.884-7.068-5.884h-9.443v19.337h4.142v-7.57h4.61l4.142 7.57h4.583l-4.586-8.146c2.302-.885 3.62-2.75 3.62-5.307zm12.686 9.91c-3.257 0-5.244-2.32-5.244-6.104 0-3.84 1.987-6.16 5.244-6.16 3.23 0 5.189 2.32 5.189 6.16 0 3.784-1.96 6.105-5.189 6.105zm0-16.132c-5.575 0-9.522 4.144-9.522 10.028 0 5.828 3.947 9.972 9.522 9.972 5.547 0 9.466-4.144 9.466-9.972C127.158 6.144 123.24 2 117.692 2zm22.59 8.929h-5.109V6.067h5.11c2.043 0 3.12.829 3.12 2.43 0 1.603-1.077 2.432-3.12 2.432zm.194-8.591h-9.445v19.337h4.142v-7.017h5.303c4.39 0 7.07-2.32 7.07-6.16 0-3.84-2.68-6.16-7.07-6.16zm35.108 12.839c-.718 1.878-2.153 2.956-4.113 2.956-3.257 0-5.244-2.32-5.244-6.105 0-3.84 1.987-6.16 5.244-6.16 1.96 0 3.395 1.077 4.113 2.955h4.388C178.896 4.68 175.667 2 171.472 2c-5.576 0-9.523 4.144-9.523 10.028 0 5.828 3.947 9.972 9.522 9.972 4.223 0 7.453-2.707 8.529-6.823h-4.416zm-26.39-12.84l7.705 19.338h4.225L153.42 2.338h-4.225zM9.277 14.024l2.636-6.796 2.637 6.796H9.276zm.428-11.685L2 21.675h4.307l1.576-4.06h8.06l1.575 4.06h4.307L14.121 2.338H9.704z"/></svg></a>
+      <a class="affil__item affil__item--lock" href="https://openai.com/index/gpt-5-6/" target="_blank" rel="noopener" aria-label="OpenAI"><svg class="sym" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.205 8.658v-2.26c0-.19.072-.333.238-.428l4.543-2.616c.619-.357 1.356-.523 2.117-.523 2.854 0 4.662 2.212 4.662 4.566 0 .167 0 .357-.024.547l-4.71-2.759a.797.797 0 00-.856 0l-5.97 3.473zm10.609 8.8V12.06c0-.333-.143-.57-.429-.737l-5.97-3.473 1.95-1.118a.433.433 0 01.476 0l4.543 2.617c1.309.76 2.189 2.378 2.189 3.948 0 1.808-1.07 3.473-2.76 4.163zM7.802 12.703l-1.95-1.142c-.167-.095-.239-.238-.239-.428V5.899c0-2.545 1.95-4.472 4.591-4.472 1 0 1.927.333 2.712.928L8.23 5.067c-.285.166-.428.404-.428.737v6.898zM12 15.128l-2.795-1.57v-3.33L12 8.658l2.795 1.57v3.33L12 15.128zm1.796 7.23c-1 0-1.927-.332-2.712-.927l4.686-2.712c.285-.166.428-.404.428-.737v-6.898l1.974 1.142c.167.095.238.238.238.428v5.233c0 2.545-1.974 4.472-4.614 4.472zm-5.637-5.303l-4.544-2.617c-1.308-.761-2.188-2.378-2.188-3.948A4.482 4.482 0 014.21 6.327v5.423c0 .333.143.571.428.738l5.947 3.449-1.95 1.118a.432.432 0 01-.476 0zm-.262 3.9c-2.688 0-4.662-2.021-4.662-4.519 0-.19.024-.38.047-.57l4.686 2.71c.286.167.571.167.856 0l5.97-3.448v2.26c0 .19-.07.333-.237.428l-4.543 2.616c-.619.357-1.356.523-2.117.523zm5.899 2.83a5.947 5.947 0 005.827-4.756C22.287 18.339 24 15.84 24 13.296c0-1.665-.713-3.282-1.998-4.448.119-.5.19-.999.19-1.498 0-3.401-2.759-5.947-5.946-5.947-.642 0-1.26.095-1.88.31A5.962 5.962 0 0010.205 0a5.947 5.947 0 00-5.827 4.757C1.713 5.447 0 7.945 0 10.49c0 1.666.713 3.283 1.998 4.448-.119.5-.19 1-.19 1.499 0 3.401 2.759 5.946 5.946 5.946.642 0 1.26-.095 1.88-.309a5.96 5.96 0 004.162 1.713z"/></svg><svg class="wm" viewBox="0 0 86 24" fill="currentColor" aria-hidden="true"><path d="M10.703 2C5.916 2 2 5.916 2 10.703c0 4.787 3.916 8.704 8.703 8.704 4.787 0 8.704-3.893 8.704-8.704A8.698 8.698 0 0010.703 2zm0 14.288c-2.973 0-5.367-2.442-5.367-5.585S7.73 5.12 10.703 5.12c2.974 0 5.367 2.441 5.367 5.584s-2.393 5.585-5.367 5.585zM28.206 6.835c-1.57 0-3.094.629-3.892 1.693v-1.45h-3.143V24h3.143v-6.116c.798.99 2.273 1.523 3.892 1.523 3.385 0 6.045-2.66 6.045-6.286 0-3.626-2.66-6.286-6.044-6.286zm-.531 9.84c-1.79 0-3.385-1.402-3.385-3.554s1.596-3.554 3.385-3.554c1.789 0 3.384 1.402 3.384 3.554s-1.595 3.554-3.384 3.554zM41.649 6.835c-3.433 0-6.141 2.684-6.141 6.286 0 3.602 2.37 6.286 6.237 6.286 3.167 0 5.198-1.91 5.827-4.062h-3.07c-.388.895-1.475 1.523-2.78 1.523-1.62 0-2.854-1.136-3.144-2.756h9.139V12.88c0-3.288-2.297-6.044-6.068-6.044zm-3.047 5.053c.339-1.523 1.596-2.514 3.12-2.514 1.619 0 2.852 1.064 2.997 2.514h-6.117zM56.081 6.835c-1.402 0-2.877.629-3.553 1.669V7.077h-3.143v12.088h3.143v-6.503c0-1.886 1.015-3.119 2.659-3.119 1.523 0 2.345 1.16 2.345 2.78v6.842h3.143v-7.35c0-2.997-1.838-4.98-4.594-4.98zM68.724 2.242l-6.841 16.923h3.36l1.45-3.699h7.785l1.45 3.7h3.41L72.543 2.241h-3.82zm-.943 10.42l2.805-7.084 2.78 7.084H67.78zM83.81 2.242h-3.191v16.923h3.19V2.242z"/></svg></a>
+      <a class="affil__item affil__item--lock" href="https://x.ai/" target="_blank" rel="noopener" aria-label="SpaceXAI"><svg class="wm wm--sxai" viewBox="0 0 1294 158" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M331.027 83.6049C331.027 67.2845 317.318 58.0969 295.467 58.0969H188.967V157.661H218.997V119.471H297.358C319.228 119.471 331.027 111.887 331.027 94.5399V83.6049ZM218.997 101.241H291.846C303.645 101.241 304.96 97.2963 304.96 90.1626V86.2536C304.96 79.2465 303.213 75.4632 290.387 75.4632H219.177L218.997 101.241Z"/><path d="M495.676 157.644H459.882L443.994 135.847H351.382L367.289 118.86H431.636L400.669 76.3459L418.954 53.8642L495.676 157.644Z"/><path d="M115.163 58.0969C131.772 58.0969 141.248 66.2575 144.166 75.4627H33.0911V96.8814H119.235C136.564 97.8902 147.066 105.312 147.066 119.309V135.198C147.066 150.654 137.897 157.643 119.523 157.643H31.632C14.8789 157.643 5.25904 151.374 2.48486 138.944H119.991V116.175H32.6585C16.482 116.265 5.54735 108.825 5.54725 95.7107V79.9662C5.54725 64.9424 16.1759 58.0969 34.6944 58.0969H115.163Z"/><path d="M635.773 58.0788C651.806 58.0789 663.173 63.6274 666.091 75.4447H553.394V138.944H666.091C662.885 152.113 656.021 157.643 636.638 157.643H551.377C536.659 157.643 522.806 151.662 522.806 135.774V79.9481C522.806 64.0597 536.659 58.0789 551.377 58.0788H635.773Z"/><path d="M798.637 108.587H738.037V138.941H841.925V157.64H707.485V91.5281H798.637V108.587Z"/><path d="M843.348 75.4627H707.485V58.0969H843.348V75.4627Z"/><path d="M1291.42 0.485005C1243.91 4.35808 1057.2 27.5063 927.728 157.658H879.684L885.052 152.308C912.145 126.134 1032.03 15.2025 1291.42 0.34082V0.485005Z"/><path d="M1128.81 157.658H1091.16L1016.96 103.651C1023.8 99.3515 1030.68 95.2564 1037.58 91.3564L1128.81 157.658Z"/><path d="M1068.63 157.659H1030.99L1019.58 149.354H955.827C960.315 145.369 964.859 141.5 969.45 137.745H1003.6L985.926 124.891C992.242 120.191 998.628 115.689 1005.07 111.377L1068.63 157.659Z"/><path d="M931.636 58.0739L960.66 79.1672C953.437 83.4208 946.676 87.6309 940.365 91.7495L894.029 58.0558L931.636 58.0739Z"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FRONTIER OVER TIME ===================== -->
+<section class="section" id="frontier">
+  <div class="container">
+    <div class="section__head">
+      <div class="section__kicker">progress · Vision2Code</div>
+      <h2 class="section__title">Where the Frontier Is</h2>
+      <p class="section__lead">Every frontier model on Vision2Code in 2026, in two views — against release date, and against what a task costs.</p>
+    </div>
+    <div class="seg" id="frontier-switch" role="group" aria-label="Chart" style="margin:18px 0 4px;">
+      <button data-chart="time" aria-pressed="true">the speed of AI evolution</button>
+      <button data-chart="cost" aria-pressed="false">vs. cost</button>
+    </div>
+    <div data-chart-panel="time">
+    <div class="figure" style="padding:22px 22px 12px;">
+      <svg viewBox="0 0 760 556" role="img" aria-label="Scatter chart of BenchCAD Vision2Code score versus model release date, January to September 2026, in two settings. Hollow points are the no-tools run, filled points the agentic run with a Python sandbox. OpenAI green, Anthropic orange, Google blue, Moonshot's Kimi gray, SpaceXAI's Grok black. A dashed line connects the no-tools record highs, Gemini 3.1 Pro 0.289, GPT-5.5 0.444 and GPT-5.6 Sol 0.706. A solid line connects the with-tools record highs, GPT-5.5 0.558, Claude Mythos 5 0.650, Grok 4.5 0.777, GPT-5.6 Sol 0.834, Claude Fable 5.1 0.843 and GPT-6 Astra 0.959, which jumps clear of the rest in September. Each point's tooltip states its split and source." style="width:100%;height:auto;display:block;">
+        <!-- legend -->
+        <g style="font-family:var(--font-mono);font-size:12px;">
+          <circle cx="60" cy="12" r="4.5" fill="#10a37f"/><text x="70" y="16" style="fill:var(--fg-dim);">OpenAI</text>
+          <circle cx="146" cy="12" r="4.5" fill="#e8543c"/><text x="156" y="16" style="fill:var(--fg-dim);">Anthropic</text>
+          <circle cx="252" cy="12" r="4.5" fill="#4285f4"/><text x="262" y="16" style="fill:var(--fg-dim);">Google</text>
+          <circle cx="326" cy="12" r="4.5" fill="#8a8a8a"/><text x="336" y="16" style="fill:var(--fg-dim);">Kimi</text>
+          <circle cx="386" cy="12" r="4.5" style="fill:var(--fg);"/><text x="396" y="16" style="fill:var(--fg-dim);">Grok</text>
+          <circle cx="60" cy="30" r="4.5" style="fill:var(--card);stroke:var(--fg-dim);stroke-width:1.8;"/><text x="70" y="34" style="fill:var(--fg-dim);">no tools</text>
+          <circle cx="150" cy="30" r="4.5" style="fill:var(--fg-dim);"/><text x="160" y="34" style="fill:var(--fg-dim);">with tools (agentic)</text>
+          <line x1="316" y1="30" x2="353" y2="30" style="stroke:var(--fg-dimmer);stroke-width:1.1;stroke-dasharray:5 4;"/><text x="359" y="34" style="fill:var(--fg-dim);">frontier, no tools</text>
+          <line x1="500" y1="30" x2="537" y2="30" style="stroke:var(--fg-dim);stroke-width:1.3;"/><text x="543" y="34" style="fill:var(--fg-dim);">frontier, with tools</text>
+        </g>
+        <!-- gridlines + y ticks -->
+        <g style="stroke:var(--border-soft);stroke-width:1;">
+          <line x1="56" y1="468.2" x2="736" y2="468.2"/><line x1="56" y1="415.2" x2="736" y2="415.2"/><line x1="56" y1="362.1" x2="736" y2="362.1"/><line x1="56" y1="309.1" x2="736" y2="309.1"/><line x1="56" y1="256.1" x2="736" y2="256.1"/><line x1="56" y1="203.1" x2="736" y2="203.1"/><line x1="56" y1="150.0" x2="736" y2="150.0"/><line x1="56" y1="97.0" x2="736" y2="97.0"/>
+        </g>
+        <g style="font-family:var(--font-mono);font-size:11px;fill:var(--fg-dimmer);" text-anchor="end">
+          <text x="48" y="101.0">0.90</text><text x="48" y="154.0">0.80</text><text x="48" y="207.1">0.70</text><text x="48" y="260.1">0.60</text><text x="48" y="313.1">0.50</text><text x="48" y="366.1">0.40</text><text x="48" y="419.2">0.30</text><text x="48" y="472.2">0.20</text>
+        </g>
+        <!-- axes -->
+        <line x1="56" y1="44" x2="56" y2="500" style="stroke:var(--border);stroke-width:1;"/>
+        <line x1="56" y1="500" x2="736" y2="500" style="stroke:var(--border);stroke-width:1;"/>
+        <text transform="rotate(-90)" x="-272" y="18" text-anchor="middle" style="font-family:var(--font-mono);font-size:11px;fill:var(--fg-dimmer);">IoU-score ↑</text>
+        <!-- x ticks -->
+        <g style="stroke:var(--border);stroke-width:1;">
+          <line x1="78.0" y1="500" x2="78.0" y2="505"/><line x1="151.4" y1="500" x2="151.4" y2="505"/><line x1="217.6" y1="500" x2="217.6" y2="505"/><line x1="291.0" y1="500" x2="291.0" y2="505"/><line x1="362.0" y1="500" x2="362.0" y2="505"/><line x1="435.3" y1="500" x2="435.3" y2="505"/><line x1="506.3" y1="500" x2="506.3" y2="505"/><line x1="579.7" y1="500" x2="579.7" y2="505"/><line x1="653.0" y1="500" x2="653.0" y2="505"/><line x1="724.0" y1="500" x2="724.0" y2="505"/>
+        </g>
+        <g style="font-family:var(--font-mono);font-size:11px;fill:var(--fg-dimmer);" text-anchor="middle">
+          <text x="114.7" y="520">Jan 2026</text><text x="184.5" y="520">Feb</text><text x="254.3" y="520">Mar</text><text x="326.5" y="520">Apr</text><text x="398.6" y="520">May</text><text x="470.8" y="520">Jun</text><text x="543.0" y="520">Jul</text><text x="616.4" y="520">Aug</text><text x="688.5" y="520">Sep</text>
+        </g>
+        <text x="736" y="540" text-anchor="end" style="font-family:var(--font-mono);font-size:11px;fill:var(--fg-dimmer);">release date →</text>
+        <!-- same-model connectors: no tools → with tools -->
+        <g>
+          <line x1="343.0" y1="278.4" x2="343.0" y2="338.8" style="stroke:#10a37f;stroke-width:1;opacity:.2;"/>
+          <line x1="395.1" y1="299.6" x2="395.1" y2="429.5" style="stroke:#e8543c;stroke-width:1;opacity:.2;"/>
+          <line x1="451.3" y1="250.8" x2="451.3" y2="386.0" style="stroke:#e8543c;stroke-width:1;opacity:.2;"/>
+          <line x1="462.0" y1="229.6" x2="462.0" y2="370.6" style="stroke:#e8543c;stroke-width:1;opacity:.2;"/>
+          <line x1="503.9" y1="376.5" x2="503.9" y2="433.2" style="stroke:#e8543c;stroke-width:1;opacity:.2;"/>
+          <line x1="511.5" y1="162.2" x2="511.5" y2="404.9" style="stroke:var(--fg);stroke-width:1;opacity:.2;"/>
+          <line x1="522.2" y1="159.6" x2="522.2" y2="243.9" style="stroke:#10a37f;stroke-width:1;opacity:.2;"/>
+          <line x1="532.8" y1="132.0" x2="532.8" y2="199.9" style="stroke:#10a37f;stroke-width:1;opacity:.2;"/>
+          <line x1="543.5" y1="182.4" x2="543.5" y2="239.7" style="stroke:#10a37f;stroke-width:1;opacity:.2;"/>
+          <line x1="560.7" y1="138.9" x2="560.7" y2="380.2" style="stroke:#e8543c;stroke-width:1;opacity:.2;"/>
+          <line x1="612.8" y1="147.1" x2="612.8" y2="381.3" style="stroke:var(--fg);stroke-width:1;opacity:.2;"/>
+          <line x1="653.0" y1="127.2" x2="653.0" y2="342.5" style="stroke:#e8543c;stroke-width:1;opacity:.2;"/>
+        </g>
+        <!-- frontier lines: running record highs, each setting -->
+        <polyline points="184.5,421.0 343.0,338.8 532.8,199.9" fill="none" style="stroke:var(--fg-dimmer);stroke-width:1.1;stroke-dasharray:5 4;"/>
+        <polyline points="343.0,278.4 462.0,229.6 511.5,162.2 532.8,132.0 653.0,127.2 657.7,65.7" fill="none" style="stroke:var(--fg-dim);stroke-width:1.3;"/>
+        <!-- points · hollow = no tools, filled = with tools -->
+        <g>
+          <circle cx="111.2" cy="456.5" r="4.5" style="fill:var(--card);stroke:#e8543c;stroke-width:1.8;"><title>Claude Sonnet 4.6 (max) · no tools · IoU-score 0.2220 (re-graded)</title></circle>
+          <circle cx="184.5" cy="479.1" r="4.5" style="fill:var(--card);stroke:#10a37f;stroke-width:1.8;"><title>GPT-5.3 (max) · no tools · IoU-score 0.1793 (re-graded) · released Feb 2026</title></circle>
+          <circle cx="184.5" cy="421.0" r="4.5" style="fill:var(--card);stroke:#4285f4;stroke-width:1.8;"><title>Gemini 3.1 Pro (thinking) · no tools · IoU-score 0.2890 (re-graded)</title></circle>
+          <circle cx="250.8" cy="431.5" r="4.5" style="fill:var(--card);stroke:#e8543c;stroke-width:1.8;"><title>Claude Opus 4.7 (max) · no tools · IoU-score 0.2692 (re-graded)</title></circle>
+          <circle cx="343.0" cy="338.8" r="4.5" style="fill:var(--card);stroke:#10a37f;stroke-width:1.8;"><title>GPT-5.5 (max) · no tools · vendor-reported 0.444 — OpenAI GPT-5.6 launch table, not re-graded; harness undisclosed</title></circle>
+          <circle cx="395.1" cy="429.5" r="4.5" style="fill:var(--card);stroke:#e8543c;stroke-width:1.8;"><title>Claude Opus 4.8 (max) · no tools · self-reported voxel IoU 0.273 (full set) — Anthropic Fable 5 / Mythos 5 system card, not re-graded</title></circle>
+          <circle cx="451.3" cy="386.0" r="4.5" style="fill:var(--card);stroke:#e8543c;stroke-width:1.8;"><title>Claude Mythos Preview (max) · no tools · self-reported voxel IoU 0.355 (full set) — Anthropic system card, not re-graded</title></circle>
+          <circle cx="462.0" cy="370.6" r="4.5" style="fill:var(--card);stroke:#e8543c;stroke-width:1.8;"><title>Claude Mythos 5 (max) · no tools · self-reported voxel IoU 0.384 (full set) — Anthropic system card, not re-graded</title></circle>
+          <circle cx="503.9" cy="433.2" r="4.5" style="fill:var(--card);stroke:#e8543c;stroke-width:1.8;"><title>Claude Sonnet 5 (max) · no tools · self-reported voxel IoU 0.266 (1,000-file subset) — Anthropic Sonnet 5 system card, not re-graded</title></circle>
+          <circle cx="511.5" cy="404.9" r="4.5" style="fill:var(--card);stroke:var(--fg);stroke-width:1.8;"><title>Grok 4.5 (high) · no tools · IoU-score 0.3194 (re-graded on our scorer) · released Jul 8 2026</title></circle>
+          <circle cx="522.2" cy="243.9" r="4.5" style="fill:var(--card);stroke:#10a37f;stroke-width:1.8;"><title>GPT-5.6 Terra (max) · no tools · vendor-reported 0.623 — OpenAI launch table, not re-graded; harness undisclosed</title></circle>
+          <circle cx="532.8" cy="199.9" r="4.5" style="fill:var(--card);stroke:#10a37f;stroke-width:1.8;"><title>GPT-5.6 Sol (max) · no tools · vendor-reported 0.706 — OpenAI launch table, not re-graded; harness undisclosed</title></circle>
+          <circle cx="543.5" cy="239.7" r="4.5" style="fill:var(--card);stroke:#10a37f;stroke-width:1.8;"><title>GPT-5.6 Luna (max) · no tools · vendor-reported 0.631 — OpenAI launch table, not re-graded; harness undisclosed</title></circle>
+          <circle cx="539.4" cy="379.6" r="4.5" style="fill:var(--card);stroke:#8a8a8a;stroke-width:1.8;"><title>Kimi K3 (max) · no tools · IoU-score 0.3670 (re-graded, we ran it)</title></circle>
+          <circle cx="560.7" cy="380.2" r="4.5" style="fill:var(--card);stroke:#e8543c;stroke-width:1.8;"><title>Claude Opus 5 (max) · no tools · self-reported voxel IoU 0.366 (1,000-file subset) — Anthropic Opus 5 system card, not re-graded</title></circle>
+          <circle cx="612.8" cy="381.3" r="4.5" style="fill:var(--card);stroke:var(--fg);stroke-width:1.8;"><title>Grok 4.6 (xhigh) · no tools · IoU-score 0.3638 (re-graded on our scorer; run arranged by SpaceXAI)</title></circle>
+          <circle cx="653.0" cy="342.5" r="4.5" style="fill:var(--card);stroke:#e8543c;stroke-width:1.8;"><title>Claude Fable 5.1 (max) · no tools · self-reported voxel IoU 0.437 (1,000-file subset) — Anthropic Fable 5.1 / Mythos 5.1 system card fig. 8.14.2.A, not re-graded</title></circle>
+        </g>
+        <g>
+          <circle cx="343.0" cy="278.4" r="4.5" style="fill:#10a37f;stroke:var(--card);stroke-width:1.4;"><title>GPT-5.5 (max) · with tools · vendor-reported 0.558 — OpenAI GPT-5.6 launch table, Python tool; split and attempt budget unstated</title></circle>
+          <circle cx="395.1" cy="299.6" r="4.5" style="fill:#e8543c;stroke:var(--card);stroke-width:1.4;"><title>Claude Opus 4.8 (max) · with tools · self-reported voxel IoU 0.518 (1,000-file subset, Python tools) — Anthropic system card fig. 8.16.4.B</title></circle>
+          <circle cx="451.3" cy="250.8" r="4.5" style="fill:#e8543c;stroke:var(--card);stroke-width:1.4;"><title>Claude Mythos Preview (max) · with tools · self-reported voxel IoU 0.610 (1,000-file subset, Python tools) — Anthropic system card fig. 8.16.4.B</title></circle>
+          <circle cx="462.0" cy="229.6" r="4.5" style="fill:#e8543c;stroke:var(--card);stroke-width:1.4;"><title>Claude Mythos 5 (max) · with tools · self-reported voxel IoU 0.650 (1,000-file subset, Python tools) — Anthropic system card fig. 8.16.4.B</title></circle>
+          <circle cx="503.9" cy="376.5" r="4.5" style="fill:#e8543c;stroke:var(--card);stroke-width:1.4;"><title>Claude Sonnet 5 (max) · with tools · self-reported voxel IoU 0.373 (1,000-file subset, Python tools) — Anthropic Sonnet 5 system card</title></circle>
+          <circle cx="511.5" cy="162.2" r="4.5" style="fill:var(--fg);stroke:var(--card);stroke-width:1.4;"><title>Grok 4.5 (high) · with tools · 0.7771 — our own agentic run on our scorer, Python sandbox</title></circle>
+          <circle cx="522.2" cy="159.6" r="4.5" style="fill:#10a37f;stroke:var(--card);stroke-width:1.4;"><title>GPT-5.6 Terra (max) · with tools · vendor-reported 0.782 — OpenAI launch table, Python tool; split and attempt budget unstated</title></circle>
+          <circle cx="532.8" cy="132.0" r="4.5" style="fill:#10a37f;stroke:var(--card);stroke-width:1.4;"><title>GPT-5.6 Sol (max) · with tools · vendor-reported 0.834 — OpenAI launch table, Python tool; split and attempt budget unstated</title></circle>
+          <circle cx="543.5" cy="182.4" r="4.5" style="fill:#10a37f;stroke:var(--card);stroke-width:1.4;"><title>GPT-5.6 Luna (max) · with tools · vendor-reported 0.739 — OpenAI launch table, Python tool; split and attempt budget unstated</title></circle>
+          <circle cx="560.7" cy="138.9" r="4.5" style="fill:#e8543c;stroke:var(--card);stroke-width:1.4;"><title>Claude Opus 5 (max) · with tools · self-reported voxel IoU 0.821 (1,000-file subset, Python tools) — Anthropic Opus 5 system card fig. 8.12.2.A</title></circle>
+          <circle cx="612.8" cy="147.1" r="4.5" style="fill:var(--fg);stroke:var(--card);stroke-width:1.4;"><title>Grok 4.6 (xhigh) · with tools · 0.8055 — our own agentic run on our scorer, Python sandbox</title></circle>
+          <circle cx="653.0" cy="127.2" r="4.5" style="fill:#e8543c;stroke:var(--card);stroke-width:1.4;"><title>Claude Fable 5.1 (max) · with tools · self-reported voxel IoU 0.843 (1,000-file subset, Python tools) — Anthropic Fable 5.1 / Mythos 5.1 system card fig. 8.14.2.A</title></circle>
+          <circle cx="657.7" cy="65.7" r="4.5" style="fill:#10a37f;stroke:var(--card);stroke-width:1.4;"><title>GPT-6 Astra · with tools · 0.959 (1,000-file subset) — OpenAI GPT-6 Astra launch coverage; no no-tools figure published</title></circle>
+        </g>
+        <!-- model labels -->
+        <g style="font-family:var(--font-mono);font-size:10px;font-weight:600;fill:var(--fg);">
+          <text x="111.2" y="471.7" text-anchor="middle">Sonnet 4.6</text>
+          <text x="184.5" y="494.7" text-anchor="middle">GPT-5.3</text>
+          <text x="184.5" y="409.9" text-anchor="middle">Gemini 3.1 Pro</text>
+          <text x="250.8" y="420.5" text-anchor="middle">Opus 4.7</text>
+          <text x="343.0" y="267.6" text-anchor="middle">GPT-5.5</text>
+          <text x="395.1" y="445.2" text-anchor="middle">Opus 4.8</text>
+          <text x="446.0" y="389.5" text-anchor="end">Mythos Preview</text>
+          <text x="462.0" y="219.0" text-anchor="middle">Mythos 5</text>
+          <text x="503.9" y="448.7" text-anchor="middle">Sonnet 5</text>
+          <text x="505" y="165.1" text-anchor="end">Grok 4.5</text>
+          <text x="520.4" y="262.3" text-anchor="middle">Terra</text>
+          <text x="532.8" y="120.9" text-anchor="middle">GPT-5.6 Sol</text>
+          <text x="545.3" y="252.6" text-anchor="middle">Luna</text>
+          <text x="536" y="363.0" text-anchor="middle">Kimi K3</text>
+          <text x="560.7" y="349.8" text-anchor="middle">Opus 5</text>
+          <text x="612.8" y="363.0" text-anchor="middle">Grok 4.6</text>
+          <text x="657.7" y="53.7" text-anchor="middle">GPT-6 Astra</text>
+          <text x="653.0" y="116.5" text-anchor="middle">Fable 5.1</text>
+        </g>
+      </svg>
+      <p class="figure__cap"><b>Setup.</b> Score is IoU-score (voxel IoU × exec%) for rows we ran; vendor-reported rows are voxel IoU on a random 1,000-file subset, so they are not on the same split. Hollow on the dashed line is the plain run, filled on the solid line is the agentic run — a Python sandbox with the task images and CAD libraries, where the model renders, measures and iterates before submitting. Frontier lines connect the running record high in each setting. GPT-6 Astra has an agentic point only; no no-tools figure is published. Points sharing a release date are nudged apart. Hover any point for its effort setting, split and source.</p>
+    </div>
+    </div>
+    <div data-chart-panel="cost" hidden>
+      <div class="figure" style="padding:22px 22px 12px;">
+        <svg viewBox="0 0 760 548" role="img" aria-label="BenchCAD Vision2Code score against cost per task on a log axis. Series: Claude Fable 5, Claude Sonnet 5, Claude Opus 5, Claude Fable 5.1, GPT-6 Astra, GPT-5.6 Sol, Grok 4.5, Grok 4.6. Vendor curves are digitised from the labs' own published figures; the Grok curves are our own measured runs." style="width:100%;height:auto;display:block;">
+        <g style="stroke:var(--border-soft);stroke-width:1;">
+        <line x1="92.0" y1="428.8" x2="596.0" y2="428.8"/>
+        <line x1="92.0" y1="382.5" x2="596.0" y2="382.5"/>
+        <line x1="92.0" y1="336.1" x2="596.0" y2="336.1"/>
+        <line x1="92.0" y1="289.8" x2="596.0" y2="289.8"/>
+        <line x1="92.0" y1="243.4" x2="596.0" y2="243.4"/>
+        <line x1="92.0" y1="197.1" x2="596.0" y2="197.1"/>
+        <line x1="92.0" y1="150.7" x2="596.0" y2="150.7"/>
+        <line x1="92.0" y1="104.4" x2="596.0" y2="104.4"/>
+        <line x1="92.0" y1="58.0" x2="596.0" y2="58.0"/>
+        <line x1="92.0" y1="58.0" x2="92.0" y2="452.0"/>
+        <line x1="141.0" y1="58.0" x2="141.0" y2="452.0"/>
+        <line x1="178.0" y1="58.0" x2="178.0" y2="452.0"/>
+        <line x1="264.0" y1="58.0" x2="264.0" y2="452.0"/>
+        <line x1="301.0" y1="58.0" x2="301.0" y2="452.0"/>
+        <line x1="387.0" y1="58.0" x2="387.0" y2="452.0"/>
+        <line x1="424.0" y1="58.0" x2="424.0" y2="452.0"/>
+        <line x1="510.0" y1="58.0" x2="510.0" y2="452.0"/>
+        <line x1="547.0" y1="58.0" x2="547.0" y2="452.0"/>
+        <line x1="584.1" y1="58.0" x2="584.1" y2="452.0"/>
+        </g>
+        <line x1="92.0" y1="58.0" x2="92.0" y2="452.0" style="stroke:var(--border);stroke-width:1;"/>
+        <line x1="92.0" y1="452.0" x2="596.0" y2="452.0" style="stroke:var(--border);stroke-width:1;"/>
+        <g style="font-family:var(--font-mono);font-size:10.5px;fill:var(--fg-dimmer);" text-anchor="end">
+        <text x="84.0" y="432.8">0.2</text>
+        <text x="84.0" y="386.5">0.3</text>
+        <text x="84.0" y="340.1">0.4</text>
+        <text x="84.0" y="293.8">0.5</text>
+        <text x="84.0" y="247.4">0.6</text>
+        <text x="84.0" y="201.1">0.7</text>
+        <text x="84.0" y="154.7">0.8</text>
+        <text x="84.0" y="108.4">0.9</text>
+        <text x="84.0" y="62.0">1.0</text>
+        </g>
+        <g style="font-family:var(--font-mono);font-size:10.5px;fill:var(--fg-dimmer);" text-anchor="middle">
+        <text x="92.0" y="470.0">$0.002</text>
+        <text x="141.0" y="470.0">$0.005</text>
+        <text x="178.0" y="470.0">$0.01</text>
+        <text x="264.0" y="470.0">$0.05</text>
+        <text x="301.0" y="470.0">$0.1</text>
+        <text x="387.0" y="470.0">$0.5</text>
+        <text x="424.0" y="470.0">$1</text>
+        <text x="510.0" y="470.0">$5</text>
+        <text x="547.0" y="470.0">$10</text>
+        <text x="584.1" y="470.0">$20</text>
+        </g>
+        <text x="344.0" y="490.0" text-anchor="middle" style="font-family:var(--font-mono);font-size:11px;fill:var(--fg-dimmer);">cost per task (USD, log scale) &#8594;</text>
+        <text transform="rotate(-90)" x="-255.0" y="16" text-anchor="middle" style="font-family:var(--font-mono);font-size:11px;fill:var(--fg-dimmer);">score &#8593;</text>
+        <polyline points="202.8,381.0 213.7,380.1 226.5,378.7 240.1,376.8 254.1,373.1 268.2,369.4 281.0,366.6 291.3,364.8 305.4,362.0 324.7,358.2 340.0,355.2 352.4,352.7 366.4,349.9 380.4,346.9 387.5,336.0 394.1,332.3 400.6,328.5 407.2,324.8 415.9,320.2 425.4,314.6 432.0,310.9 438.6,307.2 445.2,303.9 451.8,300.4 458.8,296.0 465.4,292.3 472.0,288.6 478.6,284.9 485.2,281.4 491.8,277.7 498.4,274.2 505.0,270.3 512.4,265.2 518.6,260.5 525.2,255.2 531.8,250.1 538.4,244.9 545.0,239.8 552.1,234.7 558.7,228.9 565.3,223.6 571.9,218.5 578.5,213.1 585.5,208.5" fill="none" style="stroke:#2a78d6;stroke-width:1.6;opacity:0.9;"><title>Claude Fable 5 · with tools · 0.303 at $0.0159 to 0.675 at $20.5266 per task — digitised from Anthropic's system-card fig 8.14.2.B</title></polyline>
+        <polyline points="203.4,381.2 206.0,380.5 214.2,380.1 215.0,379.8 222.0,379.1 227.8,378.4 233.2,378.0 237.2,377.7 241.8,376.4 246.7,375.0 248.9,374.5 250.0,374.0 255.8,372.6 261.6,371.3 263.7,370.3 267.4,369.6 268.7,369.4 273.6,368.5 276.9,367.5 281.9,366.6 284.7,366.2 289.7,365.2 296.3,363.8 302.5,362.7 303.7,362.4 305.8,361.8 317.7,359.9 323.1,358.7 325.6,358.2 330.1,357.3 332.6,356.6 333.4,356.6 334.2,356.4 337.5,355.7 343.7,354.1 347.8,353.6 352.8,352.7 354.9,352.2 361.5,350.8 364.8,349.9 367.2,349.7 369.3,349.4 376.3,348.0 381.7,346.9" fill="none" style="stroke:#2a78d6;stroke-width:1.6;stroke-dasharray:5 4;opacity:0.9;"><title>Claude Fable 5 · without tools · 0.303 at $0.0161 to 0.377 at $0.4526 per task — digitised from Anthropic's system-card fig 8.14.2.B</title></polyline>
+        <polyline points="110.0,426.3 121.9,427.4 134.1,428.8 147.0,428.4 157.4,427.9 169.9,427.0 178.5,427.2 193.6,426.3 202.8,425.6 212.6,424.7 222.5,424.0 231.8,423.0 240.1,422.6 253.8,420.7 263.2,419.6 273.6,418.4 283.1,416.8 292.1,415.6 306.6,414.0 318.6,412.2 329.3,412.6 339.2,411.6 347.8,410.7 358.6,409.8 372.2,403.3 382.1,398.6 390.7,394.9 399.0,391.2 407.2,387.5 415.9,383.3 424.2,380.1 432.8,375.9 441.1,372.2 449.7,368.9 458.8,365.7 467.1,363.4 475.3,361.1 484.4,358.7 493.1,356.4 501.7,354.5 510.0,352.7 518.2,350.8 526.9,349.0 536.0,347.3" fill="none" style="stroke:#eda100;stroke-width:1.6;opacity:0.9;"><title>Claude Sonnet 5 · with tools · 0.205 at $0.0028 to 0.376 at $8.1265 per task — digitised from Anthropic's system-card fig 8.14.2.B</title></polyline>
+        <polyline points="167.4,429.5 182.6,427.0 184.5,426.7 186.4,426.7 203.1,425.6 219.6,424.2 243.5,422.3 245.5,421.4 255.0,420.7 268.2,418.9 286.8,417.2 296.3,415.1 298.3,414.9 301.6,415.4 312.4,413.2 316.1,413.9 320.2,413.7 325.1,411.6 327.2,409.8 330.9,409.3 333.0,408.8 335.0,408.4 338.8,407.9 340.8,407.5 344.9,407.0 347.0,406.8 349.1,406.5 353.2,405.8 355.3,405.6 359.4,408.4 361.5,407.9 363.5,405.8 368.9,404.2 373.8,402.6 382.9,401.4 387.0,400.7 389.1,400.7 391.2,400.5 395.7,399.8 397.8,399.6 402.3,399.1 404.4,398.6 409.7,398.0 411.8,398.0" fill="none" style="stroke:#eda100;stroke-width:1.6;stroke-dasharray:5 4;opacity:0.9;"><title>Claude Sonnet 5 · without tools · 0.199 at $0.0082 to 0.267 at $0.7953 per task — digitised from Anthropic's system-card fig 8.14.2.B</title></polyline>
+        <polyline points="181.6,395.4 193.2,393.5 206.0,391.2 217.9,389.1 227.8,394.9 237.7,391.2 247.2,385.6 259.2,382.1 271.1,378.1 279.0,374.0 287.2,370.8 295.4,367.5 303.7,363.8 311.9,360.8 320.6,356.8 328.9,353.6 337.1,350.3 345.4,347.1 353.6,343.6 361.5,340.6 369.7,336.9 378.0,333.7 386.2,330.4 394.5,327.1 402.7,323.9 412.6,319.2 421.7,313.5 429.9,303.0 438.2,292.1 446.4,281.4 454.3,271.2 462.5,260.5 470.8,249.9 479.0,238.9 487.3,228.3 495.1,217.8 503.4,207.3 511.6,196.9 519.9,186.7 528.1,176.7 536.4,166.3 544.2,157.4 552.5,148.6 560.7,141.2" fill="none" style="stroke:#1baf7a;stroke-width:1.6;opacity:0.9;"><title>Claude Opus 5 · with tools · 0.272 at $0.0107 to 0.821 at $12.9154 per task — digitised from Anthropic's system-card fig 8.14.2.B</title></polyline>
+        <polyline points="224.5,396.6 227.4,387.5 229.9,394.2 233.6,386.5 236.0,386.1 240.1,385.2 242.6,384.7 246.7,387.3 254.1,383.5 262.5,381.0 276.5,378.2 281.0,377.0 283.9,376.8 288.4,375.7 291.3,375.2 296.3,374.0 299.2,373.6 304.1,372.4 309.1,371.0 311.9,370.8 318.1,369.6 323.1,368.5 325.6,368.0 330.1,367.1 333.4,366.6 338.4,365.7 341.3,365.2 345.8,364.3 351.1,363.4 353.6,363.4 359.0,362.4 361.5,362.0 366.4,361.1 368.9,361.1 373.4,360.4 376.7,359.4 381.3,358.2 386.2,356.8 388.7,356.4 393.6,355.0 396.1,354.5 401.5,353.1 403.9,352.7 409.3,351.7" fill="none" style="stroke:#1baf7a;stroke-width:1.6;stroke-dasharray:5 4;opacity:0.9;"><title>Claude Opus 5 · without tools · 0.270 at $0.0239 to 0.366 at $0.7593 per task — digitised from Anthropic's system-card fig 8.14.2.B</title></polyline>
+        <polyline points="216.3,367.5 228.6,365.7 239.8,363.4 248.0,361.1 257.1,358.2 265.3,355.9 274.0,353.4 284.3,350.1 292.6,346.9 300.8,343.6 308.7,337.6 318.1,336.7 328.9,333.0 337.5,330.4 344.5,326.2 352.0,323.2 359.4,320.2 366.4,317.4 373.8,314.6 382.1,311.6 389.1,304.2 396.5,296.9 403.9,289.8 411.4,282.6 418.4,275.8 425.8,268.6 433.2,261.4 440.3,254.7 447.7,247.5 455.1,240.1 462.1,233.6 469.5,226.4 477.0,219.2 484.0,212.2 491.4,205.0 498.8,197.8 505.8,191.1 513.3,183.9 520.7,177.2 527.7,167.7 535.1,157.9 542.6,147.9 549.6,138.9 557.0,131.0" fill="none" style="stroke:#eb6834;stroke-width:1.6;opacity:0.9;"><title>Claude Fable 5.1 · with tools · 0.332 at $0.0205 to 0.843 at $12.0484 per task — digitised from Anthropic's system-card fig 8.14.2.B</title></polyline>
+        <polyline points="217.9,367.5 231.1,363.8 238.9,359.9 242.3,358.7 246.7,355.9 251.2,353.6 254.7,351.7 259.2,349.4 263.2,356.4 267.4,345.5 271.1,344.3 274.4,343.9 279.4,342.9 283.9,350.3 287.6,341.5 292.1,340.6 295.4,340.2 300.4,339.2 305.4,342.0 310.3,339.7 321.0,335.3 330.5,332.5 343.3,330.8 349.1,329.9 354.4,328.7 358.1,328.1 363.5,327.1 369.3,326.0 372.6,325.5 378.0,324.3 384.6,323.4 390.7,323.0 396.9,322.3 400.2,322.0 405.6,321.6 411.8,321.1 415.1,321.1 421.3,320.6 427.1,320.2 432.4,319.7 436.1,319.7 441.9,319.2 448.1,318.8 452.2,318.8" fill="none" style="stroke:#eb6834;stroke-width:1.6;stroke-dasharray:5 4;opacity:0.9;"><title>Claude Fable 5.1 · without tools · 0.332 at $0.0211 to 0.437 at $1.6949 per task — digitised from Anthropic's system-card fig 8.14.2.B</title></polyline>
+        <polyline points="264.0,210.0 367.9,102.5 415.3,84.9 453.9,77.0" fill="none" style="stroke:#6d28d9;stroke-width:1.6;opacity:0.9;"><title>GPT-6 Astra · with tools · 0.672 at $0.05 to 0.959 at $1.75 per task — digitised from OpenAI's BenchCAD launch figure</title></polyline>
+        <polyline points="264.0,354.7 338.0,300.0 387.0,224.9 433.8,175.7 480.9,134.9" fill="none" style="stroke:#0f766e;stroke-width:1.6;opacity:0.9;"><title>GPT-5.6 Sol · with tools · 0.360 at $0.05 to 0.834 at $2.9 per task — digitised from OpenAI's BenchCAD launch figure</title></polyline>
+        <polyline points="319.0,314.7 419.6,266.8 509.6,161.3" fill="none" style="stroke:#6b7280;stroke-width:1.6;opacity:0.9;"><title>Grok 4.5 · with tools · 0.446 at $0.14 to 0.777 at $4.96 per task — our own run on our harness</title></polyline>
+        <g style="font-family:var(--font-mono);font-size:9.5px;font-weight:600;" paint-order="stroke" stroke="var(--card)" stroke-width="3.2" stroke-linejoin="round">
+        <text x="461.9" y="80.0" text-anchor="start" style="fill:#6d28d9;">GPT-6 Astra</text>
+        <text x="565.0" y="134.0" text-anchor="start" style="fill:#eb6834;">Claude Fable 5.1</text>
+        <text x="472.9" y="145.0" text-anchor="end" style="fill:#0f766e;">GPT-5.6 Sol</text>
+        <text x="568.7" y="156.0" text-anchor="start" style="fill:#1baf7a;">Claude Opus 5</text>
+        <text x="535.8" y="171.0" text-anchor="start" style="fill:var(--fg);">Grok 4.6</text>
+        <text x="517.6" y="186.0" text-anchor="start" style="fill:#6b7280;">Grok 4.5</text>
+        <text x="593.5" y="211.5" text-anchor="start" style="fill:#2a78d6;">Claude Fable 5</text>
+        <text x="460.2" y="321.8" text-anchor="start" style="fill:#eb6834;">Claude Fable 5.1 (no tools)</text>
+        <text x="389.7" y="349.9" text-anchor="start" style="fill:#2a78d6;">Claude Fable 5 (no tools)</text>
+        <text x="544.0" y="360.9" text-anchor="start" style="fill:#eda100;">Claude Sonnet 5</text>
+        <text x="417.3" y="375.9" text-anchor="start" style="fill:#1baf7a;">Claude Opus 5 (no tools)</text>
+        <text x="419.8" y="401.0" text-anchor="start" style="fill:#eda100;">Claude Sonnet 5 (no tools)</text>
+        </g>
+        <g><circle cx="527.8" cy="148.2" r="2.8" style="fill:var(--fg);stroke:var(--card);stroke-width:2.4;"><title>Grok 4.6 · with tools · 0.805 at $6.979/task — our own run on our harness</title></circle></g>
+        <g style="font-family:var(--font-mono);font-size:10px;">
+        <line x1="92.0" y1="508" x2="118.0" y2="508" style="stroke:var(--fg-dim);stroke-width:1.6;stroke-dasharray:5 4;"/><text x="124.0" y="512" style="fill:var(--fg-dim);">dashed = without tools</text>
+        </g>
+        </svg>
+        <p class="figure__cap"><b>Setup.</b> Cost is USD per task on a log axis. The thin curves are digitised from each lab's own published figure — Anthropic's system-card fig 8.14.2.B and OpenAI's &ldquo;BenchCAD (python tool)&rdquo; launch chart — because both publish the plot and not the table; each Claude endpoint reproduces the card's printed value to within 0.001. The Grok curves are our own runs on our harness, priced at grok-4.5's published token rates since no grok-4.6 rate exists. Grok 4.5 is a turn-budget sweep at 10 / 25 / 100 rounds; Grok 4.6 is a single 100-round point. Hover any curve for its provenance.</p>
+      </div>
+    </div>
+
+    <div class="btn-row" style="margin-top:24px;">
+      <a class='btn btn--primary' href='/leaderboard'>view the full leaderboard — all 4 tasks</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== STANDARDS ===================== -->
+<section class="section section--soft" id="standards">
+  <div class="container">
+    <div class="section__head">
+      <div class="section__kicker">industry-grounded</div>
+      <h2 class="section__title">Built on Real Engineering Standards</h2>
+      <p class="section__lead">BenchCAD parts aren't synthetic primitives. About half the families — <b>52 of 106</b> — are anchored to real specification tables drawn from <b>47 ISO · DIN · EN · ASME · IEC</b> codes, so a correct reconstruction is a spec-faithful, manufacturable part rather than a merely similar-looking shape. The rest follow common engineering practice.</p>
+    </div>
+    <div class="stdrow">
+      <span class="stdrow__chip">ISO</span>
+      <span class="stdrow__chip">DIN</span>
+      <span class="stdrow__chip">EN</span>
+      <span class="stdrow__chip">ASME</span>
+      <span class="stdrow__chip">IEC</span>
+      <span class="stdrow__sep"></span>
+      <span class="stdrow__stat"><b>52 / 106</b> standard-anchored families</span>
+      <span class="stdrow__stat"><b>47</b> specification codes</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== EXAMPLE PARTS ===================== -->
+<section class="section" id="parts">
+  <div class="container">
+    <div class="section__head">
+      <div class="section__kicker">examples</div>
+      <h2 class="section__title">What Models Are Asked to Build</h2>
+      <p class="section__lead">A sample of the 106 industrial part families — gears, springs, fittings, fasteners, and more. A model sees only multi-view renders like these and must recover the CadQuery program that rebuilds each one.</p>
+    </div>
+    <div class="gallery">
+      <div class="tile"><img src="assets/img/cases/twisted_drill.webp?v=3" alt="twisted_drill" loading="lazy"><div class="tile__l">twisted_drill</div></div>
+      <div class="tile"><img src="assets/img/cases/impeller.webp?v=3" alt="impeller" loading="lazy"><div class="tile__l">impeller</div></div>
+      <div class="tile"><img src="assets/img/cases/coil_spring.webp?v=3" alt="coil_spring" loading="lazy"><div class="tile__l">coil_spring</div></div>
+      <div class="tile"><img src="assets/img/cases/heat_sink.webp?v=3" alt="heat_sink" loading="lazy"><div class="tile__l">heat_sink</div></div>
+      <div class="tile"><img src="assets/img/cases/t_pipe_fitting.webp?v=3" alt="t_pipe_fitting" loading="lazy"><div class="tile__l">t_pipe_fitting</div></div>
+      <div class="tile"><img src="assets/img/cases/spline_hub.webp?v=3" alt="spline_hub" loading="lazy"><div class="tile__l">spline_hub</div></div>
+      <div class="tile"><img src="assets/img/cases/double_simplex_sprocket.webp?v=3" alt="double_simplex_sprocket" loading="lazy"><div class="tile__l">double_simplex_sprocket</div></div>
+      <div class="tile"><img src="assets/img/cases/twisted_bracket.webp?v=3" alt="twisted_bracket" loading="lazy"><div class="tile__l">twisted_bracket</div></div>
+      <div class="tile"><img src="assets/img/cases/bellows.webp?v=3" alt="bellows" loading="lazy"><div class="tile__l">bellows</div></div>
+      <div class="tile"><img src="assets/img/cases/eyebolt.webp?v=3" alt="eyebolt" loading="lazy"><div class="tile__l">eyebolt</div></div>
+      <div class="tile"><img src="assets/img/cases/wing_nut.webp?v=3" alt="wing_nut" loading="lazy"><div class="tile__l">wing_nut</div></div>
+      <div class="tile"><img src="assets/img/cases/pipe_elbow.webp?v=3" alt="pipe_elbow" loading="lazy"><div class="tile__l">pipe_elbow</div></div>
+      <div class="tile"><img src="assets/img/cases/handwheel.webp?v=3" alt="handwheel" loading="lazy"><div class="tile__l">handwheel</div></div>
+      <div class="tile"><img src="assets/img/cases/u_bolt.webp?v=3" alt="u_bolt" loading="lazy"><div class="tile__l">u_bolt</div></div>
+    </div>
+    <div class="btn-row" style="margin-top:24px;">
+      <a class="btn" href="https://huggingface.co/datasets/BenchCAD/BenchCAD" target="_blank" rel="noopener">browse the dataset <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- auto-scrolling parts ribbon -->
+
+
+<!-- ===================== TITLE BLOCK ===================== -->
+<section class="section" style="padding-top:8px;">
+  <div class="container">
+    <div class="titleblock">
+      <div><div class="tb-k">benchmark</div><div class="tb-v">BenchCAD</div></div>
+      <div><div class="tb-k">verified parts</div><div class="tb-v">17,900</div></div>
+      <div><div class="tb-k">families</div><div class="tb-v">106</div></div>
+      <div><div class="tb-k">standards</div><div class="tb-v">47</div></div>
+      <div><div class="tb-k">CadQuery ops</div><div class="tb-v">&gt;40</div></div>
+      <div><div class="tb-k">grading</div><div class="tb-v accent">deterministic</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="container footer__inner">
+    <span class="footer__brand"><svg class="brand__cube" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M32 12 52 22 32 32 12 22Z"/><path d="M12 22V42L32 52 52 42V22"/><path d="M32 32V52"/></svg>BenchCAD</span>
+    <p>Code <a href="https://github.com/BenchCAD/BenchCAD-main" target="_blank" rel="noopener">MIT</a> · data <a href="https://huggingface.co/datasets/BenchCAD/BenchCAD" target="_blank" rel="noopener">CC-BY-4.0</a></p>
+    <div class="footer__links">
+      <a href='/leaderboard'>Leaderboard</a>
+      <a href='/blog'>Blog</a>
+      <a href="https://github.com/BenchCAD/BenchCAD-main" target="_blank" rel="noopener">Code</a>
+      <a href='/blog/introducing-benchcad#cite'>Cite</a>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js?v=14"></script>
+<script>
+(function () {
+  var seg = document.getElementById("frontier-switch");
+  if (!seg) return;
+  seg.addEventListener("click", function (e) {
+    var b = e.target.closest("button[data-chart]");
+    if (!b) return;
+    seg.querySelectorAll("button[data-chart]").forEach(function (x) {
+      x.setAttribute("aria-pressed", String(x === b));
+    });
+    document.querySelectorAll("[data-chart-panel]").forEach(function (p) {
+      p.hidden = p.dataset.chartPanel !== b.dataset.chart;
+    });
+  });
+})();
+</script>
+
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"19323c6cfd14422ebb80f60c55cf7223","r":1,"spa":2}' crossorigin="anonymous"></script>
+</body>
+</html>

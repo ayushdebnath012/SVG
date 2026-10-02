@@ -1,0 +1,45 @@
+{
+  "model": "gpt-6-astra",
+  "effort": "high",
+  "max_output_tokens": 24000,
+  "max_tool_calls": 4,
+  "sample": 0,
+  "system": "Reconstruct the physical machined part in the supplied engineering drawing as a CadQuery solid. Units mm. The final result will also be exported as native vector SVG orthographic engineering views.\nUse XY for the circular top view, Z for thickness, main bore centred at X=Y=0, bottom at Z=0, top at Z=25. In the top view page right is +X and page up is +Y. Follow all explicit dimensions, depths, pockets, bore patterns, chamfers and fillets. Do not replace the part with a visual approximation. Explain ambiguities rather than concealing them.\nYou have a CadQuery 2.8 evaluate_cad tool. It returns kernel validity, volume, envelope, and rendered kernel projections, but no target answer or correctness feedback. Use it at least once and up to four times to review and repair the part.\nThe restricted execution interface permits import cadquery as cq, variable assignments, numeric arithmetic, literal tuple/list for loops, and these CadQuery methods: Vector Wire Workplane add box cboreHole center chamfer circle clean close cskHole cut cutBlind cutThruAll cylinder edges extrude faces fillet hole intersect lineTo loft makeHelix mirrorX mirrorY moveTo polarArray polygon polyline pushPoints radiusArc rarray rect revolve rotate size slot2D solids sphere spline sweep threePointArc toTuple transformed translate twistExtrude union val vals vertices workplane. No functions, comprehensions, other imports, file access or introspection. Precompute needed trig constants numerically. Assign the final shape/workplane to result. Unsupported interface syntax is not counted as a shape failure.\nReturn JSON only: {\"code\":\"complete executable CadQuery code\",\"explanation\":\"construction and limitations\"}.",
+  "tool": {
+    "type": "function",
+    "name": "evaluate_cad",
+    "description": "Execute a CAD candidate and inspect actual geometry. Does not compare against a hidden target.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "code"
+      ],
+      "additionalProperties": false
+    },
+    "strict": true
+  },
+  "source": "https://huggingface.co/datasets/HuggingAI4Engineering/cadgenbench-data/tree/main/149",
+  "input_sha256": {
+    "input.png": "107134139b8ed141bc1ce347e8f8d30ee3f919c3419025a7835d55f497fdbbbb",
+    "top.png": "12208b921388fb6d10bc3e81e65c5dcfe354b097378602c62bd572efc9a7730b",
+    "detail.png": "c286c8acc9bb361dd9e3eda2355fe09f53d8d253b57ae5d3c94846f41437b7ef",
+    "side.png": "c5f8f5918ccd72cf5882f9420098ef70c212916f2ae45a7c7de5f87d96ceb5dd"
+  },
+  "scope": "Unofficial local reconstruction. No private target access. All inputs are evaluation-only.",
+  "necessary_checks_frozen_before_screen": [
+    "One valid solid",
+    "Axial thickness 25 mm",
+    "Outer diameter 150 mm before four workholding flats",
+    "Main through bore diameter 95 mm except explicit internal tabs",
+    "Four diameter 10 through holes",
+    "Four diameter 9 through holes with diameter 15 counterbores depth 8.6 mm",
+    "Eight diameter 5 blind holes depth 12 mm",
+    "Outer pockets leave 13 mm base thickness"
+  ],
+  "grading": "Check explicit public drawing features only; do not count unobserved private geometry or legal alternatives as failures. A pass of partial checks is not a full benchmark pass."
+}

@@ -1,0 +1,36 @@
+{
+  "model": "gpt-6-astra",
+  "effort": "high",
+  "sample": 1,
+  "max_output_tokens": 16000,
+  "max_checker_calls": 4,
+  "system": "Create a single-layer PCB trace layout. Return JSON {\"routes\":{\"A\":[[x,y],...],...},\"explanation\":\"...\"}. Coordinates are integer grid coordinates; every segment must be horizontal or vertical. Intermediate collinear grid points may be omitted. Any valid routing passes: no hidden preferred shape or shortest length is required. Routes are exported to SVG polylines at physical scale and independently checked. Join each net's two pads; never touch another net's pad or route; avoid all blocked sites and stay within the grid. Grid spacing is 2 mm; trace width 0.6 mm; pad diameter 1 mm; square keepouts side 1.2 mm; clearance 0.4 mm. Under these stipulated orthogonal grid rules, using distinct unblocked grid sites and avoiding all foreign pads is sufficient for clearance. No vias or extra layers. A feasible complete routing exists. You may use check_routes four times to check candidate routings, including partial routings. It reports actual violations, never an optimal path or hidden reference. This tests planning with checker feedback; no arbitrary-code execution tool is available. Do not claim whole-circuit electrical correctness.",
+  "tool": {
+    "type": "function",
+    "name": "check_routes",
+    "description": "Check proposed PCB trace polylines for missing nets, endpoint errors, keepout violations, off-board vertices and cross-net contacts. No solution paths are supplied.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "routes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "routes"
+      ]
+    },
+    "strict": false
+  },
+  "manifest_sha256": "d17184e69d09338cc186be0fe53eb057fffe24471f74164badf5c28bb27e03f6",
+  "script_sha256": "eab40ffaab658949b49316f56383035d649882dcc0069a4d3faba1be0c740ef6"
+}

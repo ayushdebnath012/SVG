@@ -1,0 +1,16 @@
+{
+  "model": "gpt-6-astra",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Return one JSON object with svg (a complete SVG string) and analysis (an object).\nProduce a clean, dimensioned CAD top-view drawing of the specified physical mounting plate.\nUse the specified coordinate map and viewBox. Draw the actual material outline and the actual cutouts,\nnot a physics field plot. Use one closed path or other closed SVG primitive per boundary, each tagged\nwith data-boundary=\"the requested ID\". A circle is allowed for a circular hole. Use visible strokes;\nshow holes and the slot as cutouts, not extra solid material. All arcs must be circular with the specified radii.\nInclude dimensions, hole/slot labels, thickness and a clear unit legend. Do not use script, external images,\nCSS stylesheets, use elements, clipping, masks, hidden boundaries or nested SVG. Ancestor transforms are allowed.\nReturn analysis with area_mm2 (net material area after all cutouts), mass_g, and min_clearance_mm\n(minimum Euclidean edge-to-edge gap between any cutout and the outer boundary or another cutout),\nand status (calculated, estimated or unavailable). Display the same three numeric results in text elements\nwith data-result=\"area_mm2\", \"mass_g\" and \"min_clearance_mm\". Use at least 4 significant digits.\nUse your own reasoning; no external tools are provided. Do not claim you ran an external solver."
+    },
+    {
+      "role": "user",
+      "content": "Draw this L-shaped steel mounting plate in top view. Vertices define the sharp-corner polygon in counterclockwise order. Replace EVERY vertex by a circular tangent fillet using the corresponding radius in the list, including the concave re-entrant corner. Holes and slot go all the way through the plate. Slot length is TOTAL end-to-end length, with semicircular caps of radius width/2; angle is counterclockwise from physical +x. viewBox=\"0 0 1100 850\"; mapping X=100+3.5*x, Y=710-3.5*y. Boundary IDs must be outer, hole_A, hole_B, hole_C, slot. All lengths mm. Compute area, mass and minimum clearance.\nSpecification:\n{\"vertices_mm\": [[0, 0], [180, 0], [180, 40], [80, 40], [80, 150], [0, 150]], \"fillet_radii_mm\": [8, 6, 6, 12, 10, 8], \"holes\": [{\"id\": \"hole_A\", \"center_mm\": [24, 24], \"diameter_mm\": 12}, {\"id\": \"hole_B\", \"center_mm\": [152, 20], \"diameter_mm\": 12}, {\"id\": \"hole_C\", \"center_mm\": [28, 122], \"diameter_mm\": 14}], \"slot\": {\"center_mm\": [42, 82], \"length_mm\": 48, \"width_mm\": 14, \"angle_deg\": 68}, \"thickness_mm\": 6, \"density_g_mm3\": 0.00785}"
+    }
+  ],
+  "reasoning_effort": "medium",
+  "max_completion_tokens": 16000,
+  "store": false
+}

@@ -1,0 +1,141 @@
+<script language="JavaScript">
+function viaMk() {
+	myRegExp = /mk:@MSITStore:[^.]+.chm::/gim;
+	myRepStr = "https://dpt3.dptcorporate.com/Content/Help"
+	document.body.innerHTML = document.body.innerHTML.replace(myRegExp,myRepStr);
+}
+</script>
+<!-- LJEM -->
+<html>
+<head>
+<!-- Error handler removed 03 June 2014 -->
+
+<meta name="T_2009t1" content="translate">
+<title>Introduction to associativity</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="../../../JSandSTYLES/t32000vNOHR.css" rel="stylesheet" type="text/css">
+
+
+<style type="text/css">
+ .noleft
+{
+margin-left: 22;
+margin-top: 5;
+margin-bottom: 5;
+}
+.notop{margin-top:0;}
+.nobottom{margin-bottom:0;}
+.notopbot{margin-top:0;margin-bottom:0;}
+</style>
+
+<style type="text/css">
+.litleft
+{
+margin-left: 26;
+margin-top: 5;
+margin-bottom: 5;
+}
+.five
+{
+
+margin-top: 5;
+margin-bottom: 5;
+}
+</style>
+
+</head>
+
+<body bgcolor="white" onload="viaMk();">
+
+
+<h1>Introduction to associativity</h1>
+
+<p><a name="What is a associativity"></a></p>
+<br>
+<br>
+
+<h4>What is a associativity?</h4>
+
+<p class="nobottom">A link between two different functions in a CAD system that assures that a change made in one area is reflected in all other areas. For example, a change to a solid model will be reflected in its drawing.<br>
+In the <b>think<font color="#FF0F00">3</font></b> application, when you update some feature inside the 3D model, 2D drawing generated from the corresponding model also gets modified accordingly after regenerating the drawing. This aspect helps you to maintain a clear correlation between the model and the drawing.<br>
+</p>
+
+<p class="nobottom">You can <a href="mk:@MSITStore:help.chm::/language/file/FWfile/T_FW_dw_06.htm">create a new drawing from the current model</a> and maintain the associativity</p>
+
+<ul class="noleft">
+<li><a href="#drawing and a model">between drawing and a model</a></li> and
+<li><a href="#added geometry">of the added geometry</a></li>
+</ul>
+<br>
+<br>
+
+<h4><a name="adrawing and a model"></a>Associativity between drawing and a model</h4>
+
+<p class="nobottom">The program can automatically generate drawings from a model and maintains the associativity of the entities in the drawing view.<br>
+You can also generate the drawing views for a reference model using <b>Insert</b> <img src="../../../images/general/litarr.gif"> <b>Drawing View</b> (<a href="mk:@MSITStore:dw.chm::/language/drawing/FWfile/T_FW_dw_01_01.htm">Main</a>, <a href="mk:@MSITStore:dw.chm::/language/drawing/FWfile/T_FW_dw_01_01.htm">Derived</a>, <a href="mk:@MSITStore:dw.chm::/language/drawing/FWfile/T_FW_dw_01_01.htm">Flat Pattern</a> and <a href="mk:@MSITStore:dw.chm::/language/drawing/FWfile/T_FW_dw_01_01.htm">Exploded</a>) menu and associate them.</p>
+
+<p class="nobottom">For example: The following illustration shows the four drawing views generated from the 3D model.<br>
+<br>
+<img border="1" src="../images/Assoc1.gif"><br>
+<br>
+If you modify the model, the drawings views and their associative dimensions and axes get updated.<br>
+<br>
+</p>
+
+<table border="1" bordercolor="navy" bgcolor="#FFFFE1" cellpadding="10%">
+<tr>
+<td class="noteme" bordercolor="#ffffe1">Associatively holds well with these snap points &mdash; <b>End Point</b>, <b>Mid Point</b>, <b>Arc Center</b>, <b>Intersection Point</b>, <b>Point On Curve</b>, <b>Intersection On Extension</b>, <b>Perpendicular</b> and <b>Tangent</b>.</td>
+</tr>
+</table>
+<br>
+<br>
+<br>
+
+<h4><a name="added geometry"></a>Associativity of the added geometry</h4>
+
+<p class="nobottom">Associativity is well maintained for added geometry in the drawing view, if the entities created are fully or partially associative.</p>
+
+<br>
+<ul class="noleft">
+<li><i>Fully associative entities</i> &mdash; entities created with all associative snap points.</li>
+
+<li style="list-style: none">
+Associative snap points in the drawing view are represented with lock cursor <img src="../../../images/icons/cursors/ViewLock.gif">. For example, while creating entities (line or arc) with an associative snap points, a lock cursor is shown during the picking phase. The meaning of the lock cursor is that the created associative entity (line or arc) will be updated with the regeneration of the drawing view.<br>
+<ul class="noleft">
+<li>Entities created with respect to an associative entity are also associative. For example, a parallel created with respect to an associative line is also associative.</li>
+<li>You can edit extension an associative entity. For example, an associative parallel line created with <b>Copy length</b>/<b>Unlimited</b> length option can be resized to desired length by double-clicking on the selected entity or choosing <b>Modify Entities</b> from the contextual help menu.</li>
+</ul>
+</li>
+<br><br>
+<li><i>Partially associative entities</i> &mdash; entities created with some not associative snap points and some others associative.</li>
+
+<li style="list-style: none"><br>
+For example, when you create a <b>2 Point Line</b> (with an associative first extreme point and a not-associative second extreme  point); the first extreme point gets updated on every view regeneration and the second point is updated so as to preserve line length and orientation angle of the <b>2 Point Line</b>.<br>
+<br>
+ In the below illustration, you can observe that the line and the orientation angle are preserved even after the model is changed:<br>
+<br>
+<img border="1" src="../../../images/geometry/Geometry_Orientation.gif"><br>
+<br>
+</li>
+
+<li><a name="UE"></a><i>Not-associative (Unrelated) entities</i> &mdash; entities created without any associative reference points; the <b>think<font color="#FF0F00">3</font></b> application prompts a pop-up and moves them to <b>Unrelated</b> entities group of the corresponding view after creation.</li>
+
+<li style="list-style: none"><br>
+<br>
+<img border="1" src="../images/Warning.gif"><br>
+<br>
+For example, when you create a <b>2 Point Line</b> with both the points being not-associative, that created line is moved to <b>Unrelated</b> entities group. 
+
+<p class="nobottom">You can remove all the entities from the <b>Unrelated</b> group by selecting the <b>Empty</b> command in the context menu's of the selected entity or of the <b>Unrelated</b> group (inside <b>Drawing Structure</b>).<br>
+<br>
+<img border="1" src="../images/Empty1.gif"> &nbsp; <img border="1" src="../images/Empty.gif"></p>
+</li>
+</ul>
+
+<hr color="silver">
+<p style="margin-top:0;margin-bottom:0;"><a href="../../tocpages/EL_2D.htm" style="text-decoration: none;"><img src="../../../images/general/movie.gif" alt="Take a look at the video list" border=0 align="absmiddle"></a>&nbsp;&nbsp;<a href="../../tocpages/EL_2D.htm" style="text-decoration: none;"><font color="#63a9d8"><b>e-Learning</font> on the Drawing Environment</b></a></p>
+<p style="margin-top:0;margin-bottom:0;"><a href="../../tocpages/EL_Layout.htm" style="text-decoration: none;"><img src="../../../images/general/movie.gif" alt="Take a look at the video list" border=0 align="absmiddle"></a>&nbsp;&nbsp;<a href="../../tocpages/EL_Layout.htm" style="text-decoration: none;"><font color="#63a9d8"><b>e-Learning</font> on Layout</b></a></p>
+<hr color="silver">
+</body>
+</html>
+

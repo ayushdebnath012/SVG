@@ -1,0 +1,122 @@
+{
+  "id": "resp_0e8f574588aef02e016ab196a2fc9087d2af6b4f1bbf513ba4",
+  "object": "response",
+  "created_at": 1790023331,
+  "status": "completed",
+  "background": false,
+  "billing": {
+    "payer": "developer"
+  },
+  "completed_at": 1790023342,
+  "error": null,
+  "frequency_penalty": 0.0,
+  "incomplete_details": null,
+  "instructions": null,
+  "max_output_tokens": 16000,
+  "max_tool_calls": null,
+  "model": "gpt-6-astra",
+  "moderation": null,
+  "output": [
+    {
+      "id": "msg_0e8f574588aef02e016ab196a6e8e887d2b3c5564940195337",
+      "type": "message",
+      "status": "completed",
+      "content": [
+        {
+          "type": "output_text",
+          "annotations": [],
+          "logprobs": [],
+          "text": "{\n  \"routes\": {\n    \"A\": [[21,15],[20,15],[20,17],[12,17],[12,16],[3,16],[3,17],[1,17],[1,16]],\n    \"B\": [[10,8],[10,5],[21,5],[21,3],[22,3],[22,2],[23,2],[23,0]],\n    \"C\": [[28,10],[27,10],[27,20],[22,20],[22,19]],\n    \"D\": [[9,13],[0,13],[0,9]],\n    \"E\": [[6,6],[6,5],[9,5],[9,2],[11,2],[11,1],[14,1],[14,2],[21,2],[21,1],[22,1]],\n    \"F\": [[4,18],[5,18],[5,20],[16,20],[16,19]],\n    \"G\": [[12,0],[5,0],[5,7],[7,7],[7,8]],\n    \"H\": [[23,18],[24,18],[24,13],[22,13],[22,14],[17,14],[17,13],[15,13],[15,8]],\n    \"I\": [[3,12],[3,7],[4,7],[4,5],[1,5],[1,4]],\n    \"J\": [[23,9],[23,7],[22,7],[22,5],[24,5],[24,0]],\n    \"K\": [[11,12],[11,15],[3,15]],\n    \"L\": [[16,11],[16,10],[18,10],[18,11],[20,11],[20,10],[24,10],[24,8],[25,8],[25,6],[26,6],[26,3],[27,3]]\n  },\n  \"explanation\": \"All twelve nets connect their paired pads using single-layer orthogonal integer-grid traces. The checker passed with zero violations for endpoint connectivity, board bounds, keepouts, and inter-net clearance. No vias or extra layers are used. This validates routing geometry, not whole-circuit electrical performance.\"\n}"
+        }
+      ],
+      "phase": "final_answer",
+      "role": "assistant"
+    }
+  ],
+  "parallel_tool_calls": false,
+  "presence_penalty": 0.0,
+  "previous_response_id": null,
+  "prompt_cache_key": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "high",
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "store": false,
+  "temperature": 1.0,
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "tool_choice": "auto",
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  },
+  "tools": [
+    {
+      "type": "function",
+      "description": "Check proposed PCB trace polylines for missing nets, endpoint errors, keepout violations, off-board vertices and cross-net contacts. No solution paths are supplied.",
+      "name": "check_routes",
+      "output_schema": null,
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "routes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        },
+        "required": [
+          "routes"
+        ]
+      },
+      "strict": false
+    }
+  ],
+  "top_logprobs": 0,
+  "top_p": 0.98,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 11073,
+    "input_tokens_details": {
+      "cache_write_tokens": 7774,
+      "cached_tokens": 3296
+    },
+    "output_tokens": 468,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 11541
+  },
+  "user": null,
+  "metadata": {}
+}

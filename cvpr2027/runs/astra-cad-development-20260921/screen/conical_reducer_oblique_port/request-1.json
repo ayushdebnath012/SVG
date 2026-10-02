@@ -1,0 +1,66 @@
+{
+  "model": "gpt-6-astra",
+  "input": [
+    {
+      "role": "user",
+      "content": "Make a fabrication SVG flat cutting pattern for the ideal THIN NEUTRAL SURFACE of the described rolled metal sleeve. This is a sheet part, not a field plot. Zero thickness for geometry, no stretch, kerf, springback or seam allowance. Cut out EVERY portion of that surface inside the stated infinite drilling cylinders (both sides where applicable); keep the remaining material. If supplied, remove surface above plane z=a+b*X+c*Y. XYZ are right handed, z is the sleeve axis; all lengths mm; angles radians. Drill axes need normalization. All inputs are complete; do not infer other geometry.\nThe sleeve has a vertical seam at global azimuth seam_rad. Opening that seam maps theta in [seam_rad,seam_rad+2*pi] into the flat. For a CYLINDER use flat Cartesian u in [-pi*R,pi*R] increasing with theta; v=z-height/2. For a CONICAL FRUSTUM r0 at z=0, r1>r0 at z=height, develop into the annular sector with its virtual cone apex at (u,v)=(0,0), centered about +u. The lower seam is the negative-angle radial edge; increasing theta increases flat polar angle. Use true developed neutral-surface distances, not a projection. There is no target curve formula supplied; derive it from the geometry.\nSVG fixed viewBox=\"-130 -130 260 260\", width=height=1000. Flat u points right and v up: use a scale(1,-1) group when writing geometric paths. White background; solid black retained material, white removed areas; no strokes/labels/images. Curves must be accurate to 0.15 mm. SVG paths/polygons are allowed, including sufficiently dense samples. A helper may export numerical contours as genuine vector paths.\nReturn JSON {\"code\":\"Python that assigns the entire SVG string to svg\", \"explanation\":\"...\"}. math and np (NumPy) are preloaded, ordinary functions/for loops/comprehensions allowed; no imports, files, external calls or private attributes. contour_svg(x,y,field) is available: x and y are monotonically increasing 1D physical coordinate arrays, field is 2D [len(y),len(x)], positive for black material, negative for white; returns SVG in the required coordinate convention using interpolated marching-squares vector paths. It contains no CAD knowledge or task data. Limit arrays to at most 2000 by 2000. You can also build native SVG paths yourself. Use evaluate_pattern to execute and check each candidate; up to 3 evaluations. It reports SVG compilation and inventory, not hidden target comparisons. Then return the final code.\nSPECIFICATION:\n{\"kind\": \"cone\", \"r0\": 18.0, \"r1\": 46.0, \"height\": 58.0, \"seam_rad\": 0.47, \"bores\": [{\"point\": [4, 5, 29], \"axis\": [1, 0.35, 0.55], \"radius\": 14}]}"
+    },
+    {
+      "id": "rs_08c0c0256ab6c905016ab033a9286c87d29cac18f7eea1a49a",
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqsDPH6cUwQiY__fEwj9Twm_o5hJr6_XI7afzMMrGd9S_2FQXhkhuFNBeWjHCiei2NZxEuznJsAl54NQCVzcvFNdrQleKC6HVC0bBdZp8IWGf_byjbZWZwVGmUhXmN0p6Vv7isj9j7S3_Q_80DW7oDtxOAKz9A0CVxkZchuvL0NFwVy9yTJml2tUMv7QjAszJqzFLN8C8JkfLp-0H0mwNC2bz707t39lnsiRsDkWTVC3bQ25NCi0DKr8hW6nRGaEIQHlmv65JIlpADbPTJVKRq26eSM7ZJGYQwzjZZ_qP1J8XEIu5RKFn9IXBd5MnyekztWSHg9_g2ngy4sN-0Y5YG5eaWSp5cx5c6dNBGokofn-InV7i5Ylkgwk67HXSqvqaTuYPrB5YZSp5PEesLtB5fvSAzC_V7EkronSadKrsnGZbrlokLaIhy8eieL9M281SwNAtReIPr73tQwRgvTQlAQAvOPbQcmNRvagi2Kfbn6X87JG5GAcS6W8I14KgUILLB_t5iUUAmNvIkSqlVfETVt5QHL5ueO0a2utSGd5zQz66k0ByNzQY4E6aDltFv8uCCsG82FvSdnR0UwIJ4wf8lm3-tlQhnrNZcbLFBHmUITVN1YgLoG9YuO7SXuzBALfJYiIDbg7vQ3aZGlUPhoOSxP0uuUlXtIeyr0d9YjpWTR3RXB1XSkZbQv_KD4KdlALn7XaMEoqSJOHgDw2AmMBEX-kjvOwhTWjQzUDbYGEaho-1SOozVMiYGz95HKl4sGFOggOBuw8J9r_2wEeDSpOmaQBw_WaoLlIKR0yD9VLya2kzKPiH80_yhVQ0alOvuNdO5PO557BqETU_bYZNzKUNmlc5P6eBGXhM9ptfdyfm0sXsG4ipQCIumBQJCZAY-2xQabsZdCWAayfkEN03VniciBOyykkYbN4rd__ZC25Ibc18Vjs4LAeL7_YTtjH0MX_SWmrFoCqgoeOD-a_VJOEMmFquxDdi4oSbHuh-ySGzbyj2zZGiOIU7qbqhD-i8ZTtpMYmIi5KXSvoGh6nYh0bTgxnuAFhMNVGkVZSmILxptwRziYQAmVG1H9Ypj8-nijxivEvqlG0ITP93xdZmttVkbjWqxZjicI_1HAruI2-DeA_nzADiXljCxCLPrW3oyIUVU6AmZRDdgV3--02VzZhS7Wr4eT53xlY3pFnWq5oCU6NdzMs0s6HcAZDH4R3ePDOlPUC3XV4x4_339CGoOrnsEetEUPajeYHL4ip8ildeuy_C9_RLKZikDquOX2Jhkzsxogc49PIt7aaSbgGjAD0NcCV44FgqraqYfrD9EnhSjzQEUHFsixmCwFzPWWIcm8JqXUqk3JnmzJdgavZUXriAqEKx3dEbYGhsITIf7BoFYu6YkZN3JDSktgn3Li5nQ1KDS_Rci9Awm1-DNYIufiKiB9CQA7X1X5SQeT4T-pl__JXHYUHqJY4RVT5j0i_Q7THAQFRKI5R2BCMsZcgJMCpiShOqyho5AqyNdoplRAkyb7LHGhQyLdGFjYMYaX25aNdaPVERIYkqsU_WBJMNRV-N5Yiu4PSQI5ZfdhRR-NvesxgIAxagJBbu8ZnyheIxc1LK_nZ72r2y10ss4Kj4yoeReTkE7rsAs9E1C1hIYgxTHudwnrKrgVr8OApl5KFbaqSf9hDLCX8I3jHNXdhAOzVX44TwkFxUAeRmb23WEn5E6s4ECQewfBnJeu9vSAZsrv4gRq2Vctj5NIv9sZkWkYr11Fsz4vgxCQBPItAuFrXL8ZXSh5-inbwAMURBFezzndcu7j5PVic3sfe8gbGq3FguUWuQKz_CD68Z0E0yVrlIAUG8-nky_H3C47eEHVkN2HOVCZqP-fyAoijGSOiUfZsi4SDUfZMmvp9jHmob1aAuLu_kGvw50qqveafw9rSEzm2zDYlkL69bDHLQ1RIouPu5WMcXmszF4604VKCUWUtWIaviZjLaFwvZsBA7wNg6ijkbnSIf7WqdTxME9k3BBFzMf3XZVF4YU8iOAaXa_zD5rF8A2PHnPzxrXYJ6tAnGNlHx_2b_u92apY7xf1Hopopl43_qDmXDosuaUzCFwV4YuIdGkTp7OQzdggVpxqchJNP17YjosphQ_dm6-hKGJy1wjquoUPApoEMxK4TjtOHZH6VIQkGVbZyMcarQRr0jjlQYTL3AWrFBYlb5oWdqPyUz1cpH4hpiw-t8XqQM5bDXPQ3hd4N0XJD2ULGgUmGvXF-z43JL5iWxQw0as9H6OjMJ_miBCJvX89I0LrDo0dELFc-hq5JuaKrYxnZO12eN0emKEWTERwQN7jM_DVHnVkFQInbvClMU6_2KNl1LYjXGON7fJ7Je-_XUzij6lgKwBfEuR08-XjMs7JVCCruV1-3DNgFZBxnAiTBHyDoEr3mz3t9Ko2w1qgXkd2UyR1Irw4r7F7hApDRvv3Z-2NyRfB0gRuPuJoEef8IESmPD4gNsFHTdwUKtV505hi9NMOgbIU_jY-i61hQe2QIfHs3Fq6xSd5j7G6kGdLpNJpQ8lbiBiG8hS3pBGFW4M1bK7LmWhM3iK8nVJLm1_QAJtV_ZIPnscjq0BcDkT_jptAAgpLSMydSL5eBl5LNZkg8EFG-VfH2ObKhHQkY1R9HNKjkY4UCAai_KclX2OLBePN4vOSEdLeBvhv7jh1-x54MxYHbTZx_I5klhKt46g77DY-z3i93qmQeGO7zj4GN3YgfyMhOF2zvlC9Q5VIpuN7EWMsE5BwYzbrHKJw3rC1NSfQWX3uCakPlEJIQ02MZ8Hc54oiE-pnC9jqEsCvi21PV0RJkYZ2NgbcgjMJ21UKKONhf0xO_G_0rx7x2bFkc5V0DzrPIsK3Tdl2btr72420LdC5MVOfpAyfJ4RRz1UOCE5FiqLIrD-WpOxwgFh4KfzD0ndRShbMeKK6g5LI_9M7h1h69gXig2P1mWItJDT4crhn2CtrGb0ulHRn1dl-Ao2gnDnrJcGI__EYODUZGRWNeZJAqoLzBWfN6bsPvd3X6BnEry9_dGyosPoBMw6bDTWhi175NEu6T2Rv5sB7urtskTtDcSKqJLvRRL4iU28oswNh45c_DR9SCyffV3xpTfeGn6x0MTTmzpFlbHiEnx11aFTOU6wvMquw8LPlzNHtD64TxBA3GQKDCcgnILdwlOr0kaQyyeW2t8JMOTcdNaWzN9zjViWwHqLFss4T7NDx0MOBi5HOaMWujKpGk9tgyxoYtgnRxqXJN7WiL5BeJRgTLGKKiac5R55jTS57pkIxJk8ayI1kW8oXKrA91jLaYbVlNlg-BF-kXGgKsf2wOq8iE42zYJigP-1nqZb8tNM1M7qof-SjDenvcWGVni86II3mDdsyTzeCcqka7CLhvCxTUYBmgBqaUhQLqsEBrMmTrCYbw5Y_46q9LjQCsqcMHU-J0Tqh_xy1cxQUPslp-GXkdr3kkBZ5lVyMWui1e_w2qlXmqei5dbHPxPefE99gb9EqoVi-eQ3GBpH9C5qhwVfs-C0lMlCHWHdxo0jjB1KQz5LznWRkcYOQMryVL1igGHg8pVFc49u7TEYe1lcBcGSjKZa0hVVd2tpRpMF7_fJb91e3lon8R9HRYFcErfwuerQVrHY18It5qwGi4Qhk7Pcj_3wvF7gscOPRoUApbq7dp-NH09QFsrSLoOZGnun5TOkYBWy015b0kOICSg=",
+      "summary": []
+    },
+    {
+      "id": "rs_08c0c0256ab6c905016ab033b92e7c87d2ac16fc5fba80b88f",
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqsDPHxI9ez6xx94apJVjDr4C57d2N5qdHgHADCSeUM87cizsriz25cth8SMaY9EfxBpy2-7gt74qeN-CYKtG3fnkbzbPCKL4NkDuGq7BAcGbyzcdFLKyffIrkXuR7HnNNaawIYtcP-EaJB8JZg_LzcTj2lZP2-IoffzY0Sw5yvC8yuAC4qHcLt30VTAFxrP_pouIblXBRcsgLDhCI3hV6UbSMjeefI5p2S4iHHvWBUA91CLW3GXTgk20uIbVo6itNrmMu6hT6SK782658rQ4KA6Ij8yJgcTcrWbB2YxcdYK8d1LuHaep07VQ0fqIKnVpkwLf1gMdmpGKxT6SQomCtyp8ixIUGA_WBSeQLH9VM9hxCycKrb-lthFKJVF5m1SLDTs2FhvjmWNcRpEAiT_aVbh7QRYtvkMHdW8azLRV1NPJRVEFC7R_l3zYU6pGIs0vytljKg1yms1SwF2BmQwasdmq1iUn2uGXk3vvNgZWFjEgqG7uSYQPffk9NUypuorQi1ynQ1muxa2cySZrztpmmINPg03M2w6ekAKJeUHqThtWyUECL-oNTJbaIKQWOTY1F9ylf4M9GMGdpFWi_H2VmCJsndjyEmedBGsbsUqilw9iTnULoMfS5Z361SbG7l39rWN59lxxMPzr3dKCChfGwQhvjk0eIObKpKEzYajRZwAN2qNEwklKGIjI3XooZnetkTL6Bx0Wc-lzhVWrm_qGFpMZ9w04XtM8IsN9L_nXwHi2RybtWL_EYUPiZR4QYvTniSs25CQJPR4iopFi2vfBche0nN6H8L3iecA9HQA6Q6dPs-CZYvbokwRYIzURkQN-AshL_1AZZbxuzLG7jx1Q1CK2qhVddp2M8QjHI2BGErvMgHWsWKJjukPMliplFy2C3efTe-EOhkgfENTXAauxa-LFGHk5-SyurrFUgQwpVOpesBPuiNDTiPEwyADgjtpOOeQPEGtgeRiEPtWwm9bQKowuZMDWuxNkchh0CTxhS9q2KEDWFcEW0PkD4QGsQolFzIv01BwLatZYE1JObrcyVI5H8r8LqThHWR1Lyvlx6HMWW7NiPYfemqxOP-FMFXOV9YFnHCHRtAvYzmPZ5JOPapLoCWFTBxMgz0a1k6WnQjHaQdA3j5AZv-cLW9OxQ6Yf99FxgfsJ3YWN1MOcJTxRTwioDWhpaohCqQCcBPfhMQtF8i0oHriUAfmgwqRhaKvg2ho8TdLXfOmZHjGs7ACUg2ayza6nxNK9QlZ2Lxzs5Pz_Dj-CpoLAQIrVxKdwKE1EOzVK18ZGTL2Vc16R45H8CygkFf3u67Ixs_n3RbM3CMLkUMlwdcxPvGA_cEfepktLDmk9_X4ePGop0wHKJL11RIS1bHgauNsVFU7PTsSemp4Xg5sn3o1BeUb9q-PW1WGS-RVWKKSPEETWSWXFzn8dZZ5DJVV0VvYfoQEr9qw5rr28YwAK2e74uepjTyQ3_SY_FwE17JFIuNgflDB2OctxCigg2S27upwO-uagxx6u8qtOq3R1SAZ8AjSfmJhN-aFzDrMvqn6Fjt1phj_xn2V42soaDcWOZC95lC6-4B_JK3jN99t18ahVcq7mY9Ffd6Yvt4so73ipcjCJKirhbX3B8F1qSoErsKQVVwh75tH8BW_Js7M0EkiZt4QRlIYZIRy9TZ9qMw7hgERFGT9LutYoOKtCDb2hMS2nqpVHdRzIoCwG6O7C2qsp6OpH4eUhy4aQlV1--1TQi89ylBSFwHhLb5sjo3LO-saGIZxyGJ3bPP793r7blui-GcgsSGKbmFaqLVuQZMH6Nj5S0sfa0IqX142kpe3cfyEKuFoKrUu45fTPCugri8yODgrxTE8e55aVyDYErMFK37-GhOytZtxSquZ-JSPYactFIchmYjyDN5VhwocWK5vIQGNhQCP7wClGJtosYHcxPlmjTkAkeh_Vca6ssTobWoPXvD6fBaFqj1cf6c9vId51-8iH41Rg3ZEzb0yBZyLIrIJt-ftaIN3cwyQ1vGz1MbF3ugBj7QFh1hfJlXfB0oy5732h_xp2w1dRjbIeNNpCa8Vc9qLoEDpRsiescr4ZeVyb5Saw5N7qVc86HhP3oztX6uWAfeLrhG7dS3-1WXv3wD98Wfl-tLN-LxuHMIZRAZdyDA5nx41X6f3yl8S6ngBE9Lq7JSaKrgNw2FhigGXDPzBiF7arSlmYMAfLLNzPhoc-QY3Tp31smDcGo04WPEcub_YK12_D6MSjuc4dsvVoctkzvafFpm3TdcX6rZ3Br7VsLLlNISERvho72lUDSVuWIM5Trd7D0DuBFcoFwUeyNYCz7148yT5Mk5oioVaj4TwSJNG7IpS6yCX-lUJ_Nub-bTqNhGCAtlhq1xo_YKsqbN4_jxdSvyoMlkC3zM7yR15Qi8X0j8k39jc36C12NJuIaTcunXphz2t8Bhe5fkOXqdDDH902mcVhCE7unkiPozyMxTaHvNx5EMechJj1HtSXZv368_8TimJNpFblT",
+      "summary": []
+    },
+    {
+      "id": "fc_08c0c0256ab6c905016ab033c028a087d2be94223fa21bd069",
+      "type": "function_call",
+      "status": "completed",
+      "arguments": "{\"code\":\"r0, r1, h = 18.0, 46.0, 58.0\\nseam = 0.47\\nslant = math.sqrt(h*h + (r1-r0)*(r1-r0))\\nk = (r1-r0)/slant\\nrho0, rho1 = r0/k, r1/k\\nhalf_angle = math.pi*k\\n\\n# Grid spacing is below 0.114 mm in each developed direction.\\nx = np.linspace(-2.0, 110.0, 1001)\\ny = np.linspace(-108.0, 108.0, 1901)\\nU, V = np.meshgrid(x, y)\\nrho = np.hypot(U, V)\\nphi = np.arctan2(V, U)\\ntheta = seam + (phi + half_angle)/k\\nr = k*rho\\nZ = (rho-rho0)*h/slant\\nX = r*np.cos(theta)\\nY = r*np.sin(theta)\\n\\n# Retained annular sector, bounded by the two seam rays.\\nfield = np.minimum(rho-rho0, rho1-rho)\\nfield = np.minimum(field, U*math.sin(half_angle)-np.abs(V)*math.cos(half_angle))\\n\\n# Remove every point inside the infinite cylinder, not just one wall crossing.\\nnorm = math.sqrt(1.0 + 0.35**2 + 0.55**2)\\nnx, ny, nz = 1.0/norm, 0.35/norm, 0.55/norm\\ndx, dy, dz = X-4.0, Y-5.0, Z-29.0\\nalong = dx*nx + dy*ny + dz*nz\\ndistance = np.sqrt(np.maximum(dx*dx + dy*dy + dz*dz - along*along, 0.0))\\nfield = np.minimum(field, distance-14.0)\\nsvg = contour_svg(x, y, field)\"}",
+      "call_id": "call_Nlxh7TMLIjYliqVfpBjh2XBv",
+      "name": "evaluate_pattern"
+    },
+    {
+      "type": "function_call_output",
+      "call_id": "call_Nlxh7TMLIjYliqVfpBjh2XBv",
+      "output": "{\"status\": \"completed\", \"svg_bytes\": 141767, \"paths\": 1}"
+    }
+  ],
+  "reasoning": {
+    "effort": "high"
+  },
+  "max_output_tokens": 16000,
+  "store": false,
+  "include": [
+    "reasoning.encrypted_content"
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "name": "evaluate_pattern",
+      "description": "Run numerical SVG generator; returns execution and SVG inventory only; no target answer.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "code"
+        ],
+        "additionalProperties": false
+      },
+      "strict": true
+    }
+  ],
+  "tool_choice": "auto",
+  "parallel_tool_calls": false
+}

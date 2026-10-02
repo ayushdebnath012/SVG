@@ -1,0 +1,117 @@
+\section{Structural and mechanical SVG editing}
+\label{sec:structures}
+
+The engineering workflow extends beyond the network experiments through separate, bounded implementations.
+\Cref{tab:domains} states which editor and checker are actually evaluated. This distinction matters:
+the learned network model has not been evaluated as a general frame or truss editor.
+
+\begin{table*}[t]
+\centering\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}p{2.1cm}p{3.4cm}p{4.3cm}p{5.7cm}@{}}
+\toprule
+Drawing family & Evaluated editor & Check on the output & Evidence and input contract \\
+\midrule
+Circuits / pipes & Learned 1.5B/7B tree patches & Circuit solve; hydraulic solve & 1,000 main and 400 hard edits; visible-geometry/label network importer \\
+Axial trusses & Bounded deterministic edit & Axial FEM; equilibrium & 20,008 audited edits; visible geometry, sections, loads and supports in a fixed grammar \\
+Perforated plates & Bounded deterministic patch & Hole/edge/ligament geometry & 19,992 audited edits; 699 faithful edits violate stated geometry rules \\
+Planar frames & Saved \astra SVG edits & Geometry readback; frame FEM & Explicit physical model supplied; 21-member example, three analysis refusals in four attempts \\
+Mechanical CAD & Saved \astra generation/edits & Task-specific shape checks & Ten completed hard-screen tasks pass; retained as controls \\
+\bottomrule
+\end{tabular}
+\caption{\textbf{Implemented checks and evaluated editors.} Counts describe different protocols and are
+not pooled. FEM and geometry checks apply only to their stated physical or manufacturing assumptions.}
+\label{tab:domains}
+\end{table*}
+
+\subsection{Re-importing the edited structure}
+The truss/plate route recovers an engineering representation from supported untagged SVG geometry and
+visible annotations. A bounded request interpreter applies arithmetic and named parameter changes.
+For fixed topology, the resulting target is converted to a tree patch, serialized, parsed, policy-checked
+and applied to the original SVG. The actual patched SVG is imported again before verification.
+Changing the panel count uses version-3 structural patches with subtree insertion and geometry replacement.
+The bounded planner builds an internal target representation for patch derivation; the delivered SVG is
+always obtained by applying the serialized, parsed and validated patch to the original source. The
+21-to-29-member bridge example uses 53 operations: one text edit, 32 attribute edits, four geometry
+replacements and 16 subtree insertions. Re-import and FEM check the executed result. This is a
+deterministic patch compiler, not an evaluated learned topology-patch predictor.
+
+\paragraph{A concrete parsed patch.} In the section-depth example, the source parser assigns the
+section annotation the scene address \code{n34}. The serialized edit is:
+\begin{lstlisting}
+{"version":2,"operations":[
+  {"op":"set_text","targets":["n34"],
+   "text":"Section: 30 x 40 mm"}]}
+\end{lstlisting}
+The parser resolves this address against the source tree; the executor changes that annotation and
+preserves the remaining elements. Re-importing the output recovers the larger axial area and FEM
+reports peak stress 5.930\,MPa instead of 11.861\,MPa. Scene addresses belong to their parsed source;
+they are not universal component identifiers.
+
+\paragraph{Truss FEM.} For each pin-jointed member, the recovered endpoints determine its length $L$
+and direction; visible section dimensions determine area $A$, and the material note supplies $E$.
+The axial element stiffness is $EA/L$ times the direction-cosine matrix. Assembly and the recovered
+support conditions give $K_{ff}u_f=f_f$. Member extension gives axial force and stress; support
+reactions provide a global force and moment equilibrium check. The model assumes linear elasticity,
+small displacement and nodal loading. The reported pass in this implementation is a numerical
+equilibrium check, not a stress-allowable or buckling certification.
+
+\paragraph{Plate geometry.} For circular holes in a rectangular plate, the importer recovers the
+boundary, hole centres, diameters, thickness and stated clearance criteria. It checks boundary
+crossing, hole overlap, edge distance and ligament, and reports net area and volume. For two holes,
+the ligament is $\|c_i-c_j\|-r_i-r_j$; edge clearance is the distance from a centre to the nearest
+boundary minus its radius. These are manufacturing-geometry checks; plate stress requires a separate
+continuum model and is not inferred from the geometric pass.
+
+\subsection{Verified SVG edit examples}
+Five saved examples were replayed through the implementation for this revision; four reproduce the
+earlier saved edited SVG trees, and the fifth is a clearance violation selected from the audited dataset.
+\Cref{tab:worked-edits} lists their actual outputs. The source and edited SVGs, requests, applied patches
+where applicable, and re-imported verification records are retained with the examples.
+
+\begin{table*}[t]
+\centering\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}p{3.5cm}p{2.8cm}p{5cm}p{4.2cm}@{}}
+\toprule
+Request & Edit mechanism & Recomputed quantity & Check on delivered SVG \\
+\midrule
+Set all member depths to 40\,mm & Tree patch & Peak stress: 11.861 $\to$ 5.930\,MPa & Fidelity and FEM equilibrium pass \\
+Double downward bridge load & Tree patch & Peak stress: 84.375 $\to$ 168.750\,MPa & Fidelity and FEM equilibrium pass \\
+Change bridge to eight panels & Structural tree patch & 21 $\to$ 29 members; peak stress 112.500\,MPa & Connected output; FEM equilibrium passes \\
+Enlarge six plate holes by 4\,mm & Tree patch & Edge: 25 $\to$ 23\,mm; ligament: 58 $\to$ 54\,mm & Stated clearance rules pass \\
+Enlarge four plate holes by 6\,mm & Tree patch & Edge: 15 $\to$ 12\,mm & Faithful edit; 15\,mm edge rule fails \\
+\bottomrule
+\end{tabular}
+\caption{\textbf{Replayed engineering edits.} These examples use the deterministic structural/mechanical
+route. The bridge topology example keeps load per loaded node constant, so total load changes with
+panel count. Stress is recomputed, but no material strength limit is tested by the truss equilibrium check.}
+\label{tab:worked-edits}
+\end{table*}
+
+\paragraph{Full pipeline audit.} The saved dataset audit streams all 40,000 truss/plate SVG-edit rows
+through edit interpretation, patch application, output re-import and the applicable checker. All 40,000
+match the stored target tree and pass edit fidelity. All 20,008 truss edits satisfy FEM equilibrium.
+Of 19,992 plate edits, 19,293 meet the geometric criteria and 699 violate edge-distance or ligament
+requirements. The 699 are successfully executed edits whose consequences are flagged by the checker;
+discarding them as editing errors would hide the distinction the workflow is designed to expose.
+These synthetic, bounded requests demonstrate pipeline consistency rather than learned generalization.
+
+\subsection{Learned editing across other drawing families}
+A separate 7B patcher was trained on 8,000 lineage-disjoint synthetic examples and evaluated on 100
+balanced held-out examples from five drawing families. It produces valid patches in 100/100 cases,
+but exact target-tree equality in 59/100. The family counts are 4/20 building plans, 20/20 circuits,
+6/20 furniture tables, 9/20 mechanical parts and 20/20 water piping. A drawing audit that allows
+numeric serialization differences finds 60/100 outputs with both the intended recovered parameters
+and internally consistent geometry. This is a different adapter, dataset and metric from the network
+editor in \cref{tab:ours}. Mechanical dimension notes match in all 20 examples while 11 corresponding
+drawings are geometrically inconsistent: checking annotations alone would overstate editing quality.
+
+\paragraph{Frame and CAD analysis controls.} The saved 21-member frame example in
+\cref{fig:astra-frame} passes geometry and dimension scoring in all four completed attempts; three
+explicitly decline the requested analysis, while one calculates within tolerance. Its separate FEM
+harness gives $u_x=3.5119$\,mm, $u_y=-0.1882$\,mm and peak stress $17.6837$\,MPa after the edit.
+Ten hard-screen mechanical CAD outputs pass their geometric checkers, and six catalog-section
+structural designs pass SVG readback and their FEM constraints. These positive controls and the frame
+refusals establish checked examples under specific protocols; they do not establish a general CAD
+solver or an Astra failure on every engineering family.

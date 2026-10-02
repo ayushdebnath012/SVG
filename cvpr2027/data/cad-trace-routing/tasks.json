@@ -1,0 +1,388 @@
+{
+  "version": "pcb-grid-routing-v1",
+  "tasks": [
+    {
+      "id": "crowded_connector_board",
+      "width": 17,
+      "height": 13,
+      "blocked": [
+        [
+          1,
+          3
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          13,
+          0
+        ],
+        [
+          14,
+          9
+        ],
+        [
+          1,
+          12
+        ],
+        [
+          14,
+          8
+        ],
+        [
+          5,
+          12
+        ],
+        [
+          14,
+          12
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          1,
+          11
+        ],
+        [
+          14,
+          2
+        ],
+        [
+          6,
+          11
+        ],
+        [
+          16,
+          4
+        ],
+        [
+          13,
+          1
+        ],
+        [
+          7,
+          11
+        ],
+        [
+          7,
+          1
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          4,
+          7
+        ],
+        [
+          8,
+          11
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          5,
+          0
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          9,
+          7
+        ],
+        [
+          16,
+          5
+        ],
+        [
+          9,
+          12
+        ],
+        [
+          16,
+          7
+        ],
+        [
+          13,
+          10
+        ],
+        [
+          16,
+          0
+        ],
+        [
+          13,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          12,
+          3
+        ],
+        [
+          2,
+          10
+        ],
+        [
+          11,
+          6
+        ],
+        [
+          4,
+          8
+        ]
+      ],
+      "nets": [
+        {
+          "id": "A",
+          "start": [
+            10,
+            10
+          ],
+          "end": [
+            2,
+            4
+          ]
+        },
+        {
+          "id": "B",
+          "start": [
+            2,
+            2
+          ],
+          "end": [
+            10,
+            9
+          ]
+        },
+        {
+          "id": "C",
+          "start": [
+            8,
+            8
+          ],
+          "end": [
+            13,
+            12
+          ]
+        },
+        {
+          "id": "D",
+          "start": [
+            8,
+            5
+          ],
+          "end": [
+            14,
+            7
+          ]
+        },
+        {
+          "id": "E",
+          "start": [
+            5,
+            5
+          ],
+          "end": [
+            15,
+            8
+          ]
+        },
+        {
+          "id": "F",
+          "start": [
+            7,
+            0
+          ],
+          "end": [
+            11,
+            4
+          ]
+        }
+      ],
+      "reference_routes": {
+        "D": [
+          [
+            8,
+            5
+          ],
+          [
+            14,
+            5
+          ],
+          [
+            14,
+            7
+          ]
+        ],
+        "E": [
+          [
+            5,
+            5
+          ],
+          [
+            7,
+            5
+          ],
+          [
+            7,
+            6
+          ],
+          [
+            10,
+            6
+          ],
+          [
+            10,
+            7
+          ],
+          [
+            12,
+            7
+          ],
+          [
+            12,
+            11
+          ],
+          [
+            15,
+            11
+          ],
+          [
+            15,
+            8
+          ]
+        ],
+        "F": [
+          [
+            7,
+            0
+          ],
+          [
+            11,
+            0
+          ],
+          [
+            11,
+            4
+          ]
+        ],
+        "C": [
+          [
+            8,
+            8
+          ],
+          [
+            11,
+            8
+          ],
+          [
+            11,
+            12
+          ],
+          [
+            13,
+            12
+          ]
+        ],
+        "B": [
+          [
+            2,
+            2
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            6,
+            6
+          ],
+          [
+            6,
+            7
+          ],
+          [
+            7,
+            7
+          ],
+          [
+            7,
+            9
+          ],
+          [
+            10,
+            9
+          ]
+        ],
+        "A": [
+          [
+            10,
+            10
+          ],
+          [
+            3,
+            10
+          ],
+          [
+            3,
+            9
+          ],
+          [
+            1,
+            9
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            4
+          ]
+        ]
+      },
+      "generation_seed": 1256
+    }
+  ],
+  "selection": "Chosen before model testing from feasible seeded boards where 1 to 5 of 80 sampled shortest-path routing orders succeed. This screens classical order sensitivity, not model failures.",
+  "preflight": {
+    "reference_grade": {
+      "pass": true,
+      "violation_count": 0,
+      "violations": [],
+      "total_trace_length_mm": 150,
+      "scope": "Orthogonal integer-grid routes, one copper layer, endpoint connectivity, board bounds, keepout and inter-net clearance. No optimal-length target. Grid pitch 2 mm, trace width 0.6 mm, pad diameter 1 mm, keepout square side 1.2 mm, minimum clearance 0.4 mm. Distinct neighboring grid routes retain at least 1.4 mm trace-edge gap."
+    },
+    "successful_sequential_orders": 3,
+    "tested_orders": 80,
+    "reference_order": [
+      3,
+      4,
+      5,
+      2,
+      1,
+      0
+    ]
+  },
+  "admission": "Three independent completed high-effort routing failures, with geometric audit. Four checker calls, no arbitrary code execution; configuration-specific routing reliability, not proof that Astra cannot solve the task with a router or more tools."
+}

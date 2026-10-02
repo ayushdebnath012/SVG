@@ -1,0 +1,17 @@
+\section{Introduction}
+\label{sec:intro}
+A request to remove a bracket flange, enlarge a bore or add a shaft slot must change more than a caption. The edited part should preserve unrelated features, remain executable, and produce coherent views. If the request concerns structural performance, it additionally needs material, units, supports, loads and a declared physical model. Shape validity alone cannot supply those assumptions.
+
+This paper focuses on mechanical CAD edits and their linked vector drawings. \Cref{fig:benchcad-reference} illustrates two published reference pairs: removing a flange while retaining the twisted web and first-flange holes, and adding an obround blind slot to a stepped shaft. These require compound three-dimensional geometry rather than a symbol substitution. The figure shows released references, not model predictions.
+
+We implement a CAD-first edit--execute--check route. A language model reads an executable program and the user's instruction and returns a source-line patch. A validating executor applies the patch to the original program. CadQuery builds the resulting solid; orthographic and isometric SVG views are exported from that solid. Independent scoring compares the executed result with the author's STEP reference. A malformed patch, invalid solid and valid but incorrect edit are distinct outcomes.
+
+Our main data comes from an online release rather than only locally manufactured requests: BenchCAD's published edit pairs~\cite{benchcad2026}. Because its edit subset is originally a held-out benchmark, using it for training changes the protocol. We explicitly construct a local split before training, hold out complete family/template components and start from fresh base weights. We do not report an official BenchCAD leaderboard result.
+
+\paragraph{Contributions and scope.}
+\begin{itemize}
+\item A reproducible local training/evaluation protocol over published mechanical edit pairs, with pinned provenance, family/template isolation, disclosed token exclusions and every retained test case scored.
+\item A validated CAD-program patch interface and deterministic linked SVG export, evaluated with both program and executed-solid agreement. The learned model receives code; it is not a drawing-perception model.
+\item A separate 150-pair hard-part pilot with before/after STEP solids and four-view drawing sheets, plus a transport control showing why patch-format gains must not be equated with engineering reasoning.
+\item Explicit separation of mechanical geometry checks, deterministic structural FEM equilibrium and plate clearance rules. No mechanical safety or broad method-novelty claim follows from these small, single-seed experiments.
+\end{itemize}

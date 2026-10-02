@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
+  <rect x="0" y="0" width="1000" height="1000" fill="#ffffff"/>
+
+  <text x="100" y="65" fill="#17212b" font-family="sans-serif" font-size="27">
+    Steady two-dimensional heat conduction
+  </text>
+  <text x="100" y="105" fill="#364152" font-family="sans-serif" font-size="21">
+    ∂²T/∂x² + ∂²T/∂y² = 0
+  </text>
+
+  <g data-field="T" data-status="ill-posed">
+    <rect x="100" y="140" width="800" height="175" rx="6"
+          fill="#fff8ed" stroke="#a45b12" stroke-width="1.5"/>
+    <text x="120" y="173" fill="#82430b" font-family="sans-serif"
+          font-size="20" font-weight="bold">
+      Exact endpoint conditions are incompatible
+    </text>
+    <text x="120" y="206" fill="#493524" font-family="sans-serif" font-size="18">
+      Each lower corner belongs to both a 100°C edge and a 0°C edge.
+    </text>
+    <text x="120" y="237" fill="#493524" font-family="sans-serif" font-size="18">
+      No contours can satisfy both prescriptions at those vertices.
+    </text>
+    <text x="120" y="278" fill="#493524" font-family="sans-serif" font-size="18">
+      Requested isotherms: 10, 20, 40, 60, 80°C — not drawn as exact.
+    </text>
+  </g>
+
+  <text x="100" y="350" fill="#364152" font-family="sans-serif" font-size="17">
+    Usual solvable interpretation: prescribe temperatures on open edges,
+  </text>
+  <text x="100" y="377" fill="#364152" font-family="sans-serif" font-size="17">
+    allowing temperature jumps at the two lower corners.
+  </text>
+
+  <!-- Plate: X = 100 + 800x; Y = 900 - 800y. -->
+  <rect x="100" y="420" width="800" height="480"
+        fill="#f7f9fc" stroke="#17212b" stroke-width="2"/>
+  <path d="M100 900 V420 H900 V900"
+        fill="none" stroke="#2466a0" stroke-width="4"/>
+  <path d="M100 900 H900"
+        fill="none" stroke="#bc392c" stroke-width="4"/>
+
+  <text x="500" y="409" text-anchor="middle"
+        fill="#2466a0" font-family="sans-serif" font-size="19">
+    y = 0.6 · T = 0°C
+  </text>
+  <text x="128" y="650" fill="#2466a0"
+        font-family="sans-serif" font-size="19">T = 0°C</text>
+  <text x="872" y="650" text-anchor="end" fill="#2466a0"
+        font-family="sans-serif" font-size="19">T = 0°C</text>
+  <text x="500" y="884" text-anchor="middle"
+        fill="#bc392c" font-family="sans-serif" font-size="19">
+    y = 0 · T = 100°C
+  </text>
+
+  <text x="500" y="660" text-anchor="middle"
+        fill="#596575" font-family="sans-serif" font-size="22">
+    Rectilinear plate
+  </text>
+  <text x="500" y="693" text-anchor="middle"
+        fill="#596575" font-family="sans-serif" font-size="18">
+    0 &lt; x &lt; 1, 0 &lt; y &lt; 0.6
+  </text>
+
+  <!-- Dimension lines. -->
+  <g fill="none" stroke="#596575" stroke-width="1.2">
+    <line x1="100" y1="925" x2="100" y2="967"/>
+    <line x1="900" y1="925" x2="900" y2="967"/>
+    <line x1="100" y1="953" x2="900" y2="953"/>
+    <path d="M94 959 L106 947 M894 959 L906 947"/>
+    <line x1="62" y1="420" x2="88" y2="420"/>
+    <line x1="62" y1="900" x2="88" y2="900"/>
+    <line x1="72" y1="420" x2="72" y2="900"/>
+    <path d="M66 426 L78 414 M66 906 L78 894"/>
+  </g>
+  <rect x="466" y="939" width="68" height="28" fill="#ffffff"/>
+  <text x="500" y="960" text-anchor="middle"
+        fill="#364152" font-family="sans-serif" font-size="19">1.0</text>
+  <text x="49" y="660" text-anchor="middle"
+        transform="rotate(-90 49 660)"
+        fill="#364152" font-family="sans-serif" font-size="19">0.6</text>
+
+  <!-- Highlight the contradictory endpoint prescriptions. -->
+  <circle cx="100" cy="900" r="9" fill="#fff8ed" stroke="#a45b12" stroke-width="2"/>
+  <circle cx="900" cy="900" r="9" fill="#fff8ed" stroke="#a45b12" stroke-width="2"/>
+  <path d="M107 893 L151 819 H289 M893 893 L849 819 H711"
+        fill="none" stroke="#a45b12" stroke-width="1.5"/>
+  <text x="157" y="807" fill="#82430b" font-family="sans-serif" font-size="17">
+    0°C and 100°C
+  </text>
+  <text x="843" y="807" text-anchor="end"
+        fill="#82430b" font-family="sans-serif" font-size="17">
+    0°C and 100°C
+  </text>
+
+  <text x="100" y="932" fill="#364152"
+        font-family="sans-serif" font-size="16">(0, 0)</text>
+  <text x="900" y="932" text-anchor="end" fill="#364152"
+        font-family="sans-serif" font-size="16">(1, 0)</text>
+  <text x="113" y="445" fill="#364152"
+        font-family="sans-serif" font-size="16">(0, 0.6)</text>
+  <text x="887" y="445" text-anchor="end" fill="#364152"
+        font-family="sans-serif" font-size="16">(1, 0.6)</text>
+</svg>

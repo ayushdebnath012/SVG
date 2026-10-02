@@ -1,0 +1,870 @@
+{
+  "truss-section": {
+    "status": "verified_safe",
+    "mode": "tree_patch",
+    "request": "Set every member depth to 40 mm.",
+    "family": "truss",
+    "style": "canonical",
+    "action": {
+      "action": "edit",
+      "changes": {
+        "sections.bar.h_mm": 40.0
+      }
+    },
+    "patch": {
+      "version": 2,
+      "operations": [
+        {
+          "op": "set_text",
+          "targets": [
+            "n34"
+          ],
+          "text": "Section: 30 x 40 mm"
+        }
+      ]
+    },
+    "patch_operation_count": 1,
+    "patch_operation_types": [
+      "set_text"
+    ],
+    "target_tree_equal": true,
+    "edit_fidelity_pass": true,
+    "engineering_check_pass": true,
+    "recovered_output_family": "truss",
+    "recovered_output_style": "canonical",
+    "before_verification": {
+      "method": "linear_axial_truss_fem",
+      "pass": true,
+      "peak_abs_stress_mpa": 11.860940387163478,
+      "max_displacement_mm": 1.5265513268018096,
+      "equilibrium_residual_N_Nmm": [
+        3.637978807091713e-12,
+        -1.000444171950221e-11,
+        -3.3527612686157227e-08
+      ],
+      "relative_equilibrium_residual": 1.3339255626002948e-15,
+      "assumptions": [
+        "planar pin-jointed truss",
+        "linear elastic axial members",
+        "nodal loads only",
+        "small displacement"
+      ]
+    },
+    "after_verification": {
+      "method": "linear_axial_truss_fem",
+      "pass": true,
+      "peak_abs_stress_mpa": 5.930470193581739,
+      "max_displacement_mm": 0.7632756634009048,
+      "equilibrium_residual_N_Nmm": [
+        3.637978807091713e-12,
+        -1.000444171950221e-11,
+        -3.3527612686157227e-08
+      ],
+      "relative_equilibrium_residual": 1.3339255626002948e-15,
+      "assumptions": [
+        "planar pin-jointed truss",
+        "linear elastic axial members",
+        "nodal loads only",
+        "small displacement"
+      ]
+    }
+  },
+  "bridge-load": {
+    "status": "verified_safe",
+    "mode": "tree_patch",
+    "request": "Double the downward load.",
+    "family": "bridge_truss",
+    "style": "canonical",
+    "action": {
+      "action": "edit",
+      "changes": {
+        "loads.*.fy_N": -30000
+      }
+    },
+    "patch": {
+      "version": 2,
+      "operations": [
+        {
+          "op": "set_text",
+          "targets": [
+            "n53"
+          ],
+          "text": "Load: 30000 N downward at each arrowed node"
+        }
+      ]
+    },
+    "patch_operation_count": 1,
+    "patch_operation_types": [
+      "set_text"
+    ],
+    "target_tree_equal": true,
+    "edit_fidelity_pass": true,
+    "engineering_check_pass": true,
+    "recovered_output_family": "bridge_truss",
+    "recovered_output_style": "canonical",
+    "before_verification": {
+      "method": "linear_axial_truss_fem",
+      "pass": true,
+      "peak_abs_stress_mpa": 84.37500000000018,
+      "max_displacement_mm": 8.948985386504622,
+      "equilibrium_residual_N_Nmm": [
+        1.4551915228366852e-11,
+        1.7462298274040222e-10,
+        1.3709068298339844e-06
+      ],
+      "relative_equilibrium_residual": 1.1641532182693482e-14,
+      "assumptions": [
+        "pin-jointed axial members",
+        "nodal loads only",
+        "small displacements",
+        "self-weight excluded"
+      ]
+    },
+    "after_verification": {
+      "method": "linear_axial_truss_fem",
+      "pass": true,
+      "peak_abs_stress_mpa": 168.75000000000037,
+      "max_displacement_mm": 17.897970773009245,
+      "equilibrium_residual_N_Nmm": [
+        2.9103830456733704e-11,
+        3.4924596548080444e-10,
+        2.7418136596679688e-06
+      ],
+      "relative_equilibrium_residual": 1.1641532182693482e-14,
+      "assumptions": [
+        "pin-jointed axial members",
+        "nodal loads only",
+        "small displacements",
+        "self-weight excluded"
+      ]
+    }
+  },
+  "bridge-topology": {
+    "status": "verified_safe",
+    "mode": "structural_tree_patch",
+    "request": "Change the bridge to 8 panels.",
+    "family": "bridge_truss",
+    "style": "canonical",
+    "action": {
+      "action": "edit_topology",
+      "panels": 8,
+      "topology": "pratt"
+    },
+    "patch": {
+      "version": 3,
+      "operations": [
+        {
+          "op": "set_text",
+          "targets": [
+            "n2"
+          ],
+          "text": "Parallel-chord bridge truss, 29 members"
+        },
+        {
+          "op": "set_attributes",
+          "targets": [
+            "n4"
+          ],
+          "attributes": {
+            "x2": "222.500000"
+          }
+        },
+        {
+          "op": "set_attributes",
+          "targets": [
+            "n5"
+          ],
+          "attributes": {
+            "x1": "335.000000",
+            "x2": "447.500000"
+          }
+        },
+        {
+          "op": "set_attributes",
+          "targets": [
+            "n6"
+          ],
+          "attributes": {
+            "x1": "447.500000"
+          }
+        },
+        {
+          "op": "set_attributes",
+          "targets": [
+            "n7"
+          ],
+          "attributes": {
+            "x2": "672.500000"
+          }
+        },
+        {
+          "op": "set_attributes",
+          "targets": [
+            "n8"
+          ],
+          "attributes": {
+            "x1": "785.000000",
+            "x2": "897.500000"
+          }
+        },
+        {
+          "op": "set_attributes",
+          "targets": [
+            "n9"
+          ],
+          "attributes": {
+            "x1": "897.500000"
+          }
+        },
+        {
+          "op": "set_attributes",
+          "targets": [
+            "n10"
+          ],
+          "attributes": {
+            "x1": "335.000000",
+            "x2": "447.500000"
+          }
+        },
+        {
+          "op": "set_attributes",
+          "targets": [
+            "n11"
+          ],
+          "attributes": {
+            "x1": "447.500000"
+          }
+        },
+        {
+          "op": "set_attributes",
+          "targets": [
+            "n12"
+          ],
+          "attributes": {
+            "x2": "672.500000"
+          }
+        },
+        {
+          "op": "set_attributes",
+          "targets": [
+            "n13"
+          ],
+          "attributes": {
+            "x1": "785.000000",
+            "x2": "897.500000"
+          }
+        },
+        {
+          "op": "set_attributes",
+          "targets": [
+            "n14"
+          ],
+          "attributes": {
+            "x1": "222.500000",
+            "x2": "222.500000"
+          }
+        },
+        {
+          "op": "set_attributes",
+          "targets": [
+            "n15"
+          ],
+          "attributes": {
+            "x1": "447.500000",
+            "x2": "447.500000"
+          }
+        },
+        {
+          "op": "set_attributes",
+          "targets": [
+            "n17"
+          ],
+          "attributes": {
+            "x1": "672.500000",
+            "x2": "672.500000"
+          }
+        },
+        {
+          "op": "set_attributes",
+          "targets": [
+            "n18"
+          ],
+          "attributes": {
+            "x1": "897.500000",
+            "x2": "897.500000"
+          }
+        },
+        {
+          "op": "set_attributes",
+          "targets": [
+            "n19"
+          ],
+          "attributes": {
+            "x2": "222.500000"
+          }
+        },
+        {
+          "op": "set_attributes",
+          "targets": [
+            "n20"
+          ],
+          "attributes": {
+            "x2": "897.500000"
+          }
+        },
+        {
+          "op": "set_attributes",
+          "targets": [
+            "n21"
+          ],
+          "attributes": {
+            "x1": "335.000000",
+            "x2": "447.500000"
+          }
+        },
+        {
+          "op": "set_attributes",
+          "targets": [
+            "n22"
+          ],
+          "attributes": {
+            "x1": "447.500000"
+          }
+        },
+        {
+          "op": "set_attributes",
+          "targets": [
+            "n23"
+          ],
+          "attributes": {
+            "x1": "672.500000"
+          }
+        },
+        {
+          "op": "set_attributes",
+          "targets": [
+            "n24"
+          ],
+          "attributes": {
+            "x1": "897.500000",
+            "x2": "785.000000"
+          }
+        },
+        {
+          "op": "set_attributes",
+          "targets": [
+            "n26"
+          ],
+          "attributes": {
+            "cx": "222.500000"
+          }
+        },
+        {
+          "op": "set_attributes",
+          "targets": [
+            "n27"
+          ],
+          "attributes": {
+            "cx": "447.500000"
+          }
+        },
+        {
+          "op": "set_attributes",
+          "targets": [
+            "n29"
+          ],
+          "attributes": {
+            "cx": "672.500000"
+          }
+        },
+        {
+          "op": "set_attributes",
+          "targets": [
+            "n30"
+          ],
+          "attributes": {
+            "cx": "897.500000"
+          }
+        },
+        {
+          "op": "set_attributes",
+          "targets": [
+            "n32"
+          ],
+          "attributes": {
+            "cx": "222.500000"
+          }
+        },
+        {
+          "op": "set_attributes",
+          "targets": [
+            "n33"
+          ],
+          "attributes": {
+            "cx": "447.500000"
+          }
+        },
+        {
+          "op": "set_attributes",
+          "targets": [
+            "n35"
+          ],
+          "attributes": {
+            "cx": "672.500000"
+          }
+        },
+        {
+          "op": "set_attributes",
+          "targets": [
+            "n36"
+          ],
+          "attributes": {
+            "cx": "897.500000"
+          }
+        },
+        {
+          "op": "set_attributes",
+          "targets": [
+            "n37"
+          ],
+          "attributes": {
+            "x1": "222.500000",
+            "x2": "222.500000"
+          }
+        },
+        {
+          "op": "replace_geometry",
+          "targets": [
+            "n38"
+          ],
+          "attributes": {
+            "d": "M215.500,576.000 L222.500,590.000 L229.500,576.000"
+          }
+        },
+        {
+          "op": "set_attributes",
+          "targets": [
+            "n39"
+          ],
+          "attributes": {
+            "x1": "447.500000",
+            "x2": "447.500000"
+          }
+        },
+        {
+          "op": "replace_geometry",
+          "targets": [
+            "n40"
+          ],
+          "attributes": {
+            "d": "M440.500,576.000 L447.500,590.000 L454.500,576.000"
+          }
+        },
+        {
+          "op": "set_attributes",
+          "targets": [
+            "n43"
+          ],
+          "attributes": {
+            "x1": "672.500000",
+            "x2": "672.500000"
+          }
+        },
+        {
+          "op": "replace_geometry",
+          "targets": [
+            "n44"
+          ],
+          "attributes": {
+            "d": "M665.500,576.000 L672.500,590.000 L679.500,576.000"
+          }
+        },
+        {
+          "op": "set_attributes",
+          "targets": [
+            "n45"
+          ],
+          "attributes": {
+            "x1": "897.500000",
+            "x2": "897.500000"
+          }
+        },
+        {
+          "op": "replace_geometry",
+          "targets": [
+            "n46"
+          ],
+          "attributes": {
+            "d": "M890.500,576.000 L897.500,590.000 L904.500,576.000"
+          }
+        },
+        {
+          "op": "insert_subtree",
+          "parent": "n0",
+          "subtree": "<line xmlns=\"http://www.w3.org/2000/svg\" x1=\"222.500000\" y1=\"600.000000\" x2=\"335.000000\" y2=\"600.000000\" stroke=\"#1f3348\" stroke-width=\"4\" />\n",
+          "index": 4
+        },
+        {
+          "op": "insert_subtree",
+          "parent": "n0",
+          "subtree": "<line xmlns=\"http://www.w3.org/2000/svg\" x1=\"672.500000\" y1=\"600.000000\" x2=\"785.000000\" y2=\"600.000000\" stroke=\"#1f3348\" stroke-width=\"4\" />\n",
+          "index": 8
+        },
+        {
+          "op": "insert_subtree",
+          "parent": "n0",
+          "subtree": "<line xmlns=\"http://www.w3.org/2000/svg\" x1=\"222.500000\" y1=\"450.000000\" x2=\"335.000000\" y2=\"450.000000\" stroke=\"#1f3348\" stroke-width=\"4\" />\n",
+          "index": 11
+        },
+        {
+          "op": "insert_subtree",
+          "parent": "n0",
+          "subtree": "<line xmlns=\"http://www.w3.org/2000/svg\" x1=\"672.500000\" y1=\"450.000000\" x2=\"785.000000\" y2=\"450.000000\" stroke=\"#1f3348\" stroke-width=\"4\" />\n",
+          "index": 15
+        },
+        {
+          "op": "insert_subtree",
+          "parent": "n0",
+          "subtree": "<line xmlns=\"http://www.w3.org/2000/svg\" x1=\"335.000000\" y1=\"600.000000\" x2=\"335.000000\" y2=\"450.000000\" stroke=\"#1f3348\" stroke-width=\"4\" />\n",
+          "index": 18
+        },
+        {
+          "op": "insert_subtree",
+          "parent": "n0",
+          "subtree": "<line xmlns=\"http://www.w3.org/2000/svg\" x1=\"785.000000\" y1=\"600.000000\" x2=\"785.000000\" y2=\"450.000000\" stroke=\"#1f3348\" stroke-width=\"4\" />\n",
+          "index": 22
+        },
+        {
+          "op": "insert_subtree",
+          "parent": "n0",
+          "subtree": "<line xmlns=\"http://www.w3.org/2000/svg\" x1=\"222.500000\" y1=\"450.000000\" x2=\"335.000000\" y2=\"600.000000\" stroke=\"#1f3348\" stroke-width=\"4\" />\n",
+          "index": 26
+        },
+        {
+          "op": "insert_subtree",
+          "parent": "n0",
+          "subtree": "<line xmlns=\"http://www.w3.org/2000/svg\" x1=\"785.000000\" y1=\"450.000000\" x2=\"672.500000\" y2=\"600.000000\" stroke=\"#1f3348\" stroke-width=\"4\" />\n",
+          "index": 30
+        },
+        {
+          "op": "insert_subtree",
+          "parent": "n0",
+          "subtree": "<circle xmlns=\"http://www.w3.org/2000/svg\" cx=\"335.000000\" cy=\"600.000000\" r=\"4\" fill=\"#1f3348\" />\n",
+          "index": 34
+        },
+        {
+          "op": "insert_subtree",
+          "parent": "n0",
+          "subtree": "<circle xmlns=\"http://www.w3.org/2000/svg\" cx=\"785.000000\" cy=\"600.000000\" r=\"4\" fill=\"#1f3348\" />\n",
+          "index": 38
+        },
+        {
+          "op": "insert_subtree",
+          "parent": "n0",
+          "subtree": "<circle xmlns=\"http://www.w3.org/2000/svg\" cx=\"335.000000\" cy=\"450.000000\" r=\"4\" fill=\"#1f3348\" />\n",
+          "index": 42
+        },
+        {
+          "op": "insert_subtree",
+          "parent": "n0",
+          "subtree": "<circle xmlns=\"http://www.w3.org/2000/svg\" cx=\"785.000000\" cy=\"450.000000\" r=\"4\" fill=\"#1f3348\" />\n",
+          "index": 46
+        },
+        {
+          "op": "insert_subtree",
+          "parent": "n0",
+          "subtree": "<line xmlns=\"http://www.w3.org/2000/svg\" x1=\"335.000000\" y1=\"528.000000\" x2=\"335.000000\" y2=\"588.000000\" stroke=\"#b3261e\" stroke-width=\"3\" />\n",
+          "index": 50
+        },
+        {
+          "op": "insert_subtree",
+          "parent": "n0",
+          "subtree": "<path xmlns=\"http://www.w3.org/2000/svg\" d=\"M328.000,576.000 L335.000,590.000 L342.000,576.000\" fill=\"#b3261e\" />\n",
+          "index": 51
+        },
+        {
+          "op": "insert_subtree",
+          "parent": "n0",
+          "subtree": "<line xmlns=\"http://www.w3.org/2000/svg\" x1=\"785.000000\" y1=\"528.000000\" x2=\"785.000000\" y2=\"588.000000\" stroke=\"#b3261e\" stroke-width=\"3\" />\n",
+          "index": 58
+        },
+        {
+          "op": "insert_subtree",
+          "parent": "n0",
+          "subtree": "<path xmlns=\"http://www.w3.org/2000/svg\" d=\"M778.000,576.000 L785.000,590.000 L792.000,576.000\" fill=\"#b3261e\" />\n",
+          "index": 59
+        }
+      ]
+    },
+    "patch_operation_count": 53,
+    "patch_operation_types": [
+      "set_text",
+      "set_attributes",
+      "set_attributes",
+      "set_attributes",
+      "set_attributes",
+      "set_attributes",
+      "set_attributes",
+      "set_attributes",
+      "set_attributes",
+      "set_attributes",
+      "set_attributes",
+      "set_attributes",
+      "set_attributes",
+      "set_attributes",
+      "set_attributes",
+      "set_attributes",
+      "set_attributes",
+      "set_attributes",
+      "set_attributes",
+      "set_attributes",
+      "set_attributes",
+      "set_attributes",
+      "set_attributes",
+      "set_attributes",
+      "set_attributes",
+      "set_attributes",
+      "set_attributes",
+      "set_attributes",
+      "set_attributes",
+      "set_attributes",
+      "replace_geometry",
+      "set_attributes",
+      "replace_geometry",
+      "set_attributes",
+      "replace_geometry",
+      "set_attributes",
+      "replace_geometry",
+      "insert_subtree",
+      "insert_subtree",
+      "insert_subtree",
+      "insert_subtree",
+      "insert_subtree",
+      "insert_subtree",
+      "insert_subtree",
+      "insert_subtree",
+      "insert_subtree",
+      "insert_subtree",
+      "insert_subtree",
+      "insert_subtree",
+      "insert_subtree",
+      "insert_subtree",
+      "insert_subtree",
+      "insert_subtree"
+    ],
+    "target_tree_equal": true,
+    "edit_fidelity_pass": true,
+    "engineering_check_pass": true,
+    "recovered_output_family": "bridge_truss",
+    "recovered_output_style": "canonical",
+    "before_verification": {
+      "method": "linear_axial_truss_fem",
+      "pass": true,
+      "peak_abs_stress_mpa": 84.37500000000018,
+      "max_displacement_mm": 8.948985386504622,
+      "equilibrium_residual_N_Nmm": [
+        1.4551915228366852e-11,
+        1.7462298274040222e-10,
+        1.3709068298339844e-06
+      ],
+      "relative_equilibrium_residual": 1.1641532182693482e-14,
+      "assumptions": [
+        "pin-jointed axial members",
+        "nodal loads only",
+        "small displacements",
+        "self-weight excluded"
+      ]
+    },
+    "after_verification": {
+      "method": "linear_axial_truss_fem",
+      "pass": true,
+      "peak_abs_stress_mpa": 112.50000000000125,
+      "max_displacement_mm": 11.84765625000013,
+      "equilibrium_residual_N_Nmm": [
+        1.4551915228366852e-10,
+        1.1059455573558807e-09,
+        5.9604644775390625e-06
+      ],
+      "relative_equilibrium_residual": 7.372970382372538e-14,
+      "assumptions": [
+        "pin-jointed axial members",
+        "nodal loads only",
+        "small displacements",
+        "self-weight excluded"
+      ]
+    }
+  },
+  "plate-holes": {
+    "status": "verified_safe",
+    "mode": "tree_patch",
+    "request": "Increase all hole diameters by 4 mm.",
+    "family": "plate",
+    "style": "canonical",
+    "action": {
+      "action": "edit",
+      "changes": {
+        "holes.*.diameter_mm": 30.0
+      }
+    },
+    "patch": {
+      "version": 2,
+      "operations": [
+        {
+          "op": "set_attributes",
+          "targets": [
+            "n6",
+            "n7",
+            "n8",
+            "n9",
+            "n10",
+            "n11"
+          ],
+          "attributes": {
+            "r": "30.0"
+          }
+        },
+        {
+          "op": "set_text",
+          "targets": [
+            "n20"
+          ],
+          "text": "6x \u00d830 mm THRU"
+        }
+      ]
+    },
+    "patch_operation_count": 2,
+    "patch_operation_types": [
+      "set_attributes",
+      "set_text"
+    ],
+    "target_tree_equal": true,
+    "edit_fidelity_pass": true,
+    "engineering_check_pass": true,
+    "recovered_output_family": "plate",
+    "recovered_output_style": "canonical",
+    "before_verification": {
+      "method": "manufacturing_geometry_checks",
+      "pass": true,
+      "minimum_edge_distance_mm": 25.0,
+      "minimum_ligament_mm": 58.0,
+      "net_area_mm2": 40014.42504925995,
+      "volume_mm3": 720259.6508866792,
+      "violations": [],
+      "criteria": {
+        "min_edge_distance_mm": 15,
+        "min_ligament_mm": 20
+      },
+      "assumptions": [
+        "flat rectangular plate",
+        "six circular through holes",
+        "geometry and manufacturing checks only"
+      ]
+    },
+    "after_verification": {
+      "method": "manufacturing_geometry_checks",
+      "pass": true,
+      "minimum_edge_distance_mm": 23.0,
+      "minimum_ligament_mm": 54.0,
+      "net_area_mm2": 38958.84991765378,
+      "volume_mm3": 701259.298517768,
+      "violations": [],
+      "criteria": {
+        "min_edge_distance_mm": 15,
+        "min_ligament_mm": 20
+      },
+      "assumptions": [
+        "flat rectangular plate",
+        "six circular through holes",
+        "geometry and manufacturing checks only"
+      ]
+    }
+  },
+  "plate-violation": {
+    "status": "verified_with_violations",
+    "mode": "tree_patch",
+    "request": "Increase all hole diameters by 6 mm.",
+    "family": "plate",
+    "style": "blueprint",
+    "action": {
+      "action": "edit",
+      "changes": {
+        "holes.*.diameter_mm": 16.0
+      }
+    },
+    "patch": {
+      "version": 2,
+      "operations": [
+        {
+          "op": "set_attributes",
+          "targets": [
+            "n6",
+            "n7",
+            "n8",
+            "n9"
+          ],
+          "attributes": {
+            "r": "16.0"
+          }
+        },
+        {
+          "op": "set_text",
+          "targets": [
+            "n18"
+          ],
+          "text": "4x \u00d816 mm THRU"
+        }
+      ]
+    },
+    "patch_operation_count": 2,
+    "patch_operation_types": [
+      "set_attributes",
+      "set_text"
+    ],
+    "target_tree_equal": true,
+    "edit_fidelity_pass": true,
+    "engineering_check_pass": false,
+    "recovered_output_family": "plate",
+    "recovered_output_style": "blueprint",
+    "before_verification": {
+      "method": "manufacturing_geometry_checks",
+      "pass": true,
+      "minimum_edge_distance_mm": 15.0,
+      "minimum_ligament_mm": 210.0,
+      "net_area_mm2": 77685.84073464102,
+      "volume_mm3": 699172.5666117693,
+      "violations": [],
+      "criteria": {
+        "min_edge_distance_mm": 15,
+        "min_ligament_mm": 20
+      },
+      "assumptions": [
+        "flat rectangular plate",
+        "four circular through holes",
+        "geometry and manufacturing checks only"
+      ]
+    },
+    "after_verification": {
+      "method": "manufacturing_geometry_checks",
+      "pass": false,
+      "minimum_edge_distance_mm": 12.0,
+      "minimum_ligament_mm": 204.0,
+      "net_area_mm2": 77195.75228068102,
+      "volume_mm3": 694761.7705261292,
+      "violations": [
+        "H1 edge distance 12 mm is below 15 mm",
+        "H2 edge distance 12 mm is below 15 mm",
+        "H3 edge distance 12 mm is below 15 mm",
+        "H4 edge distance 12 mm is below 15 mm"
+      ],
+      "criteria": {
+        "min_edge_distance_mm": 15,
+        "min_ligament_mm": 20
+      },
+      "assumptions": [
+        "flat rectangular plate",
+        "four circular through holes",
+        "geometry and manufacturing checks only"
+      ]
+    }
+  }
+}

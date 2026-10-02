@@ -1,0 +1,45 @@
+{
+  "model": "gpt-6-astra",
+  "effort": "high",
+  "max_output_tokens": 24000,
+  "max_tool_calls": 4,
+  "sample": 0,
+  "system": "Reconstruct the physical machined part in the supplied engineering drawing as a CadQuery solid. Units mm. The final result will also be exported as native vector SVG orthographic engineering views.\nUse XY for the large principal view at lower left, with page right = +X and page up = +Y. Use Z for part depth along the main bore axis. Put minimum X, Y, Z at zero. The marked overall dimensions are 145.32 by 198.85 by 50 mm; keep the orientation consistent with the drawing views. Follow all explicit dimensions, depths, pockets, bore patterns, chamfers and fillets. Do not replace the part with a visual approximation. Explain ambiguities rather than concealing them.\nYou have a CadQuery 2.8 evaluate_cad tool. It returns kernel validity, volume, envelope, and rendered kernel projections, but no target answer or correctness feedback. Use it at least once and up to four times to review and repair the part.\nThe restricted execution interface permits import cadquery as cq, variable assignments, numeric arithmetic, literal tuple/list for loops, and these CadQuery methods: Vector Wire Workplane add box cboreHole center chamfer circle clean close cskHole cut cutBlind cutThruAll cylinder edges extrude faces fillet hole intersect lineTo loft makeHelix mirrorX mirrorY moveTo polarArray polygon polyline pushPoints radiusArc rarray rect revolve rotate size slot2D solids sphere spline sweep threePointArc toTuple transformed translate twistExtrude union val vals vertices workplane. No functions, comprehensions, other imports, file access or introspection. Precompute needed trig constants numerically. Assign the final shape/workplane to result. Unsupported interface syntax is not counted as a shape failure.\nReturn JSON only: {\"code\":\"complete executable CadQuery code\",\"explanation\":\"construction and limitations\"}.",
+  "tool": {
+    "type": "function",
+    "name": "evaluate_cad",
+    "description": "Execute a CAD candidate and inspect actual geometry. Does not compare against a hidden target.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "code"
+      ],
+      "additionalProperties": false
+    },
+    "strict": true
+  },
+  "source": "https://huggingface.co/datasets/HuggingAI4Engineering/cadgenbench-data/tree/main/131",
+  "input_sha256": {
+    "input.png": "b4d645fc39509a9041ade0f0d388a860183062d7f67e13e461ead0353f81929d",
+    "top.png": "d70d6387683987309d53f4803b26ba16cec70fe0dae1fa6f50e136a9f03bacc9",
+    "detail.png": "c87be181d0bab54fa2c50b73333b8b2ebc65471413a637ce37237c9c04cc8d22",
+    "side.png": "4944088ab400eb587344e5c0a1a13deb1878aeede391b05dd950372c187aad8b"
+  },
+  "scope": "Unofficial local reconstruction. No private target access. All inputs are evaluation-only.",
+  "necessary_checks_frozen_before_screen": [
+    "One valid connected solid",
+    "Marked overall dimensions 145.32 by 198.85 by 50 mm",
+    "Main bore includes diameter 80 through region and diameter 90 counterbored opening per section A-A",
+    "Two diameter 10 mounting holes shown in principal view",
+    "Two diameter 6 bottom mounting holes",
+    "Section E-E lower recess leaves 5 mm wall",
+    "Section B-B recesses have 8 mm lower wall and 15 mm upper walls",
+    "Openings in both tall inclined ribs as shown by principal/section/isometric views"
+  ],
+  "grading": "Check explicit public drawing features only; do not count unobserved private geometry or legal alternatives as failures. A pass of partial checks is not a full benchmark pass."
+}

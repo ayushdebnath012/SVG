@@ -1,5 +1,7 @@
 # Verified A100 training results
 
+**CAD update, 20 September 2026:** the [released-data CAD-Editor pilot](CAD_EDITOR_TRAINING_20260920.md) completed on the supplied Blackwell GPU (1/32 → 6/32 exact held-out sequence matches). This is separate from the older shared-template pilot. The [new CAD drawing screen](ASTRA_CAD_PILOT_20260920.md) has no confirmed shape failures yet; see the [25-source web audit](CAD_WEB_LITERATURE_AND_DATASETS_20260920.md) for the revised data plan.
+
 Three Qwen2.5-Coder-1.5B-Instruct LoRA runs completed on an NVIDIA A100-SXM4-40GB: seeds 17, 29 and 41, three full epochs and 90 optimizer steps each. Adapter weights, final/previous optimizer checkpoints, exact data, raw predictions, package versions and source hashes are saved locally in `runs/a100/`. Final adapters, predictions and manifests are versioned in this branch; intermediate optimizer checkpoints and ZIP downloads remain local ignored files. The original downloaded archive is `runs/a100-completed.zip` (350,830,393 bytes).
 
 `scripts/summarize_training.py` verified completion, data and source hashes, case-disjoint splits, all 720 raw base/final predictions, and the three safetensors adapter structures. Each adapter contains 4,358,144 parameters. Model revision: `2e1fd397ee46e1388853d2af2c993145b0f1098a`. The separate saved-adapter inference reload check was not run in that session; it has since passed 18/18 held-out actions in the [Colab reproduction batch of 2026-09-16](COLAB_REPRODUCTION_20260916.md), which also re-trained all three seeds to byte-identical adapters.
@@ -11,6 +13,7 @@ Three Qwen2.5-Coder-1.5B-Instruct LoRA runs completed on an NVIDIA A100-SXM4-40G
 | Final LoRA, seed 29 | 60/60 | 60/60 | 60/60 | 60/60 |
 | Final LoRA, seed 41 | 60/60 | 60/60 | 60/60 | 60/60 |
 | Deterministic template parser | 60/60 | 60/60 | 60/60 | 60/60 |
+| Direct Astra, zero-shot ([baseline report](ASTRA_CONTROLLED_EDITING_BASELINE.md)) | 60/60 | 60/60 | 60/60 | 60/60 |
 
 Training plus adapter-save times were 94.94, 98.61 and 99.42 seconds respectively; these exclude base/final evaluation and environment/model setup. The live notebook and logs retain the complete execution record. No cost estimate is inferred from these timings.
 

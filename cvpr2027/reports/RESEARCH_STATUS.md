@@ -1,5 +1,24 @@
 # CVPR 2027 research status
 
+**Current editor and paper — 1 October 2026.** Editing now uses source-tree parsing and parsed, validated patches throughout, including version-3 structural patches for bridge topology changes. [Evidence, examples and reproduction](ENGINEERING_EDITOR_OVERVIEW_20261001.md); [updated paper](../paper/network/main.pdf). The manuscript now shows SVG editing with circuit/hydraulic checks, axial-truss FEM, plate-clearance checks and a separately audited structural-frame example. Five concrete edits were replayed, including a 21-to-29-member bridge and a correctly edited plate that fails its clearance rule. The saved deterministic 40,000-edit audit and the learned network/cross-domain model results are reported separately.
+
+Earlier dated material below is retained as history. Serpentine routing and nesting attempts ended incomplete or with API errors; they are no longer running and provide no confirmed failure claim.
+
+**Continuing 22 September:** [Harder drawing, routing and nesting prompts](ASTRA_DRAWING_ROUTING_DISCOVERY_20260922.md) have verified feasible reference SVGs and independent geometry checks. Six completed conditions pass; dense serpentine routing and irregular-part nesting later ended incomplete or with API errors. No repeatable failure has been admitted yet. The literature registry now has 72 records; no new training has started.
+
+**Completed 22 September:** [Functional design discovery](CAD_FUNCTIONAL_DISCOVERY_20260921.md) tested six new catalog-section designs with FEM, Euler buckling, mass constraints and SVG readback. All six passed Astra; 5,576,554 reference assignments were enumerated. The registry contains 67 records with review levels. No repeatable hard case, established novelty claim or new training. Further API screening stopped to conserve credits.
+
+
+**Current follow-up, 21 September:** [Extended discovery](CAD_EXTENDED_DISCOVERY_20260921.md): three rolled-sheet patterns and two multiview machining edits passed high-effort Astra; the THROUGH/THRU false flag is corrected with original records retained. Two complex released CADGenBench drawings produced valid solids and passed 38/11 partial feature checks; full shapes remain unscored. One server-error request was resumed, not counted as a shape failure. Eleven new evaluator tests passed. The registry has 62 records with review levels; additional close work weakens the novelty claim. No confirmed hard case or new training.
+
+**Latest, 21 September:** [Project foundation](PROJECT_FOUNDATION_20260921.md) now specifies the candidate contribution, overlap with 54 registered sources, implementation boundaries, training data and prospective failure-admission rules. Four annotation-conditioned detached SVG edits all passed Astra (18,762 tokens) and the SVG-only rule baseline. They are one panel with two intentions and two coordinate encodings, not four independent designs. Eleven evaluator/query-verifier tests passed; a numerical query-evidence module handles determined and ambiguous quantities under supplied linear constraints. The broad novelty claim is rejected, the narrower complete-drawing evidence contract remains a hypothesis, and the failure-only shape subset is still empty. No new training was started.
+
+**Latest native CAD follow-up, 20 September:** [Four BenchCAD-derived edits with high-effort Astra and CadQuery tools all passed](CAD_NATIVE_AND_NOVELTY_20260920.md). Genuine SVG projection sheets, nine successful API turns (23,161 reported tokens), five verifier tests and reference audits are saved. The literature registry now has 49 sources. A narrower detached-SVG relationship-recovery hypothesis remains untested; no distinct contribution or repeatable unsolved shape is established. No additional training was started on solved or held-out benchmark cases.
+
+**Follow-up discovery, 20 September:** [Ten harder CAD prompt conditions all passed](ASTRA_CAD_HARD_DISCOVERY_20260920.md), including explicit precision templates. The failure-only shape benchmark remains empty. The [expanded 39-source overlap audit](CAD_NOVELTY_OVERLAP_20260920.md) does not support the broad novelty claim. No further training was started on these solved cases.
+
+**CAD update, 20 September 2026:** the [released-data CAD-Editor pilot](CAD_EDITOR_TRAINING_20260920.md) completed on the supplied Blackwell GPU (1/32 → 6/32 exact held-out sequence matches). This is separate from the older shared-template pilot. The [new CAD drawing screen](ASTRA_CAD_PILOT_20260920.md) has no confirmed shape failures yet; see the [25-source web audit](CAD_WEB_LITERATURE_AND_DATASETS_20260920.md) for the revised data plan.
+
 Updated 13 September 2026. Target confirmed by the user: **CVPR 2027**.
 
 ## Main conclusion
@@ -13,6 +32,8 @@ The follow-up [FEM-focused survey](FEM_LITERATURE_AND_EXTENSION.md) adds FEABenc
 The [fresh Astra API recheck](ASTRA_FEM_FAILURE_RECHECK.md) corrects the earlier failure narrative: both new Robin SVGs pass direct FEM contour evaluation (maximum errors 0.111 and 0.374 °C), the saved capacitor paths do not contain the alleged closed field loops, and the bracket explicitly discloses its illustrative stress map. The project needs stronger, well-posed physics and visual-edit experiments rather than treating these three cases as established capability limits.
 
 All three A100 pilot runs have completed and their weights/checkpoints are saved locally. See [verified training results](TRAINING_RESULTS.md). This is action-policy training, not FEM-solver training.
+
+The [first harder drawing batch](ASTRA_HARD_TASKS_20260918.md) (12 tasks, 18 September) locates the failures: closed-form fields exact, unseen procedural geometry wrong by 4.5 pp on average, the L-shape and Robin Bi = 10 marginal, Kirsch incomplete, both ill-posed cases correctly disclosed.
 
 ## Venue and schedule
 
@@ -87,7 +108,7 @@ Data: 60 training cases × 6 edits = 360 examples; 10 validation, 10 test, 10 he
 
 Actions: contour color, visible stroke width, label position within an annotation panel, route a changed boundary to the solver, reject falsified numeric relabeling, reject removing a required contour. The whitelist executor preserves geometry and bound label text for its generated schema. It does not automatically run a new solve, validate arbitrary incoming SVG, prevent every possible label collision, or prove that a permitted action fulfills the natural-language request.
 
-The rule baseline is perfect on this restricted pilot. Any neural result must be described as pipeline validation or imitation of a simple policy, not as a new graphics capability. A meaningful paper needs diverse visual drafting tasks, context-dependent counterexamples, human-written edits, and strong prompting/deterministic baselines.
+The rule baseline is perfect on this restricted pilot, and so is [zero-shot Astra](ASTRA_CONTROLLED_EDITING_BASELINE.md) (60/60 on both splits, 17 September). Any neural result must be described as pipeline validation or imitation of a simple policy, not as a new graphics capability. A meaningful paper needs diverse visual drafting tasks, context-dependent counterexamples, human-written edits, and strong prompting/deterministic baselines.
 
 Notebook: [Colab GPU experiment](https://colab.research.google.com/drive/1sLxx7qfxd06BDl8FPmpevlJnlKOawVjy). Local self-contained notebook: `notebooks/CVPR2027_controlled_editing.ipynb`. All three seeds completed three epochs and 90 steps on A100, with 60/60 strict exact actions on each evaluation split. The rule baseline also scores 60/60. Adapters, optimizer checkpoints, 720 raw base/final generations and source/data hashes were downloaded and verified; see `reports/training_verified.json`. The runtime is disconnected. The inference reload smoke check later passed 18/18 held-out actions in the [Colab reproduction batch of 2026-09-16](COLAB_REPRODUCTION_20260916.md), which also re-trained the three seeds to byte-identical adapters and reproduced the FEM references within floating-point tolerance.
 

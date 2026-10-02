@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Vitruvion: A Generative Model of Parametric CAD Sketches – Laboratory for Intelligent Probabilistic Systems – Princeton University Department of Computer Science</title>
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        svg: {
+          fontCache: 'global'
+        }
+      };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    </script>
+
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Vitruvion: A Generative Model of Parametric CAD Sketches" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Ari Seff, Wenda Zhou, Nick Richardson, and Ryan P. AdamsInternational Conference on Learning Representations (ICLR) 2022PaperVideoCode &amp; model weights Vitruvion is a transformer-based model trained to generate parametric computer-aided design (CAD) sketches. It shows promise to augment mechanical design via tasks such as converting hand drawings to CAD models, autocompleting sketches, and inferring intended constraints. Overview Parametric CAD tools are the predominant way engineers specify physical structures, from bicycle pedals to airplanes to printed circuit boards. They empower users to explore parameterized variations on their designs, while also providing a structured representation for simulation and manufacturing. At an operational level, parametric CAD starts with the specification of two-dimensional geometric representations, referred to as &quot;sketches&quot;. A sketch consists of a collection of geometric primitives (e.g., lines, circles), along with a set of constraints that relate these primitives to one another. Example constraints include parallelism, tangency, and coincidence. This relational specification allows edits to coherently propagate to other parts of the design. Parametric CAD begins with simple primitives (e.g., lines, circles) (left) that are combined with constraints (e.g., perpendicularity, distance) to form 2D sketches (middle). These sketches then form the geometric foundation for 3D parts (right). Constraints enable &quot;edit propagation&quot;, where components of CAD models are updated automatically in response to user-imposed changes. A sketch shown in the program Onshape (left) is updated as its numerical constraint parameters (e.g., radii, angles) are altered (right). While this paradigm is powerful, it is often a challenging and tedious process. Machine learning offers the intriguing possibility of automatically encoding commonly used patterns, mitigating the inefficiencies involved in repetitive manual design. This could enable new tools such as autocompletion, constraint inference, and conditional synthesis. In this work, we develop an approach to generative modeling of parametric CAD sketches. Vitruvion, trained on real-world designs from the SketchGraphs dataset, synthesizes CAD sketches by autoregressively sampling geometric primitives, with initial coordinates, and constraints that reference back to the sampled primitives. Because samples from the model match the constraint graph representation used in standard CAD software, they may be imported solved, and edited according to downstream design tasks. In addition, we experiment with providing various kinds of context to the model, including partial sketches (primers) and images of hand-drawn sketches, enabling conditional synthesis. We factorize CAD sketch synthesis into two sequence modeling tasks: primitive generation (left) and constraint generation (right). The primitive model may be conditioned on an optional input context, such as a hand-drawn sketch. Example results Extracting primitives from hand-drawn sketches Raster images of hand-drawn sketches (left) are provided as input to the primitive model, which then generates sequences of primitives (right). For each input here, four samples are generated. Autoconstraining Unconstrained geometry (left) is passed to the constraint model and then solved (right). Images are screenshots from the Onshape user interface. An example of conditional reasoning in the constraint model. In the first case (top), the model constrains the top horizontal line to serve as the top of the rectangle (coincident with the circles&#39; centers). In the second case (bottom), we manually add another line segment (denoted by the green arrow) just below the top one. Now, the model constrains this new line to be the top of the rectangle, setting the original one to be coincident with the circumferences of the two top circles. Editing generated sketches Hand-drawn sketches (left) are converted to initial unsolved sketches (middle) and then imported to Onshape, solved, and edited to various configurations (right). Constraints help enforce design intent while allowing edits to propagate. Autocompleting We take held-out sketches (leftmost column) and delete 40% of their primitives to form primers (second column from left) for the primitive model. To the right are the inferred completions, where the model is queried for additional primitives until selecting a stop token. Why &quot;Vitruvion&quot;? While debugging a data augmentation procedure, we happened to render the average of a set of normalized SketchGraphs sketches. In our opinion, it was the spitting image of a famous 1490 drawing by Leonardo da Vinci, The Vitruvian Man, depicting a man inscribed in a circle and square. Likewise, we decided to name our model after this drawing (albeit with a slight spelling alteration). Heatmap resulting from average normalized SketchGraphs images (left) and &quot;The Vitruvian Man&quot; by Leonardo Da Vinci (right). The two images are almost indistinguishable, hence our naming choice." />
+<meta property="og:description" content="Ari Seff, Wenda Zhou, Nick Richardson, and Ryan P. AdamsInternational Conference on Learning Representations (ICLR) 2022PaperVideoCode &amp; model weights Vitruvion is a transformer-based model trained to generate parametric computer-aided design (CAD) sketches. It shows promise to augment mechanical design via tasks such as converting hand drawings to CAD models, autocompleting sketches, and inferring intended constraints. Overview Parametric CAD tools are the predominant way engineers specify physical structures, from bicycle pedals to airplanes to printed circuit boards. They empower users to explore parameterized variations on their designs, while also providing a structured representation for simulation and manufacturing. At an operational level, parametric CAD starts with the specification of two-dimensional geometric representations, referred to as &quot;sketches&quot;. A sketch consists of a collection of geometric primitives (e.g., lines, circles), along with a set of constraints that relate these primitives to one another. Example constraints include parallelism, tangency, and coincidence. This relational specification allows edits to coherently propagate to other parts of the design. Parametric CAD begins with simple primitives (e.g., lines, circles) (left) that are combined with constraints (e.g., perpendicularity, distance) to form 2D sketches (middle). These sketches then form the geometric foundation for 3D parts (right). Constraints enable &quot;edit propagation&quot;, where components of CAD models are updated automatically in response to user-imposed changes. A sketch shown in the program Onshape (left) is updated as its numerical constraint parameters (e.g., radii, angles) are altered (right). While this paradigm is powerful, it is often a challenging and tedious process. Machine learning offers the intriguing possibility of automatically encoding commonly used patterns, mitigating the inefficiencies involved in repetitive manual design. This could enable new tools such as autocompletion, constraint inference, and conditional synthesis. In this work, we develop an approach to generative modeling of parametric CAD sketches. Vitruvion, trained on real-world designs from the SketchGraphs dataset, synthesizes CAD sketches by autoregressively sampling geometric primitives, with initial coordinates, and constraints that reference back to the sampled primitives. Because samples from the model match the constraint graph representation used in standard CAD software, they may be imported solved, and edited according to downstream design tasks. In addition, we experiment with providing various kinds of context to the model, including partial sketches (primers) and images of hand-drawn sketches, enabling conditional synthesis. We factorize CAD sketch synthesis into two sequence modeling tasks: primitive generation (left) and constraint generation (right). The primitive model may be conditioned on an optional input context, such as a hand-drawn sketch. Example results Extracting primitives from hand-drawn sketches Raster images of hand-drawn sketches (left) are provided as input to the primitive model, which then generates sequences of primitives (right). For each input here, four samples are generated. Autoconstraining Unconstrained geometry (left) is passed to the constraint model and then solved (right). Images are screenshots from the Onshape user interface. An example of conditional reasoning in the constraint model. In the first case (top), the model constrains the top horizontal line to serve as the top of the rectangle (coincident with the circles&#39; centers). In the second case (bottom), we manually add another line segment (denoted by the green arrow) just below the top one. Now, the model constrains this new line to be the top of the rectangle, setting the original one to be coincident with the circumferences of the two top circles. Editing generated sketches Hand-drawn sketches (left) are converted to initial unsolved sketches (middle) and then imported to Onshape, solved, and edited to various configurations (right). Constraints help enforce design intent while allowing edits to propagate. Autocompleting We take held-out sketches (leftmost column) and delete 40% of their primitives to form primers (second column from left) for the primitive model. To the right are the inferred completions, where the model is queried for additional primitives until selecting a stop token. Why &quot;Vitruvion&quot;? While debugging a data augmentation procedure, we happened to render the average of a set of normalized SketchGraphs sketches. In our opinion, it was the spitting image of a famous 1490 drawing by Leonardo da Vinci, The Vitruvian Man, depicting a man inscribed in a circle and square. Likewise, we decided to name our model after this drawing (albeit with a slight spelling alteration). Heatmap resulting from average normalized SketchGraphs images (left) and &quot;The Vitruvian Man&quot; by Leonardo Da Vinci (right). The two images are almost indistinguishable, hence our naming choice." />
+<link rel="canonical" href="http://lips.cs.princeton.edu/vitruvion/" />
+<meta property="og:url" content="http://lips.cs.princeton.edu/vitruvion/" />
+<meta property="og:site_name" content="Laboratory for Intelligent Probabilistic Systems" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-09-25T17:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Vitruvion: A Generative Model of Parametric CAD Sketches" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2021-09-25T17:00:00-07:00","datePublished":"2021-09-25T17:00:00-07:00","description":"Ari Seff, Wenda Zhou, Nick Richardson, and Ryan P. AdamsInternational Conference on Learning Representations (ICLR) 2022PaperVideoCode &amp; model weights Vitruvion is a transformer-based model trained to generate parametric computer-aided design (CAD) sketches. It shows promise to augment mechanical design via tasks such as converting hand drawings to CAD models, autocompleting sketches, and inferring intended constraints. Overview Parametric CAD tools are the predominant way engineers specify physical structures, from bicycle pedals to airplanes to printed circuit boards. They empower users to explore parameterized variations on their designs, while also providing a structured representation for simulation and manufacturing. At an operational level, parametric CAD starts with the specification of two-dimensional geometric representations, referred to as &quot;sketches&quot;. A sketch consists of a collection of geometric primitives (e.g., lines, circles), along with a set of constraints that relate these primitives to one another. Example constraints include parallelism, tangency, and coincidence. This relational specification allows edits to coherently propagate to other parts of the design. Parametric CAD begins with simple primitives (e.g., lines, circles) (left) that are combined with constraints (e.g., perpendicularity, distance) to form 2D sketches (middle). These sketches then form the geometric foundation for 3D parts (right). Constraints enable &quot;edit propagation&quot;, where components of CAD models are updated automatically in response to user-imposed changes. A sketch shown in the program Onshape (left) is updated as its numerical constraint parameters (e.g., radii, angles) are altered (right). While this paradigm is powerful, it is often a challenging and tedious process. Machine learning offers the intriguing possibility of automatically encoding commonly used patterns, mitigating the inefficiencies involved in repetitive manual design. This could enable new tools such as autocompletion, constraint inference, and conditional synthesis. In this work, we develop an approach to generative modeling of parametric CAD sketches. Vitruvion, trained on real-world designs from the SketchGraphs dataset, synthesizes CAD sketches by autoregressively sampling geometric primitives, with initial coordinates, and constraints that reference back to the sampled primitives. Because samples from the model match the constraint graph representation used in standard CAD software, they may be imported solved, and edited according to downstream design tasks. In addition, we experiment with providing various kinds of context to the model, including partial sketches (primers) and images of hand-drawn sketches, enabling conditional synthesis. We factorize CAD sketch synthesis into two sequence modeling tasks: primitive generation (left) and constraint generation (right). The primitive model may be conditioned on an optional input context, such as a hand-drawn sketch. Example results Extracting primitives from hand-drawn sketches Raster images of hand-drawn sketches (left) are provided as input to the primitive model, which then generates sequences of primitives (right). For each input here, four samples are generated. Autoconstraining Unconstrained geometry (left) is passed to the constraint model and then solved (right). Images are screenshots from the Onshape user interface. An example of conditional reasoning in the constraint model. In the first case (top), the model constrains the top horizontal line to serve as the top of the rectangle (coincident with the circles&#39; centers). In the second case (bottom), we manually add another line segment (denoted by the green arrow) just below the top one. Now, the model constrains this new line to be the top of the rectangle, setting the original one to be coincident with the circumferences of the two top circles. Editing generated sketches Hand-drawn sketches (left) are converted to initial unsolved sketches (middle) and then imported to Onshape, solved, and edited to various configurations (right). Constraints help enforce design intent while allowing edits to propagate. Autocompleting We take held-out sketches (leftmost column) and delete 40% of their primitives to form primers (second column from left) for the primitive model. To the right are the inferred completions, where the model is queried for additional primitives until selecting a stop token. Why &quot;Vitruvion&quot;? While debugging a data augmentation procedure, we happened to render the average of a set of normalized SketchGraphs sketches. In our opinion, it was the spitting image of a famous 1490 drawing by Leonardo da Vinci, The Vitruvian Man, depicting a man inscribed in a circle and square. Likewise, we decided to name our model after this drawing (albeit with a slight spelling alteration). Heatmap resulting from average normalized SketchGraphs images (left) and &quot;The Vitruvian Man&quot; by Leonardo Da Vinci (right). The two images are almost indistinguishable, hence our naming choice.","headline":"Vitruvion: A Generative Model of Parametric CAD Sketches","mainEntityOfPage":{"@type":"WebPage","@id":"http://lips.cs.princeton.edu/vitruvion/"},"url":"http://lips.cs.princeton.edu/vitruvion/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+
+<meta property="og:description" content="
+Ari Seff, Wenda Zhou, Nick Richardson, and Ryan P. AdamsInternational Conference on Learning Representations (ICLR) 2022PaperVideoCode &amp; model weights
+
+
+Vitruvion is a transformer-based model trained to generate parametric computer-aided design (CAD) sketches. It shows promise to augment mechanical design via tasks such as converting hand drawings to CAD models, autocompleting sketches, and inferring intended constraints.
+
+
+
+
+
+Overview
+
+
+Parametric CAD tools are the predominant way engineers specify physical structures, from bicycle pedals to airplanes to printed circuit boards. They empower users to explore parameterized variations on their designs, while also providing a structured representation for simulation and manufacturing.
+
+
+At an operational level, parametric CAD starts with the specification of two-dimensional geometric representations, referred to as "sketches". A sketch consists of a collection of geometric primitives (e.g., lines, circles), along with a set of constraints that relate these primitives to one another. Example constraints include parallelism, tangency, and coincidence. This relational specification allows edits to coherently propagate to other parts of the design.
+
+
+
+Parametric CAD begins with simple primitives (e.g., lines, circles) (left) that are combined with constraints (e.g., perpendicularity, distance) to form 2D sketches (middle). These sketches then form the geometric foundation for 3D parts (right).
+
+
+
+
+Constraints enable "edit propagation", where components of CAD models are updated automatically in response to user-imposed changes. A sketch shown in the program Onshape (left) is updated as its numerical constraint parameters (e.g., radii, angles) are altered (right).
+
+
+
+While this paradigm is powerful, it is often a challenging and tedious process. Machine learning offers the intriguing possibility of automatically encoding commonly used patterns, mitigating the inefficiencies involved in repetitive manual design. This could enable new tools such as autocompletion, constraint inference, and conditional synthesis.
+
+
+In this work, we develop an approach to generative modeling of parametric CAD sketches. Vitruvion, trained on real-world designs from the SketchGraphs dataset, synthesizes CAD sketches by autoregressively sampling geometric primitives, with initial coordinates, and constraints that reference back to the sampled primitives. Because samples from the model match the constraint graph representation used in standard CAD software, they may be imported solved, and edited according to downstream design tasks. In addition, we experiment with providing various kinds of context to the model, including partial sketches (primers) and images of hand-drawn sketches, enabling conditional synthesis.
+
+
+
+We factorize CAD sketch synthesis into two sequence modeling tasks: primitive generation (left) and constraint generation (right). The primitive model may be conditioned on an optional input context, such as a hand-drawn sketch.
+
+
+
+Example results
+
+
+Extracting primitives from hand-drawn sketches
+
+
+
+Raster images of hand-drawn sketches (left) are provided as input to the primitive model, which then generates sequences of primitives (right). For each input here, four samples are generated.
+
+
+
+Autoconstraining
+
+
+
+Unconstrained geometry (left) is passed to the constraint model and then solved (right). Images are screenshots from the Onshape user interface.
+
+
+
+
+An example of conditional reasoning in the constraint model. In the first case (top), the model constrains the top horizontal line to serve as the top of the rectangle (coincident with the circles' centers). In the second case (bottom), we manually add another line segment (denoted by the green arrow) just below the top one. Now, the model constrains this new line to be the top of the rectangle, setting the original one to be coincident with the circumferences of the two top circles.
+
+
+
+Editing generated sketches
+
+
+
+Hand-drawn sketches (left) are converted to initial unsolved sketches (middle) and then imported to Onshape, solved, and edited to various configurations (right). Constraints help enforce design intent while allowing edits to propagate.
+
+
+
+Autocompleting
+
+
+
+We take held-out sketches (leftmost column) and delete 40% of their primitives to form primers (second column from left) for the primitive model. To the right are the inferred completions, where the model is queried for additional primitives until selecting a stop token.
+
+
+
+Why "Vitruvion"?
+
+
+While debugging a data augmentation procedure, we happened to render the average of a set of normalized SketchGraphs sketches. In our opinion, it was the spitting image of a famous 1490 drawing by Leonardo da Vinci, The Vitruvian Man, depicting a man inscribed in a circle and square. Likewise, we decided to name our model after this drawing (albeit with a slight spelling alteration).
+
+
+
+Heatmap resulting from average normalized SketchGraphs images (left) and "The Vitruvian Man" by Leonardo Da Vinci (right). The two images are almost indistinguishable, hence our naming choice.
+
+
+" />
+
+<meta name="author" content="Laboratory for Intelligent Probabilistic Systems" />
+
+
+<meta property="og:title" content="Vitruvion: A Generative Model of Parametric CAD Sketches" />
+<meta property="twitter:title" content="Vitruvion: A Generative Model of Parametric CAD Sketches" />
+
+
+
+<meta property="og:image" content="http://lips.cs.princeton.edu/images/princeton-star.png"/>
+<meta property="twitter:image" content="http://lips.cs.princeton.edu/images/princeton-star.png"/>
+
+
+
+    <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+    <link rel="alternate" type="application/rss+xml" title="Laboratory for Intelligent Probabilistic Systems - Princeton University Department of Computer Science" href="/feed.xml" />
+    <link rel="canonical" href="http://lips.cs.princeton.edu/vitruvion/" />
+
+    <meta name="theme-color" content="#000000">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    
+
+  </head>
+
+  <body>
+    <div id="bar"></div>
+    <div class="wrapper-container">
+      <div class="wrapper-masthead">
+        <div class="container">
+          <header class="masthead clearfix">
+            <a href="/" class="site-avatar"><img src="/images/princeton-star.png" alt="" /></a>
+
+            <div class="site-info">
+              <h1 class="site-name"><a href="/">Laboratory for Intelligent Probabilistic Systems</a></h1>
+              <p class="site-description">Princeton University Department of Computer Science</p>
+            </div>
+
+            <nav>
+              <a href="/">Home</a>
+              <a href="/people">People</a>
+              <a href="/blog">Blog</a>
+              <a href="/pubs">Publications</a>
+              <a href="http://github.com/PrincetonLIPS">Github</a>
+            </nav>
+          </header>
+        </div>
+      </div>
+
+      <div class="wrapper-main">
+        <div id="main" role="main" class="container">
+          <article class="post detailed">
+  <h1>Vitruvion: A Generative Model of Parametric CAD Sketches</h1>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  },
+  svg: {
+    fontCache: 'global'
+  }
+};
+</script>
+  <script type="text/javascript" id="MathJax-script" async
+   src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+  <div>
+    <p class="author_title">Ari Seff  ·  September 25, 2021</p>
+    
+    <div class="post-tags">
+      
+      
+        <a href="/categories/#Blog">Blog</a>
+        
+      
+    </div>
+  </div>
+
+  <div class="entry">
+    <p><!-- wp:paragraph --></p>
+<p><a rel="noreferrer noopener" href="https://www.ariseff.com" target="_blank">Ari Seff</a>, <a rel="noreferrer noopener" href="https://wendazhou.com/" target="_blank">Wenda Zhou</a>, <a rel="noreferrer noopener" href="https://www.linkedin.com/in/nick-richardson-854271214" target="_blank">Nick Richardson</a>, and <a rel="noreferrer noopener" href="https://www.cs.princeton.edu/~rpa/" target="_blank">Ryan P. Adams</a><br />International Conference on Learning Representations (ICLR) 2022<br /><a rel="noreferrer noopener" href="https://arxiv.org/abs/2109.14124" target="_blank">Paper</a><br /><a rel="noreferrer noopener" href="https://youtu.be/Qm7ND25eMiw" target="_blank">Video</a><br /><a href="https://github.com/PrincetonLIPS/vitruvion" target="_blank" rel="noreferrer noopener">Code &amp; model weights</a></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>Vitruvion is a transformer-based model trained to generate parametric computer-aided design (CAD) sketches. It shows promise to augment mechanical design via tasks such as converting hand drawings to CAD models, autocompleting sketches, and inferring intended constraints.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image {"align":"center","id":4259,"sizeSlug":"full"} --></p>
+<figure class="wp-block-image aligncenter size-full"><img src="/assets/2021/09/pipeline.png" alt="" class="wp-image-4259" /></figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:heading {"level":4} --></p>
+<h4>Overview</h4>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>Parametric CAD tools are the predominant way engineers specify physical structures, from bicycle pedals to airplanes to printed circuit boards. They empower users to explore parameterized variations on their designs, while also providing a structured representation for simulation and manufacturing.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>At an operational level, parametric CAD starts with the specification of two-dimensional geometric representations, referred to as "sketches". A sketch consists of a collection of geometric primitives (e.g., lines, circles), along with a set of constraints that relate these primitives to one another. Example constraints include parallelism, tangency, and coincidence. This relational specification allows edits to coherently propagate to other parts of the design.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image {"align":"center","id":4164,"sizeSlug":"large"} --></p>
+<figure class="wp-block-image aligncenter size-large"><img src="/assets/2021/09/parametric_cad_overview-1-1024x352.png" alt="" class="wp-image-4164" /><br />
+<figcaption>Parametric CAD begins with simple primitives (e.g., lines, circles) (left) that are combined with constraints (e.g., perpendicularity, distance) to form 2D sketches (middle). These sketches then form the geometric foundation for 3D parts (right).</figcaption>
+</figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:image {"align":"center","id":4165,"width":631,"height":270,"sizeSlug":"large"} --></p>
+<figure class="wp-block-image aligncenter size-large is-resized"><img src="/assets/2021/09/constraint_viz_onshape.gif" alt="" class="wp-image-4165" width="631" height="270" /><br />
+<figcaption>Constraints enable "edit propagation", where components of CAD models are updated automatically in response to user-imposed changes. A sketch shown in the program <a href="https://www.onshape.com" target="_blank" rel="noreferrer noopener">Onshape</a> (left) is updated as its numerical constraint parameters (e.g., radii, angles) are altered (right).</figcaption>
+</figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p>While this paradigm is powerful, it is often a challenging and tedious process. Machine learning offers the intriguing possibility of automatically encoding commonly used patterns, mitigating the inefficiencies involved in repetitive manual design. This could enable new tools such as autocompletion, constraint inference, and conditional synthesis.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>In this work, we develop an approach to generative modeling of parametric CAD sketches. Vitruvion, trained on real-world designs from the <a href="https://github.com/PrincetonLIPS/SketchGraphs" target="_blank" rel="noreferrer noopener">SketchGraphs</a> dataset, synthesizes CAD sketches by autoregressively sampling geometric primitives, with initial coordinates, and constraints that reference back to the sampled primitives. Because samples from the model match the constraint graph representation used in standard CAD software, they may be imported solved, and edited according to downstream design tasks. In addition, we experiment with providing various kinds of context to the model, including partial sketches (primers) and images of hand-drawn sketches, enabling conditional synthesis.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image {"align":"center","id":4109,"sizeSlug":"full"} --></p>
+<figure class="wp-block-image aligncenter size-full"><img src="/assets/2021/09/model_fig-1.png" alt="" class="wp-image-4109" /><br />
+<figcaption>We factorize CAD sketch synthesis into two sequence modeling tasks: primitive generation (left) and constraint generation (right). The primitive model may be conditioned on an optional input context, such as a hand-drawn sketch.</figcaption>
+</figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:heading {"level":4} --></p>
+<h4>Example results</h4>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p><strong>Extracting primitives from hand-drawn sketches</strong></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image {"align":"center","id":4085,"sizeSlug":"full"} --></p>
+<figure class="wp-block-image aligncenter size-full"><img src="/assets/2021/09/img2prim-1.gif" alt="" class="wp-image-4085" /><br />
+<figcaption>Raster images of hand-drawn sketches (left) are provided as input to the primitive model, which then generates sequences of primitives (right). For each input here, four samples are generated.</figcaption>
+</figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p><strong>Autoconstraining</strong></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image {"align":"center","id":4061,"width":446,"height":278,"sizeSlug":"large"} --></p>
+<figure class="wp-block-image aligncenter size-large is-resized"><img src="/assets/2021/09/image-1.png" alt="" class="wp-image-4061" width="446" height="278" /><br />
+<figcaption>Unconstrained geometry (left) is passed to the constraint model and then solved (right). Images are screenshots from the <a href="https://www.onshape.com/">Onshape</a> user interface.</figcaption>
+</figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:image {"align":"center","id":4087,"width":481,"height":396,"sizeSlug":"full"} --></p>
+<figure class="wp-block-image aligncenter size-full is-resized"><img src="/assets/2021/09/image-3.png" alt="" class="wp-image-4087" width="481" height="396" /><br />
+<figcaption>An example of conditional reasoning in the constraint model. In the first case (top), the model constrains the top horizontal line to serve as the top of the rectangle (coincident with the circles' centers). In the second case (bottom), we manually add another line segment (denoted by the green arrow) just below the top one. Now, the model constrains this new line to be the top of the rectangle, setting the original one to be coincident with the circumferences of the two top circles.</figcaption>
+</figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p><strong>Editing generated sketches</strong></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image {"align":"center","id":4096,"width":536,"height":283,"sizeSlug":"large"} --></p>
+<figure class="wp-block-image aligncenter size-large is-resized"><img src="/assets/2021/09/editing_solved_sketches-2-1024x541.png" alt="" class="wp-image-4096" width="536" height="283" /><br />
+<figcaption>Hand-drawn sketches (left) are converted to initial unsolved sketches (middle) and then imported to Onshape, solved, and edited to various configurations (right). Constraints help enforce design intent while allowing edits to propagate.</figcaption>
+</figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p><strong>Autocompleting</strong></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image {"align":"center","id":4070,"width":568,"height":273,"sizeSlug":"large"} --></p>
+<figure class="wp-block-image aligncenter size-large is-resized"><img src="/assets/2021/09/image-2-1024x494.png" alt="" class="wp-image-4070" width="568" height="273" /><br />
+<figcaption>We take held-out sketches (leftmost column) and delete 40% of their primitives to form primers (second column from left) for the primitive model. To the right are the inferred completions, where the model is queried for additional primitives until selecting a stop token.</figcaption>
+</figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:heading {"level":4} --></p>
+<h4>Why "Vitruvion"?</h4>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>While debugging a data augmentation procedure, we happened to render the average of a set of normalized SketchGraphs sketches. In our opinion, it was the spitting image of a famous 1490 drawing by Leonardo da Vinci, <a rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/Vitruvian_Man" target="_blank">The Vitruvian Man</a>, depicting a man inscribed in a circle and square. Likewise, we decided to name our model after this drawing (albeit with a slight spelling alteration).</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image {"align":"center","id":4038,"width":437,"height":172,"sizeSlug":"large"} --></p>
+<figure class="wp-block-image aligncenter size-large is-resized"><img src="/assets/2021/09/average_vitruvian-1.png" alt="" class="wp-image-4038" width="437" height="172" /><br />
+<figcaption>Heatmap resulting from average normalized SketchGraphs images (left) and "The Vitruvian Man" by Leonardo Da Vinci (right). The two images are almost indistinguishable, hence our naming choice.</figcaption>
+</figure>
+<p><!-- /wp:image --></p>
+
+  </div>
+
+  <div>
+    <p><span class="share-box">Share:</span> <a href="http://twitter.com/share?text=Vitruvion: A Generative Model of Parametric CAD Sketches&url=http://lips.cs.princeton.edu/vitruvion/" target="_blank">Twitter</a>, <a href="https://www.facebook.com/sharer.php?u=http://lips.cs.princeton.edu/vitruvion/" target="_blank">Facebook</a></p>
+  </div>
+
+  <!--<div class="date">
+    Written on September 25, 2021
+  </div>-->
+
+  
+</article>
+
+        </div>
+      </div>
+
+      <div class="wrapper-footer">
+        <div class="container">
+          <footer class="footer">
+            
+
+
+
+
+
+
+
+<a href="/feed.xml"><i class="svg-icon rss"></i></a>
+<a href="https://www.twitter.com/ryan_p_adams"><i class="svg-icon twitter"></i></a>
+
+
+
+
+
+          </footer>
+        </div>
+      </div>
+    </div>
+
+    
+
+  </body>
+</html>

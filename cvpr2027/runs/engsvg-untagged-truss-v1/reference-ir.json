@@ -1,0 +1,141 @@
+{
+  "version": "engsvg-ir-v1",
+  "kind": "truss2d",
+  "units": {
+    "length": "mm",
+    "force": "N",
+    "stress": "MPa"
+  },
+  "nodes": {
+    "A": [
+      0,
+      0
+    ],
+    "B": [
+      1000,
+      0
+    ],
+    "C": [
+      2000,
+      1200
+    ],
+    "D": [
+      3000,
+      0
+    ],
+    "E": [
+      4000,
+      0
+    ]
+  },
+  "materials": {
+    "steel": {
+      "E_mpa": 200000
+    }
+  },
+  "sections": {
+    "bar": {
+      "shape": "rect",
+      "b_mm": 40,
+      "h_mm": 20
+    }
+  },
+  "members": [
+    {
+      "id": "AB",
+      "a": "A",
+      "b": "B",
+      "section": "bar",
+      "material": "steel"
+    },
+    {
+      "id": "BD",
+      "a": "B",
+      "b": "D",
+      "section": "bar",
+      "material": "steel"
+    },
+    {
+      "id": "DE",
+      "a": "D",
+      "b": "E",
+      "section": "bar",
+      "material": "steel"
+    },
+    {
+      "id": "AC",
+      "a": "A",
+      "b": "C",
+      "section": "bar",
+      "material": "steel"
+    },
+    {
+      "id": "BC",
+      "a": "B",
+      "b": "C",
+      "section": "bar",
+      "material": "steel"
+    },
+    {
+      "id": "CD",
+      "a": "C",
+      "b": "D",
+      "section": "bar",
+      "material": "steel"
+    },
+    {
+      "id": "CE",
+      "a": "C",
+      "b": "E",
+      "section": "bar",
+      "material": "steel"
+    }
+  ],
+  "plates": [],
+  "holes": [],
+  "dimensions": [
+    {
+      "id": "span",
+      "value_mm": 4000,
+      "between": [
+        "A",
+        "E"
+      ]
+    },
+    {
+      "id": "height",
+      "value_mm": 1200,
+      "between": [
+        "baseline",
+        "C"
+      ]
+    }
+  ],
+  "supports": {
+    "A": [
+      0,
+      1
+    ],
+    "E": [
+      1
+    ]
+  },
+  "loads": {
+    "C": [
+      0,
+      -20000
+    ]
+  },
+  "assumptions": [
+    "planar pin-jointed truss",
+    "linear elastic axial members",
+    "nodal loads only",
+    "small displacement"
+  ],
+  "provenance": {
+    "mode": "authored",
+    "confidence": {},
+    "evidence": {},
+    "ambiguities": []
+  }
+}

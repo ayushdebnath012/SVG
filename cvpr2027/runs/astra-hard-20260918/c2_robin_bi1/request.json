@@ -1,0 +1,12 @@
+{
+  "model": "gpt-6-astra",
+  "messages": [
+    {
+      "role": "user",
+      "content": "You are an engineering drafter producing SVG drawings.\n\nDraw the following as a single, self-contained SVG document:\n\nSteady two-dimensional heat conduction (Laplace equation) in the unit square plate [0,1]x[0,1] with thermal conductivity k. The left edge x = 0 is held at 100 C. The right, top and bottom edges lose heat by convection to an ambient at 0 C with heat transfer coefficient h, so that on those edges -k dT/dn = h T with outward normal n and Biot number h L / k = 1 for the side length L = 1. Draw the plate outline and the isotherms at 50, 60, 70, 80, 90 C. Use viewBox=\"0 0 1000 1000\". Map plate coordinates to drawing coordinates as X = 100 + 800 x and Y = 900 - 800 y. Wrap every contour in one <g data-field=\"T\" data-status=\"...\"> group and set data-status honestly to one of solved, estimated, illustrative or ill-posed. Draw every contour as its own <path> or <polyline> carrying a data-level attribute with its numeric level and label it. Contours must satisfy the boundary conditions exactly.\n\nRequirements:\n- Output ONLY the SVG document. No markdown fences, no prose before or after.\n- The root <svg> must declare xmlns=\"http://www.w3.org/2000/svg\" and a viewBox.\n- Use only built-in SVG elements (path, line, rect, circle, ellipse, polygon,\n  polyline, text, g, defs, marker, pattern). No external images, scripts,\n  fonts, or stylesheets.\n- Every visible element must be stroked or filled with an explicit color.\n- Label parts and dimensions with <text>; keep text inside the viewBox.\n- Prefer clean, precise geometry over decoration.\n"
+    }
+  ],
+  "reasoning_effort": "medium",
+  "max_completion_tokens": 20000,
+  "store": false
+}

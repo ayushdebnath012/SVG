@@ -1,0 +1,5 @@
+{
+  "code": "import cadquery as cq\nresult = cq.Workplane('XY').circle(75).extrude(25).intersect(cq.Workplane('XY').rect(149,149).extrude(25).rotate((0,0,0),(0,0,1),45))\nresult = result.cut(cq.Workplane('XY').circle(47.5).extrude(25))\nfor a in (0,90,180,270):\n    tab = cq.Workplane('XY').workplane(offset=13).center(0,-47).rect(5,10).extrude(12).rotate((0,0,0),(0,0,1),a)\n    result = result.union(tab)\nfor a in (0,90,180,270):\n    relief = cq.Workplane('XY').workplane(offset=13).pushPoints([(-5,-47.5),(5,-47.5)]).circle(2.5).extrude(12)\n    bridges = cq.Workplane('XY').workplane(offset=13).pushPoints([(-5,-44.75),(5,-44.75)]).rect(5,5.5).extrude(12)\n    relief = relief.union(bridges).rotate((0,0,0),(0,0,1),a)\n    result = result.cut(relief)\nresult = result.clean().faces('>Z').edges().chamfer(1)",
+  "svg": "cvpr2027/runs/astra-cad-released-20260921/149/screen/tool-2/views.svg",
+  "title": "Candidate kernel views"
+}

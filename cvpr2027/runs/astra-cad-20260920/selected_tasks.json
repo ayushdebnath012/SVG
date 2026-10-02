@@ -1,0 +1,122 @@
+{
+  "version": "cad-frame-pilot-v1",
+  "selection": {
+    "version": "cad-frame-pilot-v1",
+    "selection_rule": "At least 3 evaluable samples including 2 high-effort confirmations; at least 2 substantive failures on a track, including one high-effort failure; explicit visual/evidence review by an identified reviewer (human or assistant).",
+    "selection_policy": {
+      "version": "cad-selection-v1",
+      "recorded_utc": "2026-09-19T19:12:36.941329+00:00",
+      "rule": "At least 3 evaluable samples including 2 high-effort confirmations; at least 2 substantive failures on a track, including one high-effort failure; explicit visual/evidence review by an identified reviewer (human or assistant).",
+      "clarification": "The frozen initial task manifest used the phrase human review. Before inspecting any model output, this policy clarifies that recorded assistant visual/evidence review is acceptable. No prompts, references, numeric tolerances or failure-count thresholds changed.",
+      "review_fields": [
+        "confirmed",
+        "reviewer_type",
+        "rationale",
+        "checked_samples"
+      ]
+    },
+    "caveat": "Astra-conditioned challenge set; cannot estimate general CAD success rates. Failures are conditional on the saved prompt/budget and unaided model. Physical-only failures do not establish inability to draw the shape.",
+    "selected": [],
+    "candidates": [
+      {
+        "id": "building_edit",
+        "family": "building",
+        "mode": "edit",
+        "eligible_samples": 1,
+        "failures": 1,
+        "drawing_failures": 0,
+        "physical_failures": 1,
+        "tracks": [],
+        "evidence": [
+          "runs/astra-cad-20260920/screen/building_edit/sample-0",
+          "runs/astra-cad-20260920/confirm-building-edit/building_edit/sample-0",
+          "runs/astra-cad-20260920/confirm-building-edit/building_edit/sample-1"
+        ],
+        "review": {
+          "reviewer_type": "assistant",
+          "reviewer": "Codex visual and numerical evidence review, 2026-09-20",
+          "confirmed": true,
+          "rationale": "The screening SVG correctly changes frame geometry and dimensions. Its visible and JSON peak stress is 179 MPa; independent frame reference is 20.356447 MPa. Confirms one physical-analysis failure only. Both high-effort confirmations ended at the token cap; no repeatable failure or shape inability established.",
+          "checked_samples": [
+            "screen/building_edit/sample-0",
+            "confirm-building-edit/building_edit/sample-0",
+            "confirm-building-edit/building_edit/sample-1"
+          ]
+        }
+      }
+    ],
+    "excluded_or_controls": [
+      {
+        "id": "table_generate",
+        "family": "table",
+        "mode": "generate",
+        "eligible_samples": 1,
+        "failures": 0,
+        "drawing_failures": 0,
+        "physical_failures": 0,
+        "tracks": [],
+        "evidence": [
+          "runs/astra-cad-20260920/screen/table_generate/sample-0"
+        ],
+        "review": null
+      },
+      {
+        "id": "table_edit",
+        "family": "table",
+        "mode": "edit",
+        "eligible_samples": 1,
+        "failures": 0,
+        "drawing_failures": 0,
+        "physical_failures": 0,
+        "tracks": [],
+        "evidence": [
+          "runs/astra-cad-20260920/screen/table_edit/sample-0"
+        ],
+        "review": null
+      },
+      {
+        "id": "building_generate",
+        "family": "building",
+        "mode": "generate",
+        "eligible_samples": 1,
+        "failures": 0,
+        "drawing_failures": 0,
+        "physical_failures": 0,
+        "tracks": [],
+        "evidence": [
+          "runs/astra-cad-20260920/screen/building_generate/sample-0"
+        ],
+        "review": null
+      },
+      {
+        "id": "shelf_generate",
+        "family": "shelf",
+        "mode": "generate",
+        "eligible_samples": 1,
+        "failures": 0,
+        "drawing_failures": 0,
+        "physical_failures": 0,
+        "tracks": [],
+        "evidence": [
+          "runs/astra-cad-20260920/screen/shelf_generate/sample-0"
+        ],
+        "review": null
+      },
+      {
+        "id": "shelf_edit",
+        "family": "shelf",
+        "mode": "edit",
+        "eligible_samples": 1,
+        "failures": 0,
+        "drawing_failures": 0,
+        "physical_failures": 0,
+        "tracks": [],
+        "evidence": [
+          "runs/astra-cad-20260920/screen/shelf_edit/sample-0"
+        ],
+        "review": null
+      }
+    ]
+  },
+  "tasks": []
+}

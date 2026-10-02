@@ -1,0 +1,731 @@
+{
+  "status": "completed",
+  "model": "/Users/ayushdebnath/.cache/huggingface/hub/models--mlx-community--Qwen2.5-Coder-1.5B-Instruct-4bit/snapshots/b3252a2f97102b1fb1571fec2c9b27219a8536be",
+  "model_repo": "mlx-community/Qwen2.5-Coder-1.5B-Instruct-4bit",
+  "model_revision": "b3252a2f97102b1fb1571fec2c9b27219a8536be",
+  "source_manifest": {
+    "source": "https://huggingface.co/datasets/BenchCAD/BenchCAD",
+    "upstream_config": "edit-bench",
+    "upstream_split": "edit_bench",
+    "upstream_rows": 748,
+    "revision": "5919f578ab09ec283603a082fab07c7639ab56eb",
+    "license": "CC-BY-4.0",
+    "attribution": "Zhang et al. 2026, BenchCAD",
+    "source_sha256": "99a6c8756eabee2b818518c8003b87025d2868e2e681f4bc31488f146b5513c4",
+    "system": "Apply the instruction to the mechanical CadQuery program. Return only JSON with key edits: a list of objects containing start (zero-based original line index), delete (number of original lines to remove), and insert (list of replacement lines). Coordinates refer to the original program. Preserve unrelated geometry. Do not include Markdown or explanation.",
+    "counts": {
+      "train": 533,
+      "validation": 50,
+      "test": 127
+    },
+    "excluded": {
+      "out_of_scope": 38
+    },
+    "families": {
+      "train": [
+        "ball_knob",
+        "bearing_retainer_cap",
+        "bevel_gear",
+        "bolt",
+        "bucket",
+        "cable_routing_panel",
+        "cam",
+        "circlip",
+        "clevis",
+        "clevis_pin",
+        "coil_spring",
+        "connector_faceplate",
+        "cotter_pin",
+        "dog_bone",
+        "double_simplex_sprocket",
+        "dovetail_slide",
+        "dowel_pin",
+        "enclosure",
+        "eyebolt",
+        "fan_shroud",
+        "flat_link",
+        "grease_nipple",
+        "gridfinity_bin",
+        "grommet",
+        "gusseted_bracket",
+        "handwheel",
+        "heat_sink",
+        "helical_gear",
+        "hex_nut",
+        "hinge",
+        "hollow_tube",
+        "impeller",
+        "j_hook",
+        "keyhole_plate",
+        "l_bracket",
+        "lathe_turned_part",
+        "lobed_knob",
+        "mesh_panel",
+        "mounting_plate",
+        "nozzle",
+        "phone_stand",
+        "piston",
+        "pull_handle",
+        "pulley",
+        "ratchet_sector",
+        "rect_frame",
+        "rib_plate",
+        "shaft_collar",
+        "sheet_metal_tray",
+        "slotted_plate",
+        "snap_clip",
+        "spacer_ring",
+        "spline_hub",
+        "spur_gear",
+        "standoff",
+        "star_blank",
+        "t_slot_rail",
+        "table",
+        "taper_pin",
+        "tee_nut",
+        "torsion_spring",
+        "torus_link",
+        "turnbuckle",
+        "twisted_drill",
+        "u_bolt",
+        "u_channel",
+        "vented_panel",
+        "waffle_plate",
+        "wall_anchor",
+        "washer",
+        "wing_nut",
+        "wire_grid",
+        "worm_screw",
+        "z_bracket"
+      ],
+      "validation": [
+        "battery_holder",
+        "chair",
+        "dome_cap",
+        "i_beam",
+        "pillow_block",
+        "sprocket",
+        "tapered_boss",
+        "threaded_adapter"
+      ],
+      "test": [
+        "bellows",
+        "capsule",
+        "connecting_rod",
+        "cruciform",
+        "hex_key_organizer",
+        "hex_standoff",
+        "knob",
+        "locator_block",
+        "motor_end_cap",
+        "mounting_angle",
+        "pan_head_screw",
+        "parallel_key",
+        "propeller",
+        "rivet",
+        "round_flange",
+        "stepped_shaft",
+        "twisted_bracket",
+        "venturi_tube"
+      ]
+    },
+    "categories": {
+      "train": {
+        "T4": 138,
+        "T5": 112,
+        "T3": 81,
+        "T1": 133,
+        "T2": 69
+      },
+      "validation": {
+        "T1": 11,
+        "T4": 15,
+        "T5": 8,
+        "T2": 9,
+        "T3": 7
+      },
+      "test": {
+        "T1": 31,
+        "T3": 18,
+        "T5": 26,
+        "T4": 34,
+        "T2": 18
+      }
+    },
+    "split_policy": "70/10/20 family/template-component split. All numeric-masked source/target AST templates linked before assigning groups. Hash-ranked deterministic group split.",
+    "protocol": "Local re-partition of a published benchmark for training and evaluation; NOT official leaderboard protocol. Fresh base weights; prior mechanical adapter not reused.",
+    "fem": "not_evaluated_missing_physical_specification",
+    "files": {
+      "train": "ed2d774dc194e9f26643f90dd4059013a3186e0cc266292acc4f95a41e6a4a3c",
+      "validation": "f75bf71c664d5666042af8c540c732251c585f9ef6714543d228dd4b9fb715c2",
+      "test": "549286143417c2a6d942eb9e7e7371387ce8815dc863f2a446ac231db3289156"
+    }
+  },
+  "packages": {
+    "mlx": "0.32.3",
+    "mlx-lm": "0.32.0",
+    "transformers": "5.18.0"
+  },
+  "iterations": 492,
+  "seed": 17,
+  "max_sequence_length": 3072,
+  "max_generation_tokens": 512,
+  "batch_size": 1,
+  "learning_rate": 0.0001,
+  "lora_layers": 8,
+  "counts": {
+    "train": 492,
+    "validation": 44,
+    "test": 126
+  },
+  "omissions": [
+    {
+      "id": "fba55315919ebbc4e85ca7b4559644fd16cc3aba4c4045bfefb0a0d93d4f2371",
+      "split": "train",
+      "tokens": 6823,
+      "answer_tokens": 145,
+      "category": "T5",
+      "family": "spur_gear"
+    },
+    {
+      "id": "861db50b403323659f5d65008e58152ce3904cdc68bff0f74d98e073f19a2e75",
+      "split": "train",
+      "tokens": 9804,
+      "answer_tokens": 26,
+      "category": "T4",
+      "family": "double_simplex_sprocket"
+    },
+    {
+      "id": "eeddc1052538f17433a7656b6240cc40751e3b6bd6f4c621af58ec58564f93a7",
+      "split": "train",
+      "tokens": 10649,
+      "answer_tokens": 42,
+      "category": "T4",
+      "family": "helical_gear"
+    },
+    {
+      "id": "b10996bfd0acd907a81ab3d0d521150fce36ede680aa3fe333c282a61b0e40e9",
+      "split": "train",
+      "tokens": 9292,
+      "answer_tokens": 28,
+      "category": "T5",
+      "family": "spline_hub"
+    },
+    {
+      "id": "bd8794fdb958c7b0775798c2d67828ddae2788e9400db55c09d2da0b66aec64e",
+      "split": "train",
+      "tokens": 4768,
+      "answer_tokens": 17,
+      "category": "T4",
+      "family": "coil_spring"
+    },
+    {
+      "id": "69a379dc8ae2a551e7e1c3c1d2c8ab9335d5582b4ef4501d31be58058ecafff7",
+      "split": "train",
+      "tokens": 4753,
+      "answer_tokens": 24,
+      "category": "T1",
+      "family": "coil_spring"
+    },
+    {
+      "id": "b9e78e4d740ce2222178a7635a4716041af4481e3c76ca149c863bbf89eee960",
+      "split": "train",
+      "tokens": 5370,
+      "answer_tokens": 30,
+      "category": "T4",
+      "family": "spur_gear"
+    },
+    {
+      "id": "1718b51d9d9365df742c3d2595cd7c0b125a9e59afe9f0ddb486e52d21fcce88",
+      "split": "train",
+      "tokens": 9780,
+      "answer_tokens": 39,
+      "category": "T2",
+      "family": "double_simplex_sprocket"
+    },
+    {
+      "id": "4e693fd5016b4281e12737f0e478fce7b63607cb4321a554264961b04322de20",
+      "split": "train",
+      "tokens": 9779,
+      "answer_tokens": 28,
+      "category": "T3",
+      "family": "double_simplex_sprocket"
+    },
+    {
+      "id": "1abb2e65707a523784013d3e78919384ef8b23ca6e8a325b91a51c0ff33b089d",
+      "split": "train",
+      "tokens": 5339,
+      "answer_tokens": 26,
+      "category": "T1",
+      "family": "spur_gear"
+    },
+    {
+      "id": "7dcc927a0b1466938718ad8acd9fcbab568381227dd423702a311001cd9d6310",
+      "split": "train",
+      "tokens": 9769,
+      "answer_tokens": 27,
+      "category": "T1",
+      "family": "double_simplex_sprocket"
+    },
+    {
+      "id": "5eaa9c968f67ade2a7636cc28653ee7a44b95f22ceafd88202866ed21fc17cce",
+      "split": "train",
+      "tokens": 4756,
+      "answer_tokens": 25,
+      "category": "T1",
+      "family": "coil_spring"
+    },
+    {
+      "id": "792fdb14a78c46cac303b477ea43fb35e2d16992949bb2a3123ea326542602f5",
+      "split": "train",
+      "tokens": 9848,
+      "answer_tokens": 17,
+      "category": "T4",
+      "family": "double_simplex_sprocket"
+    },
+    {
+      "id": "886345563d6422b8d41c0b743ddeee349b091817dff8836627f4ca6b8e1d354b",
+      "split": "train",
+      "tokens": 5511,
+      "answer_tokens": 26,
+      "category": "T1",
+      "family": "bevel_gear"
+    },
+    {
+      "id": "37232587adf9b3ec3d03fa54aeb2a5a4b0167386ea9e61102a33eb783faed053",
+      "split": "train",
+      "tokens": 12853,
+      "answer_tokens": 146,
+      "category": "T5",
+      "family": "helical_gear"
+    },
+    {
+      "id": "255aa20b453c0eca462b3ab077c3f7ace3ebac05849a0b37bc59fd3511324ee0",
+      "split": "train",
+      "tokens": 10627,
+      "answer_tokens": 17,
+      "category": "T4",
+      "family": "helical_gear"
+    },
+    {
+      "id": "131af4bd39b7e1056037a864522a0942396a26343ee0ad05854ed43f0f4bd630",
+      "split": "train",
+      "tokens": 9772,
+      "answer_tokens": 26,
+      "category": "T1",
+      "family": "double_simplex_sprocket"
+    },
+    {
+      "id": "fcceb2af141c19e154158138a0dc1a9d52cd3dfc18905132a224658acc95513c",
+      "split": "train",
+      "tokens": 9827,
+      "answer_tokens": 65,
+      "category": "T5",
+      "family": "double_simplex_sprocket"
+    },
+    {
+      "id": "62cd94bbd99fe78f8815a3e279a136d139473e68ed3841bb70635b52866f7f33",
+      "split": "train",
+      "tokens": 9788,
+      "answer_tokens": 28,
+      "category": "T3",
+      "family": "double_simplex_sprocket"
+    },
+    {
+      "id": "083e9081732759e7e64ac1d7fada8855f4780ba10d3ba236f3e5ae99c6b957a9",
+      "split": "train",
+      "tokens": 10627,
+      "answer_tokens": 17,
+      "category": "T4",
+      "family": "helical_gear"
+    },
+    {
+      "id": "7e21ea060b632eda21570552979677b5e7a30125cc495deb3e3c263a0205d6f1",
+      "split": "train",
+      "tokens": 5524,
+      "answer_tokens": 42,
+      "category": "T4",
+      "family": "bevel_gear"
+    },
+    {
+      "id": "c4ca3f26d0e3928149ea4b39d7d4bce184ba8d10ae7666d7e2ddf727e4f52766",
+      "split": "train",
+      "tokens": 9870,
+      "answer_tokens": 97,
+      "category": "T5",
+      "family": "double_simplex_sprocket"
+    },
+    {
+      "id": "50b34b88583a1cc26a012b1b9e77391b14ad3c9699f0a168e40a8072f578432a",
+      "split": "train",
+      "tokens": 10626,
+      "answer_tokens": 28,
+      "category": "T3",
+      "family": "helical_gear"
+    },
+    {
+      "id": "751884c2f28800315be863288680e0da53fbe8131d77fadf5c5b7f33203861ed",
+      "split": "train",
+      "tokens": 9826,
+      "answer_tokens": 17,
+      "category": "T4",
+      "family": "double_simplex_sprocket"
+    },
+    {
+      "id": "50f450eb149a98ff337d1d50c8be2f2aa2f6ef0a567de69d5c508060f9775ab5",
+      "split": "train",
+      "tokens": 5358,
+      "answer_tokens": 42,
+      "category": "T4",
+      "family": "spur_gear"
+    },
+    {
+      "id": "e3a394c747c294e4cb4ff40e2410fe091cda3110e2542c32daaecc5d61d98ef2",
+      "split": "train",
+      "tokens": 5511,
+      "answer_tokens": 26,
+      "category": "T1",
+      "family": "bevel_gear"
+    },
+    {
+      "id": "33281884f6e1970b671b1a3e4fff70ad2879a0fb5d1eaf61e489775d55ea10a7",
+      "split": "train",
+      "tokens": 4761,
+      "answer_tokens": 39,
+      "category": "T2",
+      "family": "coil_spring"
+    },
+    {
+      "id": "c15510886b11b2eb8f792f5f88c685e3fb3fc6beed8d89482bc1cf7aeaacf654",
+      "split": "train",
+      "tokens": 5517,
+      "answer_tokens": 26,
+      "category": "T3",
+      "family": "bevel_gear"
+    },
+    {
+      "id": "3a7112d9692ce9f4f50552c1c0f9942d7153ef903ff5d2c4710caa620487a4a3",
+      "split": "train",
+      "tokens": 10631,
+      "answer_tokens": 43,
+      "category": "T2",
+      "family": "helical_gear"
+    },
+    {
+      "id": "64b2fd81d0ba6ac69f1793852395b1b8f28730cbac105887e3e94c41ffa4511e",
+      "split": "train",
+      "tokens": 9799,
+      "answer_tokens": 39,
+      "category": "T5",
+      "family": "double_simplex_sprocket"
+    },
+    {
+      "id": "4ad140aaf4d64d902a08605dd3ad8f4e406686b9f106a43d3a5c2c943861fbe6",
+      "split": "train",
+      "tokens": 4920,
+      "answer_tokens": 29,
+      "category": "T5",
+      "family": "coil_spring"
+    },
+    {
+      "id": "283a61fd0e98eff16e3125589b7c522a28915d8598b9f00115cb320c87f6ec29",
+      "split": "train",
+      "tokens": 5383,
+      "answer_tokens": 42,
+      "category": "T3",
+      "family": "spur_gear"
+    },
+    {
+      "id": "8ebd6c8685865bced536ef0ddf54855fe92465e46c3a972f2568cc4af93709a0",
+      "split": "train",
+      "tokens": 4753,
+      "answer_tokens": 26,
+      "category": "T2",
+      "family": "coil_spring"
+    },
+    {
+      "id": "5bc58643aabe6a3a6452e4e42df895dcc45b72399572f637ec6bd8c799793a47",
+      "split": "train",
+      "tokens": 5563,
+      "answer_tokens": 45,
+      "category": "T4",
+      "family": "bevel_gear"
+    },
+    {
+      "id": "ba989926a82b08d2a86c04a3bda6c3279bce6e08bb5848db8e95415cf044e9b1",
+      "split": "train",
+      "tokens": 10628,
+      "answer_tokens": 41,
+      "category": "T4",
+      "family": "helical_gear"
+    },
+    {
+      "id": "edbd7fe05e6e6f3eecaa04be361ac8b45519d8533e0fa50f3249700a5b21f83e",
+      "split": "train",
+      "tokens": 9369,
+      "answer_tokens": 62,
+      "category": "T5",
+      "family": "bevel_gear"
+    },
+    {
+      "id": "fefd5bc5c69bde1cf80b7126d0aba56b307e210e051c146a07ffe0f7018ea871",
+      "split": "train",
+      "tokens": 4171,
+      "answer_tokens": 27,
+      "category": "T1",
+      "family": "spline_hub"
+    },
+    {
+      "id": "b6794a37bc1a9cc03ffebf90be292ce2073e7c3c46c406d0f4d37c2a4fc1fc47",
+      "split": "train",
+      "tokens": 4760,
+      "answer_tokens": 24,
+      "category": "T3",
+      "family": "coil_spring"
+    },
+    {
+      "id": "6a7dab4ce0845c31dba0b6ae2525fce832414979a631f7aa849a3cca4962525a",
+      "split": "train",
+      "tokens": 5551,
+      "answer_tokens": 42,
+      "category": "T4",
+      "family": "bevel_gear"
+    },
+    {
+      "id": "2a3e05cf98ead97cbb49d4fc0a4a72d070c5effe8474463c72d698e4ac2e5e18",
+      "split": "train",
+      "tokens": 9792,
+      "answer_tokens": 43,
+      "category": "T2",
+      "family": "double_simplex_sprocket"
+    },
+    {
+      "id": "5baf3d795bfd5ae520767e14fb90a4870e5b52c37496c64aa2c5d6ef2a8df313",
+      "split": "train",
+      "tokens": 5412,
+      "answer_tokens": 56,
+      "category": "T4",
+      "family": "spur_gear"
+    },
+    {
+      "id": "436e2e7ac81587a493d05c4afa55d1ff8f6049104e984568f56ec201a57d3d10",
+      "split": "validation",
+      "tokens": 5091,
+      "answer_tokens": 17,
+      "category": "T4",
+      "family": "sprocket"
+    },
+    {
+      "id": "07c285d9ef55097934fea87fab88c2a7762a91b95dfe14c827e1c8403a36b924",
+      "split": "validation",
+      "tokens": 5080,
+      "answer_tokens": 42,
+      "category": "T4",
+      "family": "sprocket"
+    },
+    {
+      "id": "8797c4adefe394dfc959b0852de85d745dd242d5b117fc98fc0ea6f42e01f31d",
+      "split": "validation",
+      "tokens": 5074,
+      "answer_tokens": 17,
+      "category": "T4",
+      "family": "sprocket"
+    },
+    {
+      "id": "bd9f85bc57e1ced107978d013cc041f7baa3d764bacabebf62027f9db021449c",
+      "split": "validation",
+      "tokens": 5106,
+      "answer_tokens": 54,
+      "category": "T2",
+      "family": "sprocket"
+    },
+    {
+      "id": "c44be7d6f3daddce1f86e81c1e37f420b48b523e29946dd0aba602d15db6991b",
+      "split": "validation",
+      "tokens": 17403,
+      "answer_tokens": 71,
+      "category": "T5",
+      "family": "sprocket"
+    },
+    {
+      "id": "b7a08c94800298610d1dc32ae76b2c43428793207e07865befa5eb0345a314c3",
+      "split": "validation",
+      "tokens": 5119,
+      "answer_tokens": 58,
+      "category": "T4",
+      "family": "sprocket"
+    },
+    {
+      "id": "28b696193c3247881aad5b2a1f7f410a2ee1e02afabe1bf0c3961dfe9ae5bf68",
+      "split": "test",
+      "tokens": 1375,
+      "answer_tokens": 1064,
+      "category": "T5",
+      "family": "cruciform"
+    }
+  ],
+  "categories": {
+    "train": {
+      "T4": 124,
+      "T5": 104,
+      "T3": 75,
+      "T1": 125,
+      "T2": 64
+    },
+    "validation": {
+      "T1": 11,
+      "T5": 7,
+      "T2": 8,
+      "T4": 11,
+      "T3": 7
+    },
+    "test": {
+      "T1": 31,
+      "T3": 18,
+      "T5": 25,
+      "T4": 34,
+      "T2": 18
+    }
+  },
+  "families": {
+    "train": [
+      "ball_knob",
+      "bearing_retainer_cap",
+      "bolt",
+      "bucket",
+      "cable_routing_panel",
+      "cam",
+      "circlip",
+      "clevis",
+      "clevis_pin",
+      "connector_faceplate",
+      "cotter_pin",
+      "dog_bone",
+      "dovetail_slide",
+      "dowel_pin",
+      "enclosure",
+      "eyebolt",
+      "fan_shroud",
+      "flat_link",
+      "grease_nipple",
+      "gridfinity_bin",
+      "grommet",
+      "gusseted_bracket",
+      "handwheel",
+      "heat_sink",
+      "hex_nut",
+      "hinge",
+      "hollow_tube",
+      "impeller",
+      "j_hook",
+      "keyhole_plate",
+      "l_bracket",
+      "lathe_turned_part",
+      "lobed_knob",
+      "mesh_panel",
+      "mounting_plate",
+      "nozzle",
+      "phone_stand",
+      "piston",
+      "pull_handle",
+      "pulley",
+      "ratchet_sector",
+      "rect_frame",
+      "rib_plate",
+      "shaft_collar",
+      "sheet_metal_tray",
+      "slotted_plate",
+      "snap_clip",
+      "spacer_ring",
+      "spline_hub",
+      "standoff",
+      "star_blank",
+      "t_slot_rail",
+      "table",
+      "taper_pin",
+      "tee_nut",
+      "torsion_spring",
+      "torus_link",
+      "turnbuckle",
+      "twisted_drill",
+      "u_bolt",
+      "u_channel",
+      "vented_panel",
+      "waffle_plate",
+      "wall_anchor",
+      "washer",
+      "wing_nut",
+      "wire_grid",
+      "worm_screw",
+      "z_bracket"
+    ],
+    "validation": [
+      "battery_holder",
+      "chair",
+      "dome_cap",
+      "i_beam",
+      "pillow_block",
+      "tapered_boss",
+      "threaded_adapter"
+    ],
+    "test": [
+      "bellows",
+      "capsule",
+      "connecting_rod",
+      "cruciform",
+      "hex_key_organizer",
+      "hex_standoff",
+      "knob",
+      "locator_block",
+      "motor_end_cap",
+      "mounting_angle",
+      "pan_head_screw",
+      "parallel_key",
+      "propeller",
+      "rivet",
+      "round_flange",
+      "stepped_shaft",
+      "twisted_bracket",
+      "venturi_tube"
+    ]
+  },
+  "evaluation": "All retained held-out records, fixed once before training. Greedy decoding, exact patches, AST equality, then separate CAD/STEP scoring.",
+  "script_sha256": "4157882c74ee3a6d50dd54ef4c07eed13f5106862418da23c128b4e4775d0153",
+  "command": [
+    "/Users/ayushdebnath/SVG/cvpr2027/tmp/mechanical-training/bin/python",
+    "-m",
+    "mlx_lm",
+    "lora",
+    "--model",
+    "/Users/ayushdebnath/.cache/huggingface/hub/models--mlx-community--Qwen2.5-Coder-1.5B-Instruct-4bit/snapshots/b3252a2f97102b1fb1571fec2c9b27219a8536be",
+    "--train",
+    "--mask-prompt",
+    "--data",
+    "cvpr2027/runs/benchcad-online-mlx-20261002/data",
+    "--adapter-path",
+    "cvpr2027/runs/benchcad-online-mlx-20261002/adapter",
+    "--iters",
+    "492",
+    "--batch-size",
+    "1",
+    "--num-layers",
+    "8",
+    "--learning-rate",
+    "0.0001",
+    "--max-seq-length",
+    "3072",
+    "--grad-checkpoint",
+    "--steps-per-report",
+    "25",
+    "--steps-per-eval",
+    "100",
+    "--val-batches",
+    "8",
+    "--save-every",
+    "100",
+    "--seed",
+    "17"
+  ],
+  "training_and_final_eval_seconds": 346.44929412500005,
+  "adapter_sha256": "1a15f8bc7f65660378fb01a8118fcc0a91a5466a4b0b48f033a46c8fe9b4e5aa"
+}

@@ -1,0 +1,306 @@
+{
+  "version": "functional-sizing-three-bay-v1",
+  "tasks": [
+    {
+      "id": "three_bay_catalog_1",
+      "model": {
+        "nodes": {
+          "N00": [
+            0.0,
+            0.0
+          ],
+          "N10": [
+            2900.0,
+            0.0
+          ],
+          "N20": [
+            6600.0,
+            0.0
+          ],
+          "N30": [
+            9000.0,
+            0.0
+          ],
+          "N01": [
+            80.0,
+            3100.0
+          ],
+          "N11": [
+            2980.0,
+            3100.0
+          ],
+          "N21": [
+            6680.0,
+            3100.0
+          ],
+          "N31": [
+            9080.0,
+            3100.0
+          ],
+          "N02": [
+            160.0,
+            6900.0
+          ],
+          "N12": [
+            3060.0,
+            6900.0
+          ],
+          "N22": [
+            6760.0,
+            6900.0
+          ],
+          "N32": [
+            9160.0,
+            6900.0
+          ]
+        },
+        "supports": {
+          "N00": [
+            0,
+            1,
+            2
+          ],
+          "N10": [
+            0,
+            1,
+            2
+          ],
+          "N20": [
+            0,
+            1,
+            2
+          ],
+          "N30": [
+            0,
+            1,
+            2
+          ]
+        },
+        "members": [
+          {
+            "id": "M1",
+            "a": "N00",
+            "b": "N01",
+            "E": 200000.0,
+            "b_mm": 80.0
+          },
+          {
+            "id": "M2",
+            "a": "N10",
+            "b": "N11",
+            "E": 200000.0,
+            "b_mm": 80.0
+          },
+          {
+            "id": "M3",
+            "a": "N20",
+            "b": "N21",
+            "E": 200000.0,
+            "b_mm": 80.0
+          },
+          {
+            "id": "M4",
+            "a": "N30",
+            "b": "N31",
+            "E": 200000.0,
+            "b_mm": 80.0
+          },
+          {
+            "id": "M5",
+            "a": "N01",
+            "b": "N02",
+            "E": 200000.0,
+            "b_mm": 80.0
+          },
+          {
+            "id": "M6",
+            "a": "N11",
+            "b": "N12",
+            "E": 200000.0,
+            "b_mm": 80.0
+          },
+          {
+            "id": "M7",
+            "a": "N21",
+            "b": "N22",
+            "E": 200000.0,
+            "b_mm": 80.0
+          },
+          {
+            "id": "M8",
+            "a": "N31",
+            "b": "N32",
+            "E": 200000.0,
+            "b_mm": 80.0
+          },
+          {
+            "id": "M9",
+            "a": "N01",
+            "b": "N11",
+            "E": 200000.0,
+            "b_mm": 80.0
+          },
+          {
+            "id": "M10",
+            "a": "N11",
+            "b": "N21",
+            "E": 200000.0,
+            "b_mm": 80.0
+          },
+          {
+            "id": "M11",
+            "a": "N21",
+            "b": "N31",
+            "E": 200000.0,
+            "b_mm": 80.0
+          },
+          {
+            "id": "M12",
+            "a": "N02",
+            "b": "N12",
+            "E": 200000.0,
+            "b_mm": 80.0
+          },
+          {
+            "id": "M13",
+            "a": "N12",
+            "b": "N22",
+            "E": 200000.0,
+            "b_mm": 80.0
+          },
+          {
+            "id": "M14",
+            "a": "N22",
+            "b": "N32",
+            "E": 200000.0,
+            "b_mm": 80.0
+          }
+        ]
+      },
+      "load_cases": [
+        {
+          "N02": [
+            50000,
+            -100000,
+            0
+          ],
+          "N12": [
+            0,
+            -180000,
+            0
+          ],
+          "N22": [
+            0,
+            -120000,
+            0
+          ],
+          "N32": [
+            30000,
+            -200000,
+            0
+          ],
+          "N31": [
+            20000,
+            -60000,
+            0
+          ]
+        },
+        {
+          "N02": [
+            -35000,
+            -160000,
+            0
+          ],
+          "N12": [
+            0,
+            -200000,
+            0
+          ],
+          "N22": [
+            0,
+            -70000,
+            0
+          ],
+          "N32": [
+            -45000,
+            -90000,
+            0
+          ],
+          "N01": [
+            -30000,
+            -100000,
+            0
+          ]
+        },
+        {
+          "N02": [
+            12000,
+            -210000,
+            0
+          ],
+          "N12": [
+            0,
+            -270000,
+            0
+          ],
+          "N22": [
+            0,
+            -100000,
+            0
+          ],
+          "N32": [
+            8000,
+            -300000,
+            0
+          ]
+        }
+      ],
+      "catalog_h_mm": [
+        140.0,
+        240.0,
+        380.0
+      ],
+      "density_kg_mm3": 7.85e-06,
+      "buckling_factor": 2.0,
+      "limits": {
+        "stress_mpa": 120.0,
+        "ux_mm": 12.0,
+        "uy_mm": 4.0
+      },
+      "scope": "Idealized linear 2D rigid-jointed rectangular-section steel frame, nodal forces, all support DOFs clamped. No self-weight, shear deformation, connection compliance, global buckling, plasticity, out-of-plane behavior or code compliance. Euler member check uses K=1 and factor 2, independently from linear FEM.",
+      "mass_cap_kg": 6409.84426,
+      "oracle": {
+        "best": {
+          "mass_kg": 6346.380454997498,
+          "stress_mpa": 111.18014553769333,
+          "ux_mm": 11.375349133007026,
+          "uy_mm": 0.9369756106827085,
+          "buckling_utilization": 0.2156037784837617,
+          "max_utilization": 0.9479457610839188,
+          "design": [
+            0,
+            0,
+            0,
+            2,
+            0,
+            0,
+            2,
+            2,
+            0,
+            0,
+            2,
+            0,
+            0,
+            2
+          ],
+          "structurally_feasible": true
+        },
+        "mass_cap_kg": 6409.84426,
+        "feasible_before_mass_cap": 1111189,
+        "feasible_after_mass_cap": 2,
+        "enumerated": 4782969
+      }
+    }
+  ],
+  "selection_policy": "Separate adaptive-discovery extension after earlier cases passed. Three fresh independent completed functional failures required, with no reference/interface defect. Resource bounded; not proof of permanent inability or a new shape class."
+}

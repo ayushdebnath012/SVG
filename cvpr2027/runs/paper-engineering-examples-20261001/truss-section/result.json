@@ -1,0 +1,70 @@
+{
+  "status": "verified_safe",
+  "mode": "tree_patch",
+  "request": "Set every member depth to 40 mm.",
+  "family": "truss",
+  "style": "canonical",
+  "action": {
+    "action": "edit",
+    "changes": {
+      "sections.bar.h_mm": 40.0
+    }
+  },
+  "patch": {
+    "version": 2,
+    "operations": [
+      {
+        "op": "set_text",
+        "targets": [
+          "n34"
+        ],
+        "text": "Section: 30 x 40 mm"
+      }
+    ]
+  },
+  "patch_operation_count": 1,
+  "patch_operation_types": [
+    "set_text"
+  ],
+  "target_tree_equal": true,
+  "edit_fidelity_pass": true,
+  "engineering_check_pass": true,
+  "recovered_output_family": "truss",
+  "recovered_output_style": "canonical",
+  "before_verification": {
+    "method": "linear_axial_truss_fem",
+    "pass": true,
+    "peak_abs_stress_mpa": 11.860940387163478,
+    "max_displacement_mm": 1.5265513268018096,
+    "equilibrium_residual_N_Nmm": [
+      3.637978807091713e-12,
+      -1.000444171950221e-11,
+      -3.3527612686157227e-08
+    ],
+    "relative_equilibrium_residual": 1.3339255626002948e-15,
+    "assumptions": [
+      "planar pin-jointed truss",
+      "linear elastic axial members",
+      "nodal loads only",
+      "small displacement"
+    ]
+  },
+  "after_verification": {
+    "method": "linear_axial_truss_fem",
+    "pass": true,
+    "peak_abs_stress_mpa": 5.930470193581739,
+    "max_displacement_mm": 0.7632756634009048,
+    "equilibrium_residual_N_Nmm": [
+      3.637978807091713e-12,
+      -1.000444171950221e-11,
+      -3.3527612686157227e-08
+    ],
+    "relative_equilibrium_residual": 1.3339255626002948e-15,
+    "assumptions": [
+      "planar pin-jointed truss",
+      "linear elastic axial members",
+      "nodal loads only",
+      "small displacement"
+    ]
+  }
+}

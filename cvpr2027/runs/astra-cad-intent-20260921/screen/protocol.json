@@ -1,0 +1,84 @@
+{
+  "model": "gpt-6-astra",
+  "effort": "high",
+  "cap": 16000,
+  "max_api_turns": 5,
+  "tools": [
+    {
+      "type": "function",
+      "name": "inspect_svg",
+      "description": "Inspect resulting world/page-space SVG geometry after applying patches; no hidden target or constraint oracle.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "patches": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "set": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "number"
+                  }
+                },
+                "text": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id"
+              ]
+            }
+          }
+        },
+        "required": [
+          "patches"
+        ]
+      },
+      "strict": false
+    },
+    {
+      "type": "function",
+      "name": "solve_linear",
+      "description": "Solve a numeric linear system A x = b and report residual.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "A": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            }
+          },
+          "b": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          }
+        },
+        "required": [
+          "A",
+          "b"
+        ],
+        "additionalProperties": false
+      },
+      "strict": true
+    }
+  ],
+  "system": "You edit detached engineering SVG drawings. Interpret visible dimensions, their extension-line attachments and the notes; no native CAD history is available. In these fixtures, parenthesized dimensions are reference values to recompute, and unparenthesized dimensions drive the edit except the explicitly requested width change.\nUse patches to existing opaque element IDs. Format: {\"patches\":[{\"id\":\"...\",\"set\":{\"x1\":123},\"text\":\"optional text for a text element\"}],\"explanation\":\"...\"}. set can modify only numeric geometry attributes of rect/circle/line/text, not IDs, styles or transforms. Preserve all existing objects. Text positions and dimension endpoints should follow their attached features. All physical edits are in mm; SVG ancestor transforms map them into page coordinates.\nYou may use inspect_svg up to two times and solve_linear up to two times. inspect_svg returns page-space numeric geometry after candidate patches; it does NOT have reference answers or engineering constraints. solve_linear is a generic linear algebra tool. You can also compute directly. Return the final JSON when done.",
+  "ids": [
+    "chain_plain",
+    "chain_nested",
+    "edge_plain",
+    "edge_nested"
+  ],
+  "manifest_sha256": "ec6116a78fb78983a171fdbfac0d91246f8b5b85ef11419d114e81f32bd908d4"
+}

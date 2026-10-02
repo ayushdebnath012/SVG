@@ -1,0 +1,16 @@
+{
+  "model": "gpt-6-astra",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Return a JSON object with svg (a complete SVG string) and analysis (an object, may be empty).\nDraw a precise CAD section/top view of the specified real mechanical part. This is geometry, not a field plot.\nUse viewBox=\"0 0 1000 1000\", width=\"1000\", height=\"1000\". Physical coordinates in mm are mapped to\nSVG X=500+4*x, Y=500-4*y. Put the entire material silhouette in ONE direct child <g data-geometry=\"part\">.\nThat group must display all solid material in black and all holes/removed material in white on a white background.\nIt must contain no dimensions, labels, axes, hatching, decorative strokes or construction curves. Curves should\nbe accurate within 0.5 mm; smooth Beziers or sufficiently fine polygon approximations are both acceptable.\nPlace readable dimensions, explanatory labels and centre marks OUTSIDE that geometry group. Give every required\nnumeric dimension a visible text element tagged data-dimension=\"its specified key\", containing its value and mm.\nAny native SVG shapes, transforms, local use references, clipping and masks are allowed. Definitions may be in defs.\nNo scripts, animation, raster images, foreignObject, external resources or CSS stylesheets. Inline styles are allowed.\nThe drawing must represent the actual specified profile, including intersecting features. Do not substitute a generic\nsymbolic gear/cam/section. No external tools are provided. Do not claim to have executed CAD or analysis software."
+    },
+    {
+      "role": "user",
+      "content": "Plate cam for a translating roller follower. Construct the pitch curve p(theta)=r(theta)*(cos(theta),sin(theta)), r=base_radius+roller_radius+s(theta), over 0<=theta<360 degrees, CCW from +x. Start a cycloidal rise of lift h over rise_deg, then hold h for high_dwell_deg, then cycloidal return over return_deg, then hold zero for the remaining angle. For local fraction u in [0,1], rise s=h*(u-sin(2*pi*u)/(2*pi)); return s=h*(1-u+sin(2*pi*u)/(2*pi)). The actual cam contour is the inward normal offset of that pitch curve by roller_radius: p-R*(dy/dtheta,-dx/dtheta)/sqrt((dx/dtheta)^2+(dy/dtheta)^2). Draw the cam contour, NOT the roller-centre/pitch curve. Subtract the centred circular bore. Angles in differentiation are radians.\nAll lengths mm. Required named dimensions: base_diameter, lift, roller_diameter, bore_diameter.\nSpecification:\n{\"base_radius_mm\": 30.0, \"roller_radius_mm\": 7.0, \"lift_mm\": 24.0, \"rise_deg\": 110.0, \"high_dwell_deg\": 50.0, \"return_deg\": 140.0, \"bore_radius_mm\": 8.0}"
+    }
+  ],
+  "reasoning_effort": "medium",
+  "max_completion_tokens": 16000,
+  "store": false
+}

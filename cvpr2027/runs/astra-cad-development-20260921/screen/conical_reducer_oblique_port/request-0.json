@@ -1,0 +1,39 @@
+{
+  "model": "gpt-6-astra",
+  "input": [
+    {
+      "role": "user",
+      "content": "Make a fabrication SVG flat cutting pattern for the ideal THIN NEUTRAL SURFACE of the described rolled metal sleeve. This is a sheet part, not a field plot. Zero thickness for geometry, no stretch, kerf, springback or seam allowance. Cut out EVERY portion of that surface inside the stated infinite drilling cylinders (both sides where applicable); keep the remaining material. If supplied, remove surface above plane z=a+b*X+c*Y. XYZ are right handed, z is the sleeve axis; all lengths mm; angles radians. Drill axes need normalization. All inputs are complete; do not infer other geometry.\nThe sleeve has a vertical seam at global azimuth seam_rad. Opening that seam maps theta in [seam_rad,seam_rad+2*pi] into the flat. For a CYLINDER use flat Cartesian u in [-pi*R,pi*R] increasing with theta; v=z-height/2. For a CONICAL FRUSTUM r0 at z=0, r1>r0 at z=height, develop into the annular sector with its virtual cone apex at (u,v)=(0,0), centered about +u. The lower seam is the negative-angle radial edge; increasing theta increases flat polar angle. Use true developed neutral-surface distances, not a projection. There is no target curve formula supplied; derive it from the geometry.\nSVG fixed viewBox=\"-130 -130 260 260\", width=height=1000. Flat u points right and v up: use a scale(1,-1) group when writing geometric paths. White background; solid black retained material, white removed areas; no strokes/labels/images. Curves must be accurate to 0.15 mm. SVG paths/polygons are allowed, including sufficiently dense samples. A helper may export numerical contours as genuine vector paths.\nReturn JSON {\"code\":\"Python that assigns the entire SVG string to svg\", \"explanation\":\"...\"}. math and np (NumPy) are preloaded, ordinary functions/for loops/comprehensions allowed; no imports, files, external calls or private attributes. contour_svg(x,y,field) is available: x and y are monotonically increasing 1D physical coordinate arrays, field is 2D [len(y),len(x)], positive for black material, negative for white; returns SVG in the required coordinate convention using interpolated marching-squares vector paths. It contains no CAD knowledge or task data. Limit arrays to at most 2000 by 2000. You can also build native SVG paths yourself. Use evaluate_pattern to execute and check each candidate; up to 3 evaluations. It reports SVG compilation and inventory, not hidden target comparisons. Then return the final code.\nSPECIFICATION:\n{\"kind\": \"cone\", \"r0\": 18.0, \"r1\": 46.0, \"height\": 58.0, \"seam_rad\": 0.47, \"bores\": [{\"point\": [4, 5, 29], \"axis\": [1, 0.35, 0.55], \"radius\": 14}]}"
+    }
+  ],
+  "reasoning": {
+    "effort": "high"
+  },
+  "max_output_tokens": 16000,
+  "store": false,
+  "include": [
+    "reasoning.encrypted_content"
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "name": "evaluate_pattern",
+      "description": "Run numerical SVG generator; returns execution and SVG inventory only; no target answer.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "code"
+        ],
+        "additionalProperties": false
+      },
+      "strict": true
+    }
+  ],
+  "tool_choice": "required",
+  "parallel_tool_calls": false
+}

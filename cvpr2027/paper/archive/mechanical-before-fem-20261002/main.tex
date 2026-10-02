@@ -1,0 +1,63 @@
+% CVPR 2027 submission draft. Template: https://github.com/cvpr-org/author-kit
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage[review]{cvpr}
+\input{preamble}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit}
+\usepackage{xspace}
+\usepackage{listings}
+\renewcommand{\ttdefault}{lmtt}  % Courier (pcr) is unavailable under XeTeX; use Latin Modern Mono for code
+\usepackage{upquote}
+\lstset{basicstyle=\ttfamily\scriptsize, breaklines=true, columns=fullflexible, upquote=true,
+  keepspaces=true, extendedchars=true, frame=none, xleftmargin=0pt,
+  literate={"}{{\textquotedbl}}1}
+\newcommand{\astra}{\textsc{Astra}\xspace}
+\newcommand{\ours}{\textsc{ReSolve}\xspace}
+\newcommand{\code}[1]{\texttt{\small #1}}
+
+\definecolor{cvprblue}{rgb}{0.21,0.49,0.74}
+\usepackage[pagebackref,breaklinks,colorlinks,allcolors=cvprblue]{hyperref}
+
+\def\paperID{Draft}
+\def\confName{CVPR}
+\def\confYear{2027}
+
+\title{ReSolve: Verified Mechanical CAD Edits\\and Linked Vector Drawings}
+
+\author{Research working draft}
+
+\input{mechanical-results}
+\input{cuda-results}
+
+\begin{document}
+\maketitle
+
+\input{sections/mechanical/abstract}
+\input{sections/mechanical/intro}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.93\textwidth]{figures/benchcad-reference-pairs.pdf}
+\caption{\textbf{Published mechanical CAD edit pairs held out in the local protocol.} Top: remove the perpendicular end flange while preserving the twisted web and the first-flange holes. Bottom: add a centered blind obround slot to the upper cylindrical shaft section. These are source/released-target illustrations, not learned model predictions. Both views are exported from solids; shape appearance supplies no stress or FEM result.}
+\label{fig:benchcad-reference}
+\end{figure*}
+\input{sections/mechanical/related}
+\input{sections/mechanical/method}
+\input{sections/mechanical/data}
+\input{sections/mechanical/experiments}
+\input{sections/mechanical/structures}
+\input{sections/mechanical/conclusion}
+
+{
+    \small
+    \bibliographystyle{ieeenat_fullname}
+    \bibliography{refs}
+}
+
+\input{sections/mechanical/appendix}
+
+\end{document}

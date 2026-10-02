@@ -1,0 +1,246 @@
+{
+  "benchmark": "engsvg-svg2svg-verified-v1",
+  "cases": 4,
+  "edit_fidelity_pass": 4,
+  "engineering_check_pass": 4,
+  "patched": 3,
+  "regenerated": 1,
+  "results": [
+    {
+      "case": "truss-section",
+      "status": "verified_safe",
+      "mode": "tree_patch",
+      "request": "Set every member depth to 40 mm.",
+      "family": "truss",
+      "style": "canonical",
+      "action": {
+        "action": "edit",
+        "changes": {
+          "sections.bar.h_mm": 40.0
+        }
+      },
+      "patch_operation_count": 1,
+      "patch_operation_types": [
+        "set_text"
+      ],
+      "target_tree_equal": true,
+      "edit_fidelity_pass": true,
+      "engineering_check_pass": true,
+      "recovered_output_family": "truss",
+      "recovered_output_style": "canonical",
+      "before_verification": {
+        "method": "linear_axial_truss_fem",
+        "pass": true,
+        "peak_abs_stress_mpa": 11.860940387163478,
+        "max_displacement_mm": 1.5265513268018096,
+        "equilibrium_residual_N_Nmm": [
+          3.637978807091713e-12,
+          -1.000444171950221e-11,
+          -3.3527612686157227e-08
+        ],
+        "relative_equilibrium_residual": 1.3339255626002948e-15,
+        "assumptions": [
+          "planar pin-jointed truss",
+          "linear elastic axial members",
+          "nodal loads only",
+          "small displacement"
+        ]
+      },
+      "after_verification": {
+        "method": "linear_axial_truss_fem",
+        "pass": true,
+        "peak_abs_stress_mpa": 5.930470193581739,
+        "max_displacement_mm": 0.7632756634009048,
+        "equilibrium_residual_N_Nmm": [
+          3.637978807091713e-12,
+          -1.000444171950221e-11,
+          -3.3527612686157227e-08
+        ],
+        "relative_equilibrium_residual": 1.3339255626002948e-15,
+        "assumptions": [
+          "planar pin-jointed truss",
+          "linear elastic axial members",
+          "nodal loads only",
+          "small displacement"
+        ]
+      }
+    },
+    {
+      "case": "plate-holes",
+      "status": "verified_safe",
+      "mode": "tree_patch",
+      "request": "Increase all hole diameters by 4 mm.",
+      "family": "plate",
+      "style": "canonical",
+      "action": {
+        "action": "edit",
+        "changes": {
+          "holes.*.diameter_mm": 30.0
+        }
+      },
+      "patch_operation_count": 2,
+      "patch_operation_types": [
+        "set_attributes",
+        "set_text"
+      ],
+      "target_tree_equal": true,
+      "edit_fidelity_pass": true,
+      "engineering_check_pass": true,
+      "recovered_output_family": "plate",
+      "recovered_output_style": "canonical",
+      "before_verification": {
+        "method": "manufacturing_geometry_checks",
+        "pass": true,
+        "minimum_edge_distance_mm": 25.0,
+        "minimum_ligament_mm": 58.0,
+        "net_area_mm2": 40014.42504925995,
+        "volume_mm3": 720259.6508866792,
+        "violations": [],
+        "criteria": {
+          "min_edge_distance_mm": 15,
+          "min_ligament_mm": 20
+        },
+        "assumptions": [
+          "flat rectangular plate",
+          "six circular through holes",
+          "geometry and manufacturing checks only"
+        ]
+      },
+      "after_verification": {
+        "method": "manufacturing_geometry_checks",
+        "pass": true,
+        "minimum_edge_distance_mm": 23.0,
+        "minimum_ligament_mm": 54.0,
+        "net_area_mm2": 38958.84991765378,
+        "volume_mm3": 701259.298517768,
+        "violations": [],
+        "criteria": {
+          "min_edge_distance_mm": 15,
+          "min_ligament_mm": 20
+        },
+        "assumptions": [
+          "flat rectangular plate",
+          "six circular through holes",
+          "geometry and manufacturing checks only"
+        ]
+      }
+    },
+    {
+      "case": "bridge-load",
+      "status": "verified_safe",
+      "mode": "tree_patch",
+      "request": "Double the downward load.",
+      "family": "bridge_truss",
+      "style": "canonical",
+      "action": {
+        "action": "edit",
+        "changes": {
+          "loads.*.fy_N": -30000
+        }
+      },
+      "patch_operation_count": 1,
+      "patch_operation_types": [
+        "set_text"
+      ],
+      "target_tree_equal": true,
+      "edit_fidelity_pass": true,
+      "engineering_check_pass": true,
+      "recovered_output_family": "bridge_truss",
+      "recovered_output_style": "canonical",
+      "before_verification": {
+        "method": "linear_axial_truss_fem",
+        "pass": true,
+        "peak_abs_stress_mpa": 84.37500000000018,
+        "max_displacement_mm": 8.948985386504622,
+        "equilibrium_residual_N_Nmm": [
+          1.4551915228366852e-11,
+          1.7462298274040222e-10,
+          1.3709068298339844e-06
+        ],
+        "relative_equilibrium_residual": 1.1641532182693482e-14,
+        "assumptions": [
+          "pin-jointed axial members",
+          "nodal loads only",
+          "small displacements",
+          "self-weight excluded"
+        ]
+      },
+      "after_verification": {
+        "method": "linear_axial_truss_fem",
+        "pass": true,
+        "peak_abs_stress_mpa": 168.75000000000037,
+        "max_displacement_mm": 17.897970773009245,
+        "equilibrium_residual_N_Nmm": [
+          2.9103830456733704e-11,
+          3.4924596548080444e-10,
+          2.7418136596679688e-06
+        ],
+        "relative_equilibrium_residual": 1.1641532182693482e-14,
+        "assumptions": [
+          "pin-jointed axial members",
+          "nodal loads only",
+          "small displacements",
+          "self-weight excluded"
+        ]
+      }
+    },
+    {
+      "case": "bridge-topology",
+      "status": "verified_safe",
+      "mode": "regenerate_topology",
+      "request": "Change the bridge to 8 panels.",
+      "family": "bridge_truss",
+      "style": "canonical",
+      "action": {
+        "action": "regenerate_topology",
+        "panels": 8,
+        "topology": "pratt"
+      },
+      "patch_operation_count": 0,
+      "patch_operation_types": [],
+      "target_tree_equal": true,
+      "edit_fidelity_pass": true,
+      "engineering_check_pass": true,
+      "recovered_output_family": "bridge_truss",
+      "recovered_output_style": "canonical",
+      "before_verification": {
+        "method": "linear_axial_truss_fem",
+        "pass": true,
+        "peak_abs_stress_mpa": 84.37500000000018,
+        "max_displacement_mm": 8.948985386504622,
+        "equilibrium_residual_N_Nmm": [
+          1.4551915228366852e-11,
+          1.7462298274040222e-10,
+          1.3709068298339844e-06
+        ],
+        "relative_equilibrium_residual": 1.1641532182693482e-14,
+        "assumptions": [
+          "pin-jointed axial members",
+          "nodal loads only",
+          "small displacements",
+          "self-weight excluded"
+        ]
+      },
+      "after_verification": {
+        "method": "linear_axial_truss_fem",
+        "pass": true,
+        "peak_abs_stress_mpa": 112.50000000000125,
+        "max_displacement_mm": 11.84765625000013,
+        "equilibrium_residual_N_Nmm": [
+          1.4551915228366852e-10,
+          1.1059455573558807e-09,
+          5.9604644775390625e-06
+        ],
+        "relative_equilibrium_residual": 7.372970382372538e-14,
+        "assumptions": [
+          "pin-jointed axial members",
+          "nodal loads only",
+          "small displacements",
+          "self-weight excluded"
+        ]
+      }
+    }
+  ],
+  "full_dataset_audit": "full-dataset-audit.json",
+  "scope": "Generated trusses and perforated plates; axial truss FEM and plate manufacturing geometry checks."
+}

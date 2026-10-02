@@ -1,0 +1,12 @@
+{
+  "model": "gpt-6-astra",
+  "messages": [
+    {
+      "role": "user",
+      "content": "You are an engineering drafter producing SVG drawings.\n\nDraw the following as a single, self-contained SVG document:\n\nTwo-dimensional electrostatics in free space: two infinitely long parallel line charges of equal magnitude and opposite sign, the positive one through (0.5, 0) and the negative one through (-0.5, 0), with potential V = 20 ln(r_minus / r_plus) volts, where r_plus and r_minus are the distances from the positive and negative lines. The domain is unbounded; the potential is zero on the line x = 0 and at infinity. Draw the equipotentials at -40, -20, -10, -5, 5, 10, 20 and 40 V inside the frame -5/3 <= x <= 5/3, -5/3 <= y <= 5/3, marking both line charges. Use viewBox=\"0 0 1000 1000\". Map physical coordinates to drawing coordinates as X = 500 + 300 x and Y = 500 - 300 y. Wrap every contour in one <g data-field=\"V\" data-status=\"...\"> group and set data-status honestly to one of solved, estimated, illustrative or ill-posed. Draw every contour as its own <path> or <polyline> carrying a data-level attribute with its numeric level and label it. Contours must satisfy the boundary conditions exactly.\n\nRequirements:\n- Output ONLY the SVG document. No markdown fences, no prose before or after.\n- The root <svg> must declare xmlns=\"http://www.w3.org/2000/svg\" and a viewBox.\n- Use only built-in SVG elements (path, line, rect, circle, ellipse, polygon,\n  polyline, text, g, defs, marker, pattern). No external images, scripts,\n  fonts, or stylesheets.\n- Every visible element must be stroked or filled with an explicit color.\n- Label parts and dimensions with <text>; keep text inside the viewBox.\n- Prefer clean, precise geometry over decoration.\n"
+    }
+  ],
+  "reasoning_effort": "medium",
+  "max_completion_tokens": 20000,
+  "store": false
+}

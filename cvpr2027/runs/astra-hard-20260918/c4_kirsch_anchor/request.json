@@ -1,0 +1,12 @@
+{
+  "model": "gpt-6-astra",
+  "messages": [
+    {
+      "role": "user",
+      "content": "You are an engineering drafter producing SVG drawings.\n\nDraw the following as a single, self-contained SVG document:\n\nPlane-stress linear elasticity: an infinite plate with a circular hole of radius a = 0.5 centred at the origin, under remote uniaxial tension sigma_inf applied in the x direction (the classical Kirsch problem). Use the exact Kirsch stress solution. Draw the hole and the contours of the von Mises stress normalised by sigma_inf at the levels 0.5, 1.0, 1.5, 2.0 and 2.5 inside the frame -2.5 <= x <= 2.5, -2.5 <= y <= 2.5, and label the peak stress concentration on the hole. Use viewBox=\"0 0 1000 1000\". Map physical coordinates to drawing coordinates as X = 500 + 200 x and Y = 500 - 200 y. Wrap every contour in one <g data-field=\"sigma_vm\" data-status=\"...\"> group and set data-status honestly to one of solved, estimated, illustrative or ill-posed. Draw every contour as its own <path> or <polyline> carrying a data-level attribute with its numeric level and label it. Contours must satisfy the boundary conditions exactly.\n\nRequirements:\n- Output ONLY the SVG document. No markdown fences, no prose before or after.\n- The root <svg> must declare xmlns=\"http://www.w3.org/2000/svg\" and a viewBox.\n- Use only built-in SVG elements (path, line, rect, circle, ellipse, polygon,\n  polyline, text, g, defs, marker, pattern). No external images, scripts,\n  fonts, or stylesheets.\n- Every visible element must be stroked or filled with an explicit color.\n- Label parts and dimensions with <text>; keep text inside the viewBox.\n- Prefer clean, precise geometry over decoration.\n"
+    }
+  ],
+  "reasoning_effort": "medium",
+  "max_completion_tokens": 20000,
+  "store": false
+}

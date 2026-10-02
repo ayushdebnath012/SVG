@@ -1,0 +1,43 @@
+{
+  "model": "gpt-6-astra",
+  "input": [
+    {
+      "role": "system",
+      "content": "Edit the supplied CadQuery model to satisfy the instruction while preserving unrelated geometry. Units are mm.\nYou have a CadQuery 2.8 execution tool, evaluate_cad. Submit complete Python CAD code with result assigned.\nThe tool reports validity, solid count, envelope, volume and change relative to the source; it does NOT have the reference target.\nIt accepts import cadquery as cq, variables, numeric arithmetic, literal tuple/list loops and CadQuery modeling methods.\nNo filesystem, network, other imports, functions, comprehensions or introspection are supported. Unsupported syntax is an interface limitation, not a modeling failure.\nUse evaluate_cad at least once, up to three times. The final deliverable must be JSON with code and explanation.\nAn automatic exporter will produce linked top/front/right SVG views and envelope dimensions from your final model.\nDo not manually transcribe projection paths. Do not claim physical verification: no materials, loads or supports are specified.\nThe task is generation/editing of the physical part geometry and its drawing, not a fluid-flow field."
+    },
+    {
+      "role": "user",
+      "content": "Replace the round outer cross-section and the round inner passage of the elbow pipe with square cross-sections of the same outer span, keeping the swept centreline path, the end flanges, and the bolt holes unchanged.\nSource CAD:\nimport cadquery as cq\n\nresult = (\n    cq.Workplane(\"XY\")\n    .circle(10.65)\n    .sweep(\n        cq.Workplane(\"XZ\").moveTo(0.0,0.0).lineTo(0.0,25.0).radiusArc((19.1,44.1),19.1).lineTo(44.1,44.1),\n        isFrenet=True)\n    .cut(\n        cq.Workplane(\"XY\")\n            .circle(7.88)\n            .sweep(\n        cq.Workplane(\"XZ\").moveTo(0.0,0.0).lineTo(0.0,25.0).radiusArc((19.1,44.1),19.1).lineTo(44.1,44.1),\n        isFrenet=True)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, -2.117), rotate=cq.Vector(0, 0, 0))\n            .cylinder(6.365, 13.3)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, -6.917), rotate=cq.Vector(0, 0, 0))\n            .cylinder(4.3, 21.3)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(46.75, 0, 44.1), rotate=cq.Vector(0, 90, 0))\n            .cylinder(6.365, 13.3)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(51.55, 0, 44.1), rotate=cq.Vector(0, 90, 0))\n            .cylinder(4.3, 21.3)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, -10.6), rotate=cq.Vector(0, 0, 0))\n            .cylinder(36.6, 7.88)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(43.1, 0, 44.1), rotate=cq.Vector(0, 90, 0))\n            .cylinder(36.6, 7.88)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(17.3, 0.0, -10.1), rotate=cq.Vector(0, 0, 0))\n            .cylinder(5.3, 1.3)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(53.2, 17.3, 44.1), rotate=cq.Vector(0, 90, 0))\n            .cylinder(5.3, 1.3)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(8.65, 14.982, -10.1), rotate=cq.Vector(0, 0, 0))\n            .cylinder(5.3, 1.3)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(53.2, 8.65, 59.082), rotate=cq.Vector(0, 90, 0))\n            .cylinder(5.3, 1.3)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(-8.65, 14.982, -10.1), rotate=cq.Vector(0, 0, 0))\n            .cylinder(5.3, 1.3)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(53.2, -8.65, 59.082), rotate=cq.Vector(0, 90, 0))\n            .cylinder(5.3, 1.3)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(-17.3, 0.0, -10.1), rotate=cq.Vector(0, 0, 0))\n            .cylinder(5.3, 1.3)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(53.2, -17.3, 44.1), rotate=cq.Vector(0, 90, 0))\n            .cylinder(5.3, 1.3)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(-8.65, -14.982, -10.1), rotate=cq.Vector(0, 0, 0))\n            .cylinder(5.3, 1.3)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(53.2, -8.65, 29.118), rotate=cq.Vector(0, 90, 0))\n            .cylinder(5.3, 1.3)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(8.65, -14.982, -10.1), rotate=cq.Vector(0, 0, 0))\n            .cylinder(5.3, 1.3)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(53.2, 8.65, 29.118), rotate=cq.Vector(0, 90, 0))\n            .cylinder(5.3, 1.3)\n    )\n)\n\n# Export\nshow_object(result)\nSource measurements:\n{\"valid\": true, \"solids\": 1, \"volume_mm3\": 27277.86648815104, \"bbox_mm\": {\"xmin\": -21.3, \"xmax\": 53.7, \"ymin\": -21.3, \"ymax\": 21.3, \"zmin\": -9.067, \"zmax\": 65.4}, \"faces\": 40, \"edges\": 62, \"status\": \"completed\"}"
+    }
+  ],
+  "reasoning": {
+    "effort": "high"
+  },
+  "max_output_tokens": 10000,
+  "store": false,
+  "include": [
+    "reasoning.encrypted_content"
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "name": "evaluate_cad",
+      "description": "Execute a CAD candidate and inspect actual geometry. Does not compare against a hidden target.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "code"
+        ],
+        "additionalProperties": false
+      },
+      "strict": true
+    }
+  ],
+  "tool_choice": "required",
+  "parallel_tool_calls": false
+}

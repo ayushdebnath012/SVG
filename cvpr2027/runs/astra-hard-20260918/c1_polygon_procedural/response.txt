@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
+  <rect x="0" y="0" width="1000" height="1000" fill="#ffffff"/>
+
+  <text x="100" y="40" fill="#17212b" font-family="sans-serif" font-size="24">Steady two-dimensional heat conduction</text>
+  <text x="100" y="69" fill="#45515d" font-family="sans-serif" font-size="17">∂²T/∂x² + ∂²T/∂y² = 0 · Estimated isotherms</text>
+
+  <!-- Plate geometry: X = 100 + 800x; Y = 900 - 800y. -->
+  <path d="M100 900 H900 V580 H580 V100 H260 V420 H100 Z"
+        fill="#f7fafc" stroke="#253341" stroke-width="3" stroke-linejoin="miter"/>
+
+  <!--
+    These contours are estimates, not the output of a numerical solution.
+    Each intermediate-temperature contour ends only at the two discontinuous
+    hot/cold boundary junctions. Its terminal direction follows the local
+    right-angle wedge solution. No contour intersects an open cold edge.
+  -->
+  <g data-field="T" data-status="estimated" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path data-level="10"
+          d="M100 900
+             C104 875 109 800 117 740
+             C122 688 135 616 163 580
+             C180 551 199 522 228 500
+             C249 480 268 468 294 458
+             C324 440 356 437 384 444
+             C428 453 472 490 504 521
+             C526 542 539 557 541 576
+             C543 595 554 612 576 618
+             C607 626 637 623 667 626
+             C721 630 763 641 797 674
+             C842 716 876 796 888 844
+             C894 868 896 875 900 900"
+          stroke="#146c9e" stroke-width="2.5"/>
+    <path data-level="20"
+          d="M100 900
+             C108 875 118 830 128 783
+             C144 710 162 646 190 606
+             C220 562 262 531 306 520
+             C345 509 386 513 422 531
+             C461 551 490 581 513 608
+             C539 640 568 661 609 668
+             C660 676 702 674 747 696
+             C799 722 846 788 870 842
+             C884 874 892 875 900 900"
+          stroke="#238879" stroke-width="2.5"/>
+    <path data-level="40"
+          d="M100 900
+             C118 875 137 845 157 814
+             C190 763 226 716 272 684
+             C319 651 368 640 416 649
+             C469 659 512 685 555 704
+             C613 730 668 733 722 757
+             C773 780 819 817 850 848
+             C872 870 882 875 900 900"
+          stroke="#8a781d" stroke-width="2.5"/>
+    <path data-level="60"
+          d="M100 900
+             C125 882 156 858 190 834
+             C242 798 298 765 354 748
+             C406 733 456 735 505 747
+             C562 761 615 780 669 794
+             C728 810 782 832 826 854
+             C858 870 875 882 900 900"
+          stroke="#c16a20" stroke-width="2.5"/>
+    <path data-level="80"
+          d="M100 900
+             C130 890.25 164 878 202 867
+             C260 850 316 834 373 825
+             C425 817 477 819 529 826
+             C589 834 647 846 705 857
+             C766 869 824 878 870 890.25
+             L900 900"
+          stroke="#bd3838" stroke-width="2.5"/>
+  </g>
+
+  <g font-family="sans-serif" font-size="18" text-anchor="middle">
+    <text x="358" y="426" fill="#146c9e">10 °C</text>
+    <text x="353" y="500" fill="#238879">20 °C</text>
+    <text x="403" y="631" fill="#8a781d">40 °C</text>
+    <text x="437" y="721" fill="#c16a20">60 °C</text>
+    <text x="467" y="806" fill="#bd3838">80 °C</text>
+  </g>
+
+  <!-- Boundary temperatures, specified on the open edges. -->
+  <path d="M100 900 H900" fill="none" stroke="#bd3838" stroke-width="5"/>
+  <g fill="#253341" font-family="sans-serif" font-size="18" text-anchor="middle">
+    <text x="420" y="91" fill="#253341">0 °C</text>
+    <text x="605" y="290" fill="#253341" transform="rotate(90 605 290)">0 °C</text>
+    <text x="751" y="564" fill="#253341">0 °C</text>
+    <text x="925" y="730" fill="#253341" transform="rotate(90 925 730)">0 °C</text>
+    <text x="237" y="254" fill="#253341" transform="rotate(-90 237 254)">0 °C</text>
+    <text x="175" y="404" fill="#253341">0 °C</text>
+    <text x="78" y="650" fill="#253341" transform="rotate(-90 78 650)">0 °C</text>
+    <text x="500" y="927" fill="#bd3838">100 °C · y = 0</text>
+  </g>
+
+  <g font-family="sans-serif" fill="#45515d">
+    <text x="420" y="210" text-anchor="middle" font-size="18" fill="#45515d">PLATE</text>
+    <text x="420" y="237" text-anchor="middle" font-size="16" fill="#45515d">T → 0 toward cold edges</text>
+
+    <path d="M580 580 L623 530 H716" fill="none" stroke="#74808c" stroke-width="1"/>
+    <text x="631" y="519" font-size="15" fill="#45515d">(0.6, 0.4)</text>
+
+    <path d="M260 420 L218 355 H114" fill="none" stroke="#74808c" stroke-width="1"/>
+    <text x="113" y="344" font-size="15" fill="#45515d">(0.2, 0.6)</text>
+
+    <text x="103" y="922" font-size="14" fill="#45515d">(0, 0)</text>
+    <text x="897" y="922" text-anchor="end" font-size="14" fill="#45515d">(1, 0)</text>
+    <text x="635" y="151" font-size="16" fill="#45515d">Re-entrant corners: 270°</text>
+    <text x="635" y="177" font-size="16" fill="#45515d">Locally, T ∝ r^(2/3) sin(2θ/3)</text>
+    <text x="635" y="203" font-size="15" fill="#45515d">Isotherms crowd near each tip.</text>
+  </g>
+
+  <text x="100" y="961" fill="#45515d" font-family="sans-serif" font-size="15">Boundary temperatures apply on open edges; hot/cold corner limits are discontinuous.</text>
+  <text x="100" y="984" fill="#45515d" font-family="sans-serif" font-size="15">Contour geometry is estimated; intermediate levels meet the boundary only at those junctions.</text>
+</svg>

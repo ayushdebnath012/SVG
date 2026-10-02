@@ -1,0 +1,16 @@
+{
+  "model": "gpt-6-astra",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Return a JSON object with svg (a complete SVG string) and analysis (an object, may be empty).\nDraw a precise CAD section/top view of the specified real mechanical part. This is geometry, not a field plot.\nUse viewBox=\"0 0 1000 1000\", width=\"1000\", height=\"1000\". Physical coordinates in mm are mapped to\nSVG X=500+4*x, Y=500-4*y. Put the entire material silhouette in ONE direct child <g data-geometry=\"part\">.\nThat group must display all solid material in black and all holes/removed material in white on a white background.\nIt must contain no dimensions, labels, axes, hatching, decorative strokes or construction curves. Curves should\nbe accurate within 0.5 mm; smooth Beziers or sufficiently fine polygon approximations are both acceptable.\nPlace readable dimensions, explanatory labels and centre marks OUTSIDE that geometry group. Give every required\nnumeric dimension a visible text element tagged data-dimension=\"its specified key\", containing its value and mm.\nAny native SVG shapes, transforms, local use references, clipping and masks are allowed. Definitions may be in defs.\nNo scripts, animation, raster images, foreignObject, external resources or CSS stylesheets. Inline styles are allowed.\nThe drawing must represent the actual specified profile, including intersecting features. Do not substitute a generic\nsymbolic gear/cam/section. No external tools are provided. Do not claim to have executed CAD or analysis software."
+    },
+    {
+      "role": "user",
+      "content": "Make section A-A of a curved hollow pipe (a complete toroidal ring), including the stated drilled access port. Global XYZ units are mm. The torus major circle lies in global XY and is centred at (0,0,0); major_radius is the distance from the origin to the circular tube centreline. The tube has circular outer radius tube_outer and inner radius tube_inner. Thus toroidal stock consists exactly of points where tube_inner^2 <= (sqrt(X^2+Y^2)-major_radius)^2+Z^2 <= tube_outer^2. Subtract each stated infinite through-cylinder whose centre axis is point_mm+t*axis and perpendicular radius is radius_mm. The section plane has origin O and orthonormal vectors u,v: (X,Y,Z)=O+x*u+y*v. Render the actual material intersection with this plane in local x,y mm, including all disconnected regions and voids. Do not substitute ellipses for the generally non-conic torus-plane curves. Follow the common SVG coordinate map. All required dimension labels are true global dimensions: major_diameter, tube_outer_diameter, tube_inner_diameter, port_diameter. No perspective projection, exploded view, flow plot or analysis field is requested.\nSpecification:\n{\"major_radius_mm\": 42.0, \"tube_outer_mm\": 17.0, \"tube_inner_mm\": 11.0, \"plane_origin_mm\": [3, -2, 8], \"plane_u\": [0.8, 0.6, 0], \"plane_v\": [-0.36, 0.48, 0.8], \"bores\": [{\"point_mm\": [38, 8, 0], \"axis\": [0.25, -0.2, 1], \"radius_mm\": 4.0}]}"
+    }
+  ],
+  "reasoning_effort": "medium",
+  "max_completion_tokens": 16000,
+  "store": false
+}

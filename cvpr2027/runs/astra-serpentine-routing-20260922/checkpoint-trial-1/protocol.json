@@ -1,0 +1,41 @@
+{
+  "configuration_id": "high32k-fourchecks-onecheckpoint-v1",
+  "kind": "serpentine",
+  "model": "gpt-6-astra",
+  "effort": "high",
+  "max_output_tokens_per_turn": 32000,
+  "max_checker_calls_total": 4,
+  "max_token_limit_continuations": 1,
+  "checkpoint_message": "Your preceding response reached its per-turn output allowance. Continue from the saved state. Use the checker on your current best draft to obtain feedback; partial drafts are allowed. Continue using the remaining checker calls, then return final JSON with your best candidate and explain any constraints you could not satisfy. You need not claim success. Return the candidate even if it is imperfect, so its actual geometry can be evaluated.",
+  "initial_prompt_sha256": "33ae6bf4f574b8dedf0d83b367e1f604b0c0951271a386a7f22714acedd7bfba",
+  "manifest_sha256": "27dd2131acb9e28667e33edea296036215664c5d98a3c6b6504ce8735707ead8",
+  "source_prompt_run": "cvpr2027/runs/astra-serpentine-routing-20260922/trial-1",
+  "system": "Create a single-layer PCB trace layout. Return JSON {\"routes\":{\"A\":[[x,y],...],...},\"explanation\":\"...\"}. Coordinates are integer grid coordinates; every segment must be horizontal or vertical. Intermediate collinear grid points may be omitted. Any valid routing passes: no hidden preferred shape or shortest length is required. Routes are exported to SVG polylines at physical scale and independently checked. Join each net's two pads; never touch another net's pad or route; avoid all blocked sites and stay within the grid. Grid spacing is 2 mm; trace width 0.6 mm; pad diameter 1 mm; square keepouts side 1.2 mm; clearance 0.4 mm. Under these stipulated orthogonal grid rules, using distinct unblocked grid sites and avoiding all foreign pads is sufficient for clearance. No vias or extra layers. A feasible complete routing exists. You may use check_routes four times to check candidate routings, including partial routings. It reports actual violations, never an optimal path or hidden reference. This tests planning with checker feedback; no arbitrary-code execution tool is available. Do not claim whole-circuit electrical correctness. Additional mandatory constraints: every net must have the exact geometric centerline length in length_targets_mm. The lengths require serpentine paths; retracing, repeated grid sites, self-contact and loops are forbidden. Five locked_routes are existing copper: include them unchanged, allowing reversed traversal and equivalent collinear segmentation. Complete the other routes around them. All targets are feasible jointly. These are geometric length budgets, not electrical timing or impedance claims. The checker reports length and locked-route errors as well as collisions. Use it incrementally when useful; partial candidate checks are allowed. Final JSON must contain every net.",
+  "tool": {
+    "type": "function",
+    "name": "check_routes",
+    "description": "Check proposed PCB trace polylines for missing nets, endpoint errors, keepout violations, off-board vertices and cross-net contacts. No solution paths are supplied. Also checks exact specified lengths, self-contact and locked copper.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "routes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "routes"
+      ]
+    },
+    "strict": false
+  },
+  "script_sha256": "c02aaea176a17e08933ab2edbeda2b17719d2b2aaa7cd9f184c0d608ec22bc77"
+}

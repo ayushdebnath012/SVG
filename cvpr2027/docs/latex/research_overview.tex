@@ -54,7 +54,7 @@ Status: a proposal backed by limited diagnostic experiments. Not submission-read
 
 \textbf{Can an editable engineering drawing preserve the meaning of its numerical claims through natural-language presentation and physical edits, while remaining useful for drafting?}
 
-An engineering drawing is both an image and a collection of claims. A curve marked 40\degC{} is a numerical assertion about every point on that curve. A stress legend asserts a quantity, a unit and a scale. Changing a load invalidates a previous solution even when its plot still looks plausible. Changing an ancestor SVG transform can invalidate geometry without changing the path string, and editing a text label can falsify a drawing while preserving every curve. The object that must be evaluated is therefore the \emph{final} drawing, together with the physical problem it depicts and the numerical evidence supporting it.
+An engineering drawing is both an image and a collection of claims. A curve marked 40\degC{} is a numerical assertion about every point on that curve. A stress legend asserts a quantity, a unit and a scale. Changing a load invalidates a previous solution even when its plot still looks plausible. Changing an ancestor SVG transform can invalidate geometry without changing the path string, and editing a text label can falsify a drawing while preserving every curve. The object that must be evaluated is therefore the \emph{final} drawing, together with the physical problem it depicts and the numerical evidence supporting it. The deliverable of the whole programme is that drawing: an SVG file, editable element by element, whose contours are numerically true.
 
 \subsection{Three separate questions}
 
@@ -71,13 +71,29 @@ A successful solver invocation answers none of the following automatically, and 
   \caption[]{Numerical geometry and label semantics are separate checks. Left: a correct level set. Middle: endpoint-only checking accepts a chord whose midpoint value is $0.5$ instead of $1$. Right: a correct curve with a falsified label passes any purely geometric check.}
 \end{figure}
 
+\subsection{Scope: three input modes and the physics backbone}
+
+The deliverable is an SVG engineering drawing whose contours are numerically true, produced from three kinds of input. For complex items the structure is analysed with finite-element solvers and, as a planned surrogate for parametric families, physics-informed neural networks; the drawing must agree with that analysis. The benchmark concentrates on the cases in which direct Astra fails (Section~\ref{sec:c14}), since a solver-in-the-loop method can only be shown to help where the unaided model does not already succeed.
+
+\begin{longtable}{L{2.6cm} L{4.2cm} L{4.6cm} L{3.6cm}}
+\toprule
+Mode & What goes in & What comes out & Status in this package \\
+\midrule
+Text $\rightarrow$ SVG & A written engineering request: geometry, material, loads, boundary conditions, which contours to draw. & A complete SVG drawing with labelled contours and a self-reported status. & Tested: the four re-check calls (C06--C09) and the twelve harder tasks (C14). \\
+Image $\rightarrow$ SVG & A picture of the part or of an existing plot (photo, scan, raster). & The same kind of SVG, after the picture is turned into a physical specification. & Planned (P04, P05): needs a model that genuinely sees images; compared against VFEAgent-style workflows. \\
+SVG $\rightarrow$ SVG & An existing drawing plus an edit request (recolour, move a label, change a load). & The edited drawing, with the physics re-solved when the edit changes the problem. & Tested on the editing pilot (C04, C05, C13); sequential edits planned (P06). \\
+\bottomrule
+\end{longtable}
+
+FEM is implemented and validated here (scikit-fem P2 for general domains and Robin boundaries, finite differences for rectilinear domains, the pinned FEM-Bench bar solver). No PINN has been trained in this package; the proposal's alternative~D treats a learned surrogate as a separate question to be justified by cost and accuracy against FEM.
+
 \subsection{Why this is not ``LLM + FEM + SVG''}
 
 Language models already formulate and execute simulations, generate scientific vector graphics and modify editable diagrams (Section~\ref{sec:prior}). The research problem is not whether a model can call a solver or output SVG. It is whether the final editable artifact remains consistent with the numerical solution it purports to depict, particularly after a sequence of natural-language edits, and whether protecting that consistency costs drafting usefulness.
 
 \subsection{What a contribution would have to show}
 
-The prospective submission must establish that a solver-linked representation improves \emph{useful} editing under a strong deterministic baseline and a prompting baseline, at comparable drafting quality. Without that evidence the work is a useful engineering audit rather than a demonstrated new computer-vision method. Three decision gates follow: (1) references and elementary integration pass before model comparisons; (2) the benchmark exposes a useful gap before large training; (3) a visual/graphics contribution survives the strongest controls before claiming CVPR readiness. If the gates fail, the claim is narrowed or the venue changed.
+Section~\ref{sec:c14} gives the first direct measurement of where a frontier model's drawings stop being solutions. The prospective submission must establish that a solver-linked representation improves \emph{useful} editing under a strong deterministic baseline and a prompting baseline, at comparable drafting quality. Without that evidence the work is a useful engineering audit rather than a demonstrated new computer-vision method. Three decision gates follow: (1) references and elementary integration pass before model comparisons; (2) the benchmark exposes a useful gap before large training; (3) a visual/graphics contribution survives the strongest controls before claiming CVPR readiness. If the gates fail, the claim is narrowed or the venue changed.
 
 \emph{Sources:} \code{docs/source/research_proposal.md}, \code{paper/manuscript.md} \S1.
 
@@ -242,7 +258,7 @@ FMforME (2026), SciForma (2026), Text2PDE (2024) & CAD-specification constraint 
 \emph{Sources:} \code{reports/FEM_LITERATURE_AND_EXTENSION.md}; \code{reports/PRIOR_ART.md}; \code{papers/README.md}.
 
 % =====================================================================
-\section{Completed experiments C01--C10}
+\section{Completed experiments C01--C14}
 
 Each completed experiment has a runnable command and evidence under \code{runs/}. A planned experiment has no result; a working script is not evidence that a comparison was completed.
 
@@ -261,6 +277,10 @@ C07 & Independent Robin FEM & Five meshes, analytic anchor, heat balance & Mesh 
 C08 & Direct FEM contour scoring & Maxima 0.111 and 0.374\degC & Finite sampling does not certify the entire drawing. \\
 C09 & Historical capacitor path audit & 12 open field paths; no alleged closed loops & Source-specific geometry check, not electrostatic validation. \\
 C10 & Upstream FEM-Bench SVG bridge & Two upstream tests and 24 FEM solves & A one-dimensional integration anchor only. \\
+C11 & Colab A100 reproduction batch & Nine stages passed; adapters byte-identical to \code{runs/a100} & Same architecture; adds no independent cases. \\
+C12 & Remote Blackwell reproduction batch & Nine stages passed; all 360 final predictions identical & Adapter bytes differ by cross-architecture rounding. \\
+C13 & Direct Astra zero-shot baseline on the pilot & 60/60 test, 60/60 held-out; 120 calls, \$0.61 & One sample per example; compact-DOM input hides geometry. \\
+C14 & Direct Astra on twelve harder drawing tasks & 6/10 geometric passes; 2/2 ill-posed disclosed; unseen polygon fails at 4.5~pp & One sample per task; single effort setting. \\
 \bottomrule
 \end{longtable}
 
@@ -322,11 +342,12 @@ Final LoRA, seed 17 & 60/60 & 60/60 & 60/60 & 60/60 \\
 Final LoRA, seed 29 & 60/60 & 60/60 & 60/60 & 60/60 \\
 Final LoRA, seed 41 & 60/60 & 60/60 & 60/60 & 60/60 \\
 Deterministic template parser (C04) & 60/60 & 60/60 & 60/60 & 60/60 \\
+Direct Astra, zero-shot (C13) & 60/60 & 60/60 & 60/60 & 60/60 \\
 \bottomrule
 \caption[]{Pilot results: strict JSON exact action, and a sensitivity score removing one enclosing Markdown JSON fence. Train loss 0.0084/0.0082/0.0105; eval loss $\le 1.1\times10^{-4}$ by epoch 3. The base fails strict parsing mostly on fences but also makes action errors.}
 \end{longtable}
 
-\textbf{Interpretation.} Because the rule parser is perfect, the neural result is pipeline validation and does not show that learning is needed. Each split has only ten independent physical cases; repeated seeds do not add cases. Provenance: a first A100 run lost its weights before download; the recovery run repeated the configuration and is the only one counted (\code{reports/training_verified.json}).
+\textbf{Interpretation.} Because the rule parser is perfect --- and, as Section~\ref{sec:c13} shows, so is a frontier model with a prompt alone --- the neural result is pipeline validation and does not show that learning is needed. Each split has only ten independent physical cases; repeated seeds do not add cases. Provenance: a first A100 run lost its weights before download; the recovery run repeated the configuration and is the only one counted (\code{reports/training_verified.json}).
 
 \subsection{C06--C08: Astra API recheck against an independent FEM reference}
 
@@ -386,6 +407,59 @@ L-bracket & Wrong von Mises field. & Old and new outputs give $\approx 122$~MPa 
 \subsection{C10: reusing FEM-Bench --- a real solver in the edit loop}
 
 \code{vendor/FEM-bench} is pinned to commit \code{d370aef5dbe023b0b86eb3548d24d11fd69328ee} with its MIT licence; the bridge imports the author's unchanged \code{FEM_1D_linear_elastic_CC0_H0_T0}. Both upstream reference tests pass. Twelve generated axial-bar cases plus twelve re-solves after a 50\% load increase give 24 actual FEM solves with displacements, reactions, provenance IDs and editable SVG plots for both states. Maximum analytic displacement error below $2\times10^{-18}$~m; maximum relative force imbalance below $4.2\times10^{-14}$. A stale old tip displacement would be 33.3\% low relative to the edited-load solution --- exactly the discrepancy a stale-field verifier must catch. This is not a reproduction of the FEM-Bench leaderboard, training on FEM-Bench, or a visual-reasoning result.
+
+\subsection{C13: direct Astra zero-shot baseline on the pilot (17 September)}\label{sec:c13}
+
+The prompt-only control required by P04/P05 was run with \code{scripts/eval_controlled_astra_api.py}: \code{gpt-6-astra} received the pilot's exact system prompt and compact-DOM input, with no examples, no image and no fine-tuning, one sample per example, at \texttt{reasoning\_effort=low}, scored by the same \texttt{score\_action} evaluator as the LoRA runs. It answered all 120 examples with a bare JSON object and scored \textbf{60/60 on the test split and 60/60 on the held-out annulus split}, with per-task exact rates of 1.0 for all six actions and no unsafe edits. Every call finished with \texttt{finish\_reason=stop}; there were no API errors, no retries and zero reported reasoning tokens; median wall time 1.98~s. Usage: 48{,}831 input and 2{,}373 completion tokens, about \$0.61 at list prices. Records: \code{runs/astra-controlled-editing-20260918/} (protocol, all predictions, raw responses, summary).
+
+This is the benchmark reference point for the pilot task. With both the rule parser and zero-shot Astra at 100\%, the pilot has no gap for learning to fill, so H4 cannot be tested on it and the training study P05 must wait for the harder P03 collection. Limits: ten independent cases per split, one sample per example, one effort setting on one day, and a compact-DOM input that hides the geometry --- this measures instruction routing, not drawing understanding.
+
+\subsection{C14: direct Astra on twelve harder drawing tasks (18 September)}\label{sec:c14}
+
+With the pilot saturated, Astra was given the job the P1 plan calls ``where the physics stops'': draw the contour plot itself for twelve engineering\_v4-style tasks, each with an independent reference computed by this package (\code{scripts/astra_hard_tasks.py}; grids in \code{runs/reference-v4/}). Classes: C1 Dirichlet (annulus and sinusoidal-edge anchors, the L-shape textbook case, a procedural eight-edge polygon with one hot edge, solved by finite differences); C2 Robin sweep at $\mathrm{Bi}\in\{0.1,1,10\}$ (scikit-fem P2, 32{,}768 elements; mesh floor $\le 0.0024$\degC{} away from the two corners where 100\degC{} meets the convective edges, declared singular); C3 unbounded (two line charges, cylinder flow; analytic); C4 the Kirsch hole, von Mises normalised by the remote stress (analytic tensor field); C6 two ill-posed specifications scored on disclosure. Protocol: \code{gpt-6-astra}, medium effort, 20{,}000-token cap, the package's drafting wrapper, one sample per task; every prompt fixes the viewBox and the physical map and asks for \code{data-level} on each contour and an honest \code{data-status}. Scoring uses the repaired sampled-contour audit at the same 0.5~pp tolerance as the historical re-audit. All twelve calls returned an SVG; 95{,}732 completion tokens, about \$4.83.
+
+\Needspace{7\baselineskip}
+\begin{longtable}{L{3.9cm} L{2.2cm} L{1.4cm} R{1.2cm} R{1.2cm} R{1.8cm} L{2.3cm}}
+\toprule
+Task & Class / tier & Outcome & Mean pp & Max pp & Max excl.\ corners & \code{data-status} \\
+\midrule
+\code{c1_annulus_anchor} & C1 anchor & pass & 0.000 & 0.00 & --- & solved \\
+\code{c1_sine_top_anchor} & C1 anchor & pass & 0.005 & 0.04 & --- & estimated \\
+\code{c1_L_shape_textbook} & C1 textbook & \textbf{fail} & 0.660 & 90.00 & 3.16 & estimated \\
+\code{c1_polygon_procedural} & C1 procedural & \textbf{fail} & 4.464 & 90.00 & 10.60 & estimated \\
+\code{c2_robin_bi0p1} & C2 textbook & pass & 0.000 & 0.00 & 0.00 & estimated \\
+\code{c2_robin_bi1} & C2 textbook & pass & 0.007 & 0.05 & 0.05 & estimated \\
+\code{c2_robin_bi10} & C2 textbook & \textbf{fail} & 0.040 & 0.75 & 0.74 & estimated \\
+\code{c3_line_charges_anchor} & C3 anchor & pass & 0.000 & 0.02 & --- & solved \\
+\code{c3_cylinder_flow_anchor} & C3 anchor & pass & 0.002 & 0.04 & --- & estimated \\
+\code{c4_kirsch_anchor} & C4 anchor & \textbf{fail} & 0.034 & 0.53 & --- & estimated, solved \\
+\code{c6_all_neumann_illposed} & C6 disclosure & disclosed & --- & --- & --- & ill-posed \\
+\code{c6_overspecified_illposed} & C6 disclosure & disclosed & --- & --- & --- & ill-posed \\
+\bottomrule
+\caption[]{Twelve harder drawing tasks, one sample each (\code{runs/astra-hard-20260918/summary.json}). Six of ten scored tasks pass; both ill-posed tasks are declared \code{ill-posed} with explicit energy-balance reasons and none is falsely marked solved.}
+\end{longtable}
+
+\textbf{Where it fails.} (1) Unseen geometry: on the procedural polygon every isotherm is off by 2--7~pp on average (4.5~pp overall, 10.6~pp maximum away from the corners) and endpoints land on the wrong boundary --- a plausible sketch, not a solution --- while Astra itself tagged the group \code{estimated} and added a disclaimer. (2) Textbook geometry is close but inexact: the L-shape scores 0.66~pp mean and 3.2~pp maximum excluding its incompatible corners, matching the historical re-audit. (3) Robin accuracy degrades with Biot number: $\mathrm{Bi}=0.1$ and $1$ pass at $\le 0.05$~pp; $\mathrm{Bi}=10$ fails marginally at 0.75~pp on the 80\degC{} isotherm, away from the corners and far above the reference floor. (4) The tensor field is marginal and incomplete: Kirsch has mean 0.03~pp but 0.53~pp maximum on the 0.5 level, two degenerate elements and missing far-field branches that the sampled metric cannot flag by itself. (5) Closed-form fields --- annulus, sinusoidal edge, line charges, cylinder flow --- are reproduced at $\le 0.04$~pp. (6) Self-report was informative: only the two exact anchors were marked \code{solved}, and both were; everything marked \code{estimated} was in fact inexact.
+
+\textbf{Limits.} One sample per task at one effort setting on one day cannot separate capability from budget (the C2.10 sweep is pending); ten scored tasks are a class map, not a rate; corner neighbourhoods are excluded only in the diagnostic column; the overlays are the evaluator's samples, not rendered images, so labels, legends and occlusion are unassessed. Report: \code{reports/ASTRA_HARD_TASKS_20260918.md}.
+
+\begin{figure}[p]
+  \centering
+  \includegraphics[width=0.96\linewidth]{../../paper/figures/astra_hard_gallery.png}
+  \caption[]{The twelve SVG drawings as rendered by a browser (\code{scripts/render_svg_gallery.py}, headless Chrome), with the checker's verdict above each. These are the artifacts under study: complete engineering drawings with title, governing equation, boundary conditions, dimensions, labelled contours and a self-reported status.}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{../../paper/figures/astra_hard_overlays.png}
+  \caption[]{Astra's drawn contours (red: the evaluator's own samples, mapped back to physical coordinates) over the independent reference isolines (blue). Closed-form fields coincide with the reference; the procedural polygon is visibly wrong with endpoints on the wrong boundary; the Kirsch panel shows the missing far-field branches of the 0.5 level along the load axis.}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.92\linewidth]{../../paper/figures/astra_hard_errors.png}
+  \caption[]{Mean and corner-excluded maximum sampled error per task on a log scale against the 0.5~pp tolerance. Green: pass or correct disclosure; red: fail.}
+\end{figure}
 
 \emph{Sources:} \code{docs/source/experiment_protocol.md}; \code{reports/RESEARCH_STATUS.md}; \code{reports/TRAINING_RESULTS.md}; \code{reports/ASTRA_FEM_FAILURE_RECHECK.md}; \code{reports/FEM_LITERATURE_AND_EXTENSION.md}.
 
@@ -603,7 +677,7 @@ Path (under \code{cvpr2027/}) & Contents \\
 \code{papers/} & 20 source records, 15 PDFs, \code{references.bib}, download manifest. \\
 \code{src/}, \code{scripts/}, \code{tests/} & Evaluator and edit-policy modules; runnable experiments; 36 regression tests. \\
 \code{data/}, \code{configs/} & Controlled-editing pilot splits; original prompts and historical SVG inputs. \\
-\code{runs/} & \code{a100}, \code{colab-a100-20260916}, \code{blackwell-20260917}, \code{astra-api-recheck-20260913}, \code{robin-fem-reference}, \code{fem-bench-svg-anchor}, \code{contour-controls}, \code{rescore-v3}, \code{rule-baseline}, \code{astra-historical-audit}, \code{historical-v3}, \code{reference-v3}. \\
+\code{runs/} & \code{a100}, \code{colab-a100-20260916}, \code{blackwell-20260917}, \code{astra-api-recheck-20260913}, \code{astra-controlled-editing-20260918}, \code{astra-hard-20260918}, \code{reference-v4}, \code{robin-fem-reference}, \code{fem-bench-svg-anchor}, \code{contour-controls}, \code{rescore-v3}, \code{rule-baseline}, \code{astra-historical-audit}, \code{historical-v3}, \code{reference-v3}. \\
 \code{vendor/FEM-bench/} & Unmodified MIT-licensed upstream files at commit \code{d370aef5}. \\
 \code{experiments/}, \code{RUN_INDEX.json}, \code{SHA256SUMS.json} & Registry, evidence index, checksums. \\
 \code{../reports/plan/} & \code{engineering_v4_task_design.md} (repository root). \\
@@ -636,6 +710,8 @@ python3 -m venv .venv && .venv/bin/python -m pip install -r requirements-local.t
   \item \code{reports/ASTRA_FEM_FAILURE_RECHECK.md}, \code{reports/TRAINING_RESULTS.md}, \code{reports/RESEARCH_STATUS.md} --- completed results and failure audit.
   \item \code{reports/COLAB_REPRODUCTION_20260916.md} --- the 16 September reproduction batch.
   \item \code{reports/REMOTE_REPRODUCTION_20260917.md} --- the 17 September cross-architecture reproduction batch.
+  \item \code{reports/ASTRA_CONTROLLED_EDITING_BASELINE.md} --- the zero-shot Astra baseline on the pilot.
+  \item \code{reports/ASTRA_HARD_TASKS_20260918.md} --- twelve harder drawing tasks with overlays.
   \item \code{paper/manuscript.md} --- working paper.
   \item \code{reports/plan/engineering_v4_task_design.md} (repository root) --- three-paper split and task design.
 \end{itemize}

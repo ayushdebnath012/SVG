@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RedlineBench: AI Architectural Drawing Review Benchmark</title>
+  <meta name="description" content="Benchmark comparing AI models on architectural drawing review. 55 known issues across 7 categories. Free prompt included.">
+  <meta property="og:title" content="RedlineBench - AI Architectural Drawing Review Benchmark">
+  <meta property="og:description" content="RedlineBench tests how capable AI is at reviewing architectural drawing sets. Multiple models compared on 55 known issues across 7 categories. See the full results.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://redlinebench.benfeicht.com">
+  <meta property="og:image" content="https://redlinebench.benfeicht.com/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="article:author" content="Ben Feicht">
+  <meta property="article:published_time" content="2026-03-16T00:00:00Z">
+  <meta name="author" content="Ben Feicht">
+  <meta name="robots" content="index, follow">
+  <meta name="keywords" content="AI architectural drawing review, AI construction document review, architect AI tools, AI drawing QA, architectural AI benchmark, construction document quality control, AI redline drawings, architect technology benchmark, GPT architecture, Claude architecture">
+  <link rel="canonical" href="https://redlinebench.benfeicht.com">
+  <meta property="article:modified_time" content="2026-05-09T00:00:00Z">
+  <meta property="article:section" content="Architecture Technology">
+  <meta property="article:tag" content="AI">
+  <meta property="article:tag" content="Architecture">
+  <meta property="article:tag" content="Benchmark">
+  <meta property="article:tag" content="Construction Documents">
+  <meta property="article:tag" content="Drawing Review">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="RedlineBench — AI Architectural Drawing Review Benchmark">
+  <meta name="twitter:description" content="RedlineBench tests how capable AI is at reviewing architectural construction documents. Multiple models tested on 55 known issues across 7 categories. See how each model performs.">
+  <meta name="twitter:image" content="https://redlinebench.benfeicht.com/og-image.png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "RedlineBench: AI Architectural Drawing Review Benchmark",
+    "description": "RedlineBench tests how capable AI is at reviewing architectural construction documents. Multiple models compared on 55 known issues across 7 categories of drawing errors and coordination failures.",
+    "author": { "@type": "Person", "name": "Ben Feicht", "url": "https://benfeicht.com" },
+    "datePublished": "2026-03-16",
+    "dateModified": "2026-09-13",
+    "publisher": { "@type": "Person", "name": "Ben Feicht", "url": "https://benfeicht.com" },
+    "url": "https://redlinebench.benfeicht.com",
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://redlinebench.benfeicht.com" },
+    "image": "https://redlinebench.benfeicht.com/og-image.png",
+    "keywords": ["AI architectural drawing review", "construction document QA", "AI benchmark", "architect technology", "drawing set review"],
+    "about": [
+      { "@type": "Thing", "name": "Artificial Intelligence" },
+      { "@type": "Thing", "name": "Architectural Drawing Review" },
+      { "@type": "Thing", "name": "Construction Document Quality Control" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Dataset",
+    "name": "RedlineBench — AI Architectural Drawing Review Benchmark Results",
+    "description": "Benchmark dataset comparing 19 AI models on their ability to identify errors and inconsistencies in a residential architectural construction document set. Scored against 55 known issues across 7 categories including dimension conflicts, specification mismatches, and coordination failures.",
+    "url": "https://redlinebench.benfeicht.com",
+    "creator": { "@type": "Person", "name": "Ben Feicht", "url": "https://benfeicht.com" },
+    "datePublished": "2026-03-16",
+    "dateModified": "2026-09-13",
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "keywords": ["AI", "architecture", "benchmark", "construction documents", "quality control", "drawing review", "large language model"],
+    "measurementTechnique": "Manual scoring of AI model responses against a 55-issue answer key, scored at the individual-issue level with partial credit",
+    "variableMeasured": "AI model accuracy at identifying errors and inconsistencies in architectural construction document sets"
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+  <style>
+    /* DESIGN TOKENS */
+    :root {
+      --bg:         #f6f5f2;
+      --surface:    #ffffff;
+      --border:     #dedad4;
+      --border-dk:  #c0b8af;
+      --ink-1:      #1a1916;
+      --ink-2:      #5c5650;
+      --ink-3:      #9c958e;
+      --red:        #b83020;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--ink-1);
+      line-height: 1.65;
+      font-size: 1rem;
+    }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+
+    /* LAYOUT */
+    .container { max-width: 1160px; margin: 0 auto; padding: 0 clamp(18px, 5vw, 80px); overflow-x: clip; }
+    section { background: var(--surface); }
+    section + section { border-top: 1px solid var(--border); }
+    section.alt { background: var(--bg); }
+    .section-pad { padding-top: 72px; padding-bottom: 72px; }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner { display:flex; align-items:center; justify-content:space-between; height:50px; }
+    .nav-brand {
+      font-weight: 700; font-size: .95rem; letter-spacing: -.01em;
+      color: var(--ink-1); text-decoration: none; display:flex; align-items:center; gap:0;
+    }
+    .nav-brand .brand-r { color: var(--red); }
+    .nav-links { display:flex; gap:28px; list-style:none; }
+    .nav-links a {
+      color: var(--ink-2); text-decoration:none; font-size:.8rem;
+      font-weight:500; letter-spacing:.02em; transition:color .15s; text-transform:uppercase;
+    }
+    .nav-links a:hover { color: var(--ink-1); }
+    .nav-toggle {
+      display: none; background: none; border: none; cursor: pointer;
+      flex-direction: column; gap: 4px; padding: 6px;
+    }
+    .nav-toggle span {
+      display: block; width: 18px; height: 2px; background: var(--ink-1); transition: .2s;
+    }
+
+    /* SECTION LABELS */
+    .section-tag {
+      display: block; margin-bottom: 14px;
+      font-size: .66rem; font-weight: 700; letter-spacing: .16em;
+      text-transform: uppercase; color: var(--ink-3);
+    }
+    .section-header { margin-bottom: 44px; }
+    .section-header h2 { font-size: 1.55rem; font-weight: 700; letter-spacing: -.025em; line-height: 1.2; }
+    .section-header p { color: var(--ink-2); margin-top: 8px; font-size: .88rem; max-width: 600px; }
+
+    /* HERO */
+    #hero { padding: 84px 0 76px; }
+    .hero-eyebrow {
+      font-size: .82rem; font-weight: 500; letter-spacing: 0;
+      text-transform: none; color: var(--ink-2); margin-bottom: 18px;
+      display: flex; align-items: center; gap: 10px;
+      font-style: italic;
+    }
+    .hero-eyebrow::before { content:''; width:24px; height:2px; background:var(--red); }
+    h1 { font-size: 2.9rem; font-weight: 700; letter-spacing: -.04em; line-height: 1.05; max-width: 700px; }
+    .hero-sub {
+      color: var(--ink-2); font-size: .95rem; max-width: 560px;
+      margin: 18px 0 48px; line-height: 1.75;
+    }
+    .stat-row { display: flex; flex-wrap: wrap; border: 1px solid var(--border); width: fit-content; }
+    .stat-card { padding: 18px 26px; border-right: 1px solid var(--border); min-width: 130px; }
+    .stat-card:last-child { border-right: none; }
+    .stat-val { font-family: 'JetBrains Mono', monospace; font-size: 1.7rem; font-weight: 600; letter-spacing: -.03em; }
+    .stat-val.accent { color: var(--red); }
+    .stat-lbl { font-size: .63rem; color: var(--ink-3); font-weight: 600; margin-top: 2px; text-transform: uppercase; letter-spacing: .1em; }
+
+    /* SCATTER */
+    #scatter { padding: 72px 0; }
+    .scatter-meta { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:40px; flex-wrap:wrap; gap:20px; }
+    .scatter-meta-left { max-width: 520px; }
+    .scatter-meta-left h2 { font-size: 1.55rem; font-weight: 700; letter-spacing: -.025em; }
+    .scatter-meta-left p { color: var(--ink-2); margin-top: 8px; font-size: .88rem; line-height: 1.65; }
+    .family-legend { display:flex; gap:20px; flex-wrap:wrap; margin-top:4px; }
+    .family-item { display:flex; align-items:center; gap:7px; font-size:.78rem; color:var(--ink-2); }
+    .family-swatch { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+
+    /* INTRO */
+    #intro { padding: 80px 0; }
+    .intro-grid { display: grid; grid-template-columns: 1fr 380px; gap: 72px; align-items: start; }
+    .intro-lede { font-size: 1.15rem; font-weight: 400; color: var(--ink-1); line-height: 1.55; letter-spacing: -.01em; margin-bottom: 22px; max-width: 520px; }
+    .intro-body { font-size: .9rem; color: var(--ink-2); line-height: 1.8; }
+    .intro-body p + p { margin-top: 1.1em; }
+    .intro-byline { margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--border); font-size: .78rem; color: var(--ink-3); font-style: italic; }
+    .sidebar-card { border-top: 3px solid var(--red); padding-top: 22px; }
+    .sidebar-num { font-family: 'JetBrains Mono', monospace; font-size: 3.2rem; font-weight: 600; color: var(--red); line-height: 1; letter-spacing: -.04em; }
+    .sidebar-label { font-size: .7rem; font-weight: 700; color: var(--ink-2); text-transform: uppercase; letter-spacing: .1em; margin-top: 6px; }
+    .sidebar-body { font-size: .85rem; color: var(--ink-2); margin-top: 14px; line-height: 1.7; }
+    .sidebar-rule { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+    .sidebar-note { font-size: .8rem; color: var(--ink-2); line-height: 1.65; }
+
+    /* SPOTLIGHTS */
+    #highlights { padding: 72px 0; }
+    .spot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); }
+    .spot-card { background: var(--surface); }
+    .spot-top { padding: 24px 26px; }
+    .spot-bottom { padding: 14px 26px; background: var(--bg); border-top: 1px solid var(--border); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .spot-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+    .spot-id { font-family: 'JetBrains Mono', monospace; font-size: .72rem; font-weight: 700; color: var(--red); }
+    .cat-tag { font-size: .63rem; font-weight: 700; padding: 2px 7px; text-transform: uppercase; letter-spacing: .07em; border: 1px solid; }
+    .cat-tag-A { color: #8b2020; border-color: #8b2020; }
+    .cat-tag-B { color: #8b4a20; border-color: #8b4a20; }
+    .cat-tag-C { color: #7a6010; border-color: #7a6010; }
+    .cat-tag-D { color: #1a5c3a; border-color: #1a5c3a; }
+    .cat-tag-E { color: #0a5068; border-color: #0a5068; }
+    .cat-tag-F { color: #3a3a8a; border-color: #3a3a8a; }
+    .cat-tag-G { color: #5c1a8a; border-color: #5c1a8a; }
+    .cat-tag-INC { color: var(--red); border-color: var(--red); }
+    .result-pill { font-size: .63rem; font-weight: 700; padding: 2px 8px; text-transform: uppercase; letter-spacing: .07em; }
+    .result-pill.common { background: #e8f4ed; color: #1a5c3a; }
+    .result-pill.hard   { background: #fef3e8; color: #8b4a20; }
+    .result-pill.missed { background: #fdf1ef; color: var(--red); }
+    .result-pill.penalty { background: #fdf1ef; color: var(--red); }
+    .spot-title { font-weight: 600; font-size: .9rem; color: var(--ink-1); margin-bottom: 8px; }
+    .spot-desc  { font-size: .82rem; color: var(--ink-2); line-height: 1.65; }
+    .found-lbl  { font-size: .7rem; font-weight: 600; color: var(--ink-3); white-space: nowrap; }
+    .chip { display: inline-flex; align-items: center; gap: 5px; font-size: .76rem; font-weight: 500; }
+    .chip .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+    .missed-note { font-size: .75rem; color: var(--ink-3); }
+
+    /* LEADERBOARD */
+    #leaderboard { padding: 72px 0; }
+    .scoring-note { font-size: .82rem; color: var(--ink-2); margin-bottom: 28px; padding-bottom: 18px; border-bottom: 1px solid var(--border); }
+    .lb-table { width: 100%; border-collapse: collapse; }
+    .lb-table th { text-align: left; font-size: .63rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--ink-3); padding: 10px 14px; border-bottom: 2px solid var(--border-dk); }
+    .lb-table td { padding: 14px 14px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+    .lb-table tr:last-child td { border-bottom: none; }
+    .lb-table tr.top-model td { background: #faf6f5; }
+    .rank { font-family: 'JetBrains Mono', monospace; font-size: .95rem; font-weight: 600; color: var(--ink-3); width: 26px; display: inline-block; }
+    .rank.gold   { color: var(--red); }
+    .rank.silver { color: var(--ink-2); }
+    .rank.bronze { color: #a85c10; }
+    .model-name { font-weight: 600; font-size: .875rem; }
+    .provider-tag { font-size: .68rem; color: var(--ink-3); display: block; margin-top: 1px; }
+    .score-big { font-family: 'JetBrains Mono', monospace; font-size: 1.2rem; font-weight: 700; }
+    .score-denom { font-family: 'JetBrains Mono', monospace; font-size: .8rem; color: var(--ink-3); }
+    .pct { font-family: 'JetBrains Mono', monospace; font-size: .85rem; font-weight: 600; }
+    .bar-wrap { width: 140px; height: 3px; background: var(--border); }
+    .bar { height: 100%; }
+    .penalty-red  { font-family: 'JetBrains Mono', monospace; font-size: .8rem; color: var(--red); }
+    .penalty-none { font-family: 'JetBrains Mono', monospace; font-size: .8rem; color: var(--ink-3); }
+
+    /* CHARTS */
+    .chart-wrap { border: 1px solid var(--border); padding: 28px; background: var(--surface); }
+    .chart-title { font-size: .8rem; font-weight: 700; margin-bottom: 4px; }
+    .chart-desc  { font-size: .76rem; color: var(--ink-3); margin-bottom: 20px; }
+
+    /* CATEGORY CARDS */
+    .cat-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); margin-bottom: 40px; border-top: 1px solid var(--border); border-left: 1px solid var(--border); }
+    .cat-card { background: var(--surface); padding: 18px 20px; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .cat-card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+    .cat-id { font-family: 'JetBrains Mono', monospace; font-size: .7rem; font-weight: 700; padding: 2px 6px; border: 1px solid; letter-spacing: .04em; }
+    .cat-card h3 { font-size: .85rem; font-weight: 600; }
+    .cat-card p { font-size: .77rem; color: var(--ink-2); line-height: 1.55; margin-top: 4px; }
+    .cat-max { font-size: .63rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--ink-3); margin-top: 8px; }
+
+    /* HEATMAP */
+    .hm-outer { overflow-x: auto; width: 100%; }
+    .hm-wrap { min-width: 900px; }
+    .hm-header { display: grid; gap: 2px; margin-bottom: 2px; }
+    .hm-header > div { font-size: .62rem; font-weight: 700; text-align: center; padding: 7px 4px; color: #fff; letter-spacing: .04em; }
+    .hm-row { display: grid; gap: 2px; margin-bottom: 2px; }
+    .hm-cat-label { font-size: .66rem; font-weight: 700; text-transform: uppercase; letter-spacing: .14em; color: var(--ink-2); display: block; padding: 14px 0 4px; }
+    .hm-issue { font-size: .7rem; padding: 6px 10px; background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; gap: 7px; }
+    .issue-badge { font-family: 'JetBrains Mono', monospace; font-size: .63rem; font-weight: 700; color: var(--ink-2); flex-shrink: 0; min-width: 32px; }
+    .issue-text { color: var(--ink-2); font-size: .68rem; line-height: 1.3; }
+    .hm-cell { min-height: 38px; display: flex; align-items: center; justify-content: center; cursor: default; position: relative; transition: transform .1s; }
+    .hm-cell:hover { transform: scale(1.15); z-index: 10; }
+    .cell-1    { background: #2d6a4f; }
+    .cell-half { background: #74c69d; }
+    .cell-0    { background: #ebe5dc; }
+    .cell-neg  { background: #b83020; }
+    .cell-sym  { font-size: .7rem; font-weight: 700; color: #fff; }
+    .cell-half .cell-sym { color: #1b4332; }
+    .cell-0    .cell-sym { color: #c0b8ae; }
+    .hm-legend { display: flex; gap: 20px; flex-wrap: wrap; align-items: center; margin-bottom: 20px; }
+    .hm-legend-item { display: flex; align-items: center; gap: 7px; font-size: .78rem; color: var(--ink-2); }
+    .hm-swatch { width: 15px; height: 15px; flex-shrink: 0; border: 1px solid var(--border); }
+
+    /* METHODOLOGY */
+    .meth-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 48px; }
+    .meth-step-card { background: var(--surface); padding: 26px; }
+    .step-num { font-family: 'JetBrains Mono', monospace; font-size: .66rem; font-weight: 700; color: var(--ink-3); letter-spacing: .16em; margin-bottom: 10px; display: block; text-transform: uppercase; }
+    .cat-label { font-size: .66rem; font-weight: 700; text-transform: uppercase; letter-spacing: .14em; color: var(--ink-2); display: block; margin-bottom: 10px; }
+    .meth-step-card h3 { font-size: .88rem; font-weight: 700; margin-bottom: 8px; }
+    .meth-step-card p  { font-size: .8rem; color: var(--ink-2); line-height: 1.65; }
+    .rubric-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+    .rubric-cell { background: var(--surface); padding: 20px 14px; text-align: center; }
+    .rubric-score { font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; font-weight: 700; line-height: 1; letter-spacing: -.02em; }
+    .rubric-score.found   { color: #2d6a4f; }
+    .rubric-score.partial { color: #52b788; }
+    .rubric-score.missed  { color: var(--ink-3); }
+    .rubric-score.wrong   { color: var(--red); }
+    .rubric-label { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; margin-top: 7px; color: var(--ink-1); }
+    .rubric-sub { font-size: .73rem; color: var(--ink-2); margin-top: 4px; line-height: 1.4; }
+    .rubric-note { font-size: .78rem; color: var(--ink-2); line-height: 1.65; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); }
+
+    /* LEADERBOARD STATS ROW */
+    .lb-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 44px; }
+    .lb-stat { background: var(--surface); padding: 22px 26px; }
+    .lb-stat-val { font-family: 'JetBrains Mono', monospace; font-size: 2.2rem; font-weight: 600; letter-spacing: -.04em; line-height: 1; color: var(--ink-1); }
+    .lb-stat-lbl { font-size: .7rem; color: var(--ink-3); font-weight: 500; text-transform: uppercase; letter-spacing: .1em; margin-top: 6px; }
+
+    /* MODEL BAR IN TABLE */
+    .lb-model-name { font-weight: 600; font-size: .9rem; color: var(--ink-1); margin-bottom: 7px; }
+    .lb-model-bar { height: 3px; background: var(--border); width: 260px; max-width: 100%; }
+    .lb-model-fill { height: 100%; }
+
+    /* SCORING CARDS */
+    .scoring-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 40px; }
+    .scoring-card { padding: 18px 20px; border: 1.5px solid; background: var(--surface); }
+    .scoring-card-score { font-family: 'JetBrains Mono', monospace; font-size: 1.6rem; font-weight: 700; line-height: 1; }
+    .scoring-card-label { font-size: .82rem; font-weight: 700; margin-top: 8px; color: var(--ink-1); }
+    .scoring-card-desc { font-size: .76rem; color: var(--ink-2); margin-top: 4px; line-height: 1.45; }
+
+    /* SPOTLIGHT MODEL GRID */
+    .spot-cat-label { display:inline-block; font-size:.6rem; font-weight:700; padding:2px 8px; text-transform:uppercase; letter-spacing:.08em; color:#fff; }
+    .spot-mc-legend { display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin-bottom:36px; font-size:.75rem; color:var(--ink-2); }
+    .spot-mc-legend-item { display:flex; align-items:center; gap:6px; }
+    .spot-mc-swatch { width:12px; height:12px; flex-shrink:0; }
+    .spot-model-grid { display:flex; gap:3px; margin-top:18px; }
+    .spot-model-item { display:flex; flex-direction:column; align-items:center; gap:3px; cursor:default; }
+    .spot-mc { width:22px; height:22px; }
+    .spot-ml { font-size:.48rem; color:var(--ink-3); text-align:center; white-space:nowrap; line-height:1.2; max-width:24px; overflow:hidden; }
+    .cell-pen { background: var(--red); }
+
+    /* PROMPT BLOCK */
+    .prompt-cta { margin-top: 48px; padding-top: 40px; border-top: 1px solid var(--border); }
+    .prompt-cta-text { font-size: .88rem; color: var(--ink-2); line-height: 1.75; max-width: 620px; margin-bottom: 22px; }
+    .copy-btn {
+      display: inline-flex; align-items: center; gap: 9px;
+      background: var(--red); color: #fff;
+      border: none; padding: 11px 22px;
+      font-family: 'Inter', sans-serif; font-size: .82rem; font-weight: 600;
+      letter-spacing: .04em; cursor: pointer; transition: background .15s;
+    }
+    .copy-btn:hover { background: #a02818; }
+    .copy-btn.copied { background: #2d6a4f; }
+    .prompt-details { margin-top: 20px; }
+    .prompt-details summary {
+      font-size: .78rem; font-weight: 600; color: var(--ink-2);
+      cursor: pointer; user-select: none; list-style: none;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .prompt-details summary::before { content: '+'; font-size: 1rem; color: var(--red); font-weight: 700; }
+    .prompt-details[open] summary::before { content: '−'; }
+    .prompt-details summary::-webkit-details-marker { display: none; }
+    details summary::-webkit-details-marker { display: none; }
+    .prompt-pre {
+      margin-top: 16px; padding: 24px 28px;
+      background: var(--surface); border: 1px solid var(--border);
+      font-family: 'JetBrains Mono', monospace; font-size: .72rem;
+      line-height: 1.7; color: var(--ink-2); white-space: pre-wrap;
+      overflow-x: auto; max-height: 460px; overflow-y: auto;
+    }
+
+    /* FOOTER */
+    footer { border-top: 2px solid var(--ink-1); padding: 28px 0; background: var(--surface); }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .footer-inner a { color: var(--red); text-decoration: none; font-size: .78rem; }
+    .footer-inner p { font-size: .78rem; color: var(--ink-3); }
+
+    /* TOOLTIP */
+    #tooltip { position: fixed; z-index: 999; pointer-events: none; background: var(--ink-1); color: #fff; padding: 10px 14px; font-size: .75rem; max-width: 280px; box-shadow: 0 4px 20px rgba(0,0,0,.3); opacity: 0; transition: opacity .12s; line-height: 1.5; }
+    #tooltip.vis { opacity: 1; }
+    #tooltip strong { color: #f5c0b0; }
+
+    /* RESPONSIVE */
+    .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%; }
+    @media (max-width: 960px) {
+      h1 { font-size: 2.2rem; }
+      .intro-grid { grid-template-columns: 1fr; gap: 40px; }
+      .spot-grid  { grid-template-columns: 1fr; }
+      .meth-steps { grid-template-columns: 1fr; }
+      .rubric-grid { grid-template-columns: repeat(2, 1fr); }
+      .nav-toggle { display: flex; }
+      .nav-links {
+        display: none; position: absolute; top: 50px; left: 0; right: 0;
+        background: rgba(255,255,255,.98); backdrop-filter: blur(8px);
+        flex-direction: column; gap: 0; padding: 8px 0;
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 10px 32px; display: block; }
+      /* Stat cards: 2-column grid for 4 cards = clean 2×2 layout at all sub-960px widths */
+      .stat-row { display: grid; grid-template-columns: repeat(2, 1fr); width: 100%; }
+      .stat-card { min-width: 0; }
+      .scatter-meta { flex-direction: column; }
+      .scoring-cards { grid-template-columns: repeat(2, 1fr); }
+      .lb-model-bar { width: 120px; }
+    }
+    @media (max-width: 600px) {
+      h1 { font-size: 1.75rem; }
+      .rubric-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat-card { padding: 14px 12px; }
+      /* Spotlight legend: 2 per row so the 4th item doesn't orphan */
+      .spot-mc-legend { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 14px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="container nav-inner">
+    <a href="#" class="nav-brand"><span class="brand-r">Redline</span>Bench</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#scatter">Results</a></li>
+      <li><a href="#prompt">Try It</a></li>
+      <li><a href="#highlights">Issue Examples</a></li>
+      <li><a href="#methodology">Methodology</a></li>
+      <li><a href="#intro">About</a></li>
+      <li><a href="https://github.com/Feichtb/redlinebench" target="_blank">GitHub</a></li>
+      <li><a href="https://benfeicht.com" target="_blank">benfeicht.com</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ╔══════════════════════════════════════════════════════════════╗
+     ║  HERO — VERSION A  (Brand hero: name big, stats immediate)  ║
+     ╚══════════════════════════════════════════════════════════════╝ -->
+<section id="hero">
+  <div class="container">
+    <p style="font-size:.82rem;font-weight:500;color:var(--ink-2);margin-bottom:16px;letter-spacing:.02em">AI Architectural Drawing Review Benchmark</p>
+    <h1 style="font-size:clamp(2.2rem,10vw,4.2rem);max-width:none;margin-bottom:12px"><span style="color:var(--red)">Redline</span>Bench</h1>
+    <p class="hero-sub" style="margin:0 0 40px;max-width:620px">
+      How well can AI models review architectural drawing sets? Multiple models were tested on a real project with 55 known issues, including coordination errors, code concerns, and spec conflicts, with every finding scored.
+    </p>
+    <div class="stat-row" style="margin-bottom:40px">
+      <div class="stat-card">
+        <div class="stat-val mono accent" id="heroTopPct">—</div>
+        <div class="stat-lbl" id="heroTopLbl">Best model catch rate</div>
+      </div>
+    </div>
+    <a href="#prompt" class="copy-btn" style="text-decoration:none;display:inline-flex">Get the Prompt // Try It on Your Drawings</a>
+  </div>
+</section>
+
+
+<!-- SCATTER -->
+<section id="scatter" class="alt">
+  <div class="container">
+    <div class="scatter-meta">
+      <div class="scatter-meta-left">
+        <span class="section-tag">Score vs. Cost</span>
+        <h2>Drawing Review Score</h2>
+        <p>
+          Each model given the same drawing set with 55 known issues. Issue catch rate is the
+          percentage of issues correctly identified out of 55 possible. Cost is per drawing review.
+        </p>
+      </div>
+      <div class="family-legend" id="familyLegend">
+        <div class="family-item"><span class="family-swatch" style="background:#b83020"></span>Anthropic</div>
+        <div class="family-item"><span class="family-swatch" style="background:#1a4a88"></span>OpenAI</div>
+        <div class="family-item"><span class="family-swatch" style="background:#8a5a10"></span>Google</div>
+        <div class="family-item"><span class="family-swatch" style="background:#5a5650"></span>xAI</div>
+      </div>
+    </div>
+    <div id="scatterWrap" style="overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%">
+      <div style="position:relative;height:460px;min-width:560px">
+        <canvas id="scatterChart"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEADERBOARD -->
+<section id="leaderboard">
+  <div class="container section-pad">
+    <div class="section-header">
+      <span class="section-tag">Results</span>
+      <h2>All Models</h2>
+    </div>
+
+    <div class="table-scroll">
+    <table class="lb-table" id="lbTable">
+      <thead>
+        <tr>
+          <th style="width:32px">#</th>
+          <th>Model</th>
+          <th>Review Score</th>
+          <th>Catch Rate</th>
+          <th>False Alarms</th>
+          <th>Cost</th>
+        </tr>
+      </thead>
+      <tbody><!-- populated by JS --></tbody>
+    </table>
+    </div>
+    <details style="margin-top:48px">
+      <summary style="font-size:.78rem;font-weight:600;color:var(--ink-2);cursor:pointer;user-select:none;list-style:none;display:flex;align-items:center;gap:8px"><span style="color:var(--red);font-weight:700;font-size:1rem">+</span> Scoring logic</summary>
+      <div style="margin-top:20px">
+        <p style="font-size:.82rem;color:var(--ink-2);margin-bottom:20px;max-width:560px">The Review Score is the sum of all issues found correctly, minus false alarms. Maximum possible is 55 points. The answer key has been checked against the drawings twice. In August 2026, four entries were audited: three described things the drawings do not contain and are no longer scored, and one (G16) was reworded. In September 2026 a second pass corrected eight more entries, struck one false-alarm entry that turned out to describe a real defect, and reclassified seven observations as neutral. Both passes are recorded in the dataset's retired-issues.md, including every run whose score changed.</p>
+        <div class="scoring-cards">
+          <div class="scoring-card" style="border-color:#2d6a4f">
+            <div class="scoring-card-score" style="color:#2d6a4f">+1</div>
+            <div class="scoring-card-label">Found it</div>
+            <div class="scoring-card-desc">Issue correctly identified and described</div>
+          </div>
+          <div class="scoring-card" style="border-color:#74c69d">
+            <div class="scoring-card-score" style="color:#52b788">+0.5</div>
+            <div class="scoring-card-label">Noticed something</div>
+            <div class="scoring-card-desc">Flagged the area but description was vague</div>
+          </div>
+          <div class="scoring-card" style="border-color:var(--border-dk)">
+            <div class="scoring-card-score" style="color:var(--ink-3)">0</div>
+            <div class="scoring-card-label">Missed it</div>
+            <div class="scoring-card-desc">Issue was present; model didn't flag it</div>
+          </div>
+          <div class="scoring-card" style="border-color:var(--red)">
+            <div class="scoring-card-score" style="color:var(--red)">-1</div>
+            <div class="scoring-card-label">False alarm</div>
+            <div class="scoring-card-desc">Confident claim that wasn't true, the costly mistake</div>
+          </div>
+        </div>
+      </div>
+    </details>
+
+  </div>
+</section>
+
+<!-- PROMPT -->
+<section id="prompt" class="alt">
+  <div class="container section-pad">
+    <div class="section-header">
+      <span class="section-tag">Use it yourself</span>
+      <h2>Try It on Your Drawings</h2>
+      <p>This is the exact prompt sent to every model in the benchmark. It's free, it works on any project type, and it takes about ten minutes.</p>
+    </div>
+    <div class="meth-steps" style="margin-bottom:36px">
+      <div class="meth-step-card">
+        <span class="step-num">01</span>
+        <h3>Open any AI chat</h3>
+        <p>Use any AI that accepts file uploads -- Claude, ChatGPT, or Gemini all work.</p>
+      </div>
+      <div class="meth-step-card">
+        <span class="step-num">02</span>
+        <h3>Upload your PDFs</h3>
+        <p>Upload your drawing set and specification booklet. The AI reads them directly. Note: some AI models have PDF upload size limits for free account users.</p>
+      </div>
+      <div class="meth-step-card">
+        <span class="step-num">03</span>
+        <h3>Paste the prompt and run</h3>
+        <p>Copy the prompt below, paste it into the chat, and send.</p>
+      </div>
+    </div>
+    <button class="copy-btn" id="copyPromptBtn" onclick="copyPrompt()">Copy prompt to clipboard</button>
+    <details class="prompt-details">
+      <summary>View full prompt</summary>
+      <pre class="prompt-pre" id="promptText">You are an experienced architect performing a thorough review of a construction document set. Your job is to find errors, inconsistencies, omissions, and coordination failures that would cause problems during construction, the kinds of issues that generate RFIs, change orders, field conflicts, and disputes.
+
+You have been given architectural construction documents in PDF form. These may include a drawing set and a project specification booklet, or only one of the two. Begin by reading all provided documents completely before making any observations.
+
+### Step 1: Establish project context
+
+State the following very briefly:
+
+- Project name, location, and code jurisdiction or code edition
+
+- Building type and construction type
+
+- Climate zone (infer from location if not stated)
+
+- Scope of drawing set, including sheet types included and disciplines absent
+
+- Specification divisions included, or note if none provided
+
+### Step 2: Review the documents
+
+Work through the documents using the following seven review perspectives. For each perspective, think carefully about what the documents show, what they should show but don't, and where they contradict themselves. Report only issues you can identify with reasonable confidence from the documents provided — do not speculate or invent problems. Report only issues, not confirmations of things that are correct.
+
+**Work each category to exhaustion before moving to the next.** Do not stop after finding a few issues in a category — keep looking until you cannot find more. A construction document set of this size and complexity will contain many issues across all seven categories; if a category feels thin, look again before moving on.
+
+**Stay within the scope of what is provided.** If MEP, structural, civil, or other discipline drawings are not included in the set, do not flag their absence as an issue or critique systems that fall under those disciplines. Focus your review on the architectural documents that are in front of you — plans, elevations, sections, details, schedules, and specifications — and evaluate them on their own terms. If the architectural drawings reference other disciplines (e.g., "bidder design" for a system, or a structural condition), you may note where coordination will be needed, but do not review disciplines that are not present.
+
+**Read the drawings carefully before characterizing them.** When describing what the drawings show — layer sequences in wall assemblies, material callouts, dimensional relationships — be precise about what is actually depicted. If a wall section shows layers in a specific order, describe that order exactly as drawn. Do not transpose, infer, or reconstruct assembly sequences from memory or convention. Misreading a drawing and then building analysis on that misreading is worse than missing the issue entirely.
+
+**A. Internal consistency across sheets**
+
+Every element represented on multiple sheets should agree. Look at how the same building components are depicted across different drawing types — plans, elevations, sections, details, and schedules. When the same element appears on two sheets and the information differs, that is a coordination error.
+
+Pay particular attention to schedules (door, window, finish, room, etc.) and whether their entries match what is drawn and what is logical for the assigned space. A schedule entry that assigns an inappropriate finish to a room is an error even if the schedule is internally consistent. Where you can, verify counts — count the windows on an elevation and compare to what the plan shows on that wall face; count door tags on a floor plan and compare to schedule rows. Check that cross-references between sheets (section cuts, detail callouts, elevation markers) point to drawings that actually exist in the set and depict what they claim to. Verify that wall types, floor types, and ceiling types assigned in schedules or plans are consistent with what is detailed in assembly drawings.
+
+**B. Dimensional and geometric integrity**
+
+Dimensions should be internally consistent — chains of dimensions should sum to their stated totals, and measurements for the same element should agree across views. Stair geometry is arithmetic: risers times riser height must equal floor-to-floor height, treads times tread depth must equal total run. Verify these calculations where stair information is provided. Look for missing dimensions that would force a contractor to scale a drawing, and for conflicting dimensions between views. Check that floor-to-floor heights, ceiling heights, and datum elevations are consistent across plans, sections, and elevations.
+
+**C. Specification-to-drawing alignment**
+
+The drawings and specifications are complementary documents describing the same building. If both are provided, perform the following checks. If specifications are not provided, briefly note that spec references on the drawings cannot be verified, then move on — do not enumerate every individual "see specs" callout, as this is not useful without the specs to compare against.
+
+When specifications are available: material callouts, product references, and assembly descriptions on the drawings should be consistent with what the specifications require. Look for conflicts where the drawings call out one material or product and the specifications describe another. Check that specification section references on the drawings point to sections that exist in the project manual. Look for terminology mismatches where drawings and specs use different terms for the same thing. Also look for implicit conflicts — where a specification establishes a performance requirement (fire rating, STC rating, thermal performance, moisture resistance) and the drawn assembly may not be capable of achieving it.
+
+**D. Building envelope and building science**
+
+Evaluate whether the wall, roof, and foundation assemblies shown in sections and details make sense as complete systems for the project's climate.
+
+**E. Code and life safety**
+
+You are not a code official, but you can identify conditions that warrant review. Look for the presence or absence of code-required information: egress paths, exit widths, stair geometry and headroom, handrail and guardrail details, fire-rated assemblies and their continuity (including garage-to-living-space separation — wall type, gypsum board type, door rating, self-closing hardware, and ceiling assembly where habitable rooms are above), accessibility clearances, and emergency escape openings from sleeping rooms. Where code-relevant dimensions are provided, check them for internal consistency. Where code-required information appears to be missing, note its absence. Do not cite specific code sections unless the documents themselves reference them — instead, describe what appears to be missing or inconsistent.
+
+**F. Constructability**
+
+Think about whether the details as drawn can actually be built. Consider physical access for installation, sequencing of assemblies, material compatibility, feasibility of connection details, and whether specified tolerances are achievable. Look for conditions where systems compete for the same space. Consider whether material selections and assembly configurations make sense for the specified application — spans, loads, and exposure conditions implied by the drawings.
+
+**G. Completeness and clarity**
+
+Assess whether the architectural documents contain enough information for a contractor to build what is shown without guessing. Look for details that are referenced but not provided, notes that say "TBD" or "by others" without further clarification, design decisions deferred to field verification that should be resolved on the documents, and general notes that appear to have been carried from a previous project without updating for this one. Evaluate whether the annotation system is consistent — abbreviations, keynote numbering, symbol usage, and graphic conventions should be uniform throughout the set.
+
+### Step 3: Report your findings
+
+Organize your findings by the seven review perspectives above. Use this exact format — one line per finding, no additional prose:
+
+`[Tag] | [Location] | [One-sentence description of the problem] | [Confidence]`
+
+Where:
+
+- **Tag** is the category letter and a sequential number within that category (e.g., A-1, A-2, B-1)
+
+- **Location** is the sheet number(s), detail number(s), spec page(s), or schedule entry where the issue appears
+
+- **Description** is a single sentence stating what is wrong, conflicting, or missing — specific enough that a contractor could locate and understand the problem
+
+- **Confidence** is one of: **Certain** (objectively verifiable from the documents), **High** (clearly visible but involves interpretation), or **Moderate** (warrants review but depends on judgment or information not in the documents)
+
+**Do not write your summary until your findings list is complete.** Work through all seven categories fully. After all findings are listed, provide a brief summary (3–5 sentences) assessing overall document quality and naming the top three areas of greatest concern.
+
+### Important guidance
+
+- **Only report issues, not confirmations.** Do not include findings that confirm something is correct. Every item in your report should describe a problem, concern, or gap.
+
+- **Only report what you can see.** If a drawing is illegible, partially visible, or at a resolution where you cannot read dimensions or text, say so rather than guessing. If you cannot verify element counts because of image quality, state that limitation.
+
+- **Distinguish between errors and judgment calls.** A dimension that contradicts another dimension is an error. A wall assembly that might underperform in a given climate is a judgment call. Label them differently through your confidence rating.
+
+- **Be specific.** "There may be coordination issues" is not useful. "The door schedule lists D-104 as 3'-0" × 7'-0" but the floor plan shows a wider opening at that location" is useful.
+
+- **Do not pad.** If you have genuinely found all the issues in a category, move on. The goal is real findings, not reaching a number.</pre>
+    </details>
+
+    <!-- CONTACT CTA -->
+    <div style="margin-top:48px;padding:40px 0 28px;border-top:1px solid var(--border)">
+      <p style="font-size:.88rem;color:var(--ink-2);line-height:1.75;max-width:620px;margin-bottom:18px">Want help applying AI-assisted QC to your practice, or interested in having me present this research? I'd love to hear from you.</p>
+      <a href="mailto:ben.redlinebench@gmail.com" class="copy-btn" style="text-decoration:none;display:inline-flex">Get in Touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORY PERFORMANCE -->
+<section id="performance">
+  <div class="container section-pad">
+    <div class="section-header">
+      <span class="section-tag">Analysis</span>
+      <h2>Performance by Category</h2>
+      <p>The review prompt breaks the document review into seven categories, each targeting a different type of issue that can appear in a drawing set. Categories range from internal consistency across sheets to code compliance, building science, and constructability, covering the full scope of what an architect checks during QA.</p>
+    </div>
+    <div class="cat-cards" id="catCards"><!-- populated by JS --></div>
+    <div class="chart-wrap">
+      <div class="chart-title">Issue Catch Rate by Category</div>
+      <div class="chart-desc">Each bar shows that model's score as a percentage of the category's total possible points. Top 8 models ordered left-to-right by overall ranking. Hover for raw points.</div>
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%">
+        <div style="position:relative;height:500px;min-width:1020px">
+          <canvas id="barChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPOTLIGHTS -->
+<section id="highlights" class="alt">
+  <div class="container section-pad">
+    <div class="section-header">
+      <span class="section-tag">What it finds and misses</span>
+      <h2>Issue Spotlights</h2>
+      <p>Four representative issues illustrating the range of difficulty. Cells below each issue show the top 8 models left-to-right by overall score.</p>
+    </div>
+    <div class="spot-grid">
+
+      <div class="spot-card">
+        <div class="spot-top">
+          <h3 class="spot-title">Window manufacturer conflict</h3>
+          <p class="spot-desc">The specifications call for <strong>Andersen 400 Series</strong> windows, while the window schedule lists <strong>Marvin Essential (Ultrex)</strong> products. These are completely different manufacturers with different rough-opening dimensions, frame profiles, and weather-sealing details. Every window detail in the A4.10-A4.13 series would need to be reconciled before procurement.</p>
+          <div class="spot-model-grid">
+            <div class="spot-model-item" data-tip="GPT-6 Astra · Found correctly"><div class="spot-mc cell-1"></div><div class="spot-ml">G6 Astra</div></div>
+            <div class="spot-model-item" data-tip="Claude Opus 5 &middot; Found correctly in all 3 runs"><div class="spot-mc cell-1"></div><div class="spot-ml">Opus 5</div></div>
+            <div class="spot-model-item" data-tip="Claude Fable 5.1 · Found correctly"><div class="spot-mc cell-1"></div><div class="spot-ml">Fable 5.1</div></div>
+            <div class="spot-model-item" data-tip="GPT-5.6 Sol · Found correctly"><div class="spot-mc cell-1"></div><div class="spot-ml">G5.6 Sol</div></div>
+            <div class="spot-model-item" data-tip="Claude Fable 5 · Found correctly"><div class="spot-mc cell-1"></div><div class="spot-ml">Fable 5</div></div>
+            <div class="spot-model-item" data-tip="GPT-5.5 · Found correctly"><div class="spot-mc cell-1"></div><div class="spot-ml">GPT-5.5</div></div>
+            <div class="spot-model-item" data-tip="Claude Opus 4.6 · Found correctly"><div class="spot-mc cell-1"></div><div class="spot-ml">Opus 4.6</div></div>
+            <div class="spot-model-item" data-tip="GPT-5.5 Pro · Found correctly"><div class="spot-mc cell-1"></div><div class="spot-ml">G5.5 Pro</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="spot-card">
+        <div class="spot-top">
+          <h3 class="spot-title">Missing Type X gypsum above garage</h3>
+          <p class="spot-desc">The Level 2 guest suite sits directly above the garage. IRC requires <strong>5/8" Type X gypsum</strong> on the garage ceiling when habitable space is above. Floor assembly F-1 specifies standard <strong>1/2" gypsum board</strong>. This is a code-required life safety item, not a judgment call.</p>
+          <div class="spot-model-grid">
+            <div class="spot-model-item" data-tip="GPT-6 Astra · Found correctly"><div class="spot-mc cell-1"></div><div class="spot-ml">G6 Astra</div></div>
+            <div class="spot-model-item" data-tip="Claude Opus 5 &middot; Found correctly in all 3 runs"><div class="spot-mc cell-1"></div><div class="spot-ml">Opus 5</div></div>
+            <div class="spot-model-item" data-tip="Claude Fable 5.1 · Found correctly"><div class="spot-mc cell-1"></div><div class="spot-ml">Fable 5.1</div></div>
+            <div class="spot-model-item" data-tip="GPT-5.6 Sol · Found correctly"><div class="spot-mc cell-1"></div><div class="spot-ml">G5.6 Sol</div></div>
+            <div class="spot-model-item" data-tip="Claude Fable 5 · Found correctly"><div class="spot-mc cell-1"></div><div class="spot-ml">Fable 5</div></div>
+            <div class="spot-model-item" data-tip="GPT-5.5 · Found correctly"><div class="spot-mc cell-1"></div><div class="spot-ml">GPT-5.5</div></div>
+            <div class="spot-model-item" data-tip="Claude Opus 4.6 · Found correctly"><div class="spot-mc cell-1"></div><div class="spot-ml">Opus 4.6</div></div>
+            <div class="spot-model-item" data-tip="GPT-5.5 Pro · Found correctly"><div class="spot-mc cell-1"></div><div class="spot-ml">G5.5 Pro</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="spot-card">
+        <div class="spot-top">
+          <h3 class="spot-title">Reversed window sill flashing</h3>
+          <p class="spot-desc">At the window sill detail (A4.11, Detail 2), the <strong>flashing membrane laps under the weather barrier instead of over it</strong>. This means water collected by the flashing drains behind the WRB rather than to the exterior, a direct path for water infiltration into the wall assembly. Finding this requires reading the fine details of a window assembly and understanding that the weather barrier wrapping over the flashing at the sill reverses the intended drainage sequence. The models that do flag this detail flag it for a different reason, missing sill pan components rather than the reversed lap. No model has fully identified this issue, but new models are starting to flag the detail as incorrect.</p>
+          <div class="spot-model-grid">
+            <div class="spot-model-item" data-tip="GPT-6 Astra · Partial in 2 of 3 runs (0.5 pt)"><div class="spot-mc cell-half"></div><div class="spot-ml">G6 Astra</div></div>
+            <div class="spot-model-item" data-tip="Claude Opus 5 &middot; Partial in 1 of 3 runs (0.5 pt)"><div class="spot-mc cell-half"></div><div class="spot-ml">Opus 5</div></div>
+            <div class="spot-model-item" data-tip="Claude Fable 5.1 · Missed"><div class="spot-mc cell-0"></div><div class="spot-ml">Fable 5.1</div></div>
+            <div class="spot-model-item" data-tip="GPT-5.6 Sol · Partial (0.5 pt)"><div class="spot-mc cell-half"></div><div class="spot-ml">G5.6 Sol</div></div>
+            <div class="spot-model-item" data-tip="Claude Fable 5 · Missed"><div class="spot-mc cell-0"></div><div class="spot-ml">Fable 5</div></div>
+            <div class="spot-model-item" data-tip="GPT-5.5 · Missed"><div class="spot-mc cell-0"></div><div class="spot-ml">GPT-5.5</div></div>
+            <div class="spot-model-item" data-tip="Claude Opus 4.6 · Missed"><div class="spot-mc cell-0"></div><div class="spot-ml">Opus 4.6</div></div>
+            <div class="spot-model-item" data-tip="GPT-5.5 Pro · Missed"><div class="spot-mc cell-0"></div><div class="spot-ml">G5.5 Pro</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="spot-card">
+        <div class="spot-top">
+          <h3 class="spot-title">Stair geometry misread</h3>
+          <p class="spot-desc">The stair is L-shaped with <strong>10 risers in the east run</strong> and <strong>8 risers in the south run</strong>, 18 total, yielding compliant ~6-11/16" risers. Most models misread one run as the entire stair and reported impossible or irreconcilable geometry, a confident, specific, and wrong finding. This is the costliest kind of AI error: it wastes the reviewer's time and could cause unnecessary field work based on a problem that doesn't exist. <strong>Update:</strong> As of May 2026, most models are no longer making this error.</p>
+          <div class="spot-model-grid">
+            <div class="spot-model-item" data-tip="GPT-6 Astra · Didn't make this error"><div class="spot-mc cell-0"></div><div class="spot-ml">G6 Astra</div></div>
+            <div class="spot-model-item" data-tip="Claude Opus 5 &middot; Made this error in 1 of 3 runs"><div class="spot-mc cell-neg"></div><div class="spot-ml">Opus 5</div></div>
+            <div class="spot-model-item" data-tip="Claude Fable 5.1 · Didn't make this error"><div class="spot-mc cell-0"></div><div class="spot-ml">Fable 5.1</div></div>
+            <div class="spot-model-item" data-tip="GPT-5.6 Sol · Didn't make this error"><div class="spot-mc cell-0"></div><div class="spot-ml">G5.6 Sol</div></div>
+            <div class="spot-model-item" data-tip="Claude Fable 5 · Didn't make this error"><div class="spot-mc cell-0"></div><div class="spot-ml">Fable 5</div></div>
+            <div class="spot-model-item" data-tip="GPT-5.5 · Didn't make this error"><div class="spot-mc cell-0"></div><div class="spot-ml">GPT-5.5</div></div>
+            <div class="spot-model-item" data-tip="Claude Opus 4.6 · Didn't make this error"><div class="spot-mc cell-0"></div><div class="spot-ml">Opus 4.6</div></div>
+            <div class="spot-model-item" data-tip="GPT-5.5 Pro · Didn't make this error"><div class="spot-mc cell-0"></div><div class="spot-ml">G5.5 Pro</div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="spot-mc-legend" style="margin-top:20px">
+      <div class="spot-mc-legend-item"><div class="spot-mc-swatch" style="background:#2d6a4f"></div>Found correctly</div>
+      <div class="spot-mc-legend-item"><div class="spot-mc-swatch" style="background:#74c69d"></div>Found, vague</div>
+      <div class="spot-mc-legend-item"><div class="spot-mc-swatch" style="background:#ebe5dc;border:1px solid #c0b8af"></div>Missed</div>
+      <div class="spot-mc-legend-item"><div class="spot-mc-swatch" style="background:#b83020"></div>False alarm</div>
+    </div>
+  </div>
+</section>
+
+<!-- METHODOLOGY -->
+<section id="methodology">
+  <div class="container section-pad">
+    <div class="section-header">
+      <span class="section-tag">How It Works</span>
+      <h2>Methodology</h2>
+      <p>A repeatable, controlled evaluation using a single real project drawing set with known issues seeded across 7 review categories.</p>
+    </div>
+    <div class="meth-steps">
+      <div class="meth-step-card">
+        <span class="step-num">01 / TEST SET</span>
+        <h3>One real project, known issues</h3>
+        <p>A complete residential drawing set (34 sheets) and specifications (11 pages) were seeded with issues across 7 categories: clear errors, coordination failures, code concerns, and conditions that warrant review. The test set is <a href="https://huggingface.co/datasets/feichtb/redlinebench" target="_blank">published in full</a> — both PDFs, the answer key, and every scored model response — so any number here can be checked or reproduced. That is a deliberate trade: open test data can end up in training corpora. The dataset carries a do-not-train canary string, but the files have been public since 5 July 2026, and scores for models released after that date should be read with the possibility of exposure in mind.</p>
+      </div>
+      <div class="meth-step-card">
+        <span class="step-num">02 / PROMPT</span>
+        <h3>Identical prompt, every model</h3>
+        <p>Each model receives the same prompt: an experienced-architect framing with 7 review perspectives, guidance on how to structure findings, and instructions to rate confidence. Models receive both PDFs simultaneously. No hints about seeded issues are provided.</p>
+      </div>
+      <div class="meth-step-card">
+        <span class="step-num">03 / SCORING</span>
+        <h3>Issue-level, manual scoring</h3>
+        <p>Each response is scored against the benchmark answer key at the issue level. Every finding is classified as correct, vague, missed, incorrect, or neutral. Neutral observations, reasonable but out-of-scope or debatable, carry no score impact in either direction.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HEATMAP -->
+<section id="heatmap" class="alt">
+  <div class="container section-pad">
+    <div class="section-header">
+      <span class="section-tag">Issue-Level Detail</span>
+      <h2>All <span id="totalIssues"></span> Issues</h2>
+      <p>Every scored issue across all models. Hover a cell for the issue description and score. Models ordered left-to-right by overall ranking.</p>
+    </div>
+    <div class="hm-legend">
+      <div class="hm-legend-item"><div class="hm-swatch" style="background:#2d6a4f;border-color:#2d6a4f"></div>Found correctly (1 pt)</div>
+      <div class="hm-legend-item"><div class="hm-swatch" style="background:#74c69d;border-color:#74c69d"></div>Found, vague (0.5 pt)</div>
+      <div class="hm-legend-item"><div class="hm-swatch" style="background:#ebe5dc"></div>Missed</div>
+    </div>
+    <div class="hm-outer">
+      <div class="hm-wrap" id="hmGrid"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="intro">
+  <div class="container section-pad">
+    <div style="max-width:700px">
+      <span class="section-tag">Why this exists</span>
+      <p class="intro-lede">Every drawing set goes out with errors. The question is how those errors get found.</p>
+      <div class="intro-body">
+        <p>In 2021 I designed a house which became the test project for this benchmark, the first architecture project I had built on my own. It was the first time I did not have a team to review my work before sending it to the contractor. I compensated by doing extensive research, reviewing with other architects I knew, meeting with building science consultants, and having a great contractor team I could solve problems with throughout design and construction. Even so, there was always a feeling that my drawings had some error that would come back to get me.</p>
+        <p>When AI models became more capable in 2023, reviewing drawing sets was one of my <a href="https://www.benfeicht.com/blog-posts/blog---redlinegpt---architectural-drawing-reviews-with-ai" target="_blank" style="color:var(--red);text-decoration:none">first use cases</a>. Since then I've kept track of AI capabilities, and they've gone from giving vague advice about individual drawings to finding specific issues on complex drawing sets. During this latest round of testing in 2026, the AI models continued to find inconsistencies in the drawing set I had created in 2021, flagging issues that came up during construction and other minor inconsistencies that I'm sure created some confusion on the job site.</p>
+        <p>This full test includes those real issues as well as many additional issues I seeded to test the AI capabilities. My plan is to continue monitoring advances in AI models and promote their use in drawing set review to improve the quality of drawing sets and make for a more straightforward and less stressful construction process.</p>
+        <p class="intro-byline">Ben Feicht, Licensed Architect / Portland, OR</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container footer-inner">
+    <div>
+      <p><strong style="color:var(--ink-1)">RedlineBench</strong> &nbsp;·&nbsp; Built by <a href="https://benfeicht.com">Ben Feicht</a> &nbsp;·&nbsp; <a href="https://github.com/Feichtb/redlinebench" target="_blank">GitHub</a> &nbsp;·&nbsp; <a href="https://huggingface.co/datasets/feichtb/redlinebench" target="_blank">Dataset</a></p>
+    </div>
+  </div>
+</footer>
+
+<div id="tooltip"></div>
+
+<script>
+// ── COMBINED V3 DATA ──────────────────────────────────────────────────────────
+// Colors grouped by model family:
+//   Anthropic (Claude): reds   — darker = better performer
+//   OpenAI    (GPT):    blues  — darker = better performer
+//   Google    (Gemini): ambers — darker = better performer
+//   xAI       (Grok):   charcoal
+// ── RENDER ────────────────────────────────────────────────────────────────────
+const tip = document.getElementById('tooltip');
+const catColors = { A:'#8b2020', B:'#8b4a20', C:'#7a6010', D:'#1a5c3a', E:'#0a5068', F:'#3a3a8a', G:'#5c1a8a' };
+let gBarChart = null, gScatterChart = null;
+
+function renderDashboard(data) {
+  const { categories, issues } = data;
+  const models = data.models;
+  const maxPossible = data.max_possible;
+  // Per-issue mean score (0/0.5/1 for n=1; blended across runs for n>1) — feeds
+  // the bar chart and scatter, which want magnitude, not just a caught/missed flag.
+  const scores = Object.fromEntries(models.map(m => [m.id, m.issue_mean_scores]));
+  // Models arrive pre-sorted by net_mean descending from build_data.py; re-sort
+  // defensively since this is what every chart below keys off.
+  const sorted = [...models].sort((a, b) => b.net_mean - a.net_mean);
+
+  // HERO STAT CARDS
+  document.getElementById('totalIssues').textContent = issues.length;
+  const heroTopPctEl = document.getElementById('heroTopPct');
+  if (heroTopPctEl) heroTopPctEl.textContent = sorted[0].pct_mean + '%';
+  // "as of" is the top model's ship date, not today's -- the number is only
+  // true as of the newest model measured. release_date rides along on each
+  // model in data.json (redlinebench/build_data.py -> RELEASE_DATES).
+  const heroTopLblEl = document.getElementById('heroTopLbl');
+  if (heroTopLblEl && sorted[0].release_date) {
+    const asOf = new Date(sorted[0].release_date + 'T00:00:00')
+      .toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+    heroTopLblEl.textContent = `Best model catch rate, as of ${asOf}`;
+  }
+
+  // LEADERBOARD TABLE
+  const rankCls = ['gold','silver','bronze'];
+  const tbody = document.querySelector('#lbTable tbody');
+  tbody.innerHTML = '';
+  sorted.forEach((m,i) => {
+    const barPct = (m.net_mean / maxPossible * 100).toFixed(1);
+    const penCount = m.incorrect_count_mean;
+    const penStr = penCount
+      ? `<span style="font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--red)">${Number.isInteger(penCount) ? penCount : penCount.toFixed(1)}</span>`
+      : `<span style="font-family:'JetBrains Mono',monospace;color:var(--ink-3)">0</span>`;
+    const costStr = m.cost_mean != null
+      ? `<span class="mono" style="font-size:.85rem">$${m.cost_mean.toFixed(2)}</span>`
+      : `<span style="color:var(--ink-3)">-</span>`;
+    const scoreStr = m.n > 1
+      ? `<span class="score-big">${m.net_mean}</span> <span class="score-denom">/ ${maxPossible} avg</span>
+         <div style="font-size:.72rem;color:var(--ink-3)">n=${m.n}, range ${m.net_min}–${m.net_max}</div>`
+      : `<span class="score-big">${m.net_mean}</span> <span class="score-denom">/ ${maxPossible}</span>`;
+    tbody.innerHTML += `<tr${i===0?' class="top-model"':''}>
+      <td><span class="rank ${rankCls[i]||''}">${i+1}</span></td>
+      <td style="width:38%">
+        <div class="lb-model-name">${m.label}</div>
+        <div class="lb-model-bar"><div class="lb-model-fill" style="width:${barPct}%;background:${m.color}"></div></div>
+      </td>
+      <td>${scoreStr}</td>
+      <td><span class="pct" style="color:#2d6a4f">${m.pct_mean}%</span></td>
+      <td>${penStr}</td>
+      <td>${costStr}</td>
+    </tr>`;
+  });
+  // CATEGORY CARDS
+  const catCardsEl = document.getElementById('catCards');
+  catCardsEl.innerHTML = '';
+  categories.forEach(cat => {
+    const d = document.createElement('div');
+    d.className = 'cat-card';
+    d.innerHTML = `<span class="cat-label">${cat.label}</span><p>${cat.desc}</p><div class="cat-max">${cat.max} scored issue${cat.max>1?'s':''}</div>`;
+    catCardsEl.appendChild(d);
+  });
+
+  // BAR CHART — sorted models (best first = leftmost bars)
+  if (gBarChart) { gBarChart.destroy(); gBarChart = null; }
+  gBarChart = new Chart(document.getElementById('barChart').getContext('2d'), {
+    type: 'bar',
+    data: {
+      labels: categories.map(c => c.label),
+      datasets: sorted.slice(0, 8).map(m => {
+        const rawScores = categories.map(c => issues.filter(i=>i.cat===c.id).reduce((s,i)=>s+(scores[m.id]?.[i.id]||0),0));
+        return {
+          label: m.label,
+          data: categories.map((c,idx) => Math.round(rawScores[idx] / c.max * 100)),
+          rawScores,
+          backgroundColor: m.color+'cc', borderColor: m.color, borderWidth:1.5, borderRadius:0,
+        };
+      }),
+    },
+    options: {
+      responsive:true, maintainAspectRatio:false,
+      plugins: {
+        legend:{ position:'bottom', labels:{ font:{family:'Inter',size:11}, padding:14, boxWidth:10, boxHeight:10 } },
+        tooltip:{ callbacks:{
+          title: ctx => { const c=categories[ctx[0].dataIndex]; return c.id+': '+c.label; },
+          label: ctx => { const c=categories[ctx.dataIndex]; const raw=ctx.dataset.rawScores[ctx.dataIndex]; return ' '+ctx.dataset.label+': '+ctx.parsed.y+'%  ('+raw+' / '+c.max+' pts)'; },
+        }},
+      },
+      scales:{
+        x:{ grid:{display:false}, ticks:{font:{family:'Inter',size:10},color:'#5c5650',maxRotation:35,minRotation:0} },
+        y:{ beginAtZero:true, max:100, grid:{color:'#e8e3dc'}, ticks:{font:{family:'JetBrains Mono',size:11},stepSize:25,callback:v=>v+'%'}, title:{display:true,text:'Issue catch rate (% of category max)',font:{family:'Inter',size:11},color:'#9c958e'} },
+      },
+    },
+  });
+
+  // SCATTER CHART — x-axis 0-100% for honest representation of state of the art
+  if (gScatterChart) { gScatterChart.destroy(); gScatterChart = null; }
+  const scatterModels = sorted.filter(m => m.cost_mean != null);
+  if (scatterModels.length) {
+    const scatterLabelPlugin = {
+      id: 'scatterLabels',
+      afterDatasetsDraw(chart) {
+        const { ctx, chartArea } = chart;
+        ctx.save();
+        chart.data.datasets.forEach((ds, i) => {
+          const meta = chart.getDatasetMeta(i);
+          if (!meta.visible) return;
+          meta.data.forEach(pt => {
+            const lbl = ds.label.replace('Claude ', '').replace(' Preview', '');
+            ctx.font = '500 10px Inter, sans-serif';
+            const labelW = ctx.measureText(lbl).width;
+            const goLeft = pt.x + 12 + labelW > chartArea.right;
+            ctx.fillStyle = ds.borderColor;
+            ctx.textAlign = goLeft ? 'right' : 'left';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(lbl, pt.x + (goLeft ? -10 : 10), pt.y);
+          });
+        });
+        ctx.restore();
+      }
+    };
+    gScatterChart = new Chart(document.getElementById('scatterChart').getContext('2d'), {
+      type: 'scatter',
+      plugins: [scatterLabelPlugin],
+      data: {
+        datasets: scatterModels.map(m => ({
+          label: m.label,
+          data: [{ x: m.pct_mean, y: m.cost_mean }],
+          backgroundColor: m.color + 'dd',
+          borderColor: m.color,
+          pointRadius: 8,
+          pointHoverRadius: 11,
+        })),
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.x}% catch rate  $${ctx.parsed.y.toFixed(2)}/review` } },
+        },
+        scales: {
+          x: {
+            title: { display:true, text:'Issue catch rate (% of 55 issues)', font:{family:'Inter',size:11}, color:'#9c958e' },
+            min: 0, max: 100,
+            grid: { color:'#e8e3dc' },
+            ticks: { font:{family:'JetBrains Mono',size:11}, callback: v => v+'%' },
+          },
+          y: {
+            type: 'logarithmic',
+            title: { display:true, text:'Cost per drawing review (log scale)', font:{family:'Inter',size:11}, color:'#9c958e' },
+            grid: { color:'#e8e3dc' },
+            ticks: { font:{family:'JetBrains Mono',size:10}, callback: v => '$'+v },
+            afterBuildTicks: scale => {
+              scale.ticks = [
+                {value:0.01},{value:0.05},{value:0.10},
+                {value:0.50},{value:1.00},{value:5.00},{value:10.00}
+              ].filter(t => t.value <= 20);
+            },
+          },
+        },
+      },
+    });
+  }
+
+  // HEATMAP — sorted models (best first = leftmost column)
+  const grid = document.getElementById('hmGrid');
+  grid.innerHTML = '';
+  const colTpl = `270px repeat(${sorted.length}, 1fr)`;
+  const hdr = document.createElement('div');
+  hdr.className = 'hm-header';
+  hdr.style.gridTemplateColumns = colTpl;
+  hdr.innerHTML = '<div style="background:transparent"></div>' +
+    sorted.map(m => `<div style="background:${m.color}">${m.label.replace('Claude ','').replace(' Preview','')}</div>`).join('');
+  grid.appendChild(hdr);
+
+  let lastCat = null;
+  const catOrder = categories.map(c=>c.id);
+  [...issues].sort((a,b)=>catOrder.indexOf(a.cat)-catOrder.indexOf(b.cat)).forEach(issue => {
+    if (issue.cat !== lastCat) {
+      lastCat = issue.cat;
+      const catInfo = categories.find(c=>c.id===issue.cat);
+      const cl = document.createElement('div');
+      cl.innerHTML = `<span class="hm-cat-label">${catInfo.label}</span>`;
+      grid.appendChild(cl);
+    }
+    const row = document.createElement('div');
+    row.className = 'hm-row';
+    row.style.gridTemplateColumns = colTpl;
+    row.innerHTML = `<div class="hm-issue"><span class="issue-badge">${issue.id}</span><span class="issue-text">${issue.summary}</span></div>`;
+    sorted.forEach(m => {
+      const reliability = m.issue_reliability[issue.id];
+      const frac = reliability.frac;
+      const cellCls = frac===1?'cell-1':frac===0?'cell-0':'cell-half';
+      const cell = document.createElement('div');
+      cell.className = 'hm-cell '+cellCls;
+      // n=1: exact single-run symbol. n>1: reliability fraction across runs.
+      const label = m.n===1
+        ? (frac===1?'✓':frac===0?'·':'½')
+        : `${reliability.caught}/${reliability.n}`;
+      cell.innerHTML = `<span class="cell-sym"${m.n>1?' style="font-size:.68em;font-family:\'JetBrains Mono\',monospace"':''}>${label}</span>`;
+      cell.addEventListener('mousemove', e => {
+        const scoreStr = m.n===1
+          ? (frac===1?'1.0 pt: found correctly':frac===0.5?'0.5 pt: found, vague':'0: missed')
+          : `Caught in ${reliability.caught}/${reliability.n} runs`;
+        tip.innerHTML = `<strong>${issue.id} · ${m.label}</strong><br>${issue.summary}<br><br><span style="color:${frac>0?'#74c69d':'#9c958e'}">${scoreStr}</span><br><span style="color:#5c5650;font-size:.72em">${issue.loc}</span>`;
+        tip.classList.add('vis');
+        tip.style.left = Math.min(e.clientX+14,window.innerWidth-300)+'px';
+        tip.style.top  = (e.clientY-10)+'px';
+      });
+      cell.addEventListener('mouseleave', () => tip.classList.remove('vis'));
+      row.appendChild(cell);
+    });
+    grid.appendChild(row);
+  });
+}
+
+fetch('dataset/data.json')
+  .then(res => res.json())
+  .then(renderDashboard)
+  .catch(err => console.error('Failed to load results data:', err));
+
+// SPOTLIGHT TOOLTIPS
+document.querySelectorAll('.spot-model-item[data-tip]').forEach(el => {
+  el.addEventListener('mousemove', e => {
+    tip.innerHTML = el.dataset.tip;
+    tip.classList.add('vis');
+    tip.style.left = Math.min(e.clientX+14, window.innerWidth-300)+'px';
+    tip.style.top = (e.clientY-10)+'px';
+  });
+  el.addEventListener('mouseleave', () => tip.classList.remove('vis'));
+});
+
+// HAMBURGER MENU
+document.getElementById('navToggle').addEventListener('click', () => {
+  document.getElementById('navLinks').classList.toggle('open');
+});
+document.querySelectorAll('#navLinks a').forEach(a => {
+  a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+});
+
+function copyPrompt() {
+  const text = document.getElementById('promptText').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copyPromptBtn');
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Copy prompt to clipboard';
+      btn.classList.remove('copied');
+    }, 2200);
+  });
+}
+</script>
+</body>
+</html>

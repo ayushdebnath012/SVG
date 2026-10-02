@@ -1,8 +1,27 @@
 # CVPR 2027 — engineering SVG research package
 
-Branch: `cvpr2027-research-package`. This folder contains the proposal, literature survey, working paper, completed diagnostic evidence, saved A100 adapters and experiment plans for physics-consistent editing of engineering vector drawings. The main benchmark and paper are unfinished; no submission has been made.
+**Current editor and paper — 1 October 2026.** Editing now uses source-tree parsing and parsed, validated patches throughout, including version-3 structural patches for bridge topology changes. [Evidence, examples and reproduction](reports/ENGINEERING_EDITOR_OVERVIEW_20261001.md); [updated paper](paper/network/main.pdf). The manuscript now shows SVG editing with circuit/hydraulic checks, axial-truss FEM, plate-clearance checks and a separately audited structural-frame example. Five concrete edits were replayed, including a 21-to-29-member bridge and a correctly edited plate that fails its clearance rule. The saved deterministic 40,000-edit audit and the learned network/cross-domain model results are reported separately.
+
+Earlier dated material below is retained as history. Serpentine routing and nesting attempts ended incomplete or with API errors; they are no longer running and provide no confirmed failure claim.
+
+**Continuing 22 September:** [Harder drawing, routing and nesting prompts](reports/ASTRA_DRAWING_ROUTING_DISCOVERY_20260922.md) have verified feasible reference SVGs and independent geometry checks. Six completed conditions pass; dense serpentine routing and irregular-part nesting later ended incomplete or with API errors. No repeatable failure has been admitted yet. The literature registry now has 72 records; no new training has started.
+
+**Completed 22 September:** [Functional design discovery](reports/CAD_FUNCTIONAL_DISCOVERY_20260921.md) tested six new catalog-section designs with FEM, Euler buckling, mass constraints and SVG readback. All six passed Astra; 5,576,554 reference assignments were enumerated. The registry contains 67 records with review levels. No repeatable hard case, established novelty claim or new training. Further API screening stopped to conserve credits.
+
+
+**Latest evidence (21 September):** [Extended drawing tests and 62-source literature audit](reports/CAD_EXTENDED_DISCOVERY_20260921.md). Five new custom cases passed Astra. Two complex released drawings produced valid CAD solids and passed 38/11 local checks respectively; their full geometry remains unscored. No repeatable Astra-hard shape or established novelty claim was found. New close prior work also covers semantic SVG edit propagation and uncertainty-aware mechanical drawing audit. No new training was started. [Earlier foundation and proposed method](reports/PROJECT_FOUNDATION_20260921.md).
+
+Branch: `cvpr2027-research-package`. This folder contains the proposal, literature survey, working paper, completed diagnostic evidence, saved A100 adapters and experiment plans for CAD-style engineering SVG drawings of objects such as tables, buildings, frames and parts. The intended system generates or edits dimensioned drawings linked to a physical model and checks affected designs with appropriate analysis, including FEM. Existing implementations cover field diagnostics and a limited axial-bar edit/re-solve integration; the first object-drawing pilot now covers idealised frames and solid plates; general CAD generation and validation remain unfinished. The main benchmark and paper are unfinished; no submission has been made.
+
+**Scope clarified on 20 September 2026:** read the [CAD drawing scope](reports/CAD_DRAWING_SCOPE.md). It supersedes the field-plot-centred future-work framing in the earlier proposal, overview, plain-language summary, roadmap and `engineering_v4` plan. Those documents and their recorded experiments remain available, but do not establish table or building design validation.
+
+**New CAD work (20 September):** [25-source internet literature and dataset audit](reports/CAD_WEB_LITERATURE_AND_DATASETS_20260920.md), [Astra CAD pilot results](reports/ASTRA_CAD_PILOT_20260920.md), and [released-data training pilot](data/cad-editor-pilot/README.md). Eight screened drawings passed the implemented geometry checks; one analysis error remains unconfirmed. The failure-only shape benchmark is currently empty.
+
+**Follow-up discovery:** [39-source novelty stress test](reports/CAD_NOVELTY_OVERLAP_20260920.md) finds substantial prior-art overlap. [Ten harder CAD prompt conditions](reports/ASTRA_CAD_HARD_DISCOVERY_20260920.md), including 0.05 mm inspection templates, all passed Astra screening and are excluded from the hard subset. No repeatable shape failure or distinct research contribution has been established yet.
 
 ## Read the documents
+
+**Native CAD follow-up:** [49-source novelty audit and four tool-enabled Astra edits](reports/CAD_NATIVE_AND_NOVELTY_20260920.md). All four final edits passed; a transient sweep error was repaired using execution feedback. [Actual SVG projection sheets](runs/astra-cad-native-20260920/screen-responses/gallery.html) and raw API traces are retained. The hard subset remains empty. Recovering lost engineering relationships from detached SVGs is a narrower hypothesis, not an established contribution.
 
 | Document | PDF | Editable LaTeX | Authoring source |
 |---|---|---|---|
@@ -12,12 +31,15 @@ Branch: `cvpr2027-research-package`. This folder contains the proposal, literatu
 | Completed results and failure audit | [PDF](output/pdf/results_and_failure_audit.pdf) | [LaTeX](docs/latex/results_and_failure_audit.tex) | [Astra/FEM](reports/ASTRA_FEM_FAILURE_RECHECK.md), [training](reports/TRAINING_RESULTS.md), [status](reports/RESEARCH_STATUS.md) |
 | Working research paper | [PDF](output/pdf/working_paper.pdf) | [LaTeX](docs/latex/working_paper.tex) | [Markdown](paper/manuscript.md) |
 | Consolidated overview: problem, theory, architecture, all experiments and plans | [PDF](output/pdf/research_overview.pdf) | [LaTeX](docs/latex/research_overview.tex) | hand-authored LaTeX (17 Sep 2026) |
+| Plain-language summary: problem, data, system, experiments and results without jargon | [PDF](output/pdf/plain_language_summary.pdf) | [LaTeX](docs/latex/plain_language_summary.tex) | hand-authored LaTeX (18 Sep 2026) |
+| Roadmap: phases, data engine, models to train per mode, compute, gates and dates | [PDF](output/pdf/roadmap.pdf) | [LaTeX](docs/latex/roadmap.tex) | hand-authored LaTeX (18 Sep 2026) |
 
 [Paper library](papers/README.md): 20 source records, 15 downloaded PDFs, BibTeX and download provenance. Five sources remain links; unavailable downloads are recorded. [Document build instructions](docs/README.md) explain how to regenerate all PDFs.
 
 ## What the evidence establishes
 
-- Three A100 LoRA runs completed (seeds 17, 29, 41; three epochs and 90 steps each). All final adapters and 720 saved base/final predictions are included. Final models and the deterministic rule baseline both score 60/60 on test and held-out-family splits. This shared-template pilot validates the pipeline and does not establish a learned advantage.
+- Three A100 LoRA runs completed (seeds 17, 29, 41; three epochs and 90 steps each). All final adapters and 720 saved base/final predictions are included. Final models and the deterministic rule baseline both score 60/60 on test and held-out-family splits. This shared-template pilot validates the pipeline and does not establish a learned advantage. [Zero-shot Astra also scores 60/60 on both splits](reports/ASTRA_CONTROLLED_EDITING_BASELINE.md) (120 calls, $0.61), which is the benchmark reference for the pilot and shows the task has no gap for learning.
+- On [twelve harder drawing tasks](reports/ASTRA_HARD_TASKS_20260918.md) (annulus, sinusoidal edge, L-shape, an unseen polygon, a Robin sweep, line charges, cylinder flow, Kirsch, two ill-posed cases), Astra reproduces closed-form fields to solver accuracy, fails clearly on the unseen polygon (4.5 pp mean), degrades at Biot 10, leaves the Kirsch field incomplete, and discloses both ill-posed cases; 6/10 geometric passes, $4.83.
 - Four direct Astra API calls were completed. Both new Robin drawings pass direct FEM curve sampling (maximum errors 0.111 and 0.374 degrees Celsius). The old failure did not reproduce. The historical capacitor closed-loop claim was incorrect; the bracket explicitly discloses illustrative stress contours.
 - The numerical contour checker accepts 20 of 120 manufactured corruptions because it does not verify visible labels. This is a concrete evaluator limitation to address. It is not a measured Astra failure rate.
 - The unchanged, pinned FEM-Bench axial-bar solver supplies an implemented upstream extension: two reference tests and 24 actual solves for original/edited drawings. It is a simple integration anchor.

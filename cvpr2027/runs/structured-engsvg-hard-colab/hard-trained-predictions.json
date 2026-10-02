@@ -1,0 +1,413 @@
+[
+  {
+    "valid_action": true,
+    "success": false,
+    "physics_ok": null,
+    "prediction": {
+      "action": "clarify",
+      "missing": [
+        "height_mm"
+      ]
+    },
+    "result_design": null,
+    "id": "create-01",
+    "kind": "create",
+    "request": "A 1.4 m wide and 85 cm tall table side frame uses a 5 cm by 9 cm rectangular section, E 200 GPa, a 1.2 kN downward load and 0.15 kN rightward load.",
+    "raw": "{\"action\":\"clarify\",\"missing\":[\"height_mm\"]}"
+  },
+  {
+    "valid_action": true,
+    "success": false,
+    "physics_ok": null,
+    "prediction": {
+      "action": "clarify",
+      "missing": [
+        "width_mm"
+      ]
+    },
+    "result_design": null,
+    "id": "create-02",
+    "kind": "create",
+    "request": "Use 70 GPa material. Build the fixed-base portal 900 mm high and 1.8 m across, with a 40 x 80 mm section. At the top right apply 2 kN down and no sideways load.",
+    "raw": "{\"action\":\"clarify\",\"missing\":[\"width_mm\"]}"
+  },
+  {
+    "valid_action": true,
+    "success": false,
+    "physics_ok": null,
+    "prediction": {
+      "action": "clarify",
+      "missing": [
+        "height_mm"
+      ]
+    },
+    "result_design": null,
+    "id": "create-03",
+    "kind": "create",
+    "request": "Draw a rigid portal: span 125 cm; rise 0.75 m; member breadth 45 mm; member depth 0.1 m; modulus 210 GPa; loads at D are 350 N to the right and 0.9 kN downward.",
+    "raw": "{\"action\":\"clarify\",\"missing\":[\"height_mm\"]}"
+  },
+  {
+    "valid_action": false,
+    "success": false,
+    "error": "Expecting ',' delimiter: line 1 column 82 (char 81)",
+    "id": "create-04",
+    "kind": "create",
+    "request": "For a 60 by 110 mm section and E=200000 MPa, create a 2.2 m span, 1.1 m high side frame carrying 1.75 kN vertically and 0.4 kN horizontally at D.",
+    "raw": "{\"action\":\"create\",\"parameters\":{\"width_mm\":60,\"height_mm\":110,\"section_b_mm\":2.2*1000,\"section_h_mm\":1.1*1000,\"E_mpa\":200000,\"vertical_load_N\":1750,\"horizontal_load_N\":400}}"
+  },
+  {
+    "valid_action": true,
+    "success": false,
+    "physics_ok": null,
+    "prediction": {
+      "action": "clarify",
+      "missing": [
+        "height_mm"
+      ]
+    },
+    "result_design": null,
+    "id": "create-05",
+    "kind": "create",
+    "request": "Make the portal 1600 millimetres wide by 95 centimetres tall. Section is 35 mm x 75 mm, Young's modulus is 70 GPa, and D carries 650 N down plus 25 N right.",
+    "raw": "{\"action\":\"clarify\",\"missing\":[\"height_mm\"]}"
+  },
+  {
+    "valid_action": true,
+    "success": false,
+    "physics_ok": true,
+    "prediction": {
+      "action": "create",
+      "parameters": {
+        "width_mm": 1050,
+        "height_mm": 800,
+        "section_b_mm": 40,
+        "section_h_mm": 80,
+        "E_mpa": 200000000,
+        "vertical_load_N": 500,
+        "horizontal_load_N": 100
+      }
+    },
+    "result_design": {
+      "width_mm": 1050,
+      "height_mm": 800,
+      "section_b_mm": 40,
+      "section_h_mm": 80,
+      "E_mpa": 200000000,
+      "vertical_load_N": 500,
+      "horizontal_load_N": 100
+    },
+    "id": "create-06",
+    "kind": "create",
+    "request": "Create the frame with a 1.05 m width, 800 mm height, 0.04 m breadth, 0.08 m depth, 200 GPa modulus, 0.5 kN down and 0.1 kN right.",
+    "raw": "{\"action\":\"create\",\"parameters\":{\"width_mm\":1050,\"height_mm\":800,\"section_b_mm\":40,\"section_h_mm\":80,\"E_mpa\":200000000,\"vertical_load_N\":500,\"horizontal_load_N\":100}}"
+  },
+  {
+    "valid_action": true,
+    "success": false,
+    "physics_ok": true,
+    "prediction": {
+      "action": "edit",
+      "changes": {
+        "width_mm": 1680
+      }
+    },
+    "result_design": {
+      "width_mm": 1680,
+      "height_mm": 850,
+      "section_b_mm": 50,
+      "section_h_mm": 90,
+      "E_mpa": 200000,
+      "vertical_load_N": 1200,
+      "horizontal_load_N": 150
+    },
+    "id": "edit-01",
+    "kind": "edit",
+    "request": "Widen it by 0.2 m; retain every other setting.",
+    "raw": "{\"action\":\"edit\",\"changes\":{\"width_mm\":1680}}"
+  },
+  {
+    "valid_action": true,
+    "success": false,
+    "physics_ok": null,
+    "prediction": {
+      "action": "clarify",
+      "missing": [
+        "width_mm"
+      ]
+    },
+    "result_design": null,
+    "id": "edit-02",
+    "kind": "edit",
+    "request": "Make it five centimetres shorter and leave the remaining design untouched.",
+    "raw": "{\"action\":\"clarify\",\"missing\":[\"width_mm\"]}"
+  },
+  {
+    "valid_action": true,
+    "success": true,
+    "physics_ok": true,
+    "prediction": {
+      "action": "edit",
+      "changes": {
+        "vertical_load_N": 2400
+      }
+    },
+    "result_design": {
+      "width_mm": 1400,
+      "height_mm": 850,
+      "section_b_mm": 50,
+      "section_h_mm": 90,
+      "E_mpa": 200000,
+      "vertical_load_N": 2400,
+      "horizontal_load_N": 150
+    },
+    "id": "edit-03",
+    "kind": "edit",
+    "request": "Double the downward load only.",
+    "raw": "{\"action\":\"edit\",\"changes\":{\"vertical_load_N\":2400}}"
+  },
+  {
+    "valid_action": true,
+    "success": true,
+    "physics_ok": true,
+    "prediction": {
+      "action": "edit",
+      "changes": {
+        "vertical_load_N": 1500
+      }
+    },
+    "result_design": {
+      "width_mm": 1400,
+      "height_mm": 850,
+      "section_b_mm": 50,
+      "section_h_mm": 90,
+      "E_mpa": 200000,
+      "vertical_load_N": 1500,
+      "horizontal_load_N": 150
+    },
+    "id": "edit-04",
+    "kind": "edit",
+    "request": "Increase the downward force by 25 percent; do not change the lateral force.",
+    "raw": "{\"action\":\"edit\",\"changes\":{\"vertical_load_N\":1500}}"
+  },
+  {
+    "valid_action": true,
+    "success": true,
+    "physics_ok": true,
+    "prediction": {
+      "action": "edit",
+      "changes": {
+        "section_b_mm": 60,
+        "section_h_mm": 100
+      }
+    },
+    "result_design": {
+      "width_mm": 1400,
+      "height_mm": 850,
+      "section_b_mm": 60,
+      "section_h_mm": 100,
+      "E_mpa": 200000,
+      "vertical_load_N": 1200,
+      "horizontal_load_N": 150
+    },
+    "id": "edit-05",
+    "kind": "edit",
+    "request": "Use a 60 by 100 mm member section, with the first number as breadth. Preserve geometry, material, and loads.",
+    "raw": "{\"action\":\"edit\",\"changes\":{\"section_b_mm\":60,\"section_h_mm\":100}}"
+  },
+  {
+    "valid_action": true,
+    "success": true,
+    "physics_ok": true,
+    "prediction": {
+      "action": "edit",
+      "changes": {
+        "E_mpa": 210000
+      }
+    },
+    "result_design": {
+      "width_mm": 1400,
+      "height_mm": 850,
+      "section_b_mm": 50,
+      "section_h_mm": 90,
+      "E_mpa": 210000,
+      "vertical_load_N": 1200,
+      "horizontal_load_N": 150
+    },
+    "id": "edit-06",
+    "kind": "edit",
+    "request": "Switch the material stiffness to 210 GPa only.",
+    "raw": "{\"action\":\"edit\",\"changes\":{\"E_mpa\":210000}}"
+  },
+  {
+    "valid_action": false,
+    "success": false,
+    "error": "nonfinite/nonnumeric parameter",
+    "id": "edit-07",
+    "kind": "edit",
+    "request": "Remove the sideways load while retaining the vertical one.",
+    "raw": "{\"action\":\"edit\",\"changes\":{\"horizontal_load_N\":null}}"
+  },
+  {
+    "valid_action": true,
+    "success": false,
+    "physics_ok": true,
+    "prediction": {
+      "action": "edit",
+      "changes": {
+        "height_mm": 90
+      }
+    },
+    "result_design": {
+      "width_mm": 1400,
+      "height_mm": 90,
+      "section_b_mm": 50,
+      "section_h_mm": 90,
+      "E_mpa": 200000,
+      "vertical_load_N": 1200,
+      "horizontal_load_N": 150
+    },
+    "id": "edit-08",
+    "kind": "edit",
+    "request": "Set the span to 1.55 m and the height to 90 cm. Everything else stays as supplied.",
+    "raw": "{\"action\":\"edit\",\"changes\":{\"height_mm\":90}}"
+  },
+  {
+    "valid_action": true,
+    "success": false,
+    "physics_ok": true,
+    "prediction": {
+      "action": "edit",
+      "changes": {
+        "vertical_load_N": 1180,
+        "horizontal_load_N": 145
+      }
+    },
+    "result_design": {
+      "width_mm": 1400,
+      "height_mm": 850,
+      "section_b_mm": 50,
+      "section_h_mm": 90,
+      "E_mpa": 200000,
+      "vertical_load_N": 1180,
+      "horizontal_load_N": 145
+    },
+    "id": "edit-09",
+    "kind": "edit",
+    "request": "Add 0.05 kN to the lateral force and reduce the downward force by 0.2 kN.",
+    "raw": "{\"action\":\"edit\",\"changes\":{\"vertical_load_N\":1180,\"horizontal_load_N\":145}}"
+  },
+  {
+    "valid_action": false,
+    "success": false,
+    "error": "Expecting ',' delimiter: line 1 column 46 (char 45)",
+    "id": "edit-10",
+    "kind": "edit",
+    "request": "Make the section depth ten millimetres larger without changing its breadth.",
+    "raw": "{\"action\":\"edit\",\"changes\":{\"section_h_mm\":90+10}}"
+  },
+  {
+    "valid_action": true,
+    "success": false,
+    "physics_ok": null,
+    "prediction": {
+      "action": "clarify",
+      "missing": [
+        "horizontal_load_N"
+      ]
+    },
+    "result_design": null,
+    "id": "clarify-01",
+    "kind": "clarify",
+    "request": "Create a 1.4 m by 0.85 m frame with a 50 x 90 mm section and E=200 GPa. I have not specified either applied load. Supplied canonical values: {\"width_mm\": 1400, \"height_mm\": 850, \"section_b_mm\": 50, \"section_h_mm\": 90, \"E_mpa\": 200000}",
+    "raw": "{\"action\":\"clarify\",\"missing\":[\"horizontal_load_N\"]}"
+  },
+  {
+    "valid_action": true,
+    "success": true,
+    "physics_ok": null,
+    "prediction": {
+      "action": "clarify",
+      "missing": [
+        "height_mm",
+        "section_b_mm",
+        "section_h_mm"
+      ]
+    },
+    "result_design": null,
+    "id": "clarify-02",
+    "kind": "clarify",
+    "request": "I need a portal 1.8 m wide carrying 1 kN downward and zero lateral force. Use 200 GPa material. Supplied canonical values: {\"width_mm\": 1400, \"E_mpa\": 200000, \"vertical_load_N\": 1200, \"horizontal_load_N\": 150}",
+    "raw": "{\"action\":\"clarify\",\"missing\":[\"height_mm\",\"section_b_mm\",\"section_h_mm\"]}"
+  },
+  {
+    "valid_action": true,
+    "success": false,
+    "physics_ok": null,
+    "prediction": {
+      "action": "clarify",
+      "missing": [
+        "width_mm",
+        "E_mpa"
+      ]
+    },
+    "result_design": null,
+    "id": "clarify-03",
+    "kind": "clarify",
+    "request": "Create the table frame with a 40 x 80 mm section, 900 N down and 100 N right. The geometry and material have not been given. Supplied canonical values: {\"section_b_mm\": 50, \"section_h_mm\": 90, \"vertical_load_N\": 1200, \"horizontal_load_N\": 150}",
+    "raw": "{\"action\":\"clarify\",\"missing\":[\"width_mm\",\"E_mpa\"]}"
+  },
+  {
+    "valid_action": true,
+    "success": true,
+    "physics_ok": null,
+    "prediction": {
+      "action": "clarify",
+      "missing": [
+        "section_b_mm",
+        "section_h_mm",
+        "E_mpa",
+        "vertical_load_N",
+        "horizontal_load_N"
+      ]
+    },
+    "result_design": null,
+    "id": "clarify-04",
+    "kind": "clarify",
+    "request": "Make a 1200 mm wide, 800 mm tall frame. Nothing else is known yet. Supplied canonical values: {\"width_mm\": 1400, \"height_mm\": 850}",
+    "raw": "{\"action\":\"clarify\",\"missing\":[\"section_b_mm\",\"section_h_mm\",\"E_mpa\",\"vertical_load_N\",\"horizontal_load_N\"]}"
+  },
+  {
+    "valid_action": true,
+    "success": false,
+    "physics_ok": null,
+    "prediction": {
+      "action": "clarify",
+      "missing": [
+        "section_b_mm",
+        "section_h_mm"
+      ]
+    },
+    "result_design": null,
+    "id": "clarify-05",
+    "kind": "clarify",
+    "request": "Use aluminium-like stiffness of 70 GPa, 1.6 m width and 0.9 m height, with 0.5 kN down. Ask me for whatever is still required. Supplied canonical values: {\"width_mm\": 1400, \"height_mm\": 850, \"E_mpa\": 200000, \"vertical_load_N\": 1200}",
+    "raw": "{\"action\":\"clarify\",\"missing\":[\"section_b_mm\",\"section_h_mm\"]}"
+  },
+  {
+    "valid_action": true,
+    "success": false,
+    "physics_ok": null,
+    "prediction": {
+      "action": "clarify",
+      "missing": [
+        "E_mpa"
+      ]
+    },
+    "result_design": null,
+    "id": "clarify-06",
+    "kind": "clarify",
+    "request": "Create the frame using a 50 by 100 mm section under 1.5 kN downward and 0.2 kN rightward. Supplied canonical values: {\"section_b_mm\": 50, \"section_h_mm\": 90, \"vertical_load_N\": 1200, \"horizontal_load_N\": 150}",
+    "raw": "{\"action\":\"clarify\",\"missing\":[\"E_mpa\"]}"
+  }
+]

@@ -12,6 +12,7 @@ import random
 import shutil
 
 import engsvg_ir as IR
+import engsvg_truss_families as TF
 import engsvg_multifamily_benchmark as BENCH
 import engsvg_plate as plate
 import engsvg_truss as truss
@@ -38,6 +39,26 @@ def _dimension(model, name):
 
 def _provenance():
     return {"mode": "procedural", "confidence": {}, "evidence": {}, "ambiguities": []}
+
+
+def _bridge_model(rng, family):
+    """Pratt, Howe, Warren and K-truss, sized by panel count rather than a fixed node list.
+
+    The original two topologies have five or six nodes and at most nine members, and only their
+    dimensions vary. These reach 57 members and carry a real static indeterminacy in the K-truss,
+    while the same axial FEM certifies every one.
+    """
+    kind, panels = family.rsplit('_', 1)
+    panels = int(panels)
+    span = rng.randrange(8000, 18001, 500)
+    height = rng.randrange(1500, 3001, 100)
+    model = TF.FAMILIES[kind.replace('bridge_', '')](
+        panels=panels, span=span, height=height,
+        load_N=-rng.randrange(8000, 25001, 500),
+        b_mm=rng.randrange(30, 71, 5), h_mm=rng.randrange(20, 51, 5),
+        E=rng.choice([190000, 200000, 205000, 210000]))
+    model["provenance"] = _provenance()
+    return IR.validate(model)
 
 
 def _truss_model(rng, topology):
@@ -90,11 +111,23 @@ def _plate_model(rng, layout):
     return IR.validate(model)
 
 
+def _residual_ok(model, result, tolerance=1e-9):
+    """The residual is [Fx, Fy, Mz] in N, N and N*mm, so force and moment need different scales.
+
+    Comparing a moment residual against a force tolerance rejects a long-span truss for being long
+    rather than wrong: an 18 m bridge carries moments of order 1e8 N*mm, where 1e-5 N*mm is exact.
+    """
+    fx, fy, mz = result["equilibrium_residual_N_Nmm"]
+    force = max((abs(c) for load in model["loads"].values() for c in load[:2]), default=0.0) or 1.0
+    span = max((max(abs(x), abs(y)) for x, y in model["nodes"].values()), default=0.0) or 1.0
+    return max(abs(fx) / force, abs(fy) / force, abs(mz) / (force * span)) < tolerance
+
+
 def _verify(model):
     if model["kind"] == "truss2d":
         result = truss.solve(model)
         return {"method": "linear_axial_truss_fem",
-                "pass": max(abs(x) for x in result["equilibrium_residual_N_Nmm"]) < 1e-5,
+                "pass": _residual_ok(model, result),
                 "peak_abs_stress_mpa": round(result["peak_abs_stress_mpa"], 8),
                 "max_displacement_mm": round(max(abs(v) for xy in result["node_displacements_mm"].values()
                                                  for v in xy), 8),
@@ -109,8 +142,13 @@ def _verify(model):
             "assumptions": model["assumptions"]}
 
 
+def _is_bridge(model):
+    return model["kind"] == "truss2d" and any(n.startswith(("L", "U", "M")) for n in model["nodes"])
+
+
 def _render(model):
-    canonical = truss.render(model) if model["kind"] == "truss2d" else plate.render(model)
+    canonical = (TF.render(model) if _is_bridge(model) else
+                 truss.render(model) if model["kind"] == "truss2d" else plate.render(model))
     if model["kind"] == "mechanical_part_2d" and len(model["holes"]) != 4:
         canonical = canonical.replace("four-hole mounting plate",
                                       f'{len(model["holes"])}-hole mounting plate')
@@ -119,6 +157,28 @@ def _render(model):
         "#1f3348", "#d9efff").replace("#eaf3f8", "#173f5f").replace("#6b7280", "#a8d8ff")
     return {name: {"sha256": _sha(svg), "svg": svg} for name, svg in
             (("canonical", canonical), ("monochrome", monochrome), ("blueprint", blueprint))}
+
+
+def _physics_equal(recovered, original, tolerance=1e-6):
+    """Judge a recovered bridge on what the drawing actually carries: geometry, topology, response.
+
+    Node names are not drawn, so an untagged recovery must relabel. Comparing labels would fail every
+    bridge regardless of how faithful the drawing is, so compare sorted coordinates, member count and
+    the solved peak stress instead.
+    """
+    import numpy as _np
+    if len(recovered["nodes"]) != len(original["nodes"]):
+        return False
+    if len(recovered["members"]) != len(original["members"]):
+        return False
+    a = sorted((round(x, 3), round(y, 3)) for x, y in recovered["nodes"].values())
+    b = sorted((round(x, 3), round(y, 3)) for x, y in original["nodes"].values())
+    if any(abs(p[0] - q[0]) > 1e-2 or abs(p[1] - q[1]) > 1e-2 for p, q in zip(a, b)):
+        return False
+    with _np.errstate(divide="ignore", over="ignore", invalid="ignore"):
+        first, second = truss.solve(recovered), truss.solve(original)
+    want = second["peak_abs_stress_mpa"]
+    return abs(first["peak_abs_stress_mpa"] - want) <= tolerance * max(abs(want), 1.0)
 
 
 def _engineering_equal(first, second, tolerance=1e-3):
@@ -148,9 +208,20 @@ def _engineering_equal(first, second, tolerance=1e-3):
 def _description(model, family):
     if model["kind"] == "truss2d":
         sec = model["sections"]["bar"]
-        return (f"Create a {family} pin-jointed truss with span {_dimension(model, 'span')['value_mm']:g} mm, "
-                f"height {_dimension(model, 'height')['value_mm']:g} mm, rectangular bars "
-                f"{sec['b_mm']:g} by {sec['h_mm']:g} mm, E={model['materials']['steel']['E_mpa']:g} MPa, "
+        common = (f"span {_dimension(model, 'span')['value_mm']:g} mm, "
+                  f"height {_dimension(model, 'height')['value_mm']:g} mm, rectangular bars "
+                  f"{sec['b_mm']:g} by {sec['h_mm']:g} mm, "
+                  f"E={model['materials']['steel']['E_mpa']:g} MPa")
+        if _is_bridge(model):
+            # Bridge trusses carry one load at every interior panel point, not a single load at C,
+            # and their nodes are chord-indexed rather than lettered.
+            load = abs(next(iter(model["loads"].values()))[1])
+            panels = sum(1 for n in model["nodes"] if n.startswith("L")) - 1
+            return (f"Create a {family.replace('bridge_', '').replace('_', ' ')} parallel-chord "
+                    f"bridge truss with {panels} panels, {common}, a downward load of {load:g} N at "
+                    f"each interior panel point, a pin at the left base and a roller at the right "
+                    f"base. It has {len(model['nodes'])} nodes and {len(model['members'])} members.")
+        return (f"Create a {family} pin-jointed truss with {common}, "
                 f"a downward load of {abs(model['loads']['C'][1]):g} N at C, a pin at A and roller at E.")
     p = model["plates"][0]
     return (f"Create a {p['width_mm']:g} by {p['height_mm']:g} by {p['thickness_mm']:g} mm rectangular "
@@ -174,6 +245,8 @@ def _edited(model, changes):
     target = copy.deepcopy(model)
     for path, value in changes.items():
         if path == "loads.C.fy_N": target["loads"]["C"][1] = value
+        elif path == "loads.*.fy_N":
+            for node in target["loads"]: target["loads"][node][1] = value
         elif path == "sections.bar.b_mm": target["sections"]["bar"]["b_mm"] = value
         elif path == "sections.bar.h_mm": target["sections"]["bar"]["h_mm"] = value
         elif path == "materials.steel.E_mpa": target["materials"]["steel"]["E_mpa"] = value
@@ -214,15 +287,19 @@ def _tasks(asset, model, rng):
 
     edit_specs = []
     if model["kind"] == "truss2d":
-        load = abs(model["loads"]["C"][1]); percent = rng.choice([7, 12, 18, 25])
+        bridge = _is_bridge(model)
+        where = "each loaded panel point" if bridge else "C"
+        key = "loads.*.fy_N" if bridge else "loads.C.fy_N"
+        load = abs(next(iter(model["loads"].values()))[1] if bridge else model["loads"]["C"][1])
+        percent = rng.choice([7, 12, 18, 25])
         edit_specs = [
-            (f"Increase the downward load at C by {percent}%.", {"loads.C.fy_N": -round(load*(1+percent/100))}, "arithmetic"),
-            (f"Reduce the downward load at C by {rng.choice([5,15,20,30])}%.", None, "arithmetic"),
+            (f"Increase the downward load at {where} by {percent}%.", {key: -round(load*(1+percent/100))}, "arithmetic"),
+            (f"Reduce the downward load at {where} by {rng.choice([5,15,20,30])}%.", None, "arithmetic"),
             (f"Make every member {rng.choice([5,10,15])} mm wider.", None, "entity_binding"),
             (f"Set every member depth to {rng.randrange(20,61,5)} mm.", None, "basic"),
         ]
         decrease = int(edit_specs[1][0].split("by ")[1].split("%")[0])
-        edit_specs[1] = (edit_specs[1][0], {"loads.C.fy_N": -round(load*(1-decrease/100))}, edit_specs[1][2])
+        edit_specs[1] = (edit_specs[1][0], {key: -round(load*(1-decrease/100))}, edit_specs[1][2])
         wider = int(edit_specs[2][0].split("member ")[1].split(" mm")[0])
         edit_specs[2] = (edit_specs[2][0], {"sections.bar.b_mm": model["sections"]["bar"]["b_mm"]+wider}, edit_specs[2][2])
         depth = int(edit_specs[3][0].split("to ")[1].split(" mm")[0])
@@ -230,9 +307,9 @@ def _tasks(asset, model, rng):
         multiplier = rng.choice([1.25, 1.5, 2, 3]); stress_limit = rng.choice([100, 150, 200, 250])
         constraint_request = (f"Multiply the downward load at C by {multiplier:g}, but only if the resulting "
                               f"peak member stress does not exceed {stress_limit} MPa.")
-        constraint_changes = {"loads.C.fy_N": -round(load*multiplier)}
+        constraint_changes = {key: -round(load*multiplier)}
         clarify = {"action": "clarify", "missing": ["load_change_amount"]}
-        clarify_prompt = "Increase the load at C, but no amount is specified."
+        clarify_prompt = f"Increase the load at {where}, but no amount is specified."
     else:
         p = model["plates"][0]; diameter = model["holes"][0]["diameter_mm"]
         thickness_delta, diameter_delta, offset_delta = rng.choice([1,2,3,4]), rng.choice([2,4,6]), rng.choice([5,10])
@@ -348,12 +425,20 @@ def generate(out: Path, designs=10_000, seed=SEED, previous: Path | None = None)
     rng = random.Random(seed); excluded = _excluded_hashes(previous)
     candidates, seen = [], set()
     families = ("truss_fan_5", "truss_double_fan_6", "plate_corner_4", "plate_grid_6")
+    # Named bridge trusses, parameterised by panel count: 16 further topologies from 13 to 57
+    # members, so the set is no longer four shapes varied only by dimension.
+    families = families + tuple(f"bridge_{kind}_{panels}" for kind in ("pratt", "howe", "warren")
+                                for panels in (4, 6, 8, 10)) \
+                        + tuple(f"bridge_k_truss_{panels}" for panels in (4, 6, 8))
     index = 0
     while len(candidates) < designs:
         family = families[index % len(families)]; index += 1
-        model = (_truss_model(rng, "fan_5" if family == "truss_fan_5" else "double_fan_6")
-                 if family.startswith("truss") else
-                 _plate_model(rng, "corner_4" if family == "plate_corner_4" else "grid_6"))
+        if family.startswith("bridge_"):
+            model = _bridge_model(rng, family)
+        elif family.startswith("truss"):
+            model = _truss_model(rng, "fan_5" if family == "truss_fan_5" else "double_fan_6")
+        else:
+            model = _plate_model(rng, "corner_4" if family == "plate_corner_4" else "grid_6")
         engineering_hash = IR.engineering_digest(model)
         if engineering_hash in seen or engineering_hash in excluded: continue
         seen.add(engineering_hash); candidates.append((family, model, engineering_hash))
@@ -366,9 +451,11 @@ def generate(out: Path, designs=10_000, seed=SEED, previous: Path | None = None)
         variants = _render(model); verification = _verify(model)
         canonical_roundtrip = False
         try:
-            recovered = (truss.import_untagged(variants["canonical"]["svg"])
+            recovered = (TF.import_untagged(variants["canonical"]["svg"]) if _is_bridge(model) else
+                         truss.import_untagged(variants["canonical"]["svg"])
                          if model["kind"] == "truss2d" else plate.import_untagged(variants["canonical"]["svg"]))
-            canonical_roundtrip = _engineering_equal(recovered, model)
+            canonical_roundtrip = (_physics_equal(recovered, model) if _is_bridge(model)
+                                   else _engineering_equal(recovered, model))
         except Exception:
             pass
         asset = {"lineage_id": lineage, "family": family, "split": split,
