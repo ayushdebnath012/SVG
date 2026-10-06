@@ -1,0 +1,16 @@
+{
+  "model": "gpt-6-astra",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Edit mechanical CAD. Return only a JSON object {\"edits\":[{\"start\":0,\"delete\":0,\"insert\":[\"replacement line\"]}]}. Indices address zero-based ORIGINAL source lines; operations must be ordered, nonoverlapping and in bounds. Satisfy the instruction and preserve unrelated features. Reconsider the previous candidate using verifier feedback; the verifier can be wrong. Do not claim verification or invent physical results."
+    },
+    {
+      "role": "user",
+      "content": "{\"instruction\": \"Set the hub radius equal to half the blade length; the blades, spinner, and hub height stay the same.\", \"original_source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .cylinder(27.9, 18.8)\\n    .faces(\\\">Z\\\").workplane()\\n    .circle(16.92)\\n    .workplane(offset=9.0)\\n    .circle(1.5)\\n    .loft(combine=True)\\n    .union(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(0, 0, 10.375), rotate=cq.Vector(0, 0, 0.0))\\n            .transformed(offset=cq.Vector(5.64, 0, 0), rotate=cq.Vector(37.1, 0, 0))\\n            .polyline([[0.0, -12.5], [0.0, 12.5], [46.512, 8.938], [64.6, 0.0], [46.512, -8.938]])\\n            .close()\\n            .extrude(7.15)\\n    )\\n    .union(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(0, 0, 10.375), rotate=cq.Vector(0, 0, 180.0))\\n            .transformed(offset=cq.Vector(5.64, 0, 0), rotate=cq.Vector(37.1, 0, 0))\\n            .polyline([[0.0, -12.5], [0.0, 12.5], [46.512, 8.938], [64.6, 0.0], [46.512, -8.938]])\\n            .close()\\n            .extrude(7.15)\\n    )\\n)\\nshow_object(result)\", \"previous_candidate\": \"{\\\"edits\\\":[{\\\"start\\\":3,\\\"delete\\\":1,\\\"insert\\\":[\\\"    .cylinder(27.9, 32.3)\\\"]}]}\", \"verifier_verdict\": \"reject; request repair\", \"observations\": [{\"tool\": \"execute\", \"result\": {\"gates\": true, \"error\": null, \"volume\": 105514.0667545926, \"changed\": true}}]}"
+    }
+  ],
+  "reasoning_effort": "low",
+  "max_completion_tokens": 2500,
+  "store": false
+}

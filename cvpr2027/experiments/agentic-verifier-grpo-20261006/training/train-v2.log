@@ -1,0 +1,18 @@
+Sliding Window Attention is enabled but not implemented for `sdpa`; unexpected results may be encountered.
+BASE_EVAL
+{"base_dev": {"n": 238, "true_accept": 0, "true_reject": 44, "false_accept": 0, "false_reject": 194, "accuracy": 0.18487394957983194, "tool_calls": 474}}
+{"group": 5, "id": "dd9b0ebe5fa961a93766afa7424348688ad8cc1cc2dc86e26cfc6c9190674465#0", "reward_mean": 0.2200000286102295, "reward_std": 1.2990765571594238, "mixed": true, "losses": [5.27501106262207e-06, 0.003583773970603943], "seconds": 16.112561197020113}
+{"group": 10, "id": "385d6c6cbc686dde160d5fea301c723e6ba511e618e596e1a43953094011fb81#2", "reward_mean": 0.2225000262260437, "reward_std": 0.9624675512313843, "mixed": true, "losses": [8.642673492431641e-07, -0.0007085502147674561], "seconds": 18.203760736621916}
+Traceback (most recent call last):
+  File "/home/trishita/svg-compute/agentic-verifier-grpo-20261006/scripts/train_agentic_cad_grpo.py", line 125, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/home/trishita/svg-compute/agentic-verifier-grpo-20261006/scripts/train_agentic_cad_grpo.py", line 91, in main
+    group=[rollout(old.exp().cpu().tolist(),row['label'],rng) for _ in range(8)]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/trishita/svg-compute/agentic-verifier-grpo-20261006/scripts/agentic_cad_policy.py", line 43, in rollout
+    action = allowed[max(range(len(p)), key=lambda j: p[j])] if rng is None else rng.choices(allowed, weights=p)[0]
+                                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/trishita/miniconda3/envs/engsvg/lib/python3.12/random.py", line 485, in choices
+    raise ValueError('Total of weights must be finite')
+ValueError: Total of weights must be finite

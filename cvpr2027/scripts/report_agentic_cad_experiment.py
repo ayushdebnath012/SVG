@@ -1,0 +1,32 @@
+"""Render the completed saved comparison into a concise reproducible research report."""
+import csv,json
+from collections import Counter
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[1]
+OUT=ROOT/'experiments/agentic-verifier-grpo-20261006'
+
+def main():
+ summary=json.loads((OUT/'comparison.json').read_text())
+ train=json.loads((OUT/'training/run-v4/summary.json').read_text())
+ rows={r['id']:r for r in map(json.loads,(OUT/'heldout.jsonl').read_text().splitlines())}
+ diagnostics={}
+ for name in ('base','grpo'):
+  decisions=list(map(json.loads,(OUT/(name+'-heldout-decisions.jsonl')).read_text().splitlines()))
+  valid=[d for d in decisions if rows[d['id']]['reference_valid']]
+  diagnostics[name]=dict(n=len(valid),true_accept=sum(d['accepted'] and rows[d['id']]['label'] for d in valid),true_reject=sum(not d['accepted'] and not rows[d['id']]['label'] for d in valid),false_accept=sum(d['accepted'] and not rows[d['id']]['label'] for d in valid),false_reject=sum(not d['accepted'] and rows[d['id']]['label'] for d in valid),tool_calls=sum(len(d['trace'])-1 for d in valid),traces=dict(Counter(str(d['trace']) for d in valid)))
+ (OUT/'verifier-diagnostics.json').write_text(json.dumps(diagnostics,indent=2)+'\n')
+ all=summary['all_tasks'];valid=summary['valid_references']
+ lines=['# Astra + GRPO-trained agentic verifier on BenchCAD','',f"Completed 6 October 2026. All-task strict success: **{all['before']}/{all['n']} ({all['before_rate']:.1%}) without the verifier → {all['after']}/{all['n']} ({all['after_rate']:.1%}) with verifier-guided repair**, a change of **{all['delta_pp']:+.2f} percentage points**.",'',f"Valid-reference result: {valid['before']}/{valid['n']} → {valid['after']}/{valid['n']}; {valid['recovered']} recovered, {valid['regressed']} regressed. One upstream reference is invalid and excluded from the category table below.",'','| Category | Valid-reference tasks | Astra alone | Astra + agent | Change (pp) | Recovered | Regressed |','|---|---:|---:|---:|---:|---:|---:|']
+ for c,r in summary['categories'].items():
+  lines.append(f"| {c} | {r['n']} | {r['before']}/{r['n']} ({r['before_rate']:.1%}) | {r['after']}/{r['n']} ({r['after_rate']:.1%}) | {r['delta_pp']:+.2f} | {r['recovered']} | {r['regressed']} |")
+ lines+=['','## What was trained','', 'A separate Qwen2.5-Coder-1.5B-Instruct verifier received LoRA GRPO updates; Astra remained frozen. The policy chooses execution, numeric checks, acceptance or rejection, with at least one tool observation required before a verdict. This is a constrained action policy using cached target-free tool observations, not an unrestricted agent that invents verification programs. Training reward is reference agreement; reference geometry and labels are absent from model observations and repair requests.','',f"Training used 726 candidates, with 238 component-disjoint development candidates; none of the 124 held-out tasks entered training. Final run: 600 groups of eight trajectories, {train['optimizer_updates']} optimizer updates, seed 17, float32 on one H100 NVL, {train['seconds']/60:.1f} minutes, {train['peak_memory']/1024**3:.1f} GiB peak allocated memory. Reload verification passed. Earlier failed pilots and numerical fixes are recorded in PROTOCOL.md and the training archive.",'','## Verifier quality on held-out valid references','','| Verifier | Correct accept | Correct reject | False accept | False reject | Accuracy |','|---|---:|---:|---:|---:|---:|']
+ for name,d in diagnostics.items():
+  lines.append(f"| {'Untrained' if name=='base' else 'GRPO'} | {d['true_accept']} | {d['true_reject']} | {d['false_accept']} | {d['false_reject']} | {(d['true_accept']+d['true_reject'])/d['n']:.1%} |")
+ lines+=['',f"Always accepting the initial Astra answer achieves {valid['before_rate']:.1%} verdict accuracy. Compare against that class-imbalance control as well as the untrained policy. Development accuracy was {train['grpo_dev']['accuracy']:.1%}, versus {194/238:.1%} for always accepting. The trained policy used execution only on the initial held-out answers, never requesting numeric checks.",'','## Repair and evaluation protocol','',f"The policy requested {summary['repair_requested']} repairs; {summary['repair_selected']} repaired candidates were accepted for final output. Repair API statuses: {summary['repair_statuses']}. New API cost estimate: ${summary['api_cost_estimate_usd']:.4f}, using repository list-price estimates ($10/M input, $50/M output), not a billing receipt. A rejected repair retains its original answer. All selection decisions were frozen before the native geometry scorer accessed references.",'', 'Success uses strict solid-volume IoU ≥ 0.99999 against pinned released STEP files. It does not establish full instruction compliance, mechanical tolerances or FEM validity. All outputs use the same local BenchCAD holdout; this is not an official leaderboard evaluation.','',f"Paired exact McNemar p={summary['paired_exact_p']:.4g}; task bootstrap 95% interval for change: [{summary['paired_bootstrap_95pct_delta_pp'][0]:+.2f}, {summary['paired_bootstrap_95pct_delta_pp'][1]:+.2f}] pp. This interval resamples tasks, not correlated CAD families; it is descriptive. One seed and adaptive development pilots do not establish a robust GRPO benefit. The end-to-end comparison also adds Astra calls and therefore does not isolate the contribution of GRPO from extra inference compute.",'','## Artifacts','','- `comparison.json`: exact aggregates and uncertainty calculations.','- `per-task.csv`: every task, before/after success, selection and scorer status.','- `training/run-v4/adapter/`: saved GRPO LoRA weights.','- `training/run-v4/manifest.json`: model revision and training settings.','- `training-artifacts.tar.gz`: logs, failed pilots, final weights and training code.','- `repairs/`: API requests, outputs and target-free observations.','- `PROTOCOL.md`: full protocol and development changes.','- `implementation-sha256.json`: implementation checksums.','', 'Server artifacts: `/home/trishita/svg-compute/agentic-verifier-grpo-20261006`. API credentials and SSH passwords are not stored in these artifacts.']
+ lines+=['','## Recovered tasks','']
+ for r in csv.DictReader((OUT/'per-task.csv').open()):
+  if r['without']=='False' and r['with_agent']=='True':
+   lines.append(f"- **{r['category']}**, `{r['id']}`: {rows[r['id']]['instruction']} Final IoU: {r['agent_iou']}.")
+ (OUT/'RESULTS.md').write_text('\n'.join(lines)+'\n')
+ print('\n'.join(lines[:15]))
+if __name__=='__main__':main()

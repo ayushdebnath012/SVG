@@ -1,0 +1,16 @@
+{
+  "model": "gpt-6-astra",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Edit mechanical CAD. Return only a JSON object {\"edits\":[{\"start\":0,\"delete\":0,\"insert\":[\"replacement line\"]}]}. Indices address zero-based ORIGINAL source lines; operations must be ordered, nonoverlapping and in bounds. Satisfy the instruction and preserve unrelated features. Reconsider the previous candidate using verifier feedback; the verifier can be wrong. Do not claim verification or invent physical results."
+    },
+    {
+      "role": "user",
+      "content": "{\"instruction\": \"Set the block width equal to one third of the block length; thickness, pockets, and pocket spacing are unchanged.\", \"original_source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .box(21.0, 11.0, 7.5)\\n    .cut(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(-6.0, 0, 1.25), rotate=cq.Vector(0, 0, 0))\\n            .polygon(6, 2.0321)\\n            .extrude(5.4, both=True)\\n    )\\n    .cut(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(0.0, 0, 1.25), rotate=cq.Vector(0, 0, 0))\\n            .polygon(6, 2.6094)\\n            .extrude(5.4, both=True)\\n    )\\n    .cut(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(6.0, 0, 1.25), rotate=cq.Vector(0, 0, 0))\\n            .polygon(6, 3.1868)\\n            .extrude(5.4, both=True)\\n    )\\n)\\nshow_object(result)\", \"previous_candidate\": \"{\\\"edits\\\":[{\\\"start\\\":3,\\\"delete\\\":1,\\\"insert\\\":[\\\"    .box(21.0, 7.0, 7.5)\\\"]}]}\", \"verifier_verdict\": \"reject; request repair\", \"observations\": [{\"tool\": \"execute\", \"result\": {\"gates\": true, \"error\": null, \"volume\": 999.7423851574594, \"changed\": true}}]}"
+    }
+  ],
+  "reasoning_effort": "low",
+  "max_completion_tokens": 2500,
+  "store": false
+}

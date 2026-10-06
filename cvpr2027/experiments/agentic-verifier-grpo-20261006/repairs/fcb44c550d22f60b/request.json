@@ -1,0 +1,16 @@
+{
+  "model": "gpt-6-astra",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Edit mechanical CAD. Return only a JSON object {\"edits\":[{\"start\":0,\"delete\":0,\"insert\":[\"replacement line\"]}]}. Indices address zero-based ORIGINAL source lines; operations must be ordered, nonoverlapping and in bounds. Satisfy the instruction and preserve unrelated features. Reconsider the previous candidate using verifier feedback; the verifier can be wrong. Do not claim verification or invent physical results."
+    },
+    {
+      "role": "user",
+      "content": "{\"instruction\": \"Tighten the narrow throat of the venturi tube so the outer wall narrows to 14 mm radius (instead of the current 24.85 mm) and the inner wall narrows to 26 mm radius (instead of 36.75 mm), keeping the same throat length and the wide ends unchanged.\", \"original_source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .moveTo(50.0, 0.0)\\n    .lineTo(50.0, 134.9)\\n    .lineTo(24.85, 198.035)\\n    .lineTo(24.85, 247.735)\\n    .lineTo(50.0, 341.5961)\\n    .lineTo(50.0, 445.3961)\\n    .lineTo(61.9, 445.3961)\\n    .lineTo(61.9, 341.5961)\\n    .lineTo(36.75, 247.735)\\n    .lineTo(36.75, 198.035)\\n    .lineTo(61.9, 134.9)\\n    .lineTo(61.9, 0.0)\\n    .close()\\n    .revolve(360, (0, 0, 0), (0, 1, 0))\\n)\\nshow_object(result)\", \"previous_candidate\": \"{\\\"edits\\\":[{\\\"start\\\":5,\\\"delete\\\":2,\\\"insert\\\":[\\\"    .lineTo(14.0, 198.035)\\\",\\\"    .lineTo(14.0, 247.735)\\\"]},{\\\"start\\\":11,\\\"delete\\\":2,\\\"insert\\\":[\\\"    .lineTo(26.0, 247.735)\\\",\\\"    .lineTo(26.0, 198.035)\\\"]}]}\", \"verifier_verdict\": \"reject; request repair\", \"observations\": [{\"tool\": \"execute\", \"result\": {\"gates\": true, \"error\": null, \"volume\": 1520867.9153019197, \"changed\": true}}]}"
+    }
+  ],
+  "reasoning_effort": "low",
+  "max_completion_tokens": 2500,
+  "store": false
+}

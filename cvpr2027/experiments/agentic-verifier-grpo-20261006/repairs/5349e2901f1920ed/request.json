@@ -1,0 +1,16 @@
+{
+  "model": "gpt-6-astra",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Edit mechanical CAD. Return only a JSON object {\"edits\":[{\"start\":0,\"delete\":0,\"insert\":[\"replacement line\"]}]}. Indices address zero-based ORIGINAL source lines; operations must be ordered, nonoverlapping and in bounds. Satisfy the instruction and preserve unrelated features. Reconsider the previous candidate using verifier feedback; the verifier can be wrong. Do not claim verification or invent physical results."
+    },
+    {
+      "role": "user",
+      "content": "{\"instruction\": \"Bevel the six straight outer edges of the top face at 30 degrees from horizontal, 2 mm wide on the top.\", \"original_source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .polygon(6, 15.012)\\n    .extrude(15.0)\\n    .faces(\\\">Z\\\").workplane()\\n    .hole(8.0)\\n)\\nshow_object(result)\", \"previous_candidate\": \"{\\\"edits\\\":[{\\\"start\\\":7,\\\"delete\\\":0,\\\"insert\\\":[\\\"    .intersect(\\\",\\\"        cq.Workplane(\\\\\\\"XY\\\\\\\")\\\",\\\"        .polygon(6, 15.012)\\\",\\\"        .workplane(offset=15.0 - 2.0 / (3.0 ** 0.5))\\\",\\\"        .polygon(6, 15.012)\\\",\\\"        .workplane(offset=2.0 / (3.0 ** 0.5))\\\",\\\"        .polygon(6, 15.012 - 8.0 / (3.0 ** 0.5))\\\",\\\"        .loft(ruled=True)\\\",\\\"    )\\\"]}]}\", \"verifier_verdict\": \"reject; request repair\", \"observations\": [{\"tool\": \"execute\", \"result\": {\"gates\": true, \"error\": null, \"volume\": 1394.9836122011766, \"changed\": true}}]}"
+    }
+  ],
+  "reasoning_effort": "low",
+  "max_completion_tokens": 2500,
+  "store": false
+}

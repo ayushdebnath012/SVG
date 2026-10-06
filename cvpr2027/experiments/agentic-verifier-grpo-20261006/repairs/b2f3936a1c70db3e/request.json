@@ -1,0 +1,16 @@
+{
+  "model": "gpt-6-astra",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Edit mechanical CAD. Return only a JSON object {\"edits\":[{\"start\":0,\"delete\":0,\"insert\":[\"replacement line\"]}]}. Indices address zero-based ORIGINAL source lines; operations must be ordered, nonoverlapping and in bounds. Satisfy the instruction and preserve unrelated features. Reconsider the previous candidate using verifier feedback; the verifier can be wrong. Do not claim verification or invent physical results."
+    },
+    {
+      "role": "user",
+      "content": "{\"instruction\": \"Add a second groove on the screw head, perpendicular to the existing one and with the same shape and dimensions, so the head becomes a cross-slotted screw.\", \"original_source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .circle(1.25)\\n    .extrude(6.0)\\n    .faces(\\\">Z\\\").workplane()\\n    .circle(2.5)\\n    .extrude(1.5)\\n    .cut(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(0, 0, 7.2), rotate=cq.Vector(0, 0, 0))\\n            .box(5.4, 0.6, 1.4)\\n    )\\n)\\nshow_object(result)\", \"previous_candidate\": \"{\\\"edits\\\":[{\\\"start\\\":13,\\\"delete\\\":0,\\\"insert\\\":[\\\"    .cut(\\\",\\\"        cq.Workplane(\\\\\\\"XY\\\\\\\")\\\",\\\"            .transformed(offset=cq.Vector(0, 0, 7.2), rotate=cq.Vector(0, 0, 90))\\\",\\\"            .box(5.4, 0.6, 1.4)\\\",\\\"    )\\\"]}]}\", \"verifier_verdict\": \"reject; request repair\", \"observations\": [{\"tool\": \"execute\", \"result\": {\"gates\": true, \"error\": null, \"volume\": 53.27929351990111, \"changed\": true}}]}"
+    }
+  ],
+  "reasoning_effort": "low",
+  "max_completion_tokens": 2500,
+  "store": false
+}

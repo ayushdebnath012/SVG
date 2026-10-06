@@ -1,0 +1,16 @@
+{
+  "model": "gpt-6-astra",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Edit mechanical CAD. Return only a JSON object {\"edits\":[{\"start\":0,\"delete\":0,\"insert\":[\"replacement line\"]}]}. Indices address zero-based ORIGINAL source lines; operations must be ordered, nonoverlapping and in bounds. Satisfy the instruction and preserve unrelated features. Reconsider the previous candidate using verifier feedback; the verifier can be wrong. Do not claim verification or invent physical results."
+    },
+    {
+      "role": "user",
+      "content": "{\"instruction\": \"Add 3 extra bolt through-passages to each of the two flat end plates, so each plate now has a 2 by 2 grid of 4 bolt holes of 6.5 mm diameter, evenly arranged on the plate around its existing single hole.\", \"original_source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .transformed(offset=cq.Vector(20.0, 0, -2.0), rotate=cq.Vector(0, 0, 0))\\n    .rect(40.0, 24.0)\\n    .extrude(4.0)\\n    .union(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(40.0, 0, 0), rotate=cq.Vector(0, 90, 0))\\n            .rect(4.0, 24.0)\\n            .transformed(offset=cq.Vector(0, 0, 18.9), rotate=cq.Vector(0, 0, 90))\\n            .rect(4.0, 24.0)\\n            .loft(combine=True)\\n    )\\n    .union(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(78.9, -2.0, 0), rotate=cq.Vector(-90, 0, 0))\\n            .rect(40.0, 24.0)\\n            .extrude(4.0)\\n    )\\n    .cut(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(22.4, 0, -2.2), rotate=cq.Vector(0, 0, 0))\\n            .circle(3.25)\\n            .extrude(4.4)\\n    )\\n    .cut(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(81.3, -2.2, 0), rotate=cq.Vector(-90, 0, 0))\\n            .circle(3.25)\\n            .extrude(4.4)\\n    )\\n)\\nshow_object(result)\", \"previous_candidate\": \"{\\\"edits\\\":[{\\\"start\\\":23,\\\"delete\\\":0,\\\"insert\\\":[\\\"            .pushPoints([(0, 0), (-12.0, 0), (0, 8.0), (-12.0, 8.0)])\\\"]},{\\\"start\\\":29,\\\"delete\\\":0,\\\"insert\\\":[\\\"            .pushPoints([(0, 0), (-12.0, 0), (0, 8.0), (-12.0, 8.0)])\\\"]}\", \"verifier_verdict\": \"reject; request repair\", \"observations\": [{\"tool\": \"execute\", \"result\": {\"gates\": false, \"error\": \"JSONDecodeError: Expecting ',' delimiter: line 1 column 224 (char 223)\", \"volume\": null, \"changed\": null}}]}"
+    }
+  ],
+  "reasoning_effort": "low",
+  "max_completion_tokens": 2500,
+  "store": false
+}

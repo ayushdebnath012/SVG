@@ -1,0 +1,16 @@
+{
+  "model": "gpt-6-astra",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Edit mechanical CAD. Return only a JSON object {\"edits\":[{\"start\":0,\"delete\":0,\"insert\":[\"replacement line\"]}]}. Indices address zero-based ORIGINAL source lines; operations must be ordered, nonoverlapping and in bounds. Satisfy the instruction and preserve unrelated features. Reconsider the previous candidate using verifier feedback; the verifier can be wrong. Do not claim verification or invent physical results."
+    },
+    {
+      "role": "user",
+      "content": "{\"instruction\": \"Set the shank length equal to 2.4 times the head diameter; the head, slot, and shank radius stay the same.\", \"original_source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .circle(1.25)\\n    .extrude(6.0)\\n    .faces(\\\">Z\\\").workplane()\\n    .circle(2.5)\\n    .extrude(1.5)\\n    .cut(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(0, 0, 7.2), rotate=cq.Vector(0, 0, 0))\\n            .box(5.4, 0.6, 1.4)\\n    )\\n)\\nshow_object(result)\", \"previous_candidate\": \"{\\\"edits\\\":[{\\\"start\\\":4,\\\"delete\\\":1,\\\"insert\\\":[\\\"    .extrude(12.0)\\\"]},{\\\"start\\\":10,\\\"delete\\\":1,\\\"insert\\\":[\\\"            .transformed(offset=cq.Vector(0, 0, 13.2), rotate=cq.Vector(0, 0, 0))\\\"]}]}\", \"verifier_verdict\": \"reject; request repair\", \"observations\": [{\"tool\": \"execute\", \"result\": {\"gates\": true, \"error\": null, \"volume\": 85.36450901475918, \"changed\": true}}]}"
+    }
+  ],
+  "reasoning_effort": "low",
+  "max_completion_tokens": 2500,
+  "store": false
+}

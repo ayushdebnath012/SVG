@@ -1,0 +1,38 @@
+{
+  "variant": "react",
+  "system": "You edit mechanical CAD. First write a short plan, then the patch, in exactly this format:\nPLAN:\n- [i] `exact original line i` -> what changes (at most 20 words)\n(one bullet per edit operation; i is the zero-based ORIGINAL line index where the operation starts; for an insertion at the end write [END])\nPATCH:\n{\"edits\":[{\"start\":0,\"delete\":0,\"insert\":[\"replacement line\"]}]}\nIndices are zero-based lines of the ORIGINAL input; operations must be ordered, nonoverlapping and in bounds. Preserve unrelated features. The supplied representation determines syntax. Return no other text and no invented physics results. Geometry execution and FEM checks are performed by external tools; never claim verification.",
+  "files": {
+    "train": "42e85be7994c52597c4abff899bb87b0cea21825cae75dfc3bf7b80d0f14064b",
+    "validation": "f2b3d9e04b38b3dba52d518e05c1ccc36db43e72de351b46271385fd3e0a79f0",
+    "test": "26ff0b02076a62c1802578321b974b4c0b51a1d7b23133df915f4475b8da8232"
+  },
+  "counts": {
+    "train": {
+      "original": 2540,
+      "repair": 1264
+    },
+    "validation": null,
+    "test": null
+  },
+  "source_splits": "runs/multisource-cad-colab-20261002/results-final",
+  "teacher": [
+    "runs/cad-astra-distill-20261004",
+    "runs/cad-astra-distill-n2-20261005"
+  ],
+  "acceptance": "verifier gates + consensus>=2",
+  "teacher_audit": {
+    "tasks": 468,
+    "accepted": 441,
+    "accepted_reference_strict": 364
+  },
+  "note": "Rows are the retained splits of the completed 3B run; only targets change. Teacher calls used the training split only.",
+  "react": {
+    "source_samples": "runs/bestofn-student-20261006/train-samples.jsonl",
+    "checked_tasks": 2540,
+    "repair_rule": "first failing of greedy+samples; target = original row target",
+    "problems": {
+      "failed to build a valid solid": 237,
+      "Applying your patch": 982
+    }
+  }
+}

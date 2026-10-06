@@ -1,0 +1,16 @@
+{
+  "model": "gpt-6-astra",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Edit mechanical CAD. Return only a JSON object {\"edits\":[{\"start\":0,\"delete\":0,\"insert\":[\"replacement line\"]}]}. Indices address zero-based ORIGINAL source lines; operations must be ordered, nonoverlapping and in bounds. Satisfy the instruction and preserve unrelated features. Reconsider the previous candidate using verifier feedback; the verifier can be wrong. Do not claim verification or invent physical results."
+    },
+    {
+      "role": "user",
+      "content": "{\"instruction\": \"Add 2 round cross-holes of 8 mm diameter through the middle thicker step of the shaft, both perpendicular to the central axis, at 25 mm and 45 mm from the bottom face of the shaft.\", \"original_source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .cylinder(11.4, 32.8)\\n    .faces(\\\">Z\\\").workplane()\\n    .circle(21.3)\\n    .extrude(48.8)\\n    .faces(\\\">Z\\\").workplane()\\n    .circle(9.4)\\n    .extrude(29.4)\\n    .faces(\\\">Z\\\").workplane()\\n    .circle(7.1)\\n    .extrude(6.9)\\n    .faces(\\\">Z\\\")\\n    .chamfer(1.5)\\n    .faces(\\\"<Z\\\")\\n    .faces(\\\"<Z\\\").workplane()\\n    .hole(4.9)\\n)\\nshow_object(result)\", \"previous_candidate\": \"{\\\"edits\\\":[{\\\"start\\\":19,\\\"delete\\\":0,\\\"insert\\\":[\\\"result = result.cut(\\\",\\\"    cq.Workplane(\\\\\\\"XZ\\\\\\\")\\\",\\\"    .pushPoints([(0, 25 - 11.4 / 2), (0, 45 - 11.4 / 2)])\\\",\\\"    .circle(4)\\\",\\\"    .extrude(40, both=True)\\\",\\\")\\\"]}]}\", \"verifier_verdict\": \"reject; request repair\", \"observations\": [{\"tool\": \"execute\", \"result\": {\"gates\": true, \"error\": null, \"volume\": 111496.1649057224, \"changed\": true}}]}"
+    }
+  ],
+  "reasoning_effort": "low",
+  "max_completion_tokens": 2500,
+  "store": false
+}

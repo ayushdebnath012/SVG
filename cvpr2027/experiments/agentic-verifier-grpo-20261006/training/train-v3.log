@@ -1,0 +1,31 @@
+Sliding Window Attention is enabled but not implemented for `sdpa`; unexpected results may be encountered.
+BASE_EVAL
+{"base_dev": {"n": 238, "true_accept": 0, "true_reject": 44, "false_accept": 0, "false_reject": 194, "accuracy": 0.18487394957983194, "tool_calls": 474}}
+{"group": 5, "id": "91f3ee574738294f4db362a8002d216e781cb47108330fc625859db964f45d27#1", "reward_mean": -0.1499999761581421, "reward_std": 1.45368492603302, "mixed": true, "losses": [1.1831521987915039e-05, 1.1831521987915039e-05], "seconds": 17.09610014501959}
+{"group": 10, "id": "385d6c6cbc686dde160d5fea301c723e6ba511e618e596e1a43953094011fb81#2", "reward_mean": 0.2225000262260437, "reward_std": 0.9624675512313843, "mixed": true, "losses": [1.862645149230957e-05, -0.011239796876907349], "seconds": 19.444735852070153}
+{"group": 15, "id": "3044bd88ee246d05ed778748b7d7a3b98bd1dd5d18c0ec4b64759f3264de314d#1", "reward_mean": 0.2250000238418579, "reward_std": 1.2961770296096802, "mixed": true, "losses": [2.053380012512207e-05, -0.001760736107826233], "seconds": 22.449580895714462}
+{"group": 20, "id": "385d6c6cbc686dde160d5fea301c723e6ba511e618e596e1a43953094011fb81#3", "reward_mean": 0.2250000238418579, "reward_std": 0.9695746302604675, "mixed": true, "losses": [4.2945146560668945e-05, -0.0009369775652885437], "seconds": 24.685025704093277}
+{"group": 25, "id": "3f5ec5c5972f0d3dfc96160242f6a4061db66d0050fb7574d1797eff843646d3#0", "reward_mean": -0.9049999713897705, "reward_std": 1.444636583328247, "mixed": true, "losses": [6.428360939025879e-05, -0.0026405900716781616], "seconds": 27.048449753783643}
+{"group": 30, "id": "371e111e446c0ce9be9f6cd219f54242fad0d6ccb18027bda2e78b03fbf1bb3f#1", "reward_mean": 0.21750003099441528, "reward_std": 0.9740861058235168, "mixed": true, "losses": [0.0001666247844696045, 0.0001666247844696045], "seconds": 30.217400583438575}
+{"group": 35, "id": "84f10eb1330f09200225cfc1b63f6e9ddb729e0141123d461ee07937f7349988#0", "reward_mean": -0.15749996900558472, "reward_std": 1.4478754997253418, "mixed": true, "losses": [0.0003000199794769287, 0.006019674241542816], "seconds": 32.4301859466359}
+{"group": 40, "id": "233f1e48062cdd8795591376c086ccda055208d4a05467ba2cebe3bc9ecc5b8a#0", "reward_mean": -0.0299999937415123, "reward_std": 0.9950376749038696, "mixed": true, "losses": [0.0002766326069831848, -0.001597583293914795], "seconds": 34.55759460106492}
+{"group": 45, "id": "a40402bc3506dedf1936b258c8eb435ee7ab9b8b04f0f37c0194acb4385157b3#1", "reward_mean": -0.1549999713897705, "reward_std": 1.4498189687728882, "mixed": true, "losses": [0.00035252422094345093, 0.000352516770362854], "seconds": 37.08708746358752}
+Traceback (most recent call last):
+  File "/home/trishita/svg-compute/agentic-verifier-grpo-20261006/scripts/train_agentic_cad_grpo.py", line 126, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/home/trishita/svg-compute/agentic-verifier-grpo-20261006/scripts/train_agentic_cad_grpo.py", line 110, in main
+    optimizer.zero_grad();loss.backward();torch.nn.utils.clip_grad_norm_(model.parameters(),1.0,error_if_nonfinite=True);optimizer.step();updates+=1;losses.append(loss.item())
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/trishita/miniconda3/envs/engsvg/lib/python3.12/site-packages/torch/nn/utils/clip_grad.py", line 42, in _no_grad_wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/trishita/miniconda3/envs/engsvg/lib/python3.12/site-packages/torch/nn/utils/clip_grad.py", line 231, in clip_grad_norm_
+    total_norm = _get_total_norm(grads, norm_type, error_if_nonfinite, foreach)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/trishita/miniconda3/envs/engsvg/lib/python3.12/site-packages/torch/nn/utils/clip_grad.py", line 42, in _no_grad_wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/trishita/miniconda3/envs/engsvg/lib/python3.12/site-packages/torch/nn/utils/clip_grad.py", line 111, in _get_total_norm
+    raise RuntimeError(
+RuntimeError: The total norm of order 2.0 for gradients from `parameters` is non-finite, so it cannot be clipped. To disable this error and scale the gradients by the non-finite norm anyway, set `error_if_nonfinite=False`
