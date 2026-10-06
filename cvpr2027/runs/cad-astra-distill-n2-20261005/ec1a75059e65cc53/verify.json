@@ -1,0 +1,60 @@
+{
+  "n": 2,
+  "executed": 1,
+  "clusters": [
+    1
+  ],
+  "selected": 0,
+  "selected_consensus": 1,
+  "selected_numbers_fraction": 1.0,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [15] `show_object(result)` -> Insert sequential whole-part rotations about global Y and Z axes before display.",
+      "edited_lines": 1,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 45.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 15,
+            "delete": 0,
+            "insert": [
+              "result = result.rotate((0, 0, 0), (0, 1, 0), 90).rotate((0, 0, 0), (0, 0, 1), 45)"
+            ]
+          }
+        ]
+      },
+      "volume": 13396.726654836812,
+      "consensus": 1,
+      "numbers_fraction": 1.0,
+      "score": 1.749,
+      "audit_reference_iou": 1.0
+    },
+    {
+      "index": 1,
+      "gates": false,
+      "error": "SyntaxError: invalid syntax (<unknown>, line 16)",
+      "plan": "- [14] `)` -> Rotate the completed part 90 degrees about global Y, then 45 degrees about global Z.",
+      "edited_lines": null,
+      "numbers": [],
+      "changed": null,
+      "score": null,
+      "audit_reference_iou": null
+    }
+  ],
+  "audit_selected_strict": true,
+  "audit_any_strict": true,
+  "audit_reference_changed": true,
+  "id": "ec1a75059e65cc53e88e4a8ae14d3c72e207218380ddb3023ee6d3bc2b059717",
+  "category": "T2"
+}

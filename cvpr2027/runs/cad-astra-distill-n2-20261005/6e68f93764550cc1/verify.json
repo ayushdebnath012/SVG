@@ -1,0 +1,100 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 0,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": 1.0,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [29] `    .cut(` -> Insert a centered 14 mm diameter, 4 mm thick cap at Z=10, retaining the central bore.",
+      "edited_lines": 6,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 4.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 14.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 29,
+            "delete": 0,
+            "insert": [
+              "    .union(",
+              "        cq.Workplane(\"XY\")",
+              "            .workplane(offset=10.0)",
+              "            .circle(7.0)",
+              "            .extrude(4.0)",
+              "    )"
+            ]
+          }
+        ]
+      },
+      "volume": 1911.3197756930633,
+      "consensus": 2,
+      "numbers_fraction": 1.0,
+      "score": 2.244,
+      "audit_reference_iou": 0.8960751245016723
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [29] `    .cut(` -> Insert centered 14 mm diameter, 4 mm thick cap at Z=10 mm, retaining the central bore.",
+      "edited_lines": 6,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 4.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 14.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 29,
+            "delete": 0,
+            "insert": [
+              "    .union(",
+              "        cq.Workplane(\"XY\")",
+              "            .workplane(offset=10.0)",
+              "            .circle(7.0)",
+              "            .extrude(4.0)",
+              "    )"
+            ]
+          }
+        ]
+      },
+      "volume": 1911.3197756930633,
+      "consensus": 2,
+      "numbers_fraction": 1.0,
+      "score": 2.244,
+      "audit_reference_iou": 0.8960751245016723
+    }
+  ],
+  "audit_selected_strict": false,
+  "audit_any_strict": false,
+  "audit_reference_changed": true,
+  "id": "6e68f93764550cc1c909914f8121c0c3b8cbc5a432c933189376680fdfe281f2",
+  "category": "T5"
+}

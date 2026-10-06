@@ -1,0 +1,98 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 0,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": 0.5,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [31] `)` -> Insert a conical cut creating a 3 mm radial-width entry ring sloping 60 degrees from horizontal.",
+      "edited_lines": 3,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 3.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 60.0,
+          "ok": false
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 31,
+            "delete": 0,
+            "insert": [
+              "    .cut(",
+              "        cq.Solid.makeCone(8.5, 11.5, 3.0 * 3.0**0.5, cq.Vector(0, 0, 14.8 - 3.0 * 3.0**0.5))",
+              "    )"
+            ]
+          }
+        ]
+      },
+      "volume": 43980.43775178035,
+      "consensus": 2,
+      "numbers_fraction": 0.5,
+      "score": 1.747,
+      "audit_reference_iou": 1.0
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [31] `)` -> Add a conical cut forming a 3 mm radial-width inlet ring sloped 60 degrees from horizontal.",
+      "edited_lines": 7,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 3.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 60.0,
+          "ok": false
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 31,
+            "delete": 0,
+            "insert": [
+              "    .cut(",
+              "        cq.Solid.makeCone(",
+              "            8.5, 11.5, 3.0 * (3.0 ** 0.5),",
+              "            cq.Vector(0, 0, 14.8 - 3.0 * (3.0 ** 0.5)),",
+              "            cq.Vector(0, 0, 1)",
+              "        )",
+              "    )"
+            ]
+          }
+        ]
+      },
+      "volume": 43980.43775178035,
+      "consensus": 2,
+      "numbers_fraction": 0.5,
+      "score": 1.743,
+      "audit_reference_iou": 1.0
+    }
+  ],
+  "audit_selected_strict": true,
+  "audit_any_strict": true,
+  "audit_reference_changed": true,
+  "id": "13f1da1d2f7f4b4a045271369516b6d3180c201119df345661f1cb70e4b1651c",
+  "category": "T5"
+}

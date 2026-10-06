@@ -1,0 +1,91 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 0,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": 0.5,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [9] `show_object(result)` -> Insert conical cuts creating 4 mm radial-width rings sloping into both passages at 30 degrees from horizontal.",
+      "edited_lines": 2,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 4.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 30.0,
+          "ok": false
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 9,
+            "delete": 0,
+            "insert": [
+              "for x in (-18.55, 18.55):",
+              "    result = result.cut(cq.Solid.makeCone(5.7, 9.7, 4.0 / (3.0 ** 0.5), cq.Vector(x, 0.0, 10.2 - 4.0 / (3.0 ** 0.5)), cq.Vector(0, 0, 1)))"
+            ]
+          }
+        ]
+      },
+      "volume": 6178.954985280061,
+      "consensus": 2,
+      "numbers_fraction": 0.5,
+      "score": 1.748,
+      "audit_reference_iou": 1.0
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [7] `    .hole(11.4)` -> Add 19.4 mm countersinks with 120-degree included angle, forming 4 mm radial rings sloping 30 degrees from horizontal.",
+      "edited_lines": 2,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 4.0,
+          "ok": false
+        },
+        {
+          "kind": "value_present",
+          "value": 30.0,
+          "ok": false
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 7,
+            "delete": 1,
+            "insert": [
+              "    .cskHole(11.4, 19.4, 120)"
+            ]
+          }
+        ]
+      },
+      "volume": 6178.9549830452115,
+      "consensus": 2,
+      "numbers_fraction": 0.0,
+      "score": 1.248,
+      "audit_reference_iou": 1.0
+    }
+  ],
+  "audit_selected_strict": true,
+  "audit_any_strict": true,
+  "audit_reference_changed": true,
+  "id": "36ce7a14c221a43cda63fb1cb79421910c788c05348657ee2be043a6bc8a4dfc",
+  "category": "T5"
+}

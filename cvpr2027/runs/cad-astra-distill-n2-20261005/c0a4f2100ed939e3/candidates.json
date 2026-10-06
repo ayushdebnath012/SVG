@@ -1,0 +1,4 @@
+[
+  "PLAN:\n- [4] `    .extrude(3.5)` -> Set plate thickness to one eighth of its 39.8 height.\n- [8] `            .cylinder(5.5, 5.15)` -> Extend circular cutter through the thicker plate without changing the cutout profile; leave slot unchanged.\nPATCH:\n{\"edits\":[{\"start\":4,\"delete\":1,\"insert\":[\"    .extrude(39.8 / 8)\"]},{\"start\":8,\"delete\":1,\"insert\":[\"            .cylinder(39.8 / 8 + 2.0, 5.15)\"]}]}",
+  "PLAN:\n- [4] `    .extrude(3.5)` -> Set plate thickness to one eighth of its 39.8 height.\n- [8] `            .cylinder(5.5, 5.15)` -> Extend circular cutter through thicker plate, preserving keyhole radius and position; slot remains unchanged.\nPATCH:\n{\"edits\":[{\"start\":4,\"delete\":1,\"insert\":[\"    .extrude(39.8 / 8)\"]},{\"start\":8,\"delete\":1,\"insert\":[\"            .cylinder(2 * (39.8 / 8), 5.15)\"]}]}"
+]

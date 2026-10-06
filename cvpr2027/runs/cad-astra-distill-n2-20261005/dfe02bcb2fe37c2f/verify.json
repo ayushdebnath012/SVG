@@ -1,0 +1,97 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    1,
+    1
+  ],
+  "selected": 0,
+  "selected_consensus": 1,
+  "selected_numbers_fraction": 0.5,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [10] `)` -> Insert cuts for an 8 mm radius spherical cavity and a 12 mm diameter upward opening.",
+      "edited_lines": 2,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 2.0,
+          "ok": false
+        },
+        {
+          "kind": "value_present",
+          "value": 12.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 10,
+            "delete": 0,
+            "insert": [
+              "    .cut(cq.Workplane(\"XY\").sphere(8.0))",
+              "    .cut(cq.Workplane(\"XY\").circle(6.0).extrude(12.0))"
+            ]
+          }
+        ]
+      },
+      "volume": 3507.9399023404667,
+      "consensus": 1,
+      "numbers_fraction": 0.5,
+      "score": 1.248,
+      "audit_reference_iou": 0.32574575773531855
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [10] `)` -> Insert an 8 mm spherical cavity and a 12 mm diameter upward opening, retaining a 2 mm spherical wall.",
+      "edited_lines": 6,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 2.0,
+          "ok": false
+        },
+        {
+          "kind": "value_present",
+          "value": 12.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 10,
+            "delete": 0,
+            "insert": [
+              "    .cut(",
+              "        cq.Workplane(\"XY\").sphere(8.0)",
+              "    )",
+              "    .cut(",
+              "        cq.Workplane(\"XY\").circle(6.0).extrude(12.0)",
+              "    )"
+            ]
+          }
+        ]
+      },
+      "volume": 3507.9399023404667,
+      "consensus": 1,
+      "numbers_fraction": 0.5,
+      "score": 1.244,
+      "audit_reference_iou": 0.32574575773531855
+    }
+  ],
+  "audit_selected_strict": false,
+  "audit_any_strict": false,
+  "audit_reference_changed": true,
+  "id": "dfe02bcb2fe37c2fb62870b257d53172384468eb9c595b609cc4f0d90487126a",
+  "category": "T5"
+}

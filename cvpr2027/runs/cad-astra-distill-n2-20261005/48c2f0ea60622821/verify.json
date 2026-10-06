@@ -1,0 +1,90 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 0,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": 0.5,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [31] `)` -> Insert a 3 mm equal-distance chamfer on the bottom face’s four straight outer edges.",
+      "edited_lines": 1,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 3.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 45.0,
+          "ok": false
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 31,
+            "delete": 0,
+            "insert": [
+              "    .faces(\"<Z\").edges(\"%LINE\").chamfer(3.0)"
+            ]
+          }
+        ]
+      },
+      "volume": 43336.83236391858,
+      "consensus": 2,
+      "numbers_fraction": 0.5,
+      "score": 1.749,
+      "audit_reference_iou": 1.0
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [29] `    .faces(\">Z\").workplane()` -> Insert a 3 mm equal-distance chamfer on the four straight bottom outer edges, producing 45-degree bevels.",
+      "edited_lines": 1,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 3.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 45.0,
+          "ok": false
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 29,
+            "delete": 0,
+            "insert": [
+              "    .faces(\"<Z\").edges(\"%LINE\").chamfer(3.0)"
+            ]
+          }
+        ]
+      },
+      "volume": 43336.83236391858,
+      "consensus": 2,
+      "numbers_fraction": 0.5,
+      "score": 1.749,
+      "audit_reference_iou": 1.0
+    }
+  ],
+  "audit_selected_strict": true,
+  "audit_any_strict": true,
+  "audit_reference_changed": true,
+  "id": "48c2f0ea60622821d2ff4744bdf248258c201ede8da6159e837a55fede6fbc53",
+  "category": "T5"
+}

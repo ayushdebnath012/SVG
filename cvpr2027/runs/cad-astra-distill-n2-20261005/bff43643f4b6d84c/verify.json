@@ -1,0 +1,104 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 0,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": 0.6666666666666666,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [15] `)` -> Add a centered 10.00 × 3.30 mm obround slot on the flange top, cut 2.50 mm deep.",
+      "edited_lines": 3,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 2.5,
+          "ok": false
+        },
+        {
+          "kind": "value_present",
+          "value": 3.3,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 10.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 15,
+            "delete": 0,
+            "insert": [
+              "    .faces(\">Z\").workplane(centerOption=\"CenterOfBoundBox\")",
+              "    .slot2D(10.00, 3.30)",
+              "    .cutBlind(-2.50)"
+            ]
+          }
+        ]
+      },
+      "volume": 888.7176278747118,
+      "consensus": 2,
+      "numbers_fraction": 0.6666666666666666,
+      "score": 1.9136666666666666,
+      "audit_reference_iou": 1.0
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [15] `)` -> Add a centered 10.00 × 3.30 mm obround slot on the flange top, blind-cut 2.50 mm deep.",
+      "edited_lines": 3,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 2.5,
+          "ok": false
+        },
+        {
+          "kind": "value_present",
+          "value": 3.3,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 10.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 15,
+            "delete": 0,
+            "insert": [
+              "    .faces(\">Z\").workplane()",
+              "    .slot2D(10.00, 3.30)",
+              "    .cutBlind(-2.50)"
+            ]
+          }
+        ]
+      },
+      "volume": 888.7176278747118,
+      "consensus": 2,
+      "numbers_fraction": 0.6666666666666666,
+      "score": 1.9136666666666666,
+      "audit_reference_iou": 1.0
+    }
+  ],
+  "audit_selected_strict": true,
+  "audit_any_strict": true,
+  "audit_reference_changed": true,
+  "id": "bff43643f4b6d84c46ea74497b5ec503e18f346df2ba6bdcd1564a51a7aeeb6b",
+  "category": "T4"
+}

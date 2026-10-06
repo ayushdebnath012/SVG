@@ -1,0 +1,29 @@
+{
+  "passed": false,
+  "attempts": [
+    {
+      "round": 0,
+      "reply": "```python\nimport FreeCAD\nimport PartDesign\n\n# Create a new document\ndoc = FreeCAD.newDocument(\"answer\")\n\n# Create a PartDesign Body\nbody = doc.addObject(\"PartDesign::Body\", \"Body\")\n\n# Create a PartDesign Feature for the bore\nbore = body.newObject(\"PartDesign::Cylinder\", \"Bore\")\nbore.Radius = 0.3  # bore_diameter / 2\nbore.Height = 0.8  # bearing_width\n\n# Create a PartDesign Feature for the raceway\nraceway = body.newObject(\"PartDesign::Cylinder\", \"Raceway\")\nraceway.Radius = 0.388 / 2  # ball_diameter / 2\nraceway.Height = 0.8 * 0.4  # bearing_width * raceway_depth_ratio\n\n# Create a PartDesign Feature for the shoulder\nshoulder = body.newObject(\"PartDesign::Cylinder\", \"Shoulder\")\nshoulder.Radius = 0.533  # shoulder_diameter / 2\nshoulder.Height = 0.8  # bearing_width\n\n# Position the features\nraceway.Placement.Base = FreeCAD.Vector(0, 0, 0.4 * 0.8)  # Centered on the bore\nshoulder.Placement.Base = FreeCAD.Vector(0, 0, 0.8)  # Above the raceway\n\n# Save the document\ndoc.saveAs(\"/app/answer.FCStd\")\n\n# Close the document\nFreeCAD.closeDocument(doc.Name)\n```",
+      "status": "gate_failed",
+      "feedback": "answer.py ran, but the saved model violates the task requirements: all PartDesign::Body objects (Body) are empty (null shape or zero volume) \u2014 incomplete model"
+    },
+    {
+      "round": 1,
+      "reply": "```python\nimport FreeCAD\nimport PartDesign\n\n# Create a new document\ndoc = FreeCAD.newDocument(\"answer\")\n\n# Create a PartDesign Body\nbody = doc.addObject(\"PartDesign::Body\", \"Body\")\n\n# Create a PartDesign Feature for the bore\nbore = body.newObject(\"PartDesign::Cylinder\", \"Bore\")\nbore.Radius = 0.3  # bore_diameter / 2\nbore.Height = 0.8  # bearing_width\n\n# Create a PartDesign Feature for the raceway\nraceway = body.newObject(\"PartDesign::Pocket\", \"Raceway\")\nraceway.Base = bore\nraceway.Length = 0.8 * 0.4  # bearing_width * raceway_depth_ratio\nraceway.Direction = FreeCAD.Vector(0, 0, 1)\n\n# Create a PartDesign Feature for the shoulder\nshoulder = body.newObject(\"PartDesign::Pocket\", \"Shoulder\")\nshoulder.Base = raceway\nshoulder.Length = 0.8  # bearing_width\nshoulder.Direction = FreeCAD.Vector(0, 0, 1)\n\n# Save the document\ndoc.saveAs(\"/app/answer.FCStd\")\n\n# Close the document\nFreeCAD.closeDocument(doc.Name)\n```",
+      "status": "script_error",
+      "feedback": "I ran answer.py with FreeCAD 1.1.0 and it failed:\n```\nTraceback (most recent call last):\n  File \"/content/cadbench-out/qwen2.5-coder-7b/e50de66084/_run.py\", line 17, in <module>\n    raceway.Base = bore\n    ^^^^^^^^^^^^\nAttributeError: 'PartDesign.Feature' object has no attribute 'Base'\n\n```"
+    },
+    {
+      "round": 2,
+      "reply": "```python\nimport FreeCAD\nimport PartDesign\n\n# Create a new document\ndoc = FreeCAD.newDocument(\"answer\")\n\n# Create a PartDesign Body\nbody = doc.addObject(\"PartDesign::Body\", \"Body\")\n\n# Create a PartDesign Feature for the bore\nbore = body.newObject(\"PartDesign::Cylinder\", \"Bore\")\nbore.Radius = 0.3  # bore_diameter / 2\nbore.Height = 0.8  # bearing_width\n\n# Create a PartDesign Feature for the raceway\nraceway = body.newObject(\"PartDesign::Pocket\", \"Raceway\")\nraceway.Base = bore\nraceway.Length = 0.8 * 0.4  # bearing_width * raceway_depth_ratio\nraceway.Direction = FreeCAD.Vector(0, 0, 1)\n\n# Create a PartDesign Feature for the shoulder\nshoulder = body.newObject(\"PartDesign::Pocket\", \"Shoulder\")\nshoulder.Base = raceway\nshoulder.Length = 0.8  # bearing_width\nshoulder.Direction = FreeCAD.Vector(0, 0, 1)\n\n# Save the document\ndoc.saveAs(\"/app/answer.FCStd\")\n\n# Close the document\nFreeCAD.closeDocument(doc.Name)\n```",
+      "status": "script_error",
+      "feedback": "I ran answer.py with FreeCAD 1.1.0 and it failed:\n```\nTraceback (most recent call last):\n  File \"/content/cadbench-out/qwen2.5-coder-7b/e50de66084/_run.py\", line 17, in <module>\n    raceway.Base = bore\n    ^^^^^^^^^^^^\nAttributeError: 'PartDesign.Feature' object has no attribute 'Base'\n\n```"
+    },
+    {
+      "round": 3,
+      "reply": "```python\nimport FreeCAD\nimport PartDesign\n\n# Create a new document\ndoc = FreeCAD.newDocument(\"answer\")\n\n# Create a PartDesign Body\nbody = doc.addObject(\"PartDesign::Body\", \"Body\")\n\n# Create a PartDesign Feature for the bore\nbore = body.newObject(\"PartDesign::Cylinder\", \"Bore\")\nbore.Radius = 0.3  # bore_diameter / 2\nbore.Height = 0.8  # bearing_width\n\n# Create a PartDesign Feature for the raceway\nraceway = body.newObject(\"PartDesign::Pocket\", \"Raceway\")\nraceway.Base = bore\nraceway.Length = 0.8 * 0.4  # bearing_width * raceway_depth_ratio\nraceway.Direction = FreeCAD.Vector(0, 0, 1)\n\n# Create a PartDesign Feature for the shoulder\nshoulder = body.newObject(\"PartDesign::Pocket\", \"Shoulder\")\nshoulder.Base = raceway\nshoulder.Length = 0.8  # bearing_width\nshoulder.Direction = FreeCAD.Vector(0, 0, 1)\n\n# Save the document\ndoc.saveAs(\"/app/answer.FCStd\")\n\n# Close the document\nFreeCAD.closeDocument(doc.Name)\n```",
+      "status": "script_error",
+      "feedback": "I ran answer.py with FreeCAD 1.1.0 and it failed:\n```\nTraceback (most recent call last):\n  File \"/content/cadbench-out/qwen2.5-coder-7b/e50de66084/_run.py\", line 17, in <module>\n    raceway.Base = bore\n    ^^^^^^^^^^^^\nAttributeError: 'PartDesign.Feature' object has no attribute 'Base'\n\n```"
+    }
+  ]
+}

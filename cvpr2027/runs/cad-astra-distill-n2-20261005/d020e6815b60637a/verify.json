@@ -1,0 +1,110 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 0,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": null,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [3] `    .transformed(offset=cq.Vector(19.0, 0.0, 28.5), rotate=cq.Vector(0, 0, 0))` -> Move leg center to 22.5 to align with the resized hook.\n- [4] `    .cylinder(57.0, 4.0)` -> Set rod radius to 7.5, one quarter of the unchanged 30.0 hook inner diameter; preserve leg length.\n- [8] `            .moveTo(19.0, 0.0)` -> Increase hook centerline radius to 22.5, preserving its 15.0 inner radius.\n- [9] `            .circle(4.0)` -> Set hook rod radius to 7.5.",
+      "edited_lines": 8,
+      "numbers": [],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 3,
+            "delete": 1,
+            "insert": [
+              "    .transformed(offset=cq.Vector(22.5, 0.0, 28.5), rotate=cq.Vector(0, 0, 0))"
+            ]
+          },
+          {
+            "start": 4,
+            "delete": 1,
+            "insert": [
+              "    .cylinder(57.0, 7.5)"
+            ]
+          },
+          {
+            "start": 8,
+            "delete": 1,
+            "insert": [
+              "            .moveTo(22.5, 0.0)"
+            ]
+          },
+          {
+            "start": 9,
+            "delete": 1,
+            "insert": [
+              "            .circle(7.5)"
+            ]
+          }
+        ]
+      },
+      "volume": 10072.731445572275,
+      "consensus": 2,
+      "numbers_fraction": null,
+      "score": 1.742,
+      "audit_reference_iou": 0.2743064694206952
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [3] `    .transformed(offset=cq.Vector(19.0, 0.0, 28.5), rotate=cq.Vector(0, 0, 0))` -> Move leg centerline to 22.5 to preserve the hook’s 30.0 inner diameter.\n- [4] `    .cylinder(57.0, 4.0)` -> Set rod radius to 7.5, retaining the 57.0 leg length.\n- [8] `            .moveTo(19.0, 0.0)` -> Set hook centerline radius to 22.5, matching the leg position.\n- [9] `            .circle(4.0)` -> Set hook rod radius to 7.5, one quarter of its unchanged inner diameter.",
+      "edited_lines": 8,
+      "numbers": [],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 3,
+            "delete": 1,
+            "insert": [
+              "    .transformed(offset=cq.Vector(22.5, 0.0, 28.5), rotate=cq.Vector(0, 0, 0))"
+            ]
+          },
+          {
+            "start": 4,
+            "delete": 1,
+            "insert": [
+              "    .cylinder(57.0, 7.5)"
+            ]
+          },
+          {
+            "start": 8,
+            "delete": 1,
+            "insert": [
+              "            .moveTo(22.5, 0.0)"
+            ]
+          },
+          {
+            "start": 9,
+            "delete": 1,
+            "insert": [
+              "            .circle(7.5)"
+            ]
+          }
+        ]
+      },
+      "volume": 10072.731445572275,
+      "consensus": 2,
+      "numbers_fraction": null,
+      "score": 1.742,
+      "audit_reference_iou": 0.2743064694206952
+    }
+  ],
+  "audit_selected_strict": false,
+  "audit_any_strict": false,
+  "audit_reference_changed": true,
+  "id": "d020e6815b60637acf8b5b4a69480748f47253f15520d1315fab9ecab1c4d699",
+  "category": "T3"
+}

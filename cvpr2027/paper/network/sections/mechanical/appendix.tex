@@ -18,7 +18,7 @@ The zero-based line coordinate addresses the original code. A replacement list i
 The online dataset manifest pins the parquet checksum, split checksums, source IDs, categories and reference STEP hashes. The run manifest pins model revision, package versions, seed, optimization command, retained rows and omissions. The baseline and reloaded final adapter use identical test prompts. Predictions remain unmodified; the bare-list transport control is saved as a separate diagnostic. Geometry scores include every retained case, including invalid patches, code errors, unsupported constructs, timeouts and Boolean-comparison errors.
 
 \paragraph{Evidence separation.}
-The 150-pair localized pilot, 710-pair online protocol and historical 40,000-edit structural audit are different datasets and contracts. Their results are never pooled. The localized pilot's family test contains only 12 context-retained examples and gives line/number hints. The online experiment is trained afresh with original natural-language requests and evaluates 126 context-retained cases. Structural FEM is only established for specified pin-jointed trusses.
+The 150-pair localized pilot, 710-pair online protocol and historical 40,000-edit structural audit are different datasets and contracts. Their results are never pooled. The localized pilot's family test contains only 12 context-retained examples and gives line/number hints. The earlier single-source experiment evaluates 126 context-retained cases; the primary two-source 3B run evaluates 252 tasks. Structural FEM is only established for specified pin-jointed trusses.
 
 \paragraph{Validation.}
 Regression checks test multi-operation original-coordinate execution, insertion/deletion, malformed indexing, overlap rejection and comment preservation. Dataset checks require train/validation/test family and template-component disjointness, exact target-patch replay and pinned split hashes. Final adapters are reloaded for generation and checked for finite tensors. Reference STEP readback and all output geometry scores are retained. Source/reference illustrations are labeled as such and do not depict model predictions.
@@ -44,6 +44,7 @@ Figures~\ref{fig:example-success} and~\ref{fig:example-failure} show six actual 
 
 \section{Scenario-defined FEM audit of mechanical edits}
 \label{sec:mechanical-fem}
+Figure~\ref{fig:fem-large-method} gives a visual walkthrough using two actual final 3B edited geometries; its mesh, displacement and stress panels are linked to saved solver fields.
 \paragraph{Scope and physical contract.}
 We attempt FEM on every source, released target and actual prediction in the six illustrated H100 cases: 18 configurations, independently of model training. The released dataset supplies no operating load case. We explicitly assume millimetres, newtons and MPa, a homogeneous isotropic material with $E=210{,}000$ MPa and $\nu=0.3$, and a 1 N resultant tensile test load. These are synthetic diagnostic conditions, not recovered material properties or certified operating conditions. All displacements are fixed at exterior mesh nodes in the lower 5\,\% of the shape's projected span along the analysis axis. A uniform vector traction is integrated over exterior triangles whose centroids occupy the upper 5\,\%; its area-weighted nodal forces sum to 1 N. The same geometric fixture rule is applied separately to each shape, rather than claiming identical world-coordinate contact patches. The shaft's fixture and load axis co-rotate with its requested 60-degree pose edit. Every case contract and STEP hash is saved before observing FEM responses.
 
@@ -76,11 +77,61 @@ The incorrect screw output contains seven CAD solids, versus one in its target. 
 
 \section{Multi-source Colab training pipeline}
 \label{sec:colab-pipeline}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.98\textwidth]{figures/mechanical-trained-models.pdf}
+\caption{\textbf{CAD editor architecture and supervised training.} Paired native CAD edits train the quantized Qwen2.5-Coder-3B backbone with completion-only QLoRA. Patches are applied and independently scored on held-out geometry; FEM remains an external post-edit check rather than a training loss.}
+\label{fig:mechanical-models}
+\end{figure*}
 The reproducible extension uses paired edits from BenchCAD and Microsoft's CAD-Editor in their native representations. The prepared split contains 2,540 training, 172 validation, and 252 test records: respectively 492/44/124 CadQuery pairs and 2,048/128/128 native sketch--extrude pairs. Two additional pipe-related held-out instructions are excluded from this extension; the earlier 126-case experiment is unchanged. Exact source/target connected components are isolated within each source. Cross-source geometric ancestry is not established. Token-length filtering is recorded before training and evaluation.
 
-A fresh Qwen2.5-Coder-3B-Instruct backbone uses NF4 double quantization and completion-only QLoRA: rank 16, alpha 320, the seven attention/MLP projections in the last twelve blocks, two fixed epochs, seed 17, learning rate $10^{-4}$, effective batch four, a 4,096-token context, and a 768-token output cap. Colab T4 computation uses FP16 and microbatch one with four accumulation steps. The final adapter is reloaded for greedy evaluation. This extension is an execution protocol in progress; no completed multi-source result is asserted here.
+A fresh Qwen2.5-Coder-3B-Instruct backbone uses NF4 double quantization and completion-only QLoRA: rank 16, alpha 320, the seven attention/MLP projections in the last twelve blocks, two fixed epochs, seed 17, learning rate $10^{-4}$, effective batch four, a 4,096-token context, and a 768-token output cap. The completed Colab T4 run uses microbatch one with four accumulation steps. Its saved manifest records \texttt{torch.bfloat16}; native BF16 hardware acceleration is not established. The final adapter is reloaded for greedy evaluation. Training completes 1,270 optimizer steps in 20,923.7 seconds with mean completion loss 0.2495. The adapter contains 9,977,856 trainable scalars; all 168 saved tensors are finite and their checksum matches the run manifest.
 
 The model maps an instruction and original native CAD to an original-coordinate JSON line patch. Representation-specific schema and syntax checks precede execution. CadQuery patches are compared to released STEP targets; CAD-Editor command patches execute through a six-bit sketch--extrude decoder, with locally reconstructed target solids explicitly distinguished from author-released STEP files. Geometry and failure counts remain separate by source. Only examples with explicit material, unit, fixture, and load contracts proceed to tetrahedral FEM. Equilibrium, energy identity, mesh-volume fidelity, and compliance sensitivity checks precede a combined geometry/response diagnostic. FEM is an external post-edit tool, not a language-generated pass label or a solver reward used in training. Invalid patches and failed meshes remain unverified. The notebook saves adapters, manifests, predictions, geometry metrics, and numerical fields before downloading an artifact bundle.
+
+
+\begin{table}[t]
+\centering\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lrrrr}
+\toprule
+Model / source & $n$ & Patch & Solid & Strict \\
+\midrule
+Fresh 3B base, all & 252 & 39 & 7 & 1 \\
+Final 3B adapter, all & 252 & 173 & 139 & 39 \\
+Final, BenchCAD & 124 & 91 & 65 & 25 \\
+Final, CAD-Editor & 128 & 82 & 74 & 14 \\
+\bottomrule
+\end{tabular}
+\caption{\textbf{Completed two-source Colab evaluation.} Patch denotes applicable schema/syntax; solid denotes successful execution/comparison; strict denotes volume IoU $\geq0.99999$. All retained tasks remain in $n$, including six reference errors and one final-model worker timeout. BenchCAD references are released STEP files; CAD-Editor targets are locally reconstructed native sequences.}
+\label{tab:colab-completed}
+\end{table}
+\paragraph{Completed held-out results.}
+The final adapter obtains 39/252 strict matches (15.48\,\%), versus 1/252 for the fresh base. Counts by source are 25/124 for BenchCAD and 14/128 for CAD-Editor. At IoU $\geq0.95$, the base and final adapter match 2 and 52 cases. Exact target-program/sequence agreement is 1 versus 32; exact patch agreement is 1 versus 31. No final generation reaches the output cap. The whole-worker timeout makes the scorer's reference-valid bookkeeping model-dependent (246 base, 245 final); we therefore use the complete held-out denominator, not 245 as a reference-valid test set. Different datasets, model size and training settings prevent treating this run as an isolated improvement over the earlier 1.5B experiment.
+
+\paragraph{FEM of the new Colab adapter.}
+We attempt the same six illustrative held-out instructions with the new model's unmodified patches. Four prediction/target pairs---mounting angle, locator block, rotated shaft, and round flange---pass strict geometry and the scenario-defined numerical, mesh-volume and compliance checks. Their relative compliance discrepancies are respectively 0.001123\,\%, 0.046691\,\%, 0.009141\,\% and 0.013270\,\%. The flange is now a strict match; the older H100 flange in Fig.~\ref{fig:fem-failure} remains an incorrect prediction from a different adapter. The new propeller patch fails syntax validation. The screw attempt leaves an incomplete pipeline directory; its resumed audit records failure, with no saved FEM solution establishing an original cause. Both cases remain unverified. Saved meshes and displacement/stress fields substantiate the four passes; source fields are from the separate earlier audit, not recomputed for this pairwise Colab audit. These are diagnostic test scenarios, not operating-safety evidence or full-benchmark FEM coverage.
+
+
+
+
+
+\begin{figure*}[p]
+\centering
+\includegraphics[width=0.98\textwidth]{figures/fem-method-worked-examples-large.pdf}
+\caption{\textbf{Large FEM method walkthrough with actual mechanical edit examples.} The final 3B mounting-angle and six-hole flange predictions supply all meshes and fields. The left column displays the tetrahedral boundary mesh; the middle shows displacement magnitude; the right shows diagnostic von Mises stress, clipped at the per-example 95th percentile. Blue nodes are fixed and red arrows show the resultant load direction. Independent CAD/reference agreement, equilibrium, energy and mesh checks accompany these plots; stress color alone establishes neither correct editing nor strength. The listed values use each saved fine mesh and the disclosed synthetic static scenario.}
+\label{fig:fem-large-method}
+\end{figure*}
+
+
+
+\begin{figure*}[p]
+\centering
+\includegraphics[width=0.98\textwidth]{figures/mechanical-linked-drawings.pdf}
+\caption{\textbf{Linked engineering drawings from actual mechanical CAD solids.} Front, top, right and isometric views show the original and final 3B predicted mounting angle and flange. The flange edit changes four mounting holes to six equally spaced holes while retaining their diameter and bolt-circle radius; each panel is independently autoscaled. Both edited predictions pass the disclosed static geometry/FEM diagnostics. The views contain no inferred stress, production dimensions or hidden geometry repair.}
+\label{fig:linked-drawings}
+\end{figure*}
 
 \begin{figure*}[p]
 \centering
@@ -96,3 +147,25 @@ The model maps an instruction and original native CAD to an original-coordinate 
 \end{figure*}
 \clearpage
 
+
+\section{Focused visual audit details}
+\label{sec:visual-audit}
+The fixed case list comprises mounting angle, locator block, shaft, propeller, screw and round flange, previously chosen for illustration. Actual saved STEP files are tessellated, hashed and rasterized with the common-camera contract in Section~\ref{sec:method}. The earlier H100 adapter supplies six available solids; the final 3B adapter supplies four completed outputs. The adapters differ in model size, training corpus and optimization, so this subset is not a controlled model comparison. Failed/incomplete final outputs remain unavailable.
+\begin{table}[h]
+\centering\scriptsize
+\begin{tabular}{lrrr}
+\toprule
+Saved outputs & Available & Silhouette IoU & Edit-mask IoU \\
+\midrule
+Earlier H100 & 6/6 & 0.911828 & 0.584674 \\
+Final Colab 3B & 4/6 & 0.999993 & 0.874967 \\
+\bottomrule
+\end{tabular}
+\caption{\textbf{Diagnostic projected means at 512 pixels.} Average views within cases, then cases with available outputs. Undefined empty-union edit views are excluded; unintended nonempty changes remain. Unequal availability and raster-degenerate masks prohibit reading this table as general comparative accuracy.}
+\label{tab:visual-audit}
+\end{table}
+The mean absolute per-case change in edit-mask IoU between 512 and 1,024 pixels is 0.000113 for the older outputs and 0.000033 for the final available outputs. This small numerical change does not prove metric validity. For example, the flange's reference isometric change mask has only one pixel at 512 resolution. That degenerate view lowers the final flange's edit mean to roughly 0.5 despite essentially exact solid agreement, and contributes to the final aggregate of 0.874967. No mask-area threshold is introduced after inspecting results. Future full-test protocols should define minimum visible-change area or feature-aligned views in advance. Occluded features require solid/feature measurements; silhouettes cannot replace them. The raw report records every view's reference-change pixel count, two resolutions, all source/target/prediction STEP hashes and unavailable outcomes.
+
+\input{sections/mechanical/earlier-data}
+\input{sections/mechanical/earlier-experiments}
+\input{sections/mechanical/structures}

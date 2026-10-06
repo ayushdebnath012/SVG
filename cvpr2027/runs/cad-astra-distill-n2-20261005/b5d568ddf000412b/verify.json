@@ -1,0 +1,99 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    1,
+    1
+  ],
+  "selected": 0,
+  "selected_consensus": 1,
+  "selected_numbers_fraction": 1.0,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [3] `    .cylinder(12.0, 0.5)` -> Loft linearly from 1.4 mm bottom diameter to 0.6 mm top diameter over the original 12 mm length.",
+      "edited_lines": 6,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 0.6,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 1.4,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 3,
+            "delete": 1,
+            "insert": [
+              "    .workplane(offset=-6.0)",
+              "    .circle(0.7)",
+              "    .workplane(offset=12.0)",
+              "    .circle(0.3)",
+              "    .loft()"
+            ]
+          }
+        ]
+      },
+      "volume": 9.838403947106642,
+      "consensus": 1,
+      "numbers_fraction": 1.0,
+      "score": 1.744,
+      "audit_reference_iou": 1.0
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [3] `    .cylinder(12.0, 0.5)` -> Replace cylinder and chamfers with a 12 mm linear taper, preserving specified end diameters and the existing top hole.",
+      "edited_lines": 8,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 0.6,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 1.4,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 3,
+            "delete": 3,
+            "insert": [
+              "    .workplane(offset=-6.0)",
+              "    .circle(0.7)",
+              "    .workplane(offset=12.0)",
+              "    .circle(0.3)",
+              "    .loft(ruled=True)"
+            ]
+          }
+        ]
+      },
+      "volume": 9.901985884849669,
+      "consensus": 1,
+      "numbers_fraction": 1.0,
+      "score": 1.742,
+      "audit_reference_iou": 0.9935788700890485
+    }
+  ],
+  "audit_selected_strict": true,
+  "audit_any_strict": true,
+  "audit_reference_changed": true,
+  "id": "b5d568ddf000412bd900528383d1a37dd479ffcc638fa39e4473f941b751200a",
+  "category": "T5"
+}

@@ -1,0 +1,91 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 0,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": 0.5,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [13] `    .faces(\">Z\").workplane()` -> Insert conical cuts around both hole tops, creating 3 mm radial bands sloping downward inward at 30 degrees.",
+      "edited_lines": 2,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 3.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 30.0,
+          "ok": false
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 13,
+            "delete": 0,
+            "insert": [
+              "    .cut(cq.Solid.makeCone(5.9, 8.9, 3.0 ** 0.5, cq.Vector(-25.25, 0.0, 17.5 - 3.0 ** 0.5)))",
+              "    .cut(cq.Solid.makeCone(5.9, 8.9, 3.0 ** 0.5, cq.Vector(25.25, 0.0, 17.5 - 3.0 ** 0.5)))"
+            ]
+          }
+        ]
+      },
+      "volume": 12286.871701329615,
+      "consensus": 2,
+      "numbers_fraction": 0.5,
+      "score": 1.748,
+      "audit_reference_iou": 0.9999999994632941
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [12] `    .hole(11.8)` -> Countersink both through-holes with 3 mm radial top bands sloping inward and downward at 30 degrees.",
+      "edited_lines": 2,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 3.0,
+          "ok": false
+        },
+        {
+          "kind": "value_present",
+          "value": 30.0,
+          "ok": false
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 12,
+            "delete": 1,
+            "insert": [
+              "    .cskHole(11.8, 17.8, 120)"
+            ]
+          }
+        ]
+      },
+      "volume": 12286.871707924049,
+      "consensus": 2,
+      "numbers_fraction": 0.0,
+      "score": 1.248,
+      "audit_reference_iou": 1.0
+    }
+  ],
+  "audit_selected_strict": true,
+  "audit_any_strict": true,
+  "audit_reference_changed": true,
+  "id": "2d34279eceab7c91672fc7721cdc36b7df0fa08666cf7e3039eccba5b10042b4",
+  "category": "T5"
+}

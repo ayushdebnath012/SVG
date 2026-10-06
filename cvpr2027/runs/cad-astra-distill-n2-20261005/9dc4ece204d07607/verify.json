@@ -1,0 +1,100 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 0,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": 0.5,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [25] `)` -> Add a centered 10.00 × 3.00 mm blind slot, cut 5.60 mm down from the flange top.",
+      "edited_lines": 6,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 5.6,
+          "ok": false
+        },
+        {
+          "kind": "value_present",
+          "value": 10.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 25,
+            "delete": 0,
+            "insert": [
+              "    .cut(",
+              "        cq.Workplane(\"XY\")",
+              "            .workplane(offset=3.0)",
+              "            .slot2D(10.00, 3.00)",
+              "            .extrude(-5.60)",
+              "    )"
+            ]
+          }
+        ]
+      },
+      "volume": 341.4691979395358,
+      "consensus": 2,
+      "numbers_fraction": 0.5,
+      "score": 1.744,
+      "audit_reference_iou": 1.0
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [25] `)` -> Add a centered 10.00 × 3.00 mm blind slot cut 5.60 mm deep from the flange top.",
+      "edited_lines": 6,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 5.6,
+          "ok": false
+        },
+        {
+          "kind": "value_present",
+          "value": 10.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 25,
+            "delete": 0,
+            "insert": [
+              "    .cut(",
+              "        cq.Workplane(\"XY\")",
+              "            .workplane(offset=3.0)",
+              "            .slot2D(10.0, 3.0)",
+              "            .extrude(-5.6)",
+              "    )"
+            ]
+          }
+        ]
+      },
+      "volume": 341.4691979395358,
+      "consensus": 2,
+      "numbers_fraction": 0.5,
+      "score": 1.744,
+      "audit_reference_iou": 1.0
+    }
+  ],
+  "audit_selected_strict": true,
+  "audit_any_strict": true,
+  "audit_reference_changed": true,
+  "id": "9dc4ece204d076075016caeb6fbeb264b689de23eb329b46bfcda04d38cc61fc",
+  "category": "T4"
+}

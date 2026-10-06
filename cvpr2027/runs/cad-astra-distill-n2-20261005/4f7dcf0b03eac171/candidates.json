@@ -1,0 +1,4 @@
+[
+  "PLAN:\n- [2] `    cq.Workplane(\"XY\")` -> Remove the cylindrical leg and union wrapper, retaining only the semicircular hook arc.\nPATCH:\n{\"edits\":[{\"start\":2,\"delete\":10,\"insert\":[\"    cq.Workplane(\\\"XY\\\")\",\"    .transformed(offset=cq.Vector(0, 0, 55.0), rotate=cq.Vector(0, 0, 0))\",\"    .moveTo(19.0, 0.0)\",\"    .circle(4.0)\",\"    .revolve(180, (0, 0, 0), (0, -1, 0))\"]}]}",
+  "PLAN:\n- [2] `    cq.Workplane(\"XY\")` -> Remove the cylindrical leg and union wrapper, retaining the hook workplane.\n- [11] `    )` -> Remove the union’s closing parenthesis.\nPATCH:\n{\"edits\":[{\"start\":2,\"delete\":5,\"insert\":[\"    cq.Workplane(\\\"XY\\\")\"]},{\"start\":11,\"delete\":1,\"insert\":[]}]}"
+]

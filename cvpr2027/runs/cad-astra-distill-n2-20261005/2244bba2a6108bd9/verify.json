@@ -1,0 +1,102 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 0,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": 0.0,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [7] `show_object(result)` -> Insert a wedge cut at the far end, retaining the top and shifting the bottom inward 19.4 mm.",
+      "edited_lines": 7,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 19.4,
+          "ok": false
+        },
+        {
+          "kind": "value_present",
+          "value": 30.0,
+          "ok": false
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 7,
+            "delete": 0,
+            "insert": [
+              "wedge = (",
+              "    cq.Workplane(\"YZ\")",
+              "    .polyline([(0.0, 142.5), (0.0, 161.9), (11.2, 161.9)])",
+              "    .close()",
+              "    .extrude(40.0, both=True)",
+              ")",
+              "result = result.cut(wedge)"
+            ]
+          }
+        ]
+      },
+      "volume": 73437.525,
+      "consensus": 2,
+      "numbers_fraction": 0.0,
+      "score": 1.243,
+      "audit_reference_iou": 0.9999999999999992
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [7] `show_object(result)` -> Insert a transverse wedge cut, retaining the far-end top and shifting the bottom inward 19.4 mm.",
+      "edited_lines": 7,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 19.4,
+          "ok": false
+        },
+        {
+          "kind": "value_present",
+          "value": 30.0,
+          "ok": false
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 7,
+            "delete": 0,
+            "insert": [
+              "wedge = (",
+              "    cq.Workplane(\"YZ\", origin=(-31.0, 0.0, 0.0))",
+              "    .polyline([(0.0, 142.5), (0.0, 161.9), (11.2, 161.9)])",
+              "    .close()",
+              "    .extrude(62.0)",
+              ")",
+              "result = result.cut(wedge)"
+            ]
+          }
+        ]
+      },
+      "volume": 73437.52500000001,
+      "consensus": 2,
+      "numbers_fraction": 0.0,
+      "score": 1.243,
+      "audit_reference_iou": 0.9999999999999996
+    }
+  ],
+  "audit_selected_strict": true,
+  "audit_any_strict": true,
+  "audit_reference_changed": true,
+  "id": "2244bba2a6108bd924bce8b9881a6adbff69f5b13963e86c9ac187dd6d9aa87f",
+  "category": "T5"
+}

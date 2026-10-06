@@ -1,0 +1,76 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 0,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": null,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [8] `            .transformed(offset=cq.Vector(0, 0, 14.05), rotate=cq.Vector(0, 0, 0))` -> Raise hub center to 22.8 to keep its base at the cam top.\n- [9] `            .cylinder(5.3, 5.8)` -> Set hub height to 22.8, twice the 11.4 cam thickness; preserve radius.",
+      "edited_lines": 4,
+      "numbers": [],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 8,
+            "delete": 1,
+            "insert": [
+              "            .transformed(offset=cq.Vector(0, 0, 22.8), rotate=cq.Vector(0, 0, 0))"
+            ]
+          },
+          {
+            "start": 9,
+            "delete": 1,
+            "insert": [
+              "            .cylinder(22.8, 5.8)"
+            ]
+          }
+        ]
+      },
+      "volume": 10136.126771971174,
+      "consensus": 2,
+      "numbers_fraction": null,
+      "score": 1.746,
+      "audit_reference_iou": 0.9289608999277936
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [8] `            .transformed(offset=cq.Vector(0, 0, 14.05), rotate=cq.Vector(0, 0, 0))` -> Set hub height to 22.8 and center elevation to 22.8, keeping its base at the cam top.",
+      "edited_lines": 4,
+      "numbers": [],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 8,
+            "delete": 2,
+            "insert": [
+              "            .transformed(offset=cq.Vector(0, 0, 22.8), rotate=cq.Vector(0, 0, 0))",
+              "            .cylinder(22.8, 5.8)"
+            ]
+          }
+        ]
+      },
+      "volume": 10136.126771971174,
+      "consensus": 2,
+      "numbers_fraction": null,
+      "score": 1.746,
+      "audit_reference_iou": 0.9289608999277936
+    }
+  ],
+  "audit_selected_strict": false,
+  "audit_any_strict": false,
+  "audit_reference_changed": true,
+  "id": "b580c3d22f20b8da5746476d6539de000c20fa761901a391e9e5e00347aa31c7",
+  "category": "T3"
+}

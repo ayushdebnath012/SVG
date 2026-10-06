@@ -1,0 +1,4 @@
+[
+  "PLAN:\n- [26] `)` -> Insert centered 4-by-4 grid of 8 mm through-passages, spaced 16 mm in X and 24 mm in Y.\nPATCH:\n{\"edits\":[{\"start\":26,\"delete\":0,\"insert\":[\"    .cut(\",\"        cq.Workplane(\\\"XY\\\", origin=(0, 0, -1))\",\"            .rarray(16, 24, 4, 4, center=True)\",\"            .circle(4)\",\"            .extrude(8.4)\",\"    )\"]}]}",
+  "PLAN:\n- [26] `)` -> Cut sixteen 8 mm through-passages, centered on the base with 16 mm X and 26 mm Y spacing.\nPATCH:\n{\"edits\":[{\"start\":26,\"delete\":0,\"insert\":[\"    .cut(\",\"        cq.Workplane(\\\"XY\\\").workplane(offset=-1)\",\"            .pushPoints([(x, y) for x in (-24, -8, 8, 24) for y in (-39, -13, 13, 39)])\",\"            .circle(4)\",\"            .extrude(8.4)\",\"    )\"]}]}"
+]

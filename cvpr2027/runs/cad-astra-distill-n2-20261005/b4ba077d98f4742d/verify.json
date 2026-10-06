@@ -1,0 +1,90 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 0,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": 0.0,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [7] `show_object(result)` -> Insert a 45-degree cut at Z=0, retaining the top edge and shifting the bottom edge inward 11.2 mm.",
+      "edited_lines": 6,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 45.0,
+          "ok": false
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 7,
+            "delete": 0,
+            "insert": [
+              "result = result.cut(",
+              "    cq.Workplane(\"YZ\")",
+              "    .polyline([(0.0, 0.0), (11.2, 0.0), (0.0, 11.2)])",
+              "    .close()",
+              "    .extrude(40.0, both=True)",
+              ")"
+            ]
+          }
+        ]
+      },
+      "volume": 75535.78200000002,
+      "consensus": 2,
+      "numbers_fraction": 0.0,
+      "score": 1.244,
+      "audit_reference_iou": 1.0
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [6] `)` -> Insert a wedge cut at the Z=0 end, preserving its top edge and shifting its bottom inward 11.2 mm.",
+      "edited_lines": 6,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 45.0,
+          "ok": false
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 6,
+            "delete": 0,
+            "insert": [
+              "    .cut(",
+              "        cq.Workplane(\"YZ\")",
+              "        .polyline([(0.0, 0.0), (0.0, 11.2), (11.2, 0.0)])",
+              "        .close()",
+              "        .extrude(40.0, both=True)",
+              "    )"
+            ]
+          }
+        ]
+      },
+      "volume": 75535.78200000004,
+      "consensus": 2,
+      "numbers_fraction": 0.0,
+      "score": 1.244,
+      "audit_reference_iou": 1.0
+    }
+  ],
+  "audit_selected_strict": true,
+  "audit_any_strict": true,
+  "audit_reference_changed": true,
+  "id": "b4ba077d98f4742d8e42640e4fbbb494a7699ff34d354ede522b3579b05fa559",
+  "category": "T5"
+}

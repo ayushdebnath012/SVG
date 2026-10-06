@@ -1,19 +1,28 @@
-\section{Online dataset and split protocol}
+\section{Public data and local protocol}
 \label{sec:data}
-\paragraph{Published pairs.}
-We use the \texttt{edit-bench} configuration of \texttt{BenchCAD/BenchCAD}, pinned at revision \texttt{5919f578ab09ec283603a082fab07c7639ab56eb}. It contains 748 instruction/source/target pairs with original and target STEP data~\cite{benchcad2026}. The dataset declares CC-BY-4.0. Our downloaded parquet checksum and source-record identifiers are retained. Pipe, duct, fitting, manifold, valve, hose, resistor, circuit and PCB family names are excluded, removing 38 records and leaving 710 mechanical edit pairs.
+\paragraph{Two native representations.}
+The primary split contains 2,540 training, 172 validation and 252 test tasks (Table~\ref{tab:data-primary}). BenchCAD provides CadQuery source/target programs, natural-language edits and released STEP references~\cite{benchcad2026}. Microsoft's CAD-Editor provides native six-bit sketch--extrude edit sequences~\cite{cadeditor2025}. We retain their different representations and backends rather than treating them as interchangeable histories. CAD-Editor reference solids are reconstructed locally through our decoder; they are not author-released STEP references.
+\begin{table}[t]
+\centering\small
+\begin{tabular}{lrrr}
+\toprule
+Source & Train & Validation & Test \\
+\midrule
+BenchCAD & 492 & 44 & 124 \\
+CAD-Editor & 2,048 & 128 & 128 \\
+\midrule
+Total & 2,540 & 172 & 252 \\
+\bottomrule
+\end{tabular}
+\caption{\textbf{Retained primary data.} Counts define our local protocol, not an official benchmark split. Source-specific reference construction remains distinct.}
+\label{tab:data-primary}
+\end{table}
 
-\paragraph{Isolation before training.}
-A complete mechanical family is one initial group. Families whose source or target ASTs share a template after masking numeric literals are joined into a component. Hash-ranked components are assigned approximately 70/10/20 to training, validation and test before normalization, patches or augmentation. This gives 533/50/127 pairs. Family and component identities are disjoint across splits; no target from a held-out family enters fine-tuning. Template isolation is conservative but does not prove all cross-dataset geometric ancestry is disjoint. The fresh run does not load the earlier mechanical adapter.
+\paragraph{Provenance and isolation.}
+BenchCAD is pinned at revision \texttt{5919f578ab09ec283603a082fab07c7639ab56eb} and declares CC-BY-4.0. Its 748 edit pairs yield 710 after family-based exclusion of pipe/electrical content. Family groups are joined when source/target AST templates match after numeric-literal masking; whole connected components are assigned to local splits before patch construction. The earlier retained test slice had 126 tasks; two additional pipe-related instructions are excluded from the primary experiment, yielding 124. CAD-Editor uses a documented subset of the public training/evaluation archive. Exact source/target connected components are isolated within each source; cross-source geometric ancestry is not established.
 
-\paragraph{Context-limited coverage.}
-We retain a pair only when its full chat, including target, fits 3,072 tokens and its target patch fits 512 tokens. The rule is applied once before baseline evaluation and training. It retains \onlineTrain{}/\onlineValid{}/\onlineTest{} train/validation/test pairs, excluding 48 records across all splits. No example is silently truncated. The one excluded test pair and all excluded training examples remain identified in the run manifest. Results apply to the retained slice rather than the entire release.
+\paragraph{Retention and supervision.}
+Token filtering and omissions are saved before training and evaluation. The primary model uses a 4,096-token context and a 768-token output cap. Training patches replay their normalized targets exactly. Comments and blank lines are removed when preparing CadQuery patches, avoiding supervision of parameter-comment edits as geometry. Published instructions are retained without adding answer-line hints. Native command sequences use their own schema and decoder.
 
-\paragraph{Protocol change.}
-The author labels this edit subset a held-out benchmark. We deliberately re-partition it into local training and evaluation data to satisfy the present study's training objective. This invalidates claims of official benchmark-test generalization or direct leaderboard comparability. The local held-out components remain unused for optimization and checkpoint selection.
-
-\paragraph{Reference-quality limits.}
-Readback finds one invalid rivet STEP among the 126 retained test references. We also identify a concrete instruction/target conflict: \texttt{topup\_stepped\_shaft\_top\_slot\_rev} requests cutting a blind slot, but its source already has the slot and its target removes the operation. Published labels are retained without silently repairing them; this case and its source diff are recorded. The experiment measures agreement with released targets, not certified compliance with every natural-language request. We do not infer that every reverse-edit record has this defect.
-
-\paragraph{Earlier drawing pilot.}
-A separate sample of 2,000 BenchCAD code-generation parts yielded 150 verified local numeric-edit pairs from 76 hard parts and 40 families, partitioned 108/22/20 by family. It requires at least eight CAD calls and compound geometry, and excludes external edit-program templates after masking literals. Chamfer, hole, extrusion and fillet edits contribute 62, 48, 24 and 16 pairs. The sample exports 904 referenced SVG views and 150 before/after sheets. Its instructions disclose the edit line and numeric answer; it is a transport feasibility pilot, not the main online benchmark.
+\paragraph{Evaluation boundaries.}
+BenchCAD's edit release was originally held out; repartitioning it for training changes the benchmark contract. We report local held-out agreement, not official leaderboard or official-test generalization. The primary denominator includes all 252 retained tasks, including six reference errors and one final-model worker timeout. Reference availability is tracked separately. A previously identified instruction/target conflict in a shaft-slot record illustrates that reference agreement does not certify natural-language compliance for every label. The supplement preserves the earlier split details and audits.

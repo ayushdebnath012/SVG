@@ -1,0 +1,100 @@
+Sliding Window Attention is enabled but not implemented for `sdpa`; unexpected results may be encountered.
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:12<00:12, 12.52s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:15<00:00,  6.99s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:15<00:00,  7.82s/it]
+/home/trishita/miniconda3/envs/engsvg/lib/python3.12/site-packages/transformers/generation/configuration_utils.py:631: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.7` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+/home/trishita/miniconda3/envs/engsvg/lib/python3.12/site-packages/transformers/generation/configuration_utils.py:636: UserWarning: `do_sample` is set to `False`. However, `top_p` is set to `0.8` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `top_p`.
+  warnings.warn(
+/home/trishita/miniconda3/envs/engsvg/lib/python3.12/site-packages/transformers/generation/configuration_utils.py:653: UserWarning: `do_sample` is set to `False`. However, `top_k` is set to `20` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `top_k`.
+  warnings.warn(
+6/424 11s
+12/424 61s
+18/424 90s
+24/424 104s
+30/424 117s
+36/424 174s
+42/424 218s
+48/424 258s
+54/424 283s
+60/424 297s
+66/424 326s
+72/424 356s
+78/424 383s
+84/424 395s
+90/424 436s
+96/424 478s
+102/424 525s
+108/424 567s
+114/424 650s
+Traceback (most recent call last):
+  File "/home/trishita/svg-compute/bestofn-20261006/sample_student_bestofn.py", line 75, in <module>
+    main()
+  File "/home/trishita/svg-compute/bestofn-20261006/sample_student_bestofn.py", line 62, in main
+    drawn = model.generate(**inputs, max_new_tokens=a.max_new_tokens, do_sample=True,
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/trishita/miniconda3/envs/engsvg/lib/python3.12/site-packages/peft/peft_model.py", line 1875, in generate
+    outputs = self.base_model.generate(*args, **kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/trishita/miniconda3/envs/engsvg/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/trishita/miniconda3/envs/engsvg/lib/python3.12/site-packages/transformers/generation/utils.py", line 2465, in generate
+    result = self._sample(
+             ^^^^^^^^^^^^^
+  File "/home/trishita/miniconda3/envs/engsvg/lib/python3.12/site-packages/transformers/generation/utils.py", line 3431, in _sample
+    outputs = self(**model_inputs, return_dict=True)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/trishita/miniconda3/envs/engsvg/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/trishita/miniconda3/envs/engsvg/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/trishita/miniconda3/envs/engsvg/lib/python3.12/site-packages/transformers/utils/generic.py", line 965, in wrapper
+    output = func(self, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/trishita/miniconda3/envs/engsvg/lib/python3.12/site-packages/transformers/utils/deprecation.py", line 172, in wrapped_func
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/trishita/miniconda3/envs/engsvg/lib/python3.12/site-packages/transformers/models/qwen2/modeling_qwen2.py", line 823, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+                                       ^^^^^^^^^^^
+  File "/home/trishita/miniconda3/envs/engsvg/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/trishita/miniconda3/envs/engsvg/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/trishita/miniconda3/envs/engsvg/lib/python3.12/site-packages/transformers/utils/generic.py", line 965, in wrapper
+    output = func(self, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/trishita/miniconda3/envs/engsvg/lib/python3.12/site-packages/transformers/models/qwen2/modeling_qwen2.py", line 549, in forward
+    layer_outputs = decoder_layer(
+                    ^^^^^^^^^^^^^^
+  File "/home/trishita/miniconda3/envs/engsvg/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/trishita/miniconda3/envs/engsvg/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/trishita/miniconda3/envs/engsvg/lib/python3.12/site-packages/transformers/models/qwen2/modeling_qwen2.py", line 278, in forward
+    hidden_states = self.mlp(hidden_states)
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/trishita/miniconda3/envs/engsvg/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/trishita/miniconda3/envs/engsvg/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/trishita/miniconda3/envs/engsvg/lib/python3.12/site-packages/transformers/models/qwen2/modeling_qwen2.py", line 59, in forward
+    down_proj = self.down_proj(self.act_fn(self.gate_proj(x)) * self.up_proj(x))
+                                           ^^^^^^^^^^^^^^^^^
+  File "/home/trishita/miniconda3/envs/engsvg/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/trishita/miniconda3/envs/engsvg/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/trishita/miniconda3/envs/engsvg/lib/python3.12/site-packages/peft/tuners/lora/bnb.py", line 516, in forward
+    output = lora_B(lora_A(dropout(x))) * scaling
+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 3.49 GiB. GPU 0 has a total capacity of 93.09 GiB of which 2.66 GiB is free. Process 3561592 has 1.70 GiB memory in use. Process 3557497 has 2.19 GiB memory in use. Process 3973421 has 766.00 MiB memory in use. Process 3977315 has 1.15 GiB memory in use. Process 1731556 has 518.00 MiB memory in use. Process 1731557 has 518.00 MiB memory in use. Process 4056012 has 518.00 MiB memory in use. Process 10817 has 518.00 MiB memory in use. Process 585734 has 66.81 GiB memory in use. Process 900688 has 518.00 MiB memory in use. Including non-PyTorch memory, this process has 15.22 GiB memory in use. Of the allocated memory 11.47 GiB is allocated by PyTorch, and 3.09 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)

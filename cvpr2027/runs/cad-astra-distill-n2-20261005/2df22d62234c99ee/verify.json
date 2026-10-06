@@ -1,0 +1,110 @@
+{
+  "n": 2,
+  "executed": 1,
+  "clusters": [
+    1
+  ],
+  "selected": 1,
+  "selected_consensus": 1,
+  "selected_numbers_fraction": 0.3333333333333333,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": false,
+      "error": "ValueError: Unsupported Python construct",
+      "plan": "- [0] `import cadquery as cq` -> Import the chamfer builder for explicit top-face distance control.\n- [7] `show_object(result)` -> Chamfer all eight top edges with 3 mm horizontal width and 60-degree slope, then display.",
+      "edited_lines": 9,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 3.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 8.0,
+          "ok": false
+        },
+        {
+          "kind": "value_present",
+          "value": 60.0,
+          "ok": false
+        }
+      ],
+      "changed": null,
+      "patch": {
+        "edits": [
+          {
+            "start": 0,
+            "delete": 1,
+            "insert": [
+              "import cadquery as cq",
+              "from OCP.BRepFilletAPI import BRepFilletAPI_MakeChamfer"
+            ]
+          },
+          {
+            "start": 7,
+            "delete": 0,
+            "insert": [
+              "top_face = result.faces(\">Z\").val()",
+              "chamfer = BRepFilletAPI_MakeChamfer(result.val().wrapped)",
+              "for edge in top_face.Edges():",
+              "    chamfer.Add(3.0, 3.0 * (3.0 ** 0.5), edge.wrapped, top_face.wrapped)",
+              "chamfer.Build()",
+              "result = cq.Workplane(\"XY\").newObject([cq.Shape.cast(chamfer.Shape())])"
+            ]
+          }
+        ]
+      },
+      "score": null,
+      "audit_reference_iou": null
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [6] `)` -> Chamfer all eight top perimeter edges with 3 mm top setbacks and 3√3 mm vertical drops.",
+      "edited_lines": 1,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 3.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 8.0,
+          "ok": false
+        },
+        {
+          "kind": "value_present",
+          "value": 60.0,
+          "ok": false
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 6,
+            "delete": 0,
+            "insert": [
+              "    .faces(\">Z\").edges().chamfer(3.0, 3.0 * 3.0**0.5)"
+            ]
+          }
+        ]
+      },
+      "volume": 19603.7919898151,
+      "consensus": 1,
+      "numbers_fraction": 0.3333333333333333,
+      "score": 1.0823333333333334,
+      "audit_reference_iou": 1.0
+    }
+  ],
+  "audit_selected_strict": true,
+  "audit_any_strict": true,
+  "audit_reference_changed": true,
+  "id": "2df22d62234c99eed107f9a7fcefc2c1d7de4d9cbff557ec246236a8d989c1d5",
+  "category": "T5"
+}

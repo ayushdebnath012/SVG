@@ -1,0 +1,4 @@
+[
+  "PLAN:\n- [29] `    .faces(\">Z\").workplane()` -> Insert revolved triangular cut sloping the pillar’s outer 5 mm top strip downward at 30 degrees.\nPATCH:\n{\"edits\":[{\"start\":29,\"delete\":0,\"insert\":[\"    .cut(\",\"        cq.Workplane(\\\"XZ\\\")\",\"            .moveTo(15.55, 14.8)\",\"            .lineTo(20.55, 14.8 - 5.0 * 3.0**-0.5)\",\"            .lineTo(20.55, 14.8)\",\"            .close()\",\"            .revolve(360, (0, 0), (0, 1))\",\"    )\"]}]}",
+  "PLAN:\n- [29] `    .faces(\">Z\").workplane()` -> Insert a revolved triangular cut, sloping the outer 5 mm of the pillar top downward at 30 degrees.\nPATCH:\n{\"edits\":[{\"start\":29,\"delete\":0,\"insert\":[\"    .cut(\",\"        cq.Workplane(\\\"XZ\\\")\",\"            .polyline([(15.55, 14.8), (20.55, 14.8), (20.55, 14.8 - 5.0 / (3.0 ** 0.5))])\",\"            .close()\",\"            .revolve(360, (0, 0), (0, 1))\",\"    )\"]}]}"
+]

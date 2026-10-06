@@ -1,0 +1,4 @@
+[
+  "PLAN:\n- [9] `result = result.cut(` -> Union the outward-sloping, 14 mm wide trapezoidal pad instead, filling the 4 mm recess flush with the top.\nPATCH:\n{\"edits\":[{\"start\":9,\"delete\":1,\"insert\":[\"result = result.union(\"]}]}",
+  "PLAN:\n- [16] `show_object(result)` -> Insert union filling recess and adding 15 × 14 × 4 mm pad with outward-sloping 45-degree ends.\nPATCH:\n{\"edits\":[{\"start\":16,\"delete\":0,\"insert\":[\"result = result.union(\",\"    cq.Workplane(\\\"XZ\\\")\",\"    .workplane(offset=-7.0)\",\"    .polyline([(-3.5, 6.2), (3.5, 6.2), (11.5, 14.2), (-11.5, 14.2)])\",\"    .close()\",\"    .extrude(14.0, both=False)\",\")\"]}]}"
+]

@@ -1,0 +1,81 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 0,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": 1.0,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [5] `    .faces(\">Z\").workplane()` -> Insert an 8 mm fillet on the four outer vertical edges before cutting the opening.",
+      "edited_lines": 1,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 8.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 5,
+            "delete": 0,
+            "insert": [
+              "    .edges(\"|Z\").fillet(8.0)"
+            ]
+          }
+        ]
+      },
+      "volume": 29345.01929829747,
+      "consensus": 2,
+      "numbers_fraction": 1.0,
+      "score": 2.249,
+      "audit_reference_iou": 1.0
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [4] `    .extrude(10.0)` -> Add an 8 mm fillet to the four outer vertical edges before cutting the opening.",
+      "edited_lines": 3,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 8.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 4,
+            "delete": 1,
+            "insert": [
+              "    .extrude(10.0)",
+              "    .edges(\"|Z\").fillet(8.0)"
+            ]
+          }
+        ]
+      },
+      "volume": 29345.01929829747,
+      "consensus": 2,
+      "numbers_fraction": 1.0,
+      "score": 2.247,
+      "audit_reference_iou": 1.0
+    }
+  ],
+  "audit_selected_strict": true,
+  "audit_any_strict": true,
+  "audit_reference_changed": true,
+  "id": "87d40039486136c04418067115f831c7bf4c130e838fef53b024750426389456",
+  "category": "T5"
+}

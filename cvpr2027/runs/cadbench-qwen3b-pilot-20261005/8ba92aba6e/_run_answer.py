@@ -1,0 +1,56 @@
+import FreeCAD
+import PartDesign
+
+# Create a new document
+doc = FreeCAD.newDocument("Flat_Washer")
+
+# Set the active document
+FreeCAD.setActiveDocument(doc.Name)
+
+# Define the parameters
+outside_diameter = 4.0  # mm
+inner_diameter = 1.7   # mm
+thickness = 0.3     # mm
+
+# Create a new PartDesign Body
+body = doc.addObject("PartDesign::Body", "Body")
+
+# Create a new PartDesign Plane
+plane = doc.addObject("PartDesign::Plane", "Plane")
+plane.Placement.Base = FreeCAD.Vector(0, 0, 0)
+plane.Placement.Rotation = FreeCAD.Rotation(FreeCAD.Vector(0, 0, 1), 0)
+
+# Create a new PartDesign Hole
+hole = doc.addObject("PartDesign::Hole", "Hole")
+hole.HoleDiameter = inner_diameter
+hole.HoleDepth = thickness
+hole.Placement.Base = FreeCAD.Vector(0, 0, -thickness / 2)
+hole.Placement.Rotation = FreeCAD.Rotation(FreeCAD.Vector(0, 0, 1), 0)
+
+# Create a new PartDesign Fillet
+fillet = doc.addObject("PartDesign::Fillet", "Fillet")
+fillet.Radius = thickness / 2
+fillet.Shapes = [hole]
+
+# Create a new PartDesign Extrusion
+extrusion = doc.addObject("PartDesign::Extrusion", "Extrusion")
+extrusion.Dir = FreeCAD.Vector(0, 0, 1)
+extrusion.Base = plane
+extrusion.Sketch = hole.Shape
+extrusion.Length = outside_diameter
+
+# Create a new PartDesign Mirror
+mirror = doc.addObject("PartDesign::Mirror", "Mirror")
+mirror.Plane = plane
+mirror.Base = extrusion.Shape
+
+# Create a new PartDesign Shell
+shell = doc.addObject("PartDesign::Shell", "Shell")
+shell.Base = mirror.Shape
+
+# Create a new PartDesign Solid
+solid = doc.addObject("PartDesign::Solid", "Solid")
+solid.Base = shell.Shape
+
+# Save the document
+doc.saveAs("runs/cadbench-qwen3b-pilot-20261005/8ba92aba6e/answer.FCStd")

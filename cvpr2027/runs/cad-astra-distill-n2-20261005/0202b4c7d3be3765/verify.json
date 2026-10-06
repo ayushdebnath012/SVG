@@ -1,0 +1,93 @@
+{
+  "n": 2,
+  "executed": 0,
+  "clusters": [],
+  "selected": null,
+  "selected_consensus": 0,
+  "selected_numbers_fraction": null,
+  "selected_changed": null,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": false,
+      "error": "ValueError: Unsupported Python construct",
+      "plan": "- [9] `show_object(result)` -> Insert asymmetric chamfer on the top circular edge: 7 mm top setback, 60-degree bevel from horizontal.",
+      "edited_lines": 7,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 7.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 60.0,
+          "ok": false
+        }
+      ],
+      "changed": null,
+      "patch": {
+        "edits": [
+          {
+            "start": 9,
+            "delete": 0,
+            "insert": [
+              "from OCP.BRepFilletAPI import BRepFilletAPI_MakeChamfer",
+              "top_face = result.faces(\">Z\").val()",
+              "curved_edge = next(edge for edge in top_face.Edges() if edge.geomType() == \"CIRCLE\")",
+              "bevel = BRepFilletAPI_MakeChamfer(result.val().wrapped)",
+              "bevel.Add(7.0, 7.0 * (3.0 ** 0.5), curved_edge.wrapped, top_face.wrapped)",
+              "bevel.Build()",
+              "result = cq.Workplane(\"XY\").newObject([cq.Solid(bevel.Shape())])"
+            ]
+          }
+        ]
+      },
+      "score": null,
+      "audit_reference_iou": null
+    },
+    {
+      "index": 1,
+      "gates": false,
+      "error": "ValueError: Unsupported Python construct",
+      "plan": "- [9] `show_object(result)` -> Insert asymmetric chamfer on the top curved edge: 7 mm top setback, 60-degree bevel from horizontal.",
+      "edited_lines": 6,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 7.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 60.0,
+          "ok": false
+        }
+      ],
+      "changed": null,
+      "patch": {
+        "edits": [
+          {
+            "start": 9,
+            "delete": 0,
+            "insert": [
+              "from OCP.BRepFilletAPI import BRepFilletAPI_MakeChamfer",
+              "top_face = result.faces(\">Z\").val()",
+              "curved_edge = result.faces(\">Z\").edges(\"%CIRCLE\").val()",
+              "chamfer = BRepFilletAPI_MakeChamfer(result.val().wrapped)",
+              "chamfer.Add(7.0, 7.0 * (3.0 ** 0.5), curved_edge.wrapped, top_face.wrapped)",
+              "result = cq.Workplane(\"XY\").newObject([cq.Solid(chamfer.Shape())])"
+            ]
+          }
+        ]
+      },
+      "score": null,
+      "audit_reference_iou": null
+    }
+  ],
+  "audit_selected_strict": false,
+  "audit_any_strict": false,
+  "audit_reference_changed": true,
+  "id": "0202b4c7d3be3765b2e2a3354d570fcdcdb9d4d0c3c3e209a126d17bb0f7b67a",
+  "category": "T5"
+}

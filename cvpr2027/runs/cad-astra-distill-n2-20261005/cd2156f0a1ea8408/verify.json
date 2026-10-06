@@ -1,0 +1,100 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 0,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": null,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [3] `    .transformed(offset=cq.Vector(-60.0, 0, 16.45), rotate=cq.Vector(0, 0, 0))` -> Set left leg height to 60.0, half the unchanged 120.0 pitch; center at Z=30.0.\n- [7] `            .transformed(offset=cq.Vector(60.0, 0, 16.45), rotate=cq.Vector(0, 0, 0))` -> Set right leg height to 60.0 and center at Z=30.0, preserving radius and pitch.\n- [12] `            .transformed(offset=cq.Vector(0, 0, 32.9), rotate=cq.Vector(0, 90, 0))` -> Raise bar center to Z=60.0, preserving bar length and radius.",
+      "edited_lines": 10,
+      "numbers": [],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 3,
+            "delete": 2,
+            "insert": [
+              "    .transformed(offset=cq.Vector(-60.0, 0, 30.0), rotate=cq.Vector(0, 0, 0))",
+              "    .cylinder(60.0, 5.1)"
+            ]
+          },
+          {
+            "start": 7,
+            "delete": 2,
+            "insert": [
+              "            .transformed(offset=cq.Vector(60.0, 0, 30.0), rotate=cq.Vector(0, 0, 0))",
+              "            .cylinder(60.0, 5.1)"
+            ]
+          },
+          {
+            "start": 12,
+            "delete": 1,
+            "insert": [
+              "            .transformed(offset=cq.Vector(0, 0, 60.0), rotate=cq.Vector(0, 90, 0))"
+            ]
+          }
+        ]
+      },
+      "volume": 19737.076765201073,
+      "consensus": 2,
+      "numbers_fraction": null,
+      "score": 1.74,
+      "audit_reference_iou": 1.0
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [3] `    .transformed(offset=cq.Vector(-60.0, 0, 16.45), rotate=cq.Vector(0, 0, 0))` -> Set left leg height to 60, half the 120 pitch, and center elevation to 30.\n- [7] `            .transformed(offset=cq.Vector(60.0, 0, 16.45), rotate=cq.Vector(0, 0, 0))` -> Set right leg height to 60 and center elevation to 30; preserve radius and pitch.\n- [12] `            .transformed(offset=cq.Vector(0, 0, 32.9), rotate=cq.Vector(0, 90, 0))` -> Raise bar center elevation to 60; preserve bar length and radius.",
+      "edited_lines": 10,
+      "numbers": [],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 3,
+            "delete": 2,
+            "insert": [
+              "    .transformed(offset=cq.Vector(-60.0, 0, 30.0), rotate=cq.Vector(0, 0, 0))",
+              "    .cylinder(60.0, 5.1)"
+            ]
+          },
+          {
+            "start": 7,
+            "delete": 2,
+            "insert": [
+              "            .transformed(offset=cq.Vector(60.0, 0, 30.0), rotate=cq.Vector(0, 0, 0))",
+              "            .cylinder(60.0, 5.1)"
+            ]
+          },
+          {
+            "start": 12,
+            "delete": 1,
+            "insert": [
+              "            .transformed(offset=cq.Vector(0, 0, 60.0), rotate=cq.Vector(0, 90, 0))"
+            ]
+          }
+        ]
+      },
+      "volume": 19737.076765201073,
+      "consensus": 2,
+      "numbers_fraction": null,
+      "score": 1.74,
+      "audit_reference_iou": 1.0
+    }
+  ],
+  "audit_selected_strict": true,
+  "audit_any_strict": true,
+  "audit_reference_changed": true,
+  "id": "cd2156f0a1ea8408c04a9dd751564d0e81ac335a219fe9f729776d89089f5715",
+  "category": "T3"
+}

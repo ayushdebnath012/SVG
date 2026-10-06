@@ -1,0 +1,90 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 0,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": 1.0,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [24] `)` -> Union a 4 mm tall, 4 mm wide rectangular border at the top elevation, flush with the outer outline.",
+      "edited_lines": 6,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 4.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 24,
+            "delete": 0,
+            "insert": [
+              "    .union(",
+              "        cq.Workplane(\"XY\").workplane(offset=2.3)",
+              "        .rect(254.8, 112.7)",
+              "        .rect(246.8, 104.7)",
+              "        .extrude(4.0)",
+              "    )"
+            ]
+          }
+        ]
+      },
+      "volume": 124742.72489073133,
+      "consensus": 2,
+      "numbers_fraction": 1.0,
+      "score": 2.244,
+      "audit_reference_iou": 1.0
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [25] `show_object(result)` -> Insert a 4 mm tall, 4 mm wide top border flush with the outer rectangular perimeter.",
+      "edited_lines": 6,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 4.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 25,
+            "delete": 0,
+            "insert": [
+              "result = result.union(",
+              "    cq.Workplane(\"XY\").workplane(offset=2.3)",
+              "    .rect(254.8, 112.7)",
+              "    .rect(246.8, 104.7)",
+              "    .extrude(4.0)",
+              ")"
+            ]
+          }
+        ]
+      },
+      "volume": 124742.72489073133,
+      "consensus": 2,
+      "numbers_fraction": 1.0,
+      "score": 2.244,
+      "audit_reference_iou": 1.0
+    }
+  ],
+  "audit_selected_strict": true,
+  "audit_any_strict": true,
+  "audit_reference_changed": true,
+  "id": "c05842b61b0d38a8b409f1139d334ea8f52f6a170dfcddf035778b4ab13fdd14",
+  "category": "T5"
+}

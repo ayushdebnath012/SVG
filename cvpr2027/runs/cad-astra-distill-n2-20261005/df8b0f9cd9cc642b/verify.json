@@ -1,0 +1,114 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 0,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": 0.5,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [9] `show_object(result)` -> Insert half-cap bevel cuts: 3 mm top width, 60-degree downward slope; preserve sharp straight rims.",
+      "edited_lines": 11,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 3.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 60.0,
+          "ok": false
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 9,
+            "delete": 0,
+            "insert": [
+              "for center, direction in [(-7.55, -1), (7.55, 1)]:",
+              "    bevel_ring = (",
+              "        cq.Workplane(\"XZ\", origin=(center, 0, 0))",
+              "        .polyline([(8.0, 10.2), (11.0, 10.2), (11.0, 10.2 - 3.0 * 3.0**0.5)])",
+              "        .close().revolve(360, (0, 0), (0, 1))",
+              "    )",
+              "    cap_region = (",
+              "        cq.Workplane(\"XY\").box(22.0, 44.0, 10.2)",
+              "        .translate((center + direction * 11.0, 0, 5.1))",
+              "    )",
+              "    result = result.cut(bevel_ring.intersect(cap_region))"
+            ]
+          }
+        ]
+      },
+      "volume": 6017.6960330943275,
+      "consensus": 2,
+      "numbers_fraction": 0.5,
+      "score": 1.739,
+      "audit_reference_iou": 0.9270840583855994
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [9] `show_object(result)` -> Insert 3 mm radial, 60-degree bevel cuts restricted to curved end caps; preserve sharp straight sides.",
+      "edited_lines": 15,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 3.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 60.0,
+          "ok": false
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 9,
+            "delete": 0,
+            "insert": [
+              "bevel_width = 3.0",
+              "bevel_depth = bevel_width * (3.0 ** 0.5)",
+              "cap_radius = 11.0",
+              "for cap_x, direction in [(-7.55, -1), (7.55, 1)]:",
+              "    base = cq.Vector(cap_x, 0, 10.2 - bevel_depth)",
+              "    outer = cq.Solid.makeCylinder(cap_radius, bevel_depth, base)",
+              "    inner = cq.Solid.makeCone(cap_radius, cap_radius - bevel_width, bevel_depth, base)",
+              "    cap_half = (",
+              "        cq.Workplane(\"XY\")",
+              "        .box(22.0, 22.0, bevel_depth)",
+              "        .translate((cap_x + direction * 11.0, 0, 10.2 - bevel_depth / 2.0))",
+              "        .val()",
+              "    )",
+              "    bevel_cut = outer.cut(inner).intersect(cap_half)",
+              "    result = result.cut(bevel_cut)"
+            ]
+          }
+        ]
+      },
+      "volume": 6017.696033094326,
+      "consensus": 2,
+      "numbers_fraction": 0.5,
+      "score": 1.735,
+      "audit_reference_iou": 0.9270840590638302
+    }
+  ],
+  "audit_selected_strict": false,
+  "audit_any_strict": false,
+  "audit_reference_changed": true,
+  "id": "df8b0f9cd9cc642bd263b96092d46c97a25e6f304ee698c5c4cbd49ed13c3a60",
+  "category": "T5"
+}

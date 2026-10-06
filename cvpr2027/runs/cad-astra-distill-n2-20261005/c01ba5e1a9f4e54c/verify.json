@@ -1,0 +1,88 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 0,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": 1.0,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [59] `)` -> Insert a central axial through-cut of radius 10.00 mm spanning the entire part.",
+      "edited_lines": 5,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 10.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 59,
+            "delete": 0,
+            "insert": [
+              "    .cut(",
+              "        cq.Workplane(\"XY\")",
+              "            .circle(10.00)",
+              "            .extrude(110.0, both=True)",
+              "    )"
+            ]
+          }
+        ]
+      },
+      "volume": 130405.30473701935,
+      "consensus": 2,
+      "numbers_fraction": 1.0,
+      "score": 2.245,
+      "audit_reference_iou": 0.9999999999999757
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [59] `)` -> Add a centered axial cut of radius 10.00 mm, spanning the entire part.",
+      "edited_lines": 5,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 10.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 59,
+            "delete": 0,
+            "insert": [
+              "    .cut(",
+              "        cq.Workplane(\"XY\")",
+              "            .circle(10.00)",
+              "            .extrude(120.0, both=True)",
+              "    )"
+            ]
+          }
+        ]
+      },
+      "volume": 130405.30473701935,
+      "consensus": 2,
+      "numbers_fraction": 1.0,
+      "score": 2.245,
+      "audit_reference_iou": 0.9999999999999757
+    }
+  ],
+  "audit_selected_strict": true,
+  "audit_any_strict": true,
+  "audit_reference_changed": true,
+  "id": "c01ba5e1a9f4e54c2614cc1aa5f134cdbd06bc93d65e158b7032c690b1222726",
+  "category": "T4"
+}

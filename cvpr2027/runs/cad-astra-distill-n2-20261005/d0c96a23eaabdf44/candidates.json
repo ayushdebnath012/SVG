@@ -1,0 +1,4 @@
+[
+  "PLAN:\n- [10] `)` -> Add an asymmetric chamfer to the outer curved top edge: 0.4 mm horizontally, 60 degrees from horizontal.\nPATCH:\n{\"edits\":[{\"start\":10,\"delete\":0,\"insert\":[\"    .faces(\\\">Z\\\").edges(cq.selectors.RadiusNthSelector(-1))\",\"    .chamfer(0.4, 0.4 * (3 ** 0.5))\"]}]}",
+  "PLAN:\n- [11] `show_object(result)` -> Insert a revolved bevel cut, 0.4 mm radially across the top and 60 degrees from horizontal.\nPATCH:\n{\"edits\":[{\"start\":11,\"delete\":0,\"insert\":[\"outer_edge = max(result.faces(\\\">Z\\\").edges(\\\"%CIRCLE\\\").vals(), key=lambda edge: edge.radius())\",\"outer_center = outer_edge.arcCenter()\",\"outer_radius = outer_edge.radius()\",\"bevel_tool = cq.Workplane(\\\"XZ\\\", origin=(outer_center.x, outer_center.y, 0)).polyline([(outer_radius, 0.8 - 0.4 * 3**0.5), (outer_radius, 0.8), (outer_radius - 0.4, 0.8)]).close().revolve(360, (0, 0), (0, 1))\",\"result = result.cut(bevel_tool)\"]}]}"
+]

@@ -1,0 +1,99 @@
+{
+  "n": 2,
+  "executed": 1,
+  "clusters": [
+    1
+  ],
+  "selected": 1,
+  "selected_consensus": 1,
+  "selected_numbers_fraction": 0.5,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": false,
+      "error": "ValueError: Unsupported Python construct",
+      "plan": "- [1] `result = (` -> Import the chamfer builder for explicit bottom-face distance control.\n- [11] `show_object(result)` -> Chamfer every bottom perimeter edge with 0.5 mm horizontal width and 60-degree slope.",
+      "edited_lines": 7,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 0.5,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 60.0,
+          "ok": false
+        }
+      ],
+      "changed": null,
+      "patch": {
+        "edits": [
+          {
+            "start": 1,
+            "delete": 0,
+            "insert": [
+              "from OCP.BRepFilletAPI import BRepFilletAPI_MakeChamfer"
+            ]
+          },
+          {
+            "start": 11,
+            "delete": 0,
+            "insert": [
+              "bottom = result.faces(\"<Z\").val()",
+              "chamfer = BRepFilletAPI_MakeChamfer(result.val().wrapped)",
+              "for edge in bottom.Edges():",
+              "    chamfer.Add(0.5, 0.5 * (3.0 ** 0.5), edge.wrapped, bottom.wrapped)",
+              "chamfer.Build()",
+              "result = cq.Workplane(\"XY\").newObject([cq.Solid(chamfer.Shape())])"
+            ]
+          }
+        ]
+      },
+      "score": null,
+      "audit_reference_iou": null
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [10] `)` -> Add a bottom-perimeter chamfer with 0.5 mm horizontal width and 0.8660254 mm rise for a 60-degree slope.",
+      "edited_lines": 1,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 0.5,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 60.0,
+          "ok": false
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 10,
+            "delete": 0,
+            "insert": [
+              "    .faces(\"<Z\").edges().chamfer(0.5, 0.8660254037844386)"
+            ]
+          }
+        ]
+      },
+      "volume": 579.250175077759,
+      "consensus": 1,
+      "numbers_fraction": 0.5,
+      "score": 1.249,
+      "audit_reference_iou": 1.0
+    }
+  ],
+  "audit_selected_strict": true,
+  "audit_any_strict": true,
+  "audit_reference_changed": true,
+  "id": "19f3336fb9f290f7d45bc3813332fa7b285d9d1f2042d7e8ade8251fcfe3c36c",
+  "category": "T5"
+}

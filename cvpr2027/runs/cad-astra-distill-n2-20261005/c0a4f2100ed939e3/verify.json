@@ -1,0 +1,82 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 0,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": null,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [4] `    .extrude(3.5)` -> Set plate thickness to one eighth of its 39.8 height.\n- [8] `            .cylinder(5.5, 5.15)` -> Extend circular cutter through the thicker plate without changing the cutout profile; leave slot unchanged.",
+      "edited_lines": 4,
+      "numbers": [],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 4,
+            "delete": 1,
+            "insert": [
+              "    .extrude(39.8 / 8)"
+            ]
+          },
+          {
+            "start": 8,
+            "delete": 1,
+            "insert": [
+              "            .cylinder(39.8 / 8 + 2.0, 5.15)"
+            ]
+          }
+        ]
+      },
+      "volume": 4730.142203411392,
+      "consensus": 2,
+      "numbers_fraction": null,
+      "score": 1.746,
+      "audit_reference_iou": 0.9941669020557657
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [4] `    .extrude(3.5)` -> Set plate thickness to one eighth of its 39.8 height.\n- [8] `            .cylinder(5.5, 5.15)` -> Extend circular cutter through thicker plate, preserving keyhole radius and position; slot remains unchanged.",
+      "edited_lines": 4,
+      "numbers": [],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 4,
+            "delete": 1,
+            "insert": [
+              "    .extrude(39.8 / 8)"
+            ]
+          },
+          {
+            "start": 8,
+            "delete": 1,
+            "insert": [
+              "            .cylinder(2 * (39.8 / 8), 5.15)"
+            ]
+          }
+        ]
+      },
+      "volume": 4730.142203411392,
+      "consensus": 2,
+      "numbers_fraction": null,
+      "score": 1.746,
+      "audit_reference_iou": 0.9941669020557657
+    }
+  ],
+  "audit_selected_strict": false,
+  "audit_any_strict": false,
+  "audit_reference_changed": true,
+  "id": "c0a4f2100ed939e3fd93d51049c26fc3b13a0666d63d925977f59409f981482b",
+  "category": "T3"
+}

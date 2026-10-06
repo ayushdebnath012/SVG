@@ -47,7 +47,7 @@ Fusion action reconstruction is a separate adapter requirement.
 
 ## Trainable model
 
-Fresh **Qwen2.5-Coder-3B-Instruct**, using Colab GPU QLoRA with 4-bit NF4 double quantization. T4 uses FP16 computation; capable GPUs use BF16. Completion-only causal-LM
+Fresh **Qwen2.5-Coder-3B-Instruct**, using Colab GPU QLoRA with 4-bit NF4 double quantization. The completed T4 run records `torch.bfloat16` in its manifest; native hardware BF16 acceleration is not established. Computation precision follows the runtime support check. Completion-only causal-LM
 loss; LoRA rank 16, alpha 320 (scale 20), dropout zero, all seven attention/MLP
 linear projections in the last 12 transformer blocks. Two fixed epochs, effective batch
 four (T4 microbatch one with four accumulation steps), seed 17, constant learning rate 1e-4, 4,096 total-token context and
@@ -112,3 +112,8 @@ not evidence that the part is suitable for its real application.
 ## Colab execution
 
 Open `notebooks/Mechanical_CAD_Multisource_FEM_Train.ipynb` in Colab and select a GPU. The notebook embeds audited public data and scripts, runs training, executes both held-out CAD representations, checks the six new adapter examples with FEM, and downloads all results. The live notebook is https://colab.research.google.com/drive/1gm98y9TT8xQFEsz-8t39v_NASsSLFmh8. A started notebook is not a completed experiment; results require the completed manifest and saved artifacts.
+
+
+## Completed Colab result (2026-10-02)
+
+Training finished 1,270 updates on 2,540 paired edits. Final held-out results: 173/252 applicable patches, 139 executed solids, 39/252 strict geometry matches (15.48%), versus 1/252 for the fresh base. Four of six new-adapter illustrative cases pass combined geometry/FEM checks; the propeller patch is invalid and the screw pipeline remains unverified. See `reports/MULTISOURCE_CAD_COLAB_TRAINING_20261002.md` and `runs/multisource-cad-colab-20261002/archive-check.json`. The earlier ZIP is preserved; `multisource-cad-colab-results-final.zip` contains the complete six-case audit.

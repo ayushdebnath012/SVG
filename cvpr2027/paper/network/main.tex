@@ -19,6 +19,15 @@
 \newcommand{\ours}{\textsc{ReSolve}\xspace}
 \newcommand{\code}[1]{\texttt{\small #1}}
 
+% Keep Times-compatible review typography with XeTeX/Tectonic as well as pdfLaTeX.
+\usepackage{iftex}
+\ifXeTeX
+  \usepackage{fontspec}
+  \IfFontExistsTF{TeX Gyre Termes}{\setmainfont{TeX Gyre Termes}}{\setmainfont{Times New Roman}}
+  \IfFontExistsTF{TeX Gyre Heros}{\setsansfont{TeX Gyre Heros}}{\setsansfont{Arial}}
+  \IfFontExistsTF{Latin Modern Mono}{\setmonofont{Latin Modern Mono}}{\setmonofont{Menlo}}
+\fi
+
 \definecolor{cvprblue}{rgb}{0.21,0.49,0.74}
 \usepackage[pagebackref,breaklinks,colorlinks,allcolors=cvprblue]{hyperref}
 
@@ -26,13 +35,14 @@
 \def\confName{CVPR}
 \def\confYear{2027}
 
-\title{ReSolve: Verified Mechanical CAD Edits\\and Linked Vector Drawings}
+\title{ReSolve: Instruction-Guided 3D CAD Editing\\with Geometry and View Evaluation}
 
 \author{Research working draft}
 
 \input{mechanical-results}
 \input{cuda-results}
 \input{fem-results}
+\input{plan-anchor-results}
 
 \begin{document}
 \maketitle
@@ -43,14 +53,13 @@
 \begin{figure*}[t]
 \centering
 \includegraphics[width=0.93\textwidth]{figures/benchcad-reference-pairs.pdf}
-\caption{\textbf{Published mechanical CAD edit pairs held out in the local protocol.} Top: remove the perpendicular end flange while preserving the twisted web and the first-flange holes. Bottom: add a centered blind obround slot to the upper cylindrical shaft section. These are source/released-target illustrations, not learned model predictions. Both views are exported from solids; shape appearance supplies no stress or FEM result; the separate FEM audit concerns the six actual predictions in the supplement.}
+\caption{\textbf{Published mechanical CAD edit pairs held out in the local protocol.} Top: remove the perpendicular end flange while preserving the twisted web and the first-flange holes. Bottom: add a centered blind obround slot to the upper cylindrical shaft section. These are source/released-target illustrations, not learned model predictions. Both views are exported from solids. Learned predictions are evaluated separately in the primary experiment and diagnostic visual/FEM audits.}
 \label{fig:benchcad-reference}
 \end{figure*}
 \input{sections/mechanical/related}
 \input{sections/mechanical/method}
 \input{sections/mechanical/data}
 \input{sections/mechanical/experiments}
-\input{sections/mechanical/structures}
 \input{sections/mechanical/conclusion}
 
 {

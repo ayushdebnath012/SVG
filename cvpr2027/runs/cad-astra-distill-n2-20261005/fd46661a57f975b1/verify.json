@@ -1,0 +1,82 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    1,
+    1
+  ],
+  "selected": 0,
+  "selected_consensus": 1,
+  "selected_numbers_fraction": 1.0,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [10] `    .extrude(42.8)` -> Increase bracket extrusion width to 55.64.",
+      "edited_lines": 2,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 55.64,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 10,
+            "delete": 1,
+            "insert": [
+              "    .extrude(55.64)"
+            ]
+          }
+        ]
+      },
+      "volume": 50739.78520000001,
+      "consensus": 1,
+      "numbers_fraction": 1.0,
+      "score": 1.748,
+      "audit_reference_iou": 1.0
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [4] `    .lineTo(27.8, 0.0)` -> Increase half-width to 27.82 for a mirrored total width of 55.64.\n- [5] `    .lineTo(27.8, 8.3)` -> Match the outer edge to the new half-width.",
+      "edited_lines": 4,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 55.64,
+          "ok": false
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 4,
+            "delete": 2,
+            "insert": [
+              "    .lineTo(27.82, 0.0)",
+              "    .lineTo(27.82, 8.3)"
+            ]
+          }
+        ]
+      },
+      "volume": 39050.3776,
+      "consensus": 1,
+      "numbers_fraction": 0.0,
+      "score": 0.746,
+      "audit_reference_iou": 0.7689311121435515
+    }
+  ],
+  "audit_selected_strict": true,
+  "audit_any_strict": true,
+  "audit_reference_changed": true,
+  "id": "fd46661a57f975b1f76ec4eff85ea947b7d292a5daad62f4b62283d6fd5a3962",
+  "category": "T1"
+}

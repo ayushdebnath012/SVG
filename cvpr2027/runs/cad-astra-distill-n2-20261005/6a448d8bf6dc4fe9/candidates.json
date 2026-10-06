@@ -1,0 +1,4 @@
+[
+  "PLAN:\n- [5] `    .faces(\">Z\").workplane()` -> Replace through-cut with a lofted subtraction between specified bottom and top openings, producing approximately 60-degree walls.\nPATCH:\n{\"edits\":[{\"start\":5,\"delete\":3,\"insert\":[\"    .cut(\",\"        cq.Workplane(\\\"XY\\\")\",\"        .rect(26.86, 66.86)\",\"        .workplane(offset=10.0)\",\"        .rect(38.4, 78.4)\",\"        .loft(combine=False, ruled=True)\",\"    )\"]}]}",
+  "PLAN:\n- [7] `    .cutThruAll()` -> Loft-cut to a smaller bottom rectangle, retaining the top opening and forming approximately 60-degree inward-sloping walls.\nPATCH:\n{\"edits\":[{\"start\":7,\"delete\":1,\"insert\":[\"    .workplane(offset=-10.0)\",\"    .rect(26.86, 66.86)\",\"    .loft(combine=\\\"cut\\\")\"]}]}"
+]

@@ -1,0 +1,84 @@
+{
+  "n": 2,
+  "executed": 0,
+  "clusters": [],
+  "selected": null,
+  "selected_consensus": 0,
+  "selected_numbers_fraction": null,
+  "selected_changed": null,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": false,
+      "error": "Standard_Failure: BRep_API: command not done",
+      "plan": "- [10] `    .faces(\">Z\").workplane()` -> Insert asymmetric chamfers on both top outer arcs: 3 mm top setback and 60-degree downward slope.",
+      "edited_lines": 2,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 3.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 60.0,
+          "ok": false
+        }
+      ],
+      "changed": null,
+      "patch": {
+        "edits": [
+          {
+            "start": 10,
+            "delete": 0,
+            "insert": [
+              "    .faces(\">Z\").edges(\"%CIRCLE\")",
+              "    .chamfer(3.0, 3.0 * (3.0 ** 0.5))"
+            ]
+          }
+        ]
+      },
+      "score": null,
+      "audit_reference_iou": null
+    },
+    {
+      "index": 1,
+      "gates": false,
+      "error": "Standard_Failure: BRep_API: command not done",
+      "plan": "- [10] `    .faces(\">Z\").workplane()` -> Insert asymmetric chamfers on top outer arcs: 3 mm top width and 60-degree downward slope.",
+      "edited_lines": 2,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 3.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 60.0,
+          "ok": false
+        }
+      ],
+      "changed": null,
+      "patch": {
+        "edits": [
+          {
+            "start": 10,
+            "delete": 0,
+            "insert": [
+              "    .faces(\">Z\").edges(\"%CIRCLE\")",
+              "    .chamfer(3.0, 3.0 * 3.0**0.5)"
+            ]
+          }
+        ]
+      },
+      "score": null,
+      "audit_reference_iou": null
+    }
+  ],
+  "audit_selected_strict": false,
+  "audit_any_strict": false,
+  "audit_reference_changed": true,
+  "id": "f1de2ae2dd14f253a1752281d061a575bb3bba5264977aee9eae61e58445d45d",
+  "category": "T5"
+}

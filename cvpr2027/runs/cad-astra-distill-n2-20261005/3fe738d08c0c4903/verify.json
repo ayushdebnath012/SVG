@@ -1,0 +1,121 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 1,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": 0.75,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [8] `)` -> Insert recess cut: 15 × 14 mm opening, 4 mm depth, 7 mm floor length, 45-degree end walls.",
+      "edited_lines": 6,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 4.0,
+          "ok": false
+        },
+        {
+          "kind": "value_present",
+          "value": 14.0,
+          "ok": false
+        },
+        {
+          "kind": "value_present",
+          "value": 15.0,
+          "ok": false
+        },
+        {
+          "kind": "value_present",
+          "value": 45.0,
+          "ok": false
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 8,
+            "delete": 0,
+            "insert": [
+              "    .cut(",
+              "        cq.Workplane(\"XZ\")",
+              "        .polyline([(-7.5, 10.2), (7.5, 10.2), (3.5, 6.2), (-3.5, 6.2)])",
+              "        .close()",
+              "        .extrude(7.0, both=True)",
+              "    )"
+            ]
+          }
+        ]
+      },
+      "volume": 5723.9446958749895,
+      "consensus": 2,
+      "numbers_fraction": 0.0,
+      "score": 1.244,
+      "audit_reference_iou": 1.0
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [9] `show_object(result)` -> Insert centered recess cut: 15×14 mm opening, 4 mm depth, 7×14 mm floor, 45-degree end walls.",
+      "edited_lines": 7,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 4.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 14.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 15.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 45.0,
+          "ok": false
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 9,
+            "delete": 0,
+            "insert": [
+              "result = result.cut(",
+              "    cq.Workplane(\"XY\").workplane(offset=6.2)",
+              "    .rect(7.0, 14.0)",
+              "    .workplane(offset=4.0)",
+              "    .rect(15.0, 14.0)",
+              "    .loft(ruled=True) ",
+              ")"
+            ]
+          }
+        ]
+      },
+      "volume": 5723.9446958749895,
+      "consensus": 2,
+      "numbers_fraction": 0.75,
+      "score": 1.993,
+      "audit_reference_iou": 1.0
+    }
+  ],
+  "audit_selected_strict": true,
+  "audit_any_strict": true,
+  "audit_reference_changed": true,
+  "id": "3fe738d08c0c4903cd6b140c64c36716117f7861b5372910f99eebc13d1a03be",
+  "category": "T5"
+}

@@ -1,0 +1,35 @@
+{
+  "variant": "distill",
+  "system": "You edit mechanical CAD. First write a short plan, then the patch, in exactly this format:\nPLAN:\n- [i] `exact original line i` -> what changes (at most 20 words)\n(one bullet per edit operation; i is the zero-based ORIGINAL line index where the operation starts; for an insertion at the end write [END])\nPATCH:\n{\"edits\":[{\"start\":0,\"delete\":0,\"insert\":[\"replacement line\"]}]}\nIndices are zero-based lines of the ORIGINAL input; operations must be ordered, nonoverlapping and in bounds. Preserve unrelated features. The supplied representation determines syntax. Return no other text and no invented physics results. Geometry execution and FEM checks are performed by external tools; never claim verification.",
+  "files": {
+    "train": "adbc31b88dddc5862a6d5f19c9b742dc1c75af9a1aa360453a700a5819d1b06e",
+    "validation": "f2b3d9e04b38b3dba52d518e05c1ccc36db43e72de351b46271385fd3e0a79f0",
+    "test": "26ff0b02076a62c1802578321b974b4c0b51a1d7b23133df915f4475b8da8232"
+  },
+  "counts": {
+    "train": {
+      "template": 2099,
+      "teacher_verified": 441
+    },
+    "validation": {
+      "template": 172,
+      "teacher_verified": 0
+    },
+    "test": {
+      "template": 252,
+      "teacher_verified": 0
+    }
+  },
+  "source_splits": "runs/multisource-cad-colab-20261002/results-final",
+  "teacher": [
+    "runs/cad-astra-distill-20261004",
+    "runs/cad-astra-distill-n2-20261005"
+  ],
+  "acceptance": "verifier gates + consensus>=2",
+  "teacher_audit": {
+    "tasks": 468,
+    "accepted": 441,
+    "accepted_reference_strict": 364
+  },
+  "note": "Rows are the retained splits of the completed 3B run; only targets change. Teacher calls used the training split only."
+}

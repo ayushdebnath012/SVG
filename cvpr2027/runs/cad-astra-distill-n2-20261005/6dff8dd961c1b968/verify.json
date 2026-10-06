@@ -1,0 +1,67 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    1,
+    1
+  ],
+  "selected": 0,
+  "selected_consensus": 1,
+  "selected_numbers_fraction": null,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [12] `result = result.cut(` -> Replace the spherical subtraction with a union, adding back the specified 25 mm radius sphere.",
+      "edited_lines": 2,
+      "numbers": [],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 12,
+            "delete": 1,
+            "insert": [
+              "result = result.union("
+            ]
+          }
+        ]
+      },
+      "volume": 118104.44911977778,
+      "consensus": 1,
+      "numbers_fraction": null,
+      "score": 1.248,
+      "audit_reference_iou": 0.5252299671530555
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [12] `result = result.cut(` -> Remove the spherical subtraction to fill the scoop and restore the sharp inside corner.",
+      "edited_lines": 3,
+      "numbers": [],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 12,
+            "delete": 3,
+            "insert": []
+          }
+        ]
+      },
+      "volume": 62031.99593181058,
+      "consensus": 1,
+      "numbers_fraction": null,
+      "score": 1.247,
+      "audit_reference_iou": 1.0
+    }
+  ],
+  "audit_selected_strict": false,
+  "audit_any_strict": true,
+  "audit_reference_changed": true,
+  "id": "6dff8dd961c1b9684ffed2b618e5d3ca5c492ca168ecc9894b15a733d9d1e059",
+  "category": "T4"
+}

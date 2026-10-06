@@ -1,0 +1,86 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 0,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": 1.0,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [14] `show_object(result)` -> Insert a coaxial 16 mm diameter, 4 mm thick flange extending outward from the wide end.",
+      "edited_lines": 3,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 16.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 14,
+            "delete": 0,
+            "insert": [
+              "result = result.union(",
+              "    cq.Workplane(\"XZ\", origin=(0, 100, 0)).circle(8.0).extrude(-4.0)",
+              ")"
+            ]
+          }
+        ]
+      },
+      "volume": 4653.118743584218,
+      "consensus": 2,
+      "numbers_fraction": 1.0,
+      "score": 2.247,
+      "audit_reference_iou": 1.0
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [14] `show_object(result)` -> Insert a centered 16 mm diameter, 4 mm thick flange extending outward from the wide end at Y=100.",
+      "edited_lines": 5,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 16.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 14,
+            "delete": 0,
+            "insert": [
+              "result = result.union(",
+              "    cq.Workplane(cq.Plane(origin=(0, 100, 0), normal=(0, 1, 0)))",
+              "    .circle(8.0)",
+              "    .extrude(4.0)",
+              ")"
+            ]
+          }
+        ]
+      },
+      "volume": 4653.118743584218,
+      "consensus": 2,
+      "numbers_fraction": 1.0,
+      "score": 2.245,
+      "audit_reference_iou": 1.0
+    }
+  ],
+  "audit_selected_strict": true,
+  "audit_any_strict": true,
+  "audit_reference_changed": true,
+  "id": "e22b14e85e547a8915d47fbedbd302e8ae41b95f6cb473d6a7896b26ae2e2682",
+  "category": "T5"
+}

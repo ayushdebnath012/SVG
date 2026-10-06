@@ -1,0 +1,4 @@
+[
+  "PLAN:\n- [7] `bowl = cq.Workplane(\"XY\").sphere(12).translate((0, 0, 9.8))` -> Create a 12 mm radius upper hemisphere centered on the star’s top face.\n- [8] `result = result.cut(bowl)` -> Union the dome with the star instead of cutting a bowl.\nPATCH:\n{\"edits\":[{\"start\":7,\"delete\":1,\"insert\":[\"dome = cq.Workplane(\\\"XY\\\").sphere(12, angleDegrees1=0, angleDegrees2=90).translate((0, 0, 9.8))\"]},{\"start\":8,\"delete\":1,\"insert\":[\"result = result.union(dome)\"]}]}",
+  "PLAN:\n- [7] `bowl = cq.Workplane(\"XY\").sphere(12).translate((0, 0, 9.8))` -> Create a 12 mm radius upper hemisphere centered on the star’s top face.\n- [8] `result = result.cut(bowl)` -> Union the dome with the star instead of cutting a bowl.\nPATCH:\n{\"edits\":[{\"start\":7,\"delete\":1,\"insert\":[\"dome = cq.Workplane(\\\"XY\\\").sphere(12, angle1=0, angle2=90).translate((0, 0, 9.8))\"]},{\"start\":8,\"delete\":1,\"insert\":[\"result = result.union(dome)\"]}]}"
+]

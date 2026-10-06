@@ -1,0 +1,91 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 1,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": 0.5,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [9] `    .extrude(1.2)` -> Add a 0.5 mm, 45-degree chamfer along all top perimeter edges.",
+      "edited_lines": 3,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 0.5,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 45.0,
+          "ok": false
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 9,
+            "delete": 1,
+            "insert": [
+              "    .extrude(1.2)",
+              "    .faces(\">Z\").edges().chamfer(0.5)"
+            ]
+          }
+        ]
+      },
+      "volume": 594.0375349591723,
+      "consensus": 2,
+      "numbers_fraction": 0.5,
+      "score": 1.747,
+      "audit_reference_iou": 0.9999999999999984
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [10] `)` -> Insert a 0.5 mm chamfer on all top-face perimeter edges, producing a 45-degree downward strip.",
+      "edited_lines": 1,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 0.5,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 45.0,
+          "ok": false
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 10,
+            "delete": 0,
+            "insert": [
+              "    .faces(\">Z\").edges().chamfer(0.5)"
+            ]
+          }
+        ]
+      },
+      "volume": 594.0375349591723,
+      "consensus": 2,
+      "numbers_fraction": 0.5,
+      "score": 1.749,
+      "audit_reference_iou": 0.9999999999999984
+    }
+  ],
+  "audit_selected_strict": true,
+  "audit_any_strict": true,
+  "audit_reference_changed": true,
+  "id": "8c7a48442fd328a67f72a24a0965cb37d7c1314f2b9c90f2025da9d6dc07d08b",
+  "category": "T5"
+}

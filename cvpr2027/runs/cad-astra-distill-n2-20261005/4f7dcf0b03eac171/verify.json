@@ -1,0 +1,77 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 1,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": null,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [2] `    cq.Workplane(\"XY\")` -> Remove the cylindrical leg and union wrapper, retaining only the semicircular hook arc.",
+      "edited_lines": 15,
+      "numbers": [],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 2,
+            "delete": 10,
+            "insert": [
+              "    cq.Workplane(\"XY\")",
+              "    .transformed(offset=cq.Vector(0, 0, 55.0), rotate=cq.Vector(0, 0, 0))",
+              "    .moveTo(19.0, 0.0)",
+              "    .circle(4.0)",
+              "    .revolve(180, (0, 0, 0), (0, -1, 0))"
+            ]
+          }
+        ]
+      },
+      "volume": 3000.3597379311645,
+      "consensus": 2,
+      "numbers_fraction": null,
+      "score": 1.735,
+      "audit_reference_iou": 1.0
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [2] `    cq.Workplane(\"XY\")` -> Remove the cylindrical leg and union wrapper, retaining the hook workplane.\n- [11] `    )` -> Remove the union’s closing parenthesis.",
+      "edited_lines": 7,
+      "numbers": [],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 2,
+            "delete": 5,
+            "insert": [
+              "    cq.Workplane(\"XY\")"
+            ]
+          },
+          {
+            "start": 11,
+            "delete": 1,
+            "insert": []
+          }
+        ]
+      },
+      "volume": 3000.3597379311645,
+      "consensus": 2,
+      "numbers_fraction": null,
+      "score": 1.743,
+      "audit_reference_iou": 1.0
+    }
+  ],
+  "audit_selected_strict": true,
+  "audit_any_strict": true,
+  "audit_reference_changed": true,
+  "id": "4f7dcf0b03eac171237f08b90c0cddfd856943e4dc31c9300c8737d79a075ea2",
+  "category": "T4"
+}

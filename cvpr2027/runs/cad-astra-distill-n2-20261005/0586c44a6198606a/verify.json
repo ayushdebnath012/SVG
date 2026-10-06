@@ -1,0 +1,80 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 0,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": 1.0,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [11] `show_object(result)` -> Insert a 90° rotation about the global Z axis before displaying the part.",
+      "edited_lines": 1,
+      "numbers": [
+        {
+          "kind": "delta",
+          "value": 90.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 11,
+            "delete": 0,
+            "insert": [
+              "result = result.rotate((0, 0, 0), (0, 0, 1), 90)"
+            ]
+          }
+        ]
+      },
+      "volume": 761.6267789852856,
+      "consensus": 2,
+      "numbers_fraction": 1.0,
+      "score": 2.249,
+      "audit_reference_iou": 1.0
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [10] `)` -> Rotate the completed part 90° about the global Z axis.",
+      "edited_lines": 1,
+      "numbers": [
+        {
+          "kind": "delta",
+          "value": 90.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 10,
+            "delete": 0,
+            "insert": [
+              "    .rotate((0, 0, 0), (0, 0, 1), 90)"
+            ]
+          }
+        ]
+      },
+      "volume": 761.6267789852856,
+      "consensus": 2,
+      "numbers_fraction": 1.0,
+      "score": 2.249,
+      "audit_reference_iou": 1.0
+    }
+  ],
+  "audit_selected_strict": true,
+  "audit_any_strict": true,
+  "audit_reference_changed": true,
+  "id": "0586c44a6198606a9bccabc549e241f538398deede5b3d3de6c7a670f0676c73",
+  "category": "T2"
+}

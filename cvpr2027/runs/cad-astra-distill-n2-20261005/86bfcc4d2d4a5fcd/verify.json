@@ -1,0 +1,80 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 1,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": 1.0,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [8] `)` -> Rotate the completed part 90° about the global X axis.",
+      "edited_lines": 2,
+      "numbers": [
+        {
+          "kind": "delta",
+          "value": 90.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 8,
+            "delete": 1,
+            "insert": [
+              ").rotate((0, 0, 0), (1, 0, 0), 90)"
+            ]
+          }
+        ]
+      },
+      "volume": 31606.749999999996,
+      "consensus": 2,
+      "numbers_fraction": 1.0,
+      "score": 2.248,
+      "audit_reference_iou": 1.0
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [9] `show_object(result)` -> Insert a 90° rotation about the global X axis before displaying the entire part.",
+      "edited_lines": 1,
+      "numbers": [
+        {
+          "kind": "delta",
+          "value": 90.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 9,
+            "delete": 0,
+            "insert": [
+              "result = result.rotate((0, 0, 0), (1, 0, 0), 90)"
+            ]
+          }
+        ]
+      },
+      "volume": 31606.749999999996,
+      "consensus": 2,
+      "numbers_fraction": 1.0,
+      "score": 2.249,
+      "audit_reference_iou": 1.0
+    }
+  ],
+  "audit_selected_strict": true,
+  "audit_any_strict": true,
+  "audit_reference_changed": true,
+  "id": "86bfcc4d2d4a5fcd5b89b2cb6963fba95cd0c816821bb91dbd5da085e3446f2f",
+  "category": "T2"
+}

@@ -1,0 +1,4 @@
+[
+  "PLAN:\n- [1] `result = (` -> Import the chamfer builder for explicit bottom-face distance control.\n- [11] `show_object(result)` -> Chamfer every bottom perimeter edge with 0.5 mm horizontal width and 60-degree slope.\nPATCH:\n{\"edits\":[{\"start\":1,\"delete\":0,\"insert\":[\"from OCP.BRepFilletAPI import BRepFilletAPI_MakeChamfer\"]},{\"start\":11,\"delete\":0,\"insert\":[\"bottom = result.faces(\\\"<Z\\\").val()\",\"chamfer = BRepFilletAPI_MakeChamfer(result.val().wrapped)\",\"for edge in bottom.Edges():\",\"    chamfer.Add(0.5, 0.5 * (3.0 ** 0.5), edge.wrapped, bottom.wrapped)\",\"chamfer.Build()\",\"result = cq.Workplane(\\\"XY\\\").newObject([cq.Solid(chamfer.Shape())])\"]}]}",
+  "PLAN:\n- [10] `)` -> Add a bottom-perimeter chamfer with 0.5 mm horizontal width and 0.8660254 mm rise for a 60-degree slope.\nPATCH:\n{\"edits\":[{\"start\":10,\"delete\":0,\"insert\":[\"    .faces(\\\"<Z\\\").edges().chamfer(0.5, 0.8660254037844386)\"]}]}"
+]

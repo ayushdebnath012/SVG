@@ -1,0 +1,101 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 1,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": 1.0,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [4] `    .extrude(3.5)` -> Increase plate thickness to 4.55.\n- [7] `            .transformed(offset=cq.Vector(0, 10.63, 1.75), rotate=cq.Vector(0, 0, 0))` -> Center the circular cutter at the new plate midplane, preserving the through-hole.\n- [12] `            .transformed(offset=cq.Vector(0, 5.13, 1.75), rotate=cq.Vector(0, 0, 0))` -> Center the slot cutter at the new plate midplane.",
+      "edited_lines": 6,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 4.55,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 4,
+            "delete": 1,
+            "insert": [
+              "    .extrude(4.55)"
+            ]
+          },
+          {
+            "start": 7,
+            "delete": 1,
+            "insert": [
+              "            .transformed(offset=cq.Vector(0, 10.63, 2.275), rotate=cq.Vector(0, 0, 0))"
+            ]
+          },
+          {
+            "start": 12,
+            "delete": 1,
+            "insert": [
+              "            .transformed(offset=cq.Vector(0, 5.13, 2.275), rotate=cq.Vector(0, 0, 0))"
+            ]
+          }
+        ]
+      },
+      "volume": 4326.059703622479,
+      "consensus": 2,
+      "numbers_fraction": 1.0,
+      "score": 2.244,
+      "audit_reference_iou": 0.9993251537009373
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [4] `    .extrude(3.5)` -> Increase plate thickness to 4.55.\n- [7] `            .transformed(offset=cq.Vector(0, 10.63, 1.75), rotate=cq.Vector(0, 0, 0))` -> Center the cylindrical cutter within the thicker plate to preserve the through-hole.",
+      "edited_lines": 4,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 4.55,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 4,
+            "delete": 1,
+            "insert": [
+              "    .extrude(4.55)"
+            ]
+          },
+          {
+            "start": 7,
+            "delete": 1,
+            "insert": [
+              "            .transformed(offset=cq.Vector(0, 10.63, 2.275), rotate=cq.Vector(0, 0, 0))"
+            ]
+          }
+        ]
+      },
+      "volume": 4326.059703622479,
+      "consensus": 2,
+      "numbers_fraction": 1.0,
+      "score": 2.246,
+      "audit_reference_iou": 0.9993251537009373
+    }
+  ],
+  "audit_selected_strict": false,
+  "audit_any_strict": false,
+  "audit_reference_changed": true,
+  "id": "d675b85852bfce4db7e35a2559715229852d774926ab871b17295e39c107cd19",
+  "category": "T1"
+}

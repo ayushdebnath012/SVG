@@ -1,0 +1,62 @@
+```python
+import FreeCAD
+import PartDesign
+import math
+
+# Define the parameters
+pressure_angle = 20  # degrees
+gear_module = 1  # mm
+number_of_teeth = 45
+pitch_diameter = 45  # mm
+outer_diameter = 47  # mm
+face_width = 6  # mm
+hub_diameter = 16  # mm
+hub_width = 6  # mm
+shaft_diameter = 8  # mm
+overall_width = 12  # mm
+addendum = gear_module  # ISO 21771 / standard spur gear geometry
+dedendum = 1.25 * gear_module  # ISO 21771 / standard spur gear geometry
+root_diameter = pitch_diameter - 2 * dedendum  # ISO 21771 / standard spur gear geometry
+circular_pitch = math.pi * gear_module  # ISO 21771 / standard spur gear geometry
+base_diameter = pitch_diameter * math.cos(math.radians(pressure_angle))  # ISO 21771 / standard spur gear geometry
+whole_depth = addendum + dedendum  # ISO 21771 / standard spur gear geometry
+tooth_thickness = circular_pitch / 2  # ISO 21771 / standard spur gear geometry
+
+# Create a new document
+doc = FreeCAD.newDocument("SpurGear")
+
+# Create the gear body
+gear_body = PartDesign.Body(doc)
+gear_body.Label = "Gear Body"
+
+# Create the gear teeth
+gear_teeth = PartDesign.Tooth(gear_body)
+gear_teeth.NumberOfTeeth = number_of_teeth
+gear_teeth.GearModule = gear_module
+gear_teeth.PressureAngle = pressure_angle
+gear_teeth.PitchDiameter = pitch_diameter
+gear_teeth.OuterDiameter = outer_diameter
+gear_teeth.FaceWidth = face_width
+gear_teeth.Addendum = addendum
+gear_teeth.Dedendum = dedendum
+gear_teeth.WholeDepth = whole_depth
+gear_teeth.CircularPitch = circular_pitch
+gear_teeth.BaseDiameter = base_diameter
+gear_teeth.ToothThickness = tooth_thickness
+
+# Create the hub
+hub = PartDesign.Hub(gear_body)
+hub.HubDiameter = hub_diameter
+hub.HubWidth = hub_width
+hub.OverallWidth = overall_width
+
+# Create the round bore
+bore = PartDesign.Bore(gear_body)
+bore.ShootDiameter = shaft_diameter
+
+# Save the document
+output_path = FreeCAD.getHomePath() + "/app/answer.FCStd"
+doc.saveAs(output_path)
+
+print(f"Model saved to {output_path}")
+```

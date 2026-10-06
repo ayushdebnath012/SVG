@@ -1,0 +1,112 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 0,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": 1.0,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [25] `)` -> Cut four 8 mm diameter through-passages at plate-centre offsets of ±15 mm in X and Y.",
+      "edited_lines": 7,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 4.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 8.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 15.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 25,
+            "delete": 0,
+            "insert": [
+              "    .cut(",
+              "        cq.Workplane(\"XY\")",
+              "            .workplane(offset=-4.8)",
+              "            .pushPoints([(16.0, -15.0), (16.0, 15.0), (46.0, -15.0), (46.0, 15.0)])",
+              "            .circle(4.0)",
+              "            .extrude(4.8)",
+              "    )"
+            ]
+          }
+        ]
+      },
+      "volume": 30292.44277580712,
+      "consensus": 2,
+      "numbers_fraction": 1.0,
+      "score": 2.243,
+      "audit_reference_iou": 1.0
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [25] `)` -> Insert four 8 mm diameter through-cuts at plate-centre offsets (±15, ±15), spanning the plate thickness.",
+      "edited_lines": 7,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 4.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 8.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 15.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 25,
+            "delete": 0,
+            "insert": [
+              "    .cut(",
+              "        cq.Workplane(\"XY\")",
+              "            .workplane(offset=-4.8)",
+              "            .pushPoints([(16.0, -15.0), (16.0, 15.0), (46.0, -15.0), (46.0, 15.0)])",
+              "            .circle(4.0)",
+              "            .extrude(4.8)",
+              "    )"
+            ]
+          }
+        ]
+      },
+      "volume": 30292.44277580712,
+      "consensus": 2,
+      "numbers_fraction": 1.0,
+      "score": 2.243,
+      "audit_reference_iou": 1.0
+    }
+  ],
+  "audit_selected_strict": true,
+  "audit_any_strict": true,
+  "audit_reference_changed": true,
+  "id": "2824b4e72525a03d5fdc75dc14a2dd8b725e4934c1d469c23bc9af8344b6df74",
+  "category": "T5"
+}

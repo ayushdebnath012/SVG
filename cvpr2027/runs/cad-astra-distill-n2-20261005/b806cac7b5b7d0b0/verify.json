@@ -1,0 +1,90 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 0,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": 0.0,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [3] `    .polyline([(-30.3, 0.0), (30.3, 0.0), (30.3, 11.2), (6.55, 11.2), (16.6, 2.8), (-16.6, 2.8), (-6.55, 11.2), (-30.3, 11.2)])` -> Set groove walls to 60° using depth divided by √3; preserve the 13.1 mm opening and groove depth.",
+      "edited_lines": 2,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 13.1,
+          "ok": false
+        },
+        {
+          "kind": "value_present",
+          "value": 60.0,
+          "ok": false
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 3,
+            "delete": 1,
+            "insert": [
+              "    .polyline([(-30.3, 0.0), (30.3, 0.0), (30.3, 11.2), (6.55, 11.2), (6.55 + 8.4 / (3 ** 0.5), 2.8), (-(6.55 + 8.4 / (3 ** 0.5)), 2.8), (-6.55, 11.2), (-30.3, 11.2)])"
+            ]
+          }
+        ]
+      },
+      "volume": 85473.83651446817,
+      "consensus": 2,
+      "numbers_fraction": 0.0,
+      "score": 1.248,
+      "audit_reference_iou": 0.9999958991606966
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [3] `    .polyline([(-30.3, 0.0), (30.3, 0.0), (30.3, 11.2), (6.55, 11.2), (16.6, 2.8), (-16.6, 2.8), (-6.55, 11.2), (-30.3, 11.2)])` -> Set groove bottom corners for 60-degree walls, preserving the 13.1 mm opening and groove depth.",
+      "edited_lines": 2,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 13.1,
+          "ok": false
+        },
+        {
+          "kind": "value_present",
+          "value": 60.0,
+          "ok": false
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 3,
+            "delete": 1,
+            "insert": [
+              "    .polyline([(-30.3, 0.0), (30.3, 0.0), (30.3, 11.2), (6.55, 11.2), (6.55 + 8.4 / (3 ** 0.5), 2.8), (-6.55 - 8.4 / (3 ** 0.5), 2.8), (-6.55, 11.2), (-30.3, 11.2)])"
+            ]
+          }
+        ]
+      },
+      "volume": 85473.83651446817,
+      "consensus": 2,
+      "numbers_fraction": 0.0,
+      "score": 1.248,
+      "audit_reference_iou": 0.9999958991606966
+    }
+  ],
+  "audit_selected_strict": true,
+  "audit_any_strict": true,
+  "audit_reference_changed": true,
+  "id": "b806cac7b5b7d0b0b20e5d7b53fa75f45b4628875b32f69ee236dc795eaee70e",
+  "category": "T5"
+}

@@ -1,0 +1,110 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 0,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": 0.6666666666666666,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [17] `)` -> Subtract a centered 18.40 × 3.00 mm obround slot from the rod’s top, 10.00 mm deep.",
+      "edited_lines": 6,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 3.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 10.0,
+          "ok": false
+        },
+        {
+          "kind": "value_present",
+          "value": 18.4,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 17,
+            "delete": 0,
+            "insert": [
+              "    .cut(",
+              "        cq.Workplane(\"XY\")",
+              "            .workplane(offset=68.0)",
+              "            .slot2D(18.40, 3.00, angle=0)",
+              "            .extrude(-10.00)",
+              "    )"
+            ]
+          }
+        ]
+      },
+      "volume": 7094.179699731725,
+      "consensus": 2,
+      "numbers_fraction": 0.6666666666666666,
+      "score": 1.9106666666666665,
+      "audit_reference_iou": 0.9932809199191467
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [17] `)` -> Subtract a centered 18.40 × 3.00 mm obround slot, extending 10.00 mm downward from the crown top.",
+      "edited_lines": 6,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 3.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 10.0,
+          "ok": false
+        },
+        {
+          "kind": "value_present",
+          "value": 18.4,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 17,
+            "delete": 0,
+            "insert": [
+              "    .cut(",
+              "        cq.Workplane(\"XY\")",
+              "            .workplane(offset=68.0)",
+              "            .slot2D(18.40, 3.00, angle=0)",
+              "            .extrude(-10.00)",
+              "    )"
+            ]
+          }
+        ]
+      },
+      "volume": 7094.179699731725,
+      "consensus": 2,
+      "numbers_fraction": 0.6666666666666666,
+      "score": 1.9106666666666665,
+      "audit_reference_iou": 0.9932809199191467
+    }
+  ],
+  "audit_selected_strict": false,
+  "audit_any_strict": false,
+  "audit_reference_changed": true,
+  "id": "6bbf7fc1ef115264dd7ce1bd21947bc45d9fa6512c6ad8561c84c4d3e869eaac",
+  "category": "T4"
+}

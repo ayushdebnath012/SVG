@@ -1,0 +1,92 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 0,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": 0.5,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [11] `show_object(result)` -> Insert conical cuts at both passage openings, creating 5 mm radial bands sloped 60 degrees from horizontal.",
+      "edited_lines": 2,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 5.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 60.0,
+          "ok": false
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 11,
+            "delete": 0,
+            "insert": [
+              "result = result.cut(cq.Solid.makeCone(26.0, 21.0, 5.0 * 3.0**0.5, cq.Vector(0, 0, 0), cq.Vector(0, 0, 1)))",
+              "result = result.cut(cq.Solid.makeCone(26.0, 21.0, 5.0 * 3.0**0.5, cq.Vector(0, 0, 34.0), cq.Vector(0, 0, -1)))"
+            ]
+          }
+        ]
+      },
+      "volume": 70794.05473556527,
+      "consensus": 2,
+      "numbers_fraction": 0.5,
+      "score": 1.748,
+      "audit_reference_iou": 0.9752234316637597
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [11] `show_object(result)` -> Insert conical cuts at both passage openings, creating 5 mm radial bands sloped 60 degrees from horizontal.",
+      "edited_lines": 2,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 5.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 60.0,
+          "ok": false
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 11,
+            "delete": 0,
+            "insert": [
+              "result = result.cut(cq.Solid.makeCone(26.0, 21.0, 5.0 * 3.0**0.5, cq.Vector(0, 0, 0), cq.Vector(0, 0, 1)))",
+              "result = result.cut(cq.Solid.makeCone(26.0, 21.0, 5.0 * 3.0**0.5, cq.Vector(0, 0, 34.0), cq.Vector(0, 0, -1)))"
+            ]
+          }
+        ]
+      },
+      "volume": 70794.05473556527,
+      "consensus": 2,
+      "numbers_fraction": 0.5,
+      "score": 1.748,
+      "audit_reference_iou": 0.9752234316637597
+    }
+  ],
+  "audit_selected_strict": false,
+  "audit_any_strict": false,
+  "audit_reference_changed": true,
+  "id": "6c92f5522174a3c7c02071cdf7392628893635e73f8fc2842998a6ecc63d3ff8",
+  "category": "T5"
+}

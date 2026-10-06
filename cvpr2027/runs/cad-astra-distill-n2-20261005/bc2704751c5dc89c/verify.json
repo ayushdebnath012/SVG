@@ -1,0 +1,86 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 0,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": null,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [3] `    .cylinder(7.9, 18.7)` -> Replace with a 37.4 across-corners hexagon, extruded 7.9 high at the original elevation.\n- [5] `    .circle(16.2)` -> Replace with a 32.4 across-corners hexagon; preserve extrusion height, bore, and chamfers.",
+      "edited_lines": 6,
+      "numbers": [],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 3,
+            "delete": 1,
+            "insert": [
+              "    .workplane(offset=-3.95)",
+              "    .polygon(6, 37.4)",
+              "    .extrude(7.9)"
+            ]
+          },
+          {
+            "start": 5,
+            "delete": 1,
+            "insert": [
+              "    .polygon(6, 32.4)"
+            ]
+          }
+        ]
+      },
+      "volume": 11072.997847833203,
+      "consensus": 2,
+      "numbers_fraction": null,
+      "score": 1.744,
+      "audit_reference_iou": 0.6675609196860225
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [3] `    .cylinder(7.9, 18.7)` -> Use a hexagon with 37.4 across-corners diameter, preserving height and vertical position.\n- [5] `    .circle(16.2)` -> Use a hexagon with 32.4 across-corners diameter, retaining the existing extrusion, bore, and chamfers.",
+      "edited_lines": 6,
+      "numbers": [],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 3,
+            "delete": 1,
+            "insert": [
+              "    .polygon(6, 37.4)",
+              "    .extrude(7.9)",
+              "    .translate((0, 0, -3.95))"
+            ]
+          },
+          {
+            "start": 5,
+            "delete": 1,
+            "insert": [
+              "    .polygon(6, 32.4)"
+            ]
+          }
+        ]
+      },
+      "volume": 11072.997847833203,
+      "consensus": 2,
+      "numbers_fraction": null,
+      "score": 1.744,
+      "audit_reference_iou": 0.6675609196860225
+    }
+  ],
+  "audit_selected_strict": false,
+  "audit_any_strict": false,
+  "audit_reference_changed": true,
+  "id": "bc2704751c5dc89c89dff46db63bd7b70be72a71d0ca33d7ddeb7a5a713f0ac8",
+  "category": "T5"
+}

@@ -1,0 +1,88 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 0,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": 1.0,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [11] `)` -> Subtract a 25 mm radius sphere centered at (0, 33.35, 4.5) from the united base and panel.",
+      "edited_lines": 5,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 25.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 11,
+            "delete": 0,
+            "insert": [
+              "    .cut(",
+              "        cq.Workplane(\"XY\")",
+              "            .transformed(offset=cq.Vector(0, 33.35, 4.5))",
+              "            .sphere(25)",
+              "    )"
+            ]
+          }
+        ]
+      },
+      "volume": 52654.60217015578,
+      "consensus": 2,
+      "numbers_fraction": 1.0,
+      "score": 2.245,
+      "audit_reference_iou": 1.0
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [11] `)` -> Insert a 25 mm radius spherical cut centered at (0, 33.35, 4.5), subtracting from both joined pieces.",
+      "edited_lines": 5,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 25.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 11,
+            "delete": 0,
+            "insert": [
+              "    .cut(",
+              "        cq.Workplane(\"XY\")",
+              "            .transformed(offset=cq.Vector(0, 33.35, 4.5))",
+              "            .sphere(25)",
+              "    )"
+            ]
+          }
+        ]
+      },
+      "volume": 52654.60217015578,
+      "consensus": 2,
+      "numbers_fraction": 1.0,
+      "score": 2.245,
+      "audit_reference_iou": 1.0
+    }
+  ],
+  "audit_selected_strict": true,
+  "audit_any_strict": true,
+  "audit_reference_changed": true,
+  "id": "1bd0155be5195eff9642b2a08563df49b68e99c908771c9c9ce1460b57cb954e",
+  "category": "T4"
+}

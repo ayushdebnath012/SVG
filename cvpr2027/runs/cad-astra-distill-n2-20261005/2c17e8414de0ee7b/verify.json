@@ -1,0 +1,106 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 0,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": 0.6666666666666666,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [6] `)` -> Add a centered six-sided recess, 4.00 mm circumscribed diameter and 8.00 mm deep, from the top face.",
+      "edited_lines": 4,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 4.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 6.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 8.0,
+          "ok": false
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 6,
+            "delete": 0,
+            "insert": [
+              "    .faces(\">Z\")",
+              "    .workplane(centerOption=\"CenterOfMass\")",
+              "    .polygon(6, 4.00)",
+              "    .cutBlind(-8.00)"
+            ]
+          }
+        ]
+      },
+      "volume": 2994.8369635912936,
+      "consensus": 2,
+      "numbers_fraction": 0.6666666666666666,
+      "score": 1.9126666666666665,
+      "audit_reference_iou": 1.0
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [6] `)` -> Add a centered six-sided polygon, 4.00 mm circumscribed diameter, cut 8.00 mm into the top face.",
+      "edited_lines": 4,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 4.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 6.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 8.0,
+          "ok": false
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 6,
+            "delete": 0,
+            "insert": [
+              "    .faces(\">Z\")",
+              "    .workplane()",
+              "    .polygon(6, 4.00)",
+              "    .cutBlind(-8.00)"
+            ]
+          }
+        ]
+      },
+      "volume": 2994.8369635912936,
+      "consensus": 2,
+      "numbers_fraction": 0.6666666666666666,
+      "score": 1.9126666666666665,
+      "audit_reference_iou": 1.0
+    }
+  ],
+  "audit_selected_strict": true,
+  "audit_any_strict": true,
+  "audit_reference_changed": true,
+  "id": "2c17e8414de0ee7bf11af3b6053912058ef42da4cfd4085eb03b5ae29061554a",
+  "category": "T4"
+}

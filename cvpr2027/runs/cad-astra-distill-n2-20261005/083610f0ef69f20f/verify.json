@@ -1,0 +1,107 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    1,
+    1
+  ],
+  "selected": 0,
+  "selected_consensus": 1,
+  "selected_numbers_fraction": 0.0,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [9] `result = result.cut(` -> Union the outward-sloping, 14 mm wide trapezoidal pad instead, filling the 4 mm recess flush with the top.",
+      "edited_lines": 2,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 4.0,
+          "ok": false
+        },
+        {
+          "kind": "value_present",
+          "value": 15.0,
+          "ok": false
+        },
+        {
+          "kind": "value_present",
+          "value": 45.0,
+          "ok": false
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 9,
+            "delete": 1,
+            "insert": [
+              "result = result.union("
+            ]
+          }
+        ]
+      },
+      "volume": 6339.944695874992,
+      "consensus": 1,
+      "numbers_fraction": 0.0,
+      "score": 0.748,
+      "audit_reference_iou": 1.0
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [16] `show_object(result)` -> Insert union filling recess and adding 15 × 14 × 4 mm pad with outward-sloping 45-degree ends.",
+      "edited_lines": 7,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 4.0,
+          "ok": false
+        },
+        {
+          "kind": "value_present",
+          "value": 15.0,
+          "ok": false
+        },
+        {
+          "kind": "value_present",
+          "value": 45.0,
+          "ok": false
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 16,
+            "delete": 0,
+            "insert": [
+              "result = result.union(",
+              "    cq.Workplane(\"XZ\")",
+              "    .workplane(offset=-7.0)",
+              "    .polyline([(-3.5, 6.2), (3.5, 6.2), (11.5, 14.2), (-11.5, 14.2)])",
+              "    .close()",
+              "    .extrude(14.0, both=False)",
+              ")"
+            ]
+          }
+        ]
+      },
+      "volume": 7403.944695874989,
+      "consensus": 1,
+      "numbers_fraction": 0.0,
+      "score": 0.743,
+      "audit_reference_iou": 0.8562928217720495
+    }
+  ],
+  "audit_selected_strict": true,
+  "audit_any_strict": true,
+  "audit_reference_changed": true,
+  "id": "083610f0ef69f20f5d0eb90ce757d40d8da53ad7cc9af55e198916b3e7c1af59",
+  "category": "T4"
+}

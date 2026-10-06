@@ -1,0 +1,93 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 1,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": 0.5,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [10] `)` -> Insert a 0.4 mm equal-distance chamfer on the inner curved top edge, producing a 45-degree bevel.",
+      "edited_lines": 3,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 0.4,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 45.0,
+          "ok": false
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 10,
+            "delete": 0,
+            "insert": [
+              "    .faces(\">Z\").edges()",
+              "    .filter(lambda e: e.geomType() == \"CIRCLE\" and abs(e.radius() - 2.35) < 0.01)",
+              "    .chamfer(0.4)"
+            ]
+          }
+        ]
+      },
+      "volume": 48.88010927034381,
+      "consensus": 2,
+      "numbers_fraction": 0.5,
+      "score": 1.747,
+      "audit_reference_iou": 0.9310345458623913
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [10] `)` -> Select the inner curved top edge and apply a 0.4 mm equal-distance chamfer for a 45-degree bevel.",
+      "edited_lines": 2,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 0.4,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 45.0,
+          "ok": false
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 10,
+            "delete": 0,
+            "insert": [
+              "    .edges().filter(lambda e: e.geomType() == \"CIRCLE\" and abs(e.radius() - 2.35) < 0.001 and abs(e.Center().z - 0.8) < 0.001)",
+              "    .chamfer(0.4)"
+            ]
+          }
+        ]
+      },
+      "volume": 48.88010927034381,
+      "consensus": 2,
+      "numbers_fraction": 0.5,
+      "score": 1.748,
+      "audit_reference_iou": 0.9310345458623913
+    }
+  ],
+  "audit_selected_strict": false,
+  "audit_any_strict": false,
+  "audit_reference_changed": true,
+  "id": "0b7084dd688d12a20d66d68ff21605008a85d120e46764c693a00d256cd7d0ce",
+  "category": "T5"
+}

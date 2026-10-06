@@ -1,0 +1,82 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 0,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": 1.0,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [8] `)` -> Add a centered 20 diameter through-hole along Z from the top face.",
+      "edited_lines": 2,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 20.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 8,
+            "delete": 0,
+            "insert": [
+              "    .faces(\">Z\").workplane(centerOption=\"CenterOfBoundBox\")",
+              "    .hole(20.0)"
+            ]
+          }
+        ]
+      },
+      "volume": 227273.0457243729,
+      "consensus": 2,
+      "numbers_fraction": 1.0,
+      "score": 2.248,
+      "audit_reference_iou": 0.9999048027382866
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [8] `)` -> Insert a top-face workplane and drill a centered 20-diameter through-hole along Z.",
+      "edited_lines": 2,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 20.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 8,
+            "delete": 0,
+            "insert": [
+              "    .faces(\">Z\").workplane()",
+              "    .hole(20.0)"
+            ]
+          }
+        ]
+      },
+      "volume": 227273.0457243729,
+      "consensus": 2,
+      "numbers_fraction": 1.0,
+      "score": 2.248,
+      "audit_reference_iou": 0.9999048027382866
+    }
+  ],
+  "audit_selected_strict": false,
+  "audit_any_strict": false,
+  "audit_reference_changed": true,
+  "id": "0aec8b28298bf7217cd1bb48967e5c9e42dad0a21b95119f5d806da0529ca4fb",
+  "category": "T4"
+}

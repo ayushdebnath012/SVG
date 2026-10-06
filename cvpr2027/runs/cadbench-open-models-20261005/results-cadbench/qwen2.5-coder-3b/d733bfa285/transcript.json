@@ -1,0 +1,29 @@
+{
+  "passed": false,
+  "attempts": [
+    {
+      "round": 0,
+      "reply": "```python\nimport FreeCAD\nimport PartDesign\nimport Part\nimport math\n\n# Define the parameters\nnumber_teeth = 23\nspline_module = 3\nspline_pitch_diameter = number_teeth * spline_module\nspline_height = 10\npressure_angle = math.radians(30)\nfillet_radius = 1.2\n\n# Create a new document\ndoc = FreeCAD.newDocument(\"SplineTooth\")\n\n# Create a new PartDesign body\nbody = PartDesign.Body(doc)\n\n# Create a new cylindrical spline\nspline = PartDesign.Spline(body)\nspline.NumberOfPoints = number_teeth\nspline.PitchDiameter = spline_pitch_diameter\nspline.Height = spline_height\nspline.PressureAngle = pressure_angle\nspline.FilletRadius = fillet_radius\n\n# Create a new PartDesign feature to fillet the root of each tooth\nfillet_feature = PartDesign.Fillet(body)\nfillet_feature.FilletRadius = fillet_radius\nfillet_feature.FilletEdges = spline.Edges\n\n# Create a new Part::Feature to combine the spline and fillet\nfeature = PartDesign.Feature(body)\nfeature.Shape = spline.Shape\n\n# Save the document\ndoc.saveAs(\"/app/answer.FCStd\")\n```",
+      "status": "script_error",
+      "feedback": "I ran answer.py with FreeCAD 1.1.0 and it failed:\n```\nTraceback (most recent call last):\n  File \"/content/cadbench-out/qwen2.5-coder-3b/d733bfa285/_run.py\", line 18, in <module>\n    body = PartDesign.Body(doc)\n           ^^^^^^^^^^^^^^^\nAttributeError: module 'PartDesign' has no attribute 'Body'\n\n```"
+    },
+    {
+      "round": 1,
+      "reply": "```python\nimport FreeCAD\nimport PartDesign\nimport Part\nimport math\n\n# Define the parameters\nnumber_teeth = 23\nspline_module = 3\nspline_pitch_diameter = number_teeth * spline_module\nspline_height = 10\npressure_angle = math.radians(30)\nfillet_radius = 1.2\n\n# Create a new document\ndoc = FreeCAD.newDocument(\"SplineTooth\")\n\n# Create a new PartDesign body\nbody = PartDesign.Body(doc)\n\n# Create a new cylindrical spline\nspline = PartDesign.Spline(body)\nspline.NumberOfPoints = number_teeth\nspline.PitchDiameter = spline_pitch_diameter\nspline.Height = spline_height\nspline.PressureAngle = pressure_angle\nspline.FilletRadius = fillet_radius\n\n# Create a new PartDesign feature to fillet the root of each tooth\nfillet_feature = PartDesign.Fillet(body)\nfillet_feature.FilletRadius = fillet_radius\nfillet_feature.FilletEdges = spline.Edges\n\n# Create a new Part::Feature to combine the spline and fillet\nfeature = PartDesign.Feature(body)\nfeature.Shape = spline.Shape\n\n# Save the document\ndoc.saveAs(\"/app/answer.FCStd\")\n```",
+      "status": "script_error",
+      "feedback": "I ran answer.py with FreeCAD 1.1.0 and it failed:\n```\nTraceback (most recent call last):\n  File \"/content/cadbench-out/qwen2.5-coder-3b/d733bfa285/_run.py\", line 18, in <module>\n    body = PartDesign.Body(doc)\n           ^^^^^^^^^^^^^^^\nAttributeError: module 'PartDesign' has no attribute 'Body'\n\n```"
+    },
+    {
+      "round": 2,
+      "reply": "```python\nimport FreeCAD\nimport PartDesign\nimport Part\nimport math\n\n# Define the parameters\nnumber_teeth = 23\nspline_module = 3\nspline_pitch_diameter = number_teeth * spline_module\nspline_height = 10\npressure_angle = math.radians(30)\nfillet_radius = 1.2\n\n# Create a new document\ndoc = FreeCAD.newDocument(\"SplineTooth\")\n\n# Create a new PartDesign body\nbody = PartDesign.Body(doc)\n\n# Create a new cylindrical spline\nspline = PartDesign.Spline(body)\nspline.NumberOfPoints = number_teeth\nspline.PitchDiameter = spline_pitch_diameter\nspline.Height = spline_height\nspline.PressureAngle = pressure_angle\nspline.FilletRadius = fillet_radius\n\n# Create a new PartDesign feature to fillet the root of each tooth\nfillet_feature = PartDesign.Fillet(body)\nfillet_feature.FilletRadius = fillet_radius\nfillet_feature.FilletEdges = spline.Edges\n\n# Create a new Part::Feature to combine the spline and fillet\nfeature = PartDesign.Feature(body)\nfeature.Shape = spline.Shape\n\n# Save the document\ndoc.saveAs(\"/app/answer.FCStd\")\n```",
+      "status": "script_error",
+      "feedback": "I ran answer.py with FreeCAD 1.1.0 and it failed:\n```\nTraceback (most recent call last):\n  File \"/content/cadbench-out/qwen2.5-coder-3b/d733bfa285/_run.py\", line 18, in <module>\n    body = PartDesign.Body(doc)\n           ^^^^^^^^^^^^^^^\nAttributeError: module 'PartDesign' has no attribute 'Body'\n\n```"
+    },
+    {
+      "round": 3,
+      "reply": "```python\nimport FreeCAD\nimport PartDesign\nimport Part\nimport math\n\n# Define the parameters\nnumber_teeth = 23\nspline_module = 3\nspline_pitch_diameter = number_teeth * spline_module\nspline_height = 10\npressure_angle = math.radians(30)\nfillet_radius = 1.2\n\n# Create a new document\ndoc = FreeCAD.newDocument(\"SplineTooth\")\n\n# Create a new PartDesign body\nbody = PartDesign.Body(doc)\n\n# Create a new cylindrical spline\nspline = PartDesign.Spline(body)\nspline.NumberOfPoints = number_teeth\nspline.PitchDiameter = spline_pitch_diameter\nspline.Height = spline_height\nspline.PressureAngle = pressure_angle\nspline.FilletRadius = fillet_radius\n\n# Create a new PartDesign feature to fillet the root of each tooth\nfillet_feature = PartDesign.Fillet(body)\nfillet_feature.FilletRadius = fillet_radius\nfillet_feature.FilletEdges = spline.Edges\n\n# Create a new Part::Feature to combine the spline and fillet\nfeature = PartDesign.Feature(body)\nfeature.Shape = spline.Shape\n\n# Save the document\ndoc.saveAs(\"/app/answer.FCStd\")\n```",
+      "status": "script_error",
+      "feedback": "I ran answer.py with FreeCAD 1.1.0 and it failed:\n```\nTraceback (most recent call last):\n  File \"/content/cadbench-out/qwen2.5-coder-3b/d733bfa285/_run.py\", line 18, in <module>\n    body = PartDesign.Body(doc)\n           ^^^^^^^^^^^^^^^\nAttributeError: module 'PartDesign' has no attribute 'Body'\n\n```"
+    }
+  ]
+}

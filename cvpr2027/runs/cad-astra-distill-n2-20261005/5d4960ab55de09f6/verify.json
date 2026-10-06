@@ -1,0 +1,94 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 0,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": 0.5,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [11] `    .faces(\"<Y\").workplane()` -> Insert asymmetric chamfers on the post’s two long top edges, creating 4 mm bands sloped inward at 60 degrees.",
+      "edited_lines": 3,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 4.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 60.0,
+          "ok": false
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 11,
+            "delete": 0,
+            "insert": [
+              "    .faces(\">Z\").edges(\"|Y\")",
+              "    .filter(lambda edge: abs(abs(edge.Center().x) - 8.3) < 1e-6)",
+              "    .chamfer(4.0, 4.0 * (3.0 ** 0.5))"
+            ]
+          }
+        ]
+      },
+      "volume": 38682.65423776839,
+      "consensus": 2,
+      "numbers_fraction": 0.5,
+      "score": 1.747,
+      "audit_reference_iou": 0.9661755564531362
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [17] `)` -> Add asymmetric chamfers to the post’s two long top edges, with 4 mm bands and 60-degree slopes.",
+      "edited_lines": 3,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 4.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 60.0,
+          "ok": false
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 17,
+            "delete": 0,
+            "insert": [
+              "    .faces(\">Z\").edges(\"|Y\")",
+              "    .filter(lambda edge: abs(edge.Length() - 13.0) < 1e-6)",
+              "    .chamfer(4.0, 4.0 * (3.0 ** 0.5))"
+            ]
+          }
+        ]
+      },
+      "volume": 38682.65423776839,
+      "consensus": 2,
+      "numbers_fraction": 0.5,
+      "score": 1.747,
+      "audit_reference_iou": 0.9661755564531362
+    }
+  ],
+  "audit_selected_strict": false,
+  "audit_any_strict": false,
+  "audit_reference_changed": true,
+  "id": "5d4960ab55de09f63455326dd8bd42d1a43ed38cb18a6346ecda964d9356ea68",
+  "category": "T5"
+}

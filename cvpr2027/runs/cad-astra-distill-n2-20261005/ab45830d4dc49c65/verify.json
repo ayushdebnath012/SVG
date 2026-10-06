@@ -1,0 +1,90 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 0,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": 0.5,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [4] `)` -> Insert a 1.0 mm, 45-degree chamfer on both circular end edges; retain cylinder length and radius parameters.",
+      "edited_lines": 1,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 0.4,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 45.0,
+          "ok": false
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 4,
+            "delete": 0,
+            "insert": [
+              "    .edges(\"%Circle\").chamfer(0.4 * 2.5)"
+            ]
+          }
+        ]
+      },
+      "volume": 1949.8818403280652,
+      "consensus": 2,
+      "numbers_fraction": 0.5,
+      "score": 1.749,
+      "audit_reference_iou": 1.0
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [4] `)` -> Insert a 1.0 mm equal-distance chamfer on both circular end edges, retaining original cylinder dimensions.",
+      "edited_lines": 1,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 0.4,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 45.0,
+          "ok": false
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 4,
+            "delete": 0,
+            "insert": [
+              "    .edges(\"%CIRCLE\").chamfer(0.4 * 2.5)"
+            ]
+          }
+        ]
+      },
+      "volume": 1949.8818403280652,
+      "consensus": 2,
+      "numbers_fraction": 0.5,
+      "score": 1.749,
+      "audit_reference_iou": 1.0
+    }
+  ],
+  "audit_selected_strict": true,
+  "audit_any_strict": true,
+  "audit_reference_changed": true,
+  "id": "ab45830d4dc49c65eb2bd426de72714d8eac02c268618e2ef79edc311c7c8284",
+  "category": "T4"
+}

@@ -1,0 +1,109 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 1,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": 1.0,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [12] `)` -> Insert six evenly spaced 12 × 18 mm through-slots on the front (-Y) wall, centered at mid-height.",
+      "edited_lines": 6,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 6.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 12.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 18.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 12,
+            "delete": 0,
+            "insert": [
+              "    .cut(",
+              "        cq.Workplane(\"XZ\", origin=(0, -88.3 / 2, 0))",
+              "        .rarray((168.4 + 12) / 7, 1, 6, 1)",
+              "        .rect(12, 18)",
+              "        .extrude(3.2, both=True)",
+              "    )"
+            ]
+          }
+        ]
+      },
+      "volume": 89437.57368776684,
+      "consensus": 2,
+      "numbers_fraction": 1.0,
+      "score": 2.244,
+      "audit_reference_iou": 0.911370197595658
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [12] `)` -> Cut six evenly spaced 12 × 18 mm slots through the front (-Y) wall, centered at mid-height.",
+      "edited_lines": 5,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 6.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 12.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 18.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 12,
+            "delete": 0,
+            "insert": [
+              "    .cut(",
+              "        cq.Workplane(\"XY\", origin=(0, -44.15, 0))",
+              "        .rarray((168.4 + 12.0) / 7.0, 1, 6, 1)",
+              "        .box(12.0, 8.0, 18.0)",
+              "    )"
+            ]
+          }
+        ]
+      },
+      "volume": 89437.57368776684,
+      "consensus": 2,
+      "numbers_fraction": 1.0,
+      "score": 2.245,
+      "audit_reference_iou": 0.911370197595658
+    }
+  ],
+  "audit_selected_strict": false,
+  "audit_any_strict": false,
+  "audit_reference_changed": true,
+  "id": "5bee359412f2b73b26c954242e624072912b9f83cdbe6bf3769b8d71389697bc",
+  "category": "T5"
+}

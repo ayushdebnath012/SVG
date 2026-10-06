@@ -1,0 +1,29 @@
+{
+  "passed": false,
+  "attempts": [
+    {
+      "round": 0,
+      "reply": "```python\nimport FreeCAD\nimport PartDesign\n\n# Create a new document\ndoc = FreeCAD.newDocument(\"answer\")\n\n# Create a PartDesign Body\nbody = doc.addObject(\"PartDesign::Body\", \"Body\")\n\n# Define the shaft section parameters\nsections = [\n    {\"diameter\": 10, \"length\": 20},\n    {\"diameter\": 15, \"length\": 30},\n    {\"diameter\": 20, \"length\": 40},\n    {\"diameter\": 40, \"length\": 10},\n    {\"diameter\": 30, \"length\": 20},\n    {\"diameter\": 25, \"length\": 25},\n    {\"diameter\": 20, \"length\": 20},\n    {\"diameter\": 50, \"length\": 20},\n    {\"diameter\": 30, \"length\": 10}\n]\n\n# Create the shaft sections\nfor i, section in enumerate(sections):\n    # Create a new shaft section\n    shaft = body.newObject(\"PartDesign::Cylinder\", f\"Shaft_{i+1}\")\n    shaft.Radius = section[\"diameter\"] / 2\n    shaft.Height = section[\"length\"]\n    shaft.Placement.Base = FreeCAD.Vector(0, 0, sum(s[\"length\"] for s in sections[:i]))\n\n# Save the document\ndoc.saveAs(__file__.replace(\".py\", \".FCStd\"))\n```",
+      "status": "gate_failed",
+      "feedback": "answer.py ran, but the saved model violates the task requirements: all PartDesign::Body objects (Body) are empty (null shape or zero volume) \u2014 incomplete model"
+    },
+    {
+      "round": 1,
+      "reply": "```python\nimport FreeCAD\nimport PartDesign\n\n# Create a new document\ndoc = FreeCAD.newDocument(\"answer\")\n\n# Create a PartDesign Body\nbody = doc.addObject(\"PartDesign::Body\", \"Body\")\n\n# Define the shaft section parameters\nsections = [\n    {\"diameter\": 10, \"length\": 20},\n    {\"diameter\": 15, \"length\": 30},\n    {\"diameter\": 20, \"length\": 40},\n    {\"diameter\": 40, \"length\": 10},\n    {\"diameter\": 30, \"length\": 20},\n    {\"diameter\": 25, \"length\": 25},\n    {\"diameter\": 20, \"length\": 20},\n    {\"diameter\": 50, \"length\": 20},\n    {\"diameter\": 30, \"length\": 10}\n]\n\n# Create the shaft sections\nfor i, section in enumerate(sections):\n    # Create a new shaft section\n    shaft = body.newObject(\"PartDesign::Cylinder\", f\"Shaft_{i+1}\")\n    shaft.Radius = section[\"diameter\"] / 2\n    shaft.Height = section[\"length\"]\n    shaft.Placement.Base = FreeCAD.Vector(0, 0, sum(s[\"length\"] for s in sections[:i]))\n\n# Finalize the body\nbody.finish()\n\n# Save the document\ndoc.saveAs(__file__.replace(\".py\", \".FCStd\"))\n```",
+      "status": "script_error",
+      "feedback": "I ran answer.py with FreeCAD 1.1.0 and it failed:\n```\nTraceback (most recent call last):\n  File \"/content/cadbench-out/qwen2.5-coder-7b/5c60c7a004/_run.py\", line 32, in <module>\n    body.finish()\n    ^^^^^^^^^^^\nAttributeError: 'PartDesign.Body' object has no attribute 'finish'\n\n```"
+    },
+    {
+      "round": 2,
+      "reply": "```python\nimport FreeCAD\nimport PartDesign\n\n# Create a new document\ndoc = FreeCAD.newDocument(\"answer\")\n\n# Create a PartDesign Body\nbody = doc.addObject(\"PartDesign::Body\", \"Body\")\n\n# Define the shaft section parameters\nsections = [\n    {\"diameter\": 10, \"length\": 20},\n    {\"diameter\": 15, \"length\": 30},\n    {\"diameter\": 20, \"length\": 40},\n    {\"diameter\": 40, \"length\": 10},\n    {\"diameter\": 30, \"length\": 20},\n    {\"diameter\": 25, \"length\": 25},\n    {\"diameter\": 20, \"length\": 20},\n    {\"diameter\": 50, \"length\": 20},\n    {\"diameter\": 30, \"length\": 10}\n]\n\n# Create the shaft sections\nfor i, section in enumerate(sections):\n    # Create a new shaft section\n    shaft = body.newObject(\"PartDesign::Cylinder\", f\"Shaft_{i+1}\")\n    shaft.Radius = section[\"diameter\"] / 2\n    shaft.Height = section[\"length\"]\n    shaft.Placement.Base = FreeCAD.Vector(0, 0, sum(s[\"length\"] for s in sections[:i]))\n\n# Finalize the body\nbody.Tip = body last feature\nbody.recompute()\n\n# Save the document\ndoc.saveAs(__file__.replace(\".py\", \".FCStd\"))\n```",
+      "status": "script_error",
+      "feedback": "I ran answer.py with FreeCAD 1.1.0 and it failed:\n```\n  File \"/content/cadbench-out/qwen2.5-coder-7b/5c60c7a004/_run.py\", line 32\n    body.Tip = body last feature\n                    ^^^^\nSyntaxError: invalid syntax\n\n```"
+    },
+    {
+      "round": 3,
+      "reply": "```python\nimport FreeCAD\nimport PartDesign\n\n# Create a new document\ndoc = FreeCAD.newDocument(\"answer\")\n\n# Create a PartDesign Body\nbody = doc.addObject(\"PartDesign::Body\", \"Body\")\n\n# Define the shaft section parameters\nsections = [\n    {\"diameter\": 10, \"length\": 20},\n    {\"diameter\": 15, \"length\": 30},\n    {\"diameter\": 20, \"length\": 40},\n    {\"diameter\": 40, \"length\": 10},\n    {\"diameter\": 30, \"length\": 20},\n    {\"diameter\": 25, \"length\": 25},\n    {\"diameter\": 20, \"length\": 20},\n    {\"diameter\": 50, \"length\": 20},\n    {\"diameter\": 30, \"length\": 10}\n]\n\n# Create the shaft sections\nfor i, section in enumerate(sections):\n    # Create a new shaft section\n    shaft = body.newObject(\"PartDesign::Cylinder\", f\"Shaft_{i+1}\")\n    shaft.Radius = section[\"diameter\"] / 2\n    shaft.Height = section[\"length\"]\n    shaft.Placement.Base = FreeCAD.Vector(0, 0, sum(s[\"length\"] for s in sections[:i]))\n\n# Finalize the body\nbody.Tip = body[-1]\nbody.recompute()\n\n# Save the document\ndoc.saveAs(__file__.replace(\".py\", \".FCStd\"))\n```",
+      "status": "script_error",
+      "feedback": "I ran answer.py with FreeCAD 1.1.0 and it failed:\n```\nTraceback (most recent call last):\n  File \"/content/cadbench-out/qwen2.5-coder-7b/5c60c7a004/_run.py\", line 32, in <module>\n    body.Tip = body[-1]\n               ~~~~^^^^\nTypeError: 'PartDesign.Body' object is not subscriptable\n\n```"
+    }
+  ]
+}

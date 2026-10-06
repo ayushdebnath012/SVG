@@ -1,0 +1,130 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 0,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": 1.0,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [24] `show_object(result)` -> Insert four Ø8 mm transverse through-cuts along X, centered at Y=-4 and Z=20, 50, 80, 110 mm.",
+      "edited_lines": 6,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 8.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 20.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 50.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 80.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 110.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 24,
+            "delete": 0,
+            "insert": [
+              "result = result.cut(",
+              "    cq.Workplane(\"YZ\")",
+              "    .pushPoints([(-4.0, 20.0), (-4.0, 50.0), (-4.0, 80.0), (-4.0, 110.0)])",
+              "    .circle(4.0)",
+              "    .extrude(20.0, both=True)",
+              ")"
+            ]
+          }
+        ]
+      },
+      "volume": 33164.409157536604,
+      "consensus": 2,
+      "numbers_fraction": 1.0,
+      "score": 2.244,
+      "audit_reference_iou": 0.9086627213947691
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [24] `show_object(result)` -> Insert four 8 mm transverse through-holes along X, centered at Y=-4 and Z=20, 50, 80, 110 mm.",
+      "edited_lines": 6,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 8.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 20.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 50.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 80.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 110.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 24,
+            "delete": 0,
+            "insert": [
+              "result = result.cut(",
+              "    cq.Workplane(\"YZ\")",
+              "    .pushPoints([(-4.0, 20.0), (-4.0, 50.0), (-4.0, 80.0), (-4.0, 110.0)])",
+              "    .circle(4.0)",
+              "    .extrude(20.0, both=True)",
+              ")"
+            ]
+          }
+        ]
+      },
+      "volume": 33164.409157536604,
+      "consensus": 2,
+      "numbers_fraction": 1.0,
+      "score": 2.244,
+      "audit_reference_iou": 0.9086627213947691
+    }
+  ],
+  "audit_selected_strict": false,
+  "audit_any_strict": false,
+  "audit_reference_changed": true,
+  "id": "ae2e264afc29dc2ebfa82ea6308be2b29c138f291fbc0afc0ebe017c41bb1462",
+  "category": "T5"
+}

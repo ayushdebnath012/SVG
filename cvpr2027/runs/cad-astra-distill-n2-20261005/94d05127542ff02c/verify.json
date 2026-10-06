@@ -1,0 +1,81 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    1,
+    1
+  ],
+  "selected": 0,
+  "selected_consensus": 1,
+  "selected_numbers_fraction": 1.0,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [7] `show_object(result)` -> Insert a centered 12 mm radius spherical cut with its center at the top surface.",
+      "edited_lines": 1,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 12.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 7,
+            "delete": 0,
+            "insert": [
+              "result = result.cut(cq.Workplane(\"XY\").sphere(12.0).translate((0.0, 0.0, 9.8)))"
+            ]
+          }
+        ]
+      },
+      "volume": 17975.007028859916,
+      "consensus": 1,
+      "numbers_fraction": 1.0,
+      "score": 1.749,
+      "audit_reference_iou": 0.9999999999999996
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [7] `show_object(result)` -> Insert a centered 12 mm radius spherical cut, 6 mm deep from the top.",
+      "edited_lines": 1,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 12.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 7,
+            "delete": 0,
+            "insert": [
+              "result = result.cut(cq.Workplane(\"XY\").sphere(12.0).translate((0.0, 0.0, 15.8)))"
+            ]
+          }
+        ]
+      },
+      "volume": 20291.835268707684,
+      "consensus": 1,
+      "numbers_fraction": 1.0,
+      "score": 1.749,
+      "audit_reference_iou": 0.8858246083132467
+    }
+  ],
+  "audit_selected_strict": true,
+  "audit_any_strict": true,
+  "audit_reference_changed": true,
+  "id": "94d05127542ff02ca8fa32f3d8f9cc01a28c1d7530fd1da4a736741e524c4642",
+  "category": "T5"
+}

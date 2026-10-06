@@ -1,0 +1,87 @@
+{
+  "status": "started",
+  "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+  "model_revision": "488639f1ff808d1d3d0ba301aef8c11461451ec5",
+  "variant": "distill",
+  "source_manifest": {
+    "variant": "distill",
+    "system": "You edit mechanical CAD. First write a short plan, then the patch, in exactly this format:\nPLAN:\n- [i] `exact original line i` -> what changes (at most 20 words)\n(one bullet per edit operation; i is the zero-based ORIGINAL line index where the operation starts; for an insertion at the end write [END])\nPATCH:\n{\"edits\":[{\"start\":0,\"delete\":0,\"insert\":[\"replacement line\"]}]}\nIndices are zero-based lines of the ORIGINAL input; operations must be ordered, nonoverlapping and in bounds. Preserve unrelated features. The supplied representation determines syntax. Return no other text and no invented physics results. Geometry execution and FEM checks are performed by external tools; never claim verification.",
+    "files": {
+      "train": "adbc31b88dddc5862a6d5f19c9b742dc1c75af9a1aa360453a700a5819d1b06e",
+      "validation": "f2b3d9e04b38b3dba52d518e05c1ccc36db43e72de351b46271385fd3e0a79f0",
+      "test": "cfcfc849724d05dd4f85da6eb5dd368f546e53b9bb00946819e7ed2b3db30d10"
+    },
+    "counts": {
+      "train": {
+        "template": 2099,
+        "teacher_verified": 441
+      },
+      "validation": {
+        "template": 172,
+        "teacher_verified": 0
+      },
+      "test": {
+        "template": 252,
+        "teacher_verified": 0
+      }
+    },
+    "source_splits": "runs/multisource-cad-colab-20261002/results-final",
+    "teacher": [
+      "runs/cad-astra-distill-20261004",
+      "runs/cad-astra-distill-n2-20261005"
+    ],
+    "acceptance": "verifier gates + consensus>=2",
+    "teacher_audit": {
+      "tasks": 468,
+      "accepted": 441,
+      "accepted_reference_strict": 364
+    },
+    "note": "Rows are the retained splits of the completed 3B run; only targets change. Teacher calls used the training split only.",
+    "portable_reference_remap": "Only STEP paths changed; inputs, targets and patches unchanged."
+  },
+  "counts": {
+    "train": 2540,
+    "validation": 172,
+    "test": 252
+  },
+  "origin_counts": {
+    "train": {
+      "template": 2099,
+      "teacher_verified": 441
+    },
+    "validation": {
+      "template": 172,
+      "teacher_verified": 0
+    },
+    "test": {
+      "template": 252,
+      "teacher_verified": 0
+    }
+  },
+  "epochs": 2,
+  "gpu": "Tesla T4",
+  "config": {
+    "seed": 17,
+    "dtype": "torch.bfloat16",
+    "quantization": "NF4 double-quantized",
+    "rank": 16,
+    "lora_alpha": 320,
+    "dropout": 0,
+    "batch_size": 1,
+    "gradient_accumulation": 4,
+    "effective_batch_size": 4,
+    "learning_rate": 0.0001,
+    "blocks": 12,
+    "max_sequence_tokens": 4096,
+    "max_target_and_generation_tokens": 1024
+  },
+  "packages": {
+    "torch": "2.11.0+cu128",
+    "transformers": "4.51.3",
+    "peft": "0.15.2"
+  },
+  "script_sha256": "32fbda102980c06d318ea828a20e0623e04eec5c26c6ea52f4769f78e68d1d80",
+  "runtime": "Google Colab GPU",
+  "trainable_parameters": 9977856,
+  "total_parameters": 3095916544
+}

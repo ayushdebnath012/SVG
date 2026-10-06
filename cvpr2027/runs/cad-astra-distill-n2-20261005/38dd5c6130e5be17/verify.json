@@ -1,0 +1,132 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    1,
+    1
+  ],
+  "selected": 1,
+  "selected_consensus": 1,
+  "selected_numbers_fraction": 0.6,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [12] `    .pushPoints([(-35.665, -11.28), (-35.665, 11.28), (35.665, -11.28), (35.665, 11.28)])` -> Replace four mounting points with an evenly spaced 3-by-2 grid and increase through-hole diameter to 12 mm.",
+      "edited_lines": 4,
+      "numbers": [
+        {
+          "kind": "delta",
+          "value": 2.0,
+          "ok": false
+        },
+        {
+          "kind": "value_present",
+          "value": 3.0,
+          "ok": false
+        },
+        {
+          "kind": "value_present",
+          "value": 4.0,
+          "ok": false
+        },
+        {
+          "kind": "value_present",
+          "value": 6.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 12.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 12,
+            "delete": 2,
+            "insert": [
+              "    .pushPoints([(-35.665, -11.28), (-35.665, 11.28), (0, -11.28), (0, 11.28), (35.665, -11.28), (35.665, 11.28)])",
+              "    .hole(12.0)"
+            ]
+          }
+        ]
+      },
+      "volume": 38614.99675759732,
+      "consensus": 1,
+      "numbers_fraction": 0.4,
+      "score": 1.146,
+      "audit_reference_iou": 1.0
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [11] `    .faces(\">Z\").workplane()` -> Remove the original four-hole mounting pattern.\n- [19] `)` -> Cut six 12 mm through-passages in an evenly spaced 3-by-2 grid, limited to base thickness.",
+      "edited_lines": 9,
+      "numbers": [
+        {
+          "kind": "delta",
+          "value": 2.0,
+          "ok": false
+        },
+        {
+          "kind": "value_present",
+          "value": 3.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 4.0,
+          "ok": false
+        },
+        {
+          "kind": "value_present",
+          "value": 6.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 12.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 11,
+            "delete": 3,
+            "insert": []
+          },
+          {
+            "start": 19,
+            "delete": 0,
+            "insert": [
+              "    .cut(",
+              "        cq.Workplane(\"XY\").workplane(offset=-3.5)",
+              "            .pushPoints([(-35.665, -11.28), (0, -11.28), (35.665, -11.28), (-35.665, 11.28), (0, 11.28), (35.665, 11.28)])",
+              "            .circle(6.0)",
+              "            .extrude(7.0)",
+              "    )"
+            ]
+          }
+        ]
+      },
+      "volume": 38599.37224110556,
+      "consensus": 1,
+      "numbers_fraction": 0.6,
+      "score": 1.3410000000000002,
+      "audit_reference_iou": 0.9995953769829419
+    }
+  ],
+  "audit_selected_strict": false,
+  "audit_any_strict": true,
+  "audit_reference_changed": true,
+  "id": "38dd5c6130e5be17a078714bf1b4bdd99582482ec55a5ebf2c607f44d787ecf8",
+  "category": "T5"
+}

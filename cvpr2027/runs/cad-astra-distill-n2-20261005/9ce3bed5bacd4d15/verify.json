@@ -1,0 +1,78 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 0,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": null,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [4] `    .faces(\">Z\").workplane()` -> Replace rectangular cut with an 18 mm deep V-slot, 6 mm wide at top; preserve holes and base.",
+      "edited_lines": 9,
+      "numbers": [],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 4,
+            "delete": 3,
+            "insert": [
+              "    .cut(",
+              "        cq.Workplane(\"XZ\")",
+              "            .polyline([(-3.0, 15.95), (3.0, 15.95), (0.0, -2.05)])",
+              "            .close()",
+              "            .extrude(10.8, both=True)",
+              "    )"
+            ]
+          }
+        ]
+      },
+      "volume": 8644.80391949155,
+      "consensus": 2,
+      "numbers_fraction": null,
+      "score": 1.741,
+      "audit_reference_iou": 0.919708737359081
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [4] `    .faces(\">Z\").workplane()` -> Replace rectangular cut with through-width V-slot, 18 mm deep and 6 mm wide at top; preserve other features.",
+      "edited_lines": 9,
+      "numbers": [],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 4,
+            "delete": 3,
+            "insert": [
+              "    .cut(",
+              "        cq.Workplane(\"XZ\")",
+              "            .polyline([(-3.0, 15.95), (3.0, 15.95), (0.0, -2.05)])",
+              "            .close()",
+              "            .extrude(10.8, both=True)",
+              "    )"
+            ]
+          }
+        ]
+      },
+      "volume": 8644.80391949155,
+      "consensus": 2,
+      "numbers_fraction": null,
+      "score": 1.741,
+      "audit_reference_iou": 0.919708737359081
+    }
+  ],
+  "audit_selected_strict": false,
+  "audit_any_strict": false,
+  "audit_reference_changed": true,
+  "id": "9ce3bed5bacd4d15dceb6c40454462d49745cc86ac969b69c59be5507174759d",
+  "category": "T5"
+}

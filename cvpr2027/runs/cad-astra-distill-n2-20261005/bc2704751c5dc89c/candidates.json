@@ -1,0 +1,4 @@
+[
+  "PLAN:\n- [3] `    .cylinder(7.9, 18.7)` -> Replace with a 37.4 across-corners hexagon, extruded 7.9 high at the original elevation.\n- [5] `    .circle(16.2)` -> Replace with a 32.4 across-corners hexagon; preserve extrusion height, bore, and chamfers.\nPATCH:\n{\"edits\":[{\"start\":3,\"delete\":1,\"insert\":[\"    .workplane(offset=-3.95)\",\"    .polygon(6, 37.4)\",\"    .extrude(7.9)\"]},{\"start\":5,\"delete\":1,\"insert\":[\"    .polygon(6, 32.4)\"]}]}",
+  "PLAN:\n- [3] `    .cylinder(7.9, 18.7)` -> Use a hexagon with 37.4 across-corners diameter, preserving height and vertical position.\n- [5] `    .circle(16.2)` -> Use a hexagon with 32.4 across-corners diameter, retaining the existing extrusion, bore, and chamfers.\nPATCH:\n{\"edits\":[{\"start\":3,\"delete\":1,\"insert\":[\"    .polygon(6, 37.4)\",\"    .extrude(7.9)\",\"    .translate((0, 0, -3.95))\"]},{\"start\":5,\"delete\":1,\"insert\":[\"    .polygon(6, 32.4)\"]}]}"
+]

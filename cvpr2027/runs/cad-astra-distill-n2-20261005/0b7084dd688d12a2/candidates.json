@@ -1,0 +1,4 @@
+[
+  "PLAN:\n- [10] `)` -> Insert a 0.4 mm equal-distance chamfer on the inner curved top edge, producing a 45-degree bevel.\nPATCH:\n{\"edits\":[{\"start\":10,\"delete\":0,\"insert\":[\"    .faces(\\\">Z\\\").edges()\",\"    .filter(lambda e: e.geomType() == \\\"CIRCLE\\\" and abs(e.radius() - 2.35) < 0.01)\",\"    .chamfer(0.4)\"]}]}",
+  "PLAN:\n- [10] `)` -> Select the inner curved top edge and apply a 0.4 mm equal-distance chamfer for a 45-degree bevel.\nPATCH:\n{\"edits\":[{\"start\":10,\"delete\":0,\"insert\":[\"    .edges().filter(lambda e: e.geomType() == \\\"CIRCLE\\\" and abs(e.radius() - 2.35) < 0.001 and abs(e.Center().z - 0.8) < 0.001)\",\"    .chamfer(0.4)\"]}]}"
+]

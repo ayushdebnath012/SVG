@@ -1,0 +1,96 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    1,
+    1
+  ],
+  "selected": 0,
+  "selected_consensus": 1,
+  "selected_numbers_fraction": 0.5,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [10] `)` -> Add an asymmetric chamfer to the outer curved top edge: 0.4 mm horizontally, 60 degrees from horizontal.",
+      "edited_lines": 2,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 0.4,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 60.0,
+          "ok": false
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 10,
+            "delete": 0,
+            "insert": [
+              "    .faces(\">Z\").edges(cq.selectors.RadiusNthSelector(-1))",
+              "    .chamfer(0.4, 0.4 * (3 ** 0.5))"
+            ]
+          }
+        ]
+      },
+      "volume": 46.06212518798893,
+      "consensus": 1,
+      "numbers_fraction": 0.5,
+      "score": 1.248,
+      "audit_reference_iou": 0.9999976033815946
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [11] `show_object(result)` -> Insert a revolved bevel cut, 0.4 mm radially across the top and 60 degrees from horizontal.",
+      "edited_lines": 5,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 0.4,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 60.0,
+          "ok": false
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 11,
+            "delete": 0,
+            "insert": [
+              "outer_edge = max(result.faces(\">Z\").edges(\"%CIRCLE\").vals(), key=lambda edge: edge.radius())",
+              "outer_center = outer_edge.arcCenter()",
+              "outer_radius = outer_edge.radius()",
+              "bevel_tool = cq.Workplane(\"XZ\", origin=(outer_center.x, outer_center.y, 0)).polyline([(outer_radius, 0.8 - 0.4 * 3**0.5), (outer_radius, 0.8), (outer_radius - 0.4, 0.8)]).close().revolve(360, (0, 0), (0, 1))",
+              "result = result.cut(bevel_tool)"
+            ]
+          }
+        ]
+      },
+      "volume": 45.98540776743723,
+      "consensus": 1,
+      "numbers_fraction": 0.5,
+      "score": 1.245,
+      "audit_reference_iou": 0.955411570287915
+    }
+  ],
+  "audit_selected_strict": true,
+  "audit_any_strict": true,
+  "audit_reference_changed": true,
+  "id": "d0c96a23eaabdf445bb253aa0559717d9fbae0ac83c821742c800c6d25c3fca9",
+  "category": "T5"
+}

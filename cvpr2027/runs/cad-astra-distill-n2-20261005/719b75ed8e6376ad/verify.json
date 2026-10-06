@@ -1,0 +1,81 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 0,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": 1.0,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [9] `)` -> Rotate the revolved part 45 degrees about axis (0, 1, 1) through the origin.",
+      "edited_lines": 1,
+      "numbers": [
+        {
+          "kind": "delta",
+          "value": 45.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 9,
+            "delete": 0,
+            "insert": [
+              "    .rotate((0, 0, 0), (0, 1, 1), 45)"
+            ]
+          }
+        ]
+      },
+      "volume": 176062.99217373747,
+      "consensus": 2,
+      "numbers_fraction": 1.0,
+      "score": 2.249,
+      "audit_reference_iou": 1.0
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [9] `)` -> Rotate the completed part 45 degrees about the origin-centered axis (0, 1, 1).",
+      "edited_lines": 3,
+      "numbers": [
+        {
+          "kind": "delta",
+          "value": 45.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 9,
+            "delete": 1,
+            "insert": [
+              ")",
+              "result = result.rotate((0, 0, 0), (0, 1, 1), 45)"
+            ]
+          }
+        ]
+      },
+      "volume": 176062.99217373747,
+      "consensus": 2,
+      "numbers_fraction": 1.0,
+      "score": 2.247,
+      "audit_reference_iou": 1.0
+    }
+  ],
+  "audit_selected_strict": true,
+  "audit_any_strict": true,
+  "audit_reference_changed": true,
+  "id": "719b75ed8e6376adfc36190accb0415a1aeaf3a42fdf0f3123079ffa519f345b",
+  "category": "T2"
+}

@@ -1,0 +1,29 @@
+{
+  "passed": false,
+  "attempts": [
+    {
+      "round": 0,
+      "reply": "```python\nimport FreeCAD\nimport PartDesign\n\n# Create a new document\ndoc = FreeCAD.newDocument(\"answer\")\n\n# Create a PartDesign Body\nbody = doc.addObject(\"PartDesign::Body\", \"Body\")\n\n# Create a cylindrical pin\ncylinder = body.newObject(\"PartDesign::Cylinder\", \"Cylinder\")\ncylinder.Radius = 0.5  # pin_diameter / 2\ncylinder.Height = 3.0  # length\n\n# Create chamfer features\nchamfer1 = body.newObject(\"PartDesign::Chamfer\", \"Chamfer1\")\nchamfer1.Base = (cylinder, [\"Edge1\"])\nchamfer1.Length1 = 0.2  # chamfer_length\nchamfer1.Angle1 = 15  # chamfer_angle\n\nchamfer2 = body.newObject(\"PartDesign::Chamfer\", \"Chamfer2\")\nchamfer2.Base = (cylinder, [\"Edge2\"])\nchamfer2.Length1 = 0.2  # chamfer_length\nchamfer2.Angle1 = 15  # chamfer_angle\n\n# Save the document\ndoc.saveAs(\"/app/answer.FCStd\")\n\n# Close the document\nFreeCAD.closeDocument(doc.Name)\n```",
+      "status": "script_error",
+      "feedback": "I ran answer.py with FreeCAD 1.1.0 and it failed:\n```\nTraceback (most recent call last):\n  File \"/content/cadbench-out/qwen2.5-coder-7b/77178c2112/_run.py\", line 18, in <module>\n    chamfer1.Length1 = 0.2  # chamfer_length\n    ^^^^^^^^^^^^^^^^\nAttributeError: 'PartDesign.Feature' object has no attribute 'Length1'\n\n```"
+    },
+    {
+      "round": 1,
+      "reply": "```python\nimport FreeCAD\nimport PartDesign\n\n# Create a new document\ndoc = FreeCAD.newDocument(\"answer\")\n\n# Create a PartDesign Body\nbody = doc.addObject(\"PartDesign::Body\", \"Body\")\n\n# Create a cylindrical pin\ncylinder = body.newObject(\"PartDesign::Cylinder\", \"Cylinder\")\ncylinder.Radius = 0.5  # pin_diameter / 2\ncylinder.Height = 3.0  # length\n\n# Create chamfer features\nchamfer1 = body.newObject(\"PartDesign::Chamfer\", \"Chamfer1\")\nchamfer1.Base = (cylinder, [\"Edge1\"])\nchamfer1.Length = 0.2  # chamfer_length\nchamfer1.Angle = 15  # chamfer_angle\n\nchamfer2 = body.newObject(\"PartDesign::Chamfer\", \"Chamfer2\")\nchamfer2.Base = (cylinder, [\"Edge2\"])\nchamfer2.Length = 0.2  # chamfer_length\nchamfer2.Angle = 15  # chamfer_angle\n\n# Save the document\ndoc.saveAs(\"/app/answer.FCStd\")\n\n# Close the document\nFreeCAD.closeDocument(doc.Name)\n```",
+      "status": "script_error",
+      "feedback": "I ran answer.py with FreeCAD 1.1.0 and it failed:\n```\nTraceback (most recent call last):\n  File \"/content/cadbench-out/qwen2.5-coder-7b/77178c2112/_run.py\", line 18, in <module>\n    chamfer1.Length = 0.2  # chamfer_length\n    ^^^^^^^^^^^^^^^\nAttributeError: 'PartDesign.Feature' object has no attribute 'Length'\n\n```"
+    },
+    {
+      "round": 2,
+      "reply": "```python\nimport FreeCAD\nimport PartDesign\n\n# Create a new document\ndoc = FreeCAD.newDocument(\"answer\")\n\n# Create a PartDesign Body\nbody = doc.addObject(\"PartDesign::Body\", \"Body\")\n\n# Create a cylindrical pin\ncylinder = body.newObject(\"PartDesign::Cylinder\", \"Cylinder\")\ncylinder.Radius = 0.5  # pin_diameter / 2\ncylinder.Height = 3.0  # length\n\n# Create chamfer features\nchamfer1 = body.newObject(\"PartDesign::Chamfer\", \"Chamfer1\")\nchamfer1.Base = (cylinder, [\"Edge1\"])\nchamfer1.Length1 = 0.2  # chamfer_length\nchamfer1.Length2 = 0.2  # chamfer_length\nchamfer1.Angle = 15  # chamfer_angle\n\nchamfer2 = body.newObject(\"PartDesign::Chamfer\", \"Chamfer2\")\nchamfer2.Base = (cylinder, [\"Edge2\"])\nchamfer2.Length1 = 0.2  # chamfer_length\nchamfer2.Length2 = 0.2  # chamfer_length\nchamfer2.Angle = 15  # chamfer_angle\n\n# Save the document\ndoc.saveAs(\"/app/answer.FCStd\")\n\n# Close the document\nFreeCAD.closeDocument(doc.Name)\n```",
+      "status": "script_error",
+      "feedback": "I ran answer.py with FreeCAD 1.1.0 and it failed:\n```\nTraceback (most recent call last):\n  File \"/content/cadbench-out/qwen2.5-coder-7b/77178c2112/_run.py\", line 18, in <module>\n    chamfer1.Length1 = 0.2  # chamfer_length\n    ^^^^^^^^^^^^^^^^\nAttributeError: 'PartDesign.Feature' object has no attribute 'Length1'\n\n```"
+    },
+    {
+      "round": 3,
+      "reply": "```python\nimport FreeCAD\nimport PartDesign\n\n# Create a new document\ndoc = FreeCAD.newDocument(\"answer\")\n\n# Create a PartDesign Body\nbody = doc.addObject(\"PartDesign::Body\", \"Body\")\n\n# Create a cylindrical pin\ncylinder = body.newObject(\"PartDesign::Cylinder\", \"Cylinder\")\ncylinder.Radius = 0.5  # pin_diameter / 2\ncylinder.Height = 3.0  # length\n\n# Create chamfer features\nchamfer1 = body.newObject(\"PartDesign::Chamfer\", \"Chamfer1\")\nchamfer1.Base = (cylinder, [\"Edge1\"])\nchamfer1.Length = 0.2  # chamfer_length\nchamfer1.Fade = 0.2  # chamfer_length\nchamfer1.Angle = 15  # chamfer_angle\n\nchamfer2 = body.newObject(\"PartDesign::Chamfer\", \"Chamfer2\")\nchamfer2.Base = (cylinder, [\"Edge2\"])\nchamfer2.Length = 0.2  # chamfer_length\nchamfer2.Fade = 0.2  # chamfer_length\nchamfer2.Angle = 15  # chamfer_angle\n\n# Save the document\ndoc.saveAs(\"/app/answer.FCStd\")\n\n# Close the document\nFreeCAD.closeDocument(doc.Name)\n```",
+      "status": "script_error",
+      "feedback": "I ran answer.py with FreeCAD 1.1.0 and it failed:\n```\nTraceback (most recent call last):\n  File \"/content/cadbench-out/qwen2.5-coder-7b/77178c2112/_run.py\", line 18, in <module>\n    chamfer1.Length = 0.2  # chamfer_length\n    ^^^^^^^^^^^^^^^\nAttributeError: 'PartDesign.Feature' object has no attribute 'Length'\n\n```"
+    }
+  ]
+}

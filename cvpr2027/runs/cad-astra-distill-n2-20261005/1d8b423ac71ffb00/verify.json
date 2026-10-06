@@ -1,0 +1,94 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 0,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": null,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [13] `    .lineTo(half_cc, boss_radius)` -> Replace right half-disk and shoulders with one arc connecting waist edges through the existing outermost point.\n- [20] `    .lineTo(-half_cc, -boss_radius)` -> Replace left half-disk and shoulders with one arc connecting waist edges through the existing outermost point.",
+      "edited_lines": 20,
+      "numbers": [],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 13,
+            "delete": 6,
+            "insert": [
+              "    .threePointArc(",
+              "        (half_cc + boss_radius, 0.0),",
+              "        (half_cc, -waist_radius),",
+              "    )"
+            ]
+          },
+          {
+            "start": 20,
+            "delete": 6,
+            "insert": [
+              "    .threePointArc(",
+              "        (-half_cc - boss_radius, 0.0),",
+              "        (-half_cc, waist_radius),",
+              "    )"
+            ]
+          }
+        ]
+      },
+      "volume": 12450.110404512914,
+      "consensus": 2,
+      "numbers_fraction": null,
+      "score": 1.73,
+      "audit_reference_iou": 1.0
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [13] `    .lineTo(half_cc, boss_radius)` -> Replace the right half-disk and shoulders with one arc connecting the waist edges through the existing outermost point.\n- [20] `    .lineTo(-half_cc, -boss_radius)` -> Replace the left half-disk and shoulders with one arc connecting the waist edges through the existing outermost point.",
+      "edited_lines": 20,
+      "numbers": [],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 13,
+            "delete": 6,
+            "insert": [
+              "    .threePointArc(",
+              "        (half_cc + boss_radius, 0.0),",
+              "        (half_cc, -waist_radius),",
+              "    )"
+            ]
+          },
+          {
+            "start": 20,
+            "delete": 6,
+            "insert": [
+              "    .threePointArc(",
+              "        (-half_cc - boss_radius, 0.0),",
+              "        (-half_cc, waist_radius),",
+              "    )"
+            ]
+          }
+        ]
+      },
+      "volume": 12450.110404512914,
+      "consensus": 2,
+      "numbers_fraction": null,
+      "score": 1.73,
+      "audit_reference_iou": 1.0
+    }
+  ],
+  "audit_selected_strict": true,
+  "audit_any_strict": true,
+  "audit_reference_changed": true,
+  "id": "1d8b423ac71ffb00e9d43a972d8713ee348ab8b466a7df4aab71bf80966eb887",
+  "category": "T5"
+}

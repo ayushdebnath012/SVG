@@ -1,64 +1,75 @@
-\section{Online editing experiments}
+\section{Experiments}
 \label{sec:experiments}
-\paragraph{Training.}
-We start from a fresh 4-bit Qwen2.5-Coder-1.5B-Instruct conversion~\cite{hui2024qwen25coder} and train a QLoRA adapter~\cite{hu2022lora} using MLX on an Apple M5 with 16\,GB memory. The model conversion revision is \texttt{b3252a2f97102b1fb1571fec2c9b27219a8536be}. Seed 17, batch size one, learning rate $10^{-4}$ and the last eight transformer blocks are fixed. Adapters have rank 8, scale 20, no dropout, and cover attention and MLP linear projections in those blocks. Prompt tokens are masked from the loss. We run \onlineTrain{} optimizer steps, corresponding to one pass of the retained training rows, and use the final checkpoint. Validation is logged, not used to select among test-informed alternatives. Saved adapters are reloaded before evaluation.
-
-\paragraph{Evaluation and metrics.}
-Base and trained models receive the same original programs, published instructions and patch contract. Greedy decoding is capped at 512 new tokens. All \onlineTest{} retained test records are evaluated in the same fixed order. Applicability requires a valid patch and syntactically valid program; AST equality requires the executed program to match the published target's normalized syntax. Solid scoring executes the actual prediction and compares it with the released STEP reference. No gold edits repair a model prediction.
+\subsection{Primary two-source adaptation}
+A fresh 3B backbone uses rank-16 adapters with alpha 320 on seven attention/MLP projections in the last twelve transformer blocks. Seed 17, learning rate $10^{-4}$, microbatch one and four accumulation steps give effective batch four. Two fixed epochs on a Colab T4 complete 1,270 optimizer updates in 20,923.7 seconds. Mean completion loss is 0.2495. The saved manifest records \texttt{torch.bfloat16}; native BF16 hardware acceleration is not established. We reload the final adapter, check all 168 saved tensors for finite values and evaluate both fresh base and trained model greedily on identical held-out inputs. The 9,977,856 adapter scalars and artifact hashes are saved.
 
 \begin{table*}[t]
 \centering\small
 \setlength{\tabcolsep}{8pt}
-\begin{tabular}{lrrrr}
+\begin{tabular}{lrrrrr}
 \toprule
-System & Applicable & Target AST & IoU $\geq0.95$ & IoU $\geq0.99999$ \\
+Model / source & Tasks & Applicable & Executed & IoU $\geq0.95$ & IoU $\geq0.99999$ \\
 \midrule
-\onlineMainRows
+Fresh 3B base, all & 252 & 39 & 7 & 2 & 1 \\
+Final 3B adapter, all & 252 & 173 & 139 & 52 & 39 \\
+Final, BenchCAD & 124 & 91 & 65 & 32 & 25 \\
+Final, CAD-Editor & 128 & 82 & 74 & 20 & 14 \\
 \bottomrule
 \end{tabular}
-\caption{\textbf{Local online-pair benchmark: counts out of \onlineTest{}.} All systems use the same family/template holdout. The transport control only wraps a bare JSON edit list into the required object, without changing coordinates or content. Timeouts and comparison errors remain separately disclosed; they are not measured incorrect geometry. This is a local split, not an official BenchCAD score.}
-\label{tab:online}
+\caption{\textbf{Primary held-out outcomes.} Counts retain all 252 tasks, including unavailable reference comparisons and the final-model worker timeout. Strict is a local volume threshold. BenchCAD uses released STEP targets; CAD-Editor uses locally reconstructed command targets.}
+\label{tab:primary}
 \end{table*}
 
-\paragraph{Transport control.}
-The base model frequently emits a bare list of edits rather than the required object containing \texttt{edits}. We therefore add a deterministic diagnostic that wraps a syntactically valid bare list while preserving every operation. It makes 56 of 126 base predictions applicable, but none matches the target AST. This control distinguishes one schema mismatch from the remaining content and coordinate errors; it does not rewrite geometry, infer missing operations or correct indexing.
+\paragraph{Executable is not necessarily correct.}
+Table~\ref{tab:primary} separates interface success from shape agreement. Fine-tuning increases applicability from 39 to 173 tasks and execution from 7 to 139. Strict agreement rises from 1/252 to 39/252 (15.48\,\%), with 25/124 BenchCAD and 14/128 CAD-Editor matches. Only 39/139 executed outputs (28.06\,\%) reach the strict threshold, leaving considerable geometric error. Broad agreement reaches 52/252. Exact target program/sequence and patch agreement are 32 and 31 cases, respectively, versus one each for the base. No final generation reaches the output cap.
 
-\paragraph{Results and operational coverage.}
-\onlineResultsDiscussion
-\onlineOperationalDiscussion
-We keep base and trained outputs, patch errors, executed-solid measurements, reference hashes and category breakdowns. One seed and one model size cannot establish a robust scaling law or broad superiority over CAD agents. No official benchmark claim or statistical population failure rate is inferred from this local slice.
+Six reference errors and one whole-worker timeout remain in the full denominator. The scorer's reference-valid bookkeeping differs between base and final outputs (246 versus 245); 245 is therefore not treated as a fixed valid-reference test set. These counts measure released-target agreement, not audited compliance with every instruction.
 
+\paragraph{What this comparison establishes.}
+The same-model base/final comparison supports a local adaptation gain under fixed prompts and decoding. It is not a matched comparison with CAD-Editor or other published editing methods. One seed, synthetic online supervision, token filtering and unestablished cross-source ancestry limit generalization. Earlier 1.5B Apple and H100 runs use different data/settings and are preserved as separate supplementary experiments (Appendix~\ref{sec:earlier-experiments}); their counts are not pooled with the primary run.
+
+\subsection{Frontier comparison and plan-anchored patches}
+\label{sec:plan-anchor}
 \begin{table}[t]
-\centering\scriptsize
-\setlength{\tabcolsep}{4pt}
-\begin{tabular}{@{}lrrr@{}}
+\centering\footnotesize
+\setlength{\tabcolsep}{2.4pt}
+\begin{tabular}{llrrrrr}
 \toprule
-Category & Cases & Target AST & Strict match \\
+& & \multicolumn{4}{c}{Test strict (of 252)} & Val. \\
+\cmidrule(lr){3-6}
+System & GPU & Dec. & Anch. & Bench & Editor & (172) \\
 \midrule
-\onlineCategoryRows
+Fresh 3B base & T4 & \paBase & -- & \paBaseBench & \paBaseEditor & -- \\
+3B adapter, patch & T4 & \paSft & -- & \paSftBench & \paSftEditor & -- \\
+GPT-6 Astra & API & \paAstra & -- & \paAstraBench & \paAstraEditor & -- \\
+\midrule
+\planAnchorRows
 \bottomrule
 \end{tabular}
-\caption{\textbf{Trained results by published edit category.} Category IDs are retained from the source; counts are not pooled across different evaluation contracts.}
-\label{tab:categories}
+\caption{\textbf{Frontier comparison and plan-anchored 3B students} on identical held-out tasks (strict volume IoU $\geq0.99999$). \emph{Dec.}: decoded answers; \emph{Anch.}: anchored, which relocates each patch operation to the unique source line quoted in its plan. Bench/Editor split the anchored count (BenchCAD/CAD-Editor) for plan models and the decoded count otherwise. Validation counts are anchored and scored against executed reference programs. All plan rows use the 3B recipe of Sec.~\ref{sec:experiments}; each is one training run. $^\dagger$Includes 10 pilot teacher answers.}
+\label{tab:plan-anchor}
 \end{table}
+\paragraph{Frontier model on the same holdout.}
+We evaluate GPT-6 Astra~\cite{openai2026astra} zero-shot on all 252 held-out tasks with the identical system prompt, input, patch contract and scorer (medium reasoning effort, one sample per task, \$\paAstraCost{} at list price). It reaches \paAstra/252 strict matches (\paAstraBench{} BenchCAD, \paAstraEditor{} CAD-Editor), against \paSft{} for the final 3B adapter. On paired tasks, only Astra succeeds on \paAstraOnly{} and only the adapter on \paSftOnlyVsAstra{} (exact McNemar $p=\paAstraVsSftP$). The gap lies in BenchCAD programs: on CAD-Editor sequences the two are statistically indistinguishable (\paAstraEditorOnly{} versus \paSftEditorOnly{} discordant tasks, $p=\paAstraVsSftEditorP$), where \paAstraEditorWrong{} frontier answers execute but disagree with the reconstructed target and \paAstraEditorInvalid{} violate the patch or six-bit command contract. Some frontier misses follow the instruction more literally than the released target, \eg a requested 21\,mm through-hole against a released 20.98\,mm hole; strict agreement measures target reproduction, not instruction compliance.
 
-\paragraph{Additional H100 run.}
-After the local experiment, available server compute supports a separately reported CUDA run. A fresh unquantized BF16 Qwen2.5-Coder-1.5B-Instruct model is trained on the identical 492 retained training rows for three epochs (1,476 updates) on one NVIDIA H100 NVL. PEFT adapters use rank 8, alpha 160 (scale 20), no dropout and the same seven attention/MLP projections in the last eight blocks. Seed, batch size, learning rate, prompt masking, context limit and greedy generation limit remain unchanged. We reload the final adapter and evaluate all 126 cases; no test-based checkpoint selection is performed. Different precision, software implementations and epoch counts prevent interpreting the comparison as an isolated hardware effect or an independent preregistered confirmation.
+\paragraph{Plan-then-patch with quote anchoring.}
+We retrain the same 3B recipe with each answer formatted as a short plan followed by the unchanged patch. One plan bullet per operation states the zero-based original index, quotes that original line and names the action. Template plans are generated deterministically from reference patches, so this control adds no supervision beyond the patch. Decoded verbatim, the plan model is no better than the patch-only adapter (\paTemplateADecoded{} and \paTemplateBDecoded{} strict in two training runs). The first run's \paIndexFailures{} out-of-range BenchCAD patches share one failure: the plan quotes the correct source line but miscounts its index, \eg the intended cut line labelled 21 in a 19-line program. Quote anchoring therefore moves each operation to the unique source line equal to its quoted text and otherwise keeps the predicted index; it reads only the source program and the model output. Anchoring raises both runs to \paTemplateAAnchored/252 (\paTemplateAAnchorGain{} and \paTemplateBAnchorGain{} tasks gained, none lost), against \paSft{} for the patch-only adapter (first run: \paTemplateAVsSftGain{} gained, \paTemplateAVsSftLoss{} lost, $p=\paTemplateAVsSftP$). Because the rule was designed from first-run test errors, we confirm it on the 172 validation tasks of the second run, which played no role in its design: strict agreement rises from \paValDecoded{} to \paValAnchored{} (\paValGain{} gained, \paValLoss{} lost, $p=\paValP$).
 
-\begin{table*}[t]
-\centering\small
-\setlength{\tabcolsep}{8pt}
-\begin{tabular}{lrrrr}
-\toprule
-System & Applicable & Target AST & IoU $\geq0.95$ & IoU $\geq0.99999$ \\
-\midrule
-\cudaRows
-\bottomrule
-\end{tabular}
-\caption{\textbf{Additional three-epoch H100 experiment.} Counts cover the same 126 retained tasks and 125 valid references, using the unchanged local geometry thresholds. Both base and final model are decoded with the CUDA implementation; the wrapper control preserves predicted edit contents.}
-\label{tab:cuda}
-\end{table*}
-\cudaSummary
+\paragraph{Verifier-guided distillation.}
+We also distil Astra into the plan student. For each of the \paTeacherTasks{} BenchCAD training tasks, Astra samples two plan-and-patch candidates (four in a ten-task pilot). A target-free verifier executes them, checks requested numbers in inserted lines, and accepts a candidate when at least two samples agree on executed geometry (volume IoU $\geq0.99999$). It accepts \paTeacherAccepted{} tasks, of which \paTeacherAcceptedRef{} (\paTeacherPrecision\,\%) match the released target; \paTeacherUnverifiable{} source or target programs do not execute in our restricted executor. Teacher sampling cost \$\paTeacherCost{}. Replacing template answers with verifier-selected teacher answers leaves anchored test agreement at \paDistillAnchored{} (\paDistillVsTemplateGain{} gained, \paDistillVsTemplateLoss{} lost against the first template run) and validation at \paDistillVal{}. Keeping only reference-matching teacher answers gives \paDistillRefAnchored{} ($p=\paDistillVsRefP$ against the verifier-selected student). At this scale, the improvement comes from the plan format and anchoring, not from teacher supervision. Astra remains ahead of the best student (\paAstraVsDistillGain{} versus \paAstraVsDistillLoss{} discordant tasks, $p=\paAstraVsDistillP$). Each configuration is a single run on a different GPU type; the two template runs disagree on \paRunChurnGain{}+\paRunChurnLoss{} tasks with equal totals, which bounds how finely configurations can be compared.
 
-\paragraph{Localized drawing pilot.}
-The earlier 100-step adapter retained 92 training, 22 validation and 12 test examples after context filtering. All 12 held-out exact patches execute and match their references. Under a unique-substring line parser the base model already matches 11/12 solids. That result mainly improves transport formatting and cannot support a claim of advanced CAD reasoning. The online experiment uses published instructions without line hints, a fresh adapter and its own held-out families.
+\subsection{Focused multi-view edit audit}
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.98\textwidth]{figures/cad-edit-localization.pdf}
+\caption{\textbf{Localized feature agreement versus whole-shape similarity.} The request changes four mounting holes to six while keeping hole diameter and bolt-circle radius. All panels use actual saved solids and the same top-view camera. The older H100 prediction misplaces holes despite relatively high silhouette agreement; source-relative change masks expose the mismatch. The final 3B prediction agrees with the released target in this view. Red/orange show target-only/prediction-only silhouette pixels. This is one illustrative task, not a full-test visual accuracy or a controlled cross-model comparison.}
+\label{fig:edit-localization}
+\end{figure*}
+The post-hoc audit uses the fixed six previously illustrated held-out cases, selected before this visual measurement. All six older H100 solids are available; only four completed final 3B outputs are eligible. The 3B propeller patch fails syntax and the screw pipeline is incomplete. We do not assign them projected geometry scores or treat four available cases as six successes.
+
+Figure~\ref{fig:edit-localization} examines a functional flange edit. For the older prediction, top-view silhouette IoU is 0.908 but source-relative edit-mask IoU is 0.516. The final 3B output is 1.000 for both at three-decimal precision. Averaging whole silhouettes across views would further obscure a localized hole-pattern error. This supports examining the requested changed region alongside bulk volume and overall projected similarity; it does not establish general feature detection accuracy.
+
+Four-view records, STEP hashes and 512/1,024-pixel sensitivity are provided in Appendix~\ref{sec:visual-audit}. One-pixel reference-change masks in the flange isometric view illustrate an important limitation: a nearly perfect solid can receive a poor edit-mask score in a view with effectively no visible change. We therefore report the top view and raw denominators, and treat aggregate projected edit scores as diagnostic rather than a certification.
+
+\subsection{Mechanical examples with response checks}
+We attempt the same six illustrative instructions with unmodified final 3B patches. Mounting angle, locator block, shaft and flange complete strict geometry, numerical, mesh-volume and target-compliance checks. Their compliance discrepancies are 0.001123\,\%, 0.046691\,\%, 0.009141\,\% and 0.013270\,\%, respectively. The invalid propeller and incomplete screw attempts remain unverified; the screw has no saved original FEM verdict establishing its cause. Figure~\ref{fig:fem-large-method} shows saved meshes, displacement and stress fields for two completed functional edits. This subset establishes workflow feasibility under diagnostic contracts, not full-benchmark FEM coverage or real operating safety.

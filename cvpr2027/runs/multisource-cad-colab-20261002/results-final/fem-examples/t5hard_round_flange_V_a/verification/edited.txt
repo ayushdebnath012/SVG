@@ -1,0 +1,26 @@
+import cadquery as cq
+result = (
+    cq.Workplane("XY")
+    .cylinder(27.1, 81.9)
+    .faces("<Z")
+    .fillet(1.6)
+    .faces(">Z")
+    .fillet(1.6)
+    .faces(">Z")
+    .faces(">Z").workplane()
+    .polarArray(60.8, 0, 360, 6)
+    .hole(23.6)
+    .union(
+        cq.Workplane("XY")
+            .transformed(offset=cq.Vector(0, 0, 14.9), rotate=cq.Vector(0, 0, 0))
+            .cylinder(2.7, 46.8)
+    )
+    .union(
+        cq.Workplane("XY")
+            .transformed(offset=cq.Vector(0, 0, 35.6), rotate=cq.Vector(0, 0, 0))
+            .cylinder(38.7, 29.7)
+    )
+    .faces(">Z").workplane()
+    .hole(32.2)
+)
+show_object(result)

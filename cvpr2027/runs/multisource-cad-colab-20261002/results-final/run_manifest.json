@@ -1,0 +1,304 @@
+{
+  "status": "completed",
+  "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+  "model_revision": "488639f1ff808d1d3d0ba301aef8c11461451ec5",
+  "source_manifest": {
+    "system": "You edit mechanical CAD. Return only JSON {\"edits\":[{\"start\":0,\"delete\":0,\"insert\":[\"replacement line\"]}]}. Indices are zero-based lines of the ORIGINAL input; operations must be ordered, nonoverlapping and in bounds. Preserve unrelated features. The supplied representation determines syntax. Return no explanation or invented physics results. Geometry execution and FEM checks are performed by external tools; never claim verification.",
+    "status": "prepared",
+    "sources": {
+      "BenchCAD": {
+        "source": "https://huggingface.co/datasets/BenchCAD/BenchCAD",
+        "upstream_config": "edit-bench",
+        "upstream_split": "edit_bench",
+        "upstream_rows": 748,
+        "revision": "5919f578ab09ec283603a082fab07c7639ab56eb",
+        "license": "CC-BY-4.0",
+        "attribution": "Zhang et al. 2026, BenchCAD",
+        "source_sha256": "99a6c8756eabee2b818518c8003b87025d2868e2e681f4bc31488f146b5513c4",
+        "system": "Apply the instruction to the mechanical CadQuery program. Return only JSON with key edits: a list of objects containing start (zero-based original line index), delete (number of original lines to remove), and insert (list of replacement lines). Coordinates refer to the original program. Preserve unrelated geometry. Do not include Markdown or explanation.",
+        "counts": {
+          "train": 533,
+          "validation": 50,
+          "test": 127
+        },
+        "excluded": {
+          "out_of_scope": 38
+        },
+        "families": {
+          "train": [
+            "ball_knob",
+            "bearing_retainer_cap",
+            "bevel_gear",
+            "bolt",
+            "bucket",
+            "cable_routing_panel",
+            "cam",
+            "circlip",
+            "clevis",
+            "clevis_pin",
+            "coil_spring",
+            "connector_faceplate",
+            "cotter_pin",
+            "dog_bone",
+            "double_simplex_sprocket",
+            "dovetail_slide",
+            "dowel_pin",
+            "enclosure",
+            "eyebolt",
+            "fan_shroud",
+            "flat_link",
+            "grease_nipple",
+            "gridfinity_bin",
+            "grommet",
+            "gusseted_bracket",
+            "handwheel",
+            "heat_sink",
+            "helical_gear",
+            "hex_nut",
+            "hinge",
+            "hollow_tube",
+            "impeller",
+            "j_hook",
+            "keyhole_plate",
+            "l_bracket",
+            "lathe_turned_part",
+            "lobed_knob",
+            "mesh_panel",
+            "mounting_plate",
+            "nozzle",
+            "phone_stand",
+            "piston",
+            "pull_handle",
+            "pulley",
+            "ratchet_sector",
+            "rect_frame",
+            "rib_plate",
+            "shaft_collar",
+            "sheet_metal_tray",
+            "slotted_plate",
+            "snap_clip",
+            "spacer_ring",
+            "spline_hub",
+            "spur_gear",
+            "standoff",
+            "star_blank",
+            "t_slot_rail",
+            "table",
+            "taper_pin",
+            "tee_nut",
+            "torsion_spring",
+            "torus_link",
+            "turnbuckle",
+            "twisted_drill",
+            "u_bolt",
+            "u_channel",
+            "vented_panel",
+            "waffle_plate",
+            "wall_anchor",
+            "washer",
+            "wing_nut",
+            "wire_grid",
+            "worm_screw",
+            "z_bracket"
+          ],
+          "validation": [
+            "battery_holder",
+            "chair",
+            "dome_cap",
+            "i_beam",
+            "pillow_block",
+            "sprocket",
+            "tapered_boss",
+            "threaded_adapter"
+          ],
+          "test": [
+            "bellows",
+            "capsule",
+            "connecting_rod",
+            "cruciform",
+            "hex_key_organizer",
+            "hex_standoff",
+            "knob",
+            "locator_block",
+            "motor_end_cap",
+            "mounting_angle",
+            "pan_head_screw",
+            "parallel_key",
+            "propeller",
+            "rivet",
+            "round_flange",
+            "stepped_shaft",
+            "twisted_bracket",
+            "venturi_tube"
+          ]
+        },
+        "categories": {
+          "train": {
+            "T4": 138,
+            "T5": 112,
+            "T3": 81,
+            "T1": 133,
+            "T2": 69
+          },
+          "validation": {
+            "T1": 11,
+            "T4": 15,
+            "T5": 8,
+            "T2": 9,
+            "T3": 7
+          },
+          "test": {
+            "T1": 31,
+            "T3": 18,
+            "T5": 26,
+            "T4": 34,
+            "T2": 18
+          }
+        },
+        "split_policy": "70/10/20 family/template-component split. All numeric-masked source/target AST templates linked before assigning groups. Hash-ranked deterministic group split.",
+        "protocol": "Local re-partition of a published benchmark for training and evaluation; NOT official leaderboard protocol. Fresh base weights; prior mechanical adapter not reused.",
+        "fem": "not_evaluated_missing_physical_specification",
+        "files": {
+          "train": "ed2d774dc194e9f26643f90dd4059013a3186e0cc266292acc4f95a41e6a4a3c",
+          "validation": "f75bf71c664d5666042af8c540c732251c585f9ef6714543d228dd4b9fb715c2",
+          "test": "549286143417c2a6d942eb9e7e7371387ce8815dc863f2a446ac231db3289156"
+        }
+      },
+      "CAD-Editor": {
+        "source_url": "https://raw.githubusercontent.com/microsoft/CAD-Editor/main/data/processed.zip",
+        "source_archive_sha256": "98d01e2b1881f44f38518e43cad7796904ce4a795785569f3e48b87160107f4f",
+        "upstream_counts": {
+          "train": 120000,
+          "test": 2000
+        },
+        "split_rule": "Exact normalized original/edited sequence connected components; all upstream-test components excluded from train/validation; deterministic component holdout for validation.",
+        "limitation": "Source archive lacks native CAD design IDs. Equivalent geometry with different sequences is not deduplicated. This is a training feasibility pilot, not the final geometric-generalization evaluation.",
+        "selection": "Seed 17 shuffle after split; source/target <=2600 characters; bounded counts; no Astra benchmark samples.",
+        "counts": {
+          "train": {
+            "n": 2048,
+            "components": 1504,
+            "edit_types": {
+              "add": 509,
+              "modify": 1021,
+              "delete": 518
+            }
+          },
+          "validation": {
+            "n": 128,
+            "components": 111,
+            "edit_types": {
+              "add": 27,
+              "modify": 63,
+              "delete": 38
+            }
+          },
+          "test": {
+            "n": 128,
+            "components": 121,
+            "edit_types": {
+              "delete": 35,
+              "add": 34,
+              "modify": 59
+            }
+          }
+        },
+        "system": "You edit parametric CAD construction sequences. Apply the instruction to the original sequence. Return only the complete edited sequence in the same command syntax. Preserve all unrelated geometry. Do not add explanation or Markdown.",
+        "files": {
+          "train": "651f18ce86fcf947d58926ec66336aeb443c5ad8997998ddc8bce76e46c2821b",
+          "validation": "21c829808c62b60d6ce243ca8ffcc6cb8c57fdb0260118132217e6097816a694",
+          "test": "9d1bb2558488dff0d84eb74f6ce42606c6dc713aa2df3ecc212bab36cdc775bd"
+        }
+      }
+    },
+    "counts": {
+      "train": {
+        "BenchCAD": 492,
+        "CAD-Editor": 2048
+      },
+      "validation": {
+        "BenchCAD": 44,
+        "CAD-Editor": 128
+      },
+      "test": {
+        "BenchCAD": 124,
+        "CAD-Editor": 128
+      }
+    },
+    "rejections": [
+      {
+        "id": "f8fde7be49aa0211f921d980e3aecfda31cdb78d75d6303845b79f64d0117a3e",
+        "reason": "excluded subject",
+        "source": "BenchCAD"
+      },
+      {
+        "id": "90aa8be41f91c42227f2a04fcce7258d87c40060d249139b2bc789470e084f9c",
+        "reason": "excluded subject",
+        "source": "BenchCAD"
+      }
+    ],
+    "scope": "Two online paired-edit datasets; native representations preserved. No claim that sequence syntax is geometric or FEM verification. No FEM test-case labels used for training.",
+    "cross_source_limit": "CAD-Editor native sequences and BenchCAD Python programs have no shared design IDs; cross-source equivalent geometry is not proven absent.",
+    "files": {
+      "train": "b12377b3db7d2ec3d4a78c9b5c315270a3b435ce2378ef37bdeecadf1386ccb0",
+      "validation": "22bce5b6632050cc45d96d4865e0faee94c115539ef95780dbfe097cfe2cb6f8",
+      "test": "f8968f8350110b580d674fd142a936a28c36d569011ab0a358e6508491a6c49c"
+    },
+    "prepared_local_file_hashes": {
+      "train": "b12377b3db7d2ec3d4a78c9b5c315270a3b435ce2378ef37bdeecadf1386ccb0",
+      "validation": "22bce5b6632050cc45d96d4865e0faee94c115539ef95780dbfe097cfe2cb6f8",
+      "test": "6ee5536382abe2bf633f51f457bdad8cbdd44e023efe314d61522b4eca32ce01"
+    },
+    "portable_reference_remap": "Only STEP metadata paths changed; instructions, source/target strings and patches unchanged."
+  },
+  "counts": {
+    "train": 2540,
+    "validation": 172,
+    "test": 252
+  },
+  "source_counts": {
+    "train": {
+      "BenchCAD": 492,
+      "CAD-Editor": 2048
+    },
+    "validation": {
+      "BenchCAD": 44,
+      "CAD-Editor": 128
+    },
+    "test": {
+      "BenchCAD": 124,
+      "CAD-Editor": 128
+    }
+  },
+  "epochs": 2,
+  "gpu": "Tesla T4",
+  "config": {
+    "seed": 17,
+    "dtype": "torch.bfloat16",
+    "quantization": "NF4 double-quantized",
+    "rank": 16,
+    "lora_alpha": 320,
+    "dropout": 0,
+    "batch_size": 1,
+    "gradient_accumulation": 4,
+    "effective_batch_size": 4,
+    "learning_rate": 0.0001,
+    "blocks": 12,
+    "max_sequence_tokens": 4096,
+    "max_generation_tokens": 768
+  },
+  "packages": {
+    "torch": "2.11.0+cu130",
+    "transformers": "4.51.3",
+    "peft": "0.15.2"
+  },
+  "script_sha256": "1a00cf55c0f23bfa95ef5577ee47e06a33cff67fd29f35e3a52f3956c70219fc",
+  "runtime": "Google Colab GPU",
+  "fem": "External post-edit audit on explicitly contracted illustrative cases; not a training reward, not text-generated pass labels; old six FEM test cases excluded from training.",
+  "trainable_parameters": 9977856,
+  "total_parameters": 3095916544,
+  "optimizer_steps": 1270,
+  "training_and_final_eval_seconds": 22297.475733583,
+  "peak_gpu_allocated_bytes": 8527457792,
+  "adapter_sha256": "17ae7682e7a53a0ee063cf19b3adde3c7fb2314d5fedfbfeb9b3bb4e2a74433d"
+}

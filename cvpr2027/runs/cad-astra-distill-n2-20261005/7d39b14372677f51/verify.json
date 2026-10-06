@@ -1,0 +1,119 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    1,
+    1
+  ],
+  "selected": 0,
+  "selected_consensus": 1,
+  "selected_numbers_fraction": 1.0,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [9] `    .pushPoints([(0.0, -32.7), (0.0, 32.7)])` -> Replace mounting holes with a centered 3-by-2 drainage grid, spaced 50 by 40 mm, with 25 mm diameters.",
+      "edited_lines": 4,
+      "numbers": [
+        {
+          "kind": "delta",
+          "value": 2.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 3.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 6.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 25.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 9,
+            "delete": 2,
+            "insert": [
+              "    .rarray(50.0, 40.0, 3, 2)",
+              "    .hole(25.0)"
+            ]
+          }
+        ]
+      },
+      "volume": 129820.16421109717,
+      "consensus": 1,
+      "numbers_fraction": 1.0,
+      "score": 1.746,
+      "audit_reference_iou": 0.7217365624002597
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [9] `    .pushPoints([(0.0, -32.7), (0.0, 32.7)])` -> Replace mounting points with a centered 3-by-2 grid, spaced 50 mm by 35 mm.\n- [10] `    .hole(6.5)` -> Increase hole diameter to 25 mm for drainage.",
+      "edited_lines": 4,
+      "numbers": [
+        {
+          "kind": "delta",
+          "value": 2.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 3.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 6.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 25.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 9,
+            "delete": 1,
+            "insert": [
+              "    .rarray(50.0, 35.0, 3, 2)"
+            ]
+          },
+          {
+            "start": 10,
+            "delete": 1,
+            "insert": [
+              "    .hole(25.0)"
+            ]
+          }
+        ]
+      },
+      "volume": 129820.16421109694,
+      "consensus": 1,
+      "numbers_fraction": 1.0,
+      "score": 1.746,
+      "audit_reference_iou": 0.7075235655283626
+    }
+  ],
+  "audit_selected_strict": false,
+  "audit_any_strict": false,
+  "audit_reference_changed": true,
+  "id": "7d39b14372677f513055389c136fd203a16b69ca6524ca30ea1ab3f309868da4",
+  "category": "T5"
+}

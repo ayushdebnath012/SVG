@@ -1,0 +1,68 @@
+\section{Earlier 1.5B experiments and transport controls}
+\label{sec:earlier-experiments}
+\paragraph{Training.}
+We start from a fresh 4-bit Qwen2.5-Coder-1.5B-Instruct conversion~\cite{hui2024qwen25coder} and train a QLoRA adapter~\cite{hu2022lora} using MLX on an Apple M5 with 16\,GB memory. The model conversion revision is \texttt{b3252a2f97102b1fb1571fec2c9b27219a8536be}. Seed 17, batch size one, learning rate $10^{-4}$ and the last eight transformer blocks are fixed. Adapters have rank 8, scale 20, no dropout, and cover attention and MLP linear projections in those blocks. Prompt tokens are masked from the loss. We run \onlineTrain{} optimizer steps, corresponding to one pass of the retained training rows, and use the final checkpoint. Validation is logged, not used to select among test-informed alternatives. Saved adapters are reloaded before evaluation.
+
+\paragraph{Evaluation and metrics.}
+Base and trained models receive the same original programs, published instructions and patch contract. Greedy decoding is capped at 512 new tokens. All \onlineTest{} retained test records are evaluated in the same fixed order. Applicability requires a valid patch and syntactically valid program; AST equality requires the executed program to match the published target's normalized syntax. Solid scoring executes the actual prediction and compares it with the released STEP reference. No gold edits repair a model prediction.
+
+\begin{table}[!htbp]
+\centering\scriptsize
+\setlength{\tabcolsep}{2pt}
+\begin{tabular}{lrrrr}
+\toprule
+System & Patch & AST & Broad & Strict \\
+\midrule
+\onlineMainRows
+\bottomrule
+\end{tabular}
+\caption{\textbf{Local online-pair benchmark: counts out of \onlineTest{}.} All systems use the same family/template holdout. The transport control only wraps a bare JSON edit list into the required object, without changing coordinates or content. Timeouts and comparison errors remain separately disclosed; they are not measured incorrect geometry. This is a local split, not an official BenchCAD score.}
+\label{tab:online}
+\end{table}
+
+\paragraph{Transport control.}
+The base model frequently emits a bare list of edits rather than the required object containing \texttt{edits}. We therefore add a deterministic diagnostic that wraps a syntactically valid bare list while preserving every operation. It makes 56 of 126 base predictions applicable, but none matches the target AST. This control distinguishes one schema mismatch from the remaining content and coordinate errors; it does not rewrite geometry, infer missing operations or correct indexing.
+
+\paragraph{Results and operational coverage.}
+\onlineResultsDiscussion
+\onlineOperationalDiscussion
+We keep base and trained outputs, patch errors, executed-solid measurements, reference hashes and category breakdowns. One seed and one model size cannot establish a robust scaling law or broad superiority over CAD agents. No official benchmark claim or statistical population failure rate is inferred from this local slice.
+
+\begin{table}[t]
+\centering\scriptsize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+Category & Cases & Target AST & Strict match \\
+\midrule
+\onlineCategoryRows
+\bottomrule
+\end{tabular}
+\caption{\textbf{Trained results by published edit category.} Category IDs are retained from the source; counts are not pooled across different evaluation contracts.}
+\label{tab:categories}
+\end{table}
+
+\paragraph{Additional H100 run.}
+After the local experiment, available server compute supports a separately reported CUDA run. A fresh unquantized BF16 Qwen2.5-Coder-1.5B-Instruct model is trained on the identical 492 retained training rows for three epochs (1,476 updates) on one NVIDIA H100 NVL. PEFT adapters use rank 8, alpha 160 (scale 20), no dropout and the same seven attention/MLP projections in the last eight blocks. Seed, batch size, learning rate, prompt masking, context limit and greedy generation limit remain unchanged. We reload the final adapter and evaluate all 126 cases; no test-based checkpoint selection is performed. Different precision, software implementations and epoch counts prevent interpreting the comparison as an isolated hardware effect or an independent preregistered confirmation.
+
+\begin{table}[!htbp]
+\centering\scriptsize
+\setlength{\tabcolsep}{2pt}
+\begin{tabular}{lrrrr}
+\toprule
+System & Patch & AST & Broad & Strict \\
+\midrule
+\cudaRows
+\bottomrule
+\end{tabular}
+\caption{\textbf{Additional three-epoch H100 experiment.} Counts cover the same 126 retained tasks and 125 valid references, using the unchanged local geometry thresholds. Both base and final model are decoded with the CUDA implementation; the wrapper control preserves predicted edit contents.}
+\label{tab:cuda}
+\end{table}
+\cudaSummary
+
+\paragraph{Localized drawing pilot.}
+The earlier 100-step adapter retained 92 training, 22 validation and 12 test examples after context filtering. All 12 held-out exact patches execute and match their references. Under a unique-substring line parser the base model already matches 11/12 solids. That result mainly improves transport formatting and cannot support a claim of advanced CAD reasoning. The online experiment uses published instructions without line hints, a fresh adapter and its own held-out families.
+
+\paragraph{Completed multi-source Colab extension.}
+A separate fresh 3B QLoRA adapter trains on 2,540 paired edits from BenchCAD and CAD-Editor. On 252 held-out tasks it yields 173 applicable patches, 139 executed solids and 39 strict geometry matches (15.48\,\%), versus one strict match for its fresh base. Appendix~\ref{sec:colab-pipeline} reports the full protocol, source-specific results and new-adapter FEM audit. This extension uses a different model and corpus; its counts are not pooled with Table~\ref{tab:cuda}.
+

@@ -1,0 +1,95 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    1,
+    1
+  ],
+  "selected": 0,
+  "selected_consensus": 1,
+  "selected_numbers_fraction": 1.0,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [8] `)` -> Insert a centered 10×3 slot on the top face, cut 10 deep.",
+      "edited_lines": 3,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 3.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 10.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 8,
+            "delete": 0,
+            "insert": [
+              "    .faces(\">Z\").workplane()",
+              "    .slot2D(10.0, 3.0)",
+              "    .cutBlind(-10.0)"
+            ]
+          }
+        ]
+      },
+      "volume": 8389.713049065873,
+      "consensus": 1,
+      "numbers_fraction": 1.0,
+      "score": 1.747,
+      "audit_reference_iou": 1.0
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [8] `)` -> Insert a centered 10×3 rectangular slot cut 10 deep from the top face.",
+      "edited_lines": 3,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 3.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 10.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 8,
+            "delete": 0,
+            "insert": [
+              "    .faces(\">Z\").workplane()",
+              "    .rect(10.0, 3.0)",
+              "    .cutBlind(-10.0)"
+            ]
+          }
+        ]
+      },
+      "volume": 8372.04148917236,
+      "consensus": 1,
+      "numbers_fraction": 1.0,
+      "score": 1.747,
+      "audit_reference_iou": 0.9978936633720173
+    }
+  ],
+  "audit_selected_strict": true,
+  "audit_any_strict": true,
+  "audit_reference_changed": true,
+  "id": "833b2c006f8d99ba09c1474113e44d19f73c2c9dadbef69fe0fd3eb35f3bf0d5",
+  "category": "T4"
+}

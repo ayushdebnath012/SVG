@@ -1,0 +1,91 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 1,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": 0.5,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [10] `show_object(result)` -> Insert a coaxial 70 mm diameter flange extending from x = -3 to 0, flush with the wide end.",
+      "edited_lines": 2,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 3.0,
+          "ok": false
+        },
+        {
+          "kind": "value_present",
+          "value": 70.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 10,
+            "delete": 0,
+            "insert": [
+              "flange = cq.Workplane(\"YZ\").circle(35.0).extrude(-3.0)",
+              "result = result.union(flange)"
+            ]
+          }
+        ]
+      },
+      "volume": 67615.92063016484,
+      "consensus": 2,
+      "numbers_fraction": 0.5,
+      "score": 1.748,
+      "audit_reference_iou": 0.7314886397982135
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [10] `show_object(result)` -> Insert a coaxial 70 mm diameter flange extending 3 mm behind the wide face at x=0.",
+      "edited_lines": 1,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 3.0,
+          "ok": false
+        },
+        {
+          "kind": "value_present",
+          "value": 70.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 10,
+            "delete": 0,
+            "insert": [
+              "result = result.union(cq.Workplane(\"YZ\").circle(35.0).extrude(-3.0))"
+            ]
+          }
+        ]
+      },
+      "volume": 67615.92063016484,
+      "consensus": 2,
+      "numbers_fraction": 0.5,
+      "score": 1.749,
+      "audit_reference_iou": 0.7314886397982135
+    }
+  ],
+  "audit_selected_strict": false,
+  "audit_any_strict": false,
+  "audit_reference_changed": true,
+  "id": "7fe9e88b429f40d693a61f1dc9301b8e39c708d062bbc240ffcbaec34bb3e1ae",
+  "category": "T5"
+}

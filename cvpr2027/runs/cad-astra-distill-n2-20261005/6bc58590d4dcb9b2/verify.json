@@ -1,0 +1,100 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 0,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": 0.6666666666666666,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [6] `        cq.Workplane(\"XY\")` -> Replace cylindrical cutter with cone: bottom diameter 10.3 mm, top diameter 17.3 mm, height 3.5 mm.",
+      "edited_lines": 4,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 10.3,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 17.3,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 45.0,
+          "ok": false
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 6,
+            "delete": 3,
+            "insert": [
+              "        cq.Solid.makeCone(5.15, 8.65, 3.5, cq.Vector(0, 10.63, 0), cq.Vector(0, 0, 1))"
+            ]
+          }
+        ]
+      },
+      "volume": 3122.3382847971648,
+      "consensus": 2,
+      "numbers_fraction": 0.6666666666666666,
+      "score": 1.9126666666666665,
+      "audit_reference_iou": 1.0
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [6] `        cq.Workplane(\"XY\")` -> Replace cylindrical cutter with a 3.5 mm tall cone, bottom diameter 10.3 mm and top diameter 17.3 mm.",
+      "edited_lines": 4,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 10.3,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 17.3,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 45.0,
+          "ok": false
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 6,
+            "delete": 3,
+            "insert": [
+              "        cq.Solid.makeCone(5.15, 8.65, 3.5, cq.Vector(0, 10.63, 0), cq.Vector(0, 0, 1))"
+            ]
+          }
+        ]
+      },
+      "volume": 3122.3382847971648,
+      "consensus": 2,
+      "numbers_fraction": 0.6666666666666666,
+      "score": 1.9126666666666665,
+      "audit_reference_iou": 1.0
+    }
+  ],
+  "audit_selected_strict": true,
+  "audit_any_strict": true,
+  "audit_reference_changed": true,
+  "id": "6bc58590d4dcb9b241aac57ec5309a9d97fcf4a52f1726290e9bb760f9775102",
+  "category": "T5"
+}

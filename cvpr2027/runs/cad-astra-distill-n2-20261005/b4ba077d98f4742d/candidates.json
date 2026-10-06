@@ -1,0 +1,4 @@
+[
+  "PLAN:\n- [7] `show_object(result)` -> Insert a 45-degree cut at Z=0, retaining the top edge and shifting the bottom edge inward 11.2 mm.\nPATCH:\n{\"edits\":[{\"start\":7,\"delete\":0,\"insert\":[\"result = result.cut(\",\"    cq.Workplane(\\\"YZ\\\")\",\"    .polyline([(0.0, 0.0), (11.2, 0.0), (0.0, 11.2)])\",\"    .close()\",\"    .extrude(40.0, both=True)\",\")\"]}]}",
+  "PLAN:\n- [6] `)` -> Insert a wedge cut at the Z=0 end, preserving its top edge and shifting its bottom inward 11.2 mm.\nPATCH:\n{\"edits\":[{\"start\":6,\"delete\":0,\"insert\":[\"    .cut(\",\"        cq.Workplane(\\\"YZ\\\")\",\"        .polyline([(0.0, 0.0), (0.0, 11.2), (11.2, 0.0)])\",\"        .close()\",\"        .extrude(40.0, both=True)\",\"    )\"]}]}"
+]

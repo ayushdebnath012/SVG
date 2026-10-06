@@ -1,0 +1,100 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 0,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": 0.5,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [25] `)` -> Insert a top-centered hexagonal blind cut, 4.00 mm across flats and 7.00 mm deep from z=3.",
+      "edited_lines": 6,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 4.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 7.0,
+          "ok": false
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 25,
+            "delete": 0,
+            "insert": [
+              "    .cut(",
+              "        cq.Workplane(\"XY\")",
+              "            .workplane(offset=3.0)",
+              "            .polygon(6, 4.0 / (3.0**0.5 / 2.0))",
+              "            .extrude(-7.0)",
+              "    )"
+            ]
+          }
+        ]
+      },
+      "volume": 357.2031288692657,
+      "consensus": 2,
+      "numbers_fraction": 0.5,
+      "score": 1.744,
+      "audit_reference_iou": 0.9411021274275115
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [25] `)` -> Insert a top-centered hexagonal cut, 4.00 mm across flats and 7.00 mm deep from the flange top.",
+      "edited_lines": 6,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 4.0,
+          "ok": false
+        },
+        {
+          "kind": "value_present",
+          "value": 7.0,
+          "ok": false
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 25,
+            "delete": 0,
+            "insert": [
+              "    .cut(",
+              "        cq.Workplane(\"XY\")",
+              "            .workplane(offset=3.0)",
+              "            .polygon(6, 8.0 / (3.0 ** 0.5))",
+              "            .extrude(-7.0)",
+              "    )"
+            ]
+          }
+        ]
+      },
+      "volume": 357.2031288692657,
+      "consensus": 2,
+      "numbers_fraction": 0.0,
+      "score": 1.244,
+      "audit_reference_iou": 0.9411021274275115
+    }
+  ],
+  "audit_selected_strict": false,
+  "audit_any_strict": false,
+  "audit_reference_changed": true,
+  "id": "84f10eb1330f09200225cfc1b63f6e9ddb729e0141123d461ee07937f7349988",
+  "category": "T4"
+}

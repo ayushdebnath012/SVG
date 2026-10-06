@@ -1,0 +1,98 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 1,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": 1.0,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [5] `    .faces(\">Z\").workplane()` -> Replace through-cut with a lofted subtraction between specified bottom and top openings, producing approximately 60-degree walls.",
+      "edited_lines": 10,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 26.86,
+          "ok": true
+        },
+        {
+          "kind": "delta",
+          "value": 66.86,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 5,
+            "delete": 3,
+            "insert": [
+              "    .cut(",
+              "        cq.Workplane(\"XY\")",
+              "        .rect(26.86, 66.86)",
+              "        .workplane(offset=10.0)",
+              "        .rect(38.4, 78.4)",
+              "        .loft(combine=False, ruled=True)",
+              "    )"
+            ]
+          }
+        ]
+      },
+      "volume": 36189.85466666667,
+      "consensus": 2,
+      "numbers_fraction": 1.0,
+      "score": 2.24,
+      "audit_reference_iou": 1.0
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [7] `    .cutThruAll()` -> Loft-cut to a smaller bottom rectangle, retaining the top opening and forming approximately 60-degree inward-sloping walls.",
+      "edited_lines": 4,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 26.86,
+          "ok": true
+        },
+        {
+          "kind": "delta",
+          "value": 66.86,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 7,
+            "delete": 1,
+            "insert": [
+              "    .workplane(offset=-10.0)",
+              "    .rect(26.86, 66.86)",
+              "    .loft(combine=\"cut\")"
+            ]
+          }
+        ]
+      },
+      "volume": 36189.85466666667,
+      "consensus": 2,
+      "numbers_fraction": 1.0,
+      "score": 2.246,
+      "audit_reference_iou": 1.0
+    }
+  ],
+  "audit_selected_strict": true,
+  "audit_any_strict": true,
+  "audit_reference_changed": true,
+  "id": "6a448d8bf6dc4fe9b2b1f19eef49b2bb378507388bce799722dc95b5d0c61341",
+  "category": "T5"
+}

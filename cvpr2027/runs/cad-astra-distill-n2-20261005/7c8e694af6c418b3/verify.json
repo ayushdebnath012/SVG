@@ -1,0 +1,101 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 1,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": 1.0,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [11] `show_object(result)` -> Subtract a hexagonal pyramid with 30-degree slopes, preserving the six top edges, through-hole, and existing chamfers.",
+      "edited_lines": 11,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 30.0,
+          "ok": false
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 11,
+            "delete": 0,
+            "insert": [
+              "import math",
+              "radius = 75.06 / 2.0",
+              "depth = radius * math.cos(math.pi / 6.0) * math.tan(math.pi / 6.0)",
+              "rim = [cq.Vector(radius * math.cos(i * math.pi / 3.0), radius * math.sin(i * math.pi / 3.0), 34.0) for i in range(6)]",
+              "apex = cq.Vector(0, 0, 34.0 - depth)",
+              "pyramid_faces = [cq.Face.makeFromWires(cq.Wire.makePolygon(rim + [rim[0]]))]",
+              "for i in range(6):",
+              "    triangle = [rim[(i + 1) % 6], rim[i], apex, rim[(i + 1) % 6]]",
+              "    pyramid_faces.append(cq.Face.makeFromWires(cq.Wire.makePolygon(triangle)))",
+              "pyramid = cq.Solid.makeSolid(cq.Shell.makeShell(pyramid_faces))",
+              "result = result.cut(pyramid)"
+            ]
+          }
+        ]
+      },
+      "volume": 69377.34753262656,
+      "consensus": 2,
+      "numbers_fraction": 0.0,
+      "score": 1.239,
+      "audit_reference_iou": 0.9992962772185073
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [11] `show_object(result)` -> Subtract a hexagonal pyramid with 30-degree slopes, preserving the top perimeter, bore, and existing chamfers.",
+      "edited_lines": 12,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 30.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 11,
+            "delete": 0,
+            "insert": [
+              "# Pyramid depth = hexagon apothem * tan(30 degrees) = diameter / 4.",
+              "top_wire = cq.Workplane(\"XY\").workplane(offset=34.0).polygon(6, 75.06).val()",
+              "top_vertices = [vertex.Center() for vertex in top_wire.Vertices()]",
+              "apex = cq.Vector(0, 0, 34.0 - 75.06 / 4.0)",
+              "pyramid_faces = [cq.Face.makeFromWires(top_wire)]",
+              "for i in range(6):",
+              "    triangle = cq.Wire.makePolygon(",
+              "        [top_vertices[i], apex, top_vertices[(i + 1) % 6]], close=True",
+              "    )",
+              "    pyramid_faces.append(cq.Face.makeFromWires(triangle))",
+              "pyramid = cq.Solid.makeSolid(cq.Shell.makeShell(pyramid_faces))",
+              "result = result.cut(pyramid)"
+            ]
+          }
+        ]
+      },
+      "volume": 69377.34753260351,
+      "consensus": 2,
+      "numbers_fraction": 1.0,
+      "score": 2.238,
+      "audit_reference_iou": 0.9992962772188393
+    }
+  ],
+  "audit_selected_strict": false,
+  "audit_any_strict": false,
+  "audit_reference_changed": true,
+  "id": "7c8e694af6c418b3f74cd6336ee74c474df13f32c9fa84e93f49b98772fd19e9",
+  "category": "T5"
+}

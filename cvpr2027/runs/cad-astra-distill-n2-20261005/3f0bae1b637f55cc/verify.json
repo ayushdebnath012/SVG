@@ -1,0 +1,101 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 1,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": 0.5,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [21] `)` -> Insert a 4 mm tall, 3 mm wide rectangular border above the entire outer rim at Z=28.",
+      "edited_lines": 7,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 3.0,
+          "ok": false
+        },
+        {
+          "kind": "value_present",
+          "value": 4.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 21,
+            "delete": 0,
+            "insert": [
+              "    .union(",
+              "        cq.Workplane(\"XY\")",
+              "            .workplane(offset=28.0)",
+              "            .rect(84.0, 168.0)",
+              "            .rect(78.0, 162.0)",
+              "            .extrude(4.0)",
+              "    )"
+            ]
+          }
+        ]
+      },
+      "volume": 119219.80127973328,
+      "consensus": 2,
+      "numbers_fraction": 0.5,
+      "score": 1.743,
+      "audit_reference_iou": 1.0
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [21] `)` -> Insert a 4 mm tall, 3 mm wide rectangular border above the entire outer top rim.",
+      "edited_lines": 6,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 3.0,
+          "ok": false
+        },
+        {
+          "kind": "value_present",
+          "value": 4.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 21,
+            "delete": 0,
+            "insert": [
+              "    .union(",
+              "        cq.Workplane(\"XY\").workplane(offset=28.0)",
+              "            .rect(84.0, 168.0)",
+              "            .rect(78.0, 162.0)",
+              "            .extrude(4.0)",
+              "    )"
+            ]
+          }
+        ]
+      },
+      "volume": 119219.80127973328,
+      "consensus": 2,
+      "numbers_fraction": 0.5,
+      "score": 1.744,
+      "audit_reference_iou": 1.0
+    }
+  ],
+  "audit_selected_strict": true,
+  "audit_any_strict": true,
+  "audit_reference_changed": true,
+  "id": "3f0bae1b637f55ccd89b5ea13afff6ed5f0c1cde1819b654c4454970e73f1f97",
+  "category": "T5"
+}

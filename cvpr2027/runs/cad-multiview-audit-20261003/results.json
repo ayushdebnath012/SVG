@@ -1,0 +1,753 @@
+{
+  "scope": "Fixed previously illustrated six held-out cases, selected before this visual audit; diagnostic subset, not full benchmark accuracy or fair cross-model comparison",
+  "contract": {
+    "views": [
+      "front",
+      "top",
+      "right",
+      "isometric"
+    ],
+    "resolutions": [
+      512,
+      1024
+    ],
+    "tessellation_tolerance_mm": 0.3,
+    "camera": "Per-case shared source/target/all-available-prediction bounds; common orthographic bases and equal scaling; no per-shape recentering",
+    "metric": "Silhouette IoU and XOR source-to-target versus source-to-prediction change-mask IoU; unchanged-view unions are undefined and excluded from visible-edit mean",
+    "limitations": "Occluded/internal edits may be invisible; triangulation/raster effects; no instruction compliance or feature-tolerance certificate"
+  },
+  "summary": {
+    "H100": {
+      "n_available": 6,
+      "n_fixed_cases": 6,
+      "mean_silhouette_iou": 0.9118280272516031,
+      "mean_visible_edit_iou": 0.584673921426145,
+      "mean_abs_edit_iou_resolution_change": 0.00011282189746512184
+    },
+    "Colab3B": {
+      "n_available": 4,
+      "n_fixed_cases": 6,
+      "mean_silhouette_iou": 0.9999927263120976,
+      "mean_visible_edit_iou": 0.8749668787566138,
+      "mean_abs_edit_iou_resolution_change": 3.312124338607225e-05
+    }
+  },
+  "availability": [
+    {
+      "case": "mounting_angle_box_x_f130",
+      "H100": "saved_solid_available",
+      "Colab3B": "completed_output_available"
+    },
+    {
+      "case": "locator_block_box_y_f130",
+      "H100": "saved_solid_available",
+      "Colab3B": "completed_output_available"
+    },
+    {
+      "case": "t3medplus_stepped_shaft_rot_diag60",
+      "H100": "saved_solid_available",
+      "Colab3B": "completed_output_available"
+    },
+    {
+      "case": "propeller_bore_widen_compute",
+      "H100": "saved_solid_available",
+      "Colab3B": "unavailable_no_completed_verification"
+    },
+    {
+      "case": "t5hard_pan_head_screw_U_a",
+      "H100": "saved_solid_available",
+      "Colab3B": "unavailable_no_completed_verification"
+    },
+    {
+      "case": "t5hard_round_flange_V_a",
+      "H100": "saved_solid_available",
+      "Colab3B": "completed_output_available"
+    }
+  ],
+  "records": [
+    {
+      "case": "mounting_angle_box_x_f130",
+      "model": "H100",
+      "resolution": 512,
+      "views": [
+        {
+          "view": "front",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": 1.0,
+          "reference_change_pixels": 28594
+        },
+        {
+          "view": "top",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": 1.0,
+          "reference_change_pixels": 43539
+        },
+        {
+          "view": "right",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": null,
+          "reference_change_pixels": 0
+        },
+        {
+          "view": "isometric",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": 1.0,
+          "reference_change_pixels": 52899
+        }
+      ],
+      "mean_silhouette_iou": 1.0,
+      "mean_visible_edit_iou": 1.0
+    },
+    {
+      "case": "mounting_angle_box_x_f130",
+      "model": "Colab3B",
+      "resolution": 512,
+      "views": [
+        {
+          "view": "front",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": 1.0,
+          "reference_change_pixels": 28594
+        },
+        {
+          "view": "top",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": 1.0,
+          "reference_change_pixels": 43539
+        },
+        {
+          "view": "right",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": null,
+          "reference_change_pixels": 0
+        },
+        {
+          "view": "isometric",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": 1.0,
+          "reference_change_pixels": 52899
+        }
+      ],
+      "mean_silhouette_iou": 1.0,
+      "mean_visible_edit_iou": 1.0
+    },
+    {
+      "case": "mounting_angle_box_x_f130",
+      "model": "H100",
+      "resolution": 1024,
+      "views": [
+        {
+          "view": "front",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": 1.0,
+          "reference_change_pixels": 118590
+        },
+        {
+          "view": "top",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": 1.0,
+          "reference_change_pixels": 180023
+        },
+        {
+          "view": "right",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": null,
+          "reference_change_pixels": 0
+        },
+        {
+          "view": "isometric",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": 1.0,
+          "reference_change_pixels": 218922
+        }
+      ],
+      "mean_silhouette_iou": 1.0,
+      "mean_visible_edit_iou": 1.0
+    },
+    {
+      "case": "mounting_angle_box_x_f130",
+      "model": "Colab3B",
+      "resolution": 1024,
+      "views": [
+        {
+          "view": "front",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": 1.0,
+          "reference_change_pixels": 118590
+        },
+        {
+          "view": "top",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": 1.0,
+          "reference_change_pixels": 180023
+        },
+        {
+          "view": "right",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": null,
+          "reference_change_pixels": 0
+        },
+        {
+          "view": "isometric",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": 1.0,
+          "reference_change_pixels": 218922
+        }
+      ],
+      "mean_silhouette_iou": 1.0,
+      "mean_visible_edit_iou": 1.0
+    },
+    {
+      "case": "locator_block_box_y_f130",
+      "model": "H100",
+      "resolution": 512,
+      "views": [
+        {
+          "view": "front",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": 1.0,
+          "reference_change_pixels": 25432
+        },
+        {
+          "view": "top",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": 1.0,
+          "reference_change_pixels": 50274
+        },
+        {
+          "view": "right",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": 1.0,
+          "reference_change_pixels": 30438
+        },
+        {
+          "view": "isometric",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": 1.0,
+          "reference_change_pixels": 29904
+        }
+      ],
+      "mean_silhouette_iou": 1.0,
+      "mean_visible_edit_iou": 1.0
+    },
+    {
+      "case": "locator_block_box_y_f130",
+      "model": "Colab3B",
+      "resolution": 512,
+      "views": [
+        {
+          "view": "front",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": 1.0,
+          "reference_change_pixels": 25432
+        },
+        {
+          "view": "top",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": 1.0,
+          "reference_change_pixels": 50274
+        },
+        {
+          "view": "right",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": 1.0,
+          "reference_change_pixels": 30438
+        },
+        {
+          "view": "isometric",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": 1.0,
+          "reference_change_pixels": 29904
+        }
+      ],
+      "mean_silhouette_iou": 1.0,
+      "mean_visible_edit_iou": 1.0
+    },
+    {
+      "case": "locator_block_box_y_f130",
+      "model": "H100",
+      "resolution": 1024,
+      "views": [
+        {
+          "view": "front",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": 1.0,
+          "reference_change_pixels": 105537
+        },
+        {
+          "view": "top",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": 1.0,
+          "reference_change_pixels": 208568
+        },
+        {
+          "view": "right",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": 1.0,
+          "reference_change_pixels": 126440
+        },
+        {
+          "view": "isometric",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": 1.0,
+          "reference_change_pixels": 124700
+        }
+      ],
+      "mean_silhouette_iou": 1.0,
+      "mean_visible_edit_iou": 1.0
+    },
+    {
+      "case": "locator_block_box_y_f130",
+      "model": "Colab3B",
+      "resolution": 1024,
+      "views": [
+        {
+          "view": "front",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": 1.0,
+          "reference_change_pixels": 105537
+        },
+        {
+          "view": "top",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": 1.0,
+          "reference_change_pixels": 208568
+        },
+        {
+          "view": "right",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": 1.0,
+          "reference_change_pixels": 126440
+        },
+        {
+          "view": "isometric",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": 1.0,
+          "reference_change_pixels": 124700
+        }
+      ],
+      "mean_silhouette_iou": 1.0,
+      "mean_visible_edit_iou": 1.0
+    },
+    {
+      "case": "t3medplus_stepped_shaft_rot_diag60",
+      "model": "H100",
+      "resolution": 512,
+      "views": [
+        {
+          "view": "front",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": 1.0,
+          "reference_change_pixels": 83263
+        },
+        {
+          "view": "top",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": 1.0,
+          "reference_change_pixels": 14995
+        },
+        {
+          "view": "right",
+          "silhouette_iou": 0.9999218255302184,
+          "edit_mask_iou": 0.9999025673503191,
+          "reference_change_pixels": 102629
+        },
+        {
+          "view": "isometric",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": 1.0,
+          "reference_change_pixels": 30348
+        }
+      ],
+      "mean_silhouette_iou": 0.9999804563825546,
+      "mean_visible_edit_iou": 0.9999756418375798
+    },
+    {
+      "case": "t3medplus_stepped_shaft_rot_diag60",
+      "model": "Colab3B",
+      "resolution": 512,
+      "views": [
+        {
+          "view": "front",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": 1.0,
+          "reference_change_pixels": 83263
+        },
+        {
+          "view": "top",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": 1.0,
+          "reference_change_pixels": 14995
+        },
+        {
+          "view": "right",
+          "silhouette_iou": 0.9999218255302184,
+          "edit_mask_iou": 0.9999025673503191,
+          "reference_change_pixels": 102629
+        },
+        {
+          "view": "isometric",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": 1.0,
+          "reference_change_pixels": 30348
+        }
+      ],
+      "mean_silhouette_iou": 0.9999804563825546,
+      "mean_visible_edit_iou": 0.9999756418375798
+    },
+    {
+      "case": "t3medplus_stepped_shaft_rot_diag60",
+      "model": "H100",
+      "resolution": 1024,
+      "views": [
+        {
+          "view": "front",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": 1.0,
+          "reference_change_pixels": 347244
+        },
+        {
+          "view": "top",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": 1.0,
+          "reference_change_pixels": 61908
+        },
+        {
+          "view": "right",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": 1.0,
+          "reference_change_pixels": 427405
+        },
+        {
+          "view": "isometric",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": 1.0,
+          "reference_change_pixels": 125856
+        }
+      ],
+      "mean_silhouette_iou": 1.0,
+      "mean_visible_edit_iou": 1.0
+    },
+    {
+      "case": "t3medplus_stepped_shaft_rot_diag60",
+      "model": "Colab3B",
+      "resolution": 1024,
+      "views": [
+        {
+          "view": "front",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": 1.0,
+          "reference_change_pixels": 347244
+        },
+        {
+          "view": "top",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": 1.0,
+          "reference_change_pixels": 61908
+        },
+        {
+          "view": "right",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": 1.0,
+          "reference_change_pixels": 427405
+        },
+        {
+          "view": "isometric",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": 1.0,
+          "reference_change_pixels": 125856
+        }
+      ],
+      "mean_silhouette_iou": 1.0,
+      "mean_visible_edit_iou": 1.0
+    },
+    {
+      "case": "propeller_bore_widen_compute",
+      "model": "H100",
+      "resolution": 512,
+      "views": [
+        {
+          "view": "front",
+          "silhouette_iou": 0.4300349189464191,
+          "edit_mask_iou": 0.0,
+          "reference_change_pixels": 10841
+        },
+        {
+          "view": "top",
+          "silhouette_iou": 0.6881236708653689,
+          "edit_mask_iou": 0.000174809894240014,
+          "reference_change_pixels": 11405
+        },
+        {
+          "view": "right",
+          "silhouette_iou": 0.983499095840868,
+          "edit_mask_iou": 0.0,
+          "reference_change_pixels": 1752
+        },
+        {
+          "view": "isometric",
+          "silhouette_iou": 0.6680290104925245,
+          "edit_mask_iou": 8.952952235999821e-05,
+          "reference_change_pixels": 9726
+        }
+      ],
+      "mean_silhouette_iou": 0.6924216740362951,
+      "mean_visible_edit_iou": 6.608485415000305e-05
+    },
+    {
+      "case": "propeller_bore_widen_compute",
+      "model": "H100",
+      "resolution": 1024,
+      "views": [
+        {
+          "view": "front",
+          "silhouette_iou": 0.4292387099651071,
+          "edit_mask_iou": 0.0,
+          "reference_change_pixels": 45410
+        },
+        {
+          "view": "top",
+          "silhouette_iou": 0.687228582708251,
+          "edit_mask_iou": 0.00016826872515407105,
+          "reference_change_pixels": 47404
+        },
+        {
+          "view": "right",
+          "silhouette_iou": 0.983751019668268,
+          "edit_mask_iou": 0.0,
+          "reference_change_pixels": 7173
+        },
+        {
+          "view": "isometric",
+          "silhouette_iou": 0.6693175858675116,
+          "edit_mask_iou": 0.00017376949476519398,
+          "reference_change_pixels": 40089
+        }
+      ],
+      "mean_silhouette_iou": 0.6923839745522844,
+      "mean_visible_edit_iou": 8.550955497981625e-05
+    },
+    {
+      "case": "t5hard_pan_head_screw_U_a",
+      "model": "H100",
+      "resolution": 512,
+      "views": [
+        {
+          "view": "front",
+          "silhouette_iou": 0.8040632315117187,
+          "edit_mask_iou": 0.0,
+          "reference_change_pixels": 42
+        },
+        {
+          "view": "top",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": 1.0,
+          "reference_change_pixels": 52118
+        },
+        {
+          "view": "right",
+          "silhouette_iou": 0.812494523788662,
+          "edit_mask_iou": 0.0,
+          "reference_change_pixels": 0
+        },
+        {
+          "view": "isometric",
+          "silhouette_iou": 0.590130241010774,
+          "edit_mask_iou": 0.0004748338081671415,
+          "reference_change_pixels": 3063
+        }
+      ],
+      "mean_silhouette_iou": 0.8016719990777887,
+      "mean_visible_edit_iou": 0.25011870845204176
+    },
+    {
+      "case": "t5hard_pan_head_screw_U_a",
+      "model": "H100",
+      "resolution": 1024,
+      "views": [
+        {
+          "view": "front",
+          "silhouette_iou": 0.8062396573542295,
+          "edit_mask_iou": 0.0,
+          "reference_change_pixels": 105
+        },
+        {
+          "view": "top",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": 1.0,
+          "reference_change_pixels": 216963
+        },
+        {
+          "view": "right",
+          "silhouette_iou": 0.8144521096483217,
+          "edit_mask_iou": 7.57174225789354e-05,
+          "reference_change_pixels": 6
+        },
+        {
+          "view": "isometric",
+          "silhouette_iou": 0.5933614727208141,
+          "edit_mask_iou": 2.569241046194954e-05,
+          "reference_change_pixels": 12546
+        }
+      ],
+      "mean_silhouette_iou": 0.8035133099308414,
+      "mean_visible_edit_iou": 0.25002535245826024
+    },
+    {
+      "case": "t5hard_round_flange_V_a",
+      "model": "H100",
+      "resolution": 512,
+      "views": [
+        {
+          "view": "front",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": null,
+          "reference_change_pixels": 0
+        },
+        {
+          "view": "top",
+          "silhouette_iou": 0.9075831638539028,
+          "edit_mask_iou": 0.515766186826198,
+          "reference_change_pixels": 23121
+        },
+        {
+          "view": "right",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": null,
+          "reference_change_pixels": 0
+        },
+        {
+          "view": "isometric",
+          "silhouette_iou": 0.9999929721980153,
+          "edit_mask_iou": 0.0,
+          "reference_change_pixels": 1
+        }
+      ],
+      "mean_silhouette_iou": 0.9768940340129795,
+      "mean_visible_edit_iou": 0.257883093413099
+    },
+    {
+      "case": "t5hard_round_flange_V_a",
+      "model": "Colab3B",
+      "resolution": 512,
+      "views": [
+        {
+          "view": "front",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": null,
+          "reference_change_pixels": 0
+        },
+        {
+          "view": "top",
+          "silhouette_iou": 0.9999688232653264,
+          "edit_mask_iou": 0.9997837463777518,
+          "reference_change_pixels": 23121
+        },
+        {
+          "view": "right",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": null,
+          "reference_change_pixels": 0
+        },
+        {
+          "view": "isometric",
+          "silhouette_iou": 0.9999929721980153,
+          "edit_mask_iou": 0.0,
+          "reference_change_pixels": 1
+        }
+      ],
+      "mean_silhouette_iou": 0.9999904488658354,
+      "mean_visible_edit_iou": 0.4998918731888759
+    },
+    {
+      "case": "t5hard_round_flange_V_a",
+      "model": "H100",
+      "resolution": 1024,
+      "views": [
+        {
+          "view": "front",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": null,
+          "reference_change_pixels": 0
+        },
+        {
+          "view": "top",
+          "silhouette_iou": 0.9065331589934164,
+          "edit_mask_iou": 0.5168457718817164,
+          "reference_change_pixels": 97228
+        },
+        {
+          "view": "right",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": null,
+          "reference_change_pixels": 0
+        },
+        {
+          "view": "isometric",
+          "silhouette_iou": 0.9999644491995991,
+          "edit_mask_iou": 0.0,
+          "reference_change_pixels": 21
+        }
+      ],
+      "mean_silhouette_iou": 0.9766244020482538,
+      "mean_visible_edit_iou": 0.2584228859408582
+    },
+    {
+      "case": "t5hard_round_flange_V_a",
+      "model": "Colab3B",
+      "resolution": 1024,
+      "views": [
+        {
+          "view": "front",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": null,
+          "reference_change_pixels": 0
+        },
+        {
+          "view": "top",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": 1.0,
+          "reference_change_pixels": 97228
+        },
+        {
+          "view": "right",
+          "silhouette_iou": 1.0,
+          "edit_mask_iou": null,
+          "reference_change_pixels": 0
+        },
+        {
+          "view": "isometric",
+          "silhouette_iou": 0.9999644491995991,
+          "edit_mask_iou": 0.0,
+          "reference_change_pixels": 21
+        }
+      ],
+      "mean_silhouette_iou": 0.9999911122998998,
+      "mean_visible_edit_iou": 0.5
+    }
+  ],
+  "step_hashes": {
+    "runs/mechanical-cad-fem-20261002/mounting_angle_box_x_f130/source.step": "4e9b7b96e68fc7e7c69822de3c018a4f5ea7472a30b1f0f8adef57034f43a60f",
+    "runs/mechanical-cad-fem-20261002/mounting_angle_box_x_f130/target.step": "ff18ce8a69d592a24ef217e66d9e1dd00b6ff85a51113996d3fff6fde0bdf47e",
+    "runs/mechanical-cad-fem-20261002/mounting_angle_box_x_f130/prediction.step": "745f6d3d839e8ef9c2809b23e80cf74835ec312a4619eaedd28678f9dc8c2253",
+    "runs/multisource-cad-colab-20261002/results-final/fem-examples/mounting_angle_box_x_f130/verification/prediction.step": "7878e16283a1a89247a5a5c4ec8598284e18f2d54f4a06344eb5ae2ae9404b2c",
+    "runs/mechanical-cad-fem-20261002/locator_block_box_y_f130/source.step": "df11154fa76691c6043eb5f1a9bf8d5a84ff771f03712808cdc014e346cb27e7",
+    "runs/mechanical-cad-fem-20261002/locator_block_box_y_f130/target.step": "45d776f553448fd16f9f90ba59df3d7f51258b47a8811b36a9cc3d949f7e3d6b",
+    "runs/mechanical-cad-fem-20261002/locator_block_box_y_f130/prediction.step": "b2202fb8fe2bdcbd24dd2d9f854cce45ddd01a6bf93a4bad33beed5fb3f4848f",
+    "runs/multisource-cad-colab-20261002/results-final/fem-examples/locator_block_box_y_f130/verification/prediction.step": "d90a99cf5e4f23c18e2c332d27ea46292979c4a0d7502a3874d1c1a704b921e2",
+    "runs/mechanical-cad-fem-20261002/t3medplus_stepped_shaft_rot_diag60/source.step": "19c3ef3e7825cde029dcf3bdc08cdaee86f4637b8687e3996c12bfab527484ef",
+    "runs/mechanical-cad-fem-20261002/t3medplus_stepped_shaft_rot_diag60/target.step": "2475b4e155f63d6d982e412c839a53dc3f4f7cb37fe73b54d6242d856626583a",
+    "runs/mechanical-cad-fem-20261002/t3medplus_stepped_shaft_rot_diag60/prediction.step": "739678709e00c19ba70975a71d7ab62f5e4e1645e0915aa650aacb785e753d3c",
+    "runs/multisource-cad-colab-20261002/results-final/fem-examples/t3medplus_stepped_shaft_rot_diag60/verification/prediction.step": "3a8ed84ce0b937b1489ae87d215e572f31e25e8309160c3d943680e7f60d5a87",
+    "runs/mechanical-cad-fem-20261002/propeller_bore_widen_compute/source.step": "0a879b8fba4c1f33eec972158b83d8c3c40fad2cfe09febc1319eea5a483acdf",
+    "runs/mechanical-cad-fem-20261002/propeller_bore_widen_compute/target.step": "8181b731f0662e7166902dad23580965d7486ea93dad1203e2ca3bfc3dca886d",
+    "runs/mechanical-cad-fem-20261002/propeller_bore_widen_compute/prediction.step": "592be1d1b02f4c45bf18493c26036c83dcd93df29b57ea805ba4e939eb8978a5",
+    "runs/mechanical-cad-fem-20261002/t5hard_pan_head_screw_U_a/source.step": "4a6c13344fff0c9306376e4958d031ddb655db2547a8700acc28633991275f89",
+    "runs/mechanical-cad-fem-20261002/t5hard_pan_head_screw_U_a/target.step": "c855da0468352d6e6dc2d519154831aed48ababcb8548b15e2c6f62a3dfdad1b",
+    "runs/mechanical-cad-fem-20261002/t5hard_pan_head_screw_U_a/prediction.step": "9d5451ccd3f8e350e0c2a06670550911f274869743301da2074785637769e8ce",
+    "runs/mechanical-cad-fem-20261002/t5hard_round_flange_V_a/source.step": "ec4b3c0e1f7f154fa0372ac8a23d0198b005b60eafa3720697fbb9fb26ee09e7",
+    "runs/mechanical-cad-fem-20261002/t5hard_round_flange_V_a/target.step": "cd3ee5d7a2d2b64b3d2e4cee1432d6895d856a7e81a5d076c8cb4ca70f0f3406",
+    "runs/mechanical-cad-fem-20261002/t5hard_round_flange_V_a/prediction.step": "6c5627acc2d3ae8fb4cae7de5eaf3c5b0d785db088688e94e608c5e132d8ba9c",
+    "runs/multisource-cad-colab-20261002/results-final/fem-examples/t5hard_round_flange_V_a/verification/prediction.step": "974b137893627b63dd8ea99348b89a1e5a1210779fd777da29cd610ff004191b"
+  }
+}

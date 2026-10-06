@@ -1,0 +1,100 @@
+{
+  "n": 2,
+  "executed": 2,
+  "clusters": [
+    2
+  ],
+  "selected": 0,
+  "selected_consensus": 2,
+  "selected_numbers_fraction": 1.0,
+  "selected_changed": true,
+  "candidates": [
+    {
+      "index": 0,
+      "gates": true,
+      "error": null,
+      "plan": "- [16] `)` -> Insert a union adding a 13 mm diameter, 4 mm thick flange from Z=35 to Z=39.",
+      "edited_lines": 6,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 4.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 13.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 16,
+            "delete": 0,
+            "insert": [
+              "    .union(",
+              "        cq.Workplane(\"XY\")",
+              "            .workplane(offset=35.0)",
+              "            .circle(6.5)",
+              "            .extrude(4.0)",
+              "    )"
+            ]
+          }
+        ]
+      },
+      "volume": 1890.4792194138963,
+      "consensus": 2,
+      "numbers_fraction": 1.0,
+      "score": 2.244,
+      "audit_reference_iou": 1.0
+    },
+    {
+      "index": 1,
+      "gates": true,
+      "error": null,
+      "plan": "- [16] `)` -> Insert union with a 13 mm diameter, 4 mm thick flange extending upward from z=35 mm.",
+      "edited_lines": 6,
+      "numbers": [
+        {
+          "kind": "value_present",
+          "value": 4.0,
+          "ok": true
+        },
+        {
+          "kind": "value_present",
+          "value": 13.0,
+          "ok": true
+        }
+      ],
+      "changed": true,
+      "patch": {
+        "edits": [
+          {
+            "start": 16,
+            "delete": 0,
+            "insert": [
+              "    .union(",
+              "        cq.Workplane(\"XY\")",
+              "            .workplane(offset=35.0)",
+              "            .circle(6.5)",
+              "            .extrude(4.0)",
+              "    )"
+            ]
+          }
+        ]
+      },
+      "volume": 1890.4792194138963,
+      "consensus": 2,
+      "numbers_fraction": 1.0,
+      "score": 2.244,
+      "audit_reference_iou": 1.0
+    }
+  ],
+  "audit_selected_strict": true,
+  "audit_any_strict": true,
+  "audit_reference_changed": true,
+  "id": "82f48fcd05b12f00c54419833507a4fa31881fc1896817fd84cd897bd71b6543",
+  "category": "T5"
+}
