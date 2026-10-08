@@ -83,6 +83,8 @@ def run(data):
     out=dict(geometry={'status':'PASS','metrics':actual},constraints={'status':'PASS','checks':checks},
              numbers=numeric_checks(task['instruction'],task['code'],patch),code=code,changed=_iou(source,solid)<.99999,
              edited_lines=sum(op['delete']+len(op['insert']) for op in patch['edits']))
+    from adaptive_cad.repair_game import feature_graph
+    out['features']={'source':feature_graph(task['code']),'candidate':feature_graph(code)}
     if task.get('instruction_values'):
         # Opt-in instruction contract: requested values appear in inserted lines and the solid changes.
         missing=[n['value'] for n in out['numbers'] if not n['ok']]
