@@ -27,6 +27,7 @@ def main() -> None:
     p.add_argument("--batch", type=int, default=6)
     p.add_argument("--max-new-tokens", type=int, default=1024)
     p.add_argument("--seed", type=int, default=17)
+    p.add_argument("--no-quant", action="store_true", help="bf16 base instead of NF4 (GRPO adapters)")
     a = p.parse_args()
     import torch
     from peft import PeftModel
@@ -39,7 +40,7 @@ def main() -> None:
     tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen2.5-Coder-3B-Instruct", revision=REVISION)
     tokenizer.pad_token, tokenizer.padding_side = tokenizer.eos_token, "left"
     base = AutoModelForCausalLM.from_pretrained("Qwen/Qwen2.5-Coder-3B-Instruct", revision=REVISION,
-                                                torch_dtype=torch.bfloat16, quantization_config=quant,
+                                                torch_dtype=torch.bfloat16, quantization_config=None if a.no_quant else quant,
                                                 device_map={"": 0}, attn_implementation="sdpa")
     model = PeftModel.from_pretrained(base, str(a.adapter)).eval()
     done = {json.loads(l)["id"] for l in a.out.read_text().splitlines()} if a.out.exists() else set()
@@ -59,11 +60,11 @@ def main() -> None:
                 greedy = model.generate(**inputs, max_new_tokens=a.max_new_tokens, do_sample=False,
                                         pad_token_id=tokenizer.pad_token_id)[:, width:]
                 torch.manual_seed(a.seed + start)
-                drawn = model.generate(**inputs, max_new_tokens=a.max_new_tokens, do_sample=True,
+                drawn = greedy[:0] if a.n == 0 else model.generate(**inputs, max_new_tokens=a.max_new_tokens, do_sample=True,
                                        temperature=a.temperature, top_p=a.top_p, num_return_sequences=a.n,
                                        pad_token_id=tokenizer.pad_token_id)[:, width:]
             greedy_text = tokenizer.batch_decode(greedy, skip_special_tokens=True)
-            drawn_text = tokenizer.batch_decode(drawn, skip_special_tokens=True)
+            drawn_text = tokenizer.batch_decode(drawn, skip_special_tokens=True) if a.n else []
             for k, r in enumerate(batch):
                 handle.write(json.dumps(dict(id=r["id"], split=r["split"], source=r["source"], greedy=greedy_text[k],
                                              samples=drawn_text[k * a.n:(k + 1) * a.n])) + "\n")

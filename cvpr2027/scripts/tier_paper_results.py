@@ -7,6 +7,7 @@ exact two-sided McNemar tests on strict agreement over identical task ids.
 from __future__ import annotations
 
 from collections import Counter
+import csv
 import json
 from math import comb
 from pathlib import Path
@@ -74,7 +75,8 @@ def main() -> None:
     comp = json.loads((agent / "comparison.json").read_text())
     diag = json.loads((agent / "verifier-diagnostics.json").read_text())["grpo"]
     run = json.loads((agent / "training/run-v4/manifest.json").read_text())
-    dev = json.loads((agent / "training/run-v4/summary.json").read_text())["grpo_dev"]
+    training = json.loads((agent / "training/run-v4/summary.json").read_text())
+    dev = training["grpo_dev"]
     a_all, a_val = comp["all_tasks"], comp["valid_references"]
     m.update(agentN=a_all["n"], agentBefore=a_all["before"], agentAfter=a_all["after"], agentRecovered=a_all["recovered"],
              agentRegressed=a_all["regressed"], agentP=f"{comp['paired_exact_p']:.2f}",
@@ -85,6 +87,29 @@ def main() -> None:
              agentAlways=f"{100 * a_val['before'] / a_val['n']:.1f}",
              agentDevAcc=f"{100 * (dev['true_accept'] + dev['true_reject']) / dev['n']:.1f}",
              agentDevAlways=f"{100 * (dev['true_accept'] + dev['false_reject']) / dev['n']:.1f}")
+    m.update(agentValidN=a_val["n"], agentValidBefore=a_val["before"], agentValidAfter=a_val["after"],
+             agentUpdates=training["optimizer_updates"], agentFalseAccept=diag["false_accept"],
+             agentFalseReject=diag["false_reject"],
+             agentBeforeRate=f"{100 * a_all['before_rate']:.1f}",
+             agentAfterRate=f"{100 * a_all['after_rate']:.1f}",
+             agentValidDelta=f"{a_val['delta_pp']:.2f}",
+             agentDelta=f"{a_all['delta_pp']:.2f}")
+    # Descriptive edit tiers, computed from the paired task records. Do not infer shape complexity.
+    with (agent / "per-task.csv").open() as handle:
+        agent_tasks = list(csv.DictReader(handle))
+    assert len(agent_tasks) == a_all["n"]
+    agent_valid = [r for r in agent_tasks if r["reference_valid"] == "True"]
+    assert len(agent_valid) == a_val["n"]
+    assert sum(r["without"] == "True" for r in agent_valid) == a_val["before"]
+    assert sum(r["with_agent"] == "True" for r in agent_valid) == a_val["after"]
+    agent_rows = []
+    for tier, categories in (("Easy", {"T1", "T2"}), ("Moderate", {"T3", "T4"}), ("Hard", {"T5"})):
+        records = [r for r in agent_valid if r["category"] in categories]
+        n = len(records)
+        before = sum(r["without"] == "True" for r in records)
+        after = sum(r["with_agent"] == "True" for r in records)
+        agent_rows.append(f"{tier} ({n}) & {before} & {after} & {100 * (after-before) / n:+.2f} \\\\")
+    m["agentTierRows"] = "\n".join(agent_rows)
     react = ROOT / "runs/react-student-20261006/zero-shot"
     if (react / "validation-final-geometry.jsonl").exists():  # ReAct repair rounds (zero-shot student)
         history = json.loads((react / "history.json").read_text())
