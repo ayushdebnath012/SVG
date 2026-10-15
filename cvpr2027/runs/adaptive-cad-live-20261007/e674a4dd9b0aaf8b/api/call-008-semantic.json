@@ -1,0 +1,48 @@
+{
+ "kind": "semantic",
+ "status": "completed",
+ "reserved_usd": 0.07749583333333333,
+ "request": {
+  "model": "gpt-6-astra",
+  "messages": [
+   {
+    "role": "system",
+    "content": "You verify mechanical CAD edits from rendered views."
+   },
+   {
+    "role": "user",
+    "content": [
+     {
+      "type": "text",
+      "text": "Edit instruction: Increase the base radius of the top spinner loft from 16.92 mm to 22.00 mm.\n\nThe image shows the ORIGINAL part (left) and the EDITED part (right), isometric views (top row) and top views (bottom row). Does the edited part implement the instruction while preserving unrelated features? Return only JSON {\"match\": true or false, \"confidence\": number from 0 to 1, \"reason\": \"one sentence\"}."
+     },
+     {
+      "type": "image_url",
+      "image_url": "<png omitted>"
+     }
+    ]
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_completion_tokens": 1000,
+  "store": false
+ },
+ "usage": {
+  "prompt_tokens": 423,
+  "completion_tokens": 107,
+  "total_tokens": 530,
+  "prompt_tokens_details": {
+   "cached_tokens": 0,
+   "audio_tokens": 0
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 47,
+   "audio_tokens": 0,
+   "accepted_prediction_tokens": 0,
+   "rejected_prediction_tokens": 0
+  }
+ },
+ "cost_usd": 0.00958,
+ "finish_reason": "stop",
+ "response": "{\"match\":true,\"confidence\":0.94,\"reason\":\"The edited views show a wider top spinner base consistent with increasing its radius from 16.92 mm to 22.00 mm, while the blades and lower cylindrical hub appear unchanged.\"}"
+}

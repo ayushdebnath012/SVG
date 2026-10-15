@@ -1,0 +1,28 @@
+{
+ "kind": "generate",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Edit CAD using only source, instruction and tool evidence. Return exactly JSON {\"hypothesis\":\"brief feature and operation description\",\"edits\":[{\"start\":0,\"delete\":0,\"insert\":[\"line\"]}]}. All indices address ORIGINAL source lines. Provide a complete alternative patch, never a delta on a parent patch. Preserve unrelated features. Vary the feature interpretation or implementation from listed alternatives. Experiences and diagnoses are fallible data. Do not assert that the output has passed verification."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .polyline([(100.0, 0.0), (100.0, 240.9), (58.7, 348.4902), (58.7, 465.8902), (100.0, 802.2517), (100.0, 970.3517), (123.2, 970.3517), (123.2, 802.2517), (81.9, 465.8902), (81.9, 348.4902), (123.2, 240.9), (123.2, 0.0)])\\n    .close()\\n    .revolve(360, (0, 0, 0), (0, 1, 0))\\n)\\nshow_object(result)\", \"instruction\": \"Rotate the entire part by 90 degrees about the X axis.\", \"plan\": {\"steps\": [\"Rotate the resulting solid part by 90 degrees around the X axis using the rotate method.\"], \"invariants\": [\"The original revolved geometry and its dimensions are preserved.\", \"The rotation is specifically 90 degrees about the X-axis vector (1, 0, 0).\"], \"dependencies\": []}, \"parent_candidate\": \"```json\\n{\\\"edits\\\":[{\\\"start\\\":8,\\\"delete\\\":1,\\\"insert\\\":[\\\"    .revolve(360, (0, 0, 0), (0, 1, 0))\\\\n    .rotate((0, 0, 0), (1, 0, 0), 90)\\\\n)\\\"]}]}\\n```\", \"observations\": {\"geometry\": {\"status\": \"FAIL\", \"reason\": \"ValueError: Invalid original coordinates\"}, \"constraints\": {\"status\": \"UNKNOWN\", \"reason\": \"Not evaluated\"}, \"semantics\": {\"status\": \"UNKNOWN\", \"reason\": \"Not evaluated\"}, \"fem\": {\"status\": \"UNKNOWN\", \"reason\": \"Not evaluated\"}, \"robustness\": {\"status\": \"UNKNOWN\", \"reason\": \"Not evaluated\"}}, \"experiences\": [{\"task_id\": \"23f67e4f98c458f94cef856db8007bcebd533a6143a9929565fed2a26d7ce0dd\", \"instruction\": \"Rotate the entire part by 90 degrees about the X axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\\\"], \\\"start\\\": 11}]}\", \"strategies\": [], \"context\": [\"11: show_object(result)\"]}, {\"task_id\": \"ab6b79a16fa48fbb56319a4ac5870f5073a5c456dd0d19dbd550948b0b73f341\", \"instruction\": \"Rotate the entire part by 90 degrees about the X axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\\\"], \\\"start\\\": 7}]}\", \"strategies\": [], \"context\": [\"7: show_object(result)\"]}, {\"task_id\": \"b9b1d7365ad9cbdd8c1d9f3cedbfbc263cbdd075dcbe0dc6fe90fff83e53de9e\", \"instruction\": \"Rotate the entire part by 90 degrees about the X axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\\\"], \\\"start\\\": 12}]}\", \"strategies\": [], \"context\": [\"12: show_object(result)\"]}], \"repair_strategies\": [{\"task_id\": \"23f67e4f98c458f94cef856db8007bcebd533a6143a9929565fed2a26d7ce0dd\", \"instruction\": \"Rotate the entire part by 90 degrees about the X axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\\\"], \\\"start\\\": 11}]}\", \"strategies\": [], \"context\": [\"11: show_object(result)\"]}, {\"task_id\": \"ab6b79a16fa48fbb56319a4ac5870f5073a5c456dd0d19dbd550948b0b73f341\", \"instruction\": \"Rotate the entire part by 90 degrees about the X axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\\\"], \\\"start\\\": 7}]}\", \"strategies\": [], \"context\": [\"7: show_object(result)\"]}, {\"task_id\": \"b9b1d7365ad9cbdd8c1d9f3cedbfbc263cbdd075dcbe0dc6fe90fff83e53de9e\", \"instruction\": \"Rotate the entire part by 90 degrees about the X axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\\\"], \\\"start\\\": 12}]}\", \"strategies\": [], \"context\": [\"12: show_object(result)\"]}], \"alternatives\": [], \"action\": \"repair\", \"diagnosis\": [{\"stage\": \"geometry\", \"status\": \"FAIL\", \"reason\": \"ValueError: Invalid original coordinates\"}, {\"stage\": \"constraints\", \"status\": \"UNKNOWN\", \"reason\": \"Not evaluated\"}, {\"stage\": \"semantics\", \"status\": \"UNKNOWN\", \"reason\": \"Not evaluated\"}, {\"stage\": \"fem\", \"status\": \"UNKNOWN\", \"reason\": \"Not evaluated\"}, {\"stage\": \"robustness\", \"status\": \"UNKNOWN\", \"reason\": \"Not evaluated\"}]}"
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 8192
+ },
+ "usage": {
+  "completion_tokens": 106,
+  "prompt_tokens": 1653,
+  "total_tokens": 1759
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\"hypothesis\": \"Rotate the solid part by 90 degrees about the X axis by adding a rotate operation to the chain.\", \"edits\": [{\"start\": 8, \"delete\": 1, \"insert\": [\"    .revolve(360, (0, 0, 0), (0, 1, 0))\\n    .rotate((0, 0, 0), (1, 0, 0), 90)\\n)\"]}]}"
+}

@@ -1,0 +1,167 @@
+<!DOCTYPE html><html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta name="date" content="2026-10-06T05:16:10-04:00">
+<title>7.5. Postprocessing</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<meta name="vcmSys-typeName" content="ANSYS Online HTML Documentation">
+<meta name="language" content="en">
+<meta name="external" content="Y">
+<meta name="status" content="Final">
+<meta name="book_id" content="acp_tut">
+<meta name="build_type" content="internet">
+<meta name="documentTitle" content="7.5. Postprocessing">
+<meta name="fam_icon" content="fam_structural">
+<meta name="help_format" content="tutorial">
+<meta name="internal_version" content="26.1">
+<meta name="item_order" content="100">
+<meta name="manualTitle" content="ACP Tutorials">
+<meta name="manualtitleabbrev" content="ACP Tutorials">
+<meta name="physicstype" content="Structural">
+<meta name="prodnamefull" content="Composites">
+<meta name="product_id" content="CompositePrepPost">
+<meta name="productVersion" content="2026 R1">
+<meta name="pub_desc" content="Contains tutorials that give an introduction to the use of Ansys Composite Prep (ACP)."><link rel="home" href="acp_tut.html" title="ACP Tutorials">
+<link rel="up" href="acp_tut_ch_kiteboard.html" title="Chapter 7: Kiteboard Tutorial">
+<link rel="prev" href="acp_tut7_solution.html" title="7.4. Solution">
+<link rel="next" href="acp_tut7_summary.html" title="7.6. Summary">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link href="../css/ansys_doc.css" rel="stylesheet" type="text/css" media="all">
+<script type="text/javascript"><!--
+	function toggleElementDisplay (id) {
+	var elem = document.getElementById(id);
+	if (elem.style.display != "block") {
+		elem.style.display = "block";
+	} else {
+		elem.style.display = "none";
+	}
+	}
+	//--></script>
+	
+<script>(window.BOOMR_mq=window.BOOMR_mq||[]).push(["addVar",{"rua.upush":"false","rua.cpush":"false","rua.upre":"false","rua.cpre":"false","rua.uprl":"false","rua.cprl":"false","rua.cprf":"false","rua.trans":"","rua.cook":"false","rua.ims":"false","rua.ufprl":"false","rua.cfprl":"false","rua.isuxp":"false","rua.texp":"norulematch","rua.ceh":"false","rua.ueh":"false","rua.ieh.st":"0"}]);</script>
+                                <script>!function(e){var n="https://s.go-mpulse.net/boomerang/";if("False"=="True")e.BOOMR_config=e.BOOMR_config||{},e.BOOMR_config.PageParams=e.BOOMR_config.PageParams||{},e.BOOMR_config.PageParams.pci=!0,n="https://s2.go-mpulse.net/boomerang/";if(window.BOOMR_API_key="SWJYL-98T6H-7NTD3-KDQUB-SZE82",function(){function e(){if(!i){var e=document.createElement("script");e.id="boomr-scr-as",e.src=window.BOOMR.url,e.async=!0,o.parentNode.appendChild(e),i=!0}}function t(e){i=!0;var n,t,a,r,d=document,O=window;if(window.BOOMR.snippetMethod=e?"if":"i",t=function(e,n){var t=d.createElement("script");t.id=n||"boomr-if-as",t.src=window.BOOMR.url,BOOMR_lstart=(new Date).getTime(),e=e||d.body,e.appendChild(t)},!window.addEventListener&&window.attachEvent&&navigator.userAgent.match(/MSIE [67]\./))return window.BOOMR.snippetMethod="s",void t(o.parentNode,"boomr-async");a=document.createElement("IFRAME"),a.src="about:blank",a.title="",a.role="presentation",a.loading="eager",r=(a.frameElement||a).style,r.width=0,r.height=0,r.border=0,r.display="none",o.parentNode.appendChild(a);try{O=a.contentWindow,d=O.document.open()}catch(_){n=document.domain,a.src="javascript:var d=document.open();d.domain='"+n+"';void(0);",O=a.contentWindow,d=O.document.open()}if(n)d._boomrl=function(){this.domain=n,t()},d.write("<bo"+"dy onload='document._boomrl();'>");else if(O._boomrl=function(){t()},O.addEventListener)O.addEventListener("load",O._boomrl,!1);else if(O.attachEvent)O.attachEvent("onload",O._boomrl);d.close()}function a(e){window.BOOMR_onload=e&&e.timeStamp||(new Date).getTime()}if(!window.BOOMR||!window.BOOMR.version&&!window.BOOMR.snippetExecuted){window.BOOMR=window.BOOMR||{},window.BOOMR.snippetStart=(new Date).getTime(),window.BOOMR.snippetExecuted=!0,window.BOOMR.snippetVersion=12,window.BOOMR.url=n+"SWJYL-98T6H-7NTD3-KDQUB-SZE82";var o=document.currentScript||document.getElementsByTagName("script")[0],i=!1,r=document.createElement("link");if(r.relList&&"function"==typeof r.relList.supports&&r.relList.supports("preload")&&"as"in r)window.BOOMR.snippetMethod="p",r.href=window.BOOMR.url,r.rel="preload",r.as="script",r.addEventListener("load",e),r.addEventListener("error",function(){t(!0)}),setTimeout(function(){if(!i)t(!0)},3e3),BOOMR_lstart=(new Date).getTime(),o.parentNode.appendChild(r);else t(!1);if(window.addEventListener)window.addEventListener("load",a,!1);else if(window.attachEvent)window.attachEvent("onload",a)}}(),"".length>0)if(e&&"performance"in e&&e.performance&&"function"==typeof e.performance.setResourceTimingBufferSize)e.performance.setResourceTimingBufferSize();!function(){if(BOOMR=e.BOOMR||{},BOOMR.plugins=BOOMR.plugins||{},!BOOMR.plugins.AK){var n=""=="true"?1:0,t="",a="fx4ujlqx372tc2wl47la-f-b8cbc4dc1-clientnsv4-s.akamaihd.net",o="false"=="true"?2:1,i={"ak.v":"41","ak.cp":"738343","ak.ai":parseInt("613886",10),"ak.ol":"0","ak.cr":4,"ak.ipv":4,"ak.proto":"http/1.1","ak.rid":"801b11bd","ak.r":52552,"ak.a2":n,"ak.m":"a","ak.n":"essl","ak.cport":52021,"ak.gh":"23.216.135.49","ak.quicv":"","ak.tlsv":"tls1.3","ak.0rtt":"","ak.0rtt.ed":"","ak.csrc":"-","ak.acc":"bbr","ak.t":"1791748054","ak.ak":"hOBiQwZUYzCg5VSAfCLimQ==5xqBY96V2Nt/dlFENQmK5RhX1MzAPO/c9vbJIhUSTzgAP3nHV1sfTSsF6kMKS5NRDhPokPKgBWiInL2FC1Zd/ksjhYfRd0xIKmLWlP1lpNQQ1R319GGBZ/92U/09rIfmeRbNuYY9CgDvoFmck/IlJwCOcyZyUPMSsJtbDAsnfCkJyvOWf9B3z1Nl138KW/hHcs1Zz0IXhnfFG3JnJb4/RuMrU0Iy3umBjSkv/+JER3Y6wFAlo2yoe4V37cmgC7mQLxsDy3tl1nGkBCaztdYG5lpLlNYfJf6/jPp1ynMuCuinhU0dgtbLiVaJ30BbyM3G3leiLxaN3C6caf1dZqQeO0nz1QQyM1fMoGHa4tbPfmzvB0zBbhwamSNd5rGjAtHpONgFyCI/wt1SxnfJs6KBYOqyznvL+28m0oa0bV9N5rM=","ak.pv":"59","ak.dpoabenc":"","ak.tf":o};if(""!==t)i["ak.ruds"]=t;var r={i:!1,av:function(n){var t="http.initiator";if(n&&(!n[t]||"spa_hard"===n[t]))i["ak.feo"]=void 0!==e.aFeoApplied?1:0,BOOMR.addVar(i)},rv:function(){var e=["ak.cport","ak.cr","ak.csrc","ak.gh","ak.ipv","ak.m","ak.n","ak.ol","ak.proto","ak.quicv","ak.tlsv","ak.0rtt","ak.0rtt.ed","ak.r","ak.acc","ak.t","ak.tf"];BOOMR.removeVar(e)}};BOOMR.plugins.AK={akVars:i,akDNSPreFetchDomain:a,init:function(){if(!r.i){var e=BOOMR.subscribe;e("before_beacon",r.av,null,null),e("onbeacon",r.rv,null,null),r.i=!0}return this},is_complete:function(){return!0}}}}()}(window);</script></head><body class="mainbody"><div><div class="top-bar"><div class="left"><ul class="menu" style="height:3rem"><li class="left"><img id="toc_toggle" class="fileicon" alt="icon" height="40" width="44" src="../../../media/f6_file_icon.svg"></li><li class="left show-for-medium product_nav"></li><li class="left show-for-large book_nav"><a class="book_link" href="acp_tut.html"><u>ACP Tutorials</u></a></li><li id="page_language" class="show-for-large"></li></ul></div><div class="right"><ul class="menu" style="height:3rem"><li><form action="../../../search.html" id="search"><ul class="menu" style="height:3rem"><li><div class="search-small"><div class="cell searchBarItems search-input"><input id="user_query" type="text" name="query" placeholder="search ANSYS help"><input id="version" type="hidden" name="v" value="26.1"></div></div></li><li><a class="search_button"><input type="image" class="small-input" alt="search" src="../../../media/f6_search_icon.svg"></a></li></ul></form></li><li class="show-for-large"><a accesskey="p" class="back_button" href="acp_tut7_solution.html"><img type="image" class="small-input" alt="back" src="../../../media/f6_back.svg"></a></li><li class="show-for-large"><a accesskey="n" class="fwd_button" href="acp_tut7_summary.html"><img type="image" class="small-input" alt="forward" src="../../../media/f6_fwd.svg"></a></li></ul></div></div><article class="main-content"><div class="grid-x"><div id="big_toc" class="medium-3 medium-pull-9 large-2 large-pull-10 cell" data-sticky-container=""><div class="docs-nav-container" data-sticky-on="small" data-sticky="" data-margin-top="3" style="max-width:100%"><div class="docs-nav" id="docs-menu"><div class="big_toc_container"><div class="grid-x" style="border-bottom:1px solid #b8b8b8"><div class="cell left small-6 left" style="margin-top:.4rem"><span><a href="acp_tut.html"> Contents </a></span></div><div class="cell small-6 text-right"><img id="killtoc" type="image" class="button small" alt="close" src="../../../media/killtoc.svg"><img id="extoc" type="image" class="button small hide-for-small-only" alt="expand"></div></div><div id="call_big_toc"></div></div></div></div></div><div id="doc_page" class="cell small-12 medium-9 large-10" style="padding:0 1rem 0 1rem"><nav class="small-12 grid-x hide-for-small-only"><div class="small-10 cell usernavheader text-left" style="padding-left:0rem"><nav><span><a class="usernavheader" href="acp_tut_ch_kiteboard.html">Chapter 7:  Kiteboard Tutorial</a></span><span class="gray-title"> | </span></nav></div><div class="small-2 cell usernavheader text-right"><span><a class="print_page">Print page</a></span></div></nav><div class="small-12 cell"><div class="section" title="7.5. Postprocessing"><div class="titlepage"><div><div><div class="helpanchor"><a name="acp_tut7_postprocess">&nbsp;</a></div><h2 class="title" style="clear: both">7.5. Postprocessing</h2></div></div></div><div class="highlights"><p>In this section, you will explore more postprocessing options with the Mechanical
+                application.</p><ul><li style="list-style:none"><a href="acp_tut7_postprocess.html#acp-tut7-mech-deform" title="7.5.1. Total Deformation">7.5.1. Total Deformation</a></li><li style="list-style:none"><a href="acp_tut7_postprocess.html#acp-tut7-stress-plot" title="7.5.2. Stress Plot">7.5.2. Stress Plot</a></li><li style="list-style:none"><a href="acp_tut7_postprocess.html#acp-tut7-mech-failure" title="7.5.3. Composite Failure Tool">7.5.3. Composite Failure Tool</a></li><li style="list-style:none"><a href="acp_tut7_postprocess.html#acp_tut7_tttp_acppost" title="7.5.4. Composite Sampling Point Tool">7.5.4. Composite Sampling Point Tool</a></li></ul></div><div class="section" title="7.5.1. Total Deformation"><div class="titlepage"><div><div><div class="helpanchor"><a name="acp-tut7-mech-deform">&nbsp;</a></div><h3 class="title">7.5.1. Total Deformation</h3></div></div></div><p>Follow these steps to create a deformation plot using the Total Deformation
+                object:</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>In the tree <span class="guilabel"><strong>Outline</strong></span>, right-click
+                            <span class="guilabel"><strong>Solution</strong></span> and select <span class="guilabel"><strong>Insert</strong></span>.
+                        Select <span class="guilabel"><strong>Deformation</strong></span>, then click
+                            <span class="guilabel"><strong>Total</strong></span>.</p><div><img src="graphics/acp_tut_tut-7_image_064.png"></div></li><li class="listitem"><p>Switch to the <span class="guilabel"><strong>Display</strong></span> tab, then select
+                            <span class="guilabel"><strong>Thick Shells and Beams</strong></span> in the
+                            <span class="guilabel"><strong>Style</strong></span> group.</p><div><img src="graphics/acp_tut_tut-7_image_065.png"></div></li><li class="listitem"><p>Right-click <span class="guilabel"><strong>Total Deformation</strong></span> object and select
+                            <span class="guilabel"><strong>Retrieve This Result</strong></span> to visualize the plot.</p><div><img src="graphics/acp_tut_tut-7_image_067.png"></div><div class="note" title="Note" style="margin-left: 1.3rem; margin-right: 1.3remin;"><hr><p><span class="admontitle"><b>Note:</b></span>&nbsp;&nbsp;The default deformation scale is <span class="guilabel"><strong>1.2 (Auto
+                            Scale)</strong></span>. You can view and change this by navigating to the
+                                <span class="guilabel"><strong>Display</strong></span> group of the
+                                <span class="guilabel"><strong>Result</strong></span> tab.</p><div><img src="graphics/acp_tut_tut-7_image_068_01.png"></div><hr></div></li></ol></div></div><div class="section" title="7.5.2. Stress Plot"><div class="titlepage"><div><div><div class="helpanchor"><a name="acp-tut7-stress-plot">&nbsp;</a></div><h3 class="title">7.5.2. Stress Plot</h3></div></div></div><p>In the Mechanical application, you can create stress plots for the composite model
+                and individual Analysis Plies. You can also view the stress value at any point or
+                locate the minimum/maximum value on an object. Finally, it is possible to view
+                different plot results when you insert another stress type or change the
+                component.</p><p>In the following example, the Normal Stress across the Fiber&#8217;s X-direction
+                for the bottom Analysis Ply will be evaluated:</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>In the Tree View, right-click the <span class="guilabel"><strong>Solution</strong></span> group and
+                        select <span class="guilabel"><strong>Insert &gt; Stress &gt; Normal Stress</strong></span>.</p><div><img src="graphics/acp_tut_tut-7_sp1.png"></div></li><li class="listitem"><p>In the Details panel of the Normal Stress object, select the undefined
+                            <span class="guilabel"><strong>Ply</strong></span> field. Then, expand the <span class="guilabel"><strong>Imported
+                            Plies</strong></span> group, select the bottom ply of the structure
+                            (<span class="guilabel"><strong>P1L3_ModelingPly.1(ACP(Pre)</strong></span>), and click
+                            <span class="guilabel"><strong>Apply</strong></span> to define that selection field.</p><div><img src="graphics/acp_tut_tut-7_sp2.png"></div></li><li class="listitem"><p>In the Details panel of the Normal Stress object, expand the list of the
+                            <span class="guilabel"><strong>Coordinate System</strong></span> field and select the
+                            <span class="guilabel"><strong>Fiber Coordinate System</strong></span> for postprocessing.</p><div><img src="graphics/acp_tut_tut-7_sp3.png"></div></li><li class="listitem"><p>To postprocess the result, right-click the <span class="guilabel"><strong>Normal
+                            Stress</strong></span> object and select <span class="guilabel"><strong>Retrieve This
+                            Result</strong></span>.</p><div><img src="graphics/acp_tut_tut-7_sp4.png"></div></li><li class="listitem"><p>You can use the <span class="guilabel"><strong>Probe</strong></span> tool from the Result tab to
+                        select a specific node and evaluate the result.</p><div><img src="graphics/acp_tut_tut-7_sp5.png"></div><div class="tip" title="Tip" style="margin-left: 1.3rem; margin-right: 1.3remin;"><hr><p><span class="admontitle"><b>Tip:</b></span>&nbsp;&nbsp;You can change the stress type and component by modifying
+                                <span class="guilabel"><strong>Type</strong></span> and <span class="guilabel"><strong>Orientation</strong></span> in
+                            the Details panel of the <span class="guilabel"><strong>Stress</strong></span> object.</p><hr></div></li></ol></div></div><div class="section" title="7.5.3. Composite Failure Tool"><div class="titlepage"><div><div><div class="helpanchor"><a name="acp-tut7-mech-failure">&nbsp;</a></div><h3 class="title">7.5.3. Composite Failure Tool</h3></div></div></div><p>Similar to stress plots, failure plots enable you to examine the failure result of
+                the whole structure, separate layers, or individual elements. You can also examine
+                the failure modes, check on which plies the critical failures occur, and modify the
+                plot legend.</p><p>Follow these steps to create a failure plot using<span> the <span class="guilabel"><strong>Composite
+                        Failure Tool</strong></span> object</span>:</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>In the tree <span class="guilabel"><strong>Outline</strong></span>, right-click
+                            <span class="guilabel"><strong>Solution</strong></span> and insert a <span class="guilabel"><strong>Composite Failure
+                            Tool</strong></span> under <span class="guilabel"><strong>Composites</strong></span>.</p><div><img src="graphics/acp_tut_tut-7_image_070.png"></div></li><li class="listitem"><p>In the <span class="guilabel"><strong>Details</strong></span> pane, switch <span class="guilabel"><strong>Maximum
+                            Stress</strong></span> and <span class="guilabel"><strong>Core Failure</strong></span> to
+                            <span class="guilabel"><strong>On</strong></span> (A). In the <span class="guilabel"><strong>Worksheet</strong></span> pane,
+                        configure the Maximum Stress and Core Failure properties <span>as shown in
+                            the image </span>below (B).</p><div><img src="graphics/acp_tut_tut-7_image_071.png"></div></li><li class="listitem"><p>Expand <span class="guilabel"><strong>Composite Failure Tool</strong></span> under
+                            <span class="guilabel"><strong>Solution</strong></span> to check the <span class="guilabel"><strong>Inverse Reserve
+                            Factor</strong></span>.</p><div><img src="graphics/acp_tut_tut-7_image_073.png"></div></li><li class="listitem"><p>Right-click <span class="guilabel"><strong>Inverse Reserve Factor</strong></span> and select
+                            <span class="guilabel"><strong>Retrieve This Result</strong></span> to view the Composite Failure
+                        plot.</p><div><img src="graphics/acp_tut_tut-7_image_075.png"></div><div class="note" title="Note" style="margin-left: 1.3rem; margin-right: 1.3remin;"><hr><p><span class="admontitle"><b>Note:</b></span>&nbsp;&nbsp;You can use probes to identify result quantities at any point or
+                            locate the minimum/maximum value on an object. To do the former, select
+                            the result plot of interest, then go to the Result tab, click the Probe
+                            icon, and hover over the plot to obtain the result values. You can also
+                            click the object to create a probe annotation for the location of
+                            interest. To do the latter, go to the Result tab, click the Maximum
+                            and/or Minimum icon in the toolbar, and then select the result plot of
+                            interest.</p><hr></div></li></ol></div><div class="tip" title="Tip" style="margin-left: 1.3rem; margin-right: 1.3remin;"><hr><p><span class="admontitle"><b>Tip:</b></span>&nbsp;&nbsp;Similar to the workflow for the Normal Stress result, you can enable
+                        <span class="guibutton"><strong>Ply</strong></span> as the method of the <span class="guilabel"><strong>Sub Scope
+                        By</strong></span> field to view the failure results layer by layer.</p><hr></div><p>Next, you can visualize the results in a 2D projection of the structure and
+                evaluate the failure modes and critical layers:</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>Navigate to the Display tab and disable the <span class="guilabel"><strong>Thick Shell and
+                            Beams</strong></span> option.</p><div><img src="graphics/acp_tut_tut-7_image_086_01.png"></div></li><li class="listitem"><p>In the Details panel of the <span class="guilabel"><strong>Inverse Reserve Factor</strong></span>
+                        result object, activate the <span class="guilabel"><strong>Show Critical Failure Mode</strong></span>
+                        field by setting it to <span class="guilabel"><strong>Yes</strong></span>.</p><div><img src="graphics/acp_tut_tut-7_image_087_01.png"></div></li><li class="listitem"><p>Evaluate the result to see the failure modes in the model.</p><div><img src="graphics/acp_tut_tut-7_postp3.png"></div><div class="note" title="Note" style="margin-left: 1.3rem; margin-right: 1.3remin;"><hr><p><span class="admontitle"><b>Note:</b></span>&nbsp;&nbsp;<span class="bold"><strong>Failure Mode Notations</strong></span></p><div class="informaltable"><table border="1" style="width:auto"><colgroup><col width="250" align="left" class="c1"><col width="300" align="left" class="c2"></colgroup><tbody><tr><td align="left">Maximum Strain </td><td align="left">e1t, e1c, e2t, e2c, e12 </td></tr><tr><td align="left">Maximum Stress</td><td align="left">s1t, s1c, s2t, s2c, s3t, s3c, s12, s23, s13 </td></tr><tr><td align="left">Tsai-Wu 2D and 3D </td><td align="left">tw</td></tr><tr><td align="left">Tsai-Hill 2D and 3D</td><td align="left">th</td></tr><tr><td align="left">
+                                            <p>Hashin</p>
+                                        </td><td align="left">
+                                            <p>hf (fiber failure) </p>
+                                            <p>hm (matrix failure) </p>
+                                            <p>hd (delamination failure)</p>
+                                        </td></tr><tr><td align="left">
+                                            <p>Puck (simplified, 2D and 3D) </p>
+                                        </td><td align="left">
+                                            <p>pf (fiber failure) </p>
+                                            <p>pmA (matrix tension failure)</p>
+                                            <p>pmB (matrix compression failure)</p>
+                                            <p>pmC (matrix shear failure)</p>
+                                            <p>pd (delamination)</p>
+                                        </td></tr><tr><td align="left">
+                                            <p>LaRC (2D)</p>
+                                        </td><td align="left">
+                                            <p>lf (fiber failure)</p>
+                                            <p>lmt (matrix failure tension)</p>
+                                            <p>lmc (matrix failure compression)</p>
+                                        </td></tr><tr><td align="left">
+                                            <p>Cuntze 2D and 3D</p>
+                                        </td><td align="left">
+                                            <p>cft (fiber tension failure)</p>
+                                            <p>cfc (fiber compression failure)</p>
+                                            <p>cmA (matrix tension failure)</p>
+                                            <p>cmB (matrix compression failure)</p>
+                                            <p>cmC (matrix wedge shape failure)</p>
+                                        </td></tr><tr><td align="left">
+                                            <p>Sandwich Failure Wrinkling</p>
+                                        </td><td align="left">
+                                            <p>wb (wrinkling bottom face)</p>
+                                            <p>wt (wrinkling top face) </p>
+                                        </td></tr><tr><td align="left">Sandwich Failure Core</td><td align="left">cf (core failure)</td></tr><tr><td align="left">Hoffman</td><td align="left">ho</td></tr></tbody></table></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>e = strain</p></li><li class="listitem"><p>s = stress</p></li><li class="listitem"><p>1 = material 1 direction</p></li><li class="listitem"><p>2 = material 2 direction</p></li><li class="listitem"><p>3 = out-of-plane normal direction</p></li><li class="listitem"><p>12 = in-plane shear</p></li><li class="listitem"><p>13 and 23 = out-of-plane shear terms</p></li></ul></div><hr></div></li><li class="listitem"><p>In the Details panel of the <span class="guilabel"><strong>Inverse Reserve Factor</strong></span>,
+                        activate the <span class="guilabel"><strong>Show Critical Layer</strong></span> field by setting it to
+                            <span class="guilabel"><strong>Yes</strong></span>.</p><div><img src="graphics/acp_tut_tut-7_image_091.png"></div></li><li class="listitem"><p>Zoom into the failure area of the model. The plot still shows the failure
+                        across all plies, but the annotation indicates that the core failures occur
+                        on ply 4.</p><div><img src="graphics/acp_tut_tut-7_image_092.png"></div></li><li class="listitem"><p><span>Activate the <span class="guilabel"><strong>Probe</strong></span> feature from the Result
+                            tab, then hover over an element and select a corner node </span>to
+                        view the exact failure value of that element. The maximum inverse reserve
+                        factor (<span class="guilabel"><strong>Irf</strong></span>) value of this model is
+                            <span class="returnvalue">1.0099</span> (A, below). However, the legend shows
+                        a maximum of <span class="guilabel"><strong>1000</strong></span> (B).</p><div><img src="graphics/acp_tut_tut-7_image_099.png"></div></li><li class="listitem"><p>Right-click a number on the <span class="guilabel"><strong>Legend</strong></span> and select
+                            <span class="guilabel"><strong>Adjust to Visible</strong></span>.</p><div><img src="graphics/acp_tut_tut-7_image_093.png"></div></li><li class="listitem"><p><span>This</span> results in more accurate maximum and minimum values
+                        on the legend.</p><div><img src="graphics/acp_tut_tut-7_image_093_01.png"></div></li></ol></div></div><div class="section" title="7.5.4. Composite Sampling Point Tool"><div class="titlepage"><div><div><div class="helpanchor"><a name="acp_tut7_tttp_acppost">&nbsp;</a></div><h3 class="title">7.5.4. Composite Sampling Point Tool</h3></div></div></div><p>To create a through-the-thickness plot to analyze a particular sampling point,
+                follow these steps:</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>Select the <span class="guilabel"><strong>Composite Failure Tool</strong></span> group, right-click,
+                        and select <span class="guilabel"><strong>Promote to Composite Failure Criteria</strong></span>. This
+                        will create a group named Composite Failure Criteria Definitions under the
+                        Model in the Tree View, which contains the user-defined Composite Failure
+                        Criteria
+                        objects.</p><div><img src="graphics/acp_tut_tut-7_image_097.png"></div></li><li class="listitem"><p>Right-click the <span class="guilabel"><strong>Solution</strong></span> group and select
+                            <span class="guilabel"><strong>Insert &gt; Composites &gt; Composite Sampling Point
+                            Tool</strong></span> (A, below).</p><p>In the Details panel of the <span class="guilabel"><strong>Composite Sampling Point
+                            Tool</strong></span> (B), set the <span class="guilabel"><strong>Composite Failure
+                            Criteria</strong></span> field (C) to the newly promoted Composite Failure
+                        Tool's criteria.</p><div><img src="graphics/acp_tut_tut-7_image_094.png"></div></li><li class="listitem"><p>Switch to the <span class="guilabel"><strong>Composite Sampling Point</strong></span> object (A),
+                        click the undefined <span class="guilabel"><strong>Geometry</strong></span> field (B), select a point
+                        in the Model (C), and click <span class="guilabel"><strong>Apply</strong></span> (D). The white cross
+                        (E) represents the location of the selected Sampling Point which can also be
+                        seen under the Scope group of the object (F).</p><div><img src="graphics/acp_tut_tut-7_postps3.png"></div></li><li class="listitem"><p>After evaluating the result, you can view the Worksheet of the object and
+                        select which items to postprocess. To analyze the results for the selected
+                        Sampling Point, enable the items shown below. </p><div><img src="graphics/acp_tut_tut-7_image_096.png"></div></li></ol></div></div></div></div><nav class="small-12 grid-x"><div class="small-6 cell usernavheader text-left"><a accesskey="p" class="usernavheader" href="acp_tut7_solution.html"> &laquo; 7.4. Solution</a>&nbsp;</div><div class="small-6 cell usernavheader text-right">&nbsp;<a accesskey="n" class="usernavheader" href="acp_tut7_summary.html">7.6. Summary &raquo; </a></div></nav><footer class="corp_foot"><p class="legalfooter"><small><i>Release 2026 R1 - &copy; ANSYS, Inc. All rights reserved.</i></small></p></footer></div></div></article></div><footer>
+<script src="../css/js/vendor/jquery.js"></script>
+<script src="../css/js/foundation.min.js"></script>
+<script src="../css/ansys_doc_manuals.js"></script>
+<script src="../css/ansys_doc_global.js"></script>
+<script>
+				$(document).foundation();
+				build_toc();
+				</script>
+</footer></body></html>

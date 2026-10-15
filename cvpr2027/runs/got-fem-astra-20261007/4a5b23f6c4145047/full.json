@@ -1,0 +1,85 @@
+{
+ "source_fem": {
+  "ok": true,
+  "compliance": 1.206295438910367e-07,
+  "components": 1,
+  "nodes": 8083
+ },
+ "nodes": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(27.1, 81.9)\n    .faces(\"<Z\")\n    .fillet(1.6)\n    .faces(\">Z\")\n    .fillet(1.6)\n    .faces(\">Z\")\n    .faces(\">Z\").workplane()\n    .polarArray(60.8, 0, 360, 6)\n    .hole(23.6)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 14.9), rotate=cq.Vector(0, 0, 0))\n            .cylinder(2.7, 46.8)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 35.6), rotate=cq.Vector(0, 0, 0))\n            .cylinder(38.7, 29.7)\n    )\n    .faces(\">Z\").workplane()\n    .hole(32.2)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.2084573540576617e-07,
+    "components": 1,
+    "nodes": 8281
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 0.0
+  },
+  {
+   "name": "alt1",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(27.1, 81.9)\n    .faces(\"<Z\")\n    .fillet(1.6)\n    .faces(\">Z\")\n    .fillet(1.6)\n    .faces(\">Z\")\n    .faces(\">Z\").workplane()\n    .polarArray(60.8, 0, 360, 6)\n    .hole(23.6)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 14.9), rotate=cq.Vector(0, 0, 0))\n            .cylinder(2.7, 46.8)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 35.6), rotate=cq.Vector(0, 0, 0))\n            .cylinder(38.7, 29.7)\n    )\n    .faces(\">Z\").workplane()\n    .hole(32.2)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.2076781745925783e-07,
+    "components": 1,
+    "nodes": 8302
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 0.0
+  },
+  {
+   "name": "alt2",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(27.1, 81.9)\n    .faces(\"<Z\")\n    .fillet(1.6)\n    .faces(\">Z\")\n    .fillet(1.6)\n    .faces(\">Z\")\n    .faces(\">Z\").workplane()\n    .polarArray(60.8, 0, 60, 6, fill=False)\n    .hole(23.6)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 14.9), rotate=cq.Vector(0, 0, 0))\n            .cylinder(2.7, 46.8)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 35.6), rotate=cq.Vector(0, 0, 0))\n            .cylinder(38.7, 29.7)\n    )\n    .faces(\">Z\").workplane()\n    .hole(32.2)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.208020032869242e-07,
+    "components": 1,
+    "nodes": 8279
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 0.0
+  },
+  {
+   "name": "alt3",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(27.1, 81.9)\n    .faces(\"<Z\")\n    .fillet(1.6)\n    .faces(\">Z\")\n    .fillet(1.6)\n    .faces(\">Z\")\n    .faces(\">Z\").workplane()\n    .pushPoints([(60.8, 0), (30.4, 30.4 * 3**0.5), (-30.4, 30.4 * 3**0.5), (-60.8, 0), (-30.4, -30.4 * 3**0.5), (30.4, -30.4 * 3**0.5)])\n    .hole(23.6)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 14.9), rotate=cq.Vector(0, 0, 0))\n            .cylinder(2.7, 46.8)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 35.6), rotate=cq.Vector(0, 0, 0))\n            .cylinder(38.7, 29.7)\n    )\n    .faces(\">Z\").workplane()\n    .hole(32.2)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.2073611482651306e-07,
+    "components": 1,
+    "nodes": 8356
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "rag",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(27.1, 81.9)\n    .faces(\"<Z\")\n    .fillet(1.6)\n    .faces(\">Z\")\n    .fillet(1.6)\n    .faces(\">Z\")\n    .faces(\">Z\").workplane()\n    .polarArray(60.8, 0, 360, 6)\n    .hole(23.6)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 14.9), rotate=cq.Vector(0, 0, 0))\n            .cylinder(2.7, 46.8)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 35.6), rotate=cq.Vector(0, 0, 0))\n            .cylinder(38.7, 29.7)\n    )\n    .faces(\">Z\").workplane()\n    .hole(32.2)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.207739936987384e-07,
+    "components": 1,
+    "nodes": 8304
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 0.0
+  }
+ ]
+}

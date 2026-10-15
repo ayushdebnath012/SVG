@@ -1,0 +1,16 @@
+{
+  "model": "gpt-6-astra",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Return only JSON {\"edits\":[{\"old\":\"exact substring\",\"new\":\"replacement\"}],\"reason\":\"brief\"}. Repair only CalculiX C3D20R connectivity record formatting. Do not change solver physics, meshes, loads or results. No markdown."
+    },
+    {
+      "role": "user",
+      "content": "The high-reasoning solver failed before solving. Fix the native connectivity line-length/continuation syntax using the actual error below. Edits must be exact substrings of this supplied source fragment. Return a general writer, never hardcode node values.\nSOURCE FRAGMENT:\n        f.write(\"*ELEMENT,TYPE=C3D20R,ELSET=BODY\\n\")\n        for i, nodes in enumerate(conn + 1, 1):\n            f.write(str(i) + \",\" + \",\".join(map(str, nodes)) + \"\\n\")\n\nNATIVE ERROR:\nOMP: Warning #179: Function Can't set size of /tmp file failed:\nOMP: Warning #179: Function Can't set size of /tmp file failed:\n\n************************************************************\n\nCalculiX Version 2.23, Copyright(C) 1998-2025 Guido Dhondt\nCalculiX comes with ABSOLUTELY NO WARRANTY. This is free\nsoftware, and you are welcome to redistribute it under\ncertain conditions, see gpl.htm\n\n************************************************************\n\nYou are using an executable made on Mon Sep 28 09:19:28 2026\n *ERROR in splitline: there should not\n        be more than 16 entries in a \n        line; \n1,1,504,520,17,3,506,522,19,366,514,372,11,367,515,373,12,2,505,521,18\n"
+    }
+  ],
+  "reasoning_effort": "medium",
+  "max_completion_tokens": 1800,
+  "store": false
+}

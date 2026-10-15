@@ -1,0 +1,28 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .cylinder(22.9, 26.8)\\n    .faces(\\\"<Z\\\")\\n    .chamfer(1.0)\\n    .faces(\\\">Z\\\")\\n    .faces(\\\">Z\\\").workplane()\\n    .polarArray(20.9, 0, 360, 6)\\n    .hole(3.2)\\n    .union(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(0, 0, 12.75), rotate=cq.Vector(0, 0, 0))\\n            .cylinder(2.6, 15.4)\\n    )\\n    .union(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(0, 0, 27.8), rotate=cq.Vector(0, 0, 0))\\n            .cylinder(27.5, 12.0)\\n    )\\n    .faces(\\\">Z\\\").workplane()\\n    .hole(11.2)\\n)\\nshow_object(result)\", \"instruction\": \"Remove the upper raised-face cylinder; the flange keeps its 6 bolt holes, the bottom chamfer, and the small neck stub.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"dbd8da3599f3dab87ecf735f6c103134d7c5d12c74be1d0cc0a7f7616f4d814d\", \"instruction\": \"Remove the bottom flange and the tapered transition. Only the upper 11.95 mm-radius cylindrical section remains, with its full height (11.3 mm). The result is a simple short cylinder of radius 11.95 and height 11.3.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 5, \\\"insert\\\": [\\\"    .lineTo(11.95, 0.0)\\\", \\\"    .lineTo(11.95, 11.3)\\\", \\\"    .lineTo(0.0, 11.3)\\\"], \\\"start\\\": 4}]}\", \"strategies\": [], \"context\": [\"4:     .lineTo(29.7, 0.0)\", \"5:     .lineTo(29.7, 11.1)\", \"6:     .lineTo(11.95, 13.1)\", \"7:     .lineTo(11.95, 24.4)\", \"8:     .lineTo(0.0, 24.4)\"]}, {\"task_id\": \"d4b0e3b4ab682172aff86ecaf25de02038c8987b3cbc8ca306ab72ddebdc65d7\", \"instruction\": \"Widen the bottom flange from a 4.75 mm radius to a 6.00 mm radius and introduce a tapered outer face.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .lineTo(6.0, 0.0)\\\"], \\\"start\\\": 4}]}\", \"strategies\": [], \"context\": [\"4:     .lineTo(4.75, 0.0)\"]}, {\"task_id\": \"e95613c0051aa006e624e44b571119c28874f7c8075263a04b73f2e4a9910c7f\", \"instruction\": \"Remove the bolt hole on the right ear (+X side) of the flange; the left ear bolt hole and the central through-bore stay the same.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 5, \\\"insert\\\": [], \\\"start\\\": 21}]}\", \"strategies\": [], \"context\": [\"21:             .transformed(offset=cq.Vector(45.5, 0.0, -12.05), rotate=cq.Vector(0, 0, 0))\", \"22:             .cylinder(19.5, 5.3)\", \"23:     )\", \"24:     .cut(\", \"25:         cq.Workplane(\\\"XY\\\")\"]}]}"
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 4096
+ },
+ "usage": {
+  "completion_tokens": 213,
+  "prompt_tokens": 1069,
+  "total_tokens": 1282
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\n  \"steps\": [\n    \"Remove the union operation that adds the upper raised-face cylinder (height 27.5, diameter 12.0 at offset Z=27.8).\",\n    \"Adjust the final central hole operation to be applied to the top face of the remaining geometry.\"\n  ],\n  \"invariants\": [\n    \"The main body cylinder dimensions (height 22.9, diameter 26.8) remain unchanged.\",\n    \"The bottom chamfer (1.0) on the '<Z' face remains unchanged.\",\n    \"The polar array of 6 bolt holes (diameter 3.2 on radius 20.9) remains unchanged.\",\n    \"The small neck stub cylinder (height 2.6, diameter 15.4 at offset Z=12.75) remains unchanged.\"\n  ],\n  \"dependencies\": [\n    [0, 1]\n  ]\n}\n```"
+}

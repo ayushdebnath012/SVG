@@ -1,0 +1,28 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .transformed(offset=cq.Vector(35.0, 0, -1.5), rotate=cq.Vector(0, 0, 0))\\n    .rect(70.0, 16.0)\\n    .extrude(3.0)\\n    .union(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(70.0, 0, 0), rotate=cq.Vector(0, 90, 0))\\n            .rect(3.0, 16.0)\\n            .transformed(offset=cq.Vector(0, 0, 10.2), rotate=cq.Vector(0, 0, 90))\\n            .rect(3.0, 16.0)\\n            .loft(combine=True)\\n    )\\n    .union(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(115.2, -1.5, 0), rotate=cq.Vector(-90, 0, 0))\\n            .rect(70.0, 16.0)\\n            .extrude(3.0)\\n    )\\n    .cut(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(17.5, 0, -1.7), rotate=cq.Vector(0, 0, 0))\\n            .circle(2.5)\\n            .extrude(3.4)\\n    )\\n    .cut(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(52.5, 0, -1.7), rotate=cq.Vector(0, 0, 0))\\n            .circle(2.5)\\n            .extrude(3.4)\\n    )\\n    .cut(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(97.7, -1.7, 0), rotate=cq.Vector(-90, 0, 0))\\n            .circle(2.5)\\n            .extrude(3.4)\\n    )\\n    .cut(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(132.7, -1.7, 0), rotate=cq.Vector(-90, 0, 0))\\n            .circle(2.5)\\n            .extrude(3.4)\\n    )\\n)\\nshow_object(result)\", \"instruction\": \"Rotate the entire twisted double-flange plate assembly 90 degrees about the global X-axis while preserving the same dimensions, twist section, and four mounting holes.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"23f67e4f98c458f94cef856db8007bcebd533a6143a9929565fed2a26d7ce0dd\", \"instruction\": \"Rotate the entire part by 90 degrees about the X axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\\\"], \\\"start\\\": 11}]}\", \"strategies\": [], \"context\": [\"11: show_object(result)\"]}, {\"task_id\": \"ab6b79a16fa48fbb56319a4ac5870f5073a5c456dd0d19dbd550948b0b73f341\", \"instruction\": \"Rotate the entire part by 90 degrees about the X axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\\\"], \\\"start\\\": 7}]}\", \"strategies\": [], \"context\": [\"7: show_object(result)\"]}, {\"task_id\": \"b9b1d7365ad9cbdd8c1d9f3cedbfbc263cbdd075dcbe0dc6fe90fff83e53de9e\", \"instruction\": \"Rotate the entire part by 90 degrees about the X axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\\\"], \\\"start\\\": 12}]}\", \"strategies\": [], \"context\": [\"12: show_object(result)\"]}]}"
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 4096
+ },
+ "usage": {
+  "completion_tokens": 102,
+  "prompt_tokens": 1177,
+  "total_tokens": 1279
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\n  \"steps\": [\n    \"Rotate the entire constructed assembly by 90 degrees about the X-axis.\"\n  ],\n  \"invariants\": [\n    \"Dimensions of the base plate, twisted section, and second flange remain unchanged.\",\n    \"Positions and sizes of the four mounting holes remain consistent relative to their respective plates.\",\n    \"The twist geometry and connection between flanges are preserved.\"\n  ],\n  \"dependencies\": []\n}\n```"
+}

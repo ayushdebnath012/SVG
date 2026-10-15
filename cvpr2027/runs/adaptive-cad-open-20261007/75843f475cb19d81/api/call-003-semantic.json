@@ -1,0 +1,43 @@
+{
+ "kind": "semantic",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "Qwen/Qwen3.5-35B-A3B-FP8",
+  "messages": [
+   {
+    "role": "system",
+    "content": "You verify mechanical CAD edits from rendered views."
+   },
+   {
+    "role": "user",
+    "content": [
+     {
+      "type": "text",
+      "text": "Edit instruction: Remove the central rectangular through-cut and the vertical-edge fillet. The two mounting-hole rows on the top face are kept.\n\nThe image shows the ORIGINAL part (left) and the EDITED part (right), isometric views (top row) and top views (bottom row). Does the edited part implement the instruction while preserving unrelated features? Return only JSON {\"match\": true or false, \"confidence\": number from 0 to 1, \"reason\": \"one sentence\"}."
+     },
+     {
+      "type": "image_url",
+      "image_url": "<png omitted>"
+     }
+    ]
+   }
+  ],
+  "temperature": 0.6,
+  "top_p": 0.95,
+  "top_k": 20,
+  "max_tokens": 12288
+ },
+ "usage": {
+  "prompt_tokens": 383,
+  "total_tokens": 7300,
+  "completion_tokens": 6917,
+  "prompt_tokens_details": null,
+  "completion_tokens_details": {
+   "reasoning_tokens": 6839
+  }
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "\n\n{\n\"match\": true,\n\"confidence\": 0.9,\n\"reason\": \"The edited part correctly transforms the original L-shaped geometry (which implies a corner cutout) into a solid rectangle, effectively removing the cut, sharpens the vertical edges to remove the fillet, and preserves the two rows of mounting holes on the top face.\"\n}"
+}

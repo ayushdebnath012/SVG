@@ -1,0 +1,15 @@
+% Generated from completed local BenchCAD artifacts. Do not edit numeric results manually.
+\newcommand{\onlineTrain}{492}
+\newcommand{\onlineValid}{44}
+\newcommand{\onlineTest}{126}
+\newcommand{\onlineReferenceValid}{125}
+\newcommand{\onlineMainRows}{Base, strict interface & 0 & 0 & 0 & 0 \\
+Base, bare-list transport control & 56 & 0 & 1 & 0 \\
+Fresh online-pair QLoRA & 77 & 12 & 18 & 12 \\}
+\newcommand{\onlineCategoryRows}{T1 & 31 & 11 & 11 \\
+T2 & 18 & 1 & 1 \\
+T3 & 18 & 0 & 0 \\
+T4 & 34 & 0 & 0 \\
+T5 & 25 & 0 & 0 \\}
+\newcommand{\onlineResultsDiscussion}{The trained model produces 77/126 applicable patches and 12/126 exact target ASTs. Of 125 independently valid STEP references, 39 predictions build valid solids, 18 reach IoU $\geq0.95$, and 12 reach strict IoU $\geq0.99999$ (9.6\,\%). The bare-list base control builds 3 solids, with 1 broad and 0 strict matches. Thus the experiment exposes a substantial remaining gap: most held-out edits fail to produce the reference geometry, particularly beyond literal-parameter changes.}
+\newcommand{\onlineOperationalDiscussion}{Independent reference readback finds 125/126 valid target solids. One released rivet reference is invalid and is excluded from the geometric success denominator, while all task outputs remain reported. For the trained run, 39 cases are geometrically scored, 37 have execution errors and 49 have invalid patches; there are 0 timeouts and 0 Boolean-comparison errors. The observed code failures include invalid feature operations and damaged source coordinates; they are distinct from valid solids with low IoU.}

@@ -1,0 +1,129 @@
+** DIGI2ABA 2023.1 - 02/10/2023  13:51:42
+**Depending on the element type, one or two of these commands may be needed.
+***TRANSVERSE SHEAR STIFFNESS
+***The following transverse shear stiffness is computed for a unit thickness shell
+***It's an estimation of this stiffness based on the shear modulus of the stiffest material in the composite
+***This estimation is based of the formula : (5/6).G_13.(thickness), (5/6).G_23.(thickness), 0.0 
+***In order to compute an accurate estimate one must use the shear moduli of the composite (which can be computed by Digimat).
+**892.498, 892.498, 0.
+***HOURGLASS STIFFNESS
+*** The following hourglass stiffness are only estimates based on the shear modulus of the stiffest material in the composite
+*** Please refer to ABAQUS documentation in order to compute accurately these values for the finite element model under consideration
+**5.35499, ,3.21299, 
+*MATERIAL, NAME = Hexion_RIMR_035c 
+*DENSITY
+1120
+*USER MATERIAL, TYPE = MECHANICAL, CONSTANTS = 1
+0 
+*DEPVAR, delete=47
+47
+** State Variables correspondence
+1,"001_Cure","Cure degree"
+2,"002_Tg","Glass transition temperature"
+3,"003_ETH11","Thermal strain 11"
+4,"004_ETH22","Thermal strain 22"
+5,"005_ETH33","Thermal strain 33"
+6,"006_ETH12","Thermal strain 12"
+7,"007_ETH23","Thermal strain 23"
+8,"008_ETH13","Thermal strain 13"
+9,"009_ECS11","Chemical shrinkage 11"
+10,"010_ECS22","Chemical shrinkage 22"
+11,"011_ECS33","Chemical shrinkage 33"
+12,"012_ECS12","Chemical shrinkage 12"
+13,"013_ECS23","Chemical shrinkage 23"
+14,"014_ECS13","Chemical shrinkage 13"
+15,"015_HSP_1","Internal variable for hybrid solution procedure 0"
+16,"016_HSP_2","Internal variable for hybrid solution procedure 1"
+17,"017_HSP_3","Internal variable for hybrid solution procedure 2"
+18,"018_HSP_4","Internal variable for hybrid solution procedure 3"
+19,"019_HSP_5","Internal variable for hybrid solution procedure 4"
+20,"020_HSP_6","Internal variable for hybrid solution procedure 5"
+21,"021_HSP_7","Internal variable for hybrid solution procedure 6"
+22,"022_HSP_8","Internal variable for hybrid solution procedure 7"
+23,"023_HSP_9","Internal variable for hybrid solution procedure 8"
+24,"024_HSP_10","Internal variable for hybrid solution procedure 9"
+25,"025_HSP_11","Internal variable for hybrid solution procedure 10"
+26,"026_HSP_12","Internal variable for hybrid solution procedure 11"
+27,"027_HSP_13","Internal variable for hybrid solution procedure 12"
+28,"028_HSP_14","Internal variable for hybrid solution procedure 13"
+29,"029_HSP_15","Internal variable for hybrid solution procedure 14"
+30,"030_HSP_16","Internal variable for hybrid solution procedure 15"
+31,"031_HSP_17","Internal variable for hybrid solution procedure 16"
+32,"032_HSP_18","Internal variable for hybrid solution procedure 17"
+33,"033_HSP_19","Internal variable for hybrid solution procedure 18"
+34,"034_HSP_20","Internal variable for hybrid solution procedure 19"
+35,"035_HSP_21","Internal variable for hybrid solution procedure 20"
+36,"036_HSP_22","Internal variable for hybrid solution procedure 21"
+37,"037_HSP_23","Internal variable for hybrid solution procedure 22"
+38,"038_HSP_24","Internal variable for hybrid solution procedure 23"
+39,"039_HSP_25","Internal variable for hybrid solution procedure 24"
+40,"040_HSP_26","Internal variable for hybrid solution procedure 25"
+41,"041_HSP_27","Internal variable for hybrid solution procedure 26"
+42,"042_HSP_28","Internal variable for hybrid solution procedure 27"
+43,"043_HSP_29","Internal variable for hybrid solution procedure 28"
+44,"044_HSP_30","Internal variable for hybrid solution procedure 29"
+45,"045_HSP_31","Internal variable for hybrid solution procedure 30"
+46,"046_HSP_32","Internal variable for hybrid solution procedure 31"
+47,"047_HSP_33","Internal variable for hybrid solution procedure 32"
+** Begin Python Script correspondence
+** <version="1.0" tag="scalar" abaqusname="001_Cure_Degree" phasetype="Macro" phasename="Macro" description="Macro - Cure degree">
+** <version="1.0" tag="scalar" abaqusname="002_Cure_Tg" phasetype="Macro" phasename="Macro" description="Macro - Glass transition temperature">
+** <version="1.0" tag="scalar" abaqusname="003_Thermal_Strain_11" phasetype="Macro" phasename="Macro" description="Macro - Thermal strain 11">
+** <version="1.0" tag="scalar" abaqusname="004_Thermal_Strain_22" phasetype="Macro" phasename="Macro" description="Macro - Thermal strain 22">
+** <version="1.0" tag="scalar" abaqusname="005_Thermal_Strain_33" phasetype="Macro" phasename="Macro" description="Macro - Thermal strain 33">
+** <version="1.0" tag="scalar" abaqusname="006_Thermal_Strain_12" phasetype="Macro" phasename="Macro" description="Macro - Thermal strain 12">
+** <version="1.0" tag="scalar" abaqusname="007_Thermal_Strain_23" phasetype="Macro" phasename="Macro" description="Macro - Thermal strain 23">
+** <version="1.0" tag="scalar" abaqusname="008_Thermal_Strain_13" phasetype="Macro" phasename="Macro" description="Macro - Thermal strain 13">
+** <version="1.0" tag="scalar" abaqusname="009_Chemical_Shrinkage_11" phasetype="Macro" phasename="Macro" description="Macro - Chemical shrinkage 11">
+** <version="1.0" tag="scalar" abaqusname="010_Chemical_Shrinkage_22" phasetype="Macro" phasename="Macro" description="Macro - Chemical shrinkage 22">
+** <version="1.0" tag="scalar" abaqusname="011_Chemical_Shrinkage_33" phasetype="Macro" phasename="Macro" description="Macro - Chemical shrinkage 33">
+** <version="1.0" tag="scalar" abaqusname="012_Chemical_Shrinkage_12" phasetype="Macro" phasename="Macro" description="Macro - Chemical shrinkage 12">
+** <version="1.0" tag="scalar" abaqusname="013_Chemical_Shrinkage_23" phasetype="Macro" phasename="Macro" description="Macro - Chemical shrinkage 23">
+** <version="1.0" tag="scalar" abaqusname="014_Chemical_Shrinkage_13" phasetype="Macro" phasename="Macro" description="Macro - Chemical shrinkage 13">
+** <version="1.0" tag="scalar" abaqusname="015_Internal_Hybrid_Procedure" phasetype="Macro" phasename="Macro" description="Macro - Internal variable for hybrid solution procedure 0">
+** <version="1.0" tag="scalar" abaqusname="016_Internal_Hybrid_Procedure" phasetype="Macro" phasename="Macro" description="Macro - Internal variable for hybrid solution procedure 1">
+** <version="1.0" tag="scalar" abaqusname="017_Internal_Hybrid_Procedure" phasetype="Macro" phasename="Macro" description="Macro - Internal variable for hybrid solution procedure 2">
+** <version="1.0" tag="scalar" abaqusname="018_Internal_Hybrid_Procedure" phasetype="Macro" phasename="Macro" description="Macro - Internal variable for hybrid solution procedure 3">
+** <version="1.0" tag="scalar" abaqusname="019_Internal_Hybrid_Procedure" phasetype="Macro" phasename="Macro" description="Macro - Internal variable for hybrid solution procedure 4">
+** <version="1.0" tag="scalar" abaqusname="020_Internal_Hybrid_Procedure" phasetype="Macro" phasename="Macro" description="Macro - Internal variable for hybrid solution procedure 5">
+** <version="1.0" tag="scalar" abaqusname="021_Internal_Hybrid_Procedure" phasetype="Macro" phasename="Macro" description="Macro - Internal variable for hybrid solution procedure 6">
+** <version="1.0" tag="scalar" abaqusname="022_Internal_Hybrid_Procedure" phasetype="Macro" phasename="Macro" description="Macro - Internal variable for hybrid solution procedure 7">
+** <version="1.0" tag="scalar" abaqusname="023_Internal_Hybrid_Procedure" phasetype="Macro" phasename="Macro" description="Macro - Internal variable for hybrid solution procedure 8">
+** <version="1.0" tag="scalar" abaqusname="024_Internal_Hybrid_Procedure" phasetype="Macro" phasename="Macro" description="Macro - Internal variable for hybrid solution procedure 9">
+** <version="1.0" tag="scalar" abaqusname="025_Internal_Hybrid_Procedure" phasetype="Macro" phasename="Macro" description="Macro - Internal variable for hybrid solution procedure 10">
+** <version="1.0" tag="scalar" abaqusname="026_Internal_Hybrid_Procedure" phasetype="Macro" phasename="Macro" description="Macro - Internal variable for hybrid solution procedure 11">
+** <version="1.0" tag="scalar" abaqusname="027_Internal_Hybrid_Procedure" phasetype="Macro" phasename="Macro" description="Macro - Internal variable for hybrid solution procedure 12">
+** <version="1.0" tag="scalar" abaqusname="028_Internal_Hybrid_Procedure" phasetype="Macro" phasename="Macro" description="Macro - Internal variable for hybrid solution procedure 13">
+** <version="1.0" tag="scalar" abaqusname="029_Internal_Hybrid_Procedure" phasetype="Macro" phasename="Macro" description="Macro - Internal variable for hybrid solution procedure 14">
+** <version="1.0" tag="scalar" abaqusname="030_Internal_Hybrid_Procedure" phasetype="Macro" phasename="Macro" description="Macro - Internal variable for hybrid solution procedure 15">
+** <version="1.0" tag="scalar" abaqusname="031_Internal_Hybrid_Procedure" phasetype="Macro" phasename="Macro" description="Macro - Internal variable for hybrid solution procedure 16">
+** <version="1.0" tag="scalar" abaqusname="032_Internal_Hybrid_Procedure" phasetype="Macro" phasename="Macro" description="Macro - Internal variable for hybrid solution procedure 17">
+** <version="1.0" tag="scalar" abaqusname="033_Internal_Hybrid_Procedure" phasetype="Macro" phasename="Macro" description="Macro - Internal variable for hybrid solution procedure 18">
+** <version="1.0" tag="scalar" abaqusname="034_Internal_Hybrid_Procedure" phasetype="Macro" phasename="Macro" description="Macro - Internal variable for hybrid solution procedure 19">
+** <version="1.0" tag="scalar" abaqusname="035_Internal_Hybrid_Procedure" phasetype="Macro" phasename="Macro" description="Macro - Internal variable for hybrid solution procedure 20">
+** <version="1.0" tag="scalar" abaqusname="036_Internal_Hybrid_Procedure" phasetype="Macro" phasename="Macro" description="Macro - Internal variable for hybrid solution procedure 21">
+** <version="1.0" tag="scalar" abaqusname="037_Internal_Hybrid_Procedure" phasetype="Macro" phasename="Macro" description="Macro - Internal variable for hybrid solution procedure 22">
+** <version="1.0" tag="scalar" abaqusname="038_Internal_Hybrid_Procedure" phasetype="Macro" phasename="Macro" description="Macro - Internal variable for hybrid solution procedure 23">
+** <version="1.0" tag="scalar" abaqusname="039_Internal_Hybrid_Procedure" phasetype="Macro" phasename="Macro" description="Macro - Internal variable for hybrid solution procedure 24">
+** <version="1.0" tag="scalar" abaqusname="040_Internal_Hybrid_Procedure" phasetype="Macro" phasename="Macro" description="Macro - Internal variable for hybrid solution procedure 25">
+** <version="1.0" tag="scalar" abaqusname="041_Internal_Hybrid_Procedure" phasetype="Macro" phasename="Macro" description="Macro - Internal variable for hybrid solution procedure 26">
+** <version="1.0" tag="scalar" abaqusname="042_Internal_Hybrid_Procedure" phasetype="Macro" phasename="Macro" description="Macro - Internal variable for hybrid solution procedure 27">
+** <version="1.0" tag="scalar" abaqusname="043_Internal_Hybrid_Procedure" phasetype="Macro" phasename="Macro" description="Macro - Internal variable for hybrid solution procedure 28">
+** <version="1.0" tag="scalar" abaqusname="044_Internal_Hybrid_Procedure" phasetype="Macro" phasename="Macro" description="Macro - Internal variable for hybrid solution procedure 29">
+** <version="1.0" tag="scalar" abaqusname="045_Internal_Hybrid_Procedure" phasetype="Macro" phasename="Macro" description="Macro - Internal variable for hybrid solution procedure 30">
+** <version="1.0" tag="scalar" abaqusname="046_Internal_Hybrid_Procedure" phasetype="Macro" phasename="Macro" description="Macro - Internal variable for hybrid solution procedure 31">
+** <version="1.0" tag="scalar" abaqusname="047_Internal_Hybrid_Procedure" phasetype="Macro" phasename="Macro" description="Macro - Internal variable for hybrid solution procedure 32">
+** End Python Script correspondence
+** WARNING
+** =======
+**
+** When applying Digimat material models for UD and Woven in shell, 
+** the local axes systems of the element formulation will be used. 
+** Digimat software has been tested to perform well with standard element 
+** formulations and default settings as provided in the Digimat-CAE interface file.
+** If you want to use non-default settings in the definition of the axes systems
+** and/or element types which are not explicitly listed as supported
+** with the Digimat software, please carefully check your results.
+**
+** For a list of supported solver versions and element types, 
+** please refer to the Digimat manual or contact digimat.support@hexagon.com

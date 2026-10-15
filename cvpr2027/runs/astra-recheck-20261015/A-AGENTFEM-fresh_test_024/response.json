@@ -1,0 +1,36 @@
+{
+  "id": "chatcmpl-EZHdxGPs0D9YAGsyvRj0SgTpwSlqL",
+  "object": "chat.completion",
+  "created": 1792078009,
+  "model": "gpt-6-astra",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"edits\":[{\"old\":\"    gmsh.model.mesh.generate(3)\\n    gmsh.model.mesh.setOrder(2)\\n\",\"new\":\"    gmsh.model.mesh.generate(3)\\n    # Use straight-sided quadratic tetrahedra. Projecting midside nodes\\n    # onto the CAD at this mesh size inverted elements near small features.\\n    # Midpoint geometry retains the quadratic displacement approximation\\n    # and converges geometrically as the underlying mesh is refined.\\n    gmsh.option.setNumber(\\\"Mesh.SecondOrderLinear\\\", 1)\\n    gmsh.model.mesh.setOrder(2)\\n    _, volume_element_tags, _ = gmsh.model.mesh.getElements(3)\\n    element_tags = np.concatenate(volume_element_tags)\\n    determinants = np.asarray(gmsh.model.mesh.getElementQualities(\\n        element_tags, \\\"minDetJac\\\"))\\n    if not np.all(np.isfinite(determinants)) or np.any(determinants <= 0):\\n        raise RuntimeError(\\\"Mesh contains nonpositive quadratic element Jacobians\\\")\\n    logs.append(\\\"LEVEL %d: straight-sided quadratic geometry; minimum Jacobian determinant %.12g mm^3\\\"\\n                % (level, determinants.min()))\\n\"},{\"old\":\"        \\\"quadratic_tetrahedra\\\": len(tets), \\\"seat_area_mm2\\\": area,\",\"new\":\"        \\\"quadratic_tetrahedra\\\": len(tets), \\\"seat_area_mm2\\\": area,\\n        \\\"geometry_mapping\\\": \\\"straight-sided quadratic tetrahedra with edge-midpoint nodes\\\",\\n        \\\"minimum_jacobian_determinant_mm3\\\": float(determinants.min()),\"}],\"reason\":\"CalculiX failed because CAD projection of quadratic midside nodes produced inverted tetrahedra, as confirmed by the Gmsh warnings. Straight-sided quadratic elements preserve the quadratic FEM displacement approximation while avoiding those projection-induced inversions. Validate all element Jacobians before solving and document the geometric approximation in each actual refinement result.\"}",
+        "refusal": null,
+        "annotations": []
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 4879,
+    "completion_tokens": 604,
+    "total_tokens": 5483,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 4876,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 183,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": null
+}

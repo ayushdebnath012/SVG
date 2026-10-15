@@ -1,0 +1,33 @@
+{
+ "kind": "semantic",
+ "status": "failed",
+ "reserved_usd": 0.0774,
+ "request": {
+  "model": "gpt-6-astra",
+  "messages": [
+   {
+    "role": "system",
+    "content": "You verify mechanical CAD edits from rendered views."
+   },
+   {
+    "role": "user",
+    "content": [
+     {
+      "type": "text",
+      "text": "Edit instruction: Rotate the entire part by 90\u00b0 about the Z axis.\n\nThe image shows the ORIGINAL part (left) and the EDITED part (right), isometric views (top row) and top views (bottom row). Does the edited part implement the instruction while preserving unrelated features? Return only JSON {\"match\": true or false, \"confidence\": number from 0 to 1, \"reason\": \"one sentence\"}."
+     },
+     {
+      "type": "image_url",
+      "image_url": "<png omitted>"
+     }
+    ]
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_completion_tokens": 1000,
+  "store": false
+ },
+ "error_type": "HTTPError",
+ "error": "HTTP Error 429: Too Many Requests",
+ "cost_usd": 0.0774
+}

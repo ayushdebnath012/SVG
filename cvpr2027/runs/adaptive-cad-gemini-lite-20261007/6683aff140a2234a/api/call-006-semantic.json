@@ -1,0 +1,37 @@
+{
+ "kind": "semantic",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "You verify mechanical CAD edits from rendered views."
+   },
+   {
+    "role": "user",
+    "content": [
+     {
+      "type": "text",
+      "text": "Edit instruction: Replace the round pan head of the screw with a square head of the same across-flats width and the same thickness, keeping the threaded shaft, the screwdriver slot, and the rounded top edge unchanged.\n\nThe image shows the ORIGINAL part (left) and the EDITED part (right), isometric views (top row) and top views (bottom row). Does the edited part implement the instruction while preserving unrelated features? Return only JSON {\"match\": true or false, \"confidence\": number from 0 to 1, \"reason\": \"one sentence\"}."
+     },
+     {
+      "type": "image_url",
+      "image_url": "<png omitted>"
+     }
+    ]
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 4096
+ },
+ "usage": {
+  "completion_tokens": 55,
+  "prompt_tokens": 1216,
+  "total_tokens": 1271
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\"match\": false, \"confidence\": 0.9, \"reason\": \"The edited part incorrectly places a long cylindrical shaft protruding from the top of the square head instead of keeping the rounded top edge and screwdriver slot on the head itself.\"}\n```"
+}

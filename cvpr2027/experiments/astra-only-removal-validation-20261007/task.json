@@ -1,0 +1,69 @@
+{
+  "id": "synthetic-box-height",
+  "code": "import cadquery as cq\nresult = cq.Workplane(\"XY\").box(10, 10, 10)\n",
+  "instruction": "Increase the box height from 10 to 12 mm; preserve width and depth at 10 mm.",
+  "candidate": "{\"edits\":[]}",
+  "component": "synthetic-box-A",
+  "split": "development",
+  "constraints": [
+    {
+      "metric": "bbox_x",
+      "equals": 10
+    },
+    {
+      "metric": "bbox_y",
+      "equals": 10
+    },
+    {
+      "metric": "bbox_z",
+      "equals": 12
+    },
+    {
+      "metric": "solids",
+      "equals": 1
+    }
+  ],
+  "semantics": {
+    "mode": "explicit_constraints",
+    "complete": true
+  },
+  "fem": {
+    "young_MPa": 210000,
+    "poisson": 0.3,
+    "force_N": 1,
+    "axis": [
+      0,
+      0,
+      1
+    ],
+    "fixture": "lower_band_fixed_upper_band_axial_load",
+    "band": 0.05,
+    "mesh_size_mm": 4,
+    "limits": {
+      "max_displacement_mm": 0.001,
+      "vm_peak_MPa": 10
+    }
+  },
+  "robustness": {
+    "search_variations": [
+      {
+        "force_scale": 1.1
+      }
+    ],
+    "final_variations": [
+      {
+        "force_scale": 1.2,
+        "young_scale": 0.9,
+        "mesh_scale": 0.85
+      }
+    ]
+  },
+  "instruction_values": false,
+  "required": [
+    "geometry",
+    "constraints",
+    "semantics",
+    "fem",
+    "robustness"
+  ]
+}

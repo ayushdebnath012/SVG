@@ -1,0 +1,82 @@
+{
+  "collection": "Bolted shelf support: original nonlinear contact and pretension archive",
+  "geometry_families": 1,
+  "raw_solution_candidates": 1,
+  "native_CAD": "extracted-original/bolted_shelf_support_pretension_contact/Ansysaufgabe3_files/dp0/SYS/DM/SYS.scdoc",
+  "native_CAD_independent_import": false,
+  "neutral_STEP_uploaded": false,
+  "original_dimensioned_drawing_verified": false,
+  "source_archive": "workbench_archives/bolted_shelf_support_pretension_contact.wbpz",
+  "source_solver_version": "2024 R1",
+  "source_units": "MKS: m,N,Pa",
+  "material": {
+    "bracket_wall_E_Pa": 200000000000,
+    "bolt_E_Pa": 210000000000,
+    "poisson": 0.3,
+    "source_bolt_yield_Pa": 550000000
+  },
+  "contact_friction": 0.15,
+  "pretension_per_bolt_N": 5200,
+  "pretension_bolts": 4,
+  "stages": [
+    "Pretension",
+    "Pretension locked, external Y=-500 N load"
+  ],
+  "large_deflection": true,
+  "fixed_scope": "wall back face",
+  "records": [
+    {
+      "case": "shelf",
+      "set": 1,
+      "saved_label": 1.0,
+      "npz": "extracted-original-fields/shelf-set-1.npz",
+      "raw_RST": "extracted-original/bolted_shelf_support_pretension_contact/Ansysaufgabe3_files/dp0/SYS/MECH/file.rst",
+      "nodes": 91168,
+      "elements": 72308,
+      "max_U_source_units": 2.8023471267080284e-05,
+      "max_VM_source_units": 350096024.03670776,
+      "finite_stress_nodes": 16247,
+      "missing_stress_nodes": 74921
+    },
+    {
+      "case": "shelf",
+      "set": 2,
+      "saved_label": 2.0,
+      "npz": "extracted-original-fields/shelf-set-2.npz",
+      "raw_RST": "extracted-original/bolted_shelf_support_pretension_contact/Ansysaufgabe3_files/dp0/SYS/MECH/file.rst",
+      "nodes": 91168,
+      "elements": 72308,
+      "max_U_source_units": 2.8023471267080284e-05,
+      "max_VM_source_units": 350626376.64563483,
+      "finite_stress_nodes": 16247,
+      "missing_stress_nodes": 74921
+    }
+  ],
+  "source_report_peaks_held": {
+    "max_U_mm": 0.02505,
+    "max_VM_MPa": 396.77,
+    "reported_FoS": 1.39
+  },
+  "license": "Original MIT notice retained; local research collection.",
+  "limits": [
+    "Two saved load stages of one assembly, not two independent problems or transient time histories.",
+    "Original native SpaceClaim CAD exists; report referenced STEP was not uploaded.",
+    "Recovered stage2 U=0.028023471 mm and averaged VM=350.626377 MPa differ from report 0.02505 mm /396.77 MPa; keep report and archive targets separate and held.",
+    "Report explicitly describes changing contact mesh from 1.0 to1.5 mm for upload size. Revision/recovery cause of discrepancy is not verified.",
+    "Both global U peaks are equal, not proof that all node displacements or contact state are unchanged.",
+    "Missing stresses at74921of91168nodes retained as NaN; derived VM is averaged corner-node tensor recovery.",
+    "Source safety-factor claim is not an independently validated allowable load.",
+    "Thermal rod/mesh teaching reports are auxiliary only, not extra complex tasks."
+  ],
+  "source": "https://github.com/HeehwanSoul/ansys-simulation-model-evaluation",
+  "source_revision": "3b7ad3c43cf4322dde30d9284908e9341637972d",
+  "source_download_files": 7,
+  "generated_CAD": 0,
+  "new_solver_runs": 0,
+  "model_calls": 0,
+  "certified_cases": 0,
+  "benchmark_tracks": {
+    "supplied_CAD_to_FEM": "candidate; freeze exact geometry/load/material/recovery first",
+    "drawing_to_CAD_to_FEM": "held; complete matching dimensioned drawings not verified"
+  }
+}

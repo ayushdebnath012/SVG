@@ -1,0 +1,51 @@
+# Save by i4S_1 on 2022_09_14-13.37.33; build 2021 2020_03_06-20.20.37 167380
+from abaqus import *
+upgradeMdb('E:/arman/Damae_type2/project1-2020.cae', 
+    'E:/arman/Damae_type2/project1.cae')
+# Save by i4S_1 on 2022_09_14-13.37.33; build 2021 2020_03_06-20.20.37 167380
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+del mdb.models['lower_section'].parts['beamwith_uangle8mm*8mm']
+mdb.jobs['lower_cs'].submit(consistencyChecking=OFF)
+mdb.jobs['lower_cs']._Message(STARTED, {'phase': BATCHPRE_PHASE, 
+    'clientHost': 'DESKTOP-J13F995', 'handle': 0, 'jobName': 'lower_cs'})
+mdb.jobs['lower_cs']._Message(WARNING, {'phase': BATCHPRE_PHASE, 
+    'message': 'FOR *TIE PAIR (ASSEMBLY_COLUMNBOTTOM_BOTTOMFACE-ASSEMBLY_BEAM_TOP), ADJUSTED NODES WITH VERY SMALL ADJUSTMENTS WERE NOT PRINTED. SPECIFY *PREPRINT,MODEL=YES FOR COMPLETE PRINTOUT.', 
+    'jobName': 'lower_cs'})
+mdb.jobs['lower_cs']._Message(WARNING, {'phase': BATCHPRE_PHASE, 
+    'message': 'PLEASE MAKE SURE THAT THE MESH DENSITY OF THE SLAVE SURFACE IN THE TIE PAIR (ASSEMBLY_UBEAM_TOP,ASSEMBLY_COLUMNBOTTOM_TOPFACE) IS FINER THAN THE MASTER SURFACE.  THE ANALYSIS MAY RUN SLOWER, MAY YIELD INACCURATE RESULTS, AND MAY REQUIRE MORE MEMORY IF THIS IS NOT THE CASE.', 
+    'jobName': 'lower_cs'})
+mdb.jobs['lower_cs']._Message(WARNING, {'phase': BATCHPRE_PHASE, 
+    'message': 'FOR *TIE PAIR (ASSEMBLY_UBEAM_TOP-ASSEMBLY_COLUMNBOTTOM_TOPFACE), ADJUSTED NODES WITH VERY SMALL ADJUSTMENTS WERE NOT PRINTED. SPECIFY *PREPRINT,MODEL=YES FOR COMPLETE PRINTOUT.', 
+    'jobName': 'lower_cs'})
+mdb.jobs['lower_cs']._Message(WARNING, {'phase': BATCHPRE_PHASE, 
+    'message': 'PLEASE MAKE SURE THAT THE MESH DENSITY OF THE SLAVE SURFACE IN THE TIE PAIR (ASSEMBLY_UBEAM_BOTTOM,ASSEMBLY_COLUMTOP_BOTTOMFACE) IS FINER THAN THE MASTER SURFACE.  THE ANALYSIS MAY RUN SLOWER, MAY YIELD INACCURATE RESULTS, AND MAY REQUIRE MORE MEMORY IF THIS IS NOT THE CASE.', 
+    'jobName': 'lower_cs'})
+mdb.jobs['lower_cs']._Message(WARNING, {'phase': BATCHPRE_PHASE, 
+    'message': 'FOR *TIE PAIR (ASSEMBLY_UBEAM_BOTTOM-ASSEMBLY_COLUMTOP_BOTTOMFACE), ADJUSTED NODES WITH VERY SMALL ADJUSTMENTS WERE NOT PRINTED. SPECIFY *PREPRINT,MODEL=YES FOR COMPLETE PRINTOUT.', 
+    'jobName': 'lower_cs'})
+mdb.jobs['lower_cs']._Message(WARNING, {'phase': BATCHPRE_PHASE, 
+    'message': 'FOR *TIE PAIR (ASSEMBLY_BEAM_BOTTOM-ASSEMBLY_COLUMTOP_TOPFACE), ADJUSTED NODES WITH VERY SMALL ADJUSTMENTS WERE NOT PRINTED. SPECIFY *PREPRINT,MODEL=YES FOR COMPLETE PRINTOUT.', 
+    'jobName': 'lower_cs'})
+mdb.jobs['lower_cs']._Message(WARNING, {'phase': BATCHPRE_PHASE, 
+    'message': '49 nodes are either missing intersection with their respective master surface or are outside the adjust zone. The nodes have been identified in node set WarnNodeMissMasterIntersect.', 
+    'jobName': 'lower_cs'})
+mdb.jobs['lower_cs']._Message(WARNING, {'phase': BATCHPRE_PHASE, 
+    'message': '2451 elements are distorted. Either the isoparametric angles are out of the suggested limits or the triangular or tetrahedral quality measure is bad. The elements have been identified in element set WarnElemDistorted.', 
+    'jobName': 'lower_cs'})
+mdb.jobs['lower_cs']._Message(ODB_FILE, {'phase': BATCHPRE_PHASE, 
+    'file': 'E:\\arman\\Damae_type2\\lower_cs.odb', 'jobName': 'lower_cs'})
+mdb.jobs['lower_cs']._Message(COMPLETED, {'phase': BATCHPRE_PHASE, 
+    'message': 'Analysis phase complete', 'jobName': 'lower_cs'})
+# Save by i4S_1 on 2022_09_14-13.39.43; build 2021 2020_03_06-20.20.37 167380

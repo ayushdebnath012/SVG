@@ -1,0 +1,91 @@
+{
+  "task_id": "A-ASTER-SSLP311-theta15",
+  "command": "python main.py",
+  "python": "3.12.14",
+  "libraries": {
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "gmsh": "4.15.2",
+    "scikit-fem": "12.0.2",
+    "meshio": "5.3.5",
+    "cadquery": "2.8.0"
+  },
+  "units": {
+    "CAD": "mm",
+    "coordinates": "mm",
+    "displacement": "mm",
+    "stress": "MPa = N/mm^2",
+    "J_internal": "N/mm",
+    "G_output": "J/m^2; 1 N/mm = 1000 J/m^2"
+  },
+  "geometry": "part.step is an unchanged copy of input plate.step, two 0.1 mm extruded solids. FEM is the z=0 cross-section. Geometry vertices are read from CAD. No 0.1 mm thickness factor enters G per unit thickness.",
+  "materials": {
+    "1": {
+      "E_MPa": 2000000.0,
+      "nu": 0.3,
+      "region": "above inclined interface"
+    },
+    "2": {
+      "E_MPa": 200000.0,
+      "nu": 0.3,
+      "region": "below inclined interface"
+    }
+  },
+  "formulation": "Small-strain linear isotropic plane stress, conforming six-node triangles with quadratic displacement and affine geometry. Quadrature order 6. Direct sparse solve (scipy SuperLU). lambda_ps=E nu/(1-nu^2), mu=E/(2(1+nu)).",
+  "boundary_conditions": {
+    "top": "t=(0,100) MPa at y=4",
+    "bottom": "uy=0 at y=-4; ux free except bottom-left",
+    "bottom_left": "ux=0 at (-2,-4)",
+    "crack": "Two independent coincident curves, separate nodes/displacements except shared tip nodes. Both crack faces traction-free. No contact.",
+    "bonded_interface": "Shared mesh nodes and P2 edge DOFs outside the crack, guaranteeing perfect bond.",
+    "other_edges": "traction free"
+  },
+  "physical_groups": {
+    "1": "material_1, surface",
+    "2": "material_2, surface",
+    "11": "top_traction, line",
+    "12": "bottom_uy, line",
+    "13": "crack_upper, line",
+    "14": "crack_lower, line",
+    "15": "bonded_interface, line",
+    "16": "free_sides, line",
+    "21": "bottom_left_ux, point",
+    "22": "right_tip, point",
+    "23": "left_tip, point"
+  },
+  "quantity_extraction": {
+    "equation": "G = integral_A [sigma_ij (du_i/ds) - W e_j] q_,j dA, e = outward tangent to the interface from each tip, W = 0.5 sigma:epsilon.",
+    "q": "Radial q=1 within rin; q=1-3t^2+2t^3 with t=(r-rin)/(rout-rin) in annulus; q=0 beyond rout. Exact analytical gradient evaluated at quadrature points.",
+    "interface_terms": "No additional material-gradient term is needed: the virtual crack advance direction e is tangent to the straight interface; elasticity is constant along that direction. Bonded interface contributions cancel; traction-free crack has n dot e=0.",
+    "reported": "Mean of finest-mesh rings [0.20,0.40] and [0.30,0.60] mm. Five rings checked independently for path independence. Left advance direction is negative interface tangent; right is positive.",
+    "conversion": "Calculated integral in MPa mm = N/mm, multiplied by 1000 for J/m^2."
+  },
+  "field_schema": {
+    "node_ids": "N int64 IDs in mesh.msh, one based; row order for all nodal arrays.",
+    "coordinates_mm": "N x 3, z=0, includes quadratic midside nodes.",
+    "triangle6_node_ids": "T x 6 IDs (v0,v1,v2,mid01,mid12,mid20); actual FEM connectivity, same as MSH.",
+    "element_ids": "T one-based element IDs in mesh.msh. Point and line elements precede triangles.",
+    "source_gmsh_triangle_ids": "Original linear Gmsh triangle tags before deterministic quadratic-node export; diagnostic only.",
+    "material_id": "T array, 1 upper stiff or 2 lower compliant, matches physical group.",
+    "displacement_mm": "N x 2, ux,uy at P2 nodes.",
+    "prescribed_displacement_mask": "N x 2 Boolean mask of zero displacement constraints.",
+    "boundary_masks": "N x 6 Boolean columns for physical line groups 11,12,13,14,15,16.",
+    "quadrature_coordinates_mm": "T x Q x 2. Evaluation coordinates of FEM integration points.",
+    "quadrature_weights_mm2": "T x Q. Physical area weights.",
+    "strain_at_quadrature": "T x Q x 2 x 2 tensor strain, dimensionless; not engineering shear.",
+    "stress_at_quadrature_MPa": "T x Q x 2 x 2 Cauchy stress, sigma_zz=0 by plane stress.",
+    "strain_energy_density_MPa": "T x Q, W=0.5 sigma:epsilon.",
+    "forces_N_per_unit_thickness": "N x 2 consistent applied forces, integrated using numerical thickness=1 mm.",
+    "reactions_N_per_unit_thickness": "N x 2 residual K u-f, reactions at constrained components; near zero on free DOFs.",
+    "integral_radii_mm": "5 x 2 inner,outer radii.",
+    "J_integrals_J_per_m2": "2 x 5, rows right tip,left tip; columns ring order.",
+    "integral_annulus_masks": "2 x 5 x T x Q, masks of integration annuli.",
+    "load_factor": "[1.0], one static load state. No physical time dependence.",
+    "*_unit": "Unicode scalar unit metadata, no object arrays."
+  },
+  "limitations": [
+    "No contact between crack faces (as specified).",
+    "J convergence assessed with independent mesh resolutions and finite annuli; no singular crack-tip enrichment or extrapolation used.",
+    "Small-strain, plane-stress idealization; exchange-solid thickness is not a physical multiplier on reported G."
+  ]
+}

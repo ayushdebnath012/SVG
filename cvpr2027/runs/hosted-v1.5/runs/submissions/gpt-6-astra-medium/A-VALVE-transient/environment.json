@@ -1,0 +1,56 @@
+{
+  "command": "python main.py",
+  "versions": {
+    "python": "3.12.14",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "gmsh": "4.15.2"
+  },
+  "units": {
+    "length": "mm",
+    "time": "s",
+    "temperature": "deg C",
+    "conductivity": "W/(mm K)",
+    "diffusivity": "mm^2/s",
+    "capacity": "W s/(mm^3 K)"
+  },
+  "model": "Full supplied four-solid half model, conforming P1 tetrahedra and perfect welded contact. No geometric reduction. Adiabatic symmetry and ends. Internal Dirichlet from supplied ramp; external h=1e-6 to 50 C. Steady state at t=0.",
+  "material": "Solid 2 carbon, solids 1/3/4 SA312. Steffen monotone cubic interpolation of supplied k and kappa, k multiplied by 0.001, volumetric heat capacity k/kappa. Material evaluated at tetrahedron centroid temperature.",
+  "time_integration": "Nonlinear implicit midpoint with consistent mass; Picard iteration to maximum nodal update <2e-6 C. Steps split at ramp breakpoints and 99.936s.",
+  "physical_groups": {
+    "1": "internal",
+    "2": "external",
+    "3": "symmetry",
+    "4": "end_carbon",
+    "5": "end_stainless",
+    "6": "bonded_interfaces",
+    "11": "carbon volume 2",
+    "12": "stainless volumes 1,3,4"
+  },
+  "field_schema": {
+    "node_ids": "Gmsh tags, array row order for nodal fields",
+    "coordinates_mm": "(nodes,3), original coordinate frame",
+    "tetra_node_indices": "(elements,4), zero-based row indices in coordinates_mm",
+    "element_ids": "Gmsh tetrahedron element tags",
+    "solid_ids": "original CAD solid tags 1..4",
+    "carbon_element_mask": "boolean material mask",
+    "times_s": "all time steps, includes initial steady state",
+    "temperature_C": "(times,nodes), computed nodal values",
+    "probe_temperature_C": "(times,4): SCL2 inner,outer,SCL4 inner,outer; tetrahedral barycentric interpolation",
+    "probe_coordinates_mm": "(4,3) exact requested locations",
+    "internal_node_mask": "boolean Dirichlet node mask",
+    "external_triangles": "zero-based nodal indices for Robin facets",
+    "symmetry_triangles": "zero-based nodal indices for adiabatic symmetry facets",
+    "end_triangles": "zero-based nodal indices for the two adiabatic end surfaces",
+    "length_unit": "Unicode scalar mm",
+    "temperature_unit": "Unicode scalar deg C",
+    "time_unit": "Unicode scalar s"
+  },
+  "extraction": "Maximum/minimum of inner minus outer over all computed time steps; outer temperatures at explicitly included 99.936 s; no averaging across SCLs.",
+  "mesh_protocol": "Gmsh MeshAdapt surfaces, Delaunay tetrahedra, linear geometry. Original BREP face tags preserved. Mesh size background min(global_size, local_size+0.12*sqrt(x^2+y^2+(z-53)^2)), with boundary extension enabled. Fine mesh is shared between the final two time-step studies.",
+  "limitations": "P1 straight-sided tetrahedra approximate curved CAD; constitutive coefficients use centroid quadrature. Spatial and temporal sensitivity is quantified in refinement.json. Time extrema are maxima/minima of discrete time histories, including exact ramp knots.",
+  "threads": {
+    "gmsh": 2,
+    "linear_algebra": 1
+  }
+}

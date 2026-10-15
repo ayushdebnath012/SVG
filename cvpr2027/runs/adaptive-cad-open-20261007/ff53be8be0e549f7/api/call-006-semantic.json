@@ -1,0 +1,43 @@
+{
+ "kind": "semantic",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "Qwen/Qwen3.5-35B-A3B-FP8",
+  "messages": [
+   {
+    "role": "system",
+    "content": "You verify mechanical CAD edits from rendered views."
+   },
+   {
+    "role": "user",
+    "content": [
+     {
+      "type": "text",
+      "text": "Edit instruction: Add a central axial through-hole with a 7.00 mm radius through the entire propeller hub.\n\nThe image shows the ORIGINAL part (left) and the EDITED part (right), isometric views (top row) and top views (bottom row). Does the edited part implement the instruction while preserving unrelated features? Return only JSON {\"match\": true or false, \"confidence\": number from 0 to 1, \"reason\": \"one sentence\"}."
+     },
+     {
+      "type": "image_url",
+      "image_url": "<png omitted>"
+     }
+    ]
+   }
+  ],
+  "temperature": 0.6,
+  "top_p": 0.95,
+  "top_k": 20,
+  "max_tokens": 12288
+ },
+ "usage": {
+  "prompt_tokens": 380,
+  "total_tokens": 899,
+  "completion_tokens": 519,
+  "prompt_tokens_details": null,
+  "completion_tokens_details": {
+   "reasoning_tokens": 444
+  }
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "\n\n```json\n{\n  \"match\": true,\n  \"confidence\": 0.95,\n  \"reason\": \"The edited top view clearly shows a new central white circular hole in the hub that was not present in the original, indicating a through-hole was added while preserving the rest of the propeller's geometry.\"\n}\n```"
+}

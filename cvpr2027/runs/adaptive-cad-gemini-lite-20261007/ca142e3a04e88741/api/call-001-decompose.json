@@ -1,0 +1,28 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .polyline([(100.0, 0.0), (100.0, 240.9), (58.7, 348.4902), (58.7, 465.8902), (100.0, 802.2517), (100.0, 970.3517), (123.2, 970.3517), (123.2, 802.2517), (81.9, 465.8902), (81.9, 348.4902), (123.2, 240.9), (123.2, 0.0)])\\n    .close()\\n    .revolve(360, (0, 0, 0), (0, 1, 0))\\n)\\nshow_object(result)\", \"instruction\": \"Increase the inlet-end outer radius from 100.0 mm to 130.0 mm, changing the upstream outer wall from a straight cylindrical section to a tapered conical section.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"7159d61e734bfdb63d221ad1dbbba7610a157962a2006ae91e6c574a5bf54a80\", \"instruction\": \"Increase the outer radius of the cylindrical sleeve from 20.00 mm to 26.00 mm.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .cylinder(16.0, 26.0)\\\"], \\\"start\\\": 3}]}\", \"strategies\": [], \"context\": [\"3:     .cylinder(16.0, 20.0)\"]}, {\"task_id\": \"128efb1f12ca06acd045edbdd4bb633cfb794c98e8e8cf7560508b5376032882\", \"instruction\": \"Extend the outer tapered wall length from 70.1 to 100.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .lineTo(100.0, 7.0)\\\"], \\\"start\\\": 4}]}\", \"strategies\": [], \"context\": [\"4:     .lineTo(70.1, 7.0)\"]}, {\"task_id\": \"dd4ba1a9321fc8a630f89ff8963470167be5a2cb87342399e5e0393458f5ca8f\", \"instruction\": \"Increase the coil wire radius from 0.80 mm to 1.04 mm.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .circle(1.04)\\\"], \\\"start\\\": 4}]}\", \"strategies\": [], \"context\": [\"4:     .circle(0.8)\"]}]}"
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 4096
+ },
+ "usage": {
+  "completion_tokens": 120,
+  "prompt_tokens": 818,
+  "total_tokens": 938
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\n  \"steps\": [\n    \"Modify the initial inlet-end outer radius point in the polyline from (100.0, 0.0) to (130.0, 0.0) to create a tapered conical section up to the next outer diameter point.\"\n  ],\n  \"invariants\": [\n    \"Preserve the overall revolve operation and axis.\",\n    \"Preserve downstream profile points such as the inner diameter and subsequent outer profile coordinates.\"\n  ],\n  \"dependencies\": []\n}\n```"
+}

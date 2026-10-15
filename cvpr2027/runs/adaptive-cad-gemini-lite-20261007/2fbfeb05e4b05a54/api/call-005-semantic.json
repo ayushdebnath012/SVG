@@ -1,0 +1,37 @@
+{
+ "kind": "semantic",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "You verify mechanical CAD edits from rendered views."
+   },
+   {
+    "role": "user",
+    "content": [
+     {
+      "type": "text",
+      "text": "Edit instruction: Mirror the entire part across the YZ plane and union it with the original (offset 30 mm along +X) to make a back-to-back pair.\n\nThe image shows the ORIGINAL part (left) and the EDITED part (right), isometric views (top row) and top views (bottom row). Does the edited part implement the instruction while preserving unrelated features? Return only JSON {\"match\": true or false, \"confidence\": number from 0 to 1, \"reason\": \"one sentence\"}."
+     },
+     {
+      "type": "image_url",
+      "image_url": "<png omitted>"
+     }
+    ]
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 4096
+ },
+ "usage": {
+  "completion_tokens": 55,
+  "prompt_tokens": 1210,
+  "total_tokens": 1265
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\"match\": false, \"confidence\": 0.95, \"reason\": \"The edited part shows a translation or duplication offset rather than a mirror across the YZ plane combined into a single unioned back-to-back pair.\"}\n```"
+}

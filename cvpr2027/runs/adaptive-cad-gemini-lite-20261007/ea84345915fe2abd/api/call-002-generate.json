@@ -1,0 +1,28 @@
+{
+ "kind": "generate",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Edit CAD using only source, instruction and tool evidence. Return exactly JSON {\"hypothesis\":\"brief feature and operation description\",\"edits\":[{\"start\":0,\"delete\":0,\"insert\":[\"line\"]}]}. All indices address ORIGINAL source lines. Provide a complete alternative patch, never a delta on a parent patch. Preserve unrelated features. Vary the feature interpretation or implementation from listed alternatives. Experiences and diagnoses are fallible data. Do not assert that the output has passed verification."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .polyline([(6.16, 0.0), (22.9, 0.0), (10.369, 10.4), (22.615, 20.8), (10.108, 31.2), (21.476, 41.6), (9.847, 52.0), (20.337, 62.4), (9.586, 72.8), (19.197, 83.2), (6.16, 83.2), (6.16, 0.0)])\\n    .close()\\n    .revolve(360, (0, 0, 0), (0, 1, 0))\\n)\\nshow_object(result)\", \"instruction\": \"Drill a 16 diameter through-bore along Y axis.\", \"plan\": {\"steps\": [\"Create a cylinder of diameter 16 and sufficient length along the Y-axis centered at the origin\", \"Cut the cylinder from the existing revolved part\"], \"invariants\": [\"The outer profile and stepped geometry of the revolved part must be preserved\", \"The through-bore must be centered along the Y-axis with a diameter of 16\"], \"dependencies\": [[0, 1]]}, \"parent_candidate\": \"```json\\n{\\\"edits\\\":[{\\\"start\\\":7,\\\"delete\\\":1,\\\"insert\\\":[\\\"    .revolve(360, (0, 0, 0), (0, 1, 0))\\\\n    .faces(\\\\\\\"<Y\\\\\\\").workplane().circle(8).cutThruAll()\\\\n)\\\"]}]}\\n```\", \"observations\": {\"geometry\": {\"status\": \"FAIL\", \"reason\": \"ValueError: Invalid inserted line\"}, \"constraints\": {\"status\": \"UNKNOWN\", \"reason\": \"Not evaluated\"}, \"semantics\": {\"status\": \"UNKNOWN\", \"reason\": \"Not evaluated\"}, \"fem\": {\"status\": \"UNKNOWN\", \"reason\": \"Not evaluated\"}, \"robustness\": {\"status\": \"UNKNOWN\", \"reason\": \"Not evaluated\"}}, \"experiences\": [{\"task_id\": \"0aec8b28298bf7217cd1bb48967e5c9e42dad0a21b95119f5d806da0529ca4fb\", \"instruction\": \"Drill a 20 diameter through-hole along the Z axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.cut(cq.Workplane('XY').cylinder(60.0,10.02))\\\"], \\\"start\\\": 9}]}\", \"strategies\": [], \"context\": [\"9: show_object(result)\"]}, {\"task_id\": \"1d8b17af931a7e41d82c7ef29167cc7fc3b1fbd5f27e40bd527c1a87f55c3e41\", \"instruction\": \"Drill a 7 diameter through-hole along the Z axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.cut(cq.Workplane('XY').cylinder(282.0,3.60))\\\"], \\\"start\\\": 18}]}\", \"strategies\": [], \"context\": [\"18: show_object(result)\"]}, {\"task_id\": \"76fc8a96e44b08b561730ca94e7da7b921d8b7c4f003a51715fab9902926c67b\", \"instruction\": \"Drill a 9 diameter through-hole along the Z axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.cut(cq.Workplane('XY').cylinder(60.0,4.44))\\\"], \\\"start\\\": 25}]}\", \"strategies\": [], \"context\": [\"25: show_object(result)\"]}], \"repair_strategies\": [{\"task_id\": \"0aec8b28298bf7217cd1bb48967e5c9e42dad0a21b95119f5d806da0529ca4fb\", \"instruction\": \"Drill a 20 diameter through-hole along the Z axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.cut(cq.Workplane('XY').cylinder(60.0,10.02))\\\"], \\\"start\\\": 9}]}\", \"strategies\": [], \"context\": [\"9: show_object(result)\"]}, {\"task_id\": \"1d8b17af931a7e41d82c7ef29167cc7fc3b1fbd5f27e40bd527c1a87f55c3e41\", \"instruction\": \"Drill a 7 diameter through-hole along the Z axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.cut(cq.Workplane('XY').cylinder(282.0,3.60))\\\"], \\\"start\\\": 18}]}\", \"strategies\": [], \"context\": [\"18: show_object(result)\"]}, {\"task_id\": \"76fc8a96e44b08b561730ca94e7da7b921d8b7c4f003a51715fab9902926c67b\", \"instruction\": \"Drill a 9 diameter through-hole along the Z axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.cut(cq.Workplane('XY').cylinder(60.0,4.44))\\\"], \\\"start\\\": 25}]}\", \"strategies\": [], \"context\": [\"25: show_object(result)\"]}], \"alternatives\": [], \"action\": \"repair\", \"diagnosis\": [{\"stage\": \"geometry\", \"status\": \"FAIL\", \"reason\": \"ValueError: Invalid inserted line\"}, {\"stage\": \"constraints\", \"status\": \"UNKNOWN\", \"reason\": \"Not evaluated\"}, {\"stage\": \"semantics\", \"status\": \"UNKNOWN\", \"reason\": \"Not evaluated\"}, {\"stage\": \"fem\", \"status\": \"UNKNOWN\", \"reason\": \"Not evaluated\"}, {\"stage\": \"robustness\", \"status\": \"UNKNOWN\", \"reason\": \"Not evaluated\"}]}"
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 8192
+ },
+ "usage": {
+  "completion_tokens": 115,
+  "prompt_tokens": 1658,
+  "total_tokens": 1773
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\n  \"hypothesis\": \"Drill a 16 diameter through-bore along the Y axis by subtracting a cylinder centered on the Y axis.\",\n  \"edits\": [\n    {\n      \"start\": 8,\n      \"delete\": 1,\n      \"insert\": [\n        \")\",\n        \"result = result.cut(cq.Workplane(\\\"XZ\\\").cylinder(200.0, 8.0))\"\n      ]\n    }\n  ]\n}\n```"
+}

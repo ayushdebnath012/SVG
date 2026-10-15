@@ -1,0 +1,40 @@
+{
+ "source_fem": {
+  "ok": true,
+  "compliance": 1.8057747384512057e-07,
+  "components": 1,
+  "nodes": 752
+ },
+ "nodes": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(41.6, 43.7)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, 20.8), rotate=cq.Vector(0, 0, 0))\n            .sphere(43.7)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, -20.8), rotate=cq.Vector(0, 0, 0))\n            .sphere(43.7)\n    )\n    .cut(cq.Workplane(\"XY\").circle(10.5).extrude(70, both=True))\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.8542087214831755e-07,
+    "components": 1,
+    "nodes": 2324
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "rag",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(41.6, 43.7)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, 20.8), rotate=cq.Vector(0, 0, 0))\n            .sphere(43.7)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, -20.8), rotate=cq.Vector(0, 0, 0))\n            .sphere(43.7)\n    )\n)\nresult = result.cut(cq.Workplane('XY').cylinder(140.0, 10.5))\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.8499297394440643e-07,
+    "components": 1,
+    "nodes": 2294
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  }
+ ]
+}

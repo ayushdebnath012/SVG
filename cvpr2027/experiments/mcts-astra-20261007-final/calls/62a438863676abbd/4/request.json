@@ -1,0 +1,16 @@
+{
+  "model": "gpt-6-astra",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Edit mechanical CAD and preserve unrelated features. Return only a JSON object {\"edits\":[{\"start\":0,\"delete\":0,\"insert\":[\"replacement line\"]}]}. Indices always address zero-based ORIGINAL source lines, even when revising a previous candidate. Operations must be ordered, nonoverlapping and in bounds. Use the request and target-free observations to reconsider the current candidate; tools and the verifier can be wrong. Produce an alternative complete patch. Do not invent verification results."
+    },
+    {
+      "role": "user",
+      "content": "{\"instruction\": \"Each of the four arms of the cross tapers from full thickness at the central core down to zero thickness at a new shorter tip. The underside of each arm slopes upward at 45 degrees from horizontal, and the outer half of each arm is gone.\", \"original_source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .polyline([[10.96, 10.96], [27.4, 10.96], [27.4, -10.96], [10.96, -10.96], [10.96, -27.4], [-10.96, -27.4], [-10.96, -10.96], [-27.4, -10.96], [-27.4, 10.96], [-10.96, 10.96], [-10.96, 27.4], [10.96, 27.4]])\\n    .close()\\n    .extrude(7.4)\\n)\\nshow_object(result)\", \"previous_candidate\": \"{\\\"edits\\\":[{\\\"start\\\":7,\\\"delete\\\":0,\\\"insert\\\":[\\\"# Remove material below the 45-degree underside of each arm.\\\",\\\"cutter = (\\\",\\\"    cq.Workplane(\\\\\\\"XY\\\\\\\")\\\",\\\"    .box(60, 21.92, 60, centered=(False, True, False))\\\",\\\"    .translate((0, 0, -60))\\\",\\\"    .rotate((0, 0, 0), (0, 1, 0), -45.0)\\\",\\\"    .translate((10.96, 0, 0))\\\",\\\")\\\",\\\"for angle in (0, 90, 180, 270):\\\",\\\"    result = result.cut(cutter.rotate((0, 0, 0), (0, 0, 1), angle))\\\"]}]}\", \"observations\": {\"execute\": {\"gates\": true, \"error\": null, \"volume\": 5956.277760000002, \"changed\": true}, \"numbers\": [{\"kind\": \"value_present\", \"value\": 45.0, \"ok\": true}]}, \"verifier_proxy_probability\": 0.51437727894559, \"alternatives\": [], \"instruction_to_generator\": \"Find a different minimal edit that satisfies the request. Recheck unrelated features; indices always refer to the original source.\"}"
+    }
+  ],
+  "reasoning_effort": "low",
+  "max_completion_tokens": 2500,
+  "store": false
+}

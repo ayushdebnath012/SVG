@@ -1,0 +1,115 @@
+{
+ "source_fem": {
+  "ok": true,
+  "compliance": 1.9100488003002274e-06,
+  "components": 1,
+  "nodes": 14412
+ },
+ "nodes": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(28.0, 28.0, 65.0)\n    .faces(\">Z\").workplane()\n    .center(1.5, 1.5)\n    .polygon(6, 25.0)\n    .cutThruAll()\n    .edges(\"|Z\")\n    .fillet(0.6)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-9.5, -12.5), (0.0, -12.5), (9.5, -12.5)])\n    .hole(2.0)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-12.5, -9.5), (-12.5, 9.5)])\n    .hole(2.0)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 8.136842397608927e-07,
+    "components": 1,
+    "nodes": 25727
+   },
+   "numbers_ok": null,
+   "changed": true,
+   "cluster": 5,
+   "robustness": 0.0
+  },
+  {
+   "name": "alt1",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(28.0, 28.0, 65.0)\n    .faces(\">Z\").workplane()\n    .center(1.5, 1.5)\n    .polygon(6, 25.0 * 2.0**0.5)\n    .cutThruAll()\n    .edges(\"|Z\")\n    .fillet(0.6)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-9.5, -12.5), (0.0, -12.5), (9.5, -12.5)])\n    .hole(2.0)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-12.5, -9.5), (-12.5, 9.5)])\n    .hole(2.0)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 5.202707267586474e-06,
+    "components": 3,
+    "nodes": 13656
+   },
+   "numbers_ok": null,
+   "changed": true,
+   "cluster": 4,
+   "robustness": 0.0
+  },
+  {
+   "name": "alt2",
+   "code": "import cadquery as cq\nimport math\nresult = (\n    cq.Workplane(\"XY\")\n    .box(28.0, 28.0, 65.0)\n    .faces(\">Z\").workplane()\n    .center(1.5, 1.5)\n    .polyline([\n        (12.5 * 2.0**0.5 * math.cos(math.radians(30.0 + 60.0 * i)),\n         12.5 * 2.0**0.5 * math.sin(math.radians(30.0 + 60.0 * i)))\n        for i in range(6)\n    ])\n    .close()\n    .cutThruAll()\n    .edges(\"|Z\")\n    .fillet(0.6)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-9.5, -12.5), (0.0, -12.5), (9.5, -12.5)])\n    .hole(2.0)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-12.5, -9.5), (-12.5, 9.5)])\n    .hole(2.0)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 5.227383826220655e-06,
+    "components": 3,
+    "nodes": 13641
+   },
+   "numbers_ok": null,
+   "changed": true,
+   "cluster": 1,
+   "robustness": 0.0
+  },
+  {
+   "name": "alt3",
+   "code": "import cadquery as cq\nimport math\nresult = (\n    cq.Workplane(\"XY\")\n    .box(28.0, 28.0, 65.0)\n    .faces(\">Z\").workplane()\n    .center(1.5, 1.5)\n    .polyline([\n        (12.5 * 2.0**0.5 * math.cos(math.radians(45.0 + 60.0 * i)),\n         12.5 * 2.0**0.5 * math.sin(math.radians(45.0 + 60.0 * i)))\n        for i in range(6)\n    ])\n    .close()\n    .cutThruAll()\n    .edges(\"|Z\")\n    .fillet(0.6)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-9.5, -12.5), (0.0, -12.5), (9.5, -12.5)])\n    .hole(2.0)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-12.5, -9.5), (-12.5, 9.5)])\n    .hole(2.0)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 4.145176549982648e-06,
+    "components": 3,
+    "nodes": 11726
+   },
+   "numbers_ok": null,
+   "changed": true,
+   "cluster": 2,
+   "robustness": 0.0
+  },
+  {
+   "name": "mcts1-diversify",
+   "code": "import cadquery as cq\nimport math\nresult = (\n    cq.Workplane(\"XY\")\n    .box(28.0, 28.0, 65.0)\n    .faces(\">Z\").workplane()\n    .center(1.5, 1.5)\n    .polyline([\n        (12.5 * 2.0**0.5 * math.cos(math.radians(15.0 + 60.0 * i)),\n         12.5 * 2.0**0.5 * math.sin(math.radians(15.0 + 60.0 * i)))\n        for i in range(6)\n    ])\n    .close()\n    .cutThruAll()\n    .edges(\"|Z\")\n    .fillet(0.6)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-9.5, -12.5), (0.0, -12.5), (9.5, -12.5)])\n    .hole(2.0)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-12.5, -9.5), (-12.5, 9.5)])\n    .hole(2.0)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 4.286811576410841e-06,
+    "components": 4,
+    "nodes": 11711
+   },
+   "numbers_ok": null,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 0.0
+  },
+  {
+   "name": "mcts2-diversify",
+   "code": "import cadquery as cq\nimport math\nresult = (\n    cq.Workplane(\"XY\")\n    .box(28.0, 28.0, 65.0)\n    .faces(\">Z\").workplane()\n    .center(1.5, 1.5)\n    .polyline([\n        (12.5 * math.sqrt(2.0) * math.cos(math.radians(22.5 + 60.0 * i)),\n         12.5 * math.sqrt(2.0) * math.sin(math.radians(22.5 + 60.0 * i)))\n        for i in range(6)\n    ])\n    .close()\n    .cutThruAll()\n    .edges(\"|Z\")\n    .fillet(0.6)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-9.5, -12.5), (0.0, -12.5), (9.5, -12.5)])\n    .hole(2.0)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-12.5, -9.5), (-12.5, 9.5)])\n    .hole(2.0)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 4.630705492816728e-06,
+    "components": 4,
+    "nodes": 11414
+   },
+   "numbers_ok": null,
+   "changed": true,
+   "cluster": 3,
+   "robustness": 0.0
+  },
+  {
+   "name": "rag",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(28.0, 28.0, 65.0)\n    .faces(\">Z\").workplane()\n    .center(1.5, 1.5)\n    .polygon(6, 25.0)\n    .cutThruAll()\n    .edges(\"|Z\")\n    .fillet(0.6)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-9.5, -12.5), (0.0, -12.5), (9.5, -12.5)])\n    .hole(2.0)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-12.5, -9.5), (-12.5, 9.5)])\n    .hole(2.0)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 8.141514170413725e-07,
+    "components": 1,
+    "nodes": 25827
+   },
+   "numbers_ok": null,
+   "changed": true,
+   "cluster": 5,
+   "robustness": 0.0
+  }
+ ]
+}

@@ -1,0 +1,28 @@
+{
+ "kind": "single",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "You edit mechanical CAD. Return only JSON {\"edits\":[{\"start\":0,\"delete\":0,\"insert\":[\"replacement line\"]}]}. Indices are zero-based lines of the ORIGINAL input; operations must be ordered, nonoverlapping and in bounds. Preserve unrelated features. The supplied representation determines syntax. Return no explanation or invented physics results. Geometry execution and FEM checks are performed by external tools; never claim verification."
+   },
+   {
+    "role": "user",
+    "content": "Representation: cadquery\nOriginal CAD (line indices are implicit):\nimport cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .circle(5.0)\n    .extrude(6.3, taper=24.717)\n    .faces(\">Z\").workplane()\n    .circle(2.1)\n    .extrude(3.5, taper=-11.31)\n    .faces(\">Z\").workplane()\n    .circle(2.8)\n    .extrude(4.2)\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(2.94, 0.0, 9.85), rotate=cq.Vector(0, 0, 0))\n            .cylinder(7.7, 0.8)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(2.716, 1.125, 9.85), rotate=cq.Vector(0, 0, 0))\n            .cylinder(7.7, 0.8)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(2.079, 2.079, 9.85), rotate=cq.Vector(0, 0, 0))\n            .cylinder(7.7, 0.8)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(1.125, 2.716, 9.85), rotate=cq.Vector(0, 0, 0))\n            .cylinder(7.7, 0.8)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 2.94, 9.85), rotate=cq.Vector(0, 0, 0))\n            .cylinder(7.7, 0.8)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(-1.125, 2.716, 9.85), rotate=cq.Vector(0, 0, 0))\n            .cylinder(7.7, 0.8)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(-2.079, 2.079, 9.85), rotate=cq.Vector(0, 0, 0))\n            .cylinder(7.7, 0.8)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(-2.716, 1.125, 9.85), rotate=cq.Vector(0, 0, 0))\n            .cylinder(7.7, 0.8)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(-2.94, 0.0, 9.85), rotate=cq.Vector(0, 0, 0))\n            .cylinder(7.7, 0.8)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(-2.716, -1.125, 9.85), rotate=cq.Vector(0, 0, 0))\n            .cylinder(7.7, 0.8)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(-2.079, -2.079, 9.85), rotate=cq.Vector(0, 0, 0))\n            .cylinder(7.7, 0.8)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(-1.125, -2.716, 9.85), rotate=cq.Vector(0, 0, 0))\n            .cylinder(7.7, 0.8)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(-0.0, -2.94, 9.85), rotate=cq.Vector(0, 0, 0))\n            .cylinder(7.7, 0.8)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(1.125, -2.716, 9.85), rotate=cq.Vector(0, 0, 0))\n            .cylinder(7.7, 0.8)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(2.079, -2.079, 9.85), rotate=cq.Vector(0, 0, 0))\n            .cylinder(7.7, 0.8)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(2.716, -1.125, 9.85), rotate=cq.Vector(0, 0, 0))\n            .cylinder(7.7, 0.8)\n    )\n    .faces(\"<Z\").workplane()\n    .hole(4.0)\n)\nshow_object(result)Edit instruction:\nAdd a round flat cap on top of the knob, 8 mm in diameter and 1.5 mm thick, centred on the central axis and sitting flush above the existing top face."
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 8192
+ },
+ "usage": {
+  "completion_tokens": 68,
+  "prompt_tokens": 1468,
+  "total_tokens": 1536
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\"edits\":[{\"start\":8,\"delete\":4,\"insert\":[    .circle(2.8)\",\n    .extrude(4.2)\",\n    .faces(\">Z\").workplane()\",\n    .circle(4.0)\",\n    .extrude(1.5)\"}]}\n```"
+}

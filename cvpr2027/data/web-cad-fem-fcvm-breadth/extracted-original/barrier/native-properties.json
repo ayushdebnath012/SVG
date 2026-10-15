@@ -1,0 +1,87 @@
+[
+  {
+    "object": "ConstraintFixed",
+    "type": "Fem::ConstraintFixed",
+    "references": [],
+    "properties": {
+      "Label": "\n                    <String value=\"ConstraintFixed\"/>\n                ",
+      "NormalDirection": "\n                    <PropertyVector valueX=\"-0.0000000000000000\" valueY=\"-0.0000000000000000\" valueZ=\"1.0000000000000000\"/>\n                ",
+      "References": "\n                    <LinkSubList count=\"0\">\n                    </LinkSubList>\n                "
+    }
+  },
+  {
+    "object": "ConstraintForce",
+    "type": "Fem::ConstraintForce",
+    "references": [],
+    "properties": {
+      "Direction": "\n                    <LinkSub value=\"\" count=\"0\">\n                    </LinkSub>\n                ",
+      "DirectionVector": "\n                    <PropertyVector valueX=\"0.9848077530122081\" valueY=\"-0.1736481776669302\" valueZ=\"-0.0000000000000000\"/>\n                ",
+      "Force": "\n                    <Float value=\"15000.0000000000000000\"/>\n                ",
+      "Label": "\n                    <String value=\"ConstraintForce\"/>\n                ",
+      "NormalDirection": "\n                    <PropertyVector valueX=\"-0.9848077530122081\" valueY=\"0.1736481776669302\" valueZ=\"0.0000000000000000\"/>\n                ",
+      "References": "\n                    <LinkSubList count=\"0\">\n                    </LinkSubList>\n                ",
+      "Reversed": "\n                    <Bool value=\"true\"/>\n                "
+    }
+  },
+  {
+    "object": "MaterialSolid",
+    "type": "App::MaterialObjectPython",
+    "references": [],
+    "properties": {
+      "Category": "\n                    <Integer value=\"0\" CustomEnum=\"true\"/>\n                    <CustomEnumList count=\"2\">\n                        <Enum value=\"Solid\"/>\n                        <Enum value=\"Fluid\"/>\n                    </CustomEnumList>\n                ",
+      "Label": "\n                    <String value=\"MaterialSolid\"/>\n                ",
+      "Material": "\n                    <Map count=\"17\">\n                        <Item key=\"AuthorAndLicense\" value=\"(c) 2014 M. M\u00fcnch - GNU Lesser General Public License (LGPL)\"/>\n                        <Item key=\"CardName\" value=\"Steel-St-E-315\"/>\n                        <Item key=\"Density\" value=\"7800 kg/m^3\"/>\n                        <Item key=\"Father\" value=\"Metal\"/>\n                        <Item key=\"KindOfMaterial\" value=\"Fine grain steel\"/>\n                        <Item key=\"KindOfMaterialDE\" value=\"Feinkornstahl\"/>\n                        <Item key=\"MaterialNumber\" value=\"1.0505\"/>\n                        <Item key=\"Name\" value=\"St E 315\"/>\n                        <Item key=\"NameDE\" value=\"St E 315\"/>\n                        <Item key=\"Norm\" value=\"DIN 17102\"/>\n                        <Item key=\"PoissonRatio\" value=\"0.3\"/>\n                        <Item key=\"ShearModulus\" value=\"81000 MPa\"/>\n                        <Item key=\"ThermalExpansionCoefficient\" value=\"0.000011 m/m/K\"/>\n                        <Item key=\"UltimateStrain\" value=\"0\"/>\n                        <Item key=\"UltimateTensileStrength\" value=\"440 MPa\"/>\n                        <Item key=\"YieldStrength\" value=\"320 MPa\"/>\n                        <Item key=\"YoungsModulus\" value=\"210000 MPa\"/>\n                    </Map>\n                ",
+      "References": "\n                    <LinkSubList count=\"0\">\n                    </LinkSubList>\n                "
+    }
+  },
+  {
+    "object": "ConstraintFixed001",
+    "type": "Fem::ConstraintFixed",
+    "references": [
+      [
+        "Offset2D",
+        "Face1"
+      ],
+      [
+        "Extrude",
+        "Face17"
+      ],
+      [
+        "Extrude",
+        "Face35"
+      ],
+      [
+        "Extrude",
+        "Face18"
+      ]
+    ],
+    "properties": {
+      "Label": "\n                    <String value=\"ConstraintFixed001\"/>\n                ",
+      "NormalDirection": "\n                    <PropertyVector valueX=\"0.0000000000000000\" valueY=\"0.0000000000000000\" valueZ=\"1.0000000000000000\"/>\n                ",
+      "References": "\n                    <LinkSubList count=\"4\">\n                        <Link obj=\"Offset2D\" sub=\"Face1\"/>\n                        <Link obj=\"Extrude\" sub=\"Face17\"/>\n                        <Link obj=\"Extrude\" sub=\"Face35\"/>\n                        <Link obj=\"Extrude\" sub=\"Face18\"/>\n                    </LinkSubList>\n                "
+    }
+  },
+  {
+    "object": "ConstraintForce001",
+    "type": "Fem::ConstraintForce",
+    "references": [
+      [
+        "Extrude",
+        "Face22"
+      ],
+      [
+        "Extrude",
+        "Face4"
+      ]
+    ],
+    "properties": {
+      "Direction": "\n                    <LinkSub value=\"\" count=\"0\">\n                    </LinkSub>\n                ",
+      "DirectionVector": "\n                    <PropertyVector valueX=\"-0.0000000000000001\" valueY=\"-1.0000000000000000\" valueZ=\"0.0000000000000000\"/>\n                ",
+      "Force": "\n                    <Float value=\"15000.0000000000000000\"/>\n                ",
+      "Label": "\n                    <String value=\"ConstraintForce001\"/>\n                ",
+      "NormalDirection": "\n                    <PropertyVector valueX=\"0.0000000000000001\" valueY=\"1.0000000000000000\" valueZ=\"-0.0000000000000000\"/>\n                ",
+      "References": "\n                    <LinkSubList count=\"2\">\n                        <Link obj=\"Extrude\" sub=\"Face22\"/>\n                        <Link obj=\"Extrude\" sub=\"Face4\"/>\n                    </LinkSubList>\n                ",
+      "Reversed": "\n                    <Bool value=\"true\"/>\n                "
+    }
+  }
+]

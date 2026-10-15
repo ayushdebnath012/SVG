@@ -1,0 +1,18 @@
+import cadquery as cq
+result = (
+    cq.Workplane("XY")
+    .box(33.0, 33.0, 83.0)
+    .faces(">Z").workplane()
+    .center(1.5, 1.5)
+    .rect(30.0, 30.0)
+    .cutThruAll()
+    .edges("|Z")
+    .fillet(0.6)
+    .faces(">Z").workplane()
+    .pushPoints([(-12.0, -15.0), (0.0, -15.0), (12.0, -15.0)])
+    .hole(2.0)
+    .faces(">Z").workplane()
+    .pushPoints([(-15.0, -12.0), (-15.0, 0.0), (-15.0, 12.0)])
+    .hole(2.0)
+)
+show_object(result)

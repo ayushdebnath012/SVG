@@ -1,0 +1,28 @@
+{
+ "kind": "single",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "You edit mechanical CAD. Return only JSON {\"edits\":[{\"start\":0,\"delete\":0,\"insert\":[\"replacement line\"]}]}. Indices are zero-based lines of the ORIGINAL input; operations must be ordered, nonoverlapping and in bounds. Preserve unrelated features. The supplied representation determines syntax. Return no explanation or invented physics results. Geometry execution and FEM checks are performed by external tools; never claim verification."
+   },
+   {
+    "role": "user",
+    "content": "Representation: cadquery\nOriginal CAD (line indices are implicit):\nimport cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(11.2, 22.7)\n    .faces(\">Z\").workplane()\n    .circle(9.2)\n    .extrude(24.1)\n)\nresult = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').slot2D(18.16,6.81).cutBlind(-7.06)\nshow_object(result)Edit instruction:\nCut a centered obround blind slot into the top face of the upper cylindrical section, with a length of 18.16 mm, a width of 6.81 mm, and a depth of 7.06 mm."
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 8192
+ },
+ "usage": {
+  "completion_tokens": 10,
+  "prompt_tokens": 268,
+  "total_tokens": 278
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\"edits\":[]}\n```"
+}

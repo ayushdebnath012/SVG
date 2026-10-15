@@ -1,0 +1,43 @@
+{
+ "kind": "semantic",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "Qwen/Qwen3.5-35B-A3B-FP8",
+  "messages": [
+   {
+    "role": "system",
+    "content": "You verify mechanical CAD edits from rendered views."
+   },
+   {
+    "role": "user",
+    "content": [
+     {
+      "type": "text",
+      "text": "Edit instruction: Replace the rounded top end of the body with a flat circular cap of the same diameter and 10 mm thickness, leaving the cylindrical middle and the rounded bottom end unchanged.\n\nThe image shows the ORIGINAL part (left) and the EDITED part (right), isometric views (top row) and top views (bottom row). Does the edited part implement the instruction while preserving unrelated features? Return only JSON {\"match\": true or false, \"confidence\": number from 0 to 1, \"reason\": \"one sentence\"}."
+     },
+     {
+      "type": "image_url",
+      "image_url": "<png omitted>"
+     }
+    ]
+   }
+  ],
+  "temperature": 0.6,
+  "top_p": 0.95,
+  "top_k": 20,
+  "max_tokens": 12288
+ },
+ "usage": {
+  "prompt_tokens": 393,
+  "total_tokens": 882,
+  "completion_tokens": 489,
+  "prompt_tokens_details": null,
+  "completion_tokens_details": {
+   "reasoning_tokens": 423
+  }
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "\n\n```json\n{\n  \"match\": true,\n  \"confidence\": 0.95,\n  \"reason\": \"The edited part successfully replaces the original rounded dome with a flat circular top surface, while the cylindrical middle section and the rounded bottom end remain unchanged as instructed.\"\n}\n```"
+}

@@ -1,0 +1,842 @@
+{
+ "task_id": "6689506209c6d6ff76f59396c7c84e09e2b8df8e8802b1c584cb6571a7c9ec6d",
+ "status": "PASS",
+ "prediction": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .faces(\\\">Z\\\").workplane(centerOption=\\\"CenterOfBoundBox\\\")\", \"    .slot2D(18, 7)\", \"    .cutBlind(-7)\", \")\", \"show_object(result)\"], \"start\": 7}]}",
+ "selected_node": 1,
+ "bank": [
+  1
+ ],
+ "pareto": [
+  1
+ ],
+ "stop": "expansion_limit",
+ "nodes": [
+  {
+   "id": 0,
+   "candidate": "```json\n{\"edits\":[{\"start\":3,\"delete\":6,\"insert\":[\"    .cylinder(11.2, 22.7)\", \"    .faces(\\\">Z\\\").workplane()\", \"    .rect(18, 7)\", \"    .cutBlind(-7)\", \")\", \"show_object(result)\"]}]}\n```",
+   "depth": 0,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 17248.910318844784,
+       "area": 5185.099589433906,
+       "solids": 1,
+       "faces": 8,
+       "bbox_x": 45.4,
+       "bbox_y": 45.4,
+       "bbox_z": 11.2
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "FAIL",
+      "confidence": 0.9,
+      "reason": "The edited part removes the entire cylinder feature instead of cutting a slot into the top face.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-00.png"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.9,
+     0.0,
+     -12.0
+    ],
+    "score": 0.888,
+    "diagnosis": [
+     {
+      "stage": "semantics",
+      "status": "FAIL",
+      "confidence": 0.9,
+      "reason": "The edited part removes the entire cylinder feature instead of cutting a slot into the top face.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-00.png"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 3,
+   "visits": 4,
+   "final": null,
+   "edges": [
+    0
+   ]
+  },
+  {
+   "id": 1,
+   "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .faces(\\\">Z\\\").workplane(centerOption=\\\"CenterOfBoundBox\\\")\", \"    .slot2D(18, 7)\", \"    .cutBlind(-7)\", \")\", \"show_object(result)\"], \"start\": 7}]}",
+   "depth": 1,
+   "verdict": {
+    "status": "PASS",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 23730.81484181561,
+       "area": 6536.145475767663,
+       "solids": 1,
+       "faces": 10,
+       "bbox_x": 45.4,
+       "bbox_y": 45.4,
+       "bbox_z": 35.3
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 1.0,
+      "reason": "The edited part correctly shows a slot cut into the top face of the cylinder while preserving all unrelated features of the original part.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-01.png"
+     },
+     "fem": {
+      "status": "PASS",
+      "metrics": {
+       "nodes": 1107,
+       "tetrahedra": 3836,
+       "connected_components": 1,
+       "mesh_volume_mm3": 23552.39513378487,
+       "fixed_nodes": 149,
+       "loaded_facets": 212,
+       "loaded_area_mm2": 309.83215645068105,
+       "axis": [
+        0.0,
+        0.0,
+        1.0
+       ],
+       "projection_min_mm": -5.6,
+       "projection_max_mm": 29.7,
+       "compliance_N_mm": 6.675930130763476e-07,
+       "load_weighted_displacement_mm": 6.675930130763476e-07,
+       "max_displacement_mm": 1.1576903781140574e-06,
+       "strain_energy_N_mm": 3.337965065381714e-07,
+       "vm_p95_MPa": 0.0050657663271821965,
+       "vm_peak_MPa": 0.02900282007253396,
+       "relative_free_residual": 7.528322588437004e-14,
+       "relative_force_balance_error": 6.179564265595449e-15,
+       "relative_moment_balance_error": 1.717502044159338e-15,
+       "relative_energy_error": 7.136923597132603e-15
+      },
+      "checks": [
+       {
+        "metric": "connected_components",
+        "value": 1,
+        "max": 1,
+        "ok": true
+       }
+      ]
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 1.005
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 1.005
+       }
+      ]
+     }
+    },
+    "objectives": [
+     1.0,
+     1.0,
+     -6.0
+    ],
+    "score": 2.0940000000000003,
+    "diagnosis": [],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 1,
+   "visits": 4,
+   "final": {
+    "status": "PASS",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 23730.81484181561,
+       "area": 6536.145475767663,
+       "solids": 1,
+       "faces": 10,
+       "bbox_x": 45.4,
+       "bbox_y": 45.4,
+       "bbox_z": 35.3
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 1.0,
+      "reason": "The edited part correctly shows a slot cut into the top face of the cylinder while preserving all unrelated features of the original part.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-01.png"
+     },
+     "fem": {
+      "status": "PASS",
+      "metrics": {
+       "nodes": 1100,
+       "tetrahedra": 3794,
+       "connected_components": 1,
+       "mesh_volume_mm3": 23552.395133784867,
+       "fixed_nodes": 149,
+       "loaded_facets": 212,
+       "loaded_area_mm2": 309.83215645068105,
+       "axis": [
+        0.0,
+        0.0,
+        1.0
+       ],
+       "projection_min_mm": -5.6,
+       "projection_max_mm": 29.7,
+       "compliance_N_mm": 6.674565476209603e-07,
+       "load_weighted_displacement_mm": 6.674565476209603e-07,
+       "max_displacement_mm": 1.155523729300396e-06,
+       "strain_energy_N_mm": 3.337282738104779e-07,
+       "vm_p95_MPa": 0.00505855154900238,
+       "vm_peak_MPa": 0.02887927139478042,
+       "relative_free_residual": 6.218996144763606e-14,
+       "relative_force_balance_error": 2.163172430809676e-15,
+       "relative_moment_balance_error": 1.0685146022484317e-15,
+       "relative_energy_error": 6.662490597980358e-15
+      },
+      "checks": [
+       {
+        "metric": "connected_components",
+        "value": 1,
+        "max": 1,
+        "ok": true
+       }
+      ]
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 0.995
+       },
+       {
+        "mesh_scale": 1.25
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 0.995
+       },
+       {
+        "status": "PASS",
+        "metrics": {
+         "nodes": 894,
+         "tetrahedra": 3039,
+         "connected_components": 1,
+         "mesh_volume_mm3": 23505.313820486845,
+         "fixed_nodes": 103,
+         "loaded_facets": 184,
+         "loaded_area_mm2": 309.07057188973255,
+         "axis": [
+          0.0,
+          0.0,
+          1.0
+         ],
+         "projection_min_mm": -5.6,
+         "projection_max_mm": 29.7,
+         "compliance_N_mm": 6.645349981498442e-07,
+         "load_weighted_displacement_mm": 6.645349981498442e-07,
+         "max_displacement_mm": 1.1558850460721943e-06,
+         "strain_energy_N_mm": 3.3226749907492306e-07,
+         "vm_p95_MPa": 0.005045971698107111,
+         "vm_peak_MPa": 0.029252988580785292,
+         "relative_free_residual": 6.005817250298874e-14,
+         "relative_force_balance_error": 8.0753454329966475e-16,
+         "relative_moment_balance_error": 4.386118822009112e-16,
+         "relative_energy_error": 2.8679063354499753e-15
+        },
+        "checks": [
+         {
+          "metric": "connected_components",
+          "value": 1,
+          "max": 1,
+          "ok": true
+         }
+        ]
+       }
+      ]
+     }
+    },
+    "objectives": [
+     1.0,
+     1.0,
+     -6.0
+    ],
+    "score": 2.0940000000000003,
+    "diagnosis": [],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "final"
+   },
+   "edges": [
+    1
+   ]
+  },
+  {
+   "id": 2,
+   "candidate": "{\"edits\": [{\"delete\": 2, \"insert\": [\"    .faces(\\\">Z\\\").workplane(centerOption=\\\"CenterOfBoundBox\\\")\", \"    .slot2D(18, 7)\", \"    .cutBlind(7)\", \")\", \"show_object(result)\"], \"start\": 5}]}",
+   "depth": 2,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "FAIL",
+      "reason": "SyntaxError: unmatched ')' (<unknown>, line 11)"
+     },
+     "constraints": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -1000.0
+    ],
+    "score": -1.0,
+    "diagnosis": [
+     {
+      "stage": "geometry",
+      "status": "FAIL",
+      "reason": "SyntaxError: unmatched ')' (<unknown>, line 11)"
+     },
+     {
+      "stage": "constraints",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 0,
+   "visits": 1,
+   "final": null,
+   "edges": []
+  }
+ ],
+ "edges": [
+  {
+   "parent": 0,
+   "child": 1,
+   "visits": 4,
+   "total": 5.282000000000001
+  },
+  {
+   "parent": 1,
+   "child": 2,
+   "visits": 1,
+   "total": -1.0
+  }
+ ],
+ "events": [
+  {
+   "event": "decompose",
+   "plan": {
+    "steps": [
+     "Select the top face (>Z) of the existing solid",
+     "Create a workplane centered on the bounding box of the face",
+     "Add a slot profile with length 18 and width 7",
+     "Cut blindly into the solid to a depth of 7"
+    ],
+    "invariants": [
+     "The base cylinder and extruded section remain intact",
+     "The slot dimensions are precisely 18x7 with a depth of 7"
+    ],
+    "dependencies": [
+     [
+      0,
+      1
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      2,
+      3
+     ]
+    ]
+   },
+   "memory_version": "975f0bb02f2547a65804bb5aa6b039936f029e3fec125fb8aa1d05898f4f2533",
+   "retrieved": [
+    {
+     "task_id": "833b2c006f8d99ba09c1474113e44d19f73c2c9dadbef69fe0fd3eb35f3bf0d5",
+     "instruction": "Cut a 10\u00d73 slot 10 deep into the top face.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').slot2D(10.00,3.00).cutBlind(-10.00)\"], \"start\": 9}]}",
+     "strategies": [],
+     "context": [
+      "9: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "e4e244801e867d3f2c71c98bf1757c4f026c328c9d5378e9572f32cc706b4cbd",
+     "instruction": "Remove the 10\u00d73 slot 10 deep into the top face.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [], \"start\": 9}]}",
+     "strategies": [],
+     "context": [
+      "9: result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').slot2D(10.00,3.00).cutBlind(-10.00)"
+     ]
+    },
+    {
+     "task_id": "9dc4ece204d076075016caeb6fbeb264b689de23eb329b46bfcda04d38cc61fc",
+     "instruction": "Cut a centered blind slot into the top face of the flange head, with a slot length of 10.00 mm, a width of 3.00 mm, and a depth of 5.60 mm.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').slot2D(10.00,3.00).cutBlind(-5.60)\"], \"start\": 26}]}",
+     "strategies": [],
+     "context": [
+      "26: show_object(result)"
+     ]
+    }
+   ]
+  },
+  {
+   "event": "initial_state",
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 24539.206411860934,
+       "area": 6228.207435741763,
+       "solids": 1,
+       "faces": 5,
+       "bbox_x": 45.4,
+       "bbox_y": 45.4,
+       "bbox_z": 35.3
+      }
+     },
+     "constraints": {
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         7.0,
+         18.0
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -0.0
+    ],
+    "score": 0.0,
+    "diagnosis": [
+     {
+      "stage": "constraints",
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         7.0,
+         18.0
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "initial"
+   }
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "semantics",
+     "status": "FAIL",
+     "confidence": 0.9,
+     "reason": "The edited part removes the entire cylinder feature instead of cutting a slot into the top face.",
+     "basis": "Astra rendered-view judgement",
+     "image": "semantic-00.png"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "No physical contract supplied"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "No perturbation contract supplied"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "f09a0443beec3c0a74033e69d1a3b9f187b4b96f1bf5528ddcdc6de797529015",
+     "instruction": "Add a centered obround blind recess on the top face of the shaft, cutting a 10.00 mm \u00d7 3.75 mm slot down 10.00 mm into the part.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').slot2D(10.00,3.75).cutBlind(-10.00)\"], \"start\": 15}]}",
+     "strategies": [],
+     "context": [
+      "15: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "833b2c006f8d99ba09c1474113e44d19f73c2c9dadbef69fe0fd3eb35f3bf0d5",
+     "instruction": "Cut a 10\u00d73 slot 10 deep into the top face.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').slot2D(10.00,3.00).cutBlind(-10.00)\"], \"start\": 9}]}",
+     "strategies": [],
+     "context": [
+      "9: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "9dc4ece204d076075016caeb6fbeb264b689de23eb329b46bfcda04d38cc61fc",
+     "instruction": "Cut a centered blind slot into the top face of the flange head, with a slot length of 10.00 mm, a width of 3.00 mm, and a depth of 5.60 mm.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').slot2D(10.00,3.00).cutBlind(-5.60)\"], \"start\": 26}]}",
+     "strategies": [],
+     "context": [
+      "26: show_object(result)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "PASS",
+   "hypothesis": "Add a slot operation to the top face of the existing solid using slot2D and cutBlind."
+  },
+  {
+   "event": "final_verification",
+   "node": 1,
+   "status": "PASS"
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": true,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "semantics",
+     "status": "FAIL",
+     "confidence": 0.9,
+     "reason": "The edited part removes the entire cylinder feature instead of cutting a slot into the top face.",
+     "basis": "Astra rendered-view judgement",
+     "image": "semantic-00.png"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "No physical contract supplied"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "No perturbation contract supplied"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "f09a0443beec3c0a74033e69d1a3b9f187b4b96f1bf5528ddcdc6de797529015",
+     "instruction": "Add a centered obround blind recess on the top face of the shaft, cutting a 10.00 mm \u00d7 3.75 mm slot down 10.00 mm into the part.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').slot2D(10.00,3.75).cutBlind(-10.00)\"], \"start\": 15}]}",
+     "strategies": [],
+     "context": [
+      "15: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "833b2c006f8d99ba09c1474113e44d19f73c2c9dadbef69fe0fd3eb35f3bf0d5",
+     "instruction": "Cut a 10\u00d73 slot 10 deep into the top face.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').slot2D(10.00,3.00).cutBlind(-10.00)\"], \"start\": 9}]}",
+     "strategies": [],
+     "context": [
+      "9: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "9dc4ece204d076075016caeb6fbeb264b689de23eb329b46bfcda04d38cc61fc",
+     "instruction": "Cut a centered blind slot into the top face of the flange head, with a slot length of 10.00 mm, a width of 3.00 mm, and a depth of 5.60 mm.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').slot2D(10.00,3.00).cutBlind(-5.60)\"], \"start\": 26}]}",
+     "strategies": [],
+     "context": [
+      "26: show_object(result)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "PASS",
+   "hypothesis": "Cut an 18x7 slot, 7 deep into the top face of the extruded section using slot2D and cutBlind."
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": true,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "semantics",
+     "status": "FAIL",
+     "confidence": 0.9,
+     "reason": "The edited part removes the entire cylinder feature instead of cutting a slot into the top face.",
+     "basis": "Astra rendered-view judgement",
+     "image": "semantic-00.png"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "No physical contract supplied"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "No perturbation contract supplied"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "f09a0443beec3c0a74033e69d1a3b9f187b4b96f1bf5528ddcdc6de797529015",
+     "instruction": "Add a centered obround blind recess on the top face of the shaft, cutting a 10.00 mm \u00d7 3.75 mm slot down 10.00 mm into the part.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').slot2D(10.00,3.75).cutBlind(-10.00)\"], \"start\": 15}]}",
+     "strategies": [],
+     "context": [
+      "15: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "833b2c006f8d99ba09c1474113e44d19f73c2c9dadbef69fe0fd3eb35f3bf0d5",
+     "instruction": "Cut a 10\u00d73 slot 10 deep into the top face.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').slot2D(10.00,3.00).cutBlind(-10.00)\"], \"start\": 9}]}",
+     "strategies": [],
+     "context": [
+      "9: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "9dc4ece204d076075016caeb6fbeb264b689de23eb329b46bfcda04d38cc61fc",
+     "instruction": "Cut a centered blind slot into the top face of the flange head, with a slot length of 10.00 mm, a width of 3.00 mm, and a depth of 5.60 mm.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').slot2D(10.00,3.00).cutBlind(-5.60)\"], \"start\": 26}]}",
+     "strategies": [],
+     "context": [
+      "26: show_object(result)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "PASS",
+   "hypothesis": "Cut an 18x7 slot, 7 deep into the top face of the extruded section using slot2D and cutBlind."
+  },
+  {
+   "event": "backtrack",
+   "to_node": 1
+  },
+  {
+   "event": "expand",
+   "parent": 1,
+   "node": 2,
+   "merged": false,
+   "strategy": "diversify",
+   "diagnosis": [],
+   "retrieved_repairs": [
+    {
+     "task_id": "833b2c006f8d99ba09c1474113e44d19f73c2c9dadbef69fe0fd3eb35f3bf0d5",
+     "instruction": "Cut a 10\u00d73 slot 10 deep into the top face.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').slot2D(10.00,3.00).cutBlind(-10.00)\"], \"start\": 9}]}",
+     "strategies": [],
+     "context": [
+      "9: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "e4e244801e867d3f2c71c98bf1757c4f026c328c9d5378e9572f32cc706b4cbd",
+     "instruction": "Remove the 10\u00d73 slot 10 deep into the top face.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [], \"start\": 9}]}",
+     "strategies": [],
+     "context": [
+      "9: result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').slot2D(10.00,3.00).cutBlind(-10.00)"
+     ]
+    },
+    {
+     "task_id": "9dc4ece204d076075016caeb6fbeb264b689de23eb329b46bfcda04d38cc61fc",
+     "instruction": "Cut a centered blind slot into the top face of the flange head, with a slot length of 10.00 mm, a width of 3.00 mm, and a depth of 5.60 mm.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').slot2D(10.00,3.00).cutBlind(-5.60)\"], \"start\": 26}]}",
+     "strategies": [],
+     "context": [
+      "26: show_object(result)"
+     ]
+    }
+   ],
+   "path": [
+    0,
+    1
+   ],
+   "status": "FAIL",
+   "hypothesis": "Cut an 18x7 slot 7 deep into the top face of the extruded cylinder."
+  }
+ ],
+ "config": {
+  "algorithm": "mcts",
+  "max_expansions": 4,
+  "max_depth": 3,
+  "width": 2,
+  "max_width": 4,
+  "exploration": 0.7,
+  "seconds": 2400.0
+ },
+ "memory_version": "975f0bb02f2547a65804bb5aa6b039936f029e3fec125fb8aa1d05898f4f2533",
+ "stored": "runs/adaptive-cad-gemini-lite-20261007/memory.jsonl",
+ "seconds": 102.1339022090001,
+ "api": {
+  "mode": "live_astra",
+  "api_calls": 7,
+  "cost_usd": 0.0,
+  "budget_usd": 0.3,
+  "refused": 0
+ },
+ "tool_jobs": 7
+}

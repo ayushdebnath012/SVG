@@ -1,0 +1,1415 @@
+[
+  {
+    "model": "fem-elmer-tube-thermalflow-velocity-3d",
+    "materials": [
+      {
+        "object": "MaterialSolid",
+        "source_card": {
+          "AuthorAndLicense": "(c) 2013 Juergen Riegel (CC-BY 3.0)",
+          "CardName": "CalculiX-Steel",
+          "Density": "7900 kg/m^3",
+          "Description": "Standard steel material for CalculiX sample calculations",
+          "Father": "Metal",
+          "Name": "CalculiX-Steel",
+          "PoissonRatio": "0.3",
+          "SpecificHeat": "590 J/kg/K",
+          "ThermalConductivity": "43 W/m/K",
+          "ThermalExpansionCoefficient": "0.000012 m/m/K",
+          "YoungsModulus": "210000 MPa"
+        },
+        "source_refs": [
+          {
+            "obj": "BooleanFragments",
+            "sub": "Solid1"
+          }
+        ]
+      },
+      {
+        "object": "MaterialFluid",
+        "source_card": {
+          "CardName": "Water",
+          "Density": "998 kg/m^3",
+          "Description": "Standard distilled water properties at 20 Degrees Celsius and 1 atm",
+          "DynamicViscosity": "1.003e-3 kg/m/s",
+          "ElectricalConductivity": "5.5e-6 S/m",
+          "Father": "Gas",
+          "KinematicViscosity": "1.005e-6 m^2/s",
+          "MolarMass": "18",
+          "Name": "Water",
+          "PrandtlNumber": "7.56",
+          "ReferenceSource": "''",
+          "RelativePermittivity": "80.0",
+          "SpecificHeat": "4182 J/kg/K",
+          "ThermalConductivity": "0.591 W/m/K",
+          "VolumetricThermalExpansionCoefficient": "0 1/K"
+        },
+        "source_refs": [
+          {
+            "obj": "BooleanFragments",
+            "sub": "Solid2"
+          }
+        ]
+      }
+    ],
+    "source_boundary_conditions": [
+      {
+        "object": "ConstraintInitialTemperature",
+        "original_properties": {
+          "initialTemperature": [
+            {
+              "value": "300.0000000000000000"
+            }
+          ]
+        },
+        "source_refs": []
+      },
+      {
+        "object": "ConstraintTemperature",
+        "original_properties": {
+          "ConstraintType": [
+            {
+              "value": "1"
+            }
+          ],
+          "Temperature": [
+            {
+              "value": "300.0000000000000000"
+            }
+          ]
+        },
+        "source_refs": [
+          {
+            "obj": "BooleanFragments",
+            "sub": "Face29"
+          }
+        ]
+      },
+      {
+        "object": "ConstraintTemperature001",
+        "original_properties": {
+          "ConstraintType": [
+            {
+              "value": "1"
+            }
+          ],
+          "Temperature": [
+            {
+              "value": "600.0000000000000000"
+            }
+          ]
+        },
+        "source_refs": [
+          {
+            "obj": "BooleanFragments",
+            "sub": "Face10"
+          },
+          {
+            "obj": "BooleanFragments",
+            "sub": "Face11"
+          }
+        ]
+      },
+      {
+        "object": "ConstraintInitialPressure",
+        "original_properties": {
+          "Pressure": [
+            {
+              "value": "101.0000000000000000"
+            }
+          ]
+        },
+        "source_refs": []
+      },
+      {
+        "object": "ConstraintPressure",
+        "original_properties": {
+          "Pressure": [
+            {
+              "value": "0.1010000000000000"
+            }
+          ]
+        },
+        "source_refs": [
+          {
+            "obj": "BooleanFragments",
+            "sub": "Face28"
+          }
+        ]
+      },
+      {
+        "object": "ConstraintFlowVelocity",
+        "original_properties": {
+          "VelocityX": [
+            {
+              "value": "0.0000000000000000"
+            }
+          ],
+          "VelocityY": [
+            {
+              "value": "0.0000000000000000"
+            }
+          ],
+          "VelocityZ": [
+            {
+              "value": "0.0000000000000000"
+            }
+          ]
+        },
+        "source_refs": [
+          {
+            "obj": "BooleanFragments",
+            "sub": "Face27"
+          },
+          {
+            "obj": "BooleanFragments",
+            "sub": "Face25"
+          },
+          {
+            "obj": "BooleanFragments",
+            "sub": "Face26"
+          },
+          {
+            "obj": "BooleanFragments",
+            "sub": "Face21"
+          },
+          {
+            "obj": "BooleanFragments",
+            "sub": "Face7"
+          },
+          {
+            "obj": "BooleanFragments",
+            "sub": "Face3"
+          },
+          {
+            "obj": "BooleanFragments",
+            "sub": "Face18"
+          },
+          {
+            "obj": "BooleanFragments",
+            "sub": "Face14"
+          },
+          {
+            "obj": "BooleanFragments",
+            "sub": "Face6"
+          },
+          {
+            "obj": "BooleanFragments",
+            "sub": "Face2"
+          },
+          {
+            "obj": "BooleanFragments",
+            "sub": "Face17"
+          },
+          {
+            "obj": "BooleanFragments",
+            "sub": "Face12"
+          },
+          {
+            "obj": "BooleanFragments",
+            "sub": "Face8"
+          },
+          {
+            "obj": "BooleanFragments",
+            "sub": "Face4"
+          },
+          {
+            "obj": "BooleanFragments",
+            "sub": "Face19"
+          },
+          {
+            "obj": "BooleanFragments",
+            "sub": "Face15"
+          },
+          {
+            "obj": "BooleanFragments",
+            "sub": "Face5"
+          },
+          {
+            "obj": "BooleanFragments",
+            "sub": "Face1"
+          },
+          {
+            "obj": "BooleanFragments",
+            "sub": "Face20"
+          },
+          {
+            "obj": "BooleanFragments",
+            "sub": "Face16"
+          },
+          {
+            "obj": "BooleanFragments",
+            "sub": "Face23"
+          }
+        ]
+      },
+      {
+        "object": "ConstraintInitialFlowVelocity",
+        "original_properties": {
+          "VelocityX": [
+            {
+              "value": "50.0000000000000000"
+            }
+          ],
+          "VelocityY": [
+            {
+              "value": "0.0000000000000000"
+            }
+          ],
+          "VelocityZ": [
+            {
+              "value": "0.0000000000000000"
+            }
+          ]
+        },
+        "source_refs": []
+      },
+      {
+        "object": "ConstraintFlowVelocity003",
+        "original_properties": {
+          "VelocityX": [
+            {
+              "value": "50.0000000000000000"
+            }
+          ],
+          "VelocityY": [
+            {
+              "value": "0.0000000000000000"
+            }
+          ],
+          "VelocityZ": [
+            {
+              "value": "0.0000000000000000"
+            }
+          ]
+        },
+        "source_refs": [
+          {
+            "obj": "BooleanFragments",
+            "sub": "Face29"
+          }
+        ]
+      },
+      {
+        "object": "ConstraintFlowVelocity004",
+        "original_properties": {
+          "VelocityX": [
+            {
+              "value": "0.0000000000000000"
+            }
+          ],
+          "VelocityY": [
+            {
+              "value": "0.0000000000000000"
+            }
+          ],
+          "VelocityZ": [
+            {
+              "value": "0.0000000000000000"
+            }
+          ]
+        },
+        "source_refs": [
+          {
+            "obj": "BooleanFragments",
+            "sub": "Face28"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "model": "full-bridge_on_radiator",
+    "materials": [
+      {
+        "object": "MaterialSolid",
+        "source_card": {
+          "AuthorAndLicense": "no author",
+          "CardName": "Copper",
+          "Density": "8960 kg/m^3",
+          "Name": "Copper",
+          "PoissonRatio": "0.34",
+          "SpecificHeat": "389 J/kg/K",
+          "ThermalConductivity": "401,00 W/m/K",
+          "ThermalExpansionCoefficient": "16,5 \u00b5m/m/K",
+          "YoungsModulus": "110 GPa"
+        },
+        "source_refs": [
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Solid22"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Solid19"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Solid21"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Solid17"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Solid14"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Solid16"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Solid15"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Solid20"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Solid7"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Solid4"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Solid6"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Solid12"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Solid9"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Solid11"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Solid5"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Solid10"
+          }
+        ]
+      },
+      {
+        "object": "MaterialSolid001",
+        "source_card": {
+          "AuthorAndLicense": "no author",
+          "CardName": "Aluminum",
+          "Density": "2700 kg/m^3",
+          "Description": "Precipitation-hardened, Nonferrous Aluminum alloy",
+          "Father": "Metal",
+          "KindOfMaterial": "Aluminium",
+          "KindOfMaterialDE": "Aluminium",
+          "Name": "Aluminum",
+          "PoissonRatio": "0.33",
+          "ProductURL": "https://en.wikipedia.org/wiki/6061_aluminium_alloy",
+          "SpecificHeat": "896 J/kg/K",
+          "ThermalConductivity": "167 W/m/K",
+          "ThermalExpansionCoefficient": "23,10 \u00b5m/m/K",
+          "UltimateTensileStrength": "310 MPa",
+          "YoungsModulus": "69000 MPa"
+        },
+        "source_refs": [
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Solid3"
+          }
+        ]
+      },
+      {
+        "object": "MaterialSolid002",
+        "source_card": {
+          "AuthorAndLicense": "no author",
+          "CardName": "PLCC",
+          "Density": "900 kg/m^3",
+          "Name": "PLCC",
+          "PoissonRatio": "0 ",
+          "SpecificHeat": "1700 J/kg/K",
+          "ThermalConductivity": "0,2 W/m/K",
+          "YoungsModulus": "0 Pa"
+        },
+        "source_refs": [
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Solid8"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Solid13"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Solid23"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Solid18"
+          }
+        ]
+      },
+      {
+        "object": "MaterialSolid003",
+        "source_card": {
+          "AuthorAndLicense": "no author",
+          "CardName": "Polyurethane",
+          "Density": "51 kg/m^3",
+          "Name": "Polyurethane",
+          "PoissonRatio": "0 ",
+          "SpecificHeat": "1400 J/kg/K",
+          "ThermalConductivity": "1,8 W/m/K",
+          "YoungsModulus": "0 MPa"
+        },
+        "source_refs": [
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Solid2"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Solid1"
+          }
+        ]
+      },
+      {
+        "object": "MaterialFluid",
+        "source_card": {
+          "CardName": "Air",
+          "Density": "1.204 kg/m^3",
+          "Description": "Dry air properties at 20 Degrees Celsius and 1 atm",
+          "DynamicViscosity": "1.80e-5 kg/m/s",
+          "ElectricalConductivity": "1e-12 S/m",
+          "Father": "Gas",
+          "KinematicViscosity": "1.511e-5 m^2/s",
+          "MolarMass": "28.965",
+          "Name": "Air",
+          "PrandtlNumber": "0.7",
+          "RelativePermittivity": "1.00059",
+          "SpecificHeat": "1.01 kJ/kg/K",
+          "ThermalConductivity": "0.02587 W/m/K",
+          "VolumetricThermalExpansionCoefficient": "0 m^3/m^3/K"
+        },
+        "source_refs": [
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Solid24"
+          }
+        ]
+      }
+    ],
+    "source_boundary_conditions": [
+      {
+        "object": "ConstraintInitialTemperature",
+        "original_properties": {
+          "initialTemperature": [
+            {
+              "value": "298.1499999999999773"
+            }
+          ]
+        },
+        "source_refs": []
+      },
+      {
+        "object": "ConstraintTemperature",
+        "original_properties": {
+          "ConstraintType": [
+            {
+              "value": "1"
+            }
+          ],
+          "Temperature": [
+            {
+              "value": "298.1499999999999773"
+            }
+          ]
+        },
+        "source_refs": [
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face354"
+          }
+        ]
+      },
+      {
+        "object": "ConstraintHeatflux",
+        "original_properties": {
+          "AmbientTemp": [
+            {
+              "value": "300.0000000000000000"
+            }
+          ],
+          "ConstraintType": [
+            {
+              "value": "0"
+            }
+          ],
+          "DFlux": [
+            {
+              "value": "377777.7800000000279397"
+            }
+          ],
+          "FilmCoef": [
+            {
+              "value": "1.0000000000000000"
+            }
+          ]
+        },
+        "source_refs": [
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face324"
+          }
+        ],
+        "cached_face_area_mm2": 9.0,
+        "derived_power_W_if_DFlux_SI": 3.4000000200000002
+      },
+      {
+        "object": "ConstraintHeatflux001",
+        "original_properties": {
+          "AmbientTemp": [
+            {
+              "value": "300.0000000000000000"
+            }
+          ],
+          "ConstraintType": [
+            {
+              "value": "0"
+            }
+          ],
+          "DFlux": [
+            {
+              "value": "522222.2199999999720603"
+            }
+          ],
+          "FilmCoef": [
+            {
+              "value": "1.0000000000000000"
+            }
+          ]
+        },
+        "source_refs": [
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face226"
+          }
+        ],
+        "cached_face_area_mm2": 9.0,
+        "derived_power_W_if_DFlux_SI": 4.699999979999999
+      },
+      {
+        "object": "ConstraintHeatflux002",
+        "original_properties": {
+          "AmbientTemp": [
+            {
+              "value": "300.0000000000000000"
+            }
+          ],
+          "ConstraintType": [
+            {
+              "value": "0"
+            }
+          ],
+          "DFlux": [
+            {
+              "value": "244444.4400000000023283"
+            }
+          ],
+          "FilmCoef": [
+            {
+              "value": "10.0000000000000000"
+            }
+          ]
+        },
+        "source_refs": [
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face177"
+          }
+        ],
+        "cached_face_area_mm2": 9.0,
+        "derived_power_W_if_DFlux_SI": 2.19999996
+      },
+      {
+        "object": "ConstraintHeatflux003",
+        "original_properties": {
+          "AmbientTemp": [
+            {
+              "value": "298.1499999999999773"
+            }
+          ],
+          "ConstraintType": [
+            {
+              "value": "1"
+            }
+          ],
+          "DFlux": [
+            {
+              "value": "0.0000000000000000"
+            }
+          ],
+          "FilmCoef": [
+            {
+              "value": "10.0000000000000000"
+            }
+          ]
+        },
+        "source_refs": [
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face125"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face124"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face126"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face127"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face113"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face135"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face136"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face5"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face176"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face225"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face249"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face200"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face194"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face157"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face184"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face243"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face206"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face233"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face201"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face250"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face192"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face159"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face182"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face241"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face208"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face231"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face331"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face304"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face341"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face282"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face255"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face292"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face299"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face348"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face347"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face298"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face329"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face306"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face339"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face280"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face257"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face290"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face114"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face115"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face18"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face323"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face274"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face134"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face129"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face122"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face132"
+          }
+        ]
+      },
+      {
+        "object": "ConstraintInitialFlowVelocity",
+        "original_properties": {
+          "VelocityX": [
+            {
+              "value": "0.0000000000000000"
+            }
+          ],
+          "VelocityY": [
+            {
+              "value": "0.0000000000000000"
+            }
+          ],
+          "VelocityZ": [
+            {
+              "value": "50.0000000000000000"
+            }
+          ]
+        },
+        "source_refs": []
+      },
+      {
+        "object": "ConstraintFlowVelocity",
+        "original_properties": {
+          "VelocityX": [
+            {
+              "value": "0.0000000000000000"
+            }
+          ],
+          "VelocityY": [
+            {
+              "value": "0.0000000000000000"
+            }
+          ],
+          "VelocityZ": [
+            {
+              "value": "0.0000000000000000"
+            }
+          ]
+        },
+        "source_refs": [
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face25"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face143"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face145"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face147"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face146"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face149"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face152"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face151"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face153"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face150"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face128"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face117"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face116"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face110"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face109"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face67"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face62"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face63"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face64"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face65"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face66"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face61"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face32"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face33"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face31"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face29"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face30"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face34"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face59"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face60"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face58"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face56"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face57"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face55"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face53"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face54"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face52"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face50"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face51"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face49"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face47"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face48"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face46"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face44"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face45"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face43"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face41"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face42"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face40"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face38"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face39"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face37"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face35"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face36"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face144"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face26"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face27"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face28"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face74"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face73"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face83"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face88"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face92"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face97"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face107"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face68"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face75"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face81"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face87"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face93"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face99"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face105"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face70"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face137"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face111"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face112"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face77"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face78"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face82"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face80"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face84"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face89"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face86"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face90"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face91"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face95"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face96"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face98"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face101"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face102"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face106"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face104"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face72"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face69"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face108"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face71"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face103"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face100"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face94"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face85"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face79"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face76"
+          }
+        ]
+      },
+      {
+        "object": "ConstraintFlowVelocity001",
+        "original_properties": {
+          "VelocityX": [
+            {
+              "value": "0.0000000000000000"
+            }
+          ],
+          "VelocityY": [
+            {
+              "value": "0.0000000000000000"
+            }
+          ],
+          "VelocityZ": [
+            {
+              "value": "50.0000000000000000"
+            }
+          ]
+        },
+        "source_refs": [
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face354"
+          }
+        ]
+      },
+      {
+        "object": "ConstraintFlowVelocity002",
+        "original_properties": {
+          "VelocityX": [
+            {
+              "value": "0.0000000000000000"
+            }
+          ],
+          "VelocityY": [
+            {
+              "value": "0.0000000000000000"
+            }
+          ],
+          "VelocityZ": [
+            {
+              "value": "0.0000000000000000"
+            }
+          ]
+        },
+        "source_refs": [
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face352"
+          }
+        ]
+      },
+      {
+        "object": "ConstraintFlowVelocity003",
+        "original_properties": {
+          "VelocityX": [
+            {
+              "value": "0.0000000000000000"
+            }
+          ],
+          "VelocityY": [
+            {
+              "value": "0.0000000000000000"
+            }
+          ],
+          "VelocityZ": [
+            {
+              "value": "50.0000000000000000"
+            }
+          ]
+        },
+        "source_refs": [
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face350"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face353"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face351"
+          },
+          {
+            "obj": "BooleanFragments008",
+            "sub": "Face355"
+          }
+        ]
+      }
+    ]
+  }
+]

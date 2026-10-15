@@ -1,0 +1,145 @@
+{
+ "id": "b226256253055ed17f61c738ec4587db131870a836c88c375b3fc8d2a6b845e0",
+ "source_fem": {
+  "ok": true,
+  "compliance": 7.130325515163788e-07,
+  "components": 1,
+  "nodes": 1120
+ },
+ "nodes": [
+  {
+   "name": "vanilla",
+   "parent": null,
+   "visits": 1,
+   "value_sum": 1.0,
+   "eval": {
+    "gates": true,
+    "fem": {
+     "ok": true,
+     "compliance": 9.209878992872957e-07,
+     "components": 1,
+     "nodes": 1055
+    },
+    "numbers_ok": true,
+    "changed": true,
+    "error": null,
+    "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(19.5)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n)\nshow_object(result)\n"
+   }
+  },
+  {
+   "name": "alt1",
+   "parent": null,
+   "visits": 1,
+   "value_sum": 1.0,
+   "eval": {
+    "gates": true,
+    "fem": {
+     "ok": true,
+     "compliance": 9.211650704237097e-07,
+     "components": 1,
+     "nodes": 1050
+    },
+    "numbers_ok": true,
+    "changed": true,
+    "error": null,
+    "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(19.5)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n)\nshow_object(result)\n"
+   }
+  },
+  {
+   "name": "alt2",
+   "parent": null,
+   "visits": 1,
+   "value_sum": 1.0,
+   "eval": {
+    "gates": true,
+    "fem": {
+     "ok": true,
+     "compliance": 9.209916013755676e-07,
+     "components": 1,
+     "nodes": 1046
+    },
+    "numbers_ok": true,
+    "changed": true,
+    "error": null,
+    "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0 + 4.5)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n)\nshow_object(result)\n"
+   }
+  },
+  {
+   "name": "alt3",
+   "parent": null,
+   "visits": 1,
+   "value_sum": 1.0,
+   "eval": {
+    "gates": true,
+    "fem": {
+     "ok": true,
+     "compliance": 9.210287993760975e-07,
+     "components": 1,
+     "nodes": 1056
+    },
+    "numbers_ok": true,
+    "changed": true,
+    "error": null,
+    "code": "import cadquery as cq\nstandoff_height = 19.5\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(standoff_height)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n)\nshow_object(result)\n"
+   }
+  }
+ ],
+ "candidates": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(19.5)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 9.209878992872957e-07,
+    "components": 1,
+    "nodes": 1055
+   },
+   "consensus": 4,
+   "numbers_ok": true,
+   "changed": true
+  },
+  {
+   "name": "alt1",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(19.5)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 9.211650704237097e-07,
+    "components": 1,
+    "nodes": 1050
+   },
+   "consensus": 4,
+   "numbers_ok": true,
+   "changed": true
+  },
+  {
+   "name": "alt2",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0 + 4.5)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 9.209916013755676e-07,
+    "components": 1,
+    "nodes": 1046
+   },
+   "consensus": 4,
+   "numbers_ok": true,
+   "changed": true
+  },
+  {
+   "name": "alt3",
+   "code": "import cadquery as cq\nstandoff_height = 19.5\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(standoff_height)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 9.210287993760975e-07,
+    "components": 1,
+    "nodes": 1056
+   },
+   "consensus": 4,
+   "numbers_ok": true,
+   "changed": true
+  }
+ ]
+}

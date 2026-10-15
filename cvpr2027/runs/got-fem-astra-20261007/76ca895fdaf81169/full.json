@@ -1,0 +1,62 @@
+{
+ "source_fem": {
+  "ok": true,
+  "compliance": 5.204602427632933e-07,
+  "components": 1,
+  "nodes": 755
+ },
+ "nodes": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(11.2, 22.7)\n    .faces(\">Z\").workplane()\n    .circle(9.2)\n    .extrude(24.1)\n    .faces(\">Z\").workplane()\n    .polygon(6, 18.16)\n    .cutBlind(-8.00)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": false,
+    "error": "Exception: PLC Error:  A segment and a facet intersect at point"
+   },
+   "numbers_ok": false,
+   "changed": true,
+   "cluster": null,
+   "robustness": null
+  },
+  {
+   "name": "mcts1-refine",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(11.2, 22.7)\n    .faces(\">Z\").workplane()\n    .circle(9.2)\n    .extrude(24.1)\n    .faces(\">Z\").workplane()\n    .transformed(rotate=(0, 0, 30))\n    .polygon(6, 2 * 9.08, circumscribed=False)\n    .cutBlind(-8.00)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": false,
+    "error": "Exception: PLC Error:  A segment and a facet intersect at point"
+   },
+   "numbers_ok": false,
+   "changed": true,
+   "cluster": null,
+   "robustness": null
+  },
+  {
+   "name": "mcts2-refine",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(11.2, 22.7)\n    .faces(\">Z\").workplane()\n    .circle(9.2)\n    .extrude(24.1)\n    .faces(\">Z\").workplane(centerOption=\"CenterOfMass\")\n    .polygon(6, 2.0 * 9.08)\n    .cutBlind(-8.00)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": false,
+    "error": "Exception: PLC Error:  A segment and a facet intersect at point"
+   },
+   "numbers_ok": false,
+   "changed": true,
+   "cluster": null,
+   "robustness": null
+  },
+  {
+   "name": "rag",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(11.2, 22.7)\n    .faces(\">Z\").workplane()\n    .circle(9.2)\n    .extrude(24.1)\n)\nresult = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').polygon(6,18.16).cutBlind(-8.00)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": false,
+    "error": "Exception: PLC Error:  A segment and a facet intersect at point"
+   },
+   "numbers_ok": false,
+   "changed": true,
+   "cluster": null,
+   "robustness": null
+  }
+ ]
+}

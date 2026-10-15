@@ -1,0 +1,85 @@
+{
+ "source_fem": {
+  "ok": true,
+  "compliance": 5.520300918429442e-07,
+  "components": 1,
+  "nodes": 788
+ },
+ "nodes": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(11.2, 22.7)\n    .faces(\">Z\").workplane()\n    .circle(9.2)\n    .extrude(24.1)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 5.20512255593187e-07,
+    "components": 1,
+    "nodes": 755
+   },
+   "numbers_ok": null,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "alt1",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(11.2, 22.7)\n    .faces(\">Z\").workplane()\n    .circle(9.2)\n    .extrude(24.1)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 5.204590608092543e-07,
+    "components": 1,
+    "nodes": 755
+   },
+   "numbers_ok": null,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "alt2",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(11.2, 22.7)\n    .faces(\">Z\").workplane()\n    .circle(9.2)\n    .extrude(24.1)\n)\n# result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').polygon(6,9.08).cutBlind(-8.00)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 5.204565812137557e-07,
+    "components": 1,
+    "nodes": 756
+   },
+   "numbers_ok": null,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "alt3",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(11.2, 22.7)\n    .faces(\">Z\").workplane()\n    .circle(9.2)\n    .extrude(24.1)\n)\nresult = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').polygon(6,9.08).cutBlind(-8.00)\nresult = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').polygon(6, 9.08).extrude(-8.00, combine=True).clean()\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 5.204566751675207e-07,
+    "components": 1,
+    "nodes": 755
+   },
+   "numbers_ok": null,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 0.0
+  },
+  {
+   "name": "rag",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(11.2, 22.7)\n    .faces(\">Z\").workplane()\n    .circle(9.2)\n    .extrude(24.1)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 5.233281938179461e-07,
+    "components": 1,
+    "nodes": 758
+   },
+   "numbers_ok": null,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  }
+ ]
+}

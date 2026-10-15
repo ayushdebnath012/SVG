@@ -1,0 +1,65 @@
+{
+  "package": "cadfem-bench-final",
+  "scoring_version": "1.6",
+  "date": "2026-10-14",
+  "payload_files_sha256_checked": 1736,
+  "payload_checksum_failures": 0,
+  "primary_tasks": 57,
+  "graded_outputs": 123,
+  "benchmark_acceptance": "not_ready_as_fully_source_published_validated_frontier_benchmark",
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "blocking",
+      "issue": "Four scored numerical targets were locally evaluated closed forms, contradicting the source-published-only rule and release wording.",
+      "tasks": [
+        "B-FEMCAD-031",
+        "B-FEMCAD-058"
+      ],
+      "outputs": 4,
+      "evidence": "evaluator/evidence/scripts/build_femcad_hard_dataset.py lines 129-144 defines spherical_capacitor() and bathyscaphe(); task references mark these closed_form.",
+      "correction": "Hold both tasks under strict source-only admission, or explicitly authorize and report an analytic-reference track separately. Excluding these alone gives 55 primary tasks /119 outputs."
+    },
+    {
+      "id": "F2",
+      "severity": "high",
+      "issue": "Rigging shape gate rejects an identical rigidly transformed part under a general rotation.",
+      "task": "B-RIGGING-test1",
+      "confirmed_test": "original passes; identical STEP rotated 37 degrees about z and translated fails",
+      "evidence": "rigging-arbitrary-rotation.json",
+      "correction": "Use general rigid registration, or require a source/drawing-defined frame consistently. Preserve negative shape/scale probes."
+    },
+    {
+      "id": "F3",
+      "severity": "high",
+      "issue": "All five FEMCAD tasks link local task compilation/build scripts and locally reconstructed hidden CAD; original publisher pages establishing the numerical claims are absent from their evidence lists.",
+      "tasks": [
+        "B-FEMCAD-031",
+        "B-FEMCAD-057",
+        "B-FEMCAD-058",
+        "B-FEMCAD-062",
+        "B-FEMCAD-067"
+      ],
+      "correction": "Archive exact publisher page/notebook/result assets with checksums and link each reference to its original output. Current live pages confirm 14.9 and332.97; 230.197 requires inspection of the actual original output graphic."
+    },
+    {
+      "id": "F4",
+      "severity": "scope_limitation",
+      "issue": "Final package is not a full raw-data archive of all available collections.",
+      "details": "83 local collection folders /6067 files are indexed; remaining unadmitted raw files stay outside the ZIP under cvpr2027/data. This is stated in README and coverage.json."
+    },
+    {
+      "id": "F5",
+      "severity": "scope_limitation",
+      "issue": "43 of57 primary tasks lack independent reproduction, full workflow needs human review, model/expert comparison runs are absent, public reserve cannot prove contamination resistance, and major complex physics remains unadmitted."
+    }
+  ],
+  "confirmed_good": [
+    "57 primary task IDs match references;123 outputs;51 Track A/6 Track B;11 families;cap8",
+    "55 inactive tasks are separately held",
+    "40 collection reports bundled; all52 PDF-directory entries classified",
+    "No new benchmark tasks were admitted by consolidation",
+    "Full archive is evaluator-only; candidate export stays separate"
+  ],
+  "sealed_release_modified": false
+}

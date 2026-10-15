@@ -1,0 +1,255 @@
+{
+  "collection": "Original CAD and published FEM: frame and composite kiteboard",
+  "date": "2026-10-12",
+  "native_cad_with_saved_numerical_field_cases": 1,
+  "cad_with_published_plot_scalar_reference_candidates": 1,
+  "new_task_families": 2,
+  "certified_cases": 0,
+  "locally_generated_cad": 0,
+  "solver_runs": 0,
+  "model_calls": 0,
+  "records": [
+    {
+      "id": "test-bench-frame",
+      "source": "https://github.com/MarcusAdielsonGuichet/Test-Bench-Digital-Twin",
+      "cad": "test-bench-frame/Test Frame.FCStd",
+      "native_cad": true,
+      "geometry_audit": {
+        "valid": true,
+        "solids": 1,
+        "faces": 26,
+        "bounds": [
+          -1000.0000000000001,
+          999.9999999999999,
+          -750.0,
+          750.0,
+          -1.4211e-13,
+          100.00000000000011
+        ]
+      },
+      "result_type": "Embedded native CalculiX nodal displacement, stress and strain arrays",
+      "results": "test-bench-frame/saved-reference-fields.csv",
+      "nodes": 2356,
+      "all_finite": true,
+      "node_ids_verified": true,
+      "von_mises_tensor_consistency_max_absolute_error": 1.1368683772161603e-13,
+      "statistics": {
+        "DisplacementLengths": {
+          "min": 0.0,
+          "max": 19.009710774244464
+        },
+        "vonMises": {
+          "min": 0.008086295961314736,
+          "max": 477.6683112863573
+        },
+        "NodeStressXX": {
+          "min": -145.987,
+          "max": 287.257
+        },
+        "NodeStressXY": {
+          "min": -66.0308,
+          "max": 49.7123
+        },
+        "NodeStressXZ": {
+          "min": -41.0744,
+          "max": 37.2118
+        },
+        "NodeStressYY": {
+          "min": -543.638,
+          "max": 550.574
+        },
+        "NodeStressYZ": {
+          "min": -36.9905,
+          "max": 31.7653
+        },
+        "NodeStressZZ": {
+          "min": -157.11,
+          "max": 143.38
+        },
+        "NodeStrainXX": {
+          "min": -0.000913723,
+          "max": 0.00132802
+        },
+        "NodeStrainXY": {
+          "min": -0.0004292,
+          "max": 0.00032313
+        },
+        "NodeStrainXZ": {
+          "min": -0.000266983,
+          "max": 0.000241877
+        },
+        "NodeStrainYY": {
+          "min": -0.00247499,
+          "max": 0.00247006
+        },
+        "NodeStrainYZ": {
+          "min": -0.000240438,
+          "max": 0.000206474
+        },
+        "NodeStrainZZ": {
+          "min": -0.000312589,
+          "max": 0.000336825
+        }
+      },
+      "material": {
+        "AuthorAndLicense": "Steel-Generic",
+        "CardName": "Steel-Generic",
+        "Density": "7900 kg/m^3",
+        "Description": "This is a blend Steel material card. The values are at the low end of the spectrum. If you need a more precise material definition use the more specialised steel cards.",
+        "Father": "Metal",
+        "Name": "Steel-Generic",
+        "PoissonRatio": "0.3",
+        "ProductURL": "https://en.wikipedia.org/wiki/Steel",
+        "SpecificHeat": "500 J/kg/K",
+        "ThermalConductivity": "50 W/m/K",
+        "ThermalExpansionCoefficient": "0.000012 m/m/K",
+        "YoungsModulus": "200000 MPa"
+      },
+      "original_dimensioned_drawing": false,
+      "certified": false,
+      "limitations": [
+        "Elastic steel reference under prescribed -19 X displacement and self-weight; not a nonlinear collapse or strength-limit reference.",
+        "Source mesh coarse; no convergence study verified.",
+        "Explicit file/data license not found; retain publisher provenance.",
+        "Source FRD test_runs reference a different small mesh; kept as unpaired supporting files, not four extra cases.",
+        "Review native solver/result correspondence and mm/MPa conventions before certified admission."
+      ],
+      "supporting_frd": [
+        {
+          "path": "test-bench-frame/CCX Files/test_runs/Step_1/init_Step_1.frd",
+          "sha256": "11ae96d8b4402c4032b7887861e98cbc187784c4ae44ad158826acbeeb43e6d0",
+          "bytes": 49438
+        },
+        {
+          "path": "test-bench-frame/CCX Files/test_runs/Step_3/init_Step_3.frd",
+          "sha256": "f440fa29d8c8cc95ddadb3cfd3b3e8007fff7cb2bc43347b5bf812d4a4e2fb37",
+          "bytes": 49438
+        },
+        {
+          "path": "test-bench-frame/CCX Files/test_runs/Step_4/init_Step_4.frd",
+          "sha256": "dddc221b8bbd7376986113a6e3091273a8589c57fdaa4dbfd175b9fcc1198192",
+          "bytes": 49438
+        },
+        {
+          "path": "test-bench-frame/CCX Files/test_runs/Step_2/init_Step_2.frd",
+          "sha256": "156de743b77cdc0d9c1738128c50e5efce9fbd0cad05527d351fb6b10367ec3b",
+          "bytes": 49438
+        }
+      ]
+    },
+    {
+      "id": "kiteboard-composite",
+      "source": "https://ansyshelp.ansys.com/public/Views/Secured/corp/v261/en/acp_tut/acp_tut7_setup.html",
+      "reference_source": "https://ansyshelp.ansys.com/public/Views/Secured/corp/v261/en/acp_tut/acp_tut7_postprocess.html",
+      "cad_members": [
+        {
+          "path": "kiteboard/kiteboard.stp",
+          "archive_member": "Kiteboard_SOLVED_2025R1_files/import_files/kiteboard.stp",
+          "audit": {
+            "valid": true,
+            "solids": 0,
+            "faces": 3,
+            "bounds": [
+              -521.5680124257289,
+              521.568012164928,
+              -177.99903693614502,
+              177.99903693614505,
+              -1.0000013198228661e-07,
+              1.00000104369618e-07
+            ]
+          }
+        },
+        {
+          "path": "kiteboard/kiteboard_core.stp",
+          "archive_member": "Kiteboard_SOLVED_2025R1_files/user_files/kiteboard_core.stp",
+          "audit": {
+            "valid": true,
+            "solids": 1,
+            "faces": 46,
+            "bounds": [
+              -675.0000001,
+              675.0000001000001,
+              -200.0000001,
+              200.0000001,
+              0.5419999000000001,
+              18.0000001
+            ]
+          }
+        }
+      ],
+      "original_archive": "kiteboard/Workshop_7_Kiteboard_251.zip",
+      "solver": "Ansys Mechanical / ACP",
+      "reference_type": "Published FEM plots and scalar reference; no raw nodal fields",
+      "reference": {
+        "quantity": "Maximum inverse reserve factor",
+        "value": 1.0099,
+        "unit": "dimensionless",
+        "location": "official postprocessing tutorial section 7.5.3 step 6",
+        "score_status": "candidate scalar target; setup/version correspondence requires review"
+      },
+      "reference_images": [
+        {
+          "path": "kiteboard/acp_tut_tut-7_image_067.png",
+          "source": "https://ansyshelp.ansys.com/public/Views/Secured/corp/v261/en/acp_tut/graphics/acp_tut_tut-7_image_067.png",
+          "sha256": "294a1ac686600ddb3ba37bb04e376ea322a493beab56c944d1e932cb6498b05d"
+        },
+        {
+          "path": "kiteboard/acp_tut_tut-7_image_070.png",
+          "source": "https://ansyshelp.ansys.com/public/Views/Secured/corp/v261/en/acp_tut/graphics/acp_tut_tut-7_image_070.png",
+          "sha256": "0adbbac0c1d106e436fc2068881056e6c13d44973ee0ed75b31441b2c7178241"
+        },
+        {
+          "path": "kiteboard/acp_tut_tut-7_image_093.png",
+          "source": "https://ansyshelp.ansys.com/public/Views/Secured/corp/v261/en/acp_tut/graphics/acp_tut_tut-7_image_093.png",
+          "sha256": "1efb113af0b5def3cca4722ce3068203f1e55441a4eb3297954bc68a382e1ea6"
+        },
+        {
+          "path": "kiteboard/acp_tut_tut-7_image_093_01.png",
+          "source": "https://ansyshelp.ansys.com/public/Views/Secured/corp/v261/en/acp_tut/graphics/acp_tut_tut-7_image_093_01.png",
+          "sha256": "491f4e3e61d672b08aec419ea0462c5dd599848e2d86b5601252f99f7a60b5c4"
+        }
+      ],
+      "raw_fem_files_in_download": 0,
+      "original_dimensioned_drawing": false,
+      "certified": false,
+      "limitations": [
+        "Archive named SOLVED omits file.rst, solve.out and ds.dat; no raw numerical FEM field file downloaded.",
+        "Source scalar is from v261 documentation while linked archive is 2025R1; correspondence/tolerance requires verification.",
+        "Geometry includes shell surfaces and separate core; do not treat shell CAD as a closed solid automatically.",
+        "Requires Ansys ACP/Mechanical for full replay; no COMSOL dependency.",
+        "Copyrighted publisher tutorials retained as local research sources; no standalone dataset license asserted."
+      ]
+    }
+  ],
+  "held_leads": [
+    {
+      "title": "Bonded composite T-joint",
+      "source": "https://ansyshelp.ansys.com/public/Views/Secured/Doc_Assets/Static/Workshop_2_T_Joint_231.zip",
+      "archive": "cvpr2027/data/web-cad-fem-acp/Workshop_2_T_Joint_231.zip",
+      "status": "Downloaded and inventoried. No .rst/.rth saved numerical fields verified. Modeling completion is not solved FEM output; excluded from pair count."
+    },
+    {
+      "title": "Advanced sandwich panel",
+      "source": "https://ansyshelp.ansys.com/public/Views/Secured/Doc_Assets/Static/Workshop_4_Advanced_Sandwich_Panel_231.zip",
+      "archive": "cvpr2027/data/web-cad-fem-acp/Workshop_4_Advanced_Sandwich_Panel_231.zip",
+      "status": "Downloaded and inventoried. No .rst/.rth saved numerical fields verified. Modeling completion is not solved FEM output; excluded from pair count."
+    },
+    {
+      "title": "Composite solid extrusion",
+      "source": "https://ansyshelp.ansys.com/public/Views/Secured/Doc_Assets/Static/Workshop_5_Solid_Modeling_251.zip",
+      "archive": "cvpr2027/data/web-cad-fem-acp/Workshop_5_Solid_Modeling_251.zip",
+      "status": "Downloaded and inventoried. No .rst/.rth saved numerical fields verified. Modeling completion is not solved FEM output; excluded from pair count."
+    },
+    {
+      "title": "Composite cutoff-rule modeling",
+      "source": "https://ansyshelp.ansys.com/public/Views/Secured/Doc_Assets/Static/Workshop_6_Solid_Modeling_231.zip",
+      "archive": "cvpr2027/data/web-cad-fem-acp/Workshop_6_Solid_Modeling_231.zip",
+      "status": "Downloaded and inventoried. No .rst/.rth saved numerical fields verified. Modeling completion is not solved FEM output; excluded from pair count."
+    },
+    {
+      "title": "Fusion heat exchanger graphite-foam monoblock",
+      "source": "https://zenodo.org/records/3532908",
+      "status": "Published temperature-profile reference and hybrid FE mesh available, but no native CAD/BREP found in linked geometry record 3522319; not counted."
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+model2.Edit()
+template1 = GetTemplate(
+    TemplateName="Static Structural",
+    Solver="ANSYS")
+engineeringDataComponent1 = system2.GetComponent(Name="Engineering Data")
+geometryComponent1 = system2.GetComponent(Name="Geometry")
+modelComponent1 = system2.GetComponent(Name="Model")
+system3 = template1.CreateSystem(
+    Name="",
+    ComponentsToShare=[engineeringDataComponent1, geometryComponent1, modelComponent1],
+    Position="Right",
+    RelativeTo=system2)
+system3.Delete()
+system4 = template1.CreateSystem(
+    Name="",
+    ComponentsToShare=[engineeringDataComponent1, geometryComponent1, modelComponent1],
+    Position="Right",
+    RelativeTo=system2)
+system4.Delete()
+system5 = template1.CreateSystem(
+    Name="",
+    ComponentsToShare=[engineeringDataComponent1, geometryComponent1, modelComponent1],
+    Position="Right",
+    RelativeTo=system2)
+engineeringDataComponent2 = system5.GetComponent(Name="Engineering Data")
+geometryComponent2 = system5.GetComponent(Name="Geometry")
+modelComponent2 = system5.GetComponent(Name="Model")
+system6 = template1.CreateSystem(
+    Name="",
+    ComponentsToShare=[engineeringDataComponent2, geometryComponent2, modelComponent2],
+    Position="Right",
+    RelativeTo=system5)
+system6.Delete()
+system7 = template1.CreateSystem(
+    Name="",
+    ComponentsToShare=[engineeringDataComponent1, geometryComponent1, modelComponent1],
+    Position="Right",
+    RelativeTo=system2)
+engineeringDataComponent3 = system7.GetComponent(Name="Engineering Data")
+geometryComponent3 = system7.GetComponent(Name="Geometry")
+modelComponent3 = system7.GetComponent(Name="Model")
+system8 = template1.CreateSystem(
+    Name="",
+    ComponentsToShare=[engineeringDataComponent3, geometryComponent3, modelComponent3],
+    Position="Right",
+    RelativeTo=system7)
+system8.Delete()
+system9 = template1.CreateSystem(
+    Name="",
+    ComponentsToShare=[engineeringDataComponent1, geometryComponent1, modelComponent1],
+    Position="Right",
+    RelativeTo=system2)
+Save(Overwrite=True)

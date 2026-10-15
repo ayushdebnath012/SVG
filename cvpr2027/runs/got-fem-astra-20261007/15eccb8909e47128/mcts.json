@@ -1,0 +1,209 @@
+{
+ "id": "15eccb8909e471286ff034527d719e852b23a6b34ec312ded549f33c69bcfc56",
+ "source_fem": {
+  "ok": true,
+  "compliance": 1.8723322644882356e-07,
+  "components": 1,
+  "nodes": 2308
+ },
+ "nodes": [
+  {
+   "name": "vanilla",
+   "parent": null,
+   "visits": 2,
+   "value_sum": 2.0,
+   "eval": {
+    "gates": true,
+    "fem": {
+     "ok": true,
+     "compliance": 1.2120945126654436e-07,
+     "components": 1,
+     "nodes": 1959
+    },
+    "numbers_ok": null,
+    "changed": true,
+    "error": null,
+    "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(41.6, 43.7)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, -20.8), rotate=cq.Vector(0, 0, 0))\n            .sphere(43.7)\n    )\n)\nresult = result.cut(cq.Workplane('XY').cylinder(387.0,10.49))\nshow_object(result)\n"
+   }
+  },
+  {
+   "name": "alt1",
+   "parent": null,
+   "visits": 2,
+   "value_sum": 2.0,
+   "eval": {
+    "gates": true,
+    "fem": {
+     "ok": true,
+     "compliance": 1.1798260705059518e-07,
+     "components": 1,
+     "nodes": 1821
+    },
+    "numbers_ok": null,
+    "changed": true,
+    "error": null,
+    "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(41.6, 43.7)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, -20.8), rotate=cq.Vector(0, 0, 0))\n            .sphere(43.7)\n    )\n)\nresult = result.cut(cq.Workplane('XY').cylinder(387.0,10.49))\nresult = result.workplane(offset=20.8).split(keepBottom=True)\nshow_object(result)\n"
+   }
+  },
+  {
+   "name": "alt2",
+   "parent": null,
+   "visits": 1,
+   "value_sum": 0.0,
+   "eval": {
+    "gates": false,
+    "fem": {
+     "ok": false,
+     "error": "not executed"
+    },
+    "numbers_ok": null,
+    "changed": null,
+    "error": "TypeError: Workplane.sphere() got an unexpected keyword argument 'angleDegrees1'",
+    "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(41.6, 43.7)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, -20.8), rotate=cq.Vector(0, 0, 0))\n            .sphere(43.7, angleDegrees1=-90, angleDegrees2=0)\n    )\n)\nresult = result.cut(cq.Workplane('XY').cylinder(387.0,10.49))\nshow_object(result)\n"
+   }
+  },
+  {
+   "name": "alt3",
+   "parent": null,
+   "visits": 1,
+   "value_sum": 1.0,
+   "eval": {
+    "gates": true,
+    "fem": {
+     "ok": true,
+     "compliance": 1.1708997161347784e-07,
+     "components": 1,
+     "nodes": 2048
+    },
+    "numbers_ok": null,
+    "changed": true,
+    "error": null,
+    "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(41.6, 43.7)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, 20.8), rotate=cq.Vector(0, 0, 0))\n            .sphere(43.7)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, -20.8), rotate=cq.Vector(0, 0, 0))\n            .sphere(43.7)\n    )\n)\nresult = result.cut(cq.Workplane('XY').cylinder(387.0,10.49))\nresult = result.workplane(offset=20.8).split(keepBottom=True)\nshow_object(result)\n"
+   }
+  },
+  {
+   "name": "mcts1-diversify",
+   "parent": 0,
+   "visits": 1,
+   "value_sum": 1.0,
+   "eval": {
+    "gates": true,
+    "fem": {
+     "ok": true,
+     "compliance": 1.1648403571819015e-07,
+     "components": 1,
+     "nodes": 2041
+    },
+    "numbers_ok": null,
+    "changed": true,
+    "error": null,
+    "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(41.6, 43.7)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, 20.8), rotate=cq.Vector(0, 0, 0))\n            .sphere(43.7)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, -20.8), rotate=cq.Vector(0, 0, 0))\n            .sphere(43.7)\n    )\n)\nresult = result.cut(cq.Workplane('XY').cylinder(387.0,10.49))\nresult = result.cut(cq.Workplane('XY').box(200.0, 200.0, 100.0, centered=(True, True, False)).translate((0.0, 0.0, 20.8)))\nshow_object(result)\n",
+    "value": 1.0
+   }
+  },
+  {
+   "name": "mcts2-diversify",
+   "parent": 1,
+   "visits": 1,
+   "value_sum": 1.0,
+   "eval": {
+    "gates": true,
+    "fem": {
+     "ok": true,
+     "compliance": 1.1648403571818962e-07,
+     "components": 1,
+     "nodes": 2041
+    },
+    "numbers_ok": null,
+    "changed": true,
+    "error": null,
+    "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(41.6, 43.7)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, 20.8), rotate=cq.Vector(0, 0, 0))\n            .sphere(43.7)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, -20.8), rotate=cq.Vector(0, 0, 0))\n            .sphere(43.7)\n    )\n)\nresult = result.cut(cq.Workplane('XY').cylinder(387.0,10.49))\nresult = result.intersect(cq.Workplane('XY').box(200.0, 200.0, 120.8, centered=(True, True, False)).translate((0.0, 0.0, -100.0)))\nshow_object(result)\n",
+    "value": 1.0
+   }
+  }
+ ],
+ "candidates": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(41.6, 43.7)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, -20.8), rotate=cq.Vector(0, 0, 0))\n            .sphere(43.7)\n    )\n)\nresult = result.cut(cq.Workplane('XY').cylinder(387.0,10.49))\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.2120945126654436e-07,
+    "components": 1,
+    "nodes": 1959
+   },
+   "consensus": 1,
+   "numbers_ok": null,
+   "changed": true
+  },
+  {
+   "name": "alt1",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(41.6, 43.7)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, -20.8), rotate=cq.Vector(0, 0, 0))\n            .sphere(43.7)\n    )\n)\nresult = result.cut(cq.Workplane('XY').cylinder(387.0,10.49))\nresult = result.workplane(offset=20.8).split(keepBottom=True)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.1798260705059518e-07,
+    "components": 1,
+    "nodes": 1821
+   },
+   "consensus": 1,
+   "numbers_ok": null,
+   "changed": true
+  },
+  {
+   "name": "alt2",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(41.6, 43.7)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, -20.8), rotate=cq.Vector(0, 0, 0))\n            .sphere(43.7, angleDegrees1=-90, angleDegrees2=0)\n    )\n)\nresult = result.cut(cq.Workplane('XY').cylinder(387.0,10.49))\nshow_object(result)\n",
+   "gates": false,
+   "fem": {
+    "ok": false,
+    "error": "not executed"
+   },
+   "consensus": 0,
+   "numbers_ok": null,
+   "changed": null
+  },
+  {
+   "name": "alt3",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(41.6, 43.7)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, 20.8), rotate=cq.Vector(0, 0, 0))\n            .sphere(43.7)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, -20.8), rotate=cq.Vector(0, 0, 0))\n            .sphere(43.7)\n    )\n)\nresult = result.cut(cq.Workplane('XY').cylinder(387.0,10.49))\nresult = result.workplane(offset=20.8).split(keepBottom=True)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.1708997161347784e-07,
+    "components": 1,
+    "nodes": 2048
+   },
+   "consensus": 3,
+   "numbers_ok": null,
+   "changed": true
+  },
+  {
+   "name": "mcts1-diversify",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(41.6, 43.7)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, 20.8), rotate=cq.Vector(0, 0, 0))\n            .sphere(43.7)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, -20.8), rotate=cq.Vector(0, 0, 0))\n            .sphere(43.7)\n    )\n)\nresult = result.cut(cq.Workplane('XY').cylinder(387.0,10.49))\nresult = result.cut(cq.Workplane('XY').box(200.0, 200.0, 100.0, centered=(True, True, False)).translate((0.0, 0.0, 20.8)))\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.1648403571819015e-07,
+    "components": 1,
+    "nodes": 2041
+   },
+   "consensus": 3,
+   "numbers_ok": null,
+   "changed": true
+  },
+  {
+   "name": "mcts2-diversify",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(41.6, 43.7)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, 20.8), rotate=cq.Vector(0, 0, 0))\n            .sphere(43.7)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, -20.8), rotate=cq.Vector(0, 0, 0))\n            .sphere(43.7)\n    )\n)\nresult = result.cut(cq.Workplane('XY').cylinder(387.0,10.49))\nresult = result.intersect(cq.Workplane('XY').box(200.0, 200.0, 120.8, centered=(True, True, False)).translate((0.0, 0.0, -100.0)))\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.1648403571818962e-07,
+    "components": 1,
+    "nodes": 2041
+   },
+   "consensus": 3,
+   "numbers_ok": null,
+   "changed": true
+  }
+ ]
+}

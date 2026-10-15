@@ -1,0 +1,201 @@
+{
+ "id": "f40ef2d478cf1413031bead757b27bc154f5818c2488ca200eeecbb39a2438f2",
+ "source_fem": {
+  "ok": true,
+  "compliance": 8.039365616935858e-06,
+  "components": 1,
+  "nodes": 777
+ },
+ "nodes": [
+  {
+   "name": "vanilla",
+   "parent": null,
+   "visits": 2,
+   "value_sum": 1.0,
+   "eval": {
+    "gates": true,
+    "fem": {
+     "ok": true,
+     "compliance": 8.925820045441517e-06,
+     "components": 1,
+     "nodes": 866
+    },
+    "numbers_ok": true,
+    "changed": true,
+    "error": null,
+    "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .circle(1.25)\n    .extrude(6.0)\n    .faces(\">Z\").workplane()\n    .circle(3.25)\n    .extrude(1.5)\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 7.2), rotate=cq.Vector(0, 0, 0))\n            .box(5.4, 0.6, 1.4)\n    )\n)\nshow_object(result)\n"
+   }
+  },
+  {
+   "name": "alt1",
+   "parent": null,
+   "visits": 2,
+   "value_sum": 2.0,
+   "eval": {
+    "gates": true,
+    "fem": {
+     "ok": true,
+     "compliance": 8.922205932937693e-06,
+     "components": 1,
+     "nodes": 866
+    },
+    "numbers_ok": true,
+    "changed": true,
+    "error": null,
+    "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .circle(1.25)\n    .extrude(6.0)\n    .faces(\">Z\").workplane()\n    .circle(3.25)\n    .extrude(1.5)\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 7.2), rotate=cq.Vector(0, 0, 0))\n            .box(5.4, 0.6, 1.4)\n    )\n)\nshow_object(result)\n"
+   }
+  },
+  {
+   "name": "alt2",
+   "parent": null,
+   "visits": 1,
+   "value_sum": 0.0,
+   "eval": {
+    "gates": false,
+    "fem": {
+     "ok": false,
+     "error": "not executed"
+    },
+    "numbers_ok": null,
+    "changed": null,
+    "error": "SyntaxError: '(' was never closed (<unknown>, line 2)",
+    "code": null
+   }
+  },
+  {
+   "name": "alt3",
+   "parent": null,
+   "visits": 1,
+   "value_sum": 0.0,
+   "eval": {
+    "gates": false,
+    "fem": {
+     "ok": false,
+     "error": "not executed"
+    },
+    "numbers_ok": null,
+    "changed": null,
+    "error": "SyntaxError: '(' was never closed (<unknown>, line 2)",
+    "code": null
+   }
+  },
+  {
+   "name": "mcts1-diversify",
+   "parent": 0,
+   "visits": 1,
+   "value_sum": 0.0,
+   "eval": {
+    "gates": false,
+    "fem": {
+     "ok": false,
+     "error": "not executed"
+    },
+    "numbers_ok": null,
+    "changed": null,
+    "error": "SyntaxError: '(' was never closed (<unknown>, line 2)",
+    "code": null,
+    "value": 0.0
+   }
+  },
+  {
+   "name": "mcts2-diversify",
+   "parent": 1,
+   "visits": 1,
+   "value_sum": 1.0,
+   "eval": {
+    "gates": true,
+    "fem": {
+     "ok": true,
+     "compliance": 8.92772405912553e-06,
+     "components": 1,
+     "nodes": 857
+    },
+    "numbers_ok": true,
+    "changed": true,
+    "error": null,
+    "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .circle(1.25)\n    .extrude(6.0)\n    .faces(\">Z\").workplane()\n    .cylinder(1.5, 3.25, centered=(True, True, False))\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 7.2), rotate=cq.Vector(0, 0, 0))\n            .box(5.4, 0.6, 1.4)\n    )\n)\nshow_object(result)\n",
+    "value": 1.0
+   }
+  }
+ ],
+ "candidates": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .circle(1.25)\n    .extrude(6.0)\n    .faces(\">Z\").workplane()\n    .circle(3.25)\n    .extrude(1.5)\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 7.2), rotate=cq.Vector(0, 0, 0))\n            .box(5.4, 0.6, 1.4)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 8.925820045441517e-06,
+    "components": 1,
+    "nodes": 866
+   },
+   "consensus": 3,
+   "numbers_ok": true,
+   "changed": true
+  },
+  {
+   "name": "alt1",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .circle(1.25)\n    .extrude(6.0)\n    .faces(\">Z\").workplane()\n    .circle(3.25)\n    .extrude(1.5)\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 7.2), rotate=cq.Vector(0, 0, 0))\n            .box(5.4, 0.6, 1.4)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 8.922205932937693e-06,
+    "components": 1,
+    "nodes": 866
+   },
+   "consensus": 3,
+   "numbers_ok": true,
+   "changed": true
+  },
+  {
+   "name": "alt2",
+   "code": null,
+   "gates": false,
+   "fem": {
+    "ok": false,
+    "error": "not executed"
+   },
+   "consensus": 0,
+   "numbers_ok": null,
+   "changed": null
+  },
+  {
+   "name": "alt3",
+   "code": null,
+   "gates": false,
+   "fem": {
+    "ok": false,
+    "error": "not executed"
+   },
+   "consensus": 0,
+   "numbers_ok": null,
+   "changed": null
+  },
+  {
+   "name": "mcts1-diversify",
+   "code": null,
+   "gates": false,
+   "fem": {
+    "ok": false,
+    "error": "not executed"
+   },
+   "consensus": 0,
+   "numbers_ok": null,
+   "changed": null
+  },
+  {
+   "name": "mcts2-diversify",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .circle(1.25)\n    .extrude(6.0)\n    .faces(\">Z\").workplane()\n    .cylinder(1.5, 3.25, centered=(True, True, False))\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 7.2), rotate=cq.Vector(0, 0, 0))\n            .box(5.4, 0.6, 1.4)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 8.92772405912553e-06,
+    "components": 1,
+    "nodes": 857
+   },
+   "consensus": 3,
+   "numbers_ok": true,
+   "changed": true
+  }
+ ]
+}

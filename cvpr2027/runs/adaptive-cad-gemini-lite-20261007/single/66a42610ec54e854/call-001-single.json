@@ -1,0 +1,28 @@
+{
+ "kind": "single",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "You edit mechanical CAD. Return only JSON {\"edits\":[{\"start\":0,\"delete\":0,\"insert\":[\"replacement line\"]}]}. Indices are zero-based lines of the ORIGINAL input; operations must be ordered, nonoverlapping and in bounds. Preserve unrelated features. The supplied representation determines syntax. Return no explanation or invented physics results. Geometry execution and FEM checks are performed by external tools; never claim verification."
+   },
+   {
+    "role": "user",
+    "content": "Representation: cadquery\nOriginal CAD (line indices are implicit):\nimport cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(11.2, 22.7)\n    .faces(\">Z\").workplane()\n    .circle(9.2)\n    .extrude(24.1)\n)\nshow_object(result)Edit instruction:\nRotate the entire part by 60 degrees about the axis (1, 0, 1)."
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 8192
+ },
+ "usage": {
+  "completion_tokens": 112,
+  "prompt_tokens": 196,
+  "total_tokens": 308
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\"edits\":[{\"start\":1,\"delete\":1,\"insert\":[\"result = (\", \"    cq.Workplane(\\\"XY\\\")\", \"    .cylinder(11.2, 22.7)\", \"    .faces(\\\">Z\\\").workplane()\", \"    .circle(9.2)\", \"    .extrude(24.1)\", \"    .rotate((0, 0, 0), (1, 0, 1), 60)\", \")\"]}]}\n```"
+}

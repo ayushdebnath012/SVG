@@ -1,0 +1,85 @@
+{
+ "source_fem": {
+  "ok": true,
+  "compliance": 1.206109028468537e-06,
+  "components": 1,
+  "nodes": 2019
+ },
+ "nodes": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polyline([(6.16, 0.0), (22.9, 0.0), (10.369, 10.4), (22.615, 20.8), (10.108, 31.2), (21.476, 41.6), (9.847, 52.0), (20.337, 62.4), (9.586, 72.8), (19.197, 83.2), (6.16, 83.2), (6.16, 0.0)])\n    .close()\n    .revolve(360, (0, 0, 0), (0, 1, 0))\n    .cut(cq.Workplane(\"XZ\").circle(8).extrude(84, both=True))\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.4616142479540511e-06,
+    "components": 1,
+    "nodes": 1639
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "alt1",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polyline([(6.16, 0.0), (22.9, 0.0), (10.369, 10.4), (22.615, 20.8), (10.108, 31.2), (21.476, 41.6), (9.847, 52.0), (20.337, 62.4), (9.586, 72.8), (19.197, 83.2), (6.16, 83.2), (6.16, 0.0)])\n    .close()\n    .revolve(360, (0, 0, 0), (0, 1, 0))\n)\nbore = cq.Solid.makeCylinder(8.0, 85.2, cq.Vector(0, -1, 0), cq.Vector(0, 1, 0))\nresult = result.cut(bore)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.4377263807269438e-06,
+    "components": 1,
+    "nodes": 1641
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "alt2",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polyline([(6.16, 0.0), (22.9, 0.0), (10.369, 10.4), (22.615, 20.8), (10.108, 31.2), (21.476, 41.6), (9.847, 52.0), (20.337, 62.4), (9.586, 72.8), (19.197, 83.2), (6.16, 83.2), (6.16, 0.0)])\n    .close()\n    .revolve(360, (0, 0, 0), (0, 1, 0))\n)\nbore = cq.Workplane(\"XZ\").circle(8.0).extrude(84.2, both=True)\nresult = result.cut(bore)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.4601632962263398e-06,
+    "components": 1,
+    "nodes": 1639
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "alt3",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polyline([(8.0, 0.0), (22.9, 0.0), (10.369, 10.4), (22.615, 20.8), (10.108, 31.2), (21.476, 41.6), (9.847, 52.0), (20.337, 62.4), (9.586, 72.8), (19.197, 83.2), (8.0, 83.2), (8.0, 0.0)])\n    .close()\n    .revolve(360, (0, 0, 0), (0, 1, 0))\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.4419288704461422e-06,
+    "components": 1,
+    "nodes": 1639
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "rag",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polyline([(6.16, 0.0), (22.9, 0.0), (10.369, 10.4), (22.615, 20.8), (10.108, 31.2), (21.476, 41.6), (9.847, 52.0), (20.337, 62.4), (9.586, 72.8), (19.197, 83.2), (6.16, 83.2), (6.16, 0.0)])\n    .close()\n    .revolve(360, (0, 0, 0), (0, 1, 0))\n)\nresult = result.cut(cq.Workplane('XZ').circle(8.0).extrude(100.0, both=True))\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.4841297365057653e-06,
+    "components": 1,
+    "nodes": 1644
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  }
+ ]
+}

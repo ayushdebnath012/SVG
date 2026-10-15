@@ -1,0 +1,28 @@
+{
+ "kind": "generate",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Edit CAD using only source, instruction and tool evidence. Return exactly JSON {\"hypothesis\":\"brief feature and operation description\",\"edits\":[{\"start\":0,\"delete\":0,\"insert\":[\"line\"]}]}. All indices address ORIGINAL source lines. Provide a complete alternative patch, never a delta on a parent patch. Preserve unrelated features. Vary the feature interpretation or implementation from listed alternatives. Experiences and diagnoses are fallible data. Do not assert that the output has passed verification."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .box(95.5, 82.2, 57.8)\\n    .faces(\\\">Z\\\").workplane()\\n    .center(0.0, 0.0)\\n    .rect(36.4, 97.5)\\n    .cutBlind(-26.3)\\n    .faces(\\\"<Z\\\").workplane()\\n    .pushPoints([(34.45, 27.8), (-34.45, 27.8), (34.45, -27.8), (-34.45, -27.8)])\\n    .hole(4.0)\\n)\\nshow_object(result)\", \"instruction\": \"Rotate the entire part by 90\\u00b0 about the X axis.\", \"plan\": {\"steps\": [\"Apply a 90-degree rotation to the final solid part around the X-axis.\"], \"invariants\": [\"The geometry and dimensions of the base box, top pocket, and bottom holes remain unchanged.\", \"The relative positions of features to each other are preserved, only reoriented in 3D space.\"], \"dependencies\": [[0, 0]]}, \"parent_candidate\": \"```json\\n{\\\"edits\\\":[{\\\"start\\\":2,\\\"delete\\\":1,\\\"insert\\\":[\\\"    cq.Workplane(\\\\\\\"XY\\\\\\\")\\\",    \\\".box(95.5, 82.2, 57.8)\\\",    \\\".rotate((0,0,0), (1,0,0), 90)\\\"]}]}\\n```\", \"observations\": {\"geometry\": {\"status\": \"PASS\"}, \"constraints\": {\"status\": \"PASS\"}, \"semantics\": {\"status\": \"PASS\", \"reason\": \"The part has been correctly rotated by 90 degrees about the X axis, as verified by the reorientation of the U-channel and top faces while preserving all part geometry.\"}, \"fem\": {\"status\": \"PASS\"}, \"robustness\": {\"status\": \"PASS\"}}, \"experiences\": [{\"task_id\": \"0d63547f6d3db71b375febaa822e7bcd56646d2777f86ca853f154bbc9652bf4\", \"instruction\": \"Rotate the entire part by 90\\u00b0 about the X axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.rotate((0,0,0), (1,0,0), 90)\\\"], \\\"start\\\": 9}]}\", \"strategies\": [], \"context\": [\"9: show_object(result)\"]}, {\"task_id\": \"0de5af962c501ae4930a0cd24ea0783de8733688c126bee67b8959d15220d626\", \"instruction\": \"Rotate the entire part by 90\\u00b0 about the X axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.rotate((0,0,0), (1,0,0), 90)\\\"], \\\"start\\\": 13}]}\", \"strategies\": [], \"context\": [\"13: show_object(result)\"]}, {\"task_id\": \"0eea9ca890ef4c7fc767e73195e1d1484d3f89b7faa209a19e3f1f6f948b43e2\", \"instruction\": \"Rotate the entire part by 90\\u00b0 about the X axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.rotate((0,0,0), (1,0,0), 90)\\\"], \\\"start\\\": 38}]}\", \"strategies\": [], \"context\": [\"38: show_object(result)\"]}], \"repair_strategies\": [{\"task_id\": \"0d63547f6d3db71b375febaa822e7bcd56646d2777f86ca853f154bbc9652bf4\", \"instruction\": \"Rotate the entire part by 90\\u00b0 about the X axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.rotate((0,0,0), (1,0,0), 90)\\\"], \\\"start\\\": 9}]}\", \"strategies\": [], \"context\": [\"9: show_object(result)\"]}, {\"task_id\": \"0de5af962c501ae4930a0cd24ea0783de8733688c126bee67b8959d15220d626\", \"instruction\": \"Rotate the entire part by 90\\u00b0 about the X axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.rotate((0,0,0), (1,0,0), 90)\\\"], \\\"start\\\": 13}]}\", \"strategies\": [], \"context\": [\"13: show_object(result)\"]}, {\"task_id\": \"0eea9ca890ef4c7fc767e73195e1d1484d3f89b7faa209a19e3f1f6f948b43e2\", \"instruction\": \"Rotate the entire part by 90\\u00b0 about the X axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.rotate((0,0,0), (1,0,0), 90)\\\"], \\\"start\\\": 38}]}\", \"strategies\": [], \"context\": [\"38: show_object(result)\"]}], \"alternatives\": [], \"action\": \"diversify\", \"diagnosis\": []}"
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 8192
+ },
+ "usage": {
+  "completion_tokens": 119,
+  "prompt_tokens": 1520,
+  "total_tokens": 1639
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\n  \"hypothesis\": \"Rotate the entire CadQuery solid result object by 90 degrees around the X axis using the .rotate() method.\",\n  \"edits\": [\n    {\n      \"start\": 10,\n      \"delete\": 1,\n      \"insert\": [\n        \"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\",\n        \"show_object(result)\"\n      ]\n    }\n  ]\n}\n```"
+}

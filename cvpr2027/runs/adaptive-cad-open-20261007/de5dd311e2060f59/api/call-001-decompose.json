@@ -1,0 +1,34 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "Qwen/Qwen3.5-35B-A3B-FP8",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .polyline([[10.96, 10.96], [27.4, 10.96], [27.4, -10.96], [10.96, -10.96], [10.96, -27.4], [-10.96, -27.4], [-10.96, -10.96], [-27.4, -10.96], [-27.4, 10.96], [-10.96, 10.96], [-10.96, 27.4], [10.96, 27.4]])\\n    .close()\\n    .extrude(7.4)\\n)\\nshow_object(result)\", \"instruction\": \"Modify the original cross-shaped CAD part by replacing the four rectangular protrusions with semicircular rounded protrusions, where each arc has a diameter equal to the original protrusion width.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"64c68fb376a5cd44ddc08fa810318856f3ef75f166bd46c9b3a19e853605d1c8\", \"instruction\": \"Mirror the part across the YZ plane and union the mirrored copy translated -300 mm along X with the original to form a side-by-side pair.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.union(result.mirror(\\\\\\\"YZ\\\\\\\").translate((-300,0,0)))\\\"], \\\"start\\\": 9}]}\", \"strategies\": [], \"context\": [\"9: show_object(result)\"]}, {\"task_id\": \"0277130d993917ff92eea32a28c395ae4d3e98517ffbdd651d6ca4dbbddfbed8\", \"instruction\": \"Make a side-by-side pair of the part by copying it 25 mm along +X and uniting with the original.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.union(result.translate((25, 0, 0)))\\\"], \\\"start\\\": 16}]}\", \"strategies\": [], \"context\": [\"16: show_object(result)\"]}, {\"task_id\": \"2668b2d8fb1c040cbb741382fee06f9e04239ee8966d723d4ec920a6d8425044\", \"instruction\": \"Make a side-by-side pair of the part by copying it 40 mm along +Y and uniting with the original.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.union(result.translate((0, 40, 0)))\\\"], \\\"start\\\": 9}]}\", \"strategies\": [], \"context\": [\"9: show_object(result)\"]}]}"
+   }
+  ],
+  "temperature": 0.6,
+  "top_p": 0.95,
+  "top_k": 20,
+  "max_tokens": 8192
+ },
+ "usage": {
+  "prompt_tokens": 800,
+  "total_tokens": 6749,
+  "completion_tokens": 5949,
+  "prompt_tokens_details": null,
+  "completion_tokens_details": {
+   "reasoning_tokens": 5748
+  }
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "\n\n{\n  \"steps\": [\n    \"Define the central cross body using the original rectangular arm geometry\",\n    \"Define four semicircular protrusions at the extremities of the arms with diameter equal to the arm width\",\n    \"Union the central body and the semicircular protrusions to form the rounded cross profile\",\n    \"Extrude the combined profile to the original height of 7.4\"\n  ],\n  \"invariants\": [\n    \"Extrusion height remains 7.4\",\n    \"Central body dimensions (approx 21.92x21.92) are preserved\",\n    \"Arm extension length from center to cap start is preserved\",\n    \"Workplane orientation remains on the XY plane\"\n  ],\n  \"dependencies\": [\n    [0, 2],\n    [1, 2],\n    [2, 3]\n  ]\n}"
+}

@@ -1,0 +1,233 @@
+{
+  "units": "mm",
+  "ground": "base",
+  "parts": [
+    {
+      "name": "lower_left",
+      "step": "parts/lower_left.step",
+      "material": "S700MC",
+      "role": "arm"
+    },
+    {
+      "name": "lower_right",
+      "step": "parts/lower_right.step",
+      "material": "S700MC",
+      "role": "arm"
+    },
+    {
+      "name": "upper_left",
+      "step": "parts/upper_left.step",
+      "material": "S700MC",
+      "role": "arm"
+    },
+    {
+      "name": "upper_right",
+      "step": "parts/upper_right.step",
+      "material": "S700MC",
+      "role": "arm"
+    },
+    {
+      "name": "base",
+      "step": "parts/base.step",
+      "material": "S700MC",
+      "role": "base"
+    },
+    {
+      "name": "saddle",
+      "step": "parts/saddle.step",
+      "material": "S700MC",
+      "role": "saddle"
+    },
+    {
+      "name": "left_trunnion",
+      "step": "parts/left_trunnion.step",
+      "material": "S700MC",
+      "role": "trunnion"
+    },
+    {
+      "name": "right_trunnion",
+      "step": "parts/right_trunnion.step",
+      "material": "S700MC",
+      "role": "trunnion"
+    },
+    {
+      "name": "lead_screw",
+      "step": "parts/lead_screw.step",
+      "material": "12.9",
+      "role": "screw"
+    }
+  ],
+  "joints": [
+    {
+      "name": "lower_left_pivot_0",
+      "type": "revolute",
+      "parts": [
+        "lower_left",
+        "base"
+      ],
+      "origin": [
+        0,
+        -20.2,
+        17.0
+      ]
+    },
+    {
+      "name": "lower_left_pivot_1",
+      "type": "revolute",
+      "parts": [
+        "lower_left",
+        "left_trunnion"
+      ],
+      "origin": [
+        -191.83326093250878,
+        -20.2,
+        52.0
+      ]
+    },
+    {
+      "name": "lower_right_pivot_0",
+      "type": "revolute",
+      "parts": [
+        "lower_right",
+        "base"
+      ],
+      "origin": [
+        0,
+        20.2,
+        17.0
+      ]
+    },
+    {
+      "name": "lower_right_pivot_1",
+      "type": "revolute",
+      "parts": [
+        "lower_right",
+        "right_trunnion"
+      ],
+      "origin": [
+        191.83326093250878,
+        20.2,
+        52.0
+      ]
+    },
+    {
+      "name": "upper_left_pivot_0",
+      "type": "revolute",
+      "parts": [
+        "upper_left",
+        "left_trunnion"
+      ],
+      "origin": [
+        -191.83326093250878,
+        20.2,
+        52.0
+      ]
+    },
+    {
+      "name": "upper_left_pivot_1",
+      "type": "revolute",
+      "parts": [
+        "upper_left",
+        "saddle"
+      ],
+      "origin": [
+        0,
+        20.2,
+        87.0
+      ]
+    },
+    {
+      "name": "upper_right_pivot_0",
+      "type": "revolute",
+      "parts": [
+        "upper_right",
+        "right_trunnion"
+      ],
+      "origin": [
+        191.83326093250878,
+        -20.2,
+        52.0
+      ]
+    },
+    {
+      "name": "upper_right_pivot_1",
+      "type": "revolute",
+      "parts": [
+        "upper_right",
+        "saddle"
+      ],
+      "origin": [
+        0,
+        -20.2,
+        87.0
+      ]
+    },
+    {
+      "name": "level_saddle",
+      "type": "prismatic",
+      "parts": [
+        "base",
+        "saddle"
+      ],
+      "origin": [
+        0,
+        0,
+        17.0
+      ],
+      "axis": [
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "screw_retention",
+      "type": "fixed",
+      "parts": [
+        "left_trunnion",
+        "lead_screw"
+      ]
+    },
+    {
+      "name": "thread_translation",
+      "type": "prismatic",
+      "parts": [
+        "lead_screw",
+        "right_trunnion"
+      ],
+      "origin": [
+        191.83326093250878,
+        0,
+        52.0
+      ],
+      "axis": [
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "lead_screw_travel",
+      "type": "distance",
+      "parts": [
+        "left_trunnion",
+        "right_trunnion"
+      ],
+      "point_a": [
+        -191.83326093250878,
+        0,
+        52.0
+      ],
+      "point_b": [
+        191.83326093250878,
+        0,
+        52.0
+      ]
+    }
+  ],
+  "driver": "lead_screw_travel",
+  "driver_range_mm": [
+    383.66652186501756,
+    169.99705879808627
+  ]
+}

@@ -1,0 +1,100 @@
+# encoding: utf-8
+# 2024 R2
+SetScriptVersion(Version="24.2.133")
+system1 = GetSystem(Name="SYS")
+geometry1 = system1.GetContainer(ComponentName="Geometry")
+geometry1.Edit()
+Save(Overwrite=True)
+Archive(
+    FilePath="C:/Users/Administrator/Desktop/Ansys Projects/4/Bolted Nozzle Flange.wbpz",
+    IncludeExternalImportedFiles=True)
+template1 = GetTemplate(TemplateName="Geometry")
+system2 = template1.CreateSystem()
+system2.Delete()
+system3 = template1.CreateSystem(
+    Position="Right",
+    RelativeTo=system1)
+geometryComponent1 = system3.GetComponent(Name="Geometry")
+geometryComponent2 = system1.GetComponent(Name="Geometry")
+geometryComponent1.ReplaceWithShare(
+    TargetSystem=system3,
+    ComponentToShare=geometryComponent2,
+    SourceSystem=system1)
+geometryComponent1.DeleteShare(System=system3)
+geometry1.Exit()
+geometry2 = system3.GetContainer(ComponentName="Geometry")
+geometry2.Edit()
+geometry2.Exit()
+modelComponent1 = system1.GetComponent(Name="Model")
+modelComponent1.Refresh()
+model1 = system1.GetContainer(ComponentName="Model")
+model1.Edit()
+Save(Overwrite=True)
+Archive(
+    FilePath="C:/Users/Administrator/Desktop/Ansys Projects/4/Bolted Nozzle Flange.wbpz",
+    IncludeExternalImportedFiles=True)
+engineeringData1 = system1.GetContainer(ComponentName="Engineering Data")
+matl1 = engineeringData1.CreateMaterial(Name="300 series Stainless Steel")
+matlProp1 = matl1.CreateProperty(
+    Name="Elasticity",
+    Behavior="Isotropic",
+    Qualifiers={"Definition": "", "Behavior": "Isotropic"})
+unitSystem1 = SetProjectUnitSystem(UnitSystemName="US Engineering")
+matlProp1.SetData(
+    Index=-1,
+    Variables=["Young's Modulus"],
+    Values=[["29000000 [psi]"]])
+matlProp1.SetData(
+    Variables=["Poisson's Ratio"],
+    Values=[["0.27"]])
+favorites1 = EngData.LoadFavoriteItems()
+EngData.EnableFilter(Enable=False)
+matlProp2 = matl1.CreateProperty(
+    Name="Coefficient of Thermal Expansion",
+    Definition="Secant",
+    Behavior="Isotropic",
+    Qualifiers={"Definition": "Secant", "Behavior": "Isotropic"})
+matlProp2.SetVariableProperty(
+    SheetName="Coefficient of Thermal Expansion",
+    SheetQualifiers={"Definition": "Secant", "Behavior": "Isotropic"},
+    VariableName="Coefficient of Thermal Expansion",
+    Property="Unit",
+    Value="F^-1")
+matlProp2.SetData(
+    SheetName="Coefficient of Thermal Expansion",
+    SheetQualifiers={"Definition": "Secant", "Behavior": "Isotropic"},
+    Index=-1,
+    Variables=["Coefficient of Thermal Expansion"],
+    Values=[["1E-05 [F^-1]"]])
+matl2 = matl1.Duplicate(TargetContainer=engineeringData1)
+matl2.DisplayName = "A286 Steel"
+matlProp3 = matl2.GetProperty(Name="Coefficient of Thermal Expansion")
+matlProp3.SetData(
+    SheetName="Coefficient of Thermal Expansion",
+    SheetQualifiers={"Definition": "Secant", "Behavior": "Isotropic"},
+    Variables=["Coefficient of Thermal Expansion"],
+    Values=[["9.5E-06 [F^-1]"]])
+matlProp4 = matl2.GetProperty(Name="Elasticity")
+matlProp4.SetData(
+    Variables=["Poisson's Ratio"],
+    Values=[["0.31"]])
+modelComponent1.Refresh()
+geometry1.Edit()
+geometry1.Exit()
+Save(Overwrite=True)
+Archive(
+    FilePath="C:/Users/Administrator/Desktop/Ansys Projects/4/Bolted Nozzle Flange.wbpz",
+    IncludeExternalImportedFiles=True)
+Save(Overwrite=True)
+Archive(
+    FilePath="C:/Users/Administrator/Desktop/Ansys Projects/4/Bolted Nozzle Flange.wbpz",
+    IncludeExternalImportedFiles=True)
+Save(Overwrite=True)
+Archive(
+    FilePath="C:/Users/Administrator/Desktop/Ansys Projects/4/Bolted Nozzle Flange.wbpz",
+    IncludeExternalImportedFiles=True)
+Save(Overwrite=True)
+Archive(
+    FilePath="C:/Users/Administrator/Desktop/Ansys Projects/4/Bolted Nozzle Flange.wbpz",
+    IncludeExternalImportedFiles=True)
+Save(Overwrite=True)

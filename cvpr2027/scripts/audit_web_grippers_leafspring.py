@@ -1,0 +1,59 @@
+"""Inspect original web files only; no source scripts, CAD synthesis or FEM solve."""
+from pathlib import Path
+import json, csv, hashlib, zipfile
+import numpy as np, cadquery as cq, openpyxl
+from OCP.IGESControl import IGESControl_Reader
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d.art3d import Poly3DCollection
+D=Path('cvpr2027/data'); T=Path('cvpr2027/tmp/cad-fem-additional-systems-search')
+names=['web-cad-fem-pneumatic-gripper','web-cad-fem-finray-contact','web-cad-fem-leafspring-modal','web-cad-fem-bistable-gripper-held']
+def save(root,cat):
+ cat.update(revision=json.loads((root/'download-manifest.json').read_text())['revision'],license='No explicit data license located; retain locally for research, no public release.',certified_cases=0,generated_cad=0,new_solver_runs=0,model_calls=0,dimensioned_manufacturing_drawing_verified=False)
+ (root/'catalog.json').write_text(json.dumps(cat,indent=2,allow_nan=False)+'\n')
+def audit(s):
+ b=s.BoundingBox();return {'valid':s.isValid(),'solids':len(s.Solids()),'faces':len(s.Faces()),'envelope_mm':[b.xlen,b.ylen,b.zlen],'solid_volume_mm3':sum(x.Volume() for x in s.Solids())}
+def render(s,path):
+ v,tr=s.tessellate(.35);v=np.array([[a.x,a.y,a.z] for a in v]);fig=plt.figure(figsize=(7,3.8));ax=fig.add_subplot(111,projection='3d');ax.add_collection3d(Poly3DCollection(v[np.array(tr)],facecolors='#aecbd8',edgecolors='#5d7180',linewidths=.08));ax.auto_scale_xyz(*v.T);ax.set_box_aspect(np.maximum(np.ptp(v,axis=0),1));ax.view_init(25,-60);ax.set_axis_off();fig.tight_layout();fig.savefig(path,dpi=160);plt.close(fig)
+R=D/names[0]; cad={}
+for f in sorted((R/'cad').glob('*.STEP')):
+ s=cq.importers.importStep(str(f)).val();cad[str(f.relative_to(R))]=audit(s);assert s.isValid()
+ if f.name=='final_a2_gripper.STEP':render(s,T/'pneumatic-final-original-cad.png')
+rows=list(csv.DictReader((R/'results/summary.csv').open()));cols=list(rows[0])[1:];vals=np.array([[float(r[c]) for c in cols] for r in rows]);np.savez_compressed(R/'original-summary-values.npz',stage=np.array([r['stage'] for r in rows]),columns=np.array(cols),values=vals)
+w=openpyxl.load_workbook(R/'results/gripper_fea_results.xlsx',data_only=True);tables={}
+for sheet,ran in [('Load Study','A5:M21'),('Mesh Convergence','A3:O7'),('Final Validation','A4:E11'),('Comparison','A3:E10')]:
+ tables[sheet]={'range':ran,'cells':{c.coordinate:c.value for row in w[sheet][ran] for c in row if c.value is not None}}
+(R/'original-workbook-cell-references.json').write_text(json.dumps(tables,indent=2)+'\n')
+assert w['Final Validation']['C5'].value==float(rows[2]['actuator_reaction_force_N'])
+rst=json.loads((R/'saved-RST-metadata-only.json').read_text());mass=cad['cad/final_a2_jaw_plate.STEP']['solid_volume_mm3']*1240*1e-6
+save(R,{'collection':'Pneumatic multi-link gripper nonlinear contact / jaw redesign','source':'https://github.com/Tonylo-lab/pneumatic-gripper-fea','release':'https://github.com/Tonylo-lab/pneumatic-gripper-fea/releases/tag/v1.0','CAD':cad,'source_summary':rows,'summary_arrays':'original-summary-values.npz','workbook_exact_cells':'original-workbook-cell-references.json','raw_final_A2_candidate':1,'baseline_CAD_plot_candidate':1,'A1_partial_component_CAD_plot_candidate':1,'geometry_families':1,'saved_RST_metadata':rst,'final_jaw_mass_read_only_CAD_check_g':mass,'source_final_jaw_mass_g':31.198,'setup':{'units':'Original deck /units,MPA: mm, N, MPa','actuator_displacement_mm':-28.8,'large_deflection':True,'contact':'Rigid 150mm cube; frictionless jaw contact, revolute pivots and actuator translational joint','material':'Homogenized isotropic FDM PLA, E2000MPa, nu0.35, rho1240kg/m3'},'limits':['Only final A2 original saved RST is published; baseline and A1 tables/figures are not raw field archives.','A1 source has corrected block CAD, but no separate full A1 assembly STEP.','Baseline/final STEP assemblies each26solids; envelope differs15mm in Z, so source pose/revision needs matching.','Metadata only read from2026R1 RST:201463result nodes,145736elements,24static substeps. This is not baseline production mesh168478nodes.','Legacy0.56 decoder may misread2026R1 fields. No nodal fields decoded; compatible extraction and original-figure agreement pending.','Load Study GLS16:257.73N,48.026MPa,62.051MPa versus production256.67N,48.007MPa,57.06MPa. Preserve as distinct source scopes.','Reaction under prescribed closure is not a measured pneumatic actuator or gripping-force rating.','Baseline convergence is evidence for baseline; it does not certify final A2 contact/stress convergence.']})
+R=D/names[1];cad={}
+for f in sorted((R/'01_geometry/source').glob('*.step')):
+ s=cq.importers.importStep(str(f)).val();cad[str(f.relative_to(R))]=audit(s)
+ if f.name=='real15.step':assert s.isValid();render(s,T/'finray-original-finger-ball-cad.png')
+z=np.load(R/'05_results/processed/3finger_disp.npz',allow_pickle=False);u=z['disp'];ids=z['nnum'];assert u.shape==(44,26470,3) and np.isfinite(u).all();assert np.array_equal(ids,np.arange(1,26471));assert np.array_equal(z['lstep'],np.array([1,2,3,4]+[5]*40))
+nodeids=[];xyz=[];mode=False;skip=False
+for line in (R/'02_mesh/msh/real15_3finger_1.5mm.inp').open():
+ if line.startswith('NBLOCK'):mode=True;skip=True;continue
+ if mode and skip:skip=False;continue
+ if mode:
+  if line.startswith('N,R5.3'):break
+  nodeids.append(int(line[:9]));xyz.append([float(line[27:48]),float(line[48:69]),float(line[69:90])])
+assert np.array_equal(nodeids,np.arange(1,26470));np.savez_compressed(R/'original-mesh-node-map.npz',source_node_ids=np.array(nodeids),xyz_mm=np.array(xyz),source_rigid_ball_pilot_id=np.array(26470),source_rigid_ball_pilot_xyz_mm=np.array([40.,30.,-9.]))
+tables=[];byhash={}
+for f in sorted((R/'05_results/raw').glob('*.csv')):
+ rr=list(csv.DictReader(f.open(encoding='utf-8-sig')));hh=hashlib.sha256(f.read_bytes()).hexdigest();byhash.setdefault(hh,[]).append(f.name)
+ rec={'file':str(f.relative_to(R)),'rows':len(rr),'columns':list(rr[0]),'sha256':hh,'first_source_row':rr[0],'last_source_row':rr[-1]};tables.append(rec)
+ if f.name=='3finger_gravity_1.5mm_mu0.6_ramp.csv':gravity=min(rr,key=lambda r:abs(float(r['mass_kg'])-1));assert abs(float(gravity['mass_kg'])-1)<1e-10
+save(R,{'collection':'Fin Ray three-finger hyperelastic frictional contact','source':'https://github.com/9697psh/finray-gripper-fea','component_CAD':cad,'component_CAD_to_assembled_FEM_candidate':1,'full_three_finger_native_CAD_published':False,'mesh':'02_mesh/msh/real15_3finger_1.5mm.inp (ANSYS NBLOCK/EBLOCK despite inp extension)','mesh_node_map':'original-mesh-node-map.npz','mesh_nodes':26469,'mesh_solid_elements':95307,'original_displacement_cache':{'file':'05_results/processed/3finger_disp.npz','shape':list(u.shape),'finite':True,'max_abs_component_mm':float(abs(u).max()),'node_ids':{'min':int(ids.min()),'max':int(ids.max()),'extra_rigid_ball_pilot':26470},'load_steps':z['lstep'].tolist(),'static_labels':z['time'].tolist(),'physical_transient_seconds':False,'provenance':'Author extracted using native MAPDL POST1; original post/40_animate.py retained as text only.'},'CSV_tables':tables,'byte_unique_CSVs':len(byhash),'duplicate_groups':[x for x in byhash.values() if len(x)>1],'near_1kg_gravity_source_row':gravity,'setup':'Mooney-Rivlin c10=.385,c01=1.47MPa TPU; mixed-u/P SOLID285; augmented-Lagrange CONTA174, friction0.6, rigid truncated-sphere target, closures3/4/5/5.7mm then pull.','limits':['Source STEP provides one finger and truncated sphere, not complete native3finger assembly. Original assembled mesh supplied; exact component/rotation mapping pending.','finray_basic.step independently invalid overall and held; real15 andreal25 valid.','Twelve CSV names contain byte-identical duplicates; filename tilt10 is identical to nominal gravity ramp. Do not count as an independently solved tilt case.','Original cache covers closing and prescribed-pull case_3finger, not automatically gravity-ramp load cases.','No original RST or full nodal stress array published; CSV stress maxima are separate summaries.','No self-contact, mesh-dependent contact pressure, no reproduction of measured~1kg release. Holding>3.2kg is model outcome, not validated safe capacity.','Gravity-Y and tip+Y pull differ strongly. Do not combine directions or source early conclusions.','Author warns ansys-mapdl-reader0.56 misreads2026R1 fields. Source cache used unchanged; no legacy re-extraction or local solve.']})
+R=D/names[2];ig=IGESControl_Reader();assert ig.ReadFile(str(R/'leafspring.igs'))==1;ig.TransferRoots();s=cq.Shape.cast(ig.OneShape());cad=audit(s);assert cad['valid'] and cad['solids']==0
+with zipfile.ZipFile(R/'MECHANICAL VIBRATION.pptx') as zz:
+ for n in zz.namelist():
+  if n.startswith('ppt/media/'):
+   f=R/'original-presentation-evidence'/Path(n).name;f.parent.mkdir(exist_ok=True);f.write_bytes(zz.read(n))
+save(R,{'collection':'Curved multi-leaf spring modal source; geometry/material matching held','source':'https://github.com/Nihal606/Vibration-Project','original_CAD':'leafspring.igs','CAD_inspection':cad,'surface_CAD_plot_reference_candidate':1,'original_screenshot_frequency_reference':{'file':'original-presentation-evidence/image5.png','frequencies_Hz':[40.104,429.45,1388.6,1871.9,2922.3,4821.3],'material_configuration':'Unassigned; no claim it matches steel/composite comparison table','units':'Hz; modal displacement normalization-dependent, excluded as static displacement'},'auxiliary_comparison_table_held':{'file':'original-presentation-evidence/image16.png','Steel_Hz':[65.479,79.548,182.93,357.79,464.88,499.05],'CarbonGlass_Hz':[113.39,137.61,316.71,619.17,804.07,864.24],'Aluminium_Hz':[63.276,76.34,176.83,344.11,445.86,482.04],'Kevlar_Hz':[91.469,96.297,253.86,482.93,643.85,712.25]},'limits':['IGES is valid16face surface, no solid;527.5mm envelope versus1020mm full-spring presentation length suggests half/full matching required.','Six screenshot modal frequencies conflict with24material-comparison values; configuration/property/source mapping unresolved.','Rayleigh-Ritz theoretical validation is analytical data, not FEM.','Source WBPJ references project dependencies but no associated saved RST archive uploaded.','Original CAD view and schematic are not a verified dimensioned manufacturing drawing.','Moderate curved spring geometry; do not advertise as extremely complex assembly.']})
+R=D/names[3];inv=[json.loads(p.read_text()) for p in R.glob('*-archive-inventory.json')];assert len(inv)==5;assert not any(x['member'].lower().endswith(('.rst','.rth')) for a in inv for x in a)
+save(R,{'collection':'Bistable gripper CAD and setup-only archives held','source':'https://github.com/tomraven1/ansysCAD_bistable_gripper','native_CAD_files':[str(x.relative_to(R)) for x in R.iterdir() if x.suffix.lower() in ['.step','.sldprt']],'setup_archives':5,'paired_FEM_candidates':0,'reason':'Five WBPZ inventories contain model/setup databases and material information, but no located RST/RTH, solver logs, numerical histories or existing result figures. Mechdb presence alone does not prove available numerical FEM reference.'})
+P=D/'web-complex-fem/selected-dataset.json';j=json.loads(P.read_text());j['grippers_leafspring_web_extension']={'catalogs':[str(D/n/'catalog.json') for n in names],'pdf':'cvpr2027/output/pdf/web-cad-fem-grippers-leafspring.pdf','zip':'cvpr2027/output/datasets/web-cad-fem-grippers-leafspring.zip','CAD_FEM_source_projects':3,'final_gripper_raw_result_candidates':1,'baseline_gripper_CAD_plot_candidates':1,'A1_partial_component_plot_candidate':1,'FinRay_component_CAD_cache_candidate':1,'leafspring_surface_CAD_plot_candidate_held':1,'bistable_setup_only_sources_excluded':1,'new_verified_dimensioned_drawing_files':0,'certified_cases':0};P.write_text(json.dumps(j,indent=2)+'\n')
+print('Catalogs and master updated; no new CAD/solve/model call',flush=True)

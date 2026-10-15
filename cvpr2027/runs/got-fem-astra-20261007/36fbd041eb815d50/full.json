@@ -1,0 +1,83 @@
+{
+ "source_fem": {
+  "ok": true,
+  "compliance": 5.97219451493217e-08,
+  "components": 1,
+  "nodes": 25185
+ },
+ "nodes": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(125.1, 60.7, 71.5)\n    .faces(\">Z\")\n    .fillet(1.9)\n    .faces(\">Z\").workplane()\n    .center(0.0, 0.0)\n    .rect(37.8, 127.1)\n    .cutBlind(-29.3)\n    .faces(\"<Z\").workplane()\n    .pushPoints([(50.55, 18.35), (-50.55, 18.35), (50.55, -18.35), (-50.55, -18.35)])\n    .hole(6.2)\n    .faces(\">Y\").workplane()\n    .pushPoints([(31.275, 23.75), (-31.275, 23.75)])\n    .hole(3.5, depth=11.9)\n    .edges(\"|Z\")\n    .fillet(0.8)\n    .faces(\">Z\").faces(\">X\")\n    .workplane(centerOption=\"CenterOfMass\")\n    .circle(15.0)\n    .extrude(14.0)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 2.5469201330069835e-07,
+    "components": 1,
+    "nodes": 21354
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "alt1",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(125.1, 60.7, 71.5)\n    .faces(\">Z\")\n    .fillet(1.9)\n    .faces(\">Z\").workplane()\n    .center(0.0, 0.0)\n    .rect(37.8, 127.1)\n    .cutBlind(-29.3)\n    .faces(\"<Z\").workplane()\n    .pushPoints([(50.55, 18.35), (-50.55, 18.35), (50.55, -18.35), (-50.55, -18.35)])\n    .hole(6.2)\n    .faces(\">Y\").workplane()\n    .pushPoints([(31.275, 23.75), (-31.275, 23.75)])\n    .hole(3.5, depth=11.9)\n    .edges(\"|Z\")\n    .fillet(0.8)\n)\nresult = result.union(\n    cq.Workplane(\"XY\").workplane(offset=35.75)\n    .pushPoints([(-40.725, 0.0), (40.725, 0.0)])\n    .circle(15.0).extrude(14.0)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.283255520416776e-07,
+    "components": 1,
+    "nodes": 20097
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 3,
+   "robustness": 0.5
+  },
+  {
+   "name": "alt2",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(125.1, 60.7, 71.5)\n    .faces(\">Z\")\n    .fillet(1.9)\n    .faces(\">Z\").workplane()\n    .center(0.0, 0.0)\n    .rect(37.8, 127.1)\n    .cutBlind(-29.3)\n    .faces(\"<Z\").workplane()\n    .pushPoints([(50.55, 18.35), (-50.55, 18.35), (50.55, -18.35), (-50.55, -18.35)])\n    .hole(6.2)\n    .faces(\">Y\").workplane()\n    .pushPoints([(31.275, 23.75), (-31.275, 23.75)])\n    .hole(3.5, depth=11.9)\n    .edges(\"|Z\")\n    .fillet(0.8)\n)\nresult = result.union(\n    cq.Workplane(\"XY\").workplane(offset=35.75)\n    .center(40.725, 0.0)\n    .circle(15.0).extrude(14.0)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 2.565344101232076e-07,
+    "components": 1,
+    "nodes": 21148
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 2,
+   "robustness": 0.5
+  },
+  {
+   "name": "alt3",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(125.1, 60.7, 71.5)\n    .faces(\">Z\")\n    .fillet(1.9)\n    .faces(\">Z\").workplane()\n    .center(0.0, 0.0)\n    .rect(37.8, 127.1)\n    .cutBlind(-29.3)\n    .faces(\"<Z\").workplane()\n    .pushPoints([(50.55, 18.35), (-50.55, 18.35), (50.55, -18.35), (-50.55, -18.35)])\n    .hole(6.2)\n    .faces(\">Y\").workplane()\n    .pushPoints([(31.275, 23.75), (-31.275, 23.75)])\n    .hole(3.5, depth=11.9)\n    .edges(\"|Z\")\n    .fillet(0.8)\n)\nresult = result.union(\n    cq.Workplane(\"XY\").workplane(offset=35.75)\n    .center(-40.725, 0.0)\n    .circle(15.0).extrude(14.0)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 2.5805806062516667e-07,
+    "components": 1,
+    "nodes": 21432
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 1,
+   "robustness": 0.5
+  },
+  {
+   "name": "rag",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(125.1, 60.7, 71.5)\n    .faces(\">Z\")\n    .fillet(1.9)\n    .faces(\">Z\").workplane()\n    .center(0.0, 0.0)\n    .rect(37.8, 127.1)\n    .cutBlind(-29.3)\n    .faces(\"<Z\").workplane()\n    .pushPoints([(50.55, 18.35), (-50.55, 18.35), (50.55, -18.35), (-50.55, -18.35)])\n    .hole(6.2)\n    .faces(\">Y\").workplane()\n    .pushPoints([(31.275, 23.75), (-31.275, 23.75)])\n    .hole(3.5, depth=11.9)\n    .edges(\"|Z\")\n    .fillet(0.8)\n)\nresult = result.union(\n    cq.Workplane('XY')\n    .workplane(offset=35.75)\n    .circle(15.0)\n    .extrude(14.0)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": false,
+    "error": "ValueError: Unanchored disconnected component"
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": null,
+   "robustness": null
+  }
+ ]
+}

@@ -1,0 +1,101 @@
+{
+ "source_fem": {
+  "ok": true,
+  "compliance": 3.4364097483256347e-07,
+  "components": 1,
+  "nodes": 563
+ },
+ "nodes": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .transformed(offset=cq.Vector(35.0, 0, -1.5), rotate=cq.Vector(0, 0, 0))\n    .rect(70.0, 16.0)\n    .extrude(3.0)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(70.0, 0, 0), rotate=cq.Vector(0, 90, 0))\n            .rect(3.0, 16.0)\n            .transformed(offset=cq.Vector(0, 0, 10.2), rotate=cq.Vector(0, 0, 90))\n            .rect(3.0, 16.0)\n            .loft(combine=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(17.5, 0, -1.7), rotate=cq.Vector(0, 0, 0))\n            .circle(2.5)\n            .extrude(3.4)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(52.5, 0, -1.7), rotate=cq.Vector(0, 0, 0))\n            .circle(2.5)\n            .extrude(3.4)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": false,
+    "error": "ValueError: Insufficient support or loaded facets"
+   },
+   "numbers_ok": null,
+   "changed": true,
+   "cluster": null,
+   "robustness": null
+  },
+  {
+   "name": "alt1",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .transformed(offset=cq.Vector(35.0, 0, -1.5), rotate=cq.Vector(0, 0, 0))\n    .rect(70.0, 16.0)\n    .extrude(3.0)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(70.0, 0, 0), rotate=cq.Vector(0, 90, 0))\n            .rect(3.0, 16.0)\n            .transformed(offset=cq.Vector(0, 0, 10.2), rotate=cq.Vector(0, 0, 90))\n            .rect(3.0, 16.0)\n            .loft(combine=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(17.5, 0, -1.7), rotate=cq.Vector(0, 0, 0))\n            .circle(2.5)\n            .extrude(3.4)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(52.5, 0, -1.7), rotate=cq.Vector(0, 0, 0))\n            .circle(2.5)\n            .extrude(3.4)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": false,
+    "error": "ValueError: Insufficient support or loaded facets"
+   },
+   "numbers_ok": null,
+   "changed": true,
+   "cluster": null,
+   "robustness": null
+  },
+  {
+   "name": "alt2",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .transformed(offset=cq.Vector(35.0, 0, -1.5), rotate=cq.Vector(0, 0, 0))\n    .rect(70.0, 16.0)\n    .extrude(3.0)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(70.0, 0, 0), rotate=cq.Vector(0, 90, 0))\n            .rect(3.0, 16.0)\n            .transformed(offset=cq.Vector(0, 0, 10.2), rotate=cq.Vector(0, 0, 90))\n            .rect(3.0, 16.0)\n            .loft(combine=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .workplane(offset=-1.7)\n            .pushPoints([(17.5, 0), (52.5, 0)])\n            .circle(2.5)\n            .extrude(3.4)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": false,
+    "error": "ValueError: Insufficient support or loaded facets"
+   },
+   "numbers_ok": null,
+   "changed": true,
+   "cluster": null,
+   "robustness": null
+  },
+  {
+   "name": "alt3",
+   "code": "import cadquery as cq\nfirst_flange = (\n    cq.Workplane(\"XY\")\n    .transformed(offset=cq.Vector(35.0, 0, -1.5), rotate=cq.Vector(0, 0, 0))\n    .rect(70.0, 16.0)\n    .extrude(3.0)\n    .cut(\n        cq.Workplane(\"XY\")\n        .workplane(offset=-1.7)\n        .pushPoints([(17.5, 0), (52.5, 0)])\n        .circle(2.5)\n        .extrude(3.4)\n    )\n)\ntwisted_web = (\n    cq.Workplane(\"XY\")\n    .transformed(offset=cq.Vector(70.0, 0, 0), rotate=cq.Vector(0, 90, 0))\n    .rect(3.0, 16.0)\n    .transformed(offset=cq.Vector(0, 0, 10.2), rotate=cq.Vector(0, 0, 90))\n    .rect(3.0, 16.0)\n    .loft(combine=True)\n)\nresult = first_flange.union(twisted_web)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": false,
+    "error": "ValueError: Insufficient support or loaded facets"
+   },
+   "numbers_ok": null,
+   "changed": true,
+   "cluster": null,
+   "robustness": null
+  },
+  {
+   "name": "mcts1-refine",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .transformed(offset=cq.Vector(35.0, 0, -1.5), rotate=cq.Vector(0, 0, 0))\n    .rect(70.0, 16.0)\n    .extrude(3.0)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(70.0, 0, 0), rotate=cq.Vector(0, 90, 0))\n            .rect(3.0, 16.0)\n            .transformed(offset=cq.Vector(0, 0, 10.2), rotate=cq.Vector(0, 0, 90))\n            .rect(3.0, 16.0)\n            .loft(combine=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(17.5, 0, -1.7), rotate=cq.Vector(0, 0, 0))\n            .circle(2.5)\n            .extrude(3.4)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(52.5, 0, -1.7), rotate=cq.Vector(0, 0, 0))\n            .circle(2.5)\n            .extrude(3.4)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": false,
+    "error": "ValueError: Insufficient support or loaded facets"
+   },
+   "numbers_ok": null,
+   "changed": true,
+   "cluster": null,
+   "robustness": null
+  },
+  {
+   "name": "mcts2-refine",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .transformed(offset=cq.Vector(35.0, 0, -1.5), rotate=cq.Vector(0, 0, 0))\n    .rect(70.0, 16.0)\n    .extrude(3.0)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(70.0, 0, 0), rotate=cq.Vector(0, 90, 0))\n            .rect(3.0, 16.0)\n            .transformed(offset=cq.Vector(0, 0, 10.2), rotate=cq.Vector(0, 0, 90))\n            .rect(3.0, 16.0)\n            .loft(combine=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(17.5, 0, -1.7), rotate=cq.Vector(0, 0, 0))\n            .circle(2.5)\n            .extrude(3.4)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(52.5, 0, -1.7), rotate=cq.Vector(0, 0, 0))\n            .circle(2.5)\n            .extrude(3.4)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": false,
+    "error": "ValueError: Insufficient support or loaded facets"
+   },
+   "numbers_ok": null,
+   "changed": true,
+   "cluster": null,
+   "robustness": null
+  },
+  {
+   "name": "rag",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .transformed(offset=cq.Vector(35.0, 0, -1.5), rotate=cq.Vector(0, 0, 0))\n    .rect(70.0, 16.0)\n    .extrude(3.0)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(70.0, 0, 0), rotate=cq.Vector(0, 90, 0))\n            .rect(3.0, 16.0)\n            .transformed(offset=cq.Vector(0, 0, 10.2), rotate=cq.Vector(0, 0, 90))\n            .rect(3.0, 16.0)\n            .loft(combine=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(17.5, 0, -1.7), rotate=cq.Vector(0, 0, 0))\n            .circle(2.5)\n            .extrude(3.4)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(52.5, 0, -1.7), rotate=cq.Vector(0, 0, 0))\n            .circle(2.5)\n            .extrude(3.4)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": false,
+    "error": "ValueError: Insufficient support or loaded facets"
+   },
+   "numbers_ok": null,
+   "changed": true,
+   "cluster": null,
+   "robustness": null
+  }
+ ]
+}

@@ -1,0 +1,796 @@
+{
+ "task_id": "9b5dda464d457ab1bff1a73d39aecaa9d3c85bb31b616dd4803266fcd66cdc99",
+ "status": "PASS",
+ "prediction": "{\"edits\": [{\"delete\": 1, \"insert\": [\"            .sphere(6.0)\"], \"start\": 8}]}",
+ "selected_node": 1,
+ "bank": [
+  1,
+  2
+ ],
+ "pareto": [
+  1,
+  2
+ ],
+ "stop": "expansion_limit",
+ "nodes": [
+  {
+   "id": 0,
+   "candidate": "\n\n{\"edits\":[{\"start\":8,\"delete\":1,\"insert\":[\"            .sphere(40.0)\"]}]}",
+   "depth": 0,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 255582.57310632904,
+       "area": 26106.19298297468,
+       "solids": 1,
+       "faces": 7,
+       "bbox_x": 80.0,
+       "bbox_y": 80.0,
+       "bbox_z": 80.0
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "FAIL",
+      "confidence": 0.95,
+      "reason": "The edited part shows a large sphere with no visible shank, violating the instruction that the shank should remain unchanged.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-00.png"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.95,
+     0.0,
+     -2.0
+    ],
+    "score": 0.948,
+    "diagnosis": [
+     {
+      "stage": "semantics",
+      "status": "FAIL",
+      "confidence": 0.95,
+      "reason": "The edited part shows a large sphere with no visible shank, violating the instruction that the shank should remain unchanged.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-00.png"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 3,
+   "visits": 4,
+   "final": null,
+   "edges": [
+    0
+   ]
+  },
+  {
+   "id": 1,
+   "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"            .sphere(6.0)\"], \"start\": 8}]}",
+   "depth": 1,
+   "verdict": {
+    "status": "PASS",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 935.5212627443395,
+       "area": 690.2393219202138,
+       "solids": 2,
+       "faces": 5,
+       "bbox_x": 12.0,
+       "bbox_y": 12.0,
+       "bbox_z": 26.0
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 0.95,
+      "reason": "The edited part shows a significantly larger spherical head that appears to have a diameter roughly twice that of the shank cylinder, consistent with the instruction to set the head radius to twice the shank radius, while the shank dimensions below remain unchanged.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-01.png"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 1.005
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 1.005
+       }
+      ]
+     }
+    },
+    "objectives": [
+     0.95,
+     1.0,
+     -2.0
+    ],
+    "score": 2.048,
+    "diagnosis": [],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 1,
+   "visits": 4,
+   "final": {
+    "status": "PASS",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 935.5212627443395,
+       "area": 690.2393219202138,
+       "solids": 2,
+       "faces": 5,
+       "bbox_x": 12.0,
+       "bbox_y": 12.0,
+       "bbox_z": 26.0
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 0.95,
+      "reason": "The edited part shows a significantly larger spherical head that appears to have a diameter roughly twice that of the shank cylinder, consistent with the instruction to set the head radius to twice the shank radius, while the shank dimensions below remain unchanged.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-01.png"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 0.995
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 0.995
+       }
+      ]
+     }
+    },
+    "objectives": [
+     0.95,
+     1.0,
+     -2.0
+    ],
+    "score": 2.048,
+    "diagnosis": [],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "final"
+   },
+   "edges": [
+    1
+   ]
+  },
+  {
+   "id": 2,
+   "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"            .sphere(6.0)\"], \"start\": 8}]}",
+   "depth": 2,
+   "verdict": {
+    "status": "PASS",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 935.5212627443395,
+       "area": 690.2393219202138,
+       "solids": 2,
+       "faces": 5,
+       "bbox_x": 12.0,
+       "bbox_y": 12.0,
+       "bbox_z": 26.0
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 0.95,
+      "reason": "The edited part shows a significantly larger spherical head that appears to have a diameter roughly twice that of the shank cylinder, consistent with the instruction to set the head radius to twice the shank radius, while the shank dimensions below remain unchanged.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-01.png"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 1.005
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 1.005
+       }
+      ]
+     }
+    },
+    "objectives": [
+     0.95,
+     1.0,
+     -2.0
+    ],
+    "score": 2.048,
+    "diagnosis": [],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 0,
+   "visits": 1,
+   "final": {
+    "status": "PASS",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 935.5212627443395,
+       "area": 690.2393219202138,
+       "solids": 2,
+       "faces": 5,
+       "bbox_x": 12.0,
+       "bbox_y": 12.0,
+       "bbox_z": 26.0
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 0.95,
+      "reason": "The edited part shows a significantly larger spherical head that appears to have a diameter roughly twice that of the shank cylinder, consistent with the instruction to set the head radius to twice the shank radius, while the shank dimensions below remain unchanged.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-01.png"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 0.995
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 0.995
+       }
+      ]
+     }
+    },
+    "objectives": [
+     0.95,
+     1.0,
+     -2.0
+    ],
+    "score": 2.048,
+    "diagnosis": [],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "final"
+   },
+   "edges": []
+  }
+ ],
+ "edges": [
+  {
+   "parent": 0,
+   "child": 1,
+   "visits": 4,
+   "total": 8.192
+  },
+  {
+   "parent": 1,
+   "child": 2,
+   "visits": 1,
+   "total": 2.048
+  }
+ ],
+ "events": [
+  {
+   "event": "decompose",
+   "plan": {
+    "steps": [
+     "Extract shank cylinder radius from cylinder(20.0, 3.0) definition",
+     "Calculate new head sphere radius as 2 * shank radius",
+     "Update sphere radius parameter in union operation to calculated value"
+    ],
+    "invariants": [
+     "Shank cylinder radius remains 3.0",
+     "Shank cylinder height (length) remains 20.0",
+     "Shank position offset remains (0, 0, 10)",
+     "Chamfer cut box dimensions remain (50, 50, 5)",
+     "Chamfer cut position offset remains (0, 0, 16.8)"
+    ],
+    "dependencies": [
+     [
+      1,
+      0
+     ],
+     [
+      2,
+      1
+     ]
+    ]
+   },
+   "memory_version": "00cd7d2e75b3e4924430c362612fe8873652950008e8f0cb69e703582efa60ee",
+   "retrieved": [
+    {
+     "task_id": "266be1f42794bfd7997f7e123d9a826c5cadb3df0c637b920e884c50189fd541",
+     "instruction": "Set the cylinder length equal to twelve times the cylinder radius; the radius and chamfer stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .cylinder(60.0, 5.0)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .cylinder(40.0, 5.0)"
+     ]
+    },
+    {
+     "task_id": "aeba1116e1c972e00b1001d58f707d9d8f9983f919feef3ace1fb96b1ade81e3",
+     "instruction": "Set the eye torus major radius equal to twice the head radius; the head, neck, shank, and torus minor radius stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .union(cq.Workplane(\\\"XY\\\").newObject([cq.Solid.makeTorus(20.0, 4.0, cq.Vector(0, 0, 18.0), cq.Vector(0, 1, 0))]))\"], \"start\": 19}]}",
+     "strategies": [],
+     "context": [
+      "19:     .union(cq.Workplane(\"XY\").newObject([cq.Solid.makeTorus(14.0, 4.0, cq.Vector(0, 0, 18.0), cq.Vector(0, 1, 0))]))"
+     ]
+    },
+    {
+     "task_id": "64028bb82f4fc33b27e62d98abf31a60452821a9de594541604cb24b3a0d6e41",
+     "instruction": "Set the shaft length equal to three times the head across-corners size; the shaft radius and head dimensions stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .extrude(58.89)\"], \"start\": 4}]}",
+     "strategies": [],
+     "context": [
+      "4:     .extrude(90.0)"
+     ]
+    }
+   ]
+  },
+  {
+   "event": "initial_state",
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 495.11186061309786,
+       "area": 435.1419984487223,
+       "solids": 2,
+       "faces": 5,
+       "bbox_x": 6.4,
+       "bbox_y": 6.4,
+       "bbox_z": 23.2
+      }
+     },
+     "constraints": {
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -0.0
+    ],
+    "score": 0.0,
+    "diagnosis": [
+     {
+      "stage": "constraints",
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "initial"
+   }
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "semantics",
+     "status": "FAIL",
+     "confidence": 0.95,
+     "reason": "The edited part shows a large sphere with no visible shank, violating the instruction that the shank should remain unchanged.",
+     "basis": "Astra rendered-view judgement",
+     "image": "semantic-00.png"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "No perturbation contract supplied"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "aeba1116e1c972e00b1001d58f707d9d8f9983f919feef3ace1fb96b1ade81e3",
+     "instruction": "Set the eye torus major radius equal to twice the head radius; the head, neck, shank, and torus minor radius stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .union(cq.Workplane(\\\"XY\\\").newObject([cq.Solid.makeTorus(20.0, 4.0, cq.Vector(0, 0, 18.0), cq.Vector(0, 1, 0))]))\"], \"start\": 19}]}",
+     "strategies": [],
+     "context": [
+      "19:     .union(cq.Workplane(\"XY\").newObject([cq.Solid.makeTorus(14.0, 4.0, cq.Vector(0, 0, 18.0), cq.Vector(0, 1, 0))]))"
+     ]
+    },
+    {
+     "task_id": "266be1f42794bfd7997f7e123d9a826c5cadb3df0c637b920e884c50189fd541",
+     "instruction": "Set the cylinder length equal to twelve times the cylinder radius; the radius and chamfer stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .cylinder(60.0, 5.0)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .cylinder(40.0, 5.0)"
+     ]
+    },
+    {
+     "task_id": "433bf04f8a0c5c9fe984a37763f9fa3b0db9ebae035ec1d974c2f0e4c8b7e9d3",
+     "instruction": "Set the shank length equal to 2.4 times the head diameter; the head, slot, and shank radius stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .extrude(2.4 * 5.0)\"], \"start\": 4}]}",
+     "strategies": [
+      "diversify: Set shank length to 12.0 based on 2.4x head diameter ratio",
+      "repair: Adjusted shank extrusion length to 12.0 based on 2.4x head diameter ratio and shifted cut offset to 13.2 to preserve slot-head alignment.",
+      "repair: Set shank length to 12.0 (2.4 * 5.0 head diameter) while keeping cut offset at 7.2 as per plan invariants.",
+      "repair: Update shank extrude height to explicitly calculate 2.4 times head diameter (5.0) to satisfy instruction value constraints, while keeping head and cut invariants unchanged."
+     ],
+     "context": [
+      "4:     .extrude(6.0)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "PASS",
+   "hypothesis": "Update head sphere radius from 3.2 to 6.0 to match twice the shank radius of 3.0."
+  },
+  {
+   "event": "final_verification",
+   "node": 1,
+   "status": "PASS"
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": true,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "semantics",
+     "status": "FAIL",
+     "confidence": 0.95,
+     "reason": "The edited part shows a large sphere with no visible shank, violating the instruction that the shank should remain unchanged.",
+     "basis": "Astra rendered-view judgement",
+     "image": "semantic-00.png"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "No perturbation contract supplied"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "aeba1116e1c972e00b1001d58f707d9d8f9983f919feef3ace1fb96b1ade81e3",
+     "instruction": "Set the eye torus major radius equal to twice the head radius; the head, neck, shank, and torus minor radius stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .union(cq.Workplane(\\\"XY\\\").newObject([cq.Solid.makeTorus(20.0, 4.0, cq.Vector(0, 0, 18.0), cq.Vector(0, 1, 0))]))\"], \"start\": 19}]}",
+     "strategies": [],
+     "context": [
+      "19:     .union(cq.Workplane(\"XY\").newObject([cq.Solid.makeTorus(14.0, 4.0, cq.Vector(0, 0, 18.0), cq.Vector(0, 1, 0))]))"
+     ]
+    },
+    {
+     "task_id": "266be1f42794bfd7997f7e123d9a826c5cadb3df0c637b920e884c50189fd541",
+     "instruction": "Set the cylinder length equal to twelve times the cylinder radius; the radius and chamfer stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .cylinder(60.0, 5.0)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .cylinder(40.0, 5.0)"
+     ]
+    },
+    {
+     "task_id": "433bf04f8a0c5c9fe984a37763f9fa3b0db9ebae035ec1d974c2f0e4c8b7e9d3",
+     "instruction": "Set the shank length equal to 2.4 times the head diameter; the head, slot, and shank radius stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .extrude(2.4 * 5.0)\"], \"start\": 4}]}",
+     "strategies": [
+      "diversify: Set shank length to 12.0 based on 2.4x head diameter ratio",
+      "repair: Adjusted shank extrusion length to 12.0 based on 2.4x head diameter ratio and shifted cut offset to 13.2 to preserve slot-head alignment.",
+      "repair: Set shank length to 12.0 (2.4 * 5.0 head diameter) while keeping cut offset at 7.2 as per plan invariants.",
+      "repair: Update shank extrude height to explicitly calculate 2.4 times head diameter (5.0) to satisfy instruction value constraints, while keeping head and cut invariants unchanged."
+     ],
+     "context": [
+      "4:     .extrude(6.0)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "PASS",
+   "hypothesis": "Update head sphere radius to 6.0 (twice the shank radius of 3.0)"
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": true,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "semantics",
+     "status": "FAIL",
+     "confidence": 0.95,
+     "reason": "The edited part shows a large sphere with no visible shank, violating the instruction that the shank should remain unchanged.",
+     "basis": "Astra rendered-view judgement",
+     "image": "semantic-00.png"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "No perturbation contract supplied"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "aeba1116e1c972e00b1001d58f707d9d8f9983f919feef3ace1fb96b1ade81e3",
+     "instruction": "Set the eye torus major radius equal to twice the head radius; the head, neck, shank, and torus minor radius stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .union(cq.Workplane(\\\"XY\\\").newObject([cq.Solid.makeTorus(20.0, 4.0, cq.Vector(0, 0, 18.0), cq.Vector(0, 1, 0))]))\"], \"start\": 19}]}",
+     "strategies": [],
+     "context": [
+      "19:     .union(cq.Workplane(\"XY\").newObject([cq.Solid.makeTorus(14.0, 4.0, cq.Vector(0, 0, 18.0), cq.Vector(0, 1, 0))]))"
+     ]
+    },
+    {
+     "task_id": "266be1f42794bfd7997f7e123d9a826c5cadb3df0c637b920e884c50189fd541",
+     "instruction": "Set the cylinder length equal to twelve times the cylinder radius; the radius and chamfer stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .cylinder(60.0, 5.0)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .cylinder(40.0, 5.0)"
+     ]
+    },
+    {
+     "task_id": "433bf04f8a0c5c9fe984a37763f9fa3b0db9ebae035ec1d974c2f0e4c8b7e9d3",
+     "instruction": "Set the shank length equal to 2.4 times the head diameter; the head, slot, and shank radius stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .extrude(2.4 * 5.0)\"], \"start\": 4}]}",
+     "strategies": [
+      "diversify: Set shank length to 12.0 based on 2.4x head diameter ratio",
+      "repair: Adjusted shank extrusion length to 12.0 based on 2.4x head diameter ratio and shifted cut offset to 13.2 to preserve slot-head alignment.",
+      "repair: Set shank length to 12.0 (2.4 * 5.0 head diameter) while keeping cut offset at 7.2 as per plan invariants.",
+      "repair: Update shank extrude height to explicitly calculate 2.4 times head diameter (5.0) to satisfy instruction value constraints, while keeping head and cut invariants unchanged."
+     ],
+     "context": [
+      "4:     .extrude(6.0)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "PASS",
+   "hypothesis": "Update head sphere radius from 3.2 to 6.0 to satisfy the condition of being twice the shank radius (3.0)."
+  },
+  {
+   "event": "backtrack",
+   "to_node": 1
+  },
+  {
+   "event": "expand",
+   "parent": 1,
+   "node": 2,
+   "merged": false,
+   "strategy": "diversify",
+   "diagnosis": [],
+   "retrieved_repairs": [
+    {
+     "task_id": "266be1f42794bfd7997f7e123d9a826c5cadb3df0c637b920e884c50189fd541",
+     "instruction": "Set the cylinder length equal to twelve times the cylinder radius; the radius and chamfer stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .cylinder(60.0, 5.0)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .cylinder(40.0, 5.0)"
+     ]
+    },
+    {
+     "task_id": "aeba1116e1c972e00b1001d58f707d9d8f9983f919feef3ace1fb96b1ade81e3",
+     "instruction": "Set the eye torus major radius equal to twice the head radius; the head, neck, shank, and torus minor radius stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .union(cq.Workplane(\\\"XY\\\").newObject([cq.Solid.makeTorus(20.0, 4.0, cq.Vector(0, 0, 18.0), cq.Vector(0, 1, 0))]))\"], \"start\": 19}]}",
+     "strategies": [],
+     "context": [
+      "19:     .union(cq.Workplane(\"XY\").newObject([cq.Solid.makeTorus(14.0, 4.0, cq.Vector(0, 0, 18.0), cq.Vector(0, 1, 0))]))"
+     ]
+    },
+    {
+     "task_id": "64028bb82f4fc33b27e62d98abf31a60452821a9de594541604cb24b3a0d6e41",
+     "instruction": "Set the shaft length equal to three times the head across-corners size; the shaft radius and head dimensions stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .extrude(58.89)\"], \"start\": 4}]}",
+     "strategies": [],
+     "context": [
+      "4:     .extrude(90.0)"
+     ]
+    }
+   ],
+   "path": [
+    0,
+    1
+   ],
+   "status": "PASS",
+   "hypothesis": "Update head sphere radius from 3.2 to 6.0 (twice shank radius of 3.0)"
+  },
+  {
+   "event": "final_verification",
+   "node": 2,
+   "status": "PASS"
+  }
+ ],
+ "config": {
+  "algorithm": "mcts",
+  "max_expansions": 4,
+  "max_depth": 3,
+  "width": 2,
+  "max_width": 4,
+  "exploration": 0.7,
+  "seconds": 2400.0
+ },
+ "memory_version": "00cd7d2e75b3e4924430c362612fe8873652950008e8f0cb69e703582efa60ee",
+ "stored": "runs/adaptive-cad-open-20261007/memory.jsonl",
+ "seconds": 259.36205012499977,
+ "api": {
+  "mode": "live_astra",
+  "api_calls": 7,
+  "cost_usd": 0.0,
+  "budget_usd": 0.3,
+  "refused": 0
+ },
+ "tool_jobs": 8
+}

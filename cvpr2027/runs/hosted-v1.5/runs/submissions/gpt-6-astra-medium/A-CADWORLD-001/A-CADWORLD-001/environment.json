@@ -1,0 +1,63 @@
+{
+  "task_id": "A-CADWORLD-001",
+  "command": "python main.py",
+  "versions": {
+    "python": "3.12.14",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "scikit-fem": "12.0.2",
+    "gmsh": "4.15.2"
+  },
+  "units": {
+    "length": "mm",
+    "force": "N",
+    "stress": "MPa = N/mm^2"
+  },
+  "solver": "scikit-fem linear elasticity assembly, SciPy SuperLU; C3D4-equivalent (not CalculiX executable)",
+  "material": {
+    "name": "AlMg3F24",
+    "E_MPa": 70000,
+    "Poisson_ratio": 0.3
+  },
+  "physical_groups": {
+    "3:1": "entire aluminium solid",
+    "2:6": "fully fixed face 6, centroid [-127.5,0,0], area 100 mm2",
+    "2:38": "face 38, centroid [127.5,0,0], area 100 mm2; uniform traction [0,2,0] N/mm2",
+    "2:100": "remaining traction-free faces"
+  },
+  "modeling_assumptions": [
+    "Full supplied 3D solid in original mm frame, no dimensional reduction.",
+    "Linear isotropic small displacement, no gravity.",
+    "First order tetrahedra, constant strain and stress.",
+    "Fully fixed nodes on face 6 including its boundary. Consistent surface traction on all face 38 triangles.",
+    "Reported mesh maximum size 2 mm, minimum 0.5 mm. No accuracy claim beyond source linear model."
+  ],
+  "field_schema": {
+    "mapping": "Arrays use ascending Gmsh node_ids. element_ids and tetrahedra_node_ids preserve original Gmsh tags in mesh.msh; element arrays have same row order as element_ids. No node or element renumbering in exported mesh.",
+    "node_ids": "(N,) original Gmsh tags",
+    "coordinates_mm": "(N,3) original global x,y,z coordinates",
+    "element_ids": "(T,) Gmsh tetrahedron IDs",
+    "tetrahedra_node_ids": "(T,4) Gmsh node IDs, not zero-based indices",
+    "displacement_mm": "(N,3), global components",
+    "nodal_stress_MPa": "(N,3,3) symmetric Cauchy tensor, averaged element tensors",
+    "element_stress_MPa": "(T,3,3) constant unaveraged Cauchy tensors",
+    "nodal_principal_MPa": "(N,3) ascending principal stresses; last is major",
+    "nodal_von_mises_MPa": "(N,) invariant of averaged stress tensor",
+    "nodal_max_shear_MPa": "(N,) half principal range, NOT full Tresca equivalent stress",
+    "fixed_mask": "(N,) support-node Boolean mask",
+    "loaded_mask": "(N,) loaded-face Boolean mask",
+    "applied_force_N": "(N,3) consistent nodal forces",
+    "reaction_N": "(N,3) K*u-f, includes roundoff residual on free nodes",
+    "element_volume_mm3": "(T,) absolute tetrahedral volumes",
+    "stress_average_element_count": "(N,) count of incident tetrahedra",
+    "load_factor": "[1] static load factor",
+    "coordinate_units,stress_units,force_units": "Unicode arrays; no pickled objects"
+  },
+  "quantity_extraction": {
+    "max_displacement_mm": "Maximum Euclidean norm of nodal displacements",
+    "max_von_mises_MPa": "Maximum von Mises invariant of the equal-weight average of incident tetrahedral stress tensors",
+    "max_shear_stress_MPa": "Maximum half-difference of major and minor principal nodal stress",
+    "max_principal_MPa": "Maximum major principal value of recovered nodal stress"
+  },
+  "limitations": "CalculiX not present. Equivalent linear tetrahedral equations solved independently; mesh/version and nodal recovery differences can alter extrema."
+}

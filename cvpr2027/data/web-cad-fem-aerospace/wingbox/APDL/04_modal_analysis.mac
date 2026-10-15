@@ -1,0 +1,45 @@
+! ==============================================================================
+! APDL MACRO: 04_modal_analysis.mac
+! TITLE: Free Vibration Modal Dynamic Analysis (Block Lanczos)
+! AUTHOR: Muhammad Yousuf Baig
+! ==============================================================================
+
+/PREP7
+
+! Element & Material Attributes (Optimal Al 7075-T6 Alloy)
+MAT,2
+TYPE,1
+SECNUM,1
+ESIZE,0.05
+AMESH,ALL
+
+! Cantilever Root Boundary Condition
+NSEL,S,LOC,Y,0                 ! Select root nodes along Y = 0
+D,ALL,ALL,0
+ALLSEL,ALL
+
+! Modal Solver Setup
+/SOLU
+ANTYPE,MODAL
+MODOPT,LANB,4                  ! Block Lanczos extraction for 4 eigenmodes
+MXPAND,4,,,1                   ! Calculate and store eigenvectors
+
+SOLVE
+
+! Post-Processing Mode Shapes
+/POST1
+SET,LIST                       ! Print frequency spectrum
+
+SET,1,1                        ! Mode 1: 1st Tip Torsion (46.70 Hz)
+PLNSOL,U,SUM,0,1.0
+
+SET,1,2                        ! Mode 2: 1st Flexural Bending (72.18 Hz)
+PLNSOL,U,SUM,0,1.0
+
+SET,1,3                        ! Mode 3: 2nd Coupled Torsion (98.92 Hz)
+PLNSOL,U,SUM,0,1.0
+
+SET,1,4                        ! Mode 4: 2nd Higher Bending (132.26 Hz)
+PLNSOL,U,SUM,0,1.0
+
+SAVE

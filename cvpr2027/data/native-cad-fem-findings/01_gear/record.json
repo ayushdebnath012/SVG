@@ -1,0 +1,153 @@
+{
+  "id": "01_gear",
+  "cad_file": "/Users/ayushdebnath/SVG/cvpr2027/data/native-cad-fem-findings/01_gear/gear.FCStd",
+  "source": "https://github.com/FrontISTR/FEM_FrontISTR/tree/da45c381d3c70343dce3838e53463f9b2e602e24/sample/benchmarks/01_gear",
+  "source_revision": "da45c381d3c70343dce3838e53463f9b2e602e24",
+  "cad_validation": {
+    "valid": true,
+    "solids": 1,
+    "faces": 263
+  },
+  "materials": [
+    {
+      "AuthorAndLicense": "Steel-Generic",
+      "CardName": "Steel-Generic",
+      "Density": "7900 kg/m^3",
+      "Description": "This is a blend Steel material card. The values are at the low end of the spectrum. If you need a more precise material definition use the more specialised steel cards.",
+      "Father": "Metal",
+      "Name": "Steel-Generic",
+      "PoissonRatio": "0.3",
+      "ProductURL": "https://en.wikipedia.org/wiki/Steel",
+      "SpecificHeat": "500 J/kg/K",
+      "ThermalConductivity": "50 W/m/K",
+      "ThermalExpansionCoefficient": "0.000012 m/m/K",
+      "YoungsModulus": "200000 MPa"
+    }
+  ],
+  "boundary_conditions": [
+    {
+      "name": "ConstraintFixed",
+      "type": "Fem::ConstraintFixed",
+      "original_properties_xml": "<Object name=\"ConstraintFixed\">\n            <Properties Count=\"9\" TransientCount=\"0\">\n                <Property name=\"ExpressionEngine\" type=\"App::PropertyExpressionEngine\" status=\"67108864\">\n                    <ExpressionEngine count=\"0\">\n                    </ExpressionEngine>\n                </Property>\n                <Property name=\"Label\" type=\"App::PropertyString\" status=\"134217728\">\n                    <String value=\"ConstraintFixed\" />\n                </Property>\n                <Property name=\"Label2\" type=\"App::PropertyString\" status=\"67108992\">\n                    <String value=\"\" />\n                </Property>\n                <Property name=\"NormalDirection\" type=\"App::PropertyVector\" status=\"150994944\">\n                    <PropertyVector valueX=\"1.0000000000000000\" valueY=\"-0.0000000000000001\" valueZ=\"0.0000000000000000\" />\n                </Property>\n                <Property name=\"Normals\" type=\"App::PropertyVectorList\" status=\"150994944\">\n                    <VectorList file=\"Normals\" />\n                </Property>\n                <Property name=\"Points\" type=\"App::PropertyVectorList\" status=\"150994944\">\n                    <VectorList file=\"Points\" />\n                </Property>\n                <Property name=\"References\" type=\"App::PropertyLinkSubList\">\n                    <LinkSubList count=\"1\">\n                        <Link obj=\"Hole\" sub=\"Face263\" />\n                    </LinkSubList>\n                </Property>\n                <Property name=\"Scale\" type=\"App::PropertyInteger\" status=\"134217728\">\n                    <Integer value=\"1\" />\n                </Property>\n                <Property name=\"Visibility\" type=\"App::PropertyBool\" status=\"648\">\n                    <Bool value=\"true\" />\n                </Property>\n            </Properties>\n        </Object>\n        "
+    },
+    {
+      "name": "ConstraintPressure",
+      "type": "Fem::ConstraintPressure",
+      "original_properties_xml": "<Object name=\"ConstraintPressure\">\n            <Properties Count=\"11\" TransientCount=\"0\">\n                <Property name=\"ExpressionEngine\" type=\"App::PropertyExpressionEngine\" status=\"67108864\">\n                    <ExpressionEngine count=\"0\">\n                    </ExpressionEngine>\n                </Property>\n                <Property name=\"Label\" type=\"App::PropertyString\" status=\"134217728\">\n                    <String value=\"ConstraintPressure\" />\n                </Property>\n                <Property name=\"Label2\" type=\"App::PropertyString\" status=\"67108992\">\n                    <String value=\"\" />\n                </Property>\n                <Property name=\"NormalDirection\" type=\"App::PropertyVector\" status=\"150994944\">\n                    <PropertyVector valueX=\"0.9670374391131871\" valueY=\"0.2546342305217605\" valueZ=\"-0.0000000000000000\" />\n                </Property>\n                <Property name=\"Normals\" type=\"App::PropertyVectorList\" status=\"150994944\">\n                    <VectorList file=\"Normals1\" />\n                </Property>\n                <Property name=\"Points\" type=\"App::PropertyVectorList\" status=\"150994944\">\n                    <VectorList file=\"Points1\" />\n                </Property>\n                <Property name=\"Pressure\" type=\"App::PropertyFloat\">\n                    <Float value=\"100.0000000000000000\" />\n                </Property>\n                <Property name=\"References\" type=\"App::PropertyLinkSubList\">\n                    <LinkSubList count=\"1\">\n                        <Link obj=\"Hole\" sub=\"Face74\" />\n                    </LinkSubList>\n                </Property>\n                <Property name=\"Reversed\" type=\"App::PropertyBool\">\n                    <Bool value=\"false\" />\n                </Property>\n                <Property name=\"Scale\" type=\"App::PropertyInteger\" status=\"134217728\">\n                    <Integer value=\"1\" />\n                </Property>\n                <Property name=\"Visibility\" type=\"App::PropertyBool\" status=\"648\">\n                    <Bool value=\"true\" />\n                </Property>\n            </Properties>\n        </Object>\n        "
+    }
+  ],
+  "published_fem_results": [
+    {
+      "mesh": "1. small",
+      "solver": "Calculix",
+      "matrix_solver": "iterativecholesky",
+      "max_von_mises_MPa": 334.16,
+      "source_cell": "Sheet1!I3",
+      "source_flags_inaccurate": false,
+      "usable_as_published_baseline": true
+    },
+    {
+      "mesh": "1. small",
+      "solver": "Calculix",
+      "matrix_solver": "spooles",
+      "max_von_mises_MPa": 334.16,
+      "source_cell": "Sheet1!I4",
+      "source_flags_inaccurate": false,
+      "usable_as_published_baseline": true
+    },
+    {
+      "mesh": "1. small",
+      "solver": "FrontISTR",
+      "matrix_solver": "CG w/ AMG",
+      "max_von_mises_MPa": 334.16,
+      "source_cell": "Sheet1!I5",
+      "source_flags_inaccurate": false,
+      "usable_as_published_baseline": true
+    },
+    {
+      "mesh": "1. small",
+      "solver": "FrontISTR",
+      "matrix_solver": "MUMPS",
+      "max_von_mises_MPa": 334.16,
+      "source_cell": "Sheet1!I6",
+      "source_flags_inaccurate": false,
+      "usable_as_published_baseline": true
+    },
+    {
+      "mesh": "2. middle",
+      "solver": "Calculix",
+      "matrix_solver": "iterativecholesky",
+      "max_von_mises_MPa": 397.31,
+      "source_cell": "Sheet1!I7",
+      "source_flags_inaccurate": false,
+      "usable_as_published_baseline": true
+    },
+    {
+      "mesh": "2. middle",
+      "solver": "Calculix",
+      "matrix_solver": "spooles",
+      "max_von_mises_MPa": 397.37,
+      "source_cell": "Sheet1!I8",
+      "source_flags_inaccurate": false,
+      "usable_as_published_baseline": true
+    },
+    {
+      "mesh": "2. middle",
+      "solver": "FrontISTR",
+      "matrix_solver": "CG w/ AMG",
+      "max_von_mises_MPa": 397.37,
+      "source_cell": "Sheet1!I9",
+      "source_flags_inaccurate": false,
+      "usable_as_published_baseline": true
+    },
+    {
+      "mesh": "2. middle",
+      "solver": "FrontISTR",
+      "matrix_solver": "MUMPS",
+      "max_von_mises_MPa": 397.37,
+      "source_cell": "Sheet1!I10",
+      "source_flags_inaccurate": false,
+      "usable_as_published_baseline": true
+    },
+    {
+      "mesh": "3. large",
+      "solver": "Calculix",
+      "matrix_solver": "iterativecholesky",
+      "max_von_mises_MPa": 442.03,
+      "source_cell": "Sheet1!I11",
+      "source_flags_inaccurate": false,
+      "usable_as_published_baseline": true
+    },
+    {
+      "mesh": "3. large",
+      "solver": "Calculix",
+      "matrix_solver": "spooles",
+      "max_von_mises_MPa": "N/A*",
+      "source_cell": "Sheet1!I12",
+      "source_flags_inaccurate": false,
+      "usable_as_published_baseline": false
+    },
+    {
+      "mesh": "3. large",
+      "solver": "FrontISTR",
+      "matrix_solver": "CG w/ AMG",
+      "max_von_mises_MPa": 442.02,
+      "source_cell": "Sheet1!I13",
+      "source_flags_inaccurate": false,
+      "usable_as_published_baseline": true
+    },
+    {
+      "mesh": "3. large",
+      "solver": "FrontISTR",
+      "matrix_solver": "MUMPS",
+      "max_von_mises_MPa": 442.02,
+      "source_cell": "Sheet1!I14",
+      "source_flags_inaccurate": false,
+      "usable_as_published_baseline": true
+    }
+  ],
+  "dimensioned_drawing_available": false,
+  "cad_view_note": "Inspection render of the original embedded B-Rep; no geometry generated.",
+  "benchmark_status": "Source CAD/FEM pair verified; not yet admitted. Mesh-sensitive peaks, source units, selectors and replay need review.",
+  "no_local_fem_solve": true
+}

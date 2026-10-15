@@ -1,0 +1,40 @@
+{
+ "source_fem": {
+  "ok": true,
+  "compliance": 7.135068599724682e-07,
+  "components": 1,
+  "nodes": 1116
+ },
+ "nodes": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n)\nresult = result.rotate((0, 0, 0), (1, 1, 0), 75)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 0.00016889417091786536,
+    "components": 1,
+    "nodes": 650
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "rag",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n)\nresult = result.rotate((0, 0, 0), (1, 1, 0), 75)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 0.0001688933348378405,
+    "components": 1,
+    "nodes": 650
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  }
+ ]
+}

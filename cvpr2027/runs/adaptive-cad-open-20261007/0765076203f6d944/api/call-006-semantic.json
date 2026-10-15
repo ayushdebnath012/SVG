@@ -1,0 +1,43 @@
+{
+ "kind": "semantic",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "Qwen/Qwen3.5-35B-A3B-FP8",
+  "messages": [
+   {
+    "role": "system",
+    "content": "You verify mechanical CAD edits from rendered views."
+   },
+   {
+    "role": "user",
+    "content": [
+     {
+      "type": "text",
+      "text": "Edit instruction: Drill a round axial through-bore down the center of the rivet, 4 mm in diameter, from the flat bottom face up through the rounded head, along the central axis of the rivet.\n\nThe image shows the ORIGINAL part (left) and the EDITED part (right), isometric views (top row) and top views (bottom row). Does the edited part implement the instruction while preserving unrelated features? Return only JSON {\"match\": true or false, \"confidence\": number from 0 to 1, \"reason\": \"one sentence\"}."
+     },
+     {
+      "type": "image_url",
+      "image_url": "<png omitted>"
+     }
+    ]
+   }
+  ],
+  "temperature": 0.6,
+  "top_p": 0.95,
+  "top_k": 20,
+  "max_tokens": 12288
+ },
+ "usage": {
+  "prompt_tokens": 399,
+  "total_tokens": 1537,
+  "completion_tokens": 1138,
+  "prompt_tokens_details": null,
+  "completion_tokens_details": {
+   "reasoning_tokens": 1078
+  }
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "\n\n{\n\"match\": false,\n\"confidence\": 0.9,\n\"reason\": \"The edited part displays a square or angular hole in the center (visible as a diamond shape in the top view), whereas the instruction specified a round axial through-bore.\"\n}"
+}

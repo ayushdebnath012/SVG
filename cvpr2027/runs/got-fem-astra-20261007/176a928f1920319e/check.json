@@ -1,0 +1,26 @@
+{
+ "id": "176a928f1920319edd3d66a0d89a762ed42f8ab8cbc439ce0d509d960aa26983",
+ "source_fem": {
+  "ok": true,
+  "compliance": 1.5445802288869355e-08,
+  "components": 1,
+  "nodes": 578
+ },
+ "candidates": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polyline([[10.96, 10.96], [27.4, 10.96], [27.4, -10.96], [10.96, -10.96], [10.96, -27.4], [-10.96, -27.4], [-10.96, -10.96], [-27.4, -10.96], [-27.4, 10.96], [-10.96, 10.96], [-10.96, 27.4], [10.96, 27.4]])\n    .close()\n    .extrude(5.18)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.0429014825710079e-08,
+    "components": 1,
+    "nodes": 519
+   },
+   "consensus": 1,
+   "numbers_ok": true,
+   "changed": true,
+   "error": null
+  }
+ ]
+}

@@ -1,0 +1,28 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .cylinder(22.0, 75.05)\\n    .faces(\\\">Z\\\").workplane()\\n    .hole(30.0)\\n    .faces(\\\">Z\\\").workplane()\\n    .circle(19.9)\\n    .extrude(13.9)\\n    .edges(\\\">Z\\\")\\n    .chamfer(1.4)\\n    .faces(\\\">Z\\\").workplane()\\n    .polarArray(31.92, 0, 360, 8)\\n    .hole(5.2)\\n)\\nshow_object(result)\", \"instruction\": \"Change the ring of 8 polar mounting through-passages on the cap face to a ring of 16 mounting through-passages of 12 mm diameter, evenly spaced around the central axis at the same radius.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"4a5b23f6c4145047b5d69424441acab62c20e8a6efcdc0e6ec3002406720b249\", \"instruction\": \"Change the ring of 4 polar mounting through-passages on the flange face to a ring of 6 mounting through-passages of the same diameter, evenly spaced around the central axis at the same radius.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .polarArray(60.8, 0, 360, 6)\\\"], \\\"start\\\": 10}]}\", \"strategies\": [\"diversify: Change the polarArray count from 4 to 6 by directly modifying the parameter in the polarArray call.\", \"repair: Change the polar array count from 4 to 6 for the mounting holes.\", \"repair: Change the polar array count from 4 to 6 for the mounting through-passages.\", \"repair: Change the polarArray count from 4 to 6 to create 6 mounting through-passages.\"], \"context\": [\"10:     .polarArray(60.8, 0, 360, 4)\"]}, {\"task_id\": \"c55754a70806756e0e489599ba0a4a467c69470d0f70bd35b6ccdffc4ba07b82\", \"instruction\": \"Drill 8 round through-passages of 8 mm diameter through the round base disc, evenly spaced around the central axis at 15 mm radius, parallel to the stem.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"import math as _m\\\", \\\"for _i in range(8):\\\", \\\"    _ang = 2 * _m.pi * _i / 8\\\", \\\"    _x = 15.0 * _m.cos(_ang)\\\", \\\"    _y = 15.0 * _m.sin(_ang)\\\", \\\"    result = result.cut(\\\", \\\"        cq.Workplane('XY')\\\", \\\"        .transformed(offset=cq.Vector(_x, _y, 7.0), rotate=cq.Vector(0, 0, 0))\\\", \\\"        .cylinder(20.0, 4.0)\\\", \\\"    )\\\"], \\\"start\\\": 21}]}\", \"strategies\": [], \"context\": [\"21: show_object(result)\"]}, {\"task_id\": \"81d246f67035ae6b92b6704de71c7b836ae2db598854a8890362af4c1afbfa4b\", \"instruction\": \"Drill 6 round through-passages of 2 mm diameter through the bottom flange of the grommet, evenly spaced around the central axis at 8 mm radius.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"import math as _m\\\", \\\"for _i in range(6):\\\", \\\"    _ang = 2 * _m.pi * _i / 6\\\", \\\"    _x = 8.0 * _m.cos(_ang)\\\", \\\"    _z = 8.0 * _m.sin(_ang)\\\", \\\"    result = result.cut(\\\", \\\"        cq.Workplane('XY')\\\", \\\"        .transformed(offset=cq.Vector(_x, 1.65, _z), rotate=cq.Vector(90, 0, 0))\\\", \\\"        .cylinder(6.0, 1.0)\\\", \\\"    )\\\"], \\\"start\\\": 17}]}\", \"strategies\": [], \"context\": [\"17: show_object(result)\"]}]}"
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 4096
+ },
+ "usage": {
+  "completion_tokens": 147,
+  "prompt_tokens": 1162,
+  "total_tokens": 1309
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\n  \"steps\": [\n    \"Modify the polarArray parameters to use a count of 16 instead of 8\",\n    \"Modify the hole diameter to 12.0 instead of 5.2\"\n  ],\n  \"invariants\": [\n    \"The radius of the polar array (31.92) remains unchanged\",\n    \"The angular span (360 degrees) and start angle (0 degrees) remain unchanged\",\n    \"All preceding features (cylinder, central hole, collar extrusion, chamfer) remain unchanged\"\n  ],\n  \"dependencies\": [\n    [0, 1]\n  ]\n}\n```"
+}

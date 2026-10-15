@@ -1,0 +1,537 @@
+{
+ "active_dataset": "Broad mechanical engineering source collection",
+ "source": "https://huggingface.co/datasets/KAIST-SmartDesignLab/DeepJEB",
+ "revision": "160424ca2a5095315ff9ead8a5fc36d2667fd3c6",
+ "published_design_count": 2138,
+ "tracks": [
+  "CAD creation/edit plus FEM",
+  "FEM with supplied CAD"
+ ],
+ "report_tracks_separately": true,
+ "reference_policy": "Use only published results; no newly generated FEM labels.",
+ "pairing_key": "STEP filename stem = Scalar/bracket_labels.csv item_name",
+ "locally_verified_pair": {
+  "id": "10_30",
+  "cad": "cvpr2027/tmp/deepjeb-paired/BRep/10_30.step",
+  "published_results": "cvpr2027/tmp/deepjeb-paired/10_30-published-fem.json",
+  "step_imported": true,
+  "solid_count": 0,
+  "valid": true,
+  "shell_count": 1,
+  "face_count": 3992,
+  "topology_note": "STEP imports as shell geometry with no solid. Volume meshing readiness is not established; original volume mesh and solver deck should be used or closure independently checked."
+ },
+ "original_scalar_table": "cvpr2027/tmp/deepjeb-paired/Scalar/bracket_labels.csv",
+ "download_provenance": "cvpr2027/tmp/deepjeb-paired/download-manifest.json",
+ "remaining_preparation": [
+  "Download further CAD, solver decks and FEM field records for selected IDs.",
+  "Confirm source stress scalar definition before naming it von Mises or principal stress.",
+  "Extract source materials and boundary conditions from solver decks.",
+  "Separate reference labels from model inputs and establish evaluation tolerances."
+ ],
+ "model_trials": "Not run; prepare-only instruction remains active.",
+ "active_collection": "broad-mechanical-collection.json",
+ "DeepJEB_role": "Supplementary bracket subset, not the whole benchmark",
+ "drawing_requirement": "Source-published dimensioned or sectional CAD drawing required; renders alone insufficient.",
+ "qualified_source_manifest": "drawing-qualified-sources.json",
+ "included_case_records": "cases.jsonl",
+ "included_case_ids": [
+  "FEMCAD-ADV-005",
+  "FEMCAD-ADV-010"
+ ],
+ "inclusion_validation": "inclusion-validation.json",
+ "published_100_collection": {
+  "manifest": "cvpr2027/data/web-complex-fem/published-100.json",
+  "pdf": "cvpr2027/output/pdf/published-cad-fem-100.pdf",
+  "package": "cvpr2027/output/datasets/published-cad-fem-100.zip",
+  "count": 100,
+  "sources": 6,
+  "fully_specified_complex_drawing_benchmark": false,
+  "no_local_geometry_or_fem_generation": true
+ },
+ "benchmark_pilot": {
+  "catalog": "cvpr2027/data/published-fem-pilot-v1/catalog.json",
+  "audit": "cvpr2027/data/published-fem-pilot-v1/audit.json",
+  "source_complete_cases": 3,
+  "track_tasks": 6,
+  "certified_scored_cases": 0,
+  "model_trials": "Not run; prepare-only instruction remains active.",
+  "complex_cases_status": "Staged with explicit source/mapping blockers."
+ },
+ "requested_minimum_benchmark_problems": 50,
+ "published_50_expansion": {
+  "catalog": "cvpr2027/data/published-fem-expansion-50/catalog.json",
+  "validation": "cvpr2027/data/published-fem-expansion-50/validation.json",
+  "pdf": "cvpr2027/output/pdf/published-mechanical-fem-50-source-review.pdf",
+  "package": "cvpr2027/output/datasets/published-mechanical-fem-50-sources.zip",
+  "distinct_source_problems": 50,
+  "publisher_geometry_illustrations": 62,
+  "cases_with_original_geometry_scripts": 28,
+  "native_step_cases": 0,
+  "published_fem_assertion_blocks": 761,
+  "new_cases_admitted_to_pilot": 0,
+  "status": "Paired source expansion; source drawing completeness, CAD correspondence, units and independent replay pending."
+ },
+ "published_cad_fem_additions": {
+  "catalog": "cvpr2027/data/web-cad-fem-additions/catalog.json",
+  "validation": "cvpr2027/data/web-cad-fem-additions/validation.json",
+  "pdf": "cvpr2027/output/pdf/web-cad-fem-additions-169.pdf",
+  "package": "cvpr2027/output/datasets/web-cad-fem-additions-169.zip",
+  "cad_reference_pairs": 169,
+  "geopinonet_two_family_variants": 160,
+  "sheet_metal_forming_instances": 8,
+  "nonlinear_valve_cases": 1,
+  "verified_dimensioned_drawing_cases": 1,
+  "new_benchmark_admissions": 0,
+  "status": "Collected original CAD and FEM results; solver/BC/unit/tolerance review pending. Not 169 different complex task types."
+ },
+ "additional_web_varieties": {
+  "catalog": "cvpr2027/data/web-cad-fem-variety/catalog.json",
+  "validation": "cvpr2027/data/web-cad-fem-variety/validation.json",
+  "source_collections": 5,
+  "new_problem_families": 5,
+  "certified_benchmark_admissions": 0,
+  "status": "Five original source collections including WAAM temperature/distortion fields; variants and scoring blockers explicit.",
+  "pdf": "cvpr2027/output/pdf/web-cad-fem-variety-expanded.pdf",
+  "package": "cvpr2027/output/datasets/web-cad-fem-variety-expanded.zip"
+ },
+ "additional_web_cad_fem_sources": {
+  "catalog": "cvpr2027/data/web-cad-fem-next-179/catalog.json",
+  "pdf": "cvpr2027/output/pdf/web-cad-fem-new-sources-179.pdf",
+  "package": "cvpr2027/output/datasets/web-cad-fem-new-sources-179.zip",
+  "cad_result_pairs": 179,
+  "source_collections": 2,
+  "bracket_variants": 176,
+  "cadworld_complex_geometry_candidates": 2,
+  "cadworld_basic_specimens": 1,
+  "certified_benchmark_admissions": 0,
+  "status": "Downloaded and audited; source unit and physical-validity blockers remain explicit. No locally generated CAD, FEM or model trials."
+ },
+ "more_web_engineering_sources": {
+  "catalog": "cvpr2027/data/web-cad-fem-more-families/catalog.json",
+  "pdf": "cvpr2027/output/pdf/web-cad-fem-wheel-ebike.pdf",
+  "package": "cvpr2027/output/datasets/web-cad-fem-wheel-ebike.zip",
+  "new_source_collections": 2,
+  "downloaded_modal_cad_pairs": 10,
+  "plot_only_native_cad_candidates": 1,
+  "source_modal_reference_rows": 904,
+  "source_step_files_downloaded": 10,
+  "certified_benchmark_admissions": 0,
+  "status": "Original source assets collected; DeepWheel density/mass discrepancy and plot-only e-bike limitations explicit. Unsolved thermal archives excluded from pair count."
+ },
+ "multiphysics_web_candidate_extension": {
+  "catalog": "cvpr2027/data/web-cad-fem-multiphysics/catalog.json",
+  "pdf": "cvpr2027/output/pdf/web-fem-multiphysics-candidates.pdf",
+  "zip": "cvpr2027/output/datasets/web-fem-multiphysics-candidates.zip",
+  "native_cae_reference_candidates": 3,
+  "strict_verified_redistributable_native_cad_pairs": 0,
+  "local_only_native_cad_fem_case": 1,
+  "certified_admissions": 0
+ },
+ "laminate_and_manufacturing_web_extension": {
+  "catalog": "cvpr2027/data/web-cad-fem-manufacturing/catalog.json",
+  "pdf": "cvpr2027/output/pdf/web-cad-fem-laminate-extension.pdf",
+  "zip": "cvpr2027/output/datasets/web-cad-fem-laminate-extension.zip",
+  "native_cad_saved_fem_candidates": 2,
+  "complex_physics_cases": 1,
+  "certified_cases": 0,
+  "manufacturing_cad_drawing_leads": 1
+ },
+ "frame_kiteboard_web_extension": {
+  "catalog": "cvpr2027/data/web-cad-fem-assemblies/catalog.json",
+  "pdf": "cvpr2027/output/pdf/web-cad-fem-frame-kiteboard.pdf",
+  "zip": "cvpr2027/output/datasets/web-cad-fem-frame-kiteboard.zip",
+  "native_cad_saved_fem_field_cases": 1,
+  "cad_plot_scalar_reference_candidates": 1,
+  "certified_cases": 0
+ },
+ "nonlinear_modal_web_extension": {
+  "catalog": "cvpr2027/data/web-cad-fem-nonlinear-modal/catalog.json",
+  "pdf": "cvpr2027/output/pdf/web-cad-fem-nonlinear-modal.pdf",
+  "zip": "cvpr2027/output/datasets/web-cad-fem-nonlinear-modal.zip",
+  "native_cad_saved_field_cases": 5,
+  "native_cad_modal_table_candidates": 9,
+  "modal_reference_targets": 263,
+  "complex_wingbox_held": 1,
+  "certified_cases": 0
+ },
+ "marine_anchor_web_extension": {
+  "catalog": "cvpr2027/data/web-cad-fem-marine-anchor/catalog.json",
+  "pdf": "cvpr2027/output/pdf/web-cad-fem-marine-anchor.pdf",
+  "zip": "cvpr2027/output/datasets/web-cad-fem-marine-anchor.zip",
+  "engineering_families": 1,
+  "native_cad_saved_fem_candidates": 1,
+  "saved_static_load_sets": 3,
+  "mesh_nodes": 407855,
+  "certified_cases": 0
+ },
+ "rigging_turbine_web_extension": {
+  "catalogs": [
+   "cvpr2027/data/web-cad-fem-rigging-plate/catalog.json",
+   "cvpr2027/data/web-cad-fem-turbine-design/catalog.json"
+  ],
+  "pdf": "cvpr2027/output/pdf/web-cad-fem-rigging-turbine.pdf",
+  "zip": "cvpr2027/output/datasets/web-cad-fem-rigging-turbine.zip",
+  "unique_native_cad_plot_reference_candidates": 1,
+  "verified_original_dimensioned_drawings": 1,
+  "published_load_variants": 7,
+  "scalar_reference_targets": 21,
+  "raw_saved_field_cases": 0,
+  "complex_turbine_source_held": 1,
+  "certified_cases": 0
+ },
+ "gear_finger_rod_web_extension": {
+  "catalogs": [
+   "cvpr2027/data/web-cad-fem-soft-finger/catalog.json",
+   "cvpr2027/data/web-cad-fem-landing-gear/catalog.json",
+   "cvpr2027/data/web-cad-fem-connecting-rod/catalog.json"
+  ],
+  "pdf": "cvpr2027/output/pdf/web-cad-fem-gear-finger-rod.pdf",
+  "zip": "cvpr2027/output/datasets/web-cad-fem-gear-finger-rod.zip",
+  "engineering_families": 3,
+  "native_cad_saved_solution_candidates": 3,
+  "native_step_plot_scalar_candidates": 2,
+  "numerical_plot_targets": 4,
+  "verified_new_dimensioned_engineering_drawings": 0,
+  "certified_cases": 0,
+  "important_limit": "Chambered-finger report says PDMS, saved decks use steel-like linear material. References require explicit source-physics interpretation."
+ },
+ "ansys_nodal_stress_recovery": {
+  "method": "ansys-mapdl-reader nodal_stress averages stored element-nodal stresses at common corner nodes, with NaNs where output is unavailable",
+  "applies_to": [
+   "marine_anchor_web_extension",
+   "gear_finger_rod_web_extension"
+  ],
+  "scoring_rule": "Match recovered averaged corner-node stress scope; never compare directly with unaveraged integration-point stresses or fill missing nodes with zero",
+  "documentation": "https://reader.docs.pyansys.com/version/stable/api/rst.html#ansys.mapdl.reader.rst.Result.nodal_stress"
+ },
+ "composite_dynamics_web_extension": {
+  "catalog": "cvpr2027/data/web-cad-fem-composite-dynamics/catalog.json",
+  "pdf": "cvpr2027/output/pdf/web-cad-fem-composite-dynamics.pdf",
+  "zip": "cvpr2027/output/datasets/web-cad-fem-composite-dynamics.zip",
+  "publisher_projects": 5,
+  "native_cad_saved_result_candidates": 5,
+  "complex_industrial_geometry_candidates": 1,
+  "simple_geometry_physics_variety_candidates": 4,
+  "readable_static_rst_projects": 3,
+  "parser_held_projects": 2,
+  "verified_new_dimensioned_engineering_drawings": 0,
+  "certified_cases": 0,
+  "important_limit": "Wing shell decoding and stochastic vibration extraction held; synthetic fatigue curve excluded from fatigue-life scoring."
+ },
+ "pressure_brake_suspension_web_extension": {
+  "catalogs": [
+   "cvpr2027/data/web-cad-fem-pressure-vessel/catalog.json",
+   "cvpr2027/data/web-cad-fem-brake-thermal/catalog.json",
+   "cvpr2027/data/web-cad-fem-active-suspension/catalog.json",
+   "cvpr2027/data/web-cad-fem-robot-arm/catalog.json"
+  ],
+  "pdf": "cvpr2027/output/pdf/web-cad-fem-pressure-brake-suspension.pdf",
+  "zip": "cvpr2027/output/datasets/web-cad-fem-pressure-brake-suspension.zip",
+  "deformable_fem_engineering_families": 3,
+  "native_cad_raw_deformable_fem_candidates": 2,
+  "native_cad_plot_reference_candidates": 1,
+  "additional_rigid_motion_family_held": 1,
+  "independently_imported_valid_step_pairs": 2,
+  "verified_new_dimensioned_engineering_drawings": 0,
+  "certified_cases": 0,
+  "important_limit": "Pressure saved reference is Nimonic75; brake RTH is steady state, no structural RST; wishbone before/after scalar plots need CAD revision matching; robot is rigid-body joints and has no continuum stress fields."
+ },
+ "flange_pump_web_extension": {
+  "catalogs": [
+   "cvpr2027/data/web-cad-fem-flange-contact/catalog.json",
+   "cvpr2027/data/web-cad-fem-gear-pump/catalog.json"
+  ],
+  "pdf": "cvpr2027/output/pdf/web-cad-fem-flange-pump.pdf",
+  "zip": "cvpr2027/output/datasets/web-cad-fem-flange-pump.zip",
+  "engineering_families": 2,
+  "native_cad_saved_solution_candidates": 4,
+  "native_cad_plot_reference_candidates": 1,
+  "source_repositories": 4,
+  "saved_static_states": 18,
+  "gearpump_doe_rows_auxiliary": 9,
+  "independently_imported_brep_pairs": 0,
+  "verified_new_dimensioned_engineering_drawings": 0,
+  "certified_cases": 0,
+  "important_limits": "Flange projects share sector-model family; source Saturn README conflicts with static imperial steel/A286 saved deck. Pump DOE displacement label conflicts with contour units; native variant matching unresolved."
+ },
+ "vehicle_shear_frame_web_extension": {
+  "catalogs": [
+   "cvpr2027/data/web-cad-fem-fsae-chassis/catalog.json",
+   "cvpr2027/data/web-cad-fem-gokart-chassis/catalog.json",
+   "cvpr2027/data/web-cad-fem-shear-frame/catalog.json",
+   "cvpr2027/data/web-cad-fem-workshop-archives/catalog.json"
+  ],
+  "pdf": "cvpr2027/output/pdf/web-cad-fem-vehicle-shear-frames.pdf",
+  "zip": "cvpr2027/output/datasets/web-cad-fem-vehicle-shear-frames.zip",
+  "source_projects_with_reference_evidence": 3,
+  "engineering_families": 2,
+  "geometry_groups": "Vehicle chassis: FSAE and go-kart distinct designs; assembled laboratory shear-frame damage family.",
+  "native_cad_saved_solution_candidates": 4,
+  "native_cad_plot_reference_candidates": 1,
+  "native_abaqus_model_numerical_reference_candidates": 4,
+  "source_dimensioned_figure_files_verified": 3,
+  "complete_manufacturing_drawing_packages_verified": 0,
+  "certified_cases": 0,
+  "workshop_archives_held_without_saved_results": 7,
+  "important_limit": "FSAE legacy beam result extraction disagrees with source maxima, all exploratory arrays excluded. Shear acceleration label g has unresolved B/1000 conversion; no ODB. Gokart fatigue-life prose not admitted."
+ },
+ "cycloidal_engine_web_extension": {
+  "catalogs": [
+   "cvpr2027/data/web-cad-fem-cycloidal-drive/catalog.json",
+   "cvpr2027/data/web-cad-fem-engine-tbc/catalog.json",
+   "cvpr2027/data/web-cad-fem-piston-drawing/catalog.json",
+   "cvpr2027/data/web-cad-fem-held-machine-leads/catalog.json"
+  ],
+  "pdf": "cvpr2027/output/pdf/web-cad-fem-cycloidal-engine.pdf",
+  "zip": "cvpr2027/output/datasets/web-cad-fem-cycloidal-engine.zip",
+  "publisher_projects_with_reference_evidence": 3,
+  "broad_engineering_families": 2,
+  "cycloidal_component_study_groups": 15,
+  "cycloidal_unique_saved_solutions": 31,
+  "cycloidal_primary_component_reference_candidates": 28,
+  "coated_piston_published_configuration_candidates": 3,
+  "piston_assembly_conditional_plot_candidate": 1,
+  "verified_new_complete_dimensioned_drawing_packages": 0,
+  "certified_cases": 0,
+  "important_limit": "Component statics rather than gearbox assembly dynamics; engine CAD/report revision and thermal source conflicts held; piston native assembly references absent; turbine geometry mismatch excluded."
+ },
+ "origami_valve_rod_drawing_web_extension": {
+  "catalogs": [
+   "cvpr2027/data/web-cad-fem-kresling-origami/catalog.json",
+   "cvpr2027/data/web-cad-fem-valve-transient/catalog.json",
+   "cvpr2027/data/web-cad-fem-engine-rod-drawing/catalog.json",
+   "cvpr2027/data/web-drawing-fem-mounting-flange/catalog.json",
+   "cvpr2027/data/web-cad-fem-rocket-turbopump/catalog.json"
+  ],
+  "pdf": "cvpr2027/output/pdf/web-cad-fem-origami-valve-rod.pdf",
+  "zip": "cvpr2027/output/datasets/web-cad-fem-origami-valve-rod.zip",
+  "CAD_FEM_source_projects": 3,
+  "new_broad_family_candidates": 2,
+  "rod_existing_family_new_source_cases": 2,
+  "valve_native_BREP_trajectory_candidate": 1,
+  "origami_native_CAD_curve_candidate": 1,
+  "origami_auxiliary_FEM_curves": 36,
+  "drawing_only_additional_source_candidate": 1,
+  "drawing_auxiliary_scalar_rows": 55,
+  "new_dimensioned_engineering_drawing_files_verified": 1,
+  "complete_manufacturing_drawing_packages_verified": 0,
+  "held_turbopump_no_structural_FEM": 1,
+  "certified_cases": 0
+ },
+ "grippers_leafspring_web_extension": {
+  "catalogs": [
+   "cvpr2027/data/web-cad-fem-pneumatic-gripper/catalog.json",
+   "cvpr2027/data/web-cad-fem-finray-contact/catalog.json",
+   "cvpr2027/data/web-cad-fem-leafspring-modal/catalog.json",
+   "cvpr2027/data/web-cad-fem-bistable-gripper-held/catalog.json"
+  ],
+  "pdf": "cvpr2027/output/pdf/web-cad-fem-grippers-leafspring.pdf",
+  "zip": "cvpr2027/output/datasets/web-cad-fem-grippers-leafspring.zip",
+  "CAD_FEM_source_projects": 3,
+  "final_gripper_raw_result_candidates": 1,
+  "baseline_gripper_CAD_plot_candidates": 1,
+  "A1_partial_component_plot_candidate": 1,
+  "FinRay_component_CAD_cache_candidate": 1,
+  "leafspring_surface_CAD_plot_candidate_held": 1,
+  "bistable_setup_only_sources_excluded": 1,
+  "new_verified_dimensioned_drawing_files": 0,
+  "certified_cases": 0
+ },
+ "uav_composite_pipe_shaft_web_extension": {
+  "catalogs": [
+   "cvpr2027/data/web-cad-fem-uav-assembly/catalog.json",
+   "cvpr2027/data/web-cad-fem-quadcopter-dynamics/catalog.json",
+   "cvpr2027/data/web-cad-fem-composite-pipe/catalog.json",
+   "cvpr2027/data/web-cad-fem-differential-shaft/catalog.json",
+   "cvpr2027/data/web-cad-fem-rear-axle/catalog.json"
+  ],
+  "pdf": "cvpr2027/output/pdf/web-cad-fem-uav-pipe-shaft.pdf",
+  "zip": "cvpr2027/output/datasets/web-cad-fem-uav-pipe-shaft.zip",
+  "CAD_FEM_evidence_projects": 3,
+  "mechanical_geometry_types": 2,
+  "UAV_report_plot_candidate": 1,
+  "quadcopter_raw_solution_candidates": 3,
+  "quadcopter_geometry_families": 1,
+  "composite_pipe_raw_source_candidate": 1,
+  "pipe_source_revisions_not_extra_families": 2,
+  "new_dimensioned_drawing_PDF_files": 1,
+  "additional_dimensioned_sketch_source_held": 1,
+  "excluded_conflicting_shaft_sources": 1,
+  "excluded_setup_only_axle_sources": 1,
+  "certified_cases": 0
+ },
+ "cover_wing_control_parking_web_extension": {
+  "catalogs": [
+   "cvpr2027/data/web-cad-fem-cylinder-cover/catalog.json",
+   "cvpr2027/data/web-cad-fem-titanium-wing/catalog.json",
+   "cvpr2027/data/web-cad-fem-dogbone-control/catalog.json",
+   "cvpr2027/data/web-cad-fem-parking-systems/catalog.json"
+  ],
+  "pdf": "cvpr2027/output/pdf/web-cad-fem-cover-wing-control.pdf",
+  "zip": "cvpr2027/output/datasets/web-cad-fem-cover-wing-control.zip",
+  "engineering_CAD_FEM_sources": 2,
+  "cover_static_candidate": 1,
+  "wing_static_modal_candidates": 2,
+  "wing_native_CAD_import_pending": true,
+  "simple_dogbone_control_sources": 1,
+  "dogbone_complex_task_count": 0,
+  "unpaired_parking_CAD_projects_held": 3,
+  "unpaired_dimensioned_drawing_files": 9,
+  "certified_cases": 0
+ },
+ "complex_assemblies_web_extension": {
+  "catalogs": [
+   "cvpr2027/data/web-cad-fem-crank-multiphysics/catalog.json",
+   "cvpr2027/data/web-cad-fem-pipe-flange-comparison/catalog.json",
+   "cvpr2027/data/web-cad-fem-shelf-pretension/catalog.json",
+   "cvpr2027/data/web-cad-fem-knuckle-joint/catalog.json"
+  ],
+  "pdf": "cvpr2027/output/pdf/web-cad-fem-complex-assemblies.pdf",
+  "zip": "cvpr2027/output/datasets/web-cad-fem-complex-assemblies.zip",
+  "CAD_FEM_evidence_source_projects": 4,
+  "geometry_families": 4,
+  "raw_result_source_projects": 2,
+  "distinct_raw_solved_cases": 3,
+  "plot_scalar_only_source_projects": 2,
+  "verified_dimensioned_image_assets": 1,
+  "native_SLDDRW_files_unrendered": 2,
+  "drawing_unit_conflicts": 1,
+  "certified_cases": 0,
+  "count_policy": "Same CAD variants, load stages, mirrored plots and duplicated archive RSTs do not add geometry families."
+ },
+ "gear_thermal_forming_web_extension": {
+  "catalogs": [
+   "cvpr2027/data/web-cad-fem-spur-gear-pair/catalog.json",
+   "cvpr2027/data/web-cad-fem-ventilated-rotor/catalog.json",
+   "cvpr2027/data/web-cad-fem-finned-heatsink/catalog.json",
+   "cvpr2027/data/web-cad-fem-nx-heatsink/catalog.json",
+   "cvpr2027/data/web-cad-fem-titanium-forming-held/catalog.json",
+   "cvpr2027/data/web-cad-fem-crane-drawings-held/catalog.json"
+  ],
+  "pdf": "cvpr2027/output/pdf/web-cad-fem-gear-thermal-forming.pdf",
+  "zip": "cvpr2027/output/datasets/web-cad-fem-gear-thermal-forming.zip",
+  "CAD_FEM_evidence_projects": 4,
+  "complex_geometry_sources": 2,
+  "thermal_control_sources": 2,
+  "raw_field_candidates": 0,
+  "partial_forming_source_held": 1,
+  "unpaired_crane_CAD_source_held": 1,
+  "native_crane_DWG_unrendered": 3,
+  "certified_cases": 0,
+  "count_policy": "Plot/scalar candidates and controls separated; sixformingrows, duplicateplots and copied repository do not add ready tasks."
+ },
+ "native_fields_cooling_wheel_web_extension": {
+  "catalogs": [
+   "cvpr2027/data/web-cad-fem-elmer-cooling/catalog.json",
+   "cvpr2027/data/web-cad-fem-wheel-rim-fields/catalog.json",
+   "cvpr2027/data/web-cad-fem-testbench-fields/catalog.json"
+  ],
+  "pdf": "cvpr2027/output/pdf/web-cad-fem-native-fields.pdf",
+  "zip": "cvpr2027/output/datasets/web-cad-fem-native-fields.zip",
+  "new_source_repositories": 2,
+  "new_geometry_families": 3,
+  "complex_geometry_families": 2,
+  "simple_thermalflow_controls": 1,
+  "saved_analysis_candidates": 7,
+  "wheel_native_import_pending": true,
+  "duplicate_testframe_new_family_count": 0,
+  "unpaired_strip_stages_held": 4,
+  "certified_cases": 0,
+  "count_policy": "Fivewheelvariantsonegeometry,twoElmergeometries;modalsets/nodes/restartstages/copiedframeare notnewCADfamilies."
+ },
+ "portal_truss_archive_mismatch_web_extension": {
+  "catalogs": [
+   "cvpr2027/data/web-cad-fem-portal-frame/catalog.json",
+   "cvpr2027/data/web-cad-fem-bolted-truss/catalog.json",
+   "cvpr2027/data/web-cad-fem-cubesat-frame/catalog.json"
+  ],
+  "pdf": "cvpr2027/output/pdf/web-cad-fem-portal-truss.pdf",
+  "zip": "cvpr2027/output/datasets/web-cad-fem-portal-truss.zip",
+  "original_downloads_verified": 78,
+  "archive_members_byte_verified": 58,
+  "paired_source_evidence_families": 2,
+  "complex_FEM_family_candidates": 1,
+  "idealized_truss_controls": 1,
+  "CubeSat_mismatch_held": 1,
+  "certified_cases": 0,
+  "generated_cad": 0,
+  "new_solver_runs": 0,
+  "count_policy": "Portal iterations/buckling one family. Truss nine load rows one idealized control. CubeSat archive mismatch adds zero verified CubeSat families. Source findings not certified benchmark items."
+ },
+ "machinery_thermal_web_extension": {
+  "catalogs": [
+   "cvpr2027/data/web-cad-fem-shock-absorber/catalog.json",
+   "cvpr2027/data/web-cad-fem-screw-jack/catalog.json",
+   "cvpr2027/data/web-cad-fem-industrial-thermal/catalog.json",
+   "cvpr2027/data/web-cad-fem-piston-pin-assembly/catalog.json"
+  ],
+  "pdf": "cvpr2027/output/pdf/web-cad-fem-machinery-thermal.pdf",
+  "zip": "cvpr2027/output/datasets/web-cad-fem-machinery-thermal.zip",
+  "original_downloads_verified": 65,
+  "new_paired_repositories": 3,
+  "new_geometry_families": 4,
+  "new_complex_assembly_families": 2,
+  "new_thermal_controls": 2,
+  "original_archive_files_byte_verified": 55,
+  "raw_RTH_candidates": 3,
+  "duplicate_piston_new_family_count": 0,
+  "certified_cases": 0,
+  "generated_cad": 0,
+  "new_solver_runs": 0,
+  "count_policy": "Shock and screw jack one family each; curved pipe and elbow two controls. Three insulation RTH variants one curved-pipe family. Existing piston duplicate adds zero. Nodes, animation frames, report time rows and assembly part files do not inflate item counts."
+ },
+ "final_cadfem_benchmark_v1": {
+  "version": "1.5 (2026-10-14: v1.4 balanced suites + plasticity (fcVM limit loads) and fracture (Code_Aster SSLP311) families, independently checked)",
+  "folder": "cvpr2027/output/datasets/cadfem-bench-v1.5",
+  "copy": "SVG/cadfem-bench-v1.5 (+ .zip)",
+  "zip": {
+   "path": "cvpr2027/output/datasets/cadfem-bench-v1.5.zip",
+   "sha256": "fcfb05776109b0d5cd0adfd742a7bb3758a6e33257808676c354cf52c713bfa5"
+  },
+  "card": "cvpr2027/data/cadfem-bench-v1/README.md",
+  "pdf": "cvpr2027/output/pdf/cadfem-bench-v1.5.pdf",
+  "builder": "release.py (v1.3 pool) -> release_v14.py + suites.py (v1.4, Codex) -> release_v15.py -> finish_suites.py --copy-to <dir>",
+  "audit": "cvpr2027/output/audits/cadfem-bench-v1/AUDIT.md",
+  "archived_v1_0": "cvpr2027/output/audits/cadfem-bench-v1/released-v1.0.zip",
+  "tasks_active": 46,
+  "graded_outputs": 95,
+  "held_tasks": 51,
+  "excluded_local_targets": 190,
+  "engineering_families": 12,
+  "evidence_files": 477,
+  "independently_reproduced_tasks": 15,
+  "status": "pilot; model trials not run",
+  "convergence_study": "cvpr2027/output/cycloidal-convergence-study (Codex session, scripts/run_cycloidal_convergence.py)",
+  "convergence_band_tasks": 11,
+  "fcvm_buckling_tasks": 4,
+  "geometry_gate_tasks": 9,
+  "fcvm_study": "cvpr2027/output/fcvm-buckling-study (scripts/fcvm_buckling_check.py via scripts/cadfem_bench/fam_fcvm.py)",
+  "geometry_references": "cvpr2027/output/geometry-references-v1.3 (scripts/cadfem_bench/geometry_refs.py)",
+  "suite_counts": {
+   "primary": 46,
+   "calibration": 7,
+   "reserved_public": 78,
+   "related_public": 1,
+   "full_source_backed_pool": 132
+  },
+  "previous_release": {
+   "version": "1.4",
+   "folder": "SVG/cadfem-bench-v1.4",
+   "zip_sha256": "fc4e844948de589b682452fb42e11fccc60ff8dfec8c634df749e97bd7b10ab3"
+  },
+  "plastic_study": "cvpr2027/output/fcvm-plastic-study (scripts/fcvm_plastic_check.py)",
+  "crack_study": "cvpr2027/output/interface-crack-study (scripts/interface_crack_g.py)"
+ },
+ "fcvm_breadth_web_extension": {
+  "source": "https://github.com/HarryvL/fcVM-workbench",
+  "catalog": "cvpr2027/data/web-cad-fem-fcvm-breadth/catalog.json",
+  "native_CAD_result_source_pairs": 14,
+  "new_active_benchmark_admissions": 0,
+  "published_table_rows": 996,
+  "original_VTK_files": 5,
+  "locally_generated_CAD": 0,
+  "reference_solves": 0,
+  "status": "held_for_setup_revision_and_metric_validation"
+ }
+}

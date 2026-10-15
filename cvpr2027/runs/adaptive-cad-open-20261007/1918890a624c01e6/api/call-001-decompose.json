@@ -1,0 +1,36 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "Qwen/Qwen3.5-35B-A3B-FP8",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .cylinder(22.9, 26.8)\\n    .faces(\\\"<Z\\\")\\n    .chamfer(1.0)\\n    .faces(\\\">Z\\\")\\n    .faces(\\\">Z\\\").workplane()\\n    .polarArray(20.9, 0, 360, 6)\\n    .hole(3.2)\\n    .union(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(0, 0, 12.75), rotate=cq.Vector(0, 0, 0))\\n            .cylinder(2.6, 15.4)\\n    )\\n    .union(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(0, 0, 27.8), rotate=cq.Vector(0, 0, 0))\\n            .cylinder(27.5, 12.0)\\n    )\\n    .faces(\\\">Z\\\").workplane()\\n    .hole(11.2)\\n)\\nshow_object(result)\", \"instruction\": \"Set the outer cylinder height equal to half the outer radius; the bolt holes, raised face, and neck stay the same.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"f1730730fb661064cf85327e77bd3e75ece4022c9f87c6af01a89eb3942abb87\", \"instruction\": \"Set the central top through-bore diameter equal to the outer cylinder radius; the boss, ear bolt holes, and ear plate stay the same.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .hole(20.55)\\\"], \\\"start\\\": 30}]}\", \"strategies\": [], \"context\": [\"30:     .hole(17.0)\"]}, {\"task_id\": \"78e59881d95328bc0f38664d6e04278bc8cc90a7ad75e5da658a39758f05d2a4\", \"instruction\": \"Set the bottom outer radius equal to the top outer radius; wall thickness, bottom thickness, and height stay the same.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .lineTo(56.1, 0.0)\\\"], \\\"start\\\": 4}, {\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .lineTo(51.7, 5.9)\\\"], \\\"start\\\": 7}]}\", \"strategies\": [], \"context\": [\"4:     .lineTo(48.4, 0.0)\", \"7:     .lineTo(44.0, 5.9)\"]}, {\"task_id\": \"799d75af88373cd4be312a28a86290b050df3709a7f64b0e6e0d73b0f8c389da\", \"instruction\": \"Set the standoff height equal to three times the original height; the outer radius and bore stay the same.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .cylinder(15.3, 17.7)\\\"], \\\"start\\\": 3}]}\", \"strategies\": [], \"context\": [\"3:     .cylinder(5.1, 17.7)\"]}]}"
+   }
+  ],
+  "temperature": 0.6,
+  "top_p": 0.95,
+  "top_k": 20,
+  "max_tokens": 8192
+ },
+ "usage": {
+  "prompt_tokens": 922,
+  "total_tokens": 9114,
+  "completion_tokens": 8192,
+  "prompt_tokens_details": null,
+  "completion_tokens_details": {
+   "reasoning_tokens": 8192
+  }
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "length",
+ "response": "",
+ "error_type": "ValueError",
+ "error": "Incomplete model response"
+}

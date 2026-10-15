@@ -1,0 +1,43 @@
+{
+ "kind": "semantic",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "Qwen/Qwen3.5-35B-A3B-FP8",
+  "messages": [
+   {
+    "role": "system",
+    "content": "You verify mechanical CAD edits from rendered views."
+   },
+   {
+    "role": "user",
+    "content": [
+     {
+      "type": "text",
+      "text": "Edit instruction: Rotate the entire part by 75 degrees about the diagonal axis (1, 1, 0).\n\nThe image shows the ORIGINAL part (left) and the EDITED part (right), isometric views (top row) and top views (bottom row). Does the edited part implement the instruction while preserving unrelated features? Return only JSON {\"match\": true or false, \"confidence\": number from 0 to 1, \"reason\": \"one sentence\"}."
+     },
+     {
+      "type": "image_url",
+      "image_url": "<png omitted>"
+     }
+    ]
+   }
+  ],
+  "temperature": 0.6,
+  "top_p": 0.95,
+  "top_k": 20,
+  "max_tokens": 12288
+ },
+ "usage": {
+  "prompt_tokens": 380,
+  "total_tokens": 9832,
+  "completion_tokens": 9452,
+  "prompt_tokens_details": null,
+  "completion_tokens_details": {
+   "reasoning_tokens": 9373
+  }
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "\n\n{\"match\": false, \"confidence\": 0.95, \"reason\": \"The instruction specifies a 75-degree rotation about a horizontal axis (1, 1, 0), which would tilt the top face to be nearly vertical, but the edited top view clearly shows the top face (hexagon with hole) as if the part is still upright.\"}"
+}

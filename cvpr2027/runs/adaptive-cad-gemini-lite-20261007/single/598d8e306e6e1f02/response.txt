@@ -1,0 +1,33 @@
+```json
+{
+  "edits": [
+    {
+      "start": 0,
+      "delete": 113,
+      "insert": [
+        "import cadquery as cq",
+        "",
+        "arm_width = 21.92",
+        "arm_length = 16.44",
+        "thickness = 7.4",
+        "half_stage = arm_width / 2.0",
+        "outer_extent = half_stage + arm_length",
+        "",
+        "# Create a flat cross-shaped solid of uniform thickness",
+        "result = (",
+        "    cq.Workplane(\"XY\")",
+        "    .rect(arm_width, outer_extent * 2)",
+        "    .extrude(thickness)",
+        "    .union(",
+        "        cq.Workplane(\"XY\")",
+        "        .rect(outer_extent * 2, arm_width)",
+        "        .extrude(thickness)",
+        "    )",
+        ")",
+        "",
+        "show_object(result)"
+      ]
+    }
+  ]
+}
+```

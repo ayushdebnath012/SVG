@@ -1,0 +1,54 @@
+{
+  "case_id": "NAFEMS-LE10",
+  "family": "Pressure-loaded elasticity",
+  "source_url": "https://www.seamplex.com/feenox/examples/mechanical.html",
+  "public_training_contamination": "possible",
+  "qois": [
+    {
+      "key": "sigma_yy_at_D",
+      "unit": "MPa",
+      "value": -5.37968,
+      "kind": "published_FEM_solver_output",
+      "locator": "Published terminal block in section NAFEMS LE10 thick elliptic plate"
+    }
+  ],
+  "accepted_tolerances": null,
+  "certified_scored_release": false,
+  "independent_baseline_verified": false,
+  "expected_physics": "BC upper    p=1      # 1 Mpa\nBC DCD'C'   v=0      # Face DCD'C' zero y-displacement\nBC ABA'B'   u=0      # Face ABA'B' zero x-displacement\nBC BCB'C'   u=0 v=0  # Face BCB'C' x and y displ. fixed\nBC midplane w=0      #  z displacements fixed along mid-plane\nE = 210e3   # Young modulus in MPa\nnu = 0.3    # Poisson's ratio\n",
+  "expected_formulation": "3D linear elasticity",
+  "original_assets": [
+    {
+      "role": "cad",
+      "path": "cvpr2027/tmp/engineering-fem-crawl/repo/examples/nafems-le10.step",
+      "sha256": "1ebf08d9982ee89df40f4e1913aae56e7beb6cb622ce37b0b1e9bffa592eb764",
+      "bytes": 23076
+    },
+    {
+      "role": "results_file",
+      "path": "cvpr2027/tmp/engineering-fem-crawl/mechanical.html",
+      "sha256": "ed2b70c18a89a800be5db34fe597d7765be1e9c2762dce8b78e7f78eac1c0d58",
+      "bytes": 148764
+    },
+    {
+      "role": "drawing",
+      "path": "cvpr2027/tmp/engineering-fem-crawl/repo/examples/nafems-le10-problem-input.svg.png",
+      "sha256": "2470b3b185d755830b656a1025c03f5aeed4e698fcc20820fbbbc2514d580a10",
+      "bytes": 479460
+    },
+    {
+      "path": "cvpr2027/tmp/engineering-fem-crawl/repo/examples/nafems-le10.fee",
+      "sha256": "a75f6fb3dbe7ccf8dce332ff798ea98a8852d38df61cdbe28415b99d9e351461",
+      "bytes": 733,
+      "role": "original_file"
+    },
+    {
+      "path": "cvpr2027/tmp/engineering-fem-crawl/repo/examples/nafems-le10.geo",
+      "sha256": "e8e375bb75668844a0f8a0826b5d4ef2db7f7b24f37afbc110afc31be9cfffc7",
+      "bytes": 1180,
+      "role": "original_mesh_definition"
+    }
+  ],
+  "geometry_criteria": "Trusted review of topology, dimensions, units and CAD-to-mesh correspondence.",
+  "convergence_criteria": "Trusted review of at least two distinct refinements and stress recovery; numeric agreement alone does not pass."
+}

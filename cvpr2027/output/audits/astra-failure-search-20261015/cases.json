@@ -1,0 +1,105 @@
+[
+  {
+    "case": {
+      "n": 4,
+      "id": "d000c8c09d558154",
+      "category": "B",
+      "note": "union chain inserted after a completed statement; patch invalid",
+      "tier": "T5",
+      "component": "propeller",
+      "instruction": "Add a small flat round boss on top of the central hub, 16 mm in diameter and 3 mm thick, centered on the central axis above the existing tapered top of the hub.",
+      "volume_iou": null,
+      "surface_iou": 0.0,
+      "passes_all_checks": false,
+      "rescued_by_other_astra_draft": [],
+      "qwen_single": false,
+      "qwen_pipeline": false
+    },
+    "scope": "Historical vanilla CAD-editing draft; not a published CAD+FEM numerical benchmark failure",
+    "evidence_path": "/Users/ayushdebnath/SVG/cvpr2027/runs/got-fem-astra-20261007/d000c8c09d558154/full.json",
+    "evidence_sha256": "0796dbb1ed86ccdbe84a8c94522a1653908a4dc0b2cafe90816717e5e15ac96a",
+    "saved_evaluation": {
+      "name": "vanilla",
+      "code": null,
+      "gates": false,
+      "fem": {
+        "ok": false,
+        "error": "not executed"
+      },
+      "numbers_ok": null,
+      "changed": null,
+      "cluster": null,
+      "robustness": null
+    }
+  },
+  {
+    "case": {
+      "n": 22,
+      "id": "b61bd7f12f1b5e94",
+      "category": "C",
+      "note": "holes drilled along Y (XZ workplane) instead of through the wide faces along Z",
+      "tier": "T5",
+      "component": "connecting_rod",
+      "instruction": "Drill 4 round through-passages of 4 mm diameter through the flat middle section of the rod, in a single straight line at 25 mm, 40 mm, 55 mm, and 70 mm along the length, perpendicular to the wide flat faces.",
+      "volume_iou": 0.9318309902646096,
+      "surface_iou": 0.8536842105263158,
+      "passes_all_checks": true,
+      "rescued_by_other_astra_draft": [],
+      "qwen_single": false,
+      "qwen_pipeline": false
+    },
+    "scope": "Historical vanilla CAD-editing draft; not a published CAD+FEM numerical benchmark failure",
+    "evidence_path": "/Users/ayushdebnath/SVG/cvpr2027/runs/got-fem-astra-20261007/b61bd7f12f1b5e94/full.json",
+    "evidence_sha256": "8510c588ca8498a6016bbf906b1ed789f5f92c70316052ae910e1f16251ebcef",
+    "saved_evaluation": {
+      "name": "vanilla",
+      "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(8.5, 15.5)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(47.1, 0, 0), rotate=cq.Vector(0, 0, 0))\n            .box(64.2, 8.5, 11.5)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(89.5, 0, 0.0), rotate=cq.Vector(0, 0, 0))\n            .cylinder(8.5, 10.8)\n    )\n    .faces(\">Z\").workplane()\n    .hole(20.2)\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(89.5, 0, 0.0), rotate=cq.Vector(0, 0, 0))\n            .cylinder(12.75, 7.1)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(47.1, 0, 6.95), rotate=cq.Vector(0, 0, 0))\n            .box(50.56, 8.5, 3.4)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(47.1, 0, -6.95), rotate=cq.Vector(0, 0, 0))\n            .box(50.56, 8.5, 3.4)\n    )\n    .faces(\">Y\")\n    .faces(\">Y\").workplane()\n    .pushPoints([(2.35, 0.0)])\n    .hole(2.4)\n    .cut(\n        cq.Workplane(\"XZ\")\n            .pushPoints([(25, 0), (40, 0), (55, 0), (70, 0)])\n            .circle(2)\n            .extrude(10, both=True)\n    )\n)\nshow_object(result)\n",
+      "gates": true,
+      "fem": {
+        "ok": true,
+        "compliance": 1.9628819479823795e-07,
+        "components": 1,
+        "nodes": 1592
+      },
+      "numbers_ok": true,
+      "changed": true,
+      "cluster": 0,
+      "robustness": 1.0
+    }
+  },
+  {
+    "case": {
+      "n": 1,
+      "id": "277d8aa207505807",
+      "category": "D",
+      "note": "plate length doubled; dependent plate and hole offsets propagated with wrong arithmetic, one hole offset not moved",
+      "tier": "T3",
+      "component": "twisted_bracket",
+      "instruction": "Set each flange plate length equal to twice the plate width; the twist segment, plate thickness, and hole pattern (relative to plate ends) stay the same.",
+      "volume_iou": 0.5750843192863532,
+      "surface_iou": 0.5509641873278237,
+      "passes_all_checks": true,
+      "rescued_by_other_astra_draft": [],
+      "qwen_single": false,
+      "qwen_pipeline": false
+    },
+    "scope": "Historical vanilla CAD-editing draft; not a published CAD+FEM numerical benchmark failure",
+    "evidence_path": "/Users/ayushdebnath/SVG/cvpr2027/runs/got-fem-astra-20261007/277d8aa207505807/full.json",
+    "evidence_sha256": "69685e3a414c566fead0d803c6be393c6c0ab47e0ff3831d3c752f93025173d0",
+    "saved_evaluation": {
+      "name": "vanilla",
+      "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .transformed(offset=cq.Vector(16.0, 0, -1.5), rotate=cq.Vector(0, 0, 0))\n    .rect(32.0, 16.0)\n    .extrude(3.0)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(32.0, 0, 0), rotate=cq.Vector(0, 90, 0))\n            .rect(3.0, 16.0)\n            .transformed(offset=cq.Vector(0, 0, 10.2), rotate=cq.Vector(0, 0, 90))\n            .rect(3.0, 16.0)\n            .loft(combine=True)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(58.2, -1.5, 0), rotate=cq.Vector(-90, 0, 0))\n            .rect(32.0, 16.0)\n            .extrude(3.0)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(17.5, 0, -1.7), rotate=cq.Vector(0, 0, 0))\n            .circle(2.5)\n            .extrude(3.4)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(14.5, 0, -1.7), rotate=cq.Vector(0, 0, 0))\n            .circle(2.5)\n            .extrude(3.4)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(59.7, -1.7, 0), rotate=cq.Vector(-90, 0, 0))\n            .circle(2.5)\n            .extrude(3.4)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(56.7, -1.7, 0), rotate=cq.Vector(-90, 0, 0))\n            .circle(2.5)\n            .extrude(3.4)\n    )\n)\nshow_object(result)\n",
+      "gates": true,
+      "fem": {
+        "ok": true,
+        "compliance": 9.358685518972884e-07,
+        "components": 1,
+        "nodes": 978
+      },
+      "numbers_ok": null,
+      "changed": true,
+      "cluster": 0,
+      "robustness": 0.0
+    }
+  }
+]

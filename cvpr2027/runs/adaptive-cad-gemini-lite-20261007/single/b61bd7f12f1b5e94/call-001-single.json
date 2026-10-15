@@ -1,0 +1,28 @@
+{
+ "kind": "single",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "You edit mechanical CAD. Return only JSON {\"edits\":[{\"start\":0,\"delete\":0,\"insert\":[\"replacement line\"]}]}. Indices are zero-based lines of the ORIGINAL input; operations must be ordered, nonoverlapping and in bounds. Preserve unrelated features. The supplied representation determines syntax. Return no explanation or invented physics results. Geometry execution and FEM checks are performed by external tools; never claim verification."
+   },
+   {
+    "role": "user",
+    "content": "Representation: cadquery\nOriginal CAD (line indices are implicit):\nimport cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(8.5, 15.5)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(47.1, 0, 0), rotate=cq.Vector(0, 0, 0))\n            .box(64.2, 8.5, 11.5)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(89.5, 0, 0.0), rotate=cq.Vector(0, 0, 0))\n            .cylinder(8.5, 10.8)\n    )\n    .faces(\">Z\").workplane()\n    .hole(20.2)\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(89.5, 0, 0.0), rotate=cq.Vector(0, 0, 0))\n            .cylinder(12.75, 7.1)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(47.1, 0, 6.95), rotate=cq.Vector(0, 0, 0))\n            .box(50.56, 8.5, 3.4)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(47.1, 0, -6.95), rotate=cq.Vector(0, 0, 0))\n            .box(50.56, 8.5, 3.4)\n    )\n    .faces(\">Y\")\n    .faces(\">Y\").workplane()\n    .pushPoints([(2.35, 0.0)])\n    .hole(2.4)\n)\nshow_object(result)Edit instruction:\nDrill 4 round through-passages of 4 mm diameter through the flat middle section of the rod, in a single straight line at 25 mm, 40 mm, 55 mm, and 70 mm along the length, perpendicular to the wide flat faces."
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 8192
+ },
+ "usage": {
+  "completion_tokens": 122,
+  "prompt_tokens": 635,
+  "total_tokens": 757
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\"edits\":[{\"start\":30,\"delete\":3,\"insert\":[    .faces(\">Y\")\",    .faces(\">Y\").workplane()\",    .pushPoints([(2.35, 0.0)])\",    .hole(2.4)\",    .faces(\">Y\").workplane()\",    .pushPoints([(-25.0, 0), (-40.0, 0), (-55.0, 0), (-70.0, 0)])\",    .hole(4.0)\"}]}\n```"
+}

@@ -1,0 +1,807 @@
+{
+ "task_id": "75843f475cb19d81a09bd9fa261f0e6f7a90ecafbc977a5b7ba6fcc5f4228a62",
+ "status": "UNVERIFIED",
+ "prediction": "```json\n{\"edits\":[{\"start\":4,\"delete\":6,\"insert\":[]}]}\n```",
+ "selected_node": null,
+ "bank": [],
+ "pareto": [],
+ "stop": "expansion_limit",
+ "nodes": [
+  {
+   "id": 0,
+   "candidate": "```json\n{\"edits\":[{\"start\":4,\"delete\":6,\"insert\":[]}]}\n```",
+   "depth": 0,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 88822.48685851226,
+       "area": 16225.327171132358,
+       "solids": 1,
+       "faces": 12,
+       "bbox_x": 33.0,
+       "bbox_y": 33.0,
+       "bbox_z": 83.0
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "FAIL",
+      "confidence": 0.2,
+      "reason": "The edited part incorrectly fills in the L-shape to form a solid block and changes the overall geometry significantly, rather than just removing the cut and fillet.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-00.png"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.2,
+     0.0,
+     -6.0
+    ],
+    "score": 0.194,
+    "diagnosis": [
+     {
+      "stage": "semantics",
+      "status": "FAIL",
+      "confidence": 0.2,
+      "reason": "The edited part incorrectly fills in the L-shape to form a solid block and changes the overall geometry significantly, rather than just removing the cut and fillet.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-00.png"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 3,
+   "visits": 4,
+   "final": null,
+   "edges": [
+    0,
+    1
+   ]
+  },
+  {
+   "id": 1,
+   "candidate": "{\"edits\": [{\"delete\": 6, \"insert\": [], \"start\": 4}]}",
+   "depth": 1,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 88822.48685851226,
+       "area": 16225.327171132358,
+       "solids": 1,
+       "faces": 12,
+       "bbox_x": 33.0,
+       "bbox_y": 33.0,
+       "bbox_z": 83.0
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "FAIL",
+      "confidence": 0.0,
+      "reason": "The edited part completely changes the shape from an L-bracket into a solid block, rather than just removing the cut and fillet.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-01.png"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -6.0
+    ],
+    "score": -0.006,
+    "diagnosis": [
+     {
+      "stage": "semantics",
+      "status": "FAIL",
+      "confidence": 0.0,
+      "reason": "The edited part completely changes the shape from an L-bracket into a solid block, rather than just removing the cut and fillet.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-01.png"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 1,
+   "visits": 3,
+   "final": null,
+   "edges": [
+    2
+   ]
+  },
+  {
+   "id": 2,
+   "candidate": "{\"edits\": [{\"delete\": 6, \"insert\": [], \"start\": 4}, {\"delete\": 2, \"insert\": [], \"start\": 9}]}",
+   "depth": 1,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "FAIL",
+      "reason": "ValueError: Invalid original coordinates"
+     },
+     "constraints": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -1000.0
+    ],
+    "score": -1.0,
+    "diagnosis": [
+     {
+      "stage": "geometry",
+      "status": "FAIL",
+      "reason": "ValueError: Invalid original coordinates"
+     },
+     {
+      "stage": "constraints",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 0,
+   "visits": 1,
+   "final": null,
+   "edges": []
+  },
+  {
+   "id": 3,
+   "candidate": "{\"edits\": [{\"delete\": 6, \"insert\": [], \"start\": 4}]}",
+   "depth": 2,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 88822.48685851226,
+       "area": 16225.327171132358,
+       "solids": 1,
+       "faces": 12,
+       "bbox_x": 33.0,
+       "bbox_y": 33.0,
+       "bbox_z": 83.0
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "FAIL",
+      "confidence": 0.0,
+      "reason": "The edited part completely changes the shape from an L-bracket into a solid block, rather than just removing the cut and fillet.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-01.png"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -6.0
+    ],
+    "score": -0.006,
+    "diagnosis": [
+     {
+      "stage": "semantics",
+      "status": "FAIL",
+      "confidence": 0.0,
+      "reason": "The edited part completely changes the shape from an L-bracket into a solid block, rather than just removing the cut and fillet.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-01.png"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 0,
+   "visits": 1,
+   "final": null,
+   "edges": []
+  }
+ ],
+ "edges": [
+  {
+   "parent": 0,
+   "child": 1,
+   "visits": 3,
+   "total": -0.018000000000000002
+  },
+  {
+   "parent": 0,
+   "child": 2,
+   "visits": 1,
+   "total": -1.0
+  },
+  {
+   "parent": 1,
+   "child": 3,
+   "visits": 1,
+   "total": -0.006
+  }
+ ],
+ "events": [
+  {
+   "event": "decompose",
+   "plan": {
+    "steps": [
+     "Remove the rectangular through-cut operation",
+     "Remove the vertical-edge fillet operation"
+    ],
+    "invariants": [
+     "Outer box dimensions (33.0 x 33.0 x 83.0)",
+     "The two mounting-hole rows on the top face"
+    ],
+    "dependencies": [
+     [
+      0,
+      1
+     ]
+    ]
+   },
+   "memory_version": "3c5f0ea5ff71c054fee19b84d362e96797e2684c6d7f2a0ae559d2e8396fa62e",
+   "retrieved": [
+    {
+     "task_id": "34389cffaa74d42785d5fc2e7745256bfcdf3c7a260c50f8179795d939ba4273",
+     "instruction": "Remove the two legs on the +X side; only the top and the two -X legs remain.",
+     "candidate": "{\"edits\": [{\"delete\": 10, \"insert\": [], \"start\": 4}]}",
+     "strategies": [],
+     "context": [
+      "4:     .union(",
+      "5:         cq.Workplane(\"XY\")",
+      "6:             .transformed(offset=cq.Vector(93.75, 57.6, -78.25), rotate=cq.Vector(0, 0, 0))",
+      "7:             .box(18.7, 18.7, 143.1)",
+      "8:     )",
+      "9:     .union(",
+      "10:         cq.Workplane(\"XY\")",
+      "11:             .transformed(offset=cq.Vector(93.75, -57.6, -78.25), rotate=cq.Vector(0, 0, 0))",
+      "12:             .box(18.7, 18.7, 143.1)",
+      "13:     )"
+     ]
+    },
+    {
+     "task_id": "b8e847e2446dcb3b774d9f9abed4273b2f24a63f1bcbe413550c8001cbbfc1a2",
+     "instruction": "Remove the central through-hole so the hex nut becomes a solid hex prism. The hex outline, height, and the vertical edge chamfers all stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 3, \"insert\": [], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .faces(\">Z\").workplane()",
+      "6:     .circle(21.0)",
+      "7:     .cutThruAll()"
+     ]
+    },
+    {
+     "task_id": "36b7080c3255d1d22a0a7f6d44e94e1dd761dc84f1e859228f09486d6d4c8ae2",
+     "instruction": "Remove the rectangular through-cut on the top face so the L-bracket becomes a solid 23 \u00d7 23 \u00d7 133 bar. The outer box dimensions stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 4, \"insert\": [], \"start\": 4}]}",
+     "strategies": [],
+     "context": [
+      "4:     .faces(\">Z\").workplane()",
+      "5:     .center(1.5, 1.5)",
+      "6:     .rect(20.0, 20.0)",
+      "7:     .cutThruAll()"
+     ]
+    }
+   ]
+  },
+  {
+   "event": "initial_state",
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 14879.094188558203,
+       "area": 11754.799485168032,
+       "solids": 1,
+       "faces": 26,
+       "bbox_x": 33.0,
+       "bbox_y": 33.0,
+       "bbox_z": 83.0000002
+      }
+     },
+     "constraints": {
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -0.0
+    ],
+    "score": 0.0,
+    "diagnosis": [
+     {
+      "stage": "constraints",
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "initial"
+   }
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "semantics",
+     "status": "FAIL",
+     "confidence": 0.2,
+     "reason": "The edited part incorrectly fills in the L-shape to form a solid block and changes the overall geometry significantly, rather than just removing the cut and fillet.",
+     "basis": "Astra rendered-view judgement",
+     "image": "semantic-00.png"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "No physical contract supplied"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "No perturbation contract supplied"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "b8e847e2446dcb3b774d9f9abed4273b2f24a63f1bcbe413550c8001cbbfc1a2",
+     "instruction": "Remove the central through-hole so the hex nut becomes a solid hex prism. The hex outline, height, and the vertical edge chamfers all stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 3, \"insert\": [], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .faces(\">Z\").workplane()",
+      "6:     .circle(21.0)",
+      "7:     .cutThruAll()"
+     ]
+    },
+    {
+     "task_id": "bd1227697d55cc912e6d66bd87e6107e8ae09c79df64357f7b1a8b8652eb57b6",
+     "instruction": "Remove the rectangular slot cut from the top of the clevis (the cutBlind that creates the U-shape). The two pin holes and the outer box stay the same. The result is a solid block with two pin holes \u2014 no fork.",
+     "candidate": "{\"edits\": [{\"delete\": 3, \"insert\": [], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .rect(11.0, 28.9)",
+      "6:     .cutBlind(-37.3)",
+      "7:     .faces(\">Z\").workplane()"
+     ]
+    },
+    {
+     "task_id": "36b7080c3255d1d22a0a7f6d44e94e1dd761dc84f1e859228f09486d6d4c8ae2",
+     "instruction": "Remove the rectangular through-cut on the top face so the L-bracket becomes a solid 23 \u00d7 23 \u00d7 133 bar. The outer box dimensions stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 4, \"insert\": [], \"start\": 4}]}",
+     "strategies": [],
+     "context": [
+      "4:     .faces(\">Z\").workplane()",
+      "5:     .center(1.5, 1.5)",
+      "6:     .rect(20.0, 20.0)",
+      "7:     .cutThruAll()"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "FAIL",
+   "hypothesis": "Remove the central rectangular through-cut and the vertical-edge fillet by deleting lines 4 through 9."
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 2,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "semantics",
+     "status": "FAIL",
+     "confidence": 0.2,
+     "reason": "The edited part incorrectly fills in the L-shape to form a solid block and changes the overall geometry significantly, rather than just removing the cut and fillet.",
+     "basis": "Astra rendered-view judgement",
+     "image": "semantic-00.png"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "No physical contract supplied"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "No perturbation contract supplied"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "b8e847e2446dcb3b774d9f9abed4273b2f24a63f1bcbe413550c8001cbbfc1a2",
+     "instruction": "Remove the central through-hole so the hex nut becomes a solid hex prism. The hex outline, height, and the vertical edge chamfers all stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 3, \"insert\": [], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .faces(\">Z\").workplane()",
+      "6:     .circle(21.0)",
+      "7:     .cutThruAll()"
+     ]
+    },
+    {
+     "task_id": "bd1227697d55cc912e6d66bd87e6107e8ae09c79df64357f7b1a8b8652eb57b6",
+     "instruction": "Remove the rectangular slot cut from the top of the clevis (the cutBlind that creates the U-shape). The two pin holes and the outer box stay the same. The result is a solid block with two pin holes \u2014 no fork.",
+     "candidate": "{\"edits\": [{\"delete\": 3, \"insert\": [], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .rect(11.0, 28.9)",
+      "6:     .cutBlind(-37.3)",
+      "7:     .faces(\">Z\").workplane()"
+     ]
+    },
+    {
+     "task_id": "36b7080c3255d1d22a0a7f6d44e94e1dd761dc84f1e859228f09486d6d4c8ae2",
+     "instruction": "Remove the rectangular through-cut on the top face so the L-bracket becomes a solid 23 \u00d7 23 \u00d7 133 bar. The outer box dimensions stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 4, \"insert\": [], \"start\": 4}]}",
+     "strategies": [],
+     "context": [
+      "4:     .faces(\">Z\").workplane()",
+      "5:     .center(1.5, 1.5)",
+      "6:     .rect(20.0, 20.0)",
+      "7:     .cutThruAll()"
+     ]
+    }
+   ],
+   "path": [
+    1
+   ],
+   "status": "FAIL",
+   "hypothesis": "Remove the rectangular through-cut and the vertical edge fillet by deleting the corresponding chain lines."
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": true,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "semantics",
+     "status": "FAIL",
+     "confidence": 0.2,
+     "reason": "The edited part incorrectly fills in the L-shape to form a solid block and changes the overall geometry significantly, rather than just removing the cut and fillet.",
+     "basis": "Astra rendered-view judgement",
+     "image": "semantic-00.png"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "No physical contract supplied"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "No perturbation contract supplied"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "b8e847e2446dcb3b774d9f9abed4273b2f24a63f1bcbe413550c8001cbbfc1a2",
+     "instruction": "Remove the central through-hole so the hex nut becomes a solid hex prism. The hex outline, height, and the vertical edge chamfers all stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 3, \"insert\": [], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .faces(\">Z\").workplane()",
+      "6:     .circle(21.0)",
+      "7:     .cutThruAll()"
+     ]
+    },
+    {
+     "task_id": "bd1227697d55cc912e6d66bd87e6107e8ae09c79df64357f7b1a8b8652eb57b6",
+     "instruction": "Remove the rectangular slot cut from the top of the clevis (the cutBlind that creates the U-shape). The two pin holes and the outer box stay the same. The result is a solid block with two pin holes \u2014 no fork.",
+     "candidate": "{\"edits\": [{\"delete\": 3, \"insert\": [], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .rect(11.0, 28.9)",
+      "6:     .cutBlind(-37.3)",
+      "7:     .faces(\">Z\").workplane()"
+     ]
+    },
+    {
+     "task_id": "36b7080c3255d1d22a0a7f6d44e94e1dd761dc84f1e859228f09486d6d4c8ae2",
+     "instruction": "Remove the rectangular through-cut on the top face so the L-bracket becomes a solid 23 \u00d7 23 \u00d7 133 bar. The outer box dimensions stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 4, \"insert\": [], \"start\": 4}]}",
+     "strategies": [],
+     "context": [
+      "4:     .faces(\">Z\").workplane()",
+      "5:     .center(1.5, 1.5)",
+      "6:     .rect(20.0, 20.0)",
+      "7:     .cutThruAll()"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "FAIL",
+   "hypothesis": "Remove the rectangular through-cut and vertical edge fillet from the box by deleting those lines from the chain."
+  },
+  {
+   "event": "backtrack",
+   "to_node": 1
+  },
+  {
+   "event": "expand",
+   "parent": 1,
+   "node": 3,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "semantics",
+     "status": "FAIL",
+     "confidence": 0.0,
+     "reason": "The edited part completely changes the shape from an L-bracket into a solid block, rather than just removing the cut and fillet.",
+     "basis": "Astra rendered-view judgement",
+     "image": "semantic-01.png"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "No physical contract supplied"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "No perturbation contract supplied"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "36b7080c3255d1d22a0a7f6d44e94e1dd761dc84f1e859228f09486d6d4c8ae2",
+     "instruction": "Remove the rectangular through-cut on the top face so the L-bracket becomes a solid 23 \u00d7 23 \u00d7 133 bar. The outer box dimensions stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 4, \"insert\": [], \"start\": 4}]}",
+     "strategies": [],
+     "context": [
+      "4:     .faces(\">Z\").workplane()",
+      "5:     .center(1.5, 1.5)",
+      "6:     .rect(20.0, 20.0)",
+      "7:     .cutThruAll()"
+     ]
+    },
+    {
+     "task_id": "bd1227697d55cc912e6d66bd87e6107e8ae09c79df64357f7b1a8b8652eb57b6",
+     "instruction": "Remove the rectangular slot cut from the top of the clevis (the cutBlind that creates the U-shape). The two pin holes and the outer box stay the same. The result is a solid block with two pin holes \u2014 no fork.",
+     "candidate": "{\"edits\": [{\"delete\": 3, \"insert\": [], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .rect(11.0, 28.9)",
+      "6:     .cutBlind(-37.3)",
+      "7:     .faces(\">Z\").workplane()"
+     ]
+    },
+    {
+     "task_id": "b8e847e2446dcb3b774d9f9abed4273b2f24a63f1bcbe413550c8001cbbfc1a2",
+     "instruction": "Remove the central through-hole so the hex nut becomes a solid hex prism. The hex outline, height, and the vertical edge chamfers all stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 3, \"insert\": [], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .faces(\">Z\").workplane()",
+      "6:     .circle(21.0)",
+      "7:     .cutThruAll()"
+     ]
+    }
+   ],
+   "path": [
+    0,
+    2
+   ],
+   "status": "FAIL",
+   "hypothesis": "Remove the rectangular through-cut and the fillet by deleting lines 4 through 9."
+  }
+ ],
+ "config": {
+  "algorithm": "mcts",
+  "max_expansions": 4,
+  "max_depth": 3,
+  "width": 2,
+  "max_width": 4,
+  "exploration": 0.7,
+  "seconds": 2400.0
+ },
+ "memory_version": "3c5f0ea5ff71c054fee19b84d362e96797e2684c6d7f2a0ae559d2e8396fa62e",
+ "stored": null,
+ "seconds": 102.246858041,
+ "api": {
+  "mode": "live_astra",
+  "api_calls": 7,
+  "cost_usd": 0.0,
+  "budget_usd": 0.3,
+  "refused": 0
+ },
+ "tool_jobs": 4
+}

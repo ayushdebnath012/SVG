@@ -1,0 +1,630 @@
+{
+ "task_id": "fcb44c550d22f60b48836fb14557634d7d75f7b747aaa79f055c2bd26bf1c849",
+ "status": "UNVERIFIED",
+ "prediction": "```json\n{\n  \"edits\": [\n    {\n      \"start\": 5,\n      \"delete\": 2,\n      \"insert\": [\n        \"    .lineTo(14.0, 198.035)\",\n        \"    .lineTo(14.0, 247.735)\"\n      ]\n    },\n    {\n      \"start\": 10,\n      \"delete\": 2,\n      \"insert\": [\n        \"    .lineTo(26.0, 247.735)\",\n        \"    .lineTo(26.0, 198.035)\"\n      ]\n    }\n  ]\n}\n```",
+ "selected_node": null,
+ "bank": [],
+ "pareto": [],
+ "stop": "expansion_limit",
+ "nodes": [
+  {
+   "id": 0,
+   "candidate": "```json\n{\n  \"edits\": [\n    {\n      \"start\": 5,\n      \"delete\": 2,\n      \"insert\": [\n        \"    .lineTo(14.0, 198.035)\",\n        \"    .lineTo(14.0, 247.735)\"\n      ]\n    },\n    {\n      \"start\": 10,\n      \"delete\": 2,\n      \"insert\": [\n        \"    .lineTo(26.0, 247.735)\",\n        \"    .lineTo(26.0, 198.035)\"\n      ]\n    }\n  ]\n}\n```",
+   "depth": 0,
+   "verdict": {
+    "status": "UNKNOWN",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 1024896.7189459726,
+       "area": 261796.66372081122,
+       "solids": 1,
+       "faces": 12,
+       "bbox_x": 123.8,
+       "bbox_y": 445.3961,
+       "bbox_z": 123.8
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 1.0,
+      "reason": "The throat of the venturi tube is noticeably narrowed in the edited views while keeping the wide ends and overall length unchanged as requested.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-00.png"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "Exception: PLC Error:  A segment and a facet intersect at point"
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 1.005
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 1.005
+       }
+      ]
+     }
+    },
+    "objectives": [
+     1.0,
+     1.0,
+     -8.0
+    ],
+    "score": 1.092,
+    "diagnosis": [
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "Exception: PLC Error:  A segment and a facet intersect at point"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 3,
+   "visits": 4,
+   "final": null,
+   "edges": [
+    0
+   ]
+  },
+  {
+   "id": 1,
+   "candidate": "{\"edits\": [{\"delete\": 2, \"insert\": [\"    .lineTo(14.0, 198.035)\", \"    .lineTo(14.0, 247.735)\"], \"start\": 5}, {\"delete\": 2, \"insert\": [\"    .lineTo(26.0, 247.735)\", \"    .lineTo(26.0, 198.035)\"], \"start\": 9}]}",
+   "depth": 1,
+   "verdict": {
+    "status": "UNKNOWN",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 740893.0996402161,
+       "area": 269058.43117278,
+       "solids": 1,
+       "faces": 12,
+       "bbox_x": 123.8,
+       "bbox_y": 445.3961,
+       "bbox_z": 123.8
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 1.0,
+      "reason": "The venturi tube's narrow throat has been successfully tightened to the specified radii while keeping the wide ends and throat length unchanged.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-01.png"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "Exception: PLC Error:  A segment and a facet intersect at point"
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 1.005
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 1.005
+       }
+      ]
+     }
+    },
+    "objectives": [
+     1.0,
+     1.0,
+     -8.0
+    ],
+    "score": 1.092,
+    "diagnosis": [
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "Exception: PLC Error:  A segment and a facet intersect at point"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 1,
+   "visits": 4,
+   "final": null,
+   "edges": [
+    1
+   ]
+  },
+  {
+   "id": 2,
+   "candidate": "{\"edits\": [{\"delete\": 2, \"insert\": [\"    .lineTo(14.0, 198.035)\", \"    .lineTo(14.0, 247.735)\"], \"start\": 5}, {\"delete\": 2, \"insert\": [\"    .lineTo(26.0, 247.735)\", \"    .lineTo(26.0, 198.035)\"], \"start\": 9}]}",
+   "depth": 2,
+   "verdict": {
+    "status": "UNKNOWN",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 740893.0996402161,
+       "area": 269058.43117278,
+       "solids": 1,
+       "faces": 12,
+       "bbox_x": 123.8,
+       "bbox_y": 445.3961,
+       "bbox_z": 123.8
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 1.0,
+      "reason": "The venturi tube's narrow throat has been successfully tightened to the specified radii while keeping the wide ends and throat length unchanged.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-01.png"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "Exception: PLC Error:  A segment and a facet intersect at point"
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 1.005
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 1.005
+       }
+      ]
+     }
+    },
+    "objectives": [
+     1.0,
+     1.0,
+     -8.0
+    ],
+    "score": 1.092,
+    "diagnosis": [
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "Exception: PLC Error:  A segment and a facet intersect at point"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 0,
+   "visits": 1,
+   "final": null,
+   "edges": []
+  }
+ ],
+ "edges": [
+  {
+   "parent": 0,
+   "child": 1,
+   "visits": 4,
+   "total": 4.368
+  },
+  {
+   "parent": 1,
+   "child": 2,
+   "visits": 1,
+   "total": 1.092
+  }
+ ],
+ "events": [
+  {
+   "event": "decompose",
+   "plan": {
+    "steps": [
+     "Modify the outer wall throat radius from 24.85 to 14.0",
+     "Modify the inner wall throat radius from 36.75 to 26.0"
+    ],
+    "invariants": [
+     "Keep the same throat length",
+     "Keep the wide ends unchanged",
+     "Keep the 360-degree revolution around the Y-axis"
+    ],
+    "dependencies": []
+   },
+   "memory_version": "395caae3ff140e6f0f09dfdbcc2c2c6e5ae9bc6bac44bcee2e9703dbfd14c055",
+   "retrieved": [
+    {
+     "task_id": "09397df745f2cb3e859196af3b66f7b554f246fb2333dd01b82193da001ae96b",
+     "instruction": "Widen the outer cross-section of the channel from 35 mm to 50 mm wide, keeping the same length, the same height, the inner channel cut, the top chamfer, the rounded outer edges, and the row of bottom mounting holes.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(50.0, 300.0, 40.0)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(35.0, 300.0, 40.0)"
+     ]
+    },
+    {
+     "task_id": "d2f0578be6ab3160aa1d59e5d2cc3ac829baeba05ca0c233e008f54863a9f205",
+     "instruction": "Replace the square inner through-passage of the long tube with a hexagonal through-passage of the same across-corners size, keeping the outer square outline, the length, and the rounded vertical edges unchanged.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .polygon(6, 25.0)\"], \"start\": 6}]}",
+     "strategies": [],
+     "context": [
+      "6:     .rect(25.0, 25.0)"
+     ]
+    },
+    {
+     "task_id": "d8cbd80a786732ef3a85f9f03fcd7873de81541597695d9ca53e73a998142ab7",
+     "instruction": "Replace the square inner through-passage of the tube with a round through-passage of the same outer span, keeping the outer square shape, the chamfered ends, the row of top holes, and the side slot unchanged.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .circle(10.0)\"], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .rect(20.0, 20.0)"
+     ]
+    }
+   ]
+  },
+  {
+   "event": "initial_state",
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 1622187.736997766,
+       "area": 285437.9953159755,
+       "solids": 1,
+       "faces": 12,
+       "bbox_x": 123.8,
+       "bbox_y": 445.3961,
+       "bbox_z": 123.8
+      }
+     },
+     "constraints": {
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         14.0,
+         26.0
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -0.0
+    ],
+    "score": 0.0,
+    "diagnosis": [
+     {
+      "stage": "constraints",
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         14.0,
+         26.0
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "initial"
+   }
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "Exception: PLC Error:  A segment and a facet intersect at point"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "9ce3bed5bacd4d15dceb6c40454462d49745cc86ac969b69c59be5507174759d",
+     "instruction": "Replace the rectangular fork slot with a V-shaped slot of the same depth, widening from a sharp point at the inner end to 6 mm wide at the outer end of the body, keeping the side pin holes and the base unchanged.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .polyline([(0, -10.8), (3, 10.8), (-3, 10.8)])\", \"    .close()\"], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .rect(6.0, 21.6)"
+     ]
+    },
+    {
+     "task_id": "d2f0578be6ab3160aa1d59e5d2cc3ac829baeba05ca0c233e008f54863a9f205",
+     "instruction": "Replace the square inner through-passage of the long tube with a hexagonal through-passage of the same across-corners size, keeping the outer square outline, the length, and the rounded vertical edges unchanged.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .polygon(6, 25.0)\"], \"start\": 6}]}",
+     "strategies": [],
+     "context": [
+      "6:     .rect(25.0, 25.0)"
+     ]
+    },
+    {
+     "task_id": "d8cbd80a786732ef3a85f9f03fcd7873de81541597695d9ca53e73a998142ab7",
+     "instruction": "Replace the square inner through-passage of the tube with a round through-passage of the same outer span, keeping the outer square shape, the chamfered ends, the row of top holes, and the side slot unchanged.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .circle(10.0)\"], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .rect(20.0, 20.0)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "UNKNOWN",
+   "hypothesis": "Tighten the narrow throat of the venturi tube by updating the X coordinates for both the outer and inner walls at the throat section."
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": true,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "Exception: PLC Error:  A segment and a facet intersect at point"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "9ce3bed5bacd4d15dceb6c40454462d49745cc86ac969b69c59be5507174759d",
+     "instruction": "Replace the rectangular fork slot with a V-shaped slot of the same depth, widening from a sharp point at the inner end to 6 mm wide at the outer end of the body, keeping the side pin holes and the base unchanged.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .polyline([(0, -10.8), (3, 10.8), (-3, 10.8)])\", \"    .close()\"], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .rect(6.0, 21.6)"
+     ]
+    },
+    {
+     "task_id": "d2f0578be6ab3160aa1d59e5d2cc3ac829baeba05ca0c233e008f54863a9f205",
+     "instruction": "Replace the square inner through-passage of the long tube with a hexagonal through-passage of the same across-corners size, keeping the outer square outline, the length, and the rounded vertical edges unchanged.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .polygon(6, 25.0)\"], \"start\": 6}]}",
+     "strategies": [],
+     "context": [
+      "6:     .rect(25.0, 25.0)"
+     ]
+    },
+    {
+     "task_id": "d8cbd80a786732ef3a85f9f03fcd7873de81541597695d9ca53e73a998142ab7",
+     "instruction": "Replace the square inner through-passage of the tube with a round through-passage of the same outer span, keeping the outer square shape, the chamfered ends, the row of top holes, and the side slot unchanged.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .circle(10.0)\"], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .rect(20.0, 20.0)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "UNKNOWN",
+   "hypothesis": "Modify the X-coordinates for the inner and outer throat sections to 14.0 and 26.0 respectively."
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": true,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "Exception: PLC Error:  A segment and a facet intersect at point"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "9ce3bed5bacd4d15dceb6c40454462d49745cc86ac969b69c59be5507174759d",
+     "instruction": "Replace the rectangular fork slot with a V-shaped slot of the same depth, widening from a sharp point at the inner end to 6 mm wide at the outer end of the body, keeping the side pin holes and the base unchanged.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .polyline([(0, -10.8), (3, 10.8), (-3, 10.8)])\", \"    .close()\"], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .rect(6.0, 21.6)"
+     ]
+    },
+    {
+     "task_id": "d2f0578be6ab3160aa1d59e5d2cc3ac829baeba05ca0c233e008f54863a9f205",
+     "instruction": "Replace the square inner through-passage of the long tube with a hexagonal through-passage of the same across-corners size, keeping the outer square outline, the length, and the rounded vertical edges unchanged.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .polygon(6, 25.0)\"], \"start\": 6}]}",
+     "strategies": [],
+     "context": [
+      "6:     .rect(25.0, 25.0)"
+     ]
+    },
+    {
+     "task_id": "d8cbd80a786732ef3a85f9f03fcd7873de81541597695d9ca53e73a998142ab7",
+     "instruction": "Replace the square inner through-passage of the tube with a round through-passage of the same outer span, keeping the outer square shape, the chamfered ends, the row of top holes, and the side slot unchanged.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .circle(10.0)\"], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .rect(20.0, 20.0)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "UNKNOWN",
+   "hypothesis": "Tighten the narrow throat of the venturi tube by changing the outer radius from 24.85 to 14.0 and the inner radius from 36.75 to 26.0 at the correct indices."
+  },
+  {
+   "event": "backtrack",
+   "to_node": 1
+  },
+  {
+   "event": "expand",
+   "parent": 1,
+   "node": 2,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "Exception: PLC Error:  A segment and a facet intersect at point"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "9ce3bed5bacd4d15dceb6c40454462d49745cc86ac969b69c59be5507174759d",
+     "instruction": "Replace the rectangular fork slot with a V-shaped slot of the same depth, widening from a sharp point at the inner end to 6 mm wide at the outer end of the body, keeping the side pin holes and the base unchanged.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .polyline([(0, -10.8), (3, 10.8), (-3, 10.8)])\", \"    .close()\"], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .rect(6.0, 21.6)"
+     ]
+    },
+    {
+     "task_id": "d2f0578be6ab3160aa1d59e5d2cc3ac829baeba05ca0c233e008f54863a9f205",
+     "instruction": "Replace the square inner through-passage of the long tube with a hexagonal through-passage of the same across-corners size, keeping the outer square outline, the length, and the rounded vertical edges unchanged.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .polygon(6, 25.0)\"], \"start\": 6}]}",
+     "strategies": [],
+     "context": [
+      "6:     .rect(25.0, 25.0)"
+     ]
+    },
+    {
+     "task_id": "d8cbd80a786732ef3a85f9f03fcd7873de81541597695d9ca53e73a998142ab7",
+     "instruction": "Replace the square inner through-passage of the tube with a round through-passage of the same outer span, keeping the outer square shape, the chamfered ends, the row of top holes, and the side slot unchanged.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .circle(10.0)\"], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .rect(20.0, 20.0)"
+     ]
+    }
+   ],
+   "path": [
+    0,
+    1
+   ],
+   "status": "UNKNOWN",
+   "hypothesis": "Tighten the narrow throat of the venturi tube by modifying the X-coordinates of the inner and outer walls in the profile sketch from 24.85 to 14.0 and 36.75 to 26.0 respectively."
+  }
+ ],
+ "config": {
+  "algorithm": "mcts",
+  "max_expansions": 4,
+  "max_depth": 3,
+  "width": 2,
+  "max_width": 4,
+  "exploration": 0.7,
+  "seconds": 2400.0
+ },
+ "memory_version": "395caae3ff140e6f0f09dfdbcc2c2c6e5ae9bc6bac44bcee2e9703dbfd14c055",
+ "stored": null,
+ "seconds": 102.49047387500013,
+ "api": {
+  "mode": "live_astra",
+  "api_calls": 7,
+  "cost_usd": 0.0,
+  "budget_usd": 0.3,
+  "refused": 0
+ },
+ "tool_jobs": 5
+}

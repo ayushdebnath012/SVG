@@ -1,0 +1,16 @@
+{
+  "model": "gpt-6-astra",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are solving a CAD+FEM benchmark task. Return only a complete runnable Python main.py, with no markdown fences. No model-side tools are available; your code will run locally. Do not hardcode a guessed answer or use published reference results."
+    },
+    {
+      "role": "user",
+      "content": "Component analysis: the output flange P2 of an open-source, 3D-printable 15:1 cycloidal gearbox. part.step holds the single solid in millimetres (48 faces, volume 18891 mm^3). faces.json lists every face with its index, type, area, centroid and normal/axis; use the geometry, not a CAD system's own face numbering.\n\nMaterial: PETG-CF, linear isotropic elastic, E = 3000 MPa, Poisson ratio 0.36.\nAnalysis: linear static, small displacements, no gravity, no contact.\nSupports: all three displacement components are zero on face 17: cylinder, area 471.24 mm^2, centroid (115.525, -7.346, 2.871) mm, radius 30.0 mm, axis (1.0, 0.0, -0.0) through (113.025, 0.0, 20.5) (boss/shaft surface); face 23: cylinder, area 471.24 mm^2, centroid (115.525, 7.346, 38.129) mm, radius 30.0 mm, axis (1.0, 0.0, -0.0) through (113.025, 0.0, 20.5) (boss/shaft surface).\nLoad: total force (0.000, -69.086, -165.807) N applied as a uniform surface traction (constant force per unit area) over the loaded face(s): face 1 carries (0.000, -11.516, -27.638) N; face 2 carries (0.000, -11.515, -27.637) N; face 3 carries (0.000, -11.518, -27.643) N; face 4 carries (0.000, -11.516, -27.638) N; face 5 carries (0.000, -11.511, -27.626) N; face 6 carries (0.000, -11.511, -27.626) N.\nFor reference, the source solved this with second-order tetrahedra (Netgen, maximum element size 2 mm).\n\nOutputs:\n- max_displacement_mm [mm]: maximum nodal displacement magnitude in the part\n\nSubmit results.json containing exactly an outputs object with these numeric keys. Also submit main.py, part.step, mesh.msh, fields.npz, solver.log, refinement.json and environment.json. See candidate README for the artifact contract. Correct numerical answers alone do not establish workflow completion.\nRuntime: Python with numpy, scipy, gmsh, cadquery, meshio, skfem. ccx (CalculiX 2.23) available on PATH; no FreeCAD or ANSYS. Input directory is CADFEM_INPUT_DIR; files: [\"part.step\", \"faces.json\"]. Read full geometry and specification files there. Write all outputs to CADFEM_OUTPUT_DIR; main.py is preserved separately. Internet and evaluator data blocked. 600 seconds, 2 CPU threads, 6000 MB RAM. Choose feasible meshes; record convergence honestly. One code-generation attempt, no repair feedback. Return runnable code; never fabricate results.\nfaces.json schema (first face only; read full file at runtime): {\"note\": \"face_index = 1-based order of TopExp::MapShapes(TopAbs_FACE) on part.step\", \"faces\": [{\"face_index\": 1, \"area_mm2\": 31.416, \"centroid_mm\": [126.525, -11.51, 26.675], \"type\": \"cylinder\", \"radius_mm\": 2.0, \"axis_direction\": [1.0, 0.0, -0.0], \"axis_point_mm\": [124.025, -12.0, 25.5], \"concave\": true, \"bbox_mm\": [124.025, -13.846, 24.731, 129.025, -10.0, 27.5]}]}"
+    }
+  ],
+  "reasoning_effort": "low",
+  "max_completion_tokens": 6500,
+  "store": false
+}

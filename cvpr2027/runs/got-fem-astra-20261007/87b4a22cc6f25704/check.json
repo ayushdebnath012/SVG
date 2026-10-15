@@ -1,0 +1,26 @@
+{
+ "id": "87b4a22cc6f2570458f04637c3c057d2962e5537e76bff0c6be36a292783e041",
+ "source_fem": {
+  "ok": true,
+  "compliance": 1.844454308738266e-07,
+  "components": 1,
+  "nodes": 558
+ },
+ "candidates": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(28.0, 3.0, 3.0)\n    .edges(\"|X\")\n    .chamfer(0.45)\n    .faces(\">Z\").workplane()\n    .rect(22.4, 0.9)\n    .cutBlind(-0.6)\n    .union(cq.Workplane(\"XY\").box(4.0, 6.0, 6.0).translate((16.0, 0.0, 0.0)))\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.1131977455458424e-06,
+    "components": 1,
+    "nodes": 542
+   },
+   "consensus": 1,
+   "numbers_ok": true,
+   "changed": true,
+   "error": null
+  }
+ ]
+}

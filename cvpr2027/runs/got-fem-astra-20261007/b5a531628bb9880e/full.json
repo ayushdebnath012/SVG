@@ -1,0 +1,85 @@
+{
+ "source_fem": {
+  "ok": true,
+  "compliance": 7.135409323149892e-07,
+  "components": 1,
+  "nodes": 1121
+ },
+ "nodes": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(10.5)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 4.975607126049246e-07,
+    "components": 1,
+    "nodes": 1162
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "alt1",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(10.5)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 4.976094277323134e-07,
+    "components": 1,
+    "nodes": 1159
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "alt2",
+   "code": "import cadquery as cq\nstandoff_height = 10.5\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(standoff_height)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 4.976064207995471e-07,
+    "components": 1,
+    "nodes": 1158
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 0.0
+  },
+  {
+   "name": "alt3",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0 - 4.5)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 4.974455183022275e-07,
+    "components": 1,
+    "nodes": 1157
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "rag",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(10.5)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 4.974455548579126e-07,
+    "components": 1,
+    "nodes": 1157
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  }
+ ]
+}

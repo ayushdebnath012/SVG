@@ -1,0 +1,71 @@
+{
+ "id": "de5dd311e2060f598cf89a7c1141849625a30fbe65c9ab4d0b6d41290311d22e",
+ "source_fem": {
+  "ok": true,
+  "compliance": 1.543518906240129e-08,
+  "components": 1,
+  "nodes": 576
+ },
+ "candidates": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .moveTo(10.96, 10.96)\n    .threePointArc((21.92, 0), (10.96, -10.96))\n    .threePointArc((0, -21.92), (-10.96, -10.96))\n    .threePointArc((-21.92, 0), (-10.96, 10.96))\n    .threePointArc((0, 21.92), (10.96, 10.96))\n    .close()\n    .extrude(7.4)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 2.4691040600620676e-08,
+    "components": 1,
+    "nodes": 533
+   },
+   "consensus": 4,
+   "numbers_ok": null,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt1",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .moveTo(10.96, 10.96)\n    .threePointArc((21.92, 0), (10.96, -10.96))\n    .threePointArc((0, -21.92), (-10.96, -10.96))\n    .threePointArc((-21.92, 0), (-10.96, 10.96))\n    .threePointArc((0, 21.92), (10.96, 10.96))\n    .close()\n    .extrude(7.4)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 2.4692845878917036e-08,
+    "components": 1,
+    "nodes": 539
+   },
+   "consensus": 4,
+   "numbers_ok": null,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt2",
+   "code": "import cadquery as cq\nresult = cq.Workplane(\"XY\").rect(21.92, 21.92).extrude(7.4)\nfor x, y in [(10.96, 0), (0, -10.96), (-10.96, 0), (0, 10.96)]:\n    disk = cq.Workplane(\"XY\").center(x, y).circle(10.96).extrude(7.4)\n    result = result.union(disk)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 2.4680181860286586e-08,
+    "components": 1,
+    "nodes": 536
+   },
+   "consensus": 4,
+   "numbers_ok": null,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt3",
+   "code": "import cadquery as cq\nradius = 10.96\nresult = cq.Workplane(\"XY\").rect(2 * radius, 2 * radius).extrude(7.4)\nlobe = (\n    cq.Workplane(\"XY\")\n    .moveTo(-radius, 0)\n    .threePointArc((0, radius), (radius, 0))\n    .close()\n    .extrude(7.4)\n    .translate((0, radius, 0))\n)\nfor angle in [0, 90, 180, 270]:\n    result = result.union(lobe.rotate((0, 0, 0), (0, 0, 1), angle))\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 2.4686764021527255e-08,
+    "components": 1,
+    "nodes": 536
+   },
+   "consensus": 4,
+   "numbers_ok": null,
+   "changed": true,
+   "error": null
+  }
+ ]
+}

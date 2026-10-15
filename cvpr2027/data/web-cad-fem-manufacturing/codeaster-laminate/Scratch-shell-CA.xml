@@ -1,0 +1,2836 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!--
+ FreeCAD Document, see https://www.freecad.org for more information...
+-->
+<Document SchemaVersion="4" ProgramVersion="1.2R45814 (Git)" FileVersion="1" StringHasher="1">
+    <StringHasher saveall="0" threshold="0" count="0" new="1"/>
+    <StringHasher2  file="StringHasher.Table.txt"/>
+    <Properties Count="17" TransientCount="3">
+        <_Property name="FileName" type="App::PropertyString" status="50331649"/>
+        <_Property name="Tip" type="App::PropertyLink" status="33554433"/>
+        <_Property name="TransientDir" type="App::PropertyString" status="50331649"/>
+        <Property name="Comment" type="App::PropertyString">
+            <String value=""/>
+        </Property>
+        <Property name="Company" type="App::PropertyString">
+            <String value=""/>
+        </Property>
+        <Property name="CreatedBy" type="App::PropertyString">
+            <String value=""/>
+        </Property>
+        <Property name="CreationDate" type="App::PropertyString" status="16777217">
+            <String value="2024-07-15T11:12:49Z"/>
+        </Property>
+        <Property name="Id" type="App::PropertyString">
+            <String value=""/>
+        </Property>
+        <Property name="Label" type="App::PropertyString" status="16777217">
+            <String value="Scratch-shell-CA"/>
+        </Property>
+        <Property name="LastModifiedBy" type="App::PropertyString">
+            <String value=""/>
+        </Property>
+        <Property name="LastModifiedDate" type="App::PropertyString" status="16777217">
+            <String value="2026-03-16T18:05:49+00:00"/>
+        </Property>
+        <Property name="License" type="App::PropertyString" status="1">
+            <String value="All rights reserved"/>
+        </Property>
+        <Property name="LicenseURL" type="App::PropertyString" status="1">
+            <String value="https://en.wikipedia.org/wiki/All_rights_reserved"/>
+        </Property>
+        <Property name="Material" type="App::PropertyMap" status="1">
+            <Map count="0">
+            </Map>
+        </Property>
+        <Property name="Meta" type="App::PropertyMap" status="1">
+            <Map count="0">
+            </Map>
+        </Property>
+        <Property name="ShowHidden" type="App::PropertyBool" status="1">
+            <Bool value="false"/>
+        </Property>
+        <Property name="TipName" type="App::PropertyString" status="83886080">
+            <String value=""/>
+        </Property>
+        <Property name="Uid" type="App::PropertyUUID" status="16777217">
+            <Uuid value="0d96ff00-f61a-455c-99dd-92d68e884eff"/>
+        </Property>
+        <Property name="UnitSystem" type="App::PropertyEnumeration" status="1">
+            <Integer value="0" CustomEnum="true"/>
+            <CustomEnumList count="10">
+                <Enum value="Standard (mm, kg, s, °)"/>
+                <Enum value="MKS (m, kg, s, °)"/>
+                <Enum value="US customary (in, lb)"/>
+                <Enum value="Imperial decimal (in, lb)"/>
+                <Enum value="Building Euro (cm, m², m³)"/>
+                <Enum value="Building US (ft-in, sqft, cft)"/>
+                <Enum value="Metric small parts &amp; CNC (mm, mm/min)"/>
+                <Enum value="Imperial for Civil Eng (ft, ft/s)"/>
+                <Enum value="FEM (mm, N, s)"/>
+                <Enum value="Meter decimal (m, m², m³)"/>
+            </CustomEnumList>
+        </Property>
+        <Property name="UseHasher" type="App::PropertyBool" status="67108865">
+            <Bool value="true"/>
+        </Property>
+    </Properties>
+    <Objects Count="33" Dependencies="1">
+        <ObjectDeps Name="Analysis" Count="7">
+            <Dep Name="SolverCodeAster"/>
+            <Dep Name="FEMMeshGmsh"/>
+            <Dep Name="ConstraintFixed"/>
+            <Dep Name="ConstraintForce"/>
+            <Dep Name="MaterialSolid"/>
+            <Dep Name="ElementGeometry2D"/>
+            <Dep Name="CodeAsterResults"/>
+        </ObjectDeps>
+        <ObjectDeps Name="Sketch" Count="1">
+            <Dep Name="XY_Plane"/>
+        </ObjectDeps>
+        <ObjectDeps Name="Pad" Count="3">
+            <Dep Name="Sketch"/>
+            <Dep Name="Sketch"/>
+            <Dep Name="Body"/>
+        </ObjectDeps>
+        <ObjectDeps Name="X_Axis" Count="0"/>
+        <ObjectDeps Name="Y_Axis" Count="0"/>
+        <ObjectDeps Name="XZ_Plane" Count="0"/>
+        <ObjectDeps Name="YZ_Plane" Count="0"/>
+        <ObjectDeps Name="Z_Axis" Count="0"/>
+        <ObjectDeps Name="XY_Plane" Count="0"/>
+        <ObjectDeps Name="Origin" Count="7">
+            <Dep Name="X_Axis"/>
+            <Dep Name="Y_Axis"/>
+            <Dep Name="Z_Axis"/>
+            <Dep Name="XY_Plane"/>
+            <Dep Name="XZ_Plane"/>
+            <Dep Name="YZ_Plane"/>
+            <Dep Name="Origin001"/>
+        </ObjectDeps>
+        <ObjectDeps Name="Body" Count="4">
+            <Dep Name="Pad"/>
+            <Dep Name="Origin"/>
+            <Dep Name="Sketch"/>
+            <Dep Name="Pad"/>
+        </ObjectDeps>
+        <ObjectDeps Name="Face004" Count="0"/>
+        <ObjectDeps Name="ConstraintFixed" Count="1">
+            <Dep Name="Face004"/>
+        </ObjectDeps>
+        <ObjectDeps Name="ConstraintForce" Count="1">
+            <Dep Name="Face004"/>
+        </ObjectDeps>
+        <ObjectDeps Name="MaterialSolid" Count="0"/>
+        <ObjectDeps Name="ElementGeometry2D" Count="1">
+            <Dep Name="Face004"/>
+        </ObjectDeps>
+        <ObjectDeps Name="Origin001" Count="0"/>
+        <ObjectDeps Name="SolverCodeAster" Count="0"/>
+        <ObjectDeps Name="FEMMeshGmsh" Count="1">
+            <Dep Name="Face004"/>
+        </ObjectDeps>
+        <ObjectDeps Name="CodeAsterResults" Count="1">
+            <Dep Name="CodeAsterResults_Mesh"/>
+        </ObjectDeps>
+        <ObjectDeps Name="CodeAsterResults_Mesh" Count="0"/>
+        <ObjectDeps Name="Analysis001" Count="10">
+            <Dep Name="SolverCcxTools001"/>
+            <Dep Name="ConstraintFixed001"/>
+            <Dep Name="Face005"/>
+            <Dep Name="ConstraintForce001"/>
+            <Dep Name="ElementGeometry2D001"/>
+            <Dep Name="MaterialSolid001"/>
+            <Dep Name="FEMMeshGmsh001"/>
+            <Dep Name="CCX_Results"/>
+            <Dep Name="Pipeline_CCX_Results"/>
+            <Dep Name="ccx_dat_file"/>
+        </ObjectDeps>
+        <ObjectDeps Name="SolverCcxTools001" Count="0"/>
+        <ObjectDeps Name="ConstraintFixed001" Count="1">
+            <Dep Name="Face005"/>
+        </ObjectDeps>
+        <ObjectDeps Name="ConstraintForce001" Count="1">
+            <Dep Name="Face005"/>
+        </ObjectDeps>
+        <ObjectDeps Name="ElementGeometry2D001" Count="1">
+            <Dep Name="Face005"/>
+        </ObjectDeps>
+        <ObjectDeps Name="Face005" Count="0"/>
+        <ObjectDeps Name="MaterialSolid001" Count="0"/>
+        <ObjectDeps Name="FEMMeshGmsh001" Count="1">
+            <Dep Name="Face005"/>
+        </ObjectDeps>
+        <ObjectDeps Name="CCX_Results" Count="1">
+            <Dep Name="CCX_Results_Mesh"/>
+        </ObjectDeps>
+        <ObjectDeps Name="CCX_Results_Mesh" Count="0"/>
+        <ObjectDeps Name="Pipeline_CCX_Results" Count="0"/>
+        <ObjectDeps Name="ccx_dat_file" Count="0"/>
+        <Object type="Fem::FemAnalysis" name="Analysis" id="1512" />
+        <Object type="Sketcher::SketchObject" name="Sketch" id="1506" />
+        <Object type="PartDesign::Pad" name="Pad" id="1511" />
+        <Object type="App::Line" name="X_Axis" id="1500" />
+        <Object type="App::Line" name="Y_Axis" id="1501" />
+        <Object type="App::Plane" name="XZ_Plane" id="1504" />
+        <Object type="App::Plane" name="YZ_Plane" id="1505" />
+        <Object type="App::Line" name="Z_Axis" id="1502" />
+        <Object type="App::Plane" name="XY_Plane" id="1503" />
+        <Object type="App::Origin" name="Origin" id="1499" />
+        <Object type="PartDesign::Body" name="Body" id="1498" />
+        <Object type="Part::Feature" name="Face004" id="1527" />
+        <Object type="Fem::ConstraintFixed" name="ConstraintFixed" id="1532" />
+        <Object type="Fem::ConstraintForce" name="ConstraintForce" id="1533" />
+        <Object type="App::MaterialObjectPython" name="MaterialSolid" id="1534" />
+        <Object type="Fem::FeaturePython" name="ElementGeometry2D" id="1535" />
+        <Object type="App::Point" name="Origin001" id="1562" />
+        <Object type="Fem::FemSolverObjectPython" name="SolverCodeAster" id="1574" />
+        <Object type="Fem::FemMeshShapeBaseObjectPython" name="FEMMeshGmsh" id="1575" />
+        <Object type="Fem::FemResultObjectPython" name="CodeAsterResults" id="1585" />
+        <Object type="Fem::FemMeshObjectPython" name="CodeAsterResults_Mesh" id="1586" />
+        <Object type="Fem::FemAnalysis" name="Analysis001" id="1587" />
+        <Object type="Fem::FemSolverObjectPython" name="SolverCcxTools001" id="1589" />
+        <Object type="Fem::ConstraintFixed" name="ConstraintFixed001" id="1595" />
+        <Object type="Fem::ConstraintForce" name="ConstraintForce001" id="1596" />
+        <Object type="Fem::FeaturePython" name="ElementGeometry2D001" id="1597" />
+        <Object type="Part::Feature" name="Face005" id="1598" />
+        <Object type="App::MaterialObjectPython" name="MaterialSolid001" id="1599" />
+        <Object type="Fem::FemMeshShapeBaseObjectPython" name="FEMMeshGmsh001" id="1600" />
+        <Object type="Fem::FemResultObjectPython" name="CCX_Results" id="1601" />
+        <Object type="Fem::FemMeshObjectPython" name="CCX_Results_Mesh" id="1602" />
+        <Object type="Fem::FemPostPipeline" name="Pipeline_CCX_Results" id="1603" />
+        <Object type="App::TextDocument" name="ccx_dat_file" id="1604" />
+    </Objects>
+    <ObjectData Count="33">
+        <Object name="Analysis" Extensions="True">
+            <Extensions Count="1">
+                <Extension type="App::GroupExtension" name="GroupExtension">
+                </Extension>
+            </Extensions>
+            <Properties Count="6" TransientCount="1">
+                <_Property name="_GroupTouched" type="App::PropertyBool" status="100663425"/>
+                <Property name="ExpressionEngine" type="App::PropertyExpressionEngine" status="67108864">
+                    <ExpressionEngine count="0">
+                    </ExpressionEngine>
+                </Property>
+                <Property name="Group" type="App::PropertyLinkList">
+                    <LinkList count="7">
+                        <Link value="SolverCodeAster"/>
+                        <Link value="FEMMeshGmsh"/>
+                        <Link value="ConstraintFixed"/>
+                        <Link value="ConstraintForce"/>
+                        <Link value="MaterialSolid"/>
+                        <Link value="ElementGeometry2D"/>
+                        <Link value="CodeAsterResults"/>
+                    </LinkList>
+                </Property>
+                <Property name="Label" type="App::PropertyString" status="134217728">
+                    <String value="Analysis"/>
+                </Property>
+                <Property name="Label2" type="App::PropertyString" status="67108992">
+                    <String value=""/>
+                </Property>
+                <Property name="Uid" type="App::PropertyUUID">
+                    <Uuid value="9048f235-5441-4261-80e5-88785c39cb35"/>
+                </Property>
+                <Property name="Visibility" type="App::PropertyBool" status="648">
+                    <Bool value="true"/>
+                </Property>
+            </Properties>
+        </Object>
+        <Object name="Sketch" Extensions="True">
+            <Extensions Count="1">
+                <Extension type="Part::AttachExtension" name="AttachExtension">
+                </Extension>
+            </Extensions>
+            <Properties Count="24" TransientCount="1">
+                <_Property name="_ElementMapVersion" type="App::PropertyString" status="234881024"/>
+                <Property name="ArcFitTolerance" type="App::PropertyPrecision">
+                    <Float value="0.0000000000000000"/>
+                </Property>
+                <Property name="AttacherEngine" type="App::PropertyEnumeration">
+                    <Integer value="1" CustomEnum="true"/>
+                    <CustomEnumList count="4">
+                        <Enum value="Engine 3D"/>
+                        <Enum value="Engine Plane"/>
+                        <Enum value="Engine Line"/>
+                        <Enum value="Engine Point"/>
+                    </CustomEnumList>
+                </Property>
+                <Property name="AttacherType" type="App::PropertyString" status="83886080">
+                    <String value="Attacher::AttachEnginePlane"/>
+                </Property>
+                <Property name="AttachmentOffset" type="App::PropertyPlacement">
+                    <PropertyPlacement Px="0.0000000000000000" Py="0.0000000000000000" Pz="0.0000000000000000" Q0="0.0000000000000000" Q1="0.0000000000000000" Q2="0.0000000000000000" Q3="1.0000000000000000" A="0.0000000000000000" Ox="0.0000000000000000" Oy="0.0000000000000000" Oz="1.0000000000000000"/>
+                </Property>
+                <Property name="AttachmentSupport" type="App::PropertyLinkSubList">
+                    <LinkSubList count="1">
+                        <Link obj="XY_Plane" sub=""/>
+                    </LinkSubList>
+                </Property>
+                <Property name="Constraints" type="Sketcher::PropertyConstraintList">
+                    <ConstraintList count="11">
+                        <Constrain Name="" MetaData="" Type="1" Value="0.0000000000000000" LabelDistance="10.0000000000000000" LabelPosition="0.0000000000000000" IsDriving="1" IsInVirtualSpace="0" IsVisible="1" IsActive="1" First="0" FirstPos="2" Second="1" SecondPos="1" Third="-2000" ThirdPos="0" ElementIds="0 1 -2000" ElementPositions="2 1 0" />
+                        <Constrain Name="" MetaData="" Type="1" Value="0.0000000000000000" LabelDistance="10.0000000000000000" LabelPosition="0.0000000000000000" IsDriving="1" IsInVirtualSpace="0" IsVisible="1" IsActive="1" First="1" FirstPos="2" Second="2" SecondPos="1" Third="-2000" ThirdPos="0" ElementIds="1 2 -2000" ElementPositions="2 1 0" />
+                        <Constrain Name="" MetaData="" Type="1" Value="0.0000000000000000" LabelDistance="10.0000000000000000" LabelPosition="0.0000000000000000" IsDriving="1" IsInVirtualSpace="0" IsVisible="1" IsActive="1" First="2" FirstPos="2" Second="3" SecondPos="1" Third="-2000" ThirdPos="0" ElementIds="2 3 -2000" ElementPositions="2 1 0" />
+                        <Constrain Name="" MetaData="" Type="1" Value="0.0000000000000000" LabelDistance="10.0000000000000000" LabelPosition="0.0000000000000000" IsDriving="1" IsInVirtualSpace="0" IsVisible="1" IsActive="1" First="3" FirstPos="2" Second="0" SecondPos="1" Third="-2000" ThirdPos="0" ElementIds="3 0 -2000" ElementPositions="2 1 0" />
+                        <Constrain Name="" MetaData="" Type="2" Value="0.0000000000000000" LabelDistance="10.0000000000000000" LabelPosition="0.0000000000000000" IsDriving="1" IsInVirtualSpace="0" IsVisible="1" IsActive="1" First="0" FirstPos="0" Second="-2000" SecondPos="0" Third="-2000" ThirdPos="0" ElementIds="0 -2000 -2000" ElementPositions="0 0 0" />
+                        <Constrain Name="" MetaData="" Type="2" Value="0.0000000000000000" LabelDistance="10.0000000000000000" LabelPosition="0.0000000000000000" IsDriving="1" IsInVirtualSpace="0" IsVisible="1" IsActive="1" First="2" FirstPos="0" Second="-2000" SecondPos="0" Third="-2000" ThirdPos="0" ElementIds="2 -2000 -2000" ElementPositions="0 0 0" />
+                        <Constrain Name="" MetaData="" Type="3" Value="0.0000000000000000" LabelDistance="10.0000000000000000" LabelPosition="0.0000000000000000" IsDriving="1" IsInVirtualSpace="0" IsVisible="1" IsActive="1" First="1" FirstPos="0" Second="-2000" SecondPos="0" Third="-2000" ThirdPos="0" ElementIds="1 -2000 -2000" ElementPositions="0 0 0" />
+                        <Constrain Name="" MetaData="" Type="3" Value="0.0000000000000000" LabelDistance="10.0000000000000000" LabelPosition="0.0000000000000000" IsDriving="1" IsInVirtualSpace="0" IsVisible="1" IsActive="1" First="3" FirstPos="0" Second="-2000" SecondPos="0" Third="-2000" ThirdPos="0" ElementIds="3 -2000 -2000" ElementPositions="0 0 0" />
+                        <Constrain Name="" MetaData="" Type="1" Value="0.0000000000000000" LabelDistance="10.0000000000000000" LabelPosition="0.0000000000000000" IsDriving="1" IsInVirtualSpace="0" IsVisible="1" IsActive="1" First="0" FirstPos="1" Second="-1" SecondPos="1" Third="-2000" ThirdPos="0" ElementIds="0 -1 -2000" ElementPositions="1 1 0" />
+                        <Constrain Name="" MetaData="" Type="7" Value="100.0000000000000000" LabelDistance="20.4508743286132812" LabelPosition="10.7570056915283203" IsDriving="1" IsInVirtualSpace="0" IsVisible="1" IsActive="1" First="2" FirstPos="2" Second="2" SecondPos="1" Third="-2000" ThirdPos="0" ElementIds="2 2 -2000" ElementPositions="2 1 0" />
+                        <Constrain Name="" MetaData="" Type="8" Value="50.0000000000000000" LabelDistance="-20.5730838775634766" LabelPosition="-5.1088552474975586" IsDriving="1" IsInVirtualSpace="0" IsVisible="1" IsActive="1" First="1" FirstPos="1" Second="1" SecondPos="2" Third="-2000" ThirdPos="0" ElementIds="1 1 -2000" ElementPositions="1 2 0" />
+                    </ConstraintList>
+                </Property>
+                <Property name="Exports" type="App::PropertyLinkListHidden" status="67108864">
+                    <LinkList count="0">
+                    </LinkList>
+                </Property>
+                <Property name="ExpressionEngine" type="App::PropertyExpressionEngine" status="67108864">
+                    <ExpressionEngine count="0">
+                    </ExpressionEngine>
+                </Property>
+                <Property name="ExternalGeo" type="Part::PropertyGeometryList" status="67108864">
+                    <GeometryList count="2">
+                        <Geometry type="Part::GeomLineSegment" id="-1" migrated="1">
+                            <GeoExtensions count="2">
+                                <GeoExtension type="Sketcher::SketchGeometryExtension" id="-1" internalGeometryType="0" geometryModeFlags="00000000000000000000000000000010" geometryLayer="0"/>
+                                <GeoExtension type="Sketcher::ExternalGeometryExtension" Ref="" Flags="0"/>
+                            </GeoExtensions>
+                            <LineSegment StartX="0.0000000000000000" StartY="0.0000000000000000" StartZ="0.0000000000000000" EndX="1.0000000000000000" EndY="0.0000000000000000" EndZ="0.0000000000000000"/>
+                            <Construction value="1"/>
+                        </Geometry>
+                        <Geometry type="Part::GeomLineSegment" id="-2" migrated="1">
+                            <GeoExtensions count="2">
+                                <GeoExtension type="Sketcher::SketchGeometryExtension" id="-2" internalGeometryType="0" geometryModeFlags="00000000000000000000000000000010" geometryLayer="0"/>
+                                <GeoExtension type="Sketcher::ExternalGeometryExtension" Ref="" Flags="0"/>
+                            </GeoExtensions>
+                            <LineSegment StartX="0.0000000000000000" StartY="0.0000000000000000" StartZ="0.0000000000000000" EndX="0.0000000000000000" EndY="1.0000000000000000" EndZ="0.0000000000000000"/>
+                            <Construction value="1"/>
+                        </Geometry>
+                    </GeometryList>
+                </Property>
+                <Property name="ExternalGeometry" type="App::PropertyLinkSubList" status="16777216">
+                    <LinkSubList count="0">
+                    </LinkSubList>
+                </Property>
+                <Property name="ExternalTypes" type="App::PropertyIntegerList" status="67108864">
+                    <IntegerList count="1">
+                        <I v="0"/>
+                    </IntegerList>
+                </Property>
+                <Property name="FullyConstrained" type="App::PropertyBool" status="218103808">
+                    <Bool value="true"/>
+                </Property>
+                <Property name="Geometry" type="Part::PropertyGeometryList" status="8192">
+                    <GeometryList count="4">
+                        <Geometry type="Part::GeomLineSegment" id="3" migrated="1">
+                            <GeoExtensions count="1">
+                                <GeoExtension type="Sketcher::SketchGeometryExtension" id="3" internalGeometryType="0" geometryModeFlags="00000000000000000000000000000000" geometryLayer="0"/>
+                            </GeoExtensions>
+                            <LineSegment StartX="0.0000000000000000" StartY="0.0000000000000000" StartZ="0.0000000000000000" EndX="100.0000000000000000" EndY="0.0000000000000000" EndZ="0.0000000000000000"/>
+                            <Construction value="0"/>
+                        </Geometry>
+                        <Geometry type="Part::GeomLineSegment" id="4" migrated="1">
+                            <GeoExtensions count="1">
+                                <GeoExtension type="Sketcher::SketchGeometryExtension" id="4" internalGeometryType="0" geometryModeFlags="00000000000000000000000000000000" geometryLayer="0"/>
+                            </GeoExtensions>
+                            <LineSegment StartX="100.0000000000000000" StartY="0.0000000000000000" StartZ="0.0000000000000000" EndX="100.0000000000000000" EndY="50.0000000000000000" EndZ="0.0000000000000000"/>
+                            <Construction value="0"/>
+                        </Geometry>
+                        <Geometry type="Part::GeomLineSegment" id="5" migrated="1">
+                            <GeoExtensions count="1">
+                                <GeoExtension type="Sketcher::SketchGeometryExtension" id="5" internalGeometryType="0" geometryModeFlags="00000000000000000000000000000000" geometryLayer="0"/>
+                            </GeoExtensions>
+                            <LineSegment StartX="100.0000000000000000" StartY="50.0000000000000000" StartZ="0.0000000000000000" EndX="0.0000000000000000" EndY="50.0000000000000000" EndZ="0.0000000000000000"/>
+                            <Construction value="0"/>
+                        </Geometry>
+                        <Geometry type="Part::GeomLineSegment" id="6" migrated="1">
+                            <GeoExtensions count="1">
+                                <GeoExtension type="Sketcher::SketchGeometryExtension" id="6" internalGeometryType="0" geometryModeFlags="00000000000000000000000000000000" geometryLayer="0"/>
+                            </GeoExtensions>
+                            <LineSegment StartX="0.0000000000000000" StartY="50.0000000000000000" StartZ="0.0000000000000000" EndX="0.0000000000000000" EndY="0.0000000000000000" EndZ="0.0000000000000000"/>
+                            <Construction value="0"/>
+                        </Geometry>
+                    </GeometryList>
+                </Property>
+                <Property name="InternalShape" type="Part::PropertyPartShape">
+                    <Part ElementMap="15.70200.5" file="Sketch.InternalShape.brp"/>
+                    <ElementMap/>
+                </Property>
+                <Property name="Label" type="App::PropertyString" status="134217728">
+                    <String value="Sketch"/>
+                </Property>
+                <Property name="Label2" type="App::PropertyString" status="67108992">
+                    <String value=""/>
+                </Property>
+                <Property name="MakeInternals" type="App::PropertyBool">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="MapMode" type="App::PropertyEnumeration">
+                    <Integer value="5"/>
+                </Property>
+                <Property name="MapPathParameter" type="App::PropertyFloat" status="8">
+                    <Float value="0.0000000000000000"/>
+                </Property>
+                <Property name="MapReversed" type="App::PropertyBool">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="Placement" type="App::PropertyPlacement" status="8388612">
+                    <PropertyPlacement Px="0.0000000000000000" Py="0.0000000000000000" Pz="0.0000000000000000" Q0="0.0000000000000000" Q1="0.0000000000000000" Q2="0.0000000000000000" Q3="1.0000000000000000" A="0.0000000000000000" Ox="0.0000000000000000" Oy="0.0000000000000000" Oz="1.0000000000000000"/>
+                </Property>
+                <Property name="Shape" type="Part::PropertyPartShape">
+                    <Part ElementMap="15.70200.5" file="Sketch.Shape.brp"/>
+                    <ElementMap new="1" count="1"><Element key="Dummy" value="Dummy"/></ElementMap>
+                    <ElementMap2 file="Sketch.Shape.Map.txt"/>
+                </Property>
+                <Property name="ShapeMaterial" type="Materials::PropertyMaterial">
+                    <PropertyMaterial uuid="7f9fd73b-50c9-41d8-b7b2-575a030c1eeb"/>
+                </Property>
+                <Property name="Visibility" type="App::PropertyBool" status="648">
+                    <Bool value="false"/>
+                </Property>
+            </Properties>
+        </Object>
+        <Object name="Pad" Extensions="True">
+            <Extensions Count="2">
+                <Extension type="App::SuppressibleExtension" name="SuppressibleExtension">
+                </Extension>
+                <Extension type="Part::PreviewExtension" name="PreviewExtension">
+                </Extension>
+            </Extensions>
+            <Properties Count="33" TransientCount="3">
+                <_Property name="PreviewShape" type="Part::PropertyPartShape" status="152"/>
+                <_Property name="_Body" type="App::PropertyLinkHidden" status="251658241"/>
+                <_Property name="_ElementMapVersion" type="App::PropertyString" status="234881024"/>
+                <Property name="AddSubShape" type="Part::PropertyPartShape">
+                    <Part HasherIndex="0" ElementMap="15.70200.5" file="Pad.AddSubShape.brp"/>
+                    <ElementMap new="1" count="1"><Element key="Dummy" value="Dummy"/></ElementMap>
+                    <ElementMap2 file="Pad.AddSubShape.Map.txt"/>
+                </Property>
+                <Property name="AllowMultiFace" type="App::PropertyBool">
+                    <Bool value="true"/>
+                </Property>
+                <Property name="AlongSketchNormal" type="App::PropertyBool">
+                    <Bool value="true"/>
+                </Property>
+                <Property name="BaseFeature" type="App::PropertyLink" status="8">
+                    <Link value=""/>
+                </Property>
+                <Property name="Direction" type="App::PropertyVector" status="4">
+                    <PropertyVector valueX="0.0000000000000000" valueY="0.0000000000000000" valueZ="1.0000000000000000"/>
+                </Property>
+                <Property name="ExpressionEngine" type="App::PropertyExpressionEngine" status="67108864">
+                    <ExpressionEngine count="0">
+                    </ExpressionEngine>
+                </Property>
+                <Property name="Label" type="App::PropertyString" status="134217728">
+                    <String value="Pad"/>
+                </Property>
+                <Property name="Label2" type="App::PropertyString" status="67108992">
+                    <String value=""/>
+                </Property>
+                <Property name="Length" type="App::PropertyLength">
+                    <Float value="10.0000000000000000"/>
+                </Property>
+                <Property name="Length2" type="App::PropertyLength" status="4">
+                    <Float value="10.0000000000000000"/>
+                </Property>
+                <Property name="Midplane" type="App::PropertyBool">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="Offset" type="App::PropertyLength" status="4">
+                    <Float value="0.0000000000000000"/>
+                </Property>
+                <Property name="Offset2" type="App::PropertyLength" status="4">
+                    <Float value="0.0000000000000000"/>
+                </Property>
+                <Property name="Placement" type="App::PropertyPlacement" status="8388620">
+                    <PropertyPlacement Px="0.0000000000000000" Py="0.0000000000000000" Pz="0.0000000000000000" Q0="0.0000000000000000" Q1="0.0000000000000000" Q2="0.0000000000000000" Q3="1.0000000000000000" A="0.0000000000000000" Ox="0.0000000000000000" Oy="0.0000000000000000" Oz="1.0000000000000000"/>
+                </Property>
+                <Property name="Profile" type="App::PropertyLinkSub">
+                    <LinkSub value="Sketch" count="1">
+                        <Sub value=""/>
+                    </LinkSub>
+                </Property>
+                <Property name="ReferenceAxis" type="App::PropertyLinkSub">
+                    <LinkSub value="Sketch" count="1">
+                        <Sub value="N_Axis"/>
+                    </LinkSub>
+                </Property>
+                <Property name="Refine" type="App::PropertyBool">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="Reversed" type="App::PropertyBool">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="Shape" type="Part::PropertyPartShape">
+                    <Part HasherIndex="0" ElementMap="15.70200.5" file="Pad.Shape.brp"/>
+                    <ElementMap new="1" count="1"><Element key="Dummy" value="Dummy"/></ElementMap>
+                    <ElementMap2 file="Pad.Shape.Map.txt"/>
+                </Property>
+                <Property name="ShapeMaterial" type="Materials::PropertyMaterial">
+                    <PropertyMaterial uuid="7f9fd73b-50c9-41d8-b7b2-575a030c1eeb"/>
+                </Property>
+                <Property name="SideType" type="App::PropertyEnumeration">
+                    <Integer value="0"/>
+                </Property>
+                <Property name="Suppressed" type="App::PropertyBool">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="SuppressedShape" type="Part::PropertyPartShape">
+                    <Part ElementMap="15.70200.5" file="Pad.SuppressedShape.brp"/>
+                    <ElementMap/>
+                </Property>
+                <Property name="TaperAngle" type="App::PropertyAngle">
+                    <Float value="0.0000000000000000"/>
+                </Property>
+                <Property name="TaperAngle2" type="App::PropertyAngle" status="4">
+                    <Float value="0.0000000000000000"/>
+                </Property>
+                <Property name="Type" type="App::PropertyEnumeration">
+                    <Integer value="0"/>
+                </Property>
+                <Property name="Type2" type="App::PropertyEnumeration" status="4">
+                    <Integer value="0"/>
+                </Property>
+                <Property name="UpToFace" type="App::PropertyLinkSub" status="4">
+                    <LinkSub value="" count="0">
+                    </LinkSub>
+                </Property>
+                <Property name="UpToFace2" type="App::PropertyLinkSub" status="4">
+                    <LinkSub value="" count="0">
+                    </LinkSub>
+                </Property>
+                <Property name="UpToShape" type="App::PropertyLinkSubList" status="4">
+                    <LinkSubList count="0">
+                    </LinkSubList>
+                </Property>
+                <Property name="UpToShape2" type="App::PropertyLinkSubList" status="4">
+                    <LinkSubList count="0">
+                    </LinkSubList>
+                </Property>
+                <Property name="UseCustomVector" type="App::PropertyBool">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="Visibility" type="App::PropertyBool" status="648">
+                    <Bool value="false"/>
+                </Property>
+            </Properties>
+        </Object>
+        <Object name="X_Axis">
+            <Properties Count="6" TransientCount="1">
+                <_Property name="_ElementMapVersion" type="App::PropertyString" status="234881024"/>
+                <Property name="ExpressionEngine" type="App::PropertyExpressionEngine" status="67108864">
+                    <ExpressionEngine count="0">
+                    </ExpressionEngine>
+                </Property>
+                <Property name="Label" type="App::PropertyString" status="134217728">
+                    <String value="X-axis"/>
+                </Property>
+                <Property name="Label2" type="App::PropertyString" status="67108992">
+                    <String value=""/>
+                </Property>
+                <Property name="Placement" type="App::PropertyPlacement" status="8388616">
+                    <PropertyPlacement Px="0.0000000000000000" Py="0.0000000000000000" Pz="0.0000000000000000" Q0="0.0000000000000000" Q1="0.0000000000000000" Q2="0.0000000000000000" Q3="1.0000000000000000" A="0.0000000000000000" Ox="0.0000000000000000" Oy="0.0000000000000000" Oz="1.0000000000000000"/>
+                </Property>
+                <Property name="Role" type="App::PropertyString" status="16777216">
+                    <String value="X_Axis"/>
+                </Property>
+                <Property name="Visibility" type="App::PropertyBool" status="648">
+                    <Bool value="true"/>
+                </Property>
+            </Properties>
+        </Object>
+        <Object name="Y_Axis">
+            <Properties Count="6" TransientCount="1">
+                <_Property name="_ElementMapVersion" type="App::PropertyString" status="234881024"/>
+                <Property name="ExpressionEngine" type="App::PropertyExpressionEngine" status="67108864">
+                    <ExpressionEngine count="0">
+                    </ExpressionEngine>
+                </Property>
+                <Property name="Label" type="App::PropertyString" status="134217728">
+                    <String value="Y-axis"/>
+                </Property>
+                <Property name="Label2" type="App::PropertyString" status="67108992">
+                    <String value=""/>
+                </Property>
+                <Property name="Placement" type="App::PropertyPlacement" status="8388616">
+                    <PropertyPlacement Px="0.0000000000000000" Py="0.0000000000000000" Pz="0.0000000000000000" Q0="0.5000000000000000" Q1="0.5000000000000000" Q2="0.5000000000000000" Q3="0.5000000000000001" A="2.0943951023931953" Ox="1.0000000000000000" Oy="1.0000000000000000" Oz="1.0000000000000000"/>
+                </Property>
+                <Property name="Role" type="App::PropertyString" status="16777216">
+                    <String value="Y_Axis"/>
+                </Property>
+                <Property name="Visibility" type="App::PropertyBool" status="648">
+                    <Bool value="true"/>
+                </Property>
+            </Properties>
+        </Object>
+        <Object name="XZ_Plane">
+            <Properties Count="6" TransientCount="1">
+                <_Property name="_ElementMapVersion" type="App::PropertyString" status="234881024"/>
+                <Property name="ExpressionEngine" type="App::PropertyExpressionEngine" status="67108864">
+                    <ExpressionEngine count="0">
+                    </ExpressionEngine>
+                </Property>
+                <Property name="Label" type="App::PropertyString" status="134217728">
+                    <String value="XZ-plane"/>
+                </Property>
+                <Property name="Label2" type="App::PropertyString" status="67108992">
+                    <String value=""/>
+                </Property>
+                <Property name="Placement" type="App::PropertyPlacement" status="8388616">
+                    <PropertyPlacement Px="0.0000000000000000" Py="0.0000000000000000" Pz="0.0000000000000000" Q0="0.7071067811865476" Q1="0.0000000000000000" Q2="0.0000000000000000" Q3="0.7071067811865475" A="1.5707963267948968" Ox="0.9999999999999999" Oy="0.0000000000000000" Oz="0.0000000000000000"/>
+                </Property>
+                <Property name="Role" type="App::PropertyString" status="16777216">
+                    <String value="XZ_Plane"/>
+                </Property>
+                <Property name="Visibility" type="App::PropertyBool" status="648">
+                    <Bool value="true"/>
+                </Property>
+            </Properties>
+        </Object>
+        <Object name="YZ_Plane">
+            <Properties Count="6" TransientCount="1">
+                <_Property name="_ElementMapVersion" type="App::PropertyString" status="234881024"/>
+                <Property name="ExpressionEngine" type="App::PropertyExpressionEngine" status="67108864">
+                    <ExpressionEngine count="0">
+                    </ExpressionEngine>
+                </Property>
+                <Property name="Label" type="App::PropertyString" status="134217728">
+                    <String value="YZ-plane"/>
+                </Property>
+                <Property name="Label2" type="App::PropertyString" status="67108992">
+                    <String value=""/>
+                </Property>
+                <Property name="Placement" type="App::PropertyPlacement" status="8388616">
+                    <PropertyPlacement Px="0.0000000000000000" Py="0.0000000000000000" Pz="0.0000000000000000" Q0="0.5000000000000000" Q1="0.5000000000000000" Q2="0.5000000000000000" Q3="0.5000000000000001" A="2.0943951023931953" Ox="1.0000000000000000" Oy="1.0000000000000000" Oz="1.0000000000000000"/>
+                </Property>
+                <Property name="Role" type="App::PropertyString" status="16777216">
+                    <String value="YZ_Plane"/>
+                </Property>
+                <Property name="Visibility" type="App::PropertyBool" status="648">
+                    <Bool value="true"/>
+                </Property>
+            </Properties>
+        </Object>
+        <Object name="Z_Axis">
+            <Properties Count="6" TransientCount="1">
+                <_Property name="_ElementMapVersion" type="App::PropertyString" status="234881024"/>
+                <Property name="ExpressionEngine" type="App::PropertyExpressionEngine" status="67108864">
+                    <ExpressionEngine count="0">
+                    </ExpressionEngine>
+                </Property>
+                <Property name="Label" type="App::PropertyString" status="134217728">
+                    <String value="Z-axis"/>
+                </Property>
+                <Property name="Label2" type="App::PropertyString" status="67108992">
+                    <String value=""/>
+                </Property>
+                <Property name="Placement" type="App::PropertyPlacement" status="8388616">
+                    <PropertyPlacement Px="0.0000000000000000" Py="0.0000000000000000" Pz="0.0000000000000000" Q0="0.5000000000000000" Q1="-0.5000000000000000" Q2="0.5000000000000000" Q3="0.5000000000000001" A="2.0943951023931953" Ox="1.0000000000000000" Oy="-1.0000000000000000" Oz="1.0000000000000000"/>
+                </Property>
+                <Property name="Role" type="App::PropertyString" status="16777216">
+                    <String value="Z_Axis"/>
+                </Property>
+                <Property name="Visibility" type="App::PropertyBool" status="648">
+                    <Bool value="true"/>
+                </Property>
+            </Properties>
+        </Object>
+        <Object name="XY_Plane">
+            <Properties Count="6" TransientCount="1">
+                <_Property name="_ElementMapVersion" type="App::PropertyString" status="234881024"/>
+                <Property name="ExpressionEngine" type="App::PropertyExpressionEngine" status="67108864">
+                    <ExpressionEngine count="0">
+                    </ExpressionEngine>
+                </Property>
+                <Property name="Label" type="App::PropertyString" status="134217728">
+                    <String value="XY-plane"/>
+                </Property>
+                <Property name="Label2" type="App::PropertyString" status="67108992">
+                    <String value=""/>
+                </Property>
+                <Property name="Placement" type="App::PropertyPlacement" status="8388616">
+                    <PropertyPlacement Px="0.0000000000000000" Py="0.0000000000000000" Pz="0.0000000000000000" Q0="0.0000000000000000" Q1="0.0000000000000000" Q2="0.0000000000000000" Q3="1.0000000000000000" A="0.0000000000000000" Ox="0.0000000000000000" Oy="0.0000000000000000" Oz="1.0000000000000000"/>
+                </Property>
+                <Property name="Role" type="App::PropertyString" status="16777216">
+                    <String value="XY_Plane"/>
+                </Property>
+                <Property name="Visibility" type="App::PropertyBool" status="648">
+                    <Bool value="true"/>
+                </Property>
+            </Properties>
+        </Object>
+        <Object name="Origin" Extensions="True">
+            <Extensions Count="1">
+                <Extension type="App::GeoFeatureGroupExtension" name="GeoFeatureGroupExtension">
+                </Extension>
+            </Extensions>
+            <Properties Count="6" TransientCount="3">
+                <_Property name="Group" type="App::PropertyLinkList" status="16"/>
+                <_Property name="_ElementMapVersion" type="App::PropertyString" status="234881024"/>
+                <_Property name="_GroupTouched" type="App::PropertyBool" status="100663296"/>
+                <Property name="ExpressionEngine" type="App::PropertyExpressionEngine" status="67108864">
+                    <ExpressionEngine count="0">
+                    </ExpressionEngine>
+                </Property>
+                <Property name="Label" type="App::PropertyString" status="134217728">
+                    <String value="Origin"/>
+                </Property>
+                <Property name="Label2" type="App::PropertyString" status="67108992">
+                    <String value=""/>
+                </Property>
+                <Property name="OriginFeatures" type="App::PropertyLinkList" status="67108864">
+                    <LinkList count="7">
+                        <Link value="X_Axis"/>
+                        <Link value="Y_Axis"/>
+                        <Link value="Z_Axis"/>
+                        <Link value="XY_Plane"/>
+                        <Link value="XZ_Plane"/>
+                        <Link value="YZ_Plane"/>
+                        <Link value="Origin001"/>
+                    </LinkList>
+                </Property>
+                <Property name="Placement" type="App::PropertyPlacement" status="8388616">
+                    <PropertyPlacement Px="0.0000000000000000" Py="0.0000000000000000" Pz="0.0000000000000000" Q0="0.0000000000000000" Q1="0.0000000000000000" Q2="0.0000000000000000" Q3="1.0000000000000000" A="0.0000000000000000" Ox="0.0000000000000000" Oy="0.0000000000000000" Oz="1.0000000000000000"/>
+                </Property>
+                <Property name="Visibility" type="App::PropertyBool" status="648">
+                    <Bool value="false"/>
+                </Property>
+            </Properties>
+        </Object>
+        <Object name="Body" Extensions="True">
+            <Extensions Count="1">
+                <Extension type="App::OriginGroupExtension" name="OriginGroupExtension">
+                </Extension>
+            </Extensions>
+            <Properties Count="12" TransientCount="2">
+                <_Property name="_ElementMapVersion" type="App::PropertyString" status="234881024"/>
+                <_Property name="_GroupTouched" type="App::PropertyBool" status="100663424"/>
+                <Property name="AllowCompound" type="App::PropertyBool">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="BaseFeature" type="App::PropertyLink">
+                    <Link value=""/>
+                </Property>
+                <Property name="ExpressionEngine" type="App::PropertyExpressionEngine" status="67108864">
+                    <ExpressionEngine count="0">
+                    </ExpressionEngine>
+                </Property>
+                <Property name="Group" type="App::PropertyLinkList">
+                    <LinkList count="2">
+                        <Link value="Sketch"/>
+                        <Link value="Pad"/>
+                    </LinkList>
+                </Property>
+                <Property name="Label" type="App::PropertyString" status="134217728">
+                    <String value="Body"/>
+                </Property>
+                <Property name="Label2" type="App::PropertyString" status="67108992">
+                    <String value=""/>
+                </Property>
+                <Property name="Origin" type="App::PropertyLink" status="67108864">
+                    <Link value="Origin"/>
+                </Property>
+                <Property name="Placement" type="App::PropertyPlacement" status="8388608">
+                    <PropertyPlacement Px="0.0000000000000000" Py="0.0000000000000000" Pz="0.0000000000000000" Q0="0.0000000000000000" Q1="0.0000000000000000" Q2="0.0000000000000000" Q3="1.0000000000000000" A="0.0000000000000000" Ox="0.0000000000000000" Oy="0.0000000000000000" Oz="1.0000000000000000"/>
+                </Property>
+                <Property name="Shape" type="Part::PropertyPartShape">
+                    <Part HasherIndex="0" ElementMap="15.70200.5" file="Body.Shape.brp"/>
+                    <ElementMap new="1" count="1"><Element key="Dummy" value="Dummy"/></ElementMap>
+                    <ElementMap2 file="Body.Shape.Map.txt"/>
+                </Property>
+                <Property name="ShapeMaterial" type="Materials::PropertyMaterial">
+                    <PropertyMaterial uuid="7f9fd73b-50c9-41d8-b7b2-575a030c1eeb"/>
+                </Property>
+                <Property name="Tip" type="App::PropertyLink">
+                    <Link value="Pad"/>
+                </Property>
+                <Property name="Visibility" type="App::PropertyBool" status="648">
+                    <Bool value="false"/>
+                </Property>
+            </Properties>
+        </Object>
+        <Object name="Face004">
+            <Properties Count="7" TransientCount="1">
+                <_Property name="_ElementMapVersion" type="App::PropertyString" status="234881024"/>
+                <Property name="ExpressionEngine" type="App::PropertyExpressionEngine" status="67108864">
+                    <ExpressionEngine count="0">
+                    </ExpressionEngine>
+                </Property>
+                <Property name="Label" type="App::PropertyString" status="134217728">
+                    <String value="Face004"/>
+                </Property>
+                <Property name="Label2" type="App::PropertyString" status="67108992">
+                    <String value=""/>
+                </Property>
+                <Property name="Placement" type="App::PropertyPlacement" status="8388608">
+                    <PropertyPlacement Px="0.0000000000000000" Py="0.0000000000000000" Pz="0.0000000000000000" Q0="0.0000000000000000" Q1="0.0000000000000000" Q2="0.0000000000000000" Q3="1.0000000000000000" A="0.0000000000000000" Ox="0.0000000000000000" Oy="0.0000000000000000" Oz="1.0000000000000000"/>
+                </Property>
+                <Property name="Shape" type="Part::PropertyPartShape">
+                    <Part ElementMap="15.70200.5" file="Face004.Shape.brp"/>
+                    <ElementMap new="1" count="1"><Element key="Dummy" value="Dummy"/></ElementMap>
+                    <ElementMap2 file="Face004.Shape.Map.txt"/>
+                </Property>
+                <Property name="ShapeMaterial" type="Materials::PropertyMaterial">
+                    <PropertyMaterial uuid="7f9fd73b-50c9-41d8-b7b2-575a030c1eeb"/>
+                </Property>
+                <Property name="Visibility" type="App::PropertyBool" status="648">
+                    <Bool value="false"/>
+                </Property>
+            </Properties>
+        </Object>
+        <Object name="ConstraintFixed" Extensions="True">
+            <Extensions Count="1">
+                <Extension type="App::SuppressibleExtension" name="SuppressibleExtension">
+                </Extension>
+            </Extensions>
+            <Properties Count="10" TransientCount="0">
+                <Property name="ExpressionEngine" type="App::PropertyExpressionEngine" status="67108864">
+                    <ExpressionEngine count="0">
+                    </ExpressionEngine>
+                </Property>
+                <Property name="Label" type="App::PropertyString" status="134217728">
+                    <String value="ConstraintFixed"/>
+                </Property>
+                <Property name="Label2" type="App::PropertyString" status="67108992">
+                    <String value=""/>
+                </Property>
+                <Property name="NormalDirection" type="App::PropertyVector" status="150994944">
+                    <PropertyVector valueX="0.0000000000000000" valueY="0.0000000000000000" valueZ="1.0000000000000000"/>
+                </Property>
+                <Property name="Normals" type="App::PropertyVectorList" status="218103808">
+                    <VectorList file="Normals"/>
+                </Property>
+                <Property name="Points" type="App::PropertyVectorList" status="218103808">
+                    <VectorList file="Points"/>
+                </Property>
+                <Property name="References" type="App::PropertyLinkSubList">
+                    <LinkSubList count="1">
+                        <Link obj="Face004" sub="Edge4" shadow=";g674;SKT;:H5e2,E;:H5e7,E;:H5f2,E.Edge4"/>
+                    </LinkSubList>
+                </Property>
+                <Property name="Scale" type="App::PropertyFloatConstraint">
+                    <Float value="1.0000000000000000"/>
+                </Property>
+                <Property name="Suppressed" type="App::PropertyBool">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="Visibility" type="App::PropertyBool" status="648">
+                    <Bool value="true"/>
+                </Property>
+            </Properties>
+        </Object>
+        <Object name="ConstraintForce" Extensions="True">
+            <Extensions Count="1">
+                <Extension type="App::SuppressibleExtension" name="SuppressibleExtension">
+                </Extension>
+            </Extensions>
+            <Properties Count="16" TransientCount="0">
+                <Property name="AmplitudeValues" type="App::PropertyStringList">
+                    <StringList count="2">
+                        <String value="0, 0"/>
+                        <String value="1, 1"/>
+                    </StringList>
+                </Property>
+                <Property name="Direction" type="App::PropertyLinkSub">
+                    <LinkSub value="" count="0">
+                    </LinkSub>
+                </Property>
+                <Property name="DirectionVector" type="App::PropertyVector" status="150994945">
+                    <PropertyVector valueX="0.0000000000000000" valueY="0.0000000000000000" valueZ="1.0000000000000000"/>
+                </Property>
+                <Property name="EnableAmplitude" type="App::PropertyBool">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="ExpressionEngine" type="App::PropertyExpressionEngine" status="67108864">
+                    <ExpressionEngine count="0">
+                    </ExpressionEngine>
+                </Property>
+                <Property name="Force" type="App::PropertyForce">
+                    <Float value="10000.0000000000000000"/>
+                </Property>
+                <Property name="Label" type="App::PropertyString" status="134217728">
+                    <String value="ConstraintForce"/>
+                </Property>
+                <Property name="Label2" type="App::PropertyString" status="67108992">
+                    <String value=""/>
+                </Property>
+                <Property name="NormalDirection" type="App::PropertyVector" status="150994944">
+                    <PropertyVector valueX="0.0000000000000000" valueY="0.0000000000000000" valueZ="1.0000000000000000"/>
+                </Property>
+                <Property name="Normals" type="App::PropertyVectorList" status="218103808">
+                    <VectorList file="Normals1"/>
+                </Property>
+                <Property name="Points" type="App::PropertyVectorList" status="218103808">
+                    <VectorList file="Points1"/>
+                </Property>
+                <Property name="References" type="App::PropertyLinkSubList">
+                    <LinkSubList count="1">
+                        <Link obj="Face004" sub="Edge2" shadow=";g672;SKT;:H5e2,E;:H5e7,E;:H5f2,E.Edge2"/>
+                    </LinkSubList>
+                </Property>
+                <Property name="Reversed" type="App::PropertyBool">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="Scale" type="App::PropertyFloatConstraint">
+                    <Float value="1.0000000000000000"/>
+                </Property>
+                <Property name="Suppressed" type="App::PropertyBool">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="Visibility" type="App::PropertyBool" status="648">
+                    <Bool value="true"/>
+                </Property>
+            </Properties>
+        </Object>
+        <Object name="MaterialSolid" Extensions="True">
+            <Extensions Count="1">
+                <Extension type="App::SuppressibleExtensionPython" name="SuppressibleExtensionPython">
+                </Extension>
+            </Extensions>
+            <Properties Count="11" TransientCount="0">
+                <Property name="Category" type="App::PropertyEnumeration" group="Material" doc="Material type: fluid or solid" attr="0" ro="0" hide="0" status="2097408">
+                    <Integer value="0" CustomEnum="true"/>
+                    <CustomEnumList count="2">
+                        <Enum value="Solid"/>
+                        <Enum value="Fluid"/>
+                    </CustomEnumList>
+                </Property>
+                <Property name="ExpressionEngine" type="App::PropertyExpressionEngine" status="67108864">
+                    <ExpressionEngine count="0">
+                    </ExpressionEngine>
+                </Property>
+                <Property name="Label" type="App::PropertyString" status="134217728">
+                    <String value="MaterialSolid"/>
+                </Property>
+                <Property name="Label2" type="App::PropertyString" status="67108992">
+                    <String value=""/>
+                </Property>
+                <Property name="Material" type="App::PropertyMap">
+                    <Map count="18">
+                        <Item key="Author" value="Juergen Riegel"/>
+                        <Item key="AuthorAndLicense" value="CC-BY-3.0"/>
+                        <Item key="CardName" value="ABS-Generic"/>
+                        <Item key="Density" value="1.06e-06 kg/mm^3"/>
+                        <Item key="Description" value="This is a blend AcrylnitrilButadienStyrol (ABS) material card. The values are at the low end of the spectrum. If you need a more precise material definition use the more specialised ABS-blend cards."/>
+                        <Item key="Father" value="Thermoplast"/>
+                        <Item key="License" value="CC-BY-3.0"/>
+                        <Item key="Name" value="ABS-Generic"/>
+                        <Item key="PoissonRatio" value="0.37"/>
+                        <Item key="ProductURL" value="https://en.wikipedia.org/wiki/Acrylonitrile_butadiene_styrene"/>
+                        <Item key="ReferenceSource" value=""/>
+                        <Item key="SourceURL" value=""/>
+                        <Item key="SpecificHeat" value="2.05e+09 mm^2/(s^2*K)"/>
+                        <Item key="ThermalConductivity" value="158 mm*kg/(s^3*K)"/>
+                        <Item key="ThermalExpansionCoefficient" value="9.3e-05 1/K"/>
+                        <Item key="UltimateTensileStrength" value="38800 kg/(mm*s^2)"/>
+                        <Item key="YieldStrength" value="44100 kg/(mm*s^2)"/>
+                        <Item key="YoungsModulus" value="2.3e+06 kg/(mm*s^2)"/>
+                    </Map>
+                </Property>
+                <Property name="Nonlinear" type="App::PropertyLink" group="Material" doc="Material nonlinear behavior" attr="0" ro="0" hide="0" status="2097408">
+                    <Link value=""/>
+                </Property>
+                <Property name="Proxy" type="App::PropertyPythonObject">
+                    <Python value="bnVsbA==" encoded="yes" module="femobjects.material_common" class="MaterialCommon"/>
+                </Property>
+                <Property name="References" type="App::PropertyLinkSubListGlobal" group="Material" doc="List of material shapes" attr="0" ro="0" hide="0" status="2097408">
+                    <LinkSubList count="0">
+                    </LinkSubList>
+                </Property>
+                <Property name="Suppressed" type="App::PropertyBool">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="UUID" type="App::PropertyString" group="Material" doc="Material UUID" attr="0" ro="0" hide="1" status="69206272">
+                    <String value=""/>
+                </Property>
+                <Property name="Visibility" type="App::PropertyBool" status="648">
+                    <Bool value="true"/>
+                </Property>
+            </Properties>
+        </Object>
+        <Object name="ElementGeometry2D" Extensions="True">
+            <Extensions Count="1">
+                <Extension type="App::SuppressibleExtensionPython" name="SuppressibleExtensionPython">
+                </Extension>
+            </Extensions>
+            <Properties Count="9" TransientCount="0">
+                <Property name="ExpressionEngine" type="App::PropertyExpressionEngine" status="67108864">
+                    <ExpressionEngine count="0">
+                    </ExpressionEngine>
+                </Property>
+                <Property name="Label" type="App::PropertyString" status="134217728">
+                    <String value="ElementGeometry2D"/>
+                </Property>
+                <Property name="Label2" type="App::PropertyString" status="67108992">
+                    <String value=""/>
+                </Property>
+                <Property name="Offset" type="App::PropertyFloat" group="ShellThickness" doc="Set thickness offset of the shell elements" attr="0" ro="0" hide="0" status="2097408">
+                    <Float value="0.0000000000000000"/>
+                </Property>
+                <Property name="Proxy" type="App::PropertyPythonObject">
+                    <Python value="bnVsbA==" encoded="yes" module="femobjects.element_geometry2D" class="ElementGeometry2D"/>
+                </Property>
+                <Property name="References" type="App::PropertyLinkSubListGlobal" group="Element" doc="List of element shapes" attr="0" ro="0" hide="0" status="2097408">
+                    <LinkSubList count="1">
+                        <Link obj="Face004" sub="Face1" shadow=";g671;SKT;:H5e2,E;FAC;:H5e2:4,F;:H5e7,F;:H5f2,F.Face1"/>
+                    </LinkSubList>
+                </Property>
+                <Property name="Suppressed" type="App::PropertyBool">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="Thickness" type="App::PropertyLength" group="ShellThickness" doc="set thickness of the shell elements" attr="0" ro="0" hide="0" status="2097408">
+                    <Float value="10.0000000000000000"/>
+                </Property>
+                <Property name="Visibility" type="App::PropertyBool" status="648">
+                    <Bool value="true"/>
+                </Property>
+            </Properties>
+        </Object>
+        <Object name="Origin001">
+            <Properties Count="6" TransientCount="1">
+                <_Property name="_ElementMapVersion" type="App::PropertyString" status="234881024"/>
+                <Property name="ExpressionEngine" type="App::PropertyExpressionEngine" status="67108864">
+                    <ExpressionEngine count="0">
+                    </ExpressionEngine>
+                </Property>
+                <Property name="Label" type="App::PropertyString" status="134217728">
+                    <String value="Origin"/>
+                </Property>
+                <Property name="Label2" type="App::PropertyString" status="67108992">
+                    <String value=""/>
+                </Property>
+                <Property name="Placement" type="App::PropertyPlacement" status="8388616">
+                    <PropertyPlacement Px="0.0000000000000000" Py="0.0000000000000000" Pz="0.0000000000000000" Q0="0.0000000000000000" Q1="0.0000000000000000" Q2="0.0000000000000000" Q3="1.0000000000000000" A="0.0000000000000000" Ox="0.0000000000000000" Oy="0.0000000000000000" Oz="1.0000000000000000"/>
+                </Property>
+                <Property name="Role" type="App::PropertyString" status="16777224">
+                    <String value="Origin"/>
+                </Property>
+                <Property name="Visibility" type="App::PropertyBool" status="648">
+                    <Bool value="true"/>
+                </Property>
+            </Properties>
+        </Object>
+        <Object name="SolverCodeAster" Extensions="True">
+            <Extensions Count="1">
+                <Extension type="App::GroupExtensionPython" name="GroupExtensionPython">
+                </Extension>
+            </Extensions>
+            <Properties Count="9" TransientCount="3">
+                <_Property name="Tool" type="App::PropertyPythonObject" status="251658240"/>
+                <_Property name="WorkingDirectory" type="App::PropertyPath" status="234881024"/>
+                <_Property name="_GroupTouched" type="App::PropertyBool" status="100663296"/>
+                <Property name="AnalysisType" type="App::PropertyEnumeration" group="Fem" doc="Type of the analysis" attr="0" ro="0" hide="0" status="2097152">
+                    <Integer value="0" CustomEnum="true"/>
+                    <CustomEnumList count="1">
+                        <Enum value="static"/>
+                    </CustomEnumList>
+                </Property>
+                <Property name="ExpressionEngine" type="App::PropertyExpressionEngine" status="67108864">
+                    <ExpressionEngine count="0">
+                    </ExpressionEngine>
+                </Property>
+                <Property name="Group" type="App::PropertyLinkList">
+                    <LinkList count="0">
+                    </LinkList>
+                </Property>
+                <Property name="Label" type="App::PropertyString" status="134217728">
+                    <String value="SolverCodeAster002"/>
+                </Property>
+                <Property name="Label2" type="App::PropertyString" status="67108992">
+                    <String value=""/>
+                </Property>
+                <Property name="Proxy" type="App::PropertyPythonObject">
+                    <Python value="e30=" encoded="yes" module="femsolver.codeaster.solver" class="Proxy"/>
+                </Property>
+                <Property name="Results" type="App::PropertyLinkList" status="150994944">
+                    <LinkList count="0">
+                    </LinkList>
+                </Property>
+                <Property name="SolverPrecision" type="App::PropertyPrecision" group="Fem" doc="Precision of solver (a smaller number will quite with an error if this accuracy can&apos;t be met)" attr="0" ro="0" hide="0" status="2097152">
+                    <Float value="0.0000010000000000"/>
+                </Property>
+                <Property name="Visibility" type="App::PropertyBool" status="648">
+                    <Bool value="true"/>
+                </Property>
+            </Properties>
+        </Object>
+        <Object name="FEMMeshGmsh" Extensions="True">
+            <Extensions Count="1">
+                <Extension type="App::SuppressibleExtension" name="SuppressibleExtension">
+                </Extension>
+            </Extensions>
+            <Properties Count="30" TransientCount="3">
+                <_Property name="Tool" type="App::PropertyPythonObject" status="251658241"/>
+                <_Property name="WorkingDirectory" type="App::PropertyPath" status="234881025"/>
+                <_Property name="_ElementMapVersion" type="App::PropertyString" status="234881024"/>
+                <Property name="Algorithm2D" type="App::PropertyEnumeration" group="Mesh Parameters" doc="Mesh algorithm 2D" attr="0" ro="0" hide="0" status="2097408">
+                    <Integer value="0" CustomEnum="true"/>
+                    <CustomEnumList count="8">
+                        <Enum value="Automatic"/>
+                        <Enum value="MeshAdapt"/>
+                        <Enum value="Delaunay"/>
+                        <Enum value="Frontal"/>
+                        <Enum value="BAMG"/>
+                        <Enum value="DelQuad"/>
+                        <Enum value="Packing Parallelograms"/>
+                        <Enum value="Quasi-structured Quad"/>
+                    </CustomEnumList>
+                </Property>
+                <Property name="Algorithm3D" type="App::PropertyEnumeration" group="Mesh Parameters" doc="Mesh algorithm 3D" attr="0" ro="0" hide="0" status="2097408">
+                    <Integer value="0" CustomEnum="true"/>
+                    <CustomEnumList count="7">
+                        <Enum value="Automatic"/>
+                        <Enum value="Delaunay"/>
+                        <Enum value="New Delaunay"/>
+                        <Enum value="Frontal"/>
+                        <Enum value="MMG3D"/>
+                        <Enum value="R-tree"/>
+                        <Enum value="HXT"/>
+                    </CustomEnumList>
+                </Property>
+                <Property name="CharacteristicLengthMax" type="App::PropertyLength" group="Mesh Parameters" doc="Max mesh element size (0.0 means infinity)" attr="0" ro="0" hide="0" status="2097408">
+                    <Float value="0.0000000000000000"/>
+                </Property>
+                <Property name="CharacteristicLengthMin" type="App::PropertyLength" group="Mesh Parameters" doc="Min mesh element size" attr="0" ro="0" hide="0" status="2097408">
+                    <Float value="50.0000000000000000"/>
+                </Property>
+                <Property name="CoherenceMesh" type="App::PropertyBool" group="Mesh Parameters" doc="Removes all duplicate mesh vertices" attr="0" ro="0" hide="0" status="2097408">
+                    <Bool value="true"/>
+                </Property>
+                <Property name="ElementDimension" type="App::PropertyEnumeration" group="Mesh Parameters" doc="Dimension of mesh elements (&apos;From Shape&apos;: according ShapeType of part to mesh)" attr="0" ro="0" hide="0" status="2097408">
+                    <Integer value="0" CustomEnum="true"/>
+                    <CustomEnumList count="4">
+                        <Enum value="From Shape"/>
+                        <Enum value="1D"/>
+                        <Enum value="2D"/>
+                        <Enum value="3D"/>
+                    </CustomEnumList>
+                </Property>
+                <Property name="ElementOrder" type="App::PropertyEnumeration" group="Mesh Parameters" doc="Order of mesh elements" attr="0" ro="0" hide="0" status="2097408">
+                    <Integer value="0" CustomEnum="true"/>
+                    <CustomEnumList count="2">
+                        <Enum value="1st"/>
+                        <Enum value="2nd"/>
+                    </CustomEnumList>
+                </Property>
+                <Property name="ExpressionEngine" type="App::PropertyExpressionEngine" status="67108864">
+                    <ExpressionEngine count="0">
+                    </ExpressionEngine>
+                </Property>
+                <Property name="FemMesh" type="Fem::PropertyFemMesh" status="8388608">
+                    <FemMesh file="FemMesh.unv" a11="1.0000000000000000" a12="0.0000000000000000" a13="0.0000000000000000" a14="0.0000000000000000" a21="0.0000000000000000" a22="1.0000000000000000" a23="0.0000000000000000" a24="0.0000000000000000" a31="0.0000000000000000" a32="0.0000000000000000" a33="1.0000000000000000" a34="0.0000000000000000" a41="0.0000000000000000" a42="0.0000000000000000" a43="0.0000000000000000" a44="1.0000000000000000"/>
+                </Property>
+                <Property name="GeometryTolerance" type="App::PropertyFloat" group="Mesh Parameters" doc="Geometrical Tolerance (0.0 means GMSH std = 1e-08)" attr="0" ro="0" hide="0" status="2097408">
+                    <Float value="0.0000010000000000"/>
+                </Property>
+                <Property name="GroupsOfNodes" type="App::PropertyBool" group="Mesh Parameters" doc="For each group create not only the elements but the nodes too" attr="0" ro="0" hide="0" status="2097408">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="HighOrderOptimize" type="App::PropertyEnumeration" group="Mesh Parameters" doc="Optimization of high order meshes" attr="0" ro="0" hide="0" status="2097408">
+                    <Integer value="0" CustomEnum="true"/>
+                    <CustomEnumList count="5">
+                        <Enum value="None"/>
+                        <Enum value="Optimization"/>
+                        <Enum value="Elastic+Optimization"/>
+                        <Enum value="Elastic"/>
+                        <Enum value="Fast curving"/>
+                    </CustomEnumList>
+                </Property>
+                <Property name="Label" type="App::PropertyString" status="134217728">
+                    <String value="FEMMeshGmsh003"/>
+                </Property>
+                <Property name="Label2" type="App::PropertyString" status="67108992">
+                    <String value=""/>
+                </Property>
+                <Property name="MeshBoundaryLayerList" type="App::PropertyLinkList" group="Base" doc="Mesh boundaries need inflation layers" attr="0" ro="0" hide="0" status="2097408">
+                    <LinkList count="0">
+                    </LinkList>
+                </Property>
+                <Property name="MeshGroupList" type="App::PropertyLinkList" group="Base" doc="Mesh groups of the mesh" attr="0" ro="0" hide="0" status="2097408">
+                    <LinkList count="0">
+                    </LinkList>
+                </Property>
+                <Property name="MeshRegionList" type="App::PropertyLinkList" group="Base" doc="Mesh refinments of the mesh" attr="0" ro="0" hide="0" status="2097408">
+                    <LinkList count="0">
+                    </LinkList>
+                </Property>
+                <Property name="MeshSizeFromCurvature" type="App::PropertyIntegerConstraint" group="Mesh Parameters" doc="Number of elements per 2*pi radians, 0 to deactivate" attr="0" ro="0" hide="0" status="2097408">
+                    <Integer value="12" min="0" max="10000" step="1"/>
+                </Property>
+                <Property name="OptimizeNetgen" type="App::PropertyBool" group="Mesh Parameters" doc="Optimize tetra elements by use of Netgen" attr="0" ro="0" hide="0" status="2097408">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="OptimizeStd" type="App::PropertyBool" group="Mesh Parameters" doc="Optimize tetrahedral elements" attr="0" ro="0" hide="0" status="2097408">
+                    <Bool value="true"/>
+                </Property>
+                <Property name="Placement" type="App::PropertyPlacement" status="8388608">
+                    <PropertyPlacement Px="0.0000000000000000" Py="0.0000000000000000" Pz="0.0000000000000000" Q0="0.0000000000000000" Q1="0.0000000000000000" Q2="0.0000000000000000" Q3="1.0000000000000000" A="0.0000000000000000" Ox="0.0000000000000000" Oy="0.0000000000000000" Oz="1.0000000000000000"/>
+                </Property>
+                <Property name="Proxy" type="App::PropertyPythonObject">
+                    <Python value="bnVsbA==" encoded="yes" module="femobjects.mesh_gmsh" class="MeshGmsh"/>
+                </Property>
+                <Property name="RecombinationAlgorithm" type="App::PropertyEnumeration" group="Mesh Parameters" doc="Recombination algorithm" attr="0" ro="0" hide="0" status="2097408">
+                    <Integer value="0" CustomEnum="true"/>
+                    <CustomEnumList count="4">
+                        <Enum value="Simple"/>
+                        <Enum value="Blossom"/>
+                        <Enum value="Simple full-quad"/>
+                        <Enum value="Blossom full-quad"/>
+                    </CustomEnumList>
+                </Property>
+                <Property name="Recombine3DAll" type="App::PropertyBool" group="Mesh Parameters" doc="Apply recombination algorithm to all volumes" attr="0" ro="0" hide="0" status="2097408">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="RecombineAll" type="App::PropertyBool" group="Mesh Parameters" doc="Apply recombination algorithm to all surfaces" attr="0" ro="0" hide="0" status="2097408">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="SecondOrderLinear" type="App::PropertyBool" group="Mesh Parameters" doc="Second order nodes are created by linear interpolation" attr="0" ro="0" hide="0" status="2097408">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="Shape" type="App::PropertyLink">
+                    <Link value="Face004"/>
+                </Property>
+                <Property name="SubdivisionAlgorithm" type="App::PropertyEnumeration" group="Mesh Parameters" doc="Mesh subdivision algorithm" attr="0" ro="0" hide="0" status="2097408">
+                    <Integer value="0" CustomEnum="true"/>
+                    <CustomEnumList count="4">
+                        <Enum value="None"/>
+                        <Enum value="All Quadrangles"/>
+                        <Enum value="All Hexahedra"/>
+                        <Enum value="Barycentric"/>
+                    </CustomEnumList>
+                </Property>
+                <Property name="Suppressed" type="App::PropertyBool">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="Visibility" type="App::PropertyBool" status="648">
+                    <Bool value="false"/>
+                </Property>
+            </Properties>
+        </Object>
+        <Object name="CodeAsterResults">
+            <Properties Count="45" TransientCount="0">
+                <Property name="CriticalStrainRatio" type="App::PropertyFloatList" group="NodeData" doc="" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file=""/>
+                </Property>
+                <Property name="DisplacementLengths" type="App::PropertyFloatList" group="NodeData" doc="List of displacement lengths" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file="DisplacementLengths"/>
+                </Property>
+                <Property name="DisplacementVectors" type="App::PropertyVectorList" group="NodeData" doc="List of displacement vectors" attr="1" ro="0" hide="0" status="18874624">
+                    <VectorList file="DisplacementVectors"/>
+                </Property>
+                <Property name="Eigenmode" type="App::PropertyInteger" group="Data" doc="" attr="1" ro="0" hide="0" status="18874624">
+                    <Integer value="0"/>
+                </Property>
+                <Property name="EigenmodeFrequency" type="App::PropertyFloat" group="Data" doc="User Defined Results" attr="1" ro="0" hide="0" status="18874624">
+                    <Float value="0.0000000000000000"/>
+                </Property>
+                <Property name="ExpressionEngine" type="App::PropertyExpressionEngine" status="67108864">
+                    <ExpressionEngine count="0">
+                    </ExpressionEngine>
+                </Property>
+                <Property name="HeatFlux" type="App::PropertyVectorList" group="NodeData" doc="List of heat flux vectors" attr="1" ro="0" hide="0" status="18874624">
+                    <VectorList file="HeatFlux"/>
+                </Property>
+                <Property name="Label" type="App::PropertyString" status="134217728">
+                    <String value="CodeAsterResults"/>
+                </Property>
+                <Property name="Label2" type="App::PropertyString" status="67108992">
+                    <String value=""/>
+                </Property>
+                <Property name="MassFlowRate" type="App::PropertyFloatList" group="NodeData" doc="List of mass flow rate values" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file=""/>
+                </Property>
+                <Property name="MaxShear" type="App::PropertyFloatList" group="NodeData" doc="List of Maximum Shear stress values" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file=""/>
+                </Property>
+                <Property name="Mesh" type="App::PropertyLink">
+                    <Link value="CodeAsterResults_Mesh"/>
+                </Property>
+                <Property name="MohrCoulomb" type="App::PropertyFloatList" group="NodeData" doc="List of Mohr Coulomb stress values" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file=""/>
+                </Property>
+                <Property name="NetworkPressure" type="App::PropertyFloatList" group="NodeData" doc="List of network pressure values" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file=""/>
+                </Property>
+                <Property name="NodeNumbers" type="App::PropertyIntegerList" status="4">
+                    <IntegerList count="8">
+                        <I v="1"/>
+                        <I v="2"/>
+                        <I v="3"/>
+                        <I v="4"/>
+                        <I v="5"/>
+                        <I v="6"/>
+                        <I v="7"/>
+                        <I v="8"/>
+                    </IntegerList>
+                </Property>
+                <Property name="NodeStrainXX" type="App::PropertyFloatList" group="NodeData" doc="" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file=""/>
+                </Property>
+                <Property name="NodeStrainXY" type="App::PropertyFloatList" group="NodeData" doc="" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file=""/>
+                </Property>
+                <Property name="NodeStrainXZ" type="App::PropertyFloatList" group="NodeData" doc="" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file=""/>
+                </Property>
+                <Property name="NodeStrainYY" type="App::PropertyFloatList" group="NodeData" doc="" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file=""/>
+                </Property>
+                <Property name="NodeStrainYZ" type="App::PropertyFloatList" group="NodeData" doc="" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file=""/>
+                </Property>
+                <Property name="NodeStrainZZ" type="App::PropertyFloatList" group="NodeData" doc="" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file=""/>
+                </Property>
+                <Property name="NodeStressXX" type="App::PropertyFloatList" group="NodeData" doc="" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file=""/>
+                </Property>
+                <Property name="NodeStressXY" type="App::PropertyFloatList" group="NodeData" doc="" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file=""/>
+                </Property>
+                <Property name="NodeStressXZ" type="App::PropertyFloatList" group="NodeData" doc="" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file=""/>
+                </Property>
+                <Property name="NodeStressYY" type="App::PropertyFloatList" group="NodeData" doc="" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file=""/>
+                </Property>
+                <Property name="NodeStressYZ" type="App::PropertyFloatList" group="NodeData" doc="" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file=""/>
+                </Property>
+                <Property name="NodeStressZZ" type="App::PropertyFloatList" group="NodeData" doc="" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file=""/>
+                </Property>
+                <Property name="PS1Vector" type="App::PropertyVectorList" group="NodeData" doc="List of 1st Principal Stress Vectors" attr="1" ro="0" hide="0" status="18874624">
+                    <VectorList file="PS1Vector"/>
+                </Property>
+                <Property name="PS2Vector" type="App::PropertyVectorList" group="NodeData" doc="List of 2nd Principal Stress Vectors" attr="1" ro="0" hide="0" status="18874624">
+                    <VectorList file="PS2Vector"/>
+                </Property>
+                <Property name="PS3Vector" type="App::PropertyVectorList" group="NodeData" doc="List of 3rd Principal Stress Vectors" attr="1" ro="0" hide="0" status="18874624">
+                    <VectorList file="PS3Vector"/>
+                </Property>
+                <Property name="Peeq" type="App::PropertyFloatList" group="NodeData" doc="List of equivalent plastic strain values" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file=""/>
+                </Property>
+                <Property name="PrincipalMax" type="App::PropertyFloatList" group="NodeData" doc="" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file=""/>
+                </Property>
+                <Property name="PrincipalMed" type="App::PropertyFloatList" group="NodeData" doc="" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file=""/>
+                </Property>
+                <Property name="PrincipalMin" type="App::PropertyFloatList" group="NodeData" doc="" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file=""/>
+                </Property>
+                <Property name="Proxy" type="App::PropertyPythonObject">
+                    <Python value="bnVsbA==" encoded="yes" module="femobjects.result_mechanical" class="ResultMechanical"/>
+                </Property>
+                <Property name="ReinforcementRatio_x" type="App::PropertyFloatList" group="NodeData" doc="Reinforcement ratio in X-direction" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file=""/>
+                </Property>
+                <Property name="ReinforcementRatio_y" type="App::PropertyFloatList" group="NodeData" doc="Reinforcement ratio in Y-direction" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file=""/>
+                </Property>
+                <Property name="ReinforcementRatio_z" type="App::PropertyFloatList" group="NodeData" doc="Reinforcement ratio in Z-direction" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file=""/>
+                </Property>
+                <Property name="ResultType" type="App::PropertyString" group="Base" doc="Type of the result" attr="1" ro="0" hide="0" status="18874624">
+                    <String value="Fem::ResultMechanical"/>
+                </Property>
+                <Property name="Stats" type="App::PropertyFloatList" status="4">
+                    <FloatList file="Stats"/>
+                </Property>
+                <Property name="Temperature" type="App::PropertyFloatList" group="NodeData" doc="Temperature field" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file=""/>
+                </Property>
+                <Property name="Time" type="App::PropertyFloat" status="4">
+                    <Float value="0.0000000000000000"/>
+                </Property>
+                <Property name="UserDefined" type="App::PropertyFloatList" group="NodeData" doc="User Defined Results" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file=""/>
+                </Property>
+                <Property name="Visibility" type="App::PropertyBool" status="649">
+                    <Bool value="true"/>
+                </Property>
+                <Property name="vonMises" type="App::PropertyFloatList" group="NodeData" doc="List of von Mises equivalent stresses" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file=""/>
+                </Property>
+            </Properties>
+        </Object>
+        <Object name="CodeAsterResults_Mesh" Extensions="True">
+            <Extensions Count="1">
+                <Extension type="App::SuppressibleExtension" name="SuppressibleExtension">
+                </Extension>
+            </Extensions>
+            <Properties Count="8" TransientCount="1">
+                <_Property name="_ElementMapVersion" type="App::PropertyString" status="234881024"/>
+                <Property name="ExpressionEngine" type="App::PropertyExpressionEngine" status="67108864">
+                    <ExpressionEngine count="0">
+                    </ExpressionEngine>
+                </Property>
+                <Property name="FemMesh" type="Fem::PropertyFemMesh" status="8388608">
+                    <FemMesh file="FemMesh1.unv" a11="1.0000000000000000" a12="0.0000000000000000" a13="0.0000000000000000" a14="0.0000000000000000" a21="0.0000000000000000" a22="1.0000000000000000" a23="0.0000000000000000" a24="0.0000000000000000" a31="0.0000000000000000" a32="0.0000000000000000" a33="1.0000000000000000" a34="0.0000000000000000" a41="0.0000000000000000" a42="0.0000000000000000" a43="0.0000000000000000" a44="1.0000000000000000"/>
+                </Property>
+                <Property name="Label" type="App::PropertyString" status="134217728">
+                    <String value="CodeAsterResults_Mesh"/>
+                </Property>
+                <Property name="Label2" type="App::PropertyString" status="67108992">
+                    <String value=""/>
+                </Property>
+                <Property name="Placement" type="App::PropertyPlacement" status="8388608">
+                    <PropertyPlacement Px="0.0000000000000000" Py="0.0000000000000000" Pz="0.0000000000000000" Q0="0.0000000000000000" Q1="0.0000000000000000" Q2="0.0000000000000000" Q3="1.0000000000000000" A="0.0000000000000000" Ox="0.0000000000000000" Oy="0.0000000000000000" Oz="1.0000000000000000"/>
+                </Property>
+                <Property name="Proxy" type="App::PropertyPythonObject">
+                    <Python value="bnVsbA==" encoded="yes" module="femobjects.mesh_result" class="MeshResult"/>
+                </Property>
+                <Property name="Suppressed" type="App::PropertyBool">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="Visibility" type="App::PropertyBool" status="649">
+                    <Bool value="true"/>
+                </Property>
+            </Properties>
+        </Object>
+        <Object name="Analysis001" Extensions="True">
+            <Extensions Count="1">
+                <Extension type="App::GroupExtension" name="GroupExtension">
+                </Extension>
+            </Extensions>
+            <Properties Count="6" TransientCount="1">
+                <_Property name="_GroupTouched" type="App::PropertyBool" status="100663425"/>
+                <Property name="ExpressionEngine" type="App::PropertyExpressionEngine" status="67108864">
+                    <ExpressionEngine count="0">
+                    </ExpressionEngine>
+                </Property>
+                <Property name="Group" type="App::PropertyLinkList">
+                    <LinkList count="10">
+                        <Link value="SolverCcxTools001"/>
+                        <Link value="ConstraintFixed001"/>
+                        <Link value="Face005"/>
+                        <Link value="ConstraintForce001"/>
+                        <Link value="ElementGeometry2D001"/>
+                        <Link value="MaterialSolid001"/>
+                        <Link value="FEMMeshGmsh001"/>
+                        <Link value="CCX_Results"/>
+                        <Link value="Pipeline_CCX_Results"/>
+                        <Link value="ccx_dat_file"/>
+                    </LinkList>
+                </Property>
+                <Property name="Label" type="App::PropertyString" status="134217728">
+                    <String value="Analysis001"/>
+                </Property>
+                <Property name="Label2" type="App::PropertyString" status="67108992">
+                    <String value=""/>
+                </Property>
+                <Property name="Uid" type="App::PropertyUUID">
+                    <Uuid value="76720efe-b29e-4ab7-9c30-adc9b8eab802"/>
+                </Property>
+                <Property name="Visibility" type="App::PropertyBool" status="648">
+                    <Bool value="true"/>
+                </Property>
+            </Properties>
+        </Object>
+        <Object name="SolverCcxTools001">
+            <Properties Count="35" TransientCount="2">
+                <_Property name="Tool" type="App::PropertyPythonObject" status="251658240"/>
+                <_Property name="WorkingDirectory" type="App::PropertyPath" status="234881024"/>
+                <Property name="AnalysisType" type="App::PropertyEnumeration" group="AnalysisType" doc="Type of the analysis" attr="0" ro="0" hide="0" status="2097408">
+                    <Integer value="0" CustomEnum="true"/>
+                    <CustomEnumList count="5">
+                        <Enum value="static"/>
+                        <Enum value="frequency"/>
+                        <Enum value="thermomech"/>
+                        <Enum value="check"/>
+                        <Enum value="buckling"/>
+                    </CustomEnumList>
+                </Property>
+                <Property name="AutomaticIncrementation" type="App::PropertyBool" group="TimeIncrement" doc="If False, switch off automatic incrementation via `DIRECT`&#10;parameter and ignore minimum and maximum time increments.&#10;Analysis may not converge!" attr="0" ro="0" hide="0" status="2097408">
+                    <Bool value="true"/>
+                </Property>
+                <Property name="BeamReducedIntegration" type="App::PropertyBool" group="ElementModel" doc="Set to True to use beam elements with reduced integration" attr="0" ro="0" hide="0" status="2097408">
+                    <Bool value="true"/>
+                </Property>
+                <Property name="BeamShellResultOutput3D" type="App::PropertyBool" group="Solver" doc="Output 3D results for 1D and 2D analysis " attr="0" ro="0" hide="0" status="2097408">
+                    <Bool value="true"/>
+                </Property>
+                <Property name="BucklingAccuracy" type="App::PropertyFloatConstraint" group="Solver" doc="Accuracy for buckling analysis" attr="0" ro="0" hide="0" status="2097408">
+                    <Float value="0.0100000000000000"/>
+                </Property>
+                <Property name="BucklingFactors" type="App::PropertyIntegerConstraint" group="Solver" doc="Calculates the lowest buckling modes to the corresponding buckling factors" attr="0" ro="0" hide="0" status="2097408">
+                    <Integer value="1"/>
+                </Property>
+                <Property name="DisplaceMesh" type="App::PropertyBool" group="Solver" doc="Deform the mesh by the displacement field" attr="0" ro="0" hide="0" status="2097408">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="EigenmodeHighLimit" type="App::PropertyFrequency" group="Solver" doc="High frequency limit for eigenmode calculations" attr="0" ro="0" hide="0" status="2097408">
+                    <Float value="1000000.0000000000000000"/>
+                </Property>
+                <Property name="EigenmodeLowLimit" type="App::PropertyFrequency" group="Solver" doc="Low frequency limit for eigenmode calculations" attr="0" ro="0" hide="0" status="2097408">
+                    <Float value="0.0000000000000000"/>
+                </Property>
+                <Property name="EigenmodesCount" type="App::PropertyIntegerConstraint" group="Solver" doc="Number of modes for frequency calculations" attr="0" ro="0" hide="0" status="2097408">
+                    <Integer value="10" min="1" max="100" step="1"/>
+                </Property>
+                <Property name="ExcludeBendingStiffness" type="App::PropertyBool" group="ElementModel" doc="Exclude bending stiffness to replace shells with membranes or beams with trusses" attr="0" ro="0" hide="0" status="2097408">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="ExpressionEngine" type="App::PropertyExpressionEngine" status="67108864">
+                    <ExpressionEngine count="0">
+                    </ExpressionEngine>
+                </Property>
+                <Property name="GeometricalNonlinearity" type="App::PropertyBool" group="Solver" doc="Use geometrical nonlinearity" attr="0" ro="0" hide="0" status="2097408">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="IncrementsMaximum" type="App::PropertyIntegerConstraint" group="TimeIncrement" doc="Maximum Number of increments in each CalculiX step.&#10;Set to 0 to use CalculiX default value" attr="0" ro="0" hide="0" status="2097408">
+                    <Integer value="2000" min="0" max="2147483647" step="1"/>
+                </Property>
+                <Property name="IterationsControlParameterCutb" type="App::PropertyString" group="Solver" doc="User defined time incrementation cutbacks control parameter" attr="0" ro="0" hide="0" status="2097408">
+                    <String value="0.25,0.5,0.75,0.85,,,1.5,"/>
+                </Property>
+                <Property name="IterationsControlParameterIter" type="App::PropertyString" group="Solver" doc="User defined time incrementation iterations control parameter" attr="0" ro="0" hide="0" status="2097408">
+                    <String value="4,8,9,200,10,400,,200,,"/>
+                </Property>
+                <Property name="IterationsControlParameterTimeUse" type="App::PropertyBool" group="Solver" doc="Use the user defined time incrementation control parameter" attr="0" ro="0" hide="0" status="2097408">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="Label" type="App::PropertyString" status="134217728">
+                    <String value="SolverCcxTools001"/>
+                </Property>
+                <Property name="Label2" type="App::PropertyString" status="67108992">
+                    <String value=""/>
+                </Property>
+                <Property name="MaterialNonlinearity" type="App::PropertyBool" group="Solver" doc="If available, use nonlinear material properties" attr="0" ro="0" hide="0" status="2097408">
+                    <Bool value="true"/>
+                </Property>
+                <Property name="MatrixSolverType" type="App::PropertyEnumeration" group="Solver" doc="Type of solver to use" attr="0" ro="0" hide="0" status="2097408">
+                    <Integer value="0" CustomEnum="true"/>
+                    <CustomEnumList count="6">
+                        <Enum value="default"/>
+                        <Enum value="pastix"/>
+                        <Enum value="pardiso"/>
+                        <Enum value="spooles"/>
+                        <Enum value="iterativescaling"/>
+                        <Enum value="iterativecholesky"/>
+                    </CustomEnumList>
+                </Property>
+                <Property name="ModelSpace" type="App::PropertyEnumeration" group="ElementModel" doc="Type of model space" attr="0" ro="0" hide="0" status="2097408">
+                    <Integer value="0" CustomEnum="true"/>
+                    <CustomEnumList count="4">
+                        <Enum value="3D"/>
+                        <Enum value="plane stress"/>
+                        <Enum value="plane strain"/>
+                        <Enum value="axisymmetric"/>
+                    </CustomEnumList>
+                </Property>
+                <Property name="OutputFrequency" type="App::PropertyIntegerConstraint" group="Solver" doc="Set the output frequency in increments" attr="0" ro="0" hide="0" status="2097408">
+                    <Integer value="1"/>
+                </Property>
+                <Property name="PastixMixedPrecision" type="App::PropertyBool" group="Solver" doc="Mixed precision for the PaStiX matrix solver" attr="0" ro="0" hide="0" status="2097408">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="Proxy" type="App::PropertyPythonObject">
+                    <Python value="bnVsbA==" encoded="yes" module="femobjects.solver_ccxtools" class="SolverCcxTools"/>
+                </Property>
+                <Property name="Results" type="App::PropertyLinkList" status="150994944">
+                    <LinkList count="0">
+                    </LinkList>
+                </Property>
+                <Property name="SplitInputWriter" type="App::PropertyBool" group="Solver" doc="Split writing of ccx input file" attr="0" ro="0" hide="0" status="2097408">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="ThermoMechSteadyState" type="App::PropertyBool" group="AnalysisType" doc="Choose between steady state thermo mech or transient thermo mech analysis" attr="0" ro="0" hide="0" status="2097408">
+                    <Bool value="true"/>
+                </Property>
+                <Property name="ThermoMechType" type="App::PropertyEnumeration" group="AnalysisType" doc="Type of thermomechanical analysis" attr="0" ro="0" hide="0" status="2097408">
+                    <Integer value="0" CustomEnum="true"/>
+                    <CustomEnumList count="3">
+                        <Enum value="coupled"/>
+                        <Enum value="uncoupled"/>
+                        <Enum value="pure heat transfer"/>
+                    </CustomEnumList>
+                </Property>
+                <Property name="TimeInitialIncrement" type="App::PropertyTime" group="TimeIncrement" doc="Initial time increment" attr="0" ro="0" hide="0" status="2097408">
+                    <Float value="1.0000000000000000"/>
+                </Property>
+                <Property name="TimeMaximumIncrement" type="App::PropertyTime" group="TimeIncrement" doc="Maximum time increment" attr="0" ro="0" hide="0" status="2097408">
+                    <Float value="1.0000000000000000"/>
+                </Property>
+                <Property name="TimeMinimumIncrement" type="App::PropertyTime" group="TimeIncrement" doc="Minimum time increment" attr="0" ro="0" hide="0" status="2097408">
+                    <Float value="0.0000100000000000"/>
+                </Property>
+                <Property name="TimePeriod" type="App::PropertyTime" group="TimeIncrement" doc="Time period of the CalculiX step" attr="0" ro="0" hide="0" status="2097408">
+                    <Float value="1.0000000000000000"/>
+                </Property>
+                <Property name="Visibility" type="App::PropertyBool" status="648">
+                    <Bool value="true"/>
+                </Property>
+                <Property name="WorkingDir" type="App::PropertyPath" group="Solver" doc="Working directory for calculations.&#10;Will only be used it is left blank in preferences" attr="0" ro="0" hide="0" status="2097408">
+                    <Path value=""/>
+                </Property>
+            </Properties>
+        </Object>
+        <Object name="ConstraintFixed001" Extensions="True">
+            <Extensions Count="1">
+                <Extension type="App::SuppressibleExtension" name="SuppressibleExtension">
+                </Extension>
+            </Extensions>
+            <Properties Count="10" TransientCount="0">
+                <Property name="ExpressionEngine" type="App::PropertyExpressionEngine" status="67108864">
+                    <ExpressionEngine count="0">
+                    </ExpressionEngine>
+                </Property>
+                <Property name="Label" type="App::PropertyString" status="134217728">
+                    <String value="ConstraintFixed001"/>
+                </Property>
+                <Property name="Label2" type="App::PropertyString" status="67108992">
+                    <String value=""/>
+                </Property>
+                <Property name="NormalDirection" type="App::PropertyVector" status="150994944">
+                    <PropertyVector valueX="0.0000000000000000" valueY="0.0000000000000000" valueZ="1.0000000000000000"/>
+                </Property>
+                <Property name="Normals" type="App::PropertyVectorList" status="218103808">
+                    <VectorList file="Normals2"/>
+                </Property>
+                <Property name="Points" type="App::PropertyVectorList" status="218103808">
+                    <VectorList file="Points2"/>
+                </Property>
+                <Property name="References" type="App::PropertyLinkSubList">
+                    <LinkSubList count="1">
+                        <Link obj="Face005" sub="Edge4"/>
+                    </LinkSubList>
+                </Property>
+                <Property name="Scale" type="App::PropertyFloatConstraint">
+                    <Float value="1.0000000000000000"/>
+                </Property>
+                <Property name="Suppressed" type="App::PropertyBool">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="Visibility" type="App::PropertyBool" status="648">
+                    <Bool value="true"/>
+                </Property>
+            </Properties>
+        </Object>
+        <Object name="ConstraintForce001" Extensions="True">
+            <Extensions Count="1">
+                <Extension type="App::SuppressibleExtension" name="SuppressibleExtension">
+                </Extension>
+            </Extensions>
+            <Properties Count="16" TransientCount="0">
+                <Property name="AmplitudeValues" type="App::PropertyStringList">
+                    <StringList count="2">
+                        <String value="0, 0"/>
+                        <String value="1, 1"/>
+                    </StringList>
+                </Property>
+                <Property name="Direction" type="App::PropertyLinkSub">
+                    <LinkSub value="" count="0">
+                    </LinkSub>
+                </Property>
+                <Property name="DirectionVector" type="App::PropertyVector" status="150994944">
+                    <PropertyVector valueX="0.0000000000000000" valueY="0.0000000000000000" valueZ="1.0000000000000000"/>
+                </Property>
+                <Property name="EnableAmplitude" type="App::PropertyBool">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="ExpressionEngine" type="App::PropertyExpressionEngine" status="67108864">
+                    <ExpressionEngine count="0">
+                    </ExpressionEngine>
+                </Property>
+                <Property name="Force" type="App::PropertyForce">
+                    <Float value="10000.0000000000000000"/>
+                </Property>
+                <Property name="Label" type="App::PropertyString" status="134217728">
+                    <String value="ConstraintForce001"/>
+                </Property>
+                <Property name="Label2" type="App::PropertyString" status="67108992">
+                    <String value=""/>
+                </Property>
+                <Property name="NormalDirection" type="App::PropertyVector" status="150994944">
+                    <PropertyVector valueX="0.0000000000000000" valueY="0.0000000000000000" valueZ="1.0000000000000000"/>
+                </Property>
+                <Property name="Normals" type="App::PropertyVectorList" status="218103808">
+                    <VectorList file="Normals3"/>
+                </Property>
+                <Property name="Points" type="App::PropertyVectorList" status="218103808">
+                    <VectorList file="Points3"/>
+                </Property>
+                <Property name="References" type="App::PropertyLinkSubList">
+                    <LinkSubList count="1">
+                        <Link obj="Face005" sub="Edge2"/>
+                    </LinkSubList>
+                </Property>
+                <Property name="Reversed" type="App::PropertyBool">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="Scale" type="App::PropertyFloatConstraint">
+                    <Float value="1.0000000000000000"/>
+                </Property>
+                <Property name="Suppressed" type="App::PropertyBool">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="Visibility" type="App::PropertyBool" status="648">
+                    <Bool value="true"/>
+                </Property>
+            </Properties>
+        </Object>
+        <Object name="ElementGeometry2D001" Extensions="True">
+            <Extensions Count="1">
+                <Extension type="App::SuppressibleExtensionPython" name="SuppressibleExtensionPython">
+                </Extension>
+            </Extensions>
+            <Properties Count="9" TransientCount="0">
+                <Property name="ExpressionEngine" type="App::PropertyExpressionEngine" status="67108864">
+                    <ExpressionEngine count="0">
+                    </ExpressionEngine>
+                </Property>
+                <Property name="Label" type="App::PropertyString" status="134217728">
+                    <String value="ElementGeometry2D002"/>
+                </Property>
+                <Property name="Label2" type="App::PropertyString" status="67108992">
+                    <String value=""/>
+                </Property>
+                <Property name="Offset" type="App::PropertyFloat" group="ShellThickness" doc="Set thickness offset of the shell elements" attr="0" ro="0" hide="0" status="2097408">
+                    <Float value="0.0000000000000000"/>
+                </Property>
+                <Property name="Proxy" type="App::PropertyPythonObject">
+                    <Python value="bnVsbA==" encoded="yes" module="femobjects.element_geometry2D" class="ElementGeometry2D"/>
+                </Property>
+                <Property name="References" type="App::PropertyLinkSubListGlobal" group="Element" doc="List of element shapes" attr="0" ro="0" hide="0" status="2097408">
+                    <LinkSubList count="1">
+                        <Link obj="Face005" sub="Face1"/>
+                    </LinkSubList>
+                </Property>
+                <Property name="Suppressed" type="App::PropertyBool">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="Thickness" type="App::PropertyLength" group="ShellThickness" doc="set thickness of the shell elements" attr="0" ro="0" hide="0" status="2097408">
+                    <Float value="10.0000000000000000"/>
+                </Property>
+                <Property name="Visibility" type="App::PropertyBool" status="648">
+                    <Bool value="true"/>
+                </Property>
+            </Properties>
+        </Object>
+        <Object name="Face005">
+            <Properties Count="7" TransientCount="1">
+                <_Property name="_ElementMapVersion" type="App::PropertyString" status="234881024"/>
+                <Property name="ExpressionEngine" type="App::PropertyExpressionEngine" status="67108864">
+                    <ExpressionEngine count="0">
+                    </ExpressionEngine>
+                </Property>
+                <Property name="Label" type="App::PropertyString" status="134217728">
+                    <String value="Face005"/>
+                </Property>
+                <Property name="Label2" type="App::PropertyString" status="67108992">
+                    <String value=""/>
+                </Property>
+                <Property name="Placement" type="App::PropertyPlacement" status="8388608">
+                    <PropertyPlacement Px="0.0000000000000000" Py="0.0000000000000000" Pz="0.0000000000000000" Q0="0.0000000000000000" Q1="0.0000000000000000" Q2="0.0000000000000000" Q3="1.0000000000000000" A="0.0000000000000000" Ox="0.0000000000000000" Oy="0.0000000000000000" Oz="1.0000000000000000"/>
+                </Property>
+                <Property name="Shape" type="Part::PropertyPartShape">
+                    <Part ElementMap="15.70200.5" file="Face005.Shape.brp"/>
+                    <ElementMap/>
+                </Property>
+                <Property name="ShapeMaterial" type="Materials::PropertyMaterial">
+                    <PropertyMaterial uuid="7f9fd73b-50c9-41d8-b7b2-575a030c1eeb"/>
+                </Property>
+                <Property name="Visibility" type="App::PropertyBool" status="648">
+                    <Bool value="false"/>
+                </Property>
+            </Properties>
+        </Object>
+        <Object name="MaterialSolid001" Extensions="True">
+            <Extensions Count="1">
+                <Extension type="App::SuppressibleExtensionPython" name="SuppressibleExtensionPython">
+                </Extension>
+            </Extensions>
+            <Properties Count="11" TransientCount="0">
+                <Property name="Category" type="App::PropertyEnumeration" group="Material" doc="Material type: fluid or solid" attr="0" ro="0" hide="0" status="2097408">
+                    <Integer value="0" CustomEnum="true"/>
+                    <CustomEnumList count="2">
+                        <Enum value="Solid"/>
+                        <Enum value="Fluid"/>
+                    </CustomEnumList>
+                </Property>
+                <Property name="ExpressionEngine" type="App::PropertyExpressionEngine" status="67108864">
+                    <ExpressionEngine count="0">
+                    </ExpressionEngine>
+                </Property>
+                <Property name="Label" type="App::PropertyString" status="134217728">
+                    <String value="MaterialSolid002"/>
+                </Property>
+                <Property name="Label2" type="App::PropertyString" status="67108992">
+                    <String value=""/>
+                </Property>
+                <Property name="Material" type="App::PropertyMap">
+                    <Map count="18">
+                        <Item key="Author" value="Juergen Riegel"/>
+                        <Item key="AuthorAndLicense" value="CC-BY-3.0"/>
+                        <Item key="CardName" value="ABS-Generic"/>
+                        <Item key="Density" value="1.06e-06 kg/mm^3"/>
+                        <Item key="Description" value="This is a blend AcrylnitrilButadienStyrol (ABS) material card. The values are at the low end of the spectrum. If you need a more precise material definition use the more specialised ABS-blend cards."/>
+                        <Item key="Father" value="Thermoplast"/>
+                        <Item key="License" value="CC-BY-3.0"/>
+                        <Item key="Name" value="ABS-Generic"/>
+                        <Item key="PoissonRatio" value="0.37"/>
+                        <Item key="ProductURL" value="https://en.wikipedia.org/wiki/Acrylonitrile_butadiene_styrene"/>
+                        <Item key="ReferenceSource" value=""/>
+                        <Item key="SourceURL" value=""/>
+                        <Item key="SpecificHeat" value="2.05e+09 mm^2/(s^2*K)"/>
+                        <Item key="ThermalConductivity" value="158 mm*kg/(s^3*K)"/>
+                        <Item key="ThermalExpansionCoefficient" value="9.3e-05 1/K"/>
+                        <Item key="UltimateTensileStrength" value="38800 kg/(mm*s^2)"/>
+                        <Item key="YieldStrength" value="44100 kg/(mm*s^2)"/>
+                        <Item key="YoungsModulus" value="2.3e+06 kg/(mm*s^2)"/>
+                    </Map>
+                </Property>
+                <Property name="Nonlinear" type="App::PropertyLink" group="Material" doc="Material nonlinear behavior" attr="0" ro="0" hide="0" status="2097408">
+                    <Link value=""/>
+                </Property>
+                <Property name="Proxy" type="App::PropertyPythonObject">
+                    <Python value="bnVsbA==" encoded="yes" module="femobjects.material_common" class="MaterialCommon"/>
+                </Property>
+                <Property name="References" type="App::PropertyLinkSubListGlobal" group="Material" doc="List of material shapes" attr="0" ro="0" hide="0" status="2097408">
+                    <LinkSubList count="0">
+                    </LinkSubList>
+                </Property>
+                <Property name="Suppressed" type="App::PropertyBool">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="UUID" type="App::PropertyString" group="Material" doc="Material UUID" attr="0" ro="0" hide="1" status="69206272">
+                    <String value=""/>
+                </Property>
+                <Property name="Visibility" type="App::PropertyBool" status="648">
+                    <Bool value="true"/>
+                </Property>
+            </Properties>
+        </Object>
+        <Object name="FEMMeshGmsh001" Extensions="True">
+            <Extensions Count="1">
+                <Extension type="App::SuppressibleExtension" name="SuppressibleExtension">
+                </Extension>
+            </Extensions>
+            <Properties Count="30" TransientCount="3">
+                <_Property name="Tool" type="App::PropertyPythonObject" status="251658240"/>
+                <_Property name="WorkingDirectory" type="App::PropertyPath" status="234881024"/>
+                <_Property name="_ElementMapVersion" type="App::PropertyString" status="234881024"/>
+                <Property name="Algorithm2D" type="App::PropertyEnumeration" group="Mesh Parameters" doc="Mesh algorithm 2D" attr="0" ro="0" hide="0" status="2097408">
+                    <Integer value="0" CustomEnum="true"/>
+                    <CustomEnumList count="8">
+                        <Enum value="Automatic"/>
+                        <Enum value="MeshAdapt"/>
+                        <Enum value="Delaunay"/>
+                        <Enum value="Frontal"/>
+                        <Enum value="BAMG"/>
+                        <Enum value="DelQuad"/>
+                        <Enum value="Packing Parallelograms"/>
+                        <Enum value="Quasi-structured Quad"/>
+                    </CustomEnumList>
+                </Property>
+                <Property name="Algorithm3D" type="App::PropertyEnumeration" group="Mesh Parameters" doc="Mesh algorithm 3D" attr="0" ro="0" hide="0" status="2097408">
+                    <Integer value="0" CustomEnum="true"/>
+                    <CustomEnumList count="7">
+                        <Enum value="Automatic"/>
+                        <Enum value="Delaunay"/>
+                        <Enum value="New Delaunay"/>
+                        <Enum value="Frontal"/>
+                        <Enum value="MMG3D"/>
+                        <Enum value="R-tree"/>
+                        <Enum value="HXT"/>
+                    </CustomEnumList>
+                </Property>
+                <Property name="CharacteristicLengthMax" type="App::PropertyLength" group="Mesh Parameters" doc="Max mesh element size (0.0 means infinity)" attr="0" ro="0" hide="0" status="2097408">
+                    <Float value="0.0000000000000000"/>
+                </Property>
+                <Property name="CharacteristicLengthMin" type="App::PropertyLength" group="Mesh Parameters" doc="Min mesh element size" attr="0" ro="0" hide="0" status="2097408">
+                    <Float value="0.0000000000000000"/>
+                </Property>
+                <Property name="CoherenceMesh" type="App::PropertyBool" group="Mesh Parameters" doc="Removes all duplicate mesh vertices" attr="0" ro="0" hide="0" status="2097408">
+                    <Bool value="true"/>
+                </Property>
+                <Property name="ElementDimension" type="App::PropertyEnumeration" group="Mesh Parameters" doc="Dimension of mesh elements (&apos;From Shape&apos;: according ShapeType of part to mesh)" attr="0" ro="0" hide="0" status="2097408">
+                    <Integer value="0" CustomEnum="true"/>
+                    <CustomEnumList count="4">
+                        <Enum value="From Shape"/>
+                        <Enum value="1D"/>
+                        <Enum value="2D"/>
+                        <Enum value="3D"/>
+                    </CustomEnumList>
+                </Property>
+                <Property name="ElementOrder" type="App::PropertyEnumeration" group="Mesh Parameters" doc="Order of mesh elements" attr="0" ro="0" hide="0" status="2097408">
+                    <Integer value="1" CustomEnum="true"/>
+                    <CustomEnumList count="2">
+                        <Enum value="1st"/>
+                        <Enum value="2nd"/>
+                    </CustomEnumList>
+                </Property>
+                <Property name="ExpressionEngine" type="App::PropertyExpressionEngine" status="67108864">
+                    <ExpressionEngine count="0">
+                    </ExpressionEngine>
+                </Property>
+                <Property name="FemMesh" type="Fem::PropertyFemMesh" status="8388608">
+                    <FemMesh file="FemMesh2.unv" a11="1.0000000000000000" a12="0.0000000000000000" a13="0.0000000000000000" a14="0.0000000000000000" a21="0.0000000000000000" a22="1.0000000000000000" a23="0.0000000000000000" a24="0.0000000000000000" a31="0.0000000000000000" a32="0.0000000000000000" a33="1.0000000000000000" a34="0.0000000000000000" a41="0.0000000000000000" a42="0.0000000000000000" a43="0.0000000000000000" a44="1.0000000000000000"/>
+                </Property>
+                <Property name="GeometryTolerance" type="App::PropertyFloat" group="Mesh Parameters" doc="Geometrical Tolerance (0.0 means GMSH std = 1e-08)" attr="0" ro="0" hide="0" status="2097408">
+                    <Float value="0.0000010000000000"/>
+                </Property>
+                <Property name="GroupsOfNodes" type="App::PropertyBool" group="Mesh Parameters" doc="For each group create not only the elements but the nodes too" attr="0" ro="0" hide="0" status="2097408">
+                    <Bool value="true"/>
+                </Property>
+                <Property name="HighOrderOptimize" type="App::PropertyEnumeration" group="Mesh Parameters" doc="Optimization of high order meshes" attr="0" ro="0" hide="0" status="2097408">
+                    <Integer value="0" CustomEnum="true"/>
+                    <CustomEnumList count="5">
+                        <Enum value="None"/>
+                        <Enum value="Optimization"/>
+                        <Enum value="Elastic+Optimization"/>
+                        <Enum value="Elastic"/>
+                        <Enum value="Fast curving"/>
+                    </CustomEnumList>
+                </Property>
+                <Property name="Label" type="App::PropertyString" status="134217728">
+                    <String value="FEMMeshGmsh001"/>
+                </Property>
+                <Property name="Label2" type="App::PropertyString" status="67108992">
+                    <String value=""/>
+                </Property>
+                <Property name="MeshBoundaryLayerList" type="App::PropertyLinkList" group="Base" doc="Mesh boundaries need inflation layers" attr="0" ro="0" hide="0" status="2097408">
+                    <LinkList count="0">
+                    </LinkList>
+                </Property>
+                <Property name="MeshGroupList" type="App::PropertyLinkList" group="Base" doc="Mesh groups of the mesh" attr="0" ro="0" hide="0" status="2097408">
+                    <LinkList count="0">
+                    </LinkList>
+                </Property>
+                <Property name="MeshRegionList" type="App::PropertyLinkList" group="Base" doc="Mesh refinments of the mesh" attr="0" ro="0" hide="0" status="2097408">
+                    <LinkList count="0">
+                    </LinkList>
+                </Property>
+                <Property name="MeshSizeFromCurvature" type="App::PropertyIntegerConstraint" group="Mesh Parameters" doc="Number of elements per 2*pi radians, 0 to deactivate" attr="0" ro="0" hide="0" status="2097408">
+                    <Integer value="12" min="0" max="10000" step="1"/>
+                </Property>
+                <Property name="OptimizeNetgen" type="App::PropertyBool" group="Mesh Parameters" doc="Optimize tetra elements by use of Netgen" attr="0" ro="0" hide="0" status="2097408">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="OptimizeStd" type="App::PropertyBool" group="Mesh Parameters" doc="Optimize tetrahedral elements" attr="0" ro="0" hide="0" status="2097408">
+                    <Bool value="true"/>
+                </Property>
+                <Property name="Placement" type="App::PropertyPlacement" status="8388608">
+                    <PropertyPlacement Px="0.0000000000000000" Py="0.0000000000000000" Pz="0.0000000000000000" Q0="0.0000000000000000" Q1="0.0000000000000000" Q2="0.0000000000000000" Q3="1.0000000000000000" A="0.0000000000000000" Ox="0.0000000000000000" Oy="0.0000000000000000" Oz="1.0000000000000000"/>
+                </Property>
+                <Property name="Proxy" type="App::PropertyPythonObject">
+                    <Python value="bnVsbA==" encoded="yes" module="femobjects.mesh_gmsh" class="MeshGmsh"/>
+                </Property>
+                <Property name="RecombinationAlgorithm" type="App::PropertyEnumeration" group="Mesh Parameters" doc="Recombination algorithm" attr="0" ro="0" hide="0" status="2097408">
+                    <Integer value="0" CustomEnum="true"/>
+                    <CustomEnumList count="4">
+                        <Enum value="Simple"/>
+                        <Enum value="Blossom"/>
+                        <Enum value="Simple full-quad"/>
+                        <Enum value="Blossom full-quad"/>
+                    </CustomEnumList>
+                </Property>
+                <Property name="Recombine3DAll" type="App::PropertyBool" group="Mesh Parameters" doc="Apply recombination algorithm to all volumes" attr="0" ro="0" hide="0" status="2097408">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="RecombineAll" type="App::PropertyBool" group="Mesh Parameters" doc="Apply recombination algorithm to all surfaces" attr="0" ro="0" hide="0" status="2097408">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="SecondOrderLinear" type="App::PropertyBool" group="Mesh Parameters" doc="Second order nodes are created by linear interpolation" attr="0" ro="0" hide="0" status="2097408">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="Shape" type="App::PropertyLink">
+                    <Link value="Face005"/>
+                </Property>
+                <Property name="SubdivisionAlgorithm" type="App::PropertyEnumeration" group="Mesh Parameters" doc="Mesh subdivision algorithm" attr="0" ro="0" hide="0" status="2097408">
+                    <Integer value="0" CustomEnum="true"/>
+                    <CustomEnumList count="4">
+                        <Enum value="None"/>
+                        <Enum value="All Quadrangles"/>
+                        <Enum value="All Hexahedra"/>
+                        <Enum value="Barycentric"/>
+                    </CustomEnumList>
+                </Property>
+                <Property name="Suppressed" type="App::PropertyBool">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="Visibility" type="App::PropertyBool" status="649">
+                    <Bool value="false"/>
+                </Property>
+            </Properties>
+        </Object>
+        <Object name="CCX_Results">
+            <Properties Count="45" TransientCount="0">
+                <Property name="CriticalStrainRatio" type="App::PropertyFloatList" group="NodeData" doc="" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file=""/>
+                </Property>
+                <Property name="DisplacementLengths" type="App::PropertyFloatList" group="NodeData" doc="List of displacement lengths" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file="DisplacementLengths1"/>
+                </Property>
+                <Property name="DisplacementVectors" type="App::PropertyVectorList" group="NodeData" doc="List of displacement vectors" attr="1" ro="0" hide="0" status="18874624">
+                    <VectorList file="DisplacementVectors1"/>
+                </Property>
+                <Property name="Eigenmode" type="App::PropertyInteger" group="Data" doc="" attr="1" ro="0" hide="0" status="18874624">
+                    <Integer value="0"/>
+                </Property>
+                <Property name="EigenmodeFrequency" type="App::PropertyFloat" group="Data" doc="User Defined Results" attr="1" ro="0" hide="0" status="18874624">
+                    <Float value="0.0000000000000000"/>
+                </Property>
+                <Property name="ExpressionEngine" type="App::PropertyExpressionEngine" status="67108864">
+                    <ExpressionEngine count="0">
+                    </ExpressionEngine>
+                </Property>
+                <Property name="HeatFlux" type="App::PropertyVectorList" group="NodeData" doc="List of heat flux vectors" attr="1" ro="0" hide="0" status="18874624">
+                    <VectorList file="HeatFlux1"/>
+                </Property>
+                <Property name="Label" type="App::PropertyString" status="134217728">
+                    <String value="CCX_Results001"/>
+                </Property>
+                <Property name="Label2" type="App::PropertyString" status="67108992">
+                    <String value=""/>
+                </Property>
+                <Property name="MassFlowRate" type="App::PropertyFloatList" group="NodeData" doc="List of mass flow rate values" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file=""/>
+                </Property>
+                <Property name="MaxShear" type="App::PropertyFloatList" group="NodeData" doc="List of Maximum Shear stress values" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file="MaxShear"/>
+                </Property>
+                <Property name="Mesh" type="App::PropertyLink">
+                    <Link value="CCX_Results_Mesh"/>
+                </Property>
+                <Property name="MohrCoulomb" type="App::PropertyFloatList" group="NodeData" doc="List of Mohr Coulomb stress values" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file=""/>
+                </Property>
+                <Property name="NetworkPressure" type="App::PropertyFloatList" group="NodeData" doc="List of network pressure values" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file=""/>
+                </Property>
+                <Property name="NodeNumbers" type="App::PropertyIntegerList" status="4">
+                    <IntegerList count="631">
+                        <I v="1"/>
+                        <I v="2"/>
+                        <I v="3"/>
+                        <I v="4"/>
+                        <I v="5"/>
+                        <I v="6"/>
+                        <I v="7"/>
+                        <I v="8"/>
+                        <I v="9"/>
+                        <I v="10"/>
+                        <I v="11"/>
+                        <I v="12"/>
+                        <I v="13"/>
+                        <I v="14"/>
+                        <I v="15"/>
+                        <I v="16"/>
+                        <I v="17"/>
+                        <I v="18"/>
+                        <I v="19"/>
+                        <I v="20"/>
+                        <I v="21"/>
+                        <I v="22"/>
+                        <I v="23"/>
+                        <I v="24"/>
+                        <I v="25"/>
+                        <I v="26"/>
+                        <I v="27"/>
+                        <I v="28"/>
+                        <I v="29"/>
+                        <I v="30"/>
+                        <I v="31"/>
+                        <I v="32"/>
+                        <I v="33"/>
+                        <I v="34"/>
+                        <I v="35"/>
+                        <I v="36"/>
+                        <I v="37"/>
+                        <I v="38"/>
+                        <I v="39"/>
+                        <I v="40"/>
+                        <I v="41"/>
+                        <I v="42"/>
+                        <I v="43"/>
+                        <I v="44"/>
+                        <I v="45"/>
+                        <I v="46"/>
+                        <I v="47"/>
+                        <I v="48"/>
+                        <I v="49"/>
+                        <I v="50"/>
+                        <I v="51"/>
+                        <I v="52"/>
+                        <I v="53"/>
+                        <I v="54"/>
+                        <I v="55"/>
+                        <I v="56"/>
+                        <I v="57"/>
+                        <I v="58"/>
+                        <I v="59"/>
+                        <I v="60"/>
+                        <I v="61"/>
+                        <I v="62"/>
+                        <I v="63"/>
+                        <I v="64"/>
+                        <I v="65"/>
+                        <I v="66"/>
+                        <I v="67"/>
+                        <I v="68"/>
+                        <I v="69"/>
+                        <I v="70"/>
+                        <I v="71"/>
+                        <I v="72"/>
+                        <I v="73"/>
+                        <I v="74"/>
+                        <I v="75"/>
+                        <I v="76"/>
+                        <I v="77"/>
+                        <I v="78"/>
+                        <I v="79"/>
+                        <I v="80"/>
+                        <I v="81"/>
+                        <I v="82"/>
+                        <I v="83"/>
+                        <I v="84"/>
+                        <I v="85"/>
+                        <I v="86"/>
+                        <I v="87"/>
+                        <I v="88"/>
+                        <I v="89"/>
+                        <I v="90"/>
+                        <I v="91"/>
+                        <I v="92"/>
+                        <I v="93"/>
+                        <I v="94"/>
+                        <I v="95"/>
+                        <I v="96"/>
+                        <I v="97"/>
+                        <I v="98"/>
+                        <I v="99"/>
+                        <I v="100"/>
+                        <I v="101"/>
+                        <I v="102"/>
+                        <I v="103"/>
+                        <I v="104"/>
+                        <I v="105"/>
+                        <I v="106"/>
+                        <I v="107"/>
+                        <I v="108"/>
+                        <I v="109"/>
+                        <I v="110"/>
+                        <I v="111"/>
+                        <I v="112"/>
+                        <I v="113"/>
+                        <I v="114"/>
+                        <I v="115"/>
+                        <I v="116"/>
+                        <I v="117"/>
+                        <I v="118"/>
+                        <I v="119"/>
+                        <I v="120"/>
+                        <I v="121"/>
+                        <I v="122"/>
+                        <I v="123"/>
+                        <I v="124"/>
+                        <I v="125"/>
+                        <I v="126"/>
+                        <I v="127"/>
+                        <I v="128"/>
+                        <I v="129"/>
+                        <I v="130"/>
+                        <I v="131"/>
+                        <I v="132"/>
+                        <I v="133"/>
+                        <I v="134"/>
+                        <I v="135"/>
+                        <I v="136"/>
+                        <I v="137"/>
+                        <I v="138"/>
+                        <I v="139"/>
+                        <I v="140"/>
+                        <I v="141"/>
+                        <I v="142"/>
+                        <I v="143"/>
+                        <I v="144"/>
+                        <I v="145"/>
+                        <I v="146"/>
+                        <I v="147"/>
+                        <I v="148"/>
+                        <I v="149"/>
+                        <I v="150"/>
+                        <I v="151"/>
+                        <I v="152"/>
+                        <I v="153"/>
+                        <I v="154"/>
+                        <I v="155"/>
+                        <I v="156"/>
+                        <I v="157"/>
+                        <I v="158"/>
+                        <I v="159"/>
+                        <I v="160"/>
+                        <I v="161"/>
+                        <I v="162"/>
+                        <I v="163"/>
+                        <I v="164"/>
+                        <I v="165"/>
+                        <I v="166"/>
+                        <I v="167"/>
+                        <I v="168"/>
+                        <I v="169"/>
+                        <I v="170"/>
+                        <I v="171"/>
+                        <I v="172"/>
+                        <I v="173"/>
+                        <I v="174"/>
+                        <I v="175"/>
+                        <I v="176"/>
+                        <I v="177"/>
+                        <I v="178"/>
+                        <I v="179"/>
+                        <I v="180"/>
+                        <I v="181"/>
+                        <I v="182"/>
+                        <I v="183"/>
+                        <I v="184"/>
+                        <I v="185"/>
+                        <I v="186"/>
+                        <I v="187"/>
+                        <I v="188"/>
+                        <I v="189"/>
+                        <I v="190"/>
+                        <I v="191"/>
+                        <I v="192"/>
+                        <I v="193"/>
+                        <I v="194"/>
+                        <I v="195"/>
+                        <I v="196"/>
+                        <I v="197"/>
+                        <I v="198"/>
+                        <I v="199"/>
+                        <I v="200"/>
+                        <I v="201"/>
+                        <I v="202"/>
+                        <I v="203"/>
+                        <I v="204"/>
+                        <I v="205"/>
+                        <I v="206"/>
+                        <I v="207"/>
+                        <I v="208"/>
+                        <I v="209"/>
+                        <I v="210"/>
+                        <I v="211"/>
+                        <I v="212"/>
+                        <I v="213"/>
+                        <I v="214"/>
+                        <I v="215"/>
+                        <I v="216"/>
+                        <I v="217"/>
+                        <I v="218"/>
+                        <I v="219"/>
+                        <I v="220"/>
+                        <I v="221"/>
+                        <I v="222"/>
+                        <I v="223"/>
+                        <I v="224"/>
+                        <I v="225"/>
+                        <I v="226"/>
+                        <I v="227"/>
+                        <I v="228"/>
+                        <I v="229"/>
+                        <I v="230"/>
+                        <I v="231"/>
+                        <I v="232"/>
+                        <I v="233"/>
+                        <I v="234"/>
+                        <I v="235"/>
+                        <I v="236"/>
+                        <I v="237"/>
+                        <I v="238"/>
+                        <I v="239"/>
+                        <I v="240"/>
+                        <I v="241"/>
+                        <I v="242"/>
+                        <I v="243"/>
+                        <I v="244"/>
+                        <I v="245"/>
+                        <I v="246"/>
+                        <I v="247"/>
+                        <I v="248"/>
+                        <I v="249"/>
+                        <I v="250"/>
+                        <I v="251"/>
+                        <I v="252"/>
+                        <I v="253"/>
+                        <I v="254"/>
+                        <I v="255"/>
+                        <I v="256"/>
+                        <I v="257"/>
+                        <I v="258"/>
+                        <I v="259"/>
+                        <I v="260"/>
+                        <I v="261"/>
+                        <I v="262"/>
+                        <I v="263"/>
+                        <I v="264"/>
+                        <I v="265"/>
+                        <I v="266"/>
+                        <I v="267"/>
+                        <I v="268"/>
+                        <I v="269"/>
+                        <I v="270"/>
+                        <I v="271"/>
+                        <I v="272"/>
+                        <I v="273"/>
+                        <I v="274"/>
+                        <I v="275"/>
+                        <I v="276"/>
+                        <I v="277"/>
+                        <I v="278"/>
+                        <I v="279"/>
+                        <I v="280"/>
+                        <I v="281"/>
+                        <I v="282"/>
+                        <I v="283"/>
+                        <I v="284"/>
+                        <I v="285"/>
+                        <I v="286"/>
+                        <I v="287"/>
+                        <I v="288"/>
+                        <I v="289"/>
+                        <I v="290"/>
+                        <I v="291"/>
+                        <I v="292"/>
+                        <I v="293"/>
+                        <I v="294"/>
+                        <I v="295"/>
+                        <I v="296"/>
+                        <I v="297"/>
+                        <I v="298"/>
+                        <I v="299"/>
+                        <I v="300"/>
+                        <I v="301"/>
+                        <I v="302"/>
+                        <I v="303"/>
+                        <I v="304"/>
+                        <I v="305"/>
+                        <I v="306"/>
+                        <I v="307"/>
+                        <I v="308"/>
+                        <I v="309"/>
+                        <I v="310"/>
+                        <I v="311"/>
+                        <I v="312"/>
+                        <I v="313"/>
+                        <I v="314"/>
+                        <I v="315"/>
+                        <I v="316"/>
+                        <I v="317"/>
+                        <I v="318"/>
+                        <I v="319"/>
+                        <I v="320"/>
+                        <I v="321"/>
+                        <I v="322"/>
+                        <I v="323"/>
+                        <I v="324"/>
+                        <I v="325"/>
+                        <I v="326"/>
+                        <I v="327"/>
+                        <I v="328"/>
+                        <I v="329"/>
+                        <I v="330"/>
+                        <I v="331"/>
+                        <I v="332"/>
+                        <I v="333"/>
+                        <I v="334"/>
+                        <I v="335"/>
+                        <I v="336"/>
+                        <I v="337"/>
+                        <I v="338"/>
+                        <I v="339"/>
+                        <I v="340"/>
+                        <I v="341"/>
+                        <I v="342"/>
+                        <I v="343"/>
+                        <I v="344"/>
+                        <I v="345"/>
+                        <I v="346"/>
+                        <I v="347"/>
+                        <I v="348"/>
+                        <I v="349"/>
+                        <I v="350"/>
+                        <I v="351"/>
+                        <I v="352"/>
+                        <I v="353"/>
+                        <I v="354"/>
+                        <I v="355"/>
+                        <I v="356"/>
+                        <I v="357"/>
+                        <I v="358"/>
+                        <I v="359"/>
+                        <I v="360"/>
+                        <I v="361"/>
+                        <I v="362"/>
+                        <I v="363"/>
+                        <I v="364"/>
+                        <I v="365"/>
+                        <I v="366"/>
+                        <I v="367"/>
+                        <I v="368"/>
+                        <I v="369"/>
+                        <I v="370"/>
+                        <I v="371"/>
+                        <I v="372"/>
+                        <I v="373"/>
+                        <I v="374"/>
+                        <I v="375"/>
+                        <I v="376"/>
+                        <I v="377"/>
+                        <I v="378"/>
+                        <I v="379"/>
+                        <I v="380"/>
+                        <I v="381"/>
+                        <I v="382"/>
+                        <I v="383"/>
+                        <I v="384"/>
+                        <I v="385"/>
+                        <I v="386"/>
+                        <I v="387"/>
+                        <I v="388"/>
+                        <I v="389"/>
+                        <I v="390"/>
+                        <I v="391"/>
+                        <I v="392"/>
+                        <I v="393"/>
+                        <I v="394"/>
+                        <I v="395"/>
+                        <I v="396"/>
+                        <I v="397"/>
+                        <I v="398"/>
+                        <I v="399"/>
+                        <I v="400"/>
+                        <I v="401"/>
+                        <I v="402"/>
+                        <I v="403"/>
+                        <I v="404"/>
+                        <I v="405"/>
+                        <I v="406"/>
+                        <I v="407"/>
+                        <I v="408"/>
+                        <I v="409"/>
+                        <I v="410"/>
+                        <I v="411"/>
+                        <I v="412"/>
+                        <I v="413"/>
+                        <I v="414"/>
+                        <I v="415"/>
+                        <I v="416"/>
+                        <I v="417"/>
+                        <I v="418"/>
+                        <I v="419"/>
+                        <I v="420"/>
+                        <I v="421"/>
+                        <I v="422"/>
+                        <I v="423"/>
+                        <I v="424"/>
+                        <I v="425"/>
+                        <I v="426"/>
+                        <I v="427"/>
+                        <I v="428"/>
+                        <I v="429"/>
+                        <I v="430"/>
+                        <I v="431"/>
+                        <I v="432"/>
+                        <I v="433"/>
+                        <I v="434"/>
+                        <I v="435"/>
+                        <I v="436"/>
+                        <I v="437"/>
+                        <I v="438"/>
+                        <I v="439"/>
+                        <I v="440"/>
+                        <I v="441"/>
+                        <I v="442"/>
+                        <I v="443"/>
+                        <I v="444"/>
+                        <I v="445"/>
+                        <I v="446"/>
+                        <I v="447"/>
+                        <I v="448"/>
+                        <I v="449"/>
+                        <I v="450"/>
+                        <I v="451"/>
+                        <I v="452"/>
+                        <I v="453"/>
+                        <I v="454"/>
+                        <I v="455"/>
+                        <I v="456"/>
+                        <I v="457"/>
+                        <I v="458"/>
+                        <I v="459"/>
+                        <I v="460"/>
+                        <I v="461"/>
+                        <I v="462"/>
+                        <I v="463"/>
+                        <I v="464"/>
+                        <I v="465"/>
+                        <I v="466"/>
+                        <I v="467"/>
+                        <I v="468"/>
+                        <I v="469"/>
+                        <I v="470"/>
+                        <I v="471"/>
+                        <I v="472"/>
+                        <I v="473"/>
+                        <I v="474"/>
+                        <I v="475"/>
+                        <I v="476"/>
+                        <I v="477"/>
+                        <I v="478"/>
+                        <I v="479"/>
+                        <I v="480"/>
+                        <I v="481"/>
+                        <I v="482"/>
+                        <I v="483"/>
+                        <I v="484"/>
+                        <I v="485"/>
+                        <I v="486"/>
+                        <I v="487"/>
+                        <I v="488"/>
+                        <I v="489"/>
+                        <I v="490"/>
+                        <I v="491"/>
+                        <I v="492"/>
+                        <I v="493"/>
+                        <I v="494"/>
+                        <I v="495"/>
+                        <I v="496"/>
+                        <I v="497"/>
+                        <I v="498"/>
+                        <I v="499"/>
+                        <I v="500"/>
+                        <I v="501"/>
+                        <I v="502"/>
+                        <I v="503"/>
+                        <I v="504"/>
+                        <I v="505"/>
+                        <I v="506"/>
+                        <I v="507"/>
+                        <I v="508"/>
+                        <I v="509"/>
+                        <I v="510"/>
+                        <I v="511"/>
+                        <I v="512"/>
+                        <I v="513"/>
+                        <I v="514"/>
+                        <I v="515"/>
+                        <I v="516"/>
+                        <I v="517"/>
+                        <I v="518"/>
+                        <I v="519"/>
+                        <I v="520"/>
+                        <I v="521"/>
+                        <I v="522"/>
+                        <I v="523"/>
+                        <I v="524"/>
+                        <I v="525"/>
+                        <I v="526"/>
+                        <I v="527"/>
+                        <I v="528"/>
+                        <I v="529"/>
+                        <I v="530"/>
+                        <I v="531"/>
+                        <I v="532"/>
+                        <I v="533"/>
+                        <I v="534"/>
+                        <I v="535"/>
+                        <I v="536"/>
+                        <I v="537"/>
+                        <I v="538"/>
+                        <I v="539"/>
+                        <I v="540"/>
+                        <I v="541"/>
+                        <I v="542"/>
+                        <I v="543"/>
+                        <I v="544"/>
+                        <I v="545"/>
+                        <I v="546"/>
+                        <I v="547"/>
+                        <I v="548"/>
+                        <I v="549"/>
+                        <I v="550"/>
+                        <I v="551"/>
+                        <I v="552"/>
+                        <I v="553"/>
+                        <I v="554"/>
+                        <I v="555"/>
+                        <I v="556"/>
+                        <I v="557"/>
+                        <I v="558"/>
+                        <I v="559"/>
+                        <I v="560"/>
+                        <I v="561"/>
+                        <I v="562"/>
+                        <I v="563"/>
+                        <I v="564"/>
+                        <I v="565"/>
+                        <I v="566"/>
+                        <I v="567"/>
+                        <I v="568"/>
+                        <I v="569"/>
+                        <I v="570"/>
+                        <I v="571"/>
+                        <I v="572"/>
+                        <I v="573"/>
+                        <I v="574"/>
+                        <I v="575"/>
+                        <I v="576"/>
+                        <I v="577"/>
+                        <I v="578"/>
+                        <I v="579"/>
+                        <I v="580"/>
+                        <I v="581"/>
+                        <I v="582"/>
+                        <I v="583"/>
+                        <I v="584"/>
+                        <I v="585"/>
+                        <I v="586"/>
+                        <I v="587"/>
+                        <I v="588"/>
+                        <I v="589"/>
+                        <I v="590"/>
+                        <I v="591"/>
+                        <I v="592"/>
+                        <I v="593"/>
+                        <I v="594"/>
+                        <I v="595"/>
+                        <I v="596"/>
+                        <I v="597"/>
+                        <I v="598"/>
+                        <I v="599"/>
+                        <I v="600"/>
+                        <I v="601"/>
+                        <I v="602"/>
+                        <I v="603"/>
+                        <I v="604"/>
+                        <I v="605"/>
+                        <I v="606"/>
+                        <I v="607"/>
+                        <I v="608"/>
+                        <I v="609"/>
+                        <I v="610"/>
+                        <I v="611"/>
+                        <I v="612"/>
+                        <I v="613"/>
+                        <I v="614"/>
+                        <I v="615"/>
+                        <I v="616"/>
+                        <I v="617"/>
+                        <I v="618"/>
+                        <I v="619"/>
+                        <I v="620"/>
+                        <I v="621"/>
+                        <I v="622"/>
+                        <I v="623"/>
+                        <I v="624"/>
+                        <I v="625"/>
+                        <I v="626"/>
+                        <I v="627"/>
+                        <I v="628"/>
+                        <I v="629"/>
+                        <I v="630"/>
+                        <I v="631"/>
+                    </IntegerList>
+                </Property>
+                <Property name="NodeStrainXX" type="App::PropertyFloatList" group="NodeData" doc="" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file="NodeStrainXX"/>
+                </Property>
+                <Property name="NodeStrainXY" type="App::PropertyFloatList" group="NodeData" doc="" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file="NodeStrainXY"/>
+                </Property>
+                <Property name="NodeStrainXZ" type="App::PropertyFloatList" group="NodeData" doc="" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file="NodeStrainXZ"/>
+                </Property>
+                <Property name="NodeStrainYY" type="App::PropertyFloatList" group="NodeData" doc="" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file="NodeStrainYY"/>
+                </Property>
+                <Property name="NodeStrainYZ" type="App::PropertyFloatList" group="NodeData" doc="" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file="NodeStrainYZ"/>
+                </Property>
+                <Property name="NodeStrainZZ" type="App::PropertyFloatList" group="NodeData" doc="" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file="NodeStrainZZ"/>
+                </Property>
+                <Property name="NodeStressXX" type="App::PropertyFloatList" group="NodeData" doc="" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file="NodeStressXX"/>
+                </Property>
+                <Property name="NodeStressXY" type="App::PropertyFloatList" group="NodeData" doc="" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file="NodeStressXY"/>
+                </Property>
+                <Property name="NodeStressXZ" type="App::PropertyFloatList" group="NodeData" doc="" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file="NodeStressXZ"/>
+                </Property>
+                <Property name="NodeStressYY" type="App::PropertyFloatList" group="NodeData" doc="" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file="NodeStressYY"/>
+                </Property>
+                <Property name="NodeStressYZ" type="App::PropertyFloatList" group="NodeData" doc="" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file="NodeStressYZ"/>
+                </Property>
+                <Property name="NodeStressZZ" type="App::PropertyFloatList" group="NodeData" doc="" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file="NodeStressZZ"/>
+                </Property>
+                <Property name="PS1Vector" type="App::PropertyVectorList" group="NodeData" doc="List of 1st Principal Stress Vectors" attr="1" ro="0" hide="0" status="18874624">
+                    <VectorList file="PS1Vector1"/>
+                </Property>
+                <Property name="PS2Vector" type="App::PropertyVectorList" group="NodeData" doc="List of 2nd Principal Stress Vectors" attr="1" ro="0" hide="0" status="18874624">
+                    <VectorList file="PS2Vector1"/>
+                </Property>
+                <Property name="PS3Vector" type="App::PropertyVectorList" group="NodeData" doc="List of 3rd Principal Stress Vectors" attr="1" ro="0" hide="0" status="18874624">
+                    <VectorList file="PS3Vector1"/>
+                </Property>
+                <Property name="Peeq" type="App::PropertyFloatList" group="NodeData" doc="List of equivalent plastic strain values" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file=""/>
+                </Property>
+                <Property name="PrincipalMax" type="App::PropertyFloatList" group="NodeData" doc="" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file="PrincipalMax"/>
+                </Property>
+                <Property name="PrincipalMed" type="App::PropertyFloatList" group="NodeData" doc="" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file="PrincipalMed"/>
+                </Property>
+                <Property name="PrincipalMin" type="App::PropertyFloatList" group="NodeData" doc="" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file="PrincipalMin"/>
+                </Property>
+                <Property name="Proxy" type="App::PropertyPythonObject">
+                    <Python value="bnVsbA==" encoded="yes" module="femobjects.result_mechanical" class="ResultMechanical"/>
+                </Property>
+                <Property name="ReinforcementRatio_x" type="App::PropertyFloatList" group="NodeData" doc="Reinforcement ratio in X-direction" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file=""/>
+                </Property>
+                <Property name="ReinforcementRatio_y" type="App::PropertyFloatList" group="NodeData" doc="Reinforcement ratio in Y-direction" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file=""/>
+                </Property>
+                <Property name="ReinforcementRatio_z" type="App::PropertyFloatList" group="NodeData" doc="Reinforcement ratio in Z-direction" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file=""/>
+                </Property>
+                <Property name="ResultType" type="App::PropertyString" group="Base" doc="Type of the result" attr="1" ro="0" hide="0" status="18874624">
+                    <String value="Fem::ResultMechanical"/>
+                </Property>
+                <Property name="Stats" type="App::PropertyFloatList" status="4">
+                    <FloatList file="Stats1"/>
+                </Property>
+                <Property name="Temperature" type="App::PropertyFloatList" group="NodeData" doc="Temperature field" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file=""/>
+                </Property>
+                <Property name="Time" type="App::PropertyFloat" status="4">
+                    <Float value="0.0000000000000000"/>
+                </Property>
+                <Property name="UserDefined" type="App::PropertyFloatList" group="NodeData" doc="User Defined Results" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file=""/>
+                </Property>
+                <Property name="Visibility" type="App::PropertyBool" status="648">
+                    <Bool value="true"/>
+                </Property>
+                <Property name="vonMises" type="App::PropertyFloatList" group="NodeData" doc="List of von Mises equivalent stresses" attr="1" ro="0" hide="0" status="18874624">
+                    <FloatList file="vonMises"/>
+                </Property>
+            </Properties>
+        </Object>
+        <Object name="CCX_Results_Mesh" Extensions="True">
+            <Extensions Count="1">
+                <Extension type="App::SuppressibleExtension" name="SuppressibleExtension">
+                </Extension>
+            </Extensions>
+            <Properties Count="8" TransientCount="1">
+                <_Property name="_ElementMapVersion" type="App::PropertyString" status="234881024"/>
+                <Property name="ExpressionEngine" type="App::PropertyExpressionEngine" status="67108864">
+                    <ExpressionEngine count="0">
+                    </ExpressionEngine>
+                </Property>
+                <Property name="FemMesh" type="Fem::PropertyFemMesh" status="8388608">
+                    <FemMesh file="FemMesh3.unv" a11="1.0000000000000000" a12="0.0000000000000000" a13="0.0000000000000000" a14="0.0000000000000000" a21="0.0000000000000000" a22="1.0000000000000000" a23="0.0000000000000000" a24="0.0000000000000000" a31="0.0000000000000000" a32="0.0000000000000000" a33="1.0000000000000000" a34="0.0000000000000000" a41="0.0000000000000000" a42="0.0000000000000000" a43="0.0000000000000000" a44="1.0000000000000000"/>
+                </Property>
+                <Property name="Label" type="App::PropertyString" status="134217728">
+                    <String value="CCX_Results_Mesh001"/>
+                </Property>
+                <Property name="Label2" type="App::PropertyString" status="67108992">
+                    <String value=""/>
+                </Property>
+                <Property name="Placement" type="App::PropertyPlacement" status="8388608">
+                    <PropertyPlacement Px="0.0000000000000000" Py="0.0000000000000000" Pz="0.0000000000000000" Q0="0.0000000000000000" Q1="0.0000000000000000" Q2="0.0000000000000000" Q3="1.0000000000000000" A="0.0000000000000000" Ox="0.0000000000000000" Oy="0.0000000000000000" Oz="1.0000000000000000"/>
+                </Property>
+                <Property name="Proxy" type="App::PropertyPythonObject">
+                    <Python value="bnVsbA==" encoded="yes" module="femobjects.mesh_result" class="MeshResult"/>
+                </Property>
+                <Property name="Suppressed" type="App::PropertyBool">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="Visibility" type="App::PropertyBool" status="649">
+                    <Bool value="false"/>
+                </Property>
+            </Properties>
+        </Object>
+        <Object name="Pipeline_CCX_Results" Extensions="True">
+            <Extensions Count="1">
+                <Extension type="Fem::FemPostGroupExtension" name="FemPostGroupExtension">
+                </Extension>
+            </Extensions>
+            <Properties Count="10" TransientCount="2">
+                <_Property name="_ElementMapVersion" type="App::PropertyString" status="234881024"/>
+                <_Property name="_GroupTouched" type="App::PropertyBool" status="100663296"/>
+                <Property name="Data" type="Fem::PropertyPostDataObject">
+                    <Data file="Data.vtu"/>
+                </Property>
+                <Property name="ExpressionEngine" type="App::PropertyExpressionEngine" status="67108864">
+                    <ExpressionEngine count="0">
+                    </ExpressionEngine>
+                </Property>
+                <Property name="Frame" type="App::PropertyEnumeration">
+                    <Integer value="0" CustomEnum="true"/>
+                    <CustomEnumList count="1">
+                        <Enum value="No frames available"/>
+                    </CustomEnumList>
+                </Property>
+                <Property name="Group" type="App::PropertyLinkList">
+                    <LinkList count="0">
+                    </LinkList>
+                </Property>
+                <Property name="Label" type="App::PropertyString" status="134217728">
+                    <String value="Pipeline_CCX_Results"/>
+                </Property>
+                <Property name="Label2" type="App::PropertyString" status="67108992">
+                    <String value=""/>
+                </Property>
+                <Property name="MergeDuplicate" type="App::PropertyBool">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="Mode" type="App::PropertyEnumeration">
+                    <Integer value="0"/>
+                </Property>
+                <Property name="Placement" type="App::PropertyPlacement" status="8388608">
+                    <PropertyPlacement Px="0.0000000000000000" Py="0.0000000000000000" Pz="0.0000000000000000" Q0="0.0000000000000000" Q1="0.0000000000000000" Q2="0.0000000000000000" Q3="1.0000000000000000" A="0.0000000000000000" Ox="0.0000000000000000" Oy="0.0000000000000000" Oz="1.0000000000000000"/>
+                </Property>
+                <Property name="Visibility" type="App::PropertyBool" status="648">
+                    <Bool value="true"/>
+                </Property>
+            </Properties>
+        </Object>
+        <Object name="ccx_dat_file">
+            <Properties Count="5" TransientCount="0">
+                <Property name="ExpressionEngine" type="App::PropertyExpressionEngine" status="67108864">
+                    <ExpressionEngine count="0">
+                    </ExpressionEngine>
+                </Property>
+                <Property name="Label" type="App::PropertyString" status="134217728">
+                    <String value="ccx_dat_file"/>
+                </Property>
+                <Property name="Label2" type="App::PropertyString" status="67108992">
+                    <String value=""/>
+                </Property>
+                <Property name="Text" type="App::PropertyString" status="67108868">
+                    <String value="&#10;                        S T E P       1&#10;&#10;&#10;                                INCREMENT     1&#10;&#10;&#10; total force (fx,fy,fz) for set CONSTRAINTFIXED001 and time  0.1000000E+01&#10;&#10;       -8.617551E-12  2.713037E-11 -1.000000E+01&#10;"/>
+                </Property>
+                <Property name="Visibility" type="App::PropertyBool" status="648">
+                    <Bool value="true"/>
+                </Property>
+            </Properties>
+        </Object>
+    </ObjectData>
+</Document>

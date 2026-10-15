@@ -1,0 +1,26 @@
+\section{Related work}
+\label{sec:related}
+
+\paragraph{Vector graphics generation and editing.}
+Learned SVG generators model paths and primitives directly~\cite{carlier2020deepsvg} or emit SVG code with a
+language-model decoder~\cite{rodriguez2025starvector}. Instruction-based SVG editing is benchmarked by
+comparing the edited result with a reference image or markup~\cite{svgeditbench}, and scientific-diagram work
+learns edits from paper revisions~\cite{scidiagramedit} or targets structure-faithful
+generation~\cite{sciforma}. These methods treat a drawing as an image or a document. We treat an engineering
+drawing as a specification of a physical network and score it by what that network does.
+
+\paragraph{CAD and engineering design.}
+Generative CAD models produce parametric construction sequences~\cite{wu2021deepcad,khan2024text2cad}, and
+agentic systems couple language models to simulators for mechanics~\cite{mechagents} and finite-element
+analysis~\cite{all_fem,vfeagent}. Benchmarks such as FEABench~\cite{feabench}, FEM-Bench~\cite{fem_bench}
+and PDEAgent-Bench~\cite{pdeagent_bench} evaluate the reasoning or code that sets up a simulation. Our
+verifier instead reads a finished two-dimensional drawing and reconstructs the model it implies, so it can
+audit the artefact a designer or a model actually delivers.
+
+\paragraph{Network analysis.}
+Modified nodal analysis~\cite{ho1975mna} is the standard formulation for linear circuits. Pipe networks are
+classically solved by loop corrections~\cite{hardycross1936} or by the gradient method on flows and
+heads~\cite{todini1988} that underlies EPANET~\cite{rossman2000epanet}; we use Churchill's friction
+factor~\cite{churchill1977}, which is continuous from laminar through fully rough flow. None of this is new.
+What is new is running these solvers on networks recovered from free-form drawings, and using them as the
+metric for text-guided editing.

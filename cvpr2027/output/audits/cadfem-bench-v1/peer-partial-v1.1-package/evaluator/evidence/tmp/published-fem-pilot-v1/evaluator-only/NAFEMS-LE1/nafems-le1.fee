@@ -1,0 +1,13 @@
+PROBLEM mechanical 2D plane_stress MESH nafems-le1.msh
+
+E = 210e3
+nu = 0.3
+
+BC AB u=0
+BC CD v=0
+BC BC tension=10
+
+SOLVE_PROBLEM
+
+WRITE_MESH nafems-le1.vtk VECTOR u v 0 sigmax sigmay tauxy
+PRINT "σy at point D = " %.4f sigmay(2000,0) "(reference is 92.7)" SEP " "

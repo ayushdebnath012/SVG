@@ -1,0 +1,34 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "Qwen/Qwen3.5-35B-A3B-FP8",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .polygon(6, 15.012)\\n    .extrude(15.0)\\n    .faces(\\\">Z\\\").workplane()\\n    .hole(8.0)\\n)\\nshow_object(result)\", \"instruction\": \"Rotate the entire part by 75 degrees about the diagonal axis (1, 1, 0).\", \"constraints\": [], \"experiences\": [{\"task_id\": \"3ba1ae34364231be033353a943e5d0bc5943912f9ffac4e4d1066a125abafcc8\", \"instruction\": \"Rotate the entire part by 75 degrees about the axis (1, 0, 1).\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.rotate((0, 0, 0), (1, 0, 1), 75)\\\"], \\\"start\\\": 10}]}\", \"strategies\": [], \"context\": [\"10: show_object(result)\"]}, {\"task_id\": \"763b170ac034b20e0e52e15503a8e5eeb0ec6d88a1f8130aaa4b2a0a1088ec64\", \"instruction\": \"Rotate the entire part by 75 degrees about the axis (0, 1, 1).\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.rotate((0, 0, 0), (0, 1, 1), 75)\\\"], \\\"start\\\": 11}]}\", \"strategies\": [], \"context\": [\"11: show_object(result)\"]}, {\"task_id\": \"e550764be545ad0a966ea421521927b4e475ad41bdd563922d53e7081f926a77\", \"instruction\": \"Rotate the entire part by 45 degrees about the diagonal axis (1, 1, 0).\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.rotate((0,0,0), (1,1,0), 45)\\\"], \\\"start\\\": 9}]}\", \"strategies\": [], \"context\": [\"9: show_object(result)\"]}]}"
+   }
+  ],
+  "temperature": 0.6,
+  "top_p": 0.95,
+  "top_k": 20,
+  "max_tokens": 8192
+ },
+ "usage": {
+  "prompt_tokens": 661,
+  "total_tokens": 2086,
+  "completion_tokens": 1425,
+  "prompt_tokens_details": null,
+  "completion_tokens_details": {
+   "reasoning_tokens": 1266
+  }
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "\n\n{\n  \"steps\": [\n    \"Create base geometry with polygon, extrusion, and hole operations\",\n    \"Add rotation operation to result with axis (1, 1, 0) and angle 75 degrees\"\n  ],\n  \"invariants\": [\n    \"Polygon geometry (6 sides, radius 15.012) unchanged\",\n    \"Extrusion height (15.0) unchanged\",\n    \"Hole diameter (8.0) unchanged\",\n    \"Workplane selection (.faces('>Z').workplane()) unchanged\",\n    \"Object reference (result) remains consistent\"\n  ],\n  \"dependencies\": [\n    [1, 0]\n  ]\n}"
+}

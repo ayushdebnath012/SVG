@@ -1,0 +1,36 @@
+{
+  "id": "chatcmpl-EZIJuWnQVCeFy02o168ZNQLzFKHqz",
+  "object": "chat.completion",
+  "created": 1792080610,
+  "model": "gpt-6-astra",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"edits\":[{\"old\":\"gmsh.option.setNumber(\\\"Mesh.SecondOrderLinear\\\", 0)\",\"new\":\"# Retain quadratic displacement interpolation, but use straight-sided\\n        # geometry: projecting midside nodes onto tiny CAD features inverted\\n        # two curved tetrahedra in the previous mesh.\\n        gmsh.option.setNumber(\\\"Mesh.SecondOrderLinear\\\", 1)\"},{\"old\":\"gmsh.model.mesh.generate(3)\\n        gmsh.write(str(directory / \\\"mesh.msh\\\"))\",\"new\":\"gmsh.model.mesh.generate(3)\\n        _, volume_tags, _ = gmsh.model.mesh.getElements(3)\\n        quality = np.asarray(gmsh.model.mesh.getElementQualities(\\n            np.concatenate(volume_tags).tolist(), \\\"minDetJac\\\"))\\n        log(f\\\"Minimum volume-element Jacobian determinant: {quality.min():.12g}\\\")\\n        if not np.all(np.isfinite(quality)) or np.any(quality <= 0):\\n            raise RuntimeError(\\\"Mesh contains nonpositive volume-element Jacobians\\\")\\n        gmsh.write(str(directory / \\\"mesh.msh\\\"))\"},{\"old\":\"tri = tri[np.all(lug[tri], axis=1)]\",\"new\":\"# Straight-sided quadratic boundary edges have midside nodes\\n            # on chords, not exactly on the analytic cylinders. Identify\\n            # interface triangles by their CAD-projected corner nodes and\\n            # include every midside node in the boundary condition/load.\\n            corners = tri[:, :3]\\n            for xy in BOLTS:\\n                on_bolt = np.all(np.abs(\\n                    np.linalg.norm(xyz[corners, :2] - xy, axis=2)\\n                    - 5.1562) < 0.025, axis=1)\\n                fixed[tri[on_bolt].ravel()] = True\\n            tri = tri[np.all(lug[corners], axis=1)]\"}],\"reason\":\"CalculiX failed on inverted curved C3D10 elements, consistent with Gmsh's negative-Jacobian warnings. Straight-sided quadratic tetrahedra avoid midside projection inversions while retaining quadratic FEM interpolation. Interface selection now includes chord midside nodes, and Jacobians are checked before solving.\"}",
+        "refusal": null,
+        "annotations": []
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 5447,
+    "completion_tokens": 898,
+    "total_tokens": 6345,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 5444,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 417,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": null
+}

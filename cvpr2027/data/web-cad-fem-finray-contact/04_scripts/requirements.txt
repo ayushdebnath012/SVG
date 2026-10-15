@@ -1,0 +1,20 @@
+﻿# Fin Ray 해석에 직접 필요한 패키지 (전이 의존성은 pip 가 알아서 끌어온다)
+# 설치:  python -m venv <경로>\venv
+#        <경로>\venv\Scripts\python.exe -m pip install -r requirements.txt
+#
+# 전체 고정 목록이 필요하면 requirements-full.txt (pip freeze 결과) 참조.
+
+ansys-mapdl-core     # MAPDL 제어. 결과 추출도 이쪽 리더를 쓸 것
+gmsh                 # 메쉬 생성
+numpy
+pandas
+matplotlib           # 그래프
+pyvista              # 3D 렌더 / 애니메이션
+pillow               # GIF 조립, 이미지 트림
+reportlab            # PDF 보고서
+pypdf                # PDF 검사
+pypdfium2            # PDF 페이지 렌더 (보고서 확인용, 선택)
+
+# 주의: ansys-mapdl-reader 는 설치하지 말 것.
+# 2026 R1 결과 파일(.rst)을 잘못 읽어 변위가 1e307 급 쓰레기값으로 나온다.
+# 결과 추출은 mapdl.post_processing 을 쓴다.

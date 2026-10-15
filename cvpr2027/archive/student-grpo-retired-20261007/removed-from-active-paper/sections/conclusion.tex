@@ -1,0 +1,28 @@
+\section{Limitations and conclusion}
+\label{sec:conclusion}
+
+\paragraph{Limits of the evidence.} The drawing families are procedural and use bounded symbol and
+annotation grammars. The learned network editor, deterministic truss/plate editor, separate frame
+harness and cross-domain 7B patcher have different training and input contracts. Their results cannot
+be pooled or transferred across domains. The network importer rejects unsupported symbols and label
+placements. The structural importer covers idealised pin-jointed trusses; its FEM equilibrium pass
+checks numerical consistency, not buckling, fatigue, joints or material strength. Plate clearance
+checks supply no continuum stress analysis. The frame diagnostic receives an explicit physical model
+and is outside the network importer's validated input domain.
+
+The network Astra study uses one effort setting and one sample per task, with incomplete pipe coverage
+because API credits ran out. Its single wrong verdict establishes a failure mode rather than a rate.
+The repeated frame refusal concerns one edited structure, with one correct answer among four attempts.
+The network editor's performance also depends on addressing: the saved 7B opaque-identifier control
+falls from 398/400 to 154/400 correct hard edits. The broader learned patcher obtains 60/100 consistent,
+intended drawings, so robust editing across arbitrary engineering sheets remains open. Numerical
+velocity scoring for Astra uses a 0.01\,m/s absolute floor to avoid treating three-decimal rounding
+near zero as a substantive error; edit and verdict scores are unaffected.
+
+\paragraph{Conclusion.} The implemented workflow edits engineering SVGs and checks the design recovered
+from the result. Its strongest learned result is accurate editing of the supported circuit and pipe
+networks. Its structural/mechanical route demonstrates section and load edits, connected bridge
+topology patching, and detection of clearance violations in correctly patched plates. FEM, circuit,
+hydraulic and geometric checks make the consequences explicit. The resulting evidence identifies
+both successful edits and the engineering criteria that a requested revision fails, with each claim
+tied to the applicable model and delivered drawing.

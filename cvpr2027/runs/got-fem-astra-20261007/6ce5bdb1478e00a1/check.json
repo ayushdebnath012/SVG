@@ -1,0 +1,71 @@
+{
+ "id": "6ce5bdb1478e00a1f6e84476cd6e0d8f8571ab30f003f2a25be2666ea76f8c76",
+ "source_fem": {
+  "ok": true,
+  "compliance": 1.5467696412452669e-07,
+  "components": 1,
+  "nodes": 1408
+ },
+ "candidates": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(21.0, 11.0, 2.7)\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(-6.0, 0, 1.25), rotate=cq.Vector(0, 0, 0))\n            .polygon(6, 2.0321)\n            .extrude(5.4, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0, 1.25), rotate=cq.Vector(0, 0, 0))\n            .polygon(6, 2.6094)\n            .extrude(5.4, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(6.0, 0, 1.25), rotate=cq.Vector(0, 0, 0))\n            .polygon(6, 3.1868)\n            .extrude(5.4, both=True)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 5.0495698908519275e-08,
+    "components": 1,
+    "nodes": 911
+   },
+   "consensus": 2,
+   "numbers_ok": null,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt1",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(21.0, 11.0, 2.7)\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(-6.0, 0, 1.25), rotate=cq.Vector(0, 0, 0))\n            .polygon(6, 2.0321)\n            .extrude(5.4, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0, 1.25), rotate=cq.Vector(0, 0, 0))\n            .polygon(6, 2.6094)\n            .extrude(5.4, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(6.0, 0, 1.25), rotate=cq.Vector(0, 0, 0))\n            .polygon(6, 3.1868)\n            .extrude(5.4, both=True)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 5.049070884389675e-08,
+    "components": 1,
+    "nodes": 901
+   },
+   "consensus": 2,
+   "numbers_ok": null,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt2",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(21.0, 11.0, 5.4)\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(-6.0, 0, 1.25), rotate=cq.Vector(0, 0, 0))\n            .polygon(6, 2.0321)\n            .extrude(5.4, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0, 1.25), rotate=cq.Vector(0, 0, 0))\n            .polygon(6, 2.6094)\n            .extrude(5.4, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(6.0, 0, 1.25), rotate=cq.Vector(0, 0, 0))\n            .polygon(6, 3.1868)\n            .extrude(5.4, both=True)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.0756961282763395e-07,
+    "components": 1,
+    "nodes": 1171
+   },
+   "consensus": 1,
+   "numbers_ok": null,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt3",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(21.0, 11.0, 3.75)\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(-6.0, 0, 1.25), rotate=cq.Vector(0, 0, 0))\n            .polygon(6, 2.0321)\n            .extrude(5.4, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0, 1.25), rotate=cq.Vector(0, 0, 0))\n            .polygon(6, 2.6094)\n            .extrude(5.4, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(6.0, 0, 1.25), rotate=cq.Vector(0, 0, 0))\n            .polygon(6, 3.1868)\n            .extrude(5.4, both=True)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 7.248403262716477e-08,
+    "components": 1,
+    "nodes": 1015
+   },
+   "consensus": 1,
+   "numbers_ok": null,
+   "changed": true,
+   "error": null
+  }
+ ]
+}

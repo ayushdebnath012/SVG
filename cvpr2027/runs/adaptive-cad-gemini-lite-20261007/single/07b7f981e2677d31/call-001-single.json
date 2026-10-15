@@ -1,0 +1,28 @@
+{
+ "kind": "single",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "You edit mechanical CAD. Return only JSON {\"edits\":[{\"start\":0,\"delete\":0,\"insert\":[\"replacement line\"]}]}. Indices are zero-based lines of the ORIGINAL input; operations must be ordered, nonoverlapping and in bounds. Preserve unrelated features. The supplied representation determines syntax. Return no explanation or invented physics results. Geometry execution and FEM checks are performed by external tools; never claim verification."
+   },
+   {
+    "role": "user",
+    "content": "Representation: cadquery\nOriginal CAD (line indices are implicit):\nimport cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(21.0, 11.0, 7.5)\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(-6.0, 0, 1.25), rotate=cq.Vector(0, 0, 0))\n            .polygon(6, 2.0321)\n            .extrude(5.4, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0, 1.25), rotate=cq.Vector(0, 0, 0))\n            .polygon(6, 2.6094)\n            .extrude(5.4, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(6.0, 0, 1.25), rotate=cq.Vector(0, 0, 0))\n            .polygon(6, 3.1868)\n            .extrude(5.4, both=True)\n    )\n)\nshow_object(result)Edit instruction:\nRotate the entire part by 90\u00b0 about the X axis."
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 8192
+ },
+ "usage": {
+  "completion_tokens": 113,
+  "prompt_tokens": 416,
+  "total_tokens": 529
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\n  \"edits\": [\n    {\n      \"start\": 2,\n      \"delete\": 1,\n      \"insert\": [\n        \"    cq.Workplane(\\\"XY\\\")\",\n        \"    .box(21.0, 11.0, 7.5)\",\n        \"    .rotate((0, 0, 0), (1, 0, 0), 90)\"\n      ]\n    }\n  ]\n}\n```"
+}

@@ -1,0 +1,145 @@
+{
+ "id": "7d8752ab262dd60749c5f76f3c4028c92a339cdd49cdb8ab23fcf89e0fd1745f",
+ "source_fem": {
+  "ok": true,
+  "compliance": 1.74914398907971e-08,
+  "components": 1,
+  "nodes": 735
+ },
+ "nodes": [
+  {
+   "name": "vanilla",
+   "parent": null,
+   "visits": 1,
+   "value_sum": 1.0,
+   "eval": {
+    "gates": true,
+    "fem": {
+     "ok": true,
+     "compliance": 1.5422228947038128e-08,
+     "components": 1,
+     "nodes": 583
+    },
+    "numbers_ok": null,
+    "changed": true,
+    "error": null,
+    "code": "import cadquery as cq\nhalf_width = 10.96\nouter_radius = 27.4\ncap_radius = half_width\ncap_center = outer_radius - cap_radius\nresult = (\n    cq.Workplane(\"XY\")\n    .moveTo(cap_center, half_width)\n    .lineTo(outer_radius, half_width)\n    .lineTo(outer_radius, -half_width)\n    .lineTo(cap_center, -half_width)\n    .lineTo(half_width, -half_width)\n    .lineTo(half_width, -cap_center)\n    .lineTo(half_width, -outer_radius)\n    .lineTo(-half_width, -outer_radius)\n    .lineTo(-half_width, -cap_center)\n    .lineTo(-half_width, -half_width)\n    .lineTo(-cap_center, -half_width)\n    .lineTo(-outer_radius, -half_width)\n    .lineTo(-outer_radius, half_width)\n    .lineTo(-cap_center, half_width)\n    .lineTo(-half_width, half_width)\n    .lineTo(-half_width, cap_center)\n    .lineTo(-half_width, outer_radius)\n    .lineTo(half_width, outer_radius)\n    .lineTo(half_width, cap_center)\n    .lineTo(half_width, half_width)\n    .lineTo(cap_center, half_width)\n    .close()\n    .extrude(7.4)\n)\nshow_object(result)\n"
+   }
+  },
+  {
+   "name": "alt1",
+   "parent": null,
+   "visits": 1,
+   "value_sum": 1.0,
+   "eval": {
+    "gates": true,
+    "fem": {
+     "ok": true,
+     "compliance": 1.5421429534564763e-08,
+     "components": 1,
+     "nodes": 595
+    },
+    "numbers_ok": null,
+    "changed": true,
+    "error": null,
+    "code": "import cadquery as cq\nhalf_width = 10.96\nouter_radius = 27.4\ncap_radius = half_width\ncap_center = outer_radius - cap_radius\nresult = (\n    cq.Workplane(\"XY\")\n    .moveTo(cap_center, half_width)\n    .lineTo(outer_radius, half_width)\n    .lineTo(outer_radius, -half_width)\n    .lineTo(cap_center, -half_width)\n    .lineTo(half_width, -half_width)\n    .lineTo(half_width, -cap_center)\n    .lineTo(half_width, -outer_radius)\n    .lineTo(-half_width, -outer_radius)\n    .lineTo(-half_width, -cap_center)\n    .lineTo(-half_width, -half_width)\n    .lineTo(-cap_center, -half_width)\n    .lineTo(-outer_radius, -half_width)\n    .lineTo(-outer_radius, half_width)\n    .lineTo(-cap_center, half_width)\n    .lineTo(-half_width, half_width)\n    .lineTo(-half_width, cap_center)\n    .lineTo(-half_width, outer_radius)\n    .lineTo(half_width, outer_radius)\n    .lineTo(half_width, cap_center)\n    .lineTo(half_width, half_width)\n    .lineTo(cap_center, half_width)\n    .close()\n    .extrude(7.4)\n)\nshow_object(result)\n"
+   }
+  },
+  {
+   "name": "alt2",
+   "parent": null,
+   "visits": 1,
+   "value_sum": 1.0,
+   "eval": {
+    "gates": true,
+    "fem": {
+     "ok": true,
+     "compliance": 1.5447180606631107e-08,
+     "components": 1,
+     "nodes": 575
+    },
+    "numbers_ok": null,
+    "changed": true,
+    "error": null,
+    "code": "import cadquery as cq\nhalf_width = 10.96\nouter_radius = 27.4\ncap_radius = half_width\ncap_center = outer_radius - cap_radius\nresult = (\n    cq.Workplane(\"XY\")\n    .polyline([\n        (outer_radius, half_width),\n        (outer_radius, -half_width),\n        (half_width, -half_width),\n        (half_width, -outer_radius),\n        (-half_width, -outer_radius),\n        (-half_width, -half_width),\n        (-outer_radius, -half_width),\n        (-outer_radius, half_width),\n        (-half_width, half_width),\n        (-half_width, outer_radius),\n        (half_width, outer_radius),\n        (half_width, half_width),\n    ])\n    .close()\n    .extrude(7.4) \n)\nshow_object(result)\n"
+   }
+  },
+  {
+   "name": "alt3",
+   "parent": null,
+   "visits": 1,
+   "value_sum": 1.0,
+   "eval": {
+    "gates": true,
+    "fem": {
+     "ok": true,
+     "compliance": 1.5441956361532716e-08,
+     "components": 1,
+     "nodes": 585
+    },
+    "numbers_ok": null,
+    "changed": true,
+    "error": null,
+    "code": "import cadquery as cq\nhalf_width = 10.96\nouter_radius = 27.4\ncap_radius = half_width\ncap_center = outer_radius - cap_radius\nresult = (\n    cq.Workplane(\"XY\")\n    .rect(2 * outer_radius, 2 * half_width)\n    .extrude(7.4)\n    .union(\n        cq.Workplane(\"XY\")\n        .rect(2 * half_width, 2 * outer_radius)\n        .extrude(7.4)\n    )\n)\nshow_object(result)\n"
+   }
+  }
+ ],
+ "candidates": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nhalf_width = 10.96\nouter_radius = 27.4\ncap_radius = half_width\ncap_center = outer_radius - cap_radius\nresult = (\n    cq.Workplane(\"XY\")\n    .moveTo(cap_center, half_width)\n    .lineTo(outer_radius, half_width)\n    .lineTo(outer_radius, -half_width)\n    .lineTo(cap_center, -half_width)\n    .lineTo(half_width, -half_width)\n    .lineTo(half_width, -cap_center)\n    .lineTo(half_width, -outer_radius)\n    .lineTo(-half_width, -outer_radius)\n    .lineTo(-half_width, -cap_center)\n    .lineTo(-half_width, -half_width)\n    .lineTo(-cap_center, -half_width)\n    .lineTo(-outer_radius, -half_width)\n    .lineTo(-outer_radius, half_width)\n    .lineTo(-cap_center, half_width)\n    .lineTo(-half_width, half_width)\n    .lineTo(-half_width, cap_center)\n    .lineTo(-half_width, outer_radius)\n    .lineTo(half_width, outer_radius)\n    .lineTo(half_width, cap_center)\n    .lineTo(half_width, half_width)\n    .lineTo(cap_center, half_width)\n    .close()\n    .extrude(7.4)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.5422228947038128e-08,
+    "components": 1,
+    "nodes": 583
+   },
+   "consensus": 4,
+   "numbers_ok": null,
+   "changed": true
+  },
+  {
+   "name": "alt1",
+   "code": "import cadquery as cq\nhalf_width = 10.96\nouter_radius = 27.4\ncap_radius = half_width\ncap_center = outer_radius - cap_radius\nresult = (\n    cq.Workplane(\"XY\")\n    .moveTo(cap_center, half_width)\n    .lineTo(outer_radius, half_width)\n    .lineTo(outer_radius, -half_width)\n    .lineTo(cap_center, -half_width)\n    .lineTo(half_width, -half_width)\n    .lineTo(half_width, -cap_center)\n    .lineTo(half_width, -outer_radius)\n    .lineTo(-half_width, -outer_radius)\n    .lineTo(-half_width, -cap_center)\n    .lineTo(-half_width, -half_width)\n    .lineTo(-cap_center, -half_width)\n    .lineTo(-outer_radius, -half_width)\n    .lineTo(-outer_radius, half_width)\n    .lineTo(-cap_center, half_width)\n    .lineTo(-half_width, half_width)\n    .lineTo(-half_width, cap_center)\n    .lineTo(-half_width, outer_radius)\n    .lineTo(half_width, outer_radius)\n    .lineTo(half_width, cap_center)\n    .lineTo(half_width, half_width)\n    .lineTo(cap_center, half_width)\n    .close()\n    .extrude(7.4)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.5421429534564763e-08,
+    "components": 1,
+    "nodes": 595
+   },
+   "consensus": 4,
+   "numbers_ok": null,
+   "changed": true
+  },
+  {
+   "name": "alt2",
+   "code": "import cadquery as cq\nhalf_width = 10.96\nouter_radius = 27.4\ncap_radius = half_width\ncap_center = outer_radius - cap_radius\nresult = (\n    cq.Workplane(\"XY\")\n    .polyline([\n        (outer_radius, half_width),\n        (outer_radius, -half_width),\n        (half_width, -half_width),\n        (half_width, -outer_radius),\n        (-half_width, -outer_radius),\n        (-half_width, -half_width),\n        (-outer_radius, -half_width),\n        (-outer_radius, half_width),\n        (-half_width, half_width),\n        (-half_width, outer_radius),\n        (half_width, outer_radius),\n        (half_width, half_width),\n    ])\n    .close()\n    .extrude(7.4) \n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.5447180606631107e-08,
+    "components": 1,
+    "nodes": 575
+   },
+   "consensus": 4,
+   "numbers_ok": null,
+   "changed": true
+  },
+  {
+   "name": "alt3",
+   "code": "import cadquery as cq\nhalf_width = 10.96\nouter_radius = 27.4\ncap_radius = half_width\ncap_center = outer_radius - cap_radius\nresult = (\n    cq.Workplane(\"XY\")\n    .rect(2 * outer_radius, 2 * half_width)\n    .extrude(7.4)\n    .union(\n        cq.Workplane(\"XY\")\n        .rect(2 * half_width, 2 * outer_radius)\n        .extrude(7.4)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.5441956361532716e-08,
+    "components": 1,
+    "nodes": 585
+   },
+   "consensus": 4,
+   "numbers_ok": null,
+   "changed": true
+  }
+ ]
+}

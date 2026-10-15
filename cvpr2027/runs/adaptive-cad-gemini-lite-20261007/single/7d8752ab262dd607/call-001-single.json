@@ -1,0 +1,28 @@
+{
+ "kind": "single",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "You edit mechanical CAD. Return only JSON {\"edits\":[{\"start\":0,\"delete\":0,\"insert\":[\"replacement line\"]}]}. Indices are zero-based lines of the ORIGINAL input; operations must be ordered, nonoverlapping and in bounds. Preserve unrelated features. The supplied representation determines syntax. Return no explanation or invented physics results. Geometry execution and FEM checks are performed by external tools; never claim verification."
+   },
+   {
+    "role": "user",
+    "content": "Representation: cadquery\nOriginal CAD (line indices are implicit):\nimport cadquery as cq\nhalf_width = 10.96\nouter_radius = 27.4\ncap_radius = half_width\ncap_center = outer_radius - cap_radius\nresult = (\n    cq.Workplane(\"XY\")\n    .moveTo(cap_center, half_width)\n    .threePointArc((outer_radius, 0.0), (cap_center, -half_width))\n    .lineTo(half_width, -half_width)\n    .lineTo(half_width, -cap_center)\n    .threePointArc((0.0, -outer_radius), (-half_width, -cap_center))\n    .lineTo(-half_width, -half_width)\n    .lineTo(-cap_center, -half_width)\n    .threePointArc((-outer_radius, 0.0), (-cap_center, half_width))\n    .lineTo(-half_width, half_width)\n    .lineTo(-half_width, cap_center)\n    .threePointArc((0.0, outer_radius), (half_width, cap_center))\n    .lineTo(half_width, half_width)\n    .lineTo(cap_center, half_width)\n    .close()\n    .extrude(7.4)\n)\nshow_object(result)Edit instruction:\nReplace the four semicircular rounded protrusions with straight rectangular protrusions, removing the arcs and forming flat-ended arms with the same width as the previous cap diameter."
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 8192
+ },
+ "usage": {
+  "completion_tokens": 107,
+  "prompt_tokens": 439,
+  "total_tokens": 546
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\n  \"edits\": [\n    {\n      \"start\": 5,\n      \"delete\": 19,\n      \"insert\": [\n        \"result = (\",\n        \"    cq.Workplane(\\\"XY\\\")\",\n        \"    .rect(outer_radius * 2, half_width * 2)\",\n        \"    .extrude(7.4)\",\n        \")\"\n      ]\n    }\n  ]\n}\n```"
+}

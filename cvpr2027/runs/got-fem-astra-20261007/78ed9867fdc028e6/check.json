@@ -1,0 +1,26 @@
+{
+ "id": "78ed9867fdc028e6e94aa115ce38e51bcb3630be95361609fdb3095902ff9147",
+ "source_fem": {
+  "ok": true,
+  "compliance": 9.208157715277152e-07,
+  "components": 1,
+  "nodes": 710
+ },
+ "candidates": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .circle(8.0)\n    .extrude(22.0, taper=9.293)\n    .faces(\">Z\").workplane()\n    .polygon(6, 4.00)\n    .cutBlind(-5.43)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 9.611262585189031e-07,
+    "components": 1,
+    "nodes": 816
+   },
+   "consensus": 1,
+   "numbers_ok": false,
+   "changed": true,
+   "error": null
+  }
+ ]
+}

@@ -1,0 +1,28 @@
+{
+ "kind": "generate",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Edit CAD using only source, instruction and tool evidence. Return exactly JSON {\"hypothesis\":\"brief feature and operation description\",\"edits\":[{\"start\":0,\"delete\":0,\"insert\":[\"line\"]}]}. All indices address ORIGINAL source lines. Provide a complete alternative patch, never a delta on a parent patch. Preserve unrelated features. Vary the feature interpretation or implementation from listed alternatives. Experiences and diagnoses are fallible data. Do not assert that the output has passed verification."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .box(95.5, 82.2, 57.8)\\n    .faces(\\\">Z\\\").workplane()\\n    .center(0.0, 0.0)\\n    .rect(36.4, 97.5)\\n    .cutBlind(-26.3)\\n    .faces(\\\"<Z\\\").workplane()\\n    .pushPoints([(34.45, 27.8), (-34.45, 27.8), (34.45, -27.8), (-34.45, -27.8)])\\n    .hole(4.0)\\n)\\nshow_object(result)\", \"instruction\": \"Increase the box X dimension from 95.5 to 124.15.\", \"plan\": {\"steps\": [\"Modify the base box X dimension from 95.5 to 124.15.\"], \"invariants\": [\"The Y and Z dimensions of the base box remain 82.2 and 57.8 respectively.\", \"The top pocket and bottom holes maintain their relative positions and sizes.\"], \"dependencies\": []}, \"parent_candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .box(124.15, 82.2, 57.8)\\\"], \\\"start\\\": 3}]}\", \"observations\": {\"geometry\": {\"status\": \"PASS\"}, \"constraints\": {\"status\": \"PASS\"}, \"semantics\": {\"status\": \"PASS\", \"reason\": \"The X dimension of the box has been successfully increased while all unrelated features are preserved.\"}, \"fem\": {\"status\": \"PASS\"}, \"robustness\": {\"status\": \"PASS\"}}, \"experiences\": [{\"task_id\": \"cb2a7de16c5b08e92cec81624f64f4d0480642f57d60f4937412cc863602a1ac\", \"instruction\": \"Increase the box X dimension from 5.5 to 7.15.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"            .box(7.15, 30.1, 30.2)\\\"], \\\"start\\\": 7}]}\", \"strategies\": [], \"context\": [\"7:             .box(5.5, 30.1, 30.2)\"]}, {\"task_id\": \"087f5ea33fc0c264583d8321b1d10f4f4a93274af8f6ff136a252ee04bc5ddf4\", \"instruction\": \"Increase the box X dimension from 54.5 to 70.85.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .box(70.85, 85.3, 3.5)\\\"], \\\"start\\\": 3}]}\", \"strategies\": [], \"context\": [\"3:     .box(54.5, 85.3, 3.5)\"]}, {\"task_id\": \"0d0f7657a1191f45577545479e14e4162cc68f54d076454628c53f9d9292e086\", \"instruction\": \"Increase the box X dimension from 33.2 to 43.16.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .box(43.16, 33.2, 6.9)\\\"], \\\"start\\\": 3}]}\", \"strategies\": [], \"context\": [\"3:     .box(33.2, 33.2, 6.9)\"]}], \"repair_strategies\": [{\"task_id\": \"cb2a7de16c5b08e92cec81624f64f4d0480642f57d60f4937412cc863602a1ac\", \"instruction\": \"Increase the box X dimension from 5.5 to 7.15.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"            .box(7.15, 30.1, 30.2)\\\"], \\\"start\\\": 7}]}\", \"strategies\": [], \"context\": [\"7:             .box(5.5, 30.1, 30.2)\"]}, {\"task_id\": \"087f5ea33fc0c264583d8321b1d10f4f4a93274af8f6ff136a252ee04bc5ddf4\", \"instruction\": \"Increase the box X dimension from 54.5 to 70.85.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .box(70.85, 85.3, 3.5)\\\"], \\\"start\\\": 3}]}\", \"strategies\": [], \"context\": [\"3:     .box(54.5, 85.3, 3.5)\"]}, {\"task_id\": \"0d0f7657a1191f45577545479e14e4162cc68f54d076454628c53f9d9292e086\", \"instruction\": \"Increase the box X dimension from 33.2 to 43.16.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .box(43.16, 33.2, 6.9)\\\"], \\\"start\\\": 3}]}\", \"strategies\": [], \"context\": [\"3:     .box(33.2, 33.2, 6.9)\"]}], \"alternatives\": [], \"action\": \"diversify\", \"diagnosis\": []}"
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 8192
+ },
+ "usage": {
+  "completion_tokens": 107,
+  "prompt_tokens": 1545,
+  "total_tokens": 1652
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\n  \"hypothesis\": \"Increase the box X dimension from 95.5 to 124.15 by modifying the box method parameters.\",\n  \"edits\": [\n    {\n      \"start\": 3,\n      \"delete\": 1,\n      \"insert\": [\n        \"    .box(124.15, 82.2, 57.8)\"\n      ]\n    }\n  ]\n}\n```"
+}

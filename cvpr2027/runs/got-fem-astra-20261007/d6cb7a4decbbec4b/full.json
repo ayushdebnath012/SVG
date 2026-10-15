@@ -1,0 +1,115 @@
+{
+ "source_fem": {
+  "ok": true,
+  "compliance": 3.9933047675597995e-08,
+  "components": 1,
+  "nodes": 861
+ },
+ "nodes": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(87.0, 18.0, 13.8)\n    .edges(\"|Z\")\n    .chamfer(1.0)\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(-34.8, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .rect(2.0321, 2.0321)\n            .extrude(4.95, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(-23.2, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .rect(2.6094, 2.6094)\n            .extrude(4.95, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(-11.6, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .rect(3.1868, 3.1868)\n            .extrude(4.95, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .rect(3.7641, 3.7641)\n            .extrude(4.95, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(11.6, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .rect(4.9188, 4.9188)\n            .extrude(4.95, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(23.2, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .rect(6.0735, 6.0735)\n            .extrude(4.95, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(34.8, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .rect(7.2282, 7.2282)\n            .extrude(4.95, both=True)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 4.1301688014378174e-08,
+    "components": 1,
+    "nodes": 713
+   },
+   "numbers_ok": false,
+   "changed": true,
+   "cluster": null,
+   "robustness": null
+  },
+  {
+   "name": "alt1",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(87.0, 18.0, 13.8)\n    .edges(\"|Z\")\n    .chamfer(1.0)\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(-34.8, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .rect(2.0321, 2.0321)\n            .extrude(4.95, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(-23.2, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .rect(2.6094, 2.6094)\n            .extrude(4.95, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(-11.6, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .rect(3.1868, 3.1868)\n            .extrude(4.95, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .rect(3.7641, 3.7641)\n            .extrude(4.95, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(11.6, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .rect(4.9188, 4.9188)\n            .extrude(4.95, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(23.2, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .rect(6.0735, 6.0735)\n            .extrude(4.95, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(34.8, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .rect(7.2282, 7.2282)\n            .extrude(4.95, both=True)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 4.129538329339808e-08,
+    "components": 1,
+    "nodes": 714
+   },
+   "numbers_ok": false,
+   "changed": true,
+   "cluster": null,
+   "robustness": null
+  },
+  {
+   "name": "alt2",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(87.0, 18.0, 13.8)\n    .edges(\"|Z\")\n    .chamfer(1.0)\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(-34.8, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .polygon(4, 2.0321, circumscribed=True)\n            .extrude(4.95, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(-23.2, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .polygon(4, 2.6094, circumscribed=True)\n            .extrude(4.95, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(-11.6, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .polygon(4, 3.1868, circumscribed=True)\n            .extrude(4.95, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .polygon(4, 3.7641, circumscribed=True)\n            .extrude(4.95, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(11.6, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .polygon(4, 4.9188, circumscribed=True)\n            .extrude(4.95, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(23.2, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .polygon(4, 6.0735, circumscribed=True)\n            .extrude(4.95, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(34.8, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .polygon(4, 7.2282, circumscribed=True)\n            .extrude(4.95, both=True)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 4.1295486588387906e-08,
+    "components": 1,
+    "nodes": 728
+   },
+   "numbers_ok": false,
+   "changed": true,
+   "cluster": null,
+   "robustness": null
+  },
+  {
+   "name": "alt3",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(87.0, 18.0, 13.8)\n    .edges(\"|Z\")\n    .chamfer(1.0)\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(-34.8, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .polygon(4, 2.0321 * 2**0.5)\n            .extrude(4.95, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(-23.2, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .polygon(4, 2.6094 * 2**0.5)\n            .extrude(4.95, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(-11.6, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .polygon(4, 3.1868 * 2**0.5)\n            .extrude(4.95, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .polygon(4, 3.7641 * 2**0.5)\n            .extrude(4.95, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(11.6, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .polygon(4, 4.9188 * 2**0.5)\n            .extrude(4.95, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(23.2, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .polygon(4, 6.0735 * 2**0.5)\n            .extrude(4.95, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(34.8, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .polygon(4, 7.2282 * 2**0.5)\n            .extrude(4.95, both=True)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 4.128575868250933e-08,
+    "components": 1,
+    "nodes": 716
+   },
+   "numbers_ok": false,
+   "changed": true,
+   "cluster": null,
+   "robustness": null
+  },
+  {
+   "name": "mcts1-refine",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(87.0, 18.0, 13.8)\n    .edges(\"|Z\")\n    .chamfer(1.0)\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(-34.8, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .polygon(4, 2.0321, circumscribed=True)\n            .extrude(4.95, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(-23.2, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .polygon(4, 2.6094, circumscribed=True)\n            .extrude(4.95, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(-11.6, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .polygon(4, 3.1868, circumscribed=True)\n            .extrude(4.95, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .polygon(4, 3.7641, circumscribed=True)\n            .extrude(4.95, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(11.6, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .polygon(4, 4.9188, circumscribed=True)\n            .extrude(4.95, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(23.2, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .polygon(4, 6.0735, circumscribed=True)\n            .extrude(4.95, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(34.8, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .polygon(4, 7.2282, circumscribed=True)\n            .extrude(4.95, both=True)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 4.12789841011736e-08,
+    "components": 1,
+    "nodes": 727
+   },
+   "numbers_ok": false,
+   "changed": true,
+   "cluster": null,
+   "robustness": null
+  },
+  {
+   "name": "mcts2-refine",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(87.0, 18.0, 13.8)\n    .edges(\"|Z\")\n    .chamfer(1.0)\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(-34.8, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .polygon(4, 2.0321 * (2.0 ** 0.5))\n            .extrude(4.95, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(-23.2, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .polygon(4, 2.6094 * (2.0 ** 0.5))\n            .extrude(4.95, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(-11.6, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .polygon(4, 3.1868 * (2.0 ** 0.5))\n            .extrude(4.95, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .polygon(4, 3.7641 * (2.0 ** 0.5))\n            .extrude(4.95, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(11.6, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .polygon(4, 4.9188 * (2.0 ** 0.5))\n            .extrude(4.95, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(23.2, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .polygon(4, 6.0735 * (2.0 ** 0.5))\n            .extrude(4.95, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(34.8, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .polygon(4, 7.2282 * (2.0 ** 0.5))\n            .extrude(4.95, both=True)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 4.1266795382959165e-08,
+    "components": 1,
+    "nodes": 703
+   },
+   "numbers_ok": false,
+   "changed": true,
+   "cluster": null,
+   "robustness": null
+  },
+  {
+   "name": "rag",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(87.0, 18.0, 13.8)\n    .edges(\"|Z\")\n    .chamfer(1.0)\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(-34.8, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .rect(2.0321, 2.0321)\n            .extrude(4.95, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(-23.2, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .rect(2.6094, 2.6094)\n            .extrude(4.95, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(-11.6, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .rect(3.1868, 3.1868)\n            .extrude(4.95, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .rect(3.7641, 3.7641)\n            .extrude(4.95, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(11.6, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .rect(4.9188, 4.9188)\n            .extrude(4.95, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(23.2, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .rect(6.0735, 6.0735)\n            .extrude(4.95, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(34.8, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\n            .rect(7.2282, 7.2282)\n            .extrude(4.95, both=True)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 4.1290094811847706e-08,
+    "components": 1,
+    "nodes": 710
+   },
+   "numbers_ok": false,
+   "changed": true,
+   "cluster": null,
+   "robustness": null
+  }
+ ]
+}

@@ -1,0 +1,36 @@
+{
+ "kind": "single",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "Qwen/Qwen3.5-35B-A3B-FP8",
+  "messages": [
+   {
+    "role": "system",
+    "content": "You edit mechanical CAD. Return only JSON {\"edits\":[{\"start\":0,\"delete\":0,\"insert\":[\"replacement line\"]}]}. Indices are zero-based lines of the ORIGINAL input; operations must be ordered, nonoverlapping and in bounds. Preserve unrelated features. The supplied representation determines syntax. Return no explanation or invented physics results. Geometry execution and FEM checks are performed by external tools; never claim verification."
+   },
+   {
+    "role": "user",
+    "content": "Representation: cadquery\nOriginal CAD (line indices are implicit):\nimport cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polyline([(100.0, 0.0), (100.0, 240.9), (58.7, 348.4902), (58.7, 465.8902), (100.0, 802.2517), (100.0, 970.3517), (123.2, 970.3517), (123.2, 802.2517), (81.9, 465.8902), (81.9, 348.4902), (123.2, 240.9), (123.2, 0.0)])\n    .close()\n    .revolve(360, (0, 0, 0), (0, 1, 0))\n)\nshow_object(result)Edit instruction:\nReduce the throat radius from 58.7 mm to 40.0 mm, decreasing the throat diameter from 117.4 mm to 80.0 mm."
+   }
+  ],
+  "temperature": 0.6,
+  "top_p": 0.95,
+  "top_k": 20,
+  "max_tokens": 16384
+ },
+ "usage": {
+  "prompt_tokens": 401,
+  "total_tokens": 16785,
+  "completion_tokens": 16384,
+  "prompt_tokens_details": null,
+  "completion_tokens_details": {
+   "reasoning_tokens": 16384
+  }
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "length",
+ "response": "",
+ "error_type": "ValueError",
+ "error": "Incomplete model response"
+}

@@ -1,0 +1,113 @@
+{
+  "collection": "Power-plant valve and carbon/stainless nozzle nonlinear transient heat conduction",
+  "source": "https://www.seamplex.com/feenox/doc/tutorials/320-thermal/",
+  "repository": "https://github.com/seamplex/feenox",
+  "revision": "06965026d6c73919ee02744192ec4b7526bb7e5c",
+  "license": "GPL-3.0; original LICENSE/COPYING retained",
+  "native_CAD": "valve.brep",
+  "geometry": {
+    "valid": true,
+    "solids": 4,
+    "faces": 112,
+    "bounds_mm": [
+      -786.6134477845683,
+      67.40644778456829,
+      -2.4034477845683577,
+      158.5178131819303,
+      -137.3414477845683,
+      188.1404477845683
+    ],
+    "volume_mm3": 9245507.821718073
+  },
+  "native_cad_FEM_trajectory_candidates": 1,
+  "FEM_history": {
+    "original_file": "valve-1.csv",
+    "samples": 192,
+    "time_range_s": [
+      0.0,
+      1000.0
+    ],
+    "columns": [
+      "time_s",
+      "imposed_internal_T_C",
+      "SCL2 carbon inner",
+      "SCL2 carbon center",
+      "SCL2 carbon outer",
+      "SCL4 stainless inner",
+      "SCL4 stainless center",
+      "SCL4 stainless outer"
+    ],
+    "fields": [
+      {
+        "label": "SCL2 carbon inner",
+        "column_1_based": 3,
+        "minimum_C": 40.0,
+        "maximum_C": 250.0,
+        "maximum_at_time_s": 100.143,
+        "final_C": 40.0
+      },
+      {
+        "label": "SCL2 carbon center",
+        "column_1_based": 4,
+        "minimum_C": 40.004,
+        "maximum_C": 249.926,
+        "maximum_at_time_s": 475.035,
+        "final_C": 40.011
+      },
+      {
+        "label": "SCL2 carbon outer",
+        "column_1_based": 5,
+        "minimum_C": 40.008,
+        "maximum_C": 249.863,
+        "maximum_at_time_s": 499.279,
+        "final_C": 40.018
+      },
+      {
+        "label": "SCL4 stainless inner",
+        "column_1_based": 6,
+        "minimum_C": 40.0,
+        "maximum_C": 250.0,
+        "maximum_at_time_s": 100.143,
+        "final_C": 40.0
+      },
+      {
+        "label": "SCL4 stainless center",
+        "column_1_based": 7,
+        "minimum_C": 40.004,
+        "maximum_C": 249.913,
+        "maximum_at_time_s": 492.608,
+        "final_C": 40.023
+      },
+      {
+        "label": "SCL4 stainless outer",
+        "column_1_based": 8,
+        "minimum_C": 40.007,
+        "maximum_C": 249.844,
+        "maximum_at_time_s": 495.685,
+        "final_C": 40.038
+      }
+    ],
+    "units": "seconds and Celsius; CAD/setup use mm",
+    "not_FEM_reference_column": "Column 2 is imposed internal temperature, not a solved field target.",
+    "no_full_saved_nodal_file": "Original mesh/valve-1.msh nodal result absent from selected repository; six source sampled FEM trajectories only."
+  },
+  "setup": {
+    "thermal": "Nonlinear temperature-dependent conductivity/diffusivity, implicit transient from initial steady state",
+    "BC": "Internal T follows published 40 to250 to40 C profile; external convection to50 C at h=1e-6 W/(mm^2 K); symmetry adiabatic",
+    "materials": "Carbon steel and stainless steel temperature-dependent source properties",
+    "source_SCL_definition_file": "valve-scl-coords.fee",
+    "requested_geometry_mesh_generation_executed": false
+  },
+  "original_dimensioned_drawing": false,
+  "certified_cases": 0,
+  "new_solver_runs": 0,
+  "generated_cad": 0,
+  "model_calls": 0,
+  "limitations": [
+    "Four original BREP volumes; independent source surface/volume/SCL topology matching pending.",
+    "Only sampled histories, no full nodal mesh/result binary; time samples are not independent cases.",
+    "Original output rounded to 0.001 C; preserve source time samples and compare at same positions.",
+    "Exact original mesh and convergence evidence require review; no new mesh or solve generated.",
+    "Imposed-temperature column must not be used to inflate numerical accuracy."
+  ]
+}

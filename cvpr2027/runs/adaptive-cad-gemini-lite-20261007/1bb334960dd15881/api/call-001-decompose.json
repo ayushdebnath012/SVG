@@ -1,0 +1,28 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .polyline([(100.0, 0.0), (100.0, 240.9), (58.7, 348.4902), (58.7, 465.8902), (100.0, 802.2517), (100.0, 970.3517), (123.2, 970.3517), (123.2, 802.2517), (81.9, 465.8902), (81.9, 348.4902), (123.2, 240.9), (123.2, 0.0)])\\n    .close()\\n    .revolve(360, (0, 0, 0), (0, 1, 0))\\n)\\nshow_object(result)\", \"instruction\": \"Reduce the throat radius from 58.7 mm to 40.0 mm, decreasing the throat diameter from 117.4 mm to 80.0 mm.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"dd4ba1a9321fc8a630f89ff8963470167be5a2cb87342399e5e0393458f5ca8f\", \"instruction\": \"Increase the coil wire radius from 0.80 mm to 1.04 mm.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .circle(1.04)\\\"], \\\"start\\\": 4}]}\", \"strategies\": [], \"context\": [\"4:     .circle(0.8)\"]}, {\"task_id\": \"0670832a0d8cbd9285774a3e3505de8ac48b090f99aec694a64036827a7655bb\", \"instruction\": \"Reduce the twisted rod radius by 3%, from 1.485 mm to 1.440 mm.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"            .circle(1.485 * 0.97)\\\"], \\\"start\\\": 5}, {\\\"delete\\\": 1, \\\"insert\\\": [\\\"            .circle(1.485 * 0.97)\\\"], \\\"start\\\": 15}, {\\\"delete\\\": 1, \\\"insert\\\": [\\\"            .circle(1.485 * 0.97)\\\"], \\\"start\\\": 20}, {\\\"delete\\\": 1, \\\"insert\\\": [\\\"            .circle(1.485 * 0.97)\\\"], \\\"start\\\": 25}]}\", \"strategies\": [], \"context\": [\"5:             .circle(1.485)\", \"15:             .circle(1.485)\", \"20:             .circle(1.485)\", \"25:             .circle(1.485)\"]}, {\"task_id\": \"337fd19e3616e5bf2759d0b96b419c768943dad812b6e952665e74c478917875\", \"instruction\": \"Increase the cylinder radius from 4.5 to 5.85.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"            .cylinder(50.0, 5.85)\\\"], \\\"start\\\": 7}]}\", \"strategies\": [], \"context\": [\"7:             .cylinder(50.0, 4.5)\"]}]}"
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 4096
+ },
+ "usage": {
+  "completion_tokens": 131,
+  "prompt_tokens": 968,
+  "total_tokens": 1099
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\n  \"steps\": [\n    \"Modify the polyline coordinates to reduce the throat radius from 58.7 mm to 40.0 mm (updating x-coordinates 58.7 to 40.0 and 81.9 to 63.2 to maintain wall thickness/offsets).\"\n  ],\n  \"invariants\": [\n    \"The overall height, axial symmetry, and revolve parameters must be preserved.\",\n    \"The wall thickness/offset relationship between inner and outer profile curves should be maintained.\"\n  ],\n  \"dependencies\": []\n}\n```"
+}

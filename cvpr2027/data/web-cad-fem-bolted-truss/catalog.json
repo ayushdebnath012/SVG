@@ -1,0 +1,90 @@
+{
+  "collection": "Bolted plywood truss native Solid Edge assembly and existing Abaqus joint-position export",
+  "geometry_families": 1,
+  "complex_CAD_family": true,
+  "complex_FEM_family_candidate": false,
+  "classification": "Idealized 2D truss control linked to complex 3D assembled CAD; not a solved 3D contact assembly",
+  "native_CAD": "3D_Model/INTRO TO ME/FINAL TRUSS ASSEMBLY.asm",
+  "native_part_files": 17,
+  "original_CAE": "Abaqus simulation data/final_intro_to_mae.cae",
+  "original_result_CSV": "Abaqus simulation data/Abaqus_node_displacement_data.csv",
+  "source_export_rows": 9,
+  "source_joint_labels": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I"
+  ],
+  "source_load_mass_kg": [
+    0.15,
+    0.24,
+    0.3,
+    0.42,
+    0.51,
+    0.61,
+    0.65,
+    0.7,
+    1.0
+  ],
+  "source_XY_units": "Not printed in original export or report; unresolved",
+  "source_XY_at_1kg": [
+    [
+      0.0,
+      -0.0063
+    ],
+    [
+      0.0,
+      94.05
+    ],
+    [
+      94.0382,
+      20.8654
+    ],
+    [
+      94.0694,
+      94.01734
+    ],
+    [
+      173.884,
+      93.95764
+    ],
+    [
+      173.839,
+      38.5357
+    ],
+    [
+      240.393,
+      93.88142
+    ],
+    [
+      240.35,
+      53.2395
+    ],
+    [
+      293.598,
+      93.80549
+    ]
+  ],
+  "source_solver_description": "Abaqus T2D2 linear pinned-joint truss, E=6 GPa, density=600 kg/m3, fixed and rolling supports",
+  "raw_ODB_present": false,
+  "original_dimensioned_drawing": false,
+  "license": "MIT; LICENSE retained",
+  "limits": [
+    "CSV stores deformed joint positions, not displacement vectors: B y remains 94.05 and I x is 293.598 at 1 kg. No zero-load row; no baseline generated from polynomial fits.",
+    "Nine load rows 0.15..1 kg conflict with report ten stages and stated lower force 0.981 N. 0.15 kg times 9.81 equals 1.4715 N; original contradictory statement retained.",
+    "No section area, exact loading joint, units or fixed/roller mapping verified. Native Solid Edge assembly/component import and CAD-to-CAE mapping pending.",
+    "Physical 3D eccentricity/bolted joints and failure above ~0.5 kg appear in experiments, whereas FEM is idealized planar T2D2. Experimental curves and polynomial coefficients are separate, not raw FEM stresses.",
+    "Original CAE preserved but not opened via executing Abaqus; ODB absent. Joint labels are publisher A-I, not known solver node IDs. Nine stages do not add nine CAD families."
+  ],
+  "source": "https://github.com/Shass27/truss-analysis",
+  "source_revision": "70cefb4a2ddefadb5968789e69c490b2836f1116",
+  "generated_cad": 0,
+  "new_solver_runs": 0,
+  "model_calls": 0,
+  "certified_cases": 0
+}

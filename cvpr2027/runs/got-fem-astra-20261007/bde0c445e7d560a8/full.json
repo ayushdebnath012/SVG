@@ -1,0 +1,85 @@
+{
+ "source_fem": {
+  "ok": true,
+  "compliance": 1.870302295166917e-07,
+  "components": 1,
+  "nodes": 2308
+ },
+ "nodes": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(41.6, 43.7)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, 20.8), rotate=cq.Vector(0, 0, 0))\n            .sphere(21.85)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, -20.8), rotate=cq.Vector(0, 0, 0))\n            .sphere(21.85)\n    )\n)\nresult = result.cut(cq.Workplane('XY').cylinder(387.0,10.49))\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 3.519079182837598e-07,
+    "components": 1,
+    "nodes": 1532
+   },
+   "numbers_ok": null,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "alt1",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(41.6, 43.7)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, 20.8), rotate=cq.Vector(0, 0, 0))\n            .sphere(21.85)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, -20.8), rotate=cq.Vector(0, 0, 0))\n            .sphere(21.85)\n    )\n)\nresult = result.cut(cq.Workplane('XY').cylinder(387.0,10.49))\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 3.5190630098945005e-07,
+    "components": 1,
+    "nodes": 1529
+   },
+   "numbers_ok": null,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "alt2",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(41.6, 43.7)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, 20.8), rotate=cq.Vector(0, 0, 0))\n            .sphere(43.7 / 2.0)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, -20.8), rotate=cq.Vector(0, 0, 0))\n            .sphere(43.7 / 2.0)\n    )\n)\nresult = result.cut(cq.Workplane('XY').cylinder(387.0,10.49))\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 3.518705024306073e-07,
+    "components": 1,
+    "nodes": 1532
+   },
+   "numbers_ok": null,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "alt3",
+   "code": "import cadquery as cq\nend_cap_radius = 43.7 / 2.0\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(41.6, 43.7)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, 20.8), rotate=cq.Vector(0, 0, 0))\n            .sphere(end_cap_radius)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, -20.8), rotate=cq.Vector(0, 0, 0))\n            .sphere(end_cap_radius)\n    )\n)\nresult = result.cut(cq.Workplane('XY').cylinder(387.0,10.49))\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 3.51907944369699e-07,
+    "components": 1,
+    "nodes": 1532
+   },
+   "numbers_ok": null,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "rag",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(41.6, 43.7)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, 20.8), rotate=cq.Vector(0, 0, 0))\n            .sphere(21.85)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, -20.8), rotate=cq.Vector(0, 0, 0))\n            .sphere(21.85)\n    )\n)\nresult = result.cut(cq.Workplane('XY').cylinder(387.0,10.49))\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 3.519077347712359e-07,
+    "components": 1,
+    "nodes": 1532
+   },
+   "numbers_ok": null,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  }
+ ]
+}

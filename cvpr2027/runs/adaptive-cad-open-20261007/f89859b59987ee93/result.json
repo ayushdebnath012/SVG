@@ -1,0 +1,1466 @@
+{
+ "task_id": "f89859b59987ee9369182ac0c8e910b3678ddb1ac626647e16babb93114b63be",
+ "status": "PASS",
+ "prediction": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate(cq.Vector(0, 0, 0), cq.Vector(1, 0, 0), 90)\"], \"start\": 16}]}",
+ "selected_node": 1,
+ "bank": [
+  0,
+  1,
+  3,
+  4
+ ],
+ "pareto": [
+  1,
+  3,
+  4
+ ],
+ "stop": "expansion_limit",
+ "nodes": [
+  {
+   "id": 0,
+   "candidate": "\n\n{\"edits\":[{\"start\":15,\"delete\":1,\"insert\":[\"result = result.cut(cq.Workplane('XY').cylinder(387.0,10.49)).rotate(cq.Vector(0, 0, 0), cq.Vector(1, 0, 0), 90)\"]}]}",
+   "depth": 0,
+   "verdict": {
+    "status": "PASS",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 554990.952129328,
+       "area": 43052.57913716475,
+       "solids": 1,
+       "faces": 4,
+       "bbox_x": 87.4,
+       "bbox_y": 126.44456140495993,
+       "bbox_z": 87.4
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 0.95,
+      "reason": "The edited part shows the vertical capsule rotated 90 degrees to lie horizontally along the depth axis (Y), which is consistent with a rotation about the X axis, transforming the top view from a circle (end view) to a vertical capsule (side view) and moving the hole from the top face to the front/le",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-00.png"
+     },
+     "fem": {
+      "status": "PASS",
+      "metrics": {
+       "nodes": 2288,
+       "tetrahedra": 9679,
+       "connected_components": 1,
+       "mesh_volume_mm3": 550168.5329038185,
+       "fixed_nodes": 40,
+       "loaded_facets": 67,
+       "loaded_area_mm2": 2555.007597589228,
+       "axis": [
+        0.0,
+        0.0,
+        1.0
+       ],
+       "projection_min_mm": -43.7,
+       "projection_max_mm": 43.7,
+       "compliance_N_mm": 1.1247183289714362e-07,
+       "load_weighted_displacement_mm": 1.1247183289714362e-07,
+       "max_displacement_mm": 1.2889816795261332e-07,
+       "strain_energy_N_mm": 5.6235916448571974e-08,
+       "vm_p95_MPa": 0.00032580358929813286,
+       "vm_peak_MPa": 0.0006482358076591941,
+       "relative_free_residual": 3.8578567864905983e-14,
+       "relative_force_balance_error": 2.034053812540253e-15,
+       "relative_moment_balance_error": 1.3141774100810547e-15,
+       "relative_energy_error": 2.9418231791758596e-15
+      },
+      "checks": [
+       {
+        "metric": "connected_components",
+        "value": 1,
+        "max": 1,
+        "ok": true
+       }
+      ]
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 1.005
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 1.005
+       }
+      ]
+     }
+    },
+    "objectives": [
+     0.95,
+     1.0,
+     -2.0
+    ],
+    "score": 2.048,
+    "diagnosis": [],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 3,
+   "visits": 4,
+   "final": {
+    "status": "PASS",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 554990.952129328,
+       "area": 43052.57913716475,
+       "solids": 1,
+       "faces": 4,
+       "bbox_x": 87.4,
+       "bbox_y": 126.44456140495993,
+       "bbox_z": 87.4
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 0.95,
+      "reason": "The edited part shows the vertical capsule rotated 90 degrees to lie horizontally along the depth axis (Y), which is consistent with a rotation about the X axis, transforming the top view from a circle (end view) to a vertical capsule (side view) and moving the hole from the top face to the front/le",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-00.png"
+     },
+     "fem": {
+      "status": "PASS",
+      "metrics": {
+       "nodes": 2271,
+       "tetrahedra": 9570,
+       "connected_components": 1,
+       "mesh_volume_mm3": 550139.6689152339,
+       "fixed_nodes": 40,
+       "loaded_facets": 67,
+       "loaded_area_mm2": 2554.9858984363223,
+       "axis": [
+        0.0,
+        0.0,
+        1.0
+       ],
+       "projection_min_mm": -43.7,
+       "projection_max_mm": 43.7,
+       "compliance_N_mm": 1.1243280760436153e-07,
+       "load_weighted_displacement_mm": 1.1243280760436153e-07,
+       "max_displacement_mm": 1.2891627826432763e-07,
+       "strain_energy_N_mm": 5.621640380218056e-08,
+       "vm_p95_MPa": 0.0003287935162927029,
+       "vm_peak_MPa": 0.0006467341007003153,
+       "relative_free_residual": 4.153712817646821e-14,
+       "relative_force_balance_error": 5.140870056009188e-15,
+       "relative_moment_balance_error": 2.680608932312957e-15,
+       "relative_energy_error": 3.649126910270148e-15
+      },
+      "checks": [
+       {
+        "metric": "connected_components",
+        "value": 1,
+        "max": 1,
+        "ok": true
+       }
+      ]
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 0.995
+       },
+       {
+        "mesh_scale": 1.25
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 0.995
+       },
+       {
+        "status": "PASS",
+        "metrics": {
+         "nodes": 1928,
+         "tetrahedra": 7992,
+         "connected_components": 1,
+         "mesh_volume_mm3": 548029.0584263555,
+         "fixed_nodes": 23,
+         "loaded_facets": 46,
+         "loaded_area_mm2": 2584.21692143703,
+         "axis": [
+          0.0,
+          0.0,
+          1.0
+         ],
+         "projection_min_mm": -43.60012556035228,
+         "projection_max_mm": 43.59866221148779,
+         "compliance_N_mm": 1.1843408444779997e-07,
+         "load_weighted_displacement_mm": 1.1843408444779997e-07,
+         "max_displacement_mm": 1.3428795057379912e-07,
+         "strain_energy_N_mm": 5.921704222390008e-08,
+         "vm_p95_MPa": 0.0003361303534602632,
+         "vm_peak_MPa": 0.0006539453677158976,
+         "relative_free_residual": 3.798730784982802e-14,
+         "relative_force_balance_error": 2.1657077753601788e-15,
+         "relative_moment_balance_error": 1.502360006145897e-15,
+         "relative_energy_error": 1.5644859170042761e-15
+        },
+        "checks": [
+         {
+          "metric": "connected_components",
+          "value": 1,
+          "max": 1,
+          "ok": true
+         }
+        ]
+       }
+      ]
+     }
+    },
+    "objectives": [
+     0.95,
+     1.0,
+     -2.0
+    ],
+    "score": 2.048,
+    "diagnosis": [],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "final"
+   },
+   "edges": [
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "id": 1,
+   "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate(cq.Vector(0, 0, 0), cq.Vector(1, 0, 0), 90)\"], \"start\": 16}]}",
+   "depth": 1,
+   "verdict": {
+    "status": "PASS",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 554990.952129328,
+       "area": 43052.57913716475,
+       "solids": 1,
+       "faces": 4,
+       "bbox_x": 87.4,
+       "bbox_y": 126.44456140495993,
+       "bbox_z": 87.4
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 0.95,
+      "reason": "The edited part shows the vertical capsule rotated 90 degrees to a horizontal orientation, consistent with the isometric and top view changes expected from such a rotation.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-01.png"
+     },
+     "fem": {
+      "status": "PASS",
+      "metrics": {
+       "nodes": 2271,
+       "tetrahedra": 9570,
+       "connected_components": 1,
+       "mesh_volume_mm3": 550139.6689152338,
+       "fixed_nodes": 40,
+       "loaded_facets": 67,
+       "loaded_area_mm2": 2554.9858984363223,
+       "axis": [
+        0.0,
+        0.0,
+        1.0
+       ],
+       "projection_min_mm": -43.7,
+       "projection_max_mm": 43.7,
+       "compliance_N_mm": 1.1243280760436161e-07,
+       "load_weighted_displacement_mm": 1.1243280760436161e-07,
+       "max_displacement_mm": 1.2891627826432769e-07,
+       "strain_energy_N_mm": 5.621640380218072e-08,
+       "vm_p95_MPa": 0.00032879351629270067,
+       "vm_peak_MPa": 0.0006467341007003072,
+       "relative_free_residual": 4.15930292526753e-14,
+       "relative_force_balance_error": 4.517008191664522e-15,
+       "relative_moment_balance_error": 1.241293613949398e-15,
+       "relative_energy_error": 1.5302790268874801e-15
+      },
+      "checks": [
+       {
+        "metric": "connected_components",
+        "value": 1,
+        "max": 1,
+        "ok": true
+       }
+      ]
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 1.005
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 1.005
+       }
+      ]
+     }
+    },
+    "objectives": [
+     0.95,
+     1.0,
+     -1.0
+    ],
+    "score": 2.049,
+    "diagnosis": [],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 1,
+   "visits": 2,
+   "final": {
+    "status": "PASS",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 554990.952129328,
+       "area": 43052.57913716475,
+       "solids": 1,
+       "faces": 4,
+       "bbox_x": 87.4,
+       "bbox_y": 126.44456140495993,
+       "bbox_z": 87.4
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 0.95,
+      "reason": "The edited part shows the vertical capsule rotated 90 degrees to a horizontal orientation, consistent with the isometric and top view changes expected from such a rotation.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-01.png"
+     },
+     "fem": {
+      "status": "PASS",
+      "metrics": {
+       "nodes": 2272,
+       "tetrahedra": 9577,
+       "connected_components": 1,
+       "mesh_volume_mm3": 550139.6689152338,
+       "fixed_nodes": 40,
+       "loaded_facets": 67,
+       "loaded_area_mm2": 2554.9858984363223,
+       "axis": [
+        0.0,
+        0.0,
+        1.0
+       ],
+       "projection_min_mm": -43.7,
+       "projection_max_mm": 43.7,
+       "compliance_N_mm": 1.1243216353173494e-07,
+       "load_weighted_displacement_mm": 1.1243216353173494e-07,
+       "max_displacement_mm": 1.2891585225315335e-07,
+       "strain_energy_N_mm": 5.6216081765867545e-08,
+       "vm_p95_MPa": 0.0003287958824239867,
+       "vm_peak_MPa": 0.0006467323623097861,
+       "relative_free_residual": 3.995356733249587e-14,
+       "relative_force_balance_error": 9.96782622945151e-16,
+       "relative_moment_balance_error": 1.1974020996523838e-15,
+       "relative_energy_error": 1.2948589019034629e-15
+      },
+      "checks": [
+       {
+        "metric": "connected_components",
+        "value": 1,
+        "max": 1,
+        "ok": true
+       }
+      ]
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 0.995
+       },
+       {
+        "mesh_scale": 1.25
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 0.995
+       },
+       {
+        "status": "PASS",
+        "metrics": {
+         "nodes": 1930,
+         "tetrahedra": 8017,
+         "connected_components": 1,
+         "mesh_volume_mm3": 548028.7659568292,
+         "fixed_nodes": 23,
+         "loaded_facets": 46,
+         "loaded_area_mm2": 2586.0269746303434,
+         "axis": [
+          0.0,
+          0.0,
+          1.0
+         ],
+         "projection_min_mm": -43.5991427421202,
+         "projection_max_mm": 43.59866221148779,
+         "compliance_N_mm": 1.1843420575938215e-07,
+         "load_weighted_displacement_mm": 1.1843420575938215e-07,
+         "max_displacement_mm": 1.3528580076343093e-07,
+         "strain_energy_N_mm": 5.9217102879691295e-08,
+         "vm_p95_MPa": 0.00034061009561667314,
+         "vm_peak_MPa": 0.0006388865588303048,
+         "relative_free_residual": 3.71333040506423e-14,
+         "relative_force_balance_error": 1.2153116146629826e-15,
+         "relative_moment_balance_error": 1.857694006978411e-15,
+         "relative_energy_error": 3.687713027056797e-15
+        },
+        "checks": [
+         {
+          "metric": "connected_components",
+          "value": 1,
+          "max": 1,
+          "ok": true
+         }
+        ]
+       }
+      ]
+     }
+    },
+    "objectives": [
+     0.95,
+     1.0,
+     -1.0
+    ],
+    "score": 2.049,
+    "diagnosis": [],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "final"
+   },
+   "edges": [
+    3
+   ]
+  },
+  {
+   "id": 2,
+   "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate(cq.Vector(0, 0, 0), cq.Vector(1, 0, 0), 90)\\n\"], \"start\": 16}]}",
+   "depth": 1,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "FAIL",
+      "reason": "ValueError: Invalid inserted line"
+     },
+     "constraints": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -1000.0
+    ],
+    "score": -1.0,
+    "diagnosis": [
+     {
+      "stage": "geometry",
+      "status": "FAIL",
+      "reason": "ValueError: Invalid inserted line"
+     },
+     {
+      "stage": "constraints",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 0,
+   "visits": 1,
+   "final": null,
+   "edges": []
+  },
+  {
+   "id": 3,
+   "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate(cq.Vector(0, 0, 0), (1, 0, 0), 90)\"], \"start\": 16}]}",
+   "depth": 1,
+   "verdict": {
+    "status": "PASS",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 554990.952129328,
+       "area": 43052.57913716475,
+       "solids": 1,
+       "faces": 4,
+       "bbox_x": 87.4,
+       "bbox_y": 126.44456140495993,
+       "bbox_z": 87.4
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 0.95,
+      "reason": "The edited part shows the capsule-shaped object rotated from a vertical orientation to a horizontal one, consistent with a 90-degree rotation about the X-axis, and the top view correctly changes from a circular cross-section to a longitudinal view.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-02.png"
+     },
+     "fem": {
+      "status": "PASS",
+      "metrics": {
+       "nodes": 2292,
+       "tetrahedra": 9686,
+       "connected_components": 1,
+       "mesh_volume_mm3": 550166.8139494734,
+       "fixed_nodes": 40,
+       "loaded_facets": 67,
+       "loaded_area_mm2": 2555.007597589228,
+       "axis": [
+        0.0,
+        0.0,
+        1.0
+       ],
+       "projection_min_mm": -43.7,
+       "projection_max_mm": 43.7,
+       "compliance_N_mm": 1.1260096920450645e-07,
+       "load_weighted_displacement_mm": 1.1260096920450645e-07,
+       "max_displacement_mm": 1.2888941456329274e-07,
+       "strain_energy_N_mm": 5.6300484602253214e-08,
+       "vm_p95_MPa": 0.00032940250499017816,
+       "vm_peak_MPa": 0.0006671879356936606,
+       "relative_free_residual": 3.818033896379796e-14,
+       "relative_force_balance_error": 2.4057860174139316e-15,
+       "relative_moment_balance_error": 2.859620397168791e-15,
+       "relative_energy_error": 2.350759481796497e-16
+      },
+      "checks": [
+       {
+        "metric": "connected_components",
+        "value": 1,
+        "max": 1,
+        "ok": true
+       }
+      ]
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 1.005
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 1.005
+       }
+      ]
+     }
+    },
+    "objectives": [
+     0.95,
+     1.0,
+     -1.0
+    ],
+    "score": 2.049,
+    "diagnosis": [],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 0,
+   "visits": 1,
+   "final": {
+    "status": "PASS",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 554990.952129328,
+       "area": 43052.57913716475,
+       "solids": 1,
+       "faces": 4,
+       "bbox_x": 87.4,
+       "bbox_y": 126.44456140495993,
+       "bbox_z": 87.4
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 0.95,
+      "reason": "The edited part shows the capsule-shaped object rotated from a vertical orientation to a horizontal one, consistent with a 90-degree rotation about the X-axis, and the top view correctly changes from a circular cross-section to a longitudinal view.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-02.png"
+     },
+     "fem": {
+      "status": "PASS",
+      "metrics": {
+       "nodes": 2271,
+       "tetrahedra": 9570,
+       "connected_components": 1,
+       "mesh_volume_mm3": 550139.6689152338,
+       "fixed_nodes": 40,
+       "loaded_facets": 67,
+       "loaded_area_mm2": 2554.9858984363223,
+       "axis": [
+        0.0,
+        0.0,
+        1.0
+       ],
+       "projection_min_mm": -43.7,
+       "projection_max_mm": 43.7,
+       "compliance_N_mm": 1.1243280760436126e-07,
+       "load_weighted_displacement_mm": 1.1243280760436126e-07,
+       "max_displacement_mm": 1.2891627826432726e-07,
+       "strain_energy_N_mm": 5.6216403802180446e-08,
+       "vm_p95_MPa": 0.00032879351629269747,
+       "vm_peak_MPa": 0.0006467341007003096,
+       "relative_free_residual": 4.063240044089966e-14,
+       "relative_force_balance_error": 7.242165487896918e-15,
+       "relative_moment_balance_error": 8.6151659339263375e-16,
+       "relative_energy_error": 3.295985596373044e-15
+      },
+      "checks": [
+       {
+        "metric": "connected_components",
+        "value": 1,
+        "max": 1,
+        "ok": true
+       }
+      ]
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 0.995
+       },
+       {
+        "mesh_scale": 1.25
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 0.995
+       },
+       {
+        "status": "PASS",
+        "metrics": {
+         "nodes": 1929,
+         "tetrahedra": 8013,
+         "connected_components": 1,
+         "mesh_volume_mm3": 548028.7659568292,
+         "fixed_nodes": 23,
+         "loaded_facets": 46,
+         "loaded_area_mm2": 2586.0269746303434,
+         "axis": [
+          0.0,
+          0.0,
+          1.0
+         ],
+         "projection_min_mm": -43.5991427421202,
+         "projection_max_mm": 43.59866221148779,
+         "compliance_N_mm": 1.1843485397639471e-07,
+         "load_weighted_displacement_mm": 1.1843485397639471e-07,
+         "max_displacement_mm": 1.3528708802728403e-07,
+         "strain_energy_N_mm": 5.92174269881972e-08,
+         "vm_p95_MPa": 0.00034062196365183394,
+         "vm_peak_MPa": 0.0006388986830350504,
+         "relative_free_residual": 3.6894891584330285e-14,
+         "relative_force_balance_error": 2.437940235572004e-15,
+         "relative_moment_balance_error": 1.069610314686959e-15,
+         "relative_energy_error": 2.6819584316258035e-15
+        },
+        "checks": [
+         {
+          "metric": "connected_components",
+          "value": 1,
+          "max": 1,
+          "ok": true
+         }
+        ]
+       }
+      ]
+     }
+    },
+    "objectives": [
+     0.95,
+     1.0,
+     -1.0
+    ],
+    "score": 2.049,
+    "diagnosis": [],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "final"
+   },
+   "edges": []
+  },
+  {
+   "id": 4,
+   "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate(cq.Vector(0, 0, 0), cq.Vector(1, 0, 0), 90)\"], \"start\": 16}]}",
+   "depth": 2,
+   "verdict": {
+    "status": "PASS",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 554990.952129328,
+       "area": 43052.57913716475,
+       "solids": 1,
+       "faces": 4,
+       "bbox_x": 87.4,
+       "bbox_y": 126.44456140495993,
+       "bbox_z": 87.4
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 0.95,
+      "reason": "The edited part shows the vertical capsule rotated 90 degrees to a horizontal orientation, consistent with the isometric and top view changes expected from such a rotation.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-01.png"
+     },
+     "fem": {
+      "status": "PASS",
+      "metrics": {
+       "nodes": 2271,
+       "tetrahedra": 9570,
+       "connected_components": 1,
+       "mesh_volume_mm3": 550139.6689152338,
+       "fixed_nodes": 40,
+       "loaded_facets": 67,
+       "loaded_area_mm2": 2554.9858984363223,
+       "axis": [
+        0.0,
+        0.0,
+        1.0
+       ],
+       "projection_min_mm": -43.7,
+       "projection_max_mm": 43.7,
+       "compliance_N_mm": 1.1243280760436161e-07,
+       "load_weighted_displacement_mm": 1.1243280760436161e-07,
+       "max_displacement_mm": 1.2891627826432769e-07,
+       "strain_energy_N_mm": 5.621640380218072e-08,
+       "vm_p95_MPa": 0.00032879351629270067,
+       "vm_peak_MPa": 0.0006467341007003072,
+       "relative_free_residual": 4.15930292526753e-14,
+       "relative_force_balance_error": 4.517008191664522e-15,
+       "relative_moment_balance_error": 1.241293613949398e-15,
+       "relative_energy_error": 1.5302790268874801e-15
+      },
+      "checks": [
+       {
+        "metric": "connected_components",
+        "value": 1,
+        "max": 1,
+        "ok": true
+       }
+      ]
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 1.005
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 1.005
+       }
+      ]
+     }
+    },
+    "objectives": [
+     0.95,
+     1.0,
+     -1.0
+    ],
+    "score": 2.049,
+    "diagnosis": [],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 0,
+   "visits": 1,
+   "final": {
+    "status": "PASS",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 554990.952129328,
+       "area": 43052.57913716475,
+       "solids": 1,
+       "faces": 4,
+       "bbox_x": 87.4,
+       "bbox_y": 126.44456140495993,
+       "bbox_z": 87.4
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 0.95,
+      "reason": "The edited part shows the vertical capsule rotated 90 degrees to a horizontal orientation, consistent with the isometric and top view changes expected from such a rotation.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-01.png"
+     },
+     "fem": {
+      "status": "PASS",
+      "metrics": {
+       "nodes": 2271,
+       "tetrahedra": 9571,
+       "connected_components": 1,
+       "mesh_volume_mm3": 550139.6689152338,
+       "fixed_nodes": 40,
+       "loaded_facets": 67,
+       "loaded_area_mm2": 2554.9858984363223,
+       "axis": [
+        0.0,
+        0.0,
+        1.0
+       ],
+       "projection_min_mm": -43.7,
+       "projection_max_mm": 43.7,
+       "compliance_N_mm": 1.1243273574159884e-07,
+       "load_weighted_displacement_mm": 1.1243273574159884e-07,
+       "max_displacement_mm": 1.289161993420703e-07,
+       "strain_energy_N_mm": 5.621636787079931e-08,
+       "vm_p95_MPa": 0.0003287934899505813,
+       "vm_peak_MPa": 0.0006467339099013662,
+       "relative_free_residual": 3.9862020701834385e-14,
+       "relative_force_balance_error": 7.753504892764702e-15,
+       "relative_moment_balance_error": 2.5228864364890644e-16,
+       "relative_energy_error": 2.0011353911330524e-15
+      },
+      "checks": [
+       {
+        "metric": "connected_components",
+        "value": 1,
+        "max": 1,
+        "ok": true
+       }
+      ]
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 0.995
+       },
+       {
+        "mesh_scale": 1.25
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 0.995
+       },
+       {
+        "status": "PASS",
+        "metrics": {
+         "nodes": 1929,
+         "tetrahedra": 8014,
+         "connected_components": 1,
+         "mesh_volume_mm3": 548028.7659568292,
+         "fixed_nodes": 23,
+         "loaded_facets": 46,
+         "loaded_area_mm2": 2586.0269746303434,
+         "axis": [
+          0.0,
+          0.0,
+          1.0
+         ],
+         "projection_min_mm": -43.5991427421202,
+         "projection_max_mm": 43.59866221148779,
+         "compliance_N_mm": 1.1843479533381419e-07,
+         "load_weighted_displacement_mm": 1.1843479533381419e-07,
+         "max_displacement_mm": 1.3528710730994966e-07,
+         "strain_energy_N_mm": 5.921739766690693e-08,
+         "vm_p95_MPa": 0.0003406238466924554,
+         "vm_peak_MPa": 0.0006388956050104825,
+         "relative_free_residual": 3.8379011402947195e-14,
+         "relative_force_balance_error": 1.016510257995786e-14,
+         "relative_moment_balance_error": 2.606141587461047e-15,
+         "relative_energy_error": 2.793708082904451e-15
+        },
+        "checks": [
+         {
+          "metric": "connected_components",
+          "value": 1,
+          "max": 1,
+          "ok": true
+         }
+        ]
+       }
+      ]
+     }
+    },
+    "objectives": [
+     0.95,
+     1.0,
+     -1.0
+    ],
+    "score": 2.049,
+    "diagnosis": [],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "final"
+   },
+   "edges": []
+  }
+ ],
+ "edges": [
+  {
+   "parent": 0,
+   "child": 1,
+   "visits": 2,
+   "total": 4.098
+  },
+  {
+   "parent": 0,
+   "child": 2,
+   "visits": 1,
+   "total": -1.0
+  },
+  {
+   "parent": 0,
+   "child": 3,
+   "visits": 1,
+   "total": 2.049
+  },
+  {
+   "parent": 1,
+   "child": 4,
+   "visits": 1,
+   "total": 2.049
+  }
+ ],
+ "events": [
+  {
+   "event": "decompose",
+   "plan": {
+    "steps": [
+     "Insert result = result.rotate((0, 0, 0), (1, 0, 0), 90) before show_object(result)",
+     "Apply 90 degree rotation transformation about X axis to final result"
+    ],
+    "invariants": [
+     "Cylinder dimensions (41.6, 43.7) remain unchanged",
+     "Sphere radius (43.7) remains unchanged",
+     "Sphere position offsets (20.8, -20.8) remain unchanged",
+     "Cut cylinder dimensions (387.0, 10.49) remain unchanged",
+     "Union operation order remains unchanged",
+     "Coordinate system origin (0, 0, 0) remains unchanged",
+     "Workplane XY definitions remain unchanged"
+    ],
+    "dependencies": [
+     [
+      0,
+      1
+     ]
+    ]
+   },
+   "memory_version": "132d9d374c6a2e7f9d410753f930eb920aeb7fb96728561ecfc77577d6337b9d",
+   "retrieved": [
+    {
+     "task_id": "23f67e4f98c458f94cef856db8007bcebd533a6143a9929565fed2a26d7ce0dd",
+     "instruction": "Rotate the entire part by 90 degrees about the X axis.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\"], \"start\": 11}]}",
+     "strategies": [],
+     "context": [
+      "11: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "ab6b79a16fa48fbb56319a4ac5870f5073a5c456dd0d19dbd550948b0b73f341",
+     "instruction": "Rotate the entire part by 90 degrees about the X axis.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\"], \"start\": 7}]}",
+     "strategies": [],
+     "context": [
+      "7: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "b9b1d7365ad9cbdd8c1d9f3cedbfbc263cbdd075dcbe0dc6fe90fff83e53de9e",
+     "instruction": "Rotate the entire part by 90 degrees about the X axis.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\"], \"start\": 12}]}",
+     "strategies": [],
+     "context": [
+      "12: show_object(result)"
+     ]
+    }
+   ]
+  },
+  {
+   "event": "initial_state",
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 554990.952129328,
+       "area": 43052.579137164765,
+       "solids": 1,
+       "faces": 4,
+       "bbox_x": 87.4,
+       "bbox_y": 87.4,
+       "bbox_z": 126.44456140495993
+      }
+     },
+     "constraints": {
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         90.0
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -0.0
+    ],
+    "score": 0.0,
+    "diagnosis": [
+     {
+      "stage": "constraints",
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         90.0
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "initial"
+   }
+  },
+  {
+   "event": "final_verification",
+   "node": 0,
+   "status": "PASS"
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": false,
+   "strategy": "diversify",
+   "diagnosis": [],
+   "retrieved_repairs": [
+    {
+     "task_id": "23f67e4f98c458f94cef856db8007bcebd533a6143a9929565fed2a26d7ce0dd",
+     "instruction": "Rotate the entire part by 90 degrees about the X axis.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\"], \"start\": 11}]}",
+     "strategies": [],
+     "context": [
+      "11: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "ab6b79a16fa48fbb56319a4ac5870f5073a5c456dd0d19dbd550948b0b73f341",
+     "instruction": "Rotate the entire part by 90 degrees about the X axis.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\"], \"start\": 7}]}",
+     "strategies": [],
+     "context": [
+      "7: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "b9b1d7365ad9cbdd8c1d9f3cedbfbc263cbdd075dcbe0dc6fe90fff83e53de9e",
+     "instruction": "Rotate the entire part by 90 degrees about the X axis.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\"], \"start\": 12}]}",
+     "strategies": [],
+     "context": [
+      "12: show_object(result)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "PASS",
+   "hypothesis": "Add a rotation operation of 90 degrees about the X axis to the final result before displaying"
+  },
+  {
+   "event": "final_verification",
+   "node": 1,
+   "status": "PASS"
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 2,
+   "merged": false,
+   "strategy": "diversify",
+   "diagnosis": [],
+   "retrieved_repairs": [
+    {
+     "task_id": "23f67e4f98c458f94cef856db8007bcebd533a6143a9929565fed2a26d7ce0dd",
+     "instruction": "Rotate the entire part by 90 degrees about the X axis.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\"], \"start\": 11}]}",
+     "strategies": [],
+     "context": [
+      "11: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "ab6b79a16fa48fbb56319a4ac5870f5073a5c456dd0d19dbd550948b0b73f341",
+     "instruction": "Rotate the entire part by 90 degrees about the X axis.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\"], \"start\": 7}]}",
+     "strategies": [],
+     "context": [
+      "7: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "b9b1d7365ad9cbdd8c1d9f3cedbfbc263cbdd075dcbe0dc6fe90fff83e53de9e",
+     "instruction": "Rotate the entire part by 90 degrees about the X axis.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\"], \"start\": 12}]}",
+     "strategies": [],
+     "context": [
+      "12: show_object(result)"
+     ]
+    }
+   ],
+   "path": [
+    1
+   ],
+   "status": "FAIL",
+   "hypothesis": "Apply 90-degree rotation about X axis to final result before display"
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 3,
+   "merged": false,
+   "strategy": "diversify",
+   "diagnosis": [],
+   "retrieved_repairs": [
+    {
+     "task_id": "23f67e4f98c458f94cef856db8007bcebd533a6143a9929565fed2a26d7ce0dd",
+     "instruction": "Rotate the entire part by 90 degrees about the X axis.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\"], \"start\": 11}]}",
+     "strategies": [],
+     "context": [
+      "11: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "ab6b79a16fa48fbb56319a4ac5870f5073a5c456dd0d19dbd550948b0b73f341",
+     "instruction": "Rotate the entire part by 90 degrees about the X axis.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\"], \"start\": 7}]}",
+     "strategies": [],
+     "context": [
+      "7: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "b9b1d7365ad9cbdd8c1d9f3cedbfbc263cbdd075dcbe0dc6fe90fff83e53de9e",
+     "instruction": "Rotate the entire part by 90 degrees about the X axis.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\"], \"start\": 12}]}",
+     "strategies": [],
+     "context": [
+      "12: show_object(result)"
+     ]
+    }
+   ],
+   "path": [
+    2
+   ],
+   "status": "PASS",
+   "hypothesis": "Rotate the entire part by 90 degrees about the X axis using tuple for rotation axis"
+  },
+  {
+   "event": "final_verification",
+   "node": 3,
+   "status": "PASS"
+  },
+  {
+   "event": "backtrack",
+   "to_node": 1
+  },
+  {
+   "event": "expand",
+   "parent": 1,
+   "node": 4,
+   "merged": false,
+   "strategy": "diversify",
+   "diagnosis": [],
+   "retrieved_repairs": [
+    {
+     "task_id": "23f67e4f98c458f94cef856db8007bcebd533a6143a9929565fed2a26d7ce0dd",
+     "instruction": "Rotate the entire part by 90 degrees about the X axis.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\"], \"start\": 11}]}",
+     "strategies": [],
+     "context": [
+      "11: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "ab6b79a16fa48fbb56319a4ac5870f5073a5c456dd0d19dbd550948b0b73f341",
+     "instruction": "Rotate the entire part by 90 degrees about the X axis.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\"], \"start\": 7}]}",
+     "strategies": [],
+     "context": [
+      "7: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "b9b1d7365ad9cbdd8c1d9f3cedbfbc263cbdd075dcbe0dc6fe90fff83e53de9e",
+     "instruction": "Rotate the entire part by 90 degrees about the X axis.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\"], \"start\": 12}]}",
+     "strategies": [],
+     "context": [
+      "12: show_object(result)"
+     ]
+    }
+   ],
+   "path": [
+    0,
+    3
+   ],
+   "status": "PASS",
+   "hypothesis": "Add 90 degree rotation about X axis to final result before visualization"
+  },
+  {
+   "event": "final_verification",
+   "node": 4,
+   "status": "PASS"
+  }
+ ],
+ "config": {
+  "algorithm": "mcts",
+  "max_expansions": 4,
+  "max_depth": 3,
+  "width": 2,
+  "max_width": 4,
+  "exploration": 0.7,
+  "seconds": 2400.0
+ },
+ "memory_version": "132d9d374c6a2e7f9d410753f930eb920aeb7fb96728561ecfc77577d6337b9d",
+ "stored": "runs/adaptive-cad-open-20261007/memory.jsonl",
+ "seconds": 236.74059404199988,
+ "api": {
+  "mode": "live_astra",
+  "api_calls": 8,
+  "cost_usd": 0.0,
+  "budget_usd": 0.19230769230769232,
+  "refused": 0
+ },
+ "tool_jobs": 16
+}

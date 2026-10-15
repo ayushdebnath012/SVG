@@ -1,0 +1,38 @@
+{
+ "source_fem": {
+  "ok": false,
+  "error": "ValueError: Unanchored disconnected component"
+ },
+ "nodes": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .transformed(offset=cq.Vector(0, 0, 10))\n    .cylinder(20.0, 3.0)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 20))\n            .sphere(3.2)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 3.796630078583037e-06,
+    "components": 1,
+    "nodes": 578
+   },
+   "numbers_ok": null,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "rag",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .transformed(offset=cq.Vector(0, 0, 10))\n    .cylinder(20.0, 3.0)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 20))\n            .sphere(3.2)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 3.7971485014795707e-06,
+    "components": 1,
+    "nodes": 577
+   },
+   "numbers_ok": null,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  }
+ ]
+}

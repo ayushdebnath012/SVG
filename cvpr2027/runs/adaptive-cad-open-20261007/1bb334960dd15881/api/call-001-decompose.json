@@ -1,0 +1,34 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "Qwen/Qwen3.5-35B-A3B-FP8",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .polyline([(100.0, 0.0), (100.0, 240.9), (58.7, 348.4902), (58.7, 465.8902), (100.0, 802.2517), (100.0, 970.3517), (123.2, 970.3517), (123.2, 802.2517), (81.9, 465.8902), (81.9, 348.4902), (123.2, 240.9), (123.2, 0.0)])\\n    .close()\\n    .revolve(360, (0, 0, 0), (0, 1, 0))\\n)\\nshow_object(result)\", \"instruction\": \"Reduce the throat radius from 58.7 mm to 40.0 mm, decreasing the throat diameter from 117.4 mm to 80.0 mm.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"dd4ba1a9321fc8a630f89ff8963470167be5a2cb87342399e5e0393458f5ca8f\", \"instruction\": \"Increase the coil wire radius from 0.80 mm to 1.04 mm.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .circle(1.04)\\\"], \\\"start\\\": 4}]}\", \"strategies\": [], \"context\": [\"4:     .circle(0.8)\"]}, {\"task_id\": \"0670832a0d8cbd9285774a3e3505de8ac48b090f99aec694a64036827a7655bb\", \"instruction\": \"Reduce the twisted rod radius by 3%, from 1.485 mm to 1.440 mm.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"            .circle(1.485 * 0.97)\\\"], \\\"start\\\": 5}, {\\\"delete\\\": 1, \\\"insert\\\": [\\\"            .circle(1.485 * 0.97)\\\"], \\\"start\\\": 15}, {\\\"delete\\\": 1, \\\"insert\\\": [\\\"            .circle(1.485 * 0.97)\\\"], \\\"start\\\": 20}, {\\\"delete\\\": 1, \\\"insert\\\": [\\\"            .circle(1.485 * 0.97)\\\"], \\\"start\\\": 25}]}\", \"strategies\": [], \"context\": [\"5:             .circle(1.485)\", \"15:             .circle(1.485)\", \"20:             .circle(1.485)\", \"25:             .circle(1.485)\"]}, {\"task_id\": \"337fd19e3616e5bf2759d0b96b419c768943dad812b6e952665e74c478917875\", \"instruction\": \"Increase the cylinder radius from 4.5 to 5.85.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"            .cylinder(50.0, 5.85)\\\"], \\\"start\\\": 7}]}\", \"strategies\": [], \"context\": [\"7:             .cylinder(50.0, 4.5)\"]}]}"
+   }
+  ],
+  "temperature": 0.6,
+  "top_p": 0.95,
+  "top_k": 20,
+  "max_tokens": 8192
+ },
+ "usage": {
+  "prompt_tokens": 989,
+  "total_tokens": 6968,
+  "completion_tokens": 5979,
+  "prompt_tokens_details": null,
+  "completion_tokens_details": {
+   "reasoning_tokens": 5783
+  }
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "\n\n{\n  \"steps\": [\n    \"Locate the polyline definition in the script containing the throat coordinates.\",\n    \"Modify the x-coordinate of the first throat vertex from 58.7 to 40.0.\",\n    \"Modify the x-coordinate of the second throat vertex from 58.7 to 40.0.\"\n  ],\n  \"invariants\": [\n    \"Y-coordinates of the throat vertices (348.4902, 465.8902) must remain unchanged.\",\n    \"Revolution axis (0, 1, 0) must remain unchanged.\",\n    \"Revolution angle (360) must remain unchanged.\",\n    \"All other polyline vertex coordinates must remain unchanged.\"\n  ],\n  \"dependencies\": [\n    [1, 0],\n    [2, 0]\n  ]\n}"
+}

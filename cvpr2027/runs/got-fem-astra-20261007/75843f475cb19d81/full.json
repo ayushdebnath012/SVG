@@ -1,0 +1,40 @@
+{
+ "source_fem": {
+  "ok": true,
+  "compliance": 2.0376743767851582e-06,
+  "components": 1,
+  "nodes": 14410
+ },
+ "nodes": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(33.0, 33.0, 83.0)\n    .faces(\">Z\").workplane()\n    .center(1.5, 1.5)\n    .pushPoints([(-12.0, -15.0), (0.0, -15.0), (12.0, -15.0)])\n    .hole(2.0)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-15.0, -12.0), (-15.0, 0.0), (-15.0, 12.0)])\n    .hole(2.0)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 3.606481297385423e-07,
+    "components": 1,
+    "nodes": 11081
+   },
+   "numbers_ok": null,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "rag",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(33.0, 33.0, 83.0)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-12.0, -15.0), (0.0, -15.0), (12.0, -15.0)])\n    .hole(2.0)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-15.0, -12.0), (-15.0, 0.0), (-15.0, 12.0)])\n    .hole(2.0)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 3.6413517239444227e-07,
+    "components": 1,
+    "nodes": 10031
+   },
+   "numbers_ok": null,
+   "changed": true,
+   "cluster": 1,
+   "robustness": 1.0
+  }
+ ]
+}

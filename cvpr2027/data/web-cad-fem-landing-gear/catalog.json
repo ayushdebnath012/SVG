@@ -1,0 +1,86 @@
+{
+  "source": "https://github.com/aryan-pandharipande/aircraft-nose-landing-gear-design",
+  "revision": "12f44cb9e721a665b34b62239590404a3a504636",
+  "license": "MIT",
+  "date": "2026-10-12",
+  "solver_runs": 0,
+  "model_calls": 0,
+  "locally_generated_cad": 0,
+  "certified_cases": 0,
+  "collection": "Twin-wheel nose landing gear: native assembly, drawing and FEM report",
+  "engineering_families": 1,
+  "native_cad_plot_scalar_candidates": 1,
+  "raw_saved_field_files": 0,
+  "cad": "CAD/Assembly/Assembly.STEP",
+  "native_assembly": "CAD/Assembly/Assembly.SLDASM",
+  "cad_audit": {
+    "valid": true,
+    "solids": 15,
+    "faces": 500,
+    "bbox_mm": [
+      513.3333333333333,
+      346.9543809608616,
+      842.2070794005508
+    ],
+    "volume_mm3": 12534617.171138631
+  },
+  "native_part_files": [
+    "CAD/Parts/Lower Link.SLDPRT",
+    "CAD/Parts/Piston.SLDPRT",
+    "CAD/Parts/Shaft.SLDPRT",
+    "CAD/Parts/Strut.SLDPRT",
+    "CAD/Parts/Upper Link.SLDPRT",
+    "CAD/Parts/Wheel Hub.SLDPRT",
+    "CAD/Parts/Wheel.SLDPRT"
+  ],
+  "source_drawing": [
+    "Assembly Drawing/Assembly.DXF",
+    "Assembly Drawing/Assembly.SLDDRW",
+    "Assembly Drawing/Assembly.JPG"
+  ],
+  "dxf_dimension_entities": 0,
+  "original_dimensioned_drawing_verified": false,
+  "source_report": "Report/Landing_Gear_FEA_Report.pdf",
+  "targets": [
+    {
+      "quantity": "minimum_static_safety_factor",
+      "value": 0.66716,
+      "unit": "dimensionless",
+      "provenance": "Original report physical page4 Figure11 image legend; report rounds to0.667"
+    },
+    {
+      "quantity": "average_static_safety_factor",
+      "value": 13.63,
+      "unit": "dimensionless",
+      "provenance": "Original report physical page5 TableII"
+    }
+  ],
+  "capped_plot_maximum_safety_factor": 15,
+  "capped_value_is_exact_strength_target": false,
+  "simultaneous_loads_N": [
+    [
+      0,
+      0,
+      7062
+    ],
+    [
+      0,
+      -2119,
+      0
+    ],
+    [
+      0,
+      0,
+      15696
+    ]
+  ],
+  "fixed_support": "Single trunnion face at top of strut, source report page4 Figure7",
+  "limitations": [
+    "Only standalone .wbpj pointer is published; dependent Workbench model/results tree is absent. Do not label it a solved result archive.",
+    "FEM reference is a report scalar and contour; no nodal fields or stress/displacement magnitudes verified.",
+    "Native source drawing includes orthographic/isometric assembly views, but inspected DXF has zero DIMENSION entities and raster has no visible dimension callouts.",
+    "Source baseline has minimum safety factor below one; source acknowledges mesh/material/dynamic validation limitations.",
+    "Report states structural steel defaults and a Nickel wheel-hub assignment. Source materials, contacts and exact load scoping require replay review.",
+    "Buckling/fatigue mentioned in repository overview are not counted as verified numerical result cases."
+  ]
+}

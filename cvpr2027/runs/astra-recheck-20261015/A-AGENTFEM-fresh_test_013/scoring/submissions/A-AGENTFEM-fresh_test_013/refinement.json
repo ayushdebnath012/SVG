@@ -1,0 +1,43 @@
+{
+  "runs": [
+    {
+      "label": "nominal",
+      "nominal_mesh_size_mm": 9.0,
+      "nodes": 14021,
+      "quadratic_tetrahedra": 7695,
+      "seat_area_mm2": 5031.9999999999945,
+      "applied_force_z_N": -9999.992959999992,
+      "outputs": {
+        "seat_mean_displacement_mm": 0.07909005677753465,
+        "max_displacement_mm": 0.08325644159919784
+      },
+      "status": "completed"
+    },
+    {
+      "label": "refined",
+      "nominal_mesh_size_mm": 6.5,
+      "nodes": 24936,
+      "quadratic_tetrahedra": 14129,
+      "seat_area_mm2": 5031.9999999999945,
+      "applied_force_z_N": -9999.992959999989,
+      "outputs": {
+        "seat_mean_displacement_mm": 0.07689090308721067,
+        "max_displacement_mm": 0.08075795177556362
+      },
+      "status": "completed"
+    }
+  ],
+  "selected_run": "refined",
+  "relative_changes": {
+    "seat_mean_displacement_mm": 0.028600960608170762,
+    "max_displacement_mm": 0.030938003858466304
+  },
+  "two_mesh_2_percent_check_passed": false,
+  "notes": [
+    "No extrapolation or reference-answer calibration.",
+    "Seat mean uses consistent quadratic surface integration.",
+    "Quadratic tetrahedra use edge-midpoint nodes without CAD projection to prevent curved-element inversion; curved boundaries are approximated by the refined straight-sided mesh.",
+    "Maximum displacement is the maximum magnitude over all quadratic mesh nodes.",
+    "A two-mesh comparison is an empirical check, not a proof of convergence."
+  ]
+}

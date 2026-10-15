@@ -1,0 +1,88 @@
+{
+  "task_id": "A-FCVM-Plate_girder_EC3",
+  "report": "/Users/ayushdebnath/SVG/cvpr2027/runs/astra-hardest-20261015/A-FCVM-Plate_girder_EC3/README.md",
+  "generation": {
+    "status": "completed",
+    "model": "gpt-6-astra",
+    "usage": {
+      "prompt_tokens": 12577,
+      "completion_tokens": 1454,
+      "total_tokens": 14031,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 12574,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 313,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "cost_usd_conservative": 0.3870875,
+    "finish_reason": "stop",
+    "patch_applied": true,
+    "repaired_sha256": "82c7595d7b9e83aae659bffcf58ac04e868a5c39ebb4f37fea545b2a34bceaf5",
+    "elapsed_seconds": 30.4
+  },
+  "status": "recovered_numerical_pass_with_solver_feedback",
+  "protocol": "medium-reasoning model-authored repair with solver-diagnostic feedback, 9000-token cap",
+  "execution": {
+    "exit_code": 0,
+    "elapsed_seconds": 420.06930004100104,
+    "termination_reason": null,
+    "execution_verified": true,
+    "frozen_inputs_unchanged": true
+  },
+  "score_path": "/Users/ayushdebnath/SVG/cvpr2027/runs/astra-hardest-20261015/A-FCVM-Plate_girder_EC3/scoring/score.json",
+  "results": {
+    "outputs": {
+      "lambda1": 0.4063116
+    }
+  },
+  "score": {
+    "task_id": "A-FCVM-Plate_girder_EC3",
+    "track": "A",
+    "tier": "source_backed_pilot",
+    "family": "fcvm-buckling",
+    "engineering_family": "fcvm-buckling",
+    "independently_reproduced": true,
+    "passed": false,
+    "numerical_passed": true,
+    "numerical_score": 1.0,
+    "workflow_verified": false,
+    "checks": {
+      "lambda1": {
+        "ok": true,
+        "error": 0.01359131849190358
+      }
+    },
+    "submitted_solids": 104,
+    "errors": [
+      "trusted workflow review missing"
+    ]
+  },
+  "adjudication_note": "Model-authored repair after explicit solver-diagnostic feedback, hidden target. Clean replay gives lambda1=0.4063116 versus published 0.41191 (-1.359%). Finer 90 mm mesh timed out; only the completed 140 mm mesh is reported and convergence remains unverified. Original-load static fields retained. Numerical result only; trusted workflow review pending. Not a fresh unassisted attempt.",
+  "published_reference": 0.41191,
+  "relative_error_percent": -1.3591318491903537,
+  "refinement_levels": [
+    {
+      "h_mm": 140.0,
+      "nodes": 141213,
+      "elements": 25376,
+      "lambda1": 0.4063116,
+      "conditioning_scale": 0.001,
+      "status": "buckling_complete"
+    },
+    {
+      "h_mm": 90.0,
+      "nodes": 254061,
+      "elements": 45712,
+      "lambda1": null,
+      "conditioning_scale": null,
+      "status": "failed"
+    }
+  ],
+  "assistance": "Known solver mode-skipping issue and evaluator diagnosis disclosed; source reference values hidden."
+}

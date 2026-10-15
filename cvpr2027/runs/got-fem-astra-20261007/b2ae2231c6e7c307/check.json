@@ -1,0 +1,71 @@
+{
+ "id": "b2ae2231c6e7c307f74f9a95c27e308b6cc18f0968c58731d15c3b5602da9729",
+ "source_fem": {
+  "ok": true,
+  "compliance": 3.4333737673834053e-07,
+  "components": 1,
+  "nodes": 560
+ },
+ "candidates": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .transformed(offset=cq.Vector(35.0, 0, -1.5), rotate=cq.Vector(0, 0, 0))\n    .rect(70.0, 20.8)\n    .extrude(3.0)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(70.0, 0, 0), rotate=cq.Vector(0, 90, 0))\n            .rect(3.0, 16.0)\n            .transformed(offset=cq.Vector(0, 0, 10.2), rotate=cq.Vector(0, 0, 90))\n            .rect(3.0, 16.0)\n            .loft(combine=True)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(115.2, -1.5, 0), rotate=cq.Vector(-90, 0, 0))\n            .rect(70.0, 16.0)\n            .extrude(3.0)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(17.5, 0, -1.7), rotate=cq.Vector(0, 0, 0))\n            .circle(2.5)\n            .extrude(3.4)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(52.5, 0, -1.7), rotate=cq.Vector(0, 0, 0))\n            .circle(2.5)\n            .extrude(3.4)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(97.7, -1.7, 0), rotate=cq.Vector(-90, 0, 0))\n            .circle(2.5)\n            .extrude(3.4)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(132.7, -1.7, 0), rotate=cq.Vector(-90, 0, 0))\n            .circle(2.5)\n            .extrude(3.4)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 3.4209420438440813e-07,
+    "components": 1,
+    "nodes": 588
+   },
+   "consensus": 4,
+   "numbers_ok": true,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt1",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .transformed(offset=cq.Vector(35.0, 0, -1.5), rotate=cq.Vector(0, 0, 0))\n    .rect(70.0, 20.80)\n    .extrude(3.0)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(70.0, 0, 0), rotate=cq.Vector(0, 90, 0))\n            .rect(3.0, 16.0)\n            .transformed(offset=cq.Vector(0, 0, 10.2), rotate=cq.Vector(0, 0, 90))\n            .rect(3.0, 16.0)\n            .loft(combine=True)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(115.2, -1.5, 0), rotate=cq.Vector(-90, 0, 0))\n            .rect(70.0, 16.0)\n            .extrude(3.0)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(17.5, 0, -1.7), rotate=cq.Vector(0, 0, 0))\n            .circle(2.5)\n            .extrude(3.4)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(52.5, 0, -1.7), rotate=cq.Vector(0, 0, 0))\n            .circle(2.5)\n            .extrude(3.4)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(97.7, -1.7, 0), rotate=cq.Vector(-90, 0, 0))\n            .circle(2.5)\n            .extrude(3.4)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(132.7, -1.7, 0), rotate=cq.Vector(-90, 0, 0))\n            .circle(2.5)\n            .extrude(3.4)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 3.4185055417065327e-07,
+    "components": 1,
+    "nodes": 586
+   },
+   "consensus": 4,
+   "numbers_ok": true,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt2",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .transformed(offset=cq.Vector(35.0, 0, -1.5), rotate=cq.Vector(0, 0, 0))\n    .rect(70.0, 16.00 * 1.30)\n    .extrude(3.0)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(70.0, 0, 0), rotate=cq.Vector(0, 90, 0))\n            .rect(3.0, 16.0)\n            .transformed(offset=cq.Vector(0, 0, 10.2), rotate=cq.Vector(0, 0, 90))\n            .rect(3.0, 16.0)\n            .loft(combine=True)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(115.2, -1.5, 0), rotate=cq.Vector(-90, 0, 0))\n            .rect(70.0, 16.0)\n            .extrude(3.0)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(17.5, 0, -1.7), rotate=cq.Vector(0, 0, 0))\n            .circle(2.5)\n            .extrude(3.4)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(52.5, 0, -1.7), rotate=cq.Vector(0, 0, 0))\n            .circle(2.5)\n            .extrude(3.4)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(97.7, -1.7, 0), rotate=cq.Vector(-90, 0, 0))\n            .circle(2.5)\n            .extrude(3.4)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(132.7, -1.7, 0), rotate=cq.Vector(-90, 0, 0))\n            .circle(2.5)\n            .extrude(3.4)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 3.4107619068851997e-07,
+    "components": 1,
+    "nodes": 586
+   },
+   "consensus": 4,
+   "numbers_ok": false,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt3",
+   "code": "import cadquery as cq\nfirst_flange_width = 20.80\nresult = (\n    cq.Workplane(\"XY\")\n    .transformed(offset=cq.Vector(35.0, 0, -1.5), rotate=cq.Vector(0, 0, 0))\n    .rect(70.0, first_flange_width)\n    .extrude(3.0)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(70.0, 0, 0), rotate=cq.Vector(0, 90, 0))\n            .rect(3.0, 16.0)\n            .transformed(offset=cq.Vector(0, 0, 10.2), rotate=cq.Vector(0, 0, 90))\n            .rect(3.0, 16.0)\n            .loft(combine=True)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(115.2, -1.5, 0), rotate=cq.Vector(-90, 0, 0))\n            .rect(70.0, 16.0)\n            .extrude(3.0)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(17.5, 0, -1.7), rotate=cq.Vector(0, 0, 0))\n            .circle(2.5)\n            .extrude(3.4)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(52.5, 0, -1.7), rotate=cq.Vector(0, 0, 0))\n            .circle(2.5)\n            .extrude(3.4)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(97.7, -1.7, 0), rotate=cq.Vector(-90, 0, 0))\n            .circle(2.5)\n            .extrude(3.4)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(132.7, -1.7, 0), rotate=cq.Vector(-90, 0, 0))\n            .circle(2.5)\n            .extrude(3.4)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 3.4254374361657807e-07,
+    "components": 1,
+    "nodes": 601
+   },
+   "consensus": 4,
+   "numbers_ok": true,
+   "changed": true,
+   "error": null
+  }
+ ]
+}

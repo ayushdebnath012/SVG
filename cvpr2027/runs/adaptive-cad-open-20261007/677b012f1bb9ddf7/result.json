@@ -1,0 +1,964 @@
+{
+ "task_id": "677b012f1bb9ddf729a01cc181aaa070849f2e39060421f5f79d8ed527d8eb1a",
+ "status": "PASS",
+ "prediction": "{\"edits\": [{\"delete\": 0, \"insert\": [\"bowl = cq.Workplane(\\\"XY\\\").sphere(5.5).translate((0, 0, 15.0))\", \"result = result.cut(bowl)\"], \"start\": 8}]}",
+ "selected_node": 1,
+ "bank": [
+  1
+ ],
+ "pareto": [
+  1
+ ],
+ "stop": "expansion_limit",
+ "nodes": [
+  {
+   "id": 0,
+   "candidate": "\n\n{\"edits\":[{\"start\":6,\"delete\":1,\"insert\":[\"    .sphere(5.5).cut()\"]}]}",
+   "depth": 0,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "FAIL",
+      "reason": "TypeError: Workplane.cut() missing 1 required positional argument: 'toCut'"
+     },
+     "constraints": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -1000.0
+    ],
+    "score": -1.0,
+    "diagnosis": [
+     {
+      "stage": "geometry",
+      "status": "FAIL",
+      "reason": "TypeError: Workplane.cut() missing 1 required positional argument: 'toCut'"
+     },
+     {
+      "stage": "constraints",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 3,
+   "visits": 4,
+   "final": null,
+   "edges": [
+    0,
+    1
+   ]
+  },
+  {
+   "id": 1,
+   "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"bowl = cq.Workplane(\\\"XY\\\").sphere(5.5).translate((0, 0, 15.0))\", \"result = result.cut(bowl)\"], \"start\": 8}]}",
+   "depth": 1,
+   "verdict": {
+    "status": "PASS",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 1328.9904764253788,
+       "area": 1235.5616293555247,
+       "solids": 1,
+       "faces": 10,
+       "bbox_x": 15.012,
+       "bbox_y": 13.000773361611998,
+       "bbox_z": 15.0
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 0.95,
+      "reason": "The edited part clearly shows a spherical bowl indentation carved into the top surface, centered around the central axis, while preserving the original hexagonal shape and central hole.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-00.png"
+     },
+     "fem": {
+      "status": "PASS",
+      "metrics": {
+       "nodes": 1110,
+       "tetrahedra": 3794,
+       "connected_components": 1,
+       "mesh_volume_mm3": 1341.0668031213331,
+       "fixed_nodes": 103,
+       "loaded_facets": 190,
+       "loaded_area_mm2": 118.80789453315451,
+       "axis": [
+        0.0,
+        0.0,
+        1.0
+       ],
+       "projection_min_mm": 0.0,
+       "projection_max_mm": 15.0,
+       "compliance_N_mm": 8.175456472522866e-07,
+       "load_weighted_displacement_mm": 8.175456472522866e-07,
+       "max_displacement_mm": 1.1436081875595994e-06,
+       "strain_energy_N_mm": 4.087728236261418e-07,
+       "vm_p95_MPa": 0.017470114333894216,
+       "vm_peak_MPa": 0.022796084987143223,
+       "relative_free_residual": 4.2223155358765946e-14,
+       "relative_force_balance_error": 5.5498839650295305e-15,
+       "relative_moment_balance_error": 2.05726161128326e-15,
+       "relative_energy_error": 3.755746781988938e-15
+      },
+      "checks": [
+       {
+        "metric": "connected_components",
+        "value": 1,
+        "max": 1,
+        "ok": true
+       }
+      ]
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 1.005
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 1.005
+       }
+      ]
+     }
+    },
+    "objectives": [
+     0.95,
+     1.0,
+     -2.0
+    ],
+    "score": 2.048,
+    "diagnosis": [],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 1,
+   "visits": 3,
+   "final": {
+    "status": "PASS",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 1328.9904764253788,
+       "area": 1235.5616293555247,
+       "solids": 1,
+       "faces": 10,
+       "bbox_x": 15.012,
+       "bbox_y": 13.000773361611998,
+       "bbox_z": 15.0
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 0.95,
+      "reason": "The edited part clearly shows a spherical bowl indentation carved into the top surface, centered around the central axis, while preserving the original hexagonal shape and central hole.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-00.png"
+     },
+     "fem": {
+      "status": "PASS",
+      "metrics": {
+       "nodes": 1104,
+       "tetrahedra": 3751,
+       "connected_components": 1,
+       "mesh_volume_mm3": 1341.0668031213331,
+       "fixed_nodes": 103,
+       "loaded_facets": 194,
+       "loaded_area_mm2": 120.70411859601923,
+       "axis": [
+        0.0,
+        0.0,
+        1.0
+       ],
+       "projection_min_mm": 0.0,
+       "projection_max_mm": 15.0,
+       "compliance_N_mm": 8.178061386113318e-07,
+       "load_weighted_displacement_mm": 8.178061386113318e-07,
+       "max_displacement_mm": 1.1099480058246513e-06,
+       "strain_energy_N_mm": 4.089030693056663e-07,
+       "vm_p95_MPa": 0.017631233549378546,
+       "vm_peak_MPa": 0.022773701172857794,
+       "relative_free_residual": 4.2089944269158954e-14,
+       "relative_force_balance_error": 1.7419278016811737e-15,
+       "relative_moment_balance_error": 3.5155035244992035e-16,
+       "relative_energy_error": 1.0357380646379066e-15
+      },
+      "checks": [
+       {
+        "metric": "connected_components",
+        "value": 1,
+        "max": 1,
+        "ok": true
+       }
+      ]
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 0.995
+       },
+       {
+        "mesh_scale": 1.25
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 0.995
+       },
+       {
+        "status": "PASS",
+        "metrics": {
+         "nodes": 739,
+         "tetrahedra": 2393,
+         "connected_components": 1,
+         "mesh_volume_mm3": 1346.922552968238,
+         "fixed_nodes": 74,
+         "loaded_facets": 123,
+         "loaded_area_mm2": 105.18849507793767,
+         "axis": [
+          0.0,
+          0.0,
+          1.0
+         ],
+         "projection_min_mm": 0.0,
+         "projection_max_mm": 15.0,
+         "compliance_N_mm": 8.130489806247415e-07,
+         "load_weighted_displacement_mm": 8.130489806247415e-07,
+         "max_displacement_mm": 1.0034883676246784e-06,
+         "strain_energy_N_mm": 4.065244903123714e-07,
+         "vm_p95_MPa": 0.01723860957473654,
+         "vm_peak_MPa": 0.02066243704211814,
+         "relative_free_residual": 3.1896630405284354e-14,
+         "relative_force_balance_error": 2.085481972709042e-16,
+         "relative_moment_balance_error": 1.0591156650915384e-15,
+         "relative_energy_error": 1.562697268134041e-15
+        },
+        "checks": [
+         {
+          "metric": "connected_components",
+          "value": 1,
+          "max": 1,
+          "ok": true
+         }
+        ]
+       }
+      ]
+     }
+    },
+    "objectives": [
+     0.95,
+     1.0,
+     -2.0
+    ],
+    "score": 2.048,
+    "diagnosis": [],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "final"
+   },
+   "edges": [
+    2
+   ]
+  },
+  {
+   "id": 2,
+   "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"sphere = cq.Workplane(\\\"XY\\\").sphere(5.5).move((0, 0, 15.0))\", \"result = result.cut(sphere)\"], \"start\": 8}]}",
+   "depth": 1,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "FAIL",
+      "reason": "ValueError: Cannot convert object type <class 'cadquery.occ_impl.shapes.Solid'> to vector."
+     },
+     "constraints": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -1000.0
+    ],
+    "score": -1.0,
+    "diagnosis": [
+     {
+      "stage": "geometry",
+      "status": "FAIL",
+      "reason": "ValueError: Cannot convert object type <class 'cadquery.occ_impl.shapes.Solid'> to vector."
+     },
+     {
+      "stage": "constraints",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 0,
+   "visits": 1,
+   "final": null,
+   "edges": []
+  },
+  {
+   "id": 3,
+   "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"bowl = cq.Solid.makeSphere(5.5, cq.Vector(0, 0, 15.0))\", \"result = result.cut(bowl)\"], \"start\": 8}]}",
+   "depth": 2,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 1441.6533723142911,
+       "area": 1244.7515680726806,
+       "solids": 1,
+       "faces": 9,
+       "bbox_x": 15.012,
+       "bbox_y": 13.000773361611998,
+       "bbox_z": 15.000000000000002
+      }
+     },
+     "constraints": {
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -2.0
+    ],
+    "score": -0.002,
+    "diagnosis": [
+     {
+      "stage": "constraints",
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 0,
+   "visits": 1,
+   "final": null,
+   "edges": []
+  }
+ ],
+ "edges": [
+  {
+   "parent": 0,
+   "child": 1,
+   "visits": 3,
+   "total": 4.094
+  },
+  {
+   "parent": 0,
+   "child": 2,
+   "visits": 1,
+   "total": -1.0
+  },
+  {
+   "parent": 1,
+   "child": 3,
+   "visits": 1,
+   "total": -0.002
+  }
+ ],
+ "events": [
+  {
+   "event": "decompose",
+   "plan": {
+    "steps": [
+     "Construct hexagonal prism base with 15.012 radius and 15.0 height",
+     "Drill 8.0mm hole on the top face center",
+     "Define 5.5mm sphere geometry centered at top surface",
+     "Subtract sphere from base to carve spherical bowl",
+     "Display final CAD object"
+    ],
+    "invariants": [
+     "Hexagon radius remains 15.012",
+     "Extrusion height remains 15.0",
+     "Hole diameter remains 8.0",
+     "Hole location remains top-center",
+     "Part symmetry remains centered on axis"
+    ],
+    "dependencies": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      3,
+      4
+     ]
+    ]
+   },
+   "memory_version": "137ef7694ad387cc6e644b482de649b7726207a879a48300e5fa14013e493d65",
+   "retrieved": [
+    {
+     "task_id": "94d05127542ff02ca8fa32f3d8f9cc01a28c1d7530fd1da4a736741e524c4642",
+     "instruction": "On the top center of the star, carve a spherical bowl of 12 mm radius.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"bowl = cq.Workplane(\\\"XY\\\").sphere(12).translate((0, 0, 9.8))\", \"result = result.cut(bowl)\"], \"start\": 7}]}",
+     "strategies": [],
+     "context": [
+      "7: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "a40402bc3506dedf1936b258c8eb435ee7ab9b8b04f0f37c0194acb4385157b3",
+     "instruction": "On the top center of the star, add a spherical dome of 12 mm radius.",
+     "candidate": "{\"edits\": [{\"delete\": 2, \"insert\": [], \"start\": 7}]}",
+     "strategies": [],
+     "context": [
+      "7: bowl = cq.Workplane(\"XY\").sphere(12).translate((0, 0, 9.8))",
+      "8: result = result.cut(bowl)"
+     ]
+    },
+    {
+     "task_id": "f46f23eda5151773ef140fafa39487a4fdd0527ad45ef5bac94a8b1739cd6e9c",
+     "instruction": "Add a central axial through-hole with a 5.00 mm radius along the main axis of the revolved part.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.cut(cq.Workplane('XZ').cylinder(200.0, 5.0))\"], \"start\": 10}]}",
+     "strategies": [],
+     "context": [
+      "10: show_object(result)"
+     ]
+    }
+   ]
+  },
+  {
+   "event": "initial_state",
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 1441.6533723142907,
+       "area": 1244.7515680726806,
+       "solids": 1,
+       "faces": 9,
+       "bbox_x": 15.012,
+       "bbox_y": 13.000773361611998,
+       "bbox_z": 15.000000000000002
+      }
+     },
+     "constraints": {
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         5.5
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -0.0
+    ],
+    "score": 0.0,
+    "diagnosis": [
+     {
+      "stage": "constraints",
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         5.5
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "initial"
+   }
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "geometry",
+     "status": "FAIL",
+     "reason": "TypeError: Workplane.cut() missing 1 required positional argument: 'toCut'"
+    },
+    {
+     "stage": "constraints",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "94d05127542ff02ca8fa32f3d8f9cc01a28c1d7530fd1da4a736741e524c4642",
+     "instruction": "On the top center of the star, carve a spherical bowl of 12 mm radius.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"bowl = cq.Workplane(\\\"XY\\\").sphere(12).translate((0, 0, 9.8))\", \"result = result.cut(bowl)\"], \"start\": 7}]}",
+     "strategies": [],
+     "context": [
+      "7: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "2e5e823629867ea0058c5f5d522e5cc83b97f61e373773ad2c67a7b2deb1f4ff",
+     "instruction": "Add a small raised round boss centered on the top face of the tee nut, 4 mm in diameter and 1.5 mm tall, sitting flush above the existing top face and centered on the central axis.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.union(\", \"    cq.Workplane('XY')\", \"    .transformed(offset=cq.Vector(0.0, 0.0, 1.75), rotate=cq.Vector(0, 0, 0))\", \"    .cylinder(1.5, 2.0)\", \")\"], \"start\": 54}]}",
+     "strategies": [],
+     "context": [
+      "54: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "a40402bc3506dedf1936b258c8eb435ee7ab9b8b04f0f37c0194acb4385157b3",
+     "instruction": "On the top center of the star, add a spherical dome of 12 mm radius.",
+     "candidate": "{\"edits\": [{\"delete\": 2, \"insert\": [], \"start\": 7}]}",
+     "strategies": [],
+     "context": [
+      "7: bowl = cq.Workplane(\"XY\").sphere(12).translate((0, 0, 9.8))",
+      "8: result = result.cut(bowl)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "PASS",
+   "hypothesis": "Carve spherical bowl by creating sphere workplane at top surface and cutting from result"
+  },
+  {
+   "event": "final_verification",
+   "node": 1,
+   "status": "PASS"
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 2,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "geometry",
+     "status": "FAIL",
+     "reason": "TypeError: Workplane.cut() missing 1 required positional argument: 'toCut'"
+    },
+    {
+     "stage": "constraints",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "94d05127542ff02ca8fa32f3d8f9cc01a28c1d7530fd1da4a736741e524c4642",
+     "instruction": "On the top center of the star, carve a spherical bowl of 12 mm radius.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"bowl = cq.Workplane(\\\"XY\\\").sphere(12).translate((0, 0, 9.8))\", \"result = result.cut(bowl)\"], \"start\": 7}]}",
+     "strategies": [],
+     "context": [
+      "7: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "2e5e823629867ea0058c5f5d522e5cc83b97f61e373773ad2c67a7b2deb1f4ff",
+     "instruction": "Add a small raised round boss centered on the top face of the tee nut, 4 mm in diameter and 1.5 mm tall, sitting flush above the existing top face and centered on the central axis.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.union(\", \"    cq.Workplane('XY')\", \"    .transformed(offset=cq.Vector(0.0, 0.0, 1.75), rotate=cq.Vector(0, 0, 0))\", \"    .cylinder(1.5, 2.0)\", \")\"], \"start\": 54}]}",
+     "strategies": [],
+     "context": [
+      "54: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "a40402bc3506dedf1936b258c8eb435ee7ab9b8b04f0f37c0194acb4385157b3",
+     "instruction": "On the top center of the star, add a spherical dome of 12 mm radius.",
+     "candidate": "{\"edits\": [{\"delete\": 2, \"insert\": [], \"start\": 7}]}",
+     "strategies": [],
+     "context": [
+      "7: bowl = cq.Workplane(\"XY\").sphere(12).translate((0, 0, 9.8))",
+      "8: result = result.cut(bowl)"
+     ]
+    }
+   ],
+   "path": [
+    1
+   ],
+   "status": "FAIL",
+   "hypothesis": "Carve 5.5mm spherical bowl on top face by cutting translated sphere from result"
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": true,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "geometry",
+     "status": "FAIL",
+     "reason": "TypeError: Workplane.cut() missing 1 required positional argument: 'toCut'"
+    },
+    {
+     "stage": "constraints",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "94d05127542ff02ca8fa32f3d8f9cc01a28c1d7530fd1da4a736741e524c4642",
+     "instruction": "On the top center of the star, carve a spherical bowl of 12 mm radius.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"bowl = cq.Workplane(\\\"XY\\\").sphere(12).translate((0, 0, 9.8))\", \"result = result.cut(bowl)\"], \"start\": 7}]}",
+     "strategies": [],
+     "context": [
+      "7: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "2e5e823629867ea0058c5f5d522e5cc83b97f61e373773ad2c67a7b2deb1f4ff",
+     "instruction": "Add a small raised round boss centered on the top face of the tee nut, 4 mm in diameter and 1.5 mm tall, sitting flush above the existing top face and centered on the central axis.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.union(\", \"    cq.Workplane('XY')\", \"    .transformed(offset=cq.Vector(0.0, 0.0, 1.75), rotate=cq.Vector(0, 0, 0))\", \"    .cylinder(1.5, 2.0)\", \")\"], \"start\": 54}]}",
+     "strategies": [],
+     "context": [
+      "54: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "a40402bc3506dedf1936b258c8eb435ee7ab9b8b04f0f37c0194acb4385157b3",
+     "instruction": "On the top center of the star, add a spherical dome of 12 mm radius.",
+     "candidate": "{\"edits\": [{\"delete\": 2, \"insert\": [], \"start\": 7}]}",
+     "strategies": [],
+     "context": [
+      "7: bowl = cq.Workplane(\"XY\").sphere(12).translate((0, 0, 9.8))",
+      "8: result = result.cut(bowl)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "PASS",
+   "hypothesis": "Add spherical bowl carve at top surface using proper cut() syntax with separate sphere workplane object"
+  },
+  {
+   "event": "backtrack",
+   "to_node": 1
+  },
+  {
+   "event": "expand",
+   "parent": 1,
+   "node": 3,
+   "merged": false,
+   "strategy": "diversify",
+   "diagnosis": [],
+   "retrieved_repairs": [
+    {
+     "task_id": "94d05127542ff02ca8fa32f3d8f9cc01a28c1d7530fd1da4a736741e524c4642",
+     "instruction": "On the top center of the star, carve a spherical bowl of 12 mm radius.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"bowl = cq.Workplane(\\\"XY\\\").sphere(12).translate((0, 0, 9.8))\", \"result = result.cut(bowl)\"], \"start\": 7}]}",
+     "strategies": [],
+     "context": [
+      "7: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "a40402bc3506dedf1936b258c8eb435ee7ab9b8b04f0f37c0194acb4385157b3",
+     "instruction": "On the top center of the star, add a spherical dome of 12 mm radius.",
+     "candidate": "{\"edits\": [{\"delete\": 2, \"insert\": [], \"start\": 7}]}",
+     "strategies": [],
+     "context": [
+      "7: bowl = cq.Workplane(\"XY\").sphere(12).translate((0, 0, 9.8))",
+      "8: result = result.cut(bowl)"
+     ]
+    },
+    {
+     "task_id": "f46f23eda5151773ef140fafa39487a4fdd0527ad45ef5bac94a8b1739cd6e9c",
+     "instruction": "Add a central axial through-hole with a 5.00 mm radius along the main axis of the revolved part.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.cut(cq.Workplane('XZ').cylinder(200.0, 5.0))\"], \"start\": 10}]}",
+     "strategies": [],
+     "context": [
+      "10: show_object(result)"
+     ]
+    }
+   ],
+   "path": [
+    0,
+    2
+   ],
+   "status": "FAIL",
+   "hypothesis": "Carve spherical bowl using Solid.makeSphere geometry creation at top surface center."
+  }
+ ],
+ "config": {
+  "algorithm": "mcts",
+  "max_expansions": 4,
+  "max_depth": 3,
+  "width": 2,
+  "max_width": 4,
+  "exploration": 0.7,
+  "seconds": 2400.0
+ },
+ "memory_version": "137ef7694ad387cc6e644b482de649b7726207a879a48300e5fa14013e493d65",
+ "stored": "runs/adaptive-cad-open-20261007/memory.jsonl",
+ "seconds": 182.2121185829999,
+ "api": {
+  "mode": "live_astra",
+  "api_calls": 6,
+  "cost_usd": 0.0,
+  "budget_usd": 0.16666666666666666,
+  "refused": 0
+ },
+ "tool_jobs": 8
+}

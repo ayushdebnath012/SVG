@@ -1,0 +1,63 @@
+{
+ "id": "2c65d517f488a2425bfdceee46165258bba45405639e0e792ff6434421c08dcf",
+ "source_fem": {
+  "ok": true,
+  "compliance": 2.1965146584213486e-06,
+  "components": 1,
+  "nodes": 1414
+ },
+ "candidates": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .transformed(offset=cq.Vector(0.0, 0.0, -27.55), rotate=cq.Vector(0, 0, 0))\n    .circle(49.8)\n    .extrude(55.1)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, 27.55), rotate=cq.Vector(0, 0, 0))\n            .circle(49.8)\n            .extrude(10.0)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, -27.55), rotate=cq.Vector(0, 0, 0))\n            .sphere(49.8)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .cylinder(6.4, 58.8)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, 86.47), rotate=cq.Vector(0, 0, 0))\n            .cylinder(24.6, 5.3)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, -86.47), rotate=cq.Vector(0, 0, 0))\n            .cylinder(24.6, 5.3)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": false,
+    "error": "ValueError: Unanchored disconnected component"
+   },
+   "consensus": 4,
+   "numbers_ok": true,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt1",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .transformed(offset=cq.Vector(0.0, 0.0, -27.55), rotate=cq.Vector(0, 0, 0))\n    .circle(49.8)\n    .extrude(55.1)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, 27.55), rotate=cq.Vector(0, 0, 0))\n            .circle(49.8)\n            .extrude(10.0)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, -27.55), rotate=cq.Vector(0, 0, 0))\n            .sphere(49.8)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .cylinder(6.4, 58.8)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, 86.47), rotate=cq.Vector(0, 0, 0))\n            .cylinder(24.6, 5.3)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, -86.47), rotate=cq.Vector(0, 0, 0))\n            .cylinder(24.6, 5.3)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": false,
+    "error": "ValueError: Unanchored disconnected component"
+   },
+   "consensus": 4,
+   "numbers_ok": true,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt2",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .transformed(offset=cq.Vector(0.0, 0.0, -27.55), rotate=cq.Vector(0, 0, 0))\n    .circle(49.8)\n    .extrude(55.1)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, 27.55), rotate=cq.Vector(0, 0, 0))\n            .cylinder(10.0, 49.8, centered=(True, True, False))\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, -27.55), rotate=cq.Vector(0, 0, 0))\n            .sphere(49.8)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .cylinder(6.4, 58.8)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, 86.47), rotate=cq.Vector(0, 0, 0))\n            .cylinder(24.6, 5.3)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, -86.47), rotate=cq.Vector(0, 0, 0))\n            .cylinder(24.6, 5.3)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": false,
+    "error": "ValueError: Unanchored disconnected component"
+   },
+   "consensus": 4,
+   "numbers_ok": true,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt3",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .transformed(offset=cq.Vector(0.0, 0.0, -27.55), rotate=cq.Vector(0, 0, 0))\n    .circle(49.8)\n    .extrude(55.1)\n    .union(\n        cq.Solid.makeCylinder(\n            49.8, 10.0, cq.Vector(0.0, 0.0, 27.55), cq.Vector(0, 0, 1)\n        )\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, -27.55), rotate=cq.Vector(0, 0, 0))\n            .sphere(49.8)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .cylinder(6.4, 58.8)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, 86.47), rotate=cq.Vector(0, 0, 0))\n            .cylinder(24.6, 5.3)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, -86.47), rotate=cq.Vector(0, 0, 0))\n            .cylinder(24.6, 5.3)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": false,
+    "error": "ValueError: Unanchored disconnected component"
+   },
+   "consensus": 4,
+   "numbers_ok": true,
+   "changed": true,
+   "error": null
+  }
+ ]
+}

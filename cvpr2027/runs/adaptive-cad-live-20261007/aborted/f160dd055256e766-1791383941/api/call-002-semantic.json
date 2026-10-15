@@ -1,0 +1,48 @@
+{
+ "kind": "semantic",
+ "status": "completed",
+ "reserved_usd": 0.07754583333333333,
+ "request": {
+  "model": "gpt-6-astra",
+  "messages": [
+   {
+    "role": "system",
+    "content": "You verify mechanical CAD edits from rendered views."
+   },
+   {
+    "role": "user",
+    "content": [
+     {
+      "type": "text",
+      "text": "Edit instruction: Remove one of the two propeller blades; keep the hub, spinner, and the remaining blade.\n\nThe image shows the ORIGINAL part (left) and the EDITED part (right), isometric views (top row) and top views (bottom row). Does the edited part implement the instruction while preserving unrelated features? Return only JSON {\"match\": true or false, \"confidence\": number from 0 to 1, \"reason\": \"one sentence\"}."
+     },
+     {
+      "type": "image_url",
+      "image_url": "<png omitted>"
+     }
+    ]
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_completion_tokens": 1000,
+  "store": false
+ },
+ "usage": {
+  "prompt_tokens": 421,
+  "completion_tokens": 35,
+  "total_tokens": 456,
+  "prompt_tokens_details": {
+   "cached_tokens": 0,
+   "audio_tokens": 0
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 0,
+   "audio_tokens": 0,
+   "accepted_prediction_tokens": 0,
+   "rejected_prediction_tokens": 0
+  }
+ },
+ "cost_usd": 0.00596,
+ "finish_reason": "stop",
+ "response": "{\"match\":true,\"confidence\":0.99,\"reason\":\"The edited views show one blade removed while preserving the hub, spinner, and remaining blade.\"}"
+}

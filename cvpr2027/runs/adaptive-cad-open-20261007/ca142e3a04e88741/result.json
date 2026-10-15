@@ -1,0 +1,750 @@
+{
+ "task_id": "ca142e3a04e88741171e5a661f3fe7e3357c307398820fee65e265a88634daa7",
+ "status": "UNVERIFIED",
+ "prediction": "\n\n{\"edits\":[{\"start\":3,\"delete\":1,\"insert\":[\".polyline([(130.0, 0.0), (100.0, 240.9), (58.7, 348.4902), (58.7, 465.8902), (100.0, 802.2517), (100.0, 970.3517), (123.2, 970.3517), (123.2, 802.2517), (81.9, 465.8902), (81.9, 348.4902), (123.2, 240.9), (123.2, 0.0)])\"]}]}",
+ "selected_node": null,
+ "bank": [],
+ "pareto": [],
+ "stop": "expansion_limit",
+ "nodes": [
+  {
+   "id": 0,
+   "candidate": "\n\n{\"edits\":[{\"start\":3,\"delete\":1,\"insert\":[\".polyline([(130.0, 0.0), (100.0, 240.9), (58.7, 348.4902), (58.7, 465.8902), (100.0, 802.2517), (100.0, 970.3517), (123.2, 970.3517), (123.2, 802.2517), (81.9, 465.8902), (81.9, 348.4902), (123.2, 240.9), (123.2, 0.0)])\"]}]}",
+   "depth": 0,
+   "verdict": {
+    "status": "UNKNOWN",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 11244989.280883588,
+       "area": 1242056.1965961887,
+       "solids": 1,
+       "faces": 12,
+       "bbox_x": 260.0,
+       "bbox_y": 970.3517,
+       "bbox_z": 260.0
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 0.95,
+      "reason": "The edited part clearly shows the inlet section (bottom) flaring outwards into a tapered conical shape with a larger diameter compared to the straight cylindrical inlet of the original part, while the rest of the geometry remains unchanged.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-00.png"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "Exception: PLC Error:  A segment and a facet intersect at point"
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 1.005
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 1.005
+       }
+      ]
+     }
+    },
+    "objectives": [
+     0.95,
+     1.0,
+     -2.0
+    ],
+    "score": 1.048,
+    "diagnosis": [
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "Exception: PLC Error:  A segment and a facet intersect at point"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 3,
+   "visits": 4,
+   "final": null,
+   "edges": [
+    0,
+    1
+   ]
+  },
+  {
+   "id": 1,
+   "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .polyline([(130.0, 0.0), (100.0, 240.9), (58.7, 348.4902), (58.7, 465.8902), (100.0, 802.2517), (100.0, 970.3517), (123.2, 970.3517), (123.2, 802.2517), (81.9, 465.8902), (81.9, 348.4902), (123.2, 240.9), (123.2, 0.0)])\"], \"start\": 3}]}",
+   "depth": 1,
+   "verdict": {
+    "status": "UNKNOWN",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 11244989.280883588,
+       "area": 1242056.1965961887,
+       "solids": 1,
+       "faces": 12,
+       "bbox_x": 260.0,
+       "bbox_y": 970.3517,
+       "bbox_z": 260.0
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 0.95,
+      "reason": "The edited part shows a visibly larger and tapered inlet section at the bottom in the top view, consistent with increasing the radius and changing the wall from cylindrical to conical.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-01.png"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "Exception: PLC Error:  A segment and a facet intersect at point"
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 1.005
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 1.005
+       }
+      ]
+     }
+    },
+    "objectives": [
+     0.95,
+     1.0,
+     -2.0
+    ],
+    "score": 1.048,
+    "diagnosis": [
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "Exception: PLC Error:  A segment and a facet intersect at point"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 0,
+   "visits": 2,
+   "final": null,
+   "edges": []
+  },
+  {
+   "id": 2,
+   "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\".polyline([(130.0, 0.0), (100.0, 240.9), (58.7, 348.4902), (58.7, 465.8902), (100.0, 802.2517), (100.0, 970.3517), (123.2, 970.3517), (123.2, 802.2517), (81.9, 465.8902), (81.9, 348.4902), (123.2, 240.9), (123.2, 0.0)])\"], \"start\": 3}]}",
+   "depth": 1,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 11244989.280883588,
+       "area": 1242056.1965961887,
+       "solids": 1,
+       "faces": 12,
+       "bbox_x": 260.0,
+       "bbox_y": 970.3517,
+       "bbox_z": 260.0
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "FAIL",
+      "confidence": 0.9,
+      "reason": "The edited part retains the straight cylindrical shape at the inlet end (visible in both isometric and top views) instead of changing it to a tapered conical section as instructed.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-02.png"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.9,
+     0.0,
+     -2.0
+    ],
+    "score": 0.898,
+    "diagnosis": [
+     {
+      "stage": "semantics",
+      "status": "FAIL",
+      "confidence": 0.9,
+      "reason": "The edited part retains the straight cylindrical shape at the inlet end (visible in both isometric and top views) instead of changing it to a tapered conical section as instructed.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-02.png"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 1,
+   "visits": 2,
+   "final": null,
+   "edges": [
+    2
+   ]
+  },
+  {
+   "id": 3,
+   "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\".polyline([(130.0, 0.0), (115.0, 240.9), (58.7, 348.4902), (58.7, 465.8902), (100.0, 802.2517), (100.0, 970.3517), (123.2, 970.3517), (123.2, 802.2517), (81.9, 465.8902), (81.9, 348.4902), (123.2, 240.9), (123.2, 0.0)])\"], \"start\": 3}]}",
+   "depth": 2,
+   "verdict": {
+    "status": "UNKNOWN",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 9476933.32934758,
+       "area": 1261229.160272033,
+       "solids": 1,
+       "faces": 12,
+       "bbox_x": 260.0,
+       "bbox_y": 970.3517,
+       "bbox_z": 260.0
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 0.9,
+      "reason": "The edited isometric view clearly shows the inlet section (left side) changed from a straight cylinder to a tapered cone, and the inlet face appears wider, consistent with the radius increase, while the rest of the part remains unchanged.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-03.png"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "Exception: PLC Error:  A segment and a facet intersect at point"
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 1.005
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 1.005
+       }
+      ]
+     }
+    },
+    "objectives": [
+     0.9,
+     1.0,
+     -2.0
+    ],
+    "score": 0.998,
+    "diagnosis": [
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "Exception: PLC Error:  A segment and a facet intersect at point"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 0,
+   "visits": 1,
+   "final": null,
+   "edges": []
+  }
+ ],
+ "edges": [
+  {
+   "parent": 0,
+   "child": 1,
+   "visits": 2,
+   "total": 2.096
+  },
+  {
+   "parent": 0,
+   "child": 2,
+   "visits": 2,
+   "total": 1.896
+  },
+  {
+   "parent": 2,
+   "child": 3,
+   "visits": 1,
+   "total": 0.998
+  }
+ ],
+ "events": [
+  {
+   "event": "decompose",
+   "plan": {
+    "steps": [
+     "Change first polyline point from (100.0, 0.0) to (130.0, 0.0) to increase inlet radius",
+     "Modify second polyline point from (100.0, 240.9) to create tapered conical section (e.g., 130.0, 0.0 to 100.0, 240.9)",
+     "Maintain remaining polyline points to preserve downstream geometry"
+    ],
+    "invariants": [
+     "Revolve axis remains (0, 0, 0) to (0, 1, 0)",
+     "Revolve angle remains 360 degrees",
+     "Polyline closure remains intact",
+     "Downstream geometry after the tapered section remains unchanged",
+     "CAD workplane remains XY"
+    ],
+    "dependencies": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ],
+     [
+      1,
+      2
+     ]
+    ]
+   },
+   "memory_version": "27fe2a6279509080573d58915d2fea3cedcfd5da274ae3f39435fe310bda8533",
+   "retrieved": [
+    {
+     "task_id": "7159d61e734bfdb63d221ad1dbbba7610a157962a2006ae91e6c574a5bf54a80",
+     "instruction": "Increase the outer radius of the cylindrical sleeve from 20.00 mm to 26.00 mm.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .cylinder(16.0, 26.0)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .cylinder(16.0, 20.0)"
+     ]
+    },
+    {
+     "task_id": "128efb1f12ca06acd045edbdd4bb633cfb794c98e8e8cf7560508b5376032882",
+     "instruction": "Extend the outer tapered wall length from 70.1 to 100.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .lineTo(100.0, 7.0)\"], \"start\": 4}]}",
+     "strategies": [],
+     "context": [
+      "4:     .lineTo(70.1, 7.0)"
+     ]
+    },
+    {
+     "task_id": "dd4ba1a9321fc8a630f89ff8963470167be5a2cb87342399e5e0393458f5ca8f",
+     "instruction": "Increase the coil wire radius from 0.80 mm to 1.04 mm.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .circle(1.04)\"], \"start\": 4}]}",
+     "strategies": [],
+     "context": [
+      "4:     .circle(0.8)"
+     ]
+    }
+   ]
+  },
+  {
+   "event": "initial_state",
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 13742461.192707866,
+       "area": 1228866.2013455778,
+       "solids": 1,
+       "faces": 12,
+       "bbox_x": 246.4,
+       "bbox_y": 970.3517,
+       "bbox_z": 246.4
+      }
+     },
+     "constraints": {
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         130.0,
+         100.0
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -0.0
+    ],
+    "score": 0.0,
+    "diagnosis": [
+     {
+      "stage": "constraints",
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         130.0,
+         100.0
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "initial"
+   }
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "Exception: PLC Error:  A segment and a facet intersect at point"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "d4b0e3b4ab682172aff86ecaf25de02038c8987b3cbc8ca306ab72ddebdc65d7",
+     "instruction": "Widen the bottom flange from a 4.75 mm radius to a 6.00 mm radius and introduce a tapered outer face.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .lineTo(6.0, 0.0)\"], \"start\": 4}]}",
+     "strategies": [],
+     "context": [
+      "4:     .lineTo(4.75, 0.0)"
+     ]
+    },
+    {
+     "task_id": "a35caabd31d5411ddf96b5b47bd31b1b174290a114ba733beca2523a7fe7aab3",
+     "instruction": "Extend the upper 11.95 mm-radius section from 24.40 mm to 32.00 mm and replace the flat top face with an inward-tapered conical end.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .lineTo(11.95, 32.0)\"], \"start\": 7}]}",
+     "strategies": [],
+     "context": [
+      "7:     .lineTo(11.95, 24.4)"
+     ]
+    },
+    {
+     "task_id": "7159d61e734bfdb63d221ad1dbbba7610a157962a2006ae91e6c574a5bf54a80",
+     "instruction": "Increase the outer radius of the cylindrical sleeve from 20.00 mm to 26.00 mm.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .cylinder(16.0, 26.0)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .cylinder(16.0, 20.0)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "UNKNOWN",
+   "hypothesis": "Modify the inlet radius from 100.0 to 130.0 mm by adjusting the first polyline point and create a tapered conical section from y=0 to y=240.9 by maintaining the second point at radius 100.0."
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": true,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "Exception: PLC Error:  A segment and a facet intersect at point"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "d4b0e3b4ab682172aff86ecaf25de02038c8987b3cbc8ca306ab72ddebdc65d7",
+     "instruction": "Widen the bottom flange from a 4.75 mm radius to a 6.00 mm radius and introduce a tapered outer face.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .lineTo(6.0, 0.0)\"], \"start\": 4}]}",
+     "strategies": [],
+     "context": [
+      "4:     .lineTo(4.75, 0.0)"
+     ]
+    },
+    {
+     "task_id": "a35caabd31d5411ddf96b5b47bd31b1b174290a114ba733beca2523a7fe7aab3",
+     "instruction": "Extend the upper 11.95 mm-radius section from 24.40 mm to 32.00 mm and replace the flat top face with an inward-tapered conical end.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .lineTo(11.95, 32.0)\"], \"start\": 7}]}",
+     "strategies": [],
+     "context": [
+      "7:     .lineTo(11.95, 24.4)"
+     ]
+    },
+    {
+     "task_id": "7159d61e734bfdb63d221ad1dbbba7610a157962a2006ae91e6c574a5bf54a80",
+     "instruction": "Increase the outer radius of the cylindrical sleeve from 20.00 mm to 26.00 mm.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .cylinder(16.0, 26.0)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .cylinder(16.0, 20.0)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "UNKNOWN",
+   "hypothesis": "Modify the inlet radius at the start of the polyline to 130.0 mm while keeping the radius at 240.9 mm as 100.0 mm to create a tapered conical section instead of a cylindrical inlet."
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 2,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "Exception: PLC Error:  A segment and a facet intersect at point"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "d4b0e3b4ab682172aff86ecaf25de02038c8987b3cbc8ca306ab72ddebdc65d7",
+     "instruction": "Widen the bottom flange from a 4.75 mm radius to a 6.00 mm radius and introduce a tapered outer face.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .lineTo(6.0, 0.0)\"], \"start\": 4}]}",
+     "strategies": [],
+     "context": [
+      "4:     .lineTo(4.75, 0.0)"
+     ]
+    },
+    {
+     "task_id": "a35caabd31d5411ddf96b5b47bd31b1b174290a114ba733beca2523a7fe7aab3",
+     "instruction": "Extend the upper 11.95 mm-radius section from 24.40 mm to 32.00 mm and replace the flat top face with an inward-tapered conical end.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .lineTo(11.95, 32.0)\"], \"start\": 7}]}",
+     "strategies": [],
+     "context": [
+      "7:     .lineTo(11.95, 24.4)"
+     ]
+    },
+    {
+     "task_id": "7159d61e734bfdb63d221ad1dbbba7610a157962a2006ae91e6c574a5bf54a80",
+     "instruction": "Increase the outer radius of the cylindrical sleeve from 20.00 mm to 26.00 mm.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .cylinder(16.0, 26.0)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .cylinder(16.0, 20.0)"
+     ]
+    }
+   ],
+   "path": [
+    1
+   ],
+   "status": "FAIL",
+   "hypothesis": "Increase inlet radius from 100.0 to 130.0 mm and create tapered conical section by modifying first two polyline points"
+  },
+  {
+   "event": "backtrack",
+   "to_node": 2
+  },
+  {
+   "event": "expand",
+   "parent": 2,
+   "node": 3,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "semantics",
+     "status": "FAIL",
+     "confidence": 0.9,
+     "reason": "The edited part retains the straight cylindrical shape at the inlet end (visible in both isometric and top views) instead of changing it to a tapered conical section as instructed.",
+     "basis": "Astra rendered-view judgement",
+     "image": "semantic-02.png"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "No physical contract supplied"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "No perturbation contract supplied"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "a35caabd31d5411ddf96b5b47bd31b1b174290a114ba733beca2523a7fe7aab3",
+     "instruction": "Extend the upper 11.95 mm-radius section from 24.40 mm to 32.00 mm and replace the flat top face with an inward-tapered conical end.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .lineTo(11.95, 32.0)\"], \"start\": 7}]}",
+     "strategies": [],
+     "context": [
+      "7:     .lineTo(11.95, 24.4)"
+     ]
+    },
+    {
+     "task_id": "7159d61e734bfdb63d221ad1dbbba7610a157962a2006ae91e6c574a5bf54a80",
+     "instruction": "Increase the outer radius of the cylindrical sleeve from 20.00 mm to 26.00 mm.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .cylinder(16.0, 26.0)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .cylinder(16.0, 20.0)"
+     ]
+    },
+    {
+     "task_id": "d4b0e3b4ab682172aff86ecaf25de02038c8987b3cbc8ca306ab72ddebdc65d7",
+     "instruction": "Widen the bottom flange from a 4.75 mm radius to a 6.00 mm radius and introduce a tapered outer face.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .lineTo(6.0, 0.0)\"], \"start\": 4}]}",
+     "strategies": [],
+     "context": [
+      "4:     .lineTo(4.75, 0.0)"
+     ]
+    }
+   ],
+   "path": [
+    1,
+    2
+   ],
+   "status": "UNKNOWN",
+   "hypothesis": "Create tapered conical inlet by increasing first polyline point radius from 100.0 to 130.0 and adjusting second point to 115.0 for proper taper transition"
+  }
+ ],
+ "config": {
+  "algorithm": "mcts",
+  "max_expansions": 4,
+  "max_depth": 3,
+  "width": 2,
+  "max_width": 4,
+  "exploration": 0.7,
+  "seconds": 2400.0
+ },
+ "memory_version": "27fe2a6279509080573d58915d2fea3cedcfd5da274ae3f39435fe310bda8533",
+ "stored": null,
+ "seconds": 375.8039993340003,
+ "api": {
+  "mode": "live_astra",
+  "api_calls": 9,
+  "cost_usd": 0.0,
+  "budget_usd": 0.17857142857142858,
+  "refused": 0
+ },
+ "tool_jobs": 8
+}

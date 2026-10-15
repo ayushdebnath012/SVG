@@ -1,0 +1,115 @@
+{
+ "source_fem": {
+  "ok": true,
+  "compliance": 3.398832915835187e-07,
+  "components": 1,
+  "nodes": 531
+ },
+ "nodes": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(27.9, 32.3)\n    .faces(\">Z\").workplane()\n    .circle(16.92)\n    .workplane(offset=9.0)\n    .circle(1.5)\n    .loft(combine=True)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 10.375), rotate=cq.Vector(0, 0, 0.0))\n            .transformed(offset=cq.Vector(5.64, 0, 0), rotate=cq.Vector(37.1, 0, 0))\n            .polyline([[0.0, -12.5], [0.0, 12.5], [46.512, 8.938], [64.6, 0.0], [46.512, -8.938]])\n            .close()\n            .extrude(7.15)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 10.375), rotate=cq.Vector(0, 0, 180.0))\n            .transformed(offset=cq.Vector(5.64, 0, 0), rotate=cq.Vector(37.1, 0, 0))\n            .polyline([[0.0, -12.5], [0.0, 12.5], [46.512, 8.938], [64.6, 0.0], [46.512, -8.938]])\n            .close()\n            .extrude(7.15)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.7732278383705065e-07,
+    "components": 1,
+    "nodes": 590
+   },
+   "numbers_ok": null,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "alt1",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(27.9, 64.6 / 2)\n    .faces(\">Z\").workplane()\n    .circle(16.92)\n    .workplane(offset=9.0)\n    .circle(1.5)\n    .loft(combine=True)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 10.375), rotate=cq.Vector(0, 0, 0.0))\n            .transformed(offset=cq.Vector(5.64, 0, 0), rotate=cq.Vector(37.1, 0, 0))\n            .polyline([[0.0, -12.5], [0.0, 12.5], [46.512, 8.938], [64.6, 0.0], [46.512, -8.938]])\n            .close()\n            .extrude(7.15)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 10.375), rotate=cq.Vector(0, 0, 180.0))\n            .transformed(offset=cq.Vector(5.64, 0, 0), rotate=cq.Vector(37.1, 0, 0))\n            .polyline([[0.0, -12.5], [0.0, 12.5], [46.512, 8.938], [64.6, 0.0], [46.512, -8.938]])\n            .close()\n            .extrude(7.15)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.7729478626965484e-07,
+    "components": 1,
+    "nodes": 592
+   },
+   "numbers_ok": null,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "alt2",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(27.9, (5.64 + 64.6) / 2)\n    .faces(\">Z\").workplane()\n    .circle(16.92)\n    .workplane(offset=9.0)\n    .circle(1.5)\n    .loft(combine=True)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 10.375), rotate=cq.Vector(0, 0, 0.0))\n            .transformed(offset=cq.Vector(5.64, 0, 0), rotate=cq.Vector(37.1, 0, 0))\n            .polyline([[0.0, -12.5], [0.0, 12.5], [46.512, 8.938], [64.6, 0.0], [46.512, -8.938]])\n            .close()\n            .extrude(7.15)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 10.375), rotate=cq.Vector(0, 0, 180.0))\n            .transformed(offset=cq.Vector(5.64, 0, 0), rotate=cq.Vector(37.1, 0, 0))\n            .polyline([[0.0, -12.5], [0.0, 12.5], [46.512, 8.938], [64.6, 0.0], [46.512, -8.938]])\n            .close()\n            .extrude(7.15)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.6418665359099278e-07,
+    "components": 1,
+    "nodes": 639
+   },
+   "numbers_ok": null,
+   "changed": true,
+   "cluster": 2,
+   "robustness": 1.0
+  },
+  {
+   "name": "alt3",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(27.9, (5.64 + 64.6 - 18.8) / 2)\n    .faces(\">Z\").workplane()\n    .circle(16.92)\n    .workplane(offset=9.0)\n    .circle(1.5)\n    .loft(combine=True)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 10.375), rotate=cq.Vector(0, 0, 0.0))\n            .transformed(offset=cq.Vector(5.64, 0, 0), rotate=cq.Vector(37.1, 0, 0))\n            .polyline([[0.0, -12.5], [0.0, 12.5], [46.512, 8.938], [64.6, 0.0], [46.512, -8.938]])\n            .close()\n            .extrude(7.15)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 10.375), rotate=cq.Vector(0, 0, 180.0))\n            .transformed(offset=cq.Vector(5.64, 0, 0), rotate=cq.Vector(37.1, 0, 0))\n            .polyline([[0.0, -12.5], [0.0, 12.5], [46.512, 8.938], [64.6, 0.0], [46.512, -8.938]])\n            .close()\n            .extrude(7.15)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 2.0973514707007048e-07,
+    "components": 1,
+    "nodes": 542
+   },
+   "numbers_ok": null,
+   "changed": true,
+   "cluster": 1,
+   "robustness": 1.0
+  },
+  {
+   "name": "mcts1-diversify",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .circle(64.6 / 2)\n    .extrude(27.9 / 2, both=True)\n    .faces(\">Z\").workplane()\n    .circle(16.92)\n    .workplane(offset=9.0)\n    .circle(1.5)\n    .loft(combine=True)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 10.375), rotate=cq.Vector(0, 0, 0.0))\n            .transformed(offset=cq.Vector(5.64, 0, 0), rotate=cq.Vector(37.1, 0, 0))\n            .polyline([[0.0, -12.5], [0.0, 12.5], [46.512, 8.938], [64.6, 0.0], [46.512, -8.938]])\n            .close()\n            .extrude(7.15)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 10.375), rotate=cq.Vector(0, 0, 180.0))\n            .transformed(offset=cq.Vector(5.64, 0, 0), rotate=cq.Vector(37.1, 0, 0))\n            .polyline([[0.0, -12.5], [0.0, 12.5], [46.512, 8.938], [64.6, 0.0], [46.512, -8.938]])\n            .close()\n            .extrude(7.15)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.7554232126898198e-07,
+    "components": 1,
+    "nodes": 591
+   },
+   "numbers_ok": null,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "mcts2-diversify",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XZ\")\n    .polyline([(0, -13.95), (64.6 / 2, -13.95), (64.6 / 2, 13.95), (0, 13.95)])\n    .close()\n    .revolve(360, (0, 0), (0, 1))\n    .faces(\">Z\").workplane()\n    .circle(16.92)\n    .workplane(offset=9.0)\n    .circle(1.5)\n    .loft(combine=True)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 10.375), rotate=cq.Vector(0, 0, 0.0))\n            .transformed(offset=cq.Vector(5.64, 0, 0), rotate=cq.Vector(37.1, 0, 0))\n            .polyline([[0.0, -12.5], [0.0, 12.5], [46.512, 8.938], [64.6, 0.0], [46.512, -8.938]])\n            .close()\n            .extrude(7.15)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 10.375), rotate=cq.Vector(0, 0, 180.0))\n            .transformed(offset=cq.Vector(5.64, 0, 0), rotate=cq.Vector(37.1, 0, 0))\n            .polyline([[0.0, -12.5], [0.0, 12.5], [46.512, 8.938], [64.6, 0.0], [46.512, -8.938]])\n            .close()\n            .extrude(7.15)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.7753989890601875e-07,
+    "components": 1,
+    "nodes": 599
+   },
+   "numbers_ok": null,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 0.0
+  },
+  {
+   "name": "rag",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(27.9, 32.3)\n    .faces(\">Z\").workplane()\n    .circle(16.92)\n    .workplane(offset=9.0)\n    .circle(1.5)\n    .loft(combine=True)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 10.375), rotate=cq.Vector(0, 0, 0.0))\n            .transformed(offset=cq.Vector(5.64, 0, 0), rotate=cq.Vector(37.1, 0, 0))\n            .polyline([[0.0, -12.5], [0.0, 12.5], [46.512, 8.938], [64.6, 0.0], [46.512, -8.938]])\n            .close()\n            .extrude(7.15)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 10.375), rotate=cq.Vector(0, 0, 180.0))\n            .transformed(offset=cq.Vector(5.64, 0, 0), rotate=cq.Vector(37.1, 0, 0))\n            .polyline([[0.0, -12.5], [0.0, 12.5], [46.512, 8.938], [64.6, 0.0], [46.512, -8.938]])\n            .close()\n            .extrude(7.15)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.76769374190141e-07,
+    "components": 1,
+    "nodes": 593
+   },
+   "numbers_ok": null,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  }
+ ]
+}

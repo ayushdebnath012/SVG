@@ -1,0 +1,18 @@
+*RESTART, READ
+*STEP, INC=1000000
+*Static
+1e-05,1.0,1e-08,0.1
+*RESTART, WRITE
+*BOUNDARY
+ConstraintDisplacement,1,1,0.1432456753377337
+*BOUNDARY
+ConstraintDisplacement,3,3,0.8913156769933359
+*BOUNDARY
+ConstraintFixed,1,3,0
+*NODE FILE
+U
+*NODE PRINT, NSET=ConstraintDisplacement,Totals=Only
+RF
+*NODE PRINT, NSET=ConstraintFixed,Totals=Only
+RF
+*END STEP

@@ -1,0 +1,34 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "Qwen/Qwen3.5-35B-A3B-FP8",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .polyline([(100.0, 0.0), (100.0, 240.9), (58.7, 348.4902), (58.7, 465.8902), (100.0, 802.2517), (100.0, 970.3517), (123.2, 970.3517), (123.2, 802.2517), (81.9, 465.8902), (81.9, 348.4902), (123.2, 240.9), (123.2, 0.0)])\\n    .close()\\n    .revolve(360, (0, 0, 0), (0, 1, 0))\\n)\\nshow_object(result)\", \"instruction\": \"Rotate the entire part by 90 degrees about the X axis.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"23f67e4f98c458f94cef856db8007bcebd533a6143a9929565fed2a26d7ce0dd\", \"instruction\": \"Rotate the entire part by 90 degrees about the X axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\\\"], \\\"start\\\": 11}]}\", \"strategies\": [], \"context\": [\"11: show_object(result)\"]}, {\"task_id\": \"ab6b79a16fa48fbb56319a4ac5870f5073a5c456dd0d19dbd550948b0b73f341\", \"instruction\": \"Rotate the entire part by 90 degrees about the X axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\\\"], \\\"start\\\": 7}]}\", \"strategies\": [], \"context\": [\"7: show_object(result)\"]}, {\"task_id\": \"b9b1d7365ad9cbdd8c1d9f3cedbfbc263cbdd075dcbe0dc6fe90fff83e53de9e\", \"instruction\": \"Rotate the entire part by 90 degrees about the X axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\\\"], \\\"start\\\": 12}]}\", \"strategies\": [], \"context\": [\"12: show_object(result)\"]}]}"
+   }
+  ],
+  "temperature": 0.6,
+  "top_p": 0.95,
+  "top_k": 20,
+  "max_tokens": 8192
+ },
+ "usage": {
+  "prompt_tokens": 798,
+  "total_tokens": 6944,
+  "completion_tokens": 6146,
+  "prompt_tokens_details": null,
+  "completion_tokens_details": {
+   "reasoning_tokens": 5989
+  }
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "\n\n{\n  \"steps\": [\n    \"Construct the base geometry using Workplane, polyline, close, and revolve operations.\",\n    \"Apply a 90-degree rotation around the X-axis to the `result` variable.\",\n    \"Display the final `result` object using `show_object`.\"\n  ],\n  \"invariants\": [\n    \"Polyline vertex coordinates remain unchanged.\",\n    \"Revolve axis (0, 1, 0) and angle (360) remain unchanged.\",\n    \"Import statement `import cadquery as cq` remains unchanged.\"\n  ],\n  \"dependencies\": [\n    [0, 1],\n    [1, 2]\n  ]\n}"
+}

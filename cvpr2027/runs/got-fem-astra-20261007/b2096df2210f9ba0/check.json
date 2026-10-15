@@ -1,0 +1,71 @@
+{
+ "id": "b2096df2210f9ba0d42adf9b729fddc81fa7ff17f085dfbb9fb1d5d54eb02a2e",
+ "source_fem": {
+  "ok": true,
+  "compliance": 9.208157715277159e-07,
+  "components": 1,
+  "nodes": 710
+ },
+ "candidates": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .circle(8.0)\n    .extrude(22.0, taper=9.293)\n    .rotate((0, 0, 0), (1, 1, 0), 60)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 0.00038990269278372256,
+    "components": 1,
+    "nodes": 504
+   },
+   "consensus": 4,
+   "numbers_ok": true,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt1",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .circle(8.0)\n    .extrude(22.0, taper=9.293)\n    .rotate((0, 0, 0), (1, 1, 0), 60)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 0.00038990177094681675,
+    "components": 1,
+    "nodes": 504
+   },
+   "consensus": 4,
+   "numbers_ok": true,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt2",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .circle(8.0)\n    .extrude(22.0, taper=9.293)\n)\nresult = result.rotate((0, 0, 0), (1, 1, 0), 60)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 0.0003899026927823327,
+    "components": 1,
+    "nodes": 504
+   },
+   "consensus": 4,
+   "numbers_ok": true,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt3",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .circle(8.0)\n    .extrude(22.0, taper=9.293)\n)\nresult = result.newObject([result.val().rotate((0, 0, 0), (1, 1, 0), 60)])\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 0.0003899026927828661,
+    "components": 1,
+    "nodes": 504
+   },
+   "consensus": 4,
+   "numbers_ok": true,
+   "changed": true,
+   "error": null
+  }
+ ]
+}

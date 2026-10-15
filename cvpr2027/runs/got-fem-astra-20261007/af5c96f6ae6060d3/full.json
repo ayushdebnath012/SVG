@@ -1,0 +1,85 @@
+{
+ "source_fem": {
+  "ok": true,
+  "compliance": 9.870830121242354e-07,
+  "components": 1,
+  "nodes": 2625
+ },
+ "nodes": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(11.4, 32.8)\n    .faces(\">Z\").workplane()\n    .circle(21.3)\n    .extrude(48.8)\n    .faces(\">Z\").workplane()\n    .circle(9.4)\n    .extrude(29.4)\n    .faces(\">Z\").workplane()\n    .circle(7.1)\n    .extrude(6.9)\n    .faces(\">Z\")\n    .chamfer(1.5)\n    .faces(\"<Z\")\n    .faces(\"<Z\").workplane()\n    .hole(4.9)\n)\nresult = result.cut(\n    cq.Workplane(\"XZ\")\n    .pushPoints([(0, 25 - 11.4 / 2), (0, 45 - 11.4 / 2)])\n    .circle(4)\n    .extrude(40, both=True)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.0240552029835552e-06,
+    "components": 1,
+    "nodes": 5310
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "alt1",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(11.4, 32.8)\n    .faces(\">Z\").workplane()\n    .circle(21.3)\n    .extrude(48.8)\n    .faces(\">Z\").workplane()\n    .circle(9.4)\n    .extrude(29.4)\n    .faces(\">Z\").workplane()\n    .circle(7.1)\n    .extrude(6.9)\n    .faces(\">Z\")\n    .chamfer(1.5)\n    .faces(\"<Z\")\n    .faces(\"<Z\").workplane()\n    .hole(4.9)\n)\nresult = result.cut(\n    cq.Workplane(\"YZ\")\n    .pushPoints([(0, 19.3), (0, 39.3)])\n    .circle(4.0)\n    .extrude(40, both=True)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.0249366817609205e-06,
+    "components": 1,
+    "nodes": 5641
+   },
+   "numbers_ok": false,
+   "changed": true,
+   "cluster": null,
+   "robustness": null
+  },
+  {
+   "name": "alt2",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(11.4, 32.8)\n    .faces(\">Z\").workplane()\n    .circle(21.3)\n    .extrude(48.8)\n    .faces(\">Z\").workplane()\n    .circle(9.4)\n    .extrude(29.4)\n    .faces(\">Z\").workplane()\n    .circle(7.1)\n    .extrude(6.9)\n    .faces(\">Z\")\n    .chamfer(1.5)\n    .faces(\"<Z\")\n    .faces(\"<Z\").workplane()\n    .hole(4.9)\n)\nresult = result.cut(\n    cq.Workplane(\"XZ\")\n    .pushPoints([(0, 19.3), (0, 39.3)])\n    .circle(4.0)\n    .extrude(40, both=True)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.024021654203076e-06,
+    "components": 1,
+    "nodes": 5315
+   },
+   "numbers_ok": false,
+   "changed": true,
+   "cluster": null,
+   "robustness": null
+  },
+  {
+   "name": "alt3",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(11.4, 32.8)\n    .faces(\">Z\").workplane()\n    .circle(21.3)\n    .extrude(48.8)\n    .faces(\">Z\").workplane()\n    .circle(9.4)\n    .extrude(29.4)\n    .faces(\">Z\").workplane()\n    .circle(7.1)\n    .extrude(6.9)\n    .faces(\">Z\")\n    .chamfer(1.5)\n    .faces(\"<Z\")\n    .faces(\"<Z\").workplane()\n    .hole(4.9)\n)\nresult = result.cut(\n    cq.Workplane(\"YZ\").center(0, 19.3).circle(4.0).extrude(40, both=True)\n)\nresult = result.cut(\n    cq.Workplane(\"XZ\").center(0, 39.3).circle(4.0).extrude(40, both=True)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.027034300405138e-06,
+    "components": 1,
+    "nodes": 5946
+   },
+   "numbers_ok": false,
+   "changed": true,
+   "cluster": null,
+   "robustness": null
+  },
+  {
+   "name": "rag",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(11.4, 32.8)\n    .faces(\">Z\").workplane()\n    .circle(21.3)\n    .extrude(48.8)\n    .faces(\">Z\").workplane()\n    .circle(9.4)\n    .extrude(29.4)\n    .faces(\">Z\").workplane()\n    .circle(7.1)\n    .extrude(6.9)\n    .faces(\">Z\")\n    .chamfer(1.5)\n    .faces(\"<Z\")\n    .faces(\"<Z\").workplane()\n    .hole(4.9)\n)\nfor _z in (19.3, 39.3):\n    result = result.cut(\n        cq.Workplane('XY')\n        .transformed(offset=cq.Vector(0, 0, _z), rotate=cq.Vector(90, 0, 0))\n        .cylinder(60.0, 4.0)\n    )\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.0241924644843411e-06,
+    "components": 1,
+    "nodes": 5282
+   },
+   "numbers_ok": false,
+   "changed": true,
+   "cluster": null,
+   "robustness": null
+  }
+ ]
+}

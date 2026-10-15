@@ -1,0 +1,60 @@
+INPUT FILE /Users/ayushdebnath/SVG/cvpr2027/runs/astra-failure-hunt-20261015/B-FEMCAD-067/replay/inputs/task.json
+{
+  "task_id": "B-FEMCAD-067",
+  "track": "B",
+  "tier": "source_backed_pilot",
+  "family": "femcad-hard",
+  "title": "Thick-walled tube heated on an inner band",
+  "physics": [
+    "Heat Transfer"
+  ],
+  "prompt": "CAD + FEM task. Build the part with a CAD script and write it as part.step in millimetres in exactly the coordinate frame given (multi-region models: one STEP with one solid per region and shared, coincident interface faces; 2-D models: planar faces in the z = 0 plane); then analyse YOUR model with any open-source FEM library, set up exactly as under Analysis. main.py must run both steps (artifact contract below). Report mesh-converged values (each changes by less than 1 % under refinement). Your results are compared with the reference analysis.\n\nGeometry. Tube about z, units mm: inner radius 20, outer radius 100, z in [0, 140]; split the bore surface at z = 40 and z = 100 so the heated band is its own face.\n\nAnalysis. Steady conduction, k = 52 W/(m K). Heat flux 5e5 W/m^2 into the solid through the bore band 40 <= z <= 100; T = 273.15 K on z = 0, z = 140 and r = 100; the rest of the bore insulated.\nThe evaluator aligns part.step to a reference solid built from this specification (bounding-box centres, the 24 proper axis rotations; mirror images are not accepted) and requires a relative symmetric volume difference of at most 2 %; it separately reviews features, regions and boundary-condition faces.\n\nOutputs:\n- T_probe_K [K]: temperature at (r, z) = (40, 40)\n\nSubmit results.json containing exactly an outputs object with these numeric keys. Also submit main.py, part.step, mesh.msh, fields.npz, solver.log, refinement.json and environment.json. See candidate README for the artifact contract. Correct numerical answers alone do not establish workflow completion.",
+  "inputs": [
+    {
+      "path": "tasks/B-FEMCAD-067/figure-1.gif",
+      "role": "figure",
+      "bytes": 50011,
+      "sha256": "b13c5a324d87fb9a3e1a086988ec1646adf48a5de29b4195e280a1fc4f8172ad"
+    }
+  ],
+  "outputs": [
+    {
+      "key": "T_probe_K",
+      "unit": "K",
+      "definition": "temperature at (r, z) = (40, 40)"
+    }
+  ],
+  "complexity": {
+    "model_kind": "3-D solid",
+    "assembly": false
+  },
+  "source": {
+    "name": "Wolfram FEM documentation: Heat Transfer Verification Tests",
+    "url": "https://reference.wolfram.com/language/PDEModels/tutorial/HeatTransfer/HeatTransferVerificationTests.html",
+    "license": "Wolfram documentation (copyright Wolfram Research); figures not redistributable",
+    "redistributable": false
+  },
+  "status": "active",
+  "engineering_family": "femcad-hard",
+  "readiness": {
+    "independently_reproduced": false,
+    "workflow_scoring": "trusted_review_required",
+    "tolerances": "provisional_source_protocol"
+  },
+  "required_artifacts": [
+    "results.json",
+    "main.py",
+    "part.step",
+    "mesh.msh",
+    "fields.npz",
+    "solver.log",
+    "refinement.json",
+    "environment.json"
+  ]
+}
+
+CAD units mm; axisymmetric conduction calculation in SI units.
+Single isotropic solid; k=52 W/(m K); bore-band inward heat flux=500000 W/m^2.
+Dirichlet T=273.15 K on both ends and outer cylinder; other bore faces insulated.
+CAD volume (mm^3): 4222300.52642; faces: 6
+Exported STEP face inventory: [{"tag": 1, "type": "Plane", "bbox_mm": [-100.0000001, -100.0000001, -1e-07, 100.0000001, 100.0000001, 1e-07], "area_mm2": 30159.289474462013}, {"tag": 2, "type": "Cylinder", "bbox_mm": [-100.0000001, -100.0000001, -1e-07, 100.0000001, 100.0000001, 140.0000001], "area_mm2": 87964.5943005084}, {"tag": 3, "type": "Plane", "bbox_mm": [-100.0000001, -100.0000001, 139.9999999, 100.0000001, 100.0000001, 140.0000001], "area_mm2": 30159.289474462013}, {"tag": 4, "type": "Cylinder", "bbox_mm": [-20.0000001, -20.0000001, 99.9999999, 20.0000001, 20.0000001, 140.0000001], "area_mm2": 5026.548245744}, {"tag": 5, "type": "Cylinder", "bbox_mm": [-20.0000001, -20.0000001, 39.9999999, 20.0000001, 20.0000001, 100.0000001], "area_mm2": 7539.822368616001}, {"tag": 6, "type": "Cylinder", "bbox_mm": [-20.0000001, -20.0000001, -1e-07, 20.0000001, 20.0000001, 40.0000001], "area_mm2": 5026.548245744}]

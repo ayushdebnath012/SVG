@@ -1,0 +1,46 @@
+{
+ "id": "07b7f981e2677d31d64722ce48afce6682797e4752ad5351d07de31228c34847",
+ "source_fem": {
+  "ok": true,
+  "compliance": 1.5467792146109648e-07,
+  "components": 1,
+  "nodes": 1408
+ },
+ "nodes": [
+  {
+   "name": "vanilla",
+   "parent": null,
+   "visits": 1,
+   "value_sum": 1.0,
+   "eval": {
+    "gates": true,
+    "fem": {
+     "ok": true,
+     "compliance": 3.6816486204630236e-07,
+     "components": 1,
+     "nodes": 1412
+    },
+    "numbers_ok": true,
+    "changed": true,
+    "error": null,
+    "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(21.0, 11.0, 7.5)\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(-6.0, 0, 1.25), rotate=cq.Vector(0, 0, 0))\n            .polygon(6, 2.0321)\n            .extrude(5.4, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0, 1.25), rotate=cq.Vector(0, 0, 0))\n            .polygon(6, 2.6094)\n            .extrude(5.4, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(6.0, 0, 1.25), rotate=cq.Vector(0, 0, 0))\n            .polygon(6, 3.1868)\n            .extrude(5.4, both=True)\n    )\n)\nresult = result.rotate((0, 0, 0), (1, 0, 0), 90)\nshow_object(result)\n"
+   }
+  }
+ ],
+ "candidates": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(21.0, 11.0, 7.5)\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(-6.0, 0, 1.25), rotate=cq.Vector(0, 0, 0))\n            .polygon(6, 2.0321)\n            .extrude(5.4, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0, 1.25), rotate=cq.Vector(0, 0, 0))\n            .polygon(6, 2.6094)\n            .extrude(5.4, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(6.0, 0, 1.25), rotate=cq.Vector(0, 0, 0))\n            .polygon(6, 3.1868)\n            .extrude(5.4, both=True)\n    )\n)\nresult = result.rotate((0, 0, 0), (1, 0, 0), 90)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 3.6816486204630236e-07,
+    "components": 1,
+    "nodes": 1412
+   },
+   "consensus": 1,
+   "numbers_ok": true,
+   "changed": true
+  }
+ ]
+}

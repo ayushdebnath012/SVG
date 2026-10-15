@@ -1,0 +1,63 @@
+{
+ "id": "51b6a18ad24356d6cf8fbb89e63aa6af95e8db5481bad7a35869dfb7ac04bb6e",
+ "source_fem": {
+  "ok": true,
+  "compliance": 1.767720812745793e-06,
+  "components": 1,
+  "nodes": 2106
+ },
+ "candidates": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polyline([(10.795, 0.0), (22.0, 0.0), (25.3, 0.0), (25.3, 3.3), (22.0, 3.3), (13.7, 9.4), (22.0, 15.5), (13.7, 21.6), (22.0, 27.7), (13.7, 33.8), (22.0, 39.9), (13.7, 46.0), (22.0, 52.1), (13.7, 58.2), (22.0, 64.3), (13.7, 70.4), (22.0, 76.5), (13.7, 82.6), (22.0, 88.7), (25.3, 92.0), (22.0, 92.0), (10.795, 92.0), (10.795, 0.0)])\n    .close()\n    .revolve(360, (0, 0, 0), (0, 1, 0))\n    .faces(\">Y\").workplane()\n    .hole(23.0)\n    .faces(\">Y\").workplane()\n    .polarArray(23.815, 0, 360, 6)\n    .circle(1.05)\n    .cutBlind(-3.3)\n    .faces(\"<Y\").workplane()\n    .polarArray(23.815, 0, 360, 6)\n    .circle(1.05)\n    .cutBlind(-3.3)\n)\nresult = result.union(\n    cq.Workplane(\"XZ\", origin=(0, 49, 0))\n    .circle(35.0)\n    .circle(26.0)\n    .extrude(6.0)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": false,
+    "error": "ValueError: Unanchored disconnected component"
+   },
+   "consensus": 2,
+   "numbers_ok": true,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt1",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polyline([(10.795, 0.0), (22.0, 0.0), (25.3, 0.0), (25.3, 3.3), (22.0, 3.3), (13.7, 9.4), (22.0, 15.5), (13.7, 21.6), (22.0, 27.7), (13.7, 33.8), (22.0, 39.9), (13.7, 46.0), (22.0, 52.1), (13.7, 58.2), (22.0, 64.3), (13.7, 70.4), (22.0, 76.5), (13.7, 82.6), (22.0, 88.7), (25.3, 92.0), (22.0, 92.0), (10.795, 92.0), (10.795, 0.0)])\n    .close()\n    .revolve(360, (0, 0, 0), (0, 1, 0))\n    .faces(\">Y\").workplane()\n    .hole(23.0)\n    .faces(\">Y\").workplane()\n    .polarArray(23.815, 0, 360, 6)\n    .circle(1.05)\n    .cutBlind(-3.3)\n    .faces(\"<Y\").workplane()\n    .polarArray(23.815, 0, 360, 6)\n    .circle(1.05)\n    .cutBlind(-3.3)\n)\nring = (\n    cq.Workplane(cq.Plane(origin=(0, 43, 0), xDir=(1, 0, 0), normal=(0, 1, 0)))\n    .circle(35).circle(26).extrude(6)\n )\nresult = result.union(ring)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": false,
+    "error": "ValueError: Unanchored disconnected component"
+   },
+   "consensus": 2,
+   "numbers_ok": true,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt2",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polyline([(10.795, 0.0), (22.0, 0.0), (25.3, 0.0), (25.3, 3.3), (22.0, 3.3), (13.7, 9.4), (22.0, 15.5), (13.7, 21.6), (22.0, 27.7), (13.7, 33.8), (22.0, 39.9), (13.7, 46.0), (22.0, 52.1), (13.7, 58.2), (22.0, 64.3), (13.7, 70.4), (22.0, 76.5), (13.7, 82.6), (22.0, 88.7), (25.3, 92.0), (22.0, 92.0), (10.795, 92.0), (10.795, 0.0)])\n    .close()\n    .revolve(360, (0, 0, 0), (0, 1, 0))\n    .faces(\">Y\").workplane()\n    .hole(23.0)\n    .faces(\">Y\").workplane()\n    .polarArray(23.815, 0, 360, 6)\n    .circle(1.05)\n    .cutBlind(-3.3)\n    .faces(\"<Y\").workplane()\n    .polarArray(23.815, 0, 360, 6)\n    .circle(1.05)\n    .cutBlind(-3.3)\n)\nring = (\n    cq.Workplane(cq.Plane(origin=(0, 46, 0), xDir=(1, 0, 0), normal=(0, 1, 0)))\n    .circle(35).circle(26).extrude(6)\n )\nresult = result.union(ring)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": false,
+    "error": "ValueError: Unanchored disconnected component"
+   },
+   "consensus": 1,
+   "numbers_ok": true,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt3",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polyline([(10.795, 0.0), (22.0, 0.0), (25.3, 0.0), (25.3, 3.3), (22.0, 3.3), (13.7, 9.4), (22.0, 15.5), (13.7, 21.6), (22.0, 27.7), (13.7, 33.8), (22.0, 39.9), (13.7, 46.0), (22.0, 52.1), (13.7, 58.2), (22.0, 64.3), (13.7, 70.4), (22.0, 76.5), (13.7, 82.6), (22.0, 88.7), (25.3, 92.0), (22.0, 92.0), (10.795, 92.0), (10.795, 0.0)])\n    .close()\n    .revolve(360, (0, 0, 0), (0, 1, 0))\n    .faces(\">Y\").workplane()\n    .hole(23.0)\n    .faces(\">Y\").workplane()\n    .polarArray(23.815, 0, 360, 6)\n    .circle(1.05)\n    .cutBlind(-3.3)\n    .faces(\"<Y\").workplane()\n    .polarArray(23.815, 0, 360, 6)\n    .circle(1.05)\n    .cutBlind(-3.3)\n)\nring = (\n    cq.Workplane(cq.Plane(origin=(0, 40, 0), xDir=(1, 0, 0), normal=(0, 1, 0)))\n    .circle(35).circle(26).extrude(6)\n )\nresult = result.union(ring)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": false,
+    "error": "ValueError: Unanchored disconnected component"
+   },
+   "consensus": 1,
+   "numbers_ok": true,
+   "changed": true,
+   "error": null
+  }
+ ]
+}

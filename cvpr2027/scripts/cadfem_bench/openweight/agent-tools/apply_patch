@@ -1,0 +1,112 @@
+#!/usr/bin/env python3
+"""apply_patch: apply a patch in the '*** Begin Patch' format (Add File / Update File / Delete File, @@ hunks with
+' ', '-', '+' lines) to files below the current directory. Reads the patch from argv[1] or stdin.
+Offered to every model in the CADFEM-Bench open-weight harness (gpt-oss is trained to edit files this way)."""
+import sys
+from pathlib import Path
+
+ROOT = Path.cwd().resolve()
+
+
+def die(msg):
+    print(f"apply_patch error: {msg}", file=sys.stderr)
+    sys.exit(1)
+
+
+def safe(rel):
+    p = (ROOT / rel.strip()).resolve()
+    if not p.is_relative_to(ROOT):
+        die(f"path outside the working directory: {rel}")
+    return p
+
+
+def find(src, old, start):
+    for strip in (False, True):
+        key = [x.rstrip() for x in old] if strip else old
+        for k in list(range(start, len(src) - len(old) + 1)) + list(range(0, min(start, len(src) - len(old) + 1))):
+            seg = src[k:k + len(old)]
+            if (([x.rstrip() for x in seg] if strip else seg) == key):
+                return k
+    return -1
+
+
+def main():
+    text = sys.argv[1] if len(sys.argv) > 1 else sys.stdin.read()
+    lines = text.splitlines()
+    try:
+        i = next(k for k, l in enumerate(lines) if l.strip() == "*** Begin Patch") + 1
+    except StopIteration:
+        die("the patch must start with '*** Begin Patch'")
+    done = []
+    while i < len(lines):
+        l = lines[i]
+        if l.strip() == "*** End Patch":
+            break
+        if l.startswith("*** Add File: "):
+            p = safe(l[len("*** Add File: "):])
+            i += 1
+            body = []
+            while i < len(lines) and not lines[i].startswith("*** "):
+                body.append(lines[i][1:] if lines[i].startswith("+") else lines[i])
+                i += 1
+            p.parent.mkdir(parents=True, exist_ok=True)
+            p.write_text("\n".join(body) + "\n")
+            done.append(f"A {p.relative_to(ROOT)}")
+        elif l.startswith("*** Delete File: "):
+            p = safe(l[len("*** Delete File: "):])
+            if not p.is_file():
+                die(f"no such file: {p.relative_to(ROOT)}")
+            p.unlink()
+            done.append(f"D {p.relative_to(ROOT)}")
+            i += 1
+        elif l.startswith("*** Update File: "):
+            p = safe(l[len("*** Update File: "):])
+            if not p.is_file():
+                die(f"no such file: {p.relative_to(ROOT)}")
+            i += 1
+            dest = p
+            if i < len(lines) and lines[i].startswith("*** Move to: "):
+                dest = safe(lines[i][len("*** Move to: "):])
+                i += 1
+            hunks, cur = [], None
+            while i < len(lines) and not (lines[i].startswith("*** ") and lines[i].strip() != "*** End of File"):
+                s = lines[i]
+                if s.startswith("@@"):
+                    cur = []
+                    hunks.append(cur)
+                elif s.strip() != "*** End of File":
+                    if cur is None:
+                        cur = []
+                        hunks.append(cur)
+                    cur.append(s)
+                i += 1
+            src = p.read_text().split("\n")
+            pos = 0
+            for n, h in enumerate(hunks, 1):
+                old = [x[1:] if x[:1] in (" ", "-") else x for x in h if not x.startswith("+")]
+                new = [x[1:] if x[:1] in (" ", "+") else x for x in h if not x.startswith("-")]
+                while old and old[-1] == "" and new and new[-1] == "":
+                    old, new = old[:-1], new[:-1]
+                if not old:
+                    src[pos:pos] = new
+                    pos += len(new)
+                    continue
+                k = find(src, old, pos)
+                if k < 0:
+                    die(f"hunk {n} of {p.relative_to(ROOT)} does not match the file; first expected line: {old[0]!r}")
+                src[k:k + len(old)] = new
+                pos = k + len(new)
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            dest.write_text("\n".join(src))
+            if dest != p:
+                p.unlink()
+            done.append(f"M {dest.relative_to(ROOT)}")
+        else:
+            i += 1
+    if not done:
+        die("no file operations found")
+    print("Done!\n" + "\n".join(done))
+
+
+if __name__ == "__main__":
+    main()

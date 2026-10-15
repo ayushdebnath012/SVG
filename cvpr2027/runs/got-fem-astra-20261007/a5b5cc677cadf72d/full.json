@@ -1,0 +1,73 @@
+{
+ "source_fem": {
+  "ok": false,
+  "error": "Exception: The 1D mesh seems not to be forming a closed loop"
+ },
+ "nodes": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XZ\")\n    .moveTo(0.0, 0.0)\n    .lineTo(2.0, 0.0)\n    .lineTo(2.0, 20.0)\n    .lineTo(3.2, 20.0)\n    .threePointArc((2.7712, 21.3), (0.0, 22.6))\n    .close()\n    .revolve(360, (0, 0, 0), (0, 1, 0))\n)\nresult = result.rotate((0, 0, 0), (1, 0, 0), 90)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": false,
+    "error": "Exception: The 1D mesh seems not to be forming a closed loop"
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "alt1",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XZ\")\n    .moveTo(0.0, 0.0)\n    .lineTo(2.0, 0.0)\n    .lineTo(2.0, 20.0)\n    .lineTo(3.2, 20.0)\n    .threePointArc((2.7712, 21.3), (0.0, 22.6))\n    .close()\n    .revolve(360, (0, 0, 0), (0, 1, 0))\n    .rotate((0, 0, 0), (1, 0, 0), 90)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": false,
+    "error": "Exception: The 1D mesh seems not to be forming a closed loop"
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "alt2",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XZ\")\n    .moveTo(0.0, 0.0)\n    .lineTo(2.0, 0.0)\n    .lineTo(2.0, 20.0)\n    .lineTo(3.2, 20.0)\n    .threePointArc((2.7712, 21.3), (0.0, 22.6))\n    .close()\n    .revolve(360, (0, 0, 0), (0, 1, 0))\n)\nresult = result.rotate((0, 0, 0), (1, 0, 0), 90)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": false,
+    "error": "Exception: The 1D mesh seems not to be forming a closed loop"
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "alt3",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XZ\")\n    .moveTo(0.0, 0.0)\n    .lineTo(2.0, 0.0)\n    .lineTo(2.0, 20.0)\n    .lineTo(3.2, 20.0)\n    .threePointArc((2.7712, 21.3), (0.0, 22.6))\n    .close()\n    .revolve(360, (0, 0, 0), (0, 1, 0))\n)\nresult = result.newObject([result.val().moved(cq.Location(cq.Vector(0, 0, 0), cq.Vector(1, 0, 0), 90))])\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": false,
+    "error": "Exception: The 1D mesh seems not to be forming a closed loop"
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "rag",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XZ\")\n    .moveTo(0.0, 0.0)\n    .lineTo(2.0, 0.0)\n    .lineTo(2.0, 20.0)\n    .lineTo(3.2, 20.0)\n    .threePointArc((2.7712, 21.3), (0.0, 22.6))\n    .close()\n    .revolve(360, (0, 0, 0), (0, 1, 0))\n)\nresult = result.rotate((0,0,0), (1,0,0), 90)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": false,
+    "error": "Exception: The 1D mesh seems not to be forming a closed loop"
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  }
+ ]
+}

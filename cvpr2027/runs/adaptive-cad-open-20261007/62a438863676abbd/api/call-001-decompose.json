@@ -1,0 +1,34 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "Qwen/Qwen3.5-35B-A3B-FP8",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .polyline([[10.96, 10.96], [27.4, 10.96], [27.4, -10.96], [10.96, -10.96], [10.96, -27.4], [-10.96, -27.4], [-10.96, -10.96], [-27.4, -10.96], [-27.4, 10.96], [-10.96, 10.96], [-10.96, 27.4], [10.96, 27.4]])\\n    .close()\\n    .extrude(7.4)\\n)\\nshow_object(result)\", \"instruction\": \"Each of the four arms of the cross tapers from full thickness at the central core down to zero thickness at a new shorter tip. The underside of each arm slopes upward at 45 degrees from horizontal, and the outer half of each arm is gone.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"b2573cb2b599ae4893f704d346249ea55a637d38ac9b2b50890f9a0967ad96bb\", \"instruction\": \"At the top of the central pillar, the outer 5 mm strip of the top surface slopes downward at 30 degrees from horizontal.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"    .edges(\\\\\\\">Z\\\\\\\")\\\", \\\"    .chamfer(2.8867513459481287, 5.0)\\\"], \\\"start\\\": 29}]}\", \"strategies\": [], \"context\": [\"29:     .faces(\\\">Z\\\").workplane()\"]}, {\"task_id\": \"6c92f5522174a3c7c02071cdf7392628893635e73f8fc2842998a6ecc63d3ff8\", \"instruction\": \"At the top and bottom openings of the central round through-passage, the rim slopes inward at 60 degrees from horizontal, forming a 5 mm wide angled band on each face.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"    .faces(\\\\\\\">Z\\\\\\\").edges(\\\\\\\"%CIRCLE\\\\\\\").chamfer(5.0, 8.6603)\\\", \\\"    .faces(\\\\\\\"<Z\\\\\\\").edges(\\\\\\\"%CIRCLE\\\\\\\").chamfer(5.0, 8.6603)\\\"], \\\"start\\\": 10}]}\", \"strategies\": [], \"context\": [\"10: )\"]}, {\"task_id\": \"7c8e694af6c418b3f74cd6336ee74c474df13f32c9fa84e93f49b98772fd19e9\", \"instruction\": \"Carve a hexagonal pyramidal depression into the top of the nut: the six top edges stay at full height while the top surface slopes inward and downward at 30 degrees from horizontal, meeting at a central low point.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"pyramid = (\\\", \\\"    cq.Workplane(\\\\\\\"XY\\\\\\\")\\\", \\\"    .workplane(offset=15.24)\\\", \\\"    .polygon(6, 0.5)\\\", \\\"    .workplane(offset=18.76)\\\", \\\"    .polygon(6, 75.06)\\\", \\\"    .loft(combine=False)\\\", \\\")\\\", \\\"result = result.cut(pyramid)\\\"], \\\"start\\\": 11}]}\", \"strategies\": [], \"context\": [\"11: show_object(result)\"]}]}"
+   }
+  ],
+  "temperature": 0.6,
+  "top_p": 0.95,
+  "top_k": 20,
+  "max_tokens": 8192
+ },
+ "usage": {
+  "prompt_tokens": 1011,
+  "total_tokens": 1563,
+  "completion_tokens": 552,
+  "prompt_tokens_details": null,
+  "completion_tokens_details": {
+   "reasoning_tokens": 367
+  }
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "\n\n```json\n{\n  \"steps\": [\n    \"Shorten each arm by removing the outer half of the cross shape\",\n    \"Create tapered geometry on each arm from full thickness at center to zero at tip\",\n    \"Add 45-degree upward slope on the underside of each arm\",\n    \"Combine all modified arm features into the final solid\"\n  ],\n  \"invariants\": [\n    \"Central core maintains full thickness at 7.4 units height\",\n    \"XY plane positioning remains unchanged\",\n    \"Central intersection point stays at origin\",\n    \"Material continuity at arm-to-core junctions preserved\"\n  ],\n  \"dependencies\": [\n    [0, 1],\n    [1, 2],\n    [2, 3],\n    [0, 3]\n  ]\n}\n```"
+}

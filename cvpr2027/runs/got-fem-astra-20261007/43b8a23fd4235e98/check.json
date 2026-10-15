@@ -1,0 +1,61 @@
+{
+ "id": "43b8a23fd4235e983f81ac47ac2d1f3a7770bf6e33da643eee4d7356cfc30884",
+ "source_fem": {
+  "ok": false,
+  "error": "Exception: PLC Error:  A segment and a facet intersect at point"
+ },
+ "candidates": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(11.2, 22.7)\n    .faces(\">Z\").workplane()\n    .circle(9.2)\n    .extrude(24.1)\n)\nresult = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').slot2D(18.16,6.81).cutBlind(-7.06)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": false,
+    "error": "Exception: PLC Error:  A segment and a facet intersect at point"
+   },
+   "consensus": 4,
+   "numbers_ok": false,
+   "changed": false,
+   "error": null
+  },
+  {
+   "name": "alt1",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(11.2, 22.7)\n    .faces(\">Z\").workplane()\n    .circle(9.2)\n    .extrude(24.1)\n)\nresult = result.faces('>Z').workplane(centerOption='CenterOfMass').slot2D(18.16, 6.81).cutBlind(-7.06)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": false,
+    "error": "Exception: PLC Error:  A segment and a facet intersect at point"
+   },
+   "consensus": 4,
+   "numbers_ok": false,
+   "changed": false,
+   "error": null
+  },
+  {
+   "name": "alt2",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(11.2, 22.7)\n    .faces(\">Z\").workplane()\n    .circle(9.2)\n    .extrude(24.1)\n)\nresult = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').slot2D(18.16, 6.81).extrude(-7.06, combine='cut')\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": false,
+    "error": "Exception: PLC Error:  A segment and a facet intersect at point"
+   },
+   "consensus": 4,
+   "numbers_ok": false,
+   "changed": false,
+   "error": null
+  },
+  {
+   "name": "alt3",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(11.2, 22.7)\n    .faces(\">Z\").workplane()\n    .circle(9.2)\n    .extrude(24.1)\n)\nresult = (\n    result.faces('>Z').workplane(centerOption='CenterOfBoundBox')\n    .moveTo(-5.675, -3.405)\n    .lineTo(5.675, -3.405)\n    .threePointArc((9.08, 0), (5.675, 3.405))\n    .lineTo(-5.675, 3.405)\n    .threePointArc((-9.08, 0), (-5.675, -3.405))\n    .close()\n    .cutBlind(-7.06)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": false,
+    "error": "Exception: PLC Error:  A segment and a facet intersect at point"
+   },
+   "consensus": 4,
+   "numbers_ok": false,
+   "changed": false,
+   "error": null
+  }
+ ]
+}

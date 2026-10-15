@@ -1,0 +1,66 @@
+***********************************************************
+*STEP,INC=1000000
+*Static
+1E-8,1,1E-12,0.005
+*RESTART,WRITE,FREQUENCY=1
+
+
+***********************************************************
+** Fixed Constraints
+** written by write_constraints_fixed function
+** ConstraintFixed
+*BOUNDARY
+ConstraintFixed,1
+ConstraintFixed,2
+ConstraintFixed,3
+
+
+***********************************************************
+** Displacement constraint applied
+** written by write_constraints_displacement function
+** ConstraintDisplacement
+*BOUNDARY
+ConstraintDisplacement,1,1,0
+ConstraintDisplacement,2
+ConstraintDisplacement,3,3,0
+
+
+***********************************************************
+** Outputs --> frd file
+** written by write_outputs_types function
+*NODE FILE
+U
+*EL FILE
+S, E
+** outputs --> dat file
+** reaction forces for Constraint fixed
+*NODE PRINT, NSET=ConstraintDisplacement, TOTALS=ONLY
+RF
+
+
+***********************************************************
+** written by write_step_end function
+*END STEP 
+
+**  About units:
+**  See ccx manual, ccx does not know about any unit.
+**  Golden rule: The user must make sure that the numbers he provides have consistent units.
+**  The user is the FreeCAD calculix writer module ;-)
+**
+**  The unit system which is used at Guido Dhondt's company: mm, N, s, K
+**  Since Length and Mass are connected by Force, if Length is mm the Mass is in t to get N
+**  The following units are used to write to inp file:
+**
+**  Length: mm (this includes the mesh geometry)
+**  Mass: t
+**  TimeSpan: s
+**  Temperature: K
+**
+**  This leads to:
+**  Force: N
+**  Pressure: N/mm^2
+**  Density: t/mm^3
+**  Gravity: mm/s^2
+**  Thermal conductivity: t*mm/K/s^3 (same as W/m/K)
+**  Specific Heat: mm^2/s^2/K (same as J/kg/K)
+**

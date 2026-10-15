@@ -1,0 +1,113 @@
+{
+  "collection": "Pipe-flange assembly: shared topology and bonded-contact original solved cases",
+  "geometry_families": 1,
+  "raw_solution_candidates": 2,
+  "native_CAD": [
+    "CAD/SOLIDWORKS/Pipe.SLDPRT",
+    "CAD/SOLIDWORKS/Flange.SLDPRT",
+    "CAD/SOLIDWORKS/Pipe-Flange-Assembly.SLDASM"
+  ],
+  "native_drawing_files": [
+    "CAD/SOLIDWORKS/Pipe.SLDDRW",
+    "CAD/SOLIDWORKS/Flange.SLDDRW"
+  ],
+  "native_CAD_independent_import": false,
+  "original_dimensioned_drawing_images_verified": 1,
+  "dimensioned_flange_image": "Images/CAD/04_flange_detail_drawing_OD60_bore30_8x4.jpeg",
+  "mislabelled_pipe_drawing_image": "Images/CAD/02_pipe_detail_drawing_OD29_80_ID27_00.jpeg",
+  "drawing_units_conflict": "Flange title block says DIMENSIONS ARE IN INCHES; CAD README/deck dimensions use millimeters. No unit correction made.",
+  "source_solver_version": "2026 R1",
+  "source_units": "/units,MPA: mm,N,MPa",
+  "source_geometry_mm": {
+    "pipe_OD": 29.8,
+    "pipe_ID": 27,
+    "pipe_length": 225.11,
+    "flange_OD": 60,
+    "flange_bore": 30,
+    "flange_thickness": 7.53,
+    "bolt_holes_per_flange": 8,
+    "hole_diameter": 4
+  },
+  "material": {
+    "E_MPa": 200000,
+    "poisson": 0.3
+  },
+  "load_N": {
+    "X": -500
+  },
+  "fixed_scope": "16 cylindrical bolt-hole faces; no bolts explicitly modeled",
+  "records": [
+    {
+      "case": "shared_topology",
+      "set": 1,
+      "saved_label": 1.0,
+      "npz": "extracted-original-fields/shared_topology-set-1.npz",
+      "raw_RST": "ANSYS/Workbench/project_connecting_parts_files/dp0/SYS/MECH/file.rst",
+      "nodes": 79219,
+      "elements": 21384,
+      "max_U_source_units": 0.01211995134449237,
+      "max_VM_source_units": 18.912603707353416,
+      "finite_stress_nodes": 22077,
+      "missing_stress_nodes": 57142
+    },
+    {
+      "case": "bonded_contact",
+      "set": 1,
+      "saved_label": 1.0,
+      "npz": "extracted-original-fields/bonded_contact-set-1.npz",
+      "raw_RST": "ANSYS/Workbench/project_connecting_parts_files/dp0/SYS-1/MECH/file.rst",
+      "nodes": 68636,
+      "elements": 54723,
+      "max_U_source_units": 0.01115661175960516,
+      "max_VM_source_units": 19.548393064957846,
+      "finite_stress_nodes": 19488,
+      "missing_stress_nodes": 49148
+    }
+  ],
+  "source_published_peaks": [
+    {
+      "case": "shared_topology",
+      "U_mm": 0.01212,
+      "VM_MPa": 20.357,
+      "reaction_total_N": 500.46
+    },
+    {
+      "case": "bonded_contact",
+      "U_mm": 0.011157,
+      "VM_MPa": 19.548,
+      "reaction_total_N": 500
+    }
+  ],
+  "duplicate_RSTs": [
+    {
+      "direct": "ANSYS/Workbench/project_connecting_parts_files/dp0/SYS/MECH/file.rst",
+      "archive_duplicate": "extracted-original/shared_vs_contact/project_connecting_parts_files/dp0/SYS/MECH/file.rst"
+    },
+    {
+      "direct": "ANSYS/Workbench/project_connecting_parts_files/dp0/SYS-1/MECH/file.rst",
+      "archive_duplicate": "extracted-original/shared_vs_contact/project_connecting_parts_files/dp0/SYS-1/MECH/file.rst"
+    }
+  ],
+  "license": "No explicit data license located; local research only.",
+  "limits": [
+    "Two connection formulations on the same assembly; not two geometry families.",
+    "Direct and archived RSTs are byte-identical; duplicate files add zero cases.",
+    "Both recovered U peaks and bonded VM agree with published rounding; shared recovered averaged VM 18.912604 MPa differs from published 20.357 MPa.",
+    "Publisher stress screenshot uses averaged display with Average Across Bodies=No; exact recovery/revision explanation remains unverified.",
+    "Native SolidWorks/Discovery/SpaceClaim CAD retained but compatible independent import pending.",
+    "File named pipe detail drawing is actually a flange 3D CAD screenshot with no dimensions; not a verified pipe drawing.",
+    "Dimensioned flange image has inch-title-block/mm-model conflict; native SLDDRW drawings unrendered and drawing track held.",
+    "2026 R1 field decoding is exploratory; preserve NaNs for 57142/49148 missing stress nodes."
+  ],
+  "source": "https://github.com/ayushwug24me-sketch/pipe-flange-fea",
+  "source_revision": "55e51e591030730739c9a1fd61496575a090130e",
+  "source_download_files": 99,
+  "generated_CAD": 0,
+  "new_solver_runs": 0,
+  "model_calls": 0,
+  "certified_cases": 0,
+  "benchmark_tracks": {
+    "supplied_CAD_to_FEM": "candidate; freeze exact geometry/load/material/recovery first",
+    "drawing_to_CAD_to_FEM": "held; complete matching dimensioned drawings not verified"
+  }
+}

@@ -1,0 +1,28 @@
+{
+ "kind": "single",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "You edit mechanical CAD. Return only JSON {\"edits\":[{\"start\":0,\"delete\":0,\"insert\":[\"replacement line\"]}]}. Indices are zero-based lines of the ORIGINAL input; operations must be ordered, nonoverlapping and in bounds. Preserve unrelated features. The supplied representation determines syntax. Return no explanation or invented physics results. Geometry execution and FEM checks are performed by external tools; never claim verification."
+   },
+   {
+    "role": "user",
+    "content": "Representation: cadquery\nOriginal CAD (line indices are implicit):\nimport cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(125.1, 60.7, 71.5)\n    .faces(\">Z\")\n    .fillet(1.9)\n    .faces(\">Z\").workplane()\n    .center(0.0, 0.0)\n    .rect(37.8, 127.1)\n    .cutBlind(-29.3)\n    .faces(\"<Z\").workplane()\n    .pushPoints([(50.55, 18.35), (-50.55, 18.35), (50.55, -18.35), (-50.55, -18.35)])\n    .hole(6.2)\n    .faces(\">Y\").workplane()\n    .pushPoints([(31.275, 23.75), (-31.275, 23.75)])\n    .hole(3.5, depth=11.9)\n    .edges(\"|Z\")\n    .fillet(0.8)\n)\nshow_object(result)Edit instruction:\nAdd a raised round boss centered on the top face of the locator block, 30 mm in diameter and 14 mm tall, sitting flush above the existing top and flanking the rectangular pocket."
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 8192
+ },
+ "usage": {
+  "completion_tokens": 54,
+  "prompt_tokens": 419,
+  "total_tokens": 473
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\"edits\":[{\"start\":8,\"delete\":0,\"insert\":[\"    .faces(\\\">Z\\\").workplane()\\n    .circle(15.0)\\n    .extrude(14.0)\\n\"]}]}\n```"
+}

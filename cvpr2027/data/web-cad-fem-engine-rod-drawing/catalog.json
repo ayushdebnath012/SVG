@@ -1,0 +1,88 @@
+{
+  "collection": "Native engine assembly/drawing with two saved connecting-rod FEM cases",
+  "source": "https://github.com/divyamshi-07/IC-engine-Solidworks",
+  "revision": "8d0a8612ebc8261ff113a01ab33655a9afba7398",
+  "geometry": {
+    "valid": true,
+    "solids": 2,
+    "faces": 76,
+    "bounds_mm": [
+      649.7746235135434,
+      743.7746237135433,
+      771.6493696526991,
+      1055.349369652699,
+      1239.9955372029922,
+      1277.9955374029923
+    ],
+    "volume_mm3": 213819.42211011465
+  },
+  "neutral_CAD": "extracted-original/ANSYS_CONNECTINGROD/connecting_rod.STEP",
+  "records": [
+    {
+      "case": "tensile",
+      "raw_RST": "extracted-original/ANSYS_CONNECTINGROD/ConnectingRod_FEA(Tensile Loading)_files/dp0/SYS/MECH/file.rst",
+      "raw_sha256": "4160fc7f5a60f48fcebdd3d58335465dbfb439e0df1c62fee4f78a22838f3aa0",
+      "npz": "extracted-original-fields/tensile.npz",
+      "nodes": 27646,
+      "elements": 17170,
+      "sets": 1,
+      "max_translation_m": 2.2623072977209727e-07,
+      "max_translation_mm": 0.00022623072977209728,
+      "max_averaged_nodal_vm_Pa": 523163.3897043795,
+      "finite_stress_nodes": 4238,
+      "missing_stress_nodes": 23408,
+      "source_units": "/units,MKS; displacement m, stress Pa",
+      "source_traction_cards": [
+        "sfe,all,1,pres,1,0.",
+        "sfe,all,2,pres,1,12391.413196024",
+        "sfe,all,3,pres,1,0."
+      ],
+      "source_deck": "extracted-original/ANSYS_CONNECTINGROD/ConnectingRod_FEA(Tensile Loading)_files/dp0/SYS/MECH/ds.dat",
+      "material": "Two source steel cards E200 GPa, nu0.3, density7850kg/m3",
+      "saved_native_geometry": "extracted-original/ANSYS_CONNECTINGROD/ConnectingRod_FEA(Tensile Loading)_files/dp0/SYS/DM/SYS.scdoc"
+    },
+    {
+      "case": "opposite_loading",
+      "raw_RST": "extracted-original/ANSYS_CONNECTINGROD/ConnectingRod_FEA_files/dp0/SYS/MECH/file.rst",
+      "raw_sha256": "d0b6f292e3b37da9eb21e0c4b6aab59692c7b1f4515cc5a924bcfa8476b3be05",
+      "npz": "extracted-original-fields/opposite_loading.npz",
+      "nodes": 27646,
+      "elements": 17170,
+      "sets": 1,
+      "max_translation_m": 2.2623072977209727e-07,
+      "max_translation_mm": 0.00022623072977209728,
+      "max_averaged_nodal_vm_Pa": 523163.3897043795,
+      "finite_stress_nodes": 4238,
+      "missing_stress_nodes": 23408,
+      "source_units": "/units,MKS; displacement m, stress Pa",
+      "source_traction_cards": [
+        "sfe,all,1,pres,1,0.",
+        "sfe,all,2,pres,1,-12391.413196024",
+        "sfe,all,3,pres,1,0."
+      ],
+      "source_deck": "extracted-original/ANSYS_CONNECTINGROD/ConnectingRod_FEA_files/dp0/SYS/MECH/ds.dat",
+      "material": "Two source steel cards E200 GPa, nu0.3, density7850kg/m3",
+      "saved_native_geometry": "extracted-original/ANSYS_CONNECTINGROD/ConnectingRod_FEA_files/dp0/SYS/DM/SYS.scdoc"
+    }
+  ],
+  "native_cad_raw_FEM_candidates": 2,
+  "geometry_families": 1,
+  "opposite_signed_displacement_and_stress_verified": true,
+  "drawing": "Sheet-1.SLDDRW",
+  "drawing_dimensions_verified": false,
+  "complete_engine_CAD": "Two original SolidWorks assemblies and six original SLDPRT files, plus rod source native assembly/part inside archive",
+  "engine_assembly_FEM_solved": false,
+  "certified_cases": 0,
+  "generated_cad": 0,
+  "new_solver_runs": 0,
+  "model_calls": 0,
+  "license": "No source data license found; local research only.",
+  "limitations": [
+    "Two opposite load cases are one connecting-rod geometry, not two complex engine assemblies.",
+    "Engine assembly and native drawing supplied, but no independent import/dependency/dimension verification yet.",
+    "Valid neutral STEP has two solids. Its exact transformation/revision correspondence to imported SpaceClaim analysis geometry requires review.",
+    "Saved averaged corner-node stresses missing on 23408 of27646 nodes; preserve masks and NaNs, never zero-fill.",
+    "Generic stress recovery and source image legends agree in peak values but do not establish convergence or physical correctness.",
+    "Traction sign and source geometry scope must be matched. Do not infer nonlinear compression/buckling from a linear-static opposite load case."
+  ]
+}

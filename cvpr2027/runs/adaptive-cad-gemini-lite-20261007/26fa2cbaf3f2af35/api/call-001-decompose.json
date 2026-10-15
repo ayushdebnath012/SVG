@@ -1,0 +1,28 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .polyline([(6.16, 0.0), (22.9, 0.0), (10.369, 10.4), (22.615, 20.8), (10.108, 31.2), (21.476, 41.6), (9.847, 52.0), (20.337, 62.4), (9.586, 72.8), (19.197, 83.2), (6.16, 83.2), (6.16, 0.0)])\\n    .close()\\n    .revolve(360, (0, 0, 0), (0, 1, 0))\\n)\\nshow_object(result)\", \"instruction\": \"Increase the bellows outer radius from 22.9 to 30.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"2c985c0a0e916f2b2793d066665aa75074c7a42571c0a24c34fa8fecb07334c1\", \"instruction\": \"Increase the overall piston outer radius from 28.9 to 36.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 2, \\\"insert\\\": [\\\"    .lineTo(36.0, 0.0)\\\", \\\"    .lineTo(36, 67.1)\\\"], \\\"start\\\": 4}]}\", \"strategies\": [], \"context\": [\"4:     .lineTo(28.9, 0.0)\", \"5:     .lineTo(28.9, 67.1)\"]}, {\"task_id\": \"47c886110e5047cc92fb6a6ea8aee0eedd7122db52c0665b137a5c360127d70c\", \"instruction\": \"Increase the bucket bottom outer radius from 48.4 to 60.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .lineTo(60.0, 0.0)\\\"], \\\"start\\\": 4}]}\", \"strategies\": [], \"context\": [\"4:     .lineTo(48.4, 0.0)\"]}, {\"task_id\": \"337fd19e3616e5bf2759d0b96b419c768943dad812b6e952665e74c478917875\", \"instruction\": \"Increase the cylinder radius from 4.5 to 5.85.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"            .cylinder(50.0, 5.85)\\\"], \\\"start\\\": 7}]}\", \"strategies\": [], \"context\": [\"7:             .cylinder(50.0, 4.5)\"]}]}"
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 4096
+ },
+ "usage": {
+  "completion_tokens": 159,
+  "prompt_tokens": 804,
+  "total_tokens": 963
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\n  \"steps\": [\n    \"Identify the coordinates in the polyline that define the outer radius peaks of the bellows (x-values around 22.9, 22.615, etc.).\",\n    \"Scale or update the outer x-coordinate values in the polyline points from 22.9 to 30.0 (and corresponding peaks proportionally if needed, or specifically the max radius points).\"\n  ],\n  \"invariants\": [\n    \"The inner radius and vertical pitch/height of the bellows remain unchanged.\",\n    \"The total number of convolution ridges remains the same.\"\n  ],\n  \"dependencies\": [\n    [0, 1]\n  ]\n}\n```"
+}

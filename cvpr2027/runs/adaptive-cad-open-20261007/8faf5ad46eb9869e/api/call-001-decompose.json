@@ -1,0 +1,34 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "Qwen/Qwen3.5-35B-A3B-FP8",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .cylinder(22.9, 26.8)\\n    .faces(\\\"<Z\\\")\\n    .chamfer(1.0)\\n    .faces(\\\">Z\\\")\\n    .faces(\\\">Z\\\").workplane()\\n    .polarArray(20.9, 0, 360, 6)\\n    .hole(3.2)\\n    .union(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(0, 0, 12.75), rotate=cq.Vector(0, 0, 0))\\n            .cylinder(2.6, 15.4)\\n    )\\n    .union(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(0, 0, 27.8), rotate=cq.Vector(0, 0, 0))\\n            .cylinder(27.5, 12.0)\\n    )\\n    .faces(\\\">Z\\\").workplane()\\n    .hole(11.2)\\n)\\nshow_object(result)\", \"instruction\": \"Increase the height of the main flange body from 22.90 mm to 29.77 mm.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"d59f1f059b8cfcc61ff314326a302d62899e61e994f30cb81d35cbf859d66404\", \"instruction\": \"Increase the height of each rectangular cutout from 12.49 mm to 16.24 mm.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .rect(11.29, 16.24)\\\"], \\\"start\\\": 6}]}\", \"strategies\": [], \"context\": [\"6:     .rect(11.29, 12.49)\"]}, {\"task_id\": \"67b0ac3f6b393d2c32816f583d113ee28cdcbc07c652938edceaf732f2eb239b\", \"instruction\": \"Increase the size of the hexagonal prism from 8.083 mm to 12.00 mm.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"            .polygon(6, 12.0)\\\"], \\\"start\\\": 18}]}\", \"strategies\": [], \"context\": [\"18:             .polygon(6, 8.083)\"]}, {\"task_id\": \"7159d61e734bfdb63d221ad1dbbba7610a157962a2006ae91e6c574a5bf54a80\", \"instruction\": \"Increase the outer radius of the cylindrical sleeve from 20.00 mm to 26.00 mm.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .cylinder(16.0, 26.0)\\\"], \\\"start\\\": 3}]}\", \"strategies\": [], \"context\": [\"3:     .cylinder(16.0, 20.0)\"]}]}"
+   }
+  ],
+  "temperature": 0.6,
+  "top_p": 0.95,
+  "top_k": 20,
+  "max_tokens": 8192
+ },
+ "usage": {
+  "prompt_tokens": 880,
+  "total_tokens": 6706,
+  "completion_tokens": 5826,
+  "prompt_tokens_details": null,
+  "completion_tokens_details": {
+   "reasoning_tokens": 5666
+  }
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "\n\n{\n  \"steps\": [\n    \"Update the height parameter of the initial cylinder operation from 22.9 to 29.77\"\n  ],\n  \"invariants\": [\n    \"The diameter parameter of the initial cylinder (26.8) must remain unchanged\",\n    \"The chamfer dimension (1.0) applied to the top face must remain unchanged\",\n    \"The polar array parameters (radius 20.9, count 6, hole diameter 3.2) must remain unchanged\",\n    \"The union cylinder dimensions and absolute offsets must remain unchanged\",\n    \"The final top hole diameter (11.2) must remain unchanged\"\n  ],\n  \"dependencies\": []\n}"
+}

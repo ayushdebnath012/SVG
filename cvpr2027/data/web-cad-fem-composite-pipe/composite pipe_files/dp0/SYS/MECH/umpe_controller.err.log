@@ -1,0 +1,909 @@
+=== Start ACP UMPE Worker
+Create task in task factory
+ - Mechanical's failure measure: inverse_reserve_factor
+   ACP's measure: Inverse Reserve Factor (IRF)
+=== Start failure task evaluation
+Init ACP licensing
+Reset license manager
+Reset product cache of license manager
+Initialize ANSYS ACLE license manager for acp: Successful.
+Checking out license 'acpre' ...
+Checkout of ACP product license with ANSYS ACLE license manager: Checkout successful (id=Administrator-lenovo-10756-016713). 
+
+Get model
+Load ACP model from "E:/Fiver/Composite Pipe/composite pipe_files/dp0/SYS/MECH/Setup 1/ACP-Pre.acph5"
+- File version: 18.1
+- Load defining data
+- Loaded 30 vertices.
+- Loaded 90 edges.
+- Load vertex objects
+  - Load AngleData objects
+  - Load DrapingData objects
+  - Load ElementSet objects
+  - Load Fabric objects
+  - Load Material objects
+  - Load ModelingGroup objects
+  - Load ModelingPly objects
+  - Load OrientedSelectionSet objects
+  - Load ReferenceSurface objects
+  - Load Rosette objects
+  - Load Stackup objects
+  - Load ThicknessData objects
+- Load edge objects
+  - Load StackupFabricAngle objects
+- Create 30 vertices
+- Create vertex objects
+  - Create 1 AngleData vertex object(s)
+  - Create 1 DrapingData vertex object(s)
+  - Create 4 ElementSet vertex object(s)
+  - Create 3 Fabric vertex object(s)
+  - Create 3 Material vertex object(s)
+  - Create 3 ModelingGroup vertex object(s)
+  - Create 3 ModelingPly vertex object(s)
+  - Create 3 OrientedSelectionSet vertex object(s)
+  - Create 1 ReferenceSurface vertex object(s)
+  - Create 4 Rosette vertex object(s)
+  - Create 3 Stackup vertex object(s)
+  - Create 1 ThicknessData vertex object(s)
+- Create 90 edges
+- Create edge objects
+  - Create 60 StackupFabricAngle edge object(s)
+Read ExternalData node
+Finished loading of ACP model after 0.009s.
+Update reference Surface
+Reload HDF5 mesh from "E:/Fiver/Composite Pipe/composite pipe_files/dp0/SYS/MECH/Setup 1\ACP-Pre-1.1.h5"
+  Reference Surface ID Mesh 1
+Unit System : UnitSystem( length=m, mass=kg, time=s, force=N, temperature=C, currency=USD)
+Opening 0-th mesh group.
+Importing Mesh <Mesh 1>
+ - Create new reference surface node:
+ - Imported 255 nodes (0.001s)
+Reading element type array
+  Number of elements:0
+Reading element label array
+check max element label
+Reading element nodes
+Creating 210 elements.
+ - Imported 210 elements (0.004s)
+ - Create named selections
+   - Link with existing element set All_Elements
+Reading Named Selection <set_A> (type=BODY)
+   - Link with element set set_A
+Reading Named Selection <set_B> (type=BODY)
+   - Link with element set set_B
+Reading Named Selection <set_C> (type=BODY)
+   - Link with element set set_C
+ - Ignored 0 named selections.
+ - Imported 3 named selections (0.005s)
+Reload of HDF5 mesh finished after 0.006s
+Load materials from Engineering Data file "E:/Fiver/Composite Pipe/composite pipe_files/dp0/SYS/MECH/Setup 1\material.engd"
+ - Model unit system is UnitSystem( length=m, mass=kg, time=s, force=N, temperature=C, currency=USD)
+- Extracted 3 WB material ID's
+  - The unit `J` is ignored because its unknown.
+  - The units for the property pa36 are ignored because of unknown data. No conversion is done.
+  - The unit `W` is ignored because its unknown.
+  - The units for the property pa44 are ignored because of unknown data. No conversion is done.
+  - The unit `A` is ignored because its unknown.
+  - The units for the property pa68 are ignored because of unknown data. No conversion is done.
+- Processing material Structural Steel
+  - Update existing material in graph
+  - Ignoring Color
+  - Ignoring Compressive Ultimate Strength
+  - Ignoring Compressive Yield Strength
+Density default constructed in material Structural Steel
+  - Set Tensile Yield Strength (pr8)
+Stress Limits default constructed in material Structural Steel
+  - Ignoring Tensile Ultimate Strength
+  - Set Coefficient of Thermal Expansion (pr10)
+    Behavior: Isotropic
+Thermal Expansion Coefficients default constructed in material Structural Steel
+  - Set Zero-Thermal-Strain Reference Temperature (pr11)
+  - Ignoring Specific Heat
+  - Ignoring Thermal Conductivity
+  - Ignoring Alternating Stress
+  - Ignoring Strain-Life Parameters
+  - Ignoring Resistivity
+  - Set Elasticity (pr4)
+    Behavior: Isotropic
+Engineering Constants default constructed in material Structural Steel
+  - Ignoring Relative Permeability
+  Resulting Material: OrthotropicMaterial(name=Structural Steel, id=Structural Steel, ply_type=undefined>>> GIL-wrapper string-properties
+    -----------------------------
+
+
+
+>>> GIL-setup:
+    ----------
+
+    GIL is not ready.
+
+    Options:
+    - Algorithm: Linear Multivariate Legacy
+    - Caching: on
+    - Normalization: on
+
+    Data:
+    * Independent names, default, and range:
+
+    * Dependent names:
+      rho
+
+    * Independent data  ->  dependent data:
+
+>>> end-------
+
+>>> GIL-wrapper string-properties
+    -----------------------------
+
+
+
+>>> GIL-setup:
+    ----------
+
+    GIL is not ready.
+
+    Options:
+    - Algorithm: Linear Multivariate Legacy
+    - Caching: on
+    - Normalization: on
+
+    Data:
+    * Independent names, default, and range:
+      Temperature, 22, 0, 21
+
+    * Dependent names:
+      E1
+      E2
+      E3
+      G12
+      G23
+      G31
+      nu12
+      nu13
+      nu23
+
+    * Independent data  ->  dependent data:
+      (0)  ->  (2e+011, 2e+011, 2e+011, 7.69231e+010, 7.69231e+010, 7.69231e+010, 0.3, 0.3, 0.3)
+
+>>> end-------
+
+>>> GIL-wrapper string-properties
+    -----------------------------
+
+
+
+>>> GIL-setup:
+    ----------
+
+    GIL is not ready.
+
+    Options:
+    - Algorithm: Linear Multivariate Legacy
+    - Caching: off
+    - Normalization: off
+
+    Data:
+    * Independent names, default, and range:
+
+    * Dependent names:
+      Xt
+      Xc
+      Yt
+      Yc
+      Zt
+      Zc
+      Sxy
+      Sxz
+      Syz
+      effective_stress
+
+    * Independent data  ->  dependent data:
+
+>>> end-------
+
+>>> GIL-wrapper string-properties
+    -----------------------------
+
+
+
+>>> GIL-setup:
+    ----------
+
+    GIL is not ready.
+
+    Options:
+    - Algorithm: Linear Multivariate Legacy
+    - Caching: on
+    - Normalization: on
+
+    Data:
+    * Independent names, default, and range:
+
+    * Dependent names:
+      aX
+      aY
+      aZ
+      reference_temperature
+
+    * Independent data  ->  dependent data:
+
+>>> end-------
+
+, locked=true)
+- Processing material Epoxy Carbon UD (230 GPa) Wet
+  - Update existing material in graph
+Density default constructed in material Epoxy Carbon UD (230 GPa) Wet
+  - Set Ply Type (pr3)=Regular
+  - Set Elasticity (pr4)
+    Behavior: Orthotropic
+Engineering Constants default constructed in material Epoxy Carbon UD (230 GPa) Wet
+  - Set Strain Limits (pr6)
+    Behavior: Orthotropic
+Strain Limits default constructed in material Epoxy Carbon UD (230 GPa) Wet
+  - Set Stress Limits (pr7)
+    Behavior: Orthotropic
+   - Set default stress limits
+Stress Limits default constructed in material Epoxy Carbon UD (230 GPa) Wet
+  - Set Coefficient of Thermal Expansion (pr10)
+    Behavior: Orthotropic
+Thermal Expansion Coefficients default constructed in material Epoxy Carbon UD (230 GPa) Wet
+  - Set Zero-Thermal-Strain Reference Temperature (pr11)
+  - Set Puck Constants (pr14)
+Puck Constants default constructed in material Epoxy Carbon UD (230 GPa) Wet
+  - Set Additional Puck Constants (pr15)
+  - Set Tsai-Wu Constants (pr17)
+Tsai Wu Constants default constructed in material Epoxy Carbon UD (230 GPa) Wet
+  - Set LaRc03/04 Constants (pr18)
+Larc Constants default constructed in material Epoxy Carbon UD (230 GPa) Wet
+  - Ignoring Color
+  Resulting Material: OrthotropicMaterial(name=Epoxy Carbon UD (230 GPa) Wet, id=Epoxy Carbon UD (230 GPa) Wet, ply_type=regular>>> GIL-wrapper string-properties
+    -----------------------------
+
+
+
+>>> GIL-setup:
+    ----------
+
+    GIL is not ready.
+
+    Options:
+    - Algorithm: Linear Multivariate Legacy
+    - Caching: on
+    - Normalization: on
+
+    Data:
+    * Independent names, default, and range:
+
+    * Dependent names:
+      rho
+
+    * Independent data  ->  dependent data:
+
+>>> end-------
+
+>>> GIL-wrapper string-properties
+    -----------------------------
+
+
+
+>>> GIL-setup:
+    ----------
+
+    GIL is not ready.
+
+    Options:
+    - Algorithm: Linear Multivariate Legacy
+    - Caching: on
+    - Normalization: on
+
+    Data:
+    * Independent names, default, and range:
+
+    * Dependent names:
+      E1
+      E2
+      E3
+      G12
+      G23
+      G31
+      nu12
+      nu13
+      nu23
+
+    * Independent data  ->  dependent data:
+
+>>> end-------
+
+>>> GIL-wrapper string-properties
+    -----------------------------
+
+
+
+>>> GIL-setup:
+    ----------
+
+    GIL is not ready.
+
+    Options:
+    - Algorithm: Linear Multivariate Legacy
+    - Caching: on
+    - Normalization: on
+
+    Data:
+    * Independent names, default, and range:
+
+    * Dependent names:
+      Xt
+      Xc
+      Yt
+      Yc
+      Zt
+      Zc
+      Sxy
+      Sxz
+      Syz
+      effective_stress
+
+    * Independent data  ->  dependent data:
+
+>>> end-------
+
+>>> GIL-wrapper string-properties
+    -----------------------------
+
+
+
+>>> GIL-setup:
+    ----------
+
+    GIL is not ready.
+
+    Options:
+    - Algorithm: Linear Multivariate Legacy
+    - Caching: on
+    - Normalization: on
+
+    Data:
+    * Independent names, default, and range:
+
+    * Dependent names:
+      eXt
+      eXc
+      eYt
+      eYc
+      eZt
+      eZc
+      eSxy
+      eSxz
+      eSyz
+      effective_strain
+
+    * Independent data  ->  dependent data:
+
+>>> end-------
+
+>>> GIL-wrapper string-properties
+    -----------------------------
+
+    PuckMaterialClassification: carbon
+
+
+>>> GIL-setup:
+    ----------
+
+    GIL is not ready.
+
+    Options:
+    - Algorithm: Linear Multivariate Legacy
+    - Caching: on
+    - Normalization: on
+
+    Data:
+    * Independent names, default, and range:
+
+    * Dependent names:
+      p_21_pos
+      p_21_neg
+      p_22_pos
+      p_22_neg
+      s
+      M
+      interface_weakening_factor
+
+    * Independent data  ->  dependent data:
+
+>>> end-------
+
+>>> GIL-wrapper string-properties
+    -----------------------------
+
+
+
+>>> GIL-setup:
+    ----------
+
+    GIL is not ready.
+
+    Options:
+    - Algorithm: Linear Multivariate Legacy
+    - Caching: on
+    - Normalization: on
+
+    Data:
+    * Independent names, default, and range:
+
+    * Dependent names:
+      aX
+      aY
+      aZ
+      reference_temperature
+
+    * Independent data  ->  dependent data:
+
+>>> end-------
+
+>>> GIL-wrapper string-properties
+    -----------------------------
+
+
+
+>>> GIL-setup:
+    ----------
+
+    GIL is not ready.
+
+    Options:
+    - Algorithm: Linear Multivariate Legacy
+    - Caching: on
+    - Normalization: on
+
+    Data:
+    * Independent names, default, and range:
+
+    * Dependent names:
+      XY
+      XZ
+      YZ
+
+    * Independent data  ->  dependent data:
+
+>>> end-------
+
+>>> GIL-wrapper string-properties
+    -----------------------------
+
+
+
+>>> GIL-setup:
+    ----------
+
+    GIL is not ready.
+
+    Options:
+    - Algorithm: Linear Multivariate Legacy
+    - Caching: on
+    - Normalization: on
+
+    Data:
+    * Independent names, default, and range:
+
+    * Dependent names:
+      fracture_angle_under_compression
+      fracture_toughness_ratio
+      fracture_toughness_mode_1
+      fracture_toughness_mode_2
+      thin_ply_thickness_limit
+
+    * Independent data  ->  dependent data:
+
+>>> end-------
+
+, locked=true)
+- Processing material Epoxy Carbon UD
+  - Update existing material in graph
+Density default constructed in material Epoxy Carbon UD
+  - Set Ply Type (pr3)=Regular
+  - Set Elasticity (pr4)
+    Behavior: Orthotropic
+Engineering Constants default constructed in material Epoxy Carbon UD
+  - Set Strain Limits (pr6)
+    Behavior: Orthotropic
+Strain Limits default constructed in material Epoxy Carbon UD
+  - Set Stress Limits (pr7)
+    Behavior: Orthotropic
+   - Set default stress limits
+Stress Limits default constructed in material Epoxy Carbon UD
+  - Set Coefficient of Thermal Expansion (pr10)
+    Behavior: Orthotropic
+Thermal Expansion Coefficients default constructed in material Epoxy Carbon UD
+  - Set Zero-Thermal-Strain Reference Temperature (pr11)
+  - Set Puck Constants (pr14)
+Puck Constants default constructed in material Epoxy Carbon UD
+  - Set Additional Puck Constants (pr15)
+  - Set Tsai-Wu Constants (pr17)
+Tsai Wu Constants default constructed in material Epoxy Carbon UD
+  - Set LaRc03/04 Constants (pr18)
+Larc Constants default constructed in material Epoxy Carbon UD
+  - Ignoring Color
+  Resulting Material: OrthotropicMaterial(name=Epoxy Carbon UD, id=Epoxy Carbon UD, ply_type=regular>>> GIL-wrapper string-properties
+    -----------------------------
+
+
+
+>>> GIL-setup:
+    ----------
+
+    GIL is not ready.
+
+    Options:
+    - Algorithm: Linear Multivariate Legacy
+    - Caching: on
+    - Normalization: on
+
+    Data:
+    * Independent names, default, and range:
+
+    * Dependent names:
+      rho
+
+    * Independent data  ->  dependent data:
+
+>>> end-------
+
+>>> GIL-wrapper string-properties
+    -----------------------------
+
+
+
+>>> GIL-setup:
+    ----------
+
+    GIL is not ready.
+
+    Options:
+    - Algorithm: Linear Multivariate Legacy
+    - Caching: on
+    - Normalization: on
+
+    Data:
+    * Independent names, default, and range:
+
+    * Dependent names:
+      E1
+      E2
+      E3
+      G12
+      G23
+      G31
+      nu12
+      nu13
+      nu23
+
+    * Independent data  ->  dependent data:
+
+>>> end-------
+
+>>> GIL-wrapper string-properties
+    -----------------------------
+
+
+
+>>> GIL-setup:
+    ----------
+
+    GIL is not ready.
+
+    Options:
+    - Algorithm: Linear Multivariate Legacy
+    - Caching: on
+    - Normalization: on
+
+    Data:
+    * Independent names, default, and range:
+
+    * Dependent names:
+      Xt
+      Xc
+      Yt
+      Yc
+      Zt
+      Zc
+      Sxy
+      Sxz
+      Syz
+      effective_stress
+
+    * Independent data  ->  dependent data:
+
+>>> end-------
+
+>>> GIL-wrapper string-properties
+    -----------------------------
+
+
+
+>>> GIL-setup:
+    ----------
+
+    GIL is not ready.
+
+    Options:
+    - Algorithm: Linear Multivariate Legacy
+    - Caching: on
+    - Normalization: on
+
+    Data:
+    * Independent names, default, and range:
+
+    * Dependent names:
+      eXt
+      eXc
+      eYt
+      eYc
+      eZt
+      eZc
+      eSxy
+      eSxz
+      eSyz
+      effective_strain
+
+    * Independent data  ->  dependent data:
+
+>>> end-------
+
+>>> GIL-wrapper string-properties
+    -----------------------------
+
+    PuckMaterialClassification: carbon
+
+
+>>> GIL-setup:
+    ----------
+
+    GIL is not ready.
+
+    Options:
+    - Algorithm: Linear Multivariate Legacy
+    - Caching: on
+    - Normalization: on
+
+    Data:
+    * Independent names, default, and range:
+
+    * Dependent names:
+      p_21_pos
+      p_21_neg
+      p_22_pos
+      p_22_neg
+      s
+      M
+      interface_weakening_factor
+
+    * Independent data  ->  dependent data:
+
+>>> end-------
+
+>>> GIL-wrapper string-properties
+    -----------------------------
+
+
+
+>>> GIL-setup:
+    ----------
+
+    GIL is not ready.
+
+    Options:
+    - Algorithm: Linear Multivariate Legacy
+    - Caching: on
+    - Normalization: on
+
+    Data:
+    * Independent names, default, and range:
+
+    * Dependent names:
+      aX
+      aY
+      aZ
+      reference_temperature
+
+    * Independent data  ->  dependent data:
+
+>>> end-------
+
+>>> GIL-wrapper string-properties
+    -----------------------------
+
+
+
+>>> GIL-setup:
+    ----------
+
+    GIL is not ready.
+
+    Options:
+    - Algorithm: Linear Multivariate Legacy
+    - Caching: on
+    - Normalization: on
+
+    Data:
+    * Independent names, default, and range:
+
+    * Dependent names:
+      XY
+      XZ
+      YZ
+
+    * Independent data  ->  dependent data:
+
+>>> end-------
+
+>>> GIL-wrapper string-properties
+    -----------------------------
+
+
+
+>>> GIL-setup:
+    ----------
+
+    GIL is not ready.
+
+    Options:
+    - Algorithm: Linear Multivariate Legacy
+    - Caching: on
+    - Normalization: on
+
+    Data:
+    * Independent names, default, and range:
+
+    * Dependent names:
+      fracture_angle_under_compression
+      fracture_toughness_ratio
+      fracture_toughness_mode_1
+      fracture_toughness_mode_2
+      thin_ply_thickness_limit
+
+    * Independent data  ->  dependent data:
+
+>>> end-------
+
+, locked=true)
+End of material load from Engineering Data file.
+Checking license of product 'acpre' ...
+Checking license 'acpre' ...
+model::update() starts using 4 processors for computations.
+model::update() entity_maps filled: 0
+model::update() reference surfaces updated:  0.001
+model::update() orthotropic materials updated:  0.001
+model::update() fabrics updated:  0.001
+model::update() stack-ups updated:  0.001
+model::update() sub-laminates updated:  0.001
+model::update() element_sets updated:  0.001
+model::update() edge_sets updated:  0.001
+model::update() CAD-geometries updated:  0.001
+model::update() virtual geometries updated:  0.001
+model::update() rosettes updated:  0.001
+model::update() selection rules updated:  0.001
+model::update() oriented_selection_sets updated:  0.005
+Update Sequence Entities started: 0
+Ply-numbers updated: 0
+Sequence-entity-map created: 0
+Sequence Layers updated: 0.118
+model::update() sequence_entities updated:  0.123
+model::update() analysis_plies updated:  0.123
+model::update() offsets updated:  0.125
+model::update() sampling_points updated:  0.125
+model::update() section_cuts updated:  0.125
+model::update() extrusion_guides updated:  0.125
+model::update() snap_to_geometries updated:  0.125
+model::update() cut_off_geometries updated:  0.125
+model::update() solid_models updated:  0.125
+model::update() sensors updated:  0.125
+Update thickness data object Thickness.1
+- Data scope with 0 elements evaluated. t=0s
+Update of plot object Thickness.1 finished after 0s
+Update contour data object Angle.1
+Update of uncached plot object Angle.1 finished.
+model::update() layup plots updated:  0.125
+#Element-wise ply properties: 16620
+#Node-wise ply properties: 0
+  global index: 16620
+model::update() global indices updated:  0.126
+model::update() material fields updated:  0.126
+model::update() analysis meshes updated:  0.126
+Evaluate elem_label2vd_map
+- Without assembly mapping files
+Finished evaluation of elem_label2vd_map
+FailureEvaluator: Configuration
+- Property tree input: {
+    "criteria": {
+        "max_strain": {
+            "active": "true",
+            "e1": "true",
+            "e12": "true",
+            "e13": "true",
+            "e2": "true",
+            "e23": "true",
+            "e3": "true",
+            "eSxy": "0",
+            "eSxz": "0",
+            "eSyz": "0",
+            "eXc": "0",
+            "eXt": "0",
+            "eYc": "0",
+            "eYt": "0",
+            "eZc": "0",
+            "eZt": "0",
+            "force_global_strain_limits": "false",
+            "wf_e1": "1",
+            "wf_e12": "1",
+            "wf_e13": "1",
+            "wf_e2": "1",
+            "wf_e23": "1",
+            "wf_e3": "1"
+        },
+        "max_stress": {
+            "active": "true",
+            "s1": "true",
+            "s12": "true",
+            "s13": "false",
+            "s2": "true",
+            "s23": "false",
+            "s3": "false",
+            "wf_s1": "1",
+            "wf_s12": "1",
+            "wf_s13": "1",
+            "wf_s2": "1",
+            "wf_s23": "1",
+            "wf_s3": "1"
+        }
+    }
+}
+
+- Max Strain
+- Max Stress
+- Configured 2 active failure criteria.
+Temperature input data available
+  - elem_scope.size()=210
+  - elem_data_pointer.size()=210
+  - element_num_layers.size()=210
+- All data unpacked
+  - strain_data.size()=199440
+  - Unit system of strains: 6
+Convert stress/strain data from flat to nested arrays
+Convert stress/strain data from RST to ACP format
+- Computed average data for 5th in-plane int point for 210 of 210 4-node layered shell elements.
+- Swapped through the thickness int points (bot,top,mid)->(bot,mid,top) for 210 of 210 layered shell elements.
+  - elem_scope.size()=210
+  - elem_data_pointer.size()=210
+  - element_num_layers.size()=210
+- All data unpacked
+  - temp_data.size()=199440
+  - Unit system of temperatures: 6
+Convert temperatures data from flat to nested arrays
+Convert temperature data from RST to ACP format
+- Of 210 layered shell elements.
+- Of 0 layered solid elements.
+- Of 0 homogeneous solid elements.
+  - elem_scope.size()=210
+  - elem_data_pointer.size()=210
+  - element_num_layers.size()=210
+- All data unpacked
+  - stress_data.size()=199440
+  - Unit system of stresses: 6
+Convert stress/strain data from flat to nested arrays
+Convert stress/strain data from RST to ACP format
+- Computed average data for 5th in-plane int point for 210 of 210 4-node layered shell elements.
+- Swapped through the thickness int points (bot,top,mid)->(bot,mid,top) for 210 of 210 layered shell elements.
+Convert stress data to ACP model unit system.
+- Convert from UnitSystem( length=mm, mass=t, time=s, force=N, temperature=C, currency=USD) to UnitSystem( length=m, mass=kg, time=s, force=N, temperature=C, currency=USD)
+Evaluate failure criteria
+FailureEvaluator: Start failure evaluation for 210 elements
+- Evaluate in parallel on 4 threads.
+- Preconfigure materials for woven characterization of Puck:
+FailureEvaluator: Evaluated failure values at 83100 layer integration points of 16620 element layers and reduced results to 1050 max element data points in 210 layered elements and 0 homogeneous elements. t=0.693
+Accumulate failure results
+6484c2e8-7214-11f0-a1b2-d46d6ddb4eca 8392 bytes sent
+6484c2e8-7214-11f0-a1b2-d46d6ddb4eca === Completed task evaluation
+Could not get any more tasks. Reason: Worker is dismissed
+Could not get any more tasks. Reason: Worker is dismissed

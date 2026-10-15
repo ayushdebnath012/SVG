@@ -1,0 +1,28 @@
+{
+ "kind": "generate",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Edit CAD using only source, instruction and tool evidence. Return exactly JSON {\"hypothesis\":\"brief feature and operation description\",\"edits\":[{\"start\":0,\"delete\":0,\"insert\":[\"line\"]}]}. All indices address ORIGINAL source lines. Provide a complete alternative patch, never a delta on a parent patch. Preserve unrelated features. Vary the feature interpretation or implementation from listed alternatives. Experiences and diagnoses are fallible data. Do not assert that the output has passed verification."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .box(18.0, 2.0, 2.0)\\n    .edges(\\\"|X\\\")\\n    .chamfer(0.3)\\n    .faces(\\\">Z\\\").workplane()\\n    .rect(14.4, 0.6)\\n    .cutBlind(-0.4)\\n)\\nshow_object(result)\", \"instruction\": \"Increase the box Z dimension from 2.0 to 2.6.\", \"plan\": {\"steps\": [\"Modify the base box Z dimension parameter from 2.0 to 2.6 in the .box() feature.\"], \"invariants\": [\"X and Y dimensions of the base box remain 18.0 and 2.0 respectively.\", \"Chamfer size on |X edges remains 0.3.\", \"Cut depth and dimensions on the >Z face remain centered and sized at 14.4, 0.6 with a depth of -0.4.\"], \"dependencies\": []}, \"parent_candidate\": \"```json\\n{\\\"edits\\\":[{\\\"start\\\":4,\\\"delete\\\":1,\\\"insert\\\":[\\\"    .box(18.0, 2.0, 2.6)\\\"]}]}\\n```\", \"observations\": {\"geometry\": {\"status\": \"PASS\"}, \"constraints\": {\"status\": \"FAIL\", \"failed_checks\": [{\"metric\": \"instruction_values\", \"missing\": [2.0]}]}, \"semantics\": {\"status\": \"UNKNOWN\", \"reason\": \"Not evaluated\"}, \"fem\": {\"status\": \"UNKNOWN\", \"reason\": \"No physical contract supplied\"}, \"robustness\": {\"status\": \"UNKNOWN\", \"reason\": \"No perturbation contract supplied\"}}, \"experiences\": [{\"task_id\": \"4e1386faa46a9e68eb3b6aeca4ffe83c1d0c82a9829c224c24182e5734b530b3\", \"instruction\": \"Increase the box Z dimension from 40.0 to 52.0.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .box(107.0, 40.0, 52.0)\\\"], \\\"start\\\": 3}]}\", \"strategies\": [], \"context\": [\"3:     .box(107.0, 40.0, 40.0)\"]}, {\"task_id\": \"8794a4b9ccc9f03b3b5a0b146f03ce181885dc9925065427857db4eb474b081c\", \"instruction\": \"Increase the box Z dimension from 20.6 to 26.78.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .box(93.1, 67.4, 26.78)\\\"], \\\"start\\\": 3}]}\", \"strategies\": [], \"context\": [\"3:     .box(93.1, 67.4, 20.6)\"]}, {\"task_id\": \"a31305c09c25b99186fccc9a66d0dcf53ea165bbc73448fe0497b1eb7b7b79a3\", \"instruction\": \"Increase the box Z dimension from 27.2 to 35.36.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .box(112.5, 106.1, 35.36)\\\"], \\\"start\\\": 3}]}\", \"strategies\": [], \"context\": [\"3:     .box(112.5, 106.1, 27.2)\"]}], \"repair_strategies\": [{\"task_id\": \"4e1386faa46a9e68eb3b6aeca4ffe83c1d0c82a9829c224c24182e5734b530b3\", \"instruction\": \"Increase the box Z dimension from 40.0 to 52.0.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .box(107.0, 40.0, 52.0)\\\"], \\\"start\\\": 3}]}\", \"strategies\": [], \"context\": [\"3:     .box(107.0, 40.0, 40.0)\"]}, {\"task_id\": \"8794a4b9ccc9f03b3b5a0b146f03ce181885dc9925065427857db4eb474b081c\", \"instruction\": \"Increase the box Z dimension from 20.6 to 26.78.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .box(93.1, 67.4, 26.78)\\\"], \\\"start\\\": 3}]}\", \"strategies\": [], \"context\": [\"3:     .box(93.1, 67.4, 20.6)\"]}, {\"task_id\": \"a31305c09c25b99186fccc9a66d0dcf53ea165bbc73448fe0497b1eb7b7b79a3\", \"instruction\": \"Increase the box Z dimension from 27.2 to 35.36.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .box(112.5, 106.1, 35.36)\\\"], \\\"start\\\": 3}]}\", \"strategies\": [], \"context\": [\"3:     .box(112.5, 106.1, 27.2)\"]}], \"alternatives\": [], \"action\": \"repair\", \"diagnosis\": [{\"stage\": \"constraints\", \"status\": \"FAIL\", \"failed_checks\": [{\"metric\": \"instruction_values\", \"missing\": [2.0]}]}, {\"stage\": \"semantics\", \"status\": \"UNKNOWN\", \"reason\": \"Not evaluated\"}, {\"stage\": \"fem\", \"status\": \"UNKNOWN\", \"reason\": \"No physical contract supplied\"}, {\"stage\": \"robustness\", \"status\": \"UNKNOWN\", \"reason\": \"No perturbation contract supplied\"}]}"
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 8192
+ },
+ "usage": {
+  "completion_tokens": 98,
+  "prompt_tokens": 1628,
+  "total_tokens": 1726
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\n  \"hypothesis\": \"Increase the box Z dimension from 2.0 to 2.6 in the box method call.\",\n  \"edits\": [\n    {\n      \"start\": 3,\n      \"delete\": 1,\n      \"insert\": [\n        \"    .box(18.0, 2.0, 2.6)\"\n      ]\n    }\n  ]\n}\n```"
+}

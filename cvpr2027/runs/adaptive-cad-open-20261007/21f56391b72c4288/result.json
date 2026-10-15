@@ -1,0 +1,1285 @@
+{
+ "task_id": "21f56391b72c4288e7104c836513339a33ad6dfac3282a0a47746f2038aedf74",
+ "status": "PASS",
+ "prediction": "{\"edits\": [{\"delete\": 25, \"insert\": [], \"start\": 14}]}",
+ "selected_node": 1,
+ "bank": [
+  1,
+  2,
+  3
+ ],
+ "pareto": [
+  1
+ ],
+ "stop": "expansion_limit",
+ "nodes": [
+  {
+   "id": 0,
+   "candidate": "\n\n{\"edits\":[{\"start\":8,\"delete\":23,\"insert\":[\"result = (\\n    cq.Workplane(\\\"XY\\\")\\n    .polyline([[inner, inner], [outer, inner], [outer, -inner], [inner, -inner], [inner, -outer], [-inner, -outer], [-inner, inner], [-outer, inner], [-outer, -inner], [-inner, -inner], [-inner, outer], [inner, outer]])\\n    .close()\\n    .extrude(7.4)\\n)\"]},{\"start\":24,\"delete\":4,\"insert\":\"\"},{\"start\":28,\"delete\":4,\"insert\":\"\"},{\"start\":32,\"delete\":4,\"insert\":\"\"},{\"start\":36,\"delete\":4,\"insert\":\"\"},{\"start\":40,\"delete\":4,\"insert\":\"\"},{\"start\":44,\"delete\":4,\"insert\":\"\"},{\"start\":48,\"delete\":4,\"insert\":\"\"},{\"start\":52,\"delete\":4,\"insert\":\"\"},{\"start\":56,\"delete\":4,\"insert\":\"\"}]}",
+   "depth": 0,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "FAIL",
+      "reason": "ValueError: Invalid inserted line"
+     },
+     "constraints": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -1000.0
+    ],
+    "score": -1.0,
+    "diagnosis": [
+     {
+      "stage": "geometry",
+      "status": "FAIL",
+      "reason": "ValueError: Invalid inserted line"
+     },
+     {
+      "stage": "constraints",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 3,
+   "visits": 4,
+   "final": null,
+   "edges": [
+    0,
+    1
+   ]
+  },
+  {
+   "id": 1,
+   "candidate": "{\"edits\": [{\"delete\": 25, \"insert\": [], \"start\": 14}]}",
+   "depth": 1,
+   "verdict": {
+    "status": "PASS",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 14222.39744,
+       "area": 5465.971199999998,
+       "solids": 1,
+       "faces": 14,
+       "bbox_x": 54.8,
+       "bbox_y": 54.8,
+       "bbox_z": 7.4
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 0.95,
+      "reason": "The edited part clearly shows the arms extended to their full length with flat, constant-thickness rectangular geometry, successfully removing the sloped surfaces seen in the original.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-00.png"
+     },
+     "fem": {
+      "status": "PASS",
+      "metrics": {
+       "nodes": 1258,
+       "tetrahedra": 4418,
+       "connected_components": 1,
+       "mesh_volume_mm3": 14222.39744,
+       "fixed_nodes": 364,
+       "loaded_facets": 644,
+       "loaded_area_mm2": 1921.9456,
+       "axis": [
+        0.0,
+        0.0,
+        1.0
+       ],
+       "projection_min_mm": 0.0,
+       "projection_max_mm": 7.4,
+       "compliance_N_mm": 1.5516331069388976e-08,
+       "load_weighted_displacement_mm": 1.5516331069388976e-08,
+       "max_displacement_mm": 2.4154199917358512e-08,
+       "strain_energy_N_mm": 7.75816553469449e-09,
+       "vm_p95_MPa": 0.0005331513283357125,
+       "vm_peak_MPa": 0.0007291779462556751,
+       "relative_free_residual": 4.2030186891741514e-15,
+       "relative_force_balance_error": 8.588729421303427e-16,
+       "relative_moment_balance_error": 2.7002952389631137e-16,
+       "relative_energy_error": 2.1324128980075997e-16
+      },
+      "checks": [
+       {
+        "metric": "connected_components",
+        "value": 1,
+        "max": 1,
+        "ok": true
+       }
+      ]
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 1.005
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 1.005
+       }
+      ]
+     }
+    },
+    "objectives": [
+     0.95,
+     1.0,
+     -25.0
+    ],
+    "score": 2.025,
+    "diagnosis": [],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 0,
+   "visits": 2,
+   "final": {
+    "status": "PASS",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 14222.39744,
+       "area": 5465.971199999998,
+       "solids": 1,
+       "faces": 14,
+       "bbox_x": 54.8,
+       "bbox_y": 54.8,
+       "bbox_z": 7.4
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 0.95,
+      "reason": "The edited part clearly shows the arms extended to their full length with flat, constant-thickness rectangular geometry, successfully removing the sloped surfaces seen in the original.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-00.png"
+     },
+     "fem": {
+      "status": "PASS",
+      "metrics": {
+       "nodes": 1253,
+       "tetrahedra": 4393,
+       "connected_components": 1,
+       "mesh_volume_mm3": 14222.39744,
+       "fixed_nodes": 361,
+       "loaded_facets": 642,
+       "loaded_area_mm2": 1921.9456,
+       "axis": [
+        0.0,
+        0.0,
+        1.0
+       ],
+       "projection_min_mm": 0.0,
+       "projection_max_mm": 7.4,
+       "compliance_N_mm": 1.5517518673734836e-08,
+       "load_weighted_displacement_mm": 1.5517518673734836e-08,
+       "max_displacement_mm": 2.4233754138399497e-08,
+       "strain_energy_N_mm": 7.758759336867416e-09,
+       "vm_p95_MPa": 0.000532434184356201,
+       "vm_peak_MPa": 0.000739827237384925,
+       "relative_free_residual": 4.0687495241084655e-15,
+       "relative_force_balance_error": 1.844869499188993e-15,
+       "relative_moment_balance_error": 7.279999678272998e-16,
+       "relative_energy_error": 2.132249697764179e-16
+      },
+      "checks": [
+       {
+        "metric": "connected_components",
+        "value": 1,
+        "max": 1,
+        "ok": true
+       }
+      ]
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 0.995
+       },
+       {
+        "mesh_scale": 1.25
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 0.995
+       },
+       {
+        "status": "PASS",
+        "metrics": {
+         "nodes": 919,
+         "tetrahedra": 3103,
+         "connected_components": 1,
+         "mesh_volume_mm3": 14222.39744,
+         "fixed_nodes": 258,
+         "loaded_facets": 446,
+         "loaded_area_mm2": 1921.9456,
+         "axis": [
+          0.0,
+          0.0,
+          1.0
+         ],
+         "projection_min_mm": 0.0,
+         "projection_max_mm": 7.4,
+         "compliance_N_mm": 1.5508283559917918e-08,
+         "load_weighted_displacement_mm": 1.5508283559917918e-08,
+         "max_displacement_mm": 2.4252324545602593e-08,
+         "strain_energy_N_mm": 7.754141779958959e-09,
+         "vm_p95_MPa": 0.000533341824236098,
+         "vm_peak_MPa": 0.0007322939445977576,
+         "relative_free_residual": 3.034426158636786e-15,
+         "relative_force_balance_error": 1.9409663677541632e-16,
+         "relative_moment_balance_error": 4.672799972843018e-16,
+         "relative_energy_error": 0.0
+        },
+        "checks": [
+         {
+          "metric": "connected_components",
+          "value": 1,
+          "max": 1,
+          "ok": true
+         }
+        ]
+       }
+      ]
+     }
+    },
+    "objectives": [
+     0.95,
+     1.0,
+     -25.0
+    ],
+    "score": 2.025,
+    "diagnosis": [],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "final"
+   },
+   "edges": []
+  },
+  {
+   "id": 2,
+   "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [], \"start\": 0}, {\"delete\": 6, \"insert\": [], \"start\": 2}, {\"delete\": 25, \"insert\": [], \"start\": 14}]}",
+   "depth": 1,
+   "verdict": {
+    "status": "PASS",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 14222.39744,
+       "area": 5465.971199999998,
+       "solids": 1,
+       "faces": 14,
+       "bbox_x": 54.8,
+       "bbox_y": 54.8,
+       "bbox_z": 7.4
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 0.95,
+      "reason": "The edited part clearly shows the arms extended to full length and rebuilt with significant thickness and vertical sides, removing the original thin, sloped profile.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-01.png"
+     },
+     "fem": {
+      "status": "PASS",
+      "metrics": {
+       "nodes": 1258,
+       "tetrahedra": 4425,
+       "connected_components": 1,
+       "mesh_volume_mm3": 14222.39744,
+       "fixed_nodes": 363,
+       "loaded_facets": 642,
+       "loaded_area_mm2": 1921.9456,
+       "axis": [
+        0.0,
+        0.0,
+        1.0
+       ],
+       "projection_min_mm": 0.0,
+       "projection_max_mm": 7.4,
+       "compliance_N_mm": 1.5516440420321465e-08,
+       "load_weighted_displacement_mm": 1.5516440420321465e-08,
+       "max_displacement_mm": 2.4256728047599595e-08,
+       "strain_energy_N_mm": 7.75822021016073e-09,
+       "vm_p95_MPa": 0.0005324972010469115,
+       "vm_peak_MPa": 0.0007316465883350865,
+       "relative_free_residual": 4.074813690413415e-15,
+       "relative_force_balance_error": 8.520396680833039e-16,
+       "relative_moment_balance_error": 3.0920735935928577e-16,
+       "relative_energy_error": 2.1323978699900563e-16
+      },
+      "checks": [
+       {
+        "metric": "connected_components",
+        "value": 1,
+        "max": 1,
+        "ok": true
+       }
+      ]
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 1.005
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 1.005
+       }
+      ]
+     }
+    },
+    "objectives": [
+     0.95,
+     1.0,
+     -32.0
+    ],
+    "score": 2.018,
+    "diagnosis": [],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 1,
+   "visits": 2,
+   "final": {
+    "status": "PASS",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 14222.39744,
+       "area": 5465.971199999998,
+       "solids": 1,
+       "faces": 14,
+       "bbox_x": 54.8,
+       "bbox_y": 54.8,
+       "bbox_z": 7.4
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 0.95,
+      "reason": "The edited part clearly shows the arms extended to full length and rebuilt with significant thickness and vertical sides, removing the original thin, sloped profile.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-01.png"
+     },
+     "fem": {
+      "status": "PASS",
+      "metrics": {
+       "nodes": 1256,
+       "tetrahedra": 4401,
+       "connected_components": 1,
+       "mesh_volume_mm3": 14222.39744,
+       "fixed_nodes": 364,
+       "loaded_facets": 644,
+       "loaded_area_mm2": 1921.9456,
+       "axis": [
+        0.0,
+        0.0,
+        1.0
+       ],
+       "projection_min_mm": 0.0,
+       "projection_max_mm": 7.4,
+       "compliance_N_mm": 1.5515321373599694e-08,
+       "load_weighted_displacement_mm": 1.5515321373599694e-08,
+       "max_displacement_mm": 2.420778920801577e-08,
+       "strain_energy_N_mm": 7.757660686799847e-09,
+       "vm_p95_MPa": 0.000532232024066204,
+       "vm_peak_MPa": 0.0007404966153231856,
+       "relative_free_residual": 3.975062174413989e-15,
+       "relative_force_balance_error": 2.115693587194994e-16,
+       "relative_moment_balance_error": 3.8468497783791465e-16,
+       "relative_energy_error": 0.0
+      },
+      "checks": [
+       {
+        "metric": "connected_components",
+        "value": 1,
+        "max": 1,
+        "ok": true
+       }
+      ]
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 0.995
+       },
+       {
+        "mesh_scale": 1.25
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 0.995
+       },
+       {
+        "status": "PASS",
+        "metrics": {
+         "nodes": 935,
+         "tetrahedra": 3193,
+         "connected_components": 1,
+         "mesh_volume_mm3": 14222.39744,
+         "fixed_nodes": 258,
+         "loaded_facets": 448,
+         "loaded_area_mm2": 1921.9456,
+         "axis": [
+          0.0,
+          0.0,
+          1.0
+         ],
+         "projection_min_mm": 0.0,
+         "projection_max_mm": 7.4,
+         "compliance_N_mm": 1.5506466198917194e-08,
+         "load_weighted_displacement_mm": 1.5506466198917194e-08,
+         "max_displacement_mm": 2.421567859878935e-08,
+         "strain_energy_N_mm": 7.753233099458594e-09,
+         "vm_p95_MPa": 0.0005305066385508154,
+         "vm_peak_MPa": 0.0007320702192645998,
+         "relative_free_residual": 3.1266014158423158e-15,
+         "relative_force_balance_error": 9.902575106140398e-16,
+         "relative_moment_balance_error": 7.091968852630886e-16,
+         "relative_energy_error": 4.267538983760409e-16
+        },
+        "checks": [
+         {
+          "metric": "connected_components",
+          "value": 1,
+          "max": 1,
+          "ok": true
+         }
+        ]
+       }
+      ]
+     }
+    },
+    "objectives": [
+     0.95,
+     1.0,
+     -32.0
+    ],
+    "score": 2.018,
+    "diagnosis": [],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "final"
+   },
+   "edges": [
+    2
+   ]
+  },
+  {
+   "id": 3,
+   "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [], \"start\": 0}, {\"delete\": 1, \"insert\": [], \"start\": 2}, {\"delete\": 1, \"insert\": [], \"start\": 6}, {\"delete\": 1, \"insert\": [], \"start\": 7}, {\"delete\": 6, \"insert\": [], \"start\": 14}, {\"delete\": 6, \"insert\": [], \"start\": 20}, {\"delete\": 6, \"insert\": [], \"start\": 26}, {\"delete\": 6, \"insert\": [], \"start\": 32}, {\"delete\": 1, \"insert\": [], \"start\": 38}]}",
+   "depth": 2,
+   "verdict": {
+    "status": "PASS",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 14222.39744,
+       "area": 5465.971199999998,
+       "solids": 1,
+       "faces": 14,
+       "bbox_x": 54.8,
+       "bbox_y": 54.8,
+       "bbox_z": 7.4
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 0.95,
+      "reason": "The edited part clearly shows the arms extended to their full length with a uniform, blocky shape, removing the original truncated and sloped geometry as instructed.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-02.png"
+     },
+     "fem": {
+      "status": "PASS",
+      "metrics": {
+       "nodes": 1266,
+       "tetrahedra": 4481,
+       "connected_components": 1,
+       "mesh_volume_mm3": 14222.39744,
+       "fixed_nodes": 362,
+       "loaded_facets": 644,
+       "loaded_area_mm2": 1921.9456,
+       "axis": [
+        0.0,
+        0.0,
+        1.0
+       ],
+       "projection_min_mm": 0.0,
+       "projection_max_mm": 7.4,
+       "compliance_N_mm": 1.5518275456881825e-08,
+       "load_weighted_displacement_mm": 1.5518275456881825e-08,
+       "max_displacement_mm": 2.425357760188457e-08,
+       "strain_energy_N_mm": 7.759137728440914e-09,
+       "vm_p95_MPa": 0.0005313843869643654,
+       "vm_peak_MPa": 0.0007319817024787019,
+       "relative_free_residual": 4.206046604654578e-15,
+       "relative_force_balance_error": 8.840043797379148e-16,
+       "relative_moment_balance_error": 4.216598580401621e-16,
+       "relative_energy_error": 2.1321457138749302e-16
+      },
+      "checks": [
+       {
+        "metric": "connected_components",
+        "value": 1,
+        "max": 1,
+        "ok": true
+       }
+      ]
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 1.005
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 1.005
+       }
+      ]
+     }
+    },
+    "objectives": [
+     0.95,
+     1.0,
+     -29.0
+    ],
+    "score": 2.021,
+    "diagnosis": [],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 0,
+   "visits": 1,
+   "final": {
+    "status": "PASS",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 14222.39744,
+       "area": 5465.971199999998,
+       "solids": 1,
+       "faces": 14,
+       "bbox_x": 54.8,
+       "bbox_y": 54.8,
+       "bbox_z": 7.4
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 0.95,
+      "reason": "The edited part clearly shows the arms extended to their full length with a uniform, blocky shape, removing the original truncated and sloped geometry as instructed.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-02.png"
+     },
+     "fem": {
+      "status": "PASS",
+      "metrics": {
+       "nodes": 1256,
+       "tetrahedra": 4400,
+       "connected_components": 1,
+       "mesh_volume_mm3": 14222.397439999999,
+       "fixed_nodes": 364,
+       "loaded_facets": 644,
+       "loaded_area_mm2": 1921.9456,
+       "axis": [
+        0.0,
+        0.0,
+        1.0
+       ],
+       "projection_min_mm": 0.0,
+       "projection_max_mm": 7.4,
+       "compliance_N_mm": 1.551546817830988e-08,
+       "load_weighted_displacement_mm": 1.551546817830988e-08,
+       "max_displacement_mm": 2.420778308232899e-08,
+       "strain_energy_N_mm": 7.75773408915494e-09,
+       "vm_p95_MPa": 0.0005322555707550219,
+       "vm_peak_MPa": 0.0007404964072427362,
+       "relative_free_residual": 3.946946418311573e-15,
+       "relative_force_balance_error": 1.293833940732399e-15,
+       "relative_moment_balance_error": 3.2120739164005e-16,
+       "relative_energy_error": 0.0
+      },
+      "checks": [
+       {
+        "metric": "connected_components",
+        "value": 1,
+        "max": 1,
+        "ok": true
+       }
+      ]
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 0.995
+       },
+       {
+        "mesh_scale": 1.25
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 0.995
+       },
+       {
+        "status": "PASS",
+        "metrics": {
+         "nodes": 916,
+         "tetrahedra": 3101,
+         "connected_components": 1,
+         "mesh_volume_mm3": 14222.39744,
+         "fixed_nodes": 258,
+         "loaded_facets": 446,
+         "loaded_area_mm2": 1921.9456,
+         "axis": [
+          0.0,
+          0.0,
+          1.0
+         ],
+         "projection_min_mm": 0.0,
+         "projection_max_mm": 7.4,
+         "compliance_N_mm": 1.5507843467886635e-08,
+         "load_weighted_displacement_mm": 1.5507843467886635e-08,
+         "max_displacement_mm": 2.4257257858749434e-08,
+         "strain_energy_N_mm": 7.753921733943314e-09,
+         "vm_p95_MPa": 0.0005332027234447081,
+         "vm_peak_MPa": 0.0007313817565014923,
+         "relative_free_residual": 3.299517971566807e-15,
+         "relative_force_balance_error": 3.950700443875445e-16,
+         "relative_moment_balance_error": 9.519927635539944e-17,
+         "relative_energy_error": 4.267159978837488e-16
+        },
+        "checks": [
+         {
+          "metric": "connected_components",
+          "value": 1,
+          "max": 1,
+          "ok": true
+         }
+        ]
+       }
+      ]
+     }
+    },
+    "objectives": [
+     0.95,
+     1.0,
+     -29.0
+    ],
+    "score": 2.021,
+    "diagnosis": [],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "final"
+   },
+   "edges": []
+  }
+ ],
+ "edges": [
+  {
+   "parent": 0,
+   "child": 1,
+   "visits": 2,
+   "total": 4.05
+  },
+  {
+   "parent": 0,
+   "child": 2,
+   "visits": 2,
+   "total": 4.039
+  },
+  {
+   "parent": 2,
+   "child": 3,
+   "visits": 1,
+   "total": 2.021
+  }
+ ],
+ "events": [
+  {
+   "event": "decompose",
+   "plan": {
+    "steps": [
+     "Remove the four cut operations applied to the result object to eliminate the sloped arm geometry.",
+     "Delete the four wedge solid definitions (wedge_px, wedge_nx, wedge_py, wedge_ny) as they are no longer referenced.",
+     "Verify the base result cross shape and extrusion height remain unchanged."
+    ],
+    "invariants": [
+     "The result base polyline coordinates defining the cross outline must remain unchanged.",
+     "The extrude(7.4) height of the base body must remain unchanged.",
+     "The four-fold symmetry of the part must be preserved."
+    ],
+    "dependencies": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ]
+    ]
+   },
+   "memory_version": "8a1b16f7fe05a57a8e92e93d74a039b623a159338f9381e30b723b1064071219",
+   "retrieved": [
+    {
+     "task_id": "5a7b92f2ec42b321e819e27f65c12b26308196cadf014882b06908f429c1a977",
+     "instruction": "On the bottom face of the part, remove the 3 mm \u00d7 45\u00b0 bevel from the four straight outer edges, restoring them to sharp edges.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [], \"start\": 31}]}",
+     "strategies": [],
+     "context": [
+      "31:     .faces(\"<Z\").edges(\"%LINE\").chamfer(3.0, 3.0)"
+     ]
+    },
+    {
+     "task_id": "30a275d5b115f08a58b6ad65b5ab8596442002abf063c1216ac7501b1121c220",
+     "instruction": "Set the inlet outer radius equal to four times the outlet outer radius; the wall thickness and length stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .moveTo(0.0, 28.0)\"], \"start\": 3}, {\"delete\": 1, \"insert\": [\"    .lineTo(0.0, 25.9)\"], \"start\": 6}]}",
+     "strategies": [],
+     "context": [
+      "3:     .moveTo(0.0, 22.4)",
+      "6:     .lineTo(0.0, 20.3)"
+     ]
+    },
+    {
+     "task_id": "9f9217d46396040f81caaed79222d00b1681bf0038010db36311937cb6e87024",
+     "instruction": "Replace the square outer outline of the flat plate with a round outline of the same outer span and the same thickness, keeping the central round opening, the four corner mounting holes, and the raised ring unchanged.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .cylinder(10.9, 92.5)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(185.0, 185.0, 10.9)"
+     ]
+    }
+   ]
+  },
+  {
+   "event": "initial_state",
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 5956.277760000003,
+       "area": 2746.431814101661,
+       "solids": 1,
+       "faces": 14,
+       "bbox_x": 36.720000000000006,
+       "bbox_y": 36.72000000000001,
+       "bbox_z": 7.400000000000001
+      }
+     },
+     "constraints": {
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -0.0
+    ],
+    "score": 0.0,
+    "diagnosis": [
+     {
+      "stage": "constraints",
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "initial"
+   }
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "geometry",
+     "status": "FAIL",
+     "reason": "ValueError: Invalid inserted line"
+    },
+    {
+     "stage": "constraints",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "5a7b92f2ec42b321e819e27f65c12b26308196cadf014882b06908f429c1a977",
+     "instruction": "On the bottom face of the part, remove the 3 mm \u00d7 45\u00b0 bevel from the four straight outer edges, restoring them to sharp edges.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [], \"start\": 31}]}",
+     "strategies": [],
+     "context": [
+      "31:     .faces(\"<Z\").edges(\"%LINE\").chamfer(3.0, 3.0)"
+     ]
+    },
+    {
+     "task_id": "30a275d5b115f08a58b6ad65b5ab8596442002abf063c1216ac7501b1121c220",
+     "instruction": "Set the inlet outer radius equal to four times the outlet outer radius; the wall thickness and length stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .moveTo(0.0, 28.0)\"], \"start\": 3}, {\"delete\": 1, \"insert\": [\"    .lineTo(0.0, 25.9)\"], \"start\": 6}]}",
+     "strategies": [],
+     "context": [
+      "3:     .moveTo(0.0, 22.4)",
+      "6:     .lineTo(0.0, 20.3)"
+     ]
+    },
+    {
+     "task_id": "6a7ebd87c6b5fcf286fcd22fa85843e371b8a6103306004de677e5a8f2df8a21",
+     "instruction": "On each side, the brace runs in a single straight line from the bottom outer corner directly to the top of the post, forming a 45-degree slope from horizontal.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [], \"start\": 6}]}",
+     "strategies": [],
+     "context": [
+      "6:     .lineTo(8.3, 14.8)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "PASS",
+   "hypothesis": "Remove wedge definitions and cut operations to eliminate slopes and restore full thickness arms."
+  },
+  {
+   "event": "final_verification",
+   "node": 1,
+   "status": "PASS"
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": true,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "geometry",
+     "status": "FAIL",
+     "reason": "ValueError: Invalid inserted line"
+    },
+    {
+     "stage": "constraints",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "5a7b92f2ec42b321e819e27f65c12b26308196cadf014882b06908f429c1a977",
+     "instruction": "On the bottom face of the part, remove the 3 mm \u00d7 45\u00b0 bevel from the four straight outer edges, restoring them to sharp edges.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [], \"start\": 31}]}",
+     "strategies": [],
+     "context": [
+      "31:     .faces(\"<Z\").edges(\"%LINE\").chamfer(3.0, 3.0)"
+     ]
+    },
+    {
+     "task_id": "30a275d5b115f08a58b6ad65b5ab8596442002abf063c1216ac7501b1121c220",
+     "instruction": "Set the inlet outer radius equal to four times the outlet outer radius; the wall thickness and length stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .moveTo(0.0, 28.0)\"], \"start\": 3}, {\"delete\": 1, \"insert\": [\"    .lineTo(0.0, 25.9)\"], \"start\": 6}]}",
+     "strategies": [],
+     "context": [
+      "3:     .moveTo(0.0, 22.4)",
+      "6:     .lineTo(0.0, 20.3)"
+     ]
+    },
+    {
+     "task_id": "6a7ebd87c6b5fcf286fcd22fa85843e371b8a6103306004de677e5a8f2df8a21",
+     "instruction": "On each side, the brace runs in a single straight line from the bottom outer corner directly to the top of the post, forming a 45-degree slope from horizontal.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [], \"start\": 6}]}",
+     "strategies": [],
+     "context": [
+      "6:     .lineTo(8.3, 14.8)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "PASS",
+   "hypothesis": "Remove wedge definitions and cut operations to restore full thickness arms without slopes."
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 2,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "geometry",
+     "status": "FAIL",
+     "reason": "ValueError: Invalid inserted line"
+    },
+    {
+     "stage": "constraints",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "5a7b92f2ec42b321e819e27f65c12b26308196cadf014882b06908f429c1a977",
+     "instruction": "On the bottom face of the part, remove the 3 mm \u00d7 45\u00b0 bevel from the four straight outer edges, restoring them to sharp edges.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [], \"start\": 31}]}",
+     "strategies": [],
+     "context": [
+      "31:     .faces(\"<Z\").edges(\"%LINE\").chamfer(3.0, 3.0)"
+     ]
+    },
+    {
+     "task_id": "30a275d5b115f08a58b6ad65b5ab8596442002abf063c1216ac7501b1121c220",
+     "instruction": "Set the inlet outer radius equal to four times the outlet outer radius; the wall thickness and length stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .moveTo(0.0, 28.0)\"], \"start\": 3}, {\"delete\": 1, \"insert\": [\"    .lineTo(0.0, 25.9)\"], \"start\": 6}]}",
+     "strategies": [],
+     "context": [
+      "3:     .moveTo(0.0, 22.4)",
+      "6:     .lineTo(0.0, 20.3)"
+     ]
+    },
+    {
+     "task_id": "6a7ebd87c6b5fcf286fcd22fa85843e371b8a6103306004de677e5a8f2df8a21",
+     "instruction": "On each side, the brace runs in a single straight line from the bottom outer corner directly to the top of the post, forming a 45-degree slope from horizontal.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [], \"start\": 6}]}",
+     "strategies": [],
+     "context": [
+      "6:     .lineTo(8.3, 14.8)"
+     ]
+    }
+   ],
+   "path": [
+    1
+   ],
+   "status": "PASS",
+   "hypothesis": "Remove wedge definitions and cut operations to restore full arm thickness and length"
+  },
+  {
+   "event": "final_verification",
+   "node": 2,
+   "status": "PASS"
+  },
+  {
+   "event": "backtrack",
+   "to_node": 2
+  },
+  {
+   "event": "expand",
+   "parent": 2,
+   "node": 3,
+   "merged": false,
+   "strategy": "diversify",
+   "diagnosis": [],
+   "retrieved_repairs": [
+    {
+     "task_id": "5a7b92f2ec42b321e819e27f65c12b26308196cadf014882b06908f429c1a977",
+     "instruction": "On the bottom face of the part, remove the 3 mm \u00d7 45\u00b0 bevel from the four straight outer edges, restoring them to sharp edges.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [], \"start\": 31}]}",
+     "strategies": [],
+     "context": [
+      "31:     .faces(\"<Z\").edges(\"%LINE\").chamfer(3.0, 3.0)"
+     ]
+    },
+    {
+     "task_id": "30a275d5b115f08a58b6ad65b5ab8596442002abf063c1216ac7501b1121c220",
+     "instruction": "Set the inlet outer radius equal to four times the outlet outer radius; the wall thickness and length stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .moveTo(0.0, 28.0)\"], \"start\": 3}, {\"delete\": 1, \"insert\": [\"    .lineTo(0.0, 25.9)\"], \"start\": 6}]}",
+     "strategies": [],
+     "context": [
+      "3:     .moveTo(0.0, 22.4)",
+      "6:     .lineTo(0.0, 20.3)"
+     ]
+    },
+    {
+     "task_id": "9f9217d46396040f81caaed79222d00b1681bf0038010db36311937cb6e87024",
+     "instruction": "Replace the square outer outline of the flat plate with a round outline of the same outer span and the same thickness, keeping the central round opening, the four corner mounting holes, and the raised ring unchanged.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .cylinder(10.9, 92.5)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(185.0, 185.0, 10.9)"
+     ]
+    }
+   ],
+   "path": [
+    1,
+    2
+   ],
+   "status": "PASS",
+   "hypothesis": "Remove slope calculation variables, wedge definitions, and cut operations to restore full arm thickness and eliminate 45 degree slopes."
+  },
+  {
+   "event": "final_verification",
+   "node": 3,
+   "status": "PASS"
+  }
+ ],
+ "config": {
+  "algorithm": "mcts",
+  "max_expansions": 4,
+  "max_depth": 3,
+  "width": 2,
+  "max_width": 4,
+  "exploration": 0.7,
+  "seconds": 2400.0
+ },
+ "memory_version": "8a1b16f7fe05a57a8e92e93d74a039b623a159338f9381e30b723b1064071219",
+ "stored": "runs/adaptive-cad-open-20261007/memory.jsonl",
+ "seconds": 510.8976256249998,
+ "api": {
+  "mode": "live_astra",
+  "api_calls": 8,
+  "cost_usd": 0.0,
+  "budget_usd": 0.3,
+  "refused": 0
+ },
+ "tool_jobs": 14
+}

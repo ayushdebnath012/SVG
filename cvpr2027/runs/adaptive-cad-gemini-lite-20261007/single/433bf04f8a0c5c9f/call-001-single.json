@@ -1,0 +1,28 @@
+{
+ "kind": "single",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "You edit mechanical CAD. Return only JSON {\"edits\":[{\"start\":0,\"delete\":0,\"insert\":[\"replacement line\"]}]}. Indices are zero-based lines of the ORIGINAL input; operations must be ordered, nonoverlapping and in bounds. Preserve unrelated features. The supplied representation determines syntax. Return no explanation or invented physics results. Geometry execution and FEM checks are performed by external tools; never claim verification."
+   },
+   {
+    "role": "user",
+    "content": "Representation: cadquery\nOriginal CAD (line indices are implicit):\nimport cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .circle(1.25)\n    .extrude(6.0)\n    .faces(\">Z\").workplane()\n    .circle(2.5)\n    .extrude(1.5)\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 7.2), rotate=cq.Vector(0, 0, 0))\n            .box(5.4, 0.6, 1.4)\n    )\n)\nshow_object(result)Edit instruction:\nSet the shank length equal to 2.4 times the head diameter; the head, slot, and shank radius stay the same."
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 8192
+ },
+ "usage": {
+  "completion_tokens": 34,
+  "prompt_tokens": 276,
+  "total_tokens": 310
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\"edits\":[{\"start\":5,\"delete\":1,\"insert\":[\"    .extrude(6.0)\"]}],\"error\":false}\n```"
+}

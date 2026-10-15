@@ -1,0 +1,28 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import math\\nimport cadquery as cq\\nslope_angle_deg = 45.0\\ninner = 10.96\\nouter = 27.4\\nhalf_w = 10.96\\nrun = outer - inner\\nrise = run * math.tan(math.radians(slope_angle_deg))\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .polyline([[10.96, 10.96], [27.4, 10.96], [27.4, -10.96], [10.96, -10.96], [10.96, -27.4], [-10.96, -27.4], [-10.96, -10.96], [-27.4, -10.96], [-27.4, 10.96], [-10.96, 10.96], [-10.96, 27.4], [10.96, 27.4]])\\n    .close()\\n    .extrude(7.4)\\n)\\nwedge_px = (\\n    cq.Workplane(\\\"XZ\\\")\\n    .polyline([(inner, 0.0), (outer, 0.0), (outer, rise)])\\n    .close()\\n    .extrude(half_w, both=True)\\n)\\nwedge_nx = (\\n    cq.Workplane(\\\"XZ\\\")\\n    .polyline([(-inner, 0.0), (-outer, 0.0), (-outer, rise)])\\n    .close()\\n    .extrude(half_w, both=True)\\n)\\nwedge_py = (\\n    cq.Workplane(\\\"YZ\\\")\\n    .polyline([(inner, 0.0), (outer, 0.0), (outer, rise)])\\n    .close()\\n    .extrude(half_w, both=True)\\n)\\nwedge_ny = (\\n    cq.Workplane(\\\"YZ\\\")\\n    .polyline([(-inner, 0.0), (-outer, 0.0), (-outer, rise)])\\n    .close()\\n    .extrude(half_w, both=True)\\n)\\nresult = result.cut(wedge_px).cut(wedge_nx).cut(wedge_py).cut(wedge_ny)\\nshow_object(result)\", \"instruction\": \"Restore the outer halves of all four arms, extending each back to the full outer length and rebuilding them to full thickness; remove the 45\\u00b0 upward slopes so every arm has a flat underside and constant thickness to the tip.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"5a7b92f2ec42b321e819e27f65c12b26308196cadf014882b06908f429c1a977\", \"instruction\": \"On the bottom face of the part, remove the 3 mm \\u00d7 45\\u00b0 bevel from the four straight outer edges, restoring them to sharp edges.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [], \\\"start\\\": 31}]}\", \"strategies\": [], \"context\": [\"31:     .faces(\\\"<Z\\\").edges(\\\"%LINE\\\").chamfer(3.0, 3.0)\"]}, {\"task_id\": \"30a275d5b115f08a58b6ad65b5ab8596442002abf063c1216ac7501b1121c220\", \"instruction\": \"Set the inlet outer radius equal to four times the outlet outer radius; the wall thickness and length stay the same.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .moveTo(0.0, 28.0)\\\"], \\\"start\\\": 3}, {\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .lineTo(0.0, 25.9)\\\"], \\\"start\\\": 6}]}\", \"strategies\": [], \"context\": [\"3:     .moveTo(0.0, 22.4)\", \"6:     .lineTo(0.0, 20.3)\"]}, {\"task_id\": \"9f9217d46396040f81caaed79222d00b1681bf0038010db36311937cb6e87024\", \"instruction\": \"Replace the square outer outline of the flat plate with a round outline of the same outer span and the same thickness, keeping the central round opening, the four corner mounting holes, and the raised ring unchanged.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .cylinder(10.9, 92.5)\\\"], \\\"start\\\": 3}]}\", \"strategies\": [], \"context\": [\"3:     .box(185.0, 185.0, 10.9)\"]}]}"
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 4096
+ },
+ "usage": {
+  "completion_tokens": 122,
+  "prompt_tokens": 1268,
+  "total_tokens": 1390
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\n  \"steps\": [\n    \"Remove the wedge cutting operations (wedge_px, wedge_nx, wedge_py, wedge_ny) that create the 45-degree slopes.\",\n    \"Retain the base extrusion with constant thickness and full outer length across all four arms.\"\n  ],\n  \"invariants\": [\n    \"The central body and overall arm layout in the XY plane remain unchanged.\",\n    \"The thickness of the base extrusion (7.4) is preserved.\"\n  ],\n  \"dependencies\": []\n}\n```"
+}

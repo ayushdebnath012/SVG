@@ -1,0 +1,730 @@
+{
+ "task_id": "52761787aa876cb90473c46749416d456aed183da632629950b7f86b9295d373",
+ "status": "UNVERIFIED",
+ "prediction": "```json\n{\"edits\":[{\"start\":15,\"delete\":1,\"insert\":[\"result = result.cut(cq.Workplane('XY').cylinder(387.0,10.49)).cut(cq.Workplane('XY').cylinder(387.0, 21.0))\"]}]}\n```",
+ "selected_node": null,
+ "bank": [],
+ "pareto": [],
+ "stop": "expansion_limit",
+ "nodes": [
+  {
+   "id": 0,
+   "candidate": "```json\n{\"edits\":[{\"start\":15,\"delete\":1,\"insert\":[\"result = result.cut(cq.Workplane('XY').cylinder(387.0,10.49)).cut(cq.Workplane('XY').cylinder(387.0, 21.0))\"]}]}\n```",
+   "depth": 0,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 427710.9033209884,
+       "area": 48070.01058343136,
+       "solids": 1,
+       "faces": 4,
+       "bbox_x": 87.4,
+       "bbox_y": 87.4,
+       "bbox_z": 118.24698298041483
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "FAIL",
+      "confidence": 1.0,
+      "reason": "The instruction was to remove the through-hole, but instead the through-hole diameter was significantly enlarged.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-00.png"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     1.0,
+     0.0,
+     -2.0
+    ],
+    "score": 0.998,
+    "diagnosis": [
+     {
+      "stage": "semantics",
+      "status": "FAIL",
+      "confidence": 1.0,
+      "reason": "The instruction was to remove the through-hole, but instead the through-hole diameter was significantly enlarged.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-00.png"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 3,
+   "visits": 4,
+   "final": null,
+   "edges": [
+    0
+   ]
+  },
+  {
+   "id": 1,
+   "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [], \"start\": 15}]}",
+   "depth": 1,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 599146.8783867715,
+       "area": 35420.200532163486,
+       "solids": 1,
+       "faces": 3,
+       "bbox_x": 87.4,
+       "bbox_y": 87.4,
+       "bbox_z": 129.0
+      }
+     },
+     "constraints": {
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         21.0
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -1.0
+    ],
+    "score": -0.001,
+    "diagnosis": [
+     {
+      "stage": "constraints",
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         21.0
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 1,
+   "visits": 4,
+   "final": null,
+   "edges": [
+    1
+   ]
+  },
+  {
+   "id": 2,
+   "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [], \"start\": 15}]}",
+   "depth": 2,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 599146.8783867715,
+       "area": 35420.200532163486,
+       "solids": 1,
+       "faces": 3,
+       "bbox_x": 87.4,
+       "bbox_y": 87.4,
+       "bbox_z": 129.0
+      }
+     },
+     "constraints": {
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         21.0
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -1.0
+    ],
+    "score": -0.001,
+    "diagnosis": [
+     {
+      "stage": "constraints",
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         21.0
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 0,
+   "visits": 1,
+   "final": null,
+   "edges": []
+  }
+ ],
+ "edges": [
+  {
+   "parent": 0,
+   "child": 1,
+   "visits": 4,
+   "total": -0.004
+  },
+  {
+   "parent": 1,
+   "child": 2,
+   "visits": 1,
+   "total": -0.001
+  }
+ ],
+ "events": [
+  {
+   "event": "decompose",
+   "plan": {
+    "steps": [
+     "Remove the through-hole cutting operation from the model pipeline."
+    ],
+    "invariants": [
+     "The base compound shape formed by the central cylinder and the two spheres remains unchanged.",
+     "The outer geometry and overall dimensions outside of the cut feature are preserved."
+    ],
+    "dependencies": []
+   },
+   "memory_version": "6e57cd1057c1d25d69ada7306386373cd1fe80ec8521a6d8b43ec492194aa05b",
+   "retrieved": [
+    {
+     "task_id": "2b011313d1aca44727c7f5c006c03b6c968d100b17ba6726ecd0bf337ef06347",
+     "instruction": "Remove a 20 diameter through-hole along the Z axis.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [], \"start\": 9}]}",
+     "strategies": [],
+     "context": [
+      "9: result = result.cut(cq.Workplane('XY').cylinder(60.0,10.02))"
+     ]
+    },
+    {
+     "task_id": "89baa8ebedbc2e7b09a8d402e82e3139b33aef20e854093dc466ad41736bcbcc",
+     "instruction": "Remove a 6 diameter through-hole along the Z axis.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [], \"start\": 10}]}",
+     "strategies": [],
+     "context": [
+      "10: result = result.cut(cq.Workplane('XY').cylinder(225.0,3.00))"
+     ]
+    },
+    {
+     "task_id": "8ae8f2a004831eabe04e01752f7468ddf05b9b1abe92eaa45571e45579383496",
+     "instruction": "Remove a 7 diameter through-hole along the Z axis.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [], \"start\": 18}]}",
+     "strategies": [],
+     "context": [
+      "18: result = result.cut(cq.Workplane('XY').cylinder(282.0,3.60))"
+     ]
+    }
+   ]
+  },
+  {
+   "event": "initial_state",
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 554990.952129328,
+       "area": 43052.579137164765,
+       "solids": 1,
+       "faces": 4,
+       "bbox_x": 87.4,
+       "bbox_y": 87.4,
+       "bbox_z": 126.44456140495993
+      }
+     },
+     "constraints": {
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         21.0
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -0.0
+    ],
+    "score": 0.0,
+    "diagnosis": [
+     {
+      "stage": "constraints",
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         21.0
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "initial"
+   }
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "semantics",
+     "status": "FAIL",
+     "confidence": 1.0,
+     "reason": "The instruction was to remove the through-hole, but instead the through-hole diameter was significantly enlarged.",
+     "basis": "Astra rendered-view judgement",
+     "image": "semantic-00.png"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "No physical contract supplied"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "No perturbation contract supplied"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "2b011313d1aca44727c7f5c006c03b6c968d100b17ba6726ecd0bf337ef06347",
+     "instruction": "Remove a 20 diameter through-hole along the Z axis.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [], \"start\": 9}]}",
+     "strategies": [],
+     "context": [
+      "9: result = result.cut(cq.Workplane('XY').cylinder(60.0,10.02))"
+     ]
+    },
+    {
+     "task_id": "89baa8ebedbc2e7b09a8d402e82e3139b33aef20e854093dc466ad41736bcbcc",
+     "instruction": "Remove a 6 diameter through-hole along the Z axis.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [], \"start\": 10}]}",
+     "strategies": [],
+     "context": [
+      "10: result = result.cut(cq.Workplane('XY').cylinder(225.0,3.00))"
+     ]
+    },
+    {
+     "task_id": "8ae8f2a004831eabe04e01752f7468ddf05b9b1abe92eaa45571e45579383496",
+     "instruction": "Remove a 7 diameter through-hole along the Z axis.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [], \"start\": 18}]}",
+     "strategies": [],
+     "context": [
+      "18: result = result.cut(cq.Workplane('XY').cylinder(282.0,3.60))"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "FAIL",
+   "hypothesis": "Remove the cut operation that creates the through-hole."
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": true,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "semantics",
+     "status": "FAIL",
+     "confidence": 1.0,
+     "reason": "The instruction was to remove the through-hole, but instead the through-hole diameter was significantly enlarged.",
+     "basis": "Astra rendered-view judgement",
+     "image": "semantic-00.png"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "No physical contract supplied"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "No perturbation contract supplied"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "2b011313d1aca44727c7f5c006c03b6c968d100b17ba6726ecd0bf337ef06347",
+     "instruction": "Remove a 20 diameter through-hole along the Z axis.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [], \"start\": 9}]}",
+     "strategies": [],
+     "context": [
+      "9: result = result.cut(cq.Workplane('XY').cylinder(60.0,10.02))"
+     ]
+    },
+    {
+     "task_id": "89baa8ebedbc2e7b09a8d402e82e3139b33aef20e854093dc466ad41736bcbcc",
+     "instruction": "Remove a 6 diameter through-hole along the Z axis.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [], \"start\": 10}]}",
+     "strategies": [],
+     "context": [
+      "10: result = result.cut(cq.Workplane('XY').cylinder(225.0,3.00))"
+     ]
+    },
+    {
+     "task_id": "8ae8f2a004831eabe04e01752f7468ddf05b9b1abe92eaa45571e45579383496",
+     "instruction": "Remove a 7 diameter through-hole along the Z axis.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [], \"start\": 18}]}",
+     "strategies": [],
+     "context": [
+      "18: result = result.cut(cq.Workplane('XY').cylinder(282.0,3.60))"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "FAIL",
+   "hypothesis": "Remove the cylinder cut operation to eliminate the through-hole."
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": true,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "semantics",
+     "status": "FAIL",
+     "confidence": 1.0,
+     "reason": "The instruction was to remove the through-hole, but instead the through-hole diameter was significantly enlarged.",
+     "basis": "Astra rendered-view judgement",
+     "image": "semantic-00.png"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "No physical contract supplied"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "No perturbation contract supplied"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "2b011313d1aca44727c7f5c006c03b6c968d100b17ba6726ecd0bf337ef06347",
+     "instruction": "Remove a 20 diameter through-hole along the Z axis.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [], \"start\": 9}]}",
+     "strategies": [],
+     "context": [
+      "9: result = result.cut(cq.Workplane('XY').cylinder(60.0,10.02))"
+     ]
+    },
+    {
+     "task_id": "89baa8ebedbc2e7b09a8d402e82e3139b33aef20e854093dc466ad41736bcbcc",
+     "instruction": "Remove a 6 diameter through-hole along the Z axis.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [], \"start\": 10}]}",
+     "strategies": [],
+     "context": [
+      "10: result = result.cut(cq.Workplane('XY').cylinder(225.0,3.00))"
+     ]
+    },
+    {
+     "task_id": "8ae8f2a004831eabe04e01752f7468ddf05b9b1abe92eaa45571e45579383496",
+     "instruction": "Remove a 7 diameter through-hole along the Z axis.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [], \"start\": 18}]}",
+     "strategies": [],
+     "context": [
+      "18: result = result.cut(cq.Workplane('XY').cylinder(282.0,3.60))"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "FAIL",
+   "hypothesis": "Remove the cut operation that creates the through-hole along the Z axis."
+  },
+  {
+   "event": "backtrack",
+   "to_node": 1
+  },
+  {
+   "event": "expand",
+   "parent": 1,
+   "node": 2,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "constraints",
+     "status": "FAIL",
+     "checks": [
+      {
+       "metric": "instruction_values",
+       "missing": [
+        21.0
+       ],
+       "ok": false
+      },
+      {
+       "metric": "changed_solid",
+       "value": true,
+       "ok": true
+      }
+     ]
+    },
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "No physical contract supplied"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "No perturbation contract supplied"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "2b011313d1aca44727c7f5c006c03b6c968d100b17ba6726ecd0bf337ef06347",
+     "instruction": "Remove a 20 diameter through-hole along the Z axis.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [], \"start\": 9}]}",
+     "strategies": [],
+     "context": [
+      "9: result = result.cut(cq.Workplane('XY').cylinder(60.0,10.02))"
+     ]
+    },
+    {
+     "task_id": "89baa8ebedbc2e7b09a8d402e82e3139b33aef20e854093dc466ad41736bcbcc",
+     "instruction": "Remove a 6 diameter through-hole along the Z axis.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [], \"start\": 10}]}",
+     "strategies": [],
+     "context": [
+      "10: result = result.cut(cq.Workplane('XY').cylinder(225.0,3.00))"
+     ]
+    },
+    {
+     "task_id": "8ae8f2a004831eabe04e01752f7468ddf05b9b1abe92eaa45571e45579383496",
+     "instruction": "Remove a 7 diameter through-hole along the Z axis.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [], \"start\": 18}]}",
+     "strategies": [],
+     "context": [
+      "18: result = result.cut(cq.Workplane('XY').cylinder(282.0,3.60))"
+     ]
+    }
+   ],
+   "path": [
+    0,
+    1
+   ],
+   "status": "FAIL",
+   "hypothesis": "Remove the through-hole cutting operation from the result to leave a solid shape."
+  }
+ ],
+ "config": {
+  "algorithm": "mcts",
+  "max_expansions": 4,
+  "max_depth": 3,
+  "width": 2,
+  "max_width": 4,
+  "exploration": 0.7,
+  "seconds": 2400.0
+ },
+ "memory_version": "6e57cd1057c1d25d69ada7306386373cd1fe80ec8521a6d8b43ec492194aa05b",
+ "stored": null,
+ "seconds": 86.890192792,
+ "api": {
+  "mode": "live_astra",
+  "api_calls": 6,
+  "cost_usd": 0.0,
+  "budget_usd": 0.26785714285714285,
+  "refused": 0
+ },
+ "tool_jobs": 3
+}

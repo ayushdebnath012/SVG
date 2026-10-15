@@ -1,0 +1,85 @@
+{
+ "source_fem": {
+  "ok": true,
+  "compliance": 1.5469219111826218e-07,
+  "components": 1,
+  "nodes": 1412
+ },
+ "nodes": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(21.0, 14.3, 7.5)\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(-6.0, 0, 1.25), rotate=cq.Vector(0, 0, 0))\n            .polygon(6, 2.0321)\n            .extrude(5.4, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0, 1.25), rotate=cq.Vector(0, 0, 0))\n            .polygon(6, 2.6094)\n            .extrude(5.4, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(6.0, 0, 1.25), rotate=cq.Vector(0, 0, 0))\n            .polygon(6, 3.1868)\n            .extrude(5.4, both=True)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.1622795331478401e-07,
+    "components": 1,
+    "nodes": 1577
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "alt1",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(21.0, 14.3, 7.5)\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(-6.0, 0, 1.25), rotate=cq.Vector(0, 0, 0))\n            .polygon(6, 2.0321)\n            .extrude(5.4, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0, 1.25), rotate=cq.Vector(0, 0, 0))\n            .polygon(6, 2.6094)\n            .extrude(5.4, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(6.0, 0, 1.25), rotate=cq.Vector(0, 0, 0))\n            .polygon(6, 3.1868)\n            .extrude(5.4, both=True)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.1603856543569582e-07,
+    "components": 1,
+    "nodes": 1568
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "alt2",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(21.0, 11.0 + 3.3, 7.5)\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(-6.0, 0, 1.25), rotate=cq.Vector(0, 0, 0))\n            .polygon(6, 2.0321)\n            .extrude(5.4, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0, 1.25), rotate=cq.Vector(0, 0, 0))\n            .polygon(6, 2.6094)\n            .extrude(5.4, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(6.0, 0, 1.25), rotate=cq.Vector(0, 0, 0))\n            .polygon(6, 3.1868)\n            .extrude(5.4, both=True)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.1624976609573137e-07,
+    "components": 1,
+    "nodes": 1569
+   },
+   "numbers_ok": false,
+   "changed": true,
+   "cluster": null,
+   "robustness": null
+  },
+  {
+   "name": "alt3",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(length=21.0, width=14.3, height=7.5)\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(-6.0, 0, 1.25), rotate=cq.Vector(0, 0, 0))\n            .polygon(6, 2.0321)\n            .extrude(5.4, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0, 1.25), rotate=cq.Vector(0, 0, 0))\n            .polygon(6, 2.6094)\n            .extrude(5.4, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(6.0, 0, 1.25), rotate=cq.Vector(0, 0, 0))\n            .polygon(6, 3.1868)\n            .extrude(5.4, both=True)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.1625203711803496e-07,
+    "components": 1,
+    "nodes": 1571
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "rag",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(21.0, 14.3, 7.5)\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(-6.0, 0, 1.25), rotate=cq.Vector(0, 0, 0))\n            .polygon(6, 2.0321)\n            .extrude(5.4, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0, 1.25), rotate=cq.Vector(0, 0, 0))\n            .polygon(6, 2.6094)\n            .extrude(5.4, both=True)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(6.0, 0, 1.25), rotate=cq.Vector(0, 0, 0))\n            .polygon(6, 3.1868)\n            .extrude(5.4, both=True)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.1625546620814765e-07,
+    "components": 1,
+    "nodes": 1570
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  }
+ ]
+}

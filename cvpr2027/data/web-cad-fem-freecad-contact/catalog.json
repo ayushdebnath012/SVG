@@ -1,0 +1,44 @@
+{
+  "source": "https://github.com/FreeCAD/FreeCAD",
+  "revision_tree": "406063b1116a6cb872bbd92ec27c6f425a8d1f98",
+  "records": [
+    {
+      "id": "FreeCAD-shell-tube-contact",
+      "native_CAD": "constraint_contact_shell_shell.FCStd",
+      "original_solver_deck": "constraint_contact_shell_shell.inp",
+      "saved_result_nodes": 15404,
+      "max_saved_displacement": 69.6911019067779,
+      "max_saved_vonMises": 1282.0946631919323,
+      "cad_kind": "two open cylindrical shell BREP faces; not solids or mesh-only geometry",
+      "source_deck_material": {
+        "E_MPa": 72000,
+        "nu": 0.3,
+        "shell_thickness_mm": 0.5
+      },
+      "source_deck_force_N": [
+        0,
+        -5000,
+        0
+      ],
+      "source_native_force_serialized_value": 5000000,
+      "contact": "frictionless surface-to-surface, normal penalty 1000000; source static step without NLGEOM",
+      "status": "held",
+      "blockers": [
+        "Legacy native force value and deck N units must be reconciled with the pinned FreeCAD writer convention.",
+        "Exact saved result/deck revision and shell output units need independent replay.",
+        "Open-shell geometry is incompatible with the current solid-only scorer contract; requires a shell-specific validator.",
+        "Large saved displacement and very high stress do not establish physical validity or convergence."
+      ]
+    },
+    {
+      "id": "FreeCAD-solid-solid-contact",
+      "native_CAD": "constraint_contact_solid_solid.FCStd",
+      "status": "CAD_and_setup_only",
+      "blockers": [
+        "No saved result fields found in the original FCStd."
+      ]
+    }
+  ],
+  "source_program_executed": false,
+  "new_active_admissions": 0
+}

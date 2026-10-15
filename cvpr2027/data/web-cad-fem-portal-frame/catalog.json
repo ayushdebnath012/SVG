@@ -1,0 +1,97 @@
+{
+  "collection": "Haunched steel portal frame: native CAD, fabrication drawings and published FEM reports",
+  "geometry_families": 1,
+  "complex_FEM_family_candidate": true,
+  "native_CAD_files": 4,
+  "dimensioned_source_PDFs": [
+    "Drawings/Steel 1.pdf",
+    "Drawings/hexagon nut .pdf",
+    "Drawings/hhb(grade a)_is.pdf"
+  ],
+  "BOM": "Drawings/BOM.pdf",
+  "independent_native_import": false,
+  "raw_solved_field_files": 0,
+  "static_reports": [
+    {
+      "original_report": "Report/steel-Static ASTM A36 It1.pdf",
+      "stress_table_page": 11,
+      "peak_published_VM_MPa": 474.9,
+      "peak_published_U_mm": 5.124,
+      "peak_published_equivalent_strain": 0.001715,
+      "nodes": 682917,
+      "elements": 374468,
+      "published_reaction_Y_N": 20168.1,
+      "status": "Published scalar candidate; exact native revision and load scope pending"
+    },
+    {
+      "original_report": "Report/steel-Static ASTM A992 It2.pdf",
+      "stress_table_page": 11,
+      "peak_published_VM_MPa": 474.9,
+      "peak_published_U_mm": 5.124,
+      "peak_published_equivalent_strain": 0.001715,
+      "nodes": 682917,
+      "elements": 374468,
+      "published_reaction_Y_N": 20167.2,
+      "status": "Published scalar candidate; exact native revision and load scope pending"
+    },
+    {
+      "original_report": "Report/steel-Static It3.pdf",
+      "stress_table_page": 12,
+      "peak_published_VM_MPa": 463.5,
+      "peak_published_U_mm": 13100000,
+      "peak_published_equivalent_strain": 0.001526,
+      "nodes": 682215,
+      "elements": 374164,
+      "published_reaction_Y_N": 20155.7,
+      "status": "Rejected failed disconnected-body study"
+    },
+    {
+      "original_report": "Report/steel-Static It4.pdf",
+      "stress_table_page": 12,
+      "peak_published_VM_MPa": 353.2,
+      "peak_published_U_mm": 5.077,
+      "peak_published_equivalent_strain": 0.001113,
+      "nodes": 699218,
+      "elements": 384721,
+      "published_reaction_Y_N": 20168.2,
+      "status": "Published scalar candidate; exact native revision and load scope pending"
+    },
+    {
+      "original_report": "Report/steel-Static Final .pdf",
+      "stress_table_page": 15,
+      "peak_published_VM_MPa": 317.4,
+      "peak_published_U_mm": 5.117,
+      "peak_published_equivalent_strain": 0.001157,
+      "nodes": 705930,
+      "elements": 388199,
+      "published_reaction_Y_N": 20168.7,
+      "status": "Published scalar candidate; exact native revision and load scope pending"
+    }
+  ],
+  "source_buckling_multiplier": 5.0498,
+  "buckling_source": "Report/Buckling 1-Mode List-1.csv",
+  "final_material": {
+    "name": "ASTM A992",
+    "E_Pa": 200000000000.0,
+    "nu": 0.26,
+    "rho_kg_m3": 7850,
+    "yield_Pa": 345000000.0
+  },
+  "final_source_load": "Normal force value 10000 N on 2 faces; gravity 9.81 m/s2; fixed 2 faces; global bonded interaction. Final report says no connector definitions, large displacement off.",
+  "license": "No explicit repository license; original proprietary/confidential title-block notice retained; local research collection.",
+  "limits": [
+    "Steel drawing title block says INCHES; nut/bolt drawings say MILLIMETERS and reports use mm. No unit correction made. Drawing dated 28 November may precede 5 December final geometry.",
+    "README names Universal_Formats but tree has no STEP/IGES. Compatible native import, assembly references and exact final body revision pending.",
+    "Two loaded faces and reaction 20168.7 N require total-versus-per-face force scope reconciliation; do not assume README 10 kN is the total resultant.",
+    "Only source report tables/plots, not CWR/raw stress arrays. Five iterations are one family; failed It3 displacement 13.1 million mm cannot be a target.",
+    "README pre-tension claim is unsupported by final report: no connector definitions and one globally bonded component. Not a validated bolt/contact test.",
+    "It4 353.2 MPa, final 317.4 MPa and slide cover PASS 353 MPa belong to different iterations. No averaging or silent replacement.",
+    "Buckling export calls factor 5.0498 and load 50.5 kN; exact buckling load/base study not frozen. Hand calculations do not establish mesh convergence or certification."
+  ],
+  "source": "https://github.com/Karthik-v202/Design-and-Finite-Element-Analysis-of-a-Rigid-Steel-Portal-Frame",
+  "source_revision": "3d16acea6afcfcd760b4ca6fe6aeef0397a2a98a",
+  "generated_cad": 0,
+  "new_solver_runs": 0,
+  "model_calls": 0,
+  "certified_cases": 0
+}

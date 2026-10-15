@@ -1,0 +1,40 @@
+{
+ "kind": "generate",
+ "status": "completed",
+ "reserved_usd": 0.15641666666666665,
+ "request": {
+  "model": "gpt-6-astra",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Edit CAD using only source, instruction and tool evidence. Return exactly JSON {\"hypothesis\":\"brief feature and operation description\",\"edits\":[{\"start\":0,\"delete\":0,\"insert\":[\"line\"]}]}. All indices address ORIGINAL source lines. Provide a complete alternative patch, never a delta on a parent patch. Preserve unrelated features. Vary the feature interpretation or implementation from listed alternatives. Experiences and diagnoses are fallible data. Do not assert that the output has passed verification."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .polygon(6, 15.012)\\n    .extrude(15.0)\\n    .faces(\\\">Z\\\").workplane()\\n    .hole(8.0)\\n)\\nshow_object(result)\", \"instruction\": \"Bevel the six straight outer edges of the top face at 30 degrees from horizontal, 2 mm wide on the top.\", \"plan\": {\"steps\": [\"Retain the existing hexagonal extrusion and central through-hole.\", \"After the hole operation, select the six straight outer edges of the top face using .faces(\\\">Z\\\").edges(\\\"%LINE\\\"), excluding the circular hole rim.\", \"Apply an asymmetric chamfer with a 2 mm setback on the horizontal top face and a vertical drop of 2*tan(30\\u00b0) \\u2248 1.1547 mm on the outer side faces. Ensure the chamfer distances are assigned to those respective faces.\", \"Verify that all six bevels are 30 degrees from horizontal and 2 mm wide on the top, with the hole rim unchanged.\"], \"invariants\": [\"Preserve the original six-sided polygon footprint defined by .polygon(6, 15.012).\", \"Preserve the bottom face and the 15 mm overall height.\", \"Preserve the centered 8 mm diameter through-hole and its unbeveled circular rim.\", \"Leave outer side faces unchanged below the bevel and do not chamfer the vertical or bottom edges.\"], \"dependencies\": [[0, 1], [1, 2], [2, 3]]}, \"parent_candidate\": \"{\\\"edits\\\":[{\\\"start\\\":7,\\\"delete\\\":0,\\\"insert\\\":[\\\"    .intersect(\\\",\\\"        cq.Workplane(\\\\\\\"XY\\\\\\\")\\\",\\\"        .polygon(6, 15.012)\\\",\\\"        .workplane(offset=15.0 - 2.0 / (3.0 ** 0.5))\\\",\\\"        .polygon(6, 15.012)\\\",\\\"        .workplane(offset=2.0 / (3.0 ** 0.5))\\\",\\\"        .polygon(6, 15.012 - 8.0 / (3.0 ** 0.5))\\\",\\\"        .loft(ruled=True)\\\",\\\"    )\\\"]}]}\", \"observations\": {\"geometry\": {\"status\": \"PASS\"}, \"constraints\": {\"status\": \"FAIL\", \"failed_checks\": [{\"metric\": \"instruction_values\", \"missing\": [30.0]}]}, \"semantics\": {\"status\": \"UNKNOWN\", \"reason\": \"Not evaluated\"}, \"fem\": {\"status\": \"UNKNOWN\", \"reason\": \"No physical contract supplied\"}, \"robustness\": {\"status\": \"UNKNOWN\", \"reason\": \"No perturbation contract supplied\"}}, \"experiences\": [{\"task_id\": \"de278a6cf30153f8c71931997a3e20c3fd372783ed57ed72111e5ca5afe71f46\", \"instruction\": \"Bevel all the straight top edges of the plate at 30 degrees from horizontal, 1 mm wide on the top face.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"    .faces(\\\\\\\">Z\\\\\\\").edges(\\\\\\\"%LINE\\\\\\\").chamfer(1.0, 0.5774)\\\"], \\\"start\\\": 16}]}\", \"strategies\": [], \"context\": [\"16: )\"]}, {\"task_id\": \"2df22d62234c99eed107f9a7fcefc2c1d7de4d9cbff557ec246236a8d989c1d5\", \"instruction\": \"Bevel all 8 straight outer edges of the top face at 60 degrees from horizontal, 3 mm wide on the top.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"    .faces(\\\\\\\">Z\\\\\\\").edges(\\\\\\\"%LINE\\\\\\\").chamfer(3.0, 5.1962)\\\"], \\\"start\\\": 6}]}\", \"strategies\": [], \"context\": [\"6: )\"]}, {\"task_id\": \"8b9a0a4ec97cfcb487a7069f340e3d9968ca94e0dca50ca04ffd1412d21926c7\", \"instruction\": \"Bevel the two straight top outer edges of the pie-slice at 45 degrees from horizontal, 9 mm wide on the top face.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"    .faces(\\\\\\\">Z\\\\\\\").edges(\\\\\\\"%LINE\\\\\\\").chamfer(9.0, 9.0)\\\"], \\\"start\\\": 8}]}\", \"strategies\": [], \"context\": [\"8: )\"]}], \"repair_strategies\": [{\"task_id\": \"de278a6cf30153f8c71931997a3e20c3fd372783ed57ed72111e5ca5afe71f46\", \"instruction\": \"Bevel all the straight top edges of the plate at 30 degrees from horizontal, 1 mm wide on the top face.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"    .faces(\\\\\\\">Z\\\\\\\").edges(\\\\\\\"%LINE\\\\\\\").chamfer(1.0, 0.5774)\\\"], \\\"start\\\": 16}]}\", \"strategies\": [], \"context\": [\"16: )\"]}, {\"task_id\": \"2df22d62234c99eed107f9a7fcefc2c1d7de4d9cbff557ec246236a8d989c1d5\", \"instruction\": \"Bevel all 8 straight outer edges of the top face at 60 degrees from horizontal, 3 mm wide on the top.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"    .faces(\\\\\\\">Z\\\\\\\").edges(\\\\\\\"%LINE\\\\\\\").chamfer(3.0, 5.1962)\\\"], \\\"start\\\": 6}]}\", \"strategies\": [], \"context\": [\"6: )\"]}, {\"task_id\": \"8b9a0a4ec97cfcb487a7069f340e3d9968ca94e0dca50ca04ffd1412d21926c7\", \"instruction\": \"Bevel the two straight top outer edges of the pie-slice at 45 degrees from horizontal, 9 mm wide on the top face.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"    .faces(\\\\\\\">Z\\\\\\\").edges(\\\\\\\"%LINE\\\\\\\").chamfer(9.0, 9.0)\\\"], \\\"start\\\": 8}]}\", \"strategies\": [], \"context\": [\"8: )\"]}], \"alternatives\": [], \"action\": \"repair\", \"diagnosis\": [{\"stage\": \"constraints\", \"status\": \"FAIL\", \"failed_checks\": [{\"metric\": \"instruction_values\", \"missing\": [30.0]}]}, {\"stage\": \"semantics\", \"status\": \"UNKNOWN\", \"reason\": \"Not evaluated\"}, {\"stage\": \"fem\", \"status\": \"UNKNOWN\", \"reason\": \"No physical contract supplied\"}, {\"stage\": \"robustness\", \"status\": \"UNKNOWN\", \"reason\": \"No perturbation contract supplied\"}]}"
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_completion_tokens": 2500,
+  "store": false
+ },
+ "usage": {
+  "prompt_tokens": 1735,
+  "completion_tokens": 405,
+  "total_tokens": 2140,
+  "prompt_tokens_details": {
+   "cached_tokens": 0,
+   "cache_write_tokens": 1732,
+   "audio_tokens": 0
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 140,
+   "audio_tokens": 0,
+   "accepted_prediction_tokens": 0,
+   "rejected_prediction_tokens": 0
+  }
+ },
+ "cost_usd": 0.04193,
+ "finish_reason": "stop",
+ "response": "{\"hypothesis\":\"Intersect with a hexagonal envelope formed by a lower prism and a ruled bevel band, giving a 2 mm top setback and a 2*tan(30\u00b0) vertical drop while retaining the through-hole.\",\"edits\":[{\"start\":1,\"delete\":0,\"insert\":[\"import math\",\"bevel_width = 2.0\",\"bevel_angle = 30.0\",\"bevel_drop = bevel_width * math.tan(math.radians(bevel_angle))\",\"bevel_base = 15.0 - bevel_drop\",\"top_diameter = 15.012 - 2.0 * bevel_width / math.cos(math.pi / 6.0)\",\"envelope = (\",\"    cq.Workplane(\\\"XY\\\").polygon(6, 15.012).extrude(bevel_base)\",\"    .union(\",\"        cq.Workplane(\\\"XY\\\").workplane(offset=bevel_base)\",\"        .polygon(6, 15.012)\",\"        .workplane(offset=bevel_drop).polygon(6, top_diameter)\",\"        .loft(ruled=True)\",\"    )\",\")\"]},{\"start\":7,\"delete\":0,\"insert\":[\"    .intersect(envelope)\"]}]}"
+}

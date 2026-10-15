@@ -1,0 +1,28 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .box(95.5, 82.2, 57.8)\\n    .faces(\\\">Z\\\").workplane()\\n    .center(0.0, 0.0)\\n    .rect(36.4, 97.5)\\n    .cutBlind(-26.3)\\n    .faces(\\\"<Z\\\").workplane()\\n    .pushPoints([(34.45, 27.8), (-34.45, 27.8), (34.45, -27.8), (-34.45, -27.8)])\\n    .hole(4.0)\\n)\\nshow_object(result)\", \"instruction\": \"Rotate the entire part 45 degrees about the Z axis, then a further 30 degrees about the X axis.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"ab59d915456b9133dbb103b7c275c8e41528f69540368a24ed6ff058bed1f810\", \"instruction\": \"Rotate the entire part 60 degrees about the X axis, then a further 30 degrees about the Y axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.rotate((0,0,0),(1,0,0),60).rotate((0,0,0),(0,1,0),30)\\\"], \\\"start\\\": 67}]}\", \"strategies\": [], \"context\": [\"67: show_object(result)\"]}, {\"task_id\": \"ec1a75059e65cc53e88e4a8ae14d3c72e207218380ddb3023ee6d3bc2b059717\", \"instruction\": \"Rotate the entire part 90 degrees about the Y axis, then a further 45 degrees about the Z axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.rotate((0,0,0),(0,1,0),90).rotate((0,0,0),(0,0,1),45)\\\"], \\\"start\\\": 15}]}\", \"strategies\": [], \"context\": [\"15: show_object(result)\"]}, {\"task_id\": \"09f4039ea3383340ef7e6c2328f56987897b7319f7dbd14f2eecc40b77c587ab\", \"instruction\": \"Rotate the entire part 30 degrees about the X axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.rotate((0,0,0), (1,0,0), 30)\\\"], \\\"start\\\": 7}]}\", \"strategies\": [], \"context\": [\"7: show_object(result)\"]}]}"
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 4096
+ },
+ "usage": {
+  "completion_tokens": 108,
+  "prompt_tokens": 786,
+  "total_tokens": 894
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\n  \"steps\": [\n    \"Rotate the solid result 45 degrees about the Z axis\",\n    \"Rotate the solid result a further 30 degrees about the X axis\"\n  ],\n  \"invariants\": [\n    \"The base geometry, cutouts, and holes remain unchanged relative to each other\",\n    \"Feature dimensions and relative placements are preserved\"\n  ],\n  \"dependencies\": [\n    [0, 1]\n  ]\n}\n```"
+}

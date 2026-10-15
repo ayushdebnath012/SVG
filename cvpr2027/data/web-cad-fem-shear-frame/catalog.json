@@ -1,0 +1,154 @@
+{
+  "collection": "IIT Mandi assembled shear frame CAD/CAE, source dimensioned figures and modal/dynamic FEM references",
+  "source": "https://data.mendeley.com/datasets/bxmd7c78zf/3",
+  "revision": null,
+  "license_notice": "CC BY 4.0, original metadata retained",
+  "date": "2026-10-12",
+  "certified_cases": 0,
+  "locally_generated_cad": 0,
+  "solver_runs": 0,
+  "frontier_model_calls": 0,
+  "engineering_families": 1,
+  "geometry_tasks": 4,
+  "native_cad_numerical_reference_candidates": 4,
+  "native_cad_saved_result_candidates": 0,
+  "native_abaqus_cae_files": [
+    "Undamaged/project1.cae",
+    "Damage_type2/project1.cae",
+    "Damage_type3/project1.cae",
+    "Damage_type1/project1.cae"
+  ],
+  "independent_native_geometry_import": false,
+  "source_dimensioned_engineering_figures_verified": [
+    "Figures Used/Beam_col_geo.png",
+    "Figures Used/Top_bottom_view.png",
+    "Figures Used/Columns (1).png"
+  ],
+  "complete_manufacturing_drawing_package_verified": false,
+  "modal_reference_values": 24,
+  "modal_records": [
+    {
+      "case": "Undamaged",
+      "native_cae": "Undamaged/project1.cae",
+      "native_cae_sha256": "3e58e6e310b051dd149350837d339f4a74b9b684d86ec714ed76d580df319720",
+      "six_modal_reference_Hz": [
+        6.2535,
+        6.577,
+        7.8928,
+        21.428,
+        22.286,
+        24.198
+      ],
+      "exact_cells": [
+        "F3",
+        "F4",
+        "F5",
+        "F6",
+        "F7",
+        "F8"
+      ],
+      "sheet": "Sheet1",
+      "workbook": "Frequencies comparison/comparision.xlsx"
+    },
+    {
+      "case": "Damage_type1",
+      "native_cae": "Damage_type1/project1.cae",
+      "native_cae_sha256": "af1e71c8ba4906e4f182af673d54fdd5ecfb399a8bac8fb8dcef22d1dfda661f",
+      "six_modal_reference_Hz": [
+        6.5613,
+        6.5645,
+        8.0566,
+        21.913,
+        22.232,
+        24.837
+      ],
+      "exact_cells": [
+        "G3",
+        "G4",
+        "G5",
+        "G6",
+        "G7",
+        "G8"
+      ],
+      "sheet": "Sheet1",
+      "workbook": "Frequencies comparison/comparision.xlsx"
+    },
+    {
+      "case": "Damage_type2",
+      "native_cae": "Damage_type2/project1.cae",
+      "native_cae_sha256": "4964405bfaa2aef14f5b779615f8a0c1450542c1c9935eec3ba9459ccbdd13a7",
+      "six_modal_reference_Hz": [
+        5.9352,
+        6.5926,
+        7.8012,
+        21.003,
+        22.346,
+        23.417
+      ],
+      "exact_cells": [
+        "H3",
+        "H4",
+        "H5",
+        "H6",
+        "H7",
+        "H8"
+      ],
+      "sheet": "Sheet1",
+      "workbook": "Frequencies comparison/comparision.xlsx"
+    },
+    {
+      "case": "Damage_type3",
+      "native_cae": "Damage_type3/project1.cae",
+      "native_cae_sha256": "46f10408944681610609121c89cf2e377b8a4b4313774ab83fd882e0fc7140e1",
+      "six_modal_reference_Hz": [
+        6.2053,
+        6.5665,
+        7.8673,
+        21.32,
+        22.254,
+        24.146
+      ],
+      "exact_cells": [
+        "I3",
+        "I4",
+        "I5",
+        "I6",
+        "I7",
+        "I8"
+      ],
+      "sheet": "Sheet1",
+      "workbook": "Frequencies comparison/comparision.xlsx"
+    }
+  ],
+  "dynamic_reference": {
+    "file": "Dynamic Analysis/Abaqus1.xlsx",
+    "sheet": "xyToExcel",
+    "rows": "2:752",
+    "samples": 751,
+    "time_range_seconds": [
+      0.0,
+      1.5
+    ],
+    "source_columns": {
+      "A": "Time(sec)",
+      "B": "Abaqus(ACC), raw physical units unspecified",
+      "C": "Experiment(acc in g), experimental not FEM",
+      "D": "Abaqus(Acc in g), equals B/1000; physical scale unverified"
+    },
+    "g_label_scale_verification_pending": true,
+    "acceleration_case_and_sensor_mapping_pending": true
+  },
+  "npz": "original-table-arrays.npz",
+  "npz_sha256": "41c021ebe334d9b3af45d56ae5f1d0dce8681dda55b816d09e41a5f44203fc36",
+  "limitations": [
+    "Four original native Abaqus databases, associated joints/assembly journal text and source dimension figures. Geometry/CAE content not independently imported in Abaqus; not assumed interchangeable with original neutral STEP.",
+    "No saved ODB/full nodal-field export located in selected source model folders. Numerical references are published tables.",
+    "Workbook clearly separates MATLAB, Abaqus and experimental modal columns. Only Abaqus F:I rows3:8 counted as FEM targets.",
+    "Dynamic columnC is experimental, not a second FEM solution. ColumnD is rawB/1000 labeledg; rawB unit, conversion and sensor/model scope must be verified.",
+    "Source data description inconsistently says three damaged/model folders while version3 contains Undamaged plus Damage_type1/2/3. Preserve observed files, not text-only count.",
+    "Damage-type3 journal begins by upgrading a Damage_type1 path; exact revision/model/reference matching requires review.",
+    "Original dimensioned component/assembly figures support a future drawing track, but tolerances, hidden details, bolts/joints and complete model matching still need review.",
+    "Four geometry/reference variants remain one assembled frame family. 751 sample rows are one trajectory, not751 tasks.",
+    "Source journal submit commands were inspected as text and never executed. No new CAD or solver data generated."
+  ]
+}

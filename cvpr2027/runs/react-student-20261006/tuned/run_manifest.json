@@ -1,0 +1,93 @@
+{
+  "status": "completed",
+  "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+  "model_revision": "488639f1ff808d1d3d0ba301aef8c11461451ec5",
+  "variant": "react",
+  "source_manifest": {
+    "variant": "react",
+    "system": "You edit mechanical CAD. First write a short plan, then the patch, in exactly this format:\nPLAN:\n- [i] `exact original line i` -> what changes (at most 20 words)\n(one bullet per edit operation; i is the zero-based ORIGINAL line index where the operation starts; for an insertion at the end write [END])\nPATCH:\n{\"edits\":[{\"start\":0,\"delete\":0,\"insert\":[\"replacement line\"]}]}\nIndices are zero-based lines of the ORIGINAL input; operations must be ordered, nonoverlapping and in bounds. Preserve unrelated features. The supplied representation determines syntax. Return no other text and no invented physics results. Geometry execution and FEM checks are performed by external tools; never claim verification.",
+    "files": {
+      "train": "42e85be7994c52597c4abff899bb87b0cea21825cae75dfc3bf7b80d0f14064b",
+      "validation": "f2b3d9e04b38b3dba52d518e05c1ccc36db43e72de351b46271385fd3e0a79f0",
+      "test": "26ff0b02076a62c1802578321b974b4c0b51a1d7b23133df915f4475b8da8232"
+    },
+    "counts": {
+      "train": {
+        "original": 2540,
+        "repair": 1264
+      },
+      "validation": null,
+      "test": null
+    },
+    "source_splits": "runs/multisource-cad-colab-20261002/results-final",
+    "teacher": [
+      "runs/cad-astra-distill-20261004",
+      "runs/cad-astra-distill-n2-20261005"
+    ],
+    "acceptance": "verifier gates + consensus>=2",
+    "teacher_audit": {
+      "tasks": 468,
+      "accepted": 441,
+      "accepted_reference_strict": 364
+    },
+    "note": "Rows are the retained splits of the completed 3B run; only targets change. Teacher calls used the training split only.",
+    "react": {
+      "source_samples": "runs/bestofn-student-20261006/train-samples.jsonl",
+      "checked_tasks": 2540,
+      "repair_rule": "first failing of greedy+samples; target = original row target",
+      "problems": {
+        "failed to build a valid solid": 237,
+        "Applying your patch": 982
+      }
+    }
+  },
+  "counts": {
+    "train": 3804,
+    "validation": 172,
+    "test": 252
+  },
+  "origin_counts": {
+    "train": {
+      "template": 3194,
+      "teacher_verified": 610
+    },
+    "validation": {
+      "template": 172,
+      "teacher_verified": 0
+    },
+    "test": {
+      "template": 252,
+      "teacher_verified": 0
+    }
+  },
+  "epochs": 2,
+  "gpu": "NVIDIA H100 NVL",
+  "config": {
+    "seed": 17,
+    "dtype": "torch.bfloat16",
+    "quantization": "NF4 double-quantized",
+    "rank": 16,
+    "lora_alpha": 320,
+    "dropout": 0,
+    "batch_size": 4,
+    "gradient_accumulation": 1,
+    "effective_batch_size": 4,
+    "learning_rate": 0.0001,
+    "blocks": 12,
+    "max_sequence_tokens": 4096,
+    "max_target_and_generation_tokens": 1024
+  },
+  "packages": {
+    "torch": "2.11.0+cu130",
+    "transformers": "4.51.3",
+    "peft": "0.15.2"
+  },
+  "script_sha256": "b3839cd79ec60640daa2bceb6ff0802d2963c6101a03a023229c70b83fe00449",
+  "runtime": "Google Colab GPU",
+  "trainable_parameters": 9977856,
+  "total_parameters": 3095916544,
+  "optimizer_steps": 1902,
+  "training_and_final_eval_seconds": 2015.357106932439,
+  "peak_gpu_allocated_bytes": 26483354112,
+  "adapter_sha256": "149a002bce5080b6914cb73ba49f062fa92ad7e27e192810a26e9da15e97fae8"
+}

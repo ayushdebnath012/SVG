@@ -1,0 +1,16 @@
+{
+  "model": "gpt-6-astra",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are solving a CAD+FEM benchmark task. Return only a complete runnable Python main.py, with no markdown fences. No model-side tools are available; your code will run locally. Do not hardcode a guessed answer or use published reference results."
+    },
+    {
+      "role": "user",
+      "content": "Component analysis: the output coupler of an open-source, 3D-printable 15:1 cycloidal gearbox. part.step holds the single solid in millimetres (33 faces, volume 2063 mm^3). faces.json lists every face with its index, type, area, centroid and normal/axis; use the geometry, not a CAD system's own face numbering.\n\nMaterial: PETG-CF, linear isotropic elastic, E = 3000 MPa, Poisson ratio 0.36.\nAnalysis: linear static, small displacements, no gravity, no contact.\nSupports: all three displacement components are zero on face 5: cylinder, area 33.52 mm^2, centroid (76.619, -0.908, 22.737) mm, radius 2.5 mm, axis (1.0, 0.0, -0.0) through (79.025, -0.0, 20.5) (hole/bore surface); face 6: cylinder, area 117.81 mm^2, centroid (76.525, 1.588, 20.397) mm, radius 2.5 mm, axis (1.0, 0.0, -0.0) through (79.025, -0.0, 20.5) (hole/bore surface).\nLoad: total force (100.052, 0.000, 0.000) N applied as a uniform surface traction (constant force per unit area) over the loaded face(s): face 14 carries (100.052, 0.000, 0.000) N.\nFor reference, the source solved this with second-order tetrahedra (Netgen, maximum element size 2 mm).\n\nOutputs:\n- max_displacement_mm [mm]: maximum nodal displacement magnitude in the part\n\nSubmit results.json containing exactly an outputs object with these numeric keys. Also submit main.py, part.step, mesh.msh, fields.npz, solver.log, refinement.json and environment.json. See candidate README for the artifact contract. Correct numerical answers alone do not establish workflow completion.\nRuntime: Python with numpy, scipy, gmsh, cadquery, meshio, skfem. ccx (CalculiX 2.23) available on PATH; no FreeCAD or ANSYS. Input directory is CADFEM_INPUT_DIR; files: [\"part.step\", \"faces.json\"]. Read full geometry and specification files there. Write all outputs to CADFEM_OUTPUT_DIR; main.py is preserved separately. Internet and evaluator data blocked. 600 seconds, 2 CPU threads, 6000 MB RAM. Choose feasible meshes; record convergence honestly. One code-generation attempt, no repair feedback. Return runnable code; never fabricate results.\nfaces.json schema (first face only; read full file at runtime): {\"note\": \"face_index = 1-based order of TopExp::MapShapes(TopAbs_FACE) on part.step\", \"faces\": [{\"face_index\": 1, \"area_mm2\": 38.598, \"centroid_mm\": [75.281, -4.915, 20.819], \"type\": \"cylinder\", \"radius_mm\": 2.0, \"axis_direction\": [0.0, -0.9979, 0.0649], \"axis_point_mm\": [74.025, -0.998, 20.565], \"concave\": true, \"bbox_mm\": [74.025, -8.113, 18.602, 76.025, -1.367, 23.015]}]}"
+    }
+  ],
+  "reasoning_effort": "low",
+  "max_completion_tokens": 6500,
+  "store": false
+}

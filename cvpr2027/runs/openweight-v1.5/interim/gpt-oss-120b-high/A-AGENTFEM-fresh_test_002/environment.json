@@ -1,0 +1,24 @@
+{
+  "versions": {
+    "python": "3.12.15",
+    "gmsh": "4.15.2",
+    "skfem": "12.0.2",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1"
+  },
+  "units": "mm",
+  "material": {
+    "E": 70000.0,
+    "nu": 0.33,
+    "type": "linear_elastic"
+  },
+  "boundary_conditions": {
+    "fixed_bottom": "all displacement components = 0 on z=0 faces",
+    "traction_top": "uniform pressure -1.98728 N/mm^2 on top surface"
+  },
+  "mesh": {
+    "element": "tetra10 (quadratic)",
+    "order": 2
+  },
+  "solver": "scikit-fem direct sparse solver"
+}

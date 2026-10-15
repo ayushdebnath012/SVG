@@ -1,0 +1,1674 @@
+ELMER SOLVER (v 9.0) STARTED AT: 2023/11/04 16:29:26
+
+ParCommInit:  Initialize #PEs:            1
+MAIN:
+MAIN: =============================================================
+MAIN: ElmerSolver finite element software, Welcome!
+MAIN: This program is free software licensed under (L)GPL
+MAIN: Copyright 1st April 1995 - , CSC - IT Center for Science Ltd.
+MAIN: Webpage http://www.csc.fi/elmer, Email elmeradm@csc.fi
+MAIN: Version: 9.0 (Rev: unknown, Compiled: 2023-11-01)
+MAIN:  Running one task without MPI parallelization.
+MAIN:  Running with just one thread per task.
+MAIN:  HYPRE library linked in.
+MAIN:  MUMPS library linked in.
+MAIN:  Lua interpreter linked in.
+MAIN: =============================================================
+MAIN:
+MAIN:
+MAIN: -------------------------------------
+MAIN: Reading Model: case.sif
+LoadInputFile: Scanning input file: case.sif
+LoadInputFile: Scanning only size info
+LoadInputFile: First time visiting
+LoadInputFile: Reading base load of sif file
+LoadInputFile: Loading input file: case.sif
+LoadInputFile: Reading base load of sif file
+LoadInputFile: Number of BCs: 162
+LoadInputFile: Number of Body Forces: 0
+LoadInputFile: Number of Initial Conditions: 24
+LoadInputFile: Number of Materials: 24
+LoadInputFile: Number of Equations: 24
+LoadInputFile: Number of Solvers: 3
+LoadInputFile: Number of Bodies: 24
+ListTagKeywords: Setting weight for keywords!
+ListTagKeywords: No parameters width suffix: normalize by area
+ListTagKeywords: Setting weight for keywords!
+ListTagKeywords: No parameters width suffix: normalize by volume
+Loading user function library: [FlowSolve]...[FlowSolver_Init0]
+Loading user function library: [HeatSolve]...[HeatSolver_Init0]
+Loading user function library: [ResultOutputSolve]...[ResultOutputSolver_Init0]
+LoadMesh: Loading serial mesh!
+ElmerAsciiMesh: Performing step: 1
+ElmerAsciiMesh: Base mesh name: .
+ReadHeaderFile: Reading header info from file: ./mesh.header
+InitializeMesh: Number of nodes in mesh: 137182
+InitializeMesh: Number of bulk elements in mesh: 97044
+InitializeMesh: Number of boundary elements in mesh: 33261
+InitializeMesh: Initial number of max element nodes: 10
+ElmerAsciiMesh: Performing step: 2
+ReadNodesFile: Reading nodes from file: ./mesh.nodes
+MapCoordinates: Performing coordinate mapping
+SetMeshDimension: Dimension of mesh is: 3
+SetMeshDimension: Max dimension of mesh is: 3
+MapCoordinates: Scaling coordinates: 1.000E-03 1.000E-03 1.000E-03
+ElmerAsciiMesh: Performing step: 3
+ReadElementsFile: Reading bulk elements from file: ./mesh.elements
+ElmerAsciiMesh: Performing step: 4
+ReadBoundaryFile: Reading boundary elements from file: ./mesh.boundary
+PermuteNodeNumbering: Performing node mapping
+ReadTargetNames: Reading names info from file: ./mesh.names
+WARNING:: ReadTargetNames: Could not map name to Body nor BC: bnry188
+WARNING:: ReadTargetNames: Could not map name to Body nor BC: bnry189
+MapBodiesAndBCs: Remapping bodies
+MapBodiesAndBCs: Minimum initial body index: 163
+MapBodiesAndBCs: Maximum initial body index: 187
+MapBodiesAndBCs: Remapping boundaries
+MapBodiesAndBCs: Minimum initial boundary index: 2
+MapBodiesAndBCs: Maximum initial boundary index: 189
+ElmerAsciiMesh: Performing step: 5
+ElmerAsciiMesh: Performing step: 6
+LoadMesh: Loading mesh done
+LoadMesh: Preparing mesh done
+LoadMesh: Elapsed REAL time:     0.5124 (s)
+MeshStabParams: Computing stabilization parameters
+MeshStabParams: Elapsed REAL time:    14.7885 (s)
+LoadModel: Defined radiation solver by Procedure containing "HeatSolver"
+MAIN: -------------------------------------
+AddMeshCoordinates: Setting mesh coordinates and time
+AddSolvers: Setting up 3 solvers
+AddSolvers: Setting up solver 1: navier-stokes
+AddEquationBasics: Setting up keywords internally for legacy solver: navier-stokes
+AddEquationBasics: Using procedure: FlowSolve FlowSolver
+AddEquationBasics: Setting up solver: navier-stokes
+Loading user function library: [FlowSolve]...[FlowSolver_Init]
+Loading user function library: [FlowSolve]...[FlowSolver_bulk]
+Loading user function library: [FlowSolve]...[FlowSolver]
+AddEquationBasics: Creating standard variable: flow solution[velocity:3 pressure:1]
+OptimizeBandwidth: ---------------------------------------------------------
+OptimizeBandwidth: Computing matrix structure for: navier-stokes
+OptimizeBandwidth: Initial bandwidth for navier-stokes: 107558
+OptimizeBandwidth: Optimized bandwidth for navier-stokes: 9485
+OptimizeBandwidth: ---------------------------------------------------------
+AddSolvers: Setting up solver 2: heat
+AddEquationBasics: Using procedure: HeatSolve HeatSolver
+AddEquationBasics: Setting up solver: heat
+Loading user function library: [HeatSolve]...[HeatSolver_Init]
+Loading user function library: [HeatSolve]...[HeatSolver_bulk]
+Loading user function library: [HeatSolve]...[HeatSolver]
+AddEquationBasics: Creating standard variable: temperature
+OptimizeBandwidth: ---------------------------------------------------------
+OptimizeBandwidth: Computing matrix structure for: heat
+OptimizeBandwidth: Initial bandwidth for heat: 136990
+OptimizeBandwidth: Optimized bandwidth for heat: 16871
+OptimizeBandwidth: ---------------------------------------------------------
+AddSolvers: Setting up solver 3: resultoutput
+AddEquationBasics: Using procedure: ResultOutputSolve ResultOutputSolver
+AddEquationBasics: Setting up solver: resultoutput
+Loading user function library: [ResultOutputSolve]...[ResultOutputSolver_Init]
+Loading user function library: [ResultOutputSolve]...[ResultOutputSolver_bulk]
+Loading user function library: [ResultOutputSolve]...[ResultOutputSolver]
+AddTimeEtc: Setting time and other global variables
+MAIN: Random seed initialized to: 314159265
+SetInitialConditions: Setting up initial conditions (if any)
+MAIN: Number of timesteps to be saved: 1
+MAIN:
+MAIN: -------------------------------------
+MAIN:  Steady state iteration:            1
+MAIN: -------------------------------------
+MAIN:
+SingleSolver: Attempting to call solver: 1
+SingleSolver: Solver Equation string is: navier-stokes
+FlowSolver: Solving the Navier-Stokes equations
+DefaultStart: Starting solver: navier-stokes
+FlowSolve: Enforcing relative pressure relaxation
+FlowSolve:
+FlowSolve:
+FlowSolve: -------------------------------------
+FlowSolve:  NAVIER-STOKES ITERATION           1
+FlowSolve: -------------------------------------
+FlowSolve:
+FlowSolve: Starting Assembly...
+FlowSolve: Assembly:
+: .................... 64%
+: ...........Assembly done
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+EnforceDirichletConditions: Applying Dirichlet conditions using scaled diagonal
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+EnforceDirichletConditions: Dirichlet conditions enforced for dofs: 157283
+FlowSolve: Dirichlet conditions done
+DefaultSolve: Solving linear system with default routines
+SolveSystem: Solving linear system
+SolveLinearSystem: Assuming real valued linear system
+SolveLinearSystem: Assuming serial linear system
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+SolveLinearSystem: Linear System Preconditioning: ilu1
+SolveLinearSystem: Serial linear System Solver: iterative
+IterSolver: Using iterative method: bicgstab
+CRS_IncompleteLU: ILU(1) (Real), Performing Factorization:
+CRS_IncompleteLU: Allocated LU matrix of size: 77087808
+CRS_IncompleteLU: ILU(1) (Real), NOF nonzeros:  77087809
+CRS_IncompleteLU: ILU(1) (Real), filling (%) :       181
+CRS_IncompleteLU: ILU(1) (Real), Factorization ready at (s):    19.48
+       1 0.1219E+00
+       2 0.6457E-01
+       3 0.5974E-01
+       4 0.6937E-01
+       5 0.1063E+00
+       6 0.4273E-01
+       7 0.4044E-01
+       8 0.3339E-01
+       9 0.3921E-01
+      10 0.3256E-01
+      11 0.5218E-01
+      12 0.8100E-02
+      13 0.5531E-02
+      14 0.5535E-02
+      15 0.1013E-01
+      16 0.1215E-02
+      17 0.7844E-03
+      18 0.5442E-03
+      19 0.3235E-03
+      20 0.2576E-03
+      21 0.7800E-03
+      22 0.4501E-04
+      23 0.3915E-04
+      24 0.4077E-05
+      25 0.2690E-05
+      26 0.2262E-05
+      27 0.1373E-05
+      28 0.2241E-05
+      29 0.5360E-06
+      30 0.4475E-06
+      31 0.2339E-06
+      32 0.1188E-07
+      33 0.3529E-08
+      34 0.8760E-09
+      35 0.5013E-09
+      36 0.2904E-09
+      37 0.2264E-09
+      38 0.1357E-09
+      39 0.1342E-10
+      39 0.1342E-10
+ComputeNorm: Computing norm of solution
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.27989847E-01  2.0000000     ) :: navier-stokes
+FlowSolve: iter:    1 Assembly: (s)   32.59   32.59
+FlowSolve: iter:    1 Solve:    (s)   46.07   46.07
+FlowSolve:  Result Norm     :    2.7989847323402244E-002
+FlowSolve:  Relative Change :    2.0000000000000000
+FlowSolve:
+FlowSolve:
+FlowSolve: -------------------------------------
+FlowSolve:  NAVIER-STOKES ITERATION           2
+FlowSolve: -------------------------------------
+FlowSolve:
+FlowSolve: Starting Assembly...
+FlowSolve: Assembly:
+: .................... 65%
+: ..........Assembly done
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+EnforceDirichletConditions: Applying Dirichlet conditions using scaled diagonal
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+EnforceDirichletConditions: Dirichlet conditions enforced for dofs: 157283
+FlowSolve: Dirichlet conditions done
+DefaultSolve: Solving linear system with default routines
+SolveSystem: Solving linear system
+SolveLinearSystem: Assuming real valued linear system
+SolveLinearSystem: Assuming serial linear system
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+SolveLinearSystem: Linear System Preconditioning: ilu1
+SolveLinearSystem: Serial linear System Solver: iterative
+IterSolver: Using iterative method: bicgstab
+CRS_IncompleteLU: ILU(1) (Real), Performing Factorization:
+CRS_IncompleteLU: ILU(1) (Real), NOF nonzeros:  77087809
+CRS_IncompleteLU: ILU(1) (Real), filling (%) :       181
+CRS_IncompleteLU: ILU(1) (Real), Factorization ready at (s):     7.69
+       1 0.6574E-01
+       2 0.4198E-01
+       3 0.5123E-01
+       4 0.2281E-01
+       5 0.1373E-01
+       6 0.7491E-02
+       7 0.5661E-02
+       8 0.3237E-02
+       9 0.2464E-02
+      10 0.1850E-02
+      11 0.1920E-02
+      12 0.4510E-02
+      13 0.2810E-02
+      14 0.1979E-02
+      15 0.2865E-02
+      16 0.2726E-02
+      17 0.2280E-02
+      18 0.7401E-03
+      19 0.7087E-03
+      20 0.2887E-03
+      21 0.2457E-04
+      22 0.2345E-04
+      23 0.2009E-04
+      24 0.2107E-04
+      25 0.1314E-04
+      26 0.1397E-04
+      27 0.3040E-05
+      28 0.1638E-05
+      29 0.4700E-06
+      30 0.3001E-06
+      31 0.3370E-06
+      32 0.9371E-07
+      33 0.4041E-07
+      34 0.3807E-07
+      35 0.6214E-08
+      36 0.2256E-08
+      37 0.9509E-09
+      38 0.5410E-09
+      39 0.3350E-08
+      40 0.1562E-09
+      41 0.3741E-10
+      41 0.3741E-10
+ComputeNorm: Computing norm of solution
+ComputeChange: NS (ITER=2) (NRM,RELC): ( 0.28074190E-01 0.30087956E-02 ) :: navier-stokes
+FlowSolve: iter:    2 Assembly: (s)   31.66   64.25
+FlowSolve: iter:    2 Solve:    (s)   36.01   82.07
+FlowSolve:  Result Norm     :    2.8074189939036452E-002
+FlowSolve:  Relative Change :    3.0087956469990111E-003
+FlowSolve:
+FlowSolve:
+FlowSolve: -------------------------------------
+FlowSolve:  NAVIER-STOKES ITERATION           3
+FlowSolve: -------------------------------------
+FlowSolve:
+FlowSolve: Starting Assembly...
+FlowSolve: Assembly:
+: .................... 65%
+: ..........Assembly done
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+EnforceDirichletConditions: Applying Dirichlet conditions using scaled diagonal
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+EnforceDirichletConditions: Dirichlet conditions enforced for dofs: 157283
+FlowSolve: Dirichlet conditions done
+DefaultSolve: Solving linear system with default routines
+SolveSystem: Solving linear system
+SolveLinearSystem: Assuming real valued linear system
+SolveLinearSystem: Assuming serial linear system
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+SolveLinearSystem: Linear System Preconditioning: ilu1
+SolveLinearSystem: Serial linear System Solver: iterative
+IterSolver: Using iterative method: bicgstab
+CRS_IncompleteLU: ILU(1) (Real), Performing Factorization:
+CRS_IncompleteLU: ILU(1) (Real), NOF nonzeros:  77087809
+CRS_IncompleteLU: ILU(1) (Real), filling (%) :       181
+CRS_IncompleteLU: ILU(1) (Real), Factorization ready at (s):     7.67
+       1 0.1745E-01
+       2 0.7942E-02
+       3 0.4573E-02
+       4 0.2596E-02
+       5 0.3815E-02
+       6 0.1976E-02
+       7 0.1510E-02
+       8 0.1623E-02
+       9 0.1245E-02
+      10 0.3182E-03
+      11 0.2023E-03
+      12 0.2116E-03
+      13 0.8123E-04
+      14 0.7960E-04
+      15 0.5094E-04
+      16 0.5092E-04
+      17 0.5155E-04
+      18 0.6604E-04
+      19 0.1517E-03
+      20 0.1239E-03
+      21 0.2056E-04
+      22 0.2434E-04
+      23 0.6002E-05
+      24 0.2792E-05
+      25 0.5681E-04
+      26 0.2245E-06
+      27 0.2180E-06
+      28 0.1289E-06
+      29 0.1498E-06
+      30 0.1449E-06
+      31 0.5789E-07
+      32 0.2623E-07
+      33 0.1163E-07
+      34 0.3094E-07
+      35 0.9727E-08
+      36 0.2420E-08
+      37 0.1854E-08
+      38 0.1143E-08
+      39 0.1052E-08
+      40 0.2996E-09
+      41 0.2293E-10
+      41 0.2293E-10
+ComputeNorm: Computing norm of solution
+ComputeChange: NS (ITER=3) (NRM,RELC): ( 0.27977095E-01 0.34645117E-02 ) :: navier-stokes
+FlowSolve: iter:    3 Assembly: (s)   32.01   96.26
+FlowSolve: iter:    3 Solve:    (s)   36.10  118.17
+FlowSolve:  Result Norm     :    2.7977094772641712E-002
+FlowSolve:  Relative Change :    3.4645117197290784E-003
+FlowSolve:
+FlowSolve:
+FlowSolve: -------------------------------------
+FlowSolve:  NAVIER-STOKES ITERATION           4
+FlowSolve: -------------------------------------
+FlowSolve:
+FlowSolve: Starting Assembly...
+FlowSolve: Assembly:
+: .................... 59%
+: ............... 78%
+: ............ 81%
+: .. 83%
+: .......Assembly done
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+EnforceDirichletConditions: Applying Dirichlet conditions using scaled diagonal
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+EnforceDirichletConditions: Dirichlet conditions enforced for dofs: 157283
+FlowSolve: Dirichlet conditions done
+DefaultSolve: Solving linear system with default routines
+SolveSystem: Solving linear system
+SolveLinearSystem: Assuming real valued linear system
+SolveLinearSystem: Assuming serial linear system
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+SolveLinearSystem: Linear System Preconditioning: ilu1
+SolveLinearSystem: Serial linear System Solver: iterative
+IterSolver: Using iterative method: bicgstab
+CRS_IncompleteLU: ILU(1) (Real), Performing Factorization:
+CRS_IncompleteLU: ILU(1) (Real), NOF nonzeros:  77087809
+CRS_IncompleteLU: ILU(1) (Real), filling (%) :       181
+CRS_IncompleteLU: ILU(1) (Real), Factorization ready at (s):     8.45
+       1 0.4344E-02
+       2 0.1617E-02
+       3 0.8138E-03
+       4 0.1257E-02
+       5 0.4634E-03
+       6 0.2753E-03
+       7 0.2421E-03
+       8 0.1478E-03
+       9 0.1625E-03
+      10 0.3024E-02
+      11 0.2774E-03
+      12 0.4252E-03
+      13 0.1451E-03
+      14 0.1574E-03
+      15 0.1180E-03
+      16 0.1359E-03
+      17 0.6259E-04
+      18 0.4929E-04
+      19 0.1045E-03
+      20 0.2416E-04
+      21 0.2142E-04
+      22 0.1779E-04
+      23 0.1532E-05
+      24 0.8541E-06
+      25 0.1425E-05
+      26 0.3705E-06
+      27 0.3832E-06
+      28 0.2589E-06
+      29 0.3270E-06
+      30 0.1337E-06
+      31 0.2030E-06
+      32 0.4331E-08
+      33 0.2100E-08
+      34 0.9498E-09
+      35 0.8664E-09
+      36 0.4580E-09
+      37 0.3177E-09
+      38 0.8870E-10
+      38 0.8870E-10
+ComputeNorm: Computing norm of solution
+ComputeChange: NS (ITER=4) (NRM,RELC): ( 0.27969163E-01 0.28353865E-03 ) :: navier-stokes
+FlowSolve: iter:    4 Assembly: (s)   41.60  137.86
+FlowSolve: iter:    4 Solve:    (s)   36.20  154.38
+FlowSolve:  Result Norm     :    2.7969163309440825E-002
+FlowSolve:  Relative Change :    2.8353864843828517E-004
+FlowSolve:
+FlowSolve:
+FlowSolve: -------------------------------------
+FlowSolve:  NAVIER-STOKES ITERATION           5
+FlowSolve: -------------------------------------
+FlowSolve:
+FlowSolve: Starting Assembly...
+FlowSolve: Assembly:
+: .................... 45%
+: .................... 90%
+: ...Assembly done
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+EnforceDirichletConditions: Applying Dirichlet conditions using scaled diagonal
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+EnforceDirichletConditions: Dirichlet conditions enforced for dofs: 157283
+FlowSolve: Dirichlet conditions done
+DefaultSolve: Solving linear system with default routines
+SolveSystem: Solving linear system
+SolveLinearSystem: Assuming real valued linear system
+SolveLinearSystem: Assuming serial linear system
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+SolveLinearSystem: Linear System Preconditioning: ilu1
+SolveLinearSystem: Serial linear System Solver: iterative
+IterSolver: Using iterative method: bicgstab
+CRS_IncompleteLU: ILU(1) (Real), Performing Factorization:
+CRS_IncompleteLU: ILU(1) (Real), NOF nonzeros:  77087809
+CRS_IncompleteLU: ILU(1) (Real), filling (%) :       181
+CRS_IncompleteLU: ILU(1) (Real), Factorization ready at (s):     7.55
+       1 0.2024E-02
+       2 0.6532E-03
+       3 0.6488E-03
+       4 0.8138E-03
+       5 0.1636E-03
+       6 0.1159E-03
+       7 0.9306E-04
+       8 0.6503E-04
+       9 0.5482E-04
+      10 0.4956E-04
+      11 0.4440E-04
+      12 0.4455E-04
+      13 0.4421E-04
+      14 0.4061E-04
+      15 0.3637E-04
+      16 0.3642E-04
+      17 0.7797E-04
+      18 0.1280E-03
+      19 0.2158E-03
+      20 0.2512E-03
+      21 0.4243E-03
+      22 0.1520E-04
+      23 0.4866E-05
+      24 0.5369E-05
+      25 0.1468E-04
+      26 0.3316E-05
+      27 0.5338E-05
+      28 0.1171E-05
+      29 0.8996E-06
+      30 0.1232E-05
+      31 0.5493E-06
+      32 0.6288E-06
+      33 0.2102E-07
+      34 0.1141E-07
+      35 0.8092E-08
+      36 0.5689E-08
+      37 0.2346E-08
+      38 0.1808E-07
+      39 0.3466E-09
+      40 0.1015E-09
+      41 0.9306E-10
+      41 0.9306E-10
+ComputeNorm: Computing norm of solution
+ComputeChange: NS (ITER=5) (NRM,RELC): ( 0.27977944E-01 0.31388632E-03 ) :: navier-stokes
+FlowSolve: iter:    5 Assembly: (s)   44.84  182.71
+FlowSolve: iter:    5 Solve:    (s)   36.46  190.83
+FlowSolve:  Result Norm     :    2.7977943825202026E-002
+FlowSolve:  Relative Change :    3.1388631909312967E-004
+FlowSolve:
+FlowSolve:
+FlowSolve: -------------------------------------
+FlowSolve:  NAVIER-STOKES ITERATION           6
+FlowSolve: -------------------------------------
+FlowSolve:
+FlowSolve: Starting Assembly...
+FlowSolve: Assembly:
+: .................... 64%
+: ...........Assembly done
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+EnforceDirichletConditions: Applying Dirichlet conditions using scaled diagonal
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+EnforceDirichletConditions: Dirichlet conditions enforced for dofs: 157283
+FlowSolve: Dirichlet conditions done
+DefaultSolve: Solving linear system with default routines
+SolveSystem: Solving linear system
+SolveLinearSystem: Assuming real valued linear system
+SolveLinearSystem: Assuming serial linear system
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+SolveLinearSystem: Linear System Preconditioning: ilu1
+SolveLinearSystem: Serial linear System Solver: iterative
+IterSolver: Using iterative method: bicgstab
+CRS_IncompleteLU: ILU(1) (Real), Performing Factorization:
+CRS_IncompleteLU: ILU(1) (Real), NOF nonzeros:  77087809
+CRS_IncompleteLU: ILU(1) (Real), filling (%) :       181
+CRS_IncompleteLU: ILU(1) (Real), Factorization ready at (s):     7.48
+       1 0.2059E-03
+       2 0.6927E-04
+       3 0.6782E-04
+       4 0.1523E-04
+       5 0.9564E-05
+       6 0.6444E-05
+       7 0.3994E-05
+       8 0.2330E-04
+       9 0.2761E-05
+      10 0.2071E-05
+      11 0.2133E-05
+      12 0.1537E-05
+      13 0.1559E-05
+      14 0.1309E-05
+      15 0.1250E-05
+      16 0.1249E-05
+      17 0.1251E-05
+      18 0.1096E-05
+      19 0.1030E-05
+      20 0.1009E-05
+      21 0.1385E-05
+      22 0.6375E-05
+      23 0.1055E-05
+      24 0.1025E-05
+      25 0.1127E-05
+      26 0.9095E-06
+      27 0.2120E-04
+      28 0.6338E-06
+      29 0.3739E-06
+      30 0.2424E-06
+      31 0.2148E-06
+      32 0.2392E-06
+      33 0.1953E-06
+      34 0.4812E-07
+      35 0.2508E-06
+      36 0.2888E-08
+      37 0.4553E-09
+      38 0.3997E-09
+      39 0.1251E-08
+      40 0.4618E-10
+      40 0.4618E-10
+ComputeNorm: Computing norm of solution
+ComputeChange: NS (ITER=6) (NRM,RELC): ( 0.27977493E-01 0.16120746E-04 ) :: navier-stokes
+FlowSolve: iter:    6 Assembly: (s)   32.99  215.70
+FlowSolve: iter:    6 Solve:    (s)   35.20  226.03
+FlowSolve:  Result Norm     :    2.7977492803525354E-002
+FlowSolve:  Relative Change :    1.6120745502013540E-005
+FlowSolve:
+FlowSolve:
+FlowSolve: -------------------------------------
+FlowSolve:  NAVIER-STOKES ITERATION           7
+FlowSolve: -------------------------------------
+FlowSolve:
+FlowSolve: Starting Assembly...
+FlowSolve: Assembly:
+: .................... 63%
+: ...........Assembly done
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+EnforceDirichletConditions: Applying Dirichlet conditions using scaled diagonal
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+EnforceDirichletConditions: Dirichlet conditions enforced for dofs: 157283
+FlowSolve: Dirichlet conditions done
+DefaultSolve: Solving linear system with default routines
+SolveSystem: Solving linear system
+SolveLinearSystem: Assuming real valued linear system
+SolveLinearSystem: Assuming serial linear system
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+SolveLinearSystem: Linear System Preconditioning: ilu1
+SolveLinearSystem: Serial linear System Solver: iterative
+IterSolver: Using iterative method: bicgstab
+CRS_IncompleteLU: ILU(1) (Real), Performing Factorization:
+CRS_IncompleteLU: ILU(1) (Real), NOF nonzeros:  77087809
+CRS_IncompleteLU: ILU(1) (Real), filling (%) :       181
+CRS_IncompleteLU: ILU(1) (Real), Factorization ready at (s):     7.67
+       1 0.2736E-05
+       2 0.1080E-05
+       3 0.5497E-06
+       4 0.6973E-06
+       5 0.5637E-06
+       6 0.1996E-06
+       7 0.9883E-07
+       8 0.9247E-07
+       9 0.8545E-07
+      10 0.8580E-07
+      11 0.5071E-07
+      12 0.5035E-07
+      13 0.4874E-07
+      14 0.4763E-07
+      15 0.4589E-07
+      16 0.3496E-07
+      17 0.4699E-06
+      18 0.3892E-06
+      19 0.2595E-07
+      20 0.3683E-07
+      21 0.2634E-07
+      22 0.2878E-07
+      23 0.1041E-08
+      24 0.6107E-09
+      25 0.9742E-09
+      26 0.4234E-09
+      27 0.2334E-09
+      28 0.2073E-09
+      29 0.1210E-09
+      30 0.6828E-11
+      30 0.6828E-11
+ComputeNorm: Computing norm of solution
+ComputeChange: NS (ITER=7) (NRM,RELC): ( 0.27977501E-01 0.27888907E-06 ) :: navier-stokes
+FlowSolve: iter:    7 Assembly: (s)   33.10  248.80
+FlowSolve: iter:    7 Solve:    (s)   28.63  254.65
+FlowSolve:  Result Norm     :    2.7977500606143429E-002
+FlowSolve:  Relative Change :    2.7888907139445641E-007
+FlowSolve:
+FlowSolve:
+FlowSolve: -------------------------------------
+FlowSolve:  NAVIER-STOKES ITERATION           8
+FlowSolve: -------------------------------------
+FlowSolve:
+FlowSolve: Starting Assembly...
+FlowSolve: Assembly:
+: .................... 64%
+: ...........Assembly done
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+EnforceDirichletConditions: Applying Dirichlet conditions using scaled diagonal
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+EnforceDirichletConditions: Dirichlet conditions enforced for dofs: 157283
+FlowSolve: Dirichlet conditions done
+DefaultSolve: Solving linear system with default routines
+SolveSystem: Solving linear system
+SolveLinearSystem: Assuming real valued linear system
+SolveLinearSystem: Assuming serial linear system
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+SolveLinearSystem: Linear System Preconditioning: ilu1
+SolveLinearSystem: Serial linear System Solver: iterative
+IterSolver: Using iterative method: bicgstab
+CRS_IncompleteLU: ILU(1) (Real), Performing Factorization:
+CRS_IncompleteLU: ILU(1) (Real), NOF nonzeros:  77087809
+CRS_IncompleteLU: ILU(1) (Real), filling (%) :       181
+CRS_IncompleteLU: ILU(1) (Real), Factorization ready at (s):     7.71
+       1 0.1709E-07
+       2 0.7050E-08
+       3 0.3448E-08
+       4 0.1909E-08
+       5 0.2330E-08
+       6 0.3047E-08
+       7 0.1165E-08
+       8 0.8545E-09
+       9 0.7713E-09
+      10 0.6210E-09
+      11 0.7579E-09
+      12 0.6365E-09
+      13 0.1918E-08
+      14 0.7694E-09
+      15 0.1594E-08
+      16 0.8430E-09
+      17 0.5916E-09
+      18 0.4362E-09
+      19 0.5064E-09
+      20 0.4579E-09
+      21 0.6767E-09
+      22 0.2333E-09
+      23 0.2667E-09
+      24 0.6889E-10
+      24 0.6889E-10
+ComputeNorm: Computing norm of solution
+ComputeChange: NS (ITER=8) (NRM,RELC): ( 0.27977500E-01 0.87678995E-08 ) :: navier-stokes
+FlowSolve: iter:    8 Assembly: (s)   32.67  281.47
+FlowSolve: iter:    8 Solve:    (s)   24.51  279.16
+FlowSolve:  Result Norm     :    2.7977500360839517E-002
+FlowSolve:  Relative Change :    8.7678995035351554E-009
+ComputeNorm: Computing norm of solution
+ComputeChange: SS (ITER=1) (NRM,RELC): ( 0.27977500E-01  2.0000000     ) :: navier-stokes
+SingleSolver: Attempting to call solver: 2
+SingleSolver: Solver Equation string is: heat
+HeatSolver: -------------------------------------------
+HeatSolver: Solving the energy equation for temperature
+DefaultStart: Starting solver: heat
+HeatSolve:
+HeatSolve:
+HeatSolve: -------------------------------------
+HeatSolve:  TEMPERATURE ITERATION           1
+HeatSolve: -------------------------------------
+HeatSolve:
+HeatSolve: Starting Assembly...
+HeatSolve: Assembly:
+: .................... 71%
+: ................Assembly done
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+EnforceDirichletConditions: Applying Dirichlet conditions using scaled diagonal
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+EnforceDirichletConditions: Dirichlet conditions enforced for dofs: 319
+DefaultSolve: Solving linear system with default routines
+SolveSystem: Solving linear system
+SolveLinearSystem: Assuming real valued linear system
+SolveLinearSystem: Assuming serial linear system
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+SolveLinearSystem: Linear System Preconditioning: ilu0
+SolveLinearSystem: Serial linear System Solver: iterative
+IterSolver: Using iterative method: bicgstab
+CRS_IncompleteLU: ILU(0) (Real), Performing Factorization:
+CRS_IncompleteLU: Allocated LU matrix of size: 3810562
+CRS_IncompleteLU: ILU(0) (Real), NOF nonzeros:   3810563
+CRS_IncompleteLU: ILU(0) (Real), filling (%) :       100
+CRS_IncompleteLU: ILU(0) (Real), Factorization ready at (s):     0.17
+       1 0.9005E-02
+       2 0.7343E-02
+       3 0.6188E-02
+       4 0.5423E-02
+       5 0.5359E-02
+       6 0.5400E-02
+       7 0.5131E-01
+       8 0.5088E-02
+       9 0.4983E-02
+      10 0.4827E-02
+      11 0.7811E-02
+      12 0.3036E-02
+      13 0.2874E-02
+      14 0.2759E-02
+      15 0.2800E-02
+      16 0.2496E-02
+      17 0.2476E-02
+      18 0.2692E-02
+      19 0.2428E-02
+      20 0.2020E-02
+      21 0.1893E-02
+      22 0.1862E-02
+      23 0.1833E-02
+      24 0.1769E-02
+      25 0.1714E-02
+      26 0.1688E-02
+      27 0.1662E-02
+      28 0.1967E-02
+      29 0.1607E-02
+      30 0.1583E-02
+      31 0.1519E-02
+      32 0.1503E-02
+      33 0.1499E-02
+      34 0.1502E-02
+      35 0.1500E-02
+      36 0.1501E-02
+      37 0.1494E-02
+      38 0.1503E-02
+      39 0.1501E-02
+      40 0.1515E-02
+      41 0.1530E-02
+      42 0.1547E-02
+      43 0.1575E-02
+      44 0.1617E-02
+      45 0.1604E-02
+      46 0.1598E-02
+      47 0.1652E-02
+      48 0.1921E-02
+      49 0.1731E-02
+      50 0.1750E-02
+      51 0.1730E-02
+      52 0.1819E-02
+      53 0.1865E-02
+      54 0.1832E-02
+      55 0.1835E-02
+      56 0.1818E-02
+      57 0.1851E-02
+      58 0.1886E-02
+      59 0.1882E-02
+      60 0.1834E-02
+      61 0.2173E-02
+      62 0.2222E-02
+      63 0.2294E-02
+      64 0.2177E-02
+      65 0.1883E-02
+      66 0.2885E-02
+      67 0.2865E-02
+      68 0.2936E-02
+      69 0.3133E-02
+      70 0.3105E-02
+      71 0.3042E-02
+      72 0.3028E-02
+      73 0.3098E-02
+      74 0.3068E-02
+      75 0.3174E-02
+      76 0.3055E-02
+      77 0.3163E-02
+      78 0.3076E-02
+      79 0.3031E-02
+      80 0.3016E-02
+      81 0.2996E-02
+      82 0.2847E-02
+      83 0.2770E-02
+      84 0.3336E-02
+      85 0.2770E-02
+      86 0.2389E-02
+      87 0.2183E-02
+      88 0.2188E-02
+      89 0.2122E-02
+      90 0.1966E-02
+      91 0.1943E-02
+      92 0.1935E-02
+      93 0.1849E-02
+      94 0.6937E-02
+      95 0.1783E-02
+      96 0.1712E-02
+      97 0.1685E-02
+      98 0.1796E-02
+      99 0.1659E-02
+     100 0.1639E-02
+     101 0.1592E-02
+     102 0.1555E-02
+     103 0.1549E-02
+     104 0.2491E-02
+     105 0.1375E-02
+     106 0.1412E-02
+     107 0.1414E-02
+     108 0.1406E-02
+     109 0.1377E-02
+     110 0.1352E-02
+     111 0.1204E-02
+     112 0.2463E-02
+     113 0.2070E-02
+     114 0.2392E-02
+     115 0.1419E-02
+     116 0.1146E-02
+     117 0.1121E-02
+     118 0.1114E-02
+     119 0.1111E-02
+     120 0.1097E-02
+     121 0.1097E-02
+     122 0.1147E-02
+     123 0.1550E-02
+     124 0.1024E-02
+     125 0.1026E-02
+     126 0.1016E-02
+     127 0.1008E-02
+     128 0.1006E-02
+     129 0.9994E-03
+     130 0.9913E-03
+     131 0.9805E-03
+     132 0.9784E-03
+     133 0.9548E-03
+     134 0.9584E-03
+     135 0.9492E-03
+     136 0.9487E-03
+     137 0.9445E-03
+     138 0.9347E-03
+     139 0.9266E-03
+     140 0.9195E-03
+     141 0.9136E-03
+     142 0.8942E-03
+     143 0.8726E-03
+     144 0.8707E-03
+     145 0.8714E-03
+     146 0.8726E-03
+     147 0.8680E-03
+     148 0.7987E-03
+     149 0.7818E-03
+     150 0.7843E-03
+     151 0.9792E-03
+     152 0.5990E-03
+     153 0.6784E-03
+     154 0.1244E-02
+     155 0.7515E-03
+     156 0.7140E-03
+     157 0.7143E-03
+     158 0.6688E-03
+     159 0.6689E-03
+     160 0.6684E-03
+     161 0.6683E-03
+     162 0.7295E-03
+     163 0.6995E-03
+     164 0.7103E-03
+     165 0.7120E-03
+     166 0.7099E-03
+     167 0.7081E-03
+     168 0.6888E-03
+     169 0.6949E-03
+     170 0.6889E-03
+     171 0.6776E-03
+     172 0.6805E-03
+     173 0.6813E-03
+     174 0.6807E-03
+     175 0.6937E-03
+     176 0.7447E-03
+     177 0.7321E-03
+     178 0.7434E-03
+     179 0.7372E-03
+     180 0.6691E-03
+     181 0.6235E-03
+     182 0.7379E-03
+     183 0.7404E-03
+     184 0.7192E-03
+     185 0.6448E-03
+     186 0.3735E-03
+     187 0.6355E-03
+     188 0.7698E-03
+     189 0.6224E-03
+     190 0.6079E-03
+     191 0.5953E-03
+     192 0.4100E-03
+     193 0.9100E-03
+     194 0.6842E-03
+     195 0.7234E-03
+     196 0.5946E-03
+     197 0.1720E-03
+     198 0.1587E-03
+     199 0.1654E-03
+     200 0.4628E-03
+     201 0.4375E-03
+     202 0.7280E-02
+     203 0.6749E-03
+     204 0.4701E-03
+     205 0.4627E-03
+     206 0.4986E-03
+     207 0.4983E-03
+     208 0.5004E-03
+     209 0.5133E-03
+     210 0.5074E-03
+     211 0.4468E-03
+     212 0.4753E-03
+     213 0.4755E-03
+     214 0.4791E-03
+     215 0.4618E-03
+     216 0.4968E-03
+     217 0.5029E-03
+     218 0.4530E-03
+     219 0.4510E-03
+     220 0.4568E-03
+     221 0.3875E-03
+     222 0.3561E-03
+     223 0.2679E-03
+     224 0.2837E-03
+     225 0.3077E-03
+     226 0.2032E-03
+     227 0.2200E-03
+     228 0.2200E-03
+     229 0.2050E-03
+     230 0.1945E-03
+     231 0.2019E-03
+     232 0.2018E-03
+     233 0.2375E-03
+     234 0.1896E-03
+     235 0.1893E-03
+     236 0.1904E-03
+     237 0.4679E-03
+     238 0.1782E-03
+     239 0.2769E-03
+     240 0.1954E-03
+     241 0.2424E-03
+     242 0.2280E-03
+     243 0.1124E+00
+     244 0.1916E-03
+     245 0.8447E-03
+     246 0.3626E-02
+     247 0.3915E-03
+     248 0.4004E-03
+     249 0.1166E-02
+     250 0.1108E-02
+     251 0.4696E-03
+     252 0.1806E-03
+     253 0.1497E-03
+     254 0.2041E-03
+     255 0.2049E-03
+     256 0.1782E-03
+     257 0.1206E-03
+     258 0.1180E-03
+     259 0.1196E-03
+     260 0.1194E-03
+     261 0.1193E-03
+     262 0.1190E-03
+     263 0.1176E-03
+     264 0.1196E-03
+     265 0.1195E-03
+     266 0.1225E-03
+     267 0.1215E-03
+     268 0.1217E-03
+     269 0.1185E-03
+     270 0.1202E-03
+     271 0.1178E-03
+     272 0.1234E-03
+     273 0.1174E-03
+     274 0.1152E-03
+     275 0.1165E-03
+     276 0.1162E-03
+     277 0.1115E-03
+     278 0.1111E-03
+     279 0.1117E-03
+     280 0.1050E-03
+     281 0.1429E-03
+     282 0.1094E-03
+     283 0.1019E-03
+     284 0.9895E-04
+     285 0.9799E-04
+     286 0.9774E-04
+     287 0.9682E-04
+     288 0.8751E-04
+     289 0.9675E-04
+     290 0.9320E-04
+     291 0.9386E-04
+     292 0.9386E-04
+     293 0.9304E-04
+     294 0.9264E-04
+     295 0.9253E-04
+     296 0.9248E-04
+     297 0.9207E-04
+     298 0.1080E-03
+     299 0.9434E-04
+     300 0.9260E-04
+     301 0.1525E-03
+     302 0.1034E-03
+     303 0.8618E-04
+     304 0.8631E-04
+     305 0.7838E-04
+     306 0.8231E-04
+     307 0.8071E-04
+     308 0.8069E-04
+     309 0.8127E-04
+     310 0.7808E-04
+     311 0.7780E-04
+     312 0.8324E-04
+     313 0.8311E-04
+     314 0.8374E-04
+     315 0.8370E-04
+     316 0.8376E-04
+     317 0.5643E-04
+     318 0.4814E-04
+     319 0.3856E-03
+     320 0.6533E-03
+     321 0.2479E-03
+     322 0.6397E-04
+     323 0.3865E-04
+     324 0.3596E-04
+     325 0.3579E-04
+     326 0.3555E-04
+     327 0.3316E-04
+     328 0.3299E-04
+     329 0.3391E-04
+     330 0.3432E-04
+     331 0.6244E-04
+     332 0.3008E-04
+     333 0.2956E-04
+     334 0.3097E-04
+     335 0.2787E-04
+     336 0.2694E-04
+     337 0.2872E-04
+     338 0.2929E-04
+     339 0.2906E-04
+     340 0.2904E-04
+     341 0.3076E-04
+     342 0.2891E-04
+     343 0.2892E-04
+     344 0.2891E-04
+     345 0.2889E-04
+     346 0.2809E-04
+     347 0.2802E-04
+     348 0.2801E-04
+     349 0.2522E-04
+     350 0.2475E-04
+     351 0.2547E-04
+     352 0.2336E-04
+     353 0.2217E-04
+     354 0.2218E-04
+     355 0.1651E-04
+     356 0.1542E-04
+     357 0.1591E-04
+     358 0.1382E-04
+     359 0.2044E-04
+     360 0.1298E-04
+     361 0.1360E-04
+     362 0.1500E-04
+     363 0.1122E-04
+     364 0.1059E-04
+     365 0.1066E-04
+     366 0.1017E-04
+     367 0.9905E-05
+     368 0.9740E-05
+     369 0.9686E-05
+     370 0.9873E-05
+     371 0.1098E-04
+     372 0.1018E-04
+     373 0.9830E-05
+     374 0.6619E-05
+     375 0.6795E-05
+     376 0.4311E-05
+     377 0.4405E-05
+     378 0.1513E-04
+     379 0.4106E-05
+     380 0.5571E-05
+     381 0.4959E-05
+     382 0.4909E-05
+     383 0.4886E-05
+     384 0.4717E-05
+     385 0.4170E-05
+     386 0.4765E-05
+     387 0.4101E-05
+     388 0.4161E-05
+     389 0.3785E-05
+     390 0.3939E-05
+     391 0.3428E-05
+     392 0.3425E-05
+     393 0.3423E-05
+     394 0.3394E-05
+     395 0.3410E-05
+     396 0.3388E-05
+     397 0.3382E-05
+     398 0.3375E-05
+     399 0.3373E-05
+     400 0.7163E-05
+     401 0.3256E-05
+     402 0.3263E-05
+     403 0.2892E-05
+     404 0.3151E-05
+     405 0.3426E-05
+     406 0.4929E-05
+     407 0.2431E-05
+     408 0.2420E-05
+     409 0.2653E-05
+     410 0.2417E-05
+     411 0.3091E-05
+     412 0.3044E-05
+     413 0.2892E-05
+     414 0.2718E-05
+     415 0.2675E-05
+     416 0.2672E-05
+     417 0.2680E-05
+     418 0.3013E-05
+     419 0.2668E-05
+     420 0.2718E-05
+     421 0.2624E-05
+     422 0.2762E-05
+     423 0.2701E-05
+     424 0.2479E-05
+     425 0.2323E-05
+     426 0.2456E-05
+     427 0.2160E-05
+     428 0.3494E-05
+     429 0.2257E-05
+     430 0.2168E-05
+     431 0.2161E-05
+     432 0.2166E-05
+     433 0.2168E-05
+     434 0.2614E-05
+     435 0.2547E-05
+     436 0.1997E-05
+     437 0.2096E-05
+     438 0.1403E-05
+     439 0.1380E-05
+     440 0.1380E-05
+     441 0.1515E-05
+     442 0.1204E-05
+     443 0.1024E-05
+     444 0.4189E-06
+     445 0.7603E-06
+     446 0.7629E-06
+     447 0.7554E-06
+     448 0.7443E-06
+     449 0.7416E-06
+     450 0.7412E-06
+     451 0.7394E-06
+     452 0.7379E-06
+     453 0.8992E-06
+     454 0.1078E-05
+     455 0.6515E-06
+     456 0.6738E-06
+     457 0.3770E-06
+     458 0.5529E-06
+     459 0.5154E-06
+     460 0.5268E-06
+     461 0.5273E-06
+     462 0.5109E-06
+     463 0.4994E-06
+     464 0.4793E-06
+     465 0.4912E-06
+     466 0.4906E-06
+     467 0.4844E-06
+     468 0.4551E-06
+     469 0.5538E-06
+     470 0.1070E-05
+     471 0.3733E-06
+     472 0.3296E-06
+     473 0.4941E-06
+     474 0.4939E-06
+     475 0.4297E-06
+     476 0.4420E-06
+     477 0.3951E-06
+     478 0.3879E-06
+     479 0.3925E-06
+     480 0.3924E-06
+     481 0.3891E-06
+     482 0.3894E-06
+     483 0.3902E-06
+     484 0.3885E-06
+     485 0.3821E-06
+     486 0.3821E-06
+     487 0.3678E-06
+     488 0.3506E-06
+     489 0.3539E-06
+     490 0.3035E-05
+     491 0.3604E-06
+     492 0.3581E-06
+     493 0.3578E-06
+     494 0.3576E-06
+     495 0.3575E-06
+     496 0.3267E-06
+     497 0.3459E-06
+     498 0.3467E-06
+     499 0.3439E-06
+     500 0.3452E-06
+     501 0.3452E-06
+IterSolve: Linear iteration did not converge to tolerance
+ComputeNorm: Computing norm of solution
+ComputeChange: NS (ITER=1) (NRM,RELC): (  392.13823      2.0000000     ) :: heat
+HeatSolve: iter:    1 Assembly: (s)   35.67   35.67
+HeatSolve: iter:    1 Solve:    (s)   40.06   40.06
+HeatSolve:  Result Norm   :    392.13822964128468
+HeatSolve:  Relative Change :    2.0000000000000000
+HeatSolve:
+HeatSolve:
+HeatSolve: -------------------------------------
+HeatSolve:  TEMPERATURE ITERATION           2
+HeatSolve: -------------------------------------
+HeatSolve:
+HeatSolve: Starting Assembly...
+HeatSolve: Assembly:
+: .................... 61%
+: .................... 99%
+HeatSolve: Assembly done
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+EnforceDirichletConditions: Applying Dirichlet conditions using scaled diagonal
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+EnforceDirichletConditions: Dirichlet conditions enforced for dofs: 319
+DefaultSolve: Solving linear system with default routines
+SolveSystem: Solving linear system
+SolveLinearSystem: Assuming real valued linear system
+SolveLinearSystem: Assuming serial linear system
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+SolveLinearSystem: Linear System Preconditioning: ilu0
+SolveLinearSystem: Serial linear System Solver: iterative
+IterSolver: Using iterative method: bicgstab
+CRS_IncompleteLU: ILU(0) (Real), Performing Factorization:
+CRS_IncompleteLU: ILU(0) (Real), NOF nonzeros:   3810563
+CRS_IncompleteLU: ILU(0) (Real), filling (%) :       100
+CRS_IncompleteLU: ILU(0) (Real), Factorization ready at (s):     0.19
+       1 0.1084E-05
+       2 0.3213E-06
+       3 0.2282E-06
+       4 0.1761E-06
+       5 0.1692E-06
+       6 0.1720E-06
+       7 0.2654E-06
+       8 0.5779E-07
+       9 0.5114E-07
+      10 0.5092E-07
+      11 0.5267E-07
+      12 0.5250E-07
+      13 0.4808E-07
+      14 0.4575E-07
+      15 0.4839E-07
+      16 0.4734E-07
+      17 0.1006E-06
+      18 0.6919E-07
+      19 0.6283E-07
+      20 0.5955E-07
+      21 0.1207E-06
+      22 0.6848E-07
+      23 0.4218E-07
+      24 0.3896E-07
+      25 0.4017E-07
+      26 0.5039E-07
+      27 0.4714E-07
+      28 0.3840E-07
+      29 0.3776E-07
+      30 0.3784E-07
+      31 0.3731E-07
+      32 0.3706E-07
+      33 0.3725E-07
+      34 0.3714E-07
+      35 0.4003E-07
+      36 0.3941E-07
+      37 0.3925E-07
+      38 0.3885E-07
+      39 0.3650E-07
+      40 0.3623E-07
+      41 0.3474E-07
+      42 0.4204E-07
+      43 0.2343E-07
+      44 0.2839E-07
+      45 0.2480E-07
+      46 0.2246E-07
+      47 0.1708E-07
+      48 0.1764E-07
+      49 0.1714E-07
+      50 0.1726E-07
+      51 0.1161E-06
+      52 0.1271E-07
+      53 0.1230E-07
+      54 0.1070E-07
+      55 0.1039E-07
+      56 0.9548E-08
+      57 0.9436E-08
+      58 0.9407E-08
+      59 0.9473E-08
+      60 0.1272E-07
+      61 0.9758E-08
+      62 0.1326E-07
+      63 0.8264E-08
+      64 0.5305E-08
+      65 0.5282E-08
+      66 0.5359E-08
+      67 0.5251E-08
+      68 0.5211E-08
+      69 0.5198E-08
+      70 0.5178E-08
+      71 0.5166E-08
+      72 0.5152E-08
+      73 0.5096E-08
+      74 0.5040E-08
+      75 0.5088E-08
+      76 0.5088E-08
+      77 0.5066E-08
+      78 0.5058E-08
+      79 0.4955E-08
+      80 0.4933E-08
+      81 0.4360E-08
+      82 0.4437E-08
+      83 0.4440E-08
+      84 0.2417E-08
+      85 0.7193E-08
+      86 0.7162E-08
+      87 0.3666E-08
+      88 0.2589E-08
+      89 0.2581E-08
+      90 0.2076E-08
+      91 0.3457E-08
+      92 0.3716E-08
+      93 0.3709E-08
+      94 0.3756E-08
+      95 0.3836E-08
+      96 0.2367E-08
+      97 0.2121E-08
+      98 0.2092E-08
+      99 0.2094E-08
+     100 0.2129E-08
+     101 0.2099E-08
+     102 0.2097E-08
+     103 0.2135E-08
+     104 0.2121E-08
+     105 0.1733E-08
+     106 0.2567E-08
+     107 0.2650E-08
+     108 0.2264E-08
+     109 0.1365E-08
+     110 0.3117E-08
+     111 0.2885E-08
+     112 0.2522E-08
+     113 0.2412E-08
+     114 0.2380E-08
+     115 0.2305E-08
+     116 0.6642E-08
+     117 0.1176E-08
+     118 0.8052E-09
+     119 0.8259E-09
+     120 0.1116E-08
+     121 0.5549E-09
+     122 0.4526E-09
+     123 0.3964E-09
+     124 0.3767E-09
+     125 0.3749E-09
+     126 0.3664E-09
+     127 0.3619E-09
+     128 0.3550E-09
+     129 0.3563E-09
+     130 0.3058E-09
+     131 0.3112E-09
+     132 0.3610E-09
+     133 0.3473E-09
+     134 0.2867E-09
+     135 0.2854E-09
+     136 0.3067E-09
+     137 0.4507E-09
+     138 0.9706E-09
+     139 0.3281E-09
+     140 0.6503E-09
+     141 0.7674E-09
+     142 0.4725E-09
+     143 0.4577E-09
+     144 0.4702E-09
+     145 0.4540E-09
+     146 0.4503E-09
+     147 0.4489E-09
+     148 0.4480E-09
+     149 0.4418E-09
+     150 0.4231E-09
+     151 0.3801E-09
+     152 0.2920E-09
+     153 0.2722E-09
+     154 0.2721E-09
+     155 0.2720E-09
+     156 0.2664E-09
+     157 0.2637E-09
+     158 0.2668E-09
+     159 0.2579E-09
+     160 0.2547E-09
+     161 0.2547E-09
+     162 0.2546E-09
+     163 0.2545E-09
+     164 0.2545E-09
+     165 0.2544E-09
+     166 0.2546E-09
+     167 0.2545E-09
+     168 0.2544E-09
+     169 0.2557E-09
+     170 0.2571E-09
+     171 0.2549E-09
+     172 0.2622E-09
+     173 0.2623E-09
+     174 0.2623E-09
+     175 0.2560E-09
+     176 0.2556E-09
+     177 0.2554E-09
+     178 0.2553E-09
+     179 0.2552E-09
+     180 0.2553E-09
+     181 0.2553E-09
+     182 0.2565E-09
+     183 0.2536E-09
+     184 0.2521E-09
+     185 0.2437E-09
+     186 0.2545E-09
+     187 0.2541E-09
+     188 0.2550E-09
+     189 0.2538E-09
+     190 0.2539E-09
+     191 0.2577E-09
+     192 0.2549E-09
+     193 0.5165E-09
+     194 0.2503E-09
+     195 0.2367E-09
+     196 0.2468E-09
+     197 0.2594E-09
+     198 0.5261E-09
+     199 0.1295E-08
+     200 0.1949E-08
+     201 0.2000E-08
+     202 0.7210E-09
+     203 0.2358E-08
+     204 0.3333E-09
+     205 0.4904E-09
+     206 0.5897E-09
+     207 0.5829E-09
+     208 0.6120E-09
+     209 0.6127E-09
+     210 0.6104E-09
+     211 0.6093E-09
+     212 0.6176E-09
+     213 0.6230E-09
+     214 0.6294E-09
+     215 0.6314E-09
+     216 0.6348E-09
+     217 0.6248E-09
+     218 0.5964E-09
+     219 0.8383E-09
+     220 0.8271E-09
+     221 0.9589E-09
+     222 0.1757E-08
+     223 0.6946E-09
+     224 0.6632E-09
+     225 0.3023E-08
+     226 0.1436E-08
+     227 0.1257E-08
+     228 0.1329E-08
+     229 0.7789E-09
+     230 0.7946E-09
+     231 0.8188E-09
+     232 0.7842E-09
+     233 0.7874E-09
+     234 0.7813E-09
+     235 0.9906E-09
+     236 0.9622E-09
+     237 0.9631E-09
+     238 0.9612E-09
+     239 0.9608E-09
+     240 0.7161E-09
+     241 0.9902E-09
+     242 0.7769E-09
+     243 0.1106E-08
+     244 0.1186E-08
+     245 0.9662E-09
+     246 0.2729E-09
+     247 0.1426E-09
+     248 0.1144E-09
+     249 0.1009E-09
+     250 0.1013E-09
+     251 0.1002E-09
+     252 0.1039E-09
+     253 0.1460E-09
+     254 0.1304E-09
+     255 0.2041E-09
+     256 0.2076E-09
+     257 0.2957E-09
+     258 0.2673E-09
+     259 0.1400E-09
+     260 0.1345E-09
+     261 0.1365E-09
+     262 0.1366E-09
+     263 0.1393E-09
+     264 0.1326E-09
+     265 0.1177E-09
+     266 0.9254E-10
+     266 0.9254E-10
+ComputeNorm: Computing norm of solution
+ComputeChange: NS (ITER=2) (NRM,RELC): (  392.13829     0.14887674E-06 ) :: heat
+HeatSolve: iter:    2 Assembly: (s)   39.97   75.64
+HeatSolve: iter:    2 Solve:    (s)   22.25   62.31
+HeatSolve:  Result Norm   :    392.13828802154961
+HeatSolve:  Relative Change :    1.4887673828519440E-007
+HeatSolve:
+HeatSolve:
+HeatSolve: -------------------------------------
+HeatSolve:  TEMPERATURE ITERATION           3
+HeatSolve: -------------------------------------
+HeatSolve:
+HeatSolve: Starting Assembly...
+HeatSolve: Assembly:
+: .................... 65%
+: ...................Assembly done
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+EnforceDirichletConditions: Applying Dirichlet conditions using scaled diagonal
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+EnforceDirichletConditions: Dirichlet conditions enforced for dofs: 319
+DefaultSolve: Solving linear system with default routines
+SolveSystem: Solving linear system
+SolveLinearSystem: Assuming real valued linear system
+SolveLinearSystem: Assuming serial linear system
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+SolveLinearSystem: Linear System Preconditioning: ilu0
+SolveLinearSystem: Serial linear System Solver: iterative
+IterSolver: Using iterative method: bicgstab
+CRS_IncompleteLU: ILU(0) (Real), Performing Factorization:
+CRS_IncompleteLU: ILU(0) (Real), NOF nonzeros:   3810563
+CRS_IncompleteLU: ILU(0) (Real), filling (%) :       100
+CRS_IncompleteLU: ILU(0) (Real), Factorization ready at (s):     0.18
+       1 0.7648E-09
+       2 0.9972E-09
+       3 0.2638E-09
+       4 0.3984E-10
+       4 0.3984E-10
+ComputeNorm: Computing norm of solution
+ComputeChange: NS (ITER=3) (NRM,RELC): (  392.13829     0.67447169E-10 ) :: heat
+HeatSolve: iter:    3 Assembly: (s)   38.92  114.56
+HeatSolve: iter:    3 Solve:    (s)    0.49   62.79
+HeatSolve:  Result Norm   :    392.13828804799823
+HeatSolve:  Relative Change :    6.7447169341395958E-011
+DefaultFinish: Finished solver: heat
+ComputeNorm: Computing norm of solution
+ComputeChange: SS (ITER=1) (NRM,RELC): (  392.13829      2.0000000     ) :: heat
+SingleSolver: Attempting to call solver: 3
+SingleSolver: Solver Equation string is: resultoutput
+ResultOutputSolver: -------------------------------------
+ResultOutputSolver: Saving with prefix: FreeCAD
+ResultOutputSolver: Dimension of mesh is: 3
+ResultOutputSolver: Working on mesh 1: . with 137182 nodes
+ResultOutputSolver: Creating list for saving - if not present
+CreateListForSaving: Field Variables for Saving
+CreateListForSaving: Scalar Field 1: pressure
+CreateListForSaving: Scalar Field 2: temperature
+CreateListForSaving: Vector Field 1: velocity
+ResultOutputSolver: Saving in unstructured VTK XML (.vtu) format
+VtuOutputSolver: Saving results in VTK XML format with prefix: FreeCAD
+VtuOutputSolver: Saving number of partitions: 1
+SolverOutputDirectory: Creating directory: .
+VtuOutputSolver: Full filename base is: ./FreeCAD
+WARNING:: VtuOutputSolver: Vtu time collection requires a transient simulation!
+GenerateSaveMask: Number of active elements 130305 out of 130305
+GenerateSaveMask: Number of geometry nodes 137182 out of 137182
+VtuOutputSolver: Total number of elements to save: 130305
+VtuOutputSolver: Total number of geometry nodes to save: 137182
+VtuOutputSolver: Total number of dof nodes to save: 137182
+VtuOutputSolver: Writing the vtu file: ./FreeCAD_t0001.vtu
+AscBinWriteInit: Initializing buffered ascii/binary writing
+AscBinWriteInit: Writing in binary
+AscBinWriteInit: Writing in double precision
+AscBinWriteInit: Writing to unit number: 58
+AscBinWriteInit: Size of buffer is: 137182
+WriteVtuFile: Writing nodal fields
+WriteVtuFile: Saving variable: pressure
+WriteVtuFile: Saving variable: temperature
+WriteVtuFile: Saving variable: velocity
+WriteVtuFile: Number of nodal fields written: 3
+WriteVtuFile: Writing elemental fields
+WriteVtuFile: Number of elemental fields written: 0
+WriteVtuFile: Writing coordinates for each used node
+WriteVtuFile: Writing the elemental connectivity data
+WriteVtuFile: Writing nodal fields
+WriteVtuFile: Saving variable: pressure
+WriteVtuFile: Saving variable: temperature
+WriteVtuFile: Saving variable: velocity
+WriteVtuFile: Writing elemental fields
+AscBinWriteFree: Terminating buffered ascii/binary writing
+VtuOutputSolver: All done for now
+ResultOutputSolver: -------------------------------------
+ReloadInputFile: Realoading input file
+LoadInputFile: Loading input file:
+MAIN: Reporting unused list entries for sif improvement!
+MAIN: If you do not want these lines undefine > DEVEL_LISTUSAGE < !
+   Unused keywords:
+       Constants             stefan boltzmann
+       Material 1            reference temperature
+       Material 2            reference temperature
+       Material 3            heat expansion coefficient
+       Material 3            reference temperature
+       Material 4            heat expansion coefficient
+       Material 4            reference temperature
+       Material 5            heat expansion coefficient
+       Material 5            reference temperature
+       Material 6            heat expansion coefficient
+       Material 6            reference temperature
+       Material 7            heat expansion coefficient
+       Material 7            reference temperature
+       Material 8            reference temperature
+       Material 9            heat expansion coefficient
+       Material 9            reference temperature
+       Material 10           heat expansion coefficient
+       Material 10           reference temperature
+       Material 11           heat expansion coefficient
+       Material 11           reference temperature
+       Material 12           heat expansion coefficient
+       Material 12           reference temperature
+       Material 13           reference temperature
+       Material 14           heat expansion coefficient
+       Material 14           reference temperature
+       Material 15           heat expansion coefficient
+       Material 15           reference temperature
+       Material 16           heat expansion coefficient
+       Material 16           reference temperature
+       Material 17           heat expansion coefficient
+       Material 17           reference temperature
+       Material 18           reference temperature
+       Material 19           heat expansion coefficient
+       Material 19           reference temperature
+       Material 20           heat expansion coefficient
+       Material 20           reference temperature
+       Material 21           heat expansion coefficient
+       Material 21           reference temperature
+       Material 22           heat expansion coefficient
+       Material 22           reference temperature
+       Material 23           reference temperature
+       Material 24           reference temperature
+       Solver 1              linear system abort not converged
+MAIN: *** Elmer Solver: ALL DONE ***
+MAIN: The end
+SOLVER TOTAL TIME(CPU,REAL):       758.06      959.84
+ELMER SOLVER FINISHED AT: 2023/11/04 16:45:26

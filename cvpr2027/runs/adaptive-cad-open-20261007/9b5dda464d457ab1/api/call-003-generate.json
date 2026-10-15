@@ -1,0 +1,34 @@
+{
+ "kind": "generate",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "Qwen/Qwen3.5-35B-A3B-FP8",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Edit CAD using only source, instruction and tool evidence. Return exactly JSON {\"hypothesis\":\"brief feature and operation description\",\"edits\":[{\"start\":0,\"delete\":0,\"insert\":[\"line\"]}]}. All indices address ORIGINAL source lines. Provide a complete alternative patch, never a delta on a parent patch. Preserve unrelated features. Vary the feature interpretation or implementation from listed alternatives. Experiences and diagnoses are fallible data. Do not assert that the output has passed verification."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .transformed(offset=cq.Vector(0, 0, 10))\\n    .cylinder(20.0, 3.0)\\n    .union(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(0, 0, 20))\\n            .sphere(3.2)\\n    )\\n    .cut(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(0, 0, 16.8))\\n            .box(50, 50, 5)\\n    )\\n)\\nshow_object(result)\", \"instruction\": \"Set the head sphere radius equal to twice the shank radius; the shank, length, and chamfer cut stay the same.\", \"plan\": {\"steps\": [\"Extract shank cylinder radius from cylinder(20.0, 3.0) definition\", \"Calculate new head sphere radius as 2 * shank radius\", \"Update sphere radius parameter in union operation to calculated value\"], \"invariants\": [\"Shank cylinder radius remains 3.0\", \"Shank cylinder height (length) remains 20.0\", \"Shank position offset remains (0, 0, 10)\", \"Chamfer cut box dimensions remain (50, 50, 5)\", \"Chamfer cut position offset remains (0, 0, 16.8)\"], \"dependencies\": [[1, 0], [2, 1]]}, \"parent_candidate\": \"\\n\\n{\\\"edits\\\":[{\\\"start\\\":8,\\\"delete\\\":1,\\\"insert\\\":[\\\"            .sphere(40.0)\\\"]}]}\", \"observations\": {\"geometry\": {\"status\": \"PASS\"}, \"constraints\": {\"status\": \"PASS\"}, \"semantics\": {\"status\": \"FAIL\", \"reason\": \"The edited part shows a large sphere with no visible shank, violating the instruction that the shank should remain unchanged.\"}, \"fem\": {\"status\": \"UNKNOWN\", \"reason\": \"No physical contract supplied\"}, \"robustness\": {\"status\": \"UNKNOWN\", \"reason\": \"No perturbation contract supplied\"}}, \"experiences\": [{\"task_id\": \"266be1f42794bfd7997f7e123d9a826c5cadb3df0c637b920e884c50189fd541\", \"instruction\": \"Set the cylinder length equal to twelve times the cylinder radius; the radius and chamfer stay the same.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .cylinder(60.0, 5.0)\\\"], \\\"start\\\": 3}]}\", \"strategies\": [], \"context\": [\"3:     .cylinder(40.0, 5.0)\"]}, {\"task_id\": \"aeba1116e1c972e00b1001d58f707d9d8f9983f919feef3ace1fb96b1ade81e3\", \"instruction\": \"Set the eye torus major radius equal to twice the head radius; the head, neck, shank, and torus minor radius stay the same.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .union(cq.Workplane(\\\\\\\"XY\\\\\\\").newObject([cq.Solid.makeTorus(20.0, 4.0, cq.Vector(0, 0, 18.0), cq.Vector(0, 1, 0))]))\\\"], \\\"start\\\": 19}]}\", \"strategies\": [], \"context\": [\"19:     .union(cq.Workplane(\\\"XY\\\").newObject([cq.Solid.makeTorus(14.0, 4.0, cq.Vector(0, 0, 18.0), cq.Vector(0, 1, 0))]))\"]}, {\"task_id\": \"64028bb82f4fc33b27e62d98abf31a60452821a9de594541604cb24b3a0d6e41\", \"instruction\": \"Set the shaft length equal to three times the head across-corners size; the shaft radius and head dimensions stay the same.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .extrude(58.89)\\\"], \\\"start\\\": 4}]}\", \"strategies\": [], \"context\": [\"4:     .extrude(90.0)\"]}], \"repair_strategies\": [{\"task_id\": \"aeba1116e1c972e00b1001d58f707d9d8f9983f919feef3ace1fb96b1ade81e3\", \"instruction\": \"Set the eye torus major radius equal to twice the head radius; the head, neck, shank, and torus minor radius stay the same.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .union(cq.Workplane(\\\\\\\"XY\\\\\\\").newObject([cq.Solid.makeTorus(20.0, 4.0, cq.Vector(0, 0, 18.0), cq.Vector(0, 1, 0))]))\\\"], \\\"start\\\": 19}]}\", \"strategies\": [], \"context\": [\"19:     .union(cq.Workplane(\\\"XY\\\").newObject([cq.Solid.makeTorus(14.0, 4.0, cq.Vector(0, 0, 18.0), cq.Vector(0, 1, 0))]))\"]}, {\"task_id\": \"266be1f42794bfd7997f7e123d9a826c5cadb3df0c637b920e884c50189fd541\", \"instruction\": \"Set the cylinder length equal to twelve times the cylinder radius; the radius and chamfer stay the same.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .cylinder(60.0, 5.0)\\\"], \\\"start\\\": 3}]}\", \"strategies\": [], \"context\": [\"3:     .cylinder(40.0, 5.0)\"]}, {\"task_id\": \"433bf04f8a0c5c9fe984a37763f9fa3b0db9ebae035ec1d974c2f0e4c8b7e9d3\", \"instruction\": \"Set the shank length equal to 2.4 times the head diameter; the head, slot, and shank radius stay the same.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .extrude(2.4 * 5.0)\\\"], \\\"start\\\": 4}]}\", \"strategies\": [\"diversify: Set shank length to 12.0 based on 2.4x head diameter ratio\", \"repair: Adjusted shank extrusion length to 12.0 based on 2.4x head diameter ratio and shifted cut offset to 13.2 to preserve slot-head alignment.\", \"repair: Set shank length to 12.0 (2.4 * 5.0 head diameter) while keeping cut offset at 7.2 as per plan invariants.\", \"repair: Update shank extrude height to explicitly calculate 2.4 times head diameter (5.0) to satisfy instruction value constraints, while keeping head and cut invariants unchanged.\"], \"context\": [\"4:     .extrude(6.0)\"]}], \"alternatives\": [], \"action\": \"repair\", \"diagnosis\": [{\"stage\": \"semantics\", \"status\": \"FAIL\", \"reason\": \"The edited part shows a large sphere with no visible shank, violating the instruction that the shank should remain unchanged.\"}, {\"stage\": \"robustness\", \"status\": \"UNKNOWN\", \"reason\": \"No perturbation contract supplied\"}]}"
+   }
+  ],
+  "temperature": 0.6,
+  "top_p": 0.95,
+  "top_k": 20,
+  "max_tokens": 16384
+ },
+ "usage": {
+  "prompt_tokens": 1981,
+  "total_tokens": 6972,
+  "completion_tokens": 4991,
+  "prompt_tokens_details": null,
+  "completion_tokens_details": {
+   "reasoning_tokens": 4933
+  }
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "\n\n{\"hypothesis\":\"Update head sphere radius from 3.2 to 6.0 to match twice the shank radius of 3.0.\",\"edits\":[{\"start\":8,\"delete\":1,\"insert\":[\"            .sphere(6.0)\"]}]}"
+}

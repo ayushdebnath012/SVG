@@ -1,0 +1,46 @@
+{
+ "id": "f160dd055256e7663c86af765fdf20f8a2498f4de49e1677dad2ee61a8d69c0e",
+ "source_fem": {
+  "ok": true,
+  "compliance": 3.385756430848422e-07,
+  "components": 1,
+  "nodes": 538
+ },
+ "nodes": [
+  {
+   "name": "vanilla",
+   "parent": null,
+   "visits": 1,
+   "value_sum": 1.0,
+   "eval": {
+    "gates": true,
+    "fem": {
+     "ok": true,
+     "compliance": 5.825133905602994e-07,
+     "components": 1,
+     "nodes": 709
+    },
+    "numbers_ok": null,
+    "changed": true,
+    "error": null,
+    "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(27.9, 18.8)\n    .faces(\">Z\").workplane()\n    .circle(16.92)\n    .workplane(offset=9.0)\n    .circle(1.5)\n    .loft(combine=True)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 10.375), rotate=cq.Vector(0, 0, 0.0))\n            .transformed(offset=cq.Vector(5.64, 0, 0), rotate=cq.Vector(37.1, 0, 0))\n            .polyline([[0.0, -12.5], [0.0, 12.5], [46.512, 8.938], [64.6, 0.0], [46.512, -8.938]])\n            .close()\n            .extrude(7.15)\n    )\n)\nshow_object(result)\n"
+   }
+  }
+ ],
+ "candidates": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(27.9, 18.8)\n    .faces(\">Z\").workplane()\n    .circle(16.92)\n    .workplane(offset=9.0)\n    .circle(1.5)\n    .loft(combine=True)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 10.375), rotate=cq.Vector(0, 0, 0.0))\n            .transformed(offset=cq.Vector(5.64, 0, 0), rotate=cq.Vector(37.1, 0, 0))\n            .polyline([[0.0, -12.5], [0.0, 12.5], [46.512, 8.938], [64.6, 0.0], [46.512, -8.938]])\n            .close()\n            .extrude(7.15)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 5.825133905602994e-07,
+    "components": 1,
+    "nodes": 709
+   },
+   "consensus": 1,
+   "numbers_ok": null,
+   "changed": true
+  }
+ ]
+}

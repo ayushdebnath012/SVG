@@ -1,0 +1,115 @@
+{
+ "source_fem": {
+  "ok": true,
+  "compliance": 8.074024256019918e-06,
+  "components": 1,
+  "nodes": 773
+ },
+ "nodes": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .circle(1.25)\n    .extrude(6.0)\n    .faces(\">Z\").workplane()\n    .circle(2.5)\n    .extrude(1.5)\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 7.8), rotate=cq.Vector(0, 0, 0))\n            .box(5.4, 0.6, 1.4)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 7.235960709453137e-06,
+    "components": 1,
+    "nodes": 789
+   },
+   "numbers_ok": false,
+   "changed": true,
+   "cluster": null,
+   "robustness": null
+  },
+  {
+   "name": "alt1",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .circle(1.25)\n    .extrude(6.0)\n    .faces(\">Z\").workplane()\n    .circle(2.5)\n    .extrude(1.5)\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 7.8), rotate=cq.Vector(0, 0, 0))\n            .box(5.4, 0.6, 1.4)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 7.235826990041996e-06,
+    "components": 1,
+    "nodes": 790
+   },
+   "numbers_ok": false,
+   "changed": true,
+   "cluster": null,
+   "robustness": null
+  },
+  {
+   "name": "alt2",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .circle(1.25)\n    .extrude(6.0)\n    .faces(\">Z\").workplane()\n    .circle(2.5)\n    .extrude(1.5)\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 7.5), rotate=cq.Vector(0, 0, 0))\n            .box(5.4, 0.6, 0.8)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 7.2457788741850085e-06,
+    "components": 1,
+    "nodes": 786
+   },
+   "numbers_ok": false,
+   "changed": true,
+   "cluster": null,
+   "robustness": null
+  },
+  {
+   "name": "alt3",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .circle(1.25)\n    .extrude(6.0)\n    .faces(\">Z\").workplane()\n    .circle(2.5)\n    .extrude(1.5)\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 7.1), rotate=cq.Vector(0, 0, 0))\n            .box(5.4, 0.6, 1.4, centered=(True, True, False))\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 7.246419263967507e-06,
+    "components": 1,
+    "nodes": 780
+   },
+   "numbers_ok": false,
+   "changed": true,
+   "cluster": null,
+   "robustness": null
+  },
+  {
+   "name": "mcts1-refine",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .circle(1.25)\n    .extrude(6.0)\n    .faces(\">Z\").workplane()\n    .circle(2.5)\n    .extrude(1.5)\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 7.5 - 0.4), rotate=cq.Vector(0, 0, 0))\n            .box(5.4, 0.6, 1.4, centered=(True, True, False))\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 7.235352444042385e-06,
+    "components": 1,
+    "nodes": 777
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "mcts2-diversify",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .circle(1.25)\n    .extrude(6.0)\n    .faces(\">Z\").workplane()\n    .circle(2.5)\n    .extrude(1.5)\n    .cut(\n        cq.Workplane(\"XY\").workplane(offset=7.5)\n            .rect(5.4, 0.6)\n            .extrude(-0.4)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 7.231846712322699e-06,
+    "components": 1,
+    "nodes": 787
+   },
+   "numbers_ok": false,
+   "changed": true,
+   "cluster": null,
+   "robustness": null
+  },
+  {
+   "name": "rag",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .circle(1.25)\n    .extrude(6.0)\n    .faces(\">Z\").workplane()\n    .circle(2.5)\n    .extrude(1.5)\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 7.8), rotate=cq.Vector(0, 0, 0))\n            .box(5.4, 0.6, 1.4)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 7.235320032982033e-06,
+    "components": 1,
+    "nodes": 779
+   },
+   "numbers_ok": false,
+   "changed": true,
+   "cluster": null,
+   "robustness": null
+  }
+ ]
+}

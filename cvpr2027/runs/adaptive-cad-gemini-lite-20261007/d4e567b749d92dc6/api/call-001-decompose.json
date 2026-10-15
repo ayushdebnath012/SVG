@@ -1,0 +1,28 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .cylinder(19.9, 69.6)\\n    .faces(\\\">Z\\\").workplane()\\n    .hole(32.9)\\n    .faces(\\\">Z\\\").workplane()\\n    .circle(35.6)\\n    .extrude(10.4)\\n    .edges(\\\">Z\\\")\\n    .chamfer(1.1)\\n    .edges(\\\"<Z\\\")\\n    .fillet(1.3)\\n    .faces(\\\">Z\\\").workplane()\\n    .polarArray(39.79, 0, 360, 6)\\n    .hole(4.2)\\n)\\nresult = result.cut(cq.Workplane('XY').cylinder(100.0, 20.0))\\nshow_object(result)\", \"instruction\": \"Remove the central cylindrical through-cut with a 20.00 mm radius through the flange.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"7de286cc915dab42bff9cfb42462704dbcc6dc4f406e98ed58ca911ab659c496\", \"instruction\": \"Remove the axial cylindrical through-cut with radius of 20.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [], \\\"start\\\": 7}]}\", \"strategies\": [], \"context\": [\"7: result = result.cut(cq.Workplane('XZ').cylinder(100.0, 20.0))\"]}, {\"task_id\": \"c01ba5e1a9f4e54c2614cc1aa5f134cdbd06bc93d65e158b7032c690b1222726\", \"instruction\": \"Add a central axial through-cut with a 10.00 mm radius through the entire part.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.cut(cq.Workplane('XY').cylinder(200.0, 10.0))\\\"], \\\"start\\\": 60}]}\", \"strategies\": [], \"context\": [\"60: show_object(result)\"]}, {\"task_id\": \"b987d7a981c0b0cbbed979828dcaf81dacb8b6892d05e48c3d73e45600d568ee\", \"instruction\": \"Remove the central axial through-cut with a 10.00 through the entire part.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [], \\\"start\\\": 60}]}\", \"strategies\": [], \"context\": [\"60: result = result.cut(cq.Workplane('XY').cylinder(200.0, 10.0))\"]}]}"
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 4096
+ },
+ "usage": {
+  "completion_tokens": 150,
+  "prompt_tokens": 760,
+  "total_tokens": 910
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\n  \"steps\": [\n    \"Identify the final boolean cut operation that creates the central cylindrical through-cut with a 20.00 mm radius.\",\n    \"Remove the operation `result = result.cut(cq.Workplane('XY').cylinder(100.0, 20.0))` from the script.\"\n  ],\n  \"invariants\": [\n    \"The base cylinder, coaxial collar, holes, polar array, chamfers, and fillets must remain unaffected.\",\n    \"The outer diameter and overall height of the main body are preserved.\"\n  ],\n  \"dependencies\": [\n    [0, 1]\n  ]\n}\n```"
+}

@@ -1,0 +1,28 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .polygon(6, 15.012)\\n    .extrude(15.0)\\n    .faces(\\\">Z\\\").workplane()\\n    .hole(8.0)\\n)\\nshow_object(result)\", \"instruction\": \"Make the standoff taller to 19.5.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"0d00b048f0082849348a0e4ddffa9ab5984315681e927c66e1a0a5f7608893b0\", \"instruction\": \"Make the nut taller to 44.2.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .extrude(44.2)\\\"], \\\"start\\\": 4}]}\", \"strategies\": [], \"context\": [\"4:     .extrude(34.0)\"]}, {\"task_id\": \"b0706f5f1676b68172a81b8abea002e410b7420e5851b38fd5af534650c07fec\", \"instruction\": \"Make the frame taller to 13.0.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .extrude(13.0)\\\"], \\\"start\\\": 4}]}\", \"strategies\": [], \"context\": [\"4:     .extrude(10.0)\"]}, {\"task_id\": \"5ba8ce32057924468f61427d230341ad5964cae0c0a5123f806fa3b9360dd19e\", \"instruction\": \"Make the ring thicker to 3.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .extrude(3.0)\\\"], \\\"start\\\": 9}]}\", \"strategies\": [], \"context\": [\"9:     .extrude(1.2)\"]}]}"
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 4096
+ },
+ "usage": {
+  "completion_tokens": 102,
+  "prompt_tokens": 572,
+  "total_tokens": 674
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\n  \"steps\": [\n    \"Modify the extrusion depth from 15.0 to 19.5\"\n  ],\n  \"invariants\": [\n    \"Outer polygon profile (6 sides, 15.012 across flats) remains unchanged\",\n    \"Central hole diameter (8.0) remains unchanged\",\n    \"Base workplane (XY) remains unchanged\"\n  ],\n  \"dependencies\": []\n}\n```"
+}

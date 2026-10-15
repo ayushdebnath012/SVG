@@ -1,0 +1,34 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "Qwen/Qwen3.5-35B-A3B-FP8",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .polygon(6, 15.012)\\n    .extrude(15.0)\\n    .faces(\\\">Z\\\").workplane()\\n    .hole(8.0)\\n)\\nshow_object(result)\", \"instruction\": \"Remove the central through-bore so the standoff becomes a solid hex prism. The hex outline and extrude height are unchanged.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"b8e847e2446dcb3b774d9f9abed4273b2f24a63f1bcbe413550c8001cbbfc1a2\", \"instruction\": \"Remove the central through-hole so the hex nut becomes a solid hex prism. The hex outline, height, and the vertical edge chamfers all stay the same.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 3, \\\"insert\\\": [], \\\"start\\\": 5}]}\", \"strategies\": [], \"context\": [\"5:     .faces(\\\">Z\\\").workplane()\", \"6:     .circle(21.0)\", \"7:     .cutThruAll()\"]}, {\"task_id\": \"6b018ed3063c8d66834395422ebff1fe64dc8243fcae32dbb5e19d131f62ac93\", \"instruction\": \"Remove the rectangular through-cut so the hollow tube becomes a solid rectangular bar. The outer box dimensions are unchanged.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 3, \\\"insert\\\": [], \\\"start\\\": 4}]}\", \"strategies\": [], \"context\": [\"4:     .faces(\\\">X\\\").workplane()\", \"5:     .rect(34.0, 34.0)\", \"6:     .cutThruAll()\"]}, {\"task_id\": \"5edd3fc737731a13b29d7db956d94dba66e43959d9d86fa4bfdc7a87cfae9a7e\", \"instruction\": \"Remove the through-bore; the collar becomes a solid cylinder of radius 20 and width 16.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 2, \\\"insert\\\": [], \\\"start\\\": 4}]}\", \"strategies\": [], \"context\": [\"4:     .faces(\\\">Z\\\").workplane()\", \"5:     .hole(25.0)\"]}]}"
+   }
+  ],
+  "temperature": 0.6,
+  "top_p": 0.95,
+  "top_k": 20,
+  "max_tokens": 8192
+ },
+ "usage": {
+  "prompt_tokens": 664,
+  "total_tokens": 1458,
+  "completion_tokens": 794,
+  "prompt_tokens_details": null,
+  "completion_tokens_details": {
+   "reasoning_tokens": 608
+  }
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "\n\n{\n  \"steps\": [\n    \"Remove the .hole(8.0) operation from the workplane chain\",\n    \"Preserve the polygon(6, 15.012) hexagonal outline definition\",\n    \"Preserve the extrude(15.0) height parameter\",\n    \"Maintain the initial Workplane(\\\"XY\\\") setup\"\n  ],\n  \"invariants\": [\n    \"Hexagonal polygon with 6 sides maintained\",\n    \"Hexagon radius of 15.012 unchanged\",\n    \"Extrusion height of 15.0 unchanged\",\n    \"Initial workplane orientation on XY plane preserved\"\n  ],\n  \"dependencies\": [\n    [0, 1],\n    [0, 2],\n    [0, 3]\n  ]\n}"
+}

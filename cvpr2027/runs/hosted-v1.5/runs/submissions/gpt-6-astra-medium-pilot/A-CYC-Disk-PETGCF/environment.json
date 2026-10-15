@@ -1,0 +1,271 @@
+{
+  "python": "3.12.14",
+  "gmsh": "4.15.2",
+  "scikit_fem": "12.0.2",
+  "numpy": "2.5.3",
+  "scipy": "1.18.1",
+  "meshio": "5.3.5",
+  "command": "python main.py",
+  "units": {
+    "length": "mm",
+    "force": "N",
+    "stress": "MPa"
+  },
+  "material": {
+    "E_MPa": 3000,
+    "poisson_ratio": 0.36
+  },
+  "model": "Full 3D small-displacement isotropic linear elasticity, curved isoparametric quadratic tetrahedra; no gravity, no contact. Degree-4 volume and degree-5 surface quadrature. Direct sparse solution. All components fixed on both halves of central bore. Source geometry copied unchanged.",
+  "boundary_conditions": {
+    "fixed_faces": [
+      8,
+      13
+    ],
+    "loaded_faces": [
+      2,
+      19
+    ],
+    "loads_N": {
+      "2": [
+        0,
+        -31.165,
+        94.894
+      ],
+      "19": [
+        0,
+        -31.169,
+        94.905
+      ]
+    },
+    "load_rounding": "Face forces are used as given; their sum differs by 0.001 N from rounded headline total.",
+    "traction": "Constant global-direction traction separately on each half-cylinder. Divided by integrated curved area; areas agree with CAD within discretization error."
+  },
+  "physical_groups": {
+    "surfaces": "tag i = geometry-matched source face i (1..20)",
+    "volume": {
+      "101": "PETG_CF"
+    }
+  },
+  "geometry_matching": {
+    "1": {
+      "gmsh_surface": 1,
+      "area_mm2": 15.707963267928037,
+      "centroid_mm": [
+        101.5253654078935,
+        13.303329882137442,
+        51.28733904276007
+      ],
+      "type": "Cylinder"
+    },
+    "2": {
+      "gmsh_surface": 2,
+      "area_mm2": 125.66370614342429,
+      "centroid_mm": [
+        101.5253654078935,
+        23.77099661216954,
+        30.10512028904355
+      ],
+      "type": "Cylinder"
+    },
+    "3": {
+      "gmsh_surface": 3,
+      "area_mm2": 125.66370614342429,
+      "centroid_mm": [
+        101.5253654078935,
+        2.4158592524245384,
+        42.11378833951454
+      ],
+      "type": "Cylinder"
+    },
+    "4": {
+      "gmsh_surface": 4,
+      "area_mm2": 125.66370614342429,
+      "centroid_mm": [
+        101.5253654078935,
+        24.04875369471954,
+        5.606694808961549
+      ],
+      "type": "Cylinder"
+    },
+    "5": {
+      "gmsh_surface": 5,
+      "area_mm2": 125.66370614342429,
+      "centroid_mm": [
+        101.5253654078935,
+        2.9713734175245383,
+        -6.883062620648451
+      ],
+      "type": "Cylinder"
+    },
+    "6": {
+      "gmsh_surface": 6,
+      "area_mm2": 125.66370614342429,
+      "centroid_mm": [
+        101.5253654078935,
+        -18.38376394221446,
+        5.125605429822549
+      ],
+      "type": "Cylinder"
+    },
+    "7": {
+      "gmsh_surface": 7,
+      "area_mm2": 125.66370614342429,
+      "centroid_mm": [
+        101.5253654078935,
+        -18.66152102476446,
+        29.62403090990355
+      ],
+      "type": "Cylinder"
+    },
+    "8": {
+      "gmsh_surface": 8,
+      "area_mm2": 188.49555921513638,
+      "centroid_mm": [
+        101.5253654078935,
+        3.9917757687322486,
+        15.424623751812817
+      ],
+      "type": "Cylinder"
+    },
+    "9": {
+      "gmsh_surface": 9,
+      "area_mm2": 0.38837214707968015,
+      "centroid_mm": [
+        101.5253654078935,
+        31.908811108929896,
+        40.89243358101523
+      ],
+      "type": "Plane"
+    },
+    "10": {
+      "gmsh_surface": 10,
+      "area_mm2": 1311.354177507733,
+      "centroid_mm": [
+        101.525365407897,
+        0.07999135560301696,
+        21.986666948817046
+      ],
+      "type": "BSpline surface"
+    },
+    "11": {
+      "gmsh_surface": 11,
+      "area_mm2": 2924.8977082925935,
+      "centroid_mm": [
+        104.02536540789,
+        -0.10063010816441231,
+        21.84109041077953
+      ],
+      "type": "Plane"
+    },
+    "12": {
+      "gmsh_surface": 12,
+      "area_mm2": 2924.8977082925935,
+      "centroid_mm": [
+        99.025365407897,
+        -0.10063010816441231,
+        21.84109041077953
+      ],
+      "type": "Plane"
+    },
+    "13": {
+      "gmsh_surface": 13,
+      "area_mm2": 188.4955592151364,
+      "centroid_mm": [
+        101.5253654078935,
+        -3.7971808338130093,
+        28.569058397531983
+      ],
+      "type": "Cylinder"
+    },
+    "14": {
+      "gmsh_surface": 14,
+      "area_mm2": 125.66370614342428,
+      "centroid_mm": [
+        101.5253654078935,
+        -23.854158759794633,
+        38.38698734038299
+      ],
+      "type": "Cylinder"
+    },
+    "15": {
+      "gmsh_surface": 15,
+      "area_mm2": 125.66370614342428,
+      "centroid_mm": [
+        101.5253654078935,
+        -23.576401677244633,
+        13.888561860301989
+      ],
+      "type": "Cylinder"
+    },
+    "16": {
+      "gmsh_surface": 16,
+      "area_mm2": 125.66370614342428,
+      "centroid_mm": [
+        101.5253654078935,
+        -2.2212643175056326,
+        1.879893809830989
+      ],
+      "type": "Cylinder"
+    },
+    "17": {
+      "gmsh_surface": 17,
+      "area_mm2": 125.66370614342428,
+      "centroid_mm": [
+        101.5253654078935,
+        18.85611595968937,
+        14.369651239440989
+      ],
+      "type": "Cylinder"
+    },
+    "18": {
+      "gmsh_surface": 18,
+      "area_mm2": 125.66370614342428,
+      "centroid_mm": [
+        101.5253654078935,
+        -2.776778482605632,
+        50.876744769993984
+      ],
+      "type": "Cylinder"
+    },
+    "19": {
+      "gmsh_surface": 19,
+      "area_mm2": 125.66370614342428,
+      "centroid_mm": [
+        101.5253654078935,
+        18.57835887713937,
+        38.86807671952299
+      ],
+      "type": "Cylinder"
+    },
+    "20": {
+      "gmsh_surface": 20,
+      "area_mm2": 15.707963267928035,
+      "centroid_mm": [
+        101.5253654078935,
+        12.65425016525867,
+        52.38270859657
+      ],
+      "type": "Cylinder"
+    }
+  },
+  "quantity_extraction": "Maximum Euclidean displacement norm over all quadratic FE nodes, including mid-edge nodes, at load factor 1.",
+  "field_schema": {
+    "node_ids": "Gmsh node tags; all nodal arrays share this row ordering.",
+    "coordinates_mm": "N x 3 original coordinates x,y,z",
+    "displacement_mm": "N x 3 solved displacement",
+    "displacement_magnitude_mm": "N vector",
+    "fixed_mask": "N uint8, 1 on fixed faces",
+    "loaded_masks": "N x 2 uint8, columns face 2 and face 19",
+    "applied_nodal_force_N": "N x 3 consistent nodal traction loads",
+    "reaction_nodal_force_N": "N x 3 residual K u - f; physical reactions on fixed nodes, numerical residual otherwise",
+    "element_ids": "Gmsh tetrahedron element tags, ordering of stress and quadrature arrays",
+    "element_node_ids_gmsh": "elements x 10 original Gmsh connectivity, Gmsh tetra10 ordering",
+    "stress_MPa": "elements x quadrature points x 3 x 3 Cauchy stress tensor, no smoothing",
+    "von_mises_MPa": "elements x quadrature points",
+    "quadrature_coordinates_mm": "elements x quadrature points x 3",
+    "static_load_factor": "single solved static load factor 1",
+    "coordinate_units": "unicode scalar mm",
+    "stress_units": "unicode scalar MPa"
+  },
+  "mesh_convergence_relative_change": 0.002279788923681076
+}

@@ -1,0 +1,133 @@
+{
+  "created": "2026-06-05T21:01:56.991762+00:00",
+  "modified": "2026-06-06T08:30:47.141586+00:00",
+  "id": 18355528,
+  "conceptrecid": "18355527",
+  "doi": "10.5281/zenodo.18355528",
+  "conceptdoi": "10.5281/zenodo.18355527",
+  "doi_url": "https://doi.org/10.5281/zenodo.18355528",
+  "metadata": {
+    "title": "Multiscale fracture modeling of amorphous materials: Bridging atomistic and continuum mechanical perspectives \u2013 dataset",
+    "doi": "10.5281/zenodo.18355528",
+    "publication_date": "2026-06-05",
+    "description": "<div><strong>Abstract (from [1]):<br></strong>Fracture is a multiscale phenomenon in which material properties at the atomic level influence the mechanical behavior at the macroscale. Molecular dynamics (MD) simulations provide a tool for investigating the underlying mechanisms, taking into account individual atoms or representative superatoms. However, even with today's computational capabilities, it is impossible to model entire components with MD. This challenge is addressed by multiscale simulations. The Capriccio method used in this work is a partitioned-domain approach focusing on amorphous materials that couples three-dimensional MD domains with a surrounding continuum solved using the finite element method (FEM). In this way, FEM simulations are enriched by insights into the molecular level of detail. In recent years, first fracture simulations have been performed with the Capriccio method using a coarse-grained model of atactic polystyrene. The present thesis takes up on this and explores several aspects that have not yet been addressed. One of the main objectives is to derive fracture mechanical quantities using the Capriccio method. For this purpose, silica glass is chosen as an example material whose fracture process zone is significantly smaller than that of polymers. Using an MD model with atomic resolution, virtual experiments are performed on standardized test setups, in particular on an edge-notched rectangular panel loaded by all three fracture modes, three- and four-point bending specimens, and K-test setups. The studies conducted show that the Capriccio simulation environment is capable of determining values for the critical stress intensity factor and the crack opening displacement that are close to experimental findings and theoretical predictions. A further focus of this work is the consideration of crucial aspects regarding the modeling of fracture in polymers, especially the influence of bond scission on the failure of thermoplastics. For this purpose, the analytical potential functions of a generic, computationally efficient MD model are modified to include a length-based bond breaking criterion. This model is used to investigate the effect of various parameters that are essential for fracture simulations of polymers, such as sample geometry, temperature, and molar mass, but also the influence of nanoparticles in terms of their size and volume fraction. Despite the generic nature of the MD model, trends consistent with experimental observations are revealed. Ultimately, the computational efficiency of the model enables fracture simulations of polymers taking millions of superatoms into account. Overall, this work provides insights into the microscopic fracture processes of amorphous materials under realistic boundary conditions. At the same time, the Capriccio coupling is investigated and the influence of key methodological and numerical parameters is identified. This paves the way for future research activities on modeling and improving material properties based on molecular considerations.</div>\n<div>&nbsp;</div>\n<div><strong>Contact:</strong></div>\n<div>Felix Weber</div>\n<div>Institute of Applied Mechanics</div>\n<div>Friedrich-Alexander-Universit&auml;t Erlangen-N&uuml;rnberg</div>\n<div>Egerlandstr. 5</div>\n<div>91058 Erlangen</div>\n<div>Germany</div>\n<div>&nbsp;</div>\n<div>&nbsp;</div>\n<div>\n<div><strong>Context:</strong></div>\n<div>This dataset references summarizes the datasets related to the author's dissertation [1] and contains additional results as well as the necessary data to obtain those.</div>\n<div>&nbsp;</div>\n<div>&nbsp;</div>\n<div>\n<div><strong>Software:</strong></div>\n<div>All molecular dynamics (MD) simulations were performed with LAMMPS [2,3]. The Capriccio simulations using the Capriccio code version v2.0.1 [4] apply Matlab (version R2022a) [5] for the finite element (FE) calculations. The Capriccio simulations using the Capriccio code version v3.0.1 [6] apply Julia [7] for the FE calculations. The FE meshes were generated in Abaqus/CAE (version 2021.HF7) [8].&nbsp;</div>\n</div>\n</div>\n<div>&nbsp;</div>\n<div>&nbsp;</div>\n<div><strong>Associcated existing datasets:</strong></div>\n<div>The following existing datasets are associated with the given chapters:</div>\n<ul>\n<li>Chapter 5: [9,10,11]</li>\n<li>Chapter 6: [12]</li>\n<li>Chapter 7: [13]</li>\n<li>Chapter 8: [14,15]</li>\n</ul>\n<div>&nbsp;</div>\n<div>&nbsp;</div>\n<div><strong>Additional data:</strong></div>\n<ul>\n<li>GTP_Capriccio_Julia: Capriccio simulations of a generic thermoplastic polymer model [16] using Julia for the FE calculations (related to chapter 8)\n<ul>\n<li>&nbsp;MD1e6: Approximately 1e6 beads contained in the MD domain</li>\n<li>&nbsp;MD4e6: Approximately 4e6 beads contained in the MD domain</li>\n</ul>\n</li>\n<li>GTP_Capriccio_Matlab: Pure MD simulations and Capriccio simulations of a generic thermoplastic polymer model [16] using Matlab for the FE calculations (related to chapter 8)\n<ul>\n<li>capriccio_MD_main.in: LAMMPS input script for the Capriccio code</li>\n<li>SPP: Capriccio \"sandwich\" simulations using the labeling scheme \"k&lt;anchor point spring stiffness&gt;_ls&lt;load step size&gt;_tsMD&lt;number of MD time steps&gt;_&lt;FE weighting function&gt;&lt;bridging domain layers&gt;_smd&lt;remaining stiffness ratio&gt;_ngp&lt;number of Gauss points per spatial direction&gt;\"</li>\n<li>SSP_crack: Capriccio fracture simulations\n<ul>\n<li>linear_elastic: Linear elastic constitutive law applied in the FE domain</li>\n<li>vevp: Viscoelastic-viscoplastic constitutive model [17,18] applied in the FE domain</li>\n</ul>\n</li>\n</ul>\n</li>\n<li>GTP_MD: Pure MD simulations using the labeling scheme \"&lt;number of chains&gt;_&lt;number of beads per chain&gt;_&lt;sample ID&gt;\"\n<ul>\n<li>ut_NPT: Uniaxial tension simulations with free lateral deformation at zero pressure</li>\n<li>ut_NVT: Uniaxial tension simulations with fixed lateral system dimensions</li>\n</ul>\n</li>\n<li>GTP_Systems: Equilibration of pure MD systems using the labeling scheme \"&lt;number of chains&gt;_&lt;number of beads per chain&gt;_&lt;sample ID&gt;\"</li>\n</ul>\n<div>The simulation directories contain:</div>\n<ul>\n<li>Capriccio Julia:\n<ul>\n<li>input:<br>\n<ul>\n<li>GTPm.cae: Abaqus .cae file of the finite element domain</li>\n<li>GTPm.data: Initial LAMMPS data file</li>\n<li>GTPm.inp: Abaqus .inp file of the finite element domain</li>\n<li>GTPm.jl: Input parameters</li>\n<li>GTPm.lmp: LAMMPS input script</li>\n</ul>\n</li>\n<li>output: output by Capriccio code\n<ul>\n<li>log.lammps: LAMMPS log file</li>\n<li>log.txt: Capriccio log file</li>\n<li>*.vtu: Trajectories of the FE nodes and MD particles</li>\n</ul>\n</li>\n</ul>\n</li>\n<li>Capriccio Matlab:\n<ul>\n<li>input_files:\n<ul>\n<li>GTPm.ac: Initial anchor point coordinates</li>\n<li>GTPm.cae: Abaqus .cae file of the FE domain</li>\n<li>GTPm.data: Initial LAMMPS data file</li>\n<li>GTPm.inp: Abaqus .inp file of the FE domain</li>\n</ul>\n</li>\n<li>input_parameters:\n<ul>\n<li>Capriccio.prm: Input parameters</li>\n</ul>\n</li>\n<li>MD_data:\n<ul>\n<li>lammps_log.txt: LAMMPS log file</li>\n</ul>\n</li>\n<li>meta.info: Meta data of the simulation run</li>\n<li>structs_current.mat: Current Matlab structs output by Capriccio code</li>\n</ul>\n</li>\n<li>Pure MD:\n<ul>\n<li>*.in: LAMMPS input script of the simulation</li>\n<li>lammps.prm: Input parameters of the simulation (read by the input script)</li>\n<li>LAMMPS_out: Simulation results\n<ul>\n<li>*.data: Resulting LAMMPS data file</li>\n<li>log*: LAMMPS log file</li>\n</ul>\n</li>\n<li>meta.info: Meta data of the simulation run</li>\n</ul>\n</li>\n<li>potentials.lmpmod: Potentials adapted from [16] (&amp; dissipative particle dynamics region &amp; anchor points, where applicable) in [19] and [20]. Note that this file must be located at the same level as the input folders. However, to avoid redundancy, it is only provided once in the respective parent directories, respectively.</li>\n</ul>\n<div>\n<div>&nbsp;</div>\n<div>&nbsp;</div>\n<div>\n<div><strong>References:</strong></div>\n<div>[1] F. Weber, \"Multiscale fracture modeling of amorphous materials: Bridging atomistic and continuum mechanical perspectives\", Doctoral thesis, Institute of Applied Mechanics, Friedrich-Alexander-Universit&auml;t Erlangen-N&uuml;rnberg, https://doi.org/10.25593/open-fau-3051.</div>\n<div>[2] S. Plimpton, \"Fast parallel algorithms for short-range molecular dynamics\", Journal of computational physics, vol. 117, no. 1, pp. 1-19, 1995.</div>\n<div>[3] A. P. Thompson, H. M. Aktulga, R. Berger, D. S. Bolintineanu, W. M. Brown, P. S. Crozier, P. J. in 't Veld, A. Kohlmeyer, S. G. Moore, T. D. Nguyen, R. Shan, M. J. Stevens, J. Tranchida, C. Trott, S. J. Plimpton, \"LAMMPS - a flexible simulation tool for particle-based materials modeling at the atomic, meso, and continuum scales\", Computer Physics Communications, vol. 271, p. 108171, 2022.</div>\n<div>[4] S. Pfaller, M. Ries, W. Zhao, C. Bauer, F. Weber, and L. Laubert, \"CAPRICCIO - Tool to run concurrent Finite Element-Molecular Dynamics Simulations (2.0.1)\", Zenodo, https://doi.org/10.5281/zenodo.12606758.</div>\n<div>[5] The MathWorks, Inc., \"Matlab. the language of technical computing\", https://de.mathworks.com/help/matlab/.</div>\n<div>[6] J. Roksvaag, &amp; F. Weber, \"CAPRICCIO - Tool to run concurrent Finite Element-Molecular Dynamics Simulations (3.0.1)\", Zenodo, 2026, https://doi.org/10.5281/zenodo.20209460.</div>\n<div>[7] J. Bezanson, A. Edelman, S. Karpinski, and V. B. Shah, \"Julia: A Fresh Approach to Numerical Computing\", SIAM Review, vol. 59, no. 1, pp. 65&ndash;98, 2017.&nbsp;</div>\n</div>\n<div>[8] Dassault Syst&egrave;mes. \"Abaqus documentation\", https://abaqus-docs.mit.edu/2017/English/SIMACAEEXCRefMap/simaexc-c-docproc.htm.</div>\n<div>[9] M. Ries, C. Bauer, F. Weber, P. Steinmann, and S. Pfaller, \"Characterization of the material behavior and identification of effective elastic moduli based on molecular dynamics simulations of coarse-grained silica: dataset\", Zenodo, 2022, https://doi.org/10.5281/zenodo.5557075.</div>\n<div>[10] M. Ries, F. Weber, G. Possart, P. Steinmann, and S. Pfaller, \"A quantitative interphase model for polymer nanocomposites: Verification, validation, and consequences regarding size effects: dataset\", Zenodo, 2022, https://doi.org/10.5281/zenodo.7024650.</div>\n<div>[11] F. Weber, M. Ries, C. Bauer, C. R. Wick, and S. Pfaller, \"On equilibrating non-periodic molecular dynamics samples for coupled particle-continuum simulations of amorphous polymers: dataset\", Zenodo, 2023, https://doi.org/10.5281/zenodo.6868242.</div>\n<div>[12] F. Weber, M. Vassaux, L. Laubert, and S. Pfaller, \"The Capriccio method as a versatile tool for quantifying the fracture properties of glassy materials under complex loading conditions with chemical specificity &ndash; dataset\", Zenodo, 2026, https://doi.org/10.5281/zenodo.13644830.</div>\n<div>[13] F. Weber, V. D&ouml;tschel, P. Steinmann, S. Pfaller, and M. Ries, \"Evaluating the impact of filler size and filler content on the stiffness, strength, and toughness of polymer nanocomposites using coarse-grained molecular dynamics: dataset\", Zenodo, 2024, https://doi.org/10.5281/zenodo.10473251.</div>\n<div>[14] L. Laubert, F. Weber, and S. Pfaller, \"Assessing the Capriccio Method via One-dimensional Systems for Coupled Continuum-Particle Simulations in Various Uniaxial Load Cases using a Novel Interdimensional Comparison Approach &ndash; data set\", Zenodo, 2025, https://doi.org/10.5281/zenodo.13768063.</div>\n<div>[15] L. Laubert, F. Weber, and S. Pfaller, \"Approaching and overcoming the limitations of the multiscale Capriccio method for simulating the mechanical behavior of amorphous materials &ndash; data set\", Zenodo, 2025, https://doi.org/10.5281/zenodo.14796855.</div>\n<div>[16] V. Bocharova, A.-C. Genix, J.-M. Y. Carrillo, R. Kumar, B. Carroll, A. Erwin, D. Voylov, A. Kisliuk, Y. Wang, B. G. Sumpter, and A. P. Sokolov, \"Addition of Short Polymer Chains Mechanically Reinforces Glassy Poly (2-vinylpyridine)&ndash;Silica Nanoparticle Nanocomposites\", ACS Applied Nano Materials, vol. 3, no. 4, pp. 3427&ndash;3438, 2020.</div>\n<div>[17] W. Zhao, M. Ries, P. Steinmann, and S. Pfaller, \"A viscoelastic-viscoplastic constitutive&nbsp;model for glassy polymers informed by molecular dynamics simulations\", International Journal of Solids and Structures, vol. 226-227, p. 111071, 2021.<br>[18] W. Zhao. &bdquo;Fracture simulation of amorphous polymers across atomistic and continuum&nbsp;scales&ldquo;. Doctoral thesis, Institute of Applied Mechanics, Friedrich-Alexander-Universit&auml;t Erlangen-N&uuml;rnberg, 2023, https://doi.org/10.25593/open-fau-401.</div>\n<div>[19] M. Ries, J. Seibert, P. Steinmann, S. Pfaller, \"Applying a generic and fast coarse-grained molecular dynamics model to extensively study the mechanical behavior of polymer nanocomposites\", Express Polymer Letters, vol.16, no.12, pp. 1304&ndash;1321, 2022.</div>\n<div>[20] F. Weber, V. D&ouml;tschel, P. Steinmann, S. Pfaller, M. Ries, \"Evaluating the impact of filler size and filler content on the stiffness, strength, and toughness of polymer nanocomposites using coarse-grained molecular dynamics\", Engineering Fracture Mechanics, vol. 307, p. 110270, 2024.</div>\n<div>&nbsp;</div>\n<div>&nbsp;</div>\n<div><strong>Funding:</strong></div>\n<div>The author gratefully acknowledges support from various sources:&nbsp;The overall research was funded by the Deutsche Forschungsgemeinschaft (DFG, German Research Foundation) &ndash; 377472739/GRK 2423/2-2023. Moreover, scientific support and HPC resources have been provided by the Erlangen National High Performance Computing Center (NHR@FAU) of FAU under the NHR project b136dc. NHR funding is provided by federal and Bavarian state authorities. NHR@FAU hardware is partially funded by the DFG project 440719683.&nbsp;</div>\n</div>",
+    "access_right": "open",
+    "creators": [
+      {
+        "name": "Weber, Felix",
+        "affiliation": null,
+        "orcid": "0000-0002-5151-8075"
+      }
+    ],
+    "keywords": [
+      "Fracture mechanics",
+      "Multiscale modeling",
+      "Partitioned-domain coupling",
+      "Molecular dynamics",
+      "Finite element method",
+      "Inorganic glasses",
+      "Polymers",
+      "Nanocomposites"
+    ],
+    "related_identifiers": [
+      {
+        "identifier": "10.25593/open-fau-3051",
+        "relation": "isSupplementTo",
+        "resource_type": "publication-dissertation",
+        "scheme": "doi"
+      }
+    ],
+    "version": "1.0.0",
+    "language": "eng",
+    "resource_type": {
+      "title": "Dataset",
+      "type": "dataset"
+    },
+    "license": {
+      "id": "cc-by-4.0"
+    },
+    "communities": [
+      {
+        "id": "frascal"
+      }
+    ],
+    "relations": {
+      "version": [
+        {
+          "index": 0,
+          "is_last": true,
+          "parent": {
+            "pid_type": "recid",
+            "pid_value": "18355527"
+          }
+        }
+      ]
+    }
+  },
+  "title": "Multiscale fracture modeling of amorphous materials: Bridging atomistic and continuum mechanical perspectives \u2013 dataset",
+  "links": {
+    "self": "https://zenodo.org/api/records/18355528",
+    "self_html": "https://zenodo.org/records/18355528",
+    "preview_html": "https://zenodo.org/records/18355528?preview=1",
+    "doi": "https://doi.org/10.5281/zenodo.18355528",
+    "self_doi": "https://doi.org/10.5281/zenodo.18355528",
+    "self_doi_html": "https://zenodo.org/doi/10.5281/zenodo.18355528",
+    "reserve_doi": "https://zenodo.org/api/records/18355528/draft/pids/doi",
+    "parent": "https://zenodo.org/api/records/18355527",
+    "parent_html": "https://zenodo.org/records/18355527",
+    "parent_doi": "https://doi.org/10.5281/zenodo.18355527",
+    "parent_doi_html": "https://zenodo.org/doi/10.5281/zenodo.18355527",
+    "self_iiif_manifest": "https://zenodo.org/api/iiif/record:18355528/manifest",
+    "self_iiif_sequence": "https://zenodo.org/api/iiif/record:18355528/sequence/default",
+    "files": "https://zenodo.org/api/records/18355528/files",
+    "media_files": "https://zenodo.org/api/records/18355528/media-files",
+    "latest": "https://zenodo.org/api/records/18355528/versions/latest",
+    "latest_html": "https://zenodo.org/records/18355528/latest",
+    "versions": "https://zenodo.org/api/records/18355528/versions",
+    "draft": "https://zenodo.org/api/records/18355528/draft",
+    "access_links": "https://zenodo.org/api/records/18355528/access/links",
+    "access_grants": "https://zenodo.org/api/records/18355528/access/grants",
+    "access_users": "https://zenodo.org/api/records/18355528/access/users",
+    "access_request": "https://zenodo.org/api/records/18355528/access/request",
+    "access": "https://zenodo.org/api/records/18355528/access",
+    "communities": "https://zenodo.org/api/records/18355528/communities",
+    "communities-suggestions": "https://zenodo.org/api/records/18355528/communities-suggestions",
+    "request_deletion": "https://zenodo.org/api/records/18355528/request-deletion",
+    "file_modification": "https://zenodo.org/api/records/18355528/file-modification",
+    "quota_increase": "https://zenodo.org/api/records/18355528/quota-increase",
+    "requests": "https://zenodo.org/api/records/18355528/requests"
+  },
+  "updated": "2026-06-06T08:30:47.141586+00:00",
+  "recid": "18355528",
+  "revision": 8,
+  "files": [
+    {
+      "id": "2329df57-cfc5-4f26-9624-0f2bcd90b4e9",
+      "key": "Zenodo.zip",
+      "size": 3986002728,
+      "checksum": "md5:e4dbad8676685f52b03fb4cb59a65155",
+      "links": {
+        "self": "https://zenodo.org/api/records/18355528/files/Zenodo.zip/content"
+      }
+    }
+  ],
+  "swh": {},
+  "owners": [
+    {
+      "id": "260761"
+    }
+  ],
+  "status": "published",
+  "stats": {
+    "downloads": 15,
+    "unique_downloads": 12,
+    "views": 109,
+    "unique_views": 103,
+    "version_downloads": 15,
+    "version_unique_downloads": 12,
+    "version_unique_views": 103,
+    "version_views": 109
+  },
+  "state": "done",
+  "submitted": true
+}

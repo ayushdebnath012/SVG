@@ -1,0 +1,28 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .box(21.0, 11.0, 7.5)\\n    .cut(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(-6.0, 0, 1.25), rotate=cq.Vector(0, 0, 0))\\n            .polygon(6, 2.0321)\\n            .extrude(5.4, both=True)\\n    )\\n    .cut(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(0.0, 0, 1.25), rotate=cq.Vector(0, 0, 0))\\n            .polygon(6, 2.6094)\\n            .extrude(5.4, both=True)\\n    )\\n    .cut(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(6.0, 0, 1.25), rotate=cq.Vector(0, 0, 0))\\n            .polygon(6, 3.1868)\\n            .extrude(5.4, both=True)\\n    )\\n)\\nshow_object(result)\", \"instruction\": \"Set the block thickness equal to half the hex pocket depth. The block X and Y dimensions, the three hex pocket sizes, and pocket positions stay the same.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"9668a1676bf32c94a8f42d92e96ccb844b71d8c21e097b42d14d9b3b5aa9d66c\", \"instruction\": \"Set the arm height equal to the base length; the arm thickness and base dimensions stay the same.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 2, \\\"insert\\\": [\\\"            .transformed(offset=cq.Vector(23.85, 0, 28.25), rotate=cq.Vector(0, 0, 0))\\\", \\\"            .box(5.5, 30.1, 53.2)\\\"], \\\"start\\\": 6}]}\", \"strategies\": [], \"context\": [\"6:             .transformed(offset=cq.Vector(23.85, 0, 16.75), rotate=cq.Vector(0, 0, 0))\", \"7:             .box(5.5, 30.1, 30.2)\"]}, {\"task_id\": \"32ba5c1937edb093d0199da76be6f8c83d68d0fb219b0169ed46274b2b1277cb\", \"instruction\": \"Set the ring axial thickness (extrude depth) equal to half the ring inner radius. The outer profile, inner profile, and gap stay the same.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .extrude(5.0)\\\"], \\\"start\\\": 9}]}\", \"strategies\": [], \"context\": [\"9:     .extrude(1.2)\"]}, {\"task_id\": \"59e2974b114bb5e7c69aaec10ccdd0ded37df84858917442dfb0598ce541ff92\", \"instruction\": \"Set the cylindrical boss radius equal to half the central bar thickness; the bar dimensions, chamfer, and cut slots stay the same.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"            .cylinder(30.0, 14.3)\\\"], \\\"start\\\": 10}, {\\\"delete\\\": 1, \\\"insert\\\": [\\\"            .cylinder(30.0, 14.3)\\\"], \\\"start\\\": 15}]}\", \"strategies\": [], \"context\": [\"10:             .cylinder(30.0, 11.0)\", \"15:             .cylinder(30.0, 11.0)\"]}]}"
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 4096
+ },
+ "usage": {
+  "completion_tokens": 128,
+  "prompt_tokens": 1039,
+  "total_tokens": 1167
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\n  \"steps\": [\n    \"Identify the hex pocket extrude depth (5.4) and calculate half of it (2.7)\",\n    \"Update the block thickness parameter in the initial box creation to be equal to half the hex pocket depth (2.7)\"\n  ],\n  \"invariants\": [\n    \"The block X and Y dimensions remain unchanged\",\n    \"The three hex pocket sizes remain unchanged\",\n    \"The pocket positions remain unchanged\"\n  ],\n  \"dependencies\": [\n    [0, 1]\n  ]\n}\n```"
+}

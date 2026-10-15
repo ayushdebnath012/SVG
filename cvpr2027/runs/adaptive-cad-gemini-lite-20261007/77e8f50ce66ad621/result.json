@@ -1,0 +1,701 @@
+{
+ "task_id": "77e8f50ce66ad6214231e78cc4c94beb86a66354b7adcd838285753ef83186e8",
+ "status": "UNVERIFIED",
+ "prediction": "```json\n{\"edits\":[{\"start\":15,\"delete\":16,\"insert\":[\"    .faces(\\\">Z\\\").workplane()\", \"    .hole(10.8)\", \"    .cut(\", \"        cq.Workplane(\\\"XY\\\")\", \"            .transformed(offset=cq.Vector(46.7, 0, 0.0), rotate=cq.Vector(0, 0, 0))\", \"            .cylinder(13.65, 2.6)\", \"    )\", \"    .cut(\", \"        cq.Workplane(\\\"XY\\\")\", \"            .transformed(offset=cq.Vector(25.35, 0, 0), rotate=cq.Vector(0, 0, 0))\", \"            .circle(7)\", \"            .extrude(20, both=True)\", \"    )\"]}]}\n```",
+ "selected_node": null,
+ "bank": [],
+ "pareto": [],
+ "stop": "expansion_limit",
+ "nodes": [
+  {
+   "id": 0,
+   "candidate": "```json\n{\"edits\":[{\"start\":15,\"delete\":16,\"insert\":[\"    .faces(\\\">Z\\\").workplane()\", \"    .hole(10.8)\", \"    .cut(\", \"        cq.Workplane(\\\"XY\\\")\", \"            .transformed(offset=cq.Vector(46.7, 0, 0.0), rotate=cq.Vector(0, 0, 0))\", \"            .cylinder(13.65, 2.6)\", \"    )\", \"    .cut(\", \"        cq.Workplane(\\\"XY\\\")\", \"            .transformed(offset=cq.Vector(25.35, 0, 0), rotate=cq.Vector(0, 0, 0))\", \"            .circle(7)\", \"            .extrude(20, both=True)\", \"    )\"]}]}\n```",
+   "depth": 0,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "FAIL",
+      "reason": "ValueError: Invalid original coordinates"
+     },
+     "constraints": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -1000.0
+    ],
+    "score": -1.0,
+    "diagnosis": [
+     {
+      "stage": "geometry",
+      "status": "FAIL",
+      "reason": "ValueError: Invalid original coordinates"
+     },
+     {
+      "stage": "constraints",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 3,
+   "visits": 4,
+   "final": null,
+   "edges": [
+    0
+   ]
+  },
+  {
+   "id": 1,
+   "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"    .cut(\", \"        cq.Workplane(\\\"XY\\\")\", \"            .transformed(offset=cq.Vector(46.7, 0, 0.0), rotate=cq.Vector(0, 0, 0))\", \"            .cylinder(20.0, 7.0)\", \"    )\"], \"start\": 21}]}",
+   "depth": 1,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 3277.6693405746882,
+       "area": 2186.1820581886677,
+       "solids": 1,
+       "faces": 11,
+       "bbox_x": 50.78046054625029,
+       "bbox_y": 18.8,
+       "bbox_z": 9.1
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "FAIL",
+      "confidence": 1.0,
+      "reason": "The edit incorrectly removed the small-end of the connecting rod instead of cutting a through-hole at the big-end center.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-00.png"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     1.0,
+     0.0,
+     -5.0
+    ],
+    "score": 0.995,
+    "diagnosis": [
+     {
+      "stage": "semantics",
+      "status": "FAIL",
+      "confidence": 1.0,
+      "reason": "The edit incorrectly removed the small-end of the connecting rod instead of cutting a through-hole at the big-end center.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-00.png"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 1,
+   "visits": 4,
+   "final": null,
+   "edges": [
+    1
+   ]
+  },
+  {
+   "id": 2,
+   "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .cut(\", \"        cq.Workplane(\\\"XY\\\")\", \"            .transformed(offset=cq.Vector(46.7, 0, 0.0), rotate=cq.Vector(0, 0, 0))\", \"            .cylinder(20.0, 7.0)\", \"    )\"], \"start\": 21}]}",
+   "depth": 2,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "FAIL",
+      "reason": "SyntaxError: '(' was never closed (<unknown>, line 2)"
+     },
+     "constraints": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -1000.0
+    ],
+    "score": -1.0,
+    "diagnosis": [
+     {
+      "stage": "geometry",
+      "status": "FAIL",
+      "reason": "SyntaxError: '(' was never closed (<unknown>, line 2)"
+     },
+     {
+      "stage": "constraints",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 0,
+   "visits": 1,
+   "final": null,
+   "edges": []
+  }
+ ],
+ "edges": [
+  {
+   "parent": 0,
+   "child": 1,
+   "visits": 4,
+   "total": 1.9849999999999999
+  },
+  {
+   "parent": 1,
+   "child": 2,
+   "visits": 1,
+   "total": -1.0
+  }
+ ],
+ "events": [
+  {
+   "event": "decompose",
+   "plan": {
+    "steps": [
+     "Identify the big-end center coordinates (offset vector [46.7, 0, 0.0]).",
+     "Create a vertical cylinder with a radius of 7 mm and sufficient height for a through-hole at the big-end center.",
+     "Cut the cylinder from the existing model to form the through-hole."
+    ],
+    "invariants": [
+     "The position of the big-end center remains at [46.7, 0, 0.0].",
+     "The rest of the combined body geometry (cylinders and connecting box) is preserved."
+    ],
+    "dependencies": [
+     [
+      0,
+      1
+     ],
+     [
+      1,
+      2
+     ]
+    ]
+   },
+   "memory_version": "50ef573b37ec682cd84de514c1f0024ebbf0b18ca2c802e69c08fe605fd704de",
+   "retrieved": [
+    {
+     "task_id": "0ba031d7f9650514547eedaf53436caab753e2030f7fad83fc383cf0a8ab569f",
+     "instruction": "Add a central axial through-hole with a 7.00 mm radius through the entire impeller.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.cut(cq.Workplane('XY').cylinder(200.0, 7.0))\"], \"start\": 67}]}",
+     "strategies": [],
+     "context": [
+      "67: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "c01ba5e1a9f4e54c2614cc1aa5f134cdbd06bc93d65e158b7032c690b1222726",
+     "instruction": "Add a central axial through-cut with a 10.00 mm radius through the entire part.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.cut(cq.Workplane('XY').cylinder(200.0, 10.0))\"], \"start\": 60}]}",
+     "strategies": [],
+     "context": [
+      "60: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "beb39e95d33474b6c28dbc04736c47f97be8b6777f3540b2be360d26f114d131",
+     "instruction": "Remove the 7.00 mm-radius central through-hole from the impeller.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [], \"start\": 67}]}",
+     "strategies": [],
+     "context": [
+      "67: result = result.cut(cq.Workplane('XY').cylinder(200.0, 7.0))"
+     ]
+    }
+   ]
+  },
+  {
+   "event": "initial_state",
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 3989.496646429987,
+       "area": 2758.393197012635,
+       "solids": 1,
+       "faces": 16,
+       "bbox_x": 61.5,
+       "bbox_y": 18.8,
+       "bbox_z": 9.1
+      }
+     },
+     "constraints": {
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         7.0
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -0.0
+    ],
+    "score": 0.0,
+    "diagnosis": [
+     {
+      "stage": "constraints",
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         7.0
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "initial"
+   }
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "geometry",
+     "status": "FAIL",
+     "reason": "ValueError: Invalid original coordinates"
+    },
+    {
+     "stage": "constraints",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "0ba031d7f9650514547eedaf53436caab753e2030f7fad83fc383cf0a8ab569f",
+     "instruction": "Add a central axial through-hole with a 7.00 mm radius through the entire impeller.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.cut(cq.Workplane('XY').cylinder(200.0, 7.0))\"], \"start\": 67}]}",
+     "strategies": [],
+     "context": [
+      "67: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "ff53be8be0e549f7893372e2c07984aaa33fbf7265d30b11ff24b665de4b1aa2",
+     "instruction": "Add a central axial through-hole with a 7.00 mm radius through the entire propeller hub.",
+     "candidate": "```json\n{\n  \"edits\": [\n    {\n      \"start\": 2,\n      \"delete\": 3,\n      \"insert\": [\n        \"    cq.Workplane(\\\"XY\\\")\",\n        \"    .cylinder(27.9, 18.8)\",\n        \"    .faces(\\\">Z\\\").workplane()\",\n        \"    .circle(16.92)\",\n        \"    .workplane(offset=9.0)\",\n        \"    .circle(1.5)\",\n        \"    .loft(combine=True)\",\n        \"    .faces(\\\">Z\\\").workplane()\",\n        \"    .circle(7.00)\",\n        \"    .cutThruAll()\"\n      ]\n    }\n  ]\n}\n```",
+     "strategies": [
+      "diversify: Add a central axial through-hole by cutting a cylinder of radius 7.00 mm from the result using a separate cut operation.",
+      "diversify: Add a central axial through-hole to the propeller hub by subtracting a central cylinder of radius 7.00 mm.",
+      "diversify: Add a central axial through-hole with a 7.00 mm radius by cutting a cylinder through the entire part.",
+      "repair: Add a central axial through-hole with a 7.00 mm radius to the propeller by cutting it with a cylinder along the Z axis before showing the object."
+     ],
+     "context": []
+    },
+    {
+     "task_id": "c01ba5e1a9f4e54c2614cc1aa5f134cdbd06bc93d65e158b7032c690b1222726",
+     "instruction": "Add a central axial through-cut with a 10.00 mm radius through the entire part.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.cut(cq.Workplane('XY').cylinder(200.0, 10.0))\"], \"start\": 60}]}",
+     "strategies": [],
+     "context": [
+      "60: show_object(result)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "FAIL",
+   "hypothesis": "Cut a through-hole with a 7 mm radius using a vertical cylinder at the big-end center (offset [46.7, 0, 0.0])."
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": true,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "geometry",
+     "status": "FAIL",
+     "reason": "ValueError: Invalid original coordinates"
+    },
+    {
+     "stage": "constraints",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "0ba031d7f9650514547eedaf53436caab753e2030f7fad83fc383cf0a8ab569f",
+     "instruction": "Add a central axial through-hole with a 7.00 mm radius through the entire impeller.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.cut(cq.Workplane('XY').cylinder(200.0, 7.0))\"], \"start\": 67}]}",
+     "strategies": [],
+     "context": [
+      "67: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "ff53be8be0e549f7893372e2c07984aaa33fbf7265d30b11ff24b665de4b1aa2",
+     "instruction": "Add a central axial through-hole with a 7.00 mm radius through the entire propeller hub.",
+     "candidate": "```json\n{\n  \"edits\": [\n    {\n      \"start\": 2,\n      \"delete\": 3,\n      \"insert\": [\n        \"    cq.Workplane(\\\"XY\\\")\",\n        \"    .cylinder(27.9, 18.8)\",\n        \"    .faces(\\\">Z\\\").workplane()\",\n        \"    .circle(16.92)\",\n        \"    .workplane(offset=9.0)\",\n        \"    .circle(1.5)\",\n        \"    .loft(combine=True)\",\n        \"    .faces(\\\">Z\\\").workplane()\",\n        \"    .circle(7.00)\",\n        \"    .cutThruAll()\"\n      ]\n    }\n  ]\n}\n```",
+     "strategies": [
+      "diversify: Add a central axial through-hole by cutting a cylinder of radius 7.00 mm from the result using a separate cut operation.",
+      "diversify: Add a central axial through-hole to the propeller hub by subtracting a central cylinder of radius 7.00 mm.",
+      "diversify: Add a central axial through-hole with a 7.00 mm radius by cutting a cylinder through the entire part.",
+      "repair: Add a central axial through-hole with a 7.00 mm radius to the propeller by cutting it with a cylinder along the Z axis before showing the object."
+     ],
+     "context": []
+    },
+    {
+     "task_id": "c01ba5e1a9f4e54c2614cc1aa5f134cdbd06bc93d65e158b7032c690b1222726",
+     "instruction": "Add a central axial through-cut with a 10.00 mm radius through the entire part.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.cut(cq.Workplane('XY').cylinder(200.0, 10.0))\"], \"start\": 60}]}",
+     "strategies": [],
+     "context": [
+      "60: show_object(result)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "FAIL",
+   "hypothesis": "Cut a through-hole with a 7 mm radius using a vertical cylinder at the big-end center [46.7, 0, 0.0]."
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": true,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "geometry",
+     "status": "FAIL",
+     "reason": "ValueError: Invalid original coordinates"
+    },
+    {
+     "stage": "constraints",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "0ba031d7f9650514547eedaf53436caab753e2030f7fad83fc383cf0a8ab569f",
+     "instruction": "Add a central axial through-hole with a 7.00 mm radius through the entire impeller.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.cut(cq.Workplane('XY').cylinder(200.0, 7.0))\"], \"start\": 67}]}",
+     "strategies": [],
+     "context": [
+      "67: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "ff53be8be0e549f7893372e2c07984aaa33fbf7265d30b11ff24b665de4b1aa2",
+     "instruction": "Add a central axial through-hole with a 7.00 mm radius through the entire propeller hub.",
+     "candidate": "```json\n{\n  \"edits\": [\n    {\n      \"start\": 2,\n      \"delete\": 3,\n      \"insert\": [\n        \"    cq.Workplane(\\\"XY\\\")\",\n        \"    .cylinder(27.9, 18.8)\",\n        \"    .faces(\\\">Z\\\").workplane()\",\n        \"    .circle(16.92)\",\n        \"    .workplane(offset=9.0)\",\n        \"    .circle(1.5)\",\n        \"    .loft(combine=True)\",\n        \"    .faces(\\\">Z\\\").workplane()\",\n        \"    .circle(7.00)\",\n        \"    .cutThruAll()\"\n      ]\n    }\n  ]\n}\n```",
+     "strategies": [
+      "diversify: Add a central axial through-hole by cutting a cylinder of radius 7.00 mm from the result using a separate cut operation.",
+      "diversify: Add a central axial through-hole to the propeller hub by subtracting a central cylinder of radius 7.00 mm.",
+      "diversify: Add a central axial through-hole with a 7.00 mm radius by cutting a cylinder through the entire part.",
+      "repair: Add a central axial through-hole with a 7.00 mm radius to the propeller by cutting it with a cylinder along the Z axis before showing the object."
+     ],
+     "context": []
+    },
+    {
+     "task_id": "c01ba5e1a9f4e54c2614cc1aa5f134cdbd06bc93d65e158b7032c690b1222726",
+     "instruction": "Add a central axial through-cut with a 10.00 mm radius through the entire part.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.cut(cq.Workplane('XY').cylinder(200.0, 10.0))\"], \"start\": 60}]}",
+     "strategies": [],
+     "context": [
+      "60: show_object(result)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "FAIL",
+   "hypothesis": "Add a through-hole with a 7 mm radius at the big-end center (offset 46.7, 0, 0) by cutting a vertical cylinder."
+  },
+  {
+   "event": "backtrack",
+   "to_node": 1
+  },
+  {
+   "event": "expand",
+   "parent": 1,
+   "node": 2,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "semantics",
+     "status": "FAIL",
+     "confidence": 1.0,
+     "reason": "The edit incorrectly removed the small-end of the connecting rod instead of cutting a through-hole at the big-end center.",
+     "basis": "Astra rendered-view judgement",
+     "image": "semantic-00.png"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "No physical contract supplied"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "No perturbation contract supplied"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "ff53be8be0e549f7893372e2c07984aaa33fbf7265d30b11ff24b665de4b1aa2",
+     "instruction": "Add a central axial through-hole with a 7.00 mm radius through the entire propeller hub.",
+     "candidate": "```json\n{\n  \"edits\": [\n    {\n      \"start\": 2,\n      \"delete\": 3,\n      \"insert\": [\n        \"    cq.Workplane(\\\"XY\\\")\",\n        \"    .cylinder(27.9, 18.8)\",\n        \"    .faces(\\\">Z\\\").workplane()\",\n        \"    .circle(16.92)\",\n        \"    .workplane(offset=9.0)\",\n        \"    .circle(1.5)\",\n        \"    .loft(combine=True)\",\n        \"    .faces(\\\">Z\\\").workplane()\",\n        \"    .circle(7.00)\",\n        \"    .cutThruAll()\"\n      ]\n    }\n  ]\n}\n```",
+     "strategies": [
+      "diversify: Add a central axial through-hole by cutting a cylinder of radius 7.00 mm from the result using a separate cut operation.",
+      "diversify: Add a central axial through-hole to the propeller hub by subtracting a central cylinder of radius 7.00 mm.",
+      "diversify: Add a central axial through-hole with a 7.00 mm radius by cutting a cylinder through the entire part.",
+      "repair: Add a central axial through-hole with a 7.00 mm radius to the propeller by cutting it with a cylinder along the Z axis before showing the object."
+     ],
+     "context": []
+    },
+    {
+     "task_id": "0ba031d7f9650514547eedaf53436caab753e2030f7fad83fc383cf0a8ab569f",
+     "instruction": "Add a central axial through-hole with a 7.00 mm radius through the entire impeller.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.cut(cq.Workplane('XY').cylinder(200.0, 7.0))\"], \"start\": 67}]}",
+     "strategies": [],
+     "context": [
+      "67: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "f46f23eda5151773ef140fafa39487a4fdd0527ad45ef5bac94a8b1739cd6e9c",
+     "instruction": "Add a central axial through-hole with a 5.00 mm radius along the main axis of the revolved part.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.cut(cq.Workplane('XZ').cylinder(200.0, 5.0))\"], \"start\": 10}]}",
+     "strategies": [],
+     "context": [
+      "10: show_object(result)"
+     ]
+    }
+   ],
+   "path": [
+    0,
+    1
+   ],
+   "status": "FAIL",
+   "hypothesis": "Add a through-hole with a 7 mm radius (diameter 14 mm or radius 7 mm depending on cylinder syntax, CadQuery cylinder takes (height, radius)) at the big-end center by appending a cut operation at the end of the chain."
+  }
+ ],
+ "config": {
+  "algorithm": "mcts",
+  "max_expansions": 4,
+  "max_depth": 3,
+  "width": 2,
+  "max_width": 4,
+  "exploration": 0.7,
+  "seconds": 2400.0
+ },
+ "memory_version": "50ef573b37ec682cd84de514c1f0024ebbf0b18ca2c802e69c08fe605fd704de",
+ "stored": null,
+ "seconds": 95.66018008299989,
+ "api": {
+  "mode": "live_astra",
+  "api_calls": 6,
+  "cost_usd": 0.0,
+  "budget_usd": 0.2112676056338028,
+  "refused": 0
+ },
+ "tool_jobs": 4
+}

@@ -1,0 +1,811 @@
+ELMER SOLVER (v 9.0) STARTED AT: 2023/11/01 17:56:02
+
+ParCommInit:  Initialize #PEs:            1
+MAIN:
+MAIN: =============================================================
+MAIN: ElmerSolver finite element software, Welcome!
+MAIN: This program is free software licensed under (L)GPL
+MAIN: Copyright 1st April 1995 - , CSC - IT Center for Science Ltd.
+MAIN: Webpage http://www.csc.fi/elmer, Email elmeradm@csc.fi
+MAIN: Version: 9.0 (Rev: unknown, Compiled: 2023-10-31)
+MAIN:  Running one task without MPI parallelization.
+MAIN:  Running with just one thread per task.
+MAIN:  HYPRE library linked in.
+MAIN:  MUMPS library linked in.
+MAIN:  Lua interpreter linked in.
+MAIN: =============================================================
+MAIN:
+MAIN:
+MAIN: -------------------------------------
+MAIN: Reading Model: case.sif
+LoadInputFile: Scanning input file: case.sif
+LoadInputFile: Scanning only size info
+LoadInputFile: First time visiting
+LoadInputFile: Reading base load of sif file
+LoadInputFile: Loading input file: case.sif
+LoadInputFile: Reading base load of sif file
+LoadInputFile: Number of BCs: 25
+LoadInputFile: Number of Body Forces: 0
+LoadInputFile: Number of Initial Conditions: 2
+LoadInputFile: Number of Materials: 2
+LoadInputFile: Number of Equations: 2
+LoadInputFile: Number of Solvers: 3
+LoadInputFile: Number of Bodies: 2
+ListTagKeywords: Setting weight for keywords!
+ListTagKeywords: No parameters width suffix: normalize by area
+ListTagKeywords: Setting weight for keywords!
+ListTagKeywords: No parameters width suffix: normalize by volume
+Loading user function library: [FlowSolve]...[FlowSolver_Init0]
+Loading user function library: [HeatSolve]...[HeatSolver_Init0]
+Loading user function library: [ResultOutputSolve]...[ResultOutputSolver_Init0]
+LoadMesh: Loading serial mesh!
+ElmerAsciiMesh: Performing step: 1
+ElmerAsciiMesh: Base mesh name: .
+ReadHeaderFile: Reading header info from file: ./mesh.header
+InitializeMesh: Number of nodes in mesh: 41565
+InitializeMesh: Number of bulk elements in mesh: 29163
+InitializeMesh: Number of boundary elements in mesh: 7680
+InitializeMesh: Initial number of max element nodes: 10
+ElmerAsciiMesh: Performing step: 2
+ReadNodesFile: Reading nodes from file: ./mesh.nodes
+MapCoordinates: Performing coordinate mapping
+SetMeshDimension: Dimension of mesh is: 3
+SetMeshDimension: Max dimension of mesh is: 3
+MapCoordinates: Scaling coordinates: 1.000E-03 1.000E-03 1.000E-03
+ElmerAsciiMesh: Performing step: 3
+ReadElementsFile: Reading bulk elements from file: ./mesh.elements
+ElmerAsciiMesh: Performing step: 4
+ReadBoundaryFile: Reading boundary elements from file: ./mesh.boundary
+PermuteNodeNumbering: Performing node mapping
+ReadTargetNames: Reading names info from file: ./mesh.names
+WARNING:: ReadTargetNames: Could not map name to Body nor BC: bnry29
+WARNING:: ReadTargetNames: Could not map name to Body nor BC: bnry30
+MapBodiesAndBCs: Remapping bodies
+MapBodiesAndBCs: Minimum initial body index: 27
+MapBodiesAndBCs: Maximum initial body index: 28
+MapBodiesAndBCs: Remapping boundaries
+MapBodiesAndBCs: Minimum initial boundary index: 2
+MapBodiesAndBCs: Maximum initial boundary index: 30
+ElmerAsciiMesh: Performing step: 5
+ElmerAsciiMesh: Performing step: 6
+LoadMesh: Loading mesh done
+LoadMesh: Preparing mesh done
+LoadMesh: Elapsed REAL time:     0.1728 (s)
+MeshStabParams: Computing stabilization parameters
+MeshStabParams: Elapsed REAL time:     4.2751 (s)
+LoadModel: Defined radiation solver by Procedure containing "HeatSolver"
+MAIN: -------------------------------------
+AddMeshCoordinates: Setting mesh coordinates and time
+AddSolvers: Setting up 3 solvers
+AddSolvers: Setting up solver 1: navier-stokes
+AddEquationBasics: Setting up keywords internally for legacy solver: navier-stokes
+AddEquationBasics: Using procedure: FlowSolve FlowSolver
+AddEquationBasics: Setting up solver: navier-stokes
+Loading user function library: [FlowSolve]...[FlowSolver_Init]
+Loading user function library: [FlowSolve]...[FlowSolver_bulk]
+Loading user function library: [FlowSolve]...[FlowSolver]
+AddEquationBasics: Creating standard variable: flow solution[velocity:3 pressure:1]
+OptimizeBandwidth: ---------------------------------------------------------
+OptimizeBandwidth: Computing matrix structure for: navier-stokes
+OptimizeBandwidth: Initial bandwidth for navier-stokes: 32894
+OptimizeBandwidth: Optimized bandwidth for navier-stokes: 5120
+OptimizeBandwidth: ---------------------------------------------------------
+AddSolvers: Setting up solver 2: heat001
+AddEquationBasics: Using procedure: HeatSolve HeatSolver
+AddEquationBasics: Setting up solver: heat001
+Loading user function library: [HeatSolve]...[HeatSolver_Init]
+Loading user function library: [HeatSolve]...[HeatSolver_bulk]
+Loading user function library: [HeatSolve]...[HeatSolver]
+AddEquationBasics: Creating standard variable: temperature
+OptimizeBandwidth: ---------------------------------------------------------
+OptimizeBandwidth: Computing matrix structure for: heat001
+OptimizeBandwidth: Initial bandwidth for heat001: 41545
+OptimizeBandwidth: Optimized bandwidth for heat001: 5502
+OptimizeBandwidth: ---------------------------------------------------------
+AddSolvers: Setting up solver 3: resultoutput
+AddEquationBasics: Using procedure: ResultOutputSolve ResultOutputSolver
+AddEquationBasics: Setting up solver: resultoutput
+Loading user function library: [ResultOutputSolve]...[ResultOutputSolver_Init]
+Loading user function library: [ResultOutputSolve]...[ResultOutputSolver_bulk]
+Loading user function library: [ResultOutputSolve]...[ResultOutputSolver]
+AddTimeEtc: Setting time and other global variables
+MAIN: Random seed initialized to: 314159265
+SetInitialConditions: Setting up initial conditions (if any)
+MAIN: Number of timesteps to be saved: 1
+MAIN:
+MAIN: -------------------------------------
+MAIN:  Steady state iteration:            1
+MAIN: -------------------------------------
+MAIN:
+SingleSolver: Attempting to call solver: 1
+SingleSolver: Solver Equation string is: navier-stokes
+FlowSolver: Solving the Navier-Stokes equations
+DefaultStart: Starting solver: navier-stokes
+FlowSolve: Enforcing relative pressure relaxation
+FlowSolve:
+FlowSolve:
+FlowSolve: -------------------------------------
+FlowSolve:  NAVIER-STOKES ITERATION           1
+FlowSolve: -------------------------------------
+FlowSolve:
+FlowSolve: Starting Assembly...
+FlowSolve: Assembly:
+: ..........Assembly done
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+EnforceDirichletConditions: Applying Dirichlet conditions using scaled diagonal
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+EnforceDirichletConditions: Dirichlet conditions enforced for dofs: 39877
+FlowSolve: Dirichlet conditions done
+DefaultSolve: Solving linear system with default routines
+SolveSystem: Solving linear system
+SolveSystem: Previous solution must be stored before system is solved
+SolveLinearSystem: Assuming real valued linear system
+SolveLinearSystem: Assuming serial linear system
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+SolveLinearSystem: Linear System Preconditioning: ilu1
+SolveLinearSystem: Serial linear System Solver: iterative
+IterSolver: Using iterative method: bicgstabl
+CRS_IncompleteLU: ILU(1) (Real), Performing Factorization:
+CRS_IncompleteLU: Allocated LU matrix of size: 24751216
+CRS_IncompleteLU: ILU(1) (Real), NOF nonzeros:  24751217
+CRS_IncompleteLU: ILU(1) (Real), filling (%) :       184
+CRS_IncompleteLU: ILU(1) (Real), Factorization ready at (s):     5.63
+       1 0.9029E-03 0.9029E-03
+       2 0.4573E-03 0.4573E-03
+       3 0.1751E-04 0.1751E-04
+       4 0.6057E-06 0.6057E-06
+       5 0.1068E-07 0.1068E-07
+       6 0.8926E-09 0.8926E-09
+BiCGStabl:        7 0.7377E-10 0.7377E-10
+ComputeChange: Using relative pressure relaxation
+ComputeNorm: Computing norm of solution
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.53523213E-01  2.0000000     ) :: navier-stokes
+FlowSolve: iter:    1 Assembly: (s)   10.56   10.56
+FlowSolve: iter:    1 Solve:    (s)   11.96   11.96
+FlowSolve:  Result Norm     :    5.3523213179759131E-002
+FlowSolve:  Relative Change :    2.0000000000000000
+FlowSolve:
+FlowSolve:
+FlowSolve: -------------------------------------
+FlowSolve:  NAVIER-STOKES ITERATION           2
+FlowSolve: -------------------------------------
+FlowSolve:
+FlowSolve: Starting Assembly...
+FlowSolve: Assembly:
+: ..........Assembly done
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+EnforceDirichletConditions: Applying Dirichlet conditions using scaled diagonal
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+EnforceDirichletConditions: Dirichlet conditions enforced for dofs: 39877
+FlowSolve: Dirichlet conditions done
+DefaultSolve: Solving linear system with default routines
+SolveSystem: Solving linear system
+SolveSystem: Previous solution must be stored before system is solved
+SolveLinearSystem: Assuming real valued linear system
+SolveLinearSystem: Assuming serial linear system
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+SolveLinearSystem: Linear System Preconditioning: ilu1
+SolveLinearSystem: Serial linear System Solver: iterative
+IterSolver: Using iterative method: bicgstabl
+CRS_IncompleteLU: ILU(1) (Real), Performing Factorization:
+CRS_IncompleteLU: ILU(1) (Real), NOF nonzeros:  24751217
+CRS_IncompleteLU: ILU(1) (Real), filling (%) :       184
+CRS_IncompleteLU: ILU(1) (Real), Factorization ready at (s):     2.88
+       1 0.7031E-03 0.7031E-03
+       2 0.6244E-03 0.6244E-03
+       3 0.4818E-03 0.4818E-03
+       4 0.2638E-03 0.2638E-03
+       5 0.8641E-05 0.8641E-05
+       6 0.2775E-06 0.2775E-06
+       7 0.1836E-06 0.1836E-06
+       8 0.1623E-08 0.1623E-08
+       9 0.4173E-09 0.4173E-09
+BiCGStabl:       10 0.7241E-10 0.7241E-10
+ComputeChange: Using relative pressure relaxation
+ComputeNorm: Computing norm of solution
+ComputeChange: NS (ITER=2) (NRM,RELC): ( 0.63470557E-01 0.17004912     ) :: navier-stokes
+FlowSolve: iter:    2 Assembly: (s)   10.58   21.13
+FlowSolve: iter:    2 Solve:    (s)   12.06   24.01
+FlowSolve:  Result Norm     :    6.3470557197175884E-002
+FlowSolve:  Relative Change :   0.17004912287838950
+FlowSolve:
+FlowSolve:
+FlowSolve: -------------------------------------
+FlowSolve:  NAVIER-STOKES ITERATION           3
+FlowSolve: -------------------------------------
+FlowSolve:
+FlowSolve: Starting Assembly...
+FlowSolve: Assembly:
+: ..........Assembly done
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+EnforceDirichletConditions: Applying Dirichlet conditions using scaled diagonal
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+EnforceDirichletConditions: Dirichlet conditions enforced for dofs: 39877
+FlowSolve: Dirichlet conditions done
+DefaultSolve: Solving linear system with default routines
+SolveSystem: Solving linear system
+SolveSystem: Previous solution must be stored before system is solved
+SolveLinearSystem: Assuming real valued linear system
+SolveLinearSystem: Assuming serial linear system
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+SolveLinearSystem: Linear System Preconditioning: ilu1
+SolveLinearSystem: Serial linear System Solver: iterative
+IterSolver: Using iterative method: bicgstabl
+CRS_IncompleteLU: ILU(1) (Real), Performing Factorization:
+CRS_IncompleteLU: ILU(1) (Real), NOF nonzeros:  24751217
+CRS_IncompleteLU: ILU(1) (Real), filling (%) :       184
+CRS_IncompleteLU: ILU(1) (Real), Factorization ready at (s):     2.86
+       1 0.5682E-03 0.5682E-03
+       2 0.2747E-03 0.2747E-03
+       3 0.1866E-03 0.1866E-03
+       4 0.1732E-03 0.1732E-03
+       5 0.2736E-02 0.2736E-02
+       6 0.3145E-05 0.3145E-05
+       7 0.3248E-06 0.3248E-06
+       8 0.9310E-08 0.9310E-08
+       9 0.4549E-09 0.4549E-09
+      10 0.6498E-10 0.6498E-10
+BiCGStabl:       10 0.6498E-10 0.6498E-10
+ComputeChange: Using relative pressure relaxation
+ComputeNorm: Computing norm of solution
+ComputeChange: NS (ITER=3) (NRM,RELC): ( 0.64932638E-01 0.22773284E-01 ) :: navier-stokes
+FlowSolve: iter:    3 Assembly: (s)   10.72   31.85
+FlowSolve: iter:    3 Solve:    (s)   12.45   36.47
+FlowSolve:  Result Norm     :    6.4932638407598650E-002
+FlowSolve:  Relative Change :    2.2773283850708162E-002
+FlowSolve:
+FlowSolve:
+FlowSolve: -------------------------------------
+FlowSolve:  NAVIER-STOKES ITERATION           4
+FlowSolve: -------------------------------------
+FlowSolve:
+FlowSolve: Starting Assembly...
+FlowSolve: Assembly:
+: ..........Assembly done
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+EnforceDirichletConditions: Applying Dirichlet conditions using scaled diagonal
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+EnforceDirichletConditions: Dirichlet conditions enforced for dofs: 39877
+FlowSolve: Dirichlet conditions done
+DefaultSolve: Solving linear system with default routines
+SolveSystem: Solving linear system
+SolveSystem: Previous solution must be stored before system is solved
+SolveLinearSystem: Assuming real valued linear system
+SolveLinearSystem: Assuming serial linear system
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+SolveLinearSystem: Linear System Preconditioning: ilu1
+SolveLinearSystem: Serial linear System Solver: iterative
+IterSolver: Using iterative method: bicgstabl
+CRS_IncompleteLU: ILU(1) (Real), Performing Factorization:
+CRS_IncompleteLU: ILU(1) (Real), NOF nonzeros:  24751217
+CRS_IncompleteLU: ILU(1) (Real), filling (%) :       184
+CRS_IncompleteLU: ILU(1) (Real), Factorization ready at (s):     2.84
+       1 0.1075E-03 0.1075E-03
+       2 0.5678E-04 0.5678E-04
+       3 0.3489E-04 0.3489E-04
+       4 0.3363E-04 0.3363E-04
+       5 0.3118E-04 0.3118E-04
+       6 0.2429E-05 0.2429E-05
+       7 0.8739E-07 0.8739E-07
+       8 0.4971E-07 0.4971E-07
+       9 0.1821E-09 0.1821E-09
+BiCGStabl:       10 0.3875E-10 0.3875E-10
+ComputeChange: Using relative pressure relaxation
+ComputeNorm: Computing norm of solution
+ComputeChange: NS (ITER=4) (NRM,RELC): ( 0.65285310E-01 0.54166338E-02 ) :: navier-stokes
+FlowSolve: iter:    4 Assembly: (s)   10.66   42.51
+FlowSolve: iter:    4 Solve:    (s)   11.79   48.26
+FlowSolve:  Result Norm     :    6.5285309875136768E-002
+FlowSolve:  Relative Change :    5.4166337619201473E-003
+FlowSolve:
+FlowSolve:
+FlowSolve: -------------------------------------
+FlowSolve:  NAVIER-STOKES ITERATION           5
+FlowSolve: -------------------------------------
+FlowSolve:
+FlowSolve: Starting Assembly...
+FlowSolve: Assembly:
+: ..........Assembly done
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+EnforceDirichletConditions: Applying Dirichlet conditions using scaled diagonal
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+EnforceDirichletConditions: Dirichlet conditions enforced for dofs: 39877
+FlowSolve: Dirichlet conditions done
+DefaultSolve: Solving linear system with default routines
+SolveSystem: Solving linear system
+SolveSystem: Previous solution must be stored before system is solved
+SolveLinearSystem: Assuming real valued linear system
+SolveLinearSystem: Assuming serial linear system
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+SolveLinearSystem: Linear System Preconditioning: ilu1
+SolveLinearSystem: Serial linear System Solver: iterative
+IterSolver: Using iterative method: bicgstabl
+CRS_IncompleteLU: ILU(1) (Real), Performing Factorization:
+CRS_IncompleteLU: ILU(1) (Real), NOF nonzeros:  24751217
+CRS_IncompleteLU: ILU(1) (Real), filling (%) :       184
+CRS_IncompleteLU: ILU(1) (Real), Factorization ready at (s):     2.99
+       1 0.2509E-04 0.2509E-04
+       2 0.6593E-04 0.6593E-04
+       3 0.5101E-05 0.5101E-05
+       4 0.4560E-05 0.4560E-05
+       5 0.4520E-05 0.4520E-05
+       6 0.4490E-05 0.4490E-05
+       7 0.6350E-06 0.6350E-06
+       8 0.1137E-06 0.1137E-06
+       9 0.2704E-08 0.2704E-08
+      10 0.1289E-08 0.1289E-08
+BiCGStabl:       11 0.8224E-10 0.8224E-10
+ComputeChange: Using relative pressure relaxation
+ComputeNorm: Computing norm of solution
+ComputeChange: NS (ITER=5) (NRM,RELC): ( 0.65411643E-01 0.19332154E-02 ) :: navier-stokes
+FlowSolve: iter:    5 Assembly: (s)   10.83   53.34
+FlowSolve: iter:    5 Solve:    (s)   13.25   61.52
+FlowSolve:  Result Norm     :    6.5411642558199978E-002
+FlowSolve:  Relative Change :    1.9332154378679522E-003
+FlowSolve:
+FlowSolve:
+FlowSolve: -------------------------------------
+FlowSolve:  NAVIER-STOKES ITERATION           6
+FlowSolve: -------------------------------------
+FlowSolve:
+FlowSolve: Starting Assembly...
+FlowSolve: Assembly:
+: ............Assembly done
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+EnforceDirichletConditions: Applying Dirichlet conditions using scaled diagonal
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+EnforceDirichletConditions: Dirichlet conditions enforced for dofs: 39877
+FlowSolve: Dirichlet conditions done
+DefaultSolve: Solving linear system with default routines
+SolveSystem: Solving linear system
+SolveSystem: Previous solution must be stored before system is solved
+SolveLinearSystem: Assuming real valued linear system
+SolveLinearSystem: Assuming serial linear system
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+SolveLinearSystem: Linear System Preconditioning: ilu1
+SolveLinearSystem: Serial linear System Solver: iterative
+IterSolver: Using iterative method: bicgstabl
+CRS_IncompleteLU: ILU(1) (Real), Performing Factorization:
+CRS_IncompleteLU: ILU(1) (Real), NOF nonzeros:  24751217
+CRS_IncompleteLU: ILU(1) (Real), filling (%) :       184
+CRS_IncompleteLU: ILU(1) (Real), Factorization ready at (s):     3.17
+       1 0.1303E-04 0.1303E-04
+       2 0.2950E-05 0.2950E-05
+       3 0.3705E-06 0.3705E-06
+       4 0.2998E-06 0.2998E-06
+       5 0.2707E-06 0.2707E-06
+       6 0.2527E-06 0.2527E-06
+       7 0.1283E-06 0.1283E-06
+       8 0.7520E-08 0.7520E-08
+       9 0.3729E-08 0.3729E-08
+      10 0.2008E-07 0.2008E-07
+BiCGStabl:       11 0.1176E-10 0.1176E-10
+ComputeChange: Using relative pressure relaxation
+ComputeNorm: Computing norm of solution
+ComputeChange: NS (ITER=6) (NRM,RELC): ( 0.65423661E-01 0.18372586E-03 ) :: navier-stokes
+FlowSolve: iter:    6 Assembly: (s)   12.47   65.81
+FlowSolve: iter:    6 Solve:    (s)   12.92   74.44
+FlowSolve:  Result Norm     :    6.5423661472569020E-002
+FlowSolve:  Relative Change :    1.8372585989810236E-004
+FlowSolve:
+FlowSolve:
+FlowSolve: -------------------------------------
+FlowSolve:  NAVIER-STOKES ITERATION           7
+FlowSolve: -------------------------------------
+FlowSolve:
+FlowSolve: Starting Assembly...
+FlowSolve: Assembly:
+: ...........Assembly done
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+EnforceDirichletConditions: Applying Dirichlet conditions using scaled diagonal
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+EnforceDirichletConditions: Dirichlet conditions enforced for dofs: 39877
+FlowSolve: Dirichlet conditions done
+DefaultSolve: Solving linear system with default routines
+SolveSystem: Solving linear system
+SolveSystem: Previous solution must be stored before system is solved
+SolveLinearSystem: Assuming real valued linear system
+SolveLinearSystem: Assuming serial linear system
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+SolveLinearSystem: Linear System Preconditioning: ilu1
+SolveLinearSystem: Serial linear System Solver: iterative
+IterSolver: Using iterative method: bicgstabl
+CRS_IncompleteLU: ILU(1) (Real), Performing Factorization:
+CRS_IncompleteLU: ILU(1) (Real), NOF nonzeros:  24751217
+CRS_IncompleteLU: ILU(1) (Real), filling (%) :       184
+CRS_IncompleteLU: ILU(1) (Real), Factorization ready at (s):     2.81
+       1 0.2093E-05 0.2093E-05
+       2 0.3804E-05 0.3804E-05
+       3 0.9980E-07 0.9980E-07
+       4 0.6955E-07 0.6955E-07
+       5 0.7017E-07 0.7017E-07
+       6 0.1034E-06 0.1034E-06
+       7 0.6050E-08 0.6050E-08
+       8 0.4146E-09 0.4146E-09
+       9 0.1493E-09 0.1493E-09
+BiCGStabl:       10 0.4129E-10 0.4129E-10
+ComputeChange: Using relative pressure relaxation
+ComputeNorm: Computing norm of solution
+ComputeChange: NS (ITER=7) (NRM,RELC): ( 0.65425134E-01 0.22514595E-04 ) :: navier-stokes
+FlowSolve: iter:    7 Assembly: (s)   11.89   77.70
+FlowSolve: iter:    7 Solve:    (s)   11.79   86.23
+FlowSolve:  Result Norm     :    6.5425134476424660E-002
+FlowSolve:  Relative Change :    2.2514595491028566E-005
+FlowSolve:
+FlowSolve:
+FlowSolve: -------------------------------------
+FlowSolve:  NAVIER-STOKES ITERATION           8
+FlowSolve: -------------------------------------
+FlowSolve:
+FlowSolve: Starting Assembly...
+FlowSolve: Assembly:
+: ...........Assembly done
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+EnforceDirichletConditions: Applying Dirichlet conditions using scaled diagonal
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+EnforceDirichletConditions: Dirichlet conditions enforced for dofs: 39877
+FlowSolve: Dirichlet conditions done
+DefaultSolve: Solving linear system with default routines
+SolveSystem: Solving linear system
+SolveSystem: Previous solution must be stored before system is solved
+SolveLinearSystem: Assuming real valued linear system
+SolveLinearSystem: Assuming serial linear system
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+SolveLinearSystem: Linear System Preconditioning: ilu1
+SolveLinearSystem: Serial linear System Solver: iterative
+IterSolver: Using iterative method: bicgstabl
+CRS_IncompleteLU: ILU(1) (Real), Performing Factorization:
+CRS_IncompleteLU: ILU(1) (Real), NOF nonzeros:  24751217
+CRS_IncompleteLU: ILU(1) (Real), filling (%) :       184
+CRS_IncompleteLU: ILU(1) (Real), Factorization ready at (s):     2.90
+       1 0.4021E-06 0.4021E-06
+       2 0.4158E-06 0.4158E-06
+       3 0.2092E-07 0.2092E-07
+       4 0.1340E-07 0.1340E-07
+       5 0.1269E-07 0.1269E-07
+       6 0.1331E-07 0.1331E-07
+       7 0.2955E-07 0.2955E-07
+       8 0.5622E-10 0.5622E-10
+BiCGStabl:        8 0.5622E-10 0.5622E-10
+ComputeChange: Using relative pressure relaxation
+ComputeNorm: Computing norm of solution
+ComputeChange: NS (ITER=8) (NRM,RELC): ( 0.65425563E-01 0.65551581E-05 ) :: navier-stokes
+FlowSolve: iter:    8 Assembly: (s)   11.53   89.23
+FlowSolve: iter:    8 Solve:    (s)   10.37   96.60
+FlowSolve:  Result Norm     :    6.5425563349932533E-002
+FlowSolve:  Relative Change :    6.5551581305746482E-006
+FlowSolve:
+FlowSolve:
+FlowSolve: -------------------------------------
+FlowSolve:  NAVIER-STOKES ITERATION           9
+FlowSolve: -------------------------------------
+FlowSolve:
+FlowSolve: Starting Assembly...
+FlowSolve: Assembly:
+: ..........Assembly done
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+EnforceDirichletConditions: Applying Dirichlet conditions using scaled diagonal
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+EnforceDirichletConditions: Dirichlet conditions enforced for dofs: 39877
+FlowSolve: Dirichlet conditions done
+DefaultSolve: Solving linear system with default routines
+SolveSystem: Solving linear system
+SolveSystem: Previous solution must be stored before system is solved
+SolveLinearSystem: Assuming real valued linear system
+SolveLinearSystem: Assuming serial linear system
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+SolveLinearSystem: Linear System Preconditioning: ilu1
+SolveLinearSystem: Serial linear System Solver: iterative
+IterSolver: Using iterative method: bicgstabl
+CRS_IncompleteLU: ILU(1) (Real), Performing Factorization:
+CRS_IncompleteLU: ILU(1) (Real), NOF nonzeros:  24751217
+CRS_IncompleteLU: ILU(1) (Real), filling (%) :       184
+CRS_IncompleteLU: ILU(1) (Real), Factorization ready at (s):     2.91
+       1 0.8347E-07 0.8347E-07
+       2 0.1789E-06 0.1789E-06
+       3 0.6727E-08 0.6727E-08
+       4 0.2866E-08 0.2866E-08
+       5 0.2810E-08 0.2810E-08
+       6 0.2612E-08 0.2612E-08
+       7 0.1669E-06 0.1669E-06
+       8 0.6002E-09 0.6002E-09
+BiCGStabl:        9 0.6378E-10 0.6378E-10
+ComputeChange: Using relative pressure relaxation
+ComputeNorm: Computing norm of solution
+ComputeChange: NS (ITER=9) (NRM,RELC): ( 0.65425694E-01 0.20041938E-05 ) :: navier-stokes
+FlowSolve: iter:    9 Assembly: (s)   11.12  100.35
+FlowSolve: iter:    9 Solve:    (s)   11.24  107.84
+FlowSolve:  Result Norm     :    6.5425694475570534E-002
+FlowSolve:  Relative Change :    2.0041937720660327E-006
+FlowSolve:
+FlowSolve:
+FlowSolve: -------------------------------------
+FlowSolve:  NAVIER-STOKES ITERATION          10
+FlowSolve: -------------------------------------
+FlowSolve:
+FlowSolve: Starting Assembly...
+FlowSolve: Assembly:
+: ..........Assembly done
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+EnforceDirichletConditions: Applying Dirichlet conditions using scaled diagonal
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+EnforceDirichletConditions: Dirichlet conditions enforced for dofs: 39877
+FlowSolve: Dirichlet conditions done
+DefaultSolve: Solving linear system with default routines
+SolveSystem: Solving linear system
+SolveSystem: Previous solution must be stored before system is solved
+SolveLinearSystem: Assuming real valued linear system
+SolveLinearSystem: Assuming serial linear system
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+SolveLinearSystem: Linear System Preconditioning: ilu1
+SolveLinearSystem: Serial linear System Solver: iterative
+IterSolver: Using iterative method: bicgstabl
+CRS_IncompleteLU: ILU(1) (Real), Performing Factorization:
+CRS_IncompleteLU: ILU(1) (Real), NOF nonzeros:  24751217
+CRS_IncompleteLU: ILU(1) (Real), filling (%) :       184
+CRS_IncompleteLU: ILU(1) (Real), Factorization ready at (s):     2.92
+       1 0.1930E-07 0.1930E-07
+       2 0.5682E-08 0.5682E-08
+       3 0.5526E-08 0.5526E-08
+       4 0.4748E-09 0.4748E-09
+       5 0.4682E-09 0.4682E-09
+       6 0.4585E-09 0.4585E-09
+       7 0.2720E-09 0.2720E-09
+       8 0.5943E-10 0.5943E-10
+BiCGStabl:        8 0.5943E-10 0.5943E-10
+ComputeChange: Using relative pressure relaxation
+ComputeNorm: Computing norm of solution
+ComputeChange: NS (ITER=10) (NRM,RELC): ( 0.65425739E-01 0.67538156E-06 ) :: navier-stokes
+FlowSolve: iter:   10 Assembly: (s)   11.27  111.62
+FlowSolve: iter:   10 Solve:    (s)   10.59  118.43
+FlowSolve:  Result Norm     :    6.5425738662893237E-002
+FlowSolve:  Relative Change :    6.7538156279659516E-007
+FlowSolve:
+FlowSolve:
+FlowSolve: -------------------------------------
+FlowSolve:  NAVIER-STOKES ITERATION          11
+FlowSolve: -------------------------------------
+FlowSolve:
+FlowSolve: Starting Assembly...
+FlowSolve: Assembly:
+: ..........Assembly done
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+EnforceDirichletConditions: Applying Dirichlet conditions using scaled diagonal
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+EnforceDirichletConditions: Dirichlet conditions enforced for dofs: 39877
+FlowSolve: Dirichlet conditions done
+DefaultSolve: Solving linear system with default routines
+SolveSystem: Solving linear system
+SolveSystem: Previous solution must be stored before system is solved
+SolveLinearSystem: Assuming real valued linear system
+SolveLinearSystem: Assuming serial linear system
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+SolveLinearSystem: Linear System Preconditioning: ilu1
+SolveLinearSystem: Serial linear System Solver: iterative
+IterSolver: Using iterative method: bicgstabl
+CRS_IncompleteLU: ILU(1) (Real), Performing Factorization:
+CRS_IncompleteLU: ILU(1) (Real), NOF nonzeros:  24751217
+CRS_IncompleteLU: ILU(1) (Real), filling (%) :       184
+CRS_IncompleteLU: ILU(1) (Real), Factorization ready at (s):     2.85
+       1 0.5596E-08 0.5596E-08
+       2 0.2325E-08 0.2325E-08
+       3 0.1025E-09 0.1025E-09
+       4 0.1020E-09 0.1020E-09
+BiCGStabl:        5 0.9500E-10 0.9500E-10
+ComputeChange: Using relative pressure relaxation
+ComputeNorm: Computing norm of solution
+ComputeChange: NS (ITER=11) (NRM,RELC): ( 0.65425752E-01 0.21100441E-06 ) :: navier-stokes
+FlowSolve: iter:   11 Assembly: (s)   11.08  122.69
+FlowSolve: iter:   11 Solve:    (s)    6.91  125.34
+FlowSolve:  Result Norm     :    6.5425752468014201E-002
+FlowSolve:  Relative Change :    2.1100441185251350E-007
+FlowSolve:
+FlowSolve:
+FlowSolve: -------------------------------------
+FlowSolve:  NAVIER-STOKES ITERATION          12
+FlowSolve: -------------------------------------
+FlowSolve:
+FlowSolve: Starting Assembly...
+FlowSolve: Assembly:
+: ...........Assembly done
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+EnforceDirichletConditions: Applying Dirichlet conditions using scaled diagonal
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+EnforceDirichletConditions: Dirichlet conditions enforced for dofs: 39877
+FlowSolve: Dirichlet conditions done
+DefaultSolve: Solving linear system with default routines
+SolveSystem: Solving linear system
+SolveSystem: Previous solution must be stored before system is solved
+SolveLinearSystem: Assuming real valued linear system
+SolveLinearSystem: Assuming serial linear system
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+SolveLinearSystem: Linear System Preconditioning: ilu1
+SolveLinearSystem: Serial linear System Solver: iterative
+IterSolver: Using iterative method: bicgstabl
+CRS_IncompleteLU: ILU(1) (Real), Performing Factorization:
+CRS_IncompleteLU: ILU(1) (Real), NOF nonzeros:  24751217
+CRS_IncompleteLU: ILU(1) (Real), filling (%) :       184
+CRS_IncompleteLU: ILU(1) (Real), Factorization ready at (s):     3.00
+       1 0.1906E-08 0.1906E-08
+       2 0.3401E-09 0.3401E-09
+       3 0.9704E-10 0.9704E-10
+BiCGStabl:        3 0.9704E-10 0.9704E-10
+ComputeChange: Using relative pressure relaxation
+ComputeNorm: Computing norm of solution
+ComputeChange: NS (ITER=12) (NRM,RELC): ( 0.65425758E-01 0.80521352E-07 ) :: navier-stokes
+FlowSolve: iter:   12 Assembly: (s)   11.35  134.04
+FlowSolve: iter:   12 Solve:    (s)    5.96  131.30
+FlowSolve:  Result Norm     :    6.5425757736184434E-002
+FlowSolve:  Relative Change :    8.0521351647596353E-008
+ComputeNorm: Computing norm of solution
+ComputeChange: SS (ITER=1) (NRM,RELC): ( 0.65425758E-01  2.0000000     ) :: navier-stokes
+SingleSolver: Attempting to call solver: 2
+SingleSolver: Solver Equation string is: heat001
+HeatSolver: -------------------------------------------
+HeatSolver: Solving the energy equation for temperature
+DefaultStart: Starting solver: heat001
+HeatSolve:
+HeatSolve:
+HeatSolve: -------------------------------------
+HeatSolve:  TEMPERATURE ITERATION           1
+HeatSolve: -------------------------------------
+HeatSolve:
+HeatSolve: Starting Assembly...
+HeatSolve: Assembly:
+: ....Assembly done
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+EnforceDirichletConditions: Applying Dirichlet conditions using scaled diagonal
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+EnforceDirichletConditions: Dirichlet conditions enforced for dofs: 364
+DefaultSolve: Solving linear system with default routines
+SolveSystem: Solving linear system
+SolveLinearSystem: Assuming real valued linear system
+SolveLinearSystem: Assuming serial linear system
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+SolveLinearSystem: Linear System Preconditioning: ilu0
+SolveLinearSystem: Serial linear System Solver: iterative
+IterSolver: Using iterative method: bicgstab
+CRS_IncompleteLU: ILU(0) (Real), Performing Factorization:
+CRS_IncompleteLU: Allocated LU matrix of size: 1149471
+CRS_IncompleteLU: ILU(0) (Real), NOF nonzeros:   1149472
+CRS_IncompleteLU: ILU(0) (Real), filling (%) :       100
+CRS_IncompleteLU: ILU(0) (Real), Factorization ready at (s):     0.05
+       1 0.8007E-02
+       2 0.3575E-02
+       3 0.2189E-02
+       4 0.1588E-02
+       5 0.1262E-02
+       6 0.9979E-03
+       7 0.7227E-03
+       8 0.4776E-03
+       9 0.2996E-03
+      10 0.1856E-03
+      11 0.1149E-03
+      12 0.6844E-04
+      13 0.8039E-04
+      14 0.9431E-05
+      15 0.4413E-05
+      16 0.3762E-05
+      17 0.3492E-04
+      18 0.1546E-05
+      19 0.5092E-06
+      20 0.3458E-06
+      21 0.1695E-06
+      22 0.1002E-06
+      23 0.6167E-07
+      24 0.2829E-07
+      25 0.2233E-07
+      26 0.2011E-07
+      27 0.1231E-07
+      28 0.9051E-08
+      29 0.1515E-08
+      30 0.1342E-05
+      31 0.4332E-08
+      32 0.2914E-08
+      33 0.1037E-08
+      34 0.6611E-09
+      35 0.1123E-09
+      36 0.4032E-10
+      36 0.4032E-10
+ComputeNorm: Computing norm of solution
+ComputeChange: NS (ITER=1) (NRM,RELC): (  314.59280      2.0000000     ) :: heat001
+HeatSolve: iter:    1 Assembly: (s)    4.32    4.32
+HeatSolve: iter:    1 Solve:    (s)    0.85    0.85
+HeatSolve:  Result Norm   :    314.59280147291179
+HeatSolve:  Relative Change :    2.0000000000000000
+HeatSolve:
+HeatSolve:
+HeatSolve: -------------------------------------
+HeatSolve:  TEMPERATURE ITERATION           2
+HeatSolve: -------------------------------------
+HeatSolve:
+HeatSolve: Starting Assembly...
+HeatSolve: Assembly:
+: ....Assembly done
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+EnforceDirichletConditions: Applying Dirichlet conditions using scaled diagonal
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+EnforceDirichletConditions: Dirichlet conditions enforced for dofs: 364
+DefaultSolve: Solving linear system with default routines
+SolveSystem: Solving linear system
+SolveLinearSystem: Assuming real valued linear system
+SolveLinearSystem: Assuming serial linear system
+ScaleLinearSystem: Scaling diagonal entries to unity in serial
+SolveLinearSystem: Linear System Preconditioning: ilu0
+SolveLinearSystem: Serial linear System Solver: iterative
+IterSolver: Using iterative method: bicgstab
+CRS_IncompleteLU: ILU(0) (Real), Performing Factorization:
+CRS_IncompleteLU: ILU(0) (Real), NOF nonzeros:   1149472
+CRS_IncompleteLU: ILU(0) (Real), filling (%) :       100
+CRS_IncompleteLU: ILU(0) (Real), Factorization ready at (s):     0.05
+       1 0.2106E-10
+       1 0.2106E-10
+ComputeNorm: Computing norm of solution
+ComputeChange: NS (ITER=2) (NRM,RELC): (  314.59280     0.74046300E-12 ) :: heat001
+HeatSolve: iter:    2 Assembly: (s)    4.52    8.84
+HeatSolve: iter:    2 Solve:    (s)    0.08    0.93
+HeatSolve:  Result Norm   :    314.59280147314473
+HeatSolve:  Relative Change :    7.4046300297040596E-013
+DefaultFinish: Finished solver: heat001
+ComputeNorm: Computing norm of solution
+ComputeChange: SS (ITER=1) (NRM,RELC): (  314.59280      2.0000000     ) :: heat001
+SingleSolver: Attempting to call solver: 3
+SingleSolver: Solver Equation string is: resultoutput
+ResultOutputSolver: -------------------------------------
+ResultOutputSolver: Saving with prefix: FreeCAD
+ResultOutputSolver: Dimension of mesh is: 3
+ResultOutputSolver: Working on mesh 1: . with 41565 nodes
+ResultOutputSolver: Creating list for saving - if not present
+CreateListForSaving: Field Variables for Saving
+CreateListForSaving: Scalar Field 1: pressure
+CreateListForSaving: Scalar Field 2: temperature
+CreateListForSaving: Vector Field 1: velocity
+ResultOutputSolver: Saving in unstructured VTK XML (.vtu) format
+VtuOutputSolver: Saving results in VTK XML format with prefix: FreeCAD
+VtuOutputSolver: Saving number of partitions: 1
+SolverOutputDirectory: Creating directory: .
+VtuOutputSolver: Full filename base is: ./FreeCAD
+WARNING:: VtuOutputSolver: Vtu time collection requires a transient simulation!
+GenerateSaveMask: Number of active elements 36843 out of 36843
+GenerateSaveMask: Number of geometry nodes 41565 out of 41565
+VtuOutputSolver: Total number of elements to save: 36843
+VtuOutputSolver: Total number of geometry nodes to save: 41565
+VtuOutputSolver: Total number of dof nodes to save: 41565
+VtuOutputSolver: Writing the vtu file: ./FreeCAD_t0001.vtu
+AscBinWriteInit: Initializing buffered ascii/binary writing
+AscBinWriteInit: Writing in binary
+AscBinWriteInit: Writing in double precision
+AscBinWriteInit: Writing to unit number: 58
+AscBinWriteInit: Size of buffer is: 41565
+WriteVtuFile: Writing nodal fields
+WriteVtuFile: Saving variable: pressure
+WriteVtuFile: Saving variable: temperature
+WriteVtuFile: Saving variable: velocity
+WriteVtuFile: Number of nodal fields written: 3
+WriteVtuFile: Writing elemental fields
+WriteVtuFile: Number of elemental fields written: 0
+WriteVtuFile: Writing coordinates for each used node
+WriteVtuFile: Writing the elemental connectivity data
+WriteVtuFile: Writing nodal fields
+WriteVtuFile: Saving variable: pressure
+WriteVtuFile: Saving variable: temperature
+WriteVtuFile: Saving variable: velocity
+WriteVtuFile: Writing elemental fields
+AscBinWriteFree: Terminating buffered ascii/binary writing
+VtuOutputSolver: All done for now
+ResultOutputSolver: -------------------------------------
+ReloadInputFile: Realoading input file
+LoadInputFile: Loading input file:
+MAIN: Reporting unused list entries for sif improvement!
+MAIN: If you do not want these lines undefine > DEVEL_LISTUSAGE < !
+   Unused keywords:
+       Constants             stefan boltzmann
+       Material 1            heat expansion coefficient
+       Material 1            reference temperature
+       Material 2            reference temperature
+       Solver 1              linear system abort not converged
+       Solver 2              linear system abort not converged
+MAIN: *** Elmer Solver: ALL DONE ***
+MAIN: The end
+SOLVER TOTAL TIME(CPU,REAL):       281.13      250.27
+ELMER SOLVER FINISHED AT: 2023/11/01 18:00:12

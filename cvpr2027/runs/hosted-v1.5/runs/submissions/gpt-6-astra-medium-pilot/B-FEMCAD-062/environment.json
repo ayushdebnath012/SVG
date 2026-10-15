@@ -1,0 +1,81 @@
+{
+  "versions": {
+    "python": "3.12.14",
+    "cadquery": "2.8.0",
+    "skfem": "12.0.2",
+    "scipy": "1.18.1",
+    "numpy": "2.5.3",
+    "meshio": "5.3.5"
+  },
+  "command": "python main.py",
+  "units": {
+    "geometry": "mm",
+    "displacements": "mm",
+    "stress": "MPa = N/mm^2",
+    "force": "N"
+  },
+  "material": {
+    "E_MPa": 210000.0,
+    "poisson_ratio": 0.3
+  },
+  "analysis": "3D linear static elasticity, Q2 isoparametric hexahedra, 3x3x3 Gauss integration; scipy sparse direct solve",
+  "geometry": "STEP is the entire 100 x 5 x 50 mm plate with exact analytic radius-10 cylindrical through hole parallel to y",
+  "symmetry_reduction": "Mesh is y=0..2.5 and z=25..50, exact one-quarter reduction. uy=0 at y=2.5; uz=0 at z=25. Reflect through these planes with odd normal displacement and even tangential displacements to recover full solution. No x symmetry imposed.",
+  "boundary_conditions": "x=0 all displacement components fixed; x=100 uniform tx=4 MPa (1000 N / 250 mm^2), quarter resultant 250 N; other non-symmetry faces traction-free.",
+  "physical_groups": {
+    "plate_quarter": [
+      1,
+      3
+    ],
+    "fixed": [
+      2,
+      2
+    ],
+    "traction": [
+      3,
+      2
+    ],
+    "symmetry_y": [
+      4,
+      2
+    ],
+    "symmetry_z": [
+      5,
+      2
+    ],
+    "free_y": [
+      6,
+      2
+    ],
+    "free_top": [
+      7,
+      2
+    ],
+    "hole": [
+      8,
+      2
+    ]
+  },
+  "extraction": "At all 27 local Q2 nodes compute stress from displacement derivatives using isoparametric Jacobians. Average the six tensor components equally over incident elements at a shared node, then calculate von Mises and take global maximum. Integration-point and unaveraged maxima are also recorded for diagnostics.",
+  "field_schema": {
+    "node_ids": "Gmsh 1-based node tags, all quadratic nodes",
+    "coordinates_mm": "N x 3, x,y,z",
+    "displacements_mm": "N x 3, ux,uy,uz",
+    "stress_MPa": "N x 6 recovered nodal tensor [xx,yy,zz,xy,yz,xz]",
+    "von_mises_MPa": "N nodal von Mises",
+    "element_node_ids": "E x 27, Gmsh/meshio hex27 connectivity",
+    "element_local_node_ids": "E x 27, skfem Q2 local sample nodes in same order as element_local_stress",
+    "element_local_stress_MPa": "E x 27 x 6, one-sided element-node stress tensors",
+    "gauss_coordinates_mm": "E x 27 x 3",
+    "gauss_stress_MPa": "E x 27 x 6, unrecovered integration-point tensors",
+    "reaction_N": "N x 3, K u - f",
+    "constrained_dof_mask": "N x 3 Boolean",
+    "*_mask": "N Boolean physical boundary node masks",
+    "load_factor": "single static load factor 1"
+  },
+  "assumptions": [
+    "Small displacement, homogeneous isotropic elasticity.",
+    "Full thickness response retained; no plane-stress approximation.",
+    "STEP hole analytic; analysis uses converging quadratic interpolation of the cylindrical boundary."
+  ]
+}

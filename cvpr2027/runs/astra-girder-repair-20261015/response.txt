@@ -1,0 +1,31 @@
+def eigenvalues(path):
+    text = Path(path).read_text(errors="replace")
+    number = r"[-+]?(?:\d+\.?\d*|\.\d+)(?:[EeDd][-+]?\d+)?"
+    row = re.compile(r"^\s*\d+\s+(" + number + r")\s*$")
+    values = []
+    active = False
+    have_rows = False
+
+    for line in text.splitlines():
+        compact = re.sub(r"\s+", "", line).upper()
+        if "BUCKLINGFACTOR" in compact or (
+            "MODENO" in compact and "BUCKLING" in compact
+        ):
+            active = True
+            have_rows = False
+            continue
+
+        if not active:
+            continue
+
+        match = row.match(line)
+        if match:
+            values.append(float(re.sub(r"[Dd]", "E", match.group(1))))
+            have_rows = True
+        elif compact and have_rows:
+            active = False
+            have_rows = False
+
+    if not values:
+        raise RuntimeError("No buckling factors found in " + str(path))
+    return np.asarray(values, dtype=float)

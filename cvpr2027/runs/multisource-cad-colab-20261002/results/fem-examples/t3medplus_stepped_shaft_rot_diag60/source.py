@@ -1,0 +1,9 @@
+import cadquery as cq
+result = (
+    cq.Workplane("XY")
+    .cylinder(11.2, 22.7)
+    .faces(">Z").workplane()
+    .circle(9.2)
+    .extrude(24.1)
+)
+show_object(result)

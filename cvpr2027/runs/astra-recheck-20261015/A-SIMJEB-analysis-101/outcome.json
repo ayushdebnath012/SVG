@@ -1,0 +1,82 @@
+{
+  "task_id": "A-SIMJEB-analysis-101",
+  "report": "/Users/ayushdebnath/SVG/cvpr2027/runs/astra-recheck-20261015/A-SIMJEB-analysis-101/README.md",
+  "generation": {
+    "status": "completed",
+    "model": "gpt-6-astra",
+    "usage": {
+      "prompt_tokens": 5570,
+      "completion_tokens": 897,
+      "total_tokens": 6467,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 5567,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 250,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "cost_usd_conservative": 0.1840625,
+    "finish_reason": "stop",
+    "patch_applied": true,
+    "repaired_sha256": "4c6a3336501370a6f7b16cb70b37d483e7a175a77d923c2dab6a6de4c06ed08a",
+    "elapsed_seconds": 24.9
+  },
+  "status": "inconclusive_memory_limit",
+  "protocol": "medium-reasoning model-authored repair with original task/code and runtime feedback, 7000-token cap",
+  "execution": {
+    "exit_code": -9,
+    "elapsed_seconds": 119.32848937499966,
+    "termination_reason": "process_group_memory_limit",
+    "execution_verified": false,
+    "frozen_inputs_unchanged": true
+  },
+  "score_path": "/Users/ayushdebnath/SVG/cvpr2027/runs/astra-recheck-20261015/A-SIMJEB-analysis-101/scoring/score.json",
+  "results": {
+    "outputs": {
+      "vertical_max_displacement_mm": 2.2143392012243197,
+      "horizontal_max_displacement_mm": 1.8336167111336654,
+      "diagonal_max_displacement_mm": 0.7096784375334105,
+      "torsion_max_displacement_mm": 0.31321347707138975
+    }
+  },
+  "adjudication_note": "The mesh inversion issue is repaired and a coarse four-case solve produces results, but refinement is killed at the 6000 MB process-group limit. Partial numerical values miss three provisional targets; incomplete run is not counted as a persistent capability failure.",
+  "score": {
+    "task_id": "A-SIMJEB-analysis-101",
+    "track": "A",
+    "tier": "source_backed_pilot",
+    "family": "simjeb-analysis",
+    "engineering_family": "simjeb-bracket",
+    "independently_reproduced": false,
+    "passed": false,
+    "numerical_passed": false,
+    "numerical_score": 0.25,
+    "workflow_verified": false,
+    "checks": {
+      "torsion_max_displacement_mm": {
+        "ok": true,
+        "error": 0.08410476276499104
+      },
+      "diagonal_max_displacement_mm": {
+        "ok": false,
+        "error": 1.0301997092163642
+      },
+      "horizontal_max_displacement_mm": {
+        "ok": false,
+        "error": 1.019368749423099
+      },
+      "vertical_max_displacement_mm": {
+        "ok": false,
+        "error": 1.7095007307120134
+      }
+    },
+    "errors": [
+      "missing/unsafe/empty artifact: refinement.json",
+      "trusted workflow review missing"
+    ]
+  }
+}

@@ -1,0 +1,34 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "Qwen/Qwen3.5-35B-A3B-FP8",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .polyline([(100.0, 0.0), (100.0, 240.9), (58.7, 348.4902), (58.7, 465.8902), (100.0, 802.2517), (100.0, 970.3517), (123.2, 970.3517), (123.2, 802.2517), (81.9, 465.8902), (81.9, 348.4902), (123.2, 240.9), (123.2, 0.0)])\\n    .close()\\n    .revolve(360, (0, 0, 0), (0, 1, 0))\\n)\\nshow_object(result)\", \"instruction\": \"Rotate the entire part by 90\\u00b0 about the X axis.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"0d63547f6d3db71b375febaa822e7bcd56646d2777f86ca853f154bbc9652bf4\", \"instruction\": \"Rotate the entire part by 90\\u00b0 about the X axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.rotate((0,0,0), (1,0,0), 90)\\\"], \\\"start\\\": 9}]}\", \"strategies\": [], \"context\": [\"9: show_object(result)\"]}, {\"task_id\": \"0de5af962c501ae4930a0cd24ea0783de8733688c126bee67b8959d15220d626\", \"instruction\": \"Rotate the entire part by 90\\u00b0 about the X axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.rotate((0,0,0), (1,0,0), 90)\\\"], \\\"start\\\": 13}]}\", \"strategies\": [], \"context\": [\"13: show_object(result)\"]}, {\"task_id\": \"0eea9ca890ef4c7fc767e73195e1d1484d3f89b7faa209a19e3f1f6f948b43e2\", \"instruction\": \"Rotate the entire part by 90\\u00b0 about the X axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.rotate((0,0,0), (1,0,0), 90)\\\"], \\\"start\\\": 38}]}\", \"strategies\": [], \"context\": [\"38: show_object(result)\"]}]}"
+   }
+  ],
+  "temperature": 0.6,
+  "top_p": 0.95,
+  "top_k": 20,
+  "max_tokens": 8192
+ },
+ "usage": {
+  "prompt_tokens": 810,
+  "total_tokens": 1391,
+  "completion_tokens": 581,
+  "prompt_tokens_details": null,
+  "completion_tokens_details": {
+   "reasoning_tokens": 431
+  }
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "\n\n```json\n{\n  \"steps\": [\n    \"Add rotation operation: result = result.rotate((0,0,0), (1,0,0), 90) after result definition\",\n    \"Insert rotation before show_object(result) call\"\n  ],\n  \"invariants\": [\n    \"Polyline coordinates remain unchanged\",\n    \"Revolve parameters (360 degrees, axis (0,0,0), direction (0,1,0)) remain unchanged\",\n    \"Import statement remains unchanged\",\n    \"show_object still references result variable\"\n  ],\n  \"dependencies\": [\n    [0, 1]\n  ]\n}\n```"
+}

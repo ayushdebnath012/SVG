@@ -1,0 +1,1439 @@
+{
+  "task_id": "synthetic-box-height",
+  "status": "PASS",
+  "prediction": "{\"edits\": [{\"start\": 1, \"delete\": 1, \"insert\": [\"result = cq.Workplane(\\\"XY\\\").box(10, 10, 12)\"]}]}",
+  "selected_node": 2,
+  "bank": [
+    2,
+    4
+  ],
+  "pareto": [
+    2,
+    4
+  ],
+  "stop": "expansion_limit",
+  "nodes": [
+    {
+      "id": 0,
+      "candidate": "{\"edits\":[]}",
+      "depth": 0,
+      "verdict": {
+        "status": "FAIL",
+        "stages": {
+          "geometry": {
+            "status": "PASS",
+            "metrics": {
+              "volume": 999.9999999999998,
+              "area": 599.9999999999999,
+              "solids": 1,
+              "faces": 6,
+              "bbox_x": 10.0,
+              "bbox_y": 10.0,
+              "bbox_z": 10.0
+            }
+          },
+          "constraints": {
+            "status": "FAIL",
+            "checks": [
+              {
+                "metric": "bbox_x",
+                "value": 10.0,
+                "target": 10,
+                "ok": true
+              },
+              {
+                "metric": "bbox_y",
+                "value": 10.0,
+                "target": 10,
+                "ok": true
+              },
+              {
+                "metric": "bbox_z",
+                "value": 10.0,
+                "target": 12,
+                "ok": false
+              },
+              {
+                "metric": "solids",
+                "value": 1,
+                "target": 1,
+                "ok": true
+              }
+            ]
+          },
+          "semantics": {
+            "status": "UNKNOWN",
+            "reason": "Not evaluated"
+          },
+          "fem": {
+            "status": "UNKNOWN",
+            "reason": "No physical contract supplied"
+          },
+          "robustness": {
+            "status": "UNKNOWN",
+            "reason": "No perturbation contract supplied"
+          }
+        },
+        "objectives": [
+          0.0,
+          0.0,
+          -0.0
+        ],
+        "score": 0.0,
+        "diagnosis": [
+          {
+            "stage": "constraints",
+            "status": "FAIL",
+            "checks": [
+              {
+                "metric": "bbox_x",
+                "value": 10.0,
+                "target": 10,
+                "ok": true
+              },
+              {
+                "metric": "bbox_y",
+                "value": 10.0,
+                "target": 10,
+                "ok": true
+              },
+              {
+                "metric": "bbox_z",
+                "value": 10.0,
+                "target": 12,
+                "ok": false
+              },
+              {
+                "metric": "solids",
+                "value": 1,
+                "target": 1,
+                "ok": true
+              }
+            ]
+          },
+          {
+            "stage": "semantics",
+            "status": "UNKNOWN",
+            "reason": "Not evaluated"
+          },
+          {
+            "stage": "fem",
+            "status": "UNKNOWN",
+            "reason": "No physical contract supplied"
+          },
+          {
+            "stage": "robustness",
+            "status": "UNKNOWN",
+            "reason": "No perturbation contract supplied"
+          }
+        ],
+        "tool_version": "f96d2c6ba09d9624dcfd5558c458764247201fb540b493bca96511e8c8f4142b",
+        "phase": "search"
+      },
+      "attempts": 3,
+      "visits": 4,
+      "final": null,
+      "edges": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "id": 1,
+      "candidate": "{\"edits\": [{\"start\": 1, \"delete\": 1, \"insert\": [\"result = cq.Workplane(\\\"XY\\\").box(12, 10, 10)\"]}]}",
+      "depth": 1,
+      "verdict": {
+        "status": "FAIL",
+        "stages": {
+          "geometry": {
+            "status": "PASS",
+            "metrics": {
+              "volume": 1199.9999999999998,
+              "area": 679.9999999999999,
+              "solids": 1,
+              "faces": 6,
+              "bbox_x": 12.0,
+              "bbox_y": 10.0,
+              "bbox_z": 10.0
+            }
+          },
+          "constraints": {
+            "status": "FAIL",
+            "checks": [
+              {
+                "metric": "bbox_x",
+                "value": 12.0,
+                "target": 10,
+                "ok": false
+              },
+              {
+                "metric": "bbox_y",
+                "value": 10.0,
+                "target": 10,
+                "ok": true
+              },
+              {
+                "metric": "bbox_z",
+                "value": 10.0,
+                "target": 12,
+                "ok": false
+              },
+              {
+                "metric": "solids",
+                "value": 1,
+                "target": 1,
+                "ok": true
+              }
+            ]
+          },
+          "semantics": {
+            "status": "UNKNOWN",
+            "reason": "Not evaluated"
+          },
+          "fem": {
+            "status": "UNKNOWN",
+            "reason": "No physical contract supplied"
+          },
+          "robustness": {
+            "status": "UNKNOWN",
+            "reason": "No perturbation contract supplied"
+          }
+        },
+        "objectives": [
+          0.0,
+          0.0,
+          -2.0
+        ],
+        "score": -0.002,
+        "diagnosis": [
+          {
+            "stage": "constraints",
+            "status": "FAIL",
+            "checks": [
+              {
+                "metric": "bbox_x",
+                "value": 12.0,
+                "target": 10,
+                "ok": false
+              },
+              {
+                "metric": "bbox_y",
+                "value": 10.0,
+                "target": 10,
+                "ok": true
+              },
+              {
+                "metric": "bbox_z",
+                "value": 10.0,
+                "target": 12,
+                "ok": false
+              },
+              {
+                "metric": "solids",
+                "value": 1,
+                "target": 1,
+                "ok": true
+              }
+            ]
+          },
+          {
+            "stage": "semantics",
+            "status": "UNKNOWN",
+            "reason": "Not evaluated"
+          },
+          {
+            "stage": "fem",
+            "status": "UNKNOWN",
+            "reason": "No physical contract supplied"
+          },
+          {
+            "stage": "robustness",
+            "status": "UNKNOWN",
+            "reason": "No perturbation contract supplied"
+          }
+        ],
+        "tool_version": "f96d2c6ba09d9624dcfd5558c458764247201fb540b493bca96511e8c8f4142b",
+        "phase": "search"
+      },
+      "attempts": 0,
+      "visits": 1,
+      "final": null,
+      "edges": []
+    },
+    {
+      "id": 2,
+      "candidate": "{\"edits\": [{\"start\": 1, \"delete\": 1, \"insert\": [\"result = cq.Workplane(\\\"XY\\\").box(10, 10, 12)\"]}]}",
+      "depth": 1,
+      "verdict": {
+        "status": "PASS",
+        "stages": {
+          "geometry": {
+            "status": "PASS",
+            "metrics": {
+              "volume": 1199.9999999999998,
+              "area": 680.0,
+              "solids": 1,
+              "faces": 6,
+              "bbox_x": 10.0,
+              "bbox_y": 10.0,
+              "bbox_z": 12.0
+            }
+          },
+          "constraints": {
+            "status": "PASS",
+            "checks": [
+              {
+                "metric": "bbox_x",
+                "value": 10.0,
+                "target": 10,
+                "ok": true
+              },
+              {
+                "metric": "bbox_y",
+                "value": 10.0,
+                "target": 10,
+                "ok": true
+              },
+              {
+                "metric": "bbox_z",
+                "value": 12.0,
+                "target": 12,
+                "ok": true
+              },
+              {
+                "metric": "solids",
+                "value": 1,
+                "target": 1,
+                "ok": true
+              }
+            ]
+          },
+          "semantics": {
+            "status": "PASS",
+            "confidence": 1.0,
+            "basis": "Caller-declared complete measurable task contract"
+          },
+          "fem": {
+            "status": "PASS",
+            "metrics": {
+              "nodes": 426,
+              "tetrahedra": 1497,
+              "connected_components": 1,
+              "mesh_volume_mm3": 1200.0,
+              "fixed_nodes": 58,
+              "loaded_facets": 114,
+              "loaded_area_mm2": 127.54367155439333,
+              "axis": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "projection_min_mm": -6.0,
+              "projection_max_mm": 6.0,
+              "compliance_N_mm": 5.550482251756909e-07,
+              "load_weighted_displacement_mm": 5.550482251756909e-07,
+              "max_displacement_mm": 6.709148737075318e-07,
+              "strain_energy_N_mm": 2.77524112587846e-07,
+              "vm_p95_MPa": 0.01161006756762421,
+              "vm_peak_MPa": 0.01588471075285475,
+              "relative_free_residual": 2.0370986454531416e-14,
+              "relative_force_balance_error": 3.465972539807975e-15,
+              "relative_moment_balance_error": 9.304623577682668e-16,
+              "relative_energy_error": 1.9075661105532466e-15
+            },
+            "checks": [
+              {
+                "metric": "max_displacement_mm",
+                "value": 6.709148737075318e-07,
+                "max": 0.001,
+                "ok": true
+              },
+              {
+                "metric": "vm_peak_MPa",
+                "value": 0.01588471075285475,
+                "max": 10,
+                "ok": true
+              }
+            ]
+          },
+          "robustness": {
+            "status": "PASS",
+            "variations": [
+              {
+                "force_scale": 1.1
+              }
+            ],
+            "results": [
+              {
+                "status": "PASS",
+                "metrics": {
+                  "nodes": 425,
+                  "tetrahedra": 1498,
+                  "connected_components": 1,
+                  "mesh_volume_mm3": 1200.0,
+                  "fixed_nodes": 58,
+                  "loaded_facets": 116,
+                  "loaded_area_mm2": 127.54367155439333,
+                  "axis": [
+                    0.0,
+                    0.0,
+                    1.0
+                  ],
+                  "projection_min_mm": -6.0,
+                  "projection_max_mm": 6.0,
+                  "compliance_N_mm": 6.715864563947888e-07,
+                  "load_weighted_displacement_mm": 6.105331421770807e-07,
+                  "max_displacement_mm": 7.407631445445907e-07,
+                  "strain_energy_N_mm": 3.3579322819739523e-07,
+                  "vm_p95_MPa": 0.012780495466034669,
+                  "vm_peak_MPa": 0.017442576025968715,
+                  "relative_free_residual": 2.0175856831098102e-14,
+                  "relative_force_balance_error": 9.515964875380881e-16,
+                  "relative_moment_balance_error": 1.360908478952386e-15,
+                  "relative_energy_error": 2.5224837076118053e-15
+                },
+                "checks": [
+                  {
+                    "metric": "max_displacement_mm",
+                    "value": 7.407631445445907e-07,
+                    "max": 0.001,
+                    "ok": true
+                  },
+                  {
+                    "metric": "vm_peak_MPa",
+                    "value": 0.017442576025968715,
+                    "max": 10,
+                    "ok": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "objectives": [
+          1.0,
+          1.0,
+          -2.0
+        ],
+        "score": 2.0980000000000003,
+        "diagnosis": [],
+        "tool_version": "f96d2c6ba09d9624dcfd5558c458764247201fb540b493bca96511e8c8f4142b",
+        "phase": "search"
+      },
+      "attempts": 1,
+      "visits": 2,
+      "final": {
+        "status": "PASS",
+        "stages": {
+          "geometry": {
+            "status": "PASS",
+            "metrics": {
+              "volume": 1199.9999999999998,
+              "area": 680.0,
+              "solids": 1,
+              "faces": 6,
+              "bbox_x": 10.0,
+              "bbox_y": 10.0,
+              "bbox_z": 12.0
+            }
+          },
+          "constraints": {
+            "status": "PASS",
+            "checks": [
+              {
+                "metric": "bbox_x",
+                "value": 10.0,
+                "target": 10,
+                "ok": true
+              },
+              {
+                "metric": "bbox_y",
+                "value": 10.0,
+                "target": 10,
+                "ok": true
+              },
+              {
+                "metric": "bbox_z",
+                "value": 12.0,
+                "target": 12,
+                "ok": true
+              },
+              {
+                "metric": "solids",
+                "value": 1,
+                "target": 1,
+                "ok": true
+              }
+            ]
+          },
+          "semantics": {
+            "status": "PASS",
+            "confidence": 1.0,
+            "basis": "Caller-declared complete measurable task contract"
+          },
+          "fem": {
+            "status": "PASS",
+            "metrics": {
+              "nodes": 427,
+              "tetrahedra": 1501,
+              "connected_components": 1,
+              "mesh_volume_mm3": 1200.0,
+              "fixed_nodes": 58,
+              "loaded_facets": 114,
+              "loaded_area_mm2": 127.54367155439333,
+              "axis": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "projection_min_mm": -6.0,
+              "projection_max_mm": 6.0,
+              "compliance_N_mm": 5.550531344485465e-07,
+              "load_weighted_displacement_mm": 5.550531344485465e-07,
+              "max_displacement_mm": 6.710310617558191e-07,
+              "strain_energy_N_mm": 2.775265672242735e-07,
+              "vm_p95_MPa": 0.01159784809765137,
+              "vm_peak_MPa": 0.015884508859060106,
+              "relative_free_residual": 1.8835139698018e-14,
+              "relative_force_balance_error": 2.015916993978662e-15,
+              "relative_moment_balance_error": 5.425430678056203e-16,
+              "relative_energy_error": 7.630196954890094e-16
+            },
+            "checks": [
+              {
+                "metric": "max_displacement_mm",
+                "value": 6.710310617558191e-07,
+                "max": 0.001,
+                "ok": true
+              },
+              {
+                "metric": "vm_peak_MPa",
+                "value": 0.015884508859060106,
+                "max": 10,
+                "ok": true
+              }
+            ]
+          },
+          "robustness": {
+            "status": "PASS",
+            "variations": [
+              {
+                "force_scale": 1.2,
+                "young_scale": 0.9,
+                "mesh_scale": 0.85
+              }
+            ],
+            "results": [
+              {
+                "status": "PASS",
+                "metrics": {
+                  "nodes": 427,
+                  "tetrahedra": 1513,
+                  "connected_components": 1,
+                  "mesh_volume_mm3": 1200.0,
+                  "fixed_nodes": 58,
+                  "loaded_facets": 114,
+                  "loaded_area_mm2": 127.53871273949407,
+                  "axis": [
+                    0.0,
+                    0.0,
+                    1.0
+                  ],
+                  "projection_min_mm": -6.0,
+                  "projection_max_mm": 6.0,
+                  "compliance_N_mm": 8.881866188029975e-07,
+                  "load_weighted_displacement_mm": 7.401555156691646e-07,
+                  "max_displacement_mm": 8.953724687047575e-07,
+                  "strain_energy_N_mm": 4.440933094014988e-07,
+                  "vm_p95_MPa": 0.0139538716803116,
+                  "vm_peak_MPa": 0.019007553946299435,
+                  "relative_free_residual": 1.8392632633490008e-14,
+                  "relative_force_balance_error": 6.446952346777208e-16,
+                  "relative_moment_balance_error": 2.08241198070001e-16,
+                  "relative_energy_error": 1.192081890959808e-16
+                },
+                "checks": [
+                  {
+                    "metric": "max_displacement_mm",
+                    "value": 8.953724687047575e-07,
+                    "max": 0.001,
+                    "ok": true
+                  },
+                  {
+                    "metric": "vm_peak_MPa",
+                    "value": 0.019007553946299435,
+                    "max": 10,
+                    "ok": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "objectives": [
+          1.0,
+          1.0,
+          -2.0
+        ],
+        "score": 2.0980000000000003,
+        "diagnosis": [],
+        "tool_version": "f96d2c6ba09d9624dcfd5558c458764247201fb540b493bca96511e8c8f4142b",
+        "phase": "final"
+      },
+      "edges": [
+        3
+      ]
+    },
+    {
+      "id": 3,
+      "candidate": "{\"edits\": [{\"start\": 1, \"delete\": 1, \"insert\": [\"result = cq.Workplane(\\\"XY\\\").box(10, 12, 12)\"]}]}",
+      "depth": 1,
+      "verdict": {
+        "status": "FAIL",
+        "stages": {
+          "geometry": {
+            "status": "PASS",
+            "metrics": {
+              "volume": 1439.9999999999998,
+              "area": 768.0,
+              "solids": 1,
+              "faces": 6,
+              "bbox_x": 10.0,
+              "bbox_y": 12.0,
+              "bbox_z": 12.0
+            }
+          },
+          "constraints": {
+            "status": "FAIL",
+            "checks": [
+              {
+                "metric": "bbox_x",
+                "value": 10.0,
+                "target": 10,
+                "ok": true
+              },
+              {
+                "metric": "bbox_y",
+                "value": 12.0,
+                "target": 10,
+                "ok": false
+              },
+              {
+                "metric": "bbox_z",
+                "value": 12.0,
+                "target": 12,
+                "ok": true
+              },
+              {
+                "metric": "solids",
+                "value": 1,
+                "target": 1,
+                "ok": true
+              }
+            ]
+          },
+          "semantics": {
+            "status": "UNKNOWN",
+            "reason": "Not evaluated"
+          },
+          "fem": {
+            "status": "UNKNOWN",
+            "reason": "No physical contract supplied"
+          },
+          "robustness": {
+            "status": "UNKNOWN",
+            "reason": "No perturbation contract supplied"
+          }
+        },
+        "objectives": [
+          0.0,
+          0.0,
+          -2.0
+        ],
+        "score": -0.002,
+        "diagnosis": [
+          {
+            "stage": "constraints",
+            "status": "FAIL",
+            "checks": [
+              {
+                "metric": "bbox_x",
+                "value": 10.0,
+                "target": 10,
+                "ok": true
+              },
+              {
+                "metric": "bbox_y",
+                "value": 12.0,
+                "target": 10,
+                "ok": false
+              },
+              {
+                "metric": "bbox_z",
+                "value": 12.0,
+                "target": 12,
+                "ok": true
+              },
+              {
+                "metric": "solids",
+                "value": 1,
+                "target": 1,
+                "ok": true
+              }
+            ]
+          },
+          {
+            "stage": "semantics",
+            "status": "UNKNOWN",
+            "reason": "Not evaluated"
+          },
+          {
+            "stage": "fem",
+            "status": "UNKNOWN",
+            "reason": "No physical contract supplied"
+          },
+          {
+            "stage": "robustness",
+            "status": "UNKNOWN",
+            "reason": "No perturbation contract supplied"
+          }
+        ],
+        "tool_version": "f96d2c6ba09d9624dcfd5558c458764247201fb540b493bca96511e8c8f4142b",
+        "phase": "search"
+      },
+      "attempts": 0,
+      "visits": 1,
+      "final": null,
+      "edges": []
+    },
+    {
+      "id": 4,
+      "candidate": "{\"edits\": [{\"start\": 1, \"delete\": 1, \"insert\": [\"result = cq.Workplane(\\\"XY\\\").box(10, 10, 12)\"]}]}",
+      "depth": 2,
+      "verdict": {
+        "status": "PASS",
+        "stages": {
+          "geometry": {
+            "status": "PASS",
+            "metrics": {
+              "volume": 1199.9999999999998,
+              "area": 680.0,
+              "solids": 1,
+              "faces": 6,
+              "bbox_x": 10.0,
+              "bbox_y": 10.0,
+              "bbox_z": 12.0
+            }
+          },
+          "constraints": {
+            "status": "PASS",
+            "checks": [
+              {
+                "metric": "bbox_x",
+                "value": 10.0,
+                "target": 10,
+                "ok": true
+              },
+              {
+                "metric": "bbox_y",
+                "value": 10.0,
+                "target": 10,
+                "ok": true
+              },
+              {
+                "metric": "bbox_z",
+                "value": 12.0,
+                "target": 12,
+                "ok": true
+              },
+              {
+                "metric": "solids",
+                "value": 1,
+                "target": 1,
+                "ok": true
+              }
+            ]
+          },
+          "semantics": {
+            "status": "PASS",
+            "confidence": 1.0,
+            "basis": "Caller-declared complete measurable task contract"
+          },
+          "fem": {
+            "status": "PASS",
+            "metrics": {
+              "nodes": 426,
+              "tetrahedra": 1497,
+              "connected_components": 1,
+              "mesh_volume_mm3": 1200.0,
+              "fixed_nodes": 58,
+              "loaded_facets": 114,
+              "loaded_area_mm2": 127.54367155439333,
+              "axis": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "projection_min_mm": -6.0,
+              "projection_max_mm": 6.0,
+              "compliance_N_mm": 5.550482251756909e-07,
+              "load_weighted_displacement_mm": 5.550482251756909e-07,
+              "max_displacement_mm": 6.709148737075318e-07,
+              "strain_energy_N_mm": 2.77524112587846e-07,
+              "vm_p95_MPa": 0.01161006756762421,
+              "vm_peak_MPa": 0.01588471075285475,
+              "relative_free_residual": 2.0370986454531416e-14,
+              "relative_force_balance_error": 3.465972539807975e-15,
+              "relative_moment_balance_error": 9.304623577682668e-16,
+              "relative_energy_error": 1.9075661105532466e-15
+            },
+            "checks": [
+              {
+                "metric": "max_displacement_mm",
+                "value": 6.709148737075318e-07,
+                "max": 0.001,
+                "ok": true
+              },
+              {
+                "metric": "vm_peak_MPa",
+                "value": 0.01588471075285475,
+                "max": 10,
+                "ok": true
+              }
+            ]
+          },
+          "robustness": {
+            "status": "PASS",
+            "variations": [
+              {
+                "force_scale": 1.1
+              }
+            ],
+            "results": [
+              {
+                "status": "PASS",
+                "metrics": {
+                  "nodes": 425,
+                  "tetrahedra": 1498,
+                  "connected_components": 1,
+                  "mesh_volume_mm3": 1200.0,
+                  "fixed_nodes": 58,
+                  "loaded_facets": 116,
+                  "loaded_area_mm2": 127.54367155439333,
+                  "axis": [
+                    0.0,
+                    0.0,
+                    1.0
+                  ],
+                  "projection_min_mm": -6.0,
+                  "projection_max_mm": 6.0,
+                  "compliance_N_mm": 6.715864563947888e-07,
+                  "load_weighted_displacement_mm": 6.105331421770807e-07,
+                  "max_displacement_mm": 7.407631445445907e-07,
+                  "strain_energy_N_mm": 3.3579322819739523e-07,
+                  "vm_p95_MPa": 0.012780495466034669,
+                  "vm_peak_MPa": 0.017442576025968715,
+                  "relative_free_residual": 2.0175856831098102e-14,
+                  "relative_force_balance_error": 9.515964875380881e-16,
+                  "relative_moment_balance_error": 1.360908478952386e-15,
+                  "relative_energy_error": 2.5224837076118053e-15
+                },
+                "checks": [
+                  {
+                    "metric": "max_displacement_mm",
+                    "value": 7.407631445445907e-07,
+                    "max": 0.001,
+                    "ok": true
+                  },
+                  {
+                    "metric": "vm_peak_MPa",
+                    "value": 0.017442576025968715,
+                    "max": 10,
+                    "ok": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "objectives": [
+          1.0,
+          1.0,
+          -2.0
+        ],
+        "score": 2.0980000000000003,
+        "diagnosis": [],
+        "tool_version": "f96d2c6ba09d9624dcfd5558c458764247201fb540b493bca96511e8c8f4142b",
+        "phase": "search"
+      },
+      "attempts": 0,
+      "visits": 1,
+      "final": {
+        "status": "PASS",
+        "stages": {
+          "geometry": {
+            "status": "PASS",
+            "metrics": {
+              "volume": 1199.9999999999998,
+              "area": 680.0,
+              "solids": 1,
+              "faces": 6,
+              "bbox_x": 10.0,
+              "bbox_y": 10.0,
+              "bbox_z": 12.0
+            }
+          },
+          "constraints": {
+            "status": "PASS",
+            "checks": [
+              {
+                "metric": "bbox_x",
+                "value": 10.0,
+                "target": 10,
+                "ok": true
+              },
+              {
+                "metric": "bbox_y",
+                "value": 10.0,
+                "target": 10,
+                "ok": true
+              },
+              {
+                "metric": "bbox_z",
+                "value": 12.0,
+                "target": 12,
+                "ok": true
+              },
+              {
+                "metric": "solids",
+                "value": 1,
+                "target": 1,
+                "ok": true
+              }
+            ]
+          },
+          "semantics": {
+            "status": "PASS",
+            "confidence": 1.0,
+            "basis": "Caller-declared complete measurable task contract"
+          },
+          "fem": {
+            "status": "PASS",
+            "metrics": {
+              "nodes": 425,
+              "tetrahedra": 1498,
+              "connected_components": 1,
+              "mesh_volume_mm3": 1200.0,
+              "fixed_nodes": 58,
+              "loaded_facets": 116,
+              "loaded_area_mm2": 127.54367155439333,
+              "axis": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "projection_min_mm": -6.0,
+              "projection_max_mm": 6.0,
+              "compliance_N_mm": 5.550301289658244e-07,
+              "load_weighted_displacement_mm": 5.550301289658244e-07,
+              "max_displacement_mm": 6.734210491078575e-07,
+              "strain_energy_N_mm": 2.775150644829122e-07,
+              "vm_p95_MPa": 0.011618631923372457,
+              "vm_peak_MPa": 0.015856887570121773,
+              "relative_free_residual": 1.843016095091999e-14,
+              "relative_force_balance_error": 5.936281651563617e-16,
+              "relative_moment_balance_error": 6.709080976292268e-16,
+              "relative_energy_error": 0.0
+            },
+            "checks": [
+              {
+                "metric": "max_displacement_mm",
+                "value": 6.734210491078575e-07,
+                "max": 0.001,
+                "ok": true
+              },
+              {
+                "metric": "vm_peak_MPa",
+                "value": 0.015856887570121773,
+                "max": 10,
+                "ok": true
+              }
+            ]
+          },
+          "robustness": {
+            "status": "PASS",
+            "variations": [
+              {
+                "force_scale": 1.2,
+                "young_scale": 0.9,
+                "mesh_scale": 0.85
+              }
+            ],
+            "results": [
+              {
+                "status": "PASS",
+                "metrics": {
+                  "nodes": 425,
+                  "tetrahedra": 1498,
+                  "connected_components": 1,
+                  "mesh_volume_mm3": 1200.0,
+                  "fixed_nodes": 58,
+                  "loaded_facets": 116,
+                  "loaded_area_mm2": 127.54367155439333,
+                  "axis": [
+                    0.0,
+                    0.0,
+                    1.0
+                  ],
+                  "projection_min_mm": -6.0,
+                  "projection_max_mm": 6.0,
+                  "compliance_N_mm": 8.88048205565202e-07,
+                  "load_weighted_displacement_mm": 7.40040171304335e-07,
+                  "max_displacement_mm": 8.978947255273881e-07,
+                  "strain_energy_N_mm": 4.4402410278260167e-07,
+                  "vm_p95_MPa": 0.013942358024659318,
+                  "vm_peak_MPa": 0.019028265194425242,
+                  "relative_free_residual": 1.998206776104059e-14,
+                  "relative_force_balance_error": 4.798602577171883e-15,
+                  "relative_moment_balance_error": 6.381531465042104e-16,
+                  "relative_energy_error": 1.5499479990640874e-15
+                },
+                "checks": [
+                  {
+                    "metric": "max_displacement_mm",
+                    "value": 8.978947255273881e-07,
+                    "max": 0.001,
+                    "ok": true
+                  },
+                  {
+                    "metric": "vm_peak_MPa",
+                    "value": 0.019028265194425242,
+                    "max": 10,
+                    "ok": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "objectives": [
+          1.0,
+          1.0,
+          -2.0
+        ],
+        "score": 2.0980000000000003,
+        "diagnosis": [],
+        "tool_version": "f96d2c6ba09d9624dcfd5558c458764247201fb540b493bca96511e8c8f4142b",
+        "phase": "final"
+      },
+      "edges": []
+    }
+  ],
+  "edges": [
+    {
+      "parent": 0,
+      "child": 1,
+      "visits": 1,
+      "total": -0.002
+    },
+    {
+      "parent": 0,
+      "child": 2,
+      "visits": 2,
+      "total": 4.196000000000001
+    },
+    {
+      "parent": 0,
+      "child": 3,
+      "visits": 1,
+      "total": -0.002
+    },
+    {
+      "parent": 2,
+      "child": 4,
+      "visits": 1,
+      "total": 2.0980000000000003
+    }
+  ],
+  "events": [
+    {
+      "event": "decompose",
+      "plan": {
+        "source": "deterministic replay",
+        "steps": [
+          "Increase the box height from 10 to 12 mm",
+          "preserve width and depth at 10 mm."
+        ],
+        "constraints": [
+          {
+            "metric": "bbox_x",
+            "equals": 10
+          },
+          {
+            "metric": "bbox_y",
+            "equals": 10
+          },
+          {
+            "metric": "bbox_z",
+            "equals": 12
+          },
+          {
+            "metric": "solids",
+            "equals": 1
+          }
+        ],
+        "experience_ids": []
+      },
+      "memory_version": "944f6b77932a57e25059acbbe199c44f542586fe2ca99d5e90982cbfac0631be",
+      "retrieved": []
+    },
+    {
+      "event": "initial_state",
+      "verdict": {
+        "status": "FAIL",
+        "stages": {
+          "geometry": {
+            "status": "PASS",
+            "metrics": {
+              "volume": 999.9999999999998,
+              "area": 599.9999999999999,
+              "solids": 1,
+              "faces": 6,
+              "bbox_x": 10.0,
+              "bbox_y": 10.0,
+              "bbox_z": 10.0
+            }
+          },
+          "constraints": {
+            "status": "FAIL",
+            "checks": [
+              {
+                "metric": "bbox_x",
+                "value": 10.0,
+                "target": 10,
+                "ok": true
+              },
+              {
+                "metric": "bbox_y",
+                "value": 10.0,
+                "target": 10,
+                "ok": true
+              },
+              {
+                "metric": "bbox_z",
+                "value": 10.0,
+                "target": 12,
+                "ok": false
+              },
+              {
+                "metric": "solids",
+                "value": 1,
+                "target": 1,
+                "ok": true
+              }
+            ]
+          },
+          "semantics": {
+            "status": "UNKNOWN",
+            "reason": "Not evaluated"
+          },
+          "fem": {
+            "status": "UNKNOWN",
+            "reason": "No physical contract supplied"
+          },
+          "robustness": {
+            "status": "UNKNOWN",
+            "reason": "No perturbation contract supplied"
+          }
+        },
+        "objectives": [
+          0.0,
+          0.0,
+          -0.0
+        ],
+        "score": 0.0,
+        "diagnosis": [
+          {
+            "stage": "constraints",
+            "status": "FAIL",
+            "checks": [
+              {
+                "metric": "bbox_x",
+                "value": 10.0,
+                "target": 10,
+                "ok": true
+              },
+              {
+                "metric": "bbox_y",
+                "value": 10.0,
+                "target": 10,
+                "ok": true
+              },
+              {
+                "metric": "bbox_z",
+                "value": 10.0,
+                "target": 12,
+                "ok": false
+              },
+              {
+                "metric": "solids",
+                "value": 1,
+                "target": 1,
+                "ok": true
+              }
+            ]
+          },
+          {
+            "stage": "semantics",
+            "status": "UNKNOWN",
+            "reason": "Not evaluated"
+          },
+          {
+            "stage": "fem",
+            "status": "UNKNOWN",
+            "reason": "No physical contract supplied"
+          },
+          {
+            "stage": "robustness",
+            "status": "UNKNOWN",
+            "reason": "No perturbation contract supplied"
+          }
+        ],
+        "tool_version": "f96d2c6ba09d9624dcfd5558c458764247201fb540b493bca96511e8c8f4142b",
+        "phase": "initial"
+      }
+    },
+    {
+      "event": "expand",
+      "parent": 0,
+      "node": 1,
+      "merged": false,
+      "strategy": "repair",
+      "diagnosis": [
+        {
+          "stage": "constraints",
+          "status": "FAIL",
+          "checks": [
+            {
+              "metric": "bbox_x",
+              "value": 10.0,
+              "target": 10,
+              "ok": true
+            },
+            {
+              "metric": "bbox_y",
+              "value": 10.0,
+              "target": 10,
+              "ok": true
+            },
+            {
+              "metric": "bbox_z",
+              "value": 10.0,
+              "target": 12,
+              "ok": false
+            },
+            {
+              "metric": "solids",
+              "value": 1,
+              "target": 1,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "stage": "semantics",
+          "status": "UNKNOWN",
+          "reason": "Not evaluated"
+        },
+        {
+          "stage": "fem",
+          "status": "UNKNOWN",
+          "reason": "No physical contract supplied"
+        },
+        {
+          "stage": "robustness",
+          "status": "UNKNOWN",
+          "reason": "No perturbation contract supplied"
+        }
+      ],
+      "retrieved_repairs": [],
+      "path": [
+        0
+      ],
+      "status": "FAIL",
+      "hypothesis": "recorded candidate"
+    },
+    {
+      "event": "expand",
+      "parent": 0,
+      "node": 2,
+      "merged": false,
+      "strategy": "repair",
+      "diagnosis": [
+        {
+          "stage": "constraints",
+          "status": "FAIL",
+          "checks": [
+            {
+              "metric": "bbox_x",
+              "value": 10.0,
+              "target": 10,
+              "ok": true
+            },
+            {
+              "metric": "bbox_y",
+              "value": 10.0,
+              "target": 10,
+              "ok": true
+            },
+            {
+              "metric": "bbox_z",
+              "value": 10.0,
+              "target": 12,
+              "ok": false
+            },
+            {
+              "metric": "solids",
+              "value": 1,
+              "target": 1,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "stage": "semantics",
+          "status": "UNKNOWN",
+          "reason": "Not evaluated"
+        },
+        {
+          "stage": "fem",
+          "status": "UNKNOWN",
+          "reason": "No physical contract supplied"
+        },
+        {
+          "stage": "robustness",
+          "status": "UNKNOWN",
+          "reason": "No perturbation contract supplied"
+        }
+      ],
+      "retrieved_repairs": [],
+      "path": [
+        1
+      ],
+      "status": "PASS",
+      "hypothesis": "recorded candidate"
+    },
+    {
+      "event": "final_verification",
+      "node": 2,
+      "status": "PASS"
+    },
+    {
+      "event": "expand",
+      "parent": 0,
+      "node": 3,
+      "merged": false,
+      "strategy": "repair",
+      "diagnosis": [
+        {
+          "stage": "constraints",
+          "status": "FAIL",
+          "checks": [
+            {
+              "metric": "bbox_x",
+              "value": 10.0,
+              "target": 10,
+              "ok": true
+            },
+            {
+              "metric": "bbox_y",
+              "value": 10.0,
+              "target": 10,
+              "ok": true
+            },
+            {
+              "metric": "bbox_z",
+              "value": 10.0,
+              "target": 12,
+              "ok": false
+            },
+            {
+              "metric": "solids",
+              "value": 1,
+              "target": 1,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "stage": "semantics",
+          "status": "UNKNOWN",
+          "reason": "Not evaluated"
+        },
+        {
+          "stage": "fem",
+          "status": "UNKNOWN",
+          "reason": "No physical contract supplied"
+        },
+        {
+          "stage": "robustness",
+          "status": "UNKNOWN",
+          "reason": "No perturbation contract supplied"
+        }
+      ],
+      "retrieved_repairs": [],
+      "path": [
+        2
+      ],
+      "status": "FAIL",
+      "hypothesis": "recorded candidate"
+    },
+    {
+      "event": "backtrack",
+      "to_node": 2
+    },
+    {
+      "event": "expand",
+      "parent": 2,
+      "node": 4,
+      "merged": false,
+      "strategy": "diversify",
+      "diagnosis": [],
+      "retrieved_repairs": [],
+      "path": [
+        1,
+        3
+      ],
+      "status": "PASS",
+      "hypothesis": "recorded candidate"
+    },
+    {
+      "event": "final_verification",
+      "node": 4,
+      "status": "PASS"
+    }
+  ],
+  "config": {
+    "algorithm": "mcts",
+    "max_expansions": 4,
+    "max_depth": 4,
+    "width": 2,
+    "max_width": 4,
+    "exploration": 0.7,
+    "seconds": 300.0
+  },
+  "memory_version": "944f6b77932a57e25059acbbe199c44f542586fe2ca99d5e90982cbfac0631be",
+  "stored": "cvpr2027/experiments/adaptive-cad-integration-20261007/memory.jsonl",
+  "seconds": 14.711841625,
+  "api": {
+    "mode": "replay",
+    "api_calls": 0,
+    "cost_usd": 0
+  },
+  "export": {
+    "status": "PASS",
+    "path": "cvpr2027/experiments/adaptive-cad-integration-20261007/native-mcts/final_cad.step"
+  },
+  "tool_jobs": 8
+}

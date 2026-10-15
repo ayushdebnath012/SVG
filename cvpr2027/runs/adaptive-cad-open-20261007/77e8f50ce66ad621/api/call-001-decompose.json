@@ -1,0 +1,34 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "Qwen/Qwen3.5-35B-A3B-FP8",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .cylinder(9.1, 9.4)\\n    .union(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(25.35, 0, 0), rotate=cq.Vector(0, 0, 0))\\n            .box(32.9, 9.1, 5.6)\\n    )\\n    .union(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(46.7, 0, 0.0), rotate=cq.Vector(0, 0, 0))\\n            .cylinder(9.1, 5.4)\\n    )\\n    .faces(\\\">Z\\\").workplane()\\n    .hole(10.8)\\n    .cut(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(46.7, 0, 0.0), rotate=cq.Vector(0, 0, 0))\\n            .cylinder(13.65, 2.6)\\n    )\\n)\\nshow_object(result)\", \"instruction\": \"Cut a through-hole with a 7 mm radius using a vertical cylinder at the big-end center.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"0ba031d7f9650514547eedaf53436caab753e2030f7fad83fc383cf0a8ab569f\", \"instruction\": \"Add a central axial through-hole with a 7.00 mm radius through the entire impeller.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.cut(cq.Workplane('XY').cylinder(200.0, 7.0))\\\"], \\\"start\\\": 67}]}\", \"strategies\": [], \"context\": [\"67: show_object(result)\"]}, {\"task_id\": \"c01ba5e1a9f4e54c2614cc1aa5f134cdbd06bc93d65e158b7032c690b1222726\", \"instruction\": \"Add a central axial through-cut with a 10.00 mm radius through the entire part.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.cut(cq.Workplane('XY').cylinder(200.0, 10.0))\\\"], \\\"start\\\": 60}]}\", \"strategies\": [], \"context\": [\"60: show_object(result)\"]}, {\"task_id\": \"beb39e95d33474b6c28dbc04736c47f97be8b6777f3540b2be360d26f114d131\", \"instruction\": \"Remove the 7.00 mm-radius central through-hole from the impeller.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [], \\\"start\\\": 67}]}\", \"strategies\": [], \"context\": [\"67: result = result.cut(cq.Workplane('XY').cylinder(200.0, 7.0))\"]}]}"
+   }
+  ],
+  "temperature": 0.6,
+  "top_p": 0.95,
+  "top_k": 20,
+  "max_tokens": 8192
+ },
+ "usage": {
+  "prompt_tokens": 851,
+  "total_tokens": 1837,
+  "completion_tokens": 986,
+  "prompt_tokens_details": null,
+  "completion_tokens_details": {
+   "reasoning_tokens": 653
+  }
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "\n\n{\n  \"steps\": [\n    \"Create base cylinder with 9.1 radius and 9.4 height at origin\",\n    \"Union box component at offset (25.35, 0, 0) with dimensions 32.9 x 9.1 x 5.6\",\n    \"Union second cylinder at offset (46.7, 0, 0) with 5.4 radius and 9.1 height\",\n    \"Select top Z face and create workplane at big-end center\",\n    \"Cut through-hole using vertical cylinder with 7.0 mm radius at big-end center\",\n    \"Remove existing hole(10.8) and cut operations to replace with new through-hole\"\n  ],\n  \"invariants\": [\n    \"Base cylinder dimensions remain unchanged (9.1 radius, 9.4 height)\",\n    \"Box position and dimensions preserved (offset 25.35, 0, 0; 32.9 x 9.1 x 5.6)\",\n    \"Second cylinder position and dimensions preserved (offset 46.7, 0, 0; 5.4 radius)\",\n    \"Overall assembly topology maintained\",\n    \"Vertical cylinder axis aligned with Z-axis\"\n  ],\n  \"dependencies\": [\n    [0, 1],\n    [1, 2],\n    [2, 3],\n    [3, 4],\n    [4, 5]\n  ]\n}"
+}

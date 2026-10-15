@@ -1,0 +1,40 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.08994583333333332,
+ "request": {
+  "model": "gpt-6-astra",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .polygon(6, 15.012)\\n    .extrude(15.0)\\n    .faces(\\\">Z\\\").workplane()\\n    .hole(8.0)\\n)\\nshow_object(result)\", \"instruction\": \"Bevel the six straight outer edges of the top face at 30 degrees from horizontal, 2 mm wide on the top.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"de278a6cf30153f8c71931997a3e20c3fd372783ed57ed72111e5ca5afe71f46\", \"instruction\": \"Bevel all the straight top edges of the plate at 30 degrees from horizontal, 1 mm wide on the top face.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"    .faces(\\\\\\\">Z\\\\\\\").edges(\\\\\\\"%LINE\\\\\\\").chamfer(1.0, 0.5774)\\\"], \\\"start\\\": 16}]}\", \"strategies\": [], \"context\": [\"16: )\"]}, {\"task_id\": \"2df22d62234c99eed107f9a7fcefc2c1d7de4d9cbff557ec246236a8d989c1d5\", \"instruction\": \"Bevel all 8 straight outer edges of the top face at 60 degrees from horizontal, 3 mm wide on the top.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"    .faces(\\\\\\\">Z\\\\\\\").edges(\\\\\\\"%LINE\\\\\\\").chamfer(3.0, 5.1962)\\\"], \\\"start\\\": 6}]}\", \"strategies\": [], \"context\": [\"6: )\"]}, {\"task_id\": \"8b9a0a4ec97cfcb487a7069f340e3d9968ca94e0dca50ca04ffd1412d21926c7\", \"instruction\": \"Bevel the two straight top outer edges of the pie-slice at 45 degrees from horizontal, 9 mm wide on the top face.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"    .faces(\\\\\\\">Z\\\\\\\").edges(\\\\\\\"%LINE\\\\\\\").chamfer(9.0, 9.0)\\\"], \\\"start\\\": 8}]}\", \"strategies\": [], \"context\": [\"8: )\"]}]}"
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_completion_tokens": 1500,
+  "store": false
+ },
+ "usage": {
+  "prompt_tokens": 624,
+  "completion_tokens": 264,
+  "total_tokens": 888,
+  "prompt_tokens_details": {
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "audio_tokens": 0
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 0,
+   "audio_tokens": 0,
+   "accepted_prediction_tokens": 0,
+   "rejected_prediction_tokens": 0
+  }
+ },
+ "cost_usd": 0.01944,
+ "finish_reason": "stop",
+ "response": "{\n  \"steps\": [\n    \"Retain the existing hexagonal extrusion and central through-hole.\",\n    \"After the hole operation, select the six straight outer edges of the top face using .faces(\\\">Z\\\").edges(\\\"%LINE\\\"), excluding the circular hole rim.\",\n    \"Apply an asymmetric chamfer with a 2 mm setback on the horizontal top face and a vertical drop of 2*tan(30\u00b0) \u2248 1.1547 mm on the outer side faces. Ensure the chamfer distances are assigned to those respective faces.\",\n    \"Verify that all six bevels are 30 degrees from horizontal and 2 mm wide on the top, with the hole rim unchanged.\"\n  ],\n  \"invariants\": [\n    \"Preserve the original six-sided polygon footprint defined by .polygon(6, 15.012).\",\n    \"Preserve the bottom face and the 15 mm overall height.\",\n    \"Preserve the centered 8 mm diameter through-hole and its unbeveled circular rim.\",\n    \"Leave outer side faces unchanged below the bevel and do not chamfer the vertical or bottom edges.\"\n  ],\n  \"dependencies\": [\n    [0, 1],\n    [1, 2],\n    [2, 3]\n  ]\n}"
+}

@@ -1,0 +1,34 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "Qwen/Qwen3.5-35B-A3B-FP8",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .polyline([[10.96, 10.96], [27.4, 10.96], [27.4, -10.96], [10.96, -10.96], [10.96, -27.4], [-10.96, -27.4], [-10.96, -10.96], [-27.4, -10.96], [-27.4, 10.96], [-10.96, 10.96], [-10.96, 27.4], [10.96, 27.4]])\\n    .close()\\n    .extrude(7.4)\\n)\\nshow_object(result)\", \"instruction\": \"Make the cross thinner to 5.18.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"003e7304c9d48b6953ffd8a6330570bc7f94ba3583e94ed966cef6bea48da4bc\", \"instruction\": \"Make the link thinner to 7.14.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .extrude(7.14)\\\"], \\\"start\\\": 4}]}\", \"strategies\": [], \"context\": [\"4:     .extrude(10.2)\"]}, {\"task_id\": \"b65bf1d88e7afff5fb8458ab262ecedf2a36cdfddbeb945e386d027a6083f1af\", \"instruction\": \"Make the sector thicker to 18.07.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .extrude(18.07)\\\"], \\\"start\\\": 7}]}\", \"strategies\": [], \"context\": [\"7:     .extrude(13.9)\"]}, {\"task_id\": \"d827d3e3b4d1bffecde1b078f93d17a42f3480ab04351d9d050c0fc28bab9aa6\", \"instruction\": \"Make the sector thinner to 9.73.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .extrude(9.73)\\\"], \\\"start\\\": 7}]}\", \"strategies\": [], \"context\": [\"7:     .extrude(13.9)\"]}]}"
+   }
+  ],
+  "temperature": 0.6,
+  "top_p": 0.95,
+  "top_k": 20,
+  "max_tokens": 8192
+ },
+ "usage": {
+  "prompt_tokens": 709,
+  "total_tokens": 1368,
+  "completion_tokens": 659,
+  "prompt_tokens_details": null,
+  "completion_tokens_details": {
+   "reasoning_tokens": 521
+  }
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "\n\n{\n  \"steps\": [\n    \"Identify the extrude(7.4) operation controlling the cross thickness\",\n    \"Replace extrude(7.4) with extrude(5.18) to make the cross thinner\"\n  ],\n  \"invariants\": [\n    \"Polyline vertex coordinates remain unchanged\",\n    \"Workplane selection (XY) remains unchanged\",\n    \"close() operation remains unchanged\",\n    \"show_object(result) call remains unchanged\",\n    \"Overall geometry topology remains unchanged\"\n  ],\n  \"dependencies\": [\n    [0, 1]\n  ]\n}"
+}

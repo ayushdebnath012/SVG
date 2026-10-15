@@ -1,0 +1,1551 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <title>Elasticity (small and large deformation)</title>
+  <!-- Meta -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="dcterms.date" content="2026-04-15" />
+  <meta name="description" content="">
+  <link rel="shortcut icon" href="favicon.ico">  
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">   
+  <link rel="stylesheet" href="../assets/css/webfont.css">   
+  <link rel="stylesheet" href="../assets/css/asciinema-player.css">   
+  <link id="theme-style" rel="stylesheet" href="../assets/css/styles.css">
+  <script src="../assets/js/asciinema-player.min.js"></script>
+  
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
+
+  <style>
+   code {white-space: pre; position: relative; overflow: auto;}
+   span.smallcaps{font-variant: small-caps;}
+   span.underline{text-decoration: underline;}
+   div.column{display: inline-block; vertical-align: top; width: 50%;}
+   pre.feenox   { background-color: #eeeeee; padding: 1em; border: 0.15em solid #666666; border-radius: 0.2em;}  
+   pre.c        { background-color: #eeeef0; padding: 1em; border: 0.10em solid #666699; border-radius: 0.2em;}  
+   pre.bash     { background-color: #e5e6e5; padding: 1em; border: 0.10em solid #333333; border-radius: 0.2em;}  
+   pre.python   { background-color: #ffeeee; padding: 1em; border: 0.10em solid #996666; border-radius: 0.2em;}  
+   pre.terminal { background-color: #333333; padding: 1em; border: 0.20em solid #6699cc; border-radius: 0.2em;}  
+  </style>
+  <style>
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code.sourceCode {white-space: pre; overflow: auto;}
+code.wrap {white-space: pre-wrap;}
+  </style>
+<style>
+pre.feenox   code {display: block;}
+pre.c        code {display: block;}
+pre.bash     code {display: block;}
+pre.python   code {display: block;}
+pre.terminal code {display: block;}
+pre.terminal code {color: white;}
+</style>
+
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/5cc4322dd6e05b735b448b8e/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+
+ </head>
+  
+ <body class="body-blue">
+  <!-- ******navigation bar****** -->
+  <header id="header" class="header">
+   <div class="container">
+    <nav class="navbar navbar-expand-lg">
+     <div class="branding">
+      <h1 class="logo">
+       <a href="index.html">
+        <span aria-hidden="true" class="icon_documents_alt icon"></span>
+        <span class="text-bold">FeenoX</span>
+       </a>
+      </h1>
+      <small class="d-none d-lg-inline"><em>
+       A free no-fee no-X uniX-like finite-element(ish) computational engineering tool
+      </em></small>
+     </div><!--//branding-->
+              
+     <div class="top-search-box">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#feenox_navbarcontent" aria-controls="feenox_navbarcontent" aria-expanded="false" aria-label="Toggle navigation">
+       <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="feenox_navbarcontent">
+       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+       
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Home
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="../">README</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="../README4engineers.html">FeenoX for Engineers</a></li>
+            <li><a class="dropdown-item" href="../README4hackers.html">FeenoX for Hackers</a></li>
+            <li><a class="dropdown-item" href="../README4academics.html">FeenoX for Academics</a></li>
+          </ul>
+        </li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Examples
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="../examples">Index</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="../examples/basic.html">Basic math</a></li>
+            <li><a class="dropdown-item" href="../examples/daes.html">ODEs/DAEs</a></li>
+            <li><a class="dropdown-item" href="../examples/laplace.html">Laplace</a></li>
+            <li><a class="dropdown-item" href="../examples/thermal.html">Heat conduction</a></li>
+            <li><a class="dropdown-item" href="../examples/mechanical.html">Linear elasticity</a></li>
+            <li><a class="dropdown-item" href="../examples/modal.html">Modal analysis</a></li>
+            <li><a class="dropdown-item" href="../examples/neutron_diffusion.html">Neutron diffusion</a></li>
+            <li><a class="dropdown-item" href="../examples/neutron_sn.html">Neutron transport</a></li>
+          </ul>
+        </li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Tutorials
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="../doc/tutorials">Index</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="../doc/tutorials/000-setup">Set up your workspace</a></li>
+            <li><a class="dropdown-item" href="../doc/tutorials/110-tensile-test">Tensile test case</a></li>
+            <li><a class="dropdown-item" href="../doc/tutorials/120-mazes">Mazes without AI</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="../doc/tutorials/320-thermal">Heat conduction</a></li>
+          </ul>
+        </li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Documentation
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="../doc">Index</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="../doc/feenox-manual.html">Manual</a></li>
+            <li><a class="dropdown-item" href="../doc/feenox-desc.html">Description</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="../doc/srs.html">Requirements</a></li>
+            <li><a class="dropdown-item" href="../doc/sds.html">Design</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="../doc/compilation.html">Compilation</a></li>
+            <li><a class="dropdown-item" href="../doc/programming.html">Programming</a></li>
+            <li><a class="dropdown-item" href="../doc/FAQ.html">FAQs</a></li>
+            <li><a class="dropdown-item" href="../doc/history.html">History</a></li>
+          </ul>
+        </li>
+        
+        <li class="nav-item">
+         <a class="nav-link" href="../download.html">Download</a>
+        </li>
+        
+        <li class="nav-item">
+         <a class="nav-link" href="https://github.com/seamplex/feenox/">Github</a>
+        </li>
+        
+       </ul>
+      </div> <!--// collapse navbar-collapse-->
+     </div> <!--// top-search-box-->
+    </nav>
+   </div><!--//container-->
+  </header><!--//header--> 
+
+
+  <div class="page-wrapper"> 
+   <div class="doc-wrapper">
+    <div class="container">
+     <div id="doc-header" class="doc-header text-center">
+      <h1 class="doc-title">Elasticity (small and large
+deformation)</h1>
+        <div class="meta">  
+             <p class="meta"><a href="mechanical.pdf">Get PDF version</a></p>
+             <p class="meta">2026-04-15</p>
+        </div>  
+       </div><!--//doc-header--> 
+     <div class="doc-body row">
+      <div class="doc-content col-md-9 col-12 order-1">
+       <div class="content-inner">
+       
+        <div class="callout-block callout-success-outline callout-toc">
+          <h3 class="callout-title">Table of contents</h3>
+          
+<ul>
+<li><a href="#nafems-le10-thick-plate-pressure-benchmark"
+id="toc-nafems-le10-thick-plate-pressure-benchmark"><span
+class="toc-section-number">1</span> NAFEMS LE10 “Thick plate pressure”
+benchmark</a></li>
+<li><a
+href="#nafems-le11-solid-cylindertapersphere-temperature-benchmark"
+id="toc-nafems-le11-solid-cylindertapersphere-temperature-benchmark"><span
+class="toc-section-number">2</span> NAFEMS LE11 “Solid
+Cylinder/Taper/Sphere-Temperature” benchmark</a></li>
+<li><a href="#nafems-le1-elliptical-membrane-plane-stress-benchmark"
+id="toc-nafems-le1-elliptical-membrane-plane-stress-benchmark"><span
+class="toc-section-number">3</span> NAFEMS LE1 “Elliptical membrane”
+plane-stress benchmark</a></li>
+<li><a href="#parametric-study-on-a-cantilevered-beam"
+id="toc-parametric-study-on-a-cantilevered-beam"><span
+class="toc-section-number">4</span> Parametric study on a cantilevered
+beam</a></li>
+<li><a
+href="#parallelepiped-whose-youngs-modulus-is-a-function-of-the-temperature"
+id="toc-parallelepiped-whose-youngs-modulus-is-a-function-of-the-temperature"><span
+class="toc-section-number">5</span> Parallelepiped whose Young’s modulus
+is a function of the temperature</a>
+<ul>
+<li><a href="#thermal-problem" id="toc-thermal-problem"><span
+class="toc-section-number">5.1</span> Thermal problem</a></li>
+<li><a href="#mechanical-problem" id="toc-mechanical-problem"><span
+class="toc-section-number">5.2</span> Mechanical problem</a></li>
+</ul></li>
+<li><a href="#orthotropic-free-expansion-of-a-cube"
+id="toc-orthotropic-free-expansion-of-a-cube"><span
+class="toc-section-number">6</span> Orthotropic free expansion of a
+cube</a></li>
+<li><a href="#thermo-elastic-expansion-of-finite-cylinders"
+id="toc-thermo-elastic-expansion-of-finite-cylinders"><span
+class="toc-section-number">7</span> Thermo-elastic expansion of finite
+cylinders</a></li>
+<li><a href="#temperature-dependent-material-properties"
+id="toc-temperature-dependent-material-properties"><span
+class="toc-section-number">8</span> Temperature-dependent material
+properties</a></li>
+<li><a href="#two-cubes-compressing-each-other"
+id="toc-two-cubes-compressing-each-other"><span
+class="toc-section-number">9</span> Two cubes compressing each
+other</a></li>
+<li><a href="#steelaluminum-paradox"
+id="toc-steelaluminum-paradox"><span
+class="toc-section-number">10</span> Steel/aluminum paradox</a></li>
+<li><a href="#nafems-gnl5-large-deformation-beam"
+id="toc-nafems-gnl5-large-deformation-beam"><span
+class="toc-section-number">11</span> NAFEMS GNL5 “Large-deformation
+beam”</a></li>
+</ul>
+          
+        </div><!--//callout-block-->
+
+<h1 class="section-title" data-number="1"
+id="nafems-le10-thick-plate-pressure-benchmark"><span
+class="header-section-number">1</span> NAFEMS LE10 “Thick plate
+pressure” benchmark</h1>
+<figure>
+<img class="img-fluid" src="nafems-le10-problem-input.svg" style="width:100.0%"
+alt="The NAFEMS LE10 problem statement and the corresponding FeenoX input" />
+<figcaption aria-hidden="true">The NAFEMS LE10 problem statement and the
+corresponding FeenoX input</figcaption>
+</figure>
+<p>Assuming the CAD has already been created in <a
+href="nafems-le10.step">STEP format</a> (for instance using Gmsh with <a
+href="https://github.com/seamplex/feenox/blob/main/examples/nafems-le10-cad.geo">this
+geo file</a>), create a tetrahedral locally-refined unstructured grid
+with Gmsh using the following <code>.geo</code> file:</p>
+<div class="sourceCode" id="cb1" style="c"><pre
+class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// NAFEMS LE10 benchmark unstructured locally-refined tetrahedral mesh</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>Merge <span class="st">&quot;nafems-le10.step&quot;</span><span class="op">;</span>   <span class="co">// load the CAD</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">// define physical names from the geometrical entity ids</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>Physical Surface<span class="op">(</span><span class="st">&quot;upper&quot;</span><span class="op">)</span> <span class="op">=</span> <span class="op">{</span><span class="dv">7</span><span class="op">};</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>Physical Surface<span class="op">(</span><span class="st">&quot;DCD&#39;C&#39;&quot;</span><span class="op">)</span> <span class="op">=</span> <span class="op">{</span><span class="dv">1</span><span class="op">};</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>Physical Surface<span class="op">(</span><span class="st">&quot;ABA&#39;B&#39;&quot;</span><span class="op">)</span> <span class="op">=</span> <span class="op">{</span><span class="dv">3</span><span class="op">};</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>Physical Surface<span class="op">(</span><span class="st">&quot;BCB&#39;C&#39;&quot;</span><span class="op">)</span> <span class="op">=</span> <span class="op">{</span><span class="dv">4</span><span class="op">,</span> <span class="dv">5</span><span class="op">};</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>Physical Curve<span class="op">(</span><span class="st">&quot;midplane&quot;</span><span class="op">)</span> <span class="op">=</span> <span class="op">{</span><span class="dv">14</span><span class="op">};</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>Physical Volume<span class="op">(</span><span class="st">&quot;bulk&quot;</span><span class="op">)</span> <span class="op">=</span> <span class="op">{</span><span class="dv">1</span><span class="op">};</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">// meshing settings, read Gmsh&#39; manual for further reference</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>Mesh<span class="op">.</span>ElementOrder <span class="op">=</span> <span class="dv">2</span><span class="op">;</span>      <span class="co">// use second-order tetrahedra</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>Mesh<span class="op">.</span>Algorithm <span class="op">=</span> <span class="dv">6</span><span class="op">;</span>         <span class="co">// 2D mesh algorithm:  6: Frontal Delaunay</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>Mesh<span class="op">.</span>Algorithm3D <span class="op">=</span> <span class="dv">10</span><span class="op">;</span>      <span class="co">// 3D mesh algorithm: 10: HXT</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>Mesh<span class="op">.</span>Optimize <span class="op">=</span> <span class="dv">1</span><span class="op">;</span>          <span class="co">// Optimize the mesh</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>Mesh<span class="op">.</span>HighOrderOptimize <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> <span class="co">// Optimize high-order meshes? 2: elastic+optimization</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>Mesh<span class="op">.</span>MeshSizeMax <span class="op">=</span> <span class="dv">80</span><span class="op">;</span>      <span class="co">// main element size </span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>Mesh<span class="op">.</span>MeshSizeMin <span class="op">=</span> <span class="dv">20</span><span class="op">;</span>      <span class="co">// refined element size</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">// local refinement around the point D (entity 4)</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>Field<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">=</span> Distance<span class="op">;</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>Field<span class="op">[</span><span class="dv">1</span><span class="op">].</span>NodesList <span class="op">=</span> <span class="op">{</span><span class="dv">4</span><span class="op">};</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>Field<span class="op">[</span><span class="dv">2</span><span class="op">]</span> <span class="op">=</span> Threshold<span class="op">;</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>Field<span class="op">[</span><span class="dv">2</span><span class="op">].</span>IField <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>Field<span class="op">[</span><span class="dv">2</span><span class="op">].</span>LcMin <span class="op">=</span> Mesh<span class="op">.</span>MeshSizeMin<span class="op">;</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>Field<span class="op">[</span><span class="dv">2</span><span class="op">].</span>LcMax <span class="op">=</span> Mesh<span class="op">.</span>MeshSizeMax<span class="op">;</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>Field<span class="op">[</span><span class="dv">2</span><span class="op">].</span>DistMin <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> Mesh<span class="op">.</span>MeshSizeMax<span class="op">;</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>Field<span class="op">[</span><span class="dv">2</span><span class="op">].</span>DistMax <span class="op">=</span> <span class="dv">6</span> <span class="op">*</span> Mesh<span class="op">.</span>MeshSizeMax<span class="op">;</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>Background Field <span class="op">=</span> <span class="op">{</span><span class="dv">2</span><span class="op">};</span></span></code></pre></div>
+<p>and then use this pretty-straightforward input file that has a
+one-to-one correspondence with the original problem formulation from
+1990:</p>
+<div class="sourceCode" id="cb2" style="feenox"><pre
+class="sourceCode feenox"><code class="sourceCode feenox"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># NAFEMS Benchmark LE-10: thick plate pressure</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">PROBLEM</span> mechanical <span class="kw">MESH</span> nafems<span class="op">-</span>le10.msh   <span class="co"># mesh in millimeters</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># LOADING: uniform normal pressure on the upper surface</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="kw">BC</span> upper    p<span class="op">=</span><span class="dt">1</span>      <span class="co"># 1 Mpa</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># BOUNDARY CONDITIONS:</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="kw">BC</span> DCD&#39;C&#39;   v<span class="op">=</span><span class="dt">0</span>      <span class="co"># Face DCD&#39;C&#39; zero y-displacement</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="kw">BC</span> ABA&#39;B&#39;   u<span class="op">=</span><span class="dt">0</span>      <span class="co"># Face ABA&#39;B&#39; zero x-displacement</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="kw">BC</span> BCB&#39;C&#39;   u<span class="op">=</span><span class="dt">0</span> v<span class="op">=</span><span class="dt">0</span>  <span class="co"># Face BCB&#39;C&#39; x and y displ. fixed</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="kw">BC</span> midplane w<span class="op">=</span><span class="dt">0</span>      <span class="co">#  z displacements fixed along mid-plane</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># MATERIAL PROPERTIES: isotropic single-material properties</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="ot">E</span> <span class="op">=</span> <span class="dt">210e3</span>   <span class="co"># Young modulus in MPa</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="ot">nu</span> <span class="op">=</span> <span class="dt">0.3</span>    <span class="co"># Poisson&#39;s ratio</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co"># print the direct stress y at D (and nothing more)</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="kw">PRINTF</span> &quot;σ_y @ D <span class="op">=</span> %.<span class="dt">4</span>f MPa&quot; sigmay<span class="op">(</span><span class="dt">2000</span>,<span class="dt">0</span>,<span class="dt">300</span><span class="op">)</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co"># write post-processing data for paraview</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="kw">WRITE_RESULTS</span></span></code></pre></div>
+<pre class="terminal" style="terminal"><code>$ gmsh -3 nafems-le10.geo
+[...]
+$ feenox nafems-le10.fee
+sigma_y @ D = -5.37968 MPa
+$
+</code></pre>
+<figure>
+<img class="img-fluid" src="nafems-le10.png" data-width_latex="75%" data-width_html="100%"
+alt="Normal stress \sigma_y refined around point D over 5,000x-warped displacements for LE10 created with Paraview" />
+<figcaption aria-hidden="true">Normal stress <span
+class="math inline">\sigma_y</span> refined around point <span
+class="math inline">D</span> over 5,000x-warped displacements for LE10
+created with Paraview</figcaption>
+</figure>
+<h1 class="section-title" data-number="2"
+id="nafems-le11-solid-cylindertapersphere-temperature-benchmark"><span
+class="header-section-number">2</span> NAFEMS LE11 “Solid
+Cylinder/Taper/Sphere-Temperature” benchmark</h1>
+<figure id="fig:nafems-le11-problem" class="subfigures">
+<p><img class="img-fluid" src="nafems-le11-problem.png" style="width:48.0%" alt="a" />
+<img class="img-fluid" src="nafems-le11-mesh.png" style="width:48.0%" alt="b" /></p>
+<figcaption><p>Figure 1: The NAFEMS LE11 problem formulation. a —
+Problem statement, b — Structured hex mesh</p></figcaption>
+</figure>
+<p>Following the spirit from LE10, note how easy it is to give a
+space-dependent temperature field in FeenoX. Just write <span
+class="math inline">\sqrt{x^2+y^2}+z</span> like
+<code>sqrt(x^2 + y^2) + z</code>!</p>
+<div class="sourceCode" id="cb4" style="feenox"><pre
+class="sourceCode feenox"><code class="sourceCode feenox"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># NAFEMS Benchmark LE-11: solid cylinder/taper/sphere-temperature</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">PROBLEM</span> mechanical <span class="dt">3</span>D <span class="kw">MESH</span> nafems<span class="op">-</span>le11.msh</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># linear temperature gradient in the radial and axial direction</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># as an algebraic expression as human-friendly as it can be</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="ot">T</span><span class="op">(</span><span class="ot">x</span>,<span class="ot">y</span>,<span class="ot">z</span><span class="op">)</span> <span class="op">=</span> <span class="fu">sqrt</span><span class="op">(</span><span class="ot">x</span><span class="op">^</span><span class="dt">2</span> <span class="op">+</span> <span class="ot">y</span><span class="op">^</span><span class="dt">2</span><span class="op">)</span> <span class="op">+</span> <span class="ot">z</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="kw">BC</span> xz     v<span class="op">=</span><span class="dt">0</span>       <span class="co"># displacement vector is [u,v,w]</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="kw">BC</span> yz     u<span class="op">=</span><span class="dt">0</span>       <span class="co"># u = displacement in x</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="kw">BC</span> xy     w<span class="op">=</span><span class="dt">0</span>       <span class="co"># v = displacement in y</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="kw">BC</span> HIH&#39;I&#39; w<span class="op">=</span><span class="dt">0</span>       <span class="co"># w = displacement in z</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="ot">E</span> <span class="op">=</span> <span class="dt">210e3</span><span class="op">*</span><span class="dt">1e6</span>       <span class="co"># mesh is in meters, so E=210e3 MPa -&gt; Pa</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="ot">nu</span> <span class="op">=</span> <span class="dt">0.3</span>            <span class="co"># dimensionless</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="ot">alpha</span> <span class="op">=</span> <span class="dt">2.3e-4</span>      <span class="co"># in 1/ºC as in the problem</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="kw">SOLVE_PROBLEM</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co"># for post-processing in Paraview</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="kw">WRITE_MESH</span> nafems<span class="op">-</span>le11.vtk <span class="kw">VECTOR</span> u v w   <span class="ot">T</span> sigmax sigmay sigmaz</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="kw">PRINTF</span> &quot;sigma_z<span class="op">(</span>A<span class="op">)</span> <span class="op">=</span> %.<span class="dt">2</span>f MPa&quot; sigmaz<span class="op">(</span><span class="dt">1</span>,<span class="dt">0</span>,<span class="dt">0</span><span class="op">)/</span><span class="dt">1e6</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="kw">PRINTF</span> &quot;wall time  <span class="op">=</span> %.<span class="dt">2</span>f seconds&quot; <span class="fu">wall_time</span><span class="op">()</span></span></code></pre></div>
+<pre class="terminal" style="terminal"><code>$ gmsh -3 nafems-le11.geo
+[...]
+$ feenox nafems-le11.fee
+sigma_z(A) = -105.04 MPa
+wall time  = wall time  = 1.91 seconds
+$
+</code></pre>
+<figure id="fig:nafems-le11-result" class="subfigures">
+<p><img class="img-fluid" src="nafems-le11-temperature.png" style="width:48.0%" alt="a" />
+<img class="img-fluid" src="nafems-le11-sigmaz.png" style="width:48.0%" alt="b" /></p>
+<figcaption><p>Figure 2: The NAFEMS LE11 problem results. a — Problem
+statement, b — Structured hex mesh</p></figcaption>
+</figure>
+<h1 class="section-title" data-number="3"
+id="nafems-le1-elliptical-membrane-plane-stress-benchmark"><span
+class="header-section-number">3</span> NAFEMS LE1 “Elliptical membrane”
+plane-stress benchmark</h1>
+<figure>
+<img class="img-fluid" src="nafems-le1-figure.svg" style="width:90.0%"
+alt="The NAFEMS LE1 problem" />
+<figcaption aria-hidden="true">The NAFEMS LE1 problem</figcaption>
+</figure>
+<p>Tell FenooX the problem is <code>plane_stress</code>. Use the
+<code>nafems-le1.geo</code> file provided to create the mesh. Read it
+with <code>READ_MESH</code>, set material properties, <code>BC</code>s
+and <code>SOLVE_PROBLEM</code>!</p>
+<div class="sourceCode" id="cb6" style="feenox"><pre
+class="sourceCode feenox"><code class="sourceCode feenox"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">PROBLEM</span> mechanical <span class="dt">2</span>D plane_stress <span class="kw">MESH</span> nafems<span class="op">-</span>le1.msh</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ot">E</span> <span class="op">=</span> <span class="dt">210e3</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ot">nu</span> <span class="op">=</span> <span class="dt">0.3</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="kw">BC</span> AB u<span class="op">=</span><span class="dt">0</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="kw">BC</span> CD v<span class="op">=</span><span class="dt">0</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="kw">BC</span> <span class="kw">BC</span> tension<span class="op">=</span><span class="dt">10</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="kw">SOLVE_PROBLEM</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="kw">WRITE_MESH</span> nafems<span class="op">-</span>le1.vtk <span class="kw">VECTOR</span> u v <span class="dt">0</span> sigmax sigmay tauxy</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="kw">PRINT</span> &quot;σy at point D <span class="op">=</span> &quot; %.<span class="dt">4</span>f sigmay<span class="op">(</span><span class="dt">2000</span>,<span class="dt">0</span><span class="op">)</span> &quot;<span class="op">(</span>reference is <span class="dt">92.7</span><span class="op">)</span>&quot; <span class="kw">SEP</span> &quot; &quot;</span></code></pre></div>
+<pre class="terminal" style="terminal"><code>$ gmsh -2 nafems-le11.geo
+[...]
+$ feenox nafems-le1.fee
+σy at point D =  92.7011 (reference is 92.7)
+$
+</code></pre>
+<figure>
+<img class="img-fluid" src="nafems-le1-sigmay.png" style="width:85.0%"
+alt="Normal stress \sigma_y over 500x-warped displacements for LE1 created with Paraview" />
+<figcaption aria-hidden="true">Normal stress <span
+class="math inline">\sigma_y</span> over 500x-warped displacements for
+LE1 created with Paraview</figcaption>
+</figure>
+<h1 class="section-title" data-number="4" id="parametric-study-on-a-cantilevered-beam"><span
+class="header-section-number">4</span> Parametric study on a
+cantilevered beam</h1>
+<p>If an external loop successively calls FeenoX with extra command-line
+arguments, a parametric run is obtained. This file
+<code>cantilever.fee</code> fixes the face called “left” and sets a load
+in the negative <span class="math inline">z</span> direction of a mesh
+called <code>cantilever-$1-$2.msh</code>, where <code>$1</code> is the
+first argument after the input file and <code>$2</code> the second one.
+The output is a single line containing the number of nodes of the mesh
+and the displacement in the vertical direction <span
+class="math inline">w(500,0,0)</span> at the center of the cantilever’s
+free face.</p>
+<p>The following Bash script first calls Gmsh to create the meshes. To
+do so, it first starts with a base <a
+href="https://github.com/seamplex/feenox/blob/main/examples/cantilever.geo"><code>cantilever.geo</code></a>
+file that creates the CAD:</p>
+<div class="sourceCode" id="cb8" style="c"><pre
+class="sourceCode c"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">// https://autofem.com/examples/determining_natural_frequencie.html</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>SetFactory<span class="op">(</span><span class="st">&quot;OpenCASCADE&quot;</span><span class="op">);</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> <span class="fl">0.5</span><span class="op">;</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="fl">0.05</span><span class="op">;</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>h <span class="op">=</span> <span class="fl">0.02</span><span class="op">;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>Box<span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">=</span> <span class="op">{</span><span class="dv">0</span><span class="op">,-</span>b<span class="op">/</span><span class="dv">2</span><span class="op">,-</span>h<span class="op">/</span><span class="dv">2</span><span class="op">,</span> L<span class="op">,</span> b<span class="op">,</span> h<span class="op">};</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>Physical Surface<span class="op">(</span><span class="st">&quot;left&quot;</span><span class="op">)</span> <span class="op">=</span> <span class="op">{</span><span class="dv">1</span><span class="op">};</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>Physical Surface<span class="op">(</span><span class="st">&quot;right&quot;</span><span class="op">)</span> <span class="op">=</span> <span class="op">{</span><span class="dv">2</span><span class="op">};</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>Physical Surface<span class="op">(</span><span class="st">&quot;top&quot;</span><span class="op">)</span> <span class="op">=</span> <span class="op">{</span><span class="dv">4</span><span class="op">};</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>Physical Volume<span class="op">(</span><span class="st">&quot;bulk&quot;</span><span class="op">)</span> <span class="op">=</span> <span class="op">{</span><span class="dv">1</span><span class="op">};</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>Transfinite Curve <span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">7</span><span class="op">}</span> <span class="op">=</span> <span class="dv">1</span><span class="op">/(</span>Mesh<span class="op">.</span>MeshSizeFactor<span class="op">*</span>Mesh<span class="op">.</span>ElementOrder<span class="op">)</span> <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>Transfinite Curve <span class="op">{</span><span class="dv">2</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">6</span><span class="op">,</span> <span class="dv">8</span><span class="op">}</span> <span class="op">=</span> <span class="dv">2</span><span class="op">/(</span>Mesh<span class="op">.</span>MeshSizeFactor<span class="op">*</span>Mesh<span class="op">.</span>ElementOrder<span class="op">)</span> <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>Transfinite Curve <span class="op">{</span><span class="dv">9</span><span class="op">,</span> <span class="dv">10</span><span class="op">,</span> <span class="dv">11</span><span class="op">,</span> <span class="dv">12</span><span class="op">}</span> <span class="op">=</span> <span class="dv">16</span><span class="op">/(</span>Mesh<span class="op">.</span>MeshSizeFactor<span class="op">*</span>Mesh<span class="op">.</span>ElementOrder<span class="op">)</span> <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>Transfinite Surface <span class="st">&quot;*&quot;</span><span class="op">;</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>Transfinite Volume <span class="st">&quot;*&quot;</span><span class="op">;</span></span></code></pre></div>
+<p>Then another <code>.geo</code> file is merged to build
+<code>cantilever-${element}-${c}.msh</code> where</p>
+<ul>
+<li><code>${element}</code>: <a
+href="https://github.com/seamplex/feenox/blob/main/examples/cantilever-tet4.geo">tet4</a>,
+<a
+href="https://github.com/seamplex/feenox/blob/main/examples/cantilever-tet10.geo">tet10</a>,
+<a
+href="https://github.com/seamplex/feenox/blob/main/examples/cantilever-hex8.geo">hex8</a>,
+<a
+href="https://github.com/seamplex/feenox/blob/main/examples/cantilever-hex20.geo">hex20</a>,
+<a
+href="https://github.com/seamplex/feenox/blob/main/examples/cantilever-hex27.geo">hex27</a></li>
+<li><code>${c}</code>: 1,2,<span
+class="math inline">\dots</span>,10</li>
+</ul>
+<figure id="fig:cantilever-mesh" class="subfigures">
+<p><img class="img-fluid" src="cantilever-tet.png" style="width:45.0%" alt="a" /> <img
+src="cantilever-hex.png" style="width:45.0%" alt="b" /></p>
+<figcaption><p>Figure 3: Cantilevered beam meshed with structured
+tetrahedra and hexahedra. a — Tetrahedra, b — Hexahedra</p></figcaption>
+</figure>
+<p>It then calls FeenoX with the input <a
+href="https://github.com/seamplex/feenox/blob/main/examples/cantilever.fee"><code>cantilever.fee</code></a>
+and passes <code>${element}</code> and <code>${c}</code> as extra
+arguments, which then are expanded as <code>$1</code> and
+<code>$2</code> respectively.</p>
+<div class="sourceCode" id="cb9" style="bash"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-f</span> <span class="pp">*</span>.dat</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> element <span class="kw">in</span> tet4 tet10 hex8 hex20 hex27<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a> <span class="cf">for</span> c <span class="kw">in</span> <span class="va">$(</span><span class="fu">seq</span> 1 10<span class="va">)</span><span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># create mesh if not already cached</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="va">mesh</span><span class="op">=</span>cantilever-<span class="va">${element}</span>-<span class="va">${c}</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="bu">[</span> <span class="ot">!</span> <span class="ot">-e</span> <span class="va">${mesh}</span>.msh <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="va">scale</span><span class="op">=</span><span class="va">$(</span><span class="bu">echo</span> <span class="st">&quot;PRINT 1/</span><span class="va">${c}</span><span class="st">&quot;</span> <span class="kw">|</span> <span class="ex">feenox</span> <span class="at">-</span><span class="va">)</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="ex">gmsh</span> <span class="at">-3</span> <span class="at">-v</span> 0 cantilever-<span class="va">${element}</span>.geo <span class="at">-clscale</span> <span class="va">${scale}</span> <span class="at">-o</span> <span class="va">${mesh}</span>.msh</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">fi</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># call FeenoX</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>  <span class="ex">feenox</span> cantilever.fee <span class="va">${element}</span> <span class="va">${c}</span> <span class="kw">|</span> <span class="fu">tee</span> <span class="at">-a</span> cantilever-<span class="va">${element}</span>.dat</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a> <span class="cf">done</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div>
+<p>After the execution of the Bash script, thanks to the design decision
+that output is 100% defined by the user (in this case with the
+<code>PRINT</code> instruction), one has several files
+<code>cantilever-${element}.dat</code> files. When plotted, these show
+the shear locking effect of fully-integrated first-order elements. The
+theoretical Euler-Bernoulli result is just a reference as, among other
+things, it does not take into account the effect of the material’s
+Poisson’s ratio. Note that the abscissa shows the number of
+<em>nodes</em>, which are proportional to the number of degrees of
+freedom (i.e. the size of the problem matrix) and not the number of
+<em>elements</em>, which is irrelevant here and in most problems.</p>
+<div class="sourceCode" id="cb10" style="feenox"><pre
+class="sourceCode feenox"><code class="sourceCode feenox"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">PROBLEM</span> mechanical <span class="dt">3</span>D <span class="kw">MESH</span> cantilever<span class="op">-</span>$<span class="dt">1</span><span class="op">-</span>$<span class="dt">2.</span>msh   <span class="co"># in meters</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="ot">E</span> <span class="op">=</span> <span class="dt">2.1e11</span>         <span class="co"># Young modulus in Pascals</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="ot">nu</span> <span class="op">=</span> <span class="dt">0.3</span>           <span class="co"># Poisson&#39;s ratio</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="kw">BC</span> left   fixed</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="kw">BC</span> right  tz<span class="op">=-</span><span class="dt">1e5</span>  <span class="co"># traction in Pascals, negative z</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co"># z-displacement (components are u,v,w) at the tip vs. number of nodes</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="kw">PRINT</span> nodes %e w<span class="op">(</span><span class="dt">0.5</span>,<span class="dt">0</span>,<span class="dt">0</span><span class="op">)</span> &quot;\# $<span class="dt">1</span> $<span class="dt">2</span>&quot;</span></code></pre></div>
+<pre class="terminal" style="terminal"><code>$ ./cantilever.sh
+102     -7.641572e-05   # tet4 1
+495     -2.047389e-04   # tet4 2
+1372    -3.149658e-04   # tet4 3
+[...]
+19737   -5.916234e-04   # hex27 8
+24795   -5.916724e-04   # hex27 9
+37191   -5.917163e-04   # hex27 10
+$ pyxplot cantilever.ppl
+</code></pre>
+<figure>
+<img class="img-fluid" src="cantilever-displacement.svg" style="width:100.0%"
+alt="Displacement at the free tip of a cantilevered beam vs. number of nodes for different element types" />
+<figcaption aria-hidden="true">Displacement at the free tip of a
+cantilevered beam vs. number of nodes for different element
+types</figcaption>
+</figure>
+<h1 class="section-title" data-number="5"
+id="parallelepiped-whose-youngs-modulus-is-a-function-of-the-temperature"><span
+class="header-section-number">5</span> Parallelepiped whose Young’s
+modulus is a function of the temperature</h1>
+<p>The problem consists of finding the non-dimensional temperature <span
+class="math inline">T</span> and displacements <span
+class="math inline">u</span>, <span class="math inline">v</span> and
+<span class="math inline">w</span> distributions within a solid
+parallelepiped of length <span class="math inline">l</span> whose base
+is a square of <span class="math inline">h\times h</span>. The solid is
+subject to heat fluxes and to a traction pressure at the same time. The
+non-dimensional Young’s modulus <span class="math inline">E</span> of
+the material depends on the temperature <span
+class="math inline">T</span> in a know algebraically way, whilst both
+the Poisson coefficient <span class="math inline">\nu</span> and the
+thermal conductivity <span class="math inline">k</span> are uniform and
+do not depend on the spatial coordinates:</p>
+<p><span class="math display">\begin{aligned}
+E(T) &amp;= \frac{1000}{800-T} \\
+\nu &amp;= 0.3 \\
+k &amp;= 1 \\
+\end{aligned}</span></p>
+<figure id="fig:parallelepiped">
+<img class="img-fluid" src="parallelepiped.svg"
+alt="Figure 4: Original figure from v7.03.100.pdf" />
+<figcaption aria-hidden="true">Figure 4: Original figure from <a
+href="http://www.code-aster.org/V2/doc/default/fr/man_v/v7/v7.03.100.pdf">v7.03.100.pdf</a></figcaption>
+</figure>
+<p>References:</p>
+<ul>
+<li><a
+href="http://www.code-aster.org/V2/doc/default/fr/man_v/v7/v7.03.100.pdf"
+class="uri">http://www.code-aster.org/V2/doc/default/fr/man_v/v7/v7.03.100.pdf</a></li>
+<li><a href="https://www.seamplex.com/docs/SP-FI-17-BM-12F2-A.pdf"
+class="uri">https://www.seamplex.com/docs/SP-FI-17-BM-12F2-A.pdf</a></li>
+</ul>
+<p>This thermo-mechanical problem is solved in two stages. First, the
+heat conduction equation is solved over a coarse first-order mesh to
+find the non-dimensional temperature distribution. Then, a mechanical
+problem is solved where <span class="math inline">T(x,y,z)</span> is
+read from the first mesh and interpolated into a finer second-order mesh
+so to as evaluate the non-dimensional Young’s modulus as</p>
+<p><span class="math display">E\Big(T(x,y,z)\Big) =
+\frac{1000}{800-T(x,y,z)}</span></p>
+<p>Note that there are not thermal expansion effects (i.e. the thermal
+expansion coefficient is <span class="math inline">\alpha=0</span>).
+Yet, suprinsingly enough, the problem has analytical solutions for both
+the temperature and the displacement fields.</p>
+<h2 data-number="5.1" id="thermal-problem"><span
+class="header-section-number">5.1</span> Thermal problem</h2>
+<p>The following input solves the thermal problem over a coarse
+first-order mesh, writes the resulting temperature distribution into
+<code>parallelepiped-temperature.msh</code>, and prints the <span
+class="math inline">L_2</span> error of the numerical result with
+respect to the analytical solution <span class="math inline">T(x,y,z) =
+40 - 2x - 3y - 4z</span>.</p>
+<div class="sourceCode" id="cb12" style="feenox"><pre
+class="sourceCode feenox"><code class="sourceCode feenox"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">PROBLEM</span> <span class="ot">thermal</span> <span class="dt">3</span>D</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">READ_MESH</span> parallelepiped<span class="op">-</span>coarse.msh</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="ot">k</span> <span class="op">=</span> <span class="dt">1</span>     <span class="co"># unitary non-dimensional thermal conductivity</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co"># boundary conditions</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="kw">BC</span> left    <span class="ot">q</span><span class="op">=+</span><span class="dt">2</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="kw">BC</span> right   <span class="ot">q</span><span class="op">=-</span><span class="dt">2</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="kw">BC</span> front   <span class="ot">q</span><span class="op">=+</span><span class="dt">3</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="kw">BC</span> back    <span class="ot">q</span><span class="op">=-</span><span class="dt">3</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="kw">BC</span> bottom  <span class="ot">q</span><span class="op">=+</span><span class="dt">4</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="kw">BC</span> top     <span class="ot">q</span><span class="op">=-</span><span class="dt">4</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="kw">BC</span> A       <span class="ot">T</span><span class="op">=</span><span class="dt">0</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="kw">SOLVE_PROBLEM</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="kw">WRITE_MESH</span> parallelepiped<span class="op">-</span>temperature.msh <span class="ot">T</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="co"># compute the L-2 norm of the error in the displacement field</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>Te<span class="op">(</span><span class="ot">x</span>,<span class="ot">y</span>,<span class="ot">z</span><span class="op">)</span> <span class="op">=</span> <span class="dt">40</span> <span class="op">-</span> <span class="dt">2</span><span class="op">*</span><span class="ot">x</span> <span class="op">-</span> <span class="dt">3</span><span class="op">*</span><span class="ot">y</span> <span class="op">-</span> <span class="dt">4</span><span class="op">*</span><span class="ot">z</span>   <span class="co"># analytical solution, &quot;e&quot; means exact</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="kw">INTEGRATE</span> <span class="op">(</span><span class="ot">T</span><span class="op">(</span><span class="ot">x</span>,<span class="ot">y</span>,<span class="ot">z</span><span class="op">)-</span>Te<span class="op">(</span><span class="ot">x</span>,<span class="ot">y</span>,<span class="ot">z</span><span class="op">))^</span><span class="dt">2</span> <span class="kw">RESULT</span> num</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="kw">PHYSICAL_GROUP</span> bulk <span class="kw">DIM</span> <span class="dt">3</span>  <span class="co"># this is just to compute the volume</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="kw">PRINT</span> num<span class="op">/</span>bulk_volume</span></code></pre></div>
+<pre class="terminal" style="terminal"><code>$ gmsh -3 parallelepiped.geo -order 1 -clscale 2 -o parallelepiped-coarse.msh
+[...]
+Info    : 117 nodes 567 elements
+Info    : Writing &#39;parallelepiped-coarse.msh&#39;...
+Info    : Done writing &#39;parallelepiped-coarse.msh&#39;
+Info    : Stopped on Fri Dec 10 10:32:30 2021 (From start: Wall 0.0386516s, CPU 0.183052s)
+$ feenox parallelepiped-thermal.fee 
+6.18981e-12
+$
+</code></pre>
+<figure>
+<img class="img-fluid" src="parallelepiped-temperature.png"
+alt="Temperature distribution over the coarse mesh in Gmsh (yes, it is a rainbow pallete)" />
+<figcaption aria-hidden="true">Temperature distribution over the coarse
+mesh in Gmsh (yes, it is a rainbow pallete)</figcaption>
+</figure>
+<h2 data-number="5.2" id="mechanical-problem"><span
+class="header-section-number">5.2</span> Mechanical problem</h2>
+<p>Now this input file reads the scalar function <code>T</code> stored
+in the coarse first-order mesh file
+<code>parallelepiped-temperature.msh</code> and uses it to solve the
+mechanical problem in the finer second-order mesh
+<code>parallelepiped.msh</code>. The numerical solution for the
+displacements over the fine mesh is written in a VTK file (along with
+the temperature as interpolated from the coarse mesh) and compared to
+the analytical solution using the <span class="math inline">L_2</span>
+norm.</p>
+<div class="sourceCode" id="cb14" style="feenox"><pre
+class="sourceCode feenox"><code class="sourceCode feenox"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">PROBLEM</span> mechanical <span class="dt">3</span>D</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># this is where we solve the mechanical problem</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="kw">READ_MESH</span> parallelepiped.msh <span class="kw">MAIN</span>   </span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># this is where we read the temperature from</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="kw">READ_MESH</span> parallelepiped<span class="op">-</span>temperature.msh <span class="kw">DIM</span> <span class="dt">3</span> <span class="kw">READ_FUNCTION</span> <span class="ot">T</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co"># mechanical properties</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="ot">E</span><span class="op">(</span><span class="ot">x</span>,<span class="ot">y</span>,<span class="ot">z</span><span class="op">)</span> <span class="op">=</span> <span class="dt">1000</span><span class="op">/(</span><span class="dt">800</span><span class="op">-</span><span class="ot">T</span><span class="op">(</span><span class="ot">x</span>,<span class="ot">y</span>,<span class="ot">z</span><span class="op">))</span>   <span class="co"># young&#39;s modulus</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="ot">nu</span> <span class="op">=</span> <span class="dt">0.3</span>                         <span class="co"># poisson&#39;s ratio</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co"># boundary conditions</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="kw">BC</span> O fixed</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="kw">BC</span> B u<span class="op">=</span><span class="dt">0</span> w<span class="op">=</span><span class="dt">0</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="kw">BC</span> C u<span class="op">=</span><span class="dt">0</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="co"># here &quot;load&quot; is a fantasy name applied to both &quot;left&quot; and &quot;right&quot;</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="kw">BC</span> load tension<span class="op">=</span><span class="dt">1</span> <span class="kw">PHYSICAL_GROUP</span> left <span class="kw">PHYSICAL_GROUP</span> right</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="kw">SOLVE_PROBLEM</span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="kw">WRITE_MESH</span> parallelepiped<span class="op">-</span>mechanical.vtk <span class="ot">T</span> <span class="kw">VECTOR</span> u v w</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a><span class="co"># analytical solutions</span></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>h <span class="op">=</span> <span class="dt">10</span></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> <span class="dt">0.002</span></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> <span class="dt">0.003</span></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> <span class="dt">0.004</span></span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>D <span class="op">=</span> <span class="dt">0.76</span></span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a><span class="co"># the &quot;e&quot; means exact</span></span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>ue<span class="op">(</span><span class="ot">x</span>,<span class="ot">y</span>,<span class="ot">z</span><span class="op">)</span> :<span class="op">=</span> A<span class="op">/</span><span class="dt">2</span><span class="op">*(</span><span class="ot">x</span><span class="op">^</span><span class="dt">2</span> <span class="op">+</span> <span class="ot">nu</span><span class="op">*(</span><span class="ot">y</span><span class="op">^</span><span class="dt">2</span><span class="op">+</span><span class="ot">z</span><span class="op">^</span><span class="dt">2</span><span class="op">))</span> <span class="op">+</span> B<span class="op">*</span><span class="ot">x</span><span class="op">*</span><span class="ot">y</span> <span class="op">+</span> C<span class="op">*</span><span class="ot">x</span><span class="op">*</span><span class="ot">z</span> <span class="op">+</span> D<span class="op">*</span><span class="ot">x</span> <span class="op">-</span> <span class="ot">nu</span><span class="op">*</span>A<span class="op">*</span>h<span class="op">/</span><span class="dt">4</span><span class="op">*(</span><span class="ot">y</span><span class="op">+</span><span class="ot">z</span><span class="op">)</span></span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>ve<span class="op">(</span><span class="ot">x</span>,<span class="ot">y</span>,<span class="ot">z</span><span class="op">)</span> :<span class="op">=</span> <span class="op">-</span><span class="ot">nu</span><span class="op">*(</span>A<span class="op">*</span><span class="ot">x</span><span class="op">*</span><span class="ot">y</span> <span class="op">+</span> B<span class="op">/</span><span class="dt">2</span><span class="op">*(</span><span class="ot">y</span><span class="op">^</span><span class="dt">2</span><span class="op">-</span><span class="ot">z</span><span class="op">^</span><span class="dt">2</span><span class="op">+</span><span class="ot">x</span><span class="op">^</span><span class="dt">2</span><span class="op">/</span><span class="ot">nu</span><span class="op">)</span> <span class="op">+</span> C<span class="op">*</span><span class="ot">y</span><span class="op">*</span><span class="ot">z</span> <span class="op">+</span> D<span class="op">*</span><span class="ot">y</span> <span class="op">-</span>A<span class="op">*</span>h<span class="op">/</span><span class="dt">4</span><span class="op">*</span><span class="ot">x</span> <span class="op">-</span> C<span class="op">*</span>h<span class="op">/</span><span class="dt">4</span><span class="op">*</span><span class="ot">z</span><span class="op">)</span></span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>we<span class="op">(</span><span class="ot">x</span>,<span class="ot">y</span>,<span class="ot">z</span><span class="op">)</span> :<span class="op">=</span> <span class="op">-</span><span class="ot">nu</span><span class="op">*(</span>A<span class="op">*</span><span class="ot">x</span><span class="op">*</span><span class="ot">z</span> <span class="op">+</span> B<span class="op">*</span><span class="ot">y</span><span class="op">*</span><span class="ot">z</span> <span class="op">+</span> C<span class="op">/</span><span class="dt">2</span><span class="op">*(</span><span class="ot">z</span><span class="op">^</span><span class="dt">2</span><span class="op">-</span><span class="ot">y</span><span class="op">^</span><span class="dt">2</span><span class="op">+</span><span class="ot">x</span><span class="op">^</span><span class="dt">2</span><span class="op">/</span><span class="ot">nu</span><span class="op">)</span> <span class="op">+</span> D<span class="op">*</span><span class="ot">z</span> <span class="op">+</span> C<span class="op">*</span>h<span class="op">/</span><span class="dt">4</span><span class="op">*</span><span class="ot">y</span> <span class="op">-</span> A<span class="op">*</span>h<span class="op">/</span><span class="dt">4</span><span class="op">*</span><span class="ot">x</span><span class="op">)</span></span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a><span class="co"># compute the L-2 norm of the error in the displacement field</span></span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a><span class="kw">INTEGRATE</span> <span class="op">(</span>u<span class="op">(</span><span class="ot">x</span>,<span class="ot">y</span>,<span class="ot">z</span><span class="op">)-</span>ue<span class="op">(</span><span class="ot">x</span>,<span class="ot">y</span>,<span class="ot">z</span><span class="op">))^</span><span class="dt">2</span><span class="op">+(</span>v<span class="op">(</span><span class="ot">x</span>,<span class="ot">y</span>,<span class="ot">z</span><span class="op">)-</span>ve<span class="op">(</span><span class="ot">x</span>,<span class="ot">y</span>,<span class="ot">z</span><span class="op">))^</span><span class="dt">2</span><span class="op">+(</span>w<span class="op">(</span><span class="ot">x</span>,<span class="ot">y</span>,<span class="ot">z</span><span class="op">)-</span>we<span class="op">(</span><span class="ot">x</span>,<span class="ot">y</span>,<span class="ot">z</span><span class="op">))^</span><span class="dt">2</span> <span class="kw">RESULT</span> num <span class="kw">MESH</span> parallelepiped.msh</span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a><span class="kw">INTEGRATE</span> <span class="dt">1</span> <span class="kw">RESULT</span> den <span class="kw">MESH</span> parallelepiped.msh</span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a><span class="kw">PRINT</span> num<span class="op">/</span>den</span></code></pre></div>
+<pre class="terminal" style="terminal"><code>$ gmsh -3 parallelepiped.geo -order 2
+[...]
+Info    : 2564 nodes 2162 elements
+Info    : Writing &#39;parallelepiped.msh&#39;...
+Info    : Done writing &#39;parallelepiped.msh&#39;
+Info    : Stopped on Fri Dec 10 10:39:27 2021 (From start: Wall 0.165707s, CPU 0.258751s)
+$ feenox parallelepiped-mechanical.fee 
+1.46196e-06
+$ 
+</code></pre>
+<figure>
+<img class="img-fluid" src="parallelepiped-mechanical.png"
+alt="Displacements and temperature distribution over the fine mesh in Paraview (yes, still a rainbow pallete)" />
+<figcaption aria-hidden="true">Displacements and temperature
+distribution over the fine mesh in Paraview (yes, still a rainbow
+pallete)</figcaption>
+</figure>
+<h1 class="section-title" data-number="6" id="orthotropic-free-expansion-of-a-cube"><span
+class="header-section-number">6</span> Orthotropic free expansion of a
+cube</h1>
+<p>To illustrate the point of the previous discussion, let us solve the
+thermal expansion of an unrestrained unitary cube <span
+class="math inline">[0,1~\text{mm}]\times[0,1~\text{mm}]\times[0,1~\text{mm}]</span>
+subject to a linear radially-symmetric temperature field <span
+class="math display">T(x,y,z) = 30 \text{ºC} + 150
+\frac{\text{ºC}}{\text{mm}} \sqrt{x^2+y^2+z^2}</span></p>
+<p>with a mean thermal expansion coefficient for each of the three
+directions <span class="math inline">x</span>, <span
+class="math inline">y</span> and <span class="math inline">z</span>
+computed from each of the three columns of the ASME table TE-2,
+respectively. If the data was consistent, the displacement at any point
+with the same coordinates <span class="math inline">x=y=z</span> would
+be exactly equal.</p>
+<div class="sourceCode" id="cb16" style="feenox"><pre
+class="sourceCode feenox"><code class="sourceCode feenox"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">DEFAULT_ARGUMENT_VALUE</span> <span class="dt">1</span> steffen</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="kw">DEFAULT_ARGUMENT_VALUE</span> <span class="dt">2</span> hex</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="kw">PROBLEM</span> mechanical</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="kw">READ_MESH</span> cube<span class="op">-</span>$<span class="dt">2.</span>msh</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># aluminum-like linear isotropic material properties</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="ot">E</span> <span class="op">=</span> <span class="dt">69e3</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="ot">nu</span> <span class="op">=</span> <span class="dt">0.28</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co"># free expansion</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="kw">BC</span> left   u<span class="op">=</span><span class="dt">0</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="kw">BC</span> front  v<span class="op">=</span><span class="dt">0</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="kw">BC</span> bottom w<span class="op">=</span><span class="dt">0</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="co"># reference temperature is 20ºC</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="ot">T0</span> <span class="op">=</span> <span class="dt">20</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="co"># spatial temperature distribution symmetric wrt x,y &amp; z</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="ot">T</span><span class="op">(</span><span class="ot">x</span>,<span class="ot">y</span>,<span class="ot">z</span><span class="op">)</span> <span class="op">=</span> <span class="dt">30</span><span class="op">+</span><span class="dt">150</span><span class="op">*</span><span class="fu">sqrt</span><span class="op">(</span><span class="ot">x</span><span class="op">^</span><span class="dt">2</span><span class="op">+</span><span class="ot">y</span><span class="op">^</span><span class="dt">2</span><span class="op">+</span><span class="ot">z</span><span class="op">^</span><span class="dt">2</span><span class="op">)</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="co"># read ASME data</span></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a><span class="kw">FUNCTION</span> A<span class="op">(</span>T&#39;<span class="op">)</span> <span class="kw">FILE</span> asme<span class="op">-</span>expansion<span class="op">-</span>table.dat <span class="kw">COLUMNS</span> <span class="dt">1</span> <span class="dt">2</span> <span class="kw">INTERPOLATION</span> $<span class="dt">1</span></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a><span class="kw">FUNCTION</span> B<span class="op">(</span>T&#39;<span class="op">)</span> <span class="kw">FILE</span> asme<span class="op">-</span>expansion<span class="op">-</span>table.dat <span class="kw">COLUMNS</span> <span class="dt">1</span> <span class="dt">3</span> <span class="kw">INTERPOLATION</span> $<span class="dt">1</span></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="kw">FUNCTION</span> C<span class="op">(</span>T&#39;<span class="op">)</span> <span class="kw">FILE</span> asme<span class="op">-</span>expansion<span class="op">-</span>table.dat <span class="kw">COLUMNS</span> <span class="dt">1</span> <span class="dt">4</span> <span class="kw">INTERPOLATION</span> $<span class="dt">1</span></span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a><span class="co"># remember that the thermal expansion coefficients have to be</span></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a><span class="co">#  1. the mean value between T0 and T</span></span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a><span class="co">#  2. functions of space, so temperature has to be written as T(x,y,z)</span></span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a><span class="co"># in the x direction, we use column B directly</span></span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a><span class="ot">alpha_x</span><span class="op">(</span><span class="ot">x</span>,<span class="ot">y</span>,<span class="ot">z</span><span class="op">)</span> <span class="op">=</span> <span class="dt">1e-6</span><span class="op">*</span>B<span class="op">(</span><span class="ot">T</span><span class="op">(</span><span class="ot">x</span>,<span class="ot">y</span>,<span class="ot">z</span><span class="op">))</span></span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a><span class="co"># in the y direction, we convert column A to mean</span></span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a><span class="ot">alpha_y</span><span class="op">(</span><span class="ot">x</span>,<span class="ot">y</span>,<span class="ot">z</span><span class="op">)</span> <span class="op">=</span> <span class="dt">1e-6</span><span class="op">*</span><span class="fu">integral</span><span class="op">(</span>A<span class="op">(</span>T&#39;<span class="op">)</span>, T&#39;, <span class="ot">T0</span>, <span class="ot">T</span><span class="op">(</span><span class="ot">x</span>,<span class="ot">y</span>,<span class="ot">z</span><span class="op">))/(</span><span class="ot">T</span><span class="op">(</span><span class="ot">x</span>,<span class="ot">y</span>,<span class="ot">z</span><span class="op">)-</span><span class="ot">T0</span><span class="op">)</span></span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a><span class="co"># in the z direction, we convert column C to mean</span></span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a><span class="ot">alpha_z</span><span class="op">(</span><span class="ot">x</span>,<span class="ot">y</span>,<span class="ot">z</span><span class="op">)</span> <span class="op">=</span> <span class="dt">1e-3</span><span class="op">*</span>C<span class="op">(</span><span class="ot">T</span><span class="op">(</span><span class="ot">x</span>,<span class="ot">y</span>,<span class="ot">z</span><span class="op">))/(</span><span class="ot">T</span><span class="op">(</span><span class="ot">x</span>,<span class="ot">y</span>,<span class="ot">z</span><span class="op">)-</span><span class="ot">T0</span><span class="op">)</span></span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a><span class="kw">SOLVE_PROBLEM</span></span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a><span class="kw">WRITE_MESH</span> cube<span class="op">-</span>orthotropic<span class="op">-</span>expansion<span class="op">-</span>$<span class="dt">1</span><span class="op">-</span>$<span class="dt">2.</span>vtk <span class="ot">T</span> <span class="kw">VECTOR</span> u v w</span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a><span class="kw">PRINT</span> %.<span class="dt">3</span>e &quot;displacement in <span class="ot">x</span> at <span class="op">(</span><span class="dt">1</span>,<span class="dt">1</span>,<span class="dt">1</span><span class="op">)</span> <span class="op">=</span> &quot; u<span class="op">(</span><span class="dt">1</span>,<span class="dt">1</span>,<span class="dt">1</span><span class="op">)</span></span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a><span class="kw">PRINT</span> %.<span class="dt">3</span>e &quot;displacement in <span class="ot">y</span> at <span class="op">(</span><span class="dt">1</span>,<span class="dt">1</span>,<span class="dt">1</span><span class="op">)</span> <span class="op">=</span> &quot; v<span class="op">(</span><span class="dt">1</span>,<span class="dt">1</span>,<span class="dt">1</span><span class="op">)</span></span>
+<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a><span class="kw">PRINT</span> %.<span class="dt">3</span>e &quot;displacement in <span class="ot">z</span> at <span class="op">(</span><span class="dt">1</span>,<span class="dt">1</span>,<span class="dt">1</span><span class="op">)</span> <span class="op">=</span> &quot; w<span class="op">(</span><span class="dt">1</span>,<span class="dt">1</span>,<span class="dt">1</span><span class="op">)</span></span></code></pre></div>
+<pre class="terminal" style="terminal"><code>$ gmsh -3 cube-hex.geo
+[...]
+$ gmsh -3 cube-tet.geo
+[...]
+$ feenox cube-orthotropic-expansion.fee 
+displacement in x at (1,1,1) =  4.451e-03
+displacement in y at (1,1,1) =  4.449e-03
+displacement in z at (1,1,1) =  4.437e-03
+$ feenox cube-orthotropic-expansion.fee linear tet
+displacement in x at (1,1,1) =  4.452e-03
+displacement in y at (1,1,1) =  4.447e-03
+displacement in z at (1,1,1) =  4.438e-03
+$ feenox cube-orthotropic-expansion.fee akima hex
+displacement in x at (1,1,1) =  4.451e-03
+displacement in y at (1,1,1) =  4.451e-03
+displacement in z at (1,1,1) =  4.437e-03
+$ feenox cube-orthotropic-expansion.fee splines tet
+displacement in x at (1,1,1) =  4.451e-03
+displacement in y at (1,1,1) =  4.450e-03
+displacement in z at (1,1,1) =  4.438e-03
+$ 
+</code></pre>
+<figure>
+<img class="img-fluid" src="cube-orthotropic-expansion.png" style="width:100.0%"
+alt="Warped displacement (\times 500) of the cube using ASME’s three columns." />
+<figcaption aria-hidden="true">Warped displacement (<span
+class="math inline">\times 500</span>) of the cube using ASME’s three
+columns.</figcaption>
+</figure>
+<blockquote class="callout-block callout-blockquote">
+<p>Differences cannot be seen graphically, but they are there as the
+terminal mimic illustrates. Yet, they are not as large nor as sensible
+to meshing and interpolation settings as one would have expected after
+seeing the plots from the previous section.</p>
+</blockquote>
+<h1 class="section-title" data-number="7"
+id="thermo-elastic-expansion-of-finite-cylinders"><span
+class="header-section-number">7</span> Thermo-elastic expansion of
+finite cylinders</h1>
+<p>Let us solve the following problem introduced by J. Veeder in his <a
+href="https://inis.iaea.org/search/search.aspx?orig_q=RN:40103718">technical
+report AECL-2660 from 1967</a>.</p>
+<blockquote class="callout-block callout-blockquote">
+<p><img class="img-fluid" src="veeder-problem.png" style="width:50.0%" /></p>
+<p>Consider a finite solid cylinder (see insert) of radius <span
+class="math inline">b</span> and length <span
+class="math inline">2h</span>, with the origin of coordinates at the
+centre. It may be shown that the temperature distribution in a
+cylindrical fuel pellet operating in a reactor is given approximately
+by</p>
+<p><span class="math display">T(r) = T_0 + T_1 \cdot \left[ 1 -
+\left(\frac{r}{b} \right)^2 \right]</span></p>
+<p>where <span class="math inline">T_0</span> is the pellet surface
+temperature and <span class="math inline">T_1</span> is the temperature
+difference between the centre and surface. The thermal expansion is thus
+seen to be the sum of two terms, the first of which produces uniform
+expansion (zero stress) at constant temperature <span
+class="math inline">T_0</span>, and is therefore computationally
+trivial. Tho second term introduces non-uniform body forces which
+distort the pellet from its original cylindrical shape.</p>
+</blockquote>
+<p>The problem is axisymmetric on the azimutal angle and
+axially-symmetric along the mid-plane. The FeenoX input uses the
+<code>tangential</code> and <code>radial</code> boundary conditions
+applied to the base of the upper half of a 3D cylinder. The geometry is
+meshed using 27-noded hexahedra.</p>
+<p>Two one-dimensional profiles for the non-dimensional range <span
+class="math inline">[0:1]</span> at the external surfaces are written
+into an ASCII file ready to be plotted:</p>
+<ol type="1">
+<li>axial dependency of the displacement <span
+class="math inline">v(z&#39;) = v(0,v,z&#39;h)</span> in the <span
+class="math inline">y</span> direction at fixed <span
+class="math inline">x=0</span> and <span class="math inline">y=b</span>,
+and</li>
+<li>radial dependency of the displacement <span
+class="math inline">w(r&#39;) = w(0,r&#39;b, h)</span> in the <span
+class="math inline">z</span> direction at fixed <span
+class="math inline">x=0</span> and <span
+class="math inline">z=h</span></li>
+</ol>
+<p>These two profiles are compared to the power expansion series given
+in the original report from 1967. Note that the authors expect a 5%
+difference between the reference solution and the real one.</p>
+<figure>
+<img class="img-fluid" src="veeder-mesh.png"
+alt="3D mesh of the upper half of the Veeder problem" />
+<figcaption aria-hidden="true">3D mesh of the upper half of the Veeder
+problem</figcaption>
+</figure>
+<div class="sourceCode" id="cb18" style="feenox"><pre
+class="sourceCode feenox"><code class="sourceCode feenox"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">PROBLEM</span> mechanical <span class="kw">MESH</span> veeder.msh</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="dt">1</span>     <span class="co"># cylinder radius</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>h <span class="op">=</span> <span class="dt">0.5</span>   <span class="co"># cylinder height </span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="ot">E</span> <span class="op">=</span> <span class="dt">1</span>         <span class="co"># young modulus (does not matter for the displacement, only for stresses)</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="ot">nu</span> <span class="op">=</span> <span class="dt">1</span><span class="op">/</span><span class="dt">3</span>      <span class="co"># poisson ratio</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="ot">alpha</span> <span class="op">=</span> <span class="dt">1e-5</span>  <span class="co"># temperature expansion coefficient</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co"># temperature distribution as in the original paper</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>T1 <span class="op">=</span> <span class="dt">1</span>        <span class="co"># maximum temperature</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="ot">T0</span> <span class="op">=</span> <span class="dt">0</span>        <span class="co"># reference temperature (where expansion is zero)</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="ot">T</span><span class="op">(</span><span class="ot">x</span>,<span class="ot">y</span>,<span class="ot">z</span><span class="op">)</span> <span class="op">=</span> <span class="ot">T0</span> <span class="op">+</span> T1<span class="op">*(</span><span class="dt">1</span><span class="op">-(</span><span class="ot">x</span><span class="op">^</span><span class="dt">2</span><span class="op">+</span><span class="ot">y</span><span class="op">^</span><span class="dt">2</span><span class="op">)/(</span>b<span class="op">^</span><span class="dt">2</span><span class="op">))</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="co"># boundary conditions (note that the cylinder can still expand on the x-y plane)</span></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="kw">BC</span> inf      tangential radial</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a><span class="co"># write vtu output</span></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a><span class="kw">WRITE_RESULTS</span></span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a><span class="co"># non-dimensional numerical displacement profiles </span></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>v_num<span class="op">(</span>z&#39;<span class="op">)</span> <span class="op">=</span> v<span class="op">(</span><span class="dt">0</span>, b, z&#39;<span class="op">*</span>h<span class="op">)/(</span><span class="ot">alpha</span><span class="op">*</span>T1<span class="op">*</span>b<span class="op">)</span></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>w_num<span class="op">(</span>r&#39;<span class="op">)</span> <span class="op">=</span> w<span class="op">(</span><span class="dt">0</span>, r&#39;<span class="op">*</span>b, h<span class="op">)/(</span><span class="ot">alpha</span><span class="op">*</span>T1<span class="op">*</span>b<span class="op">)</span></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a><span class="co">########</span></span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a><span class="co"># reference solution</span></span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a><span class="co"># coefficients of displacement functions for h/b = 0.5</span></span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>a00 <span class="op">=</span>  <span class="dt">0.66056</span></span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>a01 <span class="op">=</span> <span class="op">-</span><span class="dt">0.44037</span></span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>a10 <span class="op">=</span>  <span class="dt">0.23356</span></span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a>a02 <span class="op">=</span> <span class="op">-</span><span class="dt">0.06945</span></span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a>a11 <span class="op">=</span> <span class="op">-</span><span class="dt">0.10417</span></span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a>a20 <span class="op">=</span>  <span class="dt">0.00288</span></span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a>b00 <span class="op">=</span> <span class="op">-</span><span class="dt">0.01773</span></span>
+<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a>b01 <span class="op">=</span> <span class="op">-</span><span class="dt">0.46713</span></span>
+<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a>b10 <span class="op">=</span> <span class="op">-</span><span class="dt">0.04618</span></span>
+<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a>b02 <span class="op">=</span> <span class="op">+</span><span class="dt">0.10417</span></span>
+<span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a>b11 <span class="op">=</span> <span class="op">-</span><span class="dt">0.01152</span></span>
+<span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a>b20 <span class="op">=</span> <span class="op">-</span><span class="dt">0.00086</span></span>
+<span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb18-43"><a href="#cb18-43" aria-hidden="true" tabindex="-1"></a><span class="co"># coefficients of displacement functions for h/b = 1.0</span></span>
+<span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a><span class="co"># a00 =  0.73197</span></span>
+<span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a><span class="co"># a01 = -0.48798</span></span>
+<span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a><span class="co"># a10 =  0.45680</span></span>
+<span id="cb18-47"><a href="#cb18-47" aria-hidden="true" tabindex="-1"></a><span class="co"># a02 = -0.01140</span></span>
+<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a><span class="co"># a11 = -0.06841</span></span>
+<span id="cb18-49"><a href="#cb18-49" aria-hidden="true" tabindex="-1"></a><span class="co"># a20 =  0.13611</span></span>
+<span id="cb18-50"><a href="#cb18-50" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb18-51"><a href="#cb18-51" aria-hidden="true" tabindex="-1"></a><span class="co"># b00 =  0.26941</span></span>
+<span id="cb18-52"><a href="#cb18-52" aria-hidden="true" tabindex="-1"></a><span class="co"># b01 = -0.45680</span></span>
+<span id="cb18-53"><a href="#cb18-53" aria-hidden="true" tabindex="-1"></a><span class="co"># b10 = -0.25670</span></span>
+<span id="cb18-54"><a href="#cb18-54" aria-hidden="true" tabindex="-1"></a><span class="co"># b02 =  0.03420</span></span>
+<span id="cb18-55"><a href="#cb18-55" aria-hidden="true" tabindex="-1"></a><span class="co"># b11 = -0.27222</span></span>
+<span id="cb18-56"><a href="#cb18-56" aria-hidden="true" tabindex="-1"></a><span class="co"># b20 = -0.08167</span></span>
+<span id="cb18-57"><a href="#cb18-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-58"><a href="#cb18-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-59"><a href="#cb18-59" aria-hidden="true" tabindex="-1"></a>R<span class="op">(</span>r&#39;<span class="op">)</span> <span class="op">=</span> r&#39;<span class="op">^</span><span class="dt">2</span> <span class="op">-</span> <span class="dt">1</span></span>
+<span id="cb18-60"><a href="#cb18-60" aria-hidden="true" tabindex="-1"></a>Z<span class="op">(</span>z&#39;<span class="op">)</span> <span class="op">=</span> z&#39;<span class="op">^</span><span class="dt">2</span> <span class="op">-</span> <span class="dt">1</span></span>
+<span id="cb18-61"><a href="#cb18-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-62"><a href="#cb18-62" aria-hidden="true" tabindex="-1"></a>v_ref<span class="op">(</span>r&#39;,z&#39;<span class="op">)</span> <span class="op">=</span> r&#39; <span class="op">*</span> <span class="op">(</span>a00 <span class="op">+</span> a01<span class="op">*</span>R<span class="op">(</span>r&#39;<span class="op">)</span> <span class="op">+</span> a10<span class="op">*</span>Z<span class="op">(</span>z&#39;<span class="op">)</span> <span class="op">+</span> a02<span class="op">*</span> R<span class="op">(</span>r&#39;<span class="op">)^</span><span class="dt">2</span> <span class="op">+</span> a11 <span class="op">*</span> R<span class="op">(</span>r&#39;<span class="op">)*</span>Z<span class="op">(</span>z&#39;<span class="op">)</span> <span class="op">+</span> a20 <span class="op">*</span> Z<span class="op">(</span>z&#39;<span class="op">)^</span><span class="dt">2</span><span class="op">)</span></span>
+<span id="cb18-63"><a href="#cb18-63" aria-hidden="true" tabindex="-1"></a>w_ref<span class="op">(</span>r&#39;,z&#39;<span class="op">)</span> <span class="op">=</span> z&#39; <span class="op">*</span> <span class="op">(</span>b00 <span class="op">+</span> b01<span class="op">*</span>R<span class="op">(</span>r&#39;<span class="op">)</span> <span class="op">+</span> b10<span class="op">*</span>Z<span class="op">(</span>z&#39;<span class="op">)</span> <span class="op">+</span> b02<span class="op">*</span> R<span class="op">(</span>r&#39;<span class="op">)^</span><span class="dt">2</span> <span class="op">+</span> b11 <span class="op">*</span> R<span class="op">(</span>r&#39;<span class="op">)*</span>Z<span class="op">(</span>z&#39;<span class="op">)</span> <span class="op">+</span> b20 <span class="op">*</span> Z<span class="op">(</span>z&#39;<span class="op">)^</span><span class="dt">2</span><span class="op">)</span></span>
+<span id="cb18-64"><a href="#cb18-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-65"><a href="#cb18-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-66"><a href="#cb18-66" aria-hidden="true" tabindex="-1"></a><span class="kw">PRINT_FUNCTION</span> <span class="kw">FILE</span> veeder_v.dat  v_num v_ref<span class="op">(</span><span class="dt">1</span>,z&#39;<span class="op">)</span> <span class="kw">MIN</span> <span class="dt">0</span> <span class="kw">MAX</span> <span class="dt">1</span> <span class="kw">NSTEPS</span> <span class="dt">50</span> <span class="kw">HEADER</span></span>
+<span id="cb18-67"><a href="#cb18-67" aria-hidden="true" tabindex="-1"></a><span class="kw">PRINT_FUNCTION</span> <span class="kw">FILE</span> veeder_w.dat  w_num w_ref<span class="op">(</span>r&#39;,<span class="dt">1</span><span class="op">)</span> <span class="kw">MIN</span> <span class="dt">0</span> <span class="kw">MAX</span> <span class="dt">1</span> <span class="kw">NSTEPS</span> <span class="dt">50</span> <span class="kw">HEADER</span></span></code></pre></div>
+<pre class="terminal" style="terminal"><code>$ gmsh -3 veeder.geo
+[...]
+$ feenox veeder.fee
+$ pyxplot veeder.ppl 
+$
+</code></pre>
+<figure>
+<img class="img-fluid" src="veeder.png" data-width_latex="75%" data-width_html="100%"
+alt="100,000x-warped displacements" />
+<figcaption aria-hidden="true">100,000x-warped
+displacements</figcaption>
+</figure>
+<figure>
+<img class="img-fluid" src="veeder-displacements.svg" style="width:100.0%"
+alt="Comparison of 1-D displacement profiles" />
+<figcaption aria-hidden="true">Comparison of 1-D displacement
+profiles</figcaption>
+</figure>
+<h1 class="section-title" data-number="8" id="temperature-dependent-material-properties"><span
+class="header-section-number">8</span> Temperature-dependent material
+properties</h1>
+<p>Let us solve a plane-strain square fixed on the left, with an
+horizontal traction on the right and free on the other two sides. The
+Young modulus depends on the temperature <span
+class="math inline">E(T)</span> as given in the ASME II part D tables of
+material properties, interpolated using a <a
+href="https://en.wikipedia.org/wiki/Monotone_cubic_interpolation">monotonic
+cubic scheme</a>.</p>
+<p>Actually, this example shows three cases:</p>
+<ol type="1">
+<li><p>Uniform temperature identically equal to 200ºC</p></li>
+<li><p>Linear temperature profile on the vertical direction given by an
+algebraic expression</p>
+<p><span class="math display">T(x,y) = 200 + 350\cdot y</span></p></li>
+<li><p>The same linear profile but read from the output of a thermal
+conduction problem over a non-conformal mesh using this FeenoX
+input:</p>
+<div class="sourceCode" id="cb20" style="feenox"><pre
+class="sourceCode feenox"><code class="sourceCode feenox"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">PROBLEM</span> <span class="ot">thermal</span> <span class="dt">2</span>D</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="kw">READ_MESH</span> square<span class="op">-</span>centered<span class="op">-</span>unstruct.msh <span class="co"># [-1:+1]x[-1:+1]</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="kw">BC</span> bottom    <span class="ot">T</span><span class="op">=-</span><span class="dt">150</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="kw">BC</span> top       <span class="ot">T</span><span class="op">=+</span><span class="dt">550</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="ot">k</span> <span class="op">=</span> <span class="dt">1</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="kw">SOLVE_PROBLEM</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="kw">WRITE_MESH</span> <span class="ot">thermal</span><span class="op">-</span>square<span class="op">-</span>temperature.msh <span class="ot">T</span></span></code></pre></div></li>
+</ol>
+<p>Which of the three cases is executed is given by the first argument
+provided in the command line after the main input file. Depending on
+this argument, which is expanded as <code>$1</code> in the main input
+file, either one of three secondary input files are included:</p>
+<ol type="1">
+<li><p><code>uniform</code></p>
+<div class="sourceCode" id="cb21" style="feenox"><pre
+class="sourceCode feenox"><code class="sourceCode feenox"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># uniform</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="ot">T</span><span class="op">(</span><span class="ot">x</span>,<span class="ot">y</span><span class="op">)</span> :<span class="op">=</span> <span class="dt">200</span></span></code></pre></div></li>
+<li><p><code>linear</code></p>
+<div class="sourceCode" id="cb22" style="feenox"><pre
+class="sourceCode feenox"><code class="sourceCode feenox"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># algebraic expression</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="ot">T</span><span class="op">(</span><span class="ot">x</span>,<span class="ot">y</span><span class="op">)</span> :<span class="op">=</span> <span class="dt">200</span> <span class="op">+</span> <span class="dt">350</span><span class="op">*</span><span class="ot">y</span></span></code></pre></div></li>
+<li><p><code>mesh</code></p>
+<div class="sourceCode" id="cb23" style="feenox"><pre
+class="sourceCode feenox"><code class="sourceCode feenox"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read the temperature from a previous result</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="kw">READ_MESH</span> <span class="ot">thermal</span><span class="op">-</span>square<span class="op">-</span>temperature.msh <span class="kw">DIM</span> <span class="dt">2</span> <span class="kw">READ_FUNCTION</span> <span class="ot">T</span></span></code></pre></div></li>
+</ol>
+<div class="sourceCode" id="cb24" style="feenox"><pre
+class="sourceCode feenox"><code class="sourceCode feenox"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2d plane strain mechanical problem over the [-1:+1]x[-1:+1] square</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="kw">PROBLEM</span> mechanical plane_strain</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="kw">READ_MESH</span> square<span class="op">-</span>centered.msh </span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co"># fixed at left, uniform traction in the x direction at right</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="kw">BC</span> left    fixed</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="kw">BC</span> right   tx<span class="op">=</span><span class="dt">50</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="co"># ASME II Part D pag. 785 Carbon steels with C&lt;=0.30%</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="kw">FUNCTION</span> E_carbon<span class="op">(</span>temp<span class="op">)</span> <span class="kw">INTERPOLATION</span> steffen <span class="kw">DATA</span> <span class="op">{</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="op">-</span><span class="dt">200</span>  <span class="dt">216</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="op">-</span><span class="dt">125</span>  <span class="dt">212</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="op">-</span><span class="dt">75</span>   <span class="dt">209</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="dt">25</span>    <span class="dt">202</span></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a><span class="dt">100</span>   <span class="dt">198</span></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a><span class="dt">150</span>   <span class="dt">195</span></span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a><span class="dt">200</span>   <span class="dt">192</span></span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a><span class="dt">250</span>   <span class="dt">189</span></span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a><span class="dt">300</span>   <span class="dt">185</span></span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a><span class="dt">350</span>   <span class="dt">179</span></span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a><span class="dt">400</span>   <span class="dt">171</span></span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a><span class="dt">450</span>   <span class="dt">162</span></span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a><span class="dt">500</span>   <span class="dt">151</span></span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a><span class="dt">550</span>   <span class="dt">137</span></span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a><span class="co"># read the temperature according to the run-time argument $1</span></span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a><span class="kw">INCLUDE</span> mechanical<span class="op">-</span>square<span class="op">-</span>temperature<span class="op">-</span>$<span class="dt">1.</span>fee</span>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Young modulus is the function above evaluated at the local temperature</span></span>
+<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a><span class="ot">E</span><span class="op">(</span><span class="ot">x</span>,<span class="ot">y</span><span class="op">)</span> :<span class="op">=</span> E_carbon<span class="op">(</span><span class="ot">T</span><span class="op">(</span><span class="ot">x</span>,<span class="ot">y</span><span class="op">))</span></span>
+<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a><span class="co"># uniform Poisson&#39;s ratio</span></span>
+<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a><span class="ot">nu</span> <span class="op">=</span> <span class="dt">0.3</span></span>
+<span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a><span class="kw">SOLVE_PROBLEM</span></span>
+<span id="cb24-37"><a href="#cb24-37" aria-hidden="true" tabindex="-1"></a><span class="kw">PRINT</span> u<span class="op">(</span><span class="dt">1</span>,<span class="dt">1</span><span class="op">)</span> v<span class="op">(</span><span class="dt">1</span>,<span class="dt">1</span><span class="op">)</span></span>
+<span id="cb24-38"><a href="#cb24-38" aria-hidden="true" tabindex="-1"></a><span class="kw">WRITE_MESH</span> mechanical<span class="op">-</span>square<span class="op">-</span>temperature<span class="op">-</span>$<span class="dt">1.</span>vtk  <span class="ot">E</span> <span class="ot">T</span> <span class="kw">VECTOR</span> u v <span class="dt">0</span>   </span></code></pre></div>
+<pre class="terminal" style="terminal"><code>$ gmsh -2 square-centered.geo
+[...]
+Info    : Done meshing 2D (Wall 0.00117144s, CPU 0.00373s)
+Info    : 1089 nodes 1156 elements
+Info    : Writing &#39;square-centered.msh&#39;...
+Info    : Done writing &#39;square-centered.msh&#39;
+Info    : Stopped on Thu Aug  4 09:40:09 2022 (From start: Wall 0.00818854s, CPU 0.031239s)
+$ feenox mechanical-square-temperature.fee uniform
+0.465632        -0.105128
+$ feenox mechanical-square-temperature.fee linear
+0.589859        -0.216061
+$ gmsh -2 square-centered-unstruct.geo 
+[...]
+Info    : Done meshing 2D (Wall 0.0274833s, CPU 0.061072s)
+Info    : 65 nodes 132 elements
+Info    : Writing &#39;square-centered-unstruct.msh&#39;...
+Info    : Done writing &#39;square-centered-unstruct.msh&#39;
+Info    : Stopped on Sun Aug  7 18:33:41 2022 (From start: Wall 0.0401667s, CPU 0.107659s)
+$ feenox thermal-square.fee
+$ feenox mechanical-square-temperature.fee mesh
+0.589859        -0.216061
+$ 
+</code></pre>
+<figure>
+<img class="img-fluid" src="thermal-square-temperature.png" style="width:100.0%"
+alt="Temperature distribution from a heat conduction problem." />
+<figcaption aria-hidden="true">Temperature distribution from a heat
+conduction problem.</figcaption>
+</figure>
+<figure>
+<img class="img-fluid" src="mechanical-square-temperature.png" style="width:100.0%"
+alt="Young modulus distribution over the final displacements." />
+<figcaption aria-hidden="true">Young modulus distribution over the final
+displacements.</figcaption>
+</figure>
+<h1 class="section-title" data-number="9" id="two-cubes-compressing-each-other"><span
+class="header-section-number">9</span> Two cubes compressing each
+other</h1>
+<p>Say we have two cubes of non-dimensional size <span
+class="math inline">1\times 1 \times 1</span>, one made out of a
+(non-dimensional) “soft” material and one made out of a “hard” material.
+We glue the two cubes together, set radial and tangential symmetry
+conditions on one side of the soft cube (so as to allow pure traction
+conditions) and set a normal compressive pressure at the other end on
+the hard cube. Besides on single VTU file with the overall results, the
+von Mises stress output is split into two VTU files—namely
+<code>soft.vtu</code> and <code>hard.vtu</code> where the stress is
+non-zero only in the corresponding volume.</p>
+<p>This example illustrates how to</p>
+<ol type="1">
+<li>assign different material properties to different volumes</li>
+<li>write VTU outputs segmented by mesh volumes</li>
+<li>write results at nodes (default) and at cells</li>
+</ol>
+<div class="sourceCode" id="cb26" style="feenox"><pre
+class="sourceCode feenox"><code class="sourceCode feenox"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">PROBLEM</span> mechanical <span class="dt">3</span>D</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="kw">READ_MESH</span> two<span class="op">-</span>cubes2.msh</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="kw">MATERIAL</span> left   <span class="ot">E</span><span class="op">=</span><span class="dt">1</span>   <span class="ot">nu</span><span class="op">=</span><span class="dt">0.35</span>  mat<span class="op">=</span><span class="dt">1</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="kw">MATERIAL</span> right  <span class="ot">E</span><span class="op">=</span><span class="dt">10</span>  <span class="ot">nu</span><span class="op">=</span><span class="dt">0.25</span>  mat<span class="op">=</span><span class="dt">2</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="co"># BCs </span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="kw">BC</span> <span class="ot">zero</span>  tangential radial</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="kw">BC</span> ramp  p<span class="op">=</span><span class="dt">0.25</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="kw">SOLVE_PROBLEM</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>sigma_at_1<span class="op">(</span><span class="ot">x</span>,<span class="ot">y</span>,<span class="ot">z</span><span class="op">)</span> <span class="op">=</span> sigma<span class="op">(</span><span class="ot">x</span>,<span class="ot">y</span>,<span class="ot">z</span><span class="op">)*(</span>mat<span class="op">(</span><span class="ot">x</span>,<span class="ot">y</span>,<span class="ot">z</span><span class="op">)=</span><span class="dt">1</span><span class="op">)</span></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>sigma_at_2<span class="op">(</span><span class="ot">x</span>,<span class="ot">y</span>,<span class="ot">z</span><span class="op">)</span> <span class="op">=</span> sigma<span class="op">(</span><span class="ot">x</span>,<span class="ot">y</span>,<span class="ot">z</span><span class="op">)*(</span>mat<span class="op">(</span><span class="ot">x</span>,<span class="ot">y</span>,<span class="ot">z</span><span class="op">)=</span><span class="dt">2</span><span class="op">)</span></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a><span class="kw">WRITE_RESULTS</span> <span class="kw">FORMAT</span> vtu displacements vonmises</span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a><span class="kw">WRITE_MESH</span> two<span class="op">-</span>cubes<span class="op">-</span>left.vtu  sigma_at_1 <span class="kw">CELL</span> <span class="kw">NAME</span> sigma_at_1_cells sigma_at_1</span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a><span class="kw">WRITE_MESH</span> two<span class="op">-</span>cubes<span class="op">-</span>right.vtu sigma_at_2 <span class="kw">CELL</span> <span class="kw">NAME</span> sigma_at_2_cells sigma_at_2</span></code></pre></div>
+<pre class="terminal" style="terminal"><code>$ gmsh -3 two-cubes.geo -order 2 -o two-cubes2.msh
+[...]
+$ feenox two-cubes-mechanical.fee --mumps
+$ 
+</code></pre>
+<figure>
+<img class="img-fluid" src="two-cubes-mechanical-vonmises.png"
+alt="Displacements and von Mises stresses from WRITE_RESULTS" />
+<figcaption aria-hidden="true">Displacements and von Mises stresses from
+<code>WRITE_RESULTS</code></figcaption>
+</figure>
+<figure id="fig:two-cubes-left" class="subfigures">
+<p><img class="img-fluid" src="two-cubes-left-nodes.png" style="width:48.0%" alt="a" />
+<img class="img-fluid" src="two-cubes-left-cells.png" style="width:48.0%" alt="b" /></p>
+<figcaption><p>Figure 5: Von Mises stresses non-zero only over the left
+(soft) cube.. a — Data at nodes, b — Data at cells</p></figcaption>
+</figure>
+<figure id="fig:two-cubes-right" class="subfigures">
+<p><img class="img-fluid" src="two-cubes-right-nodes.png" style="width:48.0%" alt="a" />
+<img class="img-fluid" src="two-cubes-right-cells.png" style="width:48.0%" alt="b" /></p>
+<figcaption><p>Figure 6: Von Mises stresses non-zero only over the right
+(hard) cube.. a — Data at nodes, b — Data at cells</p></figcaption>
+</figure>
+<h1 class="section-title" data-number="10" id="steelaluminum-paradox"><span
+class="header-section-number">10</span> Steel/aluminum paradox</h1>
+<blockquote class="callout-block callout-blockquote">
+<p>Can the maximum displacement decrease if we replace one of the steel
+components in the assembly by an aluminum component of the same
+geometry?</p>
+<p>Source: <a
+href="https://www.linkedin.com/posts/mir-abbas-77654764_can-deflection-decrease-with-youngs-modulus-activity-7349026944690081794-7Rc0"
+class="uri">https://www.linkedin.com/posts/mir-abbas-77654764_can-deflection-decrease-with-youngs-modulus-activity-7349026944690081794-7Rc0</a></p>
+</blockquote>
+<p>Consider the following configuration</p>
+<figure>
+<img class="img-fluid" src="steel-alum.svg" alt="Steel/aluminum paradox" />
+<figcaption aria-hidden="true">Steel/aluminum paradox</figcaption>
+</figure>
+<p>for the following two cases:</p>
+<ol type="1">
+<li>blue and pink is steel</li>
+<li>blue is steel and pink is aluminum</li>
+</ol>
+<p>We can create this geometry in Gmsh as</p>
+<div class="sourceCode" id="cb28" style="c"><pre
+class="sourceCode c"><code class="sourceCode c"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>SetFactory<span class="op">(</span><span class="st">&quot;OpenCASCADE&quot;</span><span class="op">);</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>Box<span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">=</span> <span class="op">{</span><span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="fl">5.5</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">1</span><span class="op">};</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>Box<span class="op">(</span><span class="dv">2</span><span class="op">)</span> <span class="op">=</span> <span class="op">{</span><span class="dv">5</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">1</span><span class="op">};</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>Box<span class="op">(</span><span class="dv">3</span><span class="op">)</span> <span class="op">=</span> <span class="op">{</span><span class="dv">10</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">1</span><span class="op">};</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>Coherence<span class="op">;</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>Mesh<span class="op">.</span>MeshSizeMax <span class="op">=</span> <span class="fl">0.2</span><span class="op">;</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>Mesh<span class="op">.</span>ElementOrder <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>Physical Volume<span class="op">(</span><span class="st">&quot;pink&quot;</span><span class="op">)</span> <span class="op">=</span> <span class="op">{</span> <span class="dv">1</span> <span class="op">};</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>Physical Volume<span class="op">(</span><span class="st">&quot;blue&quot;</span><span class="op">)</span> <span class="op">=</span> <span class="op">{</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span> <span class="op">};</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>Physical Surface<span class="op">(</span><span class="st">&quot;fixed&quot;</span><span class="op">,</span> <span class="dv">35</span><span class="op">)</span> <span class="op">=</span> <span class="op">{</span><span class="dv">1</span><span class="op">};</span></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>Physical Surface<span class="op">(</span><span class="st">&quot;2p&quot;</span><span class="op">,</span> <span class="dv">36</span><span class="op">)</span> <span class="op">=</span> <span class="op">{</span><span class="dv">8</span><span class="op">};</span></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>Physical Surface<span class="op">(</span><span class="st">&quot;p&quot;</span><span class="op">,</span> <span class="dv">37</span><span class="op">)</span> <span class="op">=</span> <span class="op">{</span><span class="dv">14</span><span class="op">};</span></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>Physical Curve<span class="op">(</span><span class="st">&quot;pin&quot;</span><span class="op">,</span> <span class="dv">38</span><span class="op">)</span> <span class="op">=</span> <span class="op">{</span><span class="dv">19</span><span class="op">};</span></span></code></pre></div>
+<p>and then call FeenoX twice with either <code>steel</code> or
+<code>alum</code> in the command line to see which case has a larger
+deflection.</p>
+<div class="sourceCode" id="cb29" style="feenox"><pre
+class="sourceCode feenox"><code class="sourceCode feenox"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">PROBLEM</span> mechanical <span class="kw">MESH</span> steel<span class="op">-</span>alum.msh</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="kw">MATERIAL</span> steel <span class="ot">E</span><span class="op">=</span><span class="dt">210e3</span> <span class="ot">nu</span><span class="op">=</span><span class="dt">0.3</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="kw">MATERIAL</span> alum  <span class="ot">E</span><span class="op">=</span><span class="dt">69e3</span>  <span class="ot">nu</span><span class="op">=</span><span class="dt">0.25</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="co"># choose the material for the pink block from command line</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="kw">PHYSICAL_GROUP</span> pink <span class="kw">MATERIAL</span> $<span class="dt">1</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="kw">PHYSICAL_GROUP</span> blue <span class="kw">MATERIAL</span> steel</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="kw">BC</span> fixed fixed</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a><span class="kw">BC</span> pin v<span class="op">=</span><span class="dt">0</span></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>F <span class="op">=</span> <span class="dt">1000</span></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a><span class="kw">BC</span> p  Fy<span class="op">=-</span>F</span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a><span class="kw">BC</span> <span class="dt">2</span>p Fy<span class="op">=-</span><span class="dt">2</span><span class="op">*</span>F</span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a><span class="kw">WRITE_RESULTS</span></span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a><span class="kw">PRINT</span> %.<span class="dt">1</span>f <span class="ot">displ_max</span></span></code></pre></div>
+<pre class="terminal" style="terminal"><code>$ gmsh -3 steel-alum.geo
+[...]
+$ feenox steel-alum.fee steel
+3.9
+$ feenox steel-alum.fee alum
+2.6
+$ 
+</code></pre>
+<figure id="fig:steel-alum" class="subfigures">
+<p><img class="img-fluid" src="steel-alum-steel.png" style="width:48.0%" alt="a" /> <img
+src="steel-alum-alum.png" style="width:48.0%" alt="b" /></p>
+<figcaption><p>Figure 7: The Steel/aluminum paradox: replacing steel
+with aluminum gives rise to smaller maximum displacements.. a — Pink is
+steel, b — Pink is aluminum</p></figcaption>
+</figure>
+<h1 class="section-title" data-number="11" id="nafems-gnl5-large-deformation-beam"><span
+class="header-section-number">11</span> NAFEMS GNL5 “Large-deformation
+beam”</h1>
+<blockquote class="callout-block callout-blockquote">
+<p>Large-strain problems in FeenoX are <strong>WORK IN
+PROGRESS</strong>. Evaluation of stresses, performance, parallelization,
+etc. will improve. Take this example with a grain of salt.</p>
+</blockquote>
+<figure>
+<img class="img-fluid" src="nafems-gnl-cantilever-problem.svg" style="width:100.0%"
+alt="The NAFEMS Geometric-non-linear cantilever beam benchmark problem." />
+<figcaption aria-hidden="true">The NAFEMS Geometric-non-linear
+cantilever beam benchmark problem.</figcaption>
+</figure>
+<p>Consider a cantilevered beam with a square <span
+class="math inline">0.1~\text{m} \times 0.1~\text{m}</span> cross
+section and axial length <span class="math inline">3.2~\text{m}</span>
+along the <span class="math inline">x</span> axis. The material es
+linear elastic with <span class="math inline">E=2.1 \times
+10^{11} \text{Pa}</span> and <span class="math inline">\nu=0</span>. The
+left end at plane <span class="math inline">y</span>-<span
+class="math inline">z</span> is fixed. The right end is subject to a
+total load of <span class="math inline">F_x = -3.844 \times
+10^6~\text{N}</span> (compressive) and <span class="math inline">F_y =
+-3.844 \times 10^3~\text{N}</span> (downward).</p>
+<p>A large-deformation buckling effect is expected due to the massive
+compression of a slender structural geometry and the slight <span
+class="math inline">0.1\%</span> loading imperfection in the <span
+class="math inline">y</span> direction. The reference results are</p>
+<table style="width:97%;">
+<colgroup>
+<col style="width: 57%" />
+<col style="width: 39%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Scalar quantity</th>
+<th style="text-align: center;">Reference result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Maximum vertical displacement at the
+tip</td>
+<td style="text-align: center;"><span class="math inline">(-2.58 \pm
+0.02)~\text{m}</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">Final vertical displacement at the
+tip</td>
+<td style="text-align: center;"><span class="math inline">(-1.36 \pm
+0.02)~\text{m}</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">Final vertical displacement at the
+tip</td>
+<td style="text-align: center;"><span class="math inline">(-5.04 \pm
+0.04)~\text{m}</span></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p>To solve the problem, let’s start with a Gmsh input file to create a
+nice structured hex20 mesh:</p>
+<div class="sourceCode" id="cb31" style="c"><pre
+class="sourceCode c"><code class="sourceCode c"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>SetFactory<span class="op">(</span><span class="st">&quot;OpenCASCADE&quot;</span><span class="op">);</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>l <span class="op">=</span> <span class="fl">3.2</span><span class="op">;</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>h <span class="op">=</span> <span class="fl">0.1</span><span class="op">;</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>Box<span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">=</span> <span class="op">{</span><span class="dv">0</span><span class="op">,</span> <span class="op">-</span>h<span class="op">/</span><span class="dv">2</span><span class="op">,</span> <span class="op">-</span>h<span class="op">/</span><span class="dv">2</span><span class="op">,</span> l<span class="op">,</span> h<span class="op">,</span> h<span class="op">};</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>Physical Surface<span class="op">(</span><span class="st">&quot;left&quot;</span><span class="op">)</span> <span class="op">=</span> <span class="op">{</span><span class="dv">1</span><span class="op">};</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>Physical Surface<span class="op">(</span><span class="st">&quot;right&quot;</span><span class="op">)</span> <span class="op">=</span> <span class="op">{</span><span class="dv">2</span><span class="op">};</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>Physical Volume<span class="op">(</span><span class="st">&quot;steel&quot;</span><span class="op">)</span> <span class="op">=</span> <span class="op">{</span><span class="dv">1</span><span class="op">};</span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">2</span><span class="op">;</span>  <span class="co">// number of elements across thickness</span></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>Transfinite Curve <span class="op">{</span><span class="dv">2</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">7</span><span class="op">,</span> <span class="dv">8</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">6</span><span class="op">}</span> <span class="op">=</span> n<span class="op">+</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>Transfinite Curve <span class="op">{</span><span class="dv">11</span><span class="op">,</span> <span class="dv">12</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">10</span><span class="op">}</span> <span class="op">=</span> n<span class="op">*</span><span class="dv">32</span><span class="op">+</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>Transfinite Surface <span class="st">&quot;*&quot;</span><span class="op">;</span></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>Transfinite Volume <span class="st">&quot;*&quot;</span><span class="op">;</span></span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>Mesh<span class="op">.</span>RecombineAll <span class="op">=</span> <span class="dv">1</span><span class="op">;</span>            <span class="co">// quads &amp; hexes</span></span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>Mesh<span class="op">.</span>ElementOrder <span class="op">=</span> <span class="dv">2</span><span class="op">;</span>            <span class="co">// second order</span></span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>Mesh<span class="op">.</span>SecondOrderIncomplete <span class="op">=</span> <span class="dv">1</span><span class="op">;</span>   <span class="co">// hex20 (and quad8) instead of hex27 (quad9)</span></span></code></pre></div>
+<figure>
+<img class="img-fluid" src="nafems-gnl-cantilever-mesh.png"
+alt="Structured $2 % hex20 grid." />
+<figcaption aria-hidden="true">Structured $2 % hex20 grid.</figcaption>
+</figure>
+<p>This problem is non-linear and path dependent so we have to make sure
+FeenoX can detect the critical buckling load, otherwise it might
+converge to other possible solutions.</p>
+<p>For that end, we run a quasi-static problem with a non-dimensional
+time <span class="math inline">t</span> from <span
+class="math inline">t=0</span> up to <span
+class="math inline">t=1</span> (i.e. <code>end_time = 1</code>) and
+scale the loads with the factor <span class="math inline">t</span>. We
+start with <span class="math inline">\Delta t_0 = 0.01</span>
+(i.e. <code>dt_0 = 1e-2</code> meaning <span
+class="math inline">1\%</span> of the load) and then allow FeenoX to
+choose the time (load) step.</p>
+<p>In FeenoX, to use a linear-elastic isotropic material model in the
+large-deformation (a.k.a. <a
+href="https://en.wikipedia.org/wiki/Hyperelastic_material#Saint_Venant%E2%80%93Kirchhoff_model">Saint
+Venant-Kirchoff model</a>) one can either</p>
+<ol type="a">
+<li><p>keep <span class="math inline">E</span> and <span
+class="math inline">\nu</span> as global variables <code>E</code> and
+<code>nu</code> respectively as in the <a
+href="http://localhost/milhouse/feenox/examples/mechanical.html#nafems-le10-thick-plate-pressure-benchmark">linear
+case</a> above and then</p>
+<ol type="i">
+<li>set the special variable <code>ldef</code> to non-zero, or</li>
+<li>write the <code>NONLINEAR</code> keyword in the <code>PROBLEM</code>
+line, or</li>
+<li>pass <code>--non-linear</code> option in the command line, or</li>
+</ol></li>
+<li><p>write a special <code>MATERIAL</code> with <code>MODEL svk</code>
+like</p>
+<div class="sourceCode" id="cb32" style="fee"><pre
+class="sourceCode fee"><code class="sourceCode feenox"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">MATERIAL</span> <span class="ot">E</span><span class="op">=</span><span class="dt">2.1e11</span> <span class="ot">nu</span><span class="op">=</span><span class="dt">0</span> <span class="kw">MODEL</span> svk</span></code></pre></div></li>
+</ol>
+<p>In the actual input file we use a-i:</p>
+<div class="sourceCode" id="cb33" style="feenox"><pre
+class="sourceCode feenox"><code class="sourceCode feenox"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># NAFEMS Geometrically-Non-Linear cantilever beam</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="kw">PROBLEM</span> mechanical <span class="kw">MESH</span> nafems<span class="op">-</span>gnl<span class="op">-</span>cantilever.msh</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="ot">E</span> <span class="op">=</span> <span class="dt">2.1e11</span>     <span class="co"># linear elastic material</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="ot">nu</span> <span class="op">=</span> <span class="dt">0</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="ot">ldef</span> <span class="op">=</span> <span class="dt">1</span>       <span class="co"># with large-strain (i.e. SVK model)</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="ot">end_time</span> <span class="op">=</span> <span class="dt">1</span>   <span class="co"># quasistatic (because problem is mechanical)</span></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>dt_0 <span class="op">=</span> <span class="dt">1e-2</span>    <span class="co"># initial time step = 1% </span></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="ot">min_dt</span> <span class="op">=</span> <span class="dt">1e-3</span>  <span class="co"># minimum load increament = 0.1%</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a><span class="co"># boundary conditions with loads scaled by t</span></span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a><span class="kw">BC</span> left fixed</span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a><span class="kw">BC</span> right Fx<span class="op">=-</span><span class="dt">3.844e6</span><span class="op">*</span><span class="ot">t</span> Fy<span class="op">=-</span><span class="dt">3.844e3</span><span class="op">*</span><span class="ot">t</span></span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a><span class="kw">SOLVE_PROBLEM</span></span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a><span class="co"># show step, t, incremente and horizontal and vertical displacements</span></span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a><span class="kw">PRINT</span> <span class="ot">step_transient</span> <span class="ot">t</span> <span class="ot">dt</span> u<span class="op">(</span><span class="dt">3.2</span>,<span class="dt">0</span>,<span class="dt">0</span><span class="op">)</span> v<span class="op">(</span><span class="dt">3.2</span>,<span class="dt">0</span>,<span class="dt">0</span><span class="op">)</span></span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a><span class="co"># write one vtu for each step and a global pvd file</span></span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a><span class="kw">WRITE_RESULTS</span></span></code></pre></div>
+<pre class="terminal" style="terminal"><code>$ gmsh -3 nafems-gnl-cantilever.geo
+[...]
+$ feenox nafems-gnl-cantilever.fee | tee nafems-gnl-cantilever.dat
+[...]
+$ awk &#39;{print $5}&#39; nafems-gnl-cantilever.dat | sort -rg | tail -n1
+-2.58023
+$ awk &#39;{print $5}&#39; nafems-gnl-cantilever.dat | tail -n1
+-1.33159
+$ awk &#39;{print $4}&#39; nafems-gnl-cantilever.dat | tail -n1
+-5.08797
+$ ./quasistatic-video.py nafems-gnl-cantilever.pvd
+[...]
+Saved animation to nafems-gnl-cantilever.pvd.mp4
+$ pyxplot nafems-gnl-cantilever.ppl 
+$ 
+</code></pre>
+<p><video
+src="https://www.seamplex.com/feenox/examples/nafems-gnl-cantilever.pvd.mp4"
+style="width:100.0%" controls=""><a
+href="https://www.seamplex.com/feenox/examples/nafems-gnl-cantilever.pvd.mp4">Video</a></video></p>
+<figure>
+<img class="img-fluid" src="nafems-gnl-cantilever.svg" style="width:100.0%"
+alt="Displacements vs. non-dimensional time (load factor)" />
+<figcaption aria-hidden="true">Displacements vs. non-dimensional time
+(load factor)</figcaption>
+</figure>
+<blockquote class="callout-block callout-blockquote">
+<p>Take some time to compare FeenoX’s approach, namely</p>
+<ul>
+<li>one text file for the geometry</li>
+<li>one text file for the problem,</li>
+<li>a solver <a
+href="https://www.seamplex.com/feenox/doc/sds.html">designed to follow
+the Unix philosophy</a></li>
+<li>standard Unix tools to get results</li>
+</ul>
+<p>against <a
+href="https://cds.comsol.com/model/download/837521/models.sme.large_deformation_beam.pdf?__gda__=1755866244_4e06a2471efdf19e9a27923cfc27bdc9&amp;fileExt=.pdf">the
+proposed way to solve this very same problem with a point-and-click
+tool</a>. Spoiler: it needs 15 pages of instructions about where to
+click to solve the problem.</p>
+</blockquote>
+
+       </div><!--//content-inner-->
+      </div><!--//doc-content-->
+      <div class="doc-sidebar col-md-3 col-12 order-0 d-none d-md-flex">
+       <div id="doc-nav" class="doc-nav">
+        <nav id="doc-menu" class="nav doc-menu flex-column sticky">
+<!--  side_toc_start -->
+<ul class="list-unstyled">
+<li class="nav-item"><a class="nav-link scrollto" href="#nafems-le10-thick-plate-pressure-benchmark"
+id="toc-nafems-le10-thick-plate-pressure-benchmark"><span
+class="toc-section-number">1</span> NAFEMS LE10 “Thick plate pressure”
+benchmark</a></li>
+<li class="nav-item"><a class="nav-link scrollto"
+href="#nafems-le11-solid-cylindertapersphere-temperature-benchmark"
+id="toc-nafems-le11-solid-cylindertapersphere-temperature-benchmark"><span
+class="toc-section-number">2</span> NAFEMS LE11 “Solid
+Cylinder/Taper/Sphere-Temperature” benchmark</a></li>
+<li class="nav-item"><a class="nav-link scrollto" href="#nafems-le1-elliptical-membrane-plane-stress-benchmark"
+id="toc-nafems-le1-elliptical-membrane-plane-stress-benchmark"><span
+class="toc-section-number">3</span> NAFEMS LE1 “Elliptical membrane”
+plane-stress benchmark</a></li>
+<li class="nav-item"><a class="nav-link scrollto" href="#parametric-study-on-a-cantilevered-beam"
+id="toc-parametric-study-on-a-cantilevered-beam"><span
+class="toc-section-number">4</span> Parametric study on a cantilevered
+beam</a></li>
+<li class="nav-item"><a class="nav-link scrollto"
+href="#parallelepiped-whose-youngs-modulus-is-a-function-of-the-temperature"
+id="toc-parallelepiped-whose-youngs-modulus-is-a-function-of-the-temperature"><span
+class="toc-section-number">5</span> Parallelepiped whose Young’s modulus
+is a function of the temperature</a>
+<ul class="list-unstyled">
+<li class="nav-item"><a class="nav-link scrollto" href="#thermal-problem" id="toc-thermal-problem"><span
+class="toc-section-number">5.1</span> Thermal problem</a></li>
+<li class="nav-item"><a class="nav-link scrollto" href="#mechanical-problem" id="toc-mechanical-problem"><span
+class="toc-section-number">5.2</span> Mechanical problem</a></li>
+</ul></li>
+<li class="nav-item"><a class="nav-link scrollto" href="#orthotropic-free-expansion-of-a-cube"
+id="toc-orthotropic-free-expansion-of-a-cube"><span
+class="toc-section-number">6</span> Orthotropic free expansion of a
+cube</a></li>
+<li class="nav-item"><a class="nav-link scrollto" href="#thermo-elastic-expansion-of-finite-cylinders"
+id="toc-thermo-elastic-expansion-of-finite-cylinders"><span
+class="toc-section-number">7</span> Thermo-elastic expansion of finite
+cylinders</a></li>
+<li class="nav-item"><a class="nav-link scrollto" href="#temperature-dependent-material-properties"
+id="toc-temperature-dependent-material-properties"><span
+class="toc-section-number">8</span> Temperature-dependent material
+properties</a></li>
+<li class="nav-item"><a class="nav-link scrollto" href="#two-cubes-compressing-each-other"
+id="toc-two-cubes-compressing-each-other"><span
+class="toc-section-number">9</span> Two cubes compressing each
+other</a></li>
+<li class="nav-item"><a class="nav-link scrollto" href="#steelaluminum-paradox"
+id="toc-steelaluminum-paradox"><span
+class="toc-section-number">10</span> Steel/aluminum paradox</a></li>
+<li class="nav-item"><a class="nav-link scrollto" href="#nafems-gnl5-large-deformation-beam"
+id="toc-nafems-gnl5-large-deformation-beam"><span
+class="toc-section-number">11</span> NAFEMS GNL5 “Large-deformation
+beam”</a></li>
+</ul>
+<!--  side_toc_end    -->
+        <p class="text-center"><a href="#header"><small>&uarr;&nbsp;Back to top</small></a><p>
+        </nav><!--//doc-menu-->
+       </div><!--//doc-nav-->
+      </div><!--//doc-sidebar-->
+     </div><!--//doc-body-->     
+     
+     <div id="doc-header" class="doc-header text-center">
+      <div class="meta">  
+           <p class="meta"><a href="#header">&uarr;&nbsp;Back to top</a></p>
+     </div><!--//doc-header-->      
+     
+    </div><!--//container-->
+   </div><!--//doc-wrapper-->
+  </div><!--//page-wrapper-->
+ 
+ <footer id="footer" class="footer text-center">
+  <div class="container">
+   <!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
+   <small class="copyright">Designed with <span class="sr-only">love</span><i class="fas fa-heart"></i> by <a href="https://themes.3rdwavemedia.com/" target="_blank">Xiaoying Riley</a> for developers</small>
+  </div><!--//container-->
+ </footer><!--//footer-->
+ <!-- Main Javascript -->    
+ <script src="../assets/js/bootstrap.bundle.min.js"></script>
+ <script src="../assets/js/stickyfill.min.js"></script>
+ <script src="../assets/js/gumshoe.polyfills.min.js"></script> 
+ <script src="../assets/js/main.js"></script> 
+ </body>
+</html> 

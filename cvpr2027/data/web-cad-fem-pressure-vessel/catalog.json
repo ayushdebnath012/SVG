@@ -1,0 +1,148 @@
+{
+  "collection": "Horizontal pressure vessel with nozzles and saddle supports",
+  "source": "https://github.com/anithinvarma03-cyber/Pressure-Vessel-Analysis",
+  "revision": "ac46e4eed48e77262d7a375abede5fe8f29c785f",
+  "license": "No explicit data license located; retained locally for research, no public release.",
+  "date": "2026-10-12",
+  "certified_cases": 0,
+  "solver_runs": 0,
+  "locally_generated_cad": 0,
+  "frontier_model_calls": 0,
+  "engineering_families": 1,
+  "native_cad_raw_deformable_fem_candidates": 1,
+  "native_catia_files": [
+    "CIRCULAR1.CATPart",
+    "FLAT HEAD.CATPart",
+    "CIRCULAR.CATPart"
+  ],
+  "neutral_cad_audits": [
+    {
+      "path": "cvpr2027/data/web-cad-fem-pressure-vessel/CIRCULAR.igs",
+      "sha256": "d01dc16a8cfca955170e52157a47b0baae6210e658dad244491f7c39ac55f1ee",
+      "valid": true,
+      "solids": 0,
+      "shells": 0,
+      "faces": 66,
+      "bbox_import_mm": [
+        2400.0,
+        880.0000002000003,
+        1239.9043581
+      ],
+      "bbox_limits_import_mm": [
+        -1200.0,
+        1200.0,
+        -440.00000010000014,
+        440.00000010000014,
+        -685.904358,
+        554.0000001
+      ]
+    },
+    {
+      "path": "cvpr2027/data/web-cad-fem-pressure-vessel/CIRCULAR1.igs",
+      "sha256": "98a4f46d71b65bcf1278d0201a40bbb5f449ecbe8b39ac1a55a12a646eb66112",
+      "valid": true,
+      "solids": 0,
+      "shells": 0,
+      "faces": 66,
+      "bbox_import_mm": [
+        2400.0,
+        880.0000002000003,
+        1239.9043581
+      ],
+      "bbox_limits_import_mm": [
+        -1200.0,
+        1200.0,
+        -440.00000010000014,
+        440.00000010000014,
+        -685.904358,
+        554.0000001
+      ]
+    },
+    {
+      "path": "cvpr2027/data/web-cad-fem-pressure-vessel/FLAT HEAD.igs",
+      "sha256": "cd690bdec211dd1655c9df089b09d50a432db379ced8306ecf4142c62162ffbe",
+      "valid": true,
+      "solids": 0,
+      "shells": 0,
+      "faces": 72,
+      "bbox_import_mm": [
+        2428.938232,
+        880.0000002000002,
+        1271.2658692999998
+      ],
+      "bbox_limits_import_mm": [
+        -1214.469116,
+        1214.469116,
+        -440.0000001000001,
+        440.0000001000001,
+        -679.2658692,
+        592.0000001
+      ]
+    }
+  ],
+  "duplicate_iges_CIRCULAR_CIRCULAR1": false,
+  "raw_result": "FILE_files/dp0/SYS/MECH/file.rst",
+  "source_input": "FILE_files/dp0/SYS/MECH/ds.dat",
+  "reader": "ansys-mapdl-reader 0.56.0",
+  "nodes": 8709,
+  "elements": 4965,
+  "static_sets": 1,
+  "set_labels": [
+    1.0
+  ],
+  "element_types": [
+    [
+      1,
+      187
+    ],
+    [
+      2,
+      154
+    ]
+  ],
+  "maximum_translation_mm": 0.03182245981992962,
+  "finite_stress_nodes": 1462,
+  "missing_stress_nodes": 7247,
+  "finite_recovered_maximum_von_mises_MPa": 22.43176269789575,
+  "npz": "saved-static-fields.npz",
+  "npz_sha256": "7147078e5ab0158664e2c2a0cce83c08b9ed0acd13f51db9464ce21a4bcc6312",
+  "source_material": "NIMONIC 75 in original MatML.xml",
+  "source_input_E_MPa": 207000,
+  "source_input_poisson": 0.34,
+  "source_pressure_MPa": 0.824,
+  "source_units": "N-mm-tonne-s; original /units,MPA",
+  "mesh_bbox_mm": [
+    [
+      -1200.0,
+      -439.999995,
+      -685.9043578
+    ],
+    [
+      1200.0,
+      439.9983188,
+      554.0
+    ]
+  ],
+  "original_dimensioned_engineering_drawing_verified": false,
+  "stress_recovery": "Legacy nodal_stress averages element-nodal components at shared corner nodes; finite subset only, NaNs preserved.",
+  "limitations": [
+    "One stored Nimonic 75 static pressure solution; material/head screenshots do not establish twelve independent raw solved cases.",
+    "CIRCULAR and CIRCULAR1 IGES exports are not byte-identical but have matching face counts and imported extents; no independent solved case is assigned to each export.",
+    "Original native CATIA retained; IGES can contain faces/shells rather than watertight solids.",
+    "README declares 24 liters while its listed shell OD 880 mm, wall 20 mm and length 1520 mm imply a much larger cylindrical volume. Geometry/design claims require review.",
+    "Exact head geometry, CAD/result revision, contact setup, stresses and convergence need verification before scoring.",
+    "Published thermal screenshot/table data are plot references, not present in this saved static structural RST.",
+    "No source dataset license found, local research collection only.",
+    "Case-sensitive source carbon steel and CARBON STEEL directories conflict on this filesystem. Lowercase directory stored as carbon-steel-root-variant, original paths and URLs retained in manifest."
+  ],
+  "source_plot_crosscheck": {
+    "NIMONIC 75/TD.JPG": {
+      "legend_max_mm": 0.031822,
+      "reader_max_mm": 0.03182245981992962
+    },
+    "NIMONIC 75/STRESS.JPG": {
+      "legend_max_MPa": 22.432,
+      "reader_finite_recovered_max_MPa": 22.43176269789575
+    }
+  }
+}

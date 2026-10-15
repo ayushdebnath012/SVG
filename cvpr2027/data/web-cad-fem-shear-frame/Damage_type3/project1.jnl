@@ -1,0 +1,229 @@
+# Save by i4S_1 on 2022_09_08-14.06.33; build 2021 2020_03_06-20.20.37 167380
+from abaqus import *
+upgradeMdb(
+    'E:/Damaged_type1-20220908T073632Z-001/Damaged_type1/project1-2020.cae', 
+    'E:/Damaged_type1-20220908T073632Z-001/Damaged_type1/project1.cae')
+# Save by i4S_1 on 2022_09_08-14.06.33; build 2021 2020_03_06-20.20.37 167380
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+del mdb.models['Model-1'].rootAssembly.features['beamwith_uangle-1-lin-2-1-lin-3-1']
+mdb.models['Model-1'].rootAssembly.Instance(dependent=ON, name=
+    'beamwith_uangle-reduc-1', part=
+    mdb.models['Model-1'].parts['beamwith_uangle-reduc'])
+mdb.models['Model-1'].rootAssembly.rotate(angle=270.0, axisDirection=(0.0, 
+    -6.0, 0.0), axisPoint=(0.0, 6.0, 100.0), instanceList=(
+    'beamwith_uangle-reduc-1', ))
+mdb.models['Model-1'].rootAssembly.translate(instanceList=(
+    'beamwith_uangle-reduc-1', ), vector=(-325.159512, 641.0, -25.159512))
+mdb.models['Model-1'].rootAssembly.translate(instanceList=(
+    'beamwith_uangle-reduc-1', ), vector=(150.0, 6.0, -22.0))
+mdb.models['Model-1'].rootAssembly.Surface(name='ubeam_bottom', side1Faces=
+    mdb.models['Model-1'].rootAssembly.instances['beamwith_uangle-1'].faces.getSequenceFromMask(
+    mask=('[#4040 ]', ), )+\
+    mdb.models['Model-1'].rootAssembly.instances['beamwith_uangle-1-lin-2-1'].faces.getSequenceFromMask(
+    mask=('[#4040 ]', ), )+\
+    mdb.models['Model-1'].rootAssembly.instances['beamwith_uangle-1-lin-2-1-1'].faces.getSequenceFromMask(
+    mask=('[#4040 ]', ), )+\
+    mdb.models['Model-1'].rootAssembly.instances['beamwith_uangle-1-lin-3-1'].faces.getSequenceFromMask(
+    mask=('[#4040 ]', ), )+\
+    mdb.models['Model-1'].rootAssembly.instances['beamwith_uangle-1-lin-4-1'].faces.getSequenceFromMask(
+    mask=('[#4040 ]', ), )+\
+    mdb.models['Model-1'].rootAssembly.instances['beamwith_uangle-1-lin-2-1-lin-2-1'].faces.getSequenceFromMask(
+    mask=('[#4040 ]', ), )+\
+    mdb.models['Model-1'].rootAssembly.instances['beamwith_uangle-1-lin-2-1-lin-4-1'].faces.getSequenceFromMask(
+    mask=('[#4040 ]', ), )+\
+    mdb.models['Model-1'].rootAssembly.instances['beamwith_uangle-1-lin-4-1-lin-2-1'].faces.getSequenceFromMask(
+    mask=('[#4040 ]', ), )+\
+    mdb.models['Model-1'].rootAssembly.instances['beamwith_uangle-1-lin-2-1-li-lin-2-1'].faces.getSequenceFromMask(
+    mask=('[#4040 ]', ), )+\
+    mdb.models['Model-1'].rootAssembly.instances['beamwith_uangle-reduc-1'].faces.getSequenceFromMask(
+    mask=('[#40400 ]', ), ))
+mdb.models['Model-1'].rootAssembly.Surface(name='ubeam_top', side1Faces=
+    mdb.models['Model-1'].rootAssembly.instances['beamwith_uangle-1'].faces.getSequenceFromMask(
+    mask=('[#10010 ]', ), )+\
+    mdb.models['Model-1'].rootAssembly.instances['beamwith_uangle-1-lin-2-1'].faces.getSequenceFromMask(
+    mask=('[#10010 ]', ), )+\
+    mdb.models['Model-1'].rootAssembly.instances['beamwith_uangle-1-lin-2-1-1'].faces.getSequenceFromMask(
+    mask=('[#10010 ]', ), )+\
+    mdb.models['Model-1'].rootAssembly.instances['beamwith_uangle-1-lin-3-1'].faces.getSequenceFromMask(
+    mask=('[#10010 ]', ), )+\
+    mdb.models['Model-1'].rootAssembly.instances['beamwith_uangle-1-lin-4-1'].faces.getSequenceFromMask(
+    mask=('[#10010 ]', ), )+\
+    mdb.models['Model-1'].rootAssembly.instances['beamwith_uangle-1-lin-2-1-lin-2-1'].faces.getSequenceFromMask(
+    mask=('[#10010 ]', ), )+\
+    mdb.models['Model-1'].rootAssembly.instances['beamwith_uangle-1-lin-2-1-lin-4-1'].faces.getSequenceFromMask(
+    mask=('[#10010 ]', ), )+\
+    mdb.models['Model-1'].rootAssembly.instances['beamwith_uangle-1-lin-4-1-lin-2-1'].faces.getSequenceFromMask(
+    mask=('[#10010 ]', ), )+\
+    mdb.models['Model-1'].rootAssembly.instances['beamwith_uangle-1-lin-2-1-li-lin-2-1'].faces.getSequenceFromMask(
+    mask=('[#10010 ]', ), )+\
+    mdb.models['Model-1'].rootAssembly.instances['beamwith_uangle-reduc-1'].faces.getSequenceFromMask(
+    mask=('[#100100 ]', ), ))
+mdb.models['Model-1'].rootAssembly.translate(instanceList=(
+    'beamwith_uangle-reduc-1', ), vector=(-150.0, -6.0, 22.0))
+mdb.Job(atTime=None, contactPrint=OFF, description='', echoPrint=OFF, 
+    explicitPrecision=SINGLE, getMemoryFromAnalysis=True, historyPrint=OFF, 
+    memory=90, memoryUnits=PERCENTAGE, model='Model-1', modelPrint=OFF, 
+    multiprocessingMode=DEFAULT, name='reduc', nodalOutputPrecision=SINGLE, 
+    numCpus=1, numGPUs=0, queue=None, resultsFormat=ODB, scratch='', type=
+    ANALYSIS, userSubroutine='', waitHours=0, waitMinutes=0)
+mdb.jobs['reduc'].submit(consistencyChecking=OFF)
+mdb.jobs['reduc']._Message(STARTED, {'phase': BATCHPRE_PHASE, 
+    'clientHost': 'DESKTOP-J13F995', 'handle': 0, 'jobName': 'reduc'})
+mdb.jobs['reduc']._Message(ERROR, {'phase': BATCHPRE_PHASE, 
+    'message': 'THE MASTER SURFACE ASSEMBLY_BEAM_TOP DOES NOT EXIST.', 
+    'jobName': 'reduc'})
+mdb.jobs['reduc']._Message(ERROR, {'phase': BATCHPRE_PHASE, 
+    'message': 'THE SLAVE SURFACE ASSEMBLY_BEAM_BOTTOM DOES NOT EXIST.', 
+    'jobName': 'reduc'})
+mdb.jobs['reduc']._Message(ERROR, {'phase': BATCHPRE_PHASE, 
+    'message': 'THE MASTER SURFACE ASSEMBLY_BEAM_TOP DOES NOT EXIST.', 
+    'jobName': 'reduc'})
+mdb.jobs['reduc']._Message(ERROR, {'phase': BATCHPRE_PHASE, 
+    'message': 'THE SLAVE SURFACE ASSEMBLY_BEAM_BOTTOM DOES NOT EXIST.', 
+    'jobName': 'reduc'})
+mdb.jobs['reduc']._Message(ERROR, {'phase': BATCHPRE_PHASE, 
+    'message': 'THE MASTER SURFACE ASSEMBLY_BEAM_TOP DOES NOT EXIST.', 
+    'jobName': 'reduc'})
+mdb.jobs['reduc']._Message(WARNING, {'phase': BATCHPRE_PHASE, 
+    'message': 'PLEASE MAKE SURE THAT THE MESH DENSITY OF THE SLAVE SURFACE IN THE TIE PAIR (ASSEMBLY_UBEAM_TOP,ASSEMBLY_COLUMNBOTTOM_TOPFACE) IS FINER THAN THE MASTER SURFACE.  THE ANALYSIS MAY RUN SLOWER, MAY YIELD INACCURATE RESULTS, AND MAY REQUIRE MORE MEMORY IF THIS IS NOT THE CASE.', 
+    'jobName': 'reduc'})
+mdb.jobs['reduc']._Message(WARNING, {'phase': BATCHPRE_PHASE, 
+    'message': 'FOR *TIE PAIR (ASSEMBLY_UBEAM_TOP-ASSEMBLY_COLUMNBOTTOM_TOPFACE), ADJUSTED NODES WITH VERY SMALL ADJUSTMENTS WERE NOT PRINTED. SPECIFY *PREPRINT,MODEL=YES FOR COMPLETE PRINTOUT.', 
+    'jobName': 'reduc'})
+mdb.jobs['reduc']._Message(WARNING, {'phase': BATCHPRE_PHASE, 
+    'message': 'PLEASE MAKE SURE THAT THE MESH DENSITY OF THE SLAVE SURFACE IN THE TIE PAIR (ASSEMBLY_UBEAM_BOTTOM,ASSEMBLY_COLUMTOP_BOTTOMFACE) IS FINER THAN THE MASTER SURFACE.  THE ANALYSIS MAY RUN SLOWER, MAY YIELD INACCURATE RESULTS, AND MAY REQUIRE MORE MEMORY IF THIS IS NOT THE CASE.', 
+    'jobName': 'reduc'})
+mdb.jobs['reduc']._Message(WARNING, {'phase': BATCHPRE_PHASE, 
+    'message': 'FOR *TIE PAIR (ASSEMBLY_UBEAM_BOTTOM-ASSEMBLY_COLUMTOP_BOTTOMFACE), ADJUSTED NODES WITH VERY SMALL ADJUSTMENTS WERE NOT PRINTED. SPECIFY *PREPRINT,MODEL=YES FOR COMPLETE PRINTOUT.', 
+    'jobName': 'reduc'})
+mdb.jobs['reduc']._Message(ERROR, {'phase': BATCHPRE_PHASE, 
+    'message': 'THE SLAVE SURFACE ASSEMBLY_BEAM_BOTTOM DOES NOT EXIST.', 
+    'jobName': 'reduc'})
+mdb.jobs['reduc']._Message(ERROR, {'phase': BATCHPRE_PHASE, 
+    'message': 'THE MASTER SURFACE ASSEMBLY_BEAM_TOP DOES NOT EXIST.', 
+    'jobName': 'reduc'})
+mdb.jobs['reduc']._Message(ERROR, {'phase': BATCHPRE_PHASE, 
+    'message': 'THE SLAVE SURFACE ASSEMBLY_BEAM_BOTTOM DOES NOT EXIST.', 
+    'jobName': 'reduc'})
+mdb.jobs['reduc']._Message(ERROR, {'phase': BATCHPRE_PHASE, 
+    'message': 'THE MASTER SURFACE ASSEMBLY_BEAM_TOP DOES NOT EXIST.', 
+    'jobName': 'reduc'})
+mdb.jobs['reduc']._Message(ERROR, {'phase': BATCHPRE_PHASE, 
+    'message': 'THE SLAVE SURFACE ASSEMBLY_BEAM_BOTTOM DOES NOT EXIST.', 
+    'jobName': 'reduc'})
+mdb.jobs['reduc']._Message(WARNING, {'phase': BATCHPRE_PHASE, 
+    'message': '64 elements are distorted. Either the isoparametric angles are out of the suggested limits or the triangular or tetrahedral quality measure is bad. The elements have been identified in element set WarnElemDistorted.', 
+    'jobName': 'reduc'})
+mdb.jobs['reduc']._Message(ODB_FILE, {'phase': BATCHPRE_PHASE, 
+    'file': 'C:\\Users\\i4S_1\\Desktop\\Damaged_type1-20220908T073632Z-001\\Damaged_type1\\reduc.odb', 
+    'jobName': 'reduc'})
+mdb.jobs['reduc']._Message(ABORTED, {'phase': BATCHPRE_PHASE, 
+    'message': 'Analysis phase failed due to errors', 'jobName': 'reduc'})
+mdb.jobs['reduc']._Message(ERROR, {
+    'message': 'Analysis Input File Processor exited with an error.', 
+    'jobName': 'reduc'})
+mdb.jobs['reduc']._Message(JOB_ABORTED, {
+    'message': 'Analysis Input File Processor exited with an error.', 
+    'jobName': 'reduc'})
+mdb.models['Model-1'].parts['beam300*6*6'].generateMesh()
+mdb.models['Model-1'].parts['beamwith_uangle'].generateMesh()
+mdb.models['Model-1'].rootAssembly.regenerate()
+mdb.jobs['reduc'].submit(consistencyChecking=OFF)
+mdb.jobs['reduc']._Message(STARTED, {'phase': BATCHPRE_PHASE, 
+    'clientHost': 'DESKTOP-J13F995', 'handle': 0, 'jobName': 'reduc'})
+mdb.jobs['reduc']._Message(WARNING, {'phase': BATCHPRE_PHASE, 
+    'message': 'FOR *TIE PAIR (ASSEMBLY_COLUMNBOTTOM_BOTTOMFACE-ASSEMBLY_BEAM_TOP), ADJUSTED NODES WITH VERY SMALL ADJUSTMENTS WERE NOT PRINTED. SPECIFY *PREPRINT,MODEL=YES FOR COMPLETE PRINTOUT.', 
+    'jobName': 'reduc'})
+mdb.jobs['reduc']._Message(WARNING, {'phase': BATCHPRE_PHASE, 
+    'message': 'PLEASE MAKE SURE THAT THE MESH DENSITY OF THE SLAVE SURFACE IN THE TIE PAIR (ASSEMBLY_UBEAM_TOP,ASSEMBLY_COLUMNBOTTOM_TOPFACE) IS FINER THAN THE MASTER SURFACE.  THE ANALYSIS MAY RUN SLOWER, MAY YIELD INACCURATE RESULTS, AND MAY REQUIRE MORE MEMORY IF THIS IS NOT THE CASE.', 
+    'jobName': 'reduc'})
+mdb.jobs['reduc']._Message(WARNING, {'phase': BATCHPRE_PHASE, 
+    'message': 'FOR *TIE PAIR (ASSEMBLY_UBEAM_TOP-ASSEMBLY_COLUMNBOTTOM_TOPFACE), ADJUSTED NODES WITH VERY SMALL ADJUSTMENTS WERE NOT PRINTED. SPECIFY *PREPRINT,MODEL=YES FOR COMPLETE PRINTOUT.', 
+    'jobName': 'reduc'})
+mdb.jobs['reduc']._Message(WARNING, {'phase': BATCHPRE_PHASE, 
+    'message': 'PLEASE MAKE SURE THAT THE MESH DENSITY OF THE SLAVE SURFACE IN THE TIE PAIR (ASSEMBLY_UBEAM_BOTTOM,ASSEMBLY_COLUMTOP_BOTTOMFACE) IS FINER THAN THE MASTER SURFACE.  THE ANALYSIS MAY RUN SLOWER, MAY YIELD INACCURATE RESULTS, AND MAY REQUIRE MORE MEMORY IF THIS IS NOT THE CASE.', 
+    'jobName': 'reduc'})
+mdb.jobs['reduc']._Message(WARNING, {'phase': BATCHPRE_PHASE, 
+    'message': 'FOR *TIE PAIR (ASSEMBLY_UBEAM_BOTTOM-ASSEMBLY_COLUMTOP_BOTTOMFACE), ADJUSTED NODES WITH VERY SMALL ADJUSTMENTS WERE NOT PRINTED. SPECIFY *PREPRINT,MODEL=YES FOR COMPLETE PRINTOUT.', 
+    'jobName': 'reduc'})
+mdb.jobs['reduc']._Message(WARNING, {'phase': BATCHPRE_PHASE, 
+    'message': 'FOR *TIE PAIR (ASSEMBLY_BEAM_BOTTOM-ASSEMBLY_COLUMTOP_TOPFACE), ADJUSTED NODES WITH VERY SMALL ADJUSTMENTS WERE NOT PRINTED. SPECIFY *PREPRINT,MODEL=YES FOR COMPLETE PRINTOUT.', 
+    'jobName': 'reduc'})
+mdb.jobs['reduc']._Message(WARNING, {'phase': BATCHPRE_PHASE, 
+    'message': '49 nodes are either missing intersection with their respective master surface or are outside the adjust zone. The nodes have been identified in node set WarnNodeMissMasterIntersect.', 
+    'jobName': 'reduc'})
+mdb.jobs['reduc']._Message(WARNING, {'phase': BATCHPRE_PHASE, 
+    'message': '650 elements are distorted. Either the isoparametric angles are out of the suggested limits or the triangular or tetrahedral quality measure is bad. The elements have been identified in element set WarnElemDistorted.', 
+    'jobName': 'reduc'})
+mdb.jobs['reduc']._Message(ODB_FILE, {'phase': BATCHPRE_PHASE, 
+    'file': 'C:\\Users\\i4S_1\\Desktop\\Damaged_type1-20220908T073632Z-001\\Damaged_type1\\reduc.odb', 
+    'jobName': 'reduc'})
+mdb.jobs['reduc']._Message(COMPLETED, {'phase': BATCHPRE_PHASE, 
+    'message': 'Analysis phase complete', 'jobName': 'reduc'})
+mdb.jobs['reduc']._Message(STARTED, {'phase': STANDARD_PHASE, 
+    'clientHost': 'DESKTOP-J13F995', 'handle': 18644, 'jobName': 'reduc'})
+mdb.jobs['reduc']._Message(STEP, {'phase': STANDARD_PHASE, 'stepId': 1, 
+    'jobName': 'reduc'})
+mdb.jobs['reduc']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 0, 'jobName': 'reduc'})
+mdb.jobs['reduc']._Message(MEMORY_ESTIMATE, {'phase': STANDARD_PHASE, 
+    'jobName': 'reduc', 'memory': 1357.0})
+mdb.jobs['reduc']._Message(PHYSICAL_MEMORY, {'phase': STANDARD_PHASE, 
+    'physical_memory': 32592.0, 'jobName': 'reduc'})
+mdb.jobs['reduc']._Message(MINIMUM_MEMORY, {'minimum_memory': 123.0, 
+    'phase': STANDARD_PHASE, 'jobName': 'reduc'})
+mdb.jobs['reduc']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 1, 'jobName': 'reduc'})
+mdb.jobs['reduc']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 2, 'jobName': 'reduc'})
+mdb.jobs['reduc']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 3, 'jobName': 'reduc'})
+mdb.jobs['reduc']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 4, 'jobName': 'reduc'})
+mdb.jobs['reduc']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 5, 'jobName': 'reduc'})
+mdb.jobs['reduc']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 6, 'jobName': 'reduc'})
+mdb.jobs['reduc']._Message(STATUS, {'totalTime': 0.0, 'attempts': 1, 
+    'timeIncrement': 1e-36, 'increment': 1, 'stepTime': 1e-36, 'step': 1, 
+    'jobName': 'reduc', 'severe': 0, 'iterations': 0, 'phase': STANDARD_PHASE, 
+    'equilibrium': 0})
+mdb.jobs['reduc']._Message(END_STEP, {'phase': STANDARD_PHASE, 'stepId': 1, 
+    'jobName': 'reduc'})
+mdb.jobs['reduc']._Message(COMPLETED, {'phase': STANDARD_PHASE, 
+    'message': 'Analysis phase complete', 'jobName': 'reduc'})
+mdb.jobs['reduc']._Message(JOB_COMPLETED, {'time': 'Mon Sep 12 10:50:01 2022', 
+    'jobName': 'reduc'})
+del mdb.models['Model-2']
+# Save by i4S_1 on 2022_09_12-10.53.02; build 2021 2020_03_06-20.20.37 167380
+# Save by i4S_1 on 2022_09_12-10.53.03; build 2021 2020_03_06-20.20.37 167380
+# Save by i4S_1 on 2022_09_12-10.53.03; build 2021 2020_03_06-20.20.37 167380
+# Save by i4S_1 on 2022_09_12-10.53.03; build 2021 2020_03_06-20.20.37 167380
+# Save by i4S_1 on 2022_09_12-10.53.03; build 2021 2020_03_06-20.20.37 167380
+# Save by i4S_1 on 2022_09_12-10.53.04; build 2021 2020_03_06-20.20.37 167380
+# Save by i4S_1 on 2022_09_12-10.53.04; build 2021 2020_03_06-20.20.37 167380
+# Save by i4S_1 on 2022_09_12-10.53.04; build 2021 2020_03_06-20.20.37 167380
+# Save by i4S_1 on 2022_09_12-10.53.04; build 2021 2020_03_06-20.20.37 167380
+# Save by i4S_1 on 2022_09_12-10.53.04; build 2021 2020_03_06-20.20.37 167380
+# Save by i4S_1 on 2022_09_12-10.53.04; build 2021 2020_03_06-20.20.37 167380
+# Save by i4S_1 on 2022_09_12-10.53.04; build 2021 2020_03_06-20.20.37 167380
+# Save by i4S_1 on 2022_09_12-10.53.05; build 2021 2020_03_06-20.20.37 167380
+# Save by i4S_1 on 2022_09_12-10.53.05; build 2021 2020_03_06-20.20.37 167380
+# Save by i4S_1 on 2022_09_12-10.53.05; build 2021 2020_03_06-20.20.37 167380
+# Save by i4S_1 on 2022_09_12-10.53.05; build 2021 2020_03_06-20.20.37 167380
+# Save by i4S_1 on 2022_09_12-10.53.05; build 2021 2020_03_06-20.20.37 167380
+# Save by i4S_1 on 2022_09_12-10.53.06; build 2021 2020_03_06-20.20.37 167380
+# Save by i4S_1 on 2022_09_12-10.53.06; build 2021 2020_03_06-20.20.37 167380
+# Save by i4S_1 on 2022_09_12-10.53.06; build 2021 2020_03_06-20.20.37 167380

@@ -1,0 +1,46 @@
+{
+ "id": "75843f475cb19d81a09bd9fa261f0e6f7a90ecafbc977a5b7ba6fcc5f4228a62",
+ "source_fem": {
+  "ok": true,
+  "compliance": 2.0376743767851582e-06,
+  "components": 1,
+  "nodes": 14410
+ },
+ "nodes": [
+  {
+   "name": "vanilla",
+   "parent": null,
+   "visits": 1,
+   "value_sum": 1.0,
+   "eval": {
+    "gates": true,
+    "fem": {
+     "ok": true,
+     "compliance": 3.606481297385423e-07,
+     "components": 1,
+     "nodes": 11081
+    },
+    "numbers_ok": null,
+    "changed": true,
+    "error": null,
+    "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(33.0, 33.0, 83.0)\n    .faces(\">Z\").workplane()\n    .center(1.5, 1.5)\n    .pushPoints([(-12.0, -15.0), (0.0, -15.0), (12.0, -15.0)])\n    .hole(2.0)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-15.0, -12.0), (-15.0, 0.0), (-15.0, 12.0)])\n    .hole(2.0)\n)\nshow_object(result)\n"
+   }
+  }
+ ],
+ "candidates": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(33.0, 33.0, 83.0)\n    .faces(\">Z\").workplane()\n    .center(1.5, 1.5)\n    .pushPoints([(-12.0, -15.0), (0.0, -15.0), (12.0, -15.0)])\n    .hole(2.0)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-15.0, -12.0), (-15.0, 0.0), (-15.0, 12.0)])\n    .hole(2.0)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 3.606481297385423e-07,
+    "components": 1,
+    "nodes": 11081
+   },
+   "consensus": 1,
+   "numbers_ok": null,
+   "changed": true
+  }
+ ]
+}

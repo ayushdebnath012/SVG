@@ -1,0 +1,26 @@
+{
+ "id": "bc0e656e1eb1c06c31b296adf6d4ae53608eb6b6b51a1bcdf8d8c26904c8ecf9",
+ "source_fem": {
+  "ok": true,
+  "compliance": 4.88178964274691e-07,
+  "components": 1,
+  "nodes": 929
+ },
+ "candidates": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(27.9, 18.8)\n    .faces(\">Z\").workplane()\n    .circle(16.92)\n    .workplane(offset=9.0)\n    .circle(1.5)\n    .loft(combine=True)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 10.375), rotate=cq.Vector(0, 0, 0.0))\n            .transformed(offset=cq.Vector(5.64, 0, 0), rotate=cq.Vector(37.1, 0, 0))\n            .polyline([[0.0, -12.5], [0.0, 12.5], [46.512, 8.938], [64.6, 0.0], [46.512, -8.938]])\n            .close()\n            .extrude(7.15)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 10.375), rotate=cq.Vector(0, 0, 180.0))\n            .transformed(offset=cq.Vector(5.64, 0, 0), rotate=cq.Vector(37.1, 0, 0))\n            .polyline([[0.0, -12.5], [0.0, 12.5], [46.512, 8.938], [64.6, 0.0], [46.512, -8.938]])\n            .close()\n            .extrude(7.15)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 3.4061095017611327e-07,
+    "components": 1,
+    "nodes": 538
+   },
+   "consensus": 1,
+   "numbers_ok": null,
+   "changed": true,
+   "error": null
+  }
+ ]
+}

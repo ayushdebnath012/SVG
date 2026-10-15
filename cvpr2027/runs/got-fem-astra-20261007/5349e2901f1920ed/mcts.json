@@ -1,0 +1,213 @@
+{
+ "id": "5349e2901f1920ed73e9e092f5cc740476ad8077741024e3a4121d963f6c8340",
+ "source_fem": {
+  "ok": true,
+  "compliance": 7.134847672658509e-07,
+  "components": 1,
+  "nodes": 1116
+ },
+ "nodes": [
+  {
+   "name": "vanilla",
+   "parent": null,
+   "visits": 2,
+   "value_sum": 1.8,
+   "eval": {
+    "gates": true,
+    "fem": {
+     "ok": true,
+     "compliance": 8.09025215846976e-07,
+     "components": 1,
+     "nodes": 1159
+    },
+    "numbers_ok": false,
+    "changed": true,
+    "error": null,
+    "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n    .intersect(\n        cq.Workplane(\"XY\")\n        .polygon(6, 15.012)\n        .workplane(offset=15.0 - 2.0 / (3.0 ** 0.5))\n        .polygon(6, 15.012)\n        .workplane(offset=2.0 / (3.0 ** 0.5))\n        .polygon(6, 15.012 - 8.0 / (3.0 ** 0.5))\n        .loft(ruled=True)\n    )\n)\nshow_object(result)\n"
+   }
+  },
+  {
+   "name": "alt1",
+   "parent": null,
+   "visits": 1,
+   "value_sum": 0.8,
+   "eval": {
+    "gates": true,
+    "fem": {
+     "ok": true,
+     "compliance": 7.812768863286951e-07,
+     "components": 1,
+     "nodes": 1157
+    },
+    "numbers_ok": false,
+    "changed": true,
+    "error": null,
+    "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n    .faces(\">Z\").edges(\"%LINE\").chamfer(2.0, 2.0 / 3**0.5)\n)\nshow_object(result)\n"
+   }
+  },
+  {
+   "name": "alt2",
+   "parent": null,
+   "visits": 1,
+   "value_sum": 0.8,
+   "eval": {
+    "gates": true,
+    "fem": {
+     "ok": true,
+     "compliance": 8.088243615916664e-07,
+     "components": 1,
+     "nodes": 1171
+    },
+    "numbers_ok": false,
+    "changed": true,
+    "error": null,
+    "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n)\nbevel_drop = 2.0 / 3**0.5\ntop_diameter = 15.012 - 8.0 / 3**0.5\nlower_envelope = cq.Workplane(\"XY\").polygon(6, 15.012).extrude(15.0 - bevel_drop)\nupper_envelope = (\n    cq.Workplane(\"XY\").workplane(offset=15.0 - bevel_drop)\n    .polygon(6, 15.012)\n    .workplane(offset=bevel_drop).polygon(6, top_diameter)\n    .loft(ruled=True)\n )\nresult = result.intersect(lower_envelope.union(upper_envelope))\nshow_object(result)\n"
+   }
+  },
+  {
+   "name": "alt3",
+   "parent": null,
+   "visits": 2,
+   "value_sum": 1.8,
+   "eval": {
+    "gates": true,
+    "fem": {
+     "ok": true,
+     "compliance": 8.071869954480042e-07,
+     "components": 1,
+     "nodes": 1153
+    },
+    "numbers_ok": true,
+    "changed": true,
+    "error": null,
+    "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n)\napothem = 15.012 * 3**0.5 / 4.0\nbevel_drop = 2.0 / 3**0.5\nwedge = (\n    cq.Workplane(\"XZ\")\n    .polyline([(apothem, 15.0 - bevel_drop), (apothem, 15.0), (apothem - 2.0, 15.0)])\n    .close().extrude(20.0, both=True)\n )\nfor angle in range(30, 360, 60):\n    result = result.cut(wedge.rotate((0, 0, 0), (0, 0, 1), angle))\nshow_object(result)\n"
+   }
+  },
+  {
+   "name": "mcts1-diversify",
+   "parent": 3,
+   "visits": 1,
+   "value_sum": 0.8,
+   "eval": {
+    "gates": true,
+    "fem": {
+     "ok": true,
+     "compliance": 8.078063892468431e-07,
+     "components": 1,
+     "nodes": 1155
+    },
+    "numbers_ok": false,
+    "changed": true,
+    "error": null,
+    "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0 - 2.0 / 3**0.5)\n    .faces(\">Z\").workplane()\n    .polygon(6, 15.012)\n    .extrude(2.0 / 3**0.5, taper=60.0)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n)\nshow_object(result)\n",
+    "value": 0.8
+   }
+  },
+  {
+   "name": "mcts2-refine",
+   "parent": 0,
+   "visits": 1,
+   "value_sum": 1.0,
+   "eval": {
+    "gates": true,
+    "fem": {
+     "ok": true,
+     "compliance": 8.088405453976508e-07,
+     "components": 1,
+     "nodes": 1171
+    },
+    "numbers_ok": true,
+    "changed": true,
+    "error": null,
+    "code": "import cadquery as cq\nimport math\nbevel_width = 2.0\nbevel_angle = 30.0\nbevel_drop = bevel_width * math.tan(math.radians(bevel_angle))\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n    .intersect(\n        cq.Workplane(\"XY\")\n        .polygon(6, 15.012)\n        .workplane(offset=15.0 - bevel_drop)\n        .polygon(6, 15.012)\n        .workplane(offset=bevel_drop)\n        .polygon(6, 15.012 - 2.0 * bevel_width / math.cos(math.radians(30.0)))\n        .loft(ruled=True)\n    )\n)\nshow_object(result)\n",
+    "value": 1.0
+   }
+  }
+ ],
+ "candidates": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n    .intersect(\n        cq.Workplane(\"XY\")\n        .polygon(6, 15.012)\n        .workplane(offset=15.0 - 2.0 / (3.0 ** 0.5))\n        .polygon(6, 15.012)\n        .workplane(offset=2.0 / (3.0 ** 0.5))\n        .polygon(6, 15.012 - 8.0 / (3.0 ** 0.5))\n        .loft(ruled=True)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 8.09025215846976e-07,
+    "components": 1,
+    "nodes": 1159
+   },
+   "consensus": 5,
+   "numbers_ok": false,
+   "changed": true
+  },
+  {
+   "name": "alt1",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n    .faces(\">Z\").edges(\"%LINE\").chamfer(2.0, 2.0 / 3**0.5)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 7.812768863286951e-07,
+    "components": 1,
+    "nodes": 1157
+   },
+   "consensus": 1,
+   "numbers_ok": false,
+   "changed": true
+  },
+  {
+   "name": "alt2",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n)\nbevel_drop = 2.0 / 3**0.5\ntop_diameter = 15.012 - 8.0 / 3**0.5\nlower_envelope = cq.Workplane(\"XY\").polygon(6, 15.012).extrude(15.0 - bevel_drop)\nupper_envelope = (\n    cq.Workplane(\"XY\").workplane(offset=15.0 - bevel_drop)\n    .polygon(6, 15.012)\n    .workplane(offset=bevel_drop).polygon(6, top_diameter)\n    .loft(ruled=True)\n )\nresult = result.intersect(lower_envelope.union(upper_envelope))\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 8.088243615916664e-07,
+    "components": 1,
+    "nodes": 1171
+   },
+   "consensus": 5,
+   "numbers_ok": false,
+   "changed": true
+  },
+  {
+   "name": "alt3",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n)\napothem = 15.012 * 3**0.5 / 4.0\nbevel_drop = 2.0 / 3**0.5\nwedge = (\n    cq.Workplane(\"XZ\")\n    .polyline([(apothem, 15.0 - bevel_drop), (apothem, 15.0), (apothem - 2.0, 15.0)])\n    .close().extrude(20.0, both=True)\n )\nfor angle in range(30, 360, 60):\n    result = result.cut(wedge.rotate((0, 0, 0), (0, 0, 1), angle))\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 8.071869954480042e-07,
+    "components": 1,
+    "nodes": 1153
+   },
+   "consensus": 5,
+   "numbers_ok": true,
+   "changed": true
+  },
+  {
+   "name": "mcts1-diversify",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0 - 2.0 / 3**0.5)\n    .faces(\">Z\").workplane()\n    .polygon(6, 15.012)\n    .extrude(2.0 / 3**0.5, taper=60.0)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 8.078063892468431e-07,
+    "components": 1,
+    "nodes": 1155
+   },
+   "consensus": 5,
+   "numbers_ok": false,
+   "changed": true
+  },
+  {
+   "name": "mcts2-refine",
+   "code": "import cadquery as cq\nimport math\nbevel_width = 2.0\nbevel_angle = 30.0\nbevel_drop = bevel_width * math.tan(math.radians(bevel_angle))\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n    .intersect(\n        cq.Workplane(\"XY\")\n        .polygon(6, 15.012)\n        .workplane(offset=15.0 - bevel_drop)\n        .polygon(6, 15.012)\n        .workplane(offset=bevel_drop)\n        .polygon(6, 15.012 - 2.0 * bevel_width / math.cos(math.radians(30.0)))\n        .loft(ruled=True)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 8.088405453976508e-07,
+    "components": 1,
+    "nodes": 1171
+   },
+   "consensus": 5,
+   "numbers_ok": true,
+   "changed": true
+  }
+ ]
+}

@@ -1,0 +1,34 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "Qwen/Qwen3.5-35B-A3B-FP8",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .cylinder(22.9, 26.8)\\n    .faces(\\\"<Z\\\")\\n    .chamfer(1.0)\\n    .faces(\\\">Z\\\")\\n    .faces(\\\">Z\\\").workplane()\\n    .polarArray(20.9, 0, 360, 6)\\n    .hole(3.2)\\n    .union(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(0, 0, 12.75), rotate=cq.Vector(0, 0, 0))\\n            .cylinder(2.6, 15.4)\\n    )\\n    .union(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(0, 0, 27.8), rotate=cq.Vector(0, 0, 0))\\n            .cylinder(27.5, 12.0)\\n    )\\n    .faces(\\\">Z\\\").workplane()\\n    .hole(11.2)\\n)\\nshow_object(result)\", \"instruction\": \"Increase the outer radius of the main flange body from 26.8 to 34.84.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"6e8c8025a6d5da9a724068826b3fe3bfe2dbafcb804f9f0b2262046b19f68518\", \"instruction\": \"Increase the plate width from 26.8 to 34.84.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .rect(34.84, 39.8)\\\"], \\\"start\\\": 3}]}\", \"strategies\": [], \"context\": [\"3:     .rect(26.8, 39.8)\"]}, {\"task_id\": \"7159d61e734bfdb63d221ad1dbbba7610a157962a2006ae91e6c574a5bf54a80\", \"instruction\": \"Increase the outer radius of the cylindrical sleeve from 20.00 mm to 26.00 mm.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .cylinder(16.0, 26.0)\\\"], \\\"start\\\": 3}]}\", \"strategies\": [], \"context\": [\"3:     .cylinder(16.0, 20.0)\"]}, {\"task_id\": \"426e6ace199f3a5f7fc1d4eaddc8d52ee86287e79511279dd8223fc4e30a164a\", \"instruction\": \"Increase the inlet radius from 20.3 to 26.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .lineTo(0.0, 26.0)\\\"], \\\"start\\\": 6}]}\", \"strategies\": [], \"context\": [\"6:     .lineTo(0.0, 20.3)\"]}]}"
+   }
+  ],
+  "temperature": 0.6,
+  "top_p": 0.95,
+  "top_k": 20,
+  "max_tokens": 8192
+ },
+ "usage": {
+  "prompt_tokens": 861,
+  "total_tokens": 2257,
+  "completion_tokens": 1396,
+  "prompt_tokens_details": null,
+  "completion_tokens_details": {
+   "reasoning_tokens": 1147
+  }
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "\n\n```json\n{\n  \"steps\": [\n    \"Identify the cylinder operation creating the main flange body at line 3\",\n    \"Change the cylinder radius parameter from 26.8 to 34.84 while keeping height at 22.9\",\n    \"Verify the modified cylinder maintains compatibility with downstream polarArray operation\",\n    \"Ensure union operations and subsequent features remain valid with the new geometry\"\n  ],\n  \"invariants\": [\n    \"Cylinder height parameter remains 22.9\",\n    \"Chamfer operation at 1.0 on <Z face remains unchanged\",\n    \"Polar array parameters (20.9, 0, 360, 6) remain unchanged\",\n    \"Hole diameters (3.2 and 11.2) remain unchanged\",\n    \"Union cylinder positions and dimensions remain unchanged\",\n    \"Workplane selection and face operations maintain their sequence\"\n  ],\n  \"dependencies\": [\n    [0, 1],\n    [1, 2],\n    [1, 3]\n  ]\n}\n```"
+}

@@ -1,0 +1,28 @@
+{
+ "kind": "generate",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Edit CAD using only source, instruction and tool evidence. Return exactly JSON {\"hypothesis\":\"brief feature and operation description\",\"edits\":[{\"start\":0,\"delete\":0,\"insert\":[\"line\"]}]}. All indices address ORIGINAL source lines. Provide a complete alternative patch, never a delta on a parent patch. Preserve unrelated features. Vary the feature interpretation or implementation from listed alternatives. Experiences and diagnoses are fallible data. Do not assert that the output has passed verification."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .polyline([[10.96, 10.96], [27.4, 10.96], [27.4, -10.96], [10.96, -10.96], [10.96, -27.4], [-10.96, -27.4], [-10.96, -10.96], [-27.4, -10.96], [-27.4, 10.96], [-10.96, 10.96], [-10.96, 27.4], [10.96, 27.4]])\\n    .close()\\n    .extrude(7.4)\\n)\\nshow_object(result)\", \"instruction\": \"Rotate the entire part by 90 degrees about the X axis.\", \"plan\": {\"steps\": [\"Rotate the extruded part by 90 degrees around the X axis.\"], \"invariants\": [\"The 3D profile geometry and extrusion height remain unchanged.\", \"The rotation is applied globally to the final solid.\"], \"dependencies\": []}, \"parent_candidate\": \"```json\\n{\\\"edits\\\":[{\\\"start\\\":8,\\\"delete\\\":0,\\\"insert\\\":[\\\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\\\"]}]}\\n```\", \"observations\": {\"geometry\": {\"status\": \"PASS\"}, \"constraints\": {\"status\": \"PASS\"}, \"semantics\": {\"status\": \"PASS\", \"reason\": \"The part has been successfully rotated by 90 degrees about the X axis while preserving all original features.\"}, \"fem\": {\"status\": \"PASS\"}, \"robustness\": {\"status\": \"PASS\"}}, \"experiences\": [{\"task_id\": \"23f67e4f98c458f94cef856db8007bcebd533a6143a9929565fed2a26d7ce0dd\", \"instruction\": \"Rotate the entire part by 90 degrees about the X axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\\\"], \\\"start\\\": 11}]}\", \"strategies\": [], \"context\": [\"11: show_object(result)\"]}, {\"task_id\": \"ab6b79a16fa48fbb56319a4ac5870f5073a5c456dd0d19dbd550948b0b73f341\", \"instruction\": \"Rotate the entire part by 90 degrees about the X axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\\\"], \\\"start\\\": 7}]}\", \"strategies\": [], \"context\": [\"7: show_object(result)\"]}, {\"task_id\": \"b9b1d7365ad9cbdd8c1d9f3cedbfbc263cbdd075dcbe0dc6fe90fff83e53de9e\", \"instruction\": \"Rotate the entire part by 90 degrees about the X axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\\\"], \\\"start\\\": 12}]}\", \"strategies\": [], \"context\": [\"12: show_object(result)\"]}], \"repair_strategies\": [{\"task_id\": \"23f67e4f98c458f94cef856db8007bcebd533a6143a9929565fed2a26d7ce0dd\", \"instruction\": \"Rotate the entire part by 90 degrees about the X axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\\\"], \\\"start\\\": 11}]}\", \"strategies\": [], \"context\": [\"11: show_object(result)\"]}, {\"task_id\": \"ab6b79a16fa48fbb56319a4ac5870f5073a5c456dd0d19dbd550948b0b73f341\", \"instruction\": \"Rotate the entire part by 90 degrees about the X axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\\\"], \\\"start\\\": 7}]}\", \"strategies\": [], \"context\": [\"7: show_object(result)\"]}, {\"task_id\": \"b9b1d7365ad9cbdd8c1d9f3cedbfbc263cbdd075dcbe0dc6fe90fff83e53de9e\", \"instruction\": \"Rotate the entire part by 90 degrees about the X axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\\\"], \\\"start\\\": 12}]}\", \"strategies\": [], \"context\": [\"12: show_object(result)\"]}], \"alternatives\": [], \"action\": \"diversify\", \"diagnosis\": []}"
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 8192
+ },
+ "usage": {
+  "completion_tokens": 76,
+  "prompt_tokens": 1455,
+  "total_tokens": 1531
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\"hypothesis\": \"Rotate the result solid by 90 degrees around the X axis using rotate().\", \"edits\": [{\"start\": 8, \"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\\n\"]}]}\n```"
+}

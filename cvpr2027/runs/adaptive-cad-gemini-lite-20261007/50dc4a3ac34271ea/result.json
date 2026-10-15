@@ -1,0 +1,1070 @@
+{
+ "task_id": "50dc4a3ac34271ea4a56e67608796aa89da6a41400da66eece9d310262f26c98",
+ "status": "PASS",
+ "prediction": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(18.0, 2.0, 2.6)\"], \"start\": 3}]}",
+ "selected_node": 1,
+ "bank": [
+  1,
+  2
+ ],
+ "pareto": [
+  1,
+  2
+ ],
+ "stop": "expansion_limit",
+ "nodes": [
+  {
+   "id": 0,
+   "candidate": "```json\n{\"edits\":[{\"start\":4,\"delete\":1,\"insert\":[\"    .box(18.0, 2.0, 2.6)\"]}]}\n```",
+   "depth": 0,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 86.22000000000003,
+       "area": 171.84230880755726,
+       "solids": 1,
+       "faces": 31,
+       "bbox_x": 18.0,
+       "bbox_y": 2.0000000000000004,
+       "bbox_z": 2.6000000000000005
+      }
+     },
+     "constraints": {
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         2.0
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -2.0
+    ],
+    "score": -0.002,
+    "diagnosis": [
+     {
+      "stage": "constraints",
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         2.0
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 3,
+   "visits": 4,
+   "final": null,
+   "edges": [
+    0
+   ]
+  },
+  {
+   "id": 1,
+   "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(18.0, 2.0, 2.6)\"], \"start\": 3}]}",
+   "depth": 1,
+   "verdict": {
+    "status": "PASS",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 86.90400000000004,
+       "area": 174.98701294725885,
+       "solids": 1,
+       "faces": 15,
+       "bbox_x": 18.0,
+       "bbox_y": 2.0000000000000004,
+       "bbox_z": 2.6000000000000005
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 1.0,
+      "reason": "The Z dimension (height) of the box has been successfully increased while preserving all other features.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-00.png"
+     },
+     "fem": {
+      "status": "PASS",
+      "metrics": {
+       "nodes": 535,
+       "tetrahedra": 1673,
+       "connected_components": 1,
+       "mesh_volume_mm3": 86.904,
+       "fixed_nodes": 60,
+       "loaded_facets": 152,
+       "loaded_area_mm2": 23.378376618407355,
+       "axis": [
+        0.0,
+        0.0,
+        1.0
+       ],
+       "projection_min_mm": -1.3,
+       "projection_max_mm": 1.3,
+       "compliance_N_mm": 3.6399819428213137e-07,
+       "load_weighted_displacement_mm": 3.6399819428213137e-07,
+       "max_displacement_mm": 5.595804756258075e-07,
+       "strain_energy_N_mm": 1.8199909714106576e-07,
+       "vm_p95_MPa": 0.040775560678516364,
+       "vm_peak_MPa": 0.060445173488370016,
+       "relative_free_residual": 7.529624503901383e-15,
+       "relative_force_balance_error": 5.486334786529305e-16,
+       "relative_moment_balance_error": 4.594444174809975e-16,
+       "relative_energy_error": 4.363172128460685e-16
+      },
+      "checks": [
+       {
+        "metric": "connected_components",
+        "value": 1,
+        "max": 1,
+        "ok": true
+       }
+      ]
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 1.005
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 1.005
+       }
+      ]
+     }
+    },
+    "objectives": [
+     1.0,
+     1.0,
+     -2.0
+    ],
+    "score": 2.0980000000000003,
+    "diagnosis": [],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 1,
+   "visits": 4,
+   "final": {
+    "status": "PASS",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 86.90400000000004,
+       "area": 174.98701294725885,
+       "solids": 1,
+       "faces": 15,
+       "bbox_x": 18.0,
+       "bbox_y": 2.0000000000000004,
+       "bbox_z": 2.6000000000000005
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 1.0,
+      "reason": "The Z dimension (height) of the box has been successfully increased while preserving all other features.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-00.png"
+     },
+     "fem": {
+      "status": "PASS",
+      "metrics": {
+       "nodes": 532,
+       "tetrahedra": 1669,
+       "connected_components": 1,
+       "mesh_volume_mm3": 86.904,
+       "fixed_nodes": 60,
+       "loaded_facets": 152,
+       "loaded_area_mm2": 23.378376618407355,
+       "axis": [
+        0.0,
+        0.0,
+        1.0
+       ],
+       "projection_min_mm": -1.3,
+       "projection_max_mm": 1.3,
+       "compliance_N_mm": 3.63663219464434e-07,
+       "load_weighted_displacement_mm": 3.63663219464434e-07,
+       "max_displacement_mm": 5.600680821553898e-07,
+       "strain_energy_N_mm": 1.8183160973221688e-07,
+       "vm_p95_MPa": 0.04062866607321339,
+       "vm_peak_MPa": 0.06018300714380978,
+       "relative_free_residual": 7.565457579288602e-15,
+       "relative_force_balance_error": 4.069188127605295e-16,
+       "relative_moment_balance_error": 9.533120933145302e-16,
+       "relative_energy_error": 5.822921469084253e-16
+      },
+      "checks": [
+       {
+        "metric": "connected_components",
+        "value": 1,
+        "max": 1,
+        "ok": true
+       }
+      ]
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 0.995
+       },
+       {
+        "mesh_scale": 1.25
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 0.995
+       },
+       {
+        "status": "PASS",
+        "metrics": {
+         "nodes": 383,
+         "tetrahedra": 1306,
+         "connected_components": 1,
+         "mesh_volume_mm3": 86.904,
+         "fixed_nodes": 49,
+         "loaded_facets": 104,
+         "loaded_area_mm2": 24.316753236814712,
+         "axis": [
+          0.0,
+          0.0,
+          1.0
+         ],
+         "projection_min_mm": -1.3,
+         "projection_max_mm": 1.3,
+         "compliance_N_mm": 3.6070809267514367e-07,
+         "load_weighted_displacement_mm": 3.6070809267514367e-07,
+         "max_displacement_mm": 6.044782186801863e-07,
+         "strain_energy_N_mm": 1.803540463375718e-07,
+         "vm_p95_MPa": 0.04041294586781795,
+         "vm_peak_MPa": 0.0630573432107593,
+         "relative_free_residual": 5.970700831998378e-15,
+         "relative_force_balance_error": 4.508909547832654e-16,
+         "relative_moment_balance_error": 9.613725629886185e-16,
+         "relative_energy_error": 1.4676565421855262e-16
+        },
+        "checks": [
+         {
+          "metric": "connected_components",
+          "value": 1,
+          "max": 1,
+          "ok": true
+         }
+        ]
+       }
+      ]
+     }
+    },
+    "objectives": [
+     1.0,
+     1.0,
+     -2.0
+    ],
+    "score": 2.0980000000000003,
+    "diagnosis": [],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "final"
+   },
+   "edges": [
+    1
+   ]
+  },
+  {
+   "id": 2,
+   "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(18.0, 2.0, 2.6)\"], \"start\": 3}]}",
+   "depth": 2,
+   "verdict": {
+    "status": "PASS",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 86.90400000000004,
+       "area": 174.98701294725885,
+       "solids": 1,
+       "faces": 15,
+       "bbox_x": 18.0,
+       "bbox_y": 2.0000000000000004,
+       "bbox_z": 2.6000000000000005
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 1.0,
+      "reason": "The Z dimension (height) of the box has been successfully increased while preserving all other features.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-00.png"
+     },
+     "fem": {
+      "status": "PASS",
+      "metrics": {
+       "nodes": 535,
+       "tetrahedra": 1673,
+       "connected_components": 1,
+       "mesh_volume_mm3": 86.904,
+       "fixed_nodes": 60,
+       "loaded_facets": 152,
+       "loaded_area_mm2": 23.378376618407355,
+       "axis": [
+        0.0,
+        0.0,
+        1.0
+       ],
+       "projection_min_mm": -1.3,
+       "projection_max_mm": 1.3,
+       "compliance_N_mm": 3.6399819428213137e-07,
+       "load_weighted_displacement_mm": 3.6399819428213137e-07,
+       "max_displacement_mm": 5.595804756258075e-07,
+       "strain_energy_N_mm": 1.8199909714106576e-07,
+       "vm_p95_MPa": 0.040775560678516364,
+       "vm_peak_MPa": 0.060445173488370016,
+       "relative_free_residual": 7.529624503901383e-15,
+       "relative_force_balance_error": 5.486334786529305e-16,
+       "relative_moment_balance_error": 4.594444174809975e-16,
+       "relative_energy_error": 4.363172128460685e-16
+      },
+      "checks": [
+       {
+        "metric": "connected_components",
+        "value": 1,
+        "max": 1,
+        "ok": true
+       }
+      ]
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 1.005
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 1.005
+       }
+      ]
+     }
+    },
+    "objectives": [
+     1.0,
+     1.0,
+     -2.0
+    ],
+    "score": 2.0980000000000003,
+    "diagnosis": [],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 0,
+   "visits": 1,
+   "final": {
+    "status": "PASS",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 86.90400000000004,
+       "area": 174.98701294725885,
+       "solids": 1,
+       "faces": 15,
+       "bbox_x": 18.0,
+       "bbox_y": 2.0000000000000004,
+       "bbox_z": 2.6000000000000005
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 1.0,
+      "reason": "The Z dimension (height) of the box has been successfully increased while preserving all other features.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-00.png"
+     },
+     "fem": {
+      "status": "PASS",
+      "metrics": {
+       "nodes": 535,
+       "tetrahedra": 1673,
+       "connected_components": 1,
+       "mesh_volume_mm3": 86.90400000000001,
+       "fixed_nodes": 60,
+       "loaded_facets": 152,
+       "loaded_area_mm2": 23.378376618407355,
+       "axis": [
+        0.0,
+        0.0,
+        1.0
+       ],
+       "projection_min_mm": -1.3,
+       "projection_max_mm": 1.3,
+       "compliance_N_mm": 3.6397989116587217e-07,
+       "load_weighted_displacement_mm": 3.6397989116587217e-07,
+       "max_displacement_mm": 5.595670402350092e-07,
+       "strain_energy_N_mm": 1.8198994558293622e-07,
+       "vm_p95_MPa": 0.04093796297079513,
+       "vm_peak_MPa": 0.06044532380984193,
+       "relative_free_residual": 7.81459657285113e-15,
+       "relative_force_balance_error": 3.0745459887892133e-16,
+       "relative_moment_balance_error": 1.7856335336125017e-15,
+       "relative_energy_error": 7.27231922535911e-16
+      },
+      "checks": [
+       {
+        "metric": "connected_components",
+        "value": 1,
+        "max": 1,
+        "ok": true
+       }
+      ]
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 0.995
+       },
+       {
+        "mesh_scale": 1.25
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 0.995
+       },
+       {
+        "status": "PASS",
+        "metrics": {
+         "nodes": 388,
+         "tetrahedra": 1331,
+         "connected_components": 1,
+         "mesh_volume_mm3": 86.904,
+         "fixed_nodes": 49,
+         "loaded_facets": 104,
+         "loaded_area_mm2": 24.316753236814712,
+         "axis": [
+          0.0,
+          0.0,
+          1.0
+         ],
+         "projection_min_mm": -1.3,
+         "projection_max_mm": 1.3,
+         "compliance_N_mm": 3.606948573714666e-07,
+         "load_weighted_displacement_mm": 3.606948573714666e-07,
+         "max_displacement_mm": 6.04492546042074e-07,
+         "strain_energy_N_mm": 1.803474286857334e-07,
+         "vm_p95_MPa": 0.040373372905473145,
+         "vm_peak_MPa": 0.06309007184917581,
+         "relative_free_residual": 6.277918048118382e-15,
+         "relative_force_balance_error": 1.8147867630233415e-16,
+         "relative_moment_balance_error": 7.332847943086473e-16,
+         "relative_energy_error": 5.870841584954812e-16
+        },
+        "checks": [
+         {
+          "metric": "connected_components",
+          "value": 1,
+          "max": 1,
+          "ok": true
+         }
+        ]
+       }
+      ]
+     }
+    },
+    "objectives": [
+     1.0,
+     1.0,
+     -2.0
+    ],
+    "score": 2.0980000000000003,
+    "diagnosis": [],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "final"
+   },
+   "edges": []
+  }
+ ],
+ "edges": [
+  {
+   "parent": 0,
+   "child": 1,
+   "visits": 4,
+   "total": 8.392000000000001
+  },
+  {
+   "parent": 1,
+   "child": 2,
+   "visits": 1,
+   "total": 2.0980000000000003
+  }
+ ],
+ "events": [
+  {
+   "event": "decompose",
+   "plan": {
+    "steps": [
+     "Modify the base box Z dimension parameter from 2.0 to 2.6 in the .box() feature."
+    ],
+    "invariants": [
+     "X and Y dimensions of the base box remain 18.0 and 2.0 respectively.",
+     "Chamfer size on |X edges remains 0.3.",
+     "Cut depth and dimensions on the >Z face remain centered and sized at 14.4, 0.6 with a depth of -0.4."
+    ],
+    "dependencies": []
+   },
+   "memory_version": "e8962d20e8e899142b2443cfbfcb010d827f14b8813532a455c3e5c322db213b",
+   "retrieved": [
+    {
+     "task_id": "4e1386faa46a9e68eb3b6aeca4ffe83c1d0c82a9829c224c24182e5734b530b3",
+     "instruction": "Increase the box Z dimension from 40.0 to 52.0.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(107.0, 40.0, 52.0)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(107.0, 40.0, 40.0)"
+     ]
+    },
+    {
+     "task_id": "8794a4b9ccc9f03b3b5a0b146f03ce181885dc9925065427857db4eb474b081c",
+     "instruction": "Increase the box Z dimension from 20.6 to 26.78.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(93.1, 67.4, 26.78)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(93.1, 67.4, 20.6)"
+     ]
+    },
+    {
+     "task_id": "a31305c09c25b99186fccc9a66d0dcf53ea165bbc73448fe0497b1eb7b7b79a3",
+     "instruction": "Increase the box Z dimension from 27.2 to 35.36.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(112.5, 106.1, 35.36)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(112.5, 106.1, 27.2)"
+     ]
+    }
+   ]
+  },
+  {
+   "event": "initial_state",
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 65.30400000000002,
+       "area": 150.98701294725885,
+       "solids": 1,
+       "faces": 15,
+       "bbox_x": 18.0,
+       "bbox_y": 2.0,
+       "bbox_z": 2.0
+      }
+     },
+     "constraints": {
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         2.6,
+         2.0
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -0.0
+    ],
+    "score": 0.0,
+    "diagnosis": [
+     {
+      "stage": "constraints",
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         2.6,
+         2.0
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "initial"
+   }
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "constraints",
+     "status": "FAIL",
+     "checks": [
+      {
+       "metric": "instruction_values",
+       "missing": [
+        2.0
+       ],
+       "ok": false
+      },
+      {
+       "metric": "changed_solid",
+       "value": true,
+       "ok": true
+      }
+     ]
+    },
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "No physical contract supplied"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "No perturbation contract supplied"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "4e1386faa46a9e68eb3b6aeca4ffe83c1d0c82a9829c224c24182e5734b530b3",
+     "instruction": "Increase the box Z dimension from 40.0 to 52.0.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(107.0, 40.0, 52.0)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(107.0, 40.0, 40.0)"
+     ]
+    },
+    {
+     "task_id": "8794a4b9ccc9f03b3b5a0b146f03ce181885dc9925065427857db4eb474b081c",
+     "instruction": "Increase the box Z dimension from 20.6 to 26.78.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(93.1, 67.4, 26.78)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(93.1, 67.4, 20.6)"
+     ]
+    },
+    {
+     "task_id": "a31305c09c25b99186fccc9a66d0dcf53ea165bbc73448fe0497b1eb7b7b79a3",
+     "instruction": "Increase the box Z dimension from 27.2 to 35.36.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(112.5, 106.1, 35.36)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(112.5, 106.1, 27.2)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "PASS",
+   "hypothesis": "Increase the box Z dimension from 2.0 to 2.6 in the box method call."
+  },
+  {
+   "event": "final_verification",
+   "node": 1,
+   "status": "PASS"
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": true,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "constraints",
+     "status": "FAIL",
+     "checks": [
+      {
+       "metric": "instruction_values",
+       "missing": [
+        2.0
+       ],
+       "ok": false
+      },
+      {
+       "metric": "changed_solid",
+       "value": true,
+       "ok": true
+      }
+     ]
+    },
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "No physical contract supplied"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "No perturbation contract supplied"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "4e1386faa46a9e68eb3b6aeca4ffe83c1d0c82a9829c224c24182e5734b530b3",
+     "instruction": "Increase the box Z dimension from 40.0 to 52.0.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(107.0, 40.0, 52.0)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(107.0, 40.0, 40.0)"
+     ]
+    },
+    {
+     "task_id": "8794a4b9ccc9f03b3b5a0b146f03ce181885dc9925065427857db4eb474b081c",
+     "instruction": "Increase the box Z dimension from 20.6 to 26.78.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(93.1, 67.4, 26.78)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(93.1, 67.4, 20.6)"
+     ]
+    },
+    {
+     "task_id": "a31305c09c25b99186fccc9a66d0dcf53ea165bbc73448fe0497b1eb7b7b79a3",
+     "instruction": "Increase the box Z dimension from 27.2 to 35.36.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(112.5, 106.1, 35.36)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(112.5, 106.1, 27.2)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "PASS",
+   "hypothesis": "Increase the box Z dimension from 2.0 to 2.6."
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": true,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "constraints",
+     "status": "FAIL",
+     "checks": [
+      {
+       "metric": "instruction_values",
+       "missing": [
+        2.0
+       ],
+       "ok": false
+      },
+      {
+       "metric": "changed_solid",
+       "value": true,
+       "ok": true
+      }
+     ]
+    },
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "No physical contract supplied"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "No perturbation contract supplied"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "4e1386faa46a9e68eb3b6aeca4ffe83c1d0c82a9829c224c24182e5734b530b3",
+     "instruction": "Increase the box Z dimension from 40.0 to 52.0.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(107.0, 40.0, 52.0)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(107.0, 40.0, 40.0)"
+     ]
+    },
+    {
+     "task_id": "8794a4b9ccc9f03b3b5a0b146f03ce181885dc9925065427857db4eb474b081c",
+     "instruction": "Increase the box Z dimension from 20.6 to 26.78.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(93.1, 67.4, 26.78)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(93.1, 67.4, 20.6)"
+     ]
+    },
+    {
+     "task_id": "a31305c09c25b99186fccc9a66d0dcf53ea165bbc73448fe0497b1eb7b7b79a3",
+     "instruction": "Increase the box Z dimension from 27.2 to 35.36.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(112.5, 106.1, 35.36)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(112.5, 106.1, 27.2)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "PASS",
+   "hypothesis": "Increase the box Z dimension from 2.0 to 2.6."
+  },
+  {
+   "event": "backtrack",
+   "to_node": 1
+  },
+  {
+   "event": "expand",
+   "parent": 1,
+   "node": 2,
+   "merged": false,
+   "strategy": "diversify",
+   "diagnosis": [],
+   "retrieved_repairs": [
+    {
+     "task_id": "4e1386faa46a9e68eb3b6aeca4ffe83c1d0c82a9829c224c24182e5734b530b3",
+     "instruction": "Increase the box Z dimension from 40.0 to 52.0.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(107.0, 40.0, 52.0)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(107.0, 40.0, 40.0)"
+     ]
+    },
+    {
+     "task_id": "8794a4b9ccc9f03b3b5a0b146f03ce181885dc9925065427857db4eb474b081c",
+     "instruction": "Increase the box Z dimension from 20.6 to 26.78.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(93.1, 67.4, 26.78)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(93.1, 67.4, 20.6)"
+     ]
+    },
+    {
+     "task_id": "a31305c09c25b99186fccc9a66d0dcf53ea165bbc73448fe0497b1eb7b7b79a3",
+     "instruction": "Increase the box Z dimension from 27.2 to 35.36.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(112.5, 106.1, 35.36)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(112.5, 106.1, 27.2)"
+     ]
+    }
+   ],
+   "path": [
+    0,
+    1
+   ],
+   "status": "PASS",
+   "hypothesis": "Increase the box Z dimension from 2.0 to 2.6 by modifying the parameters in the box method."
+  },
+  {
+   "event": "final_verification",
+   "node": 2,
+   "status": "PASS"
+  }
+ ],
+ "config": {
+  "algorithm": "mcts",
+  "max_expansions": 4,
+  "max_depth": 3,
+  "width": 2,
+  "max_width": 4,
+  "exploration": 0.7,
+  "seconds": 2400.0
+ },
+ "memory_version": "e8962d20e8e899142b2443cfbfcb010d827f14b8813532a455c3e5c322db213b",
+ "stored": "runs/adaptive-cad-gemini-lite-20261007/memory.jsonl",
+ "seconds": 102.64364775000001,
+ "api": {
+  "mode": "live_astra",
+  "api_calls": 6,
+  "cost_usd": 0.0,
+  "budget_usd": 0.2777777777777778,
+  "refused": 0
+ },
+ "tool_jobs": 8
+}

@@ -1,0 +1,34 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "Qwen/Qwen3.5-35B-A3B-FP8",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .box(28.0, 28.0, 65.0)\\n    .faces(\\\">Z\\\").workplane()\\n    .center(1.5, 1.5)\\n    .rect(25.0, 25.0)\\n    .cutThruAll()\\n    .edges(\\\"|Z\\\")\\n    .fillet(0.6)\\n    .faces(\\\">Z\\\").workplane()\\n    .pushPoints([(-9.5, -12.5), (0.0, -12.5), (9.5, -12.5)])\\n    .hole(2.0)\\n    .faces(\\\">Z\\\").workplane()\\n    .pushPoints([(-12.5, -9.5), (-12.5, 9.5)])\\n    .hole(2.0)\\n)\\nshow_object(result)\", \"instruction\": \"Replace the square inner through-passage of the angle bracket with a hexagonal through-passage of the same across-corners size, keeping the outer square outline, the rounded vertical edges, and the row of top mounting holes unchanged.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"d2f0578be6ab3160aa1d59e5d2cc3ac829baeba05ca0c233e008f54863a9f205\", \"instruction\": \"Replace the square inner through-passage of the long tube with a hexagonal through-passage of the same across-corners size, keeping the outer square outline, the length, and the rounded vertical edges unchanged.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .polygon(6, 25.0)\\\"], \\\"start\\\": 6}]}\", \"strategies\": [], \"context\": [\"6:     .rect(25.0, 25.0)\"]}, {\"task_id\": \"d8cbd80a786732ef3a85f9f03fcd7873de81541597695d9ca53e73a998142ab7\", \"instruction\": \"Replace the square inner through-passage of the tube with a round through-passage of the same outer span, keeping the outer square shape, the chamfered ends, the row of top holes, and the side slot unchanged.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .circle(10.0)\\\"], \\\"start\\\": 5}]}\", \"strategies\": [], \"context\": [\"5:     .rect(20.0, 20.0)\"]}, {\"task_id\": \"6db0e74571262ad9e60a98b6f41e6e5fe99ad45b3b10adf7cf13131601762615\", \"instruction\": \"Replace the round outer outline of the shaft collar with a hexagonal outer outline of the same across-corners size and the same height, keeping the central bore, the top chamfer, and the two side set-screw holes unchanged.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .polygon(6, 20.0)\\\"], \\\"start\\\": 3}]}\", \"strategies\": [], \"context\": [\"3:     .circle(10.0)\"]}]}"
+   }
+  ],
+  "temperature": 0.6,
+  "top_p": 0.95,
+  "top_k": 20,
+  "max_tokens": 8192
+ },
+ "usage": {
+  "prompt_tokens": 887,
+  "total_tokens": 7944,
+  "completion_tokens": 7057,
+  "prompt_tokens_details": null,
+  "completion_tokens_details": {
+   "reasoning_tokens": 6745
+  }
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "\n\n{\n  \"steps\": [\n    \"Construct outer box (28.0, 28.0, 65.0) on XY plane\",\n    \"Select top face and center workplane at (1.5, 1.5)\",\n    \"Draw hexagon sketch with 25.0 parameter\",\n    \"Cut hexagon through all\",\n    \"Fillet vertical edges with 0.6 radius\",\n    \"Select top face and define first row hole points\",\n    \"Create first row 2.0mm holes\",\n    \"Select top face and define second row hole points\",\n    \"Create second row 2.0mm holes\"\n  ],\n  \"invariants\": [\n    \"Outer box dimensions (28.0, 28.0, 65.0)\",\n    \"Vertical edge fillet radius (0.6)\",\n    \"Mounting hole diameter (2.0)\",\n    \"Mounting hole positions\",\n    \"Inner cutout center offset (1.5, 1.5)\"\n  ],\n  \"dependencies\": [\n    [1, 0],\n    [2, 1],\n    [3, 2],\n    [4, 0],\n    [5, 0],\n    [6, 5],\n    [7, 0],\n    [8, 7]\n  ]\n}"
+}

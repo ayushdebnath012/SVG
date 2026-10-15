@@ -1,0 +1,28 @@
+{
+ "kind": "generate",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Edit CAD using only source, instruction and tool evidence. Return exactly JSON {\"hypothesis\":\"brief feature and operation description\",\"edits\":[{\"start\":0,\"delete\":0,\"insert\":[\"line\"]}]}. All indices address ORIGINAL source lines. Provide a complete alternative patch, never a delta on a parent patch. Preserve unrelated features. Vary the feature interpretation or implementation from listed alternatives. Experiences and diagnoses are fallible data. Do not assert that the output has passed verification."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .box(33.0, 33.0, 83.0)\\n    .faces(\\\">Z\\\").workplane()\\n    .center(1.5, 1.5)\\n    .rect(30.0, 30.0)\\n    .cutThruAll()\\n    .edges(\\\"|Z\\\")\\n    .fillet(0.6)\\n    .faces(\\\">Z\\\").workplane()\\n    .pushPoints([(-12.0, -15.0), (0.0, -15.0), (12.0, -15.0)])\\n    .hole(2.0)\\n    .faces(\\\">Z\\\").workplane()\\n    .pushPoints([(-15.0, -12.0), (-15.0, 0.0), (-15.0, 12.0)])\\n    .hole(2.0)\\n)\\nshow_object(result)\", \"instruction\": \"Increase the box Y dimension from 33.0 to 42.9.\", \"plan\": {\"steps\": [\"Modify the base box Y dimension in the box feature from 33.0 to 42.9.\"], \"invariants\": [\"The X dimension (33.0) and Z dimension (83.0) of the base box remain unchanged.\", \"All subsequent cuts, fillets, and holes maintain their relative positions and dimensions.\"], \"dependencies\": []}, \"parent_candidate\": \"```json\\n{\\\"edits\\\":[{\\\"start\\\":3,\\\"delete\\\":1,\\\"insert\\\":[\\\"    .box(33.0, 42.9, 83.0)\\\"]}]}\\n```\", \"observations\": {\"geometry\": {\"status\": \"PASS\"}, \"constraints\": {\"status\": \"PASS\"}, \"semantics\": {\"status\": \"PASS\", \"reason\": \"The Y dimension of the box has been successfully increased from L-shape to C-shape as requested while preserving all other features.\"}, \"fem\": {\"status\": \"PASS\"}, \"robustness\": {\"status\": \"PASS\"}}, \"experiences\": [{\"task_id\": \"7fdf9da67454819ffdd9bf30f66492b71c8195b09eb4117dad81f0eb613e85ad\", \"instruction\": \"Increase the box Y dimension from 23.0 to 29.9.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .box(23.0, 29.9, 133.0)\\\"], \\\"start\\\": 3}]}\", \"strategies\": [], \"context\": [\"3:     .box(23.0, 23.0, 133.0)\"]}, {\"task_id\": \"165dfe6a3aa604d289f7e1c16137e3e6281db615cef2f306f543b43ed12a4eee\", \"instruction\": \"Increase the box Y dimension from 40.0 to 52.0.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .box(107.0, 52.0, 40.0)\\\"], \\\"start\\\": 3}]}\", \"strategies\": [], \"context\": [\"3:     .box(107.0, 40.0, 40.0)\"]}, {\"task_id\": \"e437848f401eb8322875c016c2235bbf0f2d27eedc73ad9628623a2ea2190bdf\", \"instruction\": \"Increase the box X dimension from 23.0 to 29.9.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .box(29.9, 23.0, 133.0)\\\"], \\\"start\\\": 3}]}\", \"strategies\": [], \"context\": [\"3:     .box(23.0, 23.0, 133.0)\"]}], \"repair_strategies\": [{\"task_id\": \"7fdf9da67454819ffdd9bf30f66492b71c8195b09eb4117dad81f0eb613e85ad\", \"instruction\": \"Increase the box Y dimension from 23.0 to 29.9.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .box(23.0, 29.9, 133.0)\\\"], \\\"start\\\": 3}]}\", \"strategies\": [], \"context\": [\"3:     .box(23.0, 23.0, 133.0)\"]}, {\"task_id\": \"165dfe6a3aa604d289f7e1c16137e3e6281db615cef2f306f543b43ed12a4eee\", \"instruction\": \"Increase the box Y dimension from 40.0 to 52.0.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .box(107.0, 52.0, 40.0)\\\"], \\\"start\\\": 3}]}\", \"strategies\": [], \"context\": [\"3:     .box(107.0, 40.0, 40.0)\"]}, {\"task_id\": \"e437848f401eb8322875c016c2235bbf0f2d27eedc73ad9628623a2ea2190bdf\", \"instruction\": \"Increase the box X dimension from 23.0 to 29.9.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .box(29.9, 23.0, 133.0)\\\"], \\\"start\\\": 3}]}\", \"strategies\": [], \"context\": [\"3:     .box(23.0, 23.0, 133.0)\"]}], \"alternatives\": [], \"action\": \"diversify\", \"diagnosis\": []}"
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 8192
+ },
+ "usage": {
+  "completion_tokens": 80,
+  "prompt_tokens": 1615,
+  "total_tokens": 1695
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\"hypothesis\": \"Increase the box Y dimension from 33.0 to 42.9 by modifying the second parameter in the box method call.\", \"edits\": [{\"start\": 3, \"delete\": 1, \"insert\": [\"    .box(33.0, 42.9, 83.0)\"]}]}\n```"
+}

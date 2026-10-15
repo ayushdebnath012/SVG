@@ -1,0 +1,28 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .polygon(6, 15.012)\\n    .extrude(15.0)\\n    .faces(\\\">Z\\\").workplane()\\n    .hole(8.0)\\n)\\nshow_object(result)\", \"instruction\": \"Make the standoff shorter to 7.5.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"003e7304c9d48b6953ffd8a6330570bc7f94ba3583e94ed966cef6bea48da4bc\", \"instruction\": \"Make the link thinner to 7.14.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .extrude(7.14)\\\"], \\\"start\\\": 4}]}\", \"strategies\": [], \"context\": [\"4:     .extrude(10.2)\"]}, {\"task_id\": \"91649231a7ae731a2a300dc4f80880da4546a58787ec7e5a0e978b823846daaa\", \"instruction\": \"Make the slide shorter to 113.33.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .extrude(113.33)\\\"], \\\"start\\\": 5}]}\", \"strategies\": [], \"context\": [\"5:     .extrude(161.9)\"]}, {\"task_id\": \"aa2ce49de7510d67f5cf601d33f3277c2f6716adbd3d1993b1aa88f032b13205\", \"instruction\": \"Make the star thicker to 14.7.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .extrude(14.7)\\\"], \\\"start\\\": 5}]}\", \"strategies\": [], \"context\": [\"5:     .extrude(9.8)\"]}]}"
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 4096
+ },
+ "usage": {
+  "completion_tokens": 98,
+  "prompt_tokens": 571,
+  "total_tokens": 669
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\n  \"steps\": [\n    \"Modify the extrusion depth of the polygon from 15.0 to 7.5\"\n  ],\n  \"invariants\": [\n    \"The 6-sided polygon base shape and its circumscribed diameter (15.012) remain unchanged\",\n    \"The top center hole with diameter 8.0 remains unchanged\"\n  ],\n  \"dependencies\": []\n}\n```"
+}

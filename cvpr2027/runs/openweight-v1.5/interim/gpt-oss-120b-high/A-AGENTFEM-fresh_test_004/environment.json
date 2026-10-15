@@ -1,0 +1,30 @@
+{
+  "libraries": {
+    "python": "3.12.15",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "meshio": "5.3.5",
+    "skfem": "12.0.2",
+    "gmsh": "4.15"
+  },
+  "units": {
+    "length": "mm",
+    "force": "N",
+    "stress": "MPa"
+  },
+  "material": {
+    "type": "linear isotropic elastic",
+    "E": 70000.0,
+    "nu": 0.33
+  },
+  "boundary_conditions": {
+    "fixed": "z=0 plane (all displacement components = 0)",
+    "traction": {
+      "magnitude": 1.98728,
+      "direction": "-z",
+      "applied_on": "z=189 plane (top seat face)"
+    }
+  },
+  "element": "quadratic tetrahedron (10-node) \u2013 ElementTetP2",
+  "analysis": "static linear elasticity"
+}

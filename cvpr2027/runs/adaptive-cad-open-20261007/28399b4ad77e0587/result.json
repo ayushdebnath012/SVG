@@ -1,0 +1,785 @@
+{
+ "task_id": "28399b4ad77e0587e9d1e7d563ec6a3a23aaa3a2fdf42f047fccbd600debb05a",
+ "status": "UNVERIFIED",
+ "prediction": "\n\n{\"edits\":[{\"start\":6,\"delete\":1,\"insert\":[\"    .rect(16.5, 16.5)\"]}]}",
+ "selected_node": null,
+ "bank": [],
+ "pareto": [],
+ "stop": "expansion_limit",
+ "nodes": [
+  {
+   "id": 0,
+   "candidate": "\n\n{\"edits\":[{\"start\":6,\"delete\":1,\"insert\":[\"    .rect(16.5, 16.5)\"]}]}",
+   "depth": 0,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 66225.73685851226,
+       "area": 20987.832427727444,
+       "solids": 1,
+       "faces": 24,
+       "bbox_x": 33.0,
+       "bbox_y": 33.0,
+       "bbox_z": 83.0000002
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "FAIL",
+      "confidence": 0.9,
+      "reason": "The original part is an L-shaped bracket, whereas the instruction implies a box with a central cutout; the edited part changes the geometry from an L-shape to a hollow box, altering the hole position and violating the requirement to preserve features.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-00.png"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.9,
+     0.0,
+     -2.0
+    ],
+    "score": 0.898,
+    "diagnosis": [
+     {
+      "stage": "semantics",
+      "status": "FAIL",
+      "confidence": 0.9,
+      "reason": "The original part is an L-shaped bracket, whereas the instruction implies a box with a central cutout; the edited part changes the geometry from an L-shape to a hollow box, altering the hole position and violating the requirement to preserve features.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-00.png"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 3,
+   "visits": 4,
+   "final": null,
+   "edges": [
+    0,
+    1
+   ]
+  },
+  {
+   "id": 1,
+   "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .rect(16.5, 16.5)\"], \"start\": 6}]}",
+   "depth": 1,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 66225.73685851226,
+       "area": 20987.832427727444,
+       "solids": 1,
+       "faces": 24,
+       "bbox_x": 33.0,
+       "bbox_y": 33.0,
+       "bbox_z": 83.0000002
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "FAIL",
+      "confidence": 0.95,
+      "reason": "The original part is an L-shaped bracket without a central cutout, and the edited part introduces a completely new central hole and changes the outer shape to a square, violating the instruction to keep holes and outer dimensions the same.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-01.png"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.95,
+     0.0,
+     -2.0
+    ],
+    "score": 0.948,
+    "diagnosis": [
+     {
+      "stage": "semantics",
+      "status": "FAIL",
+      "confidence": 0.95,
+      "reason": "The original part is an L-shaped bracket without a central cutout, and the edited part introduces a completely new central hole and changes the outer shape to a square, violating the instruction to keep holes and outer dimensions the same.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-01.png"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 0,
+   "visits": 2,
+   "final": null,
+   "edges": []
+  },
+  {
+   "id": 2,
+   "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .rect(33.0/2, 33.0/2)\"], \"start\": 6}]}",
+   "depth": 1,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 66225.73685851226,
+       "area": 20987.832427727444,
+       "solids": 1,
+       "faces": 24,
+       "bbox_x": 33.0,
+       "bbox_y": 33.0,
+       "bbox_z": 83.0000002
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "FAIL",
+      "confidence": 0.95,
+      "reason": "The original part is an L-shaped bracket, while the edited part is a hollow square tube, indicating a complete change in geometry that violates the instruction to keep outer dimensions and other features the same.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-02.png"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.95,
+     0.0,
+     -2.0
+    ],
+    "score": 0.948,
+    "diagnosis": [
+     {
+      "stage": "semantics",
+      "status": "FAIL",
+      "confidence": 0.95,
+      "reason": "The original part is an L-shaped bracket, while the edited part is a hollow square tube, indicating a complete change in geometry that violates the instruction to keep outer dimensions and other features the same.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-02.png"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 1,
+   "visits": 2,
+   "final": null,
+   "edges": [
+    2
+   ]
+  },
+  {
+   "id": 3,
+   "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .rect(16.5, 16.5)\"], \"start\": 6}]}",
+   "depth": 2,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 66225.73685851226,
+       "area": 20987.832427727444,
+       "solids": 1,
+       "faces": 24,
+       "bbox_x": 33.0,
+       "bbox_y": 33.0,
+       "bbox_z": 83.0000002
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "FAIL",
+      "confidence": 0.95,
+      "reason": "The original part is an L-shaped bracket without a central cutout, and the edited part introduces a completely new central hole and changes the outer shape to a square, violating the instruction to keep holes and outer dimensions the same.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-01.png"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.95,
+     0.0,
+     -2.0
+    ],
+    "score": 0.948,
+    "diagnosis": [
+     {
+      "stage": "semantics",
+      "status": "FAIL",
+      "confidence": 0.95,
+      "reason": "The original part is an L-shaped bracket without a central cutout, and the edited part introduces a completely new central hole and changes the outer shape to a square, violating the instruction to keep holes and outer dimensions the same.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-01.png"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 0,
+   "visits": 1,
+   "final": null,
+   "edges": []
+  }
+ ],
+ "edges": [
+  {
+   "parent": 0,
+   "child": 1,
+   "visits": 2,
+   "total": 1.896
+  },
+  {
+   "parent": 0,
+   "child": 2,
+   "visits": 2,
+   "total": 1.896
+  },
+  {
+   "parent": 2,
+   "child": 3,
+   "visits": 1,
+   "total": 0.948
+  }
+ ],
+ "events": [
+  {
+   "event": "decompose",
+   "plan": {
+    "steps": [
+     "Update the rectangular sketch dimensions from 30.0x30.0 to 16.5x16.5 to match half the box cross-section side (33.0 / 2)"
+    ],
+    "invariants": [
+     "Box dimensions (33.0, 33.0, 83.0)",
+     "Fillet radius (0.6)",
+     "Hole diameter (2.0)",
+     "Hole placement coordinates",
+     "Cutout centering offset (1.5, 1.5)",
+     "Workplane selection sequence"
+    ],
+    "dependencies": []
+   },
+   "memory_version": "6e8d144322e614e32e411730e518ce8b793c26d7a38b62eab8537c4555e9a4a6",
+   "retrieved": [
+    {
+     "task_id": "09a624d0d01fcfe1b2b309c364933e0ca1080cd4a73efa3de6adca928e44cbbf",
+     "instruction": "Set the central rectangular cutout side equal to half the box cross-section side; the L-bracket length is unchanged.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .rect(11.5, 11.5)\"], \"start\": 6}]}",
+     "strategies": [],
+     "context": [
+      "6:     .rect(20.0, 20.0)"
+     ]
+    },
+    {
+     "task_id": "070873a68657814d705a29b1c36216057bcf87a5ea521953c384c08e4bdf3595",
+     "instruction": "Set the inner cavity side equal to half the outer cell side; the cell height, chamfer, and outer footprint stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"            .box(21.0, 21.0, 26.6)\"], \"start\": 9}]}",
+     "strategies": [],
+     "context": [
+      "9:             .box(38.8, 38.8, 26.6)"
+     ]
+    },
+    {
+     "task_id": "5c0382564f22b5b00ad15fd9480b2c75b8a3f680f67dc4ba1827b860a36ea384",
+     "instruction": "Set each knuckle radius equal to half the leaf width; the leaf, pin holes, and central bore stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"            .cylinder(20.0, 15.0)\"], \"start\": 7}, {\"delete\": 1, \"insert\": [\"            .cylinder(20.0, 15.0)\"], \"start\": 12}]}",
+     "strategies": [],
+     "context": [
+      "7:             .cylinder(20.0, 3.5)",
+      "12:             .cylinder(20.0, 3.5)"
+     ]
+    }
+   ]
+  },
+  {
+   "event": "initial_state",
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 14879.094188558203,
+       "area": 11754.799485168032,
+       "solids": 1,
+       "faces": 26,
+       "bbox_x": 33.0,
+       "bbox_y": 33.0,
+       "bbox_z": 83.0000002
+      }
+     },
+     "constraints": {
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -0.0
+    ],
+    "score": 0.0,
+    "diagnosis": [
+     {
+      "stage": "constraints",
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "initial"
+   }
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "semantics",
+     "status": "FAIL",
+     "confidence": 0.9,
+     "reason": "The original part is an L-shaped bracket, whereas the instruction implies a box with a central cutout; the edited part changes the geometry from an L-shape to a hollow box, altering the hole position and violating the requirement to preserve features.",
+     "basis": "Astra rendered-view judgement",
+     "image": "semantic-00.png"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "No physical contract supplied"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "No perturbation contract supplied"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "09a624d0d01fcfe1b2b309c364933e0ca1080cd4a73efa3de6adca928e44cbbf",
+     "instruction": "Set the central rectangular cutout side equal to half the box cross-section side; the L-bracket length is unchanged.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .rect(11.5, 11.5)\"], \"start\": 6}]}",
+     "strategies": [],
+     "context": [
+      "6:     .rect(20.0, 20.0)"
+     ]
+    },
+    {
+     "task_id": "bd1227697d55cc912e6d66bd87e6107e8ae09c79df64357f7b1a8b8652eb57b6",
+     "instruction": "Remove the rectangular slot cut from the top of the clevis (the cutBlind that creates the U-shape). The two pin holes and the outer box stay the same. The result is a solid block with two pin holes \u2014 no fork.",
+     "candidate": "{\"edits\": [{\"delete\": 3, \"insert\": [], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .rect(11.0, 28.9)",
+      "6:     .cutBlind(-37.3)",
+      "7:     .faces(\">Z\").workplane()"
+     ]
+    },
+    {
+     "task_id": "78367165da52a019b1b524b13931d3830ab45a9a5f12f037a2a48a9f600aefae",
+     "instruction": "Remove the diagonal gusset so the bracket cross-section becomes a clean right-angle L-shape (the slanted segment from (27.8, 8.3) to (8.3, 14.8) becomes a horizontal segment to (8.3, 8.3)). Both mounting holes and the extrude depth stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .lineTo(8.3, 8.3)\"], \"start\": 6}]}",
+     "strategies": [],
+     "context": [
+      "6:     .lineTo(8.3, 14.8)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "FAIL",
+   "hypothesis": "Adjust the central rectangular cutout dimension to 16.5mm (half of the 33.0mm box cross-section) to satisfy the geometric constraint while preserving the box, fillets, and hole positions."
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": true,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "semantics",
+     "status": "FAIL",
+     "confidence": 0.9,
+     "reason": "The original part is an L-shaped bracket, whereas the instruction implies a box with a central cutout; the edited part changes the geometry from an L-shape to a hollow box, altering the hole position and violating the requirement to preserve features.",
+     "basis": "Astra rendered-view judgement",
+     "image": "semantic-00.png"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "No physical contract supplied"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "No perturbation contract supplied"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "09a624d0d01fcfe1b2b309c364933e0ca1080cd4a73efa3de6adca928e44cbbf",
+     "instruction": "Set the central rectangular cutout side equal to half the box cross-section side; the L-bracket length is unchanged.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .rect(11.5, 11.5)\"], \"start\": 6}]}",
+     "strategies": [],
+     "context": [
+      "6:     .rect(20.0, 20.0)"
+     ]
+    },
+    {
+     "task_id": "bd1227697d55cc912e6d66bd87e6107e8ae09c79df64357f7b1a8b8652eb57b6",
+     "instruction": "Remove the rectangular slot cut from the top of the clevis (the cutBlind that creates the U-shape). The two pin holes and the outer box stay the same. The result is a solid block with two pin holes \u2014 no fork.",
+     "candidate": "{\"edits\": [{\"delete\": 3, \"insert\": [], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .rect(11.0, 28.9)",
+      "6:     .cutBlind(-37.3)",
+      "7:     .faces(\">Z\").workplane()"
+     ]
+    },
+    {
+     "task_id": "78367165da52a019b1b524b13931d3830ab45a9a5f12f037a2a48a9f600aefae",
+     "instruction": "Remove the diagonal gusset so the bracket cross-section becomes a clean right-angle L-shape (the slanted segment from (27.8, 8.3) to (8.3, 14.8) becomes a horizontal segment to (8.3, 8.3)). Both mounting holes and the extrude depth stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .lineTo(8.3, 8.3)\"], \"start\": 6}]}",
+     "strategies": [],
+     "context": [
+      "6:     .lineTo(8.3, 14.8)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "FAIL",
+   "hypothesis": "Update the central rectangular cutout dimensions to 16.5x16.5 to match half the 33.0 box cross-section side, maintaining all other geometry and parameters."
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 2,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "semantics",
+     "status": "FAIL",
+     "confidence": 0.9,
+     "reason": "The original part is an L-shaped bracket, whereas the instruction implies a box with a central cutout; the edited part changes the geometry from an L-shape to a hollow box, altering the hole position and violating the requirement to preserve features.",
+     "basis": "Astra rendered-view judgement",
+     "image": "semantic-00.png"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "No physical contract supplied"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "No perturbation contract supplied"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "09a624d0d01fcfe1b2b309c364933e0ca1080cd4a73efa3de6adca928e44cbbf",
+     "instruction": "Set the central rectangular cutout side equal to half the box cross-section side; the L-bracket length is unchanged.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .rect(11.5, 11.5)\"], \"start\": 6}]}",
+     "strategies": [],
+     "context": [
+      "6:     .rect(20.0, 20.0)"
+     ]
+    },
+    {
+     "task_id": "bd1227697d55cc912e6d66bd87e6107e8ae09c79df64357f7b1a8b8652eb57b6",
+     "instruction": "Remove the rectangular slot cut from the top of the clevis (the cutBlind that creates the U-shape). The two pin holes and the outer box stay the same. The result is a solid block with two pin holes \u2014 no fork.",
+     "candidate": "{\"edits\": [{\"delete\": 3, \"insert\": [], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .rect(11.0, 28.9)",
+      "6:     .cutBlind(-37.3)",
+      "7:     .faces(\">Z\").workplane()"
+     ]
+    },
+    {
+     "task_id": "78367165da52a019b1b524b13931d3830ab45a9a5f12f037a2a48a9f600aefae",
+     "instruction": "Remove the diagonal gusset so the bracket cross-section becomes a clean right-angle L-shape (the slanted segment from (27.8, 8.3) to (8.3, 14.8) becomes a horizontal segment to (8.3, 8.3)). Both mounting holes and the extrude depth stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .lineTo(8.3, 8.3)\"], \"start\": 6}]}",
+     "strategies": [],
+     "context": [
+      "6:     .lineTo(8.3, 14.8)"
+     ]
+    }
+   ],
+   "path": [
+    1
+   ],
+   "status": "FAIL",
+   "hypothesis": "Update cutout rectangle dimensions to half the box cross-section side using dimension calculation"
+  },
+  {
+   "event": "backtrack",
+   "to_node": 2
+  },
+  {
+   "event": "expand",
+   "parent": 2,
+   "node": 3,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "semantics",
+     "status": "FAIL",
+     "confidence": 0.95,
+     "reason": "The original part is an L-shaped bracket, while the edited part is a hollow square tube, indicating a complete change in geometry that violates the instruction to keep outer dimensions and other features the same.",
+     "basis": "Astra rendered-view judgement",
+     "image": "semantic-02.png"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "No physical contract supplied"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "No perturbation contract supplied"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "09a624d0d01fcfe1b2b309c364933e0ca1080cd4a73efa3de6adca928e44cbbf",
+     "instruction": "Set the central rectangular cutout side equal to half the box cross-section side; the L-bracket length is unchanged.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .rect(11.5, 11.5)\"], \"start\": 6}]}",
+     "strategies": [],
+     "context": [
+      "6:     .rect(20.0, 20.0)"
+     ]
+    },
+    {
+     "task_id": "3b674f95359f47e3c4a5a6cf9620ffc1fafb6465cd5842ffe71f69d7e4a6ea7e",
+     "instruction": "Set the twist angle (in degrees) equal to ten times the extrude depth (in mm); the cross-section profile and tip features stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .twistExtrude(12.6, 126.0)\"], \"start\": 10}]}",
+     "strategies": [],
+     "context": [
+      "10:     .twistExtrude(12.6, 225.335)"
+     ]
+    },
+    {
+     "task_id": "af58bdd670dbce8d656029a68a73c7aead79454e544c83e1cec819f713e23043",
+     "instruction": "Set the inner square cut side equal to half the outer side; tube length is unchanged.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .rect(20.0, 20.0)\"], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .rect(34.0, 34.0)"
+     ]
+    }
+   ],
+   "path": [
+    1,
+    2
+   ],
+   "status": "FAIL",
+   "hypothesis": "Set the rectangular cutout dimensions to 16.5x16.5 to match half the box cross-section side of 33.0"
+  }
+ ],
+ "config": {
+  "algorithm": "mcts",
+  "max_expansions": 4,
+  "max_depth": 3,
+  "width": 2,
+  "max_width": 4,
+  "exploration": 0.7,
+  "seconds": 2400.0
+ },
+ "memory_version": "6e8d144322e614e32e411730e518ce8b793c26d7a38b62eab8537c4555e9a4a6",
+ "stored": null,
+ "seconds": 421.5541844579999,
+ "api": {
+  "mode": "live_astra",
+  "api_calls": 8,
+  "cost_usd": 0.0,
+  "budget_usd": 0.14018691588785046,
+  "refused": 0
+ },
+ "tool_jobs": 4
+}

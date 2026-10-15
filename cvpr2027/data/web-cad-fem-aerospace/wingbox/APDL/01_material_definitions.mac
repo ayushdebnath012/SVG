@@ -1,0 +1,69 @@
+! ==============================================================================
+! APDL MACRO: 02_static_load_cases.mac
+! TITLE: Static Structural Analysis (Wing-Up +g & Wing-Down -g Cases)
+! AUTHOR: Muhammad Yousuf Baig
+! ==============================================================================
+
+/PREP7
+
+! --- 1. Element Type & Shell Section Definition ---
+ET,1,SHELL181
+KEYOPT,1,3,2                   ! Full integration
+SECTYPE,1,SHELL
+SECDATA,31.5,1,0.0,5           ! Structural baseline thickness = 31.5 m
+
+! --- 2. Element Attributes ---
+MAT,1                          ! Al 2024-T3 baseline
+TYPE,1
+SECNUM,1
+
+! --- 3. Meshing (Optimal Medium Mesh 0.05 m) ---
+ESIZE,0.05
+AMESH,ALL
+
+! --- 4. Cantilever Root Boundary Condition ---
+NSEL,S,LOC,Y,0                 ! Select root nodes along Y = 0
+D,ALL,ALL,0                    ! Clamp root DOFs
+ALLSEL,ALL
+
+! ==============================================================================
+! SOLVE CASE 1: Wing-Up (+g Positive Maneuver)
+! ==============================================================================
+/SOLU
+ANTYPE,STATIC
+EQSLV,SPARSE
+
+! Apply Wing-Up Resultant Load (1.4918E9 N) across tip nodes
+NSEL,S,LOC,Y,10.9,11.0         ! Safely select tip nodes near Y = 10.92 m
+*GET,N_CNT,NODE,0,COUNT
+F_TIP_UP = 1.4918E9 / N_CNT
+F,ALL,FZ,F_TIP_UP              ! Apply lift along Z-axis
+ALLSEL,ALL
+
+SOLVE
+
+/POST1
+SET,LAST
+PLNSOL,S,EQV,0,1.0             ! Max von Mises Stress
+PLNSOL,U,SUM,0,1.0             ! Max Displacement (USUM)
+
+! ==============================================================================
+! SOLVE CASE 2: Wing-Down (-g Negative Maneuver)
+! ==============================================================================
+/SOLU
+FDELE,ALL,ALL
+
+NSEL,S,LOC,Y,10.9,11.0
+*GET,N_CNT,NODE,0,COUNT
+F_TIP_DOWN = -5.3278E8 / N_CNT
+F,ALL,FZ,F_TIP_DOWN
+ALLSEL,ALL
+
+SOLVE
+
+/POST1
+SET,LAST
+PLNSOL,S,EQV,0,1.0
+PLNSOL,U,SUM,0,1.0
+
+SAVE

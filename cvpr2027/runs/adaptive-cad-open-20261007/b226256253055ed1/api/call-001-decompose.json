@@ -1,0 +1,34 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "Qwen/Qwen3.5-35B-A3B-FP8",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .polygon(6, 15.012)\\n    .extrude(15.0)\\n    .faces(\\\">Z\\\").workplane()\\n    .hole(8.0)\\n)\\nshow_object(result)\", \"instruction\": \"Make the standoff taller to 19.5.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"0d00b048f0082849348a0e4ddffa9ab5984315681e927c66e1a0a5f7608893b0\", \"instruction\": \"Make the nut taller to 44.2.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .extrude(44.2)\\\"], \\\"start\\\": 4}]}\", \"strategies\": [], \"context\": [\"4:     .extrude(34.0)\"]}, {\"task_id\": \"b0706f5f1676b68172a81b8abea002e410b7420e5851b38fd5af534650c07fec\", \"instruction\": \"Make the frame taller to 13.0.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .extrude(13.0)\\\"], \\\"start\\\": 4}]}\", \"strategies\": [], \"context\": [\"4:     .extrude(10.0)\"]}, {\"task_id\": \"5ba8ce32057924468f61427d230341ad5964cae0c0a5123f806fa3b9360dd19e\", \"instruction\": \"Make the ring thicker to 3.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .extrude(3.0)\\\"], \\\"start\\\": 9}]}\", \"strategies\": [], \"context\": [\"9:     .extrude(1.2)\"]}]}"
+   }
+  ],
+  "temperature": 0.6,
+  "top_p": 0.95,
+  "top_k": 20,
+  "max_tokens": 8192
+ },
+ "usage": {
+  "prompt_tokens": 584,
+  "total_tokens": 1208,
+  "completion_tokens": 624,
+  "prompt_tokens_details": null,
+  "completion_tokens_details": {
+   "reasoning_tokens": 477
+  }
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "\n\n```json\n{\n  \"steps\": [\n    \"Locate the extrude operation controlling standoff height in the workplane chain\",\n    \"Replace extrude value from 15.0 to 19.5\"\n  ],\n  \"invariants\": [\n    \"Polygon geometry (6 sides, 15.012 diameter) remains unchanged\",\n    \"Hole operation parameters (8.0 diameter) remain unchanged\",\n    \"Workplane chain structure and face selection remain unchanged\",\n    \"Overall object topology and feature order remain unchanged\"\n  ],\n  \"dependencies\": [\n    [0, 1]\n  ]\n}\n```"
+}

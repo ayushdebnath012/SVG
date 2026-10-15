@@ -1,0 +1,60 @@
+{
+  "task_id": "A-FCVM-Plate_girder_EC3",
+  "report": "/Users/ayushdebnath/SVG/cvpr2027/runs/astra-recheck-high-20261015/A-FCVM-Plate_girder_EC3/README.md",
+  "generation": {
+    "status": "completed",
+    "model": "gpt-6-astra",
+    "usage": {
+      "prompt_tokens": 9267,
+      "completion_tokens": 13174,
+      "total_tokens": 22441,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 9264,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 8676,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "cost_usd_conservative": 0.8903375,
+    "finish_reason": "stop",
+    "patch_applied": true,
+    "repaired_sha256": "2c237f71150a25b85c1a3ed31db077966587fb22cf53c05605e4b37734541737",
+    "elapsed_seconds": 326.2
+  },
+  "status": "persistent_script_failure",
+  "protocol": "high-reasoning model-authored repair with prior repaired code and sandbox execution feedback, 14000-token cap",
+  "execution": {
+    "exit_code": 1,
+    "elapsed_seconds": 3.855318416000955,
+    "termination_reason": null,
+    "execution_verified": false,
+    "frozen_inputs_unchanged": true
+  },
+  "score_path": "/Users/ayushdebnath/SVG/cvpr2027/runs/astra-recheck-high-20261015/A-FCVM-Plate_girder_EC3/scoring/score.json",
+  "adjudication_note": "High-reasoning repair builds a structured C3D20R brick mesh but native CalculiX rejects element connectivity lines with more than 16 entries. No numerical results. Earlier medium-reasoning replay remains a completed numerical miss; high attempt fails on deck formatting.",
+  "score": {
+    "task_id": "A-FCVM-Plate_girder_EC3",
+    "track": "A",
+    "tier": "source_backed_pilot",
+    "family": "fcvm-buckling",
+    "engineering_family": "fcvm-buckling",
+    "independently_reproduced": true,
+    "passed": false,
+    "numerical_passed": false,
+    "numerical_score": 0.0,
+    "workflow_verified": false,
+    "checks": {},
+    "errors": [
+      "invalid numerical submission: [Errno 2] No such file or directory: '/Users/ayushdebnath/SVG/cvpr2027/runs/astra-recheck-high-20261015/A-FCVM-Plate_girder_EC3/scoring/submissions/A-FCVM-Plate_girder_EC3/results.json'",
+      "missing/unsafe/empty artifact: results.json",
+      "missing/unsafe/empty artifact: mesh.msh",
+      "missing/unsafe/empty artifact: fields.npz",
+      "trusted workflow review missing"
+    ]
+  }
+}

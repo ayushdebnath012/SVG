@@ -1,0 +1,213 @@
+{
+ "id": "6bbf475a389e0662f58d7925c4b94f9e77db2f76c13cd0268af7c06de7fd16ee",
+ "source_fem": {
+  "ok": true,
+  "compliance": 7.614812395442234e-07,
+  "components": 1,
+  "nodes": 1177
+ },
+ "nodes": [
+  {
+   "name": "vanilla",
+   "parent": null,
+   "visits": 3,
+   "value_sum": 2.6,
+   "eval": {
+    "gates": true,
+    "fem": {
+     "ok": true,
+     "compliance": 7.132734190774034e-07,
+     "components": 1,
+     "nodes": 1118
+    },
+    "numbers_ok": false,
+    "changed": true,
+    "error": null,
+    "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n)\nshow_object(result)\n"
+   }
+  },
+  {
+   "name": "alt1",
+   "parent": null,
+   "visits": 1,
+   "value_sum": 0.8,
+   "eval": {
+    "gates": true,
+    "fem": {
+     "ok": true,
+     "compliance": 7.13273418932352e-07,
+     "components": 1,
+     "nodes": 1118
+    },
+    "numbers_ok": false,
+    "changed": true,
+    "error": null,
+    "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n)\nshow_object(result)\n"
+   }
+  },
+  {
+   "name": "alt2",
+   "parent": null,
+   "visits": 1,
+   "value_sum": 0.8,
+   "eval": {
+    "gates": true,
+    "fem": {
+     "ok": true,
+     "compliance": 7.132734179119659e-07,
+     "components": 1,
+     "nodes": 1118
+    },
+    "numbers_ok": false,
+    "changed": true,
+    "error": null,
+    "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n    .clean()\n)\nshow_object(result)\n"
+   }
+  },
+  {
+   "name": "alt3",
+   "parent": null,
+   "visits": 1,
+   "value_sum": 0.8,
+   "eval": {
+    "gates": true,
+    "fem": {
+     "ok": true,
+     "compliance": 7.135126506652097e-07,
+     "components": 1,
+     "nodes": 1121
+    },
+    "numbers_ok": false,
+    "changed": true,
+    "error": null,
+    "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n    .combine(clean=False)\n)\nshow_object(result)\n"
+   }
+  },
+  {
+   "name": "mcts1-refine",
+   "parent": 0,
+   "visits": 2,
+   "value_sum": 1.8,
+   "eval": {
+    "gates": true,
+    "fem": {
+     "ok": true,
+     "compliance": 7.132734189323522e-07,
+     "components": 1,
+     "nodes": 1118
+    },
+    "numbers_ok": true,
+    "changed": true,
+    "error": null,
+    "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n    # Removed the 2 mm 45\u00b0 bevel; the six straight bottom outer edges remain sharp.\n)\nshow_object(result)\n",
+    "value": 1.0
+   }
+  },
+  {
+   "name": "mcts2-diversify",
+   "parent": 4,
+   "visits": 1,
+   "value_sum": 0.8,
+   "eval": {
+    "gates": true,
+    "fem": {
+     "ok": true,
+     "compliance": 7.128580675961056e-07,
+     "components": 1,
+     "nodes": 1120
+    },
+    "numbers_ok": false,
+    "changed": true,
+    "error": null,
+    "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n    .faces(\"<Z\").edges(\"%LINE\").chamfer(2.0, 2.0)\n    .union(cq.Workplane(\"XY\").polygon(6, 15.012).extrude(2.0).faces(\">Z\").workplane().hole(8.0))\n)\nshow_object(result)\n",
+    "value": 0.8
+   }
+  }
+ ],
+ "candidates": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 7.132734190774034e-07,
+    "components": 1,
+    "nodes": 1118
+   },
+   "consensus": 6,
+   "numbers_ok": false,
+   "changed": true
+  },
+  {
+   "name": "alt1",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 7.13273418932352e-07,
+    "components": 1,
+    "nodes": 1118
+   },
+   "consensus": 6,
+   "numbers_ok": false,
+   "changed": true
+  },
+  {
+   "name": "alt2",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n    .clean()\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 7.132734179119659e-07,
+    "components": 1,
+    "nodes": 1118
+   },
+   "consensus": 6,
+   "numbers_ok": false,
+   "changed": true
+  },
+  {
+   "name": "alt3",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n    .combine(clean=False)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 7.135126506652097e-07,
+    "components": 1,
+    "nodes": 1121
+   },
+   "consensus": 6,
+   "numbers_ok": false,
+   "changed": true
+  },
+  {
+   "name": "mcts1-refine",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n    # Removed the 2 mm 45\u00b0 bevel; the six straight bottom outer edges remain sharp.\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 7.132734189323522e-07,
+    "components": 1,
+    "nodes": 1118
+   },
+   "consensus": 6,
+   "numbers_ok": true,
+   "changed": true
+  },
+  {
+   "name": "mcts2-diversify",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n    .faces(\"<Z\").edges(\"%LINE\").chamfer(2.0, 2.0)\n    .union(cq.Workplane(\"XY\").polygon(6, 15.012).extrude(2.0).faces(\">Z\").workplane().hole(8.0))\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 7.128580675961056e-07,
+    "components": 1,
+    "nodes": 1120
+   },
+   "consensus": 6,
+   "numbers_ok": false,
+   "changed": true
+  }
+ ]
+}

@@ -1,0 +1,1 @@
+{"edits":[{"start":7,"delete":0,"insert":["# Cut each underside along z = distance from the core (45 degrees).","cutter = (","    cq.Workplane(\"XZ\")","    .polyline([(10.96, -1), (40, -1), (40, 29.04), (10.96, 0)])","    .close()","    .extrude(10.96, both=True)",")","for angle in (0, 90, 180, 270):","    result = result.cut(cutter.rotate((0, 0, 0), (0, 0, 1), angle))"]}]}

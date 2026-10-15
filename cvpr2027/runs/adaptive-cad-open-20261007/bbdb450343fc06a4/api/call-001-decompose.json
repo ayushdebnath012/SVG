@@ -1,0 +1,34 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "Qwen/Qwen3.5-35B-A3B-FP8",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .polyline([[10.96, 10.96], [27.4, 10.96], [27.4, -10.96], [10.96, -10.96], [10.96, -27.4], [-10.96, -27.4], [-10.96, -10.96], [-27.4, -10.96], [-27.4, 10.96], [-10.96, 10.96], [-10.96, 27.4], [10.96, 27.4]])\\n    .close()\\n    .extrude(7.4)\\n)\\nshow_object(result)\", \"instruction\": \"Set the extrude thickness equal to half the outer half-width; the cross outline is unchanged.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"700529a8f7e3cd943c7b542d6326dc354a8a909a2b82e6b2f30c22c9e6ffcd20\", \"instruction\": \"Set the extrude thickness equal to half the outer radius; the star outline is unchanged.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .extrude(21.35)\\\"], \\\"start\\\": 5}]}\", \"strategies\": [], \"context\": [\"5:     .extrude(9.8)\"]}, {\"task_id\": \"4d3bcb5c260ff2e18d512124cead2b5a4341342047cd27d8e9a56551c543789c\", \"instruction\": \"Set the extrude thickness equal to half the outer profile span; the planar profile is unchanged.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .extrude(5.25)\\\"], \\\"start\\\": 9}]}\", \"strategies\": [], \"context\": [\"9:     .extrude(0.8)\"]}, {\"task_id\": \"0d3873223631ccf645849827e9f0010c23be6171f6077c87dc754933d993061f\", \"instruction\": \"Set the extrude thickness equal to one quarter of the outer radius; the sector outline is unchanged.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .extrude(21.5)\\\"], \\\"start\\\": 7}]}\", \"strategies\": [], \"context\": [\"7:     .extrude(13.9)\"]}]}"
+   }
+  ],
+  "temperature": 0.6,
+  "top_p": 0.95,
+  "top_k": 20,
+  "max_tokens": 8192
+ },
+ "usage": {
+  "prompt_tokens": 760,
+  "total_tokens": 1505,
+  "completion_tokens": 745,
+  "prompt_tokens_details": null,
+  "completion_tokens_details": {
+   "reasoning_tokens": 593
+  }
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "\n\n```json\n{\n  \"steps\": [\n    \"Identify the maximum coordinate value from the polyline to determine outer half-width\",\n    \"Calculate half of the outer half-width for the new extrude thickness\",\n    \"Update the extrude value from 7.4 to the calculated value\"\n  ],\n  \"invariants\": [\n    \"Polyline coordinate points remain unchanged\",\n    \"The close() operation remains unchanged\",\n    \"The Workplane('XY') origin remains unchanged\",\n    \"The shape topology and connectivity remain unchanged\"\n  ],\n  \"dependencies\": [\n    [0, 1],\n    [1, 2]\n  ]\n}\n```"
+}

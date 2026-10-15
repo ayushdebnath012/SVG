@@ -1,0 +1,47 @@
+\section{Introduction}
+\label{sec:intro}
+
+Editing an engineering drawing requires several linked updates. Moving a column changes member lengths;
+changing a bridge's panel count changes connectivity and loading; enlarging holes changes clearances;
+and modifying a pipe redistributes flow. A useful SVG editor must preserve the intended design, update
+its geometry and annotations, and recompute the quantities affected by the edit.
+\Cref{fig:teaser} shows two implemented examples: a bridge edit followed by FEM and a faithful plate
+edit whose reduced edge distance is flagged by a geometric check.
+
+Markup or pixel similarity alone cannot establish these properties. SVG-editing
+benchmarks~\cite{svgeditbench,scidiagramedit} measure output similarity, while engineering-reasoning
+benchmarks~\cite{feabench,fem_bench,pdeagent_bench} evaluate numerical answers or simulation tasks.
+Our question concerns the delivered artifact: does the edited SVG describe the requested design,
+and what happens when that design is analysed under the stated assumptions?
+
+We use an edit--recover--check workflow. The editor parses the source into a scene tree, predicts or constructs a patch, parses and validates
+that patch, and applies it to the original SVG. Structural operations insert nodes when topology changes. A family-specific importer
+then recovers the produced drawing. The applicable solver or geometry checker evaluates that recovered
+result. Edit fidelity and engineering acceptance are reported separately: a correct edit can introduce
+a violation, and passing one check does not certify every aspect of a design.
+
+The network implementation, \ours, recovers visible wire and pipe connectivity, component symbols and
+labels without identifiers or hidden metadata. A learned patch editor supplies the edits; modified nodal
+analysis and hydraulic flow--head equations supply the verdicts. The structural/mechanical extension
+uses bounded edit interpretation and importers for trusses and plates, followed by axial FEM or
+manufacturing-geometry checks. A separate frame harness uses a supplied physical model and checks
+returned member geometry before a planar-frame FEM solve. We report these contracts explicitly rather
+than pooling their scores into a single cross-domain accuracy.
+
+\paragraph{Contributions.}
+\begin{itemize}
+\item \textbf{Editing followed by verification of the resulting SVG.} The supported routes cover
+circuits, pipe networks, axial trusses and perforated plates. Worked examples expose the requested
+revision, changed geometry and recomputed engineering quantities (\cref{sec:structures}).
+\item \textbf{A learned network editor with a drawing-grounded verifier.} The 1.5B identifier-addressed
+editor achieves 100\,\% on 1,000 held-out network edits and \editOneFiveHard\,\% on larger networks.
+The verifier passes \numControls{} analytical controls and recovers \roundTripTotal{} generated drawings
+exactly (\cref{sec:method,sec:experiments}).
+\item \textbf{Reproducible datasets and checked edit examples.} We provide \netEdits{} network edits,
+a \hardEdits{}-edit harder network tier, and a saved 40,000-edit deterministic truss/plate pipeline audit.
+The latter identifies 699 requested plate edits that are faithful but violate clearance rules.
+These are pipeline results, not learned-editor accuracy (\cref{sec:data,sec:structures}).
+\item \textbf{Audited analysis failures and limitations.} The saved \astra pipe error, repeated frame
+analysis refusal, opaque-identifier control and 100-case cross-domain learned-patcher pilot show where
+editing, interpretation and checking must be evaluated independently.
+\end{itemize}

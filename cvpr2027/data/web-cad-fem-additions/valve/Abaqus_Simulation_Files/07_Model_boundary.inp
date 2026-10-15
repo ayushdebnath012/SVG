@@ -1,0 +1,34 @@
+*Surface Interaction, name=IntProp-1
+1.0
+*Friction
+0.,
+*Surface Behavior, pressure-overclosure=linear
+0.5
+**
+**
+** BOUNDARY CONDITIONS
+** 
+*Boundary
+Set-1, 1, 1
+Set-1, 2, 2
+Set-1, 3, 3
+Set-2, PINNED
+**
+**
+*Step, name=Step-1, nlgeom=YES
+*Dynamic, explicit
+, 0.5, ,1e-006
+**
+** INTERACTION PROPERTIES
+**
+**
+*Variable mass scaling, freq=1, dt=1.25e-006, type = uniform
+**
+*Contact Pair, Interaction=IntProp-1
+Surf-1
+**
+*Dsload, amplitude=Amp-forward
+Surf-1, P,     0.0001333224
+*Dsload
+Surf-1, VP,   -0.000005
+**

@@ -1,0 +1,28 @@
+{
+  "algorithm": "MCTS with UCT over complete original-index CAD patches",
+  "seed": 17,
+  "all_tasks": 124,
+  "search_tasks": 60,
+  "gating": "same 60 initial verifier rejections as completed pilot",
+  "max_new_api_calls_per_search_task": 4,
+  "width": 2,
+  "max_depth": 2,
+  "exploration": 0.7,
+  "node_depth_penalty": 0.005,
+  "api_budget_usd": 5.0,
+  "api_workers": 3,
+  "model": "gpt-6-astra",
+  "reasoning_effort": "low",
+  "max_completion_tokens": 2500,
+  "price_estimate_per_million": {
+    "input": 10,
+    "output": 50
+  },
+  "verifier_adapter": "/home/trishita/svg-compute/agentic-verifier-grpo-20261006/run-v4/adapter",
+  "calibration_sha256": "364e485ab1f949089d79689d2fa3964bf97f25a0eae4e7c4fe4fe2cced84a3fb",
+  "heldout_features_sha256": "a0e105f747db7c426573cd36a4a9c665fc818234641b75ec4fea235fa301687b",
+  "tool_source_sha256": "801875aec6d5197d88029414023d1e6e6be6a38365fa32e038aa7fd0078064f9",
+  "references_in_search": false,
+  "failed_api_attempts_retried": false,
+  "rollout": "one generated candidate, live target-free CAD tools, frozen verifier proxy; terminal values cached"
+}

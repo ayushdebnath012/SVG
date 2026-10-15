@@ -1,0 +1,1404 @@
+{
+ "task_id": "75843f475cb19d81a09bd9fa261f0e6f7a90ecafbc977a5b7ba6fcc5f4228a62",
+ "status": "PASS",
+ "prediction": "{\"edits\": [{\"delete\": 6, \"insert\": [], \"start\": 4}]}",
+ "selected_node": 1,
+ "bank": [
+  1,
+  3,
+  4
+ ],
+ "pareto": [
+  1,
+  4
+ ],
+ "stop": "expansion_limit",
+ "nodes": [
+  {
+   "id": 0,
+   "candidate": "\n\n{\"edits\":[{\"start\":5,\"delete\":5,\"insert\":[]},{\"start\":8,\"delete\":2,\"insert\":[]}]}",
+   "depth": 0,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "FAIL",
+      "reason": "ValueError: Invalid original coordinates"
+     },
+     "constraints": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -1000.0
+    ],
+    "score": -1.0,
+    "diagnosis": [
+     {
+      "stage": "geometry",
+      "status": "FAIL",
+      "reason": "ValueError: Invalid original coordinates"
+     },
+     {
+      "stage": "constraints",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 3,
+   "visits": 4,
+   "final": null,
+   "edges": [
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "id": 1,
+   "candidate": "{\"edits\": [{\"delete\": 6, \"insert\": [], \"start\": 4}]}",
+   "depth": 1,
+   "verdict": {
+    "status": "PASS",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 88822.48685851226,
+       "area": 16225.327171132358,
+       "solids": 1,
+       "faces": 12,
+       "bbox_x": 33.0,
+       "bbox_y": 33.0,
+       "bbox_z": 83.0
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 0.9,
+      "reason": "The edited part correctly transforms the original L-shaped geometry (which implies a corner cutout) into a solid rectangle, effectively removing the cut, sharpens the vertical edges to remove the fillet, and preserves the two rows of mounting holes on the top face.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-00.png"
+     },
+     "fem": {
+      "status": "PASS",
+      "metrics": {
+       "nodes": 9802,
+       "tetrahedra": 44832,
+       "connected_components": 1,
+       "mesh_volume_mm3": 89022.57626415828,
+       "fixed_nodes": 614,
+       "loaded_facets": 1224,
+       "loaded_area_mm2": 1775.2103223680967,
+       "axis": [
+        0.0,
+        0.0,
+        1.0
+       ],
+       "projection_min_mm": -41.5,
+       "projection_max_mm": 41.5,
+       "compliance_N_mm": 3.6456192790874997e-07,
+       "load_weighted_displacement_mm": 3.6456192790874997e-07,
+       "max_displacement_mm": 5.806517285553649e-07,
+       "strain_energy_N_mm": 1.822809639543749e-07,
+       "vm_p95_MPa": 0.001140981808174151,
+       "vm_peak_MPa": 0.0028915871949034403,
+       "relative_free_residual": 3.1471247673611826e-13,
+       "relative_force_balance_error": 6.6693933135573685e-15,
+       "relative_moment_balance_error": 1.8884041953593945e-15,
+       "relative_energy_error": 4.356425217554086e-16
+      },
+      "checks": [
+       {
+        "metric": "connected_components",
+        "value": 1,
+        "max": 1,
+        "ok": true
+       }
+      ]
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 1.005
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 1.005
+       }
+      ]
+     }
+    },
+    "objectives": [
+     0.9,
+     1.0,
+     -6.0
+    ],
+    "score": 1.994,
+    "diagnosis": [],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 1,
+   "visits": 2,
+   "final": {
+    "status": "PASS",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 88822.48685851226,
+       "area": 16225.327171132358,
+       "solids": 1,
+       "faces": 12,
+       "bbox_x": 33.0,
+       "bbox_y": 33.0,
+       "bbox_z": 83.0
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 0.9,
+      "reason": "The edited part correctly transforms the original L-shaped geometry (which implies a corner cutout) into a solid rectangle, effectively removing the cut, sharpens the vertical edges to remove the fillet, and preserves the two rows of mounting holes on the top face.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-00.png"
+     },
+     "fem": {
+      "status": "PASS",
+      "metrics": {
+       "nodes": 9801,
+       "tetrahedra": 44821,
+       "connected_components": 1,
+       "mesh_volume_mm3": 89022.57626415828,
+       "fixed_nodes": 614,
+       "loaded_facets": 1224,
+       "loaded_area_mm2": 1775.2103223680967,
+       "axis": [
+        0.0,
+        0.0,
+        1.0
+       ],
+       "projection_min_mm": -41.5,
+       "projection_max_mm": 41.5,
+       "compliance_N_mm": 3.645698708531937e-07,
+       "load_weighted_displacement_mm": 3.645698708531937e-07,
+       "max_displacement_mm": 5.806795576334927e-07,
+       "strain_energy_N_mm": 1.822849354265978e-07,
+       "vm_p95_MPa": 0.0011409783708193667,
+       "vm_peak_MPa": 0.002879838211626952,
+       "relative_free_residual": 3.102293826488599e-13,
+       "relative_force_balance_error": 8.374029700000093e-15,
+       "relative_moment_balance_error": 3.079766788867752e-15,
+       "relative_energy_error": 5.227596364071511e-15
+      },
+      "checks": [
+       {
+        "metric": "connected_components",
+        "value": 1,
+        "max": 1,
+        "ok": true
+       }
+      ]
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 0.995
+       },
+       {
+        "mesh_scale": 1.25
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 0.995
+       },
+       {
+        "status": "PASS",
+        "metrics": {
+         "nodes": 5417,
+         "tetrahedra": 24162,
+         "connected_components": 1,
+         "mesh_volume_mm3": 89180.20606120004,
+         "fixed_nodes": 431,
+         "loaded_facets": 904,
+         "loaded_area_mm2": 1956.1738073460147,
+         "axis": [
+          0.0,
+          0.0,
+          1.0
+         ],
+         "projection_min_mm": -41.5,
+         "projection_max_mm": 41.5,
+         "compliance_N_mm": 3.6576195492972126e-07,
+         "load_weighted_displacement_mm": 3.6576195492972126e-07,
+         "max_displacement_mm": 5.406500614342974e-07,
+         "strain_energy_N_mm": 1.828809774648629e-07,
+         "vm_p95_MPa": 0.001109112359169143,
+         "vm_peak_MPa": 0.0045504603974063735,
+         "relative_free_residual": 2.0015747593161833e-13,
+         "relative_force_balance_error": 8.384259825276537e-15,
+         "relative_moment_balance_error": 2.0532029494380496e-15,
+         "relative_energy_error": 1.2447445750246646e-14
+        },
+        "checks": [
+         {
+          "metric": "connected_components",
+          "value": 1,
+          "max": 1,
+          "ok": true
+         }
+        ]
+       }
+      ]
+     }
+    },
+    "objectives": [
+     0.9,
+     1.0,
+     -6.0
+    ],
+    "score": 1.994,
+    "diagnosis": [],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "final"
+   },
+   "edges": [
+    3
+   ]
+  },
+  {
+   "id": 2,
+   "candidate": "{\"edits\": [{\"delete\": 5, \"insert\": [], \"start\": 5}]}",
+   "depth": 1,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "FAIL",
+      "reason": "ValueError: Can not return the Nth element of an empty list"
+     },
+     "constraints": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -1000.0
+    ],
+    "score": -1.0,
+    "diagnosis": [
+     {
+      "stage": "geometry",
+      "status": "FAIL",
+      "reason": "ValueError: Can not return the Nth element of an empty list"
+     },
+     {
+      "stage": "constraints",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 0,
+   "visits": 1,
+   "final": null,
+   "edges": []
+  },
+  {
+   "id": 3,
+   "candidate": "{\"edits\": [{\"delete\": 4, \"insert\": [], \"start\": 4}, {\"delete\": 2, \"insert\": [], \"start\": 8}]}",
+   "depth": 1,
+   "verdict": {
+    "status": "PASS",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 88822.48685851226,
+       "area": 16225.327171132358,
+       "solids": 1,
+       "faces": 12,
+       "bbox_x": 33.0,
+       "bbox_y": 33.0,
+       "bbox_z": 83.0
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 0.85,
+      "reason": "The edited part removes the L-shaped cutout (interpreted as the rectangular through-cut) and the associated vertical fillet, resulting in a solid rectangular block while preserving the mounting hole pattern.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-01.png"
+     },
+     "fem": {
+      "status": "PASS",
+      "metrics": {
+       "nodes": 9801,
+       "tetrahedra": 44826,
+       "connected_components": 1,
+       "mesh_volume_mm3": 89022.57626415828,
+       "fixed_nodes": 614,
+       "loaded_facets": 1224,
+       "loaded_area_mm2": 1775.2103223680967,
+       "axis": [
+        0.0,
+        0.0,
+        1.0
+       ],
+       "projection_min_mm": -41.5,
+       "projection_max_mm": 41.5,
+       "compliance_N_mm": 3.6456693512740475e-07,
+       "load_weighted_displacement_mm": 3.6456693512740475e-07,
+       "max_displacement_mm": 5.806658010391682e-07,
+       "strain_energy_N_mm": 1.8228346756370243e-07,
+       "vm_p95_MPa": 0.001141328763595708,
+       "vm_peak_MPa": 0.002891586166446641,
+       "relative_free_residual": 2.978888419212337e-13,
+       "relative_force_balance_error": 1.5442820447636463e-14,
+       "relative_moment_balance_error": 3.378911670398694e-15,
+       "relative_energy_error": 2.904243588897773e-16
+      },
+      "checks": [
+       {
+        "metric": "connected_components",
+        "value": 1,
+        "max": 1,
+        "ok": true
+       }
+      ]
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 1.005
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 1.005
+       }
+      ]
+     }
+    },
+    "objectives": [
+     0.85,
+     1.0,
+     -6.0
+    ],
+    "score": 1.9440000000000002,
+    "diagnosis": [],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 0,
+   "visits": 1,
+   "final": {
+    "status": "PASS",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 88822.48685851226,
+       "area": 16225.327171132358,
+       "solids": 1,
+       "faces": 12,
+       "bbox_x": 33.0,
+       "bbox_y": 33.0,
+       "bbox_z": 83.0
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 0.85,
+      "reason": "The edited part removes the L-shaped cutout (interpreted as the rectangular through-cut) and the associated vertical fillet, resulting in a solid rectangular block while preserving the mounting hole pattern.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-01.png"
+     },
+     "fem": {
+      "status": "PASS",
+      "metrics": {
+       "nodes": 9655,
+       "tetrahedra": 43939,
+       "connected_components": 1,
+       "mesh_volume_mm3": 89022.57626415828,
+       "fixed_nodes": 614,
+       "loaded_facets": 1224,
+       "loaded_area_mm2": 1775.2103223680963,
+       "axis": [
+        0.0,
+        0.0,
+        1.0
+       ],
+       "projection_min_mm": -41.5,
+       "projection_max_mm": 41.5,
+       "compliance_N_mm": 3.6393662307567275e-07,
+       "load_weighted_displacement_mm": 3.6393662307567275e-07,
+       "max_displacement_mm": 5.68851470814988e-07,
+       "strain_energy_N_mm": 1.8196831153783415e-07,
+       "vm_p95_MPa": 0.0011324543894376763,
+       "vm_peak_MPa": 0.0028761094178499807,
+       "relative_free_residual": 2.949010338911518e-13,
+       "relative_force_balance_error": 9.44538649900742e-15,
+       "relative_moment_balance_error": 3.4775870674155508e-15,
+       "relative_energy_error": 1.2218948825494914e-14
+      },
+      "checks": [
+       {
+        "metric": "connected_components",
+        "value": 1,
+        "max": 1,
+        "ok": true
+       }
+      ]
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 0.995
+       },
+       {
+        "mesh_scale": 1.25
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 0.995
+       },
+       {
+        "status": "PASS",
+        "metrics": {
+         "nodes": 5455,
+         "tetrahedra": 24373,
+         "connected_components": 1,
+         "mesh_volume_mm3": 89180.20606120002,
+         "fixed_nodes": 432,
+         "loaded_facets": 904,
+         "loaded_area_mm2": 1956.1740465961427,
+         "axis": [
+          0.0,
+          0.0,
+          1.0
+         ],
+         "projection_min_mm": -41.5,
+         "projection_max_mm": 41.5,
+         "compliance_N_mm": 3.6566127244136114e-07,
+         "load_weighted_displacement_mm": 3.6566127244136114e-07,
+         "max_displacement_mm": 5.401963016158554e-07,
+         "strain_energy_N_mm": 1.82830636220684e-07,
+         "vm_p95_MPa": 0.0011074618122823396,
+         "vm_peak_MPa": 0.0041754077609115125,
+         "relative_free_residual": 1.8939510752822425e-13,
+         "relative_force_balance_error": 1.9863433678285026e-14,
+         "relative_moment_balance_error": 3.868109840968184e-15,
+         "relative_energy_error": 1.88210872059054e-14
+        },
+        "checks": [
+         {
+          "metric": "connected_components",
+          "value": 1,
+          "max": 1,
+          "ok": true
+         }
+        ]
+       }
+      ]
+     }
+    },
+    "objectives": [
+     0.85,
+     1.0,
+     -6.0
+    ],
+    "score": 1.9440000000000002,
+    "diagnosis": [],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "final"
+   },
+   "edges": []
+  },
+  {
+   "id": 4,
+   "candidate": "{\"edits\": [{\"delete\": 6, \"insert\": [], \"start\": 4}]}",
+   "depth": 2,
+   "verdict": {
+    "status": "PASS",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 88822.48685851226,
+       "area": 16225.327171132358,
+       "solids": 1,
+       "faces": 12,
+       "bbox_x": 33.0,
+       "bbox_y": 33.0,
+       "bbox_z": 83.0
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 0.9,
+      "reason": "The edited part correctly transforms the original L-shaped geometry (which implies a corner cutout) into a solid rectangle, effectively removing the cut, sharpens the vertical edges to remove the fillet, and preserves the two rows of mounting holes on the top face.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-00.png"
+     },
+     "fem": {
+      "status": "PASS",
+      "metrics": {
+       "nodes": 9802,
+       "tetrahedra": 44832,
+       "connected_components": 1,
+       "mesh_volume_mm3": 89022.57626415828,
+       "fixed_nodes": 614,
+       "loaded_facets": 1224,
+       "loaded_area_mm2": 1775.2103223680967,
+       "axis": [
+        0.0,
+        0.0,
+        1.0
+       ],
+       "projection_min_mm": -41.5,
+       "projection_max_mm": 41.5,
+       "compliance_N_mm": 3.6456192790874997e-07,
+       "load_weighted_displacement_mm": 3.6456192790874997e-07,
+       "max_displacement_mm": 5.806517285553649e-07,
+       "strain_energy_N_mm": 1.822809639543749e-07,
+       "vm_p95_MPa": 0.001140981808174151,
+       "vm_peak_MPa": 0.0028915871949034403,
+       "relative_free_residual": 3.1471247673611826e-13,
+       "relative_force_balance_error": 6.6693933135573685e-15,
+       "relative_moment_balance_error": 1.8884041953593945e-15,
+       "relative_energy_error": 4.356425217554086e-16
+      },
+      "checks": [
+       {
+        "metric": "connected_components",
+        "value": 1,
+        "max": 1,
+        "ok": true
+       }
+      ]
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 1.005
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 1.005
+       }
+      ]
+     }
+    },
+    "objectives": [
+     0.9,
+     1.0,
+     -6.0
+    ],
+    "score": 1.994,
+    "diagnosis": [],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 0,
+   "visits": 1,
+   "final": {
+    "status": "PASS",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 88822.48685851226,
+       "area": 16225.327171132358,
+       "solids": 1,
+       "faces": 12,
+       "bbox_x": 33.0,
+       "bbox_y": 33.0,
+       "bbox_z": 83.0
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 0.9,
+      "reason": "The edited part correctly transforms the original L-shaped geometry (which implies a corner cutout) into a solid rectangle, effectively removing the cut, sharpens the vertical edges to remove the fillet, and preserves the two rows of mounting holes on the top face.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-00.png"
+     },
+     "fem": {
+      "status": "PASS",
+      "metrics": {
+       "nodes": 9704,
+       "tetrahedra": 44246,
+       "connected_components": 1,
+       "mesh_volume_mm3": 89022.57626415828,
+       "fixed_nodes": 615,
+       "loaded_facets": 1224,
+       "loaded_area_mm2": 1775.2071414548336,
+       "axis": [
+        0.0,
+        0.0,
+        1.0
+       ],
+       "projection_min_mm": -41.5,
+       "projection_max_mm": 41.5,
+       "compliance_N_mm": 3.643068525150847e-07,
+       "load_weighted_displacement_mm": 3.643068525150847e-07,
+       "max_displacement_mm": 5.773837822541209e-07,
+       "strain_energy_N_mm": 1.8215342625754364e-07,
+       "vm_p95_MPa": 0.0011409715125826538,
+       "vm_peak_MPa": 0.002965266006517012,
+       "relative_free_residual": 2.8942807523409197e-13,
+       "relative_force_balance_error": 8.818090187352138e-15,
+       "relative_moment_balance_error": 2.789362332802506e-15,
+       "relative_energy_error": 7.120476551724716e-15
+      },
+      "checks": [
+       {
+        "metric": "connected_components",
+        "value": 1,
+        "max": 1,
+        "ok": true
+       }
+      ]
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 0.995
+       },
+       {
+        "mesh_scale": 1.25
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 0.995
+       },
+       {
+        "status": "PASS",
+        "metrics": {
+         "nodes": 5442,
+         "tetrahedra": 24323,
+         "connected_components": 1,
+         "mesh_volume_mm3": 89180.20606120002,
+         "fixed_nodes": 432,
+         "loaded_facets": 904,
+         "loaded_area_mm2": 1956.1742583456642,
+         "axis": [
+          0.0,
+          0.0,
+          1.0
+         ],
+         "projection_min_mm": -41.5,
+         "projection_max_mm": 41.5,
+         "compliance_N_mm": 3.6559981141096683e-07,
+         "load_weighted_displacement_mm": 3.6559981141096683e-07,
+         "max_displacement_mm": 5.389656081121983e-07,
+         "strain_energy_N_mm": 1.8279990570548212e-07,
+         "vm_p95_MPa": 0.0011062549258084695,
+         "vm_peak_MPa": 0.005034566620224231,
+         "relative_free_residual": 2.0297500246457676e-13,
+         "relative_force_balance_error": 1.12843037966543e-14,
+         "relative_moment_balance_error": 1.8453687767220507e-15,
+         "relative_energy_error": 7.095294691086052e-15
+        },
+        "checks": [
+         {
+          "metric": "connected_components",
+          "value": 1,
+          "max": 1,
+          "ok": true
+         }
+        ]
+       }
+      ]
+     }
+    },
+    "objectives": [
+     0.9,
+     1.0,
+     -6.0
+    ],
+    "score": 1.994,
+    "diagnosis": [],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "final"
+   },
+   "edges": []
+  }
+ ],
+ "edges": [
+  {
+   "parent": 0,
+   "child": 1,
+   "visits": 2,
+   "total": 3.988
+  },
+  {
+   "parent": 0,
+   "child": 2,
+   "visits": 1,
+   "total": -1.0
+  },
+  {
+   "parent": 0,
+   "child": 3,
+   "visits": 1,
+   "total": 1.9440000000000002
+  },
+  {
+   "parent": 1,
+   "child": 4,
+   "visits": 1,
+   "total": 1.994
+  }
+ ],
+ "events": [
+  {
+   "event": "decompose",
+   "plan": {
+    "steps": [
+     "Create box(33.0, 33.0, 83.0)",
+     "Create first mounting hole row on top face at positions (-12.0, -15.0), (0.0, -15.0), (12.0, -15.0) with diameter 2.0",
+     "Create second mounting hole row on top face at positions (-15.0, -12.0), (-15.0, 0.0), (-15.0, 12.0) with diameter 2.0"
+    ],
+    "invariants": [
+     "Box dimensions remain 33.0 x 33.0 x 83.0",
+     "Mounting hole diameter stays 2.0",
+     "Mounting hole positions are preserved",
+     "Top face workplane context for holes is maintained"
+    ],
+    "dependencies": [
+     [
+      1,
+      0
+     ],
+     [
+      2,
+      0
+     ]
+    ]
+   },
+   "memory_version": "52d753587a0e7621923ee571a09782ae826b13f3aaca6acc3170f216cdc19f2b",
+   "retrieved": [
+    {
+     "task_id": "34389cffaa74d42785d5fc2e7745256bfcdf3c7a260c50f8179795d939ba4273",
+     "instruction": "Remove the two legs on the +X side; only the top and the two -X legs remain.",
+     "candidate": "{\"edits\": [{\"delete\": 10, \"insert\": [], \"start\": 4}]}",
+     "strategies": [],
+     "context": [
+      "4:     .union(",
+      "5:         cq.Workplane(\"XY\")",
+      "6:             .transformed(offset=cq.Vector(93.75, 57.6, -78.25), rotate=cq.Vector(0, 0, 0))",
+      "7:             .box(18.7, 18.7, 143.1)",
+      "8:     )",
+      "9:     .union(",
+      "10:         cq.Workplane(\"XY\")",
+      "11:             .transformed(offset=cq.Vector(93.75, -57.6, -78.25), rotate=cq.Vector(0, 0, 0))",
+      "12:             .box(18.7, 18.7, 143.1)",
+      "13:     )"
+     ]
+    },
+    {
+     "task_id": "b8e847e2446dcb3b774d9f9abed4273b2f24a63f1bcbe413550c8001cbbfc1a2",
+     "instruction": "Remove the central through-hole so the hex nut becomes a solid hex prism. The hex outline, height, and the vertical edge chamfers all stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 3, \"insert\": [], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .faces(\">Z\").workplane()",
+      "6:     .circle(21.0)",
+      "7:     .cutThruAll()"
+     ]
+    },
+    {
+     "task_id": "36b7080c3255d1d22a0a7f6d44e94e1dd761dc84f1e859228f09486d6d4c8ae2",
+     "instruction": "Remove the rectangular through-cut on the top face so the L-bracket becomes a solid 23 \u00d7 23 \u00d7 133 bar. The outer box dimensions stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 4, \"insert\": [], \"start\": 4}]}",
+     "strategies": [],
+     "context": [
+      "4:     .faces(\">Z\").workplane()",
+      "5:     .center(1.5, 1.5)",
+      "6:     .rect(20.0, 20.0)",
+      "7:     .cutThruAll()"
+     ]
+    }
+   ]
+  },
+  {
+   "event": "initial_state",
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 14879.094188558203,
+       "area": 11754.799485168032,
+       "solids": 1,
+       "faces": 26,
+       "bbox_x": 33.0,
+       "bbox_y": 33.0,
+       "bbox_z": 83.0000002
+      }
+     },
+     "constraints": {
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -0.0
+    ],
+    "score": 0.0,
+    "diagnosis": [
+     {
+      "stage": "constraints",
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "initial"
+   }
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "geometry",
+     "status": "FAIL",
+     "reason": "ValueError: Invalid original coordinates"
+    },
+    {
+     "stage": "constraints",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "b8e847e2446dcb3b774d9f9abed4273b2f24a63f1bcbe413550c8001cbbfc1a2",
+     "instruction": "Remove the central through-hole so the hex nut becomes a solid hex prism. The hex outline, height, and the vertical edge chamfers all stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 3, \"insert\": [], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .faces(\">Z\").workplane()",
+      "6:     .circle(21.0)",
+      "7:     .cutThruAll()"
+     ]
+    },
+    {
+     "task_id": "36b7080c3255d1d22a0a7f6d44e94e1dd761dc84f1e859228f09486d6d4c8ae2",
+     "instruction": "Remove the rectangular through-cut on the top face so the L-bracket becomes a solid 23 \u00d7 23 \u00d7 133 bar. The outer box dimensions stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 4, \"insert\": [], \"start\": 4}]}",
+     "strategies": [],
+     "context": [
+      "4:     .faces(\">Z\").workplane()",
+      "5:     .center(1.5, 1.5)",
+      "6:     .rect(20.0, 20.0)",
+      "7:     .cutThruAll()"
+     ]
+    },
+    {
+     "task_id": "ff30a463f12df742e3faa5ec4f696245d6dfcfc211940c5dc17ee18546d5b47e",
+     "instruction": "At the top and bottom openings of the central round through-passage, remove the 5 mm 60\u00b0 inward chamfers, leaving sharp, square edges on each face.",
+     "candidate": "{\"edits\": [{\"delete\": 2, \"insert\": [], \"start\": 10}]}",
+     "strategies": [],
+     "context": [
+      "10:     .faces(\">Z\").edges(\"%CIRCLE\").chamfer(5.0, 8.6603)",
+      "11:     .faces(\"<Z\").edges(\"%CIRCLE\").chamfer(5.0, 8.6603)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "PASS",
+   "hypothesis": "Removed central rectangular through-cut and vertical-edge fillet, preserving box and mounting holes."
+  },
+  {
+   "event": "final_verification",
+   "node": 1,
+   "status": "PASS"
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 2,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "geometry",
+     "status": "FAIL",
+     "reason": "ValueError: Invalid original coordinates"
+    },
+    {
+     "stage": "constraints",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "b8e847e2446dcb3b774d9f9abed4273b2f24a63f1bcbe413550c8001cbbfc1a2",
+     "instruction": "Remove the central through-hole so the hex nut becomes a solid hex prism. The hex outline, height, and the vertical edge chamfers all stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 3, \"insert\": [], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .faces(\">Z\").workplane()",
+      "6:     .circle(21.0)",
+      "7:     .cutThruAll()"
+     ]
+    },
+    {
+     "task_id": "36b7080c3255d1d22a0a7f6d44e94e1dd761dc84f1e859228f09486d6d4c8ae2",
+     "instruction": "Remove the rectangular through-cut on the top face so the L-bracket becomes a solid 23 \u00d7 23 \u00d7 133 bar. The outer box dimensions stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 4, \"insert\": [], \"start\": 4}]}",
+     "strategies": [],
+     "context": [
+      "4:     .faces(\">Z\").workplane()",
+      "5:     .center(1.5, 1.5)",
+      "6:     .rect(20.0, 20.0)",
+      "7:     .cutThruAll()"
+     ]
+    },
+    {
+     "task_id": "ff30a463f12df742e3faa5ec4f696245d6dfcfc211940c5dc17ee18546d5b47e",
+     "instruction": "At the top and bottom openings of the central round through-passage, remove the 5 mm 60\u00b0 inward chamfers, leaving sharp, square edges on each face.",
+     "candidate": "{\"edits\": [{\"delete\": 2, \"insert\": [], \"start\": 10}]}",
+     "strategies": [],
+     "context": [
+      "10:     .faces(\">Z\").edges(\"%CIRCLE\").chamfer(5.0, 8.6603)",
+      "11:     .faces(\"<Z\").edges(\"%CIRCLE\").chamfer(5.0, 8.6603)"
+     ]
+    }
+   ],
+   "path": [
+    1
+   ],
+   "status": "FAIL",
+   "hypothesis": "Remove central rectangular through-cut and vertical-edge fillet operations while preserving mounting hole rows on top face"
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 3,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "geometry",
+     "status": "FAIL",
+     "reason": "ValueError: Invalid original coordinates"
+    },
+    {
+     "stage": "constraints",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "b8e847e2446dcb3b774d9f9abed4273b2f24a63f1bcbe413550c8001cbbfc1a2",
+     "instruction": "Remove the central through-hole so the hex nut becomes a solid hex prism. The hex outline, height, and the vertical edge chamfers all stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 3, \"insert\": [], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .faces(\">Z\").workplane()",
+      "6:     .circle(21.0)",
+      "7:     .cutThruAll()"
+     ]
+    },
+    {
+     "task_id": "36b7080c3255d1d22a0a7f6d44e94e1dd761dc84f1e859228f09486d6d4c8ae2",
+     "instruction": "Remove the rectangular through-cut on the top face so the L-bracket becomes a solid 23 \u00d7 23 \u00d7 133 bar. The outer box dimensions stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 4, \"insert\": [], \"start\": 4}]}",
+     "strategies": [],
+     "context": [
+      "4:     .faces(\">Z\").workplane()",
+      "5:     .center(1.5, 1.5)",
+      "6:     .rect(20.0, 20.0)",
+      "7:     .cutThruAll()"
+     ]
+    },
+    {
+     "task_id": "ff30a463f12df742e3faa5ec4f696245d6dfcfc211940c5dc17ee18546d5b47e",
+     "instruction": "At the top and bottom openings of the central round through-passage, remove the 5 mm 60\u00b0 inward chamfers, leaving sharp, square edges on each face.",
+     "candidate": "{\"edits\": [{\"delete\": 2, \"insert\": [], \"start\": 10}]}",
+     "strategies": [],
+     "context": [
+      "10:     .faces(\">Z\").edges(\"%CIRCLE\").chamfer(5.0, 8.6603)",
+      "11:     .faces(\"<Z\").edges(\"%CIRCLE\").chamfer(5.0, 8.6603)"
+     ]
+    }
+   ],
+   "path": [
+    2
+   ],
+   "status": "PASS",
+   "hypothesis": "Removed the central rectangular through-cut and vertical-edge fillet by deleting the associated workplane setup, sketch, cut, and fillet operations while preserving the box and mounting holes."
+  },
+  {
+   "event": "final_verification",
+   "node": 3,
+   "status": "PASS"
+  },
+  {
+   "event": "backtrack",
+   "to_node": 1
+  },
+  {
+   "event": "expand",
+   "parent": 1,
+   "node": 4,
+   "merged": false,
+   "strategy": "diversify",
+   "diagnosis": [],
+   "retrieved_repairs": [
+    {
+     "task_id": "34389cffaa74d42785d5fc2e7745256bfcdf3c7a260c50f8179795d939ba4273",
+     "instruction": "Remove the two legs on the +X side; only the top and the two -X legs remain.",
+     "candidate": "{\"edits\": [{\"delete\": 10, \"insert\": [], \"start\": 4}]}",
+     "strategies": [],
+     "context": [
+      "4:     .union(",
+      "5:         cq.Workplane(\"XY\")",
+      "6:             .transformed(offset=cq.Vector(93.75, 57.6, -78.25), rotate=cq.Vector(0, 0, 0))",
+      "7:             .box(18.7, 18.7, 143.1)",
+      "8:     )",
+      "9:     .union(",
+      "10:         cq.Workplane(\"XY\")",
+      "11:             .transformed(offset=cq.Vector(93.75, -57.6, -78.25), rotate=cq.Vector(0, 0, 0))",
+      "12:             .box(18.7, 18.7, 143.1)",
+      "13:     )"
+     ]
+    },
+    {
+     "task_id": "b8e847e2446dcb3b774d9f9abed4273b2f24a63f1bcbe413550c8001cbbfc1a2",
+     "instruction": "Remove the central through-hole so the hex nut becomes a solid hex prism. The hex outline, height, and the vertical edge chamfers all stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 3, \"insert\": [], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .faces(\">Z\").workplane()",
+      "6:     .circle(21.0)",
+      "7:     .cutThruAll()"
+     ]
+    },
+    {
+     "task_id": "36b7080c3255d1d22a0a7f6d44e94e1dd761dc84f1e859228f09486d6d4c8ae2",
+     "instruction": "Remove the rectangular through-cut on the top face so the L-bracket becomes a solid 23 \u00d7 23 \u00d7 133 bar. The outer box dimensions stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 4, \"insert\": [], \"start\": 4}]}",
+     "strategies": [],
+     "context": [
+      "4:     .faces(\">Z\").workplane()",
+      "5:     .center(1.5, 1.5)",
+      "6:     .rect(20.0, 20.0)",
+      "7:     .cutThruAll()"
+     ]
+    }
+   ],
+   "path": [
+    0,
+    3
+   ],
+   "status": "PASS",
+   "hypothesis": "Removed central rectangular through-cut and vertical-edge fillet operations, preserving mounting holes on top face"
+  },
+  {
+   "event": "final_verification",
+   "node": 4,
+   "status": "PASS"
+  }
+ ],
+ "config": {
+  "algorithm": "mcts",
+  "max_expansions": 4,
+  "max_depth": 3,
+  "width": 2,
+  "max_width": 4,
+  "exploration": 0.7,
+  "seconds": 2400.0
+ },
+ "memory_version": "52d753587a0e7621923ee571a09782ae826b13f3aaca6acc3170f216cdc19f2b",
+ "stored": "runs/adaptive-cad-open-20261007/memory.jsonl",
+ "seconds": 373.2805119579998,
+ "api": {
+  "mode": "live_astra",
+  "api_calls": 7,
+  "cost_usd": 0.0,
+  "budget_usd": 0.3,
+  "refused": 0
+ },
+ "tool_jobs": 13
+}

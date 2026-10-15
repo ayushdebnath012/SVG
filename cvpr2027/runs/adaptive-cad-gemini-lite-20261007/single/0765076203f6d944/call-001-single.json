@@ -1,0 +1,28 @@
+{
+ "kind": "single",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "You edit mechanical CAD. Return only JSON {\"edits\":[{\"start\":0,\"delete\":0,\"insert\":[\"replacement line\"]}]}. Indices are zero-based lines of the ORIGINAL input; operations must be ordered, nonoverlapping and in bounds. Preserve unrelated features. The supplied representation determines syntax. Return no explanation or invented physics results. Geometry execution and FEM checks are performed by external tools; never claim verification."
+   },
+   {
+    "role": "user",
+    "content": "Representation: cadquery\nOriginal CAD (line indices are implicit):\nimport cadquery as cq\nresult = (\n    cq.Workplane(\"XZ\")\n    .moveTo(0.0, 0.0)\n    .lineTo(4.0, 0.0)\n    .lineTo(4.0, 30.0)\n    .lineTo(6.4, 30.0)\n    .threePointArc((5.5424, 32.6), (0.0, 35.2))\n    .close()\n    .revolve(360, (0, 0, 0), (0, 1, 0))\n    .edges(\"<Y\")\n    .fillet(0.8)\n)\nshow_object(result)Edit instruction:\nDrill a round axial through-bore down the center of the rivet, 4 mm in diameter, from the flat bottom face up through the rounded head, along the central axis of the rivet."
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 8192
+ },
+ "usage": {
+  "completion_tokens": 222,
+  "prompt_tokens": 308,
+  "total_tokens": 530
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\"edits\":[{\"start\":2,\"delete\":13,\"insert\":[\"result = (\\n    cq.Workplane(\\\"XZ\\\")\\n    .moveTo(0.0, 0.0)\\n    .lineTo(4.0, 0.0)\\n    .lineTo(4.0, 30.0)\\n    .lineTo(6.4, 30.0)\\n    .threePointArc((5.5424, 32.6), (0.0, 35.2))\\n    .close()\\n    .revolve(360, (0, 0, 0), (0, 1, 0))\\n    .edges(\\\"<Y\\\")\\n    .fillet(0.8)\\n)\\n\\n# Drill axial through-bore (4 mm diameter)\\nresult = result.faces(\\\">Y or <Y\\\").workplane().circle(2.0).cutThruAll()\\n\"]}]}\n```"
+}

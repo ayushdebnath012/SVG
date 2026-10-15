@@ -1,0 +1,13 @@
+{
+  "id": "a2763b8ee0861c39384f88a426721e96edc96ed6b8028682df890f433b7258b6#0",
+  "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(5.1, 17.7)\n    .faces(\">Z\").workplane()\n    .hole(14.5)\n)\nshow_object(result)",
+  "instruction": "Rotate the entire part by 45 degrees about the axis (1, 0, 1).",
+  "candidate": "PLAN:\n- [7] `show_object(result)` -> Insert a 45-degree rotation about axis (1, 0, 1) through the origin before display.\nPATCH:\n{\"edits\":[{\"start\":7,\"delete\":0,\"insert\":[\"result = result.rotate((0, 0, 0), (1, 0, 1), 45)\"]}]}",
+  "component": "clevis_pin",
+  "split": "development",
+  "required": [
+    "geometry",
+    "constraints",
+    "semantics"
+  ]
+}

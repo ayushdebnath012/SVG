@@ -1,0 +1,21 @@
+{
+  "edits": [
+    {
+      "old": "    gmsh.option.setNumber(\"Mesh.ElementOrder\", 1)\n",
+      "new": "    gmsh.option.setNumber(\"Mesh.ElementOrder\", 1)\n    # Keep quadratic displacement interpolation, but use affine tetrahedral\n    # geometry. Projecting midside nodes onto the many small CAD faces can\n    # invert otherwise valid tetrahedra near tight fillets.\n    gmsh.option.setNumber(\"Mesh.SecondOrderLinear\", 1)\n"
+    },
+    {
+      "old": "        gmsh.model.mesh.setOrder(2)\n        tags, coords, _ = gmsh.model.mesh.getNodes()",
+      "new": "        gmsh.model.mesh.setOrder(2)\n        _, volume_element_tags, _ = gmsh.model.mesh.getElements(3)\n        determinants = gmsh.model.mesh.getElementQualities(\n            np.concatenate(volume_element_tags), \"minDetJac\")\n        log(f\"Level {level}: minimum element Jacobian determinant = {np.min(determinants):.12g}\")\n        if not np.isfinite(determinants).all() or np.min(determinants) <= 0:\n            raise RuntimeError(\"Nonpositive mesh Jacobian before solver export\")\n        tags, coords, _ = gmsh.model.mesh.getNodes()"
+    },
+    {
+      "old": "            tr = indices(nodes).reshape(-1, nn)\n            tr = tr[np.all(bore[tr], axis=1)]",
+      "new": "            tr = indices(nodes).reshape(-1, nn)\n            # Affine midside nodes lie on chords rather than exactly on the\n            # CAD cylinders. Identify interface facets by their CAD vertices,\n            # then include every quadratic node of each identified facet.\n            corners = tr[:, :3]\n            bolt_faces = np.zeros(len(tr), dtype=bool)\n            for b in bolts:\n                corner_radii = np.linalg.norm(xyz[corners, :2] - b, axis=2)\n                bolt_faces |= np.all(\n                    (np.abs(corner_radii - 5.1562) < 0.025) &\n                    (xyz[corners, 2] >= -0.025), axis=1)\n            fixed[tr[bolt_faces].ravel()] = True\n            tr = tr[np.all(bore[corners], axis=1)]"
+    },
+    {
+      "old": "            \"Linear isotropic elasticity, quadratic tetrahedral solids.\",",
+      "new": "            \"Linear isotropic elasticity, quadratic tetrahedral solids with straight edges and affine geometry to avoid curvature-induced inverted elements.\",\n            \"Cylindrical interface facets identified from their corner nodes; all quadratic facet nodes participate in constraints or loading. Curved boundaries are approximated by mesh-refined planar facets.\","
+    }
+  ],
+  "reason": "The solver failed on inverted curved C3D10 elements, matching Gmsh's negative-distortion warning. Straight-sided quadratic tetrahedra avoid curvature-induced inversion while retaining quadratic FEM interpolation. Interface selection now includes chord midside nodes, and Jacobians are checked before export."
+}

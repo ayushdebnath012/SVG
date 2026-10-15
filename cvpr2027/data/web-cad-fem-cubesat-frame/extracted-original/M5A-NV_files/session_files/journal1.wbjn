@@ -1,0 +1,247 @@
+# encoding: utf-8
+# 2020 R2
+SetScriptVersion(Version="20.2.221")
+template1 = GetTemplate(
+    TemplateName="Steady-State Thermal",
+    Solver="ANSYS")
+system1 = template1.CreateSystem()
+geometry1 = system1.GetContainer(ComponentName="Geometry")
+geometry1.Edit(IsSpaceClaimGeometry=True)
+geometry1.Exit()
+unitSystem1 = CreateUnitSystem(UnitSystemName="SI")
+geometry1.Edit()
+geometry1.Exit()
+engineeringData1 = system1.GetContainer(ComponentName="Engineering Data")
+matl1 = engineeringData1.CreateMaterial(Name="Chip")
+matlProp1 = matl1.CreateProperty(
+    Name="Thermal Conductivity",
+    Behavior="Isotropic",
+    Qualifiers={"Definition": "", "Behavior": "Isotropic"})
+EngData.EnableFilter(Enable=False)
+matlProp2 = matl1.CreateProperty(
+    Name="Density",
+    Qualifiers={"Definition": "", "Behavior": ""})
+matlProp2.SetData(
+    Index=-1,
+    Variables=["Density"],
+    Values=[["900 [kg m^-3]"]])
+matlProp1.SetVariableProperty(
+    VariableName="Thermal Conductivity",
+    Property="Unit",
+    Value="W um^-1 K^-1")
+matlProp1.SetVariableProperty(
+    VariableName="Thermal Conductivity",
+    Property="Unit",
+    Value="W m^-1 K^-1")
+matlProp1.SetData(
+    Index=-1,
+    Variables=["Thermal Conductivity"],
+    Values=[["2.1 [W m^-1 K^-1]"]])
+matlProp3 = matl1.CreateProperty(
+    Name="Specific Heat",
+    Definition="Constant Pressure",
+    Qualifiers={"Definition": "Constant Pressure", "Behavior": ""})
+matlProp3.SetVariableProperty(
+    VariableName="Specific Heat",
+    Property="Unit",
+    Value="J kg^-1 K^-1")
+matlProp3.SetData(
+    Index=-1,
+    Variables=["Specific Heat"],
+    Values=[["2200 [J kg^-1 K^-1]"]])
+matl2 = engineeringData1.CreateMaterial(Name="Fin")
+matl3 = matl1.Duplicate(TargetContainer=engineeringData1)
+matl4 = matl1.Duplicate(TargetContainer=engineeringData1)
+matl5 = matl1.Duplicate(TargetContainer=engineeringData1)
+matl2.Delete()
+matl3.DisplayName = "Fin"
+matlProp4 = matl3.GetProperty(Name="Density")
+matlProp4.SetData(
+    Variables=["Density"],
+    Values=[["2050 [kg m^-3]"]])
+matlProp5 = matl3.GetProperty(Name="Thermal Conductivity")
+matlProp5.SetData(
+    Variables=["Thermal Conductivity"],
+    Values=[["45 [W m^-1 K^-1]"]])
+matlProp6 = matl3.GetProperty(Name="Specific Heat")
+matlProp6.SetData(
+    Variables=["Specific Heat"],
+    Values=[["4500 [J kg^-1 K^-1]"]])
+matl4.DisplayName = "Processor"
+matlProp7 = matl4.GetProperty(Name="Density")
+matlProp7.SetData(
+    Variables=["Density"],
+    Values=[["920 [kg m^-3]"]])
+matlProp8 = matl4.GetProperty(Name="Specific Heat")
+matlProp8.SetData(
+    Variables=["Specific Heat"],
+    Values=[["1300 [J kg^-1 K^-1]"]])
+matl5.DisplayName = "Board"
+matlProp9 = matl5.GetProperty(Name="Density")
+matlProp9.SetData(
+    Variables=["Density"],
+    Values=[["910 [kg m^-3]"]])
+matlProp10 = matl5.GetProperty(Name="Thermal Conductivity")
+matlProp10.SetData(
+    Variables=["Thermal Conductivity"],
+    Values=[["3.2 [W m^-1 K^-1]"]])
+matlProp11 = matl5.GetProperty(Name="Specific Heat")
+matlProp11.SetData(
+    Variables=["Specific Heat"],
+    Values=[["1150 [J kg^-1 K^-1]"]])
+modelComponent1 = system1.GetComponent(Name="Model")
+modelComponent1.Refresh()
+model1 = system1.GetContainer(ComponentName="Model")
+model1.Edit()
+model1.Exit()
+EngData.EnableFilter()
+EngData.EnableFilter(Enable=False)
+EngData.EnableFilter()
+EngData.EnableFilter(Enable=False)
+matlProp12 = matl5.CreateProperty(
+    Name="Coefficient of Thermal Expansion",
+    Definition="Secant",
+    Behavior="Isotropic",
+    Qualifiers={"Definition": "Secant", "Behavior": "Isotropic"})
+matlProp12.SetData(
+    SheetName="Coefficient of Thermal Expansion",
+    SheetQualifiers={"Definition": "Secant", "Behavior": "Isotropic"},
+    Index=-1,
+    Variables=["Coefficient of Thermal Expansion"],
+    Values=[["2.6E-06 [C^-1]"]])
+matlProp13 = matl1.CreateProperty(
+    Name="Coefficient of Thermal Expansion",
+    Definition="Secant",
+    Behavior="Isotropic",
+    Qualifiers={"Definition": "Secant", "Behavior": "Isotropic"})
+matlProp13.SetData(
+    SheetName="Coefficient of Thermal Expansion",
+    SheetQualifiers={"Definition": "Secant", "Behavior": "Isotropic"},
+    Index=-1,
+    Variables=["Coefficient of Thermal Expansion"],
+    Values=[["0.018 [C^-1]"]])
+matlProp13.SetData(
+    SheetName="Coefficient of Thermal Expansion",
+    SheetQualifiers={"Definition": "Secant", "Behavior": "Isotropic"},
+    Variables=["Coefficient of Thermal Expansion"],
+    Values=[["1.8E-05 [C^-1]"]])
+matlProp14 = matl3.CreateProperty(
+    Name="Coefficient of Thermal Expansion",
+    Definition="Secant",
+    Behavior="Isotropic",
+    Qualifiers={"Definition": "Secant", "Behavior": "Isotropic"})
+matlProp14.SetData(
+    SheetName="Coefficient of Thermal Expansion",
+    SheetQualifiers={"Definition": "Secant", "Behavior": "Isotropic"},
+    Index=-1,
+    Variables=["Coefficient of Thermal Expansion"],
+    Values=[["2.2E-05 [C^-1]"]])
+matlProp15 = matl4.CreateProperty(
+    Name="Coefficient of Thermal Expansion",
+    Definition="Secant",
+    Behavior="Isotropic",
+    Qualifiers={"Definition": "Secant", "Behavior": "Isotropic"})
+matlProp15.SetData(
+    SheetName="Coefficient of Thermal Expansion",
+    SheetQualifiers={"Definition": "Secant", "Behavior": "Isotropic"},
+    Index=-1,
+    Variables=["Coefficient of Thermal Expansion"],
+    Values=[["1.8E-05 [C^-1]"]])
+modelComponent1.Refresh()
+setupComponent1 = system1.GetComponent(Name="Setup")
+setupComponent1.Update(AllDependencies=True)
+template2 = GetTemplate(
+    TemplateName="Static Structural",
+    Solver="ANSYS")
+engineeringDataComponent1 = system1.GetComponent(Name="Engineering Data")
+geometryComponent1 = system1.GetComponent(Name="Geometry")
+solutionComponent1 = system1.GetComponent(Name="Solution")
+componentTemplate1 = GetComponentTemplate(Name="SimulationSetupCellTemplate_StructuralStaticANSYS")
+system2 = template2.CreateSystem(
+    ComponentsToShare=[engineeringDataComponent1, geometryComponent1, modelComponent1],
+    DataTransferFrom=[Set(FromComponent=solutionComponent1, TransferName=None, ToComponentTemplate=componentTemplate1)],
+    Position="Right",
+    RelativeTo=system1)
+model1.Edit()
+geometry1.Edit()
+matlProp16 = matl5.CreateProperty(
+    Name="Elasticity",
+    Behavior="Isotropic",
+    Qualifiers={"Definition": "", "Behavior": "Isotropic"})
+matlProp17 = matl1.CreateProperty(
+    Name="Elasticity",
+    Behavior="Isotropic",
+    Qualifiers={"Definition": "", "Behavior": "Isotropic"})
+matlProp18 = matl3.CreateProperty(
+    Name="Elasticity",
+    Behavior="Isotropic",
+    Qualifiers={"Definition": "", "Behavior": "Isotropic"})
+matlProp19 = matl4.CreateProperty(
+    Name="Elasticity",
+    Behavior="Isotropic",
+    Qualifiers={"Definition": "", "Behavior": "Isotropic"})
+matlProp16.SetVariableProperty(
+    VariableName="Young's Modulus",
+    Property="Unit",
+    Value="MPa")
+matlProp16.SetData(
+    Index=-1,
+    Variables=["Young's Modulus"],
+    Values=[["200000 [MPa]"]])
+matlProp16.SetData(
+    Variables=["Poisson's Ratio"],
+    Values=[["0.27"]])
+matlProp18.SetVariableProperty(
+    VariableName="Young's Modulus",
+    Property="Unit",
+    Value="MPa")
+matlProp18.SetData(
+    Index=-1,
+    Variables=["Young's Modulus"],
+    Values=[["70000 [MPa]"]])
+matlProp18.SetData(
+    Variables=["Poisson's Ratio"],
+    Values=[["0.3"]])
+EngData.EnableFilter()
+favorites1 = EngData.LoadFavoriteItems()
+library1 = EngData.OpenLibrary(
+    Name="General Materials",
+    Source="General_Materials.xml")
+matl6 = engineeringData1.ImportMaterial(
+    Name="Silicon Anisotropic",
+    Source="General_Materials.xml")
+matl7 = engineeringData1.ImportMaterial(
+    Name="Copper Alloy",
+    Source="General_Materials.xml")
+matl8 = engineeringData1.ImportMaterial(
+    Name="Aluminum Alloy",
+    Source="General_Materials.xml")
+matl1.SetSuppression(Suppressed=True)
+matl4.SetSuppression(Suppressed=True)
+system1.Refresh()
+Save(Overwrite=True)
+template3 = GetTemplate(
+    TemplateName="Modal",
+    Solver="ANSYS")
+system3 = template3.CreateSystem(
+    ComponentsToShare=[engineeringDataComponent1, geometryComponent1, modelComponent1],
+    Position="Below",
+    RelativeTo=system2)
+system3.Update(AllDependencies=True)
+template4 = GetTemplate(
+    TemplateName="Linear Buckling",
+    Solver="ANSYS")
+engineeringDataComponent2 = system2.GetComponent(Name="Engineering Data")
+geometryComponent2 = system2.GetComponent(Name="Geometry")
+modelComponent2 = system2.GetComponent(Name="Model")
+solutionComponent2 = system2.GetComponent(Name="Solution")
+componentTemplate2 = GetComponentTemplate(Name="SimulationSetupCellTemplate_StructuralBucklingANSYS")
+system4 = template4.CreateSystem(
+    ComponentsToShare=[engineeringDataComponent2, geometryComponent2, modelComponent2],
+    DataTransferFrom=[Set(FromComponent=solutionComponent2, TransferName=None, ToComponentTemplate=componentTemplate2)],
+    Position="Right",
+    RelativeTo=system2)
+system2.Update(AllDependencies=True)
+system4.Update(AllDependencies=True)
+Save(Overwrite=True)
+Save(Overwrite=True)

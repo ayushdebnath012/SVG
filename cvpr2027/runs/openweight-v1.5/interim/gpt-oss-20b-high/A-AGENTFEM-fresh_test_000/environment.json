@@ -1,0 +1,38 @@
+{
+    "solver": "skfem",
+    "solver_version": "12.0.2",
+    "assembly": "skfem.assembly",
+    "mesh_generation": "gmsh",
+    "mesh_generation_command": "gmsh --quiet -format msh4 -3 -order 2 -clmax 9 -clmin 9 -o mesh_fine.msh /home/trishita/cadfem-bench-run/runs/gpt-oss-20b-high/A-AGENTFEM-fresh_test_000/inputs/geometry.step",
+    "units": {
+        "length": "mm",
+        "force": "N",
+        "stress": "MPa",
+        "displacement": "mm"
+    },
+    "field_schema": {
+        "displacement": {
+            "components": [
+                "x",
+                "y",
+                "z"
+            ],
+            "units": "mm"
+        },
+        "seat_mean_displacement": {
+            "units": "mm"
+        },
+        "max_displacement": {
+            "units": "mm"
+        }
+    },
+    "physical_group_mapping": {},
+    "extraction_definitions": {
+        "seat_mean_displacement_mm": "average of displacements on top face (z = 189 mm)",
+        "max_displacement_mm": "maximum magnitude of displacement anywhere"
+    },
+    "modeling_assumptions": {
+        "gravity": "not applied",
+        "material": "linear isotropic elastic, E=70 GPa, nu=0.33"
+    }
+}

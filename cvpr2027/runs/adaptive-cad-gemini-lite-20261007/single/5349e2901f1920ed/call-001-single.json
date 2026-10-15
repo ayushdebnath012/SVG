@@ -1,0 +1,28 @@
+{
+ "kind": "single",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "You edit mechanical CAD. Return only JSON {\"edits\":[{\"start\":0,\"delete\":0,\"insert\":[\"replacement line\"]}]}. Indices are zero-based lines of the ORIGINAL input; operations must be ordered, nonoverlapping and in bounds. Preserve unrelated features. The supplied representation determines syntax. Return no explanation or invented physics results. Geometry execution and FEM checks are performed by external tools; never claim verification."
+   },
+   {
+    "role": "user",
+    "content": "Representation: cadquery\nOriginal CAD (line indices are implicit):\nimport cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n)\nshow_object(result)Edit instruction:\nBevel the six straight outer edges of the top face at 30 degrees from horizontal, 2 mm wide on the top."
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 8192
+ },
+ "usage": {
+  "completion_tokens": 78,
+  "prompt_tokens": 201,
+  "total_tokens": 279
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\"edits\":[{\"start\":5,\"delete\":2,\"insert\":[    .faces(\">Z\").workplane()\",\n    .hole(8.0)\",\n    .edges(\">Z and not (outer or inner)\").chamfer(2.0, 2.0 * math.tan(math.radians(30)))\"\n]}]}\n```"
+}

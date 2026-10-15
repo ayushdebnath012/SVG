@@ -1,0 +1,71 @@
+{
+ "id": "2bebdb495dbbe90a9216b449f6d467cbb5b8dabe74ac6c62a93c53c9fb1f0c1f",
+ "source_fem": {
+  "ok": true,
+  "compliance": 7.813026763831807e-07,
+  "components": 1,
+  "nodes": 1168
+ },
+ "candidates": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 7.135138095547048e-07,
+    "components": 1,
+    "nodes": 1121
+   },
+   "consensus": 4,
+   "numbers_ok": null,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt1",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 7.136316328774222e-07,
+    "components": 1,
+    "nodes": 1121
+   },
+   "consensus": 4,
+   "numbers_ok": null,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt2",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n    # .faces(\">Z\").edges(\"%LINE\").chamfer(2.0, 1.1547)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 7.132734189379652e-07,
+    "components": 1,
+    "nodes": 1118
+   },
+   "consensus": 4,
+   "numbers_ok": null,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt3",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n    .clean()\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 7.136316341166263e-07,
+    "components": 1,
+    "nodes": 1121
+   },
+   "consensus": 4,
+   "numbers_ok": null,
+   "changed": true,
+   "error": null
+  }
+ ]
+}

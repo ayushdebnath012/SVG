@@ -1,0 +1,40 @@
+{
+  "source": "https://howtomechatronics.com/how-it-works/what-is-cycloidal-driver-designing-3d-printing-and-testing/",
+  "title": "DIY 3D-printed cycloidal drive 15:1",
+  "inputs": {
+    "N": 16,
+    "R": 45.0,
+    "Rr": 6.5,
+    "E": 1.5
+  },
+  "units": "mm, rad",
+  "derived": {
+    "reduction_ratio": 15,
+    "disk_lobes": 15,
+    "ring_pcd_diameter": 90.0,
+    "roller_diameter": 13.0,
+    "output_note": "reduction = N-1; output rotates reversed vs input"
+  },
+  "design_choices": {
+    "disk_thickness_each": 8.0,
+    "num_disks": 2,
+    "disk_phase_offset_deg": 180,
+    "center_bore_diameter": 22.0,
+    "output_pin_circle_radius": 27.0,
+    "output_pin_count": 6,
+    "output_roller_outer_diameter": 13.0,
+    "output_hole_diameter": 16.0,
+    "output_hole_note": "roller OD + 2*E = 13 + 3 = 16",
+    "housing_outer_radius": 62.0,
+    "housing_height": 34.0,
+    "eccentricity_check": "E < Rr/2  →  1.5 < 3.25 OK"
+  },
+  "purchased_parts": {
+    "bearing_686_6x13x5": 44,
+    "bearing_6802_15x24x5": 4,
+    "bearing_6807_35x47x7": 2,
+    "steel_rod_6x35mm": "use 6.00 mm ground rod, not M6 bolt (undersize → wobble)",
+    "threaded_inserts": "M3 + M4 heat-set",
+    "bolts": "M3x20 (output pins), M3 through-bolts (input shaft sections), M4x40 (housing)"
+  }
+}

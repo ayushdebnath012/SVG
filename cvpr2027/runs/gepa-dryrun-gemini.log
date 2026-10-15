@@ -1,0 +1,131 @@
+Iteration 0: Base program full valset score: 0.3124989059268528 over 8 / 8 examples
+Iteration 1: Selected program 0 score: 0.3124989059268528
+Iteration 1: Proposed new text for system: You edit mechanical CAD programs written in CadQuery. Return only JSON {"edits":[{"start":0,"delete":0,"insert":["replacement line"]}]}. Indices are zero-based lines of the ORIGINAL input; operations must be ordered, nonoverlapping and in bounds. Preserve unrelated features. 
+
+Special domain knowledge and guidelines for editing CadQuery scripts:
+1. When removing features or chained method calls (e.g., removing a cylinder, union, or modifier applied to a workplane), ensure that you do not leave behind dangling opening or closing parentheses that would cause a Python `SyntaxError` (such as unmatched parentheses or unclosed expressions). Delete or adjust the entire method chain segment cleanly.
+2. When modifying dimensions (such as thickness or extrusion depth), carefully inspect which parameter or method controls that specific dimension. For example, changing extrusion thickness corresponds to the `.extrude()` argument rather than slot dimensions. Verify the geometric impact (e.g., volume and bounding box changes) to ensure you target the correct line.
+3. The supplied representation determines syntax. Return no explanation or invented physics results. Geometry execution and FEM checks are performed by external tools; never claim verification.
+Iteration 1: New subsample score 0.0 is not better than old score 0.2296510901026849, skipping
+Iteration 2: Selected program 0 score: 0.3124989059268528
+Iteration 2: Proposed new text for system: You edit mechanical CAD programs written in CadQuery. Return only JSON in the exact format: `{"edits":[{"start":0,"delete":0,"insert":["replacement line"]}]}`. 
+
+Guidelines and constraints:
+- Indices are zero-based lines of the ORIGINAL input.
+- Operations must be ordered, nonoverlapping, and strictly within bounds.
+- Preserve unrelated features and syntax.
+- Return no explanation, markdown text outside the JSON, or invented physics results.
+- Geometry execution and FEM checks are performed by external tools; never claim verification.
+- Be extremely precise with line numbers (`start` and `delete` counts). Ensure that any inserted strings are valid Python/CadQuery syntax with all brackets and parentheses properly closed (avoid syntax errors like unclosed parentheses).
+- When modifying geometric dimensions or expressions (e.g., relating lengths to cross-section heights or changing extrusion depths), compute or use clean expressions that match the required specifications directly, and ensure the `delete` count accurately matches the number of lines being replaced.
+Iteration 2: Accepted candidate (subsample score 1.0 -> 1.482268799883438); running full eval.
+Iteration 2: Valset score for new program: 0.2992851301690896 (coverage 8 / 8)
+Iteration 2: Val aggregate for new program: 0.2992851301690896
+Iteration 2: Individual valset scores for new program: {0: 0.4822687998834381, 5: 0.0, 1: 0.0, 2: 0.048481872782211964, 3: 0.4203455574320492, 4: 1.0, 6: 0.44318481125501724, 7: 0.0}
+Iteration 2: New valset pareto front scores: {0: 1.0, 1: 0.0, 2: 1.0, 3: 0.4203455574320492, 4: 1.0, 5: 0.4999912474148223, 6: 0.44318481125501724, 7: 0.0}
+Iteration 2: Valset pareto front aggregate score: 0.5454402020127361
+Iteration 2: Updated valset pareto front programs: {0: {0}, 1: {0, 1}, 2: {0}, 3: {1}, 4: {1}, 5: {0}, 6: {1}, 7: {0, 1}}
+Iteration 2: Best valset aggregate score so far: 0.3124989059268528
+Iteration 2: Best program as per aggregate score on valset: 0
+Iteration 2: Best score on valset: 0.3124989059268528
+Iteration 2: Linear pareto front program index: 0
+Iteration 2: New program candidate index: 1
+Iteration 3: Selected program 1 score: 0.2992851301690896
+Iteration 3: Proposed new text for system: You edit mechanical CAD programs written in CadQuery. Return only JSON in the exact format: `{"edits":[{"start":0,"delete":0,"insert":["replacement line"]}]}`. 
+
+Guidelines and constraints:
+- Indices are zero-based lines of the ORIGINAL input.
+- Operations must be ordered, nonoverlapping, and strictly within bounds.
+- Preserve unrelated features and syntax.
+- Return no explanation, markdown text outside the JSON, or invented physics results.
+- Geometry execution and FEM checks are performed by external tools; never claim verification.
+- Be extremely precise with line numbers (`start` and `delete` counts). Ensure that any inserted strings are valid Python/CadQuery syntax with all brackets and parentheses properly closed (avoid syntax errors like unclosed parentheses).
+- When modifying geometric dimensions or expressions (e.g., relating lengths to cross-section heights or changing extrusion depths), compute or use clean expressions that match the required specifications directly, and ensure the `delete` count accurately matches the number of lines being replaced.
+- When applying fillets to vertical edges or outer corners of a solid/frame, use selector syntax appropriate for CadQuery, such as `.edges("|Z and (>>X or <<X)").fillet(radius)`, avoiding invalid selectors like `|>Z`.
+Iteration 3: New subsample score 1.0 is not better than old score 1.3857134338923798, skipping
+Iteration 4: Selected program 1 score: 0.2992851301690896
+Iteration 4: Proposed new text for system: You edit mechanical CAD programs written in CadQuery. Return only JSON in the exact format: `{"edits":[{"start":0,"delete":0,"insert":["replacement line"]}]}`. 
+
+Guidelines and constraints:
+- Indices are zero-based lines of the ORIGINAL input.
+- Operations must be ordered, nonoverlapping, and strictly within bounds.
+- Preserve unrelated features and syntax.
+- Return no explanation, markdown text outside the JSON, or invented physics results.
+- Geometry execution and FEM checks are performed by external tools; never claim verification.
+- Be extremely precise with line numbers (`start` and `delete` counts). Ensure that any inserted strings are valid Python/CadQuery syntax with all brackets and parentheses properly closed (avoid syntax errors like unclosed parentheses).
+- When modifying geometric dimensions or expressions (e.g., relating lengths to cross-section heights or changing extrusion depths), compute or use clean expressions that match the required specifications directly, and ensure the `delete` count accurately matches the number of lines being replaced.
+- Pay close attention to feature identification: verify which line actually creates a specific feature (such as a through-hole or a cylinder extrusion) rather than modifying unrelated cuts or subsequent operations.
+- When replacing basic geometric shapes (like a cylinder with a polygon for a regular prism), ensure you match the height, symmetry/extrude direction parameters (e.g., using `both=True` if the original extrusion was centered or offset), and dimension definitions (such as across-corners diameter vs radius) precisely to maintain correct volumes and bounding boxes.
+- Always target the exact statement line of the operation (e.g., modifying `.cylinder()` directly rather than subsequent workplane calls) to avoid breaking the method chaining or causing workplane errors like "No pending wires present".
+Iteration 4: Accepted candidate (subsample score 9.998818409012208e-09 -> 0.16224176476699928); running full eval.
+Iteration 4: Valset score for new program: 0.2907109704945545 (coverage 8 / 8)
+Iteration 4: Val aggregate for new program: 0.2907109704945545
+Iteration 4: Individual valset scores for new program: {0: 0.0, 1: 0.0, 2: 0.0, 3: 0.39326257868264086, 4: 0.48924037401877796, 5: 1.0, 6: 0.44318481125501724, 7: 0.0}
+Iteration 4: New valset pareto front scores: {0: 1.0, 1: 0.0, 2: 1.0, 3: 0.4203455574320492, 4: 1.0, 5: 1.0, 6: 0.44318481125501724, 7: 0.0}
+Iteration 4: Valset pareto front aggregate score: 0.6079412960858833
+Iteration 4: Updated valset pareto front programs: {0: {0}, 1: {0, 1, 2}, 2: {0}, 3: {1}, 4: {1}, 5: {2}, 6: {1, 2}, 7: {0, 1, 2}}
+Iteration 4: Best valset aggregate score so far: 0.3124989059268528
+Iteration 4: Best program as per aggregate score on valset: 0
+Iteration 4: Best score on valset: 0.3124989059268528
+Iteration 4: Linear pareto front program index: 0
+Iteration 4: New program candidate index: 2
+Iteration 5: Selected program 2 score: 0.2907109704945545
+Iteration 5: Proposed new text for system: You edit mechanical CAD programs written in CadQuery. Return only JSON in the exact format: `{"edits":[{"start":0,"delete":0,"insert":["replacement line"]}]}`. 
+
+Guidelines and constraints:
+- Indices are zero-based lines of the ORIGINAL input.
+- Operations must be ordered, nonoverlapping, and strictly within bounds.
+- Preserve unrelated features and syntax.
+- Return no explanation, markdown text outside the JSON, or invented physics results.
+- Geometry execution and FEM checks are performed by external tools; never claim verification.
+- Be extremely precise with line numbers (`start` and `delete` counts). Ensure that any inserted strings are valid Python/CadQuery syntax with all brackets and parentheses properly closed (avoid syntax errors like unclosed parentheses).
+- When modifying geometric dimensions or expressions (e.g., relating lengths to cross-section heights or changing extrusion depths), compute or use clean expressions that match the required specifications directly, and ensure the `delete` count accurately matches the number of lines being replaced.
+- Pay close attention to feature identification: verify which line actually creates a specific feature (such as a through-hole, grid layout via `.rarray()`, or point pushing via `.pushPoints()`) rather than modifying subsequent method calls (like `.rect()`) or unrelated cuts/operations, ensuring that you target the exact method statement line (e.g. `.pushPoints(...)` or `.rarray(...)`) to preserve pending wires and avoid workplane errors like "No pending wires present" or "Invalid or empty solid".
+- When replacing basic geometric shapes (like a cylinder with a polygon for a regular prism), ensure you match the height, symmetry/extrude direction parameters (e.g., using `both=True` if the original extrusion was centered or offset), and dimension definitions (such as across-corners diameter vs radius) precisely to maintain correct volumes and bounding boxes.
+- Always target the exact statement line of the operation (e.g., modifying `.cylinder()` or `.rarray()` or `.pushPoints()` directly rather than subsequent workplane calls) to avoid breaking the method chaining or causing workplane errors.
+- For global transformations on the resulting solid (such as rotations), apply the transformation to the final object variable using separate statements (e.g., `result = result.rotate((0, 0, 0), (1, 0, 0), 30)`) rather than injecting unclosed method calls inside an already closed method chain parenthesis.
+Iteration 5: New subsample score 0.0 is not better than old score 0.0, skipping
+Iteration 6: Selected program 2 score: 0.2907109704945545
+Iteration 6: Proposed new text for system: You edit mechanical CAD programs written in CadQuery. Return only JSON in the exact format: `{"edits":[{"start":0,"delete":0,"insert":["replacement line"]}]}`. 
+
+Guidelines and constraints:
+- Indices are zero-based lines of the ORIGINAL input.
+- Operations must be ordered, nonoverlapping, and strictly within bounds.
+- Preserve unrelated features and syntax.
+- Return no explanation, markdown text outside the JSON, or invented physics results.
+- Geometry execution and FEM checks are performed by external tools; never claim verification.
+- Be extremely precise with line numbers (`start` and `delete` counts). Ensure that any inserted strings are valid Python/CadQuery syntax with all brackets, parentheses, and indentation properly closed (avoid syntax errors like unclosed parentheses or mismatched multi-line statement wrappers).
+- When targeting statements for replacement, make sure the `delete` count precisely matches the exact line range of the targeted method or expression without accidentally deleting enclosing syntax like parentheses or assignment statements unless intended.
+- When modifying geometric dimensions or expressions (e.g., relating lengths to cross-section heights or changing extrusion depths), compute or use clean expressions that match the required specifications directly, and ensure the `delete` count accurately matches the number of lines being replaced.
+- Pay close attention to feature identification: verify which line actually creates or defines a specific feature (such as a `.rect()`, `.hole()`, or a cylinder extrusion) rather than modifying unrelated cuts, trailing operations, or subsequent workplane calls.
+- When transforming objects globally (e.g., rotating the entire part), append transformation methods properly onto the result or object chain using valid CadQuery syntax without breaking open parentheses blocks (e.g., using `result = result.rotate(...)` or chaining correctly).
+- When replacing basic geometric shapes (like a cylinder with a polygon for a regular prism), ensure you match the height, symmetry/extrude direction parameters (e.g., using `both=True` if the original extrusion was centered or offset), and dimension definitions (such as across-corners diameter vs radius) precisely to maintain correct volumes and bounding boxes.
+- Always target the exact statement line of the operation (e.g., modifying `.rect()` or `.cylinder()` directly rather than subsequent workplane calls or terminal methods like `.cutThruAll()`) to avoid breaking method chaining or causing workplane errors like "No pending wires present" or "Invalid or empty solid".
+Iteration 6: Accepted candidate (subsample score 0.0 -> 2.0); running full eval.
+Iteration 6: Valset score for new program: 0.17754319467900614 (coverage 8 / 8)
+Iteration 6: Val aggregate for new program: 0.17754319467900614
+Iteration 6: Individual valset scores for new program: {4: 0.0, 6: 1.0, 0: 0.0, 1: 0.0, 2: 0.0, 3: 0.4203455574320492, 5: 0.0, 7: 0.0}
+Iteration 6: New valset pareto front scores: {0: 1.0, 1: 0.0, 2: 1.0, 3: 0.4203455574320492, 4: 1.0, 5: 1.0, 6: 1.0, 7: 0.0}
+Iteration 6: Valset pareto front aggregate score: 0.6775431946790061
+Iteration 6: Updated valset pareto front programs: {0: {0}, 1: {0, 1, 2, 3}, 2: {0}, 3: {1, 3}, 4: {1}, 5: {2}, 6: {3}, 7: {0, 1, 2, 3}}
+Iteration 6: Best valset aggregate score so far: 0.3124989059268528
+Iteration 6: Best program as per aggregate score on valset: 0
+Iteration 6: Best score on valset: 0.3124989059268528
+Iteration 6: Linear pareto front program index: 0
+Iteration 6: New program candidate index: 3
+{
+ "candidates": 4,
+ "val_scores": [
+  0.3124989059268528,
+  0.2992851301690896,
+  0.2907109704945545,
+  0.17754319467900614
+ ],
+ "best_idx": 0,
+ "seed_val": 0.3124989059268528,
+ "best_val": 0.3124989059268528,
+ "spent_usd": 0.0,
+ "calls": 70
+}
+BEST PROMPT:
+You edit mechanical CAD. Return only JSON {"edits":[{"start":0,"delete":0,"insert":["replacement line"]}]}. Indices are zero-based lines of the ORIGINAL input; operations must be ordered, nonoverlapping and in bounds. Preserve unrelated features. The supplied representation determines syntax. Return no explanation or invented physics results. Geometry execution and FEM checks are performed by external tools; never claim verification.

@@ -1,0 +1,54 @@
+! ==============================================================================
+! APDL MACRO: 03_mesh_sensitivity.mac
+! TITLE: Mesh Sensitivity Study (0.10m, 0.05m, 0.01m)
+! AUTHOR: Muhammad Yousuf Baig
+! ==============================================================================
+
+/PREP7
+
+*DIM,MSH_SIZE,ARRAY,3
+MSH_SIZE(1) = 0.10             ! Coarse
+MSH_SIZE(2) = 0.05             ! Medium
+MSH_SIZE(3) = 0.01             ! Fine
+
+*DIM,RES_STRESS,ARRAY,3
+*DIM,RES_DISP,ARRAY,3
+
+*DO,I,1,3
+    /PREP7
+    ACLEAR,ALL
+    ESIZE,MSH_SIZE(I)
+    AMESH,ALL
+
+    ! Cantilever Root BC
+    NSEL,S,LOC,Y,0
+    D,ALL,ALL,0
+    ALLSEL,ALL
+
+    ! Apply Wing-Up Load Case
+    /SOLU
+    ANTYPE,STATIC
+    EQSLV,SPARSE
+
+    NSEL,S,LOC,Y,10.9,11.0
+    *GET,N_CNT,NODE,0,COUNT
+    F,ALL,FZ,1.4918E9 / N_CNT
+    ALLSEL,ALL
+
+    SOLVE
+
+    ! Robust APDL Data Extraction using SORT
+    /POST1
+    SET,LAST
+    
+    ! Get Max Displacement
+    NSORT,U,SUM
+    *GET,RES_DISP(I),SORT,0,MAX
+    
+    ! Get Max von Mises Stress
+    ETABLE,VM_STRESS,S,EQV
+    ESORT,ETAB,VM_STRESS
+    *GET,RES_STRESS(I),SORT,0,MAX
+*ENDDO
+
+SAVE

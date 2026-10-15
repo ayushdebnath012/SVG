@@ -1,0 +1,1553 @@
+{
+ "task_id": "aea612b8757cb3076a3492ef62d4339770e716be2bf14a11042b25298ef14215",
+ "status": "PASS",
+ "prediction": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .cylinder(27.9, 32.3)\"], \"start\": 3}]}",
+ "selected_node": 2,
+ "bank": [
+  2
+ ],
+ "pareto": [
+  2
+ ],
+ "stop": "expansion_limit",
+ "nodes": [
+  {
+   "id": 0,
+   "candidate": "\n\n{\"edits\":[{\"start\":5,\"delete\":1,\"insert\":[\"    .circle(12.5)\"]}]}",
+   "depth": 0,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 46641.3504557279,
+       "area": 10914.87509044984,
+       "solids": 1,
+       "faces": 20,
+       "bbox_x": 140.48,
+       "bbox_y": 37.6,
+       "bbox_z": 37.56782493791641
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "FAIL",
+      "confidence": 0.9,
+      "reason": "The edited part appears visually identical to the original part, showing no increase in the hub radius to meet the requirement of being half the blade length.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-00.png"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.9,
+     0.0,
+     -2.0
+    ],
+    "score": 0.898,
+    "diagnosis": [
+     {
+      "stage": "semantics",
+      "status": "FAIL",
+      "confidence": 0.9,
+      "reason": "The edited part appears visually identical to the original part, showing no increase in the hub radius to meet the requirement of being half the blade length.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-00.png"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 3,
+   "visits": 4,
+   "final": null,
+   "edges": [
+    0,
+    1
+   ]
+  },
+  {
+   "id": 1,
+   "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .cylinder(27.9, 32.3)\"], \"start\": 4}]}",
+   "depth": 1,
+   "verdict": {
+    "status": "PASS",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 103293.3202166813,
+       "area": 16449.254767124232,
+       "solids": 1,
+       "faces": 17,
+       "bbox_x": 140.48,
+       "bbox_y": 64.6,
+       "bbox_z": 37.56782493791641
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 0.9,
+      "reason": "The edited part shows a significantly larger hub radius in the top view that appears to be approximately half the length of the blades, while the blade length, spinner shape, and hub height remain visually consistent with the original.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-01.png"
+     },
+     "fem": {
+      "status": "PASS",
+      "metrics": {
+       "nodes": 542,
+       "tetrahedra": 1832,
+       "connected_components": 1,
+       "mesh_volume_mm3": 102607.44604644626,
+       "fixed_nodes": 80,
+       "loaded_facets": 12,
+       "loaded_area_mm2": 202.96243100448524,
+       "axis": [
+        0.0,
+        0.0,
+        1.0
+       ],
+       "projection_min_mm": -13.95,
+       "projection_max_mm": 23.617824937916,
+       "compliance_N_mm": 2.488602897023547e-07,
+       "load_weighted_displacement_mm": 2.488602897023547e-07,
+       "max_displacement_mm": 3.941538921684533e-07,
+       "strain_energy_N_mm": 1.2443014485117722e-07,
+       "vm_p95_MPa": 0.0013628491001364189,
+       "vm_peak_MPa": 0.005823316615481628,
+       "relative_free_residual": 6.763414351897275e-15,
+       "relative_force_balance_error": 1.5647362613260154e-15,
+       "relative_moment_balance_error": 8.27688560729086e-16,
+       "relative_energy_error": 1.0636401505983792e-15
+      },
+      "checks": [
+       {
+        "metric": "connected_components",
+        "value": 1,
+        "max": 1,
+        "ok": true
+       }
+      ]
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 1.005
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 1.005
+       }
+      ]
+     }
+    },
+    "objectives": [
+     0.9,
+     1.0,
+     -2.0
+    ],
+    "score": 1.998,
+    "diagnosis": [],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 1,
+   "visits": 2,
+   "final": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 103293.3202166813,
+       "area": 16449.254767124232,
+       "solids": 1,
+       "faces": 17,
+       "bbox_x": 140.48,
+       "bbox_y": 64.6,
+       "bbox_z": 37.56782493791641
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 0.9,
+      "reason": "The edited part shows a significantly larger hub radius in the top view that appears to be approximately half the length of the blades, while the blade length, spinner shape, and hub height remain visually consistent with the original.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-01.png"
+     },
+     "fem": {
+      "status": "PASS",
+      "metrics": {
+       "nodes": 542,
+       "tetrahedra": 1832,
+       "connected_components": 1,
+       "mesh_volume_mm3": 102607.44604644628,
+       "fixed_nodes": 80,
+       "loaded_facets": 12,
+       "loaded_area_mm2": 202.96243100448524,
+       "axis": [
+        0.0,
+        0.0,
+        1.0
+       ],
+       "projection_min_mm": -13.95,
+       "projection_max_mm": 23.617824937916,
+       "compliance_N_mm": 2.488602897023555e-07,
+       "load_weighted_displacement_mm": 2.488602897023555e-07,
+       "max_displacement_mm": 3.9415389216845257e-07,
+       "strain_energy_N_mm": 1.2443014485117772e-07,
+       "vm_p95_MPa": 0.0013628491001364028,
+       "vm_peak_MPa": 0.005823316615481645,
+       "relative_free_residual": 6.6735365235632175e-15,
+       "relative_force_balance_error": 1.3332483489055415e-15,
+       "relative_moment_balance_error": 9.70834275125502e-16,
+       "relative_energy_error": 2.1272803011967517e-16
+      },
+      "checks": [
+       {
+        "metric": "connected_components",
+        "value": 1,
+        "max": 1,
+        "ok": true
+       }
+      ]
+     },
+     "robustness": {
+      "status": "FAIL",
+      "variations": [
+       {
+        "number_scale": 0.995
+       },
+       {
+        "mesh_scale": 1.25
+       }
+      ],
+      "results": [
+       {
+        "status": "FAIL",
+        "number_scale": 0.995
+       },
+       {
+        "status": "PASS",
+        "metrics": {
+         "nodes": 382,
+         "tetrahedra": 1238,
+         "connected_components": 1,
+         "mesh_volume_mm3": 102297.19140685225,
+         "fixed_nodes": 56,
+         "loaded_facets": 6,
+         "loaded_area_mm2": 141.25332284205157,
+         "axis": [
+          0.0,
+          0.0,
+          1.0
+         ],
+         "projection_min_mm": -13.95,
+         "projection_max_mm": 23.617824937916,
+         "compliance_N_mm": 3.2239058734462216e-07,
+         "load_weighted_displacement_mm": 3.2239058734462216e-07,
+         "max_displacement_mm": 6.39411920844973e-07,
+         "strain_energy_N_mm": 1.6119529367231108e-07,
+         "vm_p95_MPa": 0.0012713877159723362,
+         "vm_peak_MPa": 0.00880220909671394,
+         "relative_free_residual": 4.7957360592646625e-15,
+         "relative_force_balance_error": 3.130209741496011e-15,
+         "relative_moment_balance_error": 1.2284736134670855e-15,
+         "relative_energy_error": 0.0
+        },
+        "checks": [
+         {
+          "metric": "connected_components",
+          "value": 1,
+          "max": 1,
+          "ok": true
+         }
+        ]
+       }
+      ]
+     }
+    },
+    "objectives": [
+     0.9,
+     0.0,
+     -2.0
+    ],
+    "score": 0.898,
+    "diagnosis": [
+     {
+      "stage": "robustness",
+      "status": "FAIL",
+      "variations": [
+       {
+        "number_scale": 0.995
+       },
+       {
+        "mesh_scale": 1.25
+       }
+      ],
+      "results": [
+       {
+        "status": "FAIL",
+        "number_scale": 0.995
+       },
+       {
+        "status": "PASS",
+        "metrics": {
+         "nodes": 382,
+         "tetrahedra": 1238,
+         "connected_components": 1,
+         "mesh_volume_mm3": 102297.19140685225,
+         "fixed_nodes": 56,
+         "loaded_facets": 6,
+         "loaded_area_mm2": 141.25332284205157,
+         "axis": [
+          0.0,
+          0.0,
+          1.0
+         ],
+         "projection_min_mm": -13.95,
+         "projection_max_mm": 23.617824937916,
+         "compliance_N_mm": 3.2239058734462216e-07,
+         "load_weighted_displacement_mm": 3.2239058734462216e-07,
+         "max_displacement_mm": 6.39411920844973e-07,
+         "strain_energy_N_mm": 1.6119529367231108e-07,
+         "vm_p95_MPa": 0.0012713877159723362,
+         "vm_peak_MPa": 0.00880220909671394,
+         "relative_free_residual": 4.7957360592646625e-15,
+         "relative_force_balance_error": 3.130209741496011e-15,
+         "relative_moment_balance_error": 1.2284736134670855e-15,
+         "relative_energy_error": 0.0
+        },
+        "checks": [
+         {
+          "metric": "connected_components",
+          "value": 1,
+          "max": 1,
+          "ok": true
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "final"
+   },
+   "edges": [
+    2
+   ]
+  },
+  {
+   "id": 2,
+   "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .cylinder(27.9, 32.3)\"], \"start\": 3}]}",
+   "depth": 1,
+   "verdict": {
+    "status": "PASS",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 105514.0667545926,
+       "area": 16283.898913832045,
+       "solids": 1,
+       "faces": 20,
+       "bbox_x": 140.48,
+       "bbox_y": 64.6,
+       "bbox_z": 37.56782493791641
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 0.9,
+      "reason": "The edited part shows a significantly larger hub radius that appears to be approximately half the length of the blades, while the blade length, spinner, and hub height remain visually unchanged.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-02.png"
+     },
+     "fem": {
+      "status": "PASS",
+      "metrics": {
+       "nodes": 615,
+       "tetrahedra": 2070,
+       "connected_components": 1,
+       "mesh_volume_mm3": 104779.1518130352,
+       "fixed_nodes": 79,
+       "loaded_facets": 52,
+       "loaded_area_mm2": 195.12429007007515,
+       "axis": [
+        0.0,
+        0.0,
+        1.0
+       ],
+       "projection_min_mm": -13.95,
+       "projection_max_mm": 23.617824937916,
+       "compliance_N_mm": 1.754862028533762e-07,
+       "load_weighted_displacement_mm": 1.754862028533762e-07,
+       "max_displacement_mm": 2.358251254680625e-07,
+       "strain_energy_N_mm": 8.774310142668799e-08,
+       "vm_p95_MPa": 0.0009951861663092855,
+       "vm_peak_MPa": 0.004633188965160522,
+       "relative_free_residual": 7.899079479266413e-15,
+       "relative_force_balance_error": 2.23210237263532e-15,
+       "relative_moment_balance_error": 1.2072606296631662e-15,
+       "relative_energy_error": 1.2066945057242205e-15
+      },
+      "checks": [
+       {
+        "metric": "connected_components",
+        "value": 1,
+        "max": 1,
+        "ok": true
+       }
+      ]
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 1.005
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 1.005
+       }
+      ]
+     }
+    },
+    "objectives": [
+     0.9,
+     1.0,
+     -2.0
+    ],
+    "score": 1.998,
+    "diagnosis": [],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 0,
+   "visits": 2,
+   "final": {
+    "status": "PASS",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 105514.0667545926,
+       "area": 16283.898913832045,
+       "solids": 1,
+       "faces": 20,
+       "bbox_x": 140.48,
+       "bbox_y": 64.6,
+       "bbox_z": 37.56782493791641
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 0.9,
+      "reason": "The edited part shows a significantly larger hub radius that appears to be approximately half the length of the blades, while the blade length, spinner, and hub height remain visually unchanged.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-02.png"
+     },
+     "fem": {
+      "status": "PASS",
+      "metrics": {
+       "nodes": 615,
+       "tetrahedra": 2070,
+       "connected_components": 1,
+       "mesh_volume_mm3": 104779.1518130352,
+       "fixed_nodes": 79,
+       "loaded_facets": 52,
+       "loaded_area_mm2": 195.1242900700751,
+       "axis": [
+        0.0,
+        0.0,
+        1.0
+       ],
+       "projection_min_mm": -13.95,
+       "projection_max_mm": 23.617824937916,
+       "compliance_N_mm": 1.7548620285337471e-07,
+       "load_weighted_displacement_mm": 1.7548620285337471e-07,
+       "max_displacement_mm": 2.3582512546806624e-07,
+       "strain_energy_N_mm": 8.77431014266874e-08,
+       "vm_p95_MPa": 0.000995186166309226,
+       "vm_peak_MPa": 0.004633188965160382,
+       "relative_free_residual": 6.907111919306752e-15,
+       "relative_force_balance_error": 7.575648299988958e-16,
+       "relative_moment_balance_error": 4.292696320889001e-16,
+       "relative_energy_error": 4.525104396465865e-16
+      },
+      "checks": [
+       {
+        "metric": "connected_components",
+        "value": 1,
+        "max": 1,
+        "ok": true
+       }
+      ]
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 0.995
+       },
+       {
+        "mesh_scale": 1.25
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 0.995
+       },
+       {
+        "status": "PASS",
+        "metrics": {
+         "nodes": 486,
+         "tetrahedra": 1616,
+         "connected_components": 1,
+         "mesh_volume_mm3": 104470.47551857683,
+         "fixed_nodes": 53,
+         "loaded_facets": 48,
+         "loaded_area_mm2": 193.10318037042364,
+         "axis": [
+          0.0,
+          0.0,
+          1.0
+         ],
+         "projection_min_mm": -13.95,
+         "projection_max_mm": 23.617824937916,
+         "compliance_N_mm": 1.7716744559409312e-07,
+         "load_weighted_displacement_mm": 1.7716744559409312e-07,
+         "max_displacement_mm": 2.410226649463468e-07,
+         "strain_energy_N_mm": 8.858372279704655e-08,
+         "vm_p95_MPa": 0.0010634851387171195,
+         "vm_peak_MPa": 0.004696294158872052,
+         "relative_free_residual": 6.0065636001810196e-15,
+         "relative_force_balance_error": 1.3535540680344984e-15,
+         "relative_moment_balance_error": 7.604008994416416e-16,
+         "relative_energy_error": 1.4940543683370353e-16
+        },
+        "checks": [
+         {
+          "metric": "connected_components",
+          "value": 1,
+          "max": 1,
+          "ok": true
+         }
+        ]
+       }
+      ]
+     }
+    },
+    "objectives": [
+     0.9,
+     1.0,
+     -2.0
+    ],
+    "score": 1.998,
+    "diagnosis": [],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "final"
+   },
+   "edges": []
+  },
+  {
+   "id": 3,
+   "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .cylinder(27.9, 32.3)\"], \"start\": 4}]}",
+   "depth": 2,
+   "verdict": {
+    "status": "PASS",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 103293.3202166813,
+       "area": 16449.254767124232,
+       "solids": 1,
+       "faces": 17,
+       "bbox_x": 140.48,
+       "bbox_y": 64.6,
+       "bbox_z": 37.56782493791641
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 0.9,
+      "reason": "The edited part shows a significantly larger hub radius in the top view that appears to be approximately half the length of the blades, while the blade length, spinner shape, and hub height remain visually consistent with the original.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-01.png"
+     },
+     "fem": {
+      "status": "PASS",
+      "metrics": {
+       "nodes": 542,
+       "tetrahedra": 1832,
+       "connected_components": 1,
+       "mesh_volume_mm3": 102607.44604644626,
+       "fixed_nodes": 80,
+       "loaded_facets": 12,
+       "loaded_area_mm2": 202.96243100448524,
+       "axis": [
+        0.0,
+        0.0,
+        1.0
+       ],
+       "projection_min_mm": -13.95,
+       "projection_max_mm": 23.617824937916,
+       "compliance_N_mm": 2.488602897023547e-07,
+       "load_weighted_displacement_mm": 2.488602897023547e-07,
+       "max_displacement_mm": 3.941538921684533e-07,
+       "strain_energy_N_mm": 1.2443014485117722e-07,
+       "vm_p95_MPa": 0.0013628491001364189,
+       "vm_peak_MPa": 0.005823316615481628,
+       "relative_free_residual": 6.763414351897275e-15,
+       "relative_force_balance_error": 1.5647362613260154e-15,
+       "relative_moment_balance_error": 8.27688560729086e-16,
+       "relative_energy_error": 1.0636401505983792e-15
+      },
+      "checks": [
+       {
+        "metric": "connected_components",
+        "value": 1,
+        "max": 1,
+        "ok": true
+       }
+      ]
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 1.005
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 1.005
+       }
+      ]
+     }
+    },
+    "objectives": [
+     0.9,
+     1.0,
+     -2.0
+    ],
+    "score": 1.998,
+    "diagnosis": [],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 0,
+   "visits": 1,
+   "final": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 103293.3202166813,
+       "area": 16449.254767124232,
+       "solids": 1,
+       "faces": 17,
+       "bbox_x": 140.48,
+       "bbox_y": 64.6,
+       "bbox_z": 37.56782493791641
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 0.9,
+      "reason": "The edited part shows a significantly larger hub radius in the top view that appears to be approximately half the length of the blades, while the blade length, spinner shape, and hub height remain visually consistent with the original.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-01.png"
+     },
+     "fem": {
+      "status": "PASS",
+      "metrics": {
+       "nodes": 543,
+       "tetrahedra": 1837,
+       "connected_components": 1,
+       "mesh_volume_mm3": 102607.44604644628,
+       "fixed_nodes": 80,
+       "loaded_facets": 12,
+       "loaded_area_mm2": 202.96243100448524,
+       "axis": [
+        0.0,
+        0.0,
+        1.0
+       ],
+       "projection_min_mm": -13.95,
+       "projection_max_mm": 23.617824937916,
+       "compliance_N_mm": 2.4877148303670464e-07,
+       "load_weighted_displacement_mm": 2.4877148303670464e-07,
+       "max_displacement_mm": 3.9439274683077773e-07,
+       "strain_energy_N_mm": 1.2438574151835221e-07,
+       "vm_p95_MPa": 0.001374176988799378,
+       "vm_peak_MPa": 0.005788052614160515,
+       "relative_free_residual": 5.818939774407938e-15,
+       "relative_force_balance_error": 2.5008373423346637e-15,
+       "relative_moment_balance_error": 1.8318803697069354e-15,
+       "relative_energy_error": 8.51215879845567e-16
+      },
+      "checks": [
+       {
+        "metric": "connected_components",
+        "value": 1,
+        "max": 1,
+        "ok": true
+       }
+      ]
+     },
+     "robustness": {
+      "status": "FAIL",
+      "variations": [
+       {
+        "number_scale": 0.995
+       },
+       {
+        "mesh_scale": 1.25
+       }
+      ],
+      "results": [
+       {
+        "status": "FAIL",
+        "number_scale": 0.995
+       },
+       {
+        "status": "PASS",
+        "metrics": {
+         "nodes": 382,
+         "tetrahedra": 1238,
+         "connected_components": 1,
+         "mesh_volume_mm3": 102297.19140685225,
+         "fixed_nodes": 56,
+         "loaded_facets": 6,
+         "loaded_area_mm2": 141.25332284205157,
+         "axis": [
+          0.0,
+          0.0,
+          1.0
+         ],
+         "projection_min_mm": -13.95,
+         "projection_max_mm": 23.617824937916,
+         "compliance_N_mm": 3.2239078247957014e-07,
+         "load_weighted_displacement_mm": 3.2239078247957014e-07,
+         "max_displacement_mm": 6.394130553682334e-07,
+         "strain_energy_N_mm": 1.6119539123978507e-07,
+         "vm_p95_MPa": 0.001271227005538096,
+         "vm_peak_MPa": 0.008802204137349924,
+         "relative_free_residual": 4.7790654186370896e-15,
+         "relative_force_balance_error": 9.113265149826038e-16,
+         "relative_moment_balance_error": 4.015855408005544e-16,
+         "relative_energy_error": 0.0
+        },
+        "checks": [
+         {
+          "metric": "connected_components",
+          "value": 1,
+          "max": 1,
+          "ok": true
+         }
+        ]
+       }
+      ]
+     }
+    },
+    "objectives": [
+     0.9,
+     0.0,
+     -2.0
+    ],
+    "score": 0.898,
+    "diagnosis": [
+     {
+      "stage": "robustness",
+      "status": "FAIL",
+      "variations": [
+       {
+        "number_scale": 0.995
+       },
+       {
+        "mesh_scale": 1.25
+       }
+      ],
+      "results": [
+       {
+        "status": "FAIL",
+        "number_scale": 0.995
+       },
+       {
+        "status": "PASS",
+        "metrics": {
+         "nodes": 382,
+         "tetrahedra": 1238,
+         "connected_components": 1,
+         "mesh_volume_mm3": 102297.19140685225,
+         "fixed_nodes": 56,
+         "loaded_facets": 6,
+         "loaded_area_mm2": 141.25332284205157,
+         "axis": [
+          0.0,
+          0.0,
+          1.0
+         ],
+         "projection_min_mm": -13.95,
+         "projection_max_mm": 23.617824937916,
+         "compliance_N_mm": 3.2239078247957014e-07,
+         "load_weighted_displacement_mm": 3.2239078247957014e-07,
+         "max_displacement_mm": 6.394130553682334e-07,
+         "strain_energy_N_mm": 1.6119539123978507e-07,
+         "vm_p95_MPa": 0.001271227005538096,
+         "vm_peak_MPa": 0.008802204137349924,
+         "relative_free_residual": 4.7790654186370896e-15,
+         "relative_force_balance_error": 9.113265149826038e-16,
+         "relative_moment_balance_error": 4.015855408005544e-16,
+         "relative_energy_error": 0.0
+        },
+        "checks": [
+         {
+          "metric": "connected_components",
+          "value": 1,
+          "max": 1,
+          "ok": true
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "final"
+   },
+   "edges": []
+  }
+ ],
+ "edges": [
+  {
+   "parent": 0,
+   "child": 1,
+   "visits": 2,
+   "total": 3.996
+  },
+  {
+   "parent": 0,
+   "child": 2,
+   "visits": 2,
+   "total": 3.996
+  },
+  {
+   "parent": 1,
+   "child": 3,
+   "visits": 1,
+   "total": 1.998
+  }
+ ],
+ "events": [
+  {
+   "event": "decompose",
+   "plan": {
+    "steps": [
+     "Modify the cylinder radius argument from 18.8 to 32.3 (calculated as half of the blade length 64.6)."
+    ],
+    "invariants": [
+     "Hub height (27.9) remains unchanged.",
+     "Blade polyline coordinates (max x = 64.6) remain unchanged.",
+     "Blade extrude depth (7.15) remains unchanged.",
+     "Blade transformation offsets and rotations remain unchanged.",
+     "Spinner loft geometry (circles 16.92, 1.5, offset 9.0) remains unchanged."
+    ],
+    "dependencies": []
+   },
+   "memory_version": "af5a720c0c9bf9b3cbc6c79fc95475fa379b3fd83b92c45f0dc0ff82afd65d76",
+   "retrieved": [
+    {
+     "task_id": "8bb96e6849c0ec861f3423cfb72e8d4fd307c5ad849d27ac1cd7867a220cff8a",
+     "instruction": "Set the stem radius equal to half the ball radius; the ball, stem height, and axial through-bore stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"            .cylinder(50.0, 6.25)\"], \"start\": 7}]}",
+     "strategies": [],
+     "context": [
+      "7:             .cylinder(50.0, 4.5)"
+     ]
+    },
+    {
+     "task_id": "84e3fc394ba2fcfab2d8702d7ccecd3605b03da536fd67c67da6f80f3af590b9",
+     "instruction": "Set the rib spacing equal to half the base length; the rib count, height, thickness, and base footprint stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .rarray(46.4, 1, 2, 1)\"], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .rarray(84.72, 1, 2, 1)"
+     ]
+    },
+    {
+     "task_id": "266be1f42794bfd7997f7e123d9a826c5cadb3df0c637b920e884c50189fd541",
+     "instruction": "Set the cylinder length equal to twelve times the cylinder radius; the radius and chamfer stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .cylinder(60.0, 5.0)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .cylinder(40.0, 5.0)"
+     ]
+    }
+   ]
+  },
+  {
+   "event": "initial_state",
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 47545.28976986549,
+       "area": 10802.646543555244,
+       "solids": 1,
+       "faces": 20,
+       "bbox_x": 140.48,
+       "bbox_y": 37.6,
+       "bbox_z": 37.56782493791641
+      }
+     },
+     "constraints": {
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -0.0
+    ],
+    "score": 0.0,
+    "diagnosis": [
+     {
+      "stage": "constraints",
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "initial"
+   }
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "semantics",
+     "status": "FAIL",
+     "confidence": 0.9,
+     "reason": "The edited part appears visually identical to the original part, showing no increase in the hub radius to meet the requirement of being half the blade length.",
+     "basis": "Astra rendered-view judgement",
+     "image": "semantic-00.png"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "No physical contract supplied"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "No perturbation contract supplied"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "799d75af88373cd4be312a28a86290b050df3709a7f64b0e6e0d73b0f8c389da",
+     "instruction": "Set the standoff height equal to three times the original height; the outer radius and bore stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .cylinder(15.3, 17.7)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .cylinder(5.1, 17.7)"
+     ]
+    },
+    {
+     "task_id": "8bb96e6849c0ec861f3423cfb72e8d4fd307c5ad849d27ac1cd7867a220cff8a",
+     "instruction": "Set the stem radius equal to half the ball radius; the ball, stem height, and axial through-bore stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"            .cylinder(50.0, 6.25)\"], \"start\": 7}]}",
+     "strategies": [],
+     "context": [
+      "7:             .cylinder(50.0, 4.5)"
+     ]
+    },
+    {
+     "task_id": "84e3fc394ba2fcfab2d8702d7ccecd3605b03da536fd67c67da6f80f3af590b9",
+     "instruction": "Set the rib spacing equal to half the base length; the rib count, height, thickness, and base footprint stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .rarray(46.4, 1, 2, 1)\"], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .rarray(84.72, 1, 2, 1)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "PASS",
+   "hypothesis": "Update hub cylinder radius from 18.8 to 32.3 to satisfy half blade length constraint"
+  },
+  {
+   "event": "final_verification",
+   "node": 1,
+   "status": "FAIL"
+  },
+  {
+   "event": "return_to_graph",
+   "node": 1,
+   "diagnosis": [
+    {
+     "stage": "robustness",
+     "status": "FAIL",
+     "variations": [
+      {
+       "number_scale": 0.995
+      },
+      {
+       "mesh_scale": 1.25
+      }
+     ],
+     "results": [
+      {
+       "status": "FAIL",
+       "number_scale": 0.995
+      },
+      {
+       "status": "PASS",
+       "metrics": {
+        "nodes": 382,
+        "tetrahedra": 1238,
+        "connected_components": 1,
+        "mesh_volume_mm3": 102297.19140685225,
+        "fixed_nodes": 56,
+        "loaded_facets": 6,
+        "loaded_area_mm2": 141.25332284205157,
+        "axis": [
+         0.0,
+         0.0,
+         1.0
+        ],
+        "projection_min_mm": -13.95,
+        "projection_max_mm": 23.617824937916,
+        "compliance_N_mm": 3.2239058734462216e-07,
+        "load_weighted_displacement_mm": 3.2239058734462216e-07,
+        "max_displacement_mm": 6.39411920844973e-07,
+        "strain_energy_N_mm": 1.6119529367231108e-07,
+        "vm_p95_MPa": 0.0012713877159723362,
+        "vm_peak_MPa": 0.00880220909671394,
+        "relative_free_residual": 4.7957360592646625e-15,
+        "relative_force_balance_error": 3.130209741496011e-15,
+        "relative_moment_balance_error": 1.2284736134670855e-15,
+        "relative_energy_error": 0.0
+       },
+       "checks": [
+        {
+         "metric": "connected_components",
+         "value": 1,
+         "max": 1,
+         "ok": true
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 2,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "semantics",
+     "status": "FAIL",
+     "confidence": 0.9,
+     "reason": "The edited part appears visually identical to the original part, showing no increase in the hub radius to meet the requirement of being half the blade length.",
+     "basis": "Astra rendered-view judgement",
+     "image": "semantic-00.png"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "No physical contract supplied"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "No perturbation contract supplied"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "799d75af88373cd4be312a28a86290b050df3709a7f64b0e6e0d73b0f8c389da",
+     "instruction": "Set the standoff height equal to three times the original height; the outer radius and bore stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .cylinder(15.3, 17.7)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .cylinder(5.1, 17.7)"
+     ]
+    },
+    {
+     "task_id": "8bb96e6849c0ec861f3423cfb72e8d4fd307c5ad849d27ac1cd7867a220cff8a",
+     "instruction": "Set the stem radius equal to half the ball radius; the ball, stem height, and axial through-bore stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"            .cylinder(50.0, 6.25)\"], \"start\": 7}]}",
+     "strategies": [],
+     "context": [
+      "7:             .cylinder(50.0, 4.5)"
+     ]
+    },
+    {
+     "task_id": "84e3fc394ba2fcfab2d8702d7ccecd3605b03da536fd67c67da6f80f3af590b9",
+     "instruction": "Set the rib spacing equal to half the base length; the rib count, height, thickness, and base footprint stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .rarray(46.4, 1, 2, 1)\"], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .rarray(84.72, 1, 2, 1)"
+     ]
+    }
+   ],
+   "path": [
+    1
+   ],
+   "status": "PASS",
+   "hypothesis": "Modify hub cylinder radius from 18.8 to 32.3 (half of blade length 64.6)"
+  },
+  {
+   "event": "final_verification",
+   "node": 2,
+   "status": "PASS"
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 2,
+   "merged": true,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "semantics",
+     "status": "FAIL",
+     "confidence": 0.9,
+     "reason": "The edited part appears visually identical to the original part, showing no increase in the hub radius to meet the requirement of being half the blade length.",
+     "basis": "Astra rendered-view judgement",
+     "image": "semantic-00.png"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "No physical contract supplied"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "No perturbation contract supplied"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "799d75af88373cd4be312a28a86290b050df3709a7f64b0e6e0d73b0f8c389da",
+     "instruction": "Set the standoff height equal to three times the original height; the outer radius and bore stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .cylinder(15.3, 17.7)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .cylinder(5.1, 17.7)"
+     ]
+    },
+    {
+     "task_id": "8bb96e6849c0ec861f3423cfb72e8d4fd307c5ad849d27ac1cd7867a220cff8a",
+     "instruction": "Set the stem radius equal to half the ball radius; the ball, stem height, and axial through-bore stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"            .cylinder(50.0, 6.25)\"], \"start\": 7}]}",
+     "strategies": [],
+     "context": [
+      "7:             .cylinder(50.0, 4.5)"
+     ]
+    },
+    {
+     "task_id": "84e3fc394ba2fcfab2d8702d7ccecd3605b03da536fd67c67da6f80f3af590b9",
+     "instruction": "Set the rib spacing equal to half the base length; the rib count, height, thickness, and base footprint stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .rarray(46.4, 1, 2, 1)\"], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .rarray(84.72, 1, 2, 1)"
+     ]
+    }
+   ],
+   "path": [
+    1
+   ],
+   "status": "PASS",
+   "hypothesis": "Updated hub cylinder radius from 18.8 to 32.3 to satisfy half blade length constraint while maintaining height."
+  },
+  {
+   "event": "backtrack",
+   "to_node": 1
+  },
+  {
+   "event": "expand",
+   "parent": 1,
+   "node": 3,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "robustness",
+     "status": "FAIL",
+     "variations": [
+      {
+       "number_scale": 0.995
+      },
+      {
+       "mesh_scale": 1.25
+      }
+     ],
+     "results": [
+      {
+       "status": "FAIL",
+       "number_scale": 0.995
+      },
+      {
+       "status": "PASS",
+       "metrics": {
+        "nodes": 382,
+        "tetrahedra": 1238,
+        "connected_components": 1,
+        "mesh_volume_mm3": 102297.19140685225,
+        "fixed_nodes": 56,
+        "loaded_facets": 6,
+        "loaded_area_mm2": 141.25332284205157,
+        "axis": [
+         0.0,
+         0.0,
+         1.0
+        ],
+        "projection_min_mm": -13.95,
+        "projection_max_mm": 23.617824937916,
+        "compliance_N_mm": 3.2239058734462216e-07,
+        "load_weighted_displacement_mm": 3.2239058734462216e-07,
+        "max_displacement_mm": 6.39411920844973e-07,
+        "strain_energy_N_mm": 1.6119529367231108e-07,
+        "vm_p95_MPa": 0.0012713877159723362,
+        "vm_peak_MPa": 0.00880220909671394,
+        "relative_free_residual": 4.7957360592646625e-15,
+        "relative_force_balance_error": 3.130209741496011e-15,
+        "relative_moment_balance_error": 1.2284736134670855e-15,
+        "relative_energy_error": 0.0
+       },
+       "checks": [
+        {
+         "metric": "connected_components",
+         "value": 1,
+         "max": 1,
+         "ok": true
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "8617c0c1fa1d27a5a3cd40b9b43e0d50b85792a4782a2f6c398e3d2e98f080ae",
+     "instruction": "Set the barrel outer radius equal to 0.6 times the flange radius; the flange thickness, barrel height, and central thread cut stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"            .cylinder(11.0, 6.6)\"], \"start\": 8}]}",
+     "strategies": [],
+     "context": [
+      "8:             .cylinder(11.0, 4.5)"
+     ]
+    },
+    {
+     "task_id": "8bb96e6849c0ec861f3423cfb72e8d4fd307c5ad849d27ac1cd7867a220cff8a",
+     "instruction": "Set the stem radius equal to half the ball radius; the ball, stem height, and axial through-bore stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"            .cylinder(50.0, 6.25)\"], \"start\": 7}]}",
+     "strategies": [],
+     "context": [
+      "7:             .cylinder(50.0, 4.5)"
+     ]
+    },
+    {
+     "task_id": "84e3fc394ba2fcfab2d8702d7ccecd3605b03da536fd67c67da6f80f3af590b9",
+     "instruction": "Set the rib spacing equal to half the base length; the rib count, height, thickness, and base footprint stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .rarray(46.4, 1, 2, 1)\"], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .rarray(84.72, 1, 2, 1)"
+     ]
+    }
+   ],
+   "path": [
+    0,
+    2
+   ],
+   "status": "PASS",
+   "hypothesis": "Changed hub cylinder radius from 18.8 to 32.3 to match half of blade length."
+  },
+  {
+   "event": "final_verification",
+   "node": 3,
+   "status": "FAIL"
+  },
+  {
+   "event": "return_to_graph",
+   "node": 3,
+   "diagnosis": [
+    {
+     "stage": "robustness",
+     "status": "FAIL",
+     "variations": [
+      {
+       "number_scale": 0.995
+      },
+      {
+       "mesh_scale": 1.25
+      }
+     ],
+     "results": [
+      {
+       "status": "FAIL",
+       "number_scale": 0.995
+      },
+      {
+       "status": "PASS",
+       "metrics": {
+        "nodes": 382,
+        "tetrahedra": 1238,
+        "connected_components": 1,
+        "mesh_volume_mm3": 102297.19140685225,
+        "fixed_nodes": 56,
+        "loaded_facets": 6,
+        "loaded_area_mm2": 141.25332284205157,
+        "axis": [
+         0.0,
+         0.0,
+         1.0
+        ],
+        "projection_min_mm": -13.95,
+        "projection_max_mm": 23.617824937916,
+        "compliance_N_mm": 3.2239078247957014e-07,
+        "load_weighted_displacement_mm": 3.2239078247957014e-07,
+        "max_displacement_mm": 6.394130553682334e-07,
+        "strain_energy_N_mm": 1.6119539123978507e-07,
+        "vm_p95_MPa": 0.001271227005538096,
+        "vm_peak_MPa": 0.008802204137349924,
+        "relative_free_residual": 4.7790654186370896e-15,
+        "relative_force_balance_error": 9.113265149826038e-16,
+        "relative_moment_balance_error": 4.015855408005544e-16,
+        "relative_energy_error": 0.0
+       },
+       "checks": [
+        {
+         "metric": "connected_components",
+         "value": 1,
+         "max": 1,
+         "ok": true
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "config": {
+  "algorithm": "mcts",
+  "max_expansions": 4,
+  "max_depth": 3,
+  "width": 2,
+  "max_width": 4,
+  "exploration": 0.7,
+  "seconds": 2400.0
+ },
+ "memory_version": "af5a720c0c9bf9b3cbc6c79fc95475fa379b3fd83b92c45f0dc0ff82afd65d76",
+ "stored": "runs/adaptive-cad-open-20261007/memory.jsonl",
+ "seconds": 338.8829455409996,
+ "api": {
+  "mode": "live_astra",
+  "api_calls": 8,
+  "cost_usd": 0.0,
+  "budget_usd": 0.19480519480519481,
+  "refused": 0
+ },
+ "tool_jobs": 12
+}

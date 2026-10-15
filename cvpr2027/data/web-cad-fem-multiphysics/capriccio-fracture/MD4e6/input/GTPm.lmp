@@ -1,0 +1,136 @@
+# neighbor list: extra distance beyond force cutoff
+variable skin equal "v_neighListCutoff-v_nbCutoff" # internal
+
+# Simulation parameters
+units          lj			# set of units used throughout the MD simulation
+processors	   * * *		# number of processors chosen by lammps
+atom_style     molecular		# format of data file
+boundary       ${boundary_x} ${boundary_y} ${boundary_z}			# style of box boundaries in each dimension	
+
+read_data      input/GTPm.data
+
+include input/potentials.lmpmod
+
+# Communicate velocities b/w CPUs. Needed for the hybrid style.
+#comm_style tiled
+comm_modify vel yes
+
+# Timestep setting
+timestep       ${timestep}
+
+# Groups
+group md type 1
+group dpd type 2
+group anchor type 3
+group fur type 4 
+group mob type 1 2
+
+
+#obs group
+variable obscorner_x equal ${obsregion_x}/2
+variable obscorner_y equal ${obsregion_y}/2
+variable obscorner_z equal ${obsregion_z}/2
+region obsreg block -${obscorner_x} ${obscorner_x} -${obscorner_y} ${obscorner_y} -${obscorner_z} ${obscorner_z}
+group obs dynamic all region obsreg
+variable  volobs equal ${obsregion_x}*${obsregion_y}*${obsregion_z}
+# Density compute
+variable obsdens equal (mass(obs)/${volobs}) 
+
+# Atom counter
+variable mdcount equal count(md)
+variable dpdcount equal count(dpd)
+variable furcount equal count(fur)
+variable obscount equal count(obs)
+
+# Temp computes
+compute mdtemp md temp
+compute dpdtemp dpd temp
+
+# Anchor point force averaging and output
+fix anchorforce_avg anchor ave/atom ${anchorforce_avg_every} ${anchorforce_avg_repeat} ${anchorforce_output} fx fy fz
+
+# Start dumping data
+variable        bond_length internal 0.0
+variable        bond_length_squared equal v_bond_length*v_bond_length
+variable        bond_angle internal 0.0
+variable        cos equal cos(v_bond_angle)
+variable        cossq equal cos(v_bond_angle)*cos(v_bond_angle)
+
+compute         COM all com
+compute         MSD all msd com yes
+compute		DISP all displace/atom
+compute         RG all gyration
+compute         bondat all property/local batom1 batom2 btype
+compute         bondl all bond/local engpot dist v_bond_length_squared set dist bond_length
+compute         angleat all property/local aatom1 aatom2 aatom3 atype
+compute         bondang all angle/local eng theta v_cos v_cossq set theta bond_angle
+compute         bondave all reduce ave c_bondl[*]
+compute         angleave all reduce ave c_bondang[*]
+
+compute         numBonds all nbond/atom
+fix 		numBondsInit all store/state 0 c_numBonds
+dump            numbonds all custom ${trj_out} output/GTPm.bondnum id x y z f_numBondsInit c_numBonds
+dump_modify     numbonds append yes 
+
+dump           trajectory all custom ${trj_out} output/GTPm.lammpstrj id x y z vx vy vz # ix iy iz
+dump_modify    trajectory append yes 
+
+dump           bondtrj all local ${trj_out} output/GTPm.bondl c_bondat[*] c_bondl[*]
+dump_modify    bondtrj append yes format line "%.10g %.10g %.10g %.10g %.10g %.10g"
+
+# Observed region stress calculation
+compute        peratom obs stress/atom NULL
+compute        pobs obs reduce sum c_peratom[1] c_peratom[2] c_peratom[3] c_peratom[4] c_peratom[5] c_peratom[6]
+variable       obsstressxx equal "(c_pobs[1]/v_volobs)"
+variable       obsstressyy equal "(c_pobs[2]/v_volobs)"
+variable       obsstresszz equal "(c_pobs[3]/v_volobs)"
+variable       obsstressxy equal "(c_pobs[4]/v_volobs)" 
+variable       obsstressxz equal "(c_pobs[5]/v_volobs)"
+variable       obsstressyz equal "(c_pobs[6]/v_volobs)"
+
+
+#breaking bonds
+if "${bond_breakage}==1" then &
+    "fix     breakbonds1 all bond/break ${Neverybreak} 1 ${Rmax1} prob ${break_probability} ${break_seed}" &
+    "variable brokenbondscurr equal f_breakbonds1[1]" &
+    "variable brokenbondssum equal f_breakbonds1[2]" &
+else &
+    "variable brokenbondscurr equal 0" &
+    "variable brokenbondssum equal 0"
+
+# On-the-fly calculations of thermodynamics
+thermo         ${output}
+thermo_style   custom step etotal pe ke epair ebond eangle temp press pxx pyy pzz pxy pxz pyz lx ly lz density v_obsdens v_obsstressxx v_obsstressyy v_obsstresszz v_obsstressxy v_obsstressxz v_obsstressyz v_brokenbondscurr v_brokenbondssum c_RG[*] c_bondave[*] c_angleave[*] c_MSD[*] c_COM[*] c_mdtemp c_dpdtemp # thermo output
+thermo_modify  lost warn flush yes    
+
+
+# Energy minimization
+if "${initial_energy_minimization} == yes" then&
+        "min_style       cg" &
+	"min_modify      dmax 0.0001" &
+	"minimize        0.0 1.0e-4 15000 15000"
+
+if "${boundary_y}==p && ${constraint_y}==0 && ${boundary_z}==p && ${constraint_z}==0" then &
+        "fix    lateral mob press/berendsen y 0.0 0.0 $(1000.0*dt) z 0.0 0.0 $(1000.0*dt) dilate partial" &
+elif "${boundary_z}==p && ${constraint_z}==0" &
+	"fix	lateral mob press/berendsen z 0.0 0.0 $(1000.0*dt) dilate partial"
+
+if "${initial_velocities} == yes" then&  
+    "velocity mob create ${Tstart} 5287287"
+
+variable xlocurr equal xlo
+variable xhicurr equal xhi
+variable ylocurr equal ylo
+variable yhicurr equal yhi
+variable zlocurr equal zlo
+variable zhicurr equal zhi
+
+if "${wall_reflect}==yes && ${boundary_x}==s && ${boundary_y}==s && ${boundary_z}==s" then &
+    "fix walls mob wall/reflect xlo v_xlocurr xhi v_xhicurr ylo v_ylocurr yhi v_yhicurr zlo v_zlocurr zhi v_zhicurr" &
+elif "${wall_reflect}==yes && ${boundary_x}==s && ${boundary_y}==s" &
+    "fix walls mob wall/reflect xlo v_xlocurr xhi v_xhicurr ylo v_ylocurr yhi v_yhicurr" &
+elif "${wall_reflect}==yes && ${boundary_x}==s" &
+    "fix walls mob wall/reflect xlo v_xlocurr xhi v_xhicurr"
+
+# RUN with time integrator
+fix runfix mob nve

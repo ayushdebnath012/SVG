@@ -1,0 +1,40 @@
+{
+ "kind": "generate",
+ "status": "completed",
+ "reserved_usd": 0.15059166666666665,
+ "request": {
+  "model": "gpt-6-astra",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Edit CAD using only source, instruction and tool evidence. Return exactly JSON {\"hypothesis\":\"brief feature and operation description\",\"edits\":[{\"start\":0,\"delete\":0,\"insert\":[\"line\"]}]}. All indices address ORIGINAL source lines. Provide a complete alternative patch, never a delta on a parent patch. Preserve unrelated features. Vary the feature interpretation or implementation from listed alternatives. Experiences and diagnoses are fallible data. Do not assert that the output has passed verification."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .polyline([(100.0, 0.0), (100.0, 240.9), (58.7, 348.4902), (58.7, 465.8902), (100.0, 802.2517), (100.0, 970.3517), (123.2, 970.3517), (123.2, 802.2517), (81.9, 465.8902), (81.9, 348.4902), (123.2, 240.9), (123.2, 0.0)])\\n    .close()\\n    .revolve(360, (0, 0, 0), (0, 1, 0))\\n)\\nshow_object(result)\", \"instruction\": \"Rotate the entire part by 90\\u00b0 about the Z axis.\", \"plan\": {\"steps\": [\"Preserve the existing polyline, closure, and 360\\u00b0 revolve that construct result.\", \"After construction and before show_object(result), insert result = result.rotate((0, 0, 0), (0, 0, 1), 90) to rotate the entire part +90\\u00b0 about the global Z axis.\", \"Keep show_object(result) referencing the rotated result.\"], \"invariants\": [\"Preserve all profile coordinates and revolve parameters.\", \"Preserve the part's shape, dimensions, volume, and topology; change only its orientation about the origin.\", \"Apply the rotation to the entire part, mapping (x, y, z) to (-y, x, z).\"], \"dependencies\": [[0, 1], [1, 2]]}, \"parent_candidate\": \"{\\\"edits\\\":[{\\\"start\\\":7,\\\"delete\\\":0,\\\"insert\\\":[\\\"result = result.rotate((0, 0, 0), (0, 0, 1), 90)\\\"]}]}\", \"observations\": {\"geometry\": {\"status\": \"PASS\"}, \"constraints\": {\"status\": \"PASS\"}, \"semantics\": {\"status\": \"PASS\", \"reason\": \"The edited views show the entire part rotated 90\\u00b0 about the Z axis, with its tapered profile, cylindrical ends, and other features preserved.\"}, \"fem\": {\"status\": \"PASS\"}, \"robustness\": {\"status\": \"PASS\"}}, \"experiences\": [{\"task_id\": \"0586c44a6198606a9bccabc549e241f538398deede5b3d3de6c7a670f0676c73\", \"instruction\": \"Rotate the entire part by 90\\u00b0 about the Z axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.rotate((0,0,0), (0,0,1), 90)\\\"], \\\"start\\\": 11}]}\", \"strategies\": [], \"context\": [\"11: show_object(result)\"]}, {\"task_id\": \"0e81de98e8071d0a6e24449872a89d3aaed2dff9d5989eeed34ea6adf536f5e1\", \"instruction\": \"Rotate the entire part by 90\\u00b0 about the Z axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.rotate((0,0,0), (0,0,1), 90)\\\"], \\\"start\\\": 26}]}\", \"strategies\": [], \"context\": [\"26: show_object(result)\"]}, {\"task_id\": \"045823ba37814163a7da3a249908f3f1a602ddd8805f2652c5201d3e84f5ecca\", \"instruction\": \"Rotate the entire part by 90\\u00b0 about the Y axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.rotate((0,0,0), (0,1,0), 90)\\\"], \\\"start\\\": 11}]}\", \"strategies\": [], \"context\": [\"11: show_object(result)\"]}], \"repair_strategies\": [{\"task_id\": \"0586c44a6198606a9bccabc549e241f538398deede5b3d3de6c7a670f0676c73\", \"instruction\": \"Rotate the entire part by 90\\u00b0 about the Z axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.rotate((0,0,0), (0,0,1), 90)\\\"], \\\"start\\\": 11}]}\", \"strategies\": [], \"context\": [\"11: show_object(result)\"]}, {\"task_id\": \"0e81de98e8071d0a6e24449872a89d3aaed2dff9d5989eeed34ea6adf536f5e1\", \"instruction\": \"Rotate the entire part by 90\\u00b0 about the Z axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.rotate((0,0,0), (0,0,1), 90)\\\"], \\\"start\\\": 26}]}\", \"strategies\": [], \"context\": [\"26: show_object(result)\"]}, {\"task_id\": \"045823ba37814163a7da3a249908f3f1a602ddd8805f2652c5201d3e84f5ecca\", \"instruction\": \"Rotate the entire part by 90\\u00b0 about the Y axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.rotate((0,0,0), (0,1,0), 90)\\\"], \\\"start\\\": 11}]}\", \"strategies\": [], \"context\": [\"11: show_object(result)\"]}], \"alternatives\": [], \"action\": \"diversify\", \"diagnosis\": []}"
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_completion_tokens": 2500,
+  "store": false
+ },
+ "usage": {
+  "prompt_tokens": 1440,
+  "completion_tokens": 77,
+  "total_tokens": 1517,
+  "prompt_tokens_details": {
+   "cached_tokens": 0,
+   "cache_write_tokens": 1437,
+   "audio_tokens": 0
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 0,
+   "audio_tokens": 0,
+   "accepted_prediction_tokens": 0,
+   "rejected_prediction_tokens": 0
+  }
+ },
+ "cost_usd": 0.0218425,
+ "finish_reason": "stop",
+ "response": "{\"hypothesis\":\"Rotate the complete revolved part +90\u00b0 about the global Z axis by chaining the rotation directly after the revolve, preserving the profile and dimensions.\",\"edits\":[{\"start\":6,\"delete\":0,\"insert\":[\"    .rotate((0, 0, 0), (0, 0, 1), 90)\"]}]}"
+}

@@ -1,0 +1,71 @@
+{
+ "id": "ff53be8be0e549f7893372e2c07984aaa33fbf7265d30b11ff24b665de4b1aa2",
+ "source_fem": {
+  "ok": true,
+  "compliance": 3.399644186880308e-07,
+  "components": 1,
+  "nodes": 536
+ },
+ "candidates": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(27.9, 18.8)\n    .faces(\">Z\").workplane()\n    .circle(16.92)\n    .workplane(offset=9.0)\n    .circle(1.5)\n    .loft(combine=True)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 10.375), rotate=cq.Vector(0, 0, 0.0))\n            .transformed(offset=cq.Vector(5.64, 0, 0), rotate=cq.Vector(37.1, 0, 0))\n            .polyline([[0.0, -12.5], [0.0, 12.5], [46.512, 8.938], [64.6, 0.0], [46.512, -8.938]])\n            .close()\n            .extrude(7.15)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 10.375), rotate=cq.Vector(0, 0, 180.0))\n            .transformed(offset=cq.Vector(5.64, 0, 0), rotate=cq.Vector(37.1, 0, 0))\n            .polyline([[0.0, -12.5], [0.0, 12.5], [46.512, 8.938], [64.6, 0.0], [46.512, -8.938]])\n            .close()\n            .extrude(7.15)\n    )\n    .cut(cq.Workplane(\"XY\").circle(7.00).extrude(100, both=True))\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 4.904288876188258e-07,
+    "components": 1,
+    "nodes": 932
+   },
+   "consensus": 4,
+   "numbers_ok": true,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt1",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(27.9, 18.8)\n    .faces(\">Z\").workplane()\n    .circle(16.92)\n    .workplane(offset=9.0)\n    .circle(1.5)\n    .loft(combine=True)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 10.375), rotate=cq.Vector(0, 0, 0.0))\n            .transformed(offset=cq.Vector(5.64, 0, 0), rotate=cq.Vector(37.1, 0, 0))\n            .polyline([[0.0, -12.5], [0.0, 12.5], [46.512, 8.938], [64.6, 0.0], [46.512, -8.938]])\n            .close()\n            .extrude(7.15)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 10.375), rotate=cq.Vector(0, 0, 180.0))\n            .transformed(offset=cq.Vector(5.64, 0, 0), rotate=cq.Vector(37.1, 0, 0))\n            .polyline([[0.0, -12.5], [0.0, 12.5], [46.512, 8.938], [64.6, 0.0], [46.512, -8.938]])\n            .close()\n            .extrude(7.15)\n    )\n    .cut(cq.Workplane(\"XY\").cylinder(100.0, 7.00))\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 4.978558755812576e-07,
+    "components": 1,
+    "nodes": 921
+   },
+   "consensus": 4,
+   "numbers_ok": true,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt2",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(27.9, 18.8)\n    .faces(\">Z\").workplane()\n    .circle(16.92)\n    .workplane(offset=9.0)\n    .circle(1.5)\n    .loft(combine=True)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 10.375), rotate=cq.Vector(0, 0, 0.0))\n            .transformed(offset=cq.Vector(5.64, 0, 0), rotate=cq.Vector(37.1, 0, 0))\n            .polyline([[0.0, -12.5], [0.0, 12.5], [46.512, 8.938], [64.6, 0.0], [46.512, -8.938]])\n            .close()\n            .extrude(7.15)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 10.375), rotate=cq.Vector(0, 0, 180.0))\n            .transformed(offset=cq.Vector(5.64, 0, 0), rotate=cq.Vector(37.1, 0, 0))\n            .polyline([[0.0, -12.5], [0.0, 12.5], [46.512, 8.938], [64.6, 0.0], [46.512, -8.938]])\n            .close()\n            .extrude(7.15)\n    )\n    .cut(cq.Workplane(\"XY\").circle(7.00).extrude(50.0, both=True))\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 5.406480364826533e-07,
+    "components": 1,
+    "nodes": 938
+   },
+   "consensus": 4,
+   "numbers_ok": true,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt3",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(27.9, 18.8)\n    .faces(\">Z\").workplane()\n    .circle(16.92)\n    .workplane(offset=9.0)\n    .circle(1.5)\n    .loft(combine=True)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 10.375), rotate=cq.Vector(0, 0, 0.0))\n            .transformed(offset=cq.Vector(5.64, 0, 0), rotate=cq.Vector(37.1, 0, 0))\n            .polyline([[0.0, -12.5], [0.0, 12.5], [46.512, 8.938], [64.6, 0.0], [46.512, -8.938]])\n            .close()\n            .extrude(7.15)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 10.375), rotate=cq.Vector(0, 0, 180.0))\n            .transformed(offset=cq.Vector(5.64, 0, 0), rotate=cq.Vector(37.1, 0, 0))\n            .polyline([[0.0, -12.5], [0.0, 12.5], [46.512, 8.938], [64.6, 0.0], [46.512, -8.938]])\n            .close()\n            .extrude(7.15)\n    )\n    .faces(\"<Z\").workplane(centerOption=\"CenterOfMass\")\n    .hole(14.00)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 5.439444534397666e-07,
+    "components": 1,
+    "nodes": 945
+   },
+   "consensus": 4,
+   "numbers_ok": true,
+   "changed": true,
+   "error": null
+  }
+ ]
+}

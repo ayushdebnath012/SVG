@@ -1,0 +1,28 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .transformed(offset=cq.Vector(35.0, 0, -1.5), rotate=cq.Vector(0, 0, 0))\\n    .rect(70.0, 16.0)\\n    .extrude(3.0)\\n    .union(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(70.0, 0, 0), rotate=cq.Vector(0, 90, 0))\\n            .rect(3.0, 16.0)\\n            .transformed(offset=cq.Vector(0, 0, 10.2), rotate=cq.Vector(0, 0, 90))\\n            .rect(3.0, 16.0)\\n            .loft(combine=True)\\n    )\\n    .union(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(115.2, -1.5, 0), rotate=cq.Vector(-90, 0, 0))\\n            .rect(70.0, 16.0)\\n            .extrude(3.0)\\n    )\\n    .cut(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(17.5, 0, -1.7), rotate=cq.Vector(0, 0, 0))\\n            .circle(2.5)\\n            .extrude(3.4)\\n    )\\n    .cut(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(52.5, 0, -1.7), rotate=cq.Vector(0, 0, 0))\\n            .circle(2.5)\\n            .extrude(3.4)\\n    )\\n    .cut(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(97.7, -1.7, 0), rotate=cq.Vector(-90, 0, 0))\\n            .circle(2.5)\\n            .extrude(3.4)\\n    )\\n    .cut(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(132.7, -1.7, 0), rotate=cq.Vector(-90, 0, 0))\\n            .circle(2.5)\\n            .extrude(3.4)\\n    )\\n)\\nshow_object(result)\", \"instruction\": \"Remove the second flange (the perpendicular plate at the +X end); only the first plate, the twisted web, and the two holes on the first flange remain.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"34389cffaa74d42785d5fc2e7745256bfcdf3c7a260c50f8179795d939ba4273\", \"instruction\": \"Remove the two legs on the +X side; only the top and the two -X legs remain.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 10, \\\"insert\\\": [], \\\"start\\\": 4}]}\", \"strategies\": [], \"context\": [\"4:     .union(\", \"5:         cq.Workplane(\\\"XY\\\")\", \"6:             .transformed(offset=cq.Vector(93.75, 57.6, -78.25), rotate=cq.Vector(0, 0, 0))\", \"7:             .box(18.7, 18.7, 143.1)\", \"8:     )\", \"9:     .union(\", \"10:         cq.Workplane(\\\"XY\\\")\", \"11:             .transformed(offset=cq.Vector(93.75, -57.6, -78.25), rotate=cq.Vector(0, 0, 0))\", \"12:             .box(18.7, 18.7, 143.1)\", \"13:     )\"]}, {\"task_id\": \"7d171341b95d5e960f1a8f9bb659e21784ecfddc797238a75d9b0a28d53d6679\", \"instruction\": \"Remove the horizontal grasp bar; only the two vertical end cylinders remain.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 5, \\\"insert\\\": [], \\\"start\\\": 10}]}\", \"strategies\": [], \"context\": [\"10:     .union(\", \"11:         cq.Workplane(\\\"XY\\\")\", \"12:             .transformed(offset=cq.Vector(0, 0, 32.9), rotate=cq.Vector(0, 90, 0))\", \"13:             .cylinder(130.2, 5.1)\", \"14:     )\"]}, {\"task_id\": \"e361a76389f9526b60e67da80cf242c5707640c6a7af53532cbdd7ce512d9315\", \"instruction\": \"Remove the four corner mounting holes and the recessed cylindrical pocket; keep only the rectangular plate.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 4, \\\"insert\\\": [], \\\"start\\\": 4}, {\\\"delete\\\": 1, \\\"insert\\\": [], \\\"start\\\": 9}]}\", \"strategies\": [], \"context\": [\"4:     .faces(\\\">Z\\\")\", \"5:     .faces(\\\">Z\\\").workplane()\", \"6:     .pushPoints([(-67.1, -31.75), (-67.1, 31.75), (67.1, -31.75), (67.1, 31.75)])\", \"7:     .hole(10.3)\", \"9: result = result.cut(cq.Workplane('XY').cylinder(60.0,10.02))\"]}]}"
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 4096
+ },
+ "usage": {
+  "completion_tokens": 89,
+  "prompt_tokens": 1517,
+  "total_tokens": 1606
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\n  \"steps\": [\n    \"Remove the second flange union operation\",\n    \"Remove the two holes associated with the second flange\"\n  ],\n  \"invariants\": [\n    \"The first plate, the twisted web, and the two holes on the first flange remain intact\"\n  ],\n  \"dependencies\": [\n    [0, 1]\n  ]\n}\n```"
+}

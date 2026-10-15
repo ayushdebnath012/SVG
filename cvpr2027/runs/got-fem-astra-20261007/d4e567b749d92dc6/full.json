@@ -1,0 +1,85 @@
+{
+ "source_fem": {
+  "ok": true,
+  "compliance": 3.633131656425582e-08,
+  "components": 1,
+  "nodes": 6540
+ },
+ "nodes": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(19.9, 69.6)\n    .faces(\">Z\").workplane()\n    .hole(32.9)\n    .faces(\">Z\").workplane()\n    .circle(35.6)\n    .extrude(10.4)\n    .edges(\">Z\")\n    .chamfer(1.1)\n    .edges(\"<Z\")\n    .fillet(1.3)\n    .faces(\">Z\").workplane()\n    .polarArray(39.79, 0, 360, 6)\n    .hole(4.2)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 3.506804892840096e-08,
+    "components": 1,
+    "nodes": 8720
+   },
+   "numbers_ok": null,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "alt1",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(19.9, 69.6)\n    .faces(\">Z\").workplane()\n    .hole(32.9)\n    .faces(\">Z\").workplane()\n    .circle(35.6)\n    .extrude(10.4)\n    .edges(\">Z\")\n    .chamfer(1.1)\n    .edges(\"<Z\")\n    .fillet(1.3)\n    .faces(\">Z\").workplane()\n    .polarArray(39.79, 0, 360, 6)\n    .hole(4.2)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 3.505073619586751e-08,
+    "components": 1,
+    "nodes": 8708
+   },
+   "numbers_ok": null,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "alt2",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(19.9, 69.6)\n    .faces(\">Z\").workplane()\n    .hole(32.9)\n    .faces(\">Z\").workplane()\n    .circle(35.6)\n    .extrude(10.4)\n    .edges(\">Z\")\n    .chamfer(1.1)\n    .edges(\"<Z\")\n    .fillet(1.3)\n    .faces(\">Z\").workplane()\n    .polarArray(39.79, 0, 360, 6)\n    .hole(4.2)\n)\n# result = result.cut(cq.Workplane('XY').cylinder(100.0, 20.0))\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 3.505292699412277e-08,
+    "components": 1,
+    "nodes": 8721
+   },
+   "numbers_ok": null,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "alt3",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(19.9, 69.6)\n    .faces(\">Z\").workplane()\n    .hole(32.9)\n    .faces(\">Z\").workplane()\n    .circle(35.6)\n    .extrude(10.4)\n    .edges(\">Z\")\n    .chamfer(1.1)\n    .edges(\"<Z\")\n    .fillet(1.3)\n    .faces(\">Z\").workplane()\n    .polarArray(39.79, 0, 360, 6)\n    .hole(4.2)\n)\nresult = result  # Preserve the flange without the additional central through-cut.\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 3.5059835798982364e-08,
+    "components": 1,
+    "nodes": 8728
+   },
+   "numbers_ok": null,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "rag",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(19.9, 69.6)\n    .faces(\">Z\").workplane()\n    .hole(32.9)\n    .faces(\">Z\").workplane()\n    .circle(35.6)\n    .extrude(10.4)\n    .edges(\">Z\")\n    .chamfer(1.1)\n    .edges(\"<Z\")\n    .fillet(1.3)\n    .faces(\">Z\").workplane()\n    .polarArray(39.79, 0, 360, 6)\n    .hole(4.2)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 3.505805838184263e-08,
+    "components": 1,
+    "nodes": 8708
+   },
+   "numbers_ok": null,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  }
+ ]
+}

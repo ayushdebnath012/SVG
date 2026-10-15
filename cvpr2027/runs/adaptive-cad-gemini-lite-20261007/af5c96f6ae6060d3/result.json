@@ -1,0 +1,868 @@
+{
+ "task_id": "af5c96f6ae6060d314007784199307cf2efa0795e02af3bee63e310bf70b8b21",
+ "status": "PASS",
+ "prediction": "{\"edits\": [{\"delete\": 2, \"insert\": [\"    .faces(\\\"<Z\\\").workplane()\", \"    .hole(4.9)\", \")\", \"for _z in (25.0, 45.0):\", \"    result = result.cut(\", \"        cq.Workplane('XY')\", \"        .transformed(offset=cq.Vector(0, 0, _z), rotate=cq.Vector(90, 0, 0))\", \"        .cylinder(60.0, 4.0)\", \"    )\"], \"start\": 18}]}",
+ "selected_node": 2,
+ "bank": [
+  2
+ ],
+ "pareto": [
+  2
+ ],
+ "stop": "expansion_limit",
+ "nodes": [
+  {
+   "id": 0,
+   "candidate": "```json\n{\n  \"edits\": [\n    {\n      \"start\": 16,\n      \"delete\": 2,\n      \"insert\": [\n        \"    .faces(\\\"<Z\\\")\",\n        \"    .faces(\\\"<Z\\\").workplane()\",\n        \"    .hole(4.9)\",\n        \"    .faces(\\\"XY\\\")\",\n        \"    .workplane(offset=25)\",\n        \"    .circle(4)\",\n        \"    .extrude(32.8, combine=\\\"cut\\\", both=True)\",\n        \"    .faces(\\\"XY\\\")\",\n        \"    .workplane(offset=45)\",\n        \"    .circle(4)\",\n        \"    .extrude(32.8, combine=\\\"cut\\\", both=True)\"\n      ]\n    }\n  ]\n}\n```",
+   "depth": 0,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 115227.92989477614,
+       "area": 19165.96383952926,
+       "solids": 1,
+       "faces": 13,
+       "bbox_x": 65.6,
+       "bbox_y": 65.6,
+       "bbox_z": 96.50000000000001
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "FAIL",
+      "confidence": 0.95,
+      "reason": "The edited part does not show any cross-holes added to the middle step of the shaft in the isometric or top views.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-00.png"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.95,
+     0.0,
+     -13.0
+    ],
+    "score": 0.9369999999999999,
+    "diagnosis": [
+     {
+      "stage": "semantics",
+      "status": "FAIL",
+      "confidence": 0.95,
+      "reason": "The edited part does not show any cross-holes added to the middle step of the shaft in the isometric or top views.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-00.png"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 3,
+   "visits": 4,
+   "final": null,
+   "edges": [
+    0
+   ]
+  },
+  {
+   "id": 1,
+   "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"for _z in (25.0, 45.0):\", \"    result = result.cut(\", \"        cq.Workplane('XY')\", \"        .transformed(offset=cq.Vector(0, 0, _z), rotate=cq.Vector(90, 0, 0))\", \"        .cylinder(60.0, 4.0)\", \"    )\", \")\"], \"start\": 18}]}",
+   "depth": 1,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "FAIL",
+      "reason": "SyntaxError: invalid syntax (<unknown>, line 19)"
+     },
+     "constraints": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -1000.0
+    ],
+    "score": -1.0,
+    "diagnosis": [
+     {
+      "stage": "geometry",
+      "status": "FAIL",
+      "reason": "SyntaxError: invalid syntax (<unknown>, line 19)"
+     },
+     {
+      "stage": "constraints",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 1,
+   "visits": 4,
+   "final": null,
+   "edges": [
+    1
+   ]
+  },
+  {
+   "id": 2,
+   "candidate": "{\"edits\": [{\"delete\": 2, \"insert\": [\"    .faces(\\\"<Z\\\").workplane()\", \"    .hole(4.9)\", \")\", \"for _z in (25.0, 45.0):\", \"    result = result.cut(\", \"        cq.Workplane('XY')\", \"        .transformed(offset=cq.Vector(0, 0, _z), rotate=cq.Vector(90, 0, 0))\", \"        .cylinder(60.0, 4.0)\", \"    )\"], \"start\": 18}]}",
+   "depth": 2,
+   "verdict": {
+    "status": "PASS",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 111496.19579022515,
+       "area": 20709.49835148009,
+       "solids": 1,
+       "faces": 15,
+       "bbox_x": 65.6,
+       "bbox_y": 65.6,
+       "bbox_z": 96.5000002
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 1.0,
+      "reason": "The edited part successfully adds two 8 mm cross-holes through the middle thicker step of the shaft at the specified heights while leaving all unrelated features intact.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-01.png"
+     },
+     "fem": {
+      "status": "PASS",
+      "metrics": {
+       "nodes": 5309,
+       "tetrahedra": 22257,
+       "connected_components": 1,
+       "mesh_volume_mm3": 110715.68787534743,
+       "fixed_nodes": 274,
+       "loaded_facets": 263,
+       "loaded_area_mm2": 360.8199818433088,
+       "axis": [
+        0.0,
+        0.0,
+        1.0
+       ],
+       "projection_min_mm": -5.7,
+       "projection_max_mm": 90.8,
+       "compliance_N_mm": 1.0401684852270092e-06,
+       "load_weighted_displacement_mm": 1.0401684852270092e-06,
+       "max_displacement_mm": 1.1012189236744395e-06,
+       "strain_energy_N_mm": 5.20084242613506e-07,
+       "vm_p95_MPa": 0.0038447579742190816,
+       "vm_peak_MPa": 0.008838552089574335,
+       "relative_free_residual": 1.8550984549453378e-13,
+       "relative_force_balance_error": 8.7097208634742e-15,
+       "relative_moment_balance_error": 8.471246428820838e-16,
+       "relative_energy_error": 2.6465492058968553e-15
+      },
+      "checks": [
+       {
+        "metric": "connected_components",
+        "value": 1,
+        "max": 1,
+        "ok": true
+       }
+      ]
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 1.005
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 1.005
+       }
+      ]
+     }
+    },
+    "objectives": [
+     1.0,
+     1.0,
+     -11.0
+    ],
+    "score": 2.089,
+    "diagnosis": [],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 0,
+   "visits": 1,
+   "final": {
+    "status": "PASS",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 111496.19579022515,
+       "area": 20709.49835148009,
+       "solids": 1,
+       "faces": 15,
+       "bbox_x": 65.6,
+       "bbox_y": 65.6,
+       "bbox_z": 96.5000002
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 1.0,
+      "reason": "The edited part successfully adds two 8 mm cross-holes through the middle thicker step of the shaft at the specified heights while leaving all unrelated features intact.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-01.png"
+     },
+     "fem": {
+      "status": "PASS",
+      "metrics": {
+       "nodes": 5304,
+       "tetrahedra": 22236,
+       "connected_components": 1,
+       "mesh_volume_mm3": 110715.68787534744,
+       "fixed_nodes": 274,
+       "loaded_facets": 263,
+       "loaded_area_mm2": 360.8199818433088,
+       "axis": [
+        0.0,
+        0.0,
+        1.0
+       ],
+       "projection_min_mm": -5.7,
+       "projection_max_mm": 90.8,
+       "compliance_N_mm": 1.0398342607419424e-06,
+       "load_weighted_displacement_mm": 1.0398342607419424e-06,
+       "max_displacement_mm": 1.1012778932093807e-06,
+       "strain_energy_N_mm": 5.199171303709799e-07,
+       "vm_p95_MPa": 0.0038491418022695637,
+       "vm_peak_MPa": 0.008839003880506525,
+       "relative_free_residual": 1.7851693369177477e-13,
+       "relative_force_balance_error": 2.1099237394783065e-14,
+       "relative_moment_balance_error": 1.2160838295451236e-15,
+       "relative_energy_error": 1.669898374604764e-14
+      },
+      "checks": [
+       {
+        "metric": "connected_components",
+        "value": 1,
+        "max": 1,
+        "ok": true
+       }
+      ]
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 0.995
+       },
+       {
+        "mesh_scale": 1.25
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 0.995
+       },
+       {
+        "status": "PASS",
+        "metrics": {
+         "nodes": 3616,
+         "tetrahedra": 14755,
+         "connected_components": 1,
+         "mesh_volume_mm3": 110531.83323001982,
+         "fixed_nodes": 180,
+         "loaded_facets": 226,
+         "loaded_area_mm2": 363.26800454615903,
+         "axis": [
+          0.0,
+          0.0,
+          1.0
+         ],
+         "projection_min_mm": -5.7,
+         "projection_max_mm": 90.8,
+         "compliance_N_mm": 1.0324725164736525e-06,
+         "load_weighted_displacement_mm": 1.0324725164736525e-06,
+         "max_displacement_mm": 1.0940204204428347e-06,
+         "strain_energy_N_mm": 5.162362582368258e-07,
+         "vm_p95_MPa": 0.0038296475589778044,
+         "vm_peak_MPa": 0.009202309181418749,
+         "relative_free_residual": 1.3114351365579365e-13,
+         "relative_force_balance_error": 1.963585941749893e-15,
+         "relative_moment_balance_error": 1.0313222308031647e-15,
+         "relative_energy_error": 8.203927307888933e-16
+        },
+        "checks": [
+         {
+          "metric": "connected_components",
+          "value": 1,
+          "max": 1,
+          "ok": true
+         }
+        ]
+       }
+      ]
+     }
+    },
+    "objectives": [
+     1.0,
+     1.0,
+     -11.0
+    ],
+    "score": 2.089,
+    "diagnosis": [],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "final"
+   },
+   "edges": []
+  }
+ ],
+ "edges": [
+  {
+   "parent": 0,
+   "child": 1,
+   "visits": 4,
+   "total": -0.911
+  },
+  {
+   "parent": 1,
+   "child": 2,
+   "visits": 1,
+   "total": 2.089
+  }
+ ],
+ "events": [
+  {
+   "event": "decompose",
+   "plan": {
+    "steps": [
+     "Identify the middle thicker step of the shaft (formed by the extrusion of radius 21.3 and height 48.8, sitting on top of the base cylinder of height 11.4).",
+     "Calculate the Z-coordinates relative to the bottom face of the shaft: 25 mm and 45 mm.",
+     "Create two cross-holes of 8 mm diameter (4 mm radius) positioned perpendicularly to the central Z-axis at the specified Z heights."
+    ],
+    "invariants": [
+     "The core stepped shaft geometry and its axial through-hole are preserved.",
+     "The added cross-holes have an 8 mm diameter.",
+     "The cross-holes are positioned at 25 mm and 45 mm from the bottom face."
+    ],
+    "dependencies": [
+     [
+      0,
+      1
+     ],
+     [
+      1,
+      2
+     ]
+    ]
+   },
+   "memory_version": "7fffca820262622445ee12864f3d91af08b34a9231cc5182f670d1c03a74cdc7",
+   "retrieved": [
+    {
+     "task_id": "ae2e264afc29dc2ebfa82ea6308be2b29c138f291fbc0afc0ebe017c41bb1462",
+     "instruction": "Add 4 round cross-holes of 8 mm diameter through the rail along its length, each perpendicular to the rail's long axis, at 20 mm, 50 mm, 80 mm, and 110 mm from one end of the rail.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"for _z in (20.0, 50.0, 80.0, 110.0):\", \"    result = result.cut(\", \"        cq.Workplane('XY')\", \"        .transformed(offset=cq.Vector(0, 0, _z), rotate=cq.Vector(90, 0, 0))\", \"        .cylinder(40.0, 4.0)\", \"    )\"], \"start\": 24}]}",
+     "strategies": [],
+     "context": [
+      "24: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "81d246f67035ae6b92b6704de71c7b836ae2db598854a8890362af4c1afbfa4b",
+     "instruction": "Drill 6 round through-passages of 2 mm diameter through the bottom flange of the grommet, evenly spaced around the central axis at 8 mm radius.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"import math as _m\", \"for _i in range(6):\", \"    _ang = 2 * _m.pi * _i / 6\", \"    _x = 8.0 * _m.cos(_ang)\", \"    _z = 8.0 * _m.sin(_ang)\", \"    result = result.cut(\", \"        cq.Workplane('XY')\", \"        .transformed(offset=cq.Vector(_x, 1.65, _z), rotate=cq.Vector(90, 0, 0))\", \"        .cylinder(6.0, 1.0)\", \"    )\"], \"start\": 17}]}",
+     "strategies": [],
+     "context": [
+      "17: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "c55754a70806756e0e489599ba0a4a467c69470d0f70bd35b6ccdffc4ba07b82",
+     "instruction": "Drill 8 round through-passages of 8 mm diameter through the round base disc, evenly spaced around the central axis at 15 mm radius, parallel to the stem.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"import math as _m\", \"for _i in range(8):\", \"    _ang = 2 * _m.pi * _i / 8\", \"    _x = 15.0 * _m.cos(_ang)\", \"    _y = 15.0 * _m.sin(_ang)\", \"    result = result.cut(\", \"        cq.Workplane('XY')\", \"        .transformed(offset=cq.Vector(_x, _y, 7.0), rotate=cq.Vector(0, 0, 0))\", \"        .cylinder(20.0, 4.0)\", \"    )\"], \"start\": 21}]}",
+     "strategies": [],
+     "context": [
+      "21: show_object(result)"
+     ]
+    }
+   ]
+  },
+  {
+   "event": "initial_state",
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 115472.91286069935,
+       "area": 19090.000129165463,
+       "solids": 1,
+       "faces": 11,
+       "bbox_x": 65.6,
+       "bbox_y": 65.6,
+       "bbox_z": 96.50000000000001
+      }
+     },
+     "constraints": {
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         2.0,
+         8.0,
+         25.0,
+         45.0
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -0.0
+    ],
+    "score": 0.0,
+    "diagnosis": [
+     {
+      "stage": "constraints",
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         2.0,
+         8.0,
+         25.0,
+         45.0
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "initial"
+   }
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "semantics",
+     "status": "FAIL",
+     "confidence": 0.95,
+     "reason": "The edited part does not show any cross-holes added to the middle step of the shaft in the isometric or top views.",
+     "basis": "Astra rendered-view judgement",
+     "image": "semantic-00.png"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "No physical contract supplied"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "No perturbation contract supplied"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "ae2e264afc29dc2ebfa82ea6308be2b29c138f291fbc0afc0ebe017c41bb1462",
+     "instruction": "Add 4 round cross-holes of 8 mm diameter through the rail along its length, each perpendicular to the rail's long axis, at 20 mm, 50 mm, 80 mm, and 110 mm from one end of the rail.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"for _z in (20.0, 50.0, 80.0, 110.0):\", \"    result = result.cut(\", \"        cq.Workplane('XY')\", \"        .transformed(offset=cq.Vector(0, 0, _z), rotate=cq.Vector(90, 0, 0))\", \"        .cylinder(40.0, 4.0)\", \"    )\"], \"start\": 24}]}",
+     "strategies": [],
+     "context": [
+      "24: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "81d246f67035ae6b92b6704de71c7b836ae2db598854a8890362af4c1afbfa4b",
+     "instruction": "Drill 6 round through-passages of 2 mm diameter through the bottom flange of the grommet, evenly spaced around the central axis at 8 mm radius.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"import math as _m\", \"for _i in range(6):\", \"    _ang = 2 * _m.pi * _i / 6\", \"    _x = 8.0 * _m.cos(_ang)\", \"    _z = 8.0 * _m.sin(_ang)\", \"    result = result.cut(\", \"        cq.Workplane('XY')\", \"        .transformed(offset=cq.Vector(_x, 1.65, _z), rotate=cq.Vector(90, 0, 0))\", \"        .cylinder(6.0, 1.0)\", \"    )\"], \"start\": 17}]}",
+     "strategies": [],
+     "context": [
+      "17: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "2e5e823629867ea0058c5f5d522e5cc83b97f61e373773ad2c67a7b2deb1f4ff",
+     "instruction": "Add a small raised round boss centered on the top face of the tee nut, 4 mm in diameter and 1.5 mm tall, sitting flush above the existing top face and centered on the central axis.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.union(\", \"    cq.Workplane('XY')\", \"    .transformed(offset=cq.Vector(0.0, 0.0, 1.75), rotate=cq.Vector(0, 0, 0))\", \"    .cylinder(1.5, 2.0)\", \")\"], \"start\": 54}]}",
+     "strategies": [],
+     "context": [
+      "54: show_object(result)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "FAIL",
+   "hypothesis": "Add two cross-holes perpendicularly through the middle thicker step at Z=25 and Z=45 using cut cylinders."
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": true,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "semantics",
+     "status": "FAIL",
+     "confidence": 0.95,
+     "reason": "The edited part does not show any cross-holes added to the middle step of the shaft in the isometric or top views.",
+     "basis": "Astra rendered-view judgement",
+     "image": "semantic-00.png"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "No physical contract supplied"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "No perturbation contract supplied"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "ae2e264afc29dc2ebfa82ea6308be2b29c138f291fbc0afc0ebe017c41bb1462",
+     "instruction": "Add 4 round cross-holes of 8 mm diameter through the rail along its length, each perpendicular to the rail's long axis, at 20 mm, 50 mm, 80 mm, and 110 mm from one end of the rail.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"for _z in (20.0, 50.0, 80.0, 110.0):\", \"    result = result.cut(\", \"        cq.Workplane('XY')\", \"        .transformed(offset=cq.Vector(0, 0, _z), rotate=cq.Vector(90, 0, 0))\", \"        .cylinder(40.0, 4.0)\", \"    )\"], \"start\": 24}]}",
+     "strategies": [],
+     "context": [
+      "24: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "81d246f67035ae6b92b6704de71c7b836ae2db598854a8890362af4c1afbfa4b",
+     "instruction": "Drill 6 round through-passages of 2 mm diameter through the bottom flange of the grommet, evenly spaced around the central axis at 8 mm radius.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"import math as _m\", \"for _i in range(6):\", \"    _ang = 2 * _m.pi * _i / 6\", \"    _x = 8.0 * _m.cos(_ang)\", \"    _z = 8.0 * _m.sin(_ang)\", \"    result = result.cut(\", \"        cq.Workplane('XY')\", \"        .transformed(offset=cq.Vector(_x, 1.65, _z), rotate=cq.Vector(90, 0, 0))\", \"        .cylinder(6.0, 1.0)\", \"    )\"], \"start\": 17}]}",
+     "strategies": [],
+     "context": [
+      "17: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "2e5e823629867ea0058c5f5d522e5cc83b97f61e373773ad2c67a7b2deb1f4ff",
+     "instruction": "Add a small raised round boss centered on the top face of the tee nut, 4 mm in diameter and 1.5 mm tall, sitting flush above the existing top face and centered on the central axis.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.union(\", \"    cq.Workplane('XY')\", \"    .transformed(offset=cq.Vector(0.0, 0.0, 1.75), rotate=cq.Vector(0, 0, 0))\", \"    .cylinder(1.5, 2.0)\", \")\"], \"start\": 54}]}",
+     "strategies": [],
+     "context": [
+      "54: show_object(result)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "FAIL",
+   "hypothesis": "Add 2 cross-holes of 8 mm diameter (4 mm radius) at Z=25 and Z=45 by cutting cylinders rotated 90 degrees."
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": true,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "semantics",
+     "status": "FAIL",
+     "confidence": 0.95,
+     "reason": "The edited part does not show any cross-holes added to the middle step of the shaft in the isometric or top views.",
+     "basis": "Astra rendered-view judgement",
+     "image": "semantic-00.png"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "No physical contract supplied"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "No perturbation contract supplied"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "ae2e264afc29dc2ebfa82ea6308be2b29c138f291fbc0afc0ebe017c41bb1462",
+     "instruction": "Add 4 round cross-holes of 8 mm diameter through the rail along its length, each perpendicular to the rail's long axis, at 20 mm, 50 mm, 80 mm, and 110 mm from one end of the rail.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"for _z in (20.0, 50.0, 80.0, 110.0):\", \"    result = result.cut(\", \"        cq.Workplane('XY')\", \"        .transformed(offset=cq.Vector(0, 0, _z), rotate=cq.Vector(90, 0, 0))\", \"        .cylinder(40.0, 4.0)\", \"    )\"], \"start\": 24}]}",
+     "strategies": [],
+     "context": [
+      "24: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "81d246f67035ae6b92b6704de71c7b836ae2db598854a8890362af4c1afbfa4b",
+     "instruction": "Drill 6 round through-passages of 2 mm diameter through the bottom flange of the grommet, evenly spaced around the central axis at 8 mm radius.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"import math as _m\", \"for _i in range(6):\", \"    _ang = 2 * _m.pi * _i / 6\", \"    _x = 8.0 * _m.cos(_ang)\", \"    _z = 8.0 * _m.sin(_ang)\", \"    result = result.cut(\", \"        cq.Workplane('XY')\", \"        .transformed(offset=cq.Vector(_x, 1.65, _z), rotate=cq.Vector(90, 0, 0))\", \"        .cylinder(6.0, 1.0)\", \"    )\"], \"start\": 17}]}",
+     "strategies": [],
+     "context": [
+      "17: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "2e5e823629867ea0058c5f5d522e5cc83b97f61e373773ad2c67a7b2deb1f4ff",
+     "instruction": "Add a small raised round boss centered on the top face of the tee nut, 4 mm in diameter and 1.5 mm tall, sitting flush above the existing top face and centered on the central axis.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.union(\", \"    cq.Workplane('XY')\", \"    .transformed(offset=cq.Vector(0.0, 0.0, 1.75), rotate=cq.Vector(0, 0, 0))\", \"    .cylinder(1.5, 2.0)\", \")\"], \"start\": 54}]}",
+     "strategies": [],
+     "context": [
+      "54: show_object(result)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "FAIL",
+   "hypothesis": "Add two cross holes of 8 mm diameter through the middle step of the shaft at Z = 25 and Z = 45 from the bottom."
+  },
+  {
+   "event": "backtrack",
+   "to_node": 1
+  },
+  {
+   "event": "expand",
+   "parent": 1,
+   "node": 2,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "geometry",
+     "status": "FAIL",
+     "reason": "SyntaxError: invalid syntax (<unknown>, line 19)"
+    },
+    {
+     "stage": "constraints",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "ae2e264afc29dc2ebfa82ea6308be2b29c138f291fbc0afc0ebe017c41bb1462",
+     "instruction": "Add 4 round cross-holes of 8 mm diameter through the rail along its length, each perpendicular to the rail's long axis, at 20 mm, 50 mm, 80 mm, and 110 mm from one end of the rail.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"for _z in (20.0, 50.0, 80.0, 110.0):\", \"    result = result.cut(\", \"        cq.Workplane('XY')\", \"        .transformed(offset=cq.Vector(0, 0, _z), rotate=cq.Vector(90, 0, 0))\", \"        .cylinder(40.0, 4.0)\", \"    )\"], \"start\": 24}]}",
+     "strategies": [],
+     "context": [
+      "24: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "81d246f67035ae6b92b6704de71c7b836ae2db598854a8890362af4c1afbfa4b",
+     "instruction": "Drill 6 round through-passages of 2 mm diameter through the bottom flange of the grommet, evenly spaced around the central axis at 8 mm radius.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"import math as _m\", \"for _i in range(6):\", \"    _ang = 2 * _m.pi * _i / 6\", \"    _x = 8.0 * _m.cos(_ang)\", \"    _z = 8.0 * _m.sin(_ang)\", \"    result = result.cut(\", \"        cq.Workplane('XY')\", \"        .transformed(offset=cq.Vector(_x, 1.65, _z), rotate=cq.Vector(90, 0, 0))\", \"        .cylinder(6.0, 1.0)\", \"    )\"], \"start\": 17}]}",
+     "strategies": [],
+     "context": [
+      "17: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "c55754a70806756e0e489599ba0a4a467c69470d0f70bd35b6ccdffc4ba07b82",
+     "instruction": "Drill 8 round through-passages of 8 mm diameter through the round base disc, evenly spaced around the central axis at 15 mm radius, parallel to the stem.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"import math as _m\", \"for _i in range(8):\", \"    _ang = 2 * _m.pi * _i / 8\", \"    _x = 15.0 * _m.cos(_ang)\", \"    _y = 15.0 * _m.sin(_ang)\", \"    result = result.cut(\", \"        cq.Workplane('XY')\", \"        .transformed(offset=cq.Vector(_x, _y, 7.0), rotate=cq.Vector(0, 0, 0))\", \"        .cylinder(20.0, 4.0)\", \"    )\"], \"start\": 21}]}",
+     "strategies": [],
+     "context": [
+      "21: show_object(result)"
+     ]
+    }
+   ],
+   "path": [
+    0,
+    1
+   ],
+   "status": "PASS",
+   "hypothesis": "Add two cross-holes perpendicularly through the shaft at z=25 and z=45 using valid cadquery syntax by appending cuts properly."
+  },
+  {
+   "event": "final_verification",
+   "node": 2,
+   "status": "PASS"
+  }
+ ],
+ "config": {
+  "algorithm": "mcts",
+  "max_expansions": 4,
+  "max_depth": 3,
+  "width": 2,
+  "max_width": 4,
+  "exploration": 0.7,
+  "seconds": 2400.0
+ },
+ "memory_version": "7fffca820262622445ee12864f3d91af08b34a9231cc5182f670d1c03a74cdc7",
+ "stored": "runs/adaptive-cad-gemini-lite-20261007/memory.jsonl",
+ "seconds": 119.55892058299992,
+ "api": {
+  "mode": "live_astra",
+  "api_calls": 7,
+  "cost_usd": 0.0,
+  "budget_usd": 0.3,
+  "refused": 0
+ },
+ "tool_jobs": 7
+}

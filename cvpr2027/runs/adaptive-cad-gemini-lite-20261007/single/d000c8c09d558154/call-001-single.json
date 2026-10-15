@@ -1,0 +1,28 @@
+{
+ "kind": "single",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "You edit mechanical CAD. Return only JSON {\"edits\":[{\"start\":0,\"delete\":0,\"insert\":[\"replacement line\"]}]}. Indices are zero-based lines of the ORIGINAL input; operations must be ordered, nonoverlapping and in bounds. Preserve unrelated features. The supplied representation determines syntax. Return no explanation or invented physics results. Geometry execution and FEM checks are performed by external tools; never claim verification."
+   },
+   {
+    "role": "user",
+    "content": "Representation: cadquery\nOriginal CAD (line indices are implicit):\nimport cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(21.2, 15.5)\n    .faces(\">Z\").workplane()\n    .circle(13.95)\n    .workplane(offset=7.7)\n    .circle(1.5)\n    .loft(combine=True)\n    .faces(\">Z\").workplane()\n    .hole(6.7)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 0), rotate=cq.Vector(0, 0, 0.0))\n            .transformed(offset=cq.Vector(0, 0, 10.85), rotate=cq.Vector(0, 90, 0))\n            .transformed(offset=cq.Vector(0, 0, 0), rotate=cq.Vector(0, 32.8, 0))\n            .ellipse(2.41, 7.6)\n            .workplane(offset=55.6)\n            .transformed(offset=cq.Vector(0, 0, 0), rotate=cq.Vector(0, -14.8, 0))\n            .ellipse(1.29, 3.65)\n            .loft(combine=True)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 0), rotate=cq.Vector(0, 0, 180.0))\n            .transformed(offset=cq.Vector(0, 0, 10.85), rotate=cq.Vector(0, 90, 0))\n            .transformed(offset=cq.Vector(0, 0, 0), rotate=cq.Vector(0, 32.8, 0))\n            .ellipse(2.41, 7.6)\n            .workplane(offset=55.6)\n            .transformed(offset=cq.Vector(0, 0, 0), rotate=cq.Vector(0, -14.8, 0))\n            .ellipse(1.29, 3.65)\n            .loft(combine=True)\n    )\n)\nshow_object(result)Edit instruction:\nAdd a small flat round boss on top of the central hub, 16 mm in diameter and 3 mm thick, centered on the central axis above the existing tapered top of the hub."
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 8192
+ },
+ "usage": {
+  "completion_tokens": 114,
+  "prompt_tokens": 686,
+  "total_tokens": 800
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\n  \"edits\": [\n    {\n      \"start\": 10,\n      \"delete\": 2,\n      \"insert\": [\n        \"    .faces(\\\">Z\\\").workplane()\",\n        \"    .circle(8.0)\",\n        \"    .extrude(3.0)\",\n        \"    .faces(\\\">Z\\\").workplane()\",\n        \"    .hole(6.7)\"\n      ]\n    }\n  ]\n}\n```"
+}

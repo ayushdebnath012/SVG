@@ -1,0 +1,34 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "Qwen/Qwen3.5-35B-A3B-FP8",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .cylinder(41.6, 43.7)\\n    .union(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(0.0, 0.0, 20.8), rotate=cq.Vector(0, 0, 0))\\n            .sphere(43.7)\\n    )\\n    .union(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(0.0, 0.0, -20.8), rotate=cq.Vector(0, 0, 0))\\n            .sphere(43.7)\\n    )\\n)\\nresult = result.cut(cq.Workplane('XY').cylinder(387.0,10.49))\\nshow_object(result)\", \"instruction\": \"Remove a 21 diameter through-hole along the Z axis.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"2b011313d1aca44727c7f5c006c03b6c968d100b17ba6726ecd0bf337ef06347\", \"instruction\": \"Remove a 20 diameter through-hole along the Z axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [], \\\"start\\\": 9}]}\", \"strategies\": [], \"context\": [\"9: result = result.cut(cq.Workplane('XY').cylinder(60.0,10.02))\"]}, {\"task_id\": \"89baa8ebedbc2e7b09a8d402e82e3139b33aef20e854093dc466ad41736bcbcc\", \"instruction\": \"Remove a 6 diameter through-hole along the Z axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [], \\\"start\\\": 10}]}\", \"strategies\": [], \"context\": [\"10: result = result.cut(cq.Workplane('XY').cylinder(225.0,3.00))\"]}, {\"task_id\": \"8ae8f2a004831eabe04e01752f7468ddf05b9b1abe92eaa45571e45579383496\", \"instruction\": \"Remove a 7 diameter through-hole along the Z axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [], \\\"start\\\": 18}]}\", \"strategies\": [], \"context\": [\"18: result = result.cut(cq.Workplane('XY').cylinder(282.0,3.60))\"]}]}"
+   }
+  ],
+  "temperature": 0.6,
+  "top_p": 0.95,
+  "top_k": 20,
+  "max_tokens": 8192
+ },
+ "usage": {
+  "prompt_tokens": 729,
+  "total_tokens": 1864,
+  "completion_tokens": 1135,
+  "prompt_tokens_details": null,
+  "completion_tokens_details": {
+   "reasoning_tokens": 950
+  }
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "\n\n{\n  \"steps\": [\n    \"Modify the cut operation cylinder dimensions from diameter 387.0 to diameter 21.0\",\n    \"Ensure cut cylinder height is sufficient for through-hole (at least 130.0 to pass through entire part)\",\n    \"Maintain cut operation position at center (XY origin) for Z-axis aligned hole\"\n  ],\n  \"invariants\": [\n    \"Original cylinder base dimensions (41.6 diameter, 43.7 height)\",\n    \"Two sphere union operations remain unchanged\",\n    \"All coordinate systems and transforms preserved\",\n    \"Cut operation remains as subtraction from result\",\n    \"show_object() call remains at end\"\n  ],\n  \"dependencies\": [\n    [0, 1],\n    [1, 2]\n  ]\n}"
+}

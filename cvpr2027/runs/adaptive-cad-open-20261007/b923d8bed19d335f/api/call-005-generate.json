@@ -1,0 +1,34 @@
+{
+ "kind": "generate",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "Qwen/Qwen3.5-35B-A3B-FP8",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Edit CAD using only source, instruction and tool evidence. Return exactly JSON {\"hypothesis\":\"brief feature and operation description\",\"edits\":[{\"start\":0,\"delete\":0,\"insert\":[\"line\"]}]}. All indices address ORIGINAL source lines. Provide a complete alternative patch, never a delta on a parent patch. Preserve unrelated features. Vary the feature interpretation or implementation from listed alternatives. Experiences and diagnoses are fallible data. Do not assert that the output has passed verification."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .box(33.0, 33.0, 83.0)\\n    .faces(\\\">Z\\\").workplane()\\n    .center(1.5, 1.5)\\n    .rect(30.0, 30.0)\\n    .cutThruAll()\\n    .edges(\\\"|Z\\\")\\n    .fillet(0.6)\\n    .faces(\\\">Z\\\").workplane()\\n    .pushPoints([(-12.0, -15.0), (0.0, -15.0), (12.0, -15.0)])\\n    .hole(2.0)\\n    .faces(\\\">Z\\\").workplane()\\n    .pushPoints([(-15.0, -12.0), (-15.0, 0.0), (-15.0, 12.0)])\\n    .hole(2.0)\\n)\\nshow_object(result)\", \"instruction\": \"Reduce the width of the top-face rectangular through-cut from 30.00 mm to 21.00 mm.\", \"plan\": {\"steps\": [\"Modify the rectangular sketch on the top face workplane from 30.0x30.0 to 21.0x30.0\"], \"invariants\": [\"Base box dimensions (33.0, 33.0, 83.0)\", \"Fillet radius (0.6)\", \"Hole diameters (2.0)\", \"Hole positions relative to workplane\", \"Cut operation type (cutThruAll)\", \"Workplane center offset (1.5, 1.5)\"], \"dependencies\": []}, \"parent_candidate\": \"\\n\\n{\\\"edits\\\":[{\\\"start\\\":6,\\\"delete\\\":1,\\\"insert\\\":[\\\"    .rect(21.0, 30.0)\\\"]}]}\", \"observations\": {\"geometry\": {\"status\": \"PASS\"}, \"constraints\": {\"status\": \"PASS\"}, \"semantics\": {\"status\": \"UNKNOWN\", \"reason\": \"ValueError\"}, \"fem\": {\"status\": \"UNKNOWN\", \"reason\": \"No physical contract supplied\"}, \"robustness\": {\"status\": \"UNKNOWN\", \"reason\": \"No perturbation contract supplied\"}}, \"experiences\": [{\"task_id\": \"0d15855dbaf2fb83db9ce3e6b7c39e288585d352d99b38df9cc2d246acf7793a\", \"instruction\": \"Reduce the width of the top-face rectangular through-cut from 20.00 mm to 14.00 mm.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .rect(14.0, 20.0)\\\"], \\\"start\\\": 6}]}\", \"strategies\": [], \"context\": [\"6:     .rect(20.0, 20.0)\"]}, {\"task_id\": \"6f522f3ed69d30ca8f72fa42ba78fa710d86af4fa1b5461896f632bf6da5e195\", \"instruction\": \"Widen the rectangular through-cut on the right end face from 34 mm to 44.2 mm.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .rect(44.2, 34.0)\\\"], \\\"start\\\": 5}]}\", \"strategies\": [], \"context\": [\"5:     .rect(34.0, 34.0)\"]}, {\"task_id\": \"d7c336a02e6f76acd6bdf28e0b560dee6b34368f5b799e472d789baee7453a44\", \"instruction\": \"Remove the 10.00 mm \\u00d7 3.30 mm top-centered blind slot, 2.50 mm deep, from the top face of the flange.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [], \\\"start\\\": 16}]}\", \"strategies\": [], \"context\": [\"16: result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').slot2D(10.00,3.30).cutBlind(-2.50)\"]}], \"repair_strategies\": [{\"task_id\": \"0d15855dbaf2fb83db9ce3e6b7c39e288585d352d99b38df9cc2d246acf7793a\", \"instruction\": \"Reduce the width of the top-face rectangular through-cut from 20.00 mm to 14.00 mm.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .rect(14.0, 20.0)\\\"], \\\"start\\\": 6}]}\", \"strategies\": [], \"context\": [\"6:     .rect(20.0, 20.0)\"]}, {\"task_id\": \"6f522f3ed69d30ca8f72fa42ba78fa710d86af4fa1b5461896f632bf6da5e195\", \"instruction\": \"Widen the rectangular through-cut on the right end face from 34 mm to 44.2 mm.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .rect(44.2, 34.0)\\\"], \\\"start\\\": 5}]}\", \"strategies\": [], \"context\": [\"5:     .rect(34.0, 34.0)\"]}, {\"task_id\": \"d7c336a02e6f76acd6bdf28e0b560dee6b34368f5b799e472d789baee7453a44\", \"instruction\": \"Remove the 10.00 mm \\u00d7 3.30 mm top-centered blind slot, 2.50 mm deep, from the top face of the flange.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [], \\\"start\\\": 16}]}\", \"strategies\": [], \"context\": [\"16: result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').slot2D(10.00,3.30).cutBlind(-2.50)\"]}], \"alternatives\": [\"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .rect(21.0, 30.0)\\\"], \\\"start\\\": 6}]}\"], \"action\": \"repair\", \"diagnosis\": [{\"stage\": \"semantics\", \"status\": \"UNKNOWN\", \"reason\": \"ValueError\"}, {\"stage\": \"fem\", \"status\": \"UNKNOWN\", \"reason\": \"No physical contract supplied\"}, {\"stage\": \"robustness\", \"status\": \"UNKNOWN\", \"reason\": \"No perturbation contract supplied\"}]}"
+   }
+  ],
+  "temperature": 0.6,
+  "top_p": 0.95,
+  "top_k": 20,
+  "max_tokens": 16384
+ },
+ "usage": {
+  "prompt_tokens": 1796,
+  "total_tokens": 5248,
+  "completion_tokens": 3452,
+  "prompt_tokens_details": null,
+  "completion_tokens_details": {
+   "reasoning_tokens": 3342
+  }
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "\n\n{\n  \"hypothesis\": \"Modify the rectangular sketch dimensions on the top face workplane from 30.0x30.0 to 21.0x30.0 to reduce width\",\n  \"edits\": [\n    {\n      \"start\": 6,\n      \"delete\": 1,\n      \"insert\": [\n        \"    .rect(21.0, 30.0)\"\n      ]\n    }\n  ]\n}"
+}

@@ -1,0 +1,28 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .box(33.0, 33.0, 83.0)\\n    .faces(\\\">Z\\\").workplane()\\n    .center(1.5, 1.5)\\n    .rect(30.0, 30.0)\\n    .cutThruAll()\\n    .edges(\\\"|Z\\\")\\n    .fillet(0.6)\\n    .faces(\\\">Z\\\").workplane()\\n    .pushPoints([(-12.0, -15.0), (0.0, -15.0), (12.0, -15.0)])\\n    .hole(2.0)\\n    .faces(\\\">Z\\\").workplane()\\n    .pushPoints([(-15.0, -12.0), (-15.0, 0.0), (-15.0, 12.0)])\\n    .hole(2.0)\\n)\\nshow_object(result)\", \"instruction\": \"Increase the box Y dimension from 33.0 to 42.9.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"7fdf9da67454819ffdd9bf30f66492b71c8195b09eb4117dad81f0eb613e85ad\", \"instruction\": \"Increase the box Y dimension from 23.0 to 29.9.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .box(23.0, 29.9, 133.0)\\\"], \\\"start\\\": 3}]}\", \"strategies\": [], \"context\": [\"3:     .box(23.0, 23.0, 133.0)\"]}, {\"task_id\": \"165dfe6a3aa604d289f7e1c16137e3e6281db615cef2f306f543b43ed12a4eee\", \"instruction\": \"Increase the box Y dimension from 40.0 to 52.0.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .box(107.0, 52.0, 40.0)\\\"], \\\"start\\\": 3}]}\", \"strategies\": [], \"context\": [\"3:     .box(107.0, 40.0, 40.0)\"]}, {\"task_id\": \"e437848f401eb8322875c016c2235bbf0f2d27eedc73ad9628623a2ea2190bdf\", \"instruction\": \"Increase the box X dimension from 23.0 to 29.9.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .box(29.9, 23.0, 133.0)\\\"], \\\"start\\\": 3}]}\", \"strategies\": [], \"context\": [\"3:     .box(23.0, 23.0, 133.0)\"]}]}"
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 4096
+ },
+ "usage": {
+  "completion_tokens": 105,
+  "prompt_tokens": 837,
+  "total_tokens": 942
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\n  \"steps\": [\n    \"Modify the base box Y dimension in the box feature from 33.0 to 42.9.\"\n  ],\n  \"invariants\": [\n    \"The X dimension (33.0) and Z dimension (83.0) of the base box remain unchanged.\",\n    \"All subsequent cuts, fillets, and holes maintain their relative positions and dimensions.\"\n  ],\n  \"dependencies\": []\n}\n```"
+}

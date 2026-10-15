@@ -1,0 +1,28 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .box(87.0, 18.0, 13.8)\\n    .edges(\\\"|Z\\\")\\n    .chamfer(1.0)\\n    .cut(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(-34.8, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\\n            .polygon(6, 2.0321)\\n            .extrude(4.95, both=True)\\n    )\\n    .cut(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(-23.2, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\\n            .polygon(6, 2.6094)\\n            .extrude(4.95, both=True)\\n    )\\n    .cut(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(-11.6, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\\n            .polygon(6, 3.1868)\\n            .extrude(4.95, both=True)\\n    )\\n    .cut(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(0.0, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\\n            .polygon(6, 3.7641)\\n            .extrude(4.95, both=True)\\n    )\\n    .cut(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(11.6, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\\n            .polygon(6, 4.9188)\\n            .extrude(4.95, both=True)\\n    )\\n    .cut(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(23.2, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\\n            .polygon(6, 6.0735)\\n            .extrude(4.95, both=True)\\n    )\\n    .cut(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(34.8, 0, 2.150000000000001), rotate=cq.Vector(0, 0, 0))\\n            .polygon(6, 7.2282)\\n            .extrude(4.95, both=True)\\n    )\\n)\\nshow_object(result)\", \"instruction\": \"Replace all 7 hexagonal tool pockets in the organiser with square pockets, each square pocket having a side length equal to the across-corners size of the hexagonal pocket it replaces.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"d2f0578be6ab3160aa1d59e5d2cc3ac829baeba05ca0c233e008f54863a9f205\", \"instruction\": \"Replace the square inner through-passage of the long tube with a hexagonal through-passage of the same across-corners size, keeping the outer square outline, the length, and the rounded vertical edges unchanged.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .polygon(6, 25.0)\\\"], \\\"start\\\": 6}]}\", \"strategies\": [], \"context\": [\"6:     .rect(25.0, 25.0)\"]}, {\"task_id\": \"6db0e74571262ad9e60a98b6f41e6e5fe99ad45b3b10adf7cf13131601762615\", \"instruction\": \"Replace the round outer outline of the shaft collar with a hexagonal outer outline of the same across-corners size and the same height, keeping the central bore, the top chamfer, and the two side set-screw holes unchanged.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .polygon(6, 20.0)\\\"], \\\"start\\\": 3}]}\", \"strategies\": [], \"context\": [\"3:     .circle(10.0)\"]}, {\"task_id\": \"a0a77f466dda5ec43822032cc43a4e167eee85d70d7659db453778530a867ca1\", \"instruction\": \"Replace the round outer outline of the spacer ring with a hexagonal outer outline of the same across-corners diameter and the same thickness, keeping the central round through-hole and the small side notch.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .polygon(6, 9.0).extrude(0.5)\\\"], \\\"start\\\": 3}]}\", \"strategies\": [], \"context\": [\"3:     .cylinder(0.5, 4.5)\"]}]}"
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 4096
+ },
+ "usage": {
+  "completion_tokens": 233,
+  "prompt_tokens": 1405,
+  "total_tokens": 1638
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\n  \"steps\": [\n    \"Replace the first hexagonal pocket with a square pocket of side length equal to its across-corners size.\",\n    \"Replace the second hexagonal pocket with a square pocket of side length equal to its across-corners size.\",\n    \"Replace the third hexagonal pocket with a square pocket of side length equal to its across-corners size.\",\n    \"Replace the fourth hexagonal pocket with a square pocket of side length equal to its across-corners size.\",\n    \"Replace the fifth hexagonal pocket with a square pocket of side length equal to its across-corners size.\",\n    \"Replace the sixth hexagonal pocket with a square pocket of side length equal to its across-corners size.\",\n    \"Replace the seventh hexagonal pocket with a square pocket of side length equal to its across-corners size.\"\n  ],\n  \"invariants\": [\n    \"Keep the base organizer box dimensions, position, and Z-axis edge chamfers unchanged.\",\n    \"Keep the positions, depth, and orientation of all 7 pockets unchanged.\"\n  ],\n  \"dependencies\": []\n}\n```"
+}

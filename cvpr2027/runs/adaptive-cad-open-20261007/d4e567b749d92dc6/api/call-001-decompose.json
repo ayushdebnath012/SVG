@@ -1,0 +1,34 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "Qwen/Qwen3.5-35B-A3B-FP8",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .cylinder(19.9, 69.6)\\n    .faces(\\\">Z\\\").workplane()\\n    .hole(32.9)\\n    .faces(\\\">Z\\\").workplane()\\n    .circle(35.6)\\n    .extrude(10.4)\\n    .edges(\\\">Z\\\")\\n    .chamfer(1.1)\\n    .edges(\\\"<Z\\\")\\n    .fillet(1.3)\\n    .faces(\\\">Z\\\").workplane()\\n    .polarArray(39.79, 0, 360, 6)\\n    .hole(4.2)\\n)\\nresult = result.cut(cq.Workplane('XY').cylinder(100.0, 20.0))\\nshow_object(result)\", \"instruction\": \"Remove the central cylindrical through-cut with a 20.00 mm radius through the flange.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"7de286cc915dab42bff9cfb42462704dbcc6dc4f406e98ed58ca911ab659c496\", \"instruction\": \"Remove the axial cylindrical through-cut with radius of 20.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [], \\\"start\\\": 7}]}\", \"strategies\": [], \"context\": [\"7: result = result.cut(cq.Workplane('XZ').cylinder(100.0, 20.0))\"]}, {\"task_id\": \"c01ba5e1a9f4e54c2614cc1aa5f134cdbd06bc93d65e158b7032c690b1222726\", \"instruction\": \"Add a central axial through-cut with a 10.00 mm radius through the entire part.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.cut(cq.Workplane('XY').cylinder(200.0, 10.0))\\\"], \\\"start\\\": 60}]}\", \"strategies\": [], \"context\": [\"60: show_object(result)\"]}, {\"task_id\": \"b987d7a981c0b0cbbed979828dcaf81dacb8b6892d05e48c3d73e45600d568ee\", \"instruction\": \"Remove the central axial through-cut with a 10.00 through the entire part.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [], \\\"start\\\": 60}]}\", \"strategies\": [], \"context\": [\"60: result = result.cut(cq.Workplane('XY').cylinder(200.0, 10.0))\"]}]}"
+   }
+  ],
+  "temperature": 0.6,
+  "top_p": 0.95,
+  "top_k": 20,
+  "max_tokens": 8192
+ },
+ "usage": {
+  "prompt_tokens": 768,
+  "total_tokens": 2197,
+  "completion_tokens": 1429,
+  "prompt_tokens_details": null,
+  "completion_tokens_details": {
+   "reasoning_tokens": 1258
+  }
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "\n\n```json\n{\n  \"steps\": [\n    \"Delete the cut operation line: result = result.cut(cq.Workplane('XY').cylinder(100.0, 20.0))\"\n  ],\n  \"invariants\": [\n    \"All feature creation operations remain unchanged\",\n    \"The show_object(result) call remains at the end\",\n    \"The base cylinder dimensions (19.9, 69.6) remain unchanged\",\n    \"The central hole dimensions (32.9) remain unchanged\",\n    \"The chamfer (1.1) and fillet (1.3) operations remain unchanged\",\n    \"The polarArray operation with 6 holes remains unchanged\"\n  ],\n  \"dependencies\": []\n}\n```"
+}

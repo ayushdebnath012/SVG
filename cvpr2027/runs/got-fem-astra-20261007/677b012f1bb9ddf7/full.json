@@ -1,0 +1,115 @@
+{
+ "source_fem": {
+  "ok": true,
+  "compliance": 7.134847672911635e-07,
+  "components": 1,
+  "nodes": 1116
+ },
+ "nodes": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n)\nresult = result.cut(cq.Workplane(\"XY\").sphere(5.5).translate((0, 0, 15.0)))\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 8.178389673742774e-07,
+    "components": 1,
+    "nodes": 1103
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "alt1",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n)\nresult = result.cut(cq.Workplane(\"XY\").sphere(5.5).translate((0, 0, 15.0)))\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 8.194059730042113e-07,
+    "components": 1,
+    "nodes": 1108
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "alt2",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n)\nresult = result.cut(cq.Workplane(\"XY\").sphere(5.5).translate((0, 0, 17.75)))\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 7.143000092310427e-07,
+    "components": 1,
+    "nodes": 1113
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 4,
+   "robustness": 1.0
+  },
+  {
+   "name": "alt3",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n)\nresult = result.cut(cq.Workplane(\"XY\").sphere(5.5).translate((0, 0, 19.0)))\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 7.135124177559226e-07,
+    "components": 1,
+    "nodes": 1116
+   },
+   "numbers_ok": true,
+   "changed": false,
+   "cluster": null,
+   "robustness": null
+  },
+  {
+   "name": "mcts1-diversify",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n)\nresult = result.cut(cq.Workplane(\"XY\").sphere(5.5).translate((0, 0, 16.5)))\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 7.656512277860549e-07,
+    "components": 1,
+    "nodes": 1119
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 3,
+   "robustness": 1.0
+  },
+  {
+   "name": "mcts2-diversify",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n)\nresult = result.cut(cq.Workplane(\"XY\").sphere(5.5).translate((0, 0, 13.5)))\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 8.67109915753033e-07,
+    "components": 1,
+    "nodes": 1111
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 1,
+   "robustness": 1.0
+  },
+  {
+   "name": "rag",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n)\nbowl = cq.Workplane(\"XY\").sphere(5.5).translate((0, 0, 15.0))\nresult = result.cut(bowl)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 8.178389673742805e-07,
+    "components": 1,
+    "nodes": 1103
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  }
+ ]
+}

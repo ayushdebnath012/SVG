@@ -1,0 +1,40 @@
+{
+ "source_fem": {
+  "ok": true,
+  "compliance": 3.513095361153174e-08,
+  "components": 1,
+  "nodes": 9705
+ },
+ "nodes": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(19.9, 69.6)\n    .faces(\">Z\").workplane()\n    .hole(32.9)\n    .faces(\">Z\").workplane()\n    .circle(35.6)\n    .extrude(10.4)\n    .edges(\">Z\")\n    .chamfer(1.1)\n    .edges(\"<Z\")\n    .fillet(1.3)\n    .faces(\">Z\").workplane()\n    .polarArray(39.79, 0, 360, 6)\n    .hole(4.2)\n    .faces(\">Z\").workplane()\n    .polarArray(49.31, 0, 360, 6)\n    .hole(4.6)\n)\nresult = result.union(result.translate((150, 0, 0)))\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.7559423761440262e-08,
+    "components": 2,
+    "nodes": 11070
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "rag",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(19.9, 69.6)\n    .faces(\">Z\").workplane()\n    .hole(32.9)\n    .faces(\">Z\").workplane()\n    .circle(35.6)\n    .extrude(10.4)\n    .edges(\">Z\")\n    .chamfer(1.1)\n    .edges(\"<Z\")\n    .fillet(1.3)\n    .faces(\">Z\").workplane()\n    .polarArray(39.79, 0, 360, 6)\n    .hole(4.2)\n    .faces(\">Z\").workplane()\n    .polarArray(49.31, 0, 360, 6)\n    .hole(4.6)\n)\nresult = result.union(result.translate((150, 0, 0)))\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.7544775419873448e-08,
+    "components": 2,
+    "nodes": 11035
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  }
+ ]
+}

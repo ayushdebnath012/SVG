@@ -1,0 +1,54 @@
+{
+  "case_id": "NAFEMS-LE1",
+  "family": "Plane-stress elasticity",
+  "source_url": "https://www.seamplex.com/feenox/examples/mechanical.html",
+  "public_training_contamination": "possible",
+  "qois": [
+    {
+      "key": "sigma_yy_at_D",
+      "unit": "MPa",
+      "value": 92.7011,
+      "kind": "published_FEM_solver_output",
+      "locator": "Published terminal block in section NAFEMS LE1 elliptical membrane"
+    }
+  ],
+  "accepted_tolerances": null,
+  "certified_scored_release": false,
+  "independent_baseline_verified": false,
+  "expected_physics": "E = 210e3\nnu = 0.3\nBC AB u=0\nBC CD v=0\nBC BC tension=10\n",
+  "expected_formulation": "2D plane stress",
+  "original_assets": [
+    {
+      "role": "cad",
+      "path": "cvpr2027/tmp/engineering-fem-crawl/repo/examples/nafems-le1.geo",
+      "sha256": "03131a67a1afc83c7499cc913c226a96f9e73bb23beb31a9051555cde434cb46",
+      "bytes": 1359
+    },
+    {
+      "role": "results_file",
+      "path": "cvpr2027/tmp/engineering-fem-crawl/mechanical.html",
+      "sha256": "ed2b70c18a89a800be5db34fe597d7765be1e9c2762dce8b78e7f78eac1c0d58",
+      "bytes": 148764
+    },
+    {
+      "role": "drawing",
+      "path": "cvpr2027/tmp/engineering-fem-crawl/repo/examples/nafems-le1-figure.svg.png",
+      "sha256": "ad9079ff233e516965d4870af5a64fe1d60b4c2a993e35fdda208dc95ae471fa",
+      "bytes": 161412
+    },
+    {
+      "path": "cvpr2027/tmp/engineering-fem-crawl/repo/examples/nafems-le1.fee",
+      "sha256": "229a061c7518a5ea30f3e66176e0c0c8dbecdc47fb8546440df4e0c9ca439a1c",
+      "bytes": 264,
+      "role": "original_file"
+    },
+    {
+      "path": "cvpr2027/tmp/engineering-fem-crawl/repo/examples/nafems-le1.geo",
+      "sha256": "03131a67a1afc83c7499cc913c226a96f9e73bb23beb31a9051555cde434cb46",
+      "bytes": 1359,
+      "role": "original_mesh_definition"
+    }
+  ],
+  "geometry_criteria": "Trusted review of topology, dimensions, units and CAD-to-mesh correspondence.",
+  "convergence_criteria": "Trusted review of at least two distinct refinements and stress recovery; numeric agreement alone does not pass."
+}

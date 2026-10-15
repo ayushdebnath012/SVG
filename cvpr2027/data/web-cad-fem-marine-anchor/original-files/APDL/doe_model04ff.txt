@@ -1,0 +1,342 @@
+/clear
+
+/PREP7
+
+
+/UIS,MSGPOP,4
+KEYW,PR_SGVOF,1
+
+! *DIM,RSW,ARRAY,135,1
+! *VREAD,RSW(1,1),/data/wwalker/2022_1633/doe_test_out5,txt,,,135,1
+! (F10.0)
+
+run=24
+
+! INPUT VARIABLIES !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+t_top=0.5	! thickness of top plate
+t_skirt=0.5 	! thickness of skirt plate
+d_pile=150	! overall diameter of pile
+l_skirt=150	! length of skirt - starting from bottom of top plate
+d_anchor=100   ! diameter of bolt circle for anchors 
+h_gusset=8	! height/depth of gussets under top plate
+t_gusset=0.75  ! thickness of gussets under top plate
+n_holes=9  ! number of anchors/"holes" 
+w_offset=8  ! width of top plate section between gusset and cut out edge
+
+! constants and calculated terms !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+PI=3.1415926535
+or_pile=d_pile/2
+ir_pile=or_pile-t_skirt
+mr_pile=0.5*(or_pile+ir_pile)
+r_anchor=d_anchor/2
+
+! GENERATE GUSSET GEOMETRY
+g1=0.5*(2*PI)/(2*n_holes)
+c1=SQRT((r_anchor*r_anchor)+(mr_pile*mr_pile)-2*(r_anchor*mr_pile)*cos(g1))
+theta1=acos(((c1*c1)+(r_anchor*r_anchor)-(mr_pile*mr_pile))/(2*r_anchor*c1))
+thetac=PI-theta1
+k1y=0.5*t_gusset/sin(thetac)
+thetab=PI-thetac
+k1x=-0.5*t_gusset/cos(thetab)
+
+k2x=mr_pile*cos(0.5*PI-g1)
+k2y=mr_pile*sin(0.5*PI-g1)
+
+K,31,-k1x,r_anchor,0
+K,32,-k2x-k1x,k2y,0
+K,33,-k2x+k1x,k2y,0
+K,34,0,r_anchor+k1y,0
+K,35,k2x-k1x,k2y,0
+K,36,k2x+k1x,k2y,0
+K,37,k1x,r_anchor,0
+
+L,31,32
+L,32,33
+L,33,34
+L,34,35
+L,35,36
+L,36,37
+L,37,31
+
+AL,1,2,3,4,5,6,7
+
+thetad=0.5*pi-(2*pi)/n_holes
+
+k3x=r_anchor*cos(thetad)
+k3y=r_anchor*sin(thetad)
+k3d=0.5*t_gusset/cos(pi/n_holes)
+
+K,41,0,r_anchor+k3d,0
+k,42,k3x,k3y+k3d,0
+k,43,k3x,k3y-k3d,0
+K,44,0,r_anchor-k3d,0
+
+L,41,42
+L,42,43
+L,43,44
+L,44,41
+
+AL,8,9,10,11
+
+RECTNG,-0.5*t_gusset,0.5*t_gusset,0,r_anchor
+
+CYL4,0,r_anchor,0,0,1.875,360,0
+ASBA,ALL,4
+
+CYL4,0,0,14.875,0,14.875+t_gusset,360,0
+ASBA,8,1
+
+CYL4,0,0,0,0,1.875,360,0
+ASBA,2,1
+
+CYL4,k3x,k3y,0,0,1.875,360,0
+ASBA,7,1
+
+CYL4,0,0,ir_pile,0,or_pile+10,360,0
+ASBA,ALL,1 ! THIS COMMAND MIGHT CAUSE ISSUES SINCE THE CUT ISN'T OVER ALL AREAS 
+
+CYL4,0,r_anchor,1.875,0,1.5,360,0
+
+CSYS,1
+AGEN,n_holes,ALL,,,,360/n_holes,0
+
+CYL4,0,0,14.875,0,14.875+t_gusset,360,0
+CYL4,0,0,IR_PILE,0,OR_PILE,360,0
+CYL4,0,0,1.5,0,1.875,360,0
+  
+AGLUE,ALL
+
+VEXT,ALL,,,0,0,-H_GUSSET
+ 
+CSYS,0
+ 
+thetaf=PI/n_holes
+thetag=0.25*(PI-((2*PI)/n_holes))
+thetah=-((PI/n_holes)-thetag)
+k4y=(w_offset*tan(thetaf))+(w_offset/cos(thetaf))
+k5=w_offset/sin(thetag)
+k5x=k5*cos(thetah)
+k5y=k5*sin(thetah)
+k6y=(w_offset/sin(PI/n_holes))*cos(PI/n_holes)
+k,5000,0+w_offset,r_anchor-k4y,0
+k,5001,k3x-k5x,k3y-k5y,0
+k,5002,0+w_offset,0+k6y,0
+L,5000,5001
+L,5001,5002
+L,5002,5000
+ 
+LC=-18*(n_holes*n_holes)+446*n_holes-1475
+LFILLT,LC,LC+1,2
+LFILLT,LC+1,LC+2,2
+LFILLT,LC+2,LC,2
+AL,LC,LC+3,LC+1,LC+4,LC+2,LC+5
+
+CYL4,0,r_anchor,0,0,1.5,360,0
+AC=-6*(n_holes*n_holes)+164*n_holes-485
+
+CSYS,1
+AGEN,n_holes,AC,AC+1,,,360/n_holes,0
+
+CSYS,0
+CYL4,0,0,0,0,or_pile,360,0
+
+AC2=(2*n_holes)+(AC)-1
+
+ASEL,S,AREA,,AC,AC2,1,1
+CM,HOLES,AREA
+ALLSEL
+
+ASBA,AC2+1,HOLES ! THIS COMMAND MIGHT CAUSE ISSUES SINCE THE CUT ISN'T OVER ALL AREAS 
+VEXT,AC2+2,,,0,0,t_top
+
+VGLUE,ALL
+
+ALLSEL
+CYLIND,0,14.5,t_top,t_top+0.5,0,360
+CYLIND,ir_pile,or_pile,-h_gusset,-l_skirt,0,180
+CYLIND,ir_pile,or_pile,-h_gusset,-l_skirt,180,360
+
+VGLUE,ALL
+ 
+K,6000,-2,-10,t_top+0.5
+K,6001,-2,-10+4.4041,t_top+0.5+11.792
+K,6002,-2,10-4.4041,t_top+0.5+11.792
+K,6003,-2,10,t_top+0.5
+
+K,6004,-2,0,t_top+0.5+10.25-(4.9/2)
+K,6005,-2,-4.9/2,t_top+0.5+10.25
+K,6006,-2,0,t_top+0.5+10.25+(4.9/2)
+K,6007,-2,4.9/2,t_top+0.5+10.25
+
+L,6000,6001
+LARC,6001,6002,6003,6.3
+L,6002,6003
+L,6003,6000
+
+LARC,6004,6006,6007,4.9/2
+LARC,6006,6004,6005,4.9/2
+
+CSYS,0
+LSEL,S,LOC,X,-2
+AL,ALL
+ALLSEL
+ASEL,S,LOC,X,-2
+VEXT,ALL,,,4,0,0 
+VGLUE,ALL
+
+! n,9999998,0,-14.875+t_gusset,-h_gusset
+! n,9999999,0,-14.875,0
+
+ 
+ET,1,SOLID187
+MP,EX,1,30E6
+MP,NUXY,1,0.3
+VSEL,S,LOC,Z,0,t_top
+VMESH,ALL
+ALLSEL
+VSEL,S,LOC,z,-h_gusset,-l_skirt
+ESIZE,15*T_SKIRT
+VMESH,ALL
+VSEL,S,LOC,Z,t_top+0.5,100
+ESIZE,3.5
+VMESH,ALL
+ALLSEL
+VMESH,ALL
+
+ n,9999998,0,-14.875+t_gusset,-h_gusset
+ n,9999999,0,-14.875,0
+! NUMMRG,NODE,1E-1
+
+
+K,8000,0,R_ANCHOR,0
+K,8001,0,R_ANCHOR,-250
+
+L,8000,8001
+ET,2,BEAM188
+SECTYPE,,BEAM,CSOLID
+SECDATA,0.4941
+MP,EX,2,30E6
+MP,PRXY,2,0.3
+
+CSYS,1
+LSEL,S,LOC,X,R_ANCHOR
+LSEL,R,LOC,Y,90
+LMESH,ALL
+
+LGEN,n_holes,ALL,,,,360/n_holes,0
+CSYS,0
+
+NSEL,S,LOC,Z,-250
+D,ALL,ALL,0
+ALLSEL
+
+ss=99 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+*DO,N,1,n_holes
+thetan=(2*PI)*(N-1)/n_holes
+LOCAL,ss+n,1,R_ANCHOR*sin(thetan),R_ANCHOR*cos(thetan),0
+CSYS,ss+n
+NSEL,S,LOC,X,0,1.875
+NSEL,R,LOC,Z,-h_gusset,t_top
+CP,,ALL,ALL
+ALLSEL
+*enddo
+
+CSYS,0
+
+ET,3,COMBIN39
+keyopt,3,3,0
+keyopt,3,3,1
+keyopt,3,3,2
+R,3,0,0,0.75,32172.7,1,45083,3,2,92414.2,4,184885.8  ! THIS SOIL STIFFNESS IS SPECIFIC TO...
+
+n,999998,0,OR_PILE+0.002,-0.5*(l_skirt+h_gusset)
+n,999999,0,OR_PILE+100,-0.5*(l_skirt+h_gusset)
+type,3
+real,3
+e,999998,999999
+allsel
+
+CSYS,1
+
+NSEL,S,LOC,X,OR_PILE
+NSEL,R,LOC,Y,0,180
+NSEL,R,LOC,Z,-h_gusset,-l_skirt
+CM,CASS,NODE
+allsel
+
+CSYS,0
+NSEL,S,,,CASS
+NSEL,A,,,999998
+RBE3,999998,UY,ALL
+RBE3,999998,ROTX,ALL
+
+RBE3,999998,UZ,ALL
+RBE3,999998,ROTY,ALL
+RBE3,999998,ROTZ,ALL
+  
+ALLSEL
+
+ET,4,CONTA175  ! Define contact element type 4
+ET,5,TARGE170  ! Define target element type 5
+KEYOPT,4,12,5   ! Set contact element to bonded behavior (no separation)
+
+allsel 
+
+TYPE,4
+REAL,10
+E,999998
+ALLSEL
+
+NSEL,S,,,CASS
+TYPE,5
+REAL,10
+ESLN,S,0
+ESURF
+ALLSEL
+
+D,999999,ALL,0
+ALLSEL
+ 
+D,999998,UX,0
+D,999998,UZ,0
+! D,999998,ROTX,0
+! D,999998,ROTY,0
+!D,999998,ROTZ,0
+CSYS,0
+
+! ADDING LOAD TO PADEYE
+LOCAL,200,1,0,0,t_top+10.75,0,0,90
+CSYS,200
+ASEL,S,LOC,X,0,2.49
+NSLA,S,1
+
+F,ALL,FZ,1734.3   ! 1734.3=650kN
+F,ALL,FY,1686.3   ! 1686.3=632kN
+ALLSEL
+
+CSYS,0 
+NSEL,S,LOC,z,t_top+0.75,t_top+20
+NSEL,R,LOC,X,2
+D,ALL,UX,0
+
+ALLSEL
+FINISH
+
+ /SOLUTION
+ /UIS,MSGPOP,4
+ NSUBST,2  ! 2 SUBSTEPS PER SOLVE STEP
+ALLSEL 
+ SOLVE
+ FINISH
+ 
+ /POST1
+ALLSEL
+SET,LAST                 ! Select the result set (replace '1' with your desired result set number)
+plns,s,eqv
+*GET,ssmax,PLNSOL,0,MAX 
+/out,/data/wwalker/2022_1633/doe_stress_results,txt,,append
+*STATUS,RUN
+*STATUS,ssmax     ! Display the maximum stress value
+/OUT                  ! Turn off output redirection
+

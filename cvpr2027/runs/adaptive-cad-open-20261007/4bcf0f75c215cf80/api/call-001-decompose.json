@@ -1,0 +1,34 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "Qwen/Qwen3.5-35B-A3B-FP8",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .transformed(offset=cq.Vector(35.0, 0, -1.5), rotate=cq.Vector(0, 0, 0))\\n    .rect(70.0, 16.0)\\n    .extrude(3.0)\\n    .union(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(70.0, 0, 0), rotate=cq.Vector(0, 90, 0))\\n            .rect(3.0, 16.0)\\n            .transformed(offset=cq.Vector(0, 0, 10.2), rotate=cq.Vector(0, 0, 90))\\n            .rect(3.0, 16.0)\\n            .loft(combine=True)\\n    )\\n    .union(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(115.2, -1.5, 0), rotate=cq.Vector(-90, 0, 0))\\n            .rect(70.0, 16.0)\\n            .extrude(3.0)\\n    )\\n    .cut(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(17.5, 0, -1.7), rotate=cq.Vector(0, 0, 0))\\n            .circle(2.5)\\n            .extrude(3.4)\\n    )\\n    .cut(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(52.5, 0, -1.7), rotate=cq.Vector(0, 0, 0))\\n            .circle(2.5)\\n            .extrude(3.4)\\n    )\\n    .cut(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(97.7, -1.7, 0), rotate=cq.Vector(-90, 0, 0))\\n            .circle(2.5)\\n            .extrude(3.4)\\n    )\\n    .cut(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(132.7, -1.7, 0), rotate=cq.Vector(-90, 0, 0))\\n            .circle(2.5)\\n            .extrude(3.4)\\n    )\\n)\\nshow_object(result)\", \"instruction\": \"Rotate the entire twisted double-flange plate assembly 90 degrees about the global X-axis while preserving the same dimensions, twist section, and four mounting holes.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"23f67e4f98c458f94cef856db8007bcebd533a6143a9929565fed2a26d7ce0dd\", \"instruction\": \"Rotate the entire part by 90 degrees about the X axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\\\"], \\\"start\\\": 11}]}\", \"strategies\": [], \"context\": [\"11: show_object(result)\"]}, {\"task_id\": \"ab6b79a16fa48fbb56319a4ac5870f5073a5c456dd0d19dbd550948b0b73f341\", \"instruction\": \"Rotate the entire part by 90 degrees about the X axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\\\"], \\\"start\\\": 7}]}\", \"strategies\": [], \"context\": [\"7: show_object(result)\"]}, {\"task_id\": \"b9b1d7365ad9cbdd8c1d9f3cedbfbc263cbdd075dcbe0dc6fe90fff83e53de9e\", \"instruction\": \"Rotate the entire part by 90 degrees about the X axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\\\"], \\\"start\\\": 12}]}\", \"strategies\": [], \"context\": [\"12: show_object(result)\"]}]}"
+   }
+  ],
+  "temperature": 0.6,
+  "top_p": 0.95,
+  "top_k": 20,
+  "max_tokens": 8192
+ },
+ "usage": {
+  "prompt_tokens": 1166,
+  "total_tokens": 8590,
+  "completion_tokens": 7424,
+  "prompt_tokens_details": null,
+  "completion_tokens_details": {
+   "reasoning_tokens": 7243
+  }
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "\n\n{\n  \"steps\": [\n    \"Preserve the existing geometry construction chain including unions, cuts, and extrusions.\",\n    \"Apply the 90-degree global X-axis rotation transformation to the `result` variable.\",\n    \"Update the visualization call to display the rotated result object.\"\n  ],\n  \"invariants\": [\n    \"All geometric dimensions (70.0, 16.0, 3.0, 2.5) remain constant.\",\n    \"The relative positions of the four mounting holes remain constant relative to the plates.\",\n    \"The twist section loft geometry and parameters remain unchanged.\",\n    \"The boolean operation sequence (union, cut) remains unchanged.\"\n  ],\n  \"dependencies\": [\n    [0, 1],\n    [1, 2]\n  ]\n}"
+}

@@ -1,0 +1,703 @@
+{
+ "task_id": "bc48c07fbbe8a3004c06344916a50893db3f284392d96350a58382c20c828a8c",
+ "status": "UNVERIFIED",
+ "prediction": "\n\n{\"edits\":[{\"start\":3,\"delete\":1,\"insert\":[\"    cq.Workplane(\\\"XY\\\")\\n    .polyline([(6.16, 0.0), (18.48, 0.0), (10.369, 10.4), (18.48, 20.8), (10.108, 31.2), (18.48, 41.6), (9.847, 52.0), (18.48, 62.4), (9.586, 72.8), (18.48, 83.2), (6.16, 83.2), (6.16, 0.0)])\"]}]",
+ "selected_node": null,
+ "bank": [],
+ "pareto": [],
+ "stop": "expansion_limit",
+ "nodes": [
+  {
+   "id": 0,
+   "candidate": "\n\n{\"edits\":[{\"start\":3,\"delete\":1,\"insert\":[\"    cq.Workplane(\\\"XY\\\")\\n    .polyline([(6.16, 0.0), (18.48, 0.0), (10.369, 10.4), (18.48, 20.8), (10.108, 31.2), (18.48, 41.6), (9.847, 52.0), (18.48, 62.4), (9.586, 72.8), (18.48, 83.2), (6.16, 83.2), (6.16, 0.0)])\"]}]",
+   "depth": 0,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "FAIL",
+      "reason": "JSONDecodeError: Expecting ',' delimiter: line 1 column 265 (char 264)"
+     },
+     "constraints": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -1000.0
+    ],
+    "score": -1.0,
+    "diagnosis": [
+     {
+      "stage": "geometry",
+      "status": "FAIL",
+      "reason": "JSONDecodeError: Expecting ',' delimiter: line 1 column 265 (char 264)"
+     },
+     {
+      "stage": "constraints",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 3,
+   "visits": 4,
+   "final": null,
+   "edges": [
+    0
+   ]
+  },
+  {
+   "id": 1,
+   "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .polyline([(6.16, 0.0), (18.48, 0.0), (10.369, 10.4), (18.48, 20.8), (10.108, 31.2), (18.48, 41.6), (9.847, 52.0), (18.48, 62.4), (9.586, 72.8), (18.48, 83.2), (6.16, 83.2), (6.16, 0.0)])\"], \"start\": 3}]}",
+   "depth": 1,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 44582.232086689044,
+       "area": 14735.23615432155,
+       "solids": 1,
+       "faces": 11,
+       "bbox_x": 36.96,
+       "bbox_y": 83.2,
+       "bbox_z": 36.96
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "FAIL",
+      "confidence": 0.9,
+      "reason": "The edited part shows a radially thinner ring (smaller outer radius relative to inner radius) compared to the original, whereas the instruction implies setting a specific ratio of 3:1 which likely requires a thicker ring or larger outer radius if the original was standard.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-00.png"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.9,
+     0.0,
+     -2.0
+    ],
+    "score": 0.898,
+    "diagnosis": [
+     {
+      "stage": "semantics",
+      "status": "FAIL",
+      "confidence": 0.9,
+      "reason": "The edited part shows a radially thinner ring (smaller outer radius relative to inner radius) compared to the original, whereas the instruction implies setting a specific ratio of 3:1 which likely requires a thicker ring or larger outer radius if the original was standard.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-00.png"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 1,
+   "visits": 4,
+   "final": null,
+   "edges": [
+    1
+   ]
+  },
+  {
+   "id": 2,
+   "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .polyline([(6.16, 0.0), (18.48, 0.0), (10.369, 10.4), (18.251, 20.8), (10.108, 31.2), (18.251, 41.6), (9.847, 52.0), (16.409, 62.4), (9.586, 72.8), (15.491, 83.2), (6.16, 83.2), (6.16, 0.0)])\"], \"start\": 3}]}",
+   "depth": 2,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 40684.91389380167,
+       "area": 13683.40396893865,
+       "solids": 1,
+       "faces": 11,
+       "bbox_x": 36.96,
+       "bbox_y": 83.2,
+       "bbox_z": 36.96
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "FAIL",
+      "confidence": 0.9,
+      "reason": "The instruction requires the outer radius to be three times the inner radius, which would imply a wider rim, but the edited part shows a narrower rim where the outer radius is closer to the inner radius compared to the original.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-01.png"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.9,
+     0.0,
+     -2.0
+    ],
+    "score": 0.898,
+    "diagnosis": [
+     {
+      "stage": "semantics",
+      "status": "FAIL",
+      "confidence": 0.9,
+      "reason": "The instruction requires the outer radius to be three times the inner radius, which would imply a wider rim, but the edited part shows a narrower rim where the outer radius is closer to the inner radius compared to the original.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-01.png"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 0,
+   "visits": 1,
+   "final": null,
+   "edges": []
+  }
+ ],
+ "edges": [
+  {
+   "parent": 0,
+   "child": 1,
+   "visits": 4,
+   "total": 3.592
+  },
+  {
+   "parent": 1,
+   "child": 2,
+   "visits": 1,
+   "total": 0.898
+  }
+ ],
+ "events": [
+  {
+   "event": "decompose",
+   "plan": {
+    "steps": [
+     "Identify the base inner radius value from the polyline starting X-coordinate (6.16).",
+     "Calculate the target outer radius as three times the identified inner radius (18.48).",
+     "Update the polyline coordinate list to set the outer profile X-values to the target outer radius while preserving inner coordinates and Y-values."
+    ],
+    "invariants": [
+     "Y-coordinates of all polyline vertices remain unchanged.",
+     "X-coordinates of the inner profile vertices remain unchanged.",
+     "The number of polyline vertices (convolutions) remains unchanged.",
+     "The revolve axis and angle parameters remain unchanged."
+    ],
+    "dependencies": [
+     [
+      0,
+      1
+     ],
+     [
+      1,
+      2
+     ]
+    ]
+   },
+   "memory_version": "3bfd30b74ff6a8135bdb99efa5ce2e501d9cc778bd1a5cc6ff9b660f637a1ab0",
+   "retrieved": [
+    {
+     "task_id": "799d75af88373cd4be312a28a86290b050df3709a7f64b0e6e0d73b0f8c389da",
+     "instruction": "Set the standoff height equal to three times the original height; the outer radius and bore stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .cylinder(15.3, 17.7)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .cylinder(5.1, 17.7)"
+     ]
+    },
+    {
+     "task_id": "78e59881d95328bc0f38664d6e04278bc8cc90a7ad75e5da658a39758f05d2a4",
+     "instruction": "Set the bottom outer radius equal to the top outer radius; wall thickness, bottom thickness, and height stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .lineTo(56.1, 0.0)\"], \"start\": 4}, {\"delete\": 1, \"insert\": [\"    .lineTo(51.7, 5.9)\"], \"start\": 7}]}",
+     "strategies": [],
+     "context": [
+      "4:     .lineTo(48.4, 0.0)",
+      "7:     .lineTo(44.0, 5.9)"
+     ]
+    },
+    {
+     "task_id": "8617c0c1fa1d27a5a3cd40b9b43e0d50b85792a4782a2f6c398e3d2e98f080ae",
+     "instruction": "Set the barrel outer radius equal to 0.6 times the flange radius; the flange thickness, barrel height, and central thread cut stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"            .cylinder(11.0, 6.6)\"], \"start\": 8}]}",
+     "strategies": [],
+     "context": [
+      "8:             .cylinder(11.0, 4.5)"
+     ]
+    }
+   ]
+  },
+  {
+   "event": "initial_state",
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 57287.5154760491,
+       "area": 17977.43363714098,
+       "solids": 1,
+       "faces": 11,
+       "bbox_x": 45.8,
+       "bbox_y": 83.2,
+       "bbox_z": 45.8
+      }
+     },
+     "constraints": {
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -0.0
+    ],
+    "score": 0.0,
+    "diagnosis": [
+     {
+      "stage": "constraints",
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "initial"
+   }
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "geometry",
+     "status": "FAIL",
+     "reason": "JSONDecodeError: Expecting ',' delimiter: line 1 column 265 (char 264)"
+    },
+    {
+     "stage": "constraints",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "799d75af88373cd4be312a28a86290b050df3709a7f64b0e6e0d73b0f8c389da",
+     "instruction": "Set the standoff height equal to three times the original height; the outer radius and bore stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .cylinder(15.3, 17.7)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .cylinder(5.1, 17.7)"
+     ]
+    },
+    {
+     "task_id": "7fc4ccc1f71dd3185f531a8dff2a1a55d060e9b00137ff6dd7e2d30d4080df54",
+     "instruction": "Set the rim outer radius equal to four times the hub radius; the bore, belt width, and groove geometry stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .polyline([[15.6, -11.25], [25.0, -11.25], [93.2, -11.25], [93.2, -4.45], [100.0, -4.45], [100.0, -1.43], [95.6, 0.0], [100.0, 1.43], [100.0, 4.45], [93.2, 4.45], [93.2, 11.25], [25.0, 11.25], [15.6, 11.25]])\"], \"start\": 3}, {\"delete\": 0, \"insert\": [\"show_object(result)\"], \"start\": 7}]}",
+     "strategies": [],
+     "context": [
+      "3:     .polyline([[15.6, -11.25], [25.0, -11.25], [55.7, -11.25], [55.7, -4.45], [62.5, -4.45], [62.5, -1.43], [58.1, 0.0], [62.5, 1.43], [62.5, 4.45], [55.7, 4.45], [55.7, 11.25], [25.0, 11.25], [15.6, 11.25]])"
+     ]
+    },
+    {
+     "task_id": "8617c0c1fa1d27a5a3cd40b9b43e0d50b85792a4782a2f6c398e3d2e98f080ae",
+     "instruction": "Set the barrel outer radius equal to 0.6 times the flange radius; the flange thickness, barrel height, and central thread cut stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"            .cylinder(11.0, 6.6)\"], \"start\": 8}]}",
+     "strategies": [],
+     "context": [
+      "8:             .cylinder(11.0, 4.5)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "FAIL",
+   "hypothesis": "Update outer profile X-coordinates to 18.48 (3x inner radius)"
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": true,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "geometry",
+     "status": "FAIL",
+     "reason": "JSONDecodeError: Expecting ',' delimiter: line 1 column 265 (char 264)"
+    },
+    {
+     "stage": "constraints",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "799d75af88373cd4be312a28a86290b050df3709a7f64b0e6e0d73b0f8c389da",
+     "instruction": "Set the standoff height equal to three times the original height; the outer radius and bore stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .cylinder(15.3, 17.7)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .cylinder(5.1, 17.7)"
+     ]
+    },
+    {
+     "task_id": "7fc4ccc1f71dd3185f531a8dff2a1a55d060e9b00137ff6dd7e2d30d4080df54",
+     "instruction": "Set the rim outer radius equal to four times the hub radius; the bore, belt width, and groove geometry stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .polyline([[15.6, -11.25], [25.0, -11.25], [93.2, -11.25], [93.2, -4.45], [100.0, -4.45], [100.0, -1.43], [95.6, 0.0], [100.0, 1.43], [100.0, 4.45], [93.2, 4.45], [93.2, 11.25], [25.0, 11.25], [15.6, 11.25]])\"], \"start\": 3}, {\"delete\": 0, \"insert\": [\"show_object(result)\"], \"start\": 7}]}",
+     "strategies": [],
+     "context": [
+      "3:     .polyline([[15.6, -11.25], [25.0, -11.25], [55.7, -11.25], [55.7, -4.45], [62.5, -4.45], [62.5, -1.43], [58.1, 0.0], [62.5, 1.43], [62.5, 4.45], [55.7, 4.45], [55.7, 11.25], [25.0, 11.25], [15.6, 11.25]])"
+     ]
+    },
+    {
+     "task_id": "8617c0c1fa1d27a5a3cd40b9b43e0d50b85792a4782a2f6c398e3d2e98f080ae",
+     "instruction": "Set the barrel outer radius equal to 0.6 times the flange radius; the flange thickness, barrel height, and central thread cut stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"            .cylinder(11.0, 6.6)\"], \"start\": 8}]}",
+     "strategies": [],
+     "context": [
+      "8:             .cylinder(11.0, 4.5)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "FAIL",
+   "hypothesis": "Modified the polyline profile to enforce an outer radius of 18.48 (3x the inner radius of 6.16) while maintaining the inner profile geometry and convolution count."
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": true,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "geometry",
+     "status": "FAIL",
+     "reason": "JSONDecodeError: Expecting ',' delimiter: line 1 column 265 (char 264)"
+    },
+    {
+     "stage": "constraints",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "799d75af88373cd4be312a28a86290b050df3709a7f64b0e6e0d73b0f8c389da",
+     "instruction": "Set the standoff height equal to three times the original height; the outer radius and bore stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .cylinder(15.3, 17.7)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .cylinder(5.1, 17.7)"
+     ]
+    },
+    {
+     "task_id": "7fc4ccc1f71dd3185f531a8dff2a1a55d060e9b00137ff6dd7e2d30d4080df54",
+     "instruction": "Set the rim outer radius equal to four times the hub radius; the bore, belt width, and groove geometry stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .polyline([[15.6, -11.25], [25.0, -11.25], [93.2, -11.25], [93.2, -4.45], [100.0, -4.45], [100.0, -1.43], [95.6, 0.0], [100.0, 1.43], [100.0, 4.45], [93.2, 4.45], [93.2, 11.25], [25.0, 11.25], [15.6, 11.25]])\"], \"start\": 3}, {\"delete\": 0, \"insert\": [\"show_object(result)\"], \"start\": 7}]}",
+     "strategies": [],
+     "context": [
+      "3:     .polyline([[15.6, -11.25], [25.0, -11.25], [55.7, -11.25], [55.7, -4.45], [62.5, -4.45], [62.5, -1.43], [58.1, 0.0], [62.5, 1.43], [62.5, 4.45], [55.7, 4.45], [55.7, 11.25], [25.0, 11.25], [15.6, 11.25]])"
+     ]
+    },
+    {
+     "task_id": "8617c0c1fa1d27a5a3cd40b9b43e0d50b85792a4782a2f6c398e3d2e98f080ae",
+     "instruction": "Set the barrel outer radius equal to 0.6 times the flange radius; the flange thickness, barrel height, and central thread cut stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"            .cylinder(11.0, 6.6)\"], \"start\": 8}]}",
+     "strategies": [],
+     "context": [
+      "8:             .cylinder(11.0, 4.5)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "FAIL",
+   "hypothesis": "Adjusted outer radius X-coordinates in polyline to 18.48 (3x inner radius 6.16), maintaining inner coordinates and Y-values"
+  },
+  {
+   "event": "backtrack",
+   "to_node": 1
+  },
+  {
+   "event": "expand",
+   "parent": 1,
+   "node": 2,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "semantics",
+     "status": "FAIL",
+     "confidence": 0.9,
+     "reason": "The edited part shows a radially thinner ring (smaller outer radius relative to inner radius) compared to the original, whereas the instruction implies setting a specific ratio of 3:1 which likely requires a thicker ring or larger outer radius if the original was standard.",
+     "basis": "Astra rendered-view judgement",
+     "image": "semantic-00.png"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "No physical contract supplied"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "No perturbation contract supplied"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "799d75af88373cd4be312a28a86290b050df3709a7f64b0e6e0d73b0f8c389da",
+     "instruction": "Set the standoff height equal to three times the original height; the outer radius and bore stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .cylinder(15.3, 17.7)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .cylinder(5.1, 17.7)"
+     ]
+    },
+    {
+     "task_id": "8617c0c1fa1d27a5a3cd40b9b43e0d50b85792a4782a2f6c398e3d2e98f080ae",
+     "instruction": "Set the barrel outer radius equal to 0.6 times the flange radius; the flange thickness, barrel height, and central thread cut stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"            .cylinder(11.0, 6.6)\"], \"start\": 8}]}",
+     "strategies": [],
+     "context": [
+      "8:             .cylinder(11.0, 4.5)"
+     ]
+    },
+    {
+     "task_id": "32ba5c1937edb093d0199da76be6f8c83d68d0fb219b0169ed46274b2b1277cb",
+     "instruction": "Set the ring axial thickness (extrude depth) equal to half the ring inner radius. The outer profile, inner profile, and gap stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .extrude(5.0)\"], \"start\": 9}]}",
+     "strategies": [],
+     "context": [
+      "9:     .extrude(1.2)"
+     ]
+    }
+   ],
+   "path": [
+    0,
+    1
+   ],
+   "status": "FAIL",
+   "hypothesis": "Set outer radius to 3x inner radius by scaling outer profile points to maintain shape"
+  }
+ ],
+ "config": {
+  "algorithm": "mcts",
+  "max_expansions": 4,
+  "max_depth": 3,
+  "width": 2,
+  "max_width": 4,
+  "exploration": 0.7,
+  "seconds": 2400.0
+ },
+ "memory_version": "3bfd30b74ff6a8135bdb99efa5ce2e501d9cc778bd1a5cc6ff9b660f637a1ab0",
+ "stored": null,
+ "seconds": 541.7995537500001,
+ "api": {
+  "mode": "live_astra",
+  "api_calls": 7,
+  "cost_usd": 0.0,
+  "budget_usd": 0.13392857142857142,
+  "refused": 0
+ },
+ "tool_jobs": 4
+}

@@ -1,0 +1,242 @@
+{
+ "task_id": "07b7f981e2677d31d64722ce48afce6682797e4752ad5351d07de31228c34847",
+ "status": "UNVERIFIED",
+ "prediction": "{\"edits\":[{\"start\":23,\"delete\":0,\"insert\":[\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\"]}]}",
+ "selected_node": null,
+ "bank": [],
+ "pareto": [],
+ "stop": "planner_error",
+ "nodes": [
+  {
+   "id": 0,
+   "candidate": "{\"edits\":[{\"start\":23,\"delete\":0,\"insert\":[\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\"]}]}",
+   "depth": 0,
+   "verdict": {
+    "status": "UNKNOWN",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 1629.7423851574595,
+       "area": 1090.7347193753217,
+       "solids": 1,
+       "faces": 24,
+       "bbox_x": 21.0,
+       "bbox_y": 7.500000000000002,
+       "bbox_z": 11.0
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "HTTPError"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -1.0
+    ],
+    "score": -0.001,
+    "diagnosis": [
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "HTTPError"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 0,
+   "visits": 0,
+   "final": null,
+   "edges": []
+  }
+ ],
+ "edges": [],
+ "events": [
+  {
+   "event": "decompose",
+   "plan": {
+    "steps": [],
+    "source": "planner error",
+    "error_type": "HTTPError"
+   },
+   "memory_version": "dac08b8ab46df1d214ac31d1fe9098148dd2a99df47432be0f28c6683767ae83",
+   "retrieved": [
+    {
+     "task_id": "0d63547f6d3db71b375febaa822e7bcd56646d2777f86ca853f154bbc9652bf4",
+     "instruction": "Rotate the entire part by 90\u00b0 about the X axis.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0,0,0), (1,0,0), 90)\"], \"start\": 9}]}",
+     "strategies": [],
+     "context": [
+      "9: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "0de5af962c501ae4930a0cd24ea0783de8733688c126bee67b8959d15220d626",
+     "instruction": "Rotate the entire part by 90\u00b0 about the X axis.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0,0,0), (1,0,0), 90)\"], \"start\": 13}]}",
+     "strategies": [],
+     "context": [
+      "13: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "0eea9ca890ef4c7fc767e73195e1d1484d3f89b7faa209a19e3f1f6f948b43e2",
+     "instruction": "Rotate the entire part by 90\u00b0 about the X axis.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0,0,0), (1,0,0), 90)\"], \"start\": 38}]}",
+     "strategies": [],
+     "context": [
+      "38: show_object(result)"
+     ]
+    }
+   ]
+  },
+  {
+   "event": "initial_state",
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 1629.7423851574595,
+       "area": 1090.7347193753217,
+       "solids": 1,
+       "faces": 24,
+       "bbox_x": 21.0,
+       "bbox_y": 11.0,
+       "bbox_z": 7.5
+      }
+     },
+     "constraints": {
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         90.0
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -0.0
+    ],
+    "score": 0.0,
+    "diagnosis": [
+     {
+      "stage": "constraints",
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         90.0
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "initial"
+   }
+  }
+ ],
+ "config": {
+  "algorithm": "mcts",
+  "max_expansions": 4,
+  "max_depth": 3,
+  "width": 2,
+  "max_width": 4,
+  "exploration": 0.7,
+  "seconds": 1500
+ },
+ "memory_version": "dac08b8ab46df1d214ac31d1fe9098148dd2a99df47432be0f28c6683767ae83",
+ "stored": null,
+ "seconds": 6.429897459000003,
+ "api": {
+  "mode": "live_astra",
+  "api_calls": 2,
+  "cost_usd": 0.16865,
+  "budget_usd": 0.11894966101694916,
+  "refused": 0
+ },
+ "tool_jobs": 2
+}

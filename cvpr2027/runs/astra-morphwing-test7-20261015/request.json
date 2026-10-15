@@ -1,0 +1,16 @@
+{
+  "model": "gpt-6-astra",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are solving a CAD+FEM benchmark task. Return only a complete runnable Python main.py, with no markdown fences. No model-side tools are available; your code will run locally. Do not hardcode a guessed answer or use published reference results."
+    },
+    {
+      "role": "user",
+      "content": "Cantilever plate specimen for an active-camber morphing-wing study (FDM-printed PLA): a 4 mm plate with a 1 mm-thick flexible strip (mid-plane z = 2 mm) along part of its width, the stepped plate used for active camber morphing. part.step is one solid in millimetres, 319 x 50 x 4 mm, with a 19 mm clamping grip at x = 0-19 mm (the scalloped clamp region).\nModel the vibrating structure only: the free part x >= 19 mm, clamped (all displacements and rotations zero) along its whole cross-section at x = 19 mm. The grip is held in the fixture and is not part of the model.\nMaterial: PLA treated as isotropic linear elastic, E = 2110 MPa, Poisson ratio 0.3, density 1180 kg/m^3.\nAnalysis: undamped natural frequencies (modal analysis), no prestress, no gravity. Identify the modes by their shapes.\n\nOutputs:\n- f_1B_Hz [Hz]: first out-of-plane bending mode\n- f_1T_Hz [Hz]: first torsion mode about the span (x) axis\n- f_2B_Hz [Hz]: second out-of-plane bending mode\n\nSubmit results.json containing exactly an outputs object with these numeric keys. Also submit main.py, part.step, mesh.msh, fields.npz, solver.log, refinement.json and environment.json. See candidate README for the artifact contract. Correct numerical answers alone do not establish workflow completion.\nRuntime: Python with numpy, scipy, gmsh, cadquery, meshio, skfem. Also ccx (CalculiX 2.23) available on PATH. No FreeCAD or ANSYS. Read CADFEM_INPUT_DIR/part.step; write outputs into CADFEM_OUTPUT_DIR. main.py itself is preserved separately by the runner. Internet and evaluator data are blocked. 600 seconds, 2 CPU threads, 6000 MB RAM. Choose meshes feasible for these limits and record convergence honestly. Identify bending and torsion from computed mode shapes; do not assume frequency order alone determines the labels.\nYou have one code-generation attempt, no repair feedback. Provide runnable code, not a plan. If computation fails, do not fabricate results."
+    }
+  ],
+  "reasoning_effort": "low",
+  "max_completion_tokens": 5600,
+  "store": false
+}

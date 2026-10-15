@@ -1,0 +1,450 @@
+{
+  "collection": "Original published DeepWheel wheel modal CAD/reference subset",
+  "source": "https://dataset.narnia.ai/deepwheel.html",
+  "dataset_source": "https://huggingface.co/datasets/KAIST-SmartDesignLab/DeepWheel",
+  "revision": "b867a2d3fb41e51d3d654fb064e57d265b0c9488",
+  "collected_date": "2026-10-12",
+  "license": "CC BY-NC 4.0, Soyoung Yoo and Namwoo Kang / KAIST SmartDesignLab, Narnia Labs",
+  "source_cad_reference_pairs": 904,
+  "downloaded_cad_reference_pairs": 10,
+  "problem_families": 1,
+  "selection": "Ten cases evenly spaced by sorted Mode7 frequency index; not a random or independent blind holdout",
+  "source_generated_geometry": true,
+  "local_geometry_generated": false,
+  "local_solver_runs": 0,
+  "model_calls": 0,
+  "certified_benchmark_admissions": 0,
+  "original_dimensioned_drawing_verified": false,
+  "limitations": [
+    "Geometry is publisher-generated and mesh-reconstructed BREP, not human-authored parametric design or verified dimensioned drawing.",
+    "Modal scalar labels only: no downloaded full eigenvectors, stress fields or executable OptiStruct solver deck.",
+    "Rigid body modes precede Mode7; ordinal mode labels may swap families and need eigenvector matching for detailed modal scoring.",
+    "Publisher mesh size is 6 mm; independent mesh convergence and replay tolerances not certified.",
+    "Public labels can cause model contamination; do not claim new independent holdout.",
+    "License allows noncommercial use with attribution.",
+    "All ten CAD masses at publisher-stated density 2680 kg/m3 are about 3.25% below CSV mass. CSV mass implies approximately 2770 kg/m3. This suggests a density/setup discrepancy, but source deck is absent: inference, not verified solver input. Do not silently substitute density."
+  ],
+  "records": [
+    {
+      "id": "zeta_0133_c1_0.0050_c2_0.15_c3_0.220_pp_4_1",
+      "cad": "cad/zeta_0133_c1_0.0050_c2_0.15_c3_0.220_pp_4_1.stp",
+      "cad_geometry": {
+        "valid": true,
+        "solids": 1,
+        "faces": 8910,
+        "volume_mm3": 7112630.799826092,
+        "bounds_mm": [
+          -239.16018082361038,
+          -240.12314354589358,
+          -127.81039536620267,
+          241.50844422894997,
+          239.60567506606856,
+          86.5116595908202
+        ],
+        "cad_density_mass_kg": 19.06185054353393,
+        "relative_mass_difference": 0.03247195438269335,
+        "step_unit_declaration": "millimetres",
+        "implied_density_from_published_mass_kg_m3": 2769.945545392531
+      },
+      "reference": {
+        "mass_kg": 19.7016,
+        "mode_7_frequency_Hz": 366.0754,
+        "mode_11_frequency_Hz": 916.9191
+      },
+      "source_csv": "deepwheel_sim_results.csv",
+      "source_cad_archive_member": "step/zeta_0133_c1_0.0050_c2_0.15_c3_0.220_pp_4_1.stp",
+      "source_zip_crc": 2369483962,
+      "sha256": "0b97cd910e5d5ed664664d3eb1a1d3e10720148b779ed9f997ab314fd9cea8b4",
+      "physics": {
+        "type": "Free-free modal vibration",
+        "solver": "Altair OptiStruct via SimLab",
+        "material": "A356-T6 aluminium",
+        "young_modulus_Pa": 72000000000.0,
+        "poisson_ratio": 0.33,
+        "density_kg_m3": 2680,
+        "reference_mesh": "Tet10, average size 6 mm (publisher paper)",
+        "density_status": "Publisher paper value; CAD/CSV mass consistency flagged for every selected case"
+      },
+      "provenance": "Publisher synthetic wheel geometry reconstructed then converted to BREP; downloaded original unchanged",
+      "scoring_status": "Candidate: scalar frequency reference available; source solver deck/mode shapes and independent mesh convergence not verified"
+    },
+    {
+      "id": "zeta_0471_c1_0.0050_c2_0.00_c3_0.154_pp_5_3",
+      "cad": "cad/zeta_0471_c1_0.0050_c2_0.00_c3_0.154_pp_5_3.stp",
+      "cad_geometry": {
+        "valid": true,
+        "solids": 1,
+        "faces": 7928,
+        "volume_mm3": 6642791.839527512,
+        "bounds_mm": [
+          -240.02370317980518,
+          -239.68804879045504,
+          -123.12505408497056,
+          240.75428723384564,
+          240.49042657581063,
+          91.20782759892391
+        ],
+        "cad_density_mass_kg": 17.802682129933732,
+        "relative_mass_difference": 0.0324681860460686,
+        "step_unit_declaration": "millimetres",
+        "implied_density_from_published_mass_kg_m3": 2769.934757026612
+      },
+      "reference": {
+        "mass_kg": 18.4001,
+        "mode_7_frequency_Hz": 390.0166,
+        "mode_11_frequency_Hz": 975.5839
+      },
+      "source_csv": "deepwheel_sim_results.csv",
+      "source_cad_archive_member": "step/zeta_0471_c1_0.0050_c2_0.00_c3_0.154_pp_5_3.stp",
+      "source_zip_crc": 1146275883,
+      "sha256": "e86c146f7402ea38b2db9c248ecc1920983e1a87d7ac1a664ffaf02e98d8b1dd",
+      "physics": {
+        "type": "Free-free modal vibration",
+        "solver": "Altair OptiStruct via SimLab",
+        "material": "A356-T6 aluminium",
+        "young_modulus_Pa": 72000000000.0,
+        "poisson_ratio": 0.33,
+        "density_kg_m3": 2680,
+        "reference_mesh": "Tet10, average size 6 mm (publisher paper)"
+      },
+      "provenance": "Publisher synthetic wheel geometry reconstructed then converted to BREP; downloaded original unchanged",
+      "scoring_status": "Candidate: scalar frequency reference available; source solver deck/mode shapes and independent mesh convergence not verified"
+    },
+    {
+      "id": "epsilon_0285_2",
+      "cad": "cad/epsilon_0285_2.stp",
+      "cad_geometry": {
+        "valid": true,
+        "solids": 1,
+        "faces": 9268,
+        "volume_mm3": 7120293.714923657,
+        "bounds_mm": [
+          -239.80215373932836,
+          -239.8862137645942,
+          -128.1139916541463,
+          240.85507808282634,
+          239.95922580352385,
+          86.38793477583938
+        ],
+        "cad_density_mass_kg": 19.082387155995402,
+        "relative_mass_difference": 0.032451062954031884,
+        "step_unit_declaration": "millimetres",
+        "implied_density_from_published_mass_kg_m3": 2769.8857364076393
+      },
+      "reference": {
+        "mass_kg": 19.7224,
+        "mode_7_frequency_Hz": 400.1808,
+        "mode_11_frequency_Hz": 1109.113
+      },
+      "source_csv": "deepwheel_sim_results.csv",
+      "source_cad_archive_member": "step/epsilon_0285_2.stp",
+      "source_zip_crc": 2861880207,
+      "sha256": "8b97edc632644a7b94a16af0e3f6d47429ad3bbf2cd00abd57a89cfb38531ee1",
+      "physics": {
+        "type": "Free-free modal vibration",
+        "solver": "Altair OptiStruct via SimLab",
+        "material": "A356-T6 aluminium",
+        "young_modulus_Pa": 72000000000.0,
+        "poisson_ratio": 0.33,
+        "density_kg_m3": 2680,
+        "reference_mesh": "Tet10, average size 6 mm (publisher paper)"
+      },
+      "provenance": "Publisher synthetic wheel geometry reconstructed then converted to BREP; downloaded original unchanged",
+      "scoring_status": "Candidate: scalar frequency reference available; source solver deck/mode shapes and independent mesh convergence not verified"
+    },
+    {
+      "id": "theta_0062_2",
+      "cad": "cad/theta_0062_2.stp",
+      "cad_geometry": {
+        "valid": true,
+        "solids": 1,
+        "faces": 9087,
+        "volume_mm3": 7083382.735921994,
+        "bounds_mm": [
+          -240.2998810739403,
+          -239.84826965674495,
+          -124.02920392753919,
+          240.32783264865765,
+          239.96338330078618,
+          90.33961761456561
+        ],
+        "cad_density_mass_kg": 18.983465732270943,
+        "relative_mass_difference": 0.03245792713307427,
+        "step_unit_declaration": "millimetres",
+        "implied_density_from_published_mass_kg_m3": 2769.905387224027
+      },
+      "reference": {
+        "mass_kg": 19.6203,
+        "mode_7_frequency_Hz": 407.125,
+        "mode_11_frequency_Hz": 1099.993
+      },
+      "source_csv": "deepwheel_sim_results.csv",
+      "source_cad_archive_member": "step/theta_0062_2.stp",
+      "source_zip_crc": 1418511277,
+      "sha256": "e691ad106a3bf3e22e756fee69e8ec6c63a71b79804a6985c427a80903f4b1c2",
+      "physics": {
+        "type": "Free-free modal vibration",
+        "solver": "Altair OptiStruct via SimLab",
+        "material": "A356-T6 aluminium",
+        "young_modulus_Pa": 72000000000.0,
+        "poisson_ratio": 0.33,
+        "density_kg_m3": 2680,
+        "reference_mesh": "Tet10, average size 6 mm (publisher paper)"
+      },
+      "provenance": "Publisher synthetic wheel geometry reconstructed then converted to BREP; downloaded original unchanged",
+      "scoring_status": "Candidate: scalar frequency reference available; source solver deck/mode shapes and independent mesh convergence not verified"
+    },
+    {
+      "id": "nu_0047_3",
+      "cad": "cad/nu_0047_3.stp",
+      "cad_geometry": {
+        "valid": true,
+        "solids": 1,
+        "faces": 8971,
+        "volume_mm3": 7306848.815962122,
+        "bounds_mm": [
+          -240.21444192643096,
+          -239.25986666264333,
+          -125.50060700737852,
+          240.57742964846125,
+          240.69542102464504,
+          89.31308033374528
+        ],
+        "cad_density_mass_kg": 19.582354826778488,
+        "relative_mass_difference": 0.03246844898448631,
+        "step_unit_declaration": "millimetres",
+        "implied_density_from_published_mass_kg_m3": 2769.935509789932
+      },
+      "reference": {
+        "mass_kg": 20.2395,
+        "mode_7_frequency_Hz": 413.6829,
+        "mode_11_frequency_Hz": 1152.342
+      },
+      "source_csv": "deepwheel_sim_results.csv",
+      "source_cad_archive_member": "step/nu_0047_3.stp",
+      "source_zip_crc": 1542287208,
+      "sha256": "326b3f9fa53aaa3fd3fad5c7980ec1aa21d6e359c8c50f5c75b1acc99a64a188",
+      "physics": {
+        "type": "Free-free modal vibration",
+        "solver": "Altair OptiStruct via SimLab",
+        "material": "A356-T6 aluminium",
+        "young_modulus_Pa": 72000000000.0,
+        "poisson_ratio": 0.33,
+        "density_kg_m3": 2680,
+        "reference_mesh": "Tet10, average size 6 mm (publisher paper)"
+      },
+      "provenance": "Publisher synthetic wheel geometry reconstructed then converted to BREP; downloaded original unchanged",
+      "scoring_status": "Candidate: scalar frequency reference available; source solver deck/mode shapes and independent mesh convergence not verified"
+    },
+    {
+      "id": "theta_0042_c1_0.0050_c2_0.05_c3_0.147_pp_6_1",
+      "cad": "cad/theta_0042_c1_0.0050_c2_0.05_c3_0.147_pp_6_1.stp",
+      "cad_geometry": {
+        "valid": true,
+        "solids": 1,
+        "faces": 8956,
+        "volume_mm3": 7708556.393630828,
+        "bounds_mm": [
+          -239.8155680967152,
+          -239.5193085654918,
+          -127.60419736718666,
+          240.9323435857548,
+          240.20739512331195,
+          87.07170029104667
+        ],
+        "cad_density_mass_kg": 20.658931134930622,
+        "relative_mass_difference": 0.032472795205639504,
+        "step_unit_declaration": "millimetres",
+        "implied_density_from_published_mass_kg_m3": 2769.947952594895
+      },
+      "reference": {
+        "mass_kg": 21.3523,
+        "mode_7_frequency_Hz": 420.8694,
+        "mode_11_frequency_Hz": 1103.563
+      },
+      "source_csv": "deepwheel_sim_results.csv",
+      "source_cad_archive_member": "step/theta_0042_c1_0.0050_c2_0.05_c3_0.147_pp_6_1.stp",
+      "source_zip_crc": 1463736113,
+      "sha256": "f22d962784c1f464b3ed82f36dfcad0d803823d564e7c8727b5b6d56e8baa7f7",
+      "physics": {
+        "type": "Free-free modal vibration",
+        "solver": "Altair OptiStruct via SimLab",
+        "material": "A356-T6 aluminium",
+        "young_modulus_Pa": 72000000000.0,
+        "poisson_ratio": 0.33,
+        "density_kg_m3": 2680,
+        "reference_mesh": "Tet10, average size 6 mm (publisher paper)"
+      },
+      "provenance": "Publisher synthetic wheel geometry reconstructed then converted to BREP; downloaded original unchanged",
+      "scoring_status": "Candidate: scalar frequency reference available; source solver deck/mode shapes and independent mesh convergence not verified"
+    },
+    {
+      "id": "beta_0446_0",
+      "cad": "cad/beta_0446_0.stp",
+      "cad_geometry": {
+        "valid": true,
+        "solids": 1,
+        "faces": 9438,
+        "volume_mm3": 7493947.968848265,
+        "bounds_mm": [
+          -240.4006592834178,
+          -239.99432090393375,
+          -125.23089088847813,
+          240.40443119912047,
+          239.84965932285158,
+          88.62202475272335
+        ],
+        "cad_density_mass_kg": 20.08378055651335,
+        "relative_mass_difference": 0.032461336738671576,
+        "step_unit_declaration": "millimetres",
+        "implied_density_from_published_mass_kg_m3": 2769.9151483687456
+      },
+      "reference": {
+        "mass_kg": 20.7576,
+        "mode_7_frequency_Hz": 426.9859,
+        "mode_11_frequency_Hz": 1223.881
+      },
+      "source_csv": "deepwheel_sim_results.csv",
+      "source_cad_archive_member": "step/beta_0446_0.stp",
+      "source_zip_crc": 2105936267,
+      "sha256": "f4ea3248f773067ed10fc098a25e522085706a90c26ed6907c66181960ef6ebd",
+      "physics": {
+        "type": "Free-free modal vibration",
+        "solver": "Altair OptiStruct via SimLab",
+        "material": "A356-T6 aluminium",
+        "young_modulus_Pa": 72000000000.0,
+        "poisson_ratio": 0.33,
+        "density_kg_m3": 2680,
+        "reference_mesh": "Tet10, average size 6 mm (publisher paper)"
+      },
+      "provenance": "Publisher synthetic wheel geometry reconstructed then converted to BREP; downloaded original unchanged",
+      "scoring_status": "Candidate: scalar frequency reference available; source solver deck/mode shapes and independent mesh convergence not verified"
+    },
+    {
+      "id": "kappa_0331_c1_0.0500_c2_0.20_c3_0.147_pp_6_3",
+      "cad": "cad/kappa_0331_c1_0.0500_c2_0.20_c3_0.147_pp_6_3.stp",
+      "cad_geometry": {
+        "valid": true,
+        "solids": 1,
+        "faces": 8922,
+        "volume_mm3": 7932988.849798904,
+        "bounds_mm": [
+          -239.96237811126002,
+          -239.81344864770517,
+          -129.07294069083605,
+          240.76085138033255,
+          240.09279775653494,
+          85.75086877592435
+        ],
+        "cad_density_mass_kg": 21.260410117461067,
+        "relative_mass_difference": 0.03246987938139945,
+        "step_unit_declaration": "millimetres",
+        "implied_density_from_published_mass_kg_m3": 2769.939604863686
+      },
+      "reference": {
+        "mass_kg": 21.9739,
+        "mode_7_frequency_Hz": 433.5723,
+        "mode_11_frequency_Hz": 1319.919
+      },
+      "source_csv": "deepwheel_sim_results.csv",
+      "source_cad_archive_member": "step/kappa_0331_c1_0.0500_c2_0.20_c3_0.147_pp_6_3.stp",
+      "source_zip_crc": 568768448,
+      "sha256": "df93671eb81fce502461a25f43fd3c0d921525cc78afe3704de04bcec16b7cad",
+      "physics": {
+        "type": "Free-free modal vibration",
+        "solver": "Altair OptiStruct via SimLab",
+        "material": "A356-T6 aluminium",
+        "young_modulus_Pa": 72000000000.0,
+        "poisson_ratio": 0.33,
+        "density_kg_m3": 2680,
+        "reference_mesh": "Tet10, average size 6 mm (publisher paper)"
+      },
+      "provenance": "Publisher synthetic wheel geometry reconstructed then converted to BREP; downloaded original unchanged",
+      "scoring_status": "Candidate: scalar frequency reference available; source solver deck/mode shapes and independent mesh convergence not verified"
+    },
+    {
+      "id": "kappa_0581_3",
+      "cad": "cad/kappa_0581_3.stp",
+      "cad_geometry": {
+        "valid": true,
+        "solids": 1,
+        "faces": 9774,
+        "volume_mm3": 7964622.485652924,
+        "bounds_mm": [
+          -240.00167041012932,
+          -239.9574282946341,
+          -130.25647953106514,
+          240.73571937335655,
+          240.1196072754236,
+          83.13469830303275
+        ],
+        "cad_density_mass_kg": 21.345188261549836,
+        "relative_mass_difference": 0.032468859254817795,
+        "step_unit_declaration": "millimetres",
+        "implied_density_from_published_mass_kg_m3": 2769.9366843488806
+      },
+      "reference": {
+        "mass_kg": 22.0615,
+        "mode_7_frequency_Hz": 443.7821,
+        "mode_11_frequency_Hz": 1327.715
+      },
+      "source_csv": "deepwheel_sim_results.csv",
+      "source_cad_archive_member": "step/kappa_0581_3.stp",
+      "source_zip_crc": 2290221181,
+      "sha256": "aef46d726d46b93643e90ac58d16ee7b34690f4c23018cfb0305d713e651c7f0",
+      "physics": {
+        "type": "Free-free modal vibration",
+        "solver": "Altair OptiStruct via SimLab",
+        "material": "A356-T6 aluminium",
+        "young_modulus_Pa": 72000000000.0,
+        "poisson_ratio": 0.33,
+        "density_kg_m3": 2680,
+        "reference_mesh": "Tet10, average size 6 mm (publisher paper)"
+      },
+      "provenance": "Publisher synthetic wheel geometry reconstructed then converted to BREP; downloaded original unchanged",
+      "scoring_status": "Candidate: scalar frequency reference available; source solver deck/mode shapes and independent mesh convergence not verified"
+    },
+    {
+      "id": "beta_0451_0",
+      "cad": "cad/beta_0451_0.stp",
+      "cad_geometry": {
+        "valid": true,
+        "solids": 1,
+        "faces": 8861,
+        "volume_mm3": 8292016.5197842615,
+        "bounds_mm": [
+          -240.704354611388,
+          -239.63723074100338,
+          -126.62045105750562,
+          240.01189187931678,
+          240.1087323181836,
+          87.34132931807332
+        ],
+        "cad_density_mass_kg": 22.222604273021823,
+        "relative_mass_difference": 0.032470512834075316,
+        "step_unit_declaration": "millimetres",
+        "implied_density_from_published_mass_kg_m3": 2769.941418374982
+      },
+      "reference": {
+        "mass_kg": 22.9684,
+        "mode_7_frequency_Hz": 479.6003,
+        "mode_11_frequency_Hz": 1345.399
+      },
+      "source_csv": "deepwheel_sim_results.csv",
+      "source_cad_archive_member": "step/beta_0451_0.stp",
+      "source_zip_crc": 1185856762,
+      "sha256": "2990d58d13ce66c1ca8436ebe2f22184876743d3309f369f16ff4813bedae3cd",
+      "physics": {
+        "type": "Free-free modal vibration",
+        "solver": "Altair OptiStruct via SimLab",
+        "material": "A356-T6 aluminium",
+        "young_modulus_Pa": 72000000000.0,
+        "poisson_ratio": 0.33,
+        "density_kg_m3": 2680,
+        "reference_mesh": "Tet10, average size 6 mm (publisher paper)"
+      },
+      "provenance": "Publisher synthetic wheel geometry reconstructed then converted to BREP; downloaded original unchanged",
+      "scoring_status": "Candidate: scalar frequency reference available; source solver deck/mode shapes and independent mesh convergence not verified"
+    }
+  ]
+}

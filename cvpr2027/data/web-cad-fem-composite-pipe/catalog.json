@@ -1,0 +1,80 @@
+{
+  "collection": "Layered composite pipe CAD and two saved source revisions",
+  "source": "https://github.com/koolkingisone/composite-pipe-fea",
+  "author": "Momin Ali Khan",
+  "original_IGES": "composite pipe.IGS",
+  "IGES_inspection": {
+    "valid": true,
+    "solids": 0,
+    "faces": 18,
+    "envelope_mm": [
+      374.000000014496,
+      374.000000014496,
+      1000.0000001999999
+    ]
+  },
+  "ACP_STEP_inspection": {
+    "valid": true,
+    "solids": 1,
+    "faces": 8,
+    "envelope_mm": [
+      380.0000002,
+      380.0000002,
+      206.00000020000002
+    ]
+  },
+  "native_CAD": [
+    "composite pipe.SLDPRT",
+    "compsite pipe surface.SLDPRT",
+    "composite pipe.x_t",
+    "compsite pipe surface.x_t"
+  ],
+  "raw_source_candidate": 1,
+  "raw_source_revisions": [
+    {
+      "raw_RST": "extracted-original/composite pipe_files/dp0/SYS/MECH/file.rst",
+      "source_workbench_version": "! ANSYS input file written by Workbench version 18.1 RELEASE",
+      "source_unit_card": "/units,MPA",
+      "nodes": 255,
+      "elements": 420,
+      "sets": 1,
+      "source_applied_pressure_card": [
+        "sf,all,pres,%_loadvari920%"
+      ],
+      "source_CAD_scope": "OriginalIGESfull1000mmsurfacecandidate; sourceACPSTEPis206mmlongsolidanddoesnotmatchfullsolve"
+    },
+    {
+      "raw_RST": "composite pipe_files/dp0/SYS/MECH/file.rst",
+      "source_workbench_version": "! ANSYS input file written by Workbench version 2023 R2",
+      "source_unit_card": "/units,MKS",
+      "nodes": 255,
+      "elements": 420,
+      "sets": 1,
+      "source_applied_pressure_card": [
+        "sf,all,pres,1000000."
+      ],
+      "source_CAD_scope": "OriginalIGESfull1000mmsurfacecandidate; sourceACPSTEPis206mmlongsolidanddoesnotmatchfullsolve"
+    }
+  ],
+  "archive_exploratory_max_U_mm": 1.313397154743312,
+  "exploratory_displacement_scoring_admitted": false,
+  "raw_nodes": 255,
+  "raw_elements": 420,
+  "original_dimensioned_drawing": false,
+  "license": "READMElimitsMITto documentation;CAD/ANSYS remainauthorswork andrequestcredit. No broad data-license grant assumed.",
+  "limits": [
+    "Geometry is a moderately simple pipe; complexity lies inorthotropic layered shell definitions andmaterial/section mapping.",
+    "FullIGESvalid18face surface,0solids,374x374x1000mm. Saved mesh midradius184mm,length1000. ACPSTEPvalid380x380x206mmsolid is a differentCADscope; exclude as exactfull-pipegeometry.",
+    "WBPZarchived18.1MPAsolution andloose2023R2MKSsolution differ inmaterial/section cards; not mere unit-scaled mirrors or2independentfamilies.",
+    "Archive containsstructural-steel cards forsections1-3 plusorthotropicmat4;loose project usesorthotropiccards. Do notdescribe everyarchivedpart ascarbon/epoxy.",
+    "Exploratory archive translationsfinite,max1.313397mm;compatibleindependent decoder/source-figure validation missing. Loose-source legacydecode returnsunphysical~1e307values; no loosefieldNPZ retained.",
+    "Legacy shell stress recovery terminated process; no nodalstress export or certified plyfailure result extracted. UsecompatibleACP/MAPDLreader.",
+    "Do not apply isotropicvonMisesfailure scoring to orthotropicplies; original layup/rosettes/criteria mustbe resolved.",
+    "No newFEMsolve or executedrunACP.py; originaldefinitions/code retained asread-only assets."
+  ],
+  "source_revision": "cd4f43678209b7eb5f5cf374911e38d0defe6bac",
+  "certified_cases": 0,
+  "generated_cad": 0,
+  "new_solver_runs": 0,
+  "model_calls": 0
+}

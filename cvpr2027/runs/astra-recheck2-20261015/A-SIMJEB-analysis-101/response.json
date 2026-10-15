@@ -1,0 +1,36 @@
+{
+  "id": "chatcmpl-EZIOeghRyzIVzeeRmUM2JAB950MVO",
+  "object": "chat.completion",
+  "created": 1792080904,
+  "model": "gpt-6-astra",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"edits\":[{\"old\":\"for level, size in enumerate([3.2, 2.35]):\",\"new\":\"# The 2.35 mm mesh exceeded the process-group memory budget during\\n    # direct factorization. Compare two coarser quadratic meshes instead;\\n    # the previous execution successfully solved the 3.2 mm mesh.\\n    for level, size in enumerate([4.2, 3.2]):\"},{\"old\":\"        n = len(tags)\\n\\n        def indices(t):\",\"new\":\"        n = len(tags)\\n        # Check before launching the memory-intensive sparse direct solver.\\n        # Preserve the completed coarser solve if CAD-driven meshing produces\\n        # an unexpectedly large refinement mesh.\\n        if accepted is not None and n > 210000:\\n            history.append({\\\"mesh_size_mm\\\": size, \\\"nodes\\\": n,\\n                            \\\"status\\\": \\\"not_solved\\\",\\n                            \\\"reason\\\": \\\"Conservative direct-solver memory budget\\\"})\\n            log(f\\\"Level {level}: refinement not solved: {n} nodes exceed memory budget.\\\")\\n            break\\n\\n        def indices(t):\"},{\"old\":\"                f.write(\\\"*STEP\\\\n*STATIC\\\\n1.,1.\\\\n*CLOAD,OP=NEW\\\\n\\\")\",\"new\":\"                f.write(\\\"*STEP\\\\n*STATIC\\\\n1.,1.,1.e-6,1.\\\\n*CLOAD,OP=NEW\\\\n\\\")\"}],\"reason\":\"The coarse analysis completed; the 299,860-node refinement caused a process-group memory kill during direct solution, not a mesh or load failure. Use a smaller two-mesh comparison ending at the previously successful mesh size, guard unexpectedly large refinements, and specify valid static increment limits. FEM, all four cases, computed fields, and truthful refinement reporting remain intact.\"}",
+        "refusal": null,
+        "annotations": []
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 6110,
+    "completion_tokens": 764,
+    "total_tokens": 6874,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 6107,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 366,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": null
+}

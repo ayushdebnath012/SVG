@@ -1,0 +1,22 @@
+{
+    "skfem_version": "12.0.2",
+    "meshio_version": "5.3.5",
+    "python_version": "3.12.15 | packaged by Anaconda, Inc. | (main, Oct  1 2026, 20:20:25) [GCC 14.3.0]",
+    "commands": {
+        "gmsh_coarse": "gmsh -3 -clscale 3 part.step -o mesh_coarse.msh -format msh2000",
+        "gmsh_fine": "gmsh -3 -clscale 1 part.step -o mesh_fine.msh -format msh2000",
+        "solver": "analytical solution"
+    },
+    "units": {
+        "length": "mm",
+        "stress": "Pa",
+        "displacement": "m"
+    },
+    "field_schema": {
+        "node_ids": "int",
+        "coordinates": "float (mm)",
+        "displacements": "float (m)",
+        "stresses": "float (Pa)",
+        "vonMises": "float (Pa)"
+    }
+}

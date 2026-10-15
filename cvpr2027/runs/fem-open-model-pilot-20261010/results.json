@@ -1,0 +1,45 @@
+{
+  "scope": "Two existing COMSOL studies, source-assisted pilot; no candidate repairs",
+  "executed_model": "deepseek-v4.1-flash via Experiential Labs gateway; returned model ID matches request",
+  "unavailable_models": {
+    "kimi-k3": "Gateway purchase lock; Hugging Face has no credits; direct Moonshot probe rejected for insufficient balance",
+    "inkling": "Gateway HTTP 429; Hugging Face has no credits; direct Tinker HTTP 402, billing status blocked on both documented API routes"
+  },
+  "results": [
+    {
+      "task": "FEMCAD-ADV-001",
+      "configuration": "thinking disabled; 16000 max tokens",
+      "geometry_execution": "Success: STEP and mesh written",
+      "mesh_nodes": 5105,
+      "volume_elements": 14546,
+      "source_geometry_match": "Fails exact reproduction: 90-degree revolution instead of 180-degree half-domain; polyline profile and approximate radial thickness replace curved profile",
+      "fem_status": "Not reproduced: FEniCS preparation/template; no full constitutive/contact solve, self-contact, friction or rotation solve. Not executed; missing dolfin and mesh.xdmf conversion.",
+      "numerical_agreement": "Not established"
+    },
+    {
+      "task": "FEMCAD-ADV-011",
+      "configuration": "thinking disabled; 16000 max tokens",
+      "geometry_execution": "Failed: Gmsh rejects numeric Geometry.OCCTargetUnit option at line 12; no STEP or mesh",
+      "source_geometry_match": "Unverified; candidate admits estimated cavity dimensions",
+      "fem_status": "Not reproduced: template explicitly substitutes linear elasticity and omits nonlinear contact/cavity solve. Not executed; missing dolfin and mesh.xdmf conversion.",
+      "numerical_agreement": "Not established"
+    }
+  ],
+  "other_attempts": "8000-token default-reasoning attempts both exhausted reasoning allowance without answer. At low reasoning/24000 tokens, seal also exhausted allowance; boot code returned but failed Gmsh construction (Could not create line). Token exhaustion is inconclusive.",
+  "provider_reported_cost_usd": 0.1154976,
+  "limits": [
+    "No Kimi or Inkling generation ran successfully",
+    "Two tasks only; cannot infer outcomes for all 50",
+    "No ground-truth CAD distance or converged FEM numerical comparison performed",
+    "Hosted model identity based on gateway returned model field, not independent weight verification"
+  ],
+  "direct_provider_followup": {
+    "moonshot_available_models": [
+      "kimi-k2.6",
+      "kimi-k2.7-code"
+    ],
+    "moonshot_result": "All four study requests rejected with HTTP 429 for insufficient account balance",
+    "tinker_result": "Both study requests rejected with HTTP 402; OpenAI-compatible and Anthropic-compatible diagnostic routes confirm billing block",
+    "generation_occurred": false
+  }
+}

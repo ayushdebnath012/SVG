@@ -1,0 +1,17 @@
+{
+  "edits": [
+    {
+      "old": "        gmsh.option.setNumber(\"Mesh.ElementOrder\", 2)\n        gmsh.option.setNumber(\"Mesh.SecondOrderLinear\", 0)",
+      "new": "        # Generate and optimize valid linear tetrahedra before adding midside\n        # nodes. CAD-projected midside nodes can invert small curved elements.\n        # Straight-sided C3D10 elements retain quadratic displacement interpolation.\n        gmsh.option.setNumber(\"Mesh.ElementOrder\", 1)\n        gmsh.option.setNumber(\"Mesh.SecondOrderLinear\", 1)"
+    },
+    {
+      "old": "        gmsh.model.mesh.generate(3)\n        gmsh.write(str(directory / \"mesh.msh\"))",
+      "new": "        gmsh.model.mesh.generate(3)\n        gmsh.model.mesh.optimize(\"Netgen\")\n        gmsh.model.mesh.setOrder(2)\n        volume_types, volume_element_tags, _ = gmsh.model.mesh.getElements(3)\n        if any(int(t) != 11 for t in volume_types):\n            raise RuntimeError(\"Expected only quadratic tetrahedra after elevation\")\n        element_tags = np.concatenate(volume_element_tags)\n        determinants = np.asarray(gmsh.model.mesh.getElementQualities(\n            element_tags, \"minDetJac\"))\n        if not np.isfinite(determinants).all() or np.any(determinants <= 0):\n            raise RuntimeError(\"Nonpositive or invalid tetrahedral Jacobian before solve\")\n        log(f\"{label}: straight-sided quadratic tetrahedra; \"\n            f\"minimum Jacobian determinant={determinants.min():.12g}\")\n        gmsh.write(str(directory / \"mesh.msh\"))"
+    },
+    {
+      "old": "            \"Seat mean uses consistent quadratic surface integration.\",",
+      "new": "            \"Seat mean uses consistent quadratic surface integration.\",\n            \"Quadratic tetrahedra use edge-midpoint nodes without CAD projection to prevent curved-element inversion; curved boundaries are approximated by the refined straight-sided mesh.\","
+    }
+  ],
+  "reason": "The reported failure is nonpositive element Jacobians, not the existing Gmsh-to-C3D10 node permutation. CAD-projected quadratic midside nodes can invert otherwise valid tetrahedra. Optimize the linear mesh, elevate it with straight edges, and verify Jacobians before CalculiX. This retains quadratic FEM, consistent seat loading, real refinement solves, and artifact generation while documenting the boundary approximation."
+}

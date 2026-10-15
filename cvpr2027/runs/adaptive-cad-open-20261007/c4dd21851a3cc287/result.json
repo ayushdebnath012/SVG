@@ -1,0 +1,696 @@
+{
+ "task_id": "c4dd21851a3cc28784939e123ce7acfb39939414f1d4f284c308fa2d23d181cd",
+ "status": "UNVERIFIED",
+ "prediction": "\n\n{\"edits\":[{\"start\":3,\"delete\":1,\"insert\":[\"    .box(33.0, 42.9, 83.0)\"]}]}",
+ "selected_node": null,
+ "bank": [],
+ "pareto": [],
+ "stop": "expansion_limit",
+ "nodes": [
+  {
+   "id": 0,
+   "candidate": "\n\n{\"edits\":[{\"start\":3,\"delete\":1,\"insert\":[\"    .box(33.0, 42.9, 83.0)\"]}]}",
+   "depth": 0,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 41995.19417924085,
+       "area": 18988.850799316806,
+       "solids": 1,
+       "faces": 30,
+       "bbox_x": 33.0,
+       "bbox_y": 42.9,
+       "bbox_z": 83.0000002
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "FAIL",
+      "confidence": 0.9,
+      "reason": "The edited part shows a significant shape change from an L-profile to a C-profile (or box with a groove) and increased thickness, indicating that features other than the Y dimension were modified.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-00.png"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.9,
+     0.0,
+     -2.0
+    ],
+    "score": 0.898,
+    "diagnosis": [
+     {
+      "stage": "semantics",
+      "status": "FAIL",
+      "confidence": 0.9,
+      "reason": "The edited part shows a significant shape change from an L-profile to a C-profile (or box with a groove) and increased thickness, indicating that features other than the Y dimension were modified.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-00.png"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 3,
+   "visits": 4,
+   "final": null,
+   "edges": [
+    0
+   ]
+  },
+  {
+   "id": 1,
+   "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(33.0, 42.9, 83.0)\"], \"start\": 3}]}",
+   "depth": 1,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 41995.19417924085,
+       "area": 18988.850799316806,
+       "solids": 1,
+       "faces": 30,
+       "bbox_x": 33.0,
+       "bbox_y": 42.9,
+       "bbox_z": 83.0000002
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "FAIL",
+      "confidence": 0.9,
+      "reason": "The edited part changes the geometry from an L-shape to a C-shape (or changes the cutout location significantly) rather than simply increasing the Y dimension of the original part while preserving its features.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-01.png"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.9,
+     0.0,
+     -2.0
+    ],
+    "score": 0.898,
+    "diagnosis": [
+     {
+      "stage": "semantics",
+      "status": "FAIL",
+      "confidence": 0.9,
+      "reason": "The edited part changes the geometry from an L-shape to a C-shape (or changes the cutout location significantly) rather than simply increasing the Y dimension of the original part while preserving its features.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-01.png"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 1,
+   "visits": 4,
+   "final": null,
+   "edges": [
+    1
+   ]
+  },
+  {
+   "id": 2,
+   "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(33.0, 42.9, 83.0)\"], \"start\": 3}]}",
+   "depth": 2,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 41995.19417924085,
+       "area": 18988.850799316806,
+       "solids": 1,
+       "faces": 30,
+       "bbox_x": 33.0,
+       "bbox_y": 42.9,
+       "bbox_z": 83.0000002
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "FAIL",
+      "confidence": 0.9,
+      "reason": "The edited part changes the geometry from an L-shape to a C-shape (or changes the cutout location significantly) rather than simply increasing the Y dimension of the original part while preserving its features.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-01.png"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.9,
+     0.0,
+     -2.0
+    ],
+    "score": 0.898,
+    "diagnosis": [
+     {
+      "stage": "semantics",
+      "status": "FAIL",
+      "confidence": 0.9,
+      "reason": "The edited part changes the geometry from an L-shape to a C-shape (or changes the cutout location significantly) rather than simply increasing the Y dimension of the original part while preserving its features.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-01.png"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 0,
+   "visits": 1,
+   "final": null,
+   "edges": []
+  }
+ ],
+ "edges": [
+  {
+   "parent": 0,
+   "child": 1,
+   "visits": 4,
+   "total": 3.592
+  },
+  {
+   "parent": 1,
+   "child": 2,
+   "visits": 1,
+   "total": 0.898
+  }
+ ],
+ "events": [
+  {
+   "event": "decompose",
+   "plan": {
+    "steps": [
+     "Locate the .box() command in the CadQuery script.",
+     "Modify the second argument of the .box() call from 33.0 to 42.9."
+    ],
+    "invariants": [
+     "The X dimension (33.0) must remain unchanged.",
+     "The Z dimension (83.0) must remain unchanged.",
+     "The CadQuery script syntax must remain valid."
+    ],
+    "dependencies": [
+     [
+      0,
+      1
+     ]
+    ]
+   },
+   "memory_version": "b2daa2a31d35ff730f48cdc8510825f52fb3e79f1cff5648aafb24ade2ed3c7a",
+   "retrieved": [
+    {
+     "task_id": "7fdf9da67454819ffdd9bf30f66492b71c8195b09eb4117dad81f0eb613e85ad",
+     "instruction": "Increase the box Y dimension from 23.0 to 29.9.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(23.0, 29.9, 133.0)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(23.0, 23.0, 133.0)"
+     ]
+    },
+    {
+     "task_id": "165dfe6a3aa604d289f7e1c16137e3e6281db615cef2f306f543b43ed12a4eee",
+     "instruction": "Increase the box Y dimension from 40.0 to 52.0.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(107.0, 52.0, 40.0)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(107.0, 40.0, 40.0)"
+     ]
+    },
+    {
+     "task_id": "e437848f401eb8322875c016c2235bbf0f2d27eedc73ad9628623a2ea2190bdf",
+     "instruction": "Increase the box X dimension from 23.0 to 29.9.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(29.9, 23.0, 133.0)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(23.0, 23.0, 133.0)"
+     ]
+    }
+   ]
+  },
+  {
+   "event": "initial_state",
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 14879.094188558203,
+       "area": 11754.799485168032,
+       "solids": 1,
+       "faces": 26,
+       "bbox_x": 33.0,
+       "bbox_y": 33.0,
+       "bbox_z": 83.0000002
+      }
+     },
+     "constraints": {
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         42.9,
+         33.0
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -0.0
+    ],
+    "score": 0.0,
+    "diagnosis": [
+     {
+      "stage": "constraints",
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         42.9,
+         33.0
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "initial"
+   }
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "semantics",
+     "status": "FAIL",
+     "confidence": 0.9,
+     "reason": "The edited part shows a significant shape change from an L-profile to a C-profile (or box with a groove) and increased thickness, indicating that features other than the Y dimension were modified.",
+     "basis": "Astra rendered-view judgement",
+     "image": "semantic-00.png"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "No physical contract supplied"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "No perturbation contract supplied"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "7fdf9da67454819ffdd9bf30f66492b71c8195b09eb4117dad81f0eb613e85ad",
+     "instruction": "Increase the box Y dimension from 23.0 to 29.9.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(23.0, 29.9, 133.0)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(23.0, 23.0, 133.0)"
+     ]
+    },
+    {
+     "task_id": "165dfe6a3aa604d289f7e1c16137e3e6281db615cef2f306f543b43ed12a4eee",
+     "instruction": "Increase the box Y dimension from 40.0 to 52.0.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(107.0, 52.0, 40.0)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(107.0, 40.0, 40.0)"
+     ]
+    },
+    {
+     "task_id": "e437848f401eb8322875c016c2235bbf0f2d27eedc73ad9628623a2ea2190bdf",
+     "instruction": "Increase the box X dimension from 23.0 to 29.9.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(29.9, 23.0, 133.0)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(23.0, 23.0, 133.0)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "FAIL",
+   "hypothesis": "Modify the second argument of the .box() method to increase the Y dimension from 33.0 to 42.9"
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": true,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "semantics",
+     "status": "FAIL",
+     "confidence": 0.9,
+     "reason": "The edited part shows a significant shape change from an L-profile to a C-profile (or box with a groove) and increased thickness, indicating that features other than the Y dimension were modified.",
+     "basis": "Astra rendered-view judgement",
+     "image": "semantic-00.png"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "No physical contract supplied"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "No perturbation contract supplied"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "7fdf9da67454819ffdd9bf30f66492b71c8195b09eb4117dad81f0eb613e85ad",
+     "instruction": "Increase the box Y dimension from 23.0 to 29.9.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(23.0, 29.9, 133.0)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(23.0, 23.0, 133.0)"
+     ]
+    },
+    {
+     "task_id": "165dfe6a3aa604d289f7e1c16137e3e6281db615cef2f306f543b43ed12a4eee",
+     "instruction": "Increase the box Y dimension from 40.0 to 52.0.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(107.0, 52.0, 40.0)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(107.0, 40.0, 40.0)"
+     ]
+    },
+    {
+     "task_id": "e437848f401eb8322875c016c2235bbf0f2d27eedc73ad9628623a2ea2190bdf",
+     "instruction": "Increase the box X dimension from 23.0 to 29.9.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(29.9, 23.0, 133.0)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(23.0, 23.0, 133.0)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "FAIL",
+   "hypothesis": "Increase box Y dimension from 33.0 to 42.9 in .box() call"
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": true,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "semantics",
+     "status": "FAIL",
+     "confidence": 0.9,
+     "reason": "The edited part shows a significant shape change from an L-profile to a C-profile (or box with a groove) and increased thickness, indicating that features other than the Y dimension were modified.",
+     "basis": "Astra rendered-view judgement",
+     "image": "semantic-00.png"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "No physical contract supplied"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "No perturbation contract supplied"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "7fdf9da67454819ffdd9bf30f66492b71c8195b09eb4117dad81f0eb613e85ad",
+     "instruction": "Increase the box Y dimension from 23.0 to 29.9.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(23.0, 29.9, 133.0)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(23.0, 23.0, 133.0)"
+     ]
+    },
+    {
+     "task_id": "165dfe6a3aa604d289f7e1c16137e3e6281db615cef2f306f543b43ed12a4eee",
+     "instruction": "Increase the box Y dimension from 40.0 to 52.0.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(107.0, 52.0, 40.0)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(107.0, 40.0, 40.0)"
+     ]
+    },
+    {
+     "task_id": "e437848f401eb8322875c016c2235bbf0f2d27eedc73ad9628623a2ea2190bdf",
+     "instruction": "Increase the box X dimension from 23.0 to 29.9.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(29.9, 23.0, 133.0)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(23.0, 23.0, 133.0)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "FAIL",
+   "hypothesis": "Modify the Y dimension parameter of the box() function call from 33.0 to 42.9"
+  },
+  {
+   "event": "backtrack",
+   "to_node": 1
+  },
+  {
+   "event": "expand",
+   "parent": 1,
+   "node": 2,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "semantics",
+     "status": "FAIL",
+     "confidence": 0.9,
+     "reason": "The edited part changes the geometry from an L-shape to a C-shape (or changes the cutout location significantly) rather than simply increasing the Y dimension of the original part while preserving its features.",
+     "basis": "Astra rendered-view judgement",
+     "image": "semantic-01.png"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "No physical contract supplied"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "No perturbation contract supplied"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "7fdf9da67454819ffdd9bf30f66492b71c8195b09eb4117dad81f0eb613e85ad",
+     "instruction": "Increase the box Y dimension from 23.0 to 29.9.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(23.0, 29.9, 133.0)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(23.0, 23.0, 133.0)"
+     ]
+    },
+    {
+     "task_id": "165dfe6a3aa604d289f7e1c16137e3e6281db615cef2f306f543b43ed12a4eee",
+     "instruction": "Increase the box Y dimension from 40.0 to 52.0.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(107.0, 52.0, 40.0)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(107.0, 40.0, 40.0)"
+     ]
+    },
+    {
+     "task_id": "e437848f401eb8322875c016c2235bbf0f2d27eedc73ad9628623a2ea2190bdf",
+     "instruction": "Increase the box X dimension from 23.0 to 29.9.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(29.9, 23.0, 133.0)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(23.0, 23.0, 133.0)"
+     ]
+    }
+   ],
+   "path": [
+    0,
+    1
+   ],
+   "status": "FAIL",
+   "hypothesis": "Increase the Y dimension of the box from 33.0 to 42.9 by modifying the second argument of the .box() command."
+  }
+ ],
+ "config": {
+  "algorithm": "mcts",
+  "max_expansions": 4,
+  "max_depth": 3,
+  "width": 2,
+  "max_width": 4,
+  "exploration": 0.7,
+  "seconds": 2400.0
+ },
+ "memory_version": "b2daa2a31d35ff730f48cdc8510825f52fb3e79f1cff5648aafb24ade2ed3c7a",
+ "stored": null,
+ "seconds": 387.82910666599946,
+ "api": {
+  "mode": "live_astra",
+  "api_calls": 7,
+  "cost_usd": 0.0,
+  "budget_usd": 0.3,
+  "refused": 0
+ },
+ "tool_jobs": 3
+}

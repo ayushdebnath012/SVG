@@ -1,0 +1,71 @@
+{
+ "id": "2fbfeb05e4b05a544c96209779df1eb0aec5ffa128dc0625e5075086592ceff4",
+ "source_fem": {
+  "ok": true,
+  "compliance": 2.869531727884965e-07,
+  "components": 1,
+  "nodes": 555
+ },
+ "candidates": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(18.0, 2.0, 2.0)\n    .edges(\"|X\")\n    .chamfer(0.3)\n    .faces(\">Z\").workplane()\n    .rect(14.4, 0.6)\n    .cutBlind(-0.4)\n)\nresult = result.union(result.mirror(\"YZ\").translate((30.0, 0.0, 0.0)))\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.3923152399031882e-07,
+    "components": 2,
+    "nodes": 389
+   },
+   "consensus": 4,
+   "numbers_ok": true,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt1",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(18.0, 2.0, 2.0)\n    .edges(\"|X\")\n    .chamfer(0.3)\n    .faces(\">Z\").workplane()\n    .rect(14.4, 0.6)\n    .cutBlind(-0.4)\n)\nresult = result.translate((30.0, 0.0, 0.0)).union(result.mirror(\"YZ\"))\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.385111174917929e-07,
+    "components": 2,
+    "nodes": 376
+   },
+   "consensus": 4,
+   "numbers_ok": true,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt2",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(18.0, 2.0, 2.0)\n    .edges(\"|X\")\n    .chamfer(0.3)\n    .faces(\">Z\").workplane()\n    .rect(14.4, 0.6)\n    .cutBlind(-0.4)\n)\noriginal_solid = result.val()\nmirrored_solid = original_solid.mirror(\"YZ\")\noffset_solid = original_solid.translate((30.0, 0.0, 0.0))\nresult = cq.Workplane(\"XY\").newObject([offset_solid.fuse(mirrored_solid).clean()])\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.3828975834095397e-07,
+    "components": 2,
+    "nodes": 381
+   },
+   "consensus": 4,
+   "numbers_ok": true,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt3",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(18.0, 2.0, 2.0)\n    .edges(\"|X\")\n    .chamfer(0.3)\n    .faces(\">Z\").workplane()\n    .rect(14.4, 0.6)\n    .cutBlind(-0.4)\n)\nresult = result.mirror(\"YZ\").add(result.translate((30.0, 0.0, 0.0))).combine()\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.3854971447509138e-07,
+    "components": 2,
+    "nodes": 391
+   },
+   "consensus": 4,
+   "numbers_ok": true,
+   "changed": true,
+   "error": null
+  }
+ ]
+}

@@ -1,0 +1,186 @@
+{
+  "name": "IPE400_4",
+  "E_MPa": 210000.0,
+  "nu": 0.3,
+  "density_kg_mm3": 7.8e-06,
+  "body_force_N_mm3": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "gravity_m_s2": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "face_bcs": [
+    {
+      "constraint": "ConstraintFixed",
+      "components": [
+        0,
+        1,
+        2
+      ],
+      "faces": [
+        {
+          "face_index": 45,
+          "area_mm2": 8067.8,
+          "centroid_mm": [
+            -200.0,
+            90.0,
+            -600.0
+          ],
+          "type": "plane",
+          "outward_normal": [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          "bbox_mm": [
+            -400.0,
+            -0.0,
+            -600.0,
+            0.0,
+            180.0,
+            -600.0
+          ]
+        }
+      ]
+    },
+    {
+      "constraint": "ConstraintDisplacement",
+      "components": [
+        1
+      ],
+      "faces": [
+        {
+          "face_index": 60,
+          "area_mm2": 20000.0,
+          "centroid_mm": [
+            625.0,
+            180.0,
+            200.0
+          ],
+          "type": "plane",
+          "outward_normal": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "bbox_mm": [
+            600.0,
+            180.0,
+            -0.0,
+            650.0,
+            180.0,
+            400.0
+          ]
+        }
+      ]
+    }
+  ],
+  "edge_bcs": [],
+  "face_loads": [
+    {
+      "constraint": "ConstraintForce",
+      "kind": "traction",
+      "face": {
+        "face_index": 62,
+        "area_mm2": 9000.0,
+        "centroid_mm": [
+          625.0,
+          90.0,
+          400.0
+        ],
+        "type": "plane",
+        "outward_normal": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "bbox_mm": [
+          600.0,
+          -0.0,
+          400.0,
+          650.0,
+          180.0,
+          400.0
+        ]
+      },
+      "traction_MPa": [
+        111.11111111111111,
+        0.0,
+        0.0
+      ],
+      "resultant_N": [
+        1000000.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "constraint": "ConstraintForce001",
+      "kind": "traction",
+      "face": {
+        "face_index": 61,
+        "area_mm2": 9000.0,
+        "centroid_mm": [
+          625.0,
+          90.0,
+          0.0
+        ],
+        "type": "plane",
+        "outward_normal": [
+          -0.0,
+          -0.0,
+          -1.0
+        ],
+        "bbox_mm": [
+          600.0,
+          -0.0,
+          -0.0,
+          650.0,
+          180.0,
+          0.0
+        ]
+      },
+      "traction_MPa": [
+        -111.11111111111111,
+        -0.0,
+        -0.0
+      ],
+      "resultant_N": [
+        -1000000.0,
+        -0.0,
+        -0.0
+      ]
+    }
+  ],
+  "volume_mm3": 17371564.69999999,
+  "solids": 7,
+  "load_check": {
+    "calculated_load_sum": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "published_load_sum": [
+      2.47e-10,
+      0.0,
+      0.0
+    ],
+    "gravity_N": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "max_relative_difference": 1.2349999999999999e-16,
+    "applied_without_gravity": [
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "published_elements": 4900,
+  "analysis_object": "BooleanFragments"
+}

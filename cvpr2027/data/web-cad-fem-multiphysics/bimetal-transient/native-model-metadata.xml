@@ -1,0 +1,542 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!--
+ FreeCAD Document, see http://www.freecadweb.org for more information...
+-->
+<Document SchemaVersion="4" ProgramVersion="0.18R16117 (Git)" FileVersion="1">
+    <Properties Count="14">
+        <Property name="Comment" type="App::PropertyString">
+            <String value=""/>
+        </Property>
+        <Property name="Company" type="App::PropertyString">
+            <String value=""/>
+        </Property>
+        <Property name="CreatedBy" type="App::PropertyString">
+            <String value=""/>
+        </Property>
+        <Property name="CreationDate" type="App::PropertyString">
+            <String value="2019-08-29T13:43:54Z"/>
+        </Property>
+        <Property name="Id" type="App::PropertyString">
+            <String value=""/>
+        </Property>
+        <Property name="Label" type="App::PropertyString">
+            <String value="bimetalstrip_tutorial_without_results"/>
+        </Property>
+        <Property name="LastModifiedBy" type="App::PropertyString">
+            <String value=""/>
+        </Property>
+        <Property name="LastModifiedDate" type="App::PropertyString">
+            <String value="2019-08-30T10:29:03Z"/>
+        </Property>
+        <Property name="License" type="App::PropertyString">
+            <String value="All rights reserved"/>
+        </Property>
+        <Property name="LicenseURL" type="App::PropertyString">
+            <String value="http://en.wikipedia.org/wiki/All_rights_reserved"/>
+        </Property>
+        <Property name="Material" type="App::PropertyMap">
+            <Map count="0">
+            </Map>
+        </Property>
+        <Property name="Meta" type="App::PropertyMap">
+            <Map count="0">
+            </Map>
+        </Property>
+        <Property name="TipName" type="App::PropertyString">
+            <String value=""/>
+        </Property>
+        <Property name="Uid" type="App::PropertyUUID">
+            <Uuid value="96bcfa72-6d11-4c91-937b-879a2f2c50ba"/>
+        </Property>
+    </Properties>
+    <Objects Count="11">
+        <Object type="Part::Box" name="Box" />
+        <Object type="Part::Box" name="Box001" />
+        <Object type="Part::FeaturePython" name="BooleanFragments" />
+        <Object type="Fem::FemAnalysis" name="Analysis" />
+        <Object type="Fem::FemSolverObjectPython" name="CalculiXccxTools" />
+        <Object type="App::MaterialObjectPython" name="SolidMaterial" />
+        <Object type="App::MaterialObjectPython" name="SolidMaterial001" />
+        <Object type="Fem::FemMeshShapeNetgenObject" name="FEMMeshNetgen" />
+        <Object type="Fem::ConstraintInitialTemperature" name="FemConstraintInitialTemperature" />
+        <Object type="Fem::ConstraintTemperature" name="FemConstraintTemperature" />
+        <Object type="Fem::ConstraintFixed" name="FemConstraintFixed" />
+    </Objects>
+    <ObjectData Count="11">
+        <Object name="Box" Extensions="True">
+            <Extensions Count="1">
+                <Extension type="Part::AttachExtension" name="AttachExtension">
+                </Extension>
+            </Extensions>
+            <Properties Count="13">
+                <Property name="AttacherType" type="App::PropertyString">
+                    <String value="Attacher::AttachEngine3D"/>
+                </Property>
+                <Property name="AttachmentOffset" type="App::PropertyPlacement">
+                    <PropertyPlacement Px="0.0000000000000000" Py="0.0000000000000000" Pz="0.0000000000000000" Q0="0.0000000000000000" Q1="0.0000000000000000" Q2="0.0000000000000000" Q3="1.0000000000000000" A="0.0000000000000000" Ox="0.0000000000000000" Oy="0.0000000000000000" Oz="1.0000000000000000"/>
+                </Property>
+                <Property name="ExpressionEngine" type="App::PropertyExpressionEngine">
+                    <ExpressionEngine count="0">
+                    </ExpressionEngine>
+                </Property>
+                <Property name="Height" type="App::PropertyLength">
+                    <Float value="2.0000000000000000"/>
+                </Property>
+                <Property name="Label" type="App::PropertyString">
+                    <String value="aluminium"/>
+                </Property>
+                <Property name="Length" type="App::PropertyLength">
+                    <Float value="100.0000000000000000"/>
+                </Property>
+                <Property name="MapMode" type="App::PropertyEnumeration">
+                    <Integer value="0"/>
+                </Property>
+                <Property name="MapPathParameter" type="App::PropertyFloat">
+                    <Float value="0.0000000000000000"/>
+                </Property>
+                <Property name="MapReversed" type="App::PropertyBool">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="Placement" type="App::PropertyPlacement">
+                    <PropertyPlacement Px="0.0000000000000000" Py="0.0000000000000000" Pz="0.0000000000000000" Q0="0.0000000000000000" Q1="0.0000000000000000" Q2="0.0000000000000000" Q3="1.0000000000000000" A="0.0000000000000000" Ox="0.0000000000000000" Oy="0.0000000000000000" Oz="1.0000000000000000"/>
+                </Property>
+                <Property name="Shape" type="Part::PropertyPartShape">
+                    <Part file="PartShape.brp"/>
+                </Property>
+                <Property name="Support" type="App::PropertyLinkSubList">
+                    <LinkSubList count="0">
+                    </LinkSubList>
+                </Property>
+                <Property name="Width" type="App::PropertyLength">
+                    <Float value="10.0000000000000000"/>
+                </Property>
+            </Properties>
+        </Object>
+        <Object name="Box001" Extensions="True">
+            <Extensions Count="1">
+                <Extension type="Part::AttachExtension" name="AttachExtension">
+                </Extension>
+            </Extensions>
+            <Properties Count="13">
+                <Property name="AttacherType" type="App::PropertyString">
+                    <String value="Attacher::AttachEngine3D"/>
+                </Property>
+                <Property name="AttachmentOffset" type="App::PropertyPlacement">
+                    <PropertyPlacement Px="0.0000000000000000" Py="0.0000000000000000" Pz="0.0000000000000000" Q0="0.0000000000000000" Q1="0.0000000000000000" Q2="0.0000000000000000" Q3="1.0000000000000000" A="0.0000000000000000" Ox="0.0000000000000000" Oy="0.0000000000000000" Oz="1.0000000000000000"/>
+                </Property>
+                <Property name="ExpressionEngine" type="App::PropertyExpressionEngine">
+                    <ExpressionEngine count="0">
+                    </ExpressionEngine>
+                </Property>
+                <Property name="Height" type="App::PropertyLength">
+                    <Float value="2.0000000000000000"/>
+                </Property>
+                <Property name="Label" type="App::PropertyString">
+                    <String value="steel"/>
+                </Property>
+                <Property name="Length" type="App::PropertyLength">
+                    <Float value="100.0000000000000000"/>
+                </Property>
+                <Property name="MapMode" type="App::PropertyEnumeration">
+                    <Integer value="0"/>
+                </Property>
+                <Property name="MapPathParameter" type="App::PropertyFloat">
+                    <Float value="0.0000000000000000"/>
+                </Property>
+                <Property name="MapReversed" type="App::PropertyBool">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="Placement" type="App::PropertyPlacement">
+                    <PropertyPlacement Px="0.0000000000000000" Py="0.0000000000000000" Pz="2.0000000000000000" Q0="0.0000000000000000" Q1="0.0000000000000000" Q2="0.0000000000000000" Q3="1.0000000000000000" A="0.0000000000000000" Ox="0.0000000000000000" Oy="0.0000000000000000" Oz="1.0000000000000000"/>
+                </Property>
+                <Property name="Shape" type="Part::PropertyPartShape">
+                    <Part file="PartShape1.brp"/>
+                </Property>
+                <Property name="Support" type="App::PropertyLinkSubList">
+                    <LinkSubList count="0">
+                    </LinkSubList>
+                </Property>
+                <Property name="Width" type="App::PropertyLength">
+                    <Float value="10.0000000000000000"/>
+                </Property>
+            </Properties>
+        </Object>
+        <Object name="BooleanFragments">
+            <Properties Count="8">
+                <Property name="ExpressionEngine" type="App::PropertyExpressionEngine">
+                    <ExpressionEngine count="0">
+                    </ExpressionEngine>
+                </Property>
+                <Property name="Label" type="App::PropertyString">
+                    <String value="bimetal strip"/>
+                </Property>
+                <Property name="Mode" type="App::PropertyEnumeration" group="BooleanFragments" doc="Standard: wires, shells, compsolids remain in one piece. Split: wires, shells, compsolids are split. CompSolid: make compsolid from solid fragments." attr="0" ro="0" hide="0">
+                    <Integer value="2" CustomEnum="true"/>
+                    <CustomEnumList count="3">
+                        <Enum value="Standard"/>
+                        <Enum value="Split"/>
+                        <Enum value="CompSolid"/>
+                    </CustomEnumList>
+                </Property>
+                <Property name="Objects" type="App::PropertyLinkList" group="BooleanFragments" doc="Object to compute intersections between." attr="0" ro="0" hide="0">
+                    <LinkList count="2">
+                        <Link value="Box"/>
+                        <Link value="Box001"/>
+                    </LinkList>
+                </Property>
+                <Property name="Placement" type="App::PropertyPlacement">
+                    <PropertyPlacement Px="0.0000000000000000" Py="0.0000000000000000" Pz="0.0000000000000000" Q0="0.0000000000000000" Q1="0.0000000000000000" Q2="0.0000000000000000" Q3="1.0000000000000000" A="0.0000000000000000" Ox="0.0000000000000000" Oy="0.0000000000000000" Oz="1.0000000000000000"/>
+                </Property>
+                <Property name="Proxy" type="App::PropertyPythonObject">
+                    <Python value="eyJUeXBlIjogIkZlYXR1cmVCb29sZWFuRnJhZ21lbnRzIn0=" encoded="yes" module="BOPTools.SplitFeatures" class="FeatureBooleanFragments"/>
+                </Property>
+                <Property name="Shape" type="Part::PropertyPartShape">
+                    <Part file="PartShape2.brp"/>
+                </Property>
+                <Property name="Tolerance" type="App::PropertyLength" group="BooleanFragments" doc="Tolerance when intersecting (fuzzy value). In addition to tolerances of the shapes." attr="0" ro="0" hide="0">
+                    <Float value="0.0000000000000000"/>
+                </Property>
+            </Properties>
+        </Object>
+        <Object name="Analysis" Extensions="True">
+            <Extensions Count="1">
+                <Extension type="App::GroupExtension" name="GroupExtension">
+                </Extension>
+            </Extensions>
+            <Properties Count="4">
+                <Property name="ExpressionEngine" type="App::PropertyExpressionEngine">
+                    <ExpressionEngine count="0">
+                    </ExpressionEngine>
+                </Property>
+                <Property name="Group" type="App::PropertyLinkList">
+                    <LinkList count="7">
+                        <Link value="CalculiXccxTools"/>
+                        <Link value="SolidMaterial"/>
+                        <Link value="SolidMaterial001"/>
+                        <Link value="FEMMeshNetgen"/>
+                        <Link value="FemConstraintInitialTemperature"/>
+                        <Link value="FemConstraintTemperature"/>
+                        <Link value="FemConstraintFixed"/>
+                    </LinkList>
+                </Property>
+                <Property name="Label" type="App::PropertyString">
+                    <String value="Analysis"/>
+                </Property>
+                <Property name="Uid" type="App::PropertyUUID">
+                    <Uuid value="eb6ba764-a5f8-43c0-a7db-9b8bc03faf7a"/>
+                </Property>
+            </Properties>
+        </Object>
+        <Object name="CalculiXccxTools">
+            <Properties Count="22">
+                <Property name="AnalysisType" type="App::PropertyEnumeration" group="Fem" doc="Type of the analysis" attr="0" ro="0" hide="0">
+                    <Integer value="2" CustomEnum="true"/>
+                    <CustomEnumList count="4">
+                        <Enum value="static"/>
+                        <Enum value="frequency"/>
+                        <Enum value="thermomech"/>
+                        <Enum value="check"/>
+                    </CustomEnumList>
+                </Property>
+                <Property name="BeamShellResultOutput3D" type="App::PropertyBool" group="Fem" doc="Output 3D results for 1D and 2D analysis " attr="0" ro="0" hide="0">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="EigenmodeHighLimit" type="App::PropertyFloatConstraint" group="Fem" doc="High frequency limit for eigenmode calculations" attr="0" ro="0" hide="0">
+                    <Float value="1000000.0000000000000000"/>
+                </Property>
+                <Property name="EigenmodeLowLimit" type="App::PropertyFloatConstraint" group="Fem" doc="Low frequency limit for eigenmode calculations" attr="0" ro="0" hide="0">
+                    <Float value="0.0000000000000000"/>
+                </Property>
+                <Property name="EigenmodesCount" type="App::PropertyIntegerConstraint" group="Fem" doc="Number of modes for frequency calculations" attr="0" ro="0" hide="0">
+                    <Integer value="10"/>
+                </Property>
+                <Property name="ExpressionEngine" type="App::PropertyExpressionEngine">
+                    <ExpressionEngine count="0">
+                    </ExpressionEngine>
+                </Property>
+                <Property name="GeometricalNonlinearity" type="App::PropertyEnumeration" group="Fem" doc="Set geometrical nonlinearity" attr="0" ro="0" hide="0">
+                    <Integer value="0" CustomEnum="true"/>
+                    <CustomEnumList count="2">
+                        <Enum value="linear"/>
+                        <Enum value="nonlinear"/>
+                    </CustomEnumList>
+                </Property>
+                <Property name="IterationsControlParameterCutb" type="App::PropertyString" group="Fem" doc="User defined time incrementation cutbacks control parameter" attr="0" ro="0" hide="0">
+                    <String value="0.25,0.5,0.75,0.85,,,1.5,"/>
+                </Property>
+                <Property name="IterationsControlParameterIter" type="App::PropertyString" group="Fem" doc="User defined time incrementation iterations control parameter" attr="0" ro="0" hide="0">
+                    <String value="4,8,9,200,10,400,,200,,"/>
+                </Property>
+                <Property name="IterationsControlParameterTimeUse" type="App::PropertyBool" group="Fem" doc="Use the user defined time incrementation control parameter" attr="0" ro="0" hide="0">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="IterationsThermoMechMaximum" type="App::PropertyIntegerConstraint" group="Fem" doc="Maximum Number of thermo mechanical iterations in each time step before stopping jobs" attr="0" ro="0" hide="0">
+                    <Integer value="2000"/>
+                </Property>
+                <Property name="IterationsUserDefinedIncrementations" type="App::PropertyBool" group="Fem" doc="Set to True to switch off the ccx automatic incrementation completely (ccx parameter DIRECT). Use with care. Analysis may not converge!" attr="0" ro="0" hide="0">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="IterationsUserDefinedTimeStepLength" type="App::PropertyBool" group="Fem" doc="Set to True to use the user defined time steps. The time steps are set with TimeInitialStep and TimeEnd" attr="0" ro="0" hide="0">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="Label" type="App::PropertyString">
+                    <String value="CalculiXccxTools"/>
+                </Property>
+                <Property name="MaterialNonlinearity" type="App::PropertyEnumeration" group="Fem" doc="Set material nonlinearity (needs geometrical nonlinearity)" attr="0" ro="0" hide="0">
+                    <Integer value="0" CustomEnum="true"/>
+                    <CustomEnumList count="2">
+                        <Enum value="linear"/>
+                        <Enum value="nonlinear"/>
+                    </CustomEnumList>
+                </Property>
+                <Property name="MatrixSolverType" type="App::PropertyEnumeration" group="Fem" doc="Type of solver to use" attr="0" ro="0" hide="0">
+                    <Integer value="0" CustomEnum="true"/>
+                    <CustomEnumList count="4">
+                        <Enum value="default"/>
+                        <Enum value="spooles"/>
+                        <Enum value="iterativescaling"/>
+                        <Enum value="iterativecholesky"/>
+                    </CustomEnumList>
+                </Property>
+                <Property name="Proxy" type="App::PropertyPythonObject">
+                    <Python value="IkZlbTo6RmVtU29sdmVyQ2FsY3VsaXhDY3hUb29scyI=" encoded="yes" module="femobjects._FemSolverCalculix" class="_FemSolverCalculix"/>
+                </Property>
+                <Property name="SplitInputWriter" type="App::PropertyBool" group="Fem" doc="Split writing of ccx input file" attr="0" ro="0" hide="0">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="ThermoMechSteadyState" type="App::PropertyBool" group="Fem" doc="Choose between steady state thermo mech or transient thermo mech analysis" attr="0" ro="0" hide="0">
+                    <Bool value="false"/>
+                </Property>
+                <Property name="TimeEnd" type="App::PropertyFloatConstraint" group="Fem" doc="End time analysis" attr="0" ro="0" hide="0">
+                    <Float value="60.0000000000000000"/>
+                </Property>
+                <Property name="TimeInitialStep" type="App::PropertyFloatConstraint" group="Fem" doc="Initial time steps" attr="0" ro="0" hide="0">
+                    <Float value="0.0100000000000000"/>
+                </Property>
+                <Property name="WorkingDir" type="App::PropertyPath" group="Fem" doc="Working directory for calculations, will only be used it is left blank in preferences" attr="0" ro="0" hide="0">
+                    <Path value=""/>
+                </Property>
+            </Properties>
+        </Object>
+        <Object name="SolidMaterial">
+            <Properties Count="6">
+                <Property name="Category" type="App::PropertyEnumeration" group="Material" doc="Material type: fluid or solid" attr="0" ro="0" hide="0">
+                    <Integer value="0" CustomEnum="true"/>
+                    <CustomEnumList count="2">
+                        <Enum value="Solid"/>
+                        <Enum value="Fluid"/>
+                    </CustomEnumList>
+                </Property>
+                <Property name="ExpressionEngine" type="App::PropertyExpressionEngine">
+                    <ExpressionEngine count="0">
+                    </ExpressionEngine>
+                </Property>
+                <Property name="Label" type="App::PropertyString">
+                    <String value="Al"/>
+                </Property>
+                <Property name="Material" type="App::PropertyMap">
+                    <Map count="13">
+                        <Item key="Density" value="2700 kg/m^3"/>
+                        <Item key="Description" value="Precipitation-hardened, Nonferrous Aluminum alloy"/>
+                        <Item key="Father" value="Metal"/>
+                        <Item key="KindOfMaterial" value="Aluminium"/>
+                        <Item key="KindOfMaterialDE" value="Aluminium"/>
+                        <Item key="Name" value="Aluminum 6061-T6"/>
+                        <Item key="PoissonRatio" value="0.33"/>
+                        <Item key="ProductURL" value="https://en.wikipedia.org/wiki/6061_aluminium_alloy"/>
+                        <Item key="SpecificHeat" value="0 J/kg/K"/>
+                        <Item key="ThermalConductivity" value="167 W/m/K"/>
+                        <Item key="ThermalExpansionCoefficient" value="0 um/m/K"/>
+                        <Item key="UltimateTensileStrength" value="310 MPa"/>
+                        <Item key="YoungsModulus" value="69000 MPa"/>
+                    </Map>
+                </Property>
+                <Property name="Proxy" type="App::PropertyPythonObject">
+                    <Python value="eyJUeXBlIjogIkZlbTo6TWF0ZXJpYWwifQ==" encoded="yes" module="femobjects._FemMaterial" class="_FemMaterial"/>
+                </Property>
+                <Property name="References" type="App::PropertyLinkSubList" group="Material" doc="List of material shapes" attr="0" ro="0" hide="0">
+                    <LinkSubList count="1">
+                        <Link obj="BooleanFragments" sub="Solid1"/>
+                    </LinkSubList>
+                </Property>
+            </Properties>
+        </Object>
+        <Object name="SolidMaterial001">
+            <Properties Count="6">
+                <Property name="Category" type="App::PropertyEnumeration" group="Material" doc="Material type: fluid or solid" attr="0" ro="0" hide="0">
+                    <Integer value="0" CustomEnum="true"/>
+                    <CustomEnumList count="2">
+                        <Enum value="Solid"/>
+                        <Enum value="Fluid"/>
+                    </CustomEnumList>
+                </Property>
+                <Property name="ExpressionEngine" type="App::PropertyExpressionEngine">
+                    <ExpressionEngine count="0">
+                    </ExpressionEngine>
+                </Property>
+                <Property name="Label" type="App::PropertyString">
+                    <String value="Steel"/>
+                </Property>
+                <Property name="Material" type="App::PropertyMap">
+                    <Map count="9">
+                        <Item key="Density" value="7900 kg/m^3"/>
+                        <Item key="Description" value="Standard steel material for CalculiX sample calculations"/>
+                        <Item key="Father" value="Metal"/>
+                        <Item key="Name" value="CalculiX-Steel"/>
+                        <Item key="PoissonRatio" value="0.3"/>
+                        <Item key="SpecificHeat" value="590 J/kg/K"/>
+                        <Item key="ThermalConductivity" value="43 W/m/K"/>
+                        <Item key="ThermalExpansionCoefficient" value="0.000012 m/m/K"/>
+                        <Item key="YoungsModulus" value="210000 MPa"/>
+                    </Map>
+                </Property>
+                <Property name="Proxy" type="App::PropertyPythonObject">
+                    <Python value="eyJUeXBlIjogIkZlbTo6TWF0ZXJpYWwifQ==" encoded="yes" module="femobjects._FemMaterial" class="_FemMaterial"/>
+                </Property>
+                <Property name="References" type="App::PropertyLinkSubList" group="Material" doc="List of material shapes" attr="0" ro="0" hide="0">
+                    <LinkSubList count="1">
+                        <Link obj="BooleanFragments" sub="Solid2"/>
+                    </LinkSubList>
+                </Property>
+            </Properties>
+        </Object>
+        <Object name="FEMMeshNetgen">
+            <Properties Count="12">
+                <Property name="ExpressionEngine" type="App::PropertyExpressionEngine">
+                    <ExpressionEngine count="0">
+                    </ExpressionEngine>
+                </Property>
+                <Property name="FemMesh" type="Fem::PropertyFemMesh">
+                    <FemMesh file="FemMesh.unv" a11="1.0000000000000000" a12="0.0000000000000000" a13="0.0000000000000000" a14="0.0000000000000000" a21="0.0000000000000000" a22="1.0000000000000000" a23="0.0000000000000000" a24="0.0000000000000000" a31="0.0000000000000000" a32="0.0000000000000000" a33="1.0000000000000000" a34="0.0000000000000000" a41="0.0000000000000000" a42="0.0000000000000000" a43="0.0000000000000000" a44="1.0000000000000000"/>
+                </Property>
+                <Property name="Fineness" type="App::PropertyEnumeration">
+                    <Integer value="2"/>
+                </Property>
+                <Property name="GrowthRate" type="App::PropertyFloat">
+                    <Float value="0.3000000000000000"/>
+                </Property>
+                <Property name="Label" type="App::PropertyString">
+                    <String value="FEMMeshNetgen"/>
+                </Property>
+                <Property name="MaxSize" type="App::PropertyFloat">
+                    <Float value="10.0000000000000000"/>
+                </Property>
+                <Property name="NbSegsPerEdge" type="App::PropertyInteger">
+                    <Integer value="1"/>
+                </Property>
+                <Property name="NbSegsPerRadius" type="App::PropertyInteger">
+                    <Integer value="2"/>
+                </Property>
+                <Property name="Optimize" type="App::PropertyBool">
+                    <Bool value="true"/>
+                </Property>
+                <Property name="Placement" type="App::PropertyPlacement">
+                    <PropertyPlacement Px="0.0000000000000000" Py="0.0000000000000000" Pz="0.0000000000000000" Q0="0.0000000000000000" Q1="0.0000000000000000" Q2="0.0000000000000000" Q3="1.0000000000000000" A="0.0000000000000000" Ox="0.0000000000000000" Oy="0.0000000000000000" Oz="1.0000000000000000"/>
+                </Property>
+                <Property name="SecondOrder" type="App::PropertyBool">
+                    <Bool value="true"/>
+                </Property>
+                <Property name="Shape" type="App::PropertyLink">
+                    <Link value="BooleanFragments"/>
+                </Property>
+            </Properties>
+        </Object>
+        <Object name="FemConstraintInitialTemperature">
+            <Properties Count="8">
+                <Property name="ExpressionEngine" type="App::PropertyExpressionEngine">
+                    <ExpressionEngine count="0">
+                    </ExpressionEngine>
+                </Property>
+                <Property name="Label" type="App::PropertyString">
+                    <String value="FemConstraintInitialTemperature"/>
+                </Property>
+                <Property name="NormalDirection" type="App::PropertyVector">
+                    <PropertyVector valueX="0.0000000000000000" valueY="0.0000000000000000" valueZ="1.0000000000000000"/>
+                </Property>
+                <Property name="Normals" type="App::PropertyVectorList">
+                    <VectorList file="Normals"/>
+                </Property>
+                <Property name="Points" type="App::PropertyVectorList">
+                    <VectorList file="Points"/>
+                </Property>
+                <Property name="References" type="App::PropertyLinkSubList">
+                    <LinkSubList count="0">
+                    </LinkSubList>
+                </Property>
+                <Property name="Scale" type="App::PropertyInteger">
+                    <Integer value="1"/>
+                </Property>
+                <Property name="initialTemperature" type="App::PropertyFloat">
+                    <Float value="300.0000000000000000"/>
+                </Property>
+            </Properties>
+        </Object>
+        <Object name="FemConstraintTemperature">
+            <Properties Count="10">
+                <Property name="CFlux" type="App::PropertyFloat">
+                    <Float value="0.0000000000000000"/>
+                </Property>
+                <Property name="ConstraintType" type="App::PropertyEnumeration">
+                    <Integer value="1"/>
+                </Property>
+                <Property name="ExpressionEngine" type="App::PropertyExpressionEngine">
+                    <ExpressionEngine count="0">
+                    </ExpressionEngine>
+                </Property>
+                <Property name="Label" type="App::PropertyString">
+                    <String value="FemConstraintTemperature"/>
+                </Property>
+                <Property name="NormalDirection" type="App::PropertyVector">
+                    <PropertyVector valueX="1.0000000000000000" valueY="0.0000000000000000" valueZ="-0.0000000000000000"/>
+                </Property>
+                <Property name="Normals" type="App::PropertyVectorList">
+                    <VectorList file="Normals1"/>
+                </Property>
+                <Property name="Points" type="App::PropertyVectorList">
+                    <VectorList file="Points1"/>
+                </Property>
+                <Property name="References" type="App::PropertyLinkSubList">
+                    <LinkSubList count="2">
+                        <Link obj="BooleanFragments" sub="Face8"/>
+                        <Link obj="BooleanFragments" sub="Face2"/>
+                    </LinkSubList>
+                </Property>
+                <Property name="Scale" type="App::PropertyInteger">
+                    <Integer value="1"/>
+                </Property>
+                <Property name="Temperature" type="App::PropertyFloat">
+                    <Float value="400.0000000000000000"/>
+                </Property>
+            </Properties>
+        </Object>
+        <Object name="FemConstraintFixed">
+            <Properties Count="7">
+                <Property name="ExpressionEngine" type="App::PropertyExpressionEngine">
+                    <ExpressionEngine count="0">
+                    </ExpressionEngine>
+                </Property>
+                <Property name="Label" type="App::PropertyString">
+                    <String value="FemConstraintFixed"/>
+                </Property>
+                <Property name="NormalDirection" type="App::PropertyVector">
+                    <PropertyVector valueX="1.0000000000000000" valueY="0.0000000000000000" valueZ="-0.0000000000000000"/>
+                </Property>
+                <Property name="Normals" type="App::PropertyVectorList">
+                    <VectorList file="Normals2"/>
+                </Property>
+                <Property name="Points" type="App::PropertyVectorList">
+                    <VectorList file="Points2"/>
+                </Property>
+                <Property name="References" type="App::PropertyLinkSubList">
+                    <LinkSubList count="2">
+                        <Link obj="BooleanFragments" sub="Face8"/>
+                        <Link obj="BooleanFragments" sub="Face2"/>
+                    </LinkSubList>
+                </Property>
+                <Property name="Scale" type="App::PropertyInteger">
+                    <Integer value="1"/>
+                </Property>
+            </Properties>
+        </Object>
+    </ObjectData>
+</Document>

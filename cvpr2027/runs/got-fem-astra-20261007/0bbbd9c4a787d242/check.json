@@ -1,0 +1,26 @@
+{
+ "id": "0bbbd9c4a787d242a32cf24a8e12ec878941432a70ac4aa9559afdcb3aa3e683",
+ "source_fem": {
+  "ok": true,
+  "compliance": 8.062263840604426e-06,
+  "components": 1,
+  "nodes": 778
+ },
+ "candidates": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .circle(1.25)\n    .extrude(6.0)\n    .faces(\">Z\").workplane()\n    .circle(2.5)\n    .extrude(1.5)\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 7.2), rotate=cq.Vector(0, 0, 0))\n            .box(5.4, 0.6, 1.4)\n    )\n)\nresult = result.rotate((0, 0, 0), (0, 1, 0), 90)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 6.248986631625862e-06,
+    "components": 1,
+    "nodes": 776
+   },
+   "consensus": 1,
+   "numbers_ok": true,
+   "changed": true,
+   "error": null
+  }
+ ]
+}

@@ -1,0 +1,16 @@
+{
+  "model": "gpt-6-astra",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are solving a CAD+FEM benchmark task. Return only a complete runnable Python main.py, with no markdown fences. No model-side tools are available; your code will run locally. Do not hardcode a guessed answer or use published reference results."
+    },
+    {
+      "role": "user",
+      "content": "CAD + FEM task. Build the part with a CAD script and write it as part.step in millimetres in exactly the coordinate frame given (multi-region models: one STEP with one solid per region and shared, coincident interface faces; 2-D models: planar faces in the z = 0 plane); then analyse YOUR model with any open-source FEM library, set up exactly as under Analysis. main.py must run both steps (artifact contract below). Report mesh-converged values (each changes by less than 1 % under refinement). Your results are compared with the reference analysis.\n\nGeometry. Plate x in [0, 100], y in [0, 5], z in [0, 50] (units mm) with a through hole of radius 10 along y centred at (x, z) = (50, 25).\n\nAnalysis. E = 210000 MPa, Poisson ratio 0.3. Face x = 0 fixed; 1000 N in +x as a uniform traction on the face x = 100.\nThe evaluator aligns part.step to a reference solid built from this specification (bounding-box centres, the 24 proper axis rotations; mirror images are not accepted) and requires a relative symmetric volume difference of at most 2 %; it separately reviews features, regions and boundary-condition faces.\n\nOutputs:\n- max_von_mises_MPa [MPa]: maximum von Mises stress\n\nSubmit results.json containing exactly an outputs object with these numeric keys. Also submit main.py, part.step, mesh.msh, fields.npz, solver.log, refinement.json and environment.json. See candidate README for the artifact contract. Correct numerical answers alone do not establish workflow completion.\nRuntime: Python with numpy, scipy, gmsh, cadquery, meshio, skfem. ccx (CalculiX 2.23) available on PATH; no FreeCAD or ANSYS. Input directory is CADFEM_INPUT_DIR; files: [\"figure-1.png\"]. Read full geometry and specification files there. Write all outputs to CADFEM_OUTPUT_DIR; main.py is preserved separately. Internet and evaluator data blocked. 600 seconds, 2 CPU threads, 6000 MB RAM. Choose feasible meshes; record convergence honestly. One code-generation attempt, no repair feedback. Return runnable code; never fabricate results."
+    }
+  ],
+  "reasoning_effort": "low",
+  "max_completion_tokens": 6500,
+  "store": false
+}

@@ -1,0 +1,28 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .transformed(offset=cq.Vector(0, 0, 10))\\n    .cylinder(20.0, 3.0)\\n    .union(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(0, 0, 20))\\n            .sphere(3.2)\\n    )\\n    .cut(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(0, 0, 16.8))\\n            .box(50, 50, 5)\\n    )\\n)\\nshow_object(result)\", \"instruction\": \"Set the head sphere radius equal to twice the shank radius; the shank, length, and chamfer cut stay the same.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"266be1f42794bfd7997f7e123d9a826c5cadb3df0c637b920e884c50189fd541\", \"instruction\": \"Set the cylinder length equal to twelve times the cylinder radius; the radius and chamfer stay the same.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .cylinder(60.0, 5.0)\\\"], \\\"start\\\": 3}]}\", \"strategies\": [], \"context\": [\"3:     .cylinder(40.0, 5.0)\"]}, {\"task_id\": \"aeba1116e1c972e00b1001d58f707d9d8f9983f919feef3ace1fb96b1ade81e3\", \"instruction\": \"Set the eye torus major radius equal to twice the head radius; the head, neck, shank, and torus minor radius stay the same.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .union(cq.Workplane(\\\\\\\"XY\\\\\\\").newObject([cq.Solid.makeTorus(20.0, 4.0, cq.Vector(0, 0, 18.0), cq.Vector(0, 1, 0))]))\\\"], \\\"start\\\": 19}]}\", \"strategies\": [], \"context\": [\"19:     .union(cq.Workplane(\\\"XY\\\").newObject([cq.Solid.makeTorus(14.0, 4.0, cq.Vector(0, 0, 18.0), cq.Vector(0, 1, 0))]))\"]}, {\"task_id\": \"64028bb82f4fc33b27e62d98abf31a60452821a9de594541604cb24b3a0d6e41\", \"instruction\": \"Set the shaft length equal to three times the head across-corners size; the shaft radius and head dimensions stay the same.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .extrude(58.89)\\\"], \\\"start\\\": 4}]}\", \"strategies\": [], \"context\": [\"4:     .extrude(90.0)\"]}]}"
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 4096
+ },
+ "usage": {
+  "completion_tokens": 131,
+  "prompt_tokens": 835,
+  "total_tokens": 966
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\n  \"steps\": [\n    \"Identify the shank radius from the cylinder feature (radius = 3.0).\",\n    \"Update the sphere radius to be twice the shank radius (2 * 3.0 = 6.0).\"\n  ],\n  \"invariants\": [\n    \"The shank radius remains 3.0.\",\n    \"The shank length remains 20.0.\",\n    \"The cut box dimensions and position remain unchanged relative to the top.\"\n  ],\n  \"dependencies\": [\n    [0, 1]\n  ]\n}\n```"
+}

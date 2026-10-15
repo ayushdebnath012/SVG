@@ -1,0 +1,155 @@
+{
+  "name": "buckling_U100_3D",
+  "E_MPa": 210000.0,
+  "nu": 0.3,
+  "density_kg_mm3": 7.9e-06,
+  "body_force_N_mm3": [
+    0.0,
+    0.0,
+    -7.900000000000001e-05
+  ],
+  "gravity_m_s2": [
+    0.0,
+    0.0,
+    -10.0
+  ],
+  "face_bcs": [
+    {
+      "constraint": "ConstraintFixed001",
+      "components": [
+        0,
+        1,
+        2
+      ],
+      "faces": [
+        {
+          "face_index": 11,
+          "area_mm2": 1207.5,
+          "centroid_mm": [
+            19.502,
+            0.0,
+            0.0
+          ],
+          "type": "plane",
+          "outward_normal": [
+            -0.0,
+            -0.0,
+            -1.0
+          ],
+          "bbox_mm": [
+            -0.0,
+            -50.0,
+            -0.0,
+            55.0,
+            50.0,
+            0.0
+          ]
+        }
+      ]
+    }
+  ],
+  "edge_bcs": [],
+  "face_loads": [
+    {
+      "constraint": "ConstraintForce",
+      "kind": "traction",
+      "face": {
+        "face_index": 10,
+        "area_mm2": 1207.5,
+        "centroid_mm": [
+          19.502,
+          0.0,
+          1000.0
+        ],
+        "type": "plane",
+        "outward_normal": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "bbox_mm": [
+          -0.0,
+          -50.0,
+          1000.0,
+          55.0,
+          50.0,
+          1000.0
+        ]
+      },
+      "traction_MPa": [
+        -0.0,
+        -0.0,
+        -41.40786749482402
+      ],
+      "resultant_N": [
+        -0.0,
+        -0.0,
+        -50000.0
+      ]
+    },
+    {
+      "constraint": "ConstraintForce001",
+      "kind": "traction",
+      "face": {
+        "face_index": 10,
+        "area_mm2": 1207.5,
+        "centroid_mm": [
+          19.502,
+          0.0,
+          1000.0
+        ],
+        "type": "plane",
+        "outward_normal": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "bbox_mm": [
+          -0.0,
+          -50.0,
+          1000.0,
+          55.0,
+          50.0,
+          1000.0
+        ]
+      },
+      "traction_MPa": [
+        1.6563146997929608,
+        0.0,
+        0.0
+      ],
+      "resultant_N": [
+        2000.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "volume_mm3": 1207500.0000000005,
+  "solids": 1,
+  "load_check": {
+    "calculated_load_sum": [
+      2000.0,
+      0.0,
+      -50095.3925
+    ],
+    "published_load_sum": [
+      2000.0,
+      0.0,
+      -50100.0
+    ],
+    "gravity_N": [
+      0.0,
+      0.0,
+      -95.39250000000006
+    ],
+    "max_relative_difference": 8.860576923073565e-05,
+    "applied_without_gravity": [
+      2000.0,
+      0.0,
+      -50000.0
+    ]
+  },
+  "published_elements": 420,
+  "analysis_object": "Extrude"
+}

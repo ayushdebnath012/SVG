@@ -1,0 +1,28 @@
+{
+ "kind": "single",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "You edit mechanical CAD. Return only JSON {\"edits\":[{\"start\":0,\"delete\":0,\"insert\":[\"replacement line\"]}]}. Indices are zero-based lines of the ORIGINAL input; operations must be ordered, nonoverlapping and in bounds. Preserve unrelated features. The supplied representation determines syntax. Return no explanation or invented physics results. Geometry execution and FEM checks are performed by external tools; never claim verification."
+   },
+   {
+    "role": "user",
+    "content": "Representation: cadquery\nOriginal CAD (line indices are implicit):\nimport cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .circle(2.0)\n    .extrude(30.0)\n    .faces(\">Z\").workplane()\n    .circle(4.0)\n    .extrude(2.4)\n    .edges(\">Z\")\n    .fillet(0.48)\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 31.9), rotate=cq.Vector(0, 0, 0))\n            .box(8.4, 1.0, 2.2)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 0), rotate=cq.Vector(90, 0, 0))\n            .center(2.0, 0.0)\n            .polyline([[0.0, 0.1617], [-0.28, 0.0], [0.0, -0.1617]])\n            .close()\n            .sweep(cq.Wire.makeHelix(0.7, 14.0, 2.0), isFrenet=False)\n    )\n)\nshow_object(result)Edit instruction:\nReplace the round pan head of the screw with a square head of the same across-flats width and the same thickness, keeping the threaded shaft, the screwdriver slot, and the rounded top edge unchanged."
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 8192
+ },
+ "usage": {
+  "completion_tokens": 41,
+  "prompt_tokens": 454,
+  "total_tokens": 495
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\"edits\":[{\"start\":5,\"delete\":4,\"insert\":[\".rect(8.0, 8.0)\",\".extrude(2.4)\"]}]}\n```"
+}

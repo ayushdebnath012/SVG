@@ -1,0 +1,793 @@
+[
+  {
+    "source_family": "feenox",
+    "difficulty": "uncalibrated",
+    "release_status": "diagnostic-pilot",
+    "scored_release": false,
+    "id": "ENGFEM-LE1",
+    "title": "Curved elliptical membrane under outer-edge traction",
+    "domain": "linear_elasticity",
+    "formulation": "2D plane stress",
+    "geometry": "First-quadrant elliptical annulus: outer (x/3250)^2+(y/2750)^2=1, inner (x/2000)^2+(y/1000)^2=1, straight edges on x=0 and y=0. Dimensions in mm. A=(0,1000), B=(0,2750), C=(3250,0), D=(2000,0). Use a planar CAD face, not an invented 3D extrusion.",
+    "physics": "E=210000 MPa, nu=0.3. On AB, ux=0; on CD, uy=0. Apply outward normal tensile traction 10 MPa to BC (outer ellipse). Inner ellipse is traction-free. Compute signed sigma_yy at D=(2000,0).",
+    "output_keys": [
+      "sigma_yy_D_MPa"
+    ],
+    "units": {
+      "sigma_yy_D_MPa": "MPa"
+    },
+    "geometry_files": [
+      "nafems-le1.geo"
+    ],
+    "reference_files": [
+      "nafems-le1.fee",
+      "nafems-le1.yaml"
+    ],
+    "figures": [
+      "nafems-le1-figure.svg"
+    ],
+    "input_figures": [
+      "nafems-le1-figure.svg"
+    ],
+    "anchor": "nafems-le1-elliptical-membrane-plane-stress-benchmark",
+    "qois": [
+      {
+        "key": "sigma_yy_D_MPa",
+        "unit": "MPa",
+        "value": 92.7,
+        "reference_kind": "published_benchmark",
+        "evidence": "examples/nafems-le1.fee; examples/nafems-le1.yaml"
+      }
+    ],
+    "notes": [
+      "The original drawing omits the /1000 term in the inner y coordinate. The geometry code and explicit dimensions in task.md determine the ellipse.",
+      "Point stress requires a documented recovery method and mesh refinement."
+    ]
+  },
+  {
+    "source_family": "feenox",
+    "difficulty": "uncalibrated",
+    "release_status": "diagnostic-pilot",
+    "scored_release": false,
+    "id": "ENGFEM-LE10",
+    "title": "Thick curved plate under transverse pressure",
+    "domain": "solid_mechanics",
+    "formulation": "3D linear elasticity",
+    "geometry": "First-quadrant elliptical annulus: outer (x/3250)^2+(y/2750)^2=1, inner (x/2000)^2+(y/1000)^2=1, straight edges on x=0 and y=0. Dimensions in mm. A=(0,1000), B=(0,2750), C=(3250,0), D=(2000,0). Extrude from z=-300 to z=300 mm. Preserve a midplane curve on the outer elliptical face.",
+    "physics": "E=210000 MPa, nu=0.3. On y=0 face DCD'C', uy=0; on x=0 face ABA'B', ux=0. On outer elliptical face BCB'C', ux=uy=0. On its curve at z=0, uz=0. Apply inward normal pressure 1 MPa to the upper z=300 surface. Other surfaces are traction-free. Compute signed sigma_yy at D=(2000,0,300) mm.",
+    "output_keys": [
+      "sigma_yy_D_MPa"
+    ],
+    "units": {
+      "sigma_yy_D_MPa": "MPa"
+    },
+    "geometry_files": [
+      "nafems-le10.geo",
+      "nafems-le10.step"
+    ],
+    "reference_files": [
+      "nafems-le10.fee",
+      "nafems-le10.yaml",
+      "nafems-le10-cad.geo"
+    ],
+    "figures": [
+      "nafems-le10-problem-input.svg",
+      "nafems-le10.png"
+    ],
+    "input_figures": [],
+    "anchor": "nafems-le10-thick-plate-pressure-benchmark",
+    "qois": [
+      {
+        "key": "sigma_yy_D_MPa",
+        "unit": "MPa",
+        "value": -5.38,
+        "reference_kind": "published_benchmark",
+        "evidence": "mechanical.html LE10 expected result and examples/nafems-le10.yaml"
+      }
+    ],
+    "notes": [
+      "The source diagram includes the answer and solver recipe. It is evaluator-only. CAD-track geometry is completely specified in task.md.",
+      "Archived STEP and named geometry groups are supplied only in the analysis track."
+    ]
+  },
+  {
+    "source_family": "feenox",
+    "difficulty": "uncalibrated",
+    "release_status": "diagnostic-pilot",
+    "scored_release": false,
+    "id": "ENGFEM-LE11",
+    "title": "Thermal stress in a cylinder/taper/spherical shell",
+    "domain": "thermoelasticity",
+    "formulation": "3D quarter-turn linear thermoelasticity",
+    "geometry": "Units m. In the r-z plane build three connected regions: (1) a spherical shell sector between inner/outer circular arcs of radii 1 and 1.4, both starting at z=0 and ending at z=sqrt(0.5), closed by horizontal segments at those elevations; (2) from its upper endpoints (r,z)=(sqrt(0.5),sqrt(0.5)) and (sqrt(1.4^2-0.5),sqrt(0.5)), extend inner wall vertically to z=sqrt(0.5)+0.69, and connect the outer endpoint linearly to (1,sqrt(0.5)+0.69); (3) extend both walls vertically a further 0.4 m. Rotate this cross-section about z through pi/2 into x>=0,y>=0. Keep shared interfaces.",
+    "physics": "E=210e9 Pa; nu=0.3; thermal expansion alpha=2.3e-4 /degC; reference temperature 0 degC. Prescribed T(x,y,z)=sqrt(x*x+y*y)+z degC. On y=0, uy=0; on x=0, ux=0; on z=0, uz=0; on the upper annular face at z=sqrt(0.5)+1.09, uz=0. All other surfaces traction-free. Return signed sigma_zz at A=(1,0,0) m in MPa.",
+    "output_keys": [
+      "sigma_zz_A_MPa"
+    ],
+    "units": {
+      "sigma_zz_A_MPa": "MPa"
+    },
+    "geometry_files": [
+      "nafems-le11.geo"
+    ],
+    "reference_files": [
+      "nafems-le11.fee",
+      "nafems-le11.yaml"
+    ],
+    "figures": [
+      "nafems-le11-problem.png",
+      "nafems-le11-mesh.png"
+    ],
+    "input_figures": [
+      "nafems-le11-mesh.png"
+    ],
+    "anchor": "nafems-le11-solid-cylindertapersphere-temperature-benchmark",
+    "qois": [
+      {
+        "key": "sigma_zz_A_MPa",
+        "unit": "MPa",
+        "value": -105.04,
+        "reference_kind": "published_solver_output",
+        "evidence": "examples/nafems-le11.yaml terminal block",
+        "benchmark_magnitude_MPa": 105
+      }
+    ],
+    "notes": [
+      "Full source problem diagram contains the target stress and is held out. Geometry-only mesh figure is retained.",
+      "Reference is the published FeenoX output, not a newly computed solution."
+    ]
+  },
+  {
+    "source_family": "feenox",
+    "difficulty": "uncalibrated",
+    "release_status": "diagnostic-pilot",
+    "scored_release": false,
+    "id": "ENGFEM-GNL5",
+    "title": "Large-deformation imperfect cantilever buckling",
+    "domain": "nonlinear_mechanics",
+    "formulation": "3D quasistatic finite-strain Saint Venant-Kirchhoff",
+    "geometry": "Rectangular beam x=[0,3.2], y=[-0.05,0.05], z=[-0.05,0.05] m. Left x=0 face clamped.",
+    "physics": "E=2.1e11 Pa; nu=0. Geometrically nonlinear, source ldef=1 (Saint Venant-Kirchhoff). Proportional load lambda in [0,1]: total right-end Fx=-3.844e6*lambda N and Fy=-3.844e3*lambda N, uniformly distributed over the end face. Follow the quasistatic branch with initial increment 0.01; refine load increments around turning behavior. At tip center (3.2,0,0), return the most negative uy over the entire path. Save the full load-displacement curve separately.",
+    "output_keys": [
+      "minimum_tip_uy_m"
+    ],
+    "units": {
+      "minimum_tip_uy_m": "m"
+    },
+    "geometry_files": [
+      "nafems-gnl-cantilever.geo"
+    ],
+    "reference_files": [
+      "nafems-gnl-cantilever.fee",
+      "nafems-gnl-cantilever.yaml"
+    ],
+    "figures": [
+      "nafems-gnl-cantilever-problem.svg",
+      "nafems-gnl-cantilever-mesh.png"
+    ],
+    "input_figures": [
+      "nafems-gnl-cantilever-problem.svg"
+    ],
+    "anchor": "nafems-gnl5-large-deformation-beam",
+    "qois": [
+      {
+        "key": "minimum_tip_uy_m",
+        "unit": "m",
+        "value": -2.58,
+        "reference_kind": "published_benchmark",
+        "evidence": "examples/nafems-gnl-cantilever.yaml reference table",
+        "source_absolute_tolerance": 0.02
+      }
+    ],
+    "notes": [
+      "Source implementation is explicitly work in progress. Independent formulation/branch validation remains required.",
+      "Two final-displacement rows have duplicate labels; neither ambiguous output is used."
+    ]
+  },
+  {
+    "source_family": "feenox",
+    "difficulty": "uncalibrated",
+    "release_status": "diagnostic-pilot",
+    "scored_release": false,
+    "id": "ENGFEM-COUPLED",
+    "title": "Heat conduction coupled to temperature-dependent stiffness",
+    "domain": "coupled_thermal_structural",
+    "formulation": "3D sequential steady conduction and linear elasticity",
+    "geometry": "Source non-dimensional coordinates. Solid box x=[0,20], y=[-5,5], z=[-5,5]. O=(0,0,0), A=(20,0,0), B=(0,5,0), C=(0,0,5). Embed these points in their respective surfaces.",
+    "physics": "Steady thermal conductivity k=1. Inward heat flux is +2 on x=0, -2 on x=20, +3 on y=-5, -3 on y=5, +4 on z=-5, -4 on z=5. T(A)=0 removes the thermal nullspace. Then solve linear elasticity with E(T)=1000/(800-T), nu=0.3, alpha=0. Prescribe u=v=w=0 at O; u=w=0 at B; u=0 at C. Apply outward normal tensile traction 1 to both x-end faces. Other surfaces traction-free. Use the solved thermal field, not an assumed temperature. Sample temperature and displacement at the seven query points in queries.json.",
+    "output_keys": [
+      "T_q0",
+      "u_q0",
+      "v_q0",
+      "w_q0",
+      "T_q1",
+      "u_q1",
+      "v_q1",
+      "w_q1",
+      "T_q2",
+      "u_q2",
+      "v_q2",
+      "w_q2",
+      "T_q3",
+      "u_q3",
+      "v_q3",
+      "w_q3",
+      "T_q4",
+      "u_q4",
+      "v_q4",
+      "w_q4",
+      "T_q5",
+      "u_q5",
+      "v_q5",
+      "w_q5",
+      "T_q6",
+      "u_q6",
+      "v_q6",
+      "w_q6"
+    ],
+    "units": {
+      "T_q0": "source_nondimensional",
+      "u_q0": "source_nondimensional",
+      "v_q0": "source_nondimensional",
+      "w_q0": "source_nondimensional",
+      "T_q1": "source_nondimensional",
+      "u_q1": "source_nondimensional",
+      "v_q1": "source_nondimensional",
+      "w_q1": "source_nondimensional",
+      "T_q2": "source_nondimensional",
+      "u_q2": "source_nondimensional",
+      "v_q2": "source_nondimensional",
+      "w_q2": "source_nondimensional",
+      "T_q3": "source_nondimensional",
+      "u_q3": "source_nondimensional",
+      "v_q3": "source_nondimensional",
+      "w_q3": "source_nondimensional",
+      "T_q4": "source_nondimensional",
+      "u_q4": "source_nondimensional",
+      "v_q4": "source_nondimensional",
+      "w_q4": "source_nondimensional",
+      "T_q5": "source_nondimensional",
+      "u_q5": "source_nondimensional",
+      "v_q5": "source_nondimensional",
+      "w_q5": "source_nondimensional",
+      "T_q6": "source_nondimensional",
+      "u_q6": "source_nondimensional",
+      "v_q6": "source_nondimensional",
+      "w_q6": "source_nondimensional"
+    },
+    "geometry_files": [
+      "parallelepiped.geo"
+    ],
+    "reference_files": [
+      "parallelepiped-thermal.fee",
+      "parallelepiped-mechanical.fee",
+      "parallelepiped-mechanical.yaml"
+    ],
+    "figures": [
+      "parallelepiped.svg"
+    ],
+    "input_figures": [
+      "parallelepiped.svg"
+    ],
+    "anchor": "parallelepiped-whose-youngs-modulus-is-a-function-of-the-temperature",
+    "query_points": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        20,
+        0,
+        0
+      ],
+      [
+        10,
+        0,
+        0
+      ],
+      [
+        10,
+        2,
+        2
+      ],
+      [
+        5,
+        -2,
+        -2
+      ],
+      [
+        15,
+        3,
+        -3
+      ],
+      [
+        20,
+        5,
+        5
+      ]
+    ],
+    "qois": [
+      {
+        "key": "T_q0",
+        "unit": "source_nondimensional",
+        "value": 40,
+        "reference_kind": "published_analytical_expression",
+        "evidence": "examples/parallelepiped-thermal.fee",
+        "point": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "key": "u_q0",
+        "unit": "source_nondimensional",
+        "value": 0.0,
+        "reference_kind": "published_analytical_expression",
+        "evidence": "examples/parallelepiped-mechanical.fee",
+        "point": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "key": "v_q0",
+        "unit": "source_nondimensional",
+        "value": -0.0,
+        "reference_kind": "published_analytical_expression",
+        "evidence": "examples/parallelepiped-mechanical.fee",
+        "point": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "key": "w_q0",
+        "unit": "source_nondimensional",
+        "value": -0.0,
+        "reference_kind": "published_analytical_expression",
+        "evidence": "examples/parallelepiped-mechanical.fee",
+        "point": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "key": "T_q1",
+        "unit": "source_nondimensional",
+        "value": 0,
+        "reference_kind": "published_analytical_expression",
+        "evidence": "examples/parallelepiped-thermal.fee",
+        "point": [
+          20,
+          0,
+          0
+        ]
+      },
+      {
+        "key": "u_q1",
+        "unit": "source_nondimensional",
+        "value": 15.6,
+        "reference_kind": "published_analytical_expression",
+        "evidence": "examples/parallelepiped-mechanical.fee",
+        "point": [
+          20,
+          0,
+          0
+        ]
+      },
+      {
+        "key": "v_q1",
+        "unit": "source_nondimensional",
+        "value": -0.5700000000000001,
+        "reference_kind": "published_analytical_expression",
+        "evidence": "examples/parallelepiped-mechanical.fee",
+        "point": [
+          20,
+          0,
+          0
+        ]
+      },
+      {
+        "key": "w_q1",
+        "unit": "source_nondimensional",
+        "value": -0.77,
+        "reference_kind": "published_analytical_expression",
+        "evidence": "examples/parallelepiped-mechanical.fee",
+        "point": [
+          20,
+          0,
+          0
+        ]
+      },
+      {
+        "key": "T_q2",
+        "unit": "source_nondimensional",
+        "value": 20,
+        "reference_kind": "published_analytical_expression",
+        "evidence": "examples/parallelepiped-thermal.fee",
+        "point": [
+          10,
+          0,
+          0
+        ]
+      },
+      {
+        "key": "u_q2",
+        "unit": "source_nondimensional",
+        "value": 7.699999999999999,
+        "reference_kind": "published_analytical_expression",
+        "evidence": "examples/parallelepiped-mechanical.fee",
+        "point": [
+          10,
+          0,
+          0
+        ]
+      },
+      {
+        "key": "v_q2",
+        "unit": "source_nondimensional",
+        "value": -0.13500000000000004,
+        "reference_kind": "published_analytical_expression",
+        "evidence": "examples/parallelepiped-mechanical.fee",
+        "point": [
+          10,
+          0,
+          0
+        ]
+      },
+      {
+        "key": "w_q2",
+        "unit": "source_nondimensional",
+        "value": -0.185,
+        "reference_kind": "published_analytical_expression",
+        "evidence": "examples/parallelepiped-mechanical.fee",
+        "point": [
+          10,
+          0,
+          0
+        ]
+      },
+      {
+        "key": "T_q3",
+        "unit": "source_nondimensional",
+        "value": 6,
+        "reference_kind": "published_analytical_expression",
+        "evidence": "examples/parallelepiped-thermal.fee",
+        "point": [
+          10,
+          2,
+          2
+        ]
+      },
+      {
+        "key": "u_q3",
+        "unit": "source_nondimensional",
+        "value": 7.836399999999999,
+        "reference_kind": "published_analytical_expression",
+        "evidence": "examples/parallelepiped-mechanical.fee",
+        "point": [
+          10,
+          2,
+          2
+        ]
+      },
+      {
+        "key": "v_q3",
+        "unit": "source_nondimensional",
+        "value": -0.6018,
+        "reference_kind": "published_analytical_expression",
+        "evidence": "examples/parallelepiped-mechanical.fee",
+        "point": [
+          10,
+          2,
+          2
+        ]
+      },
+      {
+        "key": "w_q3",
+        "unit": "source_nondimensional",
+        "value": -0.6626000000000002,
+        "reference_kind": "published_analytical_expression",
+        "evidence": "examples/parallelepiped-mechanical.fee",
+        "point": [
+          10,
+          2,
+          2
+        ]
+      },
+      {
+        "key": "T_q4",
+        "unit": "source_nondimensional",
+        "value": 44,
+        "reference_kind": "published_analytical_expression",
+        "evidence": "examples/parallelepiped-thermal.fee",
+        "point": [
+          5,
+          -2,
+          -2
+        ]
+      },
+      {
+        "key": "u_q4",
+        "unit": "source_nondimensional",
+        "value": 3.7633999999999994,
+        "reference_kind": "published_analytical_expression",
+        "evidence": "examples/parallelepiped-mechanical.fee",
+        "point": [
+          5,
+          -2,
+          -2
+        ]
+      },
+      {
+        "key": "v_q4",
+        "unit": "source_nondimensional",
+        "value": 0.42119999999999996,
+        "reference_kind": "published_analytical_expression",
+        "evidence": "examples/parallelepiped-mechanical.fee",
+        "point": [
+          5,
+          -2,
+          -2
+        ]
+      },
+      {
+        "key": "w_q4",
+        "unit": "source_nondimensional",
+        "value": 0.42189999999999994,
+        "reference_kind": "published_analytical_expression",
+        "evidence": "examples/parallelepiped-mechanical.fee",
+        "point": [
+          5,
+          -2,
+          -2
+        ]
+      },
+      {
+        "key": "T_q5",
+        "unit": "source_nondimensional",
+        "value": 13,
+        "reference_kind": "published_analytical_expression",
+        "evidence": "examples/parallelepiped-thermal.fee",
+        "point": [
+          15,
+          3,
+          -3
+        ]
+      },
+      {
+        "key": "u_q5",
+        "unit": "source_nondimensional",
+        "value": 11.5854,
+        "reference_kind": "published_analytical_expression",
+        "evidence": "examples/parallelepiped-mechanical.fee",
+        "point": [
+          15,
+          3,
+          -3
+        ]
+      },
+      {
+        "key": "v_q5",
+        "unit": "source_nondimensional",
+        "value": -1.0242,
+        "reference_kind": "published_analytical_expression",
+        "evidence": "examples/parallelepiped-mechanical.fee",
+        "point": [
+          15,
+          3,
+          -3
+        ]
+      },
+      {
+        "key": "w_q5",
+        "unit": "source_nondimensional",
+        "value": 0.2826,
+        "reference_kind": "published_analytical_expression",
+        "evidence": "examples/parallelepiped-mechanical.fee",
+        "point": [
+          15,
+          3,
+          -3
+        ]
+      },
+      {
+        "key": "T_q6",
+        "unit": "source_nondimensional",
+        "value": -35,
+        "reference_kind": "published_analytical_expression",
+        "evidence": "examples/parallelepiped-thermal.fee",
+        "point": [
+          20,
+          5,
+          5
+        ]
+      },
+      {
+        "key": "u_q6",
+        "unit": "source_nondimensional",
+        "value": 16.299999999999997,
+        "reference_kind": "published_analytical_expression",
+        "evidence": "examples/parallelepiped-mechanical.fee",
+        "point": [
+          20,
+          5,
+          5
+        ]
+      },
+      {
+        "key": "v_q6",
+        "unit": "source_nondimensional",
+        "value": -1.7850000000000004,
+        "reference_kind": "published_analytical_expression",
+        "evidence": "examples/parallelepiped-mechanical.fee",
+        "point": [
+          20,
+          5,
+          5
+        ]
+      },
+      {
+        "key": "w_q6",
+        "unit": "source_nondimensional",
+        "value": -2.0075000000000003,
+        "reference_kind": "published_analytical_expression",
+        "evidence": "examples/parallelepiped-mechanical.fee",
+        "point": [
+          20,
+          5,
+          5
+        ]
+      }
+    ],
+    "reference_formula": "parallelepiped_analytical",
+    "notes": [
+      "Reference arrays are evaluations of the published analytical expressions, not a new FEM solve.",
+      "Inputs specify inward heat-flux sign explicitly."
+    ]
+  },
+  {
+    "source_family": "feenox",
+    "difficulty": "uncalibrated",
+    "release_status": "diagnostic-pilot",
+    "scored_release": false,
+    "id": "ENGFEM-MODAL",
+    "title": "Degenerate bending modes of a copper cantilever wire",
+    "domain": "modal_analysis",
+    "formulation": "3D linear elastic eigenproblem",
+    "geometry": "Circular solid cylinder with diameter 0.001948 m, z=[0,0.1515] m, centered on the z-axis. Clamp its lower z=0 end.",
+    "physics": "E=132.4e9 Pa, nu=0, total mass 0.00401 kg, uniform density rho=mass/(pi*(diameter/2)^2*length). All lateral and free-end surfaces traction-free. Compute at least ten elastic vibration eigenmodes. Five distinct bending frequencies each occur as a near-degenerate pair; report the mean frequency of each consecutive pair among the ten lowest positive modes in Hz, and save mode shapes. Do not substitute an Euler-Bernoulli formula for a FEM solve.",
+    "output_keys": [
+      "bending_frequency_1_Hz",
+      "bending_frequency_2_Hz",
+      "bending_frequency_3_Hz",
+      "bending_frequency_4_Hz",
+      "bending_frequency_5_Hz"
+    ],
+    "units": {
+      "bending_frequency_1_Hz": "Hz",
+      "bending_frequency_2_Hz": "Hz",
+      "bending_frequency_3_Hz": "Hz",
+      "bending_frequency_4_Hz": "Hz",
+      "bending_frequency_5_Hz": "Hz"
+    },
+    "geometry_files": [
+      "wire-hex.geo"
+    ],
+    "reference_files": [
+      "wire.fee",
+      "wire.yaml"
+    ],
+    "figures": [],
+    "input_figures": [],
+    "source_page": "https://www.seamplex.com/feenox/examples/modal.html",
+    "anchor": "five-natural-modes-of-a-cantilevered-wire",
+    "qois": [
+      {
+        "key": "bending_frequency_1_Hz",
+        "unit": "Hz",
+        "value": 45.84,
+        "reference_kind": "published_solver_output",
+        "evidence": "examples/wire.yaml copper hex FEM table",
+        "rounded": true
+      },
+      {
+        "key": "bending_frequency_2_Hz",
+        "unit": "Hz",
+        "value": 287.1,
+        "reference_kind": "published_solver_output",
+        "evidence": "examples/wire.yaml copper hex FEM table",
+        "rounded": true
+      },
+      {
+        "key": "bending_frequency_3_Hz",
+        "unit": "Hz",
+        "value": 803.4,
+        "reference_kind": "published_solver_output",
+        "evidence": "examples/wire.yaml copper hex FEM table",
+        "rounded": true
+      },
+      {
+        "key": "bending_frequency_4_Hz",
+        "unit": "Hz",
+        "value": 1573,
+        "reference_kind": "published_solver_output",
+        "evidence": "examples/wire.yaml copper hex FEM table",
+        "rounded": true
+      },
+      {
+        "key": "bending_frequency_5_Hz",
+        "unit": "Hz",
+        "value": 2596,
+        "reference_kind": "published_solver_output",
+        "evidence": "examples/wire.yaml copper hex FEM table",
+        "rounded": true
+      }
+    ],
+    "notes": [
+      "Values are the source copper-hex FEM frequencies, not experimental measurements or Euler-Bernoulli predictions.",
+      "Mode ordering and pairing require validation for a candidate discretization."
+    ]
+  },
+  {
+    "source_family": "feenox",
+    "difficulty": "uncalibrated",
+    "release_status": "diagnostic-pilot",
+    "scored_release": false,
+    "id": "ENGFEM-BIMATERIAL",
+    "title": "Steel/aluminum stepped assembly displacement comparison",
+    "domain": "multimaterial_elasticity",
+    "formulation": "3D linear elasticity, two material cases",
+    "geometry": "Source length coordinates, interpreted consistently as mm for an N-MPa system. Connected boxes: pink x=[0,5.5], y=[0,1], z=[0,1]; blue-left x=[5,10], y=[1,2], z=[0,1]; blue-right x=[10,15], y=[1,2], z=[0,1]. Perfectly bonded interfaces; preserve material regions. Full fixity on x=0 pink face. Pin support is the vertical edge x=10,y=1,z=[0,1], constraining uy only.",
+    "physics": "Two cases: (1) all steel E=210000 MPa, nu=0.3; (2) pink aluminum E=69000 MPa, nu=0.25 and both blue boxes steel. Apply total Fy=-2000 N uniformly to blue-left face x=5,y=[1,2],z=[0,1], and total Fy=-1000 N uniformly to blue-right face x=15,y=[1,2],z=[0,1]. All remaining surfaces traction-free. Return maximum displacement magnitude in source length units for each case. Explain the comparison using the computed fields.",
+    "output_keys": [
+      "max_displacement_all_steel",
+      "max_displacement_aluminum_pink"
+    ],
+    "units": {
+      "max_displacement_all_steel": "source_length",
+      "max_displacement_aluminum_pink": "source_length"
+    },
+    "geometry_files": [
+      "steel-alum.geo"
+    ],
+    "reference_files": [
+      "steel-alum.fee",
+      "steel-alum.yaml"
+    ],
+    "figures": [
+      "steel-alum.svg"
+    ],
+    "input_figures": [
+      "steel-alum.svg"
+    ],
+    "anchor": "steelaluminum-paradox",
+    "qois": [
+      {
+        "key": "max_displacement_all_steel",
+        "unit": "source_length",
+        "value": 3.9,
+        "reference_kind": "published_solver_output",
+        "evidence": "examples/steel-alum.yaml terminal block",
+        "rounding_resolution": 0.1
+      },
+      {
+        "key": "max_displacement_aluminum_pink",
+        "unit": "source_length",
+        "value": 2.6,
+        "reference_kind": "published_solver_output",
+        "evidence": "examples/steel-alum.yaml terminal block",
+        "rounding_resolution": 0.1
+      }
+    ],
+    "notes": [
+      "Source prints only one decimal place. Targets are rounded source outputs; precision and mesh effects limit comparisons.",
+      "Pin/load entity locations were checked against the source geometry physical groups."
+    ]
+  }
+]

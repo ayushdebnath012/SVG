@@ -1,0 +1,109 @@
+{
+ "source_fem": {
+  "ok": true,
+  "compliance": 8.039365616935858e-06,
+  "components": 1,
+  "nodes": 777
+ },
+ "nodes": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .circle(1.25)\n    .extrude(6.0)\n    .faces(\">Z\").workplane()\n    .circle(3.25)\n    .extrude(1.5)\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 7.2), rotate=cq.Vector(0, 0, 0))\n            .box(5.4, 0.6, 1.4)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 8.925820045441517e-06,
+    "components": 1,
+    "nodes": 866
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "alt1",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .circle(1.25)\n    .extrude(6.0)\n    .faces(\">Z\").workplane()\n    .circle(3.25)\n    .extrude(1.5)\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 7.2), rotate=cq.Vector(0, 0, 0))\n            .box(5.4, 0.6, 1.4)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 8.922205932937693e-06,
+    "components": 1,
+    "nodes": 866
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "alt2",
+   "code": null,
+   "gates": false,
+   "fem": {
+    "ok": false,
+    "error": "not executed"
+   },
+   "numbers_ok": null,
+   "changed": null,
+   "cluster": null,
+   "robustness": null
+  },
+  {
+   "name": "alt3",
+   "code": null,
+   "gates": false,
+   "fem": {
+    "ok": false,
+    "error": "not executed"
+   },
+   "numbers_ok": null,
+   "changed": null,
+   "cluster": null,
+   "robustness": null
+  },
+  {
+   "name": "mcts1-diversify",
+   "code": null,
+   "gates": false,
+   "fem": {
+    "ok": false,
+    "error": "not executed"
+   },
+   "numbers_ok": null,
+   "changed": null,
+   "cluster": null,
+   "robustness": null
+  },
+  {
+   "name": "mcts2-diversify",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .circle(1.25)\n    .extrude(6.0)\n    .faces(\">Z\").workplane()\n    .cylinder(1.5, 3.25, centered=(True, True, False))\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 7.2), rotate=cq.Vector(0, 0, 0))\n            .box(5.4, 0.6, 1.4)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 8.92772405912553e-06,
+    "components": 1,
+    "nodes": 857
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "rag",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .circle(1.25)\n    .extrude(6.0)\n    .faces(\">Z\").workplane()\n    .circle(3.25)\n    .extrude(1.5)\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 7.2), rotate=cq.Vector(0, 0, 0))\n            .box(5.4, 0.6, 1.4)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 8.92582004544137e-06,
+    "components": 1,
+    "nodes": 866
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  }
+ ]
+}

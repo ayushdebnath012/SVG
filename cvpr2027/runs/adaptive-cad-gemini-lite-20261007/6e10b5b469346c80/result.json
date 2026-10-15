@@ -1,0 +1,689 @@
+{
+ "task_id": "6e10b5b469346c80fed505940ecc0007cb8c7f54af53df256d40e7c9db6cae72",
+ "status": "UNVERIFIED",
+ "prediction": "```json\n{\"edits\":[{\"start\":3,\"delete\":1,\"insert\":[\"    .box(95.5, 106.86, 57.8)\"]}]}\n```",
+ "selected_node": null,
+ "bank": [],
+ "pareto": [],
+ "stop": "expansion_limit",
+ "nodes": [
+  {
+   "id": 0,
+   "candidate": "```json\n{\"edits\":[{\"start\":3,\"delete\":1,\"insert\":[\"    .box(95.5, 106.86, 57.8)\"]}]}\n```",
+   "depth": 0,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 493612.46911396,
+       "area": 53651.02992112497,
+       "solids": 1,
+       "faces": 15,
+       "bbox_x": 95.5,
+       "bbox_y": 106.86,
+       "bbox_z": 57.800000000000004
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "FAIL",
+      "confidence": 1.0,
+      "reason": "The edit instruction was to increase the box Y dimension, but the part was changed fundamentally from an open-slot U-shape to a closed rectangular cavity, altering the topology rather than just scaling a dimension.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-00.png"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     1.0,
+     0.0,
+     -2.0
+    ],
+    "score": 0.998,
+    "diagnosis": [
+     {
+      "stage": "semantics",
+      "status": "FAIL",
+      "confidence": 1.0,
+      "reason": "The edit instruction was to increase the box Y dimension, but the part was changed fundamentally from an open-slot U-shape to a closed rectangular cavity, altering the topology rather than just scaling a dimension.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-00.png"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 3,
+   "visits": 4,
+   "final": null,
+   "edges": [
+    0
+   ]
+  },
+  {
+   "id": 1,
+   "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(95.5, 106.86, 57.8)\"], \"start\": 3}]}",
+   "depth": 1,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 493612.46911396,
+       "area": 53651.02992112497,
+       "solids": 1,
+       "faces": 15,
+       "bbox_x": 95.5,
+       "bbox_y": 106.86,
+       "bbox_z": 57.800000000000004
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "FAIL",
+      "confidence": 1.0,
+      "reason": "The edit instruction was to increase the box Y dimension, but the U-shaped cutout was incorrectly filled in, changing the topology entirely instead of just scaling the dimension.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-01.png"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     1.0,
+     0.0,
+     -2.0
+    ],
+    "score": 0.998,
+    "diagnosis": [
+     {
+      "stage": "semantics",
+      "status": "FAIL",
+      "confidence": 1.0,
+      "reason": "The edit instruction was to increase the box Y dimension, but the U-shaped cutout was incorrectly filled in, changing the topology entirely instead of just scaling the dimension.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-01.png"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 1,
+   "visits": 4,
+   "final": null,
+   "edges": [
+    1
+   ]
+  },
+  {
+   "id": 2,
+   "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(95.5, 106.86, 57.8)\"], \"start\": 3}]}",
+   "depth": 2,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 493612.46911396,
+       "area": 53651.02992112497,
+       "solids": 1,
+       "faces": 15,
+       "bbox_x": 95.5,
+       "bbox_y": 106.86,
+       "bbox_z": 57.800000000000004
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "FAIL",
+      "confidence": 1.0,
+      "reason": "The edit instruction was to increase the box Y dimension, but the U-shaped cutout was incorrectly filled in, changing the topology entirely instead of just scaling the dimension.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-01.png"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     1.0,
+     0.0,
+     -2.0
+    ],
+    "score": 0.998,
+    "diagnosis": [
+     {
+      "stage": "semantics",
+      "status": "FAIL",
+      "confidence": 1.0,
+      "reason": "The edit instruction was to increase the box Y dimension, but the U-shaped cutout was incorrectly filled in, changing the topology entirely instead of just scaling the dimension.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-01.png"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 0,
+   "visits": 1,
+   "final": null,
+   "edges": []
+  }
+ ],
+ "edges": [
+  {
+   "parent": 0,
+   "child": 1,
+   "visits": 4,
+   "total": 3.992
+  },
+  {
+   "parent": 1,
+   "child": 2,
+   "visits": 1,
+   "total": 0.998
+  }
+ ],
+ "events": [
+  {
+   "event": "decompose",
+   "plan": {
+    "steps": [
+     "Modify the base box Y dimension from 82.2 to 106.86 in the box feature."
+    ],
+    "invariants": [
+     "The box X dimension (95.5) and Z dimension (57.8) remain unchanged.",
+     "The top rectangular cut and bottom corner holes retain their relative positions and sizes."
+    ],
+    "dependencies": []
+   },
+   "memory_version": "eb7401dc51b2cbe39d9f8ddcf35837f059fd2f7eba1197d1c5dd8f474622a8db",
+   "retrieved": [
+    {
+     "task_id": "165dfe6a3aa604d289f7e1c16137e3e6281db615cef2f306f543b43ed12a4eee",
+     "instruction": "Increase the box Y dimension from 40.0 to 52.0.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(107.0, 52.0, 40.0)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(107.0, 40.0, 40.0)"
+     ]
+    },
+    {
+     "task_id": "08a4bb0d25e7af30589ee2fec0f0a982eebe6fca738e07f9cfd70e45a5c9c3ab",
+     "instruction": "Increase the box Y dimension from 38.8 to 50.44.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"            .box(38.8, 50.44, 26.6)\"], \"start\": 9}]}",
+     "strategies": [],
+     "context": [
+      "9:             .box(38.8, 38.8, 26.6)"
+     ]
+    },
+    {
+     "task_id": "0d0f7657a1191f45577545479e14e4162cc68f54d076454628c53f9d9292e086",
+     "instruction": "Increase the box X dimension from 33.2 to 43.16.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(43.16, 33.2, 6.9)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(33.2, 33.2, 6.9)"
+     ]
+    }
+   ]
+  },
+  {
+   "event": "initial_state",
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 372138.73111396027,
+       "area": 41456.213921124974,
+       "solids": 1,
+       "faces": 14,
+       "bbox_x": 95.5,
+       "bbox_y": 82.2,
+       "bbox_z": 57.8
+      }
+     },
+     "constraints": {
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         106.86,
+         82.2
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -0.0
+    ],
+    "score": 0.0,
+    "diagnosis": [
+     {
+      "stage": "constraints",
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         106.86,
+         82.2
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "initial"
+   }
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "semantics",
+     "status": "FAIL",
+     "confidence": 1.0,
+     "reason": "The edit instruction was to increase the box Y dimension, but the part was changed fundamentally from an open-slot U-shape to a closed rectangular cavity, altering the topology rather than just scaling a dimension.",
+     "basis": "Astra rendered-view judgement",
+     "image": "semantic-00.png"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "No physical contract supplied"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "No perturbation contract supplied"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "165dfe6a3aa604d289f7e1c16137e3e6281db615cef2f306f543b43ed12a4eee",
+     "instruction": "Increase the box Y dimension from 40.0 to 52.0.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(107.0, 52.0, 40.0)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(107.0, 40.0, 40.0)"
+     ]
+    },
+    {
+     "task_id": "46e2ae8c051377579efdf95583c5871761565e76a7ae5a1a99fb31227da751db",
+     "instruction": "Increase the box Y dimension from 30.1 to 39.13.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(53.2, 39.13, 4.3)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(53.2, 30.1, 4.3)"
+     ]
+    },
+    {
+     "task_id": "7fdf9da67454819ffdd9bf30f66492b71c8195b09eb4117dad81f0eb613e85ad",
+     "instruction": "Increase the box Y dimension from 23.0 to 29.9.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(23.0, 29.9, 133.0)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(23.0, 23.0, 133.0)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "FAIL",
+   "hypothesis": "Increase the box Y dimension from 82.2 to 106.86."
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": true,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "semantics",
+     "status": "FAIL",
+     "confidence": 1.0,
+     "reason": "The edit instruction was to increase the box Y dimension, but the part was changed fundamentally from an open-slot U-shape to a closed rectangular cavity, altering the topology rather than just scaling a dimension.",
+     "basis": "Astra rendered-view judgement",
+     "image": "semantic-00.png"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "No physical contract supplied"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "No perturbation contract supplied"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "165dfe6a3aa604d289f7e1c16137e3e6281db615cef2f306f543b43ed12a4eee",
+     "instruction": "Increase the box Y dimension from 40.0 to 52.0.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(107.0, 52.0, 40.0)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(107.0, 40.0, 40.0)"
+     ]
+    },
+    {
+     "task_id": "46e2ae8c051377579efdf95583c5871761565e76a7ae5a1a99fb31227da751db",
+     "instruction": "Increase the box Y dimension from 30.1 to 39.13.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(53.2, 39.13, 4.3)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(53.2, 30.1, 4.3)"
+     ]
+    },
+    {
+     "task_id": "7fdf9da67454819ffdd9bf30f66492b71c8195b09eb4117dad81f0eb613e85ad",
+     "instruction": "Increase the box Y dimension from 23.0 to 29.9.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(23.0, 29.9, 133.0)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(23.0, 23.0, 133.0)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "FAIL",
+   "hypothesis": "Increase the box Y dimension from 82.2 to 106.86"
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": true,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "semantics",
+     "status": "FAIL",
+     "confidence": 1.0,
+     "reason": "The edit instruction was to increase the box Y dimension, but the part was changed fundamentally from an open-slot U-shape to a closed rectangular cavity, altering the topology rather than just scaling a dimension.",
+     "basis": "Astra rendered-view judgement",
+     "image": "semantic-00.png"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "No physical contract supplied"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "No perturbation contract supplied"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "165dfe6a3aa604d289f7e1c16137e3e6281db615cef2f306f543b43ed12a4eee",
+     "instruction": "Increase the box Y dimension from 40.0 to 52.0.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(107.0, 52.0, 40.0)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(107.0, 40.0, 40.0)"
+     ]
+    },
+    {
+     "task_id": "46e2ae8c051377579efdf95583c5871761565e76a7ae5a1a99fb31227da751db",
+     "instruction": "Increase the box Y dimension from 30.1 to 39.13.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(53.2, 39.13, 4.3)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(53.2, 30.1, 4.3)"
+     ]
+    },
+    {
+     "task_id": "7fdf9da67454819ffdd9bf30f66492b71c8195b09eb4117dad81f0eb613e85ad",
+     "instruction": "Increase the box Y dimension from 23.0 to 29.9.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(23.0, 29.9, 133.0)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(23.0, 23.0, 133.0)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "FAIL",
+   "hypothesis": "Increase the box Y dimension from 82.2 to 106.86."
+  },
+  {
+   "event": "backtrack",
+   "to_node": 1
+  },
+  {
+   "event": "expand",
+   "parent": 1,
+   "node": 2,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "semantics",
+     "status": "FAIL",
+     "confidence": 1.0,
+     "reason": "The edit instruction was to increase the box Y dimension, but the U-shaped cutout was incorrectly filled in, changing the topology entirely instead of just scaling the dimension.",
+     "basis": "Astra rendered-view judgement",
+     "image": "semantic-01.png"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "No physical contract supplied"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "No perturbation contract supplied"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "165dfe6a3aa604d289f7e1c16137e3e6281db615cef2f306f543b43ed12a4eee",
+     "instruction": "Increase the box Y dimension from 40.0 to 52.0.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(107.0, 52.0, 40.0)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(107.0, 40.0, 40.0)"
+     ]
+    },
+    {
+     "task_id": "46e2ae8c051377579efdf95583c5871761565e76a7ae5a1a99fb31227da751db",
+     "instruction": "Increase the box Y dimension from 30.1 to 39.13.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(53.2, 39.13, 4.3)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(53.2, 30.1, 4.3)"
+     ]
+    },
+    {
+     "task_id": "7fdf9da67454819ffdd9bf30f66492b71c8195b09eb4117dad81f0eb613e85ad",
+     "instruction": "Increase the box Y dimension from 23.0 to 29.9.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .box(23.0, 29.9, 133.0)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .box(23.0, 23.0, 133.0)"
+     ]
+    }
+   ],
+   "path": [
+    0,
+    1
+   ],
+   "status": "FAIL",
+   "hypothesis": "Change the box Y dimension from 82.2 to 106.86 by modifying the second argument in the box method call."
+  }
+ ],
+ "config": {
+  "algorithm": "mcts",
+  "max_expansions": 4,
+  "max_depth": 3,
+  "width": 2,
+  "max_width": 4,
+  "exploration": 0.7,
+  "seconds": 2400.0
+ },
+ "memory_version": "eb7401dc51b2cbe39d9f8ddcf35837f059fd2f7eba1197d1c5dd8f474622a8db",
+ "stored": null,
+ "seconds": 111.68446529200003,
+ "api": {
+  "mode": "live_astra",
+  "api_calls": 7,
+  "cost_usd": 0.0,
+  "budget_usd": 0.15151515151515152,
+  "refused": 0
+ },
+ "tool_jobs": 3
+}

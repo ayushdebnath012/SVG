@@ -1,0 +1,65 @@
+{
+ "id": "511b48e9304b4f209992476550c822f4f358ec8ccf7756369073dc67ffa908dc",
+ "source_fem": {
+  "ok": true,
+  "compliance": 1.5664690955528068e-07,
+  "components": 1,
+  "nodes": 895
+ },
+ "candidates": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(9.1, 9.4)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(25.35, 0, 0), rotate=cq.Vector(0, 0, 0))\n            .box(32.9, 9.1, 5.6)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(46.7, 0, 0.0), rotate=cq.Vector(0, 0, 0))\n            .cylinder(9.1, 5.4)\n    )\n    .faces(\">Z\").workplane()\n    .hole(10.8)\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(46.7, 0, 0.0), rotate=cq.Vector(0, 0, 0))\n            .cylinder(13.65, 2.6)\n    )\n    .faces(\"+Z\").edges().chamfer(1.3)\n)\nshow_object(result)\n",
+   "gates": false,
+   "fem": {
+    "ok": false,
+    "error": "not executed"
+   },
+   "consensus": 0,
+   "numbers_ok": false,
+   "changed": null,
+   "error": "Standard_Failure: BRep_API: command not done"
+  },
+  {
+   "name": "alt1",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(9.1, 9.4)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(25.35, 0, 0), rotate=cq.Vector(0, 0, 0))\n            .box(32.9, 9.1, 5.6)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(46.7, 0, 0.0), rotate=cq.Vector(0, 0, 0))\n            .cylinder(9.1, 5.4)\n    )\n    .faces(\">Z\").workplane()\n    .hole(10.8)\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(46.7, 0, 0.0), rotate=cq.Vector(0, 0, 0))\n            .cylinder(13.65, 2.6)\n    )\n    .edges(\">Z\").chamfer(1.3)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.6758327374343215e-07,
+    "components": 1,
+    "nodes": 947
+   },
+   "consensus": 1,
+   "numbers_ok": false,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt2",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(9.1, 9.4)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(25.35, 0, 0), rotate=cq.Vector(0, 0, 0))\n            .box(32.9, 9.1, 5.6)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(46.7, 0, 0.0), rotate=cq.Vector(0, 0, 0))\n            .cylinder(9.1, 5.4)\n    )\n    .faces(\">Z\").workplane()\n    .hole(10.8)\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(46.7, 0, 0.0), rotate=cq.Vector(0, 0, 0))\n            .cylinder(13.65, 2.6)\n    )\n    .faces(\"+Z\").edges().chamfer(1.3)\n)\nshow_object(result)\n",
+   "gates": false,
+   "fem": {
+    "ok": false,
+    "error": "not executed"
+   },
+   "consensus": 0,
+   "numbers_ok": false,
+   "changed": null,
+   "error": "Standard_Failure: BRep_API: command not done"
+  },
+  {
+   "name": "alt3",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(9.1, 9.4)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(25.35, 0, 0), rotate=cq.Vector(0, 0, 0))\n            .box(32.9, 9.1, 5.6)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(46.7, 0, 0.0), rotate=cq.Vector(0, 0, 0))\n            .cylinder(9.1, 5.4)\n    )\n    .faces(\">Z\").workplane()\n    .hole(10.8)\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(46.7, 0, 0.0), rotate=cq.Vector(0, 0, 0))\n            .cylinder(13.65, 2.6)\n    )\n    .faces(\"+Z\").edges()\n    .filter(lambda e: not (e.geomType() == \"CIRCLE\" and (abs(e.radius() - 2.6) < 1e-6 or (abs(e.radius() - 5.4) < 1e-6 and e.Center().x < 20))))\n    .chamfer(1.3)\n)\nshow_object(result)\n",
+   "gates": false,
+   "fem": {
+    "ok": false,
+    "error": "not executed"
+   },
+   "consensus": 0,
+   "numbers_ok": false,
+   "changed": null,
+   "error": "Standard_Failure: BRep_API: command not done"
+  }
+ ]
+}

@@ -1,0 +1,36 @@
+{
+  "id": "chatcmpl-EZHaTcNA4jQ4Te8M0NOh9B5I80yWo",
+  "object": "chat.completion",
+  "created": 1792077793,
+  "model": "gpt-6-astra",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"edits\":[{\"old\":\"probe = float(basis.probes(np.array([[.040], [.040]])) @ temperature)\",\"new\":\"probe = (basis.probes(np.array([[.040], [.040]])) @ temperature).item()\"}],\"reason\":\"The FEM probe returns a one-element array, which current NumPy cannot convert directly with float(). Extract its scalar using item(), preserving the computed FEM result and allowing refinement and artifact export to complete.\"}",
+        "refusal": null,
+        "annotations": []
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 4615,
+    "completion_tokens": 141,
+    "total_tokens": 4756,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 4612,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 37,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": null
+}

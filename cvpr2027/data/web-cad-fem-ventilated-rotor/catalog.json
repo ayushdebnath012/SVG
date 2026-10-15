@@ -1,0 +1,103 @@
+{
+  "collection": "Perforated ventilated rotor original IGES with linked thermal/static FEM report",
+  "geometry_families": 1,
+  "complex_geometry_candidates": 1,
+  "CAD_inspection": {
+    "file": "disk break.IGS",
+    "valid": true,
+    "solids": 0,
+    "shells": 0,
+    "faces": 363,
+    "envelope_imported_mm": [
+      180.00000020000002,
+      180.00000020031837,
+      21.0000002
+    ]
+  },
+  "source_CAEsingle_solid": true,
+  "source_CAE_envelope_mm": [
+    180,
+    180,
+    21
+  ],
+  "numerical_evidence": "Original57page ANSYS report and matching result plots; no RST/RTH uploaded",
+  "raw_solution_candidates": 0,
+  "source_solver": "ANSYS2025R2",
+  "mesh": {
+    "nodes": 39030,
+    "elements": 21095
+  },
+  "source_report_references": {
+    "thermal_min_C": 99.905,
+    "thermal_max_C": 100,
+    "thermal_average_C": 99.991,
+    "max_U_mm": 0.067061,
+    "min_U_mm": 0,
+    "average_U_mm": 0.045413,
+    "max_VM_MPa": 621.02,
+    "min_VM_MPa": 1.1227,
+    "average_VM_MPa": 69.235
+  },
+  "thermal_boundary_condition": {
+    "prescribed_temperature_C": 100,
+    "temperature_scope_faces": 1,
+    "ambient_C": 22,
+    "convection_scope_faces": 1,
+    "film_coefficient_table_units": "W/mm^2/C",
+    "delta_temperature_C": [
+      1,
+      10,
+      100,
+      200,
+      300,
+      500,
+      700,
+      1000
+    ],
+    "h_W_mm2_C": [
+      1.24e-06,
+      2.67e-06,
+      5.76e-06,
+      7.25e-06,
+      8.3e-06,
+      9.84e-06,
+      1.101e-05,
+      1.24e-05
+    ]
+  },
+  "source_structural_conditions": {
+    "rotational_velocity_rad_s": 100,
+    "fixed_support_faces": 10,
+    "pressure_objects": 2,
+    "pressure_MPa_each": 0.5,
+    "pressure_scope_faces_each": 1,
+    "imported_temperature": "one-way body-temperature transfer from original steady thermal solution",
+    "large_deflection": false
+  },
+  "material": {
+    "name": "Structural Steel",
+    "E_MPa": 200000,
+    "poisson": 0.3,
+    "yield_MPa": 250,
+    "conductivity_W_mm_K": 0.0605,
+    "thermal_expansion_per_K": 1.2e-05
+  },
+  "original_dimensioned_drawing_verified": false,
+  "license": "No explicit data license located; local research only.",
+  "limits": [
+    "IGES imports as363valid faces,0solids/0shells; source ANSYS stitched one solid. No locally constructed/sewn solid is substituted; exact sewing/face map pending.",
+    "README calls the thermal input heat flux; actual report specifies imposed100Ctemperature on one face. Max100C is boundary input, not independent prediction.",
+    "Two pressure objects0.5MPa each, rotation100rad/s, ten fixed faces and imported temperature must match source geometry exactly.",
+    "621.02MPa linear-elastic peak exceeds uploaded250MPa yield; no validated plastic/contact brake-cycle claim.",
+    "Linked steady thermal then staticstructural is one-way transfer, not transient/frictional brake-cycle analysis.",
+    "Report advertises8.9375MBthermal and15.938MBstructural solution files; these are not uploaded and are not raw dataset assets.",
+    "All references are source tables/plots, not independently reconstructed fields or certified scores."
+  ],
+  "source": "https://github.com/ikanishk123/Disc-Brake-Rotor-FEA-ANSYS-Workbench",
+  "source_revision": "b896dba823bc10897277dff634e3f8c7d0094f39",
+  "download_files": 7,
+  "generated_CAD": 0,
+  "new_solver_runs": 0,
+  "model_calls": 0,
+  "certified_cases": 0
+}

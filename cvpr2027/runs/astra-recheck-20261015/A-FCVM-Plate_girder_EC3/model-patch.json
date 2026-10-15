@@ -1,0 +1,21 @@
+{
+  "edits": [
+    {
+      "old": "deck += \"*BUCKLE\\n8,0.001\\n\"",
+      "new": "deck += \"*BUCKLE\\n12,0.00001\\n\""
+    },
+    {
+      "old": "for level, h in enumerate((300., 210.)):\n        if level and remaining() < 230.:",
+      "new": "# Resolve plate bending with substantially smaller quadratic tetrahedra.\n    # The previous 210 mm mesh was very coarse relative to the thin plates.\n    for level, h in enumerate((180., 110., 70., 45.)):\n        if level and remaining() < 170.:"
+    },
+    {
+      "old": "allowance = min(155. if level == 0 else 195., remaining() - 100.)",
+      "new": "allowance = min(260., remaining() - 80.)"
+    },
+    {
+      "old": "\"A two-level comparison, where completed, is not an asymptotic convergence proof. \"",
+      "new": "\"Successively refined meshes are attempted within the runtime budget; failures and skipped refinements are not convergence evidence. \"\n            \"The recorded mesh-to-mesh changes are not an asymptotic convergence proof. \""
+    }
+  ],
+  "reason": "The physical load integration, shared-interface fragmentation, support selection and C3D10 node ordering are consistent with the task. The previous meshes remained very coarse for thin-plate bending and buckling despite completing far below the runtime limit. Attempt substantially finer conforming quadratic meshes and tighten the eigensolve, retaining actual refinement results and fallback behavior without claiming convergence."
+}

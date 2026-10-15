@@ -1,0 +1,68 @@
+{
+  "invocation": "python main.py",
+  "versions": {
+    "python": "3.12.14 (main, Aug 25 2026, 13:50:33) [Clang 22.1.3 ]",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "gmsh": "4.15.2"
+  },
+  "units": {
+    "length": "mm",
+    "stress": "MPa",
+    "force": "N"
+  },
+  "material": {
+    "E_MPa": 210000.0,
+    "poisson_ratio": 0.3,
+    "yield_stress_MPa": 235.0,
+    "hardening": 0
+  },
+  "formulation": "Isoparametric 10-node tetrahedra, 4-point quadrature. Small-strain incremental associated von Mises plasticity, backward-Euler radial return and consistent tangent. Work-conjugate displacement control with unknown load multiplier; all loads scale together.",
+  "symmetry": "Full solid in part.step; mesh is quarter body X>=0,Y>=0 where [X,Y,Z]=ROT*[x,y,z]. ROT is +45deg about z. At Y=0 uY=0; at X=0 uY=uZ=0 (antisymmetry in bending). J2 invariance under stress sign change allows antisymmetric quarter. Mesh and exported displacements use original physical frame.",
+  "rotation_matrix": [
+    [
+      0.7071067811865475,
+      -0.7071067811865475,
+      0.0
+    ],
+    [
+      0.7071067811865475,
+      0.7071067811865475,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "physical_groups": {
+    "1": "fixed cylindrical shaft surfaces",
+    "2": "Y=0 symmetry",
+    "3": "X=0 antisymmetry",
+    "4": "face52 half, traction -43.521099 MPa z",
+    "5": "face55 quarter, traction (0.213062,-0.213062,0) MPa",
+    "10": "continuous steel, shared nodes on all region interfaces"
+  },
+  "extraction": "Largest computed equilibrated load factor at large work-controlled displacement; plateau checked at final increments. See actual curves and mesh convergence in refinement.json.",
+  "field_schema": {
+    "equivalent_plastic_strain": "element x 4, accumulated sqrt(2/3)*norm(plastic strain increments), final",
+    "von_Mises_MPa": "element x 4 final equivalent stress",
+    "reaction_N": "node x 3, final internal minus external nodal force, original frame; unconstrained entries are equilibrium residuals",
+    "quadrature_coordinates_mm": "element x 4 x 3 physical integration locations in original frame; tetra barycentric rule diagonal 0.5854101966 and off-diagonal 0.1381966011",
+    "node_ids": "Gmsh global node IDs, sorted",
+    "coordinates_mm": "n x 3 original frame",
+    "solver_coordinates_mm": "n x 3 rotated frame",
+    "tetrahedra_node_ids": "e x 10 Gmsh tet10 connectivity",
+    "element_ids": "Gmsh 3D element IDs",
+    "displacement_mm": "step x node x 3 original frame",
+    "load_factors": "step, proportional applied load factor",
+    "force_reference_N": "node x 3 assembled equivalent nodal reference loads in original frame",
+    "fixed_mask_solver_frame": "node x 3 boolean essential BC mask in X Y Z",
+    "stress_Mandel_MPa": "element x 4 quadrature points x [XX,YY,ZZ,sqrt2 XY,sqrt2 YZ,sqrt2 ZX], final state, rotated solver frame",
+    "plastic_strain_Mandel": "same order/frame as stress, dimensionless",
+    "quadrature_weights_mm3": "element x 4 physical integration volumes",
+    "*_node_ids": "boundary-set nodes as named"
+  },
+  "limitations": "Four-point integration and quarter symmetry; no geometric nonlinearity, no hardening. Finite displacement plateau is an approximation to asymptotic limit. The very large formal displacements used to approach the plateau do not update geometry; they are a numerical limit-load device, not a prediction of geometrically nonlinear deformation."
+}

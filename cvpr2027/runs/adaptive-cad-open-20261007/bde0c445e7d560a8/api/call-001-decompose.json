@@ -1,0 +1,34 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "Qwen/Qwen3.5-35B-A3B-FP8",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .cylinder(41.6, 43.7)\\n    .union(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(0.0, 0.0, 20.8), rotate=cq.Vector(0, 0, 0))\\n            .sphere(43.7)\\n    )\\n    .union(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(0.0, 0.0, -20.8), rotate=cq.Vector(0, 0, 0))\\n            .sphere(43.7)\\n    )\\n)\\nresult = result.cut(cq.Workplane('XY').cylinder(387.0,10.49))\\nshow_object(result)\", \"instruction\": \"Set the spherical end-cap radius equal to half the cylinder radius; the central cylinder and axial bore stay the same.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"8bb96e6849c0ec861f3423cfb72e8d4fd307c5ad849d27ac1cd7867a220cff8a\", \"instruction\": \"Set the stem radius equal to half the ball radius; the ball, stem height, and axial through-bore stay the same.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"            .cylinder(50.0, 6.25)\\\"], \\\"start\\\": 7}]}\", \"strategies\": [], \"context\": [\"7:             .cylinder(50.0, 4.5)\"]}, {\"task_id\": \"5c0382564f22b5b00ad15fd9480b2c75b8a3f680f67dc4ba1827b860a36ea384\", \"instruction\": \"Set each knuckle radius equal to half the leaf width; the leaf, pin holes, and central bore stay the same.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"            .cylinder(20.0, 15.0)\\\"], \\\"start\\\": 7}, {\\\"delete\\\": 1, \\\"insert\\\": [\\\"            .cylinder(20.0, 15.0)\\\"], \\\"start\\\": 12}]}\", \"strategies\": [], \"context\": [\"7:             .cylinder(20.0, 3.5)\", \"12:             .cylinder(20.0, 3.5)\"]}, {\"task_id\": \"aa63e278014c70f40ab58dbaa8010e71b435acb4c7c9d489c25e8a4dd11930a2\", \"instruction\": \"Set the hex flat-to-flat half-size equal to four times the central bore radius; the revolve profile and bore stay the same.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"            .polygon(6, 5.0)\\\"], \\\"start\\\": 18}]}\", \"strategies\": [], \"context\": [\"18:             .polygon(6, 8.083)\"]}]}"
+   }
+  ],
+  "temperature": 0.6,
+  "top_p": 0.95,
+  "top_k": 20,
+  "max_tokens": 8192
+ },
+ "usage": {
+  "prompt_tokens": 858,
+  "total_tokens": 8982,
+  "completion_tokens": 8124,
+  "prompt_tokens_details": null,
+  "completion_tokens_details": {
+   "reasoning_tokens": 7898
+  }
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "\n\n{\n  \"steps\": [\n    \"Calculate the target spherical radius as half of the central cylinder radius (43.7 / 2 = 21.85).\",\n    \"Update the top sphere radius parameter in the first union operation from 43.7 to 21.85.\",\n    \"Update the bottom sphere radius parameter in the second union operation from 43.7 to 21.85.\"\n  ],\n  \"invariants\": [\n    \"Central cylinder height remains 41.6.\",\n    \"Central cylinder radius remains 43.7.\",\n    \"Axial bore cylinder dimensions (387.0 height, 10.49 radius) remain unchanged.\",\n    \"Sphere offset positions (20.8, -20.8) remain unchanged.\"\n  ],\n  \"dependencies\": [\n    [\n      1,\n      0\n    ],\n    [\n      2,\n      0\n    ]\n  ]\n}"
+}

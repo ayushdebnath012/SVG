@@ -1,0 +1,16 @@
+{
+  "model": "gpt-6-astra",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are solving a CAD+FEM benchmark task. Return only a complete runnable Python main.py, with no markdown fences. No model-side tools are available; your code will run locally. Do not hardcode a guessed answer or use published reference results."
+    },
+    {
+      "role": "user",
+      "content": "Support bracket (one member of a parametric double-arm bracket family). geometry.step holds one solid in millimetres (height 189 mm).\n\nMaterial: linear isotropic elastic, E = 70 GPa, Poisson ratio 0.33 (density 2700 kg/m^3, gravity not applied).\nSupports: the foot undersides, i.e. every face lying in the plane z = 0, are fully fixed (all displacement components zero).\nLoad: a uniform downward traction of 1.98728 MPa in the -z direction over the top seat face (the face in the plane z = 189 mm); total 10000 N.\nAnalysis: 3-D linear elasticity, small displacements. The publisher used quadratic tetrahedra with a nominal 9 mm mesh.\n\nOutputs:\n- seat_mean_displacement_mm [mm]: mean of the downward displacement -u_z over the top seat face (z = 189 mm)\n- max_displacement_mm [mm]: maximum displacement magnitude anywhere in the bracket\n\nSubmit results.json containing exactly an outputs object with these numeric keys. Also submit main.py, part.step, mesh.msh, fields.npz, solver.log, refinement.json and environment.json. See candidate README for the artifact contract. Correct numerical answers alone do not establish workflow completion.\nRuntime: Python with numpy, scipy, gmsh, cadquery, meshio, skfem. ccx (CalculiX 2.23) available on PATH; no FreeCAD or ANSYS. Input directory is CADFEM_INPUT_DIR; files: [\"geometry.step\"]. Read full geometry and specification files there. Write all outputs to CADFEM_OUTPUT_DIR; main.py is preserved separately. Internet and evaluator data blocked. 600 seconds, 2 CPU threads, 6000 MB RAM. Choose feasible meshes; record convergence honestly. One code-generation attempt, no repair feedback. Return runnable code; never fabricate results."
+    }
+  ],
+  "reasoning_effort": "low",
+  "max_completion_tokens": 6500,
+  "store": false
+}

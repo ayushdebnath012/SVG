@@ -1,0 +1,178 @@
+{
+  "collection": "Curved steam pipe saved thermal fields and elbow thermal-shock report",
+  "new_geometry_families": 2,
+  "complex_geometry_family": false,
+  "classification": "Two thermal controls: S-shaped pipe and 90-degree elbow; insulation cases are variants, not families",
+  "raw_saved_RTH_candidates": 3,
+  "saved_result_inventory": [
+    {
+      "system": "SYS",
+      "source_RTH": "extracted-original/Steady_HeatTransfer/SteadyHeatTransfer_files/dp0/SYS/MECH/file.rth",
+      "source_version": "23.2",
+      "source_nodes": 51145,
+      "source_elements": 19591,
+      "saved_sets": 1,
+      "static_set_label": [
+        1.0
+      ],
+      "global_temperature_range_C": [
+        118.16373598583405,
+        128.47356137095204
+      ],
+      "coordinate_envelope_m": [
+        0.18786796564,
+        0.1,
+        0.28
+      ],
+      "exterior_surface_node_count": 8820,
+      "exterior_scope": "Outer foam",
+      "exterior_temperature_range_C": [
+        118.16373598583405,
+        118.77415159571015
+      ],
+      "cast_iron_outer_node_count": 9164,
+      "cast_iron_outer_temperature_range_C": [
+        128.1207084023414,
+        128.32436926489837
+      ],
+      "report_part": "C"
+    },
+    {
+      "system": "SYS-1",
+      "source_RTH": "extracted-original/Steady_HeatTransfer/SteadyHeatTransfer_files/dp0/SYS-1/MECH/file.rth",
+      "source_version": "23.2",
+      "source_nodes": 31057,
+      "source_elements": 10972,
+      "saved_sets": 1,
+      "static_set_label": [
+        1.0
+      ],
+      "global_temperature_range_C": [
+        128.365629823967,
+        128.58385846636642
+      ],
+      "coordinate_envelope_m": [
+        0.17786796564,
+        0.09,
+        0.28
+      ],
+      "exterior_surface_node_count": 9164,
+      "exterior_scope": "Outer cast iron pipe",
+      "exterior_temperature_range_C": [
+        128.365629823967,
+        128.494404240553
+      ],
+      "report_part": "A"
+    },
+    {
+      "system": "SYS-2",
+      "source_RTH": "extracted-original/Steady_HeatTransfer/SteadyHeatTransfer_files/dp0/SYS-2/MECH/file.rth",
+      "source_version": "23.2",
+      "source_nodes": 31057,
+      "source_elements": 10972,
+      "saved_sets": 1,
+      "static_set_label": [
+        1.0
+      ],
+      "global_temperature_range_C": [
+        130.6649000876664,
+        130.86439961916352
+      ],
+      "coordinate_envelope_m": [
+        0.17786796564,
+        0.09,
+        0.28
+      ],
+      "exterior_surface_node_count": 9164,
+      "exterior_scope": "Outer cast iron pipe",
+      "exterior_temperature_range_C": [
+        130.6649000876664,
+        130.7826706684568
+      ],
+      "report_part": "B"
+    }
+  ],
+  "published_steady_refs": [
+    {
+      "part": "A",
+      "cast_iron_outer_peak_C": 128.5,
+      "heat_loss_magnitude_W": 35.4
+    },
+    {
+      "part": "B",
+      "cast_iron_outer_peak_C": 130.8,
+      "heat_loss_magnitude_W": 32.3
+    },
+    {
+      "part": "C",
+      "cast_iron_outer_peak_C": 128.3,
+      "heat_loss_magnitude_W": 35.6
+    }
+  ],
+  "published_elbow_insulation_sweep": {
+    "thickness_mm": [
+      1.5,
+      2.5,
+      5,
+      10,
+      15,
+      7.5,
+      12.5,
+      10.5
+    ],
+    "heat_loss_W": [
+      39.835,
+      39.921,
+      40.07,
+      40.147,
+      39.997,
+      40.143,
+      40.096,
+      40.141
+    ]
+  },
+  "published_elbow_transient": {
+    "time_minutes": [
+      10,
+      167,
+      90,
+      91,
+      92,
+      95,
+      94
+    ],
+    "maximum_outer_insulation_temperature_C": [
+      29.62,
+      113.53,
+      106.93,
+      107.15,
+      107.39,
+      108.01,
+      107.79
+    ],
+    "source_steady_time_minutes": 95,
+    "raw_transient_results_uploaded": false
+  },
+  "source_problem_PDFs": [
+    "SteadyStateThermalAnalysis/ProblemStatement.pdf",
+    "TransientThermalAnalysis/ProblemStatement.pdf"
+  ],
+  "dimensioned_drawing_track_complete": false,
+  "license": "No explicit repository license located; original author/course notices retained; local research only.",
+  "limits": [
+    "Original native SpaceClaim SAB geometries and matching project archives retained; independent ACIS BREP/body/face import remains pending.",
+    "Default legacy VTK mesh decoding exited 139. Safe read_mesh=False recovers finite scalar temperatures with exact node IDs; coordinates and scopes copied from original textual NBLOCK/EBLOCK decks. No reconstructed VTK mesh or solver run.",
+    "Raw-record scalar values and repeat original RTH reads match exactly. Outer surface maxima round to each source A/B/C reference; this verifies reference mapping, not mesh/physics certification.",
+    "Part C report asks outer cast iron temperature, not outer foam temperature. Native cast iron interface max 128.324369 C differs from foam max 118.774152 C; masks distinguish them.",
+    "Three steady variants are one pipe family. Heat-loss table magnitudes are published references; signed source reaction screenshots include negative outward values. Heat-flow arrays were not decoded.",
+    "Elbow report and CAD include temperature-dependent cast iron conductivity, thermal shock and insulation sweep, but no transient RTH/history archive was uploaded.",
+    "Elbow 95-minute criterion uses 0.95 times temperature in Celsius. Do not silently replace it with 95 percent of temperature rise or absolute Kelvin; exact task convention/time-step assessment remains pending.",
+    "Problem figures state diameters but do not provide complete manufacturing dimensions. Source statements and CAD views are not complete dimensioned drawing-to-CAD tasks."
+  ],
+  "source": "https://github.com/maryhzd/FEA-IndustryRelatedProjects",
+  "pinned_tree_revision": "049c50def3f75a5b1b7b5c4aaf952646b100b5ee",
+  "generated_cad": 0,
+  "new_solver_runs": 0,
+  "model_calls": 0,
+  "certified_cases": 0
+}

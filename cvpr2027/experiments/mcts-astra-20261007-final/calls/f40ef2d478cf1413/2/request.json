@@ -1,0 +1,16 @@
+{
+  "model": "gpt-6-astra",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Edit mechanical CAD and preserve unrelated features. Return only a JSON object {\"edits\":[{\"start\":0,\"delete\":0,\"insert\":[\"replacement line\"]}]}. Indices always address zero-based ORIGINAL source lines, even when revising a previous candidate. Operations must be ordered, nonoverlapping and in bounds. Use the request and target-free observations to reconsider the current candidate; tools and the verifier can be wrong. Produce an alternative complete patch. Do not invent verification results."
+    },
+    {
+      "role": "user",
+      "content": "{\"instruction\": \"The slotted screw is modified with a larger head, increasing the head diameter to 6.5 mm.\", \"original_source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .circle(1.25)\\n    .extrude(6.0)\\n    .faces(\\\">Z\\\").workplane()\\n    .circle(2.5)\\n    .extrude(1.5)\\n    .cut(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(0, 0, 7.2), rotate=cq.Vector(0, 0, 0))\\n            .box(5.4, 0.6, 1.4)\\n    )\\n)\\nshow_object(result)\", \"previous_candidate\": \"{\\\"edits\\\":[{\\\"start\\\":6,\\\"delete\\\":1,\\\"insert\\\":[\\\"    .circle(3.25)\\\"]}]}\", \"observations\": {\"execute\": {\"gates\": true, \"error\": null, \"volume\": 75.98703973271758, \"changed\": true}, \"numbers\": [{\"kind\": \"value_present\", \"value\": 6.5, \"ok\": true}]}, \"verifier_proxy_probability\": 0.5143600955026133, \"alternatives\": [\"{\\\"edits\\\":[{\\\"start\\\":6,\\\"delete\\\":1,\\\"insert\\\":[\\\"    .circle(3.25)\\\"]},{\\\"start\\\":11,\\\"delete\\\":1,\\\"insert\\\":[\\\"            .box(6.9, 0.6, 1.4)\\\"]}]}\"], \"instruction_to_generator\": \"Find a different minimal edit that satisfies the request. Recheck unrelated features; indices always refer to the original source.\"}"
+    }
+  ],
+  "reasoning_effort": "low",
+  "max_completion_tokens": 2500,
+  "store": false
+}

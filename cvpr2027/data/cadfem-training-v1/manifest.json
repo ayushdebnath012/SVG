@@ -1,0 +1,35 @@
+{
+  "source": "https://huggingface.co/datasets/HaomingLuo/AgentFEM-Bracket-Elasticity",
+  "revision": "8b020d1f3ae22e1583dfa3f2e466627d38ebeab3",
+  "license": "CC BY 4.0, Haoming Luo (2026)",
+  "attribution": "Haoming Luo, AgentFEM-Bracket-Elasticity (2026), CC BY 4.0",
+  "system": "Predict the original publisher discretized linear-elastic FEM displacement metrics for the supplied bracket parameters and physical load. Return only JSON with an outputs object containing seat_mean_displacement_mm and max_displacement_mm. This is numerical surrogate prediction; do not claim that you executed CAD or FEM.",
+  "objective": "source-summary numerical surrogate warm-up; not CAD/FEM workflow SFT",
+  "counts": {
+    "train": 128,
+    "validation": 16
+  },
+  "files": {
+    "train": "19faaf6a85298974ff0117a04360ddbda849f3fb7c9cbc4cb36fdf04ee947aab",
+    "validation": "23e2847b28b97570f4a13f2be776c3c66de81dcfcafd3a9fa6343b9bd36c53bb"
+  },
+  "asset_files": 576,
+  "benchmark": "/Users/ayushdebnath/SVG/cadfem-bench-v1.7",
+  "benchmark_version": "1.7",
+  "benchmark_cases_excluded": 32,
+  "publisher_test_cases_excluded": 32,
+  "exact_geometry_parameter_overlap_train_validation": 0,
+  "exact_geometry_parameter_overlap_with_publisher_test": 0,
+  "raw_asset_hashes_match_original_source_archives": true,
+  "FEM_scalar_checks_against_original_fields": 288,
+  "new_CAD_generated": 0,
+  "new_FEM_results_generated": 0,
+  "new_target_values_generated": 0,
+  "limitations": [
+    "One bracket family; validation is within-family geometry generalization, not cross-family generalization.",
+    "Publisher mesh is not qualified as converged. Targets describe the published discretized solution.",
+    "This LLM input uses source geometry parameters, not direct STEP tokens or an image encoder.",
+    "No agent trajectory or independently verified CAD/FEM workflow label is trained.",
+    "Public-source exposure cannot be ruled out."
+  ]
+}

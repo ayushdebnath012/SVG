@@ -1,0 +1,61 @@
+{
+ "id": "9b5dda464d457ab1bff1a73d39aecaa9d3c85bb31b616dd4803266fcd66cdc99",
+ "source_fem": {
+  "ok": false,
+  "error": "ValueError: Unanchored disconnected component"
+ },
+ "candidates": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .transformed(offset=cq.Vector(0, 0, 10))\n    .cylinder(20.0, 3.0)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 20))\n            .sphere(6.0)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 16.8))\n            .box(50, 50, 5)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": false,
+    "error": "ValueError: Unanchored disconnected component"
+   },
+   "consensus": 4,
+   "numbers_ok": null,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt1",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .transformed(offset=cq.Vector(0, 0, 10))\n    .cylinder(20.0, 3.0)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 20))\n            .sphere(6.0)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 16.8))\n            .box(50, 50, 5)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": false,
+    "error": "ValueError: Unanchored disconnected component"
+   },
+   "consensus": 4,
+   "numbers_ok": null,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt2",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .transformed(offset=cq.Vector(0, 0, 10))\n    .cylinder(20.0, 3.0)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 20))\n            .sphere(2.0 * 3.0)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 16.8))\n            .box(50, 50, 5)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": false,
+    "error": "ValueError: Unanchored disconnected component"
+   },
+   "consensus": 4,
+   "numbers_ok": null,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt3",
+   "code": "import cadquery as cq\nshank_radius = 3.0\nresult = (\n    cq.Workplane(\"XY\")\n    .transformed(offset=cq.Vector(0, 0, 10))\n    .cylinder(20.0, shank_radius)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 20))\n            .sphere(2.0 * shank_radius)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 16.8))\n            .box(50, 50, 5)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": false,
+    "error": "ValueError: Unanchored disconnected component"
+   },
+   "consensus": 4,
+   "numbers_ok": null,
+   "changed": true,
+   "error": null
+  }
+ ]
+}

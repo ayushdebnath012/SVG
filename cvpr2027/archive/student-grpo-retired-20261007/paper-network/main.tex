@@ -1,0 +1,74 @@
+% CVPR 2027 submission draft. Template: https://github.com/cvpr-org/author-kit
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage[review]{cvpr}
+\input{preamble}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit}
+\usepackage{xspace}
+\usepackage{listings}
+\renewcommand{\ttdefault}{lmtt}  % Courier (pcr) is unavailable under XeTeX; use Latin Modern Mono for code
+\usepackage{upquote}
+\lstset{basicstyle=\ttfamily\scriptsize, breaklines=true, columns=fullflexible, upquote=true,
+  keepspaces=true, extendedchars=true, frame=none, xleftmargin=0pt,
+  literate={"}{{\textquotedbl}}1}
+\newcommand{\astra}{\textsc{Astra}\xspace}
+\newcommand{\ours}{\textsc{ReSolve}\xspace}
+\newcommand{\code}[1]{\texttt{\small #1}}
+
+% Keep Times-compatible review typography with XeTeX/Tectonic as well as pdfLaTeX.
+\usepackage{iftex}
+\ifXeTeX
+  \usepackage{fontspec}
+  \IfFontExistsTF{TeX Gyre Termes}{\setmainfont{TeX Gyre Termes}}{\setmainfont{Times New Roman}}
+  \IfFontExistsTF{TeX Gyre Heros}{\setsansfont{TeX Gyre Heros}}{\setsansfont{Arial}}
+  \IfFontExistsTF{Latin Modern Mono}{\setmonofont{Latin Modern Mono}}{\setmonofont{Menlo}}
+\fi
+
+\definecolor{cvprblue}{rgb}{0.21,0.49,0.74}
+\usepackage[pagebackref,breaklinks,colorlinks,allcolors=cvprblue]{hyperref}
+
+\def\paperID{Draft}
+\def\confName{CVPR}
+\def\confYear{2027}
+
+\title{ReSolve: Instruction-Guided 3D CAD Editing\\with Geometry and View Evaluation}
+
+\author{Research working draft}
+
+\input{mechanical-results}
+\input{cuda-results}
+\input{fem-results}
+\input{plan-anchor-results}
+\input{pipeline-results}
+
+\begin{document}
+\maketitle
+
+\input{sections/mechanical/abstract}
+\input{sections/mechanical/intro}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.93\textwidth]{figures/benchcad-reference-pairs.pdf}
+\caption{\textbf{Published mechanical CAD edit pairs held out in the local protocol.} Top: remove the perpendicular end flange while preserving the twisted web and the first-flange holes. Bottom: add a centered blind obround slot to the upper cylindrical shaft section. These are source/released-target illustrations, not learned model predictions. Both views are exported from solids. Learned predictions are evaluated separately in the primary experiment and diagnostic visual/FEM audits.}
+\label{fig:benchcad-reference}
+\end{figure*}
+\input{sections/mechanical/related}
+\input{sections/mechanical/method}
+\input{sections/mechanical/data}
+\input{sections/mechanical/experiments}
+\input{sections/mechanical/conclusion}
+
+{
+    \small
+    \bibliographystyle{ieeenat_fullname}
+    \bibliography{refs}
+}
+
+\input{sections/mechanical/appendix}
+
+\end{document}

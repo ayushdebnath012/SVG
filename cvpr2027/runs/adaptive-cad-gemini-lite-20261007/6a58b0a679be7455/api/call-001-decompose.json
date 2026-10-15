@@ -1,0 +1,28 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .polygon(6, 15.012)\\n    .extrude(15.0)\\n    .faces(\\\">Z\\\").workplane()\\n    .hole(8.0)\\n)\\nshow_object(result)\", \"instruction\": \"Bevel the six straight outer edges of the bottom face at 45 degrees from horizontal, 2 mm wide on the bottom face.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"48c2f0ea60622821d2ff4744bdf248258c201ede8da6159e837a55fede6fbc53\", \"instruction\": \"On the bottom face of the part, bevel the four straight outer edges at 45 degrees from horizontal, 3 mm wide on the bottom.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"    .faces(\\\\\\\"<Z\\\\\\\").edges(\\\\\\\"%LINE\\\\\\\").chamfer(3.0, 3.0)\\\"], \\\"start\\\": 31}]}\", \"strategies\": [], \"context\": [\"31: )\"]}, {\"task_id\": \"8b9a0a4ec97cfcb487a7069f340e3d9968ca94e0dca50ca04ffd1412d21926c7\", \"instruction\": \"Bevel the two straight top outer edges of the pie-slice at 45 degrees from horizontal, 9 mm wide on the top face.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"    .faces(\\\\\\\">Z\\\\\\\").edges(\\\\\\\"%LINE\\\\\\\").chamfer(9.0, 9.0)\\\"], \\\"start\\\": 8}]}\", \"strategies\": [], \"context\": [\"8: )\"]}, {\"task_id\": \"2df22d62234c99eed107f9a7fcefc2c1d7de4d9cbff557ec246236a8d989c1d5\", \"instruction\": \"Bevel all 8 straight outer edges of the top face at 60 degrees from horizontal, 3 mm wide on the top.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"    .faces(\\\\\\\">Z\\\\\\\").edges(\\\\\\\"%LINE\\\\\\\").chamfer(3.0, 5.1962)\\\"], \\\"start\\\": 6}]}\", \"strategies\": [], \"context\": [\"6: )\"]}]}"
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 4096
+ },
+ "usage": {
+  "completion_tokens": 165,
+  "prompt_tokens": 670,
+  "total_tokens": 835
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\n  \"steps\": [\n    \"Select the bottom face (<Z) of the extruded polygon\",\n    \"Select the six straight outer edges (%LINE) of the bottom face\",\n    \"Apply a 2 mm chamfer to the selected edges\"\n  ],\n  \"invariants\": [\n    \"The 15.0 mm height and 15.012 mm polygon outer diameter remain unchanged\",\n    \"The 8.0 mm hole on the top face remains unchanged\",\n    \"The chamfer angle is 45 degrees from horizontal, resulting in equal 2 mm setbacks\"\n  ],\n  \"dependencies\": [\n    [0, 1],\n    [1, 2]\n  ]\n}\n```"
+}

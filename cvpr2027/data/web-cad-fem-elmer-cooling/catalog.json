@@ -1,0 +1,120 @@
+{
+  "collection": "NativeFreeCAD/Elmerconjugatecooling models with full original savedfields",
+  "geometry_families": 2,
+  "complex_radiator_assembly_families": 1,
+  "simple_thermalflow_control_families": 1,
+  "raw_field_candidates": 2,
+  "records": [
+    {
+      "model": "fem-elmer-tube-thermalflow-velocity-3d",
+      "CAD_object": "BooleanFragments",
+      "original_BREP_member": "PartShape13.brp",
+      "CAD_valid": true,
+      "solids": 2,
+      "faces": 29,
+      "CAD_envelope_mm": [
+        100.0,
+        40.0,
+        45.90000000000001
+      ],
+      "nodes": 41565,
+      "cells": 36843,
+      "raw_VTU": "extracted-original/fem-elmer-tube-thermalflow-velocity-3d/Data.vtu",
+      "field_npz": "fem-elmer-tube-thermalflow-velocity-3d-original-fields.npz",
+      "field_stats": {
+        "pressure": {
+          "min": 0.0,
+          "max": 101095.06016652808,
+          "finite": true,
+          "shape": [
+            41565
+          ]
+        },
+        "temperature": {
+          "min": 284.26756868749646,
+          "max": 600.0000000000002,
+          "finite": true,
+          "shape": [
+            41565
+          ]
+        },
+        "velocity": {
+          "min": -0.11438811024848036,
+          "max": 0.4993110485990898,
+          "finite": true,
+          "shape": [
+            41565,
+            3
+          ]
+        }
+      },
+      "derived_speed_max": 0.4993110485990898
+    },
+    {
+      "model": "full-bridge_on_radiator",
+      "CAD_object": "BooleanFragments008",
+      "original_BREP_member": "PartShape185.brp",
+      "CAD_valid": true,
+      "solids": 24,
+      "faces": 355,
+      "CAD_envelope_mm": [
+        40.0000002,
+        66.75,
+        400.0000002
+      ],
+      "nodes": 137182,
+      "cells": 130305,
+      "raw_VTU": "extracted-original/full-bridge_on_radiator/Data.vtu",
+      "field_npz": "full-bridge_on_radiator-original-fields.npz",
+      "field_stats": {
+        "pressure": {
+          "min": -0.011610978062585027,
+          "max": 0.05898354627764927,
+          "finite": true,
+          "shape": [
+            137182
+          ]
+        },
+        "temperature": {
+          "min": 285.9547014244654,
+          "max": 424.3554997202047,
+          "finite": true,
+          "shape": [
+            137182
+          ]
+        },
+        "velocity": {
+          "min": -0.05345727480145313,
+          "max": 0.1821520514694345,
+          "finite": true,
+          "shape": [
+            137182,
+            3
+          ]
+        }
+      },
+      "derived_speed_max": 0.18218989893561735
+    }
+  ],
+  "source_boundary_metadata": "original-boundary-and-material-inspection.json",
+  "units": "VTUcoordinatesmatchcachedCADmillimeters; ElmerfieldsSI:temperatureK,pressurePa,velocitym/s. Nativevelocity50mm/s=.05m/s. FreeCADElmerwriter scalescoordinates.001forSIand revertscoordinatesforoutput.",
+  "unit_source": "https://github.com/FreeCAD/FreeCAD/blob/0.21.1/src/Mod/Fem/femsolver/elmer/writer.py",
+  "original_dimensioned_drawing_verified": false,
+  "license": "MITrepositorynotice retained. Original material cards retain author/CC-BY notices. Localresearchcollection.",
+  "limits": [
+    "TwoCADgeometries,not355facesor177kpointsastasks. Fullbridgehas23physicalsolidsplusoneairdomain; tubehassteelandwaterdomains.",
+    "Alltemperature/pressure/velocityarraysfinitebutundershoot: tube284.2676Kbelow300Kboundary; radiator285.9547Kbelow298.15Kambient. No clipping/correction;stabilization/convergence/material/bodymappingreviewrequired.",
+    "Maximumtube600Kisprescribed,notindependentprediction. Fluidpressurezerosatsolidpointsarenotfluidminimumpressure;VTUnoCellData/bodyIDs,domainmaskmappingpending.",
+    "RadiatorREADMEpowers3.04/1.91/4/0Wsum8.95W differfromnative3DFluxvalueson9mm2faces,derived3.4/4.7/2.2Wsum10.3W assumingElmerSIflux. Exactrevision/scopeheld.",
+    "Radiationomittedinpublishermodel;resultnotvalidatedexperimentaltemperature. Nativecommadecimalmaterialstringskeptunchanged.",
+    "StoredsolverlogsfinishALLDONEbutthatdoesnotestablishconvergence/meshindependence. No sourceProxyPythonobjectdeserializationorFreeCADrecomputeexecuted.",
+    "Temperaturesectionplotsinspectoriginalsavedfieldwiththinspatialselection;notnewsolveordimensioneddrawing."
+  ],
+  "source": "https://github.com/mist90/FreeCAD-FEM-examples",
+  "source_revision": "1afc9deb50cf50f53ae6b95fca974d21f106fff5",
+  "source_downloads": 4,
+  "generated_CAD": 0,
+  "new_solver_runs": 0,
+  "model_calls": 0,
+  "certified_cases": 0
+}

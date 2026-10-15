@@ -1,0 +1,145 @@
+{
+ "id": "f0cdaa4300f3694e3cae0a7a91d4fb4d5ec574389f07137e3b30f5b7db45375e",
+ "source_fem": {
+  "ok": true,
+  "compliance": 2.877220966363322e-07,
+  "components": 1,
+  "nodes": 550
+ },
+ "nodes": [
+  {
+   "name": "vanilla",
+   "parent": null,
+   "visits": 1,
+   "value_sum": 1.0,
+   "eval": {
+    "gates": true,
+    "fem": {
+     "ok": true,
+     "compliance": 2.08407028045592e-07,
+     "components": 1,
+     "nodes": 570
+    },
+    "numbers_ok": true,
+    "changed": true,
+    "error": null,
+    "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(18.0, 2.6, 2.0)\n    .edges(\"|X\")\n    .chamfer(0.3)\n    .faces(\">Z\").workplane()\n    .rect(14.4, 0.6)\n    .cutBlind(-0.4)\n)\nshow_object(result)\n"
+   }
+  },
+  {
+   "name": "alt1",
+   "parent": null,
+   "visits": 1,
+   "value_sum": 1.0,
+   "eval": {
+    "gates": true,
+    "fem": {
+     "ok": true,
+     "compliance": 2.0827131551450404e-07,
+     "components": 1,
+     "nodes": 567
+    },
+    "numbers_ok": true,
+    "changed": true,
+    "error": null,
+    "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(18.0, 2.6, 2.0)\n    .edges(\"|X\")\n    .chamfer(0.3)\n    .faces(\">Z\").workplane()\n    .rect(14.4, 0.6)\n    .cutBlind(-0.4)\n)\nshow_object(result)\n"
+   }
+  },
+  {
+   "name": "alt2",
+   "parent": null,
+   "visits": 1,
+   "value_sum": 0.8,
+   "eval": {
+    "gates": true,
+    "fem": {
+     "ok": true,
+     "compliance": 2.080585603457566e-07,
+     "components": 1,
+     "nodes": 564
+    },
+    "numbers_ok": false,
+    "changed": true,
+    "error": null,
+    "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(18.0, 2.0 + 0.6, 2.0)\n    .edges(\"|X\")\n    .chamfer(0.3)\n    .faces(\">Z\").workplane()\n    .rect(14.4, 0.6)\n    .cutBlind(-0.4)\n)\nshow_object(result)\n"
+   }
+  },
+  {
+   "name": "alt3",
+   "parent": null,
+   "visits": 1,
+   "value_sum": 1.0,
+   "eval": {
+    "gates": true,
+    "fem": {
+     "ok": true,
+     "compliance": 2.0815909276519752e-07,
+     "components": 1,
+     "nodes": 566
+    },
+    "numbers_ok": true,
+    "changed": true,
+    "error": null,
+    "code": "import cadquery as cq\nbox_y = 2.6\nresult = (\n    cq.Workplane(\"XY\")\n    .box(18.0, box_y, 2.0)\n    .edges(\"|X\")\n    .chamfer(0.3)\n    .faces(\">Z\").workplane()\n    .rect(14.4, 0.6)\n    .cutBlind(-0.4)\n)\nshow_object(result)\n"
+   }
+  }
+ ],
+ "candidates": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(18.0, 2.6, 2.0)\n    .edges(\"|X\")\n    .chamfer(0.3)\n    .faces(\">Z\").workplane()\n    .rect(14.4, 0.6)\n    .cutBlind(-0.4)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 2.08407028045592e-07,
+    "components": 1,
+    "nodes": 570
+   },
+   "consensus": 4,
+   "numbers_ok": true,
+   "changed": true
+  },
+  {
+   "name": "alt1",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(18.0, 2.6, 2.0)\n    .edges(\"|X\")\n    .chamfer(0.3)\n    .faces(\">Z\").workplane()\n    .rect(14.4, 0.6)\n    .cutBlind(-0.4)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 2.0827131551450404e-07,
+    "components": 1,
+    "nodes": 567
+   },
+   "consensus": 4,
+   "numbers_ok": true,
+   "changed": true
+  },
+  {
+   "name": "alt2",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(18.0, 2.0 + 0.6, 2.0)\n    .edges(\"|X\")\n    .chamfer(0.3)\n    .faces(\">Z\").workplane()\n    .rect(14.4, 0.6)\n    .cutBlind(-0.4)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 2.080585603457566e-07,
+    "components": 1,
+    "nodes": 564
+   },
+   "consensus": 4,
+   "numbers_ok": false,
+   "changed": true
+  },
+  {
+   "name": "alt3",
+   "code": "import cadquery as cq\nbox_y = 2.6\nresult = (\n    cq.Workplane(\"XY\")\n    .box(18.0, box_y, 2.0)\n    .edges(\"|X\")\n    .chamfer(0.3)\n    .faces(\">Z\").workplane()\n    .rect(14.4, 0.6)\n    .cutBlind(-0.4)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 2.0815909276519752e-07,
+    "components": 1,
+    "nodes": 566
+   },
+   "consensus": 4,
+   "numbers_ok": true,
+   "changed": true
+  }
+ ]
+}

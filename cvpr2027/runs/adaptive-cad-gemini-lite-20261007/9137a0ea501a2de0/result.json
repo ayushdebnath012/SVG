@@ -1,0 +1,1021 @@
+{
+ "task_id": "9137a0ea501a2de0767750edbac92f6a3a7ae09db402d83e61e330fbcce83818",
+ "status": "PASS",
+ "prediction": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .extrude(30.024)\"], \"start\": 4}]}",
+ "selected_node": 1,
+ "bank": [
+  1,
+  2
+ ],
+ "pareto": [
+  1,
+  2
+ ],
+ "stop": "expansion_limit",
+ "nodes": [
+  {
+   "id": 0,
+   "candidate": "```json\n{\"edits\":[{\"start\":3,\"delete\":2,\"insert\":[\n    \".extrude(30.024)\"\n]}]}\n```",
+   "depth": 0,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "FAIL",
+      "reason": "ValueError: No pending wires present"
+     },
+     "constraints": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -1000.0
+    ],
+    "score": -1.0,
+    "diagnosis": [
+     {
+      "stage": "geometry",
+      "status": "FAIL",
+      "reason": "ValueError: No pending wires present"
+     },
+     {
+      "stage": "constraints",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 3,
+   "visits": 4,
+   "final": null,
+   "edges": [
+    0
+   ]
+  },
+  {
+   "id": 1,
+   "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .extrude(30.024)\"], \"start\": 4}]}",
+   "depth": 1,
+   "verdict": {
+    "status": "PASS",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 2885.6133900242858,
+       "area": 2298.966736292945,
+       "solids": 1,
+       "faces": 9,
+       "bbox_x": 15.012,
+       "bbox_y": 13.000773361611998,
+       "bbox_z": 30.024
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 1.0,
+      "reason": "The standoff height has been increased to twice the across-flats size while preserving the bore and hex profile.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-00.png"
+     },
+     "fem": {
+      "status": "PASS",
+      "metrics": {
+       "nodes": 1959,
+       "tetrahedra": 6988,
+       "connected_components": 1,
+       "mesh_volume_mm3": 2906.6353126869312,
+       "fixed_nodes": 165,
+       "loaded_facets": 317,
+       "loaded_area_mm2": 201.42484229959985,
+       "axis": [
+        0.0,
+        0.0,
+        1.0
+       ],
+       "projection_min_mm": 0.0,
+       "projection_max_mm": 30.024,
+       "compliance_N_mm": 1.3928248624045177e-06,
+       "load_weighted_displacement_mm": 1.3928248624045177e-06,
+       "max_displacement_mm": 1.5196618659444552e-06,
+       "strain_energy_N_mm": 6.964124312022579e-07,
+       "vm_p95_MPa": 0.010696786844159395,
+       "vm_peak_MPa": 0.014443066385124569,
+       "relative_free_residual": 1.540313607194193e-13,
+       "relative_force_balance_error": 7.947064318199304e-15,
+       "relative_moment_balance_error": 5.170425143658533e-15,
+       "relative_energy_error": 1.368315703405837e-15
+      },
+      "checks": [
+       {
+        "metric": "connected_components",
+        "value": 1,
+        "max": 1,
+        "ok": true
+       }
+      ]
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 1.005
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 1.005
+       }
+      ]
+     }
+    },
+    "objectives": [
+     1.0,
+     1.0,
+     -2.0
+    ],
+    "score": 2.0980000000000003,
+    "diagnosis": [],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 1,
+   "visits": 4,
+   "final": {
+    "status": "PASS",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 2885.6133900242858,
+       "area": 2298.966736292945,
+       "solids": 1,
+       "faces": 9,
+       "bbox_x": 15.012,
+       "bbox_y": 13.000773361611998,
+       "bbox_z": 30.024
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 1.0,
+      "reason": "The standoff height has been increased to twice the across-flats size while preserving the bore and hex profile.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-00.png"
+     },
+     "fem": {
+      "status": "PASS",
+      "metrics": {
+       "nodes": 1967,
+       "tetrahedra": 7025,
+       "connected_components": 1,
+       "mesh_volume_mm3": 2906.6353126869294,
+       "fixed_nodes": 165,
+       "loaded_facets": 317,
+       "loaded_area_mm2": 201.73376570976006,
+       "axis": [
+        0.0,
+        0.0,
+        1.0
+       ],
+       "projection_min_mm": 0.0,
+       "projection_max_mm": 30.024,
+       "compliance_N_mm": 1.3931060424830878e-06,
+       "load_weighted_displacement_mm": 1.3931060424830878e-06,
+       "max_displacement_mm": 1.5154708243126684e-06,
+       "strain_energy_N_mm": 6.965530212415507e-07,
+       "vm_p95_MPa": 0.010688645126488865,
+       "vm_peak_MPa": 0.014731483893497958,
+       "relative_free_residual": 1.4729426588050408e-13,
+       "relative_force_balance_error": 8.079877242151117e-15,
+       "relative_moment_balance_error": 3.700758241892562e-15,
+       "relative_energy_error": 9.72828108039258e-15
+      },
+      "checks": [
+       {
+        "metric": "connected_components",
+        "value": 1,
+        "max": 1,
+        "ok": true
+       }
+      ]
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 0.995
+       },
+       {
+        "mesh_scale": 1.25
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 0.995
+       },
+       {
+        "status": "PASS",
+        "metrics": {
+         "nodes": 1317,
+         "tetrahedra": 4400,
+         "connected_components": 1,
+         "mesh_volume_mm3": 2912.9983611279795,
+         "fixed_nodes": 121,
+         "loaded_facets": 201,
+         "loaded_area_mm2": 186.31252063864653,
+         "axis": [
+          0.0,
+          0.0,
+          1.0
+         ],
+         "projection_min_mm": 0.0,
+         "projection_max_mm": 30.024,
+         "compliance_N_mm": 1.3848210567259564e-06,
+         "load_weighted_displacement_mm": 1.3848210567259564e-06,
+         "max_displacement_mm": 1.4706666266479593e-06,
+         "strain_energy_N_mm": 6.924105283629672e-07,
+         "vm_p95_MPa": 0.010595045598445443,
+         "vm_peak_MPa": 0.014798785758016447,
+         "relative_free_residual": 1.0554060861104758e-13,
+         "relative_force_balance_error": 2.718162601595668e-14,
+         "relative_moment_balance_error": 1.0668024559534213e-15,
+         "relative_energy_error": 1.5903034201891064e-14
+        },
+        "checks": [
+         {
+          "metric": "connected_components",
+          "value": 1,
+          "max": 1,
+          "ok": true
+         }
+        ]
+       }
+      ]
+     }
+    },
+    "objectives": [
+     1.0,
+     1.0,
+     -2.0
+    ],
+    "score": 2.0980000000000003,
+    "diagnosis": [],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "final"
+   },
+   "edges": [
+    1
+   ]
+  },
+  {
+   "id": 2,
+   "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .extrude(15.012 * 2)\"], \"start\": 4}]}",
+   "depth": 2,
+   "verdict": {
+    "status": "PASS",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 2885.6133900242858,
+       "area": 2298.966736292945,
+       "solids": 1,
+       "faces": 9,
+       "bbox_x": 15.012,
+       "bbox_y": 13.000773361611998,
+       "bbox_z": 30.024
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 1.0,
+      "reason": "The standoff height has been increased to twice the across-flats size while keeping the bore and hex profile unchanged.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-01.png"
+     },
+     "fem": {
+      "status": "PASS",
+      "metrics": {
+       "nodes": 1967,
+       "tetrahedra": 7026,
+       "connected_components": 1,
+       "mesh_volume_mm3": 2906.6353126869294,
+       "fixed_nodes": 165,
+       "loaded_facets": 317,
+       "loaded_area_mm2": 201.73376570976006,
+       "axis": [
+        0.0,
+        0.0,
+        1.0
+       ],
+       "projection_min_mm": 0.0,
+       "projection_max_mm": 30.024,
+       "compliance_N_mm": 1.393085409510828e-06,
+       "load_weighted_displacement_mm": 1.393085409510828e-06,
+       "max_displacement_mm": 1.5153634073012412e-06,
+       "strain_energy_N_mm": 6.96542704755419e-07,
+       "vm_p95_MPa": 0.010686069997229488,
+       "vm_peak_MPa": 0.014731564892368652,
+       "relative_free_residual": 1.483841716748416e-13,
+       "relative_force_balance_error": 8.748936093892342e-15,
+       "relative_moment_balance_error": 3.869832584737433e-15,
+       "relative_energy_error": 7.144312231173842e-15
+      },
+      "checks": [
+       {
+        "metric": "connected_components",
+        "value": 1,
+        "max": 1,
+        "ok": true
+       }
+      ]
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 1.005
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 1.005
+       }
+      ]
+     }
+    },
+    "objectives": [
+     1.0,
+     1.0,
+     -2.0
+    ],
+    "score": 2.0980000000000003,
+    "diagnosis": [],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 0,
+   "visits": 1,
+   "final": {
+    "status": "PASS",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 2885.6133900242858,
+       "area": 2298.966736292945,
+       "solids": 1,
+       "faces": 9,
+       "bbox_x": 15.012,
+       "bbox_y": 13.000773361611998,
+       "bbox_z": 30.024
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 1.0,
+      "reason": "The standoff height has been increased to twice the across-flats size while keeping the bore and hex profile unchanged.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-01.png"
+     },
+     "fem": {
+      "status": "PASS",
+      "metrics": {
+       "nodes": 1969,
+       "tetrahedra": 7029,
+       "connected_components": 1,
+       "mesh_volume_mm3": 2906.635312686931,
+       "fixed_nodes": 165,
+       "loaded_facets": 317,
+       "loaded_area_mm2": 201.77084706686787,
+       "axis": [
+        0.0,
+        0.0,
+        1.0
+       ],
+       "projection_min_mm": 0.0,
+       "projection_max_mm": 30.024,
+       "compliance_N_mm": 1.3928838346928707e-06,
+       "load_weighted_displacement_mm": 1.3928838346928707e-06,
+       "max_displacement_mm": 1.514249951725712e-06,
+       "strain_energy_N_mm": 6.96441917346432e-07,
+       "vm_p95_MPa": 0.010684547364016358,
+       "vm_peak_MPa": 0.014413737660567137,
+       "relative_free_residual": 1.626993723199765e-13,
+       "relative_force_balance_error": 6.865750727463146e-16,
+       "relative_moment_balance_error": 6.852145964634369e-16,
+       "relative_energy_error": 4.864916520140792e-15
+      },
+      "checks": [
+       {
+        "metric": "connected_components",
+        "value": 1,
+        "max": 1,
+        "ok": true
+       }
+      ]
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 0.995
+       },
+       {
+        "mesh_scale": 1.25
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 0.995
+       },
+       {
+        "status": "PASS",
+        "metrics": {
+         "nodes": 1312,
+         "tetrahedra": 4363,
+         "connected_components": 1,
+         "mesh_volume_mm3": 2912.9983611279804,
+         "fixed_nodes": 121,
+         "loaded_facets": 201,
+         "loaded_area_mm2": 186.31283550782376,
+         "axis": [
+          0.0,
+          0.0,
+          1.0
+         ],
+         "projection_min_mm": 0.0,
+         "projection_max_mm": 30.024,
+         "compliance_N_mm": 1.3846063498334445e-06,
+         "load_weighted_displacement_mm": 1.3846063498334445e-06,
+         "max_displacement_mm": 1.469822917074912e-06,
+         "strain_energy_N_mm": 6.923031749167152e-07,
+         "vm_p95_MPa": 0.010588779428541143,
+         "vm_peak_MPa": 0.01479989346576625,
+         "relative_free_residual": 1.0671815308706843e-13,
+         "relative_force_balance_error": 2.0525311009602717e-15,
+         "relative_moment_balance_error": 5.59904154905204e-16,
+         "relative_energy_error": 1.0246812654164264e-14
+        },
+        "checks": [
+         {
+          "metric": "connected_components",
+          "value": 1,
+          "max": 1,
+          "ok": true
+         }
+        ]
+       }
+      ]
+     }
+    },
+    "objectives": [
+     1.0,
+     1.0,
+     -2.0
+    ],
+    "score": 2.0980000000000003,
+    "diagnosis": [],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "final"
+   },
+   "edges": []
+  }
+ ],
+ "edges": [
+  {
+   "parent": 0,
+   "child": 1,
+   "visits": 4,
+   "total": 8.392000000000001
+  },
+  {
+   "parent": 1,
+   "child": 2,
+   "visits": 1,
+   "total": 2.0980000000000003
+  }
+ ],
+ "events": [
+  {
+   "event": "decompose",
+   "plan": {
+    "steps": [
+     "Identify the across-flats size of the polygon (15.012)",
+     "Calculate the new standoff height as twice the across-flats size (2 * 15.012 = 30.024)",
+     "Update the extrusion depth to the new height value"
+    ],
+    "invariants": [
+     "The bore diameter (8.0) remains unchanged",
+     "The hex polygon profile (6 sides, 15.012 size) remains unchanged"
+    ],
+    "dependencies": [
+     [
+      0,
+      1
+     ],
+     [
+      1,
+      2
+     ]
+    ]
+   },
+   "memory_version": "c898b4dbb404df0cd4c5f4c1fec66e1089e3499f7d179e9d355ca743bd4a612c",
+   "retrieved": [
+    {
+     "task_id": "955bb2a6086315cae09d04b8f90cc21d570d793f8d6ae7d35da3e9ba1b069287",
+     "instruction": "Set the central bore radius equal to one quarter of the across-flats size; the nut height and chamfer stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .circle(18.765)\"], \"start\": 6}]}",
+     "strategies": [],
+     "context": [
+      "6:     .circle(21.0)"
+     ]
+    },
+    {
+     "task_id": "aa63e278014c70f40ab58dbaa8010e71b435acb4c7c9d489c25e8a4dd11930a2",
+     "instruction": "Set the hex flat-to-flat half-size equal to four times the central bore radius; the revolve profile and bore stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"            .polygon(6, 5.0)\"], \"start\": 18}]}",
+     "strategies": [],
+     "context": [
+      "18:             .polygon(6, 8.083)"
+     ]
+    },
+    {
+     "task_id": "799d75af88373cd4be312a28a86290b050df3709a7f64b0e6e0d73b0f8c389da",
+     "instruction": "Set the standoff height equal to three times the original height; the outer radius and bore stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .cylinder(15.3, 17.7)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .cylinder(5.1, 17.7)"
+     ]
+    }
+   ]
+  },
+  {
+   "event": "initial_state",
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 1441.6533723142907,
+       "area": 1244.7515680726806,
+       "solids": 1,
+       "faces": 9,
+       "bbox_x": 15.012,
+       "bbox_y": 13.000773361611998,
+       "bbox_z": 15.000000000000002
+      }
+     },
+     "constraints": {
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -0.0
+    ],
+    "score": 0.0,
+    "diagnosis": [
+     {
+      "stage": "constraints",
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "initial"
+   }
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "geometry",
+     "status": "FAIL",
+     "reason": "ValueError: No pending wires present"
+    },
+    {
+     "stage": "constraints",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "955bb2a6086315cae09d04b8f90cc21d570d793f8d6ae7d35da3e9ba1b069287",
+     "instruction": "Set the central bore radius equal to one quarter of the across-flats size; the nut height and chamfer stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .circle(18.765)\"], \"start\": 6}]}",
+     "strategies": [],
+     "context": [
+      "6:     .circle(21.0)"
+     ]
+    },
+    {
+     "task_id": "aa63e278014c70f40ab58dbaa8010e71b435acb4c7c9d489c25e8a4dd11930a2",
+     "instruction": "Set the hex flat-to-flat half-size equal to four times the central bore radius; the revolve profile and bore stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"            .polygon(6, 5.0)\"], \"start\": 18}]}",
+     "strategies": [],
+     "context": [
+      "18:             .polygon(6, 8.083)"
+     ]
+    },
+    {
+     "task_id": "799d75af88373cd4be312a28a86290b050df3709a7f64b0e6e0d73b0f8c389da",
+     "instruction": "Set the standoff height equal to three times the original height; the outer radius and bore stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .cylinder(15.3, 17.7)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .cylinder(5.1, 17.7)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "PASS",
+   "hypothesis": "Set the extrusion height to 30.024 (twice the across-flats size of 15.012)."
+  },
+  {
+   "event": "final_verification",
+   "node": 1,
+   "status": "PASS"
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": true,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "geometry",
+     "status": "FAIL",
+     "reason": "ValueError: No pending wires present"
+    },
+    {
+     "stage": "constraints",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "955bb2a6086315cae09d04b8f90cc21d570d793f8d6ae7d35da3e9ba1b069287",
+     "instruction": "Set the central bore radius equal to one quarter of the across-flats size; the nut height and chamfer stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .circle(18.765)\"], \"start\": 6}]}",
+     "strategies": [],
+     "context": [
+      "6:     .circle(21.0)"
+     ]
+    },
+    {
+     "task_id": "aa63e278014c70f40ab58dbaa8010e71b435acb4c7c9d489c25e8a4dd11930a2",
+     "instruction": "Set the hex flat-to-flat half-size equal to four times the central bore radius; the revolve profile and bore stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"            .polygon(6, 5.0)\"], \"start\": 18}]}",
+     "strategies": [],
+     "context": [
+      "18:             .polygon(6, 8.083)"
+     ]
+    },
+    {
+     "task_id": "799d75af88373cd4be312a28a86290b050df3709a7f64b0e6e0d73b0f8c389da",
+     "instruction": "Set the standoff height equal to three times the original height; the outer radius and bore stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .cylinder(15.3, 17.7)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .cylinder(5.1, 17.7)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "PASS",
+   "hypothesis": "Change the extrusion height to 30.024 (twice the across-flats size of 15.012)."
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": true,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "geometry",
+     "status": "FAIL",
+     "reason": "ValueError: No pending wires present"
+    },
+    {
+     "stage": "constraints",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "955bb2a6086315cae09d04b8f90cc21d570d793f8d6ae7d35da3e9ba1b069287",
+     "instruction": "Set the central bore radius equal to one quarter of the across-flats size; the nut height and chamfer stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .circle(18.765)\"], \"start\": 6}]}",
+     "strategies": [],
+     "context": [
+      "6:     .circle(21.0)"
+     ]
+    },
+    {
+     "task_id": "aa63e278014c70f40ab58dbaa8010e71b435acb4c7c9d489c25e8a4dd11930a2",
+     "instruction": "Set the hex flat-to-flat half-size equal to four times the central bore radius; the revolve profile and bore stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"            .polygon(6, 5.0)\"], \"start\": 18}]}",
+     "strategies": [],
+     "context": [
+      "18:             .polygon(6, 8.083)"
+     ]
+    },
+    {
+     "task_id": "799d75af88373cd4be312a28a86290b050df3709a7f64b0e6e0d73b0f8c389da",
+     "instruction": "Set the standoff height equal to three times the original height; the outer radius and bore stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .cylinder(15.3, 17.7)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .cylinder(5.1, 17.7)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "PASS",
+   "hypothesis": "Change the extrusion height to 30.024 (twice 15.012)"
+  },
+  {
+   "event": "backtrack",
+   "to_node": 1
+  },
+  {
+   "event": "expand",
+   "parent": 1,
+   "node": 2,
+   "merged": false,
+   "strategy": "diversify",
+   "diagnosis": [],
+   "retrieved_repairs": [
+    {
+     "task_id": "955bb2a6086315cae09d04b8f90cc21d570d793f8d6ae7d35da3e9ba1b069287",
+     "instruction": "Set the central bore radius equal to one quarter of the across-flats size; the nut height and chamfer stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .circle(18.765)\"], \"start\": 6}]}",
+     "strategies": [],
+     "context": [
+      "6:     .circle(21.0)"
+     ]
+    },
+    {
+     "task_id": "aa63e278014c70f40ab58dbaa8010e71b435acb4c7c9d489c25e8a4dd11930a2",
+     "instruction": "Set the hex flat-to-flat half-size equal to four times the central bore radius; the revolve profile and bore stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"            .polygon(6, 5.0)\"], \"start\": 18}]}",
+     "strategies": [],
+     "context": [
+      "18:             .polygon(6, 8.083)"
+     ]
+    },
+    {
+     "task_id": "799d75af88373cd4be312a28a86290b050df3709a7f64b0e6e0d73b0f8c389da",
+     "instruction": "Set the standoff height equal to three times the original height; the outer radius and bore stay the same.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .cylinder(15.3, 17.7)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .cylinder(5.1, 17.7)"
+     ]
+    }
+   ],
+   "path": [
+    0,
+    1
+   ],
+   "status": "PASS",
+   "hypothesis": "Set the extrusion depth using an expression 15.012 * 2 for the standoff height."
+  },
+  {
+   "event": "final_verification",
+   "node": 2,
+   "status": "PASS"
+  }
+ ],
+ "config": {
+  "algorithm": "mcts",
+  "max_expansions": 4,
+  "max_depth": 3,
+  "width": 2,
+  "max_width": 4,
+  "exploration": 0.7,
+  "seconds": 2400.0
+ },
+ "memory_version": "c898b4dbb404df0cd4c5f4c1fec66e1089e3499f7d179e9d355ca743bd4a612c",
+ "stored": "runs/adaptive-cad-gemini-lite-20261007/memory.jsonl",
+ "seconds": 112.21768029099997,
+ "api": {
+  "mode": "live_astra",
+  "api_calls": 7,
+  "cost_usd": 0.0,
+  "budget_usd": 0.28846153846153844,
+  "refused": 0
+ },
+ "tool_jobs": 10
+}

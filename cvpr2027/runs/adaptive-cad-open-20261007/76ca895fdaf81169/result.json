@@ -1,0 +1,741 @@
+{
+ "task_id": "76ca895fdaf81169ecb2425b6c2329640ea8faa19a90b4c43375ec5887f69fb1",
+ "status": "UNVERIFIED",
+ "prediction": "\n\n{\"edits\":[{\"start\":5,\"delete\":1,\"insert\":[\".hexagon(9.08)\"]},{\"start\":6,\"delete\":1,\"insert\":[\".extrude(-8.00)\"]}]}",
+ "selected_node": null,
+ "bank": [],
+ "pareto": [],
+ "stop": "expansion_limit",
+ "nodes": [
+  {
+   "id": 0,
+   "candidate": "\n\n{\"edits\":[{\"start\":5,\"delete\":1,\"insert\":[\".hexagon(9.08)\"]},{\"start\":6,\"delete\":1,\"insert\":[\".extrude(-8.00)\"]}]}",
+   "depth": 0,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "FAIL",
+      "reason": "AttributeError: 'Workplane' object has no attribute 'hexagon'"
+     },
+     "constraints": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -1000.0
+    ],
+    "score": -1.0,
+    "diagnosis": [
+     {
+      "stage": "geometry",
+      "status": "FAIL",
+      "reason": "AttributeError: 'Workplane' object has no attribute 'hexagon'"
+     },
+     {
+      "stage": "constraints",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 3,
+   "visits": 4,
+   "final": null,
+   "edges": [
+    0
+   ]
+  },
+  {
+   "id": 1,
+   "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"    .faces('>Z').workplane(centerOption='CenterOfBoundBox').polygon(6, 9.08).cutBlind(-8.00)\"], \"start\": 7}]}",
+   "depth": 1,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 24110.802350757494,
+       "area": 6446.127435741762,
+       "solids": 1,
+       "faces": 12,
+       "bbox_x": 45.4,
+       "bbox_y": 45.4,
+       "bbox_z": 35.3
+      }
+     },
+     "constraints": {
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         8.0
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -1.0
+    ],
+    "score": -0.001,
+    "diagnosis": [
+     {
+      "stage": "constraints",
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         8.0
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 1,
+   "visits": 4,
+   "final": null,
+   "edges": [
+    1
+   ]
+  },
+  {
+   "id": 2,
+   "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').polygon(6, 9.08).cutBlind(-8.00)\"], \"start\": 8}]}",
+   "depth": 2,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 24110.802350757494,
+       "area": 6446.127435741762,
+       "solids": 1,
+       "faces": 12,
+       "bbox_x": 45.4,
+       "bbox_y": 45.4,
+       "bbox_z": 35.3
+      }
+     },
+     "constraints": {
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         8.0
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -1.0
+    ],
+    "score": -0.001,
+    "diagnosis": [
+     {
+      "stage": "constraints",
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         8.0
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 0,
+   "visits": 1,
+   "final": null,
+   "edges": []
+  }
+ ],
+ "edges": [
+  {
+   "parent": 0,
+   "child": 1,
+   "visits": 4,
+   "total": -0.004
+  },
+  {
+   "parent": 1,
+   "child": 2,
+   "visits": 1,
+   "total": -0.001
+  }
+ ],
+ "events": [
+  {
+   "event": "decompose",
+   "plan": {
+    "steps": [
+     "Insert a line to modify the 'result' variable by selecting the top face and cutting a hexagonal blind recess with a 9.08 mm radius and 8.00 mm depth."
+    ],
+    "invariants": [
+     "The base cylinder dimensions (11.2 mm radius, 22.7 mm height) remain unchanged.",
+     "The top extrusion dimensions (9.2 mm radius, 24.1 mm height) remain unchanged.",
+     "The import statement 'import cadquery as cq' remains unchanged.",
+     "The 'show_object(result)' call remains unchanged.",
+     "The centering of the recess on the top face is maintained via workplane settings."
+    ],
+    "dependencies": []
+   },
+   "memory_version": "8e0d30115a1562f815b6a060b0e73fd443e93872269570e3c69b098e10a4fcc8",
+   "retrieved": [
+    {
+     "task_id": "82775a49e6f8a863081da34fad847d5f0cf5ca6b0d9dd9c5e57612119703c648",
+     "instruction": "Add a centered hexagonal blind recess on the top face, with a size of 4.00 mm and a depth of 2.00 mm.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').polygon(6,4.00).cutBlind(-2.00)\"], \"start\": 14}]}",
+     "strategies": [],
+     "context": [
+      "14: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "38599c21d1ef02f727c75ba01f8732517edc90ef6bfbaaacfbb689527a103a98",
+     "instruction": "Remove the centered 6-sided hexagonal blind recess on the top face, which has a 4.00 mm circumscribed diameter and an 8.00 mm depth.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [], \"start\": 7}]}",
+     "strategies": [],
+     "context": [
+      "7: result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').polygon(6,4.00).cutBlind(-8.00)"
+     ]
+    },
+    {
+     "task_id": "2c17e8414de0ee7bf11af3b6053912058ef42da4cfd4085eb03b5ae29061554a",
+     "instruction": "Cut a centered hexagonal blind recess on the top face: 6 sides, 4.00 mm across the circumscribed circle, and 8.00 mm deep.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').polygon(6,4.00).cutBlind(-8.00)\"], \"start\": 7}]}",
+     "strategies": [],
+     "context": [
+      "7: show_object(result)"
+     ]
+    }
+   ]
+  },
+  {
+   "event": "initial_state",
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 24539.206411860934,
+       "area": 6228.207435741763,
+       "solids": 1,
+       "faces": 5,
+       "bbox_x": 45.4,
+       "bbox_y": 45.4,
+       "bbox_z": 35.3
+      }
+     },
+     "constraints": {
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         8.0,
+         9.08
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -0.0
+    ],
+    "score": 0.0,
+    "diagnosis": [
+     {
+      "stage": "constraints",
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         8.0,
+         9.08
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "initial"
+   }
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "geometry",
+     "status": "FAIL",
+     "reason": "AttributeError: 'Workplane' object has no attribute 'hexagon'"
+    },
+    {
+     "stage": "constraints",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "82775a49e6f8a863081da34fad847d5f0cf5ca6b0d9dd9c5e57612119703c648",
+     "instruction": "Add a centered hexagonal blind recess on the top face, with a size of 4.00 mm and a depth of 2.00 mm.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').polygon(6,4.00).cutBlind(-2.00)\"], \"start\": 14}]}",
+     "strategies": [],
+     "context": [
+      "14: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "38599c21d1ef02f727c75ba01f8732517edc90ef6bfbaaacfbb689527a103a98",
+     "instruction": "Remove the centered 6-sided hexagonal blind recess on the top face, which has a 4.00 mm circumscribed diameter and an 8.00 mm depth.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [], \"start\": 7}]}",
+     "strategies": [],
+     "context": [
+      "7: result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').polygon(6,4.00).cutBlind(-8.00)"
+     ]
+    },
+    {
+     "task_id": "2c17e8414de0ee7bf11af3b6053912058ef42da4cfd4085eb03b5ae29061554a",
+     "instruction": "Cut a centered hexagonal blind recess on the top face: 6 sides, 4.00 mm across the circumscribed circle, and 8.00 mm deep.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').polygon(6,4.00).cutBlind(-8.00)\"], \"start\": 7}]}",
+     "strategies": [],
+     "context": [
+      "7: show_object(result)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "FAIL",
+   "hypothesis": "Add a centered hexagonal blind recess on the top face using polygon(6, 9.08) and cutBlind(-8.00)"
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": true,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "geometry",
+     "status": "FAIL",
+     "reason": "AttributeError: 'Workplane' object has no attribute 'hexagon'"
+    },
+    {
+     "stage": "constraints",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "82775a49e6f8a863081da34fad847d5f0cf5ca6b0d9dd9c5e57612119703c648",
+     "instruction": "Add a centered hexagonal blind recess on the top face, with a size of 4.00 mm and a depth of 2.00 mm.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').polygon(6,4.00).cutBlind(-2.00)\"], \"start\": 14}]}",
+     "strategies": [],
+     "context": [
+      "14: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "38599c21d1ef02f727c75ba01f8732517edc90ef6bfbaaacfbb689527a103a98",
+     "instruction": "Remove the centered 6-sided hexagonal blind recess on the top face, which has a 4.00 mm circumscribed diameter and an 8.00 mm depth.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [], \"start\": 7}]}",
+     "strategies": [],
+     "context": [
+      "7: result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').polygon(6,4.00).cutBlind(-8.00)"
+     ]
+    },
+    {
+     "task_id": "2c17e8414de0ee7bf11af3b6053912058ef42da4cfd4085eb03b5ae29061554a",
+     "instruction": "Cut a centered hexagonal blind recess on the top face: 6 sides, 4.00 mm across the circumscribed circle, and 8.00 mm deep.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').polygon(6,4.00).cutBlind(-8.00)\"], \"start\": 7}]}",
+     "strategies": [],
+     "context": [
+      "7: show_object(result)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "FAIL",
+   "hypothesis": "Adds a centered hexagonal blind recess on the top face using a polygon cut operation with radius 9.08 mm and depth 8.00 mm."
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": true,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "geometry",
+     "status": "FAIL",
+     "reason": "AttributeError: 'Workplane' object has no attribute 'hexagon'"
+    },
+    {
+     "stage": "constraints",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "82775a49e6f8a863081da34fad847d5f0cf5ca6b0d9dd9c5e57612119703c648",
+     "instruction": "Add a centered hexagonal blind recess on the top face, with a size of 4.00 mm and a depth of 2.00 mm.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').polygon(6,4.00).cutBlind(-2.00)\"], \"start\": 14}]}",
+     "strategies": [],
+     "context": [
+      "14: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "38599c21d1ef02f727c75ba01f8732517edc90ef6bfbaaacfbb689527a103a98",
+     "instruction": "Remove the centered 6-sided hexagonal blind recess on the top face, which has a 4.00 mm circumscribed diameter and an 8.00 mm depth.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [], \"start\": 7}]}",
+     "strategies": [],
+     "context": [
+      "7: result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').polygon(6,4.00).cutBlind(-8.00)"
+     ]
+    },
+    {
+     "task_id": "2c17e8414de0ee7bf11af3b6053912058ef42da4cfd4085eb03b5ae29061554a",
+     "instruction": "Cut a centered hexagonal blind recess on the top face: 6 sides, 4.00 mm across the circumscribed circle, and 8.00 mm deep.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').polygon(6,4.00).cutBlind(-8.00)\"], \"start\": 7}]}",
+     "strategies": [],
+     "context": [
+      "7: show_object(result)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "FAIL",
+   "hypothesis": "Added centered hexagonal blind recess on top face using polygon and cutBlind methods"
+  },
+  {
+   "event": "backtrack",
+   "to_node": 1
+  },
+  {
+   "event": "expand",
+   "parent": 1,
+   "node": 2,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "constraints",
+     "status": "FAIL",
+     "checks": [
+      {
+       "metric": "instruction_values",
+       "missing": [
+        8.0
+       ],
+       "ok": false
+      },
+      {
+       "metric": "changed_solid",
+       "value": true,
+       "ok": true
+      }
+     ]
+    },
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "No physical contract supplied"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "No perturbation contract supplied"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "82775a49e6f8a863081da34fad847d5f0cf5ca6b0d9dd9c5e57612119703c648",
+     "instruction": "Add a centered hexagonal blind recess on the top face, with a size of 4.00 mm and a depth of 2.00 mm.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').polygon(6,4.00).cutBlind(-2.00)\"], \"start\": 14}]}",
+     "strategies": [],
+     "context": [
+      "14: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "38599c21d1ef02f727c75ba01f8732517edc90ef6bfbaaacfbb689527a103a98",
+     "instruction": "Remove the centered 6-sided hexagonal blind recess on the top face, which has a 4.00 mm circumscribed diameter and an 8.00 mm depth.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [], \"start\": 7}]}",
+     "strategies": [],
+     "context": [
+      "7: result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').polygon(6,4.00).cutBlind(-8.00)"
+     ]
+    },
+    {
+     "task_id": "2c17e8414de0ee7bf11af3b6053912058ef42da4cfd4085eb03b5ae29061554a",
+     "instruction": "Cut a centered hexagonal blind recess on the top face: 6 sides, 4.00 mm across the circumscribed circle, and 8.00 mm deep.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').polygon(6,4.00).cutBlind(-8.00)\"], \"start\": 7}]}",
+     "strategies": [],
+     "context": [
+      "7: show_object(result)"
+     ]
+    }
+   ],
+   "path": [
+    0,
+    1
+   ],
+   "status": "FAIL",
+   "hypothesis": "Insert a line after the result assignment to cut a centered hexagonal blind recess on the top face using polygon and cutBlind methods with a radius of 9.08 mm and depth of 8.00 mm."
+  }
+ ],
+ "config": {
+  "algorithm": "mcts",
+  "max_expansions": 4,
+  "max_depth": 3,
+  "width": 2,
+  "max_width": 4,
+  "exploration": 0.7,
+  "seconds": 2400.0
+ },
+ "memory_version": "8e0d30115a1562f815b6a060b0e73fd443e93872269570e3c69b098e10a4fcc8",
+ "stored": null,
+ "seconds": 303.3452602090001,
+ "api": {
+  "mode": "live_astra",
+  "api_calls": 5,
+  "cost_usd": 0.0,
+  "budget_usd": 0.3,
+  "refused": 0
+ },
+ "tool_jobs": 4
+}

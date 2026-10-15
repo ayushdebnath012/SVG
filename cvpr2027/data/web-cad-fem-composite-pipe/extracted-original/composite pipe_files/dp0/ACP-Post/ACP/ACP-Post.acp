@@ -1,0 +1,21 @@
+# 
+# ACP Post Database File
+# 
+# (c) 2005 - 2025 by
+# ANSYS Switzerland GmbH
+# 
+# Product: ANSYS Composite PrepPost
+# Version: 18.1
+# Written: 2025-08-05 21:21:36
+# 
+acp_file_version='18.1'
+db.open(path=u'ACP-Pre.acp', pre_db=True, unit_system_type='mks')
+db.models[u'ACP Model'].add_solution(name='Solution 1', path=u'../../SYS/MECH/file.rst', format='ansys:rst', active=True, set=-1, read_stresses_strains=True, use_felyx_to_compute_pp_results=True, ext_id='Solution')
+db.models[u'ACP Model'].solutions['Solution 1'].plots.create_strain_plot(name='Strain.1', ply_wise=True, solution_set=-1, active=True, component='e1', show_ply_offsets=False, ply_offset_scale_factor=1.0, spot='bot', show_on_solids=False, data_scope=[db.models[u'ACP Model'].element_sets.get('All_Elements')])
+db.models[u'ACP Model'].solutions['Solution 1'].plots.create_deformation_contour_plot(name='Deformation.1', active=True, component='usum', solution_set=-1, show_on_solids=False, data_scope=[db.models[u'ACP Model'].element_sets.get('All_Elements')])
+db.models[u'ACP Model'].show_deformed=False
+db.models[u'ACP Model'].deformation_scale_factor=1.0
+db.models[u'ACP Model'].create_view( name = 'View.2', position = (1.6323651531051404, 0.8267525777648311, -0.6734748776364705), orientation = (-0.3257445850237005, 0.9245903111962219, 0.19754296183314357), rotation_point = (-0.001590691506862636, 0.00037146359682084523, 0.5), parallel_scale= 0.56287999825, projection = 'perspective' )
+db.models[u'ACP Model'].create_scene(name='Scene.1', id='Scene.1', title=u'def', projection='perspective', show_global_coordinate_system=True, show_legend=True, show_surface=True, show_edges=True, show_selected_mesh=True, show_normals=False, show_orientations=False, show_ref_directions=False, show_fiber_directions=False, show_draped_fiber_directions=False, show_draped_transverse_directions=False, show_transverse_directions=False, show_solid_elements=False, continuous_pick_enabled=False, active_set=["db.models[u'ACP Model'].element_sets['set_B']","db.models[u'ACP Model'].element_sets['set_C']","db.models[u'ACP Model'].element_sets['All_Elements']","db.models[u'ACP Model'].element_sets['set_A']"])
+db.models[u'ACP Model'].scenes['Scene.1'].view = db.models[u'ACP Model'].views.get('View.2')
+db.models[u'ACP Model'].create_scene(name='Scene.2', id='Scene.2', title='', projection='perspective', show_global_coordinate_system=True, show_legend=True, show_surface=True, show_edges=False, show_selected_mesh=False, show_normals=False, show_orientations=False, show_ref_directions=False, show_fiber_directions=False, show_draped_fiber_directions=False, show_draped_transverse_directions=False, show_transverse_directions=False, show_solid_elements=False, continuous_pick_enabled=False, active_set=["db.models[u'ACP Model'].element_sets['set_B']","db.models[u'ACP Model'].element_sets['set_C']","db.models[u'ACP Model'].element_sets['All_Elements']","db.models[u'ACP Model'].element_sets['set_A']"])

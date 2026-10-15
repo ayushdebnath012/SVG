@@ -1,0 +1,654 @@
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <meta charset="iso-8859-1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        <meta name="format-detection" content="telephone=no">
+        
+        <title>DASHlink
+  
+    - HIRENASD FEM wing only HEX20
+  
+</title>
+        
+            <link rel="shortcut icon" href="/c3/static/htdocs/site/base/img/meatball-favicon.ico">
+        
+        
+        
+
+
+        
+            <link rel="stylesheet" href="/c3/static/htdocs/site/base/css/foundation.css">
+        
+
+        
+            
+
+            <link href="/c3/static/htdocs/site/base/css/label.css" rel="stylesheet" type="text/css" />
+            <link href="/c3/static/htdocs/site/base/css/form.css" rel="stylesheet" type="text/css" />
+            <link href="/c3/static/htdocs/site/base/css/table.css" rel="stylesheet" type="text/css" />
+            <link href="/c3/static/htdocs/site/base/css/comment.css" rel="stylesheet" type="text/css" />
+            <link href="/c3/static/htdocs/site/base/css/core.css" rel="stylesheet" type="text/css" />
+            <link href="/c3/static/htdocs/site/base/css/typography.css" rel="stylesheet" type="text/css" />
+        
+        
+        
+        
+        
+    <link href="/c3/static/htdocs/site/dashlink/css/main_page.css" rel="stylesheet" type="text/css" />
+    <link href="/c3/static/htdocs/site/dashlink/css/typography_dash.css" rel="stylesheet" type="text/css" />
+    <link href="/c3/static/htdocs/site/dashlink/css/banner.css" rel="stylesheet" type="text/css" /> 
+    <link href="/c3/static/htdocs/site/dashlink/css/core_dash.css" rel="stylesheet" type="text/css" />
+
+
+        
+    <style type="text/css">
+      
+      
+      
+      
+      
+      
+      
+          .editor_only,
+          .editor_creator_only {
+            display:none !important;
+           }
+      
+    </style>
+
+        
+
+        <script type="text/javascript" src="/c3/static/htdocs/site/base/js/vendor/custom.modernizr.js"></script>
+        <script type="text/javascript" src="/c3/static/htdocs/site/base/js/vendor/jquery.js"></script>
+        <script type="text/javascript" src="/c3/static/htdocs/site/base/js/foundation.min.js"></script>
+        <script type="text/javascript" src="/c3/static/htdocs/site/base/js/foundation/foundation.topbar.js"></script>
+        <script type="text/javascript" src="/c3/static/htdocs/site/base/js/foundation/foundation.reveal.js"></script>
+        <script type="text/javascript" src="/c3/static/htdocs/site/base/js/c3_js.js"></script>
+
+        <script type="text/javascript" id="_fed_an_ua_tag" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=NASA&subagency=ARC"></script>
+        
+        
+            
+        
+    </head>
+
+    
+
+    <body id="" >
+
+
+        <div class="wrapper">
+            <div id="skipnav">
+                <ul class="hideme">
+                    <li><a href="#skippy">Skip Navigation</a></li>
+                    <li><a href="#right_sidebar">User Sidebar</a></li>
+                </ul>
+            </div> 
+
+            
+
+            
+    <div id="banner-wrap">
+        
+
+
+
+<div class="row">
+    <div class="left large-8 columns">
+        
+    </div>
+    <div class="right large-4 columns">
+        <!-- search form -->
+     </div>
+</div>
+
+<div class="row">
+    <div class="large-12 large-centered columns">
+        <nav class="top-bar" style="text-align:center;">
+            <ul class="title-area">
+                <li class="name">
+                  <div id="meatball-top"><a href="https://www.nasa.gov"></a></div>
+                  <div id="dash-logotype"><a href="/dashlink/"></a></div>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href=""><span class="show-for-medium-up">Menu&nbsp;&nbsp;</span><span class="show-for-small"></span></a></li>
+            </ul>
+
+            <section class="top-bar-section">
+                <ul class="right">
+                    <li class=""><a id="home-nav" href="/dashlink/">Home</a></li>
+                    <li id="research" class="has-dropdown "><a href="/dashlink/areas/">Research Areas</a>
+                        <ul class="dropdown">
+                            
+
+
+
+    
+        <li class="nav_li divider"></li>
+        <li class="nav_li "><a href="/dashlink/areas/4/">Data Mining and Knowledge Discovery</a>
+            
+        </li>
+    
+        <li class="nav_li divider"></li>
+        <li class="nav_li "><a href="/dashlink/areas/5/">Verification and Validation</a>
+            
+        </li>
+    
+        <li class="nav_li divider"></li>
+        <li class="nav_li "><a href="/dashlink/areas/6/">Human Factors</a>
+            
+        </li>
+    
+        <li class="nav_li divider"></li>
+        <li class="nav_li "><a href="/dashlink/areas/7/">Mitigation</a>
+            
+        </li>
+    
+        <li class="nav_li divider"></li>
+        <li class="nav_li "><a href="/dashlink/areas/2/">Prognostics</a>
+            
+        </li>
+    
+        <li class="nav_li divider"></li>
+        <li class="nav_li "><a href="/dashlink/areas/1/">Diagnostics</a>
+            
+        </li>
+    
+
+
+
+
+
+
+                        </ul>
+                    </li>
+
+                    <li class=" events"><a href="/dashlink/events/">Events</a></li>
+
+                    <li id="projects" class="has-dropdown 
+                             ">
+                        <a title="Browse all projects" href="/dashlink/projects/?all">Projects</a>
+                        <ul class="dropdown">
+                            <li class="nav_li divider"></li>
+                            <li class="nav_li last"><a href="/dashlink/projects/">Browse All</a></li>
+                            
+                        </ul>
+                    </li>
+                    <li id="resource" class="has-dropdown round last 
+                            active
+                            
+                            ">
+                        <a class="round" title="Browse available resources" href="/dashlink/resources/">Resources</a>
+                        <ul class="dropdown">
+                            <li class="nav_li divider"></li>
+                            <li class="nav_li"><a href="/dashlink/resources/">Browse All</a></li>
+
+                            
+  <li class="nav_li divider"></li>
+  <li class="nav_li">
+    <a href="/dashlink/resources/?type=26">Algorithm</a>
+  </li>
+
+  <li class="nav_li divider"></li>
+  <li class="nav_li">
+    <a href="/dashlink/resources/?type=28">Dataset</a>
+  </li>
+
+  <li class="nav_li divider"></li>
+  <li class="nav_li">
+    <a href="/dashlink/resources/?type=30">Publication</a>
+  </li>
+
+  <li class="nav_li divider"></li>
+  <li class="nav_li last">
+    <a href="/dashlink/resources/?type=32">Other</a>
+  </li>
+
+
+
+                            
+                        </ul>
+                    </li>
+                  
+                    <li class="">
+                        <a href="/dashlink/members/all/">Members</a>
+                    </li>
+
+                    
+
+                    
+                        <li class="last has-dropdown"><a href="/dashlink/auth/login/?next=/dashlink/resources/274/">Login / Register</a>
+                            <ul class="dropdown">
+                                <li class="nav_li has-dropdown"><a href="/dashlink/auth/login/?next=/dashlink/resources/274/">Login</a>
+                                    <ul class="dropdown">
+                                        <li class="nav_li"><a href="/dashlink/admin/login/?next=/dashlink/resources/274/">with NDC</a></li>
+                                        <li class="nav_li"><a href="/dashlink/auth/openid/?next=/dashlink/resources/274/">with OpenID</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav_li"><a href="/dashlink/auth/register/">Register</a></li>
+                            </ul>
+                        </li>
+                    
+                </ul>
+            </section>
+        </nav>
+    </div>
+</div>
+
+    </div>
+
+            <a name="skippy"></a>
+            <section >
+                
+                <div id="heading" class="row heading">
+                    <div class="large-12 columns">
+                        
+      
+    
+  
+      <h1 class="big_title">
+        <a class="project" href="/dashlink/projects/47/" title="Go to Project's Home Page">Aeroelastic Prediction Workshop</a>
+        
+      </h1>
+  
+
+  
+    
+    
+
+
+  
+
+
+
+                        
+                    </div>
+                </div>
+
+                
+                <a name="skippy"></a>
+                <div id="main_content" class="row">
+                    
+  <div class="large-2 columns l_col" id="left_column">
+      
+    
+
+<ul class="side_nav">                
+	<li>
+        <span class="show-for-small" style="text-align:center; border-top-right-radius:5px;"><a href="/dashlink/projects/47/">Home</a></span>
+        <span class="hide-for-small"><a href="/dashlink/projects/47/">Home</a></span>
+    </li>
+
+	
+        <li
+           
+            class="active">
+            <span class="show-for-small" style="text-align:center;"><a href="/dashlink/projects/47/resources/">Resources</a></span>
+            <span class="hide-for-small"><a href="/dashlink/projects/47/resources/">Resources</a></span>
+        </li>
+    
+    
+	<li>
+        <span class="show-for-small" style="text-align:center;"><a href="/dashlink/projects/47/members/">Members </a></span>
+        <span class="hide-for-small"><a href="/dashlink/projects/47/members/">Members </a></span>
+    </li>
+
+    
+        
+            
+        
+            
+                <li>
+                    <span class="show-for-small" style="text-align:center;"><a href="/dashlink/projects/47/wiki/">Wiki</a></span>
+                    <span class="hide-for-small"><a href="/dashlink/projects/47/wiki/">Wiki</a></span>
+                </li>
+            
+        
+            
+                <li>
+                    <span class="show-for-small" style="text-align:center;"><a href="/dashlink/projects/47/code/">Code</a></span>
+                    <span class="hide-for-small"><a href="/dashlink/projects/47/code/">Code</a></span>
+                </li>
+            
+        
+    
+</ul>
+
+<div>
+    
+</div>          
+             
+
+
+
+  </div> 
+  <div class="large-10 columns m_col" id="main_column">
+      <div class="greyouterborder">
+        <div class="innerborder">
+          
+    
+    
+    
+    
+        
+
+<div class="profile_info">
+    <h3 class="sub_title dataset">HIRENASD FEM wing only HEX20 </h3>
+    <p class="smaller">
+        A dataset shared by <a class="underline author" href="/dashlink/members/65/">CAROL WIESEMAN</a>, updated on Nov 23, 2010
+    </p>
+</div>
+
+<h2 class="sub_heading">Summary </h2>
+
+<div class="profile_info">
+    <div class="profile_img default">
+        
+            <span class="resource_default"></span>
+        
+    </div>
+</div>
+
+
+<div class="profile_detail">
+    
+
+    
+        <p>The finite element model being used by the AePW is based on the model provided at <br />
+<a href="https://heinrich.lufmech.rwth-aachen.de/index.php?lang=en&amp;pg;=home"><strong>HIRENASD website</strong></a></p>
+<p>The NASTRAN FEM&#39;s using HEXA solid elements and identified as &quot;structured&quot;(str) is the one that will be used.  Another exists which uses TETRA elements and is labeled &quot;unstructured&quot;(unstr).  The original FEM&#39;s as provided on the website had different coordinate systems and are in different units. <br />
+<li> str = mm <br />
+<li> unstructured = meters</p>
+<p>The coordinate systems for each of the FEM are different also.  To facilitate use both FEM&#39;s were modified so that the x direction is in the flow direction, y - is out the wing and z is goes from lower surface to upper surface of the wing and the models are in meters. </p>
+<p>Mode shapes and frequencies were calculated with both FEM&#39;s and a frequency comparison is provided.  The only model NASA has used is the &quot;str&quot; model.   </p>
+<p>Comparisons of the FEM as provided from HIRENASD website with as modified are <a href="https://c3.ndc.nasa.gov/dashlink/static/media/dataset/HIRENASD_coordinate_system_2.pdf">provided</a></p>
+<table>
+<tr><td>
+<img src="https://c3.ndc.nasa.gov/dashlink/static/media/other/CoordinateSystem_StructuredFEM.jpg" />
+</td></tr>
+<tr><td>
+<img src="https://c3.ndc.nasa.gov/dashlink/static/media/other/CoordinateSystem_UnstructuredFEM.jpg" />
+</td></tr></table>
+        
+    
+</div>
+
+<a class="more" id="slick-toggle" style="float:right; clear:both;">show more info</a>
+
+<dl id="slickbox" class="table-display" style="margin-bottom:35px; clear:both;">
+  <dt>Operating System</dt>
+    <dd>
+      
+        N/A <a class="edit editor_creator_only" href="/dashlink/resources/274/edit/?info">(edit)</a>
+      
+    </dd>
+  <dt>License</dt>
+    <dd>
+      
+        N/A <a class="edit editor_creator_only" href="/dashlink/resources/274/edit/?info">(edit)</a>
+      
+    </dd>
+  <dt>Programming Language</dt>
+    <dd>
+      
+        N/A <a class="edit editor_creator_only" href="/dashlink/resources/274/edit/?info">(edit)</a>
+      
+    </dd>
+  <dt>Version</dt>
+    <dd>
+      
+        N/A <a class="edit editor_creator_only" href="/dashlink/resources/274/edit/?info">(edit)</a>
+      
+    </dd>
+ </dl>
+
+<h2 class="sub_heading">Source Files  </h2>
+
+
+
+<div class="table">
+  <table class="singlelist">
+    <a name="files"></a>
+    
+	    
+
+<tr class="row1">
+    <td class="title">
+        <dl>
+            <dt>
+                
+                
+                    <a href="/dashlink/static/media/dataset/gridmod.bdf.zip" class="file">
+                
+                
+                    
+	                    gridmod.bdf.zip
+                    
+                
+                </a>
+            </dt>
+            <dd class="smaller">Grid Locations for Str model (HEXA)</dd>
+        </dl>
+    </td>
+   <td class="tinyprint">2.6 MB</td>
+   <td class="dl">88 downloads</td>
+</tr>
+
+    
+	    
+
+<tr class="row1">
+    <td class="title">
+        <dl>
+            <dt>
+                
+                
+                    <a href="/dashlink/static/media/dataset/ms103_str_t293.bdf.zip" class="file">
+                
+                
+                    
+	                    ms103_str_t293.bdf.zip
+                    
+                
+                </a>
+            </dt>
+            <dd class="smaller">Finite element for Structured Model - Temperature 293deg R</dd>
+        </dl>
+    </td>
+   <td class="tinyprint">4.3 MB</td>
+   <td class="dl">102 downloads</td>
+</tr>
+
+    
+	    
+
+<tr class="row1">
+    <td class="title">
+        <dl>
+            <dt>
+                
+                
+                    <a href="/dashlink/static/media/dataset/ms103_str_t293.pch.tar" class="file">
+                
+                
+                    
+	                    ms103_str_t293.pch.tar
+                    
+                
+                </a>
+            </dt>
+            <dd class="smaller">Mode shapes in punch file format</dd>
+        </dl>
+    </td>
+   <td class="tinyprint">309.7 MB</td>
+   <td class="dl">77 downloads</td>
+</tr>
+
+    
+  </table>
+</div>
+
+
+<h2 class="sub_heading">Support/Documentation </h2>
+
+
+  <div class="table">
+    <table class="singlelist">
+      <a name="files"></a>
+      
+        <tr class="row1">
+          <td class="title">
+            <dl>
+              <dt><a href="/dashlink/static/media/dataset/HIRENASD_coordinate_system_2.pdf" target="_blank" class="file">HIRENASD_coordinate_system.pdf</a></dt>
+              
+            </dl>
+          </td>
+          <td class="tinyprint">353954</td>
+          <td class="dl">187 downloads</td>
+        </tr>
+      
+    </table>
+  </div>
+
+
+
+
+<p>For any questions, contact this resource's administrator: <a class="leader" href="/dashlink/members/65/contactme/?next=/dashlink/resources/274/">NDC-cwiesema</a></p>
+
+
+
+
+
+
+
+    
+    
+
+    
+
+        </div>
+      </div>
+
+      
+    
+    <h2 class="sub_heading">Discussions</h2>
+    <a name="c0"></a>
+    
+
+
+  
+
+
+    <div id="new_comment">
+        <a name="comment"></a>
+        <p class="bold">Add New Comment</p>
+
+        <form action="/dashlink/comments/post/" method=post><input type='hidden' name='csrfmiddlewaretoken' value='0BT76z5khYyKkGeUk92sc9LWE2YRnF22' />
+            <fieldset class="comment_field">
+                <textarea cols="40" id="id_comment" name="comment" rows="10">
+</textarea>
+
+                <input id="id_content_type" name="content_type" type="hidden" value="resource.dataset" /><input id="id_object_id" name="object_id" type="hidden" value="274" />
+            </fieldset>
+            <input type="submit" value="Submit" name="save" class="button"/>
+            <input type="submit" value="Cancel" name="cancel" class="button"/>
+        </form>
+    </div>
+
+
+
+
+
+
+
+    <div id="list_results" class="list_results" >
+        <ul class="comment">
+            
+        </ul>
+    </div>
+
+
+
+
+<script type="text/javascript">     
+    $(document).ready(function() { 
+      $("[class^=hidden_form]").hide();
+      
+      $("a.comment_response").click(function() {
+          
+      var $this = $(this);
+      var x = $this.attr("name");
+      
+      $(".hidden_form" + x).toggle();
+      return false;
+      })
+
+    });
+</script>
+
+
+  </div> 
+
+                </div>
+
+                
+                <div id="bottom_content" class="row">
+                    <div class="large-12 columns">
+                        
+                    </div>
+                </div>
+            </section>
+            <div class="push"></div>
+        </div>
+
+        
+    <div id="footer">
+        <div class="row" style="background-color:#333;">
+            <div class="small-12 small-centered columns">
+                <div class="breadcrumb">
+                    <div class="breadcrumb_content">
+                        <a style="margin-left:0;" href="/dashlink/">Home</a> > <a href="/dashlink/projects/">Projects</a> > <a href="/dashlink/projects/47/">Aeroelastic Prediction Workshop</a><a href="/dashlink/projects/47/resources">> Resources</a> > HIRENASD FEM wing only HEX20
+
+                        <div style="float:right;">
+                            <a href="/dashlink/labels/">Tags</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">       
+                    <div id="footer_body">
+                        <div class="large-7 columns">
+                            <ul>
+                                <li><a class="first" href="/dashlink/about/">About DASHlink</a>•</li>
+                                <li><a href="/dashlink/help/">Help Center</a></li>
+                            </ul>
+                            <ul class="smaller">
+                                <li><a class="first" href="/dashlink/contactus/?next=/dashlink/resources/274/">Contact Us</a>•</li>
+                                <li><a href="/dashlink/members/all/">Member Directory</a></li>
+                            </ul>
+                            <ul class="smaller">
+                                <li><a class="first" href="https://www.nasa.gov/about/highlights/HP_Privacy.html">Privacy Policy and Notices</a>•</li>
+                                <li><a href="/dashlink/terms/">Terms and Conditions</a></li>          
+                            </ul>
+                        </div>
+                        <div class="large-5 columns">
+                            <ul class="official">
+                                <li>Responsible NASA official: Nikunj Oza</li>
+                                <li>Curator: ASANI Solutions, LLC</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+        <script>
+            $(document).foundation();
+        </script>
+    </body>
+    
+</html>

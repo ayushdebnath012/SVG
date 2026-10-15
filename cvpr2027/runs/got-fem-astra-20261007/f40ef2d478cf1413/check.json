@@ -1,0 +1,67 @@
+{
+ "id": "f40ef2d478cf1413031bead757b27bc154f5818c2488ca200eeecbb39a2438f2",
+ "source_fem": {
+  "ok": true,
+  "compliance": 8.039365616935858e-06,
+  "components": 1,
+  "nodes": 777
+ },
+ "candidates": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .circle(1.25)\n    .extrude(6.0)\n    .faces(\">Z\").workplane()\n    .circle(3.25)\n    .extrude(1.5)\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 7.2), rotate=cq.Vector(0, 0, 0))\n            .box(5.4, 0.6, 1.4)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 8.925820045441517e-06,
+    "components": 1,
+    "nodes": 866
+   },
+   "consensus": 2,
+   "numbers_ok": true,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt1",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .circle(1.25)\n    .extrude(6.0)\n    .faces(\">Z\").workplane()\n    .circle(3.25)\n    .extrude(1.5)\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 7.2), rotate=cq.Vector(0, 0, 0))\n            .box(5.4, 0.6, 1.4)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 8.922205932937693e-06,
+    "components": 1,
+    "nodes": 866
+   },
+   "consensus": 2,
+   "numbers_ok": true,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt2",
+   "code": null,
+   "gates": false,
+   "fem": {
+    "ok": false,
+    "error": "not executed"
+   },
+   "consensus": 0,
+   "numbers_ok": null,
+   "changed": null,
+   "error": "SyntaxError: '(' was never closed (<unknown>, line 2)"
+  },
+  {
+   "name": "alt3",
+   "code": null,
+   "gates": false,
+   "fem": {
+    "ok": false,
+    "error": "not executed"
+   },
+   "consensus": 0,
+   "numbers_ok": null,
+   "changed": null,
+   "error": "SyntaxError: '(' was never closed (<unknown>, line 2)"
+  }
+ ]
+}

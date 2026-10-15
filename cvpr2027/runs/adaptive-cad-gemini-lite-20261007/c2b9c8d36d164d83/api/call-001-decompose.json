@@ -1,0 +1,28 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .cylinder(19.9, 69.6)\\n    .faces(\\\">Z\\\").workplane()\\n    .hole(32.9)\\n    .faces(\\\">Z\\\").workplane()\\n    .circle(35.6)\\n    .extrude(10.4)\\n    .edges(\\\">Z\\\")\\n    .chamfer(1.1)\\n    .edges(\\\"<Z\\\")\\n    .fillet(1.3)\\n    .faces(\\\">Z\\\").workplane()\\n    .polarArray(39.79, 0, 360, 6)\\n    .hole(4.2)\\n    .faces(\\\">Z\\\").workplane()\\n    .polarArray(49.31, 0, 360, 6)\\n    .hole(4.6)\\n)\\nshow_object(result)\", \"instruction\": \"Drill a 33 diameter through-hole along the Z axis.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"0aec8b28298bf7217cd1bb48967e5c9e42dad0a21b95119f5d806da0529ca4fb\", \"instruction\": \"Drill a 20 diameter through-hole along the Z axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.cut(cq.Workplane('XY').cylinder(60.0,10.02))\\\"], \\\"start\\\": 9}]}\", \"strategies\": [], \"context\": [\"9: show_object(result)\"]}, {\"task_id\": \"1d8b17af931a7e41d82c7ef29167cc7fc3b1fbd5f27e40bd527c1a87f55c3e41\", \"instruction\": \"Drill a 7 diameter through-hole along the Z axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.cut(cq.Workplane('XY').cylinder(282.0,3.60))\\\"], \\\"start\\\": 18}]}\", \"strategies\": [], \"context\": [\"18: show_object(result)\"]}, {\"task_id\": \"76fc8a96e44b08b561730ca94e7da7b921d8b7c4f003a51715fab9902926c67b\", \"instruction\": \"Drill a 9 diameter through-hole along the Z axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.cut(cq.Workplane('XY').cylinder(60.0,4.44))\\\"], \\\"start\\\": 25}]}\", \"strategies\": [], \"context\": [\"25: show_object(result)\"]}]}"
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 4096
+ },
+ "usage": {
+  "completion_tokens": 101,
+  "prompt_tokens": 777,
+  "total_tokens": 878
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\n  \"steps\": [\n    \"Modify the central hole diameter to 33 or add a new through-hole of diameter 33 along the Z axis.\"\n  ],\n  \"invariants\": [\n    \"The outer diameter, height, and overall form of the cylindrical body are preserved.\",\n    \"The polar array holes and edge treatments (chamfer/fillet) remain intact.\"\n  ],\n  \"dependencies\": []\n}\n```"
+}

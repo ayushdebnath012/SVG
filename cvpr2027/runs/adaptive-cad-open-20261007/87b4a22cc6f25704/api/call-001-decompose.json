@@ -1,0 +1,34 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "Qwen/Qwen3.5-35B-A3B-FP8",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .box(28.0, 3.0, 3.0)\\n    .edges(\\\"|X\\\")\\n    .chamfer(0.45)\\n    .faces(\\\">Z\\\").workplane()\\n    .rect(22.4, 0.9)\\n    .cutBlind(-0.6)\\n)\\nshow_object(result)\", \"instruction\": \"Add a thicker square shoulder at one end of the key, 4 mm long along the key's length, 6 mm wide, and 6 mm tall, sitting flush against the end face and centered on the key's cross-section.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"e22b14e85e547a8915d47fbedbd302e8ae41b95f6cb473d6a7896b26ae2e2682\", \"instruction\": \"Add a round flat head flange at the wide end of the tapered pin, 16 mm in diameter and 4 mm thick, sitting flush against the wide end face and centered on the pin's central axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"_head = (\\\", \\\"    cq.Workplane('XY')\\\", \\\"    .transformed(offset=cq.Vector(0, 102.0, 0), rotate=cq.Vector(90, 0, 0))\\\", \\\"    .cylinder(4.0, 8.0)\\\", \\\")\\\", \\\"result = result.union(_head)\\\"], \\\"start\\\": 14}]}\", \"strategies\": [], \"context\": [\"14: show_object(result)\"]}, {\"task_id\": \"7fe9e88b429f40d693a61f1dc9301b8e39c708d062bbc240ffcbaec34bb3e1ae\", \"instruction\": \"Add a flat round flange disc behind the wide end of the cone, 70 mm in diameter and 3 mm thick, sitting flush against the wide face of the cone and centered on the central axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"_flange = (\\\", \\\"    cq.Workplane('YZ')\\\", \\\"    .transformed(offset=cq.Vector(-3.0, 0, 0), rotate=cq.Vector(0, 0, 0))\\\", \\\"    .circle(35.0)\\\", \\\"    .extrude(3.0)\\\", \\\")\\\", \\\"result = result.union(_flange)\\\"], \\\"start\\\": 10}]}\", \"strategies\": [], \"context\": [\"10: show_object(result)\"]}, {\"task_id\": \"ae2e264afc29dc2ebfa82ea6308be2b29c138f291fbc0afc0ebe017c41bb1462\", \"instruction\": \"Add 4 round cross-holes of 8 mm diameter through the rail along its length, each perpendicular to the rail's long axis, at 20 mm, 50 mm, 80 mm, and 110 mm from one end of the rail.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"for _z in (20.0, 50.0, 80.0, 110.0):\\\", \\\"    result = result.cut(\\\", \\\"        cq.Workplane('XY')\\\", \\\"        .transformed(offset=cq.Vector(0, 0, _z), rotate=cq.Vector(90, 0, 0))\\\", \\\"        .cylinder(40.0, 4.0)\\\", \\\"    )\\\"], \\\"start\\\": 24}]}\", \"strategies\": [], \"context\": [\"24: show_object(result)\"]}]}"
+   }
+  ],
+  "temperature": 0.6,
+  "top_p": 0.95,
+  "top_k": 20,
+  "max_tokens": 8192
+ },
+ "usage": {
+  "prompt_tokens": 975,
+  "total_tokens": 6989,
+  "completion_tokens": 6014,
+  "prompt_tokens_details": null,
+  "completion_tokens_details": {
+   "reasoning_tokens": 5811
+  }
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "\n\n{\n  \"steps\": [\n    \"Define a new workplane at the key's positive X end face.\",\n    \"Construct the shoulder block geometry (4x6x6) on the new workplane.\",\n    \"Translate the shoulder block to align flush with the key's end face.\",\n    \"Union the shoulder geometry with the existing key result.\"\n  ],\n  \"invariants\": [\n    \"The original key dimensions (28x3x3) are preserved.\",\n    \"The edge chamfer (0.45) on the key is preserved.\",\n    \"The top face blind cut (22.4x0.9, depth 0.6) is preserved.\",\n    \"The key remains centered on the XY plane origin.\"\n  ],\n  \"dependencies\": [\n    [0, 1],\n    [1, 2],\n    [2, 3]\n  ]\n}"
+}

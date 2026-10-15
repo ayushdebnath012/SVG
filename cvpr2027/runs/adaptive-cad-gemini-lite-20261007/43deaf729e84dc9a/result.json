@@ -1,0 +1,632 @@
+{
+ "task_id": "43deaf729e84dc9ac73ffe829ca3015b3e0dd701c4546eac2419b14646046648",
+ "status": "UNVERIFIED",
+ "prediction": "```json\n{\"edits\":[{\"start\":6,\"delete\":1,\"insert\":[\"    .cylinder(20.0, 2.0)\"]}]}\n```",
+ "selected_node": null,
+ "bank": [],
+ "pareto": [],
+ "stop": "expansion_limit",
+ "nodes": [
+  {
+   "id": 0,
+   "candidate": "```json\n{\"edits\":[{\"start\":6,\"delete\":1,\"insert\":[\"    .cylinder(20.0, 2.0)\"]}]}\n```",
+   "depth": 0,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "FAIL",
+      "reason": "SyntaxError: invalid syntax (<unknown>, line 7)"
+     },
+     "constraints": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -1000.0
+    ],
+    "score": -1.0,
+    "diagnosis": [
+     {
+      "stage": "geometry",
+      "status": "FAIL",
+      "reason": "SyntaxError: invalid syntax (<unknown>, line 7)"
+     },
+     {
+      "stage": "constraints",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 3,
+   "visits": 4,
+   "final": null,
+   "edges": [
+    0
+   ]
+  },
+  {
+   "id": 1,
+   "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .cylinder(20.0, 2.0)\"], \"start\": 5}]}",
+   "depth": 1,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "FAIL",
+      "reason": "SyntaxError: unmatched ')' (<unknown>, line 16)"
+     },
+     "constraints": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -1000.0
+    ],
+    "score": -1.0,
+    "diagnosis": [
+     {
+      "stage": "geometry",
+      "status": "FAIL",
+      "reason": "SyntaxError: unmatched ')' (<unknown>, line 16)"
+     },
+     {
+      "stage": "constraints",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 1,
+   "visits": 4,
+   "final": null,
+   "edges": [
+    1
+   ]
+  },
+  {
+   "id": 2,
+   "candidate": "```json\n{\"hypothesis\": \"Change the cylinder radius parameter from 3.0 to 2.0.\", \"edits\": [{\"start\": 4, \"delete\": 1, \"insert\": [\"    .cylinder(20.0, 2.0)\"], \"}]}\n```",
+   "depth": 2,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "FAIL",
+      "reason": "JSONDecodeError: Unterminated string starting at: line 1 column 149 (char 148)"
+     },
+     "constraints": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -1000.0
+    ],
+    "score": -1.0,
+    "diagnosis": [
+     {
+      "stage": "geometry",
+      "status": "FAIL",
+      "reason": "JSONDecodeError: Unterminated string starting at: line 1 column 149 (char 148)"
+     },
+     {
+      "stage": "constraints",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 0,
+   "visits": 1,
+   "final": null,
+   "edges": []
+  }
+ ],
+ "edges": [
+  {
+   "parent": 0,
+   "child": 1,
+   "visits": 4,
+   "total": -4.0
+  },
+  {
+   "parent": 1,
+   "child": 2,
+   "visits": 1,
+   "total": -1.0
+  }
+ ],
+ "events": [
+  {
+   "event": "decompose",
+   "plan": {
+    "steps": [
+     "Modify the cylinder radius parameter for the shank from 3.0 to 2.0."
+    ],
+    "invariants": [
+     "The height and location of the cylinder remain unchanged.",
+     "The sphere and the cutting box operations remain unchanged."
+    ],
+    "dependencies": []
+   },
+   "memory_version": "9a22d5771630ad85b745b4443cfc6f9e3e49c79840425738bffc87686e976a96",
+   "retrieved": [
+    {
+     "task_id": "4407b19aa42964bbe89666ecbef7ecd89f806d46558c7167e1433e892589bd5c",
+     "instruction": "Narrow the pin radius from 2.5 to 1.5.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .cylinder(100.0, 1.5)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .cylinder(100.0, 2.5)"
+     ]
+    },
+    {
+     "task_id": "f0be23e8b4ecbc8aa9e658d85e849a3e07c4bb455f57e5f56a33b61f075605c0",
+     "instruction": "Narrow the outlet radius from 4.9 to 3.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .lineTo(70.1, 3.0)\"], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .lineTo(70.1, 4.9)"
+     ]
+    },
+    {
+     "task_id": "ae6a617bbc9bde3789be1a26f5e15740688e3218fbf2ecebcb17dbd75223d1ad",
+     "instruction": "Increase the big-end radius from 2.2 to 3.5.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .lineTo(3.5, 70.0)\"], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .lineTo(2.2, 70.0)"
+     ]
+    }
+   ]
+  },
+  {
+   "event": "initial_state",
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 495.11186061309786,
+       "area": 435.1419984487223,
+       "solids": 2,
+       "faces": 5,
+       "bbox_x": 6.4,
+       "bbox_y": 6.4,
+       "bbox_z": 23.2
+      }
+     },
+     "constraints": {
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         2.0,
+         3.0
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -0.0
+    ],
+    "score": 0.0,
+    "diagnosis": [
+     {
+      "stage": "constraints",
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         2.0,
+         3.0
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "initial"
+   }
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "geometry",
+     "status": "FAIL",
+     "reason": "SyntaxError: invalid syntax (<unknown>, line 7)"
+    },
+    {
+     "stage": "constraints",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "4407b19aa42964bbe89666ecbef7ecd89f806d46558c7167e1433e892589bd5c",
+     "instruction": "Narrow the pin radius from 2.5 to 1.5.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .cylinder(100.0, 1.5)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .cylinder(100.0, 2.5)"
+     ]
+    },
+    {
+     "task_id": "f0be23e8b4ecbc8aa9e658d85e849a3e07c4bb455f57e5f56a33b61f075605c0",
+     "instruction": "Narrow the outlet radius from 4.9 to 3.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .lineTo(70.1, 3.0)\"], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .lineTo(70.1, 4.9)"
+     ]
+    },
+    {
+     "task_id": "ae6a617bbc9bde3789be1a26f5e15740688e3218fbf2ecebcb17dbd75223d1ad",
+     "instruction": "Increase the big-end radius from 2.2 to 3.5.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .lineTo(3.5, 70.0)\"], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .lineTo(2.2, 70.0)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "FAIL",
+   "hypothesis": "Change cylinder radius from 3.0 to 2.0"
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": true,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "geometry",
+     "status": "FAIL",
+     "reason": "SyntaxError: invalid syntax (<unknown>, line 7)"
+    },
+    {
+     "stage": "constraints",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "4407b19aa42964bbe89666ecbef7ecd89f806d46558c7167e1433e892589bd5c",
+     "instruction": "Narrow the pin radius from 2.5 to 1.5.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .cylinder(100.0, 1.5)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .cylinder(100.0, 2.5)"
+     ]
+    },
+    {
+     "task_id": "f0be23e8b4ecbc8aa9e658d85e849a3e07c4bb455f57e5f56a33b61f075605c0",
+     "instruction": "Narrow the outlet radius from 4.9 to 3.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .lineTo(70.1, 3.0)\"], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .lineTo(70.1, 4.9)"
+     ]
+    },
+    {
+     "task_id": "ae6a617bbc9bde3789be1a26f5e15740688e3218fbf2ecebcb17dbd75223d1ad",
+     "instruction": "Increase the big-end radius from 2.2 to 3.5.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .lineTo(3.5, 70.0)\"], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .lineTo(2.2, 70.0)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "FAIL",
+   "hypothesis": "Change the cylinder radius from 3.0 to 2.0 at line 5 (0-indexed)."
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": true,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "geometry",
+     "status": "FAIL",
+     "reason": "SyntaxError: invalid syntax (<unknown>, line 7)"
+    },
+    {
+     "stage": "constraints",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "4407b19aa42964bbe89666ecbef7ecd89f806d46558c7167e1433e892589bd5c",
+     "instruction": "Narrow the pin radius from 2.5 to 1.5.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .cylinder(100.0, 1.5)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .cylinder(100.0, 2.5)"
+     ]
+    },
+    {
+     "task_id": "f0be23e8b4ecbc8aa9e658d85e849a3e07c4bb455f57e5f56a33b61f075605c0",
+     "instruction": "Narrow the outlet radius from 4.9 to 3.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .lineTo(70.1, 3.0)\"], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .lineTo(70.1, 4.9)"
+     ]
+    },
+    {
+     "task_id": "ae6a617bbc9bde3789be1a26f5e15740688e3218fbf2ecebcb17dbd75223d1ad",
+     "instruction": "Increase the big-end radius from 2.2 to 3.5.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .lineTo(3.5, 70.0)\"], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .lineTo(2.2, 70.0)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "FAIL",
+   "hypothesis": "Change cylinder radius from 3.0 to 2.0 at line 5"
+  },
+  {
+   "event": "backtrack",
+   "to_node": 1
+  },
+  {
+   "event": "expand",
+   "parent": 1,
+   "node": 2,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "geometry",
+     "status": "FAIL",
+     "reason": "SyntaxError: unmatched ')' (<unknown>, line 16)"
+    },
+    {
+     "stage": "constraints",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "4407b19aa42964bbe89666ecbef7ecd89f806d46558c7167e1433e892589bd5c",
+     "instruction": "Narrow the pin radius from 2.5 to 1.5.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .cylinder(100.0, 1.5)\"], \"start\": 3}]}",
+     "strategies": [],
+     "context": [
+      "3:     .cylinder(100.0, 2.5)"
+     ]
+    },
+    {
+     "task_id": "f0be23e8b4ecbc8aa9e658d85e849a3e07c4bb455f57e5f56a33b61f075605c0",
+     "instruction": "Narrow the outlet radius from 4.9 to 3.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .lineTo(70.1, 3.0)\"], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .lineTo(70.1, 4.9)"
+     ]
+    },
+    {
+     "task_id": "ae6a617bbc9bde3789be1a26f5e15740688e3218fbf2ecebcb17dbd75223d1ad",
+     "instruction": "Increase the big-end radius from 2.2 to 3.5.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .lineTo(3.5, 70.0)\"], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .lineTo(2.2, 70.0)"
+     ]
+    }
+   ],
+   "path": [
+    0,
+    1
+   ],
+   "status": "FAIL",
+   "hypothesis": "unparseable response"
+  }
+ ],
+ "config": {
+  "algorithm": "mcts",
+  "max_expansions": 4,
+  "max_depth": 3,
+  "width": 2,
+  "max_width": 4,
+  "exploration": 0.7,
+  "seconds": 2400.0
+ },
+ "memory_version": "9a22d5771630ad85b745b4443cfc6f9e3e49c79840425738bffc87686e976a96",
+ "stored": null,
+ "seconds": 79.9523385,
+ "api": {
+  "mode": "live_astra",
+  "api_calls": 5,
+  "cost_usd": 0.0,
+  "budget_usd": 0.189873417721519,
+  "refused": 0
+ },
+ "tool_jobs": 4
+}

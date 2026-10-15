@@ -1,0 +1,733 @@
+
+PAGE 1
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+PrePoMax v1.1.0 
+Examples 
+26th of June 2021 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Written by Jakub Michalski and Matej Borovinšek 
+
+
+PAGE 2
+ 
+ 
+ 
+Contents 
+1 
+Pressure loaded ring segment ......................................................................................................... 1 
+2 
+Shaft with surface traction loading ................................................................................................. 3 
+3 
+Elliptical bar torsion ......................................................................................................................... 5 
+4 
+Rectangular bar subjected to torsion and bending ......................................................................... 7 
+5 
+Assembly of two cylinders ............................................................................................................... 9 
+6 
+Beam modal analysis ..................................................................................................................... 11 
+7 
+Elasto-plastic plate in tension ....................................................................................................... 14 
+8 
+Hertz contact of two spheres ........................................................................................................ 17 
+9 
+Cylindrical shell buckling ............................................................................................................... 20 
+10 
+Buckling of a simply-supported plate in compression .............................................................. 22 
+11 
+Heat transfer in insulated pipeline ............................................................................................ 24 
+12 
+Termomechanical analysis of a bimetallic strip ........................................................................ 26 
+
+
+PAGE 3
+1 
+ 
+1 Pressure loaded ring segment 
+The first example is a ring segment (one quarter of a ring) subjected to pressure loading. The 
+dimensions are: 
+- 
+Outer diameter: 150 mm 
+- 
+Inner diameter: 90 mm 
+- 
+Thickness: 20 mm 
+1) Create a new file with [mm, ton, s, °C] units and import geometry in step format to 
+PrePoMax. Then mesh the part. In this case maximum element size of 3 mm was selected 
+while other settings were left with no changes (Figure 1). 
+ 
+Figure 1: Ring segment – mesh 
+2) Create a node set fix (bottom side) and surface press (top side) for further use when 
+applying boundary condition and load. 
+3) Define a new material named Steel, add Elastic behavior and specify Young’s modulus of 
+210000 MPa and Poisson’s ratio of 0.3. Create a new solid section named Steel_section, with 
+Steel as a material and select the ring segment so that the section will be assigned to it. 
+4) Define static analysis step with default settings. 
+5) Add Fixed boundary condition to the node set named fix. Add Pressure load to the surface 
+named press, specify the magnitude of 20 MPa (Figure 2). 
+
+
+PAGE 4
+ 
+2 
+ 
+ 
+Figure 2: Ring segment – boundary conditions and loads 
+6) Since all the necessary definitions were made, the analysis can be submitted. Wait until it 
+finishes and open the results. 
+7) Examine Mises stress and displacement contour plots. Change the color spectrum type to 
+Rainbow. Hide max value label, change number format to general and set the deformation 
+scale factor to 40 (Figure 3). Analytically calculated maximum stress value is 230.68 MPa and 
+similar stresses can be found in simulation results when checking the outer shorter edge of 
+the fixed face. 
+ 
+Figure 3: Ring segment – von Mises stress 
+ 
+ 
+
+
+PAGE 5
+ 
+3 
+ 
+2 Shaft with surface traction loading 
+In this example a short circular shaft is subjected to surface traction loading that causes 
+bending. The dimensions are: 
+- 
+Diameter: 50 mm 
+- 
+Length: 200 mm 
+1) Create a new file with [mm, ton, s, °C] units and import geometry in step format to 
+PrePoMax. Then mesh the part. In this case maximum element size of 4 mm was selected 
+while other settings were left with no changes (Figure 4). 
+ 
+Figure 4: Shaft – mesh 
+2) Define a new material, add Elastic behavior and specify Young’s modulus of 210000 MPa 
+and Poisson’s ratio of 0.3. Create a new solid section referencing previously created material 
+and select the shaft so that the section will be assigned to this part. 
+3) Define a static analysis step with default settings. Assign Fixed boundary condition to one 
+end of the shaft and Surface traction loading to the other one. Specify the value of -500 N in 
+the direction perpendicular to the shaft’s axis (Figure 5). 
+
+
+PAGE 6
+ 
+4 
+ 
+ 
+Figure 5: Shaft – boundary conditions and loads 
+ 
+4) Run the analysis and open the results when it completes. Change the deformation scale 
+factor to 400 and turn on the option to draw undeformed model. Examine the displacements 
+contour plot, hide undeformed model shape and check the Mises stress plot (Figure 6). 
+Analytically calculated maximum stress is 8.17 MPa and similar values can be found when 
+checking the results of the analysis. 
+ 
+Figure 6: Shaft – von Mises stress 
+ 
+ 
+
+
+PAGE 7
+ 
+5 
+ 
+3 Elliptical bar torsion 
+In this case an elliptical section bar is subjected to torsion. The dimensions are: 
+- 
+Major axis: 200 mm 
+- 
+Minor axis: 100 mm 
+- 
+Length: 1000 mm 
+1) Create a new file with [mm, ton, s, °C] units and import geometry in step format to 
+PrePoMax. Then mesh the part. In this case maximum element size of 10 mm was selected 
+while other settings were left with no changes (Figure 7). 
+ 
+Figure 7: Elliptical bar – mesh 
+2) Define a new material, add Elastic behavior and specify Young’s modulus of 210000 MPa 
+and Poisson’s ratio of 0.3. Create a new solid section referencing previously created material 
+and select the shaft so that the section will be assigned to this part. 
+3) Create a reference point at (0, 0, 1000) coordinates. Create a rigid body constraint using 
+this reference point and assign it to the surface of the shaft. 
+4) Define a static analysis step with default settings. Assign Fixed boundary condition to the 
+surface of the shaft opposite to the one with reference point. Create Moment load and apply 
+it to the reference point, specify the magnitude of 1000000 Nmm for the axis of the bar (Figure 
+8). 
+
+
+PAGE 8
+ 
+6 
+ 
+ 
+Figure 8: Elliptical bar – boundary conditions and loads 
+5) Run the analysis and open the results when it’s completed. In this case analytically 
+calculated maximum shear stress is 2.547 MPa. In order to compare the numerical result to it 
+switch to proper stress component (depending on how your model is aligned with global 
+coordinate system’s axes). Use the Query → Point/Node tool to examine stress values in 
+various locations on the bar. Also, show the label pointing to the node with maximum shear 
+stress. In this case the result was 2.555 MPa, so very close to the analytical solution (Figure 9). 
+ 
+Figure 9: Elliptical bar – shear stress 
+ 
+ 
+ 
+
+
+PAGE 9
+ 
+7 
+ 
+4 Rectangular bar subjected to torsion and bending 
+In this case a rectangular section bar subjected to combined loading (torsion and bending) is 
+analyzed. The dimensions are: 
+- 
+Cross-section: rectangle 200x300 mm 
+- 
+Length: 1400 mm 
+1) Create a new file with [mm, ton, s, °C] units and import geometry in step format to 
+PrePoMax. Then mesh the part. In this case maximum element size of 30 mm was selected 
+while other settings were left with no changes (Figure 10). 
+ 
+Figure 10: Rectangular bar – mesh 
+2) Define a new material, add Elastic behavior and specify Young’s modulus of 180000 MPa 
+and Poisson’s ratio of 0.25. Create a new solid section referencing previously created material 
+and select the bar so that the section will be assigned to this part. 
+3) Create a reference point at (500, 0, 1400) coordinates. Create a rigid body constraint using 
+this reference point and assign it to the surface of the bar. 
+3) Define a static analysis step with default settings. Assign Fixed boundary condition to the 
+end of the bar opposite to the one with reference point. Create Concentrated force loading to 
+the other one. Specify the value of -8000 N in the direction perpendicular to the bar’s axis 
+(Figure 11). 
+
+
+PAGE 10
+ 
+8 
+ 
+ 
+Figure 11: Rectangular bar – boundary conditions and loads 
+4) Run the analysis and examine the results. Set the deformation scale factor to 1000 and 
+enable the option to draw undeformed model (Figure 12). You will notice both bending and 
+twisting of the bar caused by the remote load. The analytical result is around 4.69 MPa. Results 
+from simulation are affected by stress concentration and mesh sensitivity but the value read 
+in a node right next to the corner with maximum stress is 4.77 MPa in this case. 
+ 
+Figure 12: Rectangular bar – von Mises stress 
+
+
+PAGE 11
+ 
+9 
+ 
+5 Assembly of two cylinders 
+In this case a simple assembly consisting of two cylinders is analyzed. The dimensions are: 
+- 
+Diameter of the first cylinder: 80 mm 
+- 
+Length of the first cylinder: 100 mm 
+- 
+Diameter of the second cylinder: 50 mm 
+- 
+Length of the second cylinder: 120 mm 
+The cylinders are modelled in CAD software as separate parts and then their assembly has to 
+be imported in step format. 
+1) Create a new file with [mm, ton, s, °C] units and import geometry in step format to 
+PrePoMax. Then mesh both parts. In this case maximum element size of 5 mm was selected 
+while other settings were left with no changes (Figure 13). 
+ 
+Figure 13: Two cylinders – mesh 
+2) Define a new material, add Elastic behavior and specify Young’s modulus of 180000 MPa 
+and Poisson’s ratio of 0.25. Create a new solid section referencing previously created material 
+and select both cylinders so that the section will be assigned to these parts. 
+3) Hide the wider cylinder and create surface named Tie1 for the back face of the narrower 
+cylinder. Invert the part visibility (View → Invert Visible Parts) and create a surface named 
+Tie2 for the front face of the wider cylinder. Show both parts again. Define a tie constraint, 
+use previously created surfaces as master and slave regions. 
+4) Create a static step with default settings. Apply Fixed boundary condition to the back face 
+of the wider cylinder and Pressure load (magnitude 30 MPa) to the front face of the narrower 
+cylinder (Figure 14). 
+
+
+PAGE 12
+ 
+10 
+ 
+ 
+Figure 14: Two cylinders – boundary conditions and loads 
+5) Run the analysis and display the results. Examine the stresses and displacements with the 
+deformation scale factor of 100 (Figure 15). 
+ 
+Figure 15: Rectangular bar – von Mises stress 
+ 
+ 
+ 
+ 
+
+
+PAGE 13
+ 
+11 
+ 
+6 Beam modal analysis 
+In this example a simply-supported rectangular beam is analyzed in terms of natural 
+frequencies. The dimensions are: 
+- 
+Cross-section: square 40 mm 
+- 
+Length: 1000 mm 
+1) Create a new file with [mm, ton, s, °C] units and import geometry in step format to 
+PrePoMax. Then mesh the part. In this case maximum element size of 10 mm was selected 
+while other settings were left with no changes (Figure 16). 
+ 
+Figure 16: Beam – mesh 
+2) Define a new material, add Elastic behavior and specify Young’s modulus of 210000 MPa 
+and Poisson’s ratio of 0.3. Also, add Density and specify the value of 7.85e-9 tonne/mm3. 
+Create a new solid section referencing previously created material and select the beam so that 
+the section will be assigned to this part. 
+3) Create a frequency step with the default settings (extraction of the 10 natural frequencies). 
+Apply Displacement/Rotation boundary condition to the bottom edge of cross-section at one 
+end. Fix the degrees of freedom U1, U2 and U3. Create another Displacement/Rotation 
+boundary condition applied to the bottom edge of the cross-section on the opposite side. Fix 
+the degrees of freedom like before but leave one translation free (the one in the beam’s axis) 
+to simulate roller support (Figure 17). 
+
+
+PAGE 14
+ 
+12 
+ 
+ 
+Figure 17: Beam – boundary conditions 
+4) Run the analysis and open the results when it completes. Examine the natural frequencies 
+and mode shapes. To switch between mode shapes use Previous/Next Increment buttons or 
+drop-down list in the shortcuts toolbar. Analytical values of natural frequencies are listed 
+below (Table 1). 
+Table 1: Beam – theoretical natural frequencies 
+No. 
+Natural frequency 
+[Hz] 
+1 
+93.82 
+2 
+375.46 
+3 
+844.07 
+4 
+1501.83 
+5 
+2347.80 
+ 
+while values obtained from the analysis are given in the next table (Table 2): 
+Table 2: Beam – natural frequencies from the analysis 
+No. 
+Natural frequency 
+[Hz] 
+1 
+93.39 
+2 
+121.28 
+3 
+339.68 
+4 
+413.17 
+5 
+785.76 
+6 
+850.47 
+7 
+1066.7 
+8 
+1223.69 
+9 
+1478.86 
+10 
+1609.22 
+
+
+PAGE 15
+ 
+13 
+ 
+Analytical calculations are simplified (they account only for the deformation in one plane) and 
+can’t predict all the natural frequencies that were obtained using modal analysis. That’s one 
+of the main reasons of differences in results in this case. 
+One of the higher mode shapes (#9) can be seen in the image below (Figure 18). 
+ 
+Figure 18: Beam – mode shape #9 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+PAGE 16
+ 
+14 
+ 
+7 Elasto-plastic plate in tension 
+In this example a rectangular plate with a hole in the middle is subjected to tension. The plate 
+is made of elasto-plastic material. Due to symmetry, only one quarter of the plate is analyzed. 
+The dimensions are: 
+- 
+Plate size: 300x150 mm 
+- 
+Hole diameter: 60 mm 
+- 
+Thickness: 10 mm 
+1) Create a new file with [mm, ton, s, °C] units and import geometry in step format to 
+PrePoMax. Then mesh the part. In this case maximum element size of 2 mm was selected 
+while other settings were left with no changes (Figure 19). 
+ 
+Figure 19: Plate – mesh 
+2) Define a new material, add Elastic behavior and specify Young’s modulus of 210000 MPa 
+and Poisson’s ratio of 0.3. Also, add Plasticity and specify data points given below (Table 3). 
+Table 3: Plate – data points for plasticity definition 
+Yield stress [MPa] 
+Plastic strain [-] 
+235 
+0 
+335 
+0.12 
+ 
+Create a new solid section referencing previously created material and select the beam so that 
+the section will be assigned to this part. 
+3) Define a static step with default settings. Apply Displacement/Rotation boundary conditions 
+to faces that were cut due to symmetry. For each of these BCs fix the degree of freedom 
+corresponding to the direction normal to specific face. Create another Displacement/Rotation 
+BC, apply it to the two largest faces and constrain displacements in normal direction to 
+prevent out-of-plane deformations (the problem is in fact two-dimensional). Apply a Pressure 
+load of -200 MPa to the side were the plate is pulled (Figure 20). 
+
+
+PAGE 17
+ 
+15 
+ 
+ 
+Figure 20: Plate – boundary conditions 
+4) Add new field output request, select element output and PEEQ variable. 
+5) Run the analysis and examine the results when it completes. Take a closer look at Mises 
+stress and plastic strain (PE) distribution (Figure 21). 
+ 
+Figure 21: Plate – plastic strain 
+6) Use the Transformation → Symmetry option to mirror the results and display them for the 
+whole plate (Figure 22). 
+
+
+PAGE 18
+ 
+16 
+ 
+ 
+Figure 22: Plate – plastic strain (mirrored) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+PAGE 19
+ 
+17 
+ 
+8 Hertz contact of two spheres 
+The example discussed here is based on Code_Aster benchmark problem SSNV104. In this case 
+two spheres in contact are pressed against each other. Symmetry is utilized so that only 1/8 
+of each sphere has to be analyzed. 
+The geometry is modelled in CAD software as separate parts and then their assembly has to 
+be imported in step format. 
+1) Create a new file with [mm, ton, s, °C] units and import geometry in step format to 
+PrePoMax. Then mesh both parts. In this case maximum element size of 5 mm was selected 
+while other settings were left with no changes. In addition, local mesh refinement of 0.5 mm 
+was applied to the contact region (for better refinement of the mesh it would be necessary to 
+partition the spheres, creating edges to which the refinement can be assigned. Otherwise, the 
+user has to use vertices at the point of contact (Figure 23). 
+ 
+Figure 23: Two spheres – mesh 
+2) Define a new material, add Elastic behavior and specify Young’s modulus of 20000 MPa and 
+Poisson’s ratio of 0.3. Create a new solid section referencing previously created material and 
+select both sphere segments so that the section will be assigned to these parts. 
+3) Create a surface interaction with default surface behavior (hard). Create a contact pair 
+referencing this interaction and select the two surfaces that will come into contact during the 
+analysis. 
+
+
+PAGE 20
+ 
+18 
+ 
+4) Create a new static step, turn Nlgeom to On (to account for geometric nonlinearity). Define 
+two Displacement/Rotation boundary conditions, apply them to 2 sets consisting of 2 side 
+faces where the symmetry is (constrain only displacements in the direction normal to each set 
+of the faces). Create another two Displacement/Rotation BCs and assign them to top and 
+bottom face, prescribing the displacement of 2 mm and -2 mm, so that the arrows point to 
+each other and the spheres will be pressed against each other (Figure 24). 
+ 
+Figure 24: Two spheres – boundary conditions 
+5) Run the analysis and check the results when it completes. Notice specific stress distribution 
+around the point of contact (Figure 25). Analytically calculated value of the normal stress in 
+the direction in which spheres are compressed (at the point of contact) is 2798.3 MPa while 
+the result of simulation in this case is 2750 MPa. Analyses involving contact are very sensitive 
+to mesh density so better result could be obtained with finer mesh. 
+
+
+PAGE 21
+ 
+19 
+ 
+ 
+Figure 25: Two spheres – normal stress 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+PAGE 22
+ 
+20 
+ 
+9 Cylindrical shell buckling 
+In this example linear buckling analysis of an axially compressed cylindrical shell is performed. 
+The dimensions are: 
+- 
+Diameter: 300 mm 
+- 
+Length: 600 mm 
+The geometry is modelled in CAD software as a surface. 
+1) Create a new file with [mm, ton, s, °C] units and import geometry in step format to 
+PrePoMax. Then mesh the part. In this case maximum element size of 10 mm was selected 
+and quad-dominated mesh was enabled while other settings were left with no changes (Figure 
+26). 
+ 
+Figure 26: Cylindrical shell – mesh 
+2) Define a new material, add Elastic behavior and specify Young’s modulus of 210000 MPa 
+and Poisson’s ratio of 0.3. Create a new shell section referencing previously created material 
+and select the cylindrical shell so that the section will be assigned to this part. Specify the 
+thickness of 5 mm. 
+3) Create a reference point at coordinates (0, 0, 600). Define a rigid body constraint using this 
+reference point and shell edge. 
+4) Add a new buckle step and set the number of buckling factors to 5. Create a Fixed boundary 
+condition assigned to the bottom edge of the shell. Define a concentrated force load and apply 
+it to the reference point connected with top edge of the shell. Specify the value of -1 N for this 
+load (Figure 27). 
+
+
+PAGE 23
+ 
+21 
+ 
+ 
+Figure 27: Cylindrical shell – boundary conditions and loads 
+5) Run the analysis and open results when it finishes. Set the deformation scale factor to 10000 
+and examine buckling mode shapes. One of them (#4) is shown in the image below (Figure 28). 
+Analytically calculated critical load is 1.9964·107 while from the simulation we get 1.9024·107. 
+ 
+Figure 28: Cylindrical shell – buckling mode shape #4 
+
+
+PAGE 24
+ 
+22 
+ 
+ 
+10 Buckling of a simply-supported plate in compression 
+In this example a simply-supported rectangular plate subjected to compression on all edges is 
+analyzed in terms of buckling. The dimensions are: 
+- 
+Plate size: 200x150 mm 
+The geometry is modelled in CAD software as a surface. 
+1) Create a new file with [mm, ton, s, °C] units and import geometry in step format to 
+PrePoMax. Then mesh the part. In this case maximum element size of 5 mm was selected and 
+quad-dominated mesh was enabled while other settings were left with no changes (Figure 29). 
+ 
+Figure 29: Plate – mesh 
+2) Define a new material, add Elastic behavior and specify Young’s modulus of 200000 MPa 
+and Poisson’s ratio of 0.3. Create a new shell section referencing previously created material 
+and select the cylindrical shell so that the section will be assigned to this part. Specify the 
+thickness of 4 mm. 
+3) Add a new buckle step and set the number of buckling factors to 3. Create a 
+Displacement/Rotation boundary condition assigned to all edges of the plate, constrain only 
+the out-of-plane translation. Add two more Displacement/Rotation BCs and apply them to 2 
+perpendicular edges of the plate, constrain the direction normal to each edge. Define a normal 
+shell edge load with magnitude 1 N/mm and assign it to 2 edges opposite to those with BCs in 
+normal directions (Figure 30). 
+
+
+PAGE 25
+ 
+23 
+ 
+ 
+Figure 30: Plate – boundary conditions and loads 
+4) Run the analysis and examine results when it finishes. Check each buckling mode shape. 
+The second one is shown in the image below (Figure 31). Analytically calculated critical 
+compressive stress is 200.85 MPa while from the simulation we get 197 MPa. 
+ 
+Figure 31: Plate – buckling mode shape #2 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+PAGE 26
+ 
+24 
+ 
+11 Heat transfer in insulated pipeline 
+In this example an insulated pipeline is subjected to thermal loading. The dimensions are: 
+- 
+Outer diameter: 57 mm 
+- 
+Inner diameter: 50 mm 
+- 
+Insulation thickness: 28 mm 
+- 
+Length: 200 mm 
+1) Create a new file with [mm, ton, s, °C] units and import geometry in step format to 
+PrePoMax. Then mesh both parts. In this case the following maximum element sizes were 
+selected: 2 mm for insulation and 3 mm for pipe. Other settings were left with no changes 
+(Figure 32). 
+ 
+Figure 32: Pipeline – mesh 
+2) Define a new material named Pipe_material, add Thermal conductivity and specify the 
+value of 45 mW/(mm·°C). Define another material, name it Insulation_material, add Thermal 
+conductivity and specify the value of 0.05 mW/(mm·°C). Create a new solid section named 
+Pipe_section, with Pipe_material as a material and select the inner part (pipe) so that the 
+section will be assigned to it. Create another section, name it Insulation_section, pick 
+Insulation_material as a material and select the outer part (insulation). 
+3) Hide the pipe and create surface named Tie1 for the inner face of the insulation. Invert the 
+part visibility (View → Invert Visible Parts) and create a surface named Tie2 for the outer face 
+of the pipe. Show both parts again. Define a tie constraint, use previously created surfaces as 
+master and slave regions. 
+ 
+
+
+PAGE 27
+ 
+25 
+ 
+4) Define heat transfer analysis step with default settings (steady state). 
+5) Create Convective film load and assign it to the outer surface of the insulation. Specify sink 
+temperature of 20 °C and film coefficient of 0.015 mW/(mm2·°C). Create another Convective 
+film load and assign it to the inner surface of the pipe. Specify sink temperature of -30 °C and 
+film coefficient of 0.8 mW/(mm2·°C) (Figure 33). 
+ 
+Figure 33: Pipeline – thermal loads 
+6) Since all the necessary definitions were made, the analysis can be submitted. Wait until it 
+finishes and open the results. 
+7) Examine temperature contour plot (Figure 34). Analytically calculated temperature at the 
+inner face of the pipe is -29.83 °C while at the outer face of the pipe it’s 16.05 °C. Similar values 
+can be found in the analysis (use Query tool to check them). 
+ 
+Figure 34: Pipeline – temperature 
+
+
+PAGE 28
+ 
+26 
+ 
+12 Termomechanical analysis of a bimetallic strip 
+In this example a bimetallic strip bends due to different thermal expansion of each layer. The 
+model consists of two beams (120x20x4 mm) placed on top of each other. 
+1) Create a new file with [mm, ton, s, °C] units and import geometry in step format to 
+PrePoMax. Then mesh both parts. In this case maximum element size of 1 mm was selected 
+for both parts while other settings were left with no changes (Figure 35). 
+ 
+Figure 35: Bimetallic strip – mesh 
+2) Define a new material named Copper, add Elasticity (Young’s modulus 130000 MPa, 
+Poisson’s ratio 0.34), Thermal conductivity (385 mW/(mm·°C)) and Thermal expansion (17e-6 
+(1/°C), zero temperature 20 °C). Define another material, name it Steel, add Elasticity (Young’s 
+modulus 210000 MPa, Poisson’s ratio 0.3), Thermal conductivity (45 mW/(mm·°C)) and 
+Thermal expansion (12.3e-6 (1/°C), zero temperature 20 °C). Create a new solid section named 
+Top_layer, with Copper as a material and select the top beam so that the section will be 
+assigned to it. Create another section, name it Bottom_layer, pick Steel as a material and 
+select the bottom beam. 
+3) Hide the top beam and create surface named Tie1 for the upper face of the bottom beam. 
+Invert the part visibility (View → Invert Visible Parts) and create a surface named Tie2 for the 
+lower face of the top beam. Show both parts again. Define a tie constraint, use previously 
+created surfaces as master and slave regions. 
+4) Define coupled temperature-displacement analysis step with default settings (steady state). 
+5) Assign Fixed boundary condition to the back faces of both beams. Add Temperature 
+boundary condition with magnitude of 80 °C to all external faces apart from the fixed one 
+(Figure 36). 
+
+
+PAGE 29
+ 
+27 
+ 
+ 
+Figure 36: Bimetallic strip – boundary conditions 
+6) Since all the necessary definitions were made, the analysis can be submitted. Wait until it 
+finishes and open the results. 
+7) Examine the vertical displacement contour plot (Figure 37). Analytically calculated 
+deflection of the bimetallic strip is 0.3807 mm. The analysis may give a slightly higher 
+prediction. 
+ 
+Figure 37: Bimetallic strip – deflection 

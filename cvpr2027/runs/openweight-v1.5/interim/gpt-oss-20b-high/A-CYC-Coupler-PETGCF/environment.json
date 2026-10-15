@@ -1,0 +1,57 @@
+{
+  "solver": {
+    "name": "spsolve from scipy.sparse.linalg",
+    "scipy_version": "1.18.1"
+  },
+  "meshing_tool": {
+    "name": "gmsh",
+    "version": "4.15.2"
+  },
+  "cad_file": "part.step",
+  "physical_groups": {
+    "fixed_faces": [
+      5,
+      6
+    ],
+    "load_face": [
+      14
+    ]
+  },
+  "units": {
+    "length": "mm",
+    "force": "N",
+    "stiffness": "MPa",
+    "displacement": "mm"
+  },
+  "material": {
+    "E": 3000.0,
+    "nu": 0.36
+  },
+  "finite_element": {
+    "type": "P1 tetrahedral",
+    "vector_displacement": true
+  },
+  "mesh_size_target_mm": 1.0,
+  "load_application": {
+    "type": "uniform traction",
+    "face": 14,
+    "total_force_N": 100.052,
+    "area_mm2": 267.272,
+    "direction": [
+      1.0,
+      0.0,
+      0.0
+    ]
+  },
+  "modeling_assumptions": {
+    "gravity": false,
+    "contact": false,
+    "small_displacements": true,
+    "linear_elasticity": true
+  },
+  "field_schema": {
+    "node_ids": "Array of node tags from gmsh (int)",
+    "coordinates": "N x 3 array of coordinates in mm (float)",
+    "displacements": "N x 3 array of displacements in mm (float)"
+  }
+}

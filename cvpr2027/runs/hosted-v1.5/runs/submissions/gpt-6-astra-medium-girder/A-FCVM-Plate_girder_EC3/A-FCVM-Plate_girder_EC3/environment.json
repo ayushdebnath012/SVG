@@ -1,0 +1,105 @@
+{
+  "command": "python main.py",
+  "python": "3.12.14 (main, Aug 25 2026, 13:50:33) [Clang 22.1.3 ]",
+  "numpy": "2.5.3",
+  "scipy": "1.18.1",
+  "meshio": "5.3.5",
+  "units": {
+    "length": "mm",
+    "force": "N",
+    "stress": "MPa",
+    "rotation": "rad",
+    "buckling_factor": "dimensionless"
+  },
+  "material": {
+    "E_MPa": 210000.0,
+    "nu": 0.3
+  },
+  "element": "Four-node flat MITC4 shell, full 2x2 membrane/bending integration, mixed interpolated transverse shear; weak drilling rotation/curl penalty 1e-4 E t. Six DOFs per node.",
+  "physical_groups": {
+    "1": "bottom flange",
+    "2": "top flange",
+    "3": "web",
+    "4": "longitudinal stiffener",
+    "5": "end stiffeners",
+    "6": "interior transverse stiffeners"
+  },
+  "modeling_assumptions": [
+    "All interfaces welded, shared shell nodes with all six DOFs continuous. Exact 104-region physical solid retained in part.step; mesh.msh is the midsurface reduction.",
+    "Web thickness 15; flange thickness 50; longitudinal stiffener 20; transverse stiffeners 15 except end plates 24 mm. Web and stiffeners extend to flange midplanes, neglecting joint overlap volume.",
+    "Bottom 175x175 bearing plates represented by 100-mm-thick eccentric flange patches: reference z=25, section centroid z=0.",
+    "Supports mapped from z=2100 to z=2075 with exact rigid offset (25 mm): ux+25 theta_y=0 on left; uy-25 theta_x=0 and uz=0 both ends. All other rotations free.",
+    "All prescribed tractions integrated at their original plan locations, preserving areas, sums, and load moments; duplicate lower-patch pressures add. No self weight.",
+    "Geometric matrix integrates initial in-plane stresses and bending stresses through thickness, acting on gradients of all three displacement components and two bending rotations. Initial transverse shear/normal stress neglected in the shell reduction."
+  ],
+  "quantity_extraction": "Solve Ku=F, then generalized symmetric eigenproblem -KG v = mu K v, six largest algebraic mu; lambda1 = 1 / max positive mu. Entire reference load scales together.",
+  "field_schema": {
+    "node_ids": "One-based mesh.msh node tags; row order matches coordinates",
+    "connectivity": "One-based node IDs of each quad, matching element row order",
+    "element_ids": "One-based mesh element tags",
+    "coordinates_mm": "N x 3 global XYZ on reference shell surface",
+    "reference_displacement_mm": "N x 3 translations in global frame",
+    "reference_rotation_rad": "N x 3 rotation vectors in global frame",
+    "reference_stress_MPa": "Ne x 4 in-plane Gauss points x 2 section surfaces (bottom,top) x 3 local stresses (xx,yy,xy). Gauss loop x then y ascending.",
+    "buckling_modes": "N x 6 x 6 modes, global translations then rotations, normalized to maximum translational vector magnitude = 1 mm",
+    "buckling_factors": "Six positive elastic load factors, ascending",
+    "reference_nodal_load_N_Nmm": "N x 6 consistent forces and moments",
+    "reference_residual_N_Nmm": "Ku-F in full DOFs, including support reaction force/couple",
+    "support_left, support_right": "Node masks at support reference lines",
+    "constrained_dof_mask": "N x 6 masks of eliminated DOFs; offset constraints described above",
+    "load_element_masks": "Ne x 3: bottom strip, bearing patch, top end load masks",
+    "physical_group": "Ne group IDs matching MSH physical tags",
+    "thickness_mm, eccentricity_mm": "Ne shell thickness and centroid offset along local normal",
+    "local_frame_type": "0: (X,Y,Z); 1: (X,Z,-Y); 2: (Y,Z,X)"
+  },
+  "source_CAD": {
+    "cadquery": "2.8.0",
+    "solid_regions": 104,
+    "volume_mm3": 3335612900.0000014
+  },
+  "reduction_limitations": "Shell midsurfaces extend to intersecting plate midplanes. Their integrated section volume is 1.16% greater than the exact solid because joint overlaps are not subtracted. Convergence is numerical shell-mesh convergence, not an estimate of 3D-to-shell modeling error. Local through-thickness stresses at loads and constrained edges are not resolved.",
+  "source_face_mapping": {
+    "top_end_pressure_-166.15942_MPa": [
+      332,
+      334,
+      337,
+      304,
+      306,
+      309
+    ],
+    "bearing_pressure_30.204082_MPa": [
+      240,
+      610
+    ],
+    "additional_pressure_5.423191_MPa": [
+      240,
+      286,
+      320,
+      348,
+      376,
+      410,
+      478,
+      512,
+      584,
+      585,
+      586,
+      587,
+      588,
+      591,
+      592,
+      593,
+      610
+    ],
+    "support_left_edges": [
+      459,
+      463,
+      464
+    ],
+    "support_right_edges": [
+      517,
+      528,
+      529
+    ]
+  },
+  "load_sign_convention": "Top end traction is global -z; all bottom strip and bearing tractions are global +z. End faces have total area 27600 mm2; bearings 61250 mm2; remaining bottom strip 443250 mm2. Rounded input tractions leave net -0.11 N."
+}

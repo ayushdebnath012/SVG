@@ -1,0 +1,28 @@
+{
+ "kind": "single",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "You edit mechanical CAD. Return only JSON {\"edits\":[{\"start\":0,\"delete\":0,\"insert\":[\"replacement line\"]}]}. Indices are zero-based lines of the ORIGINAL input; operations must be ordered, nonoverlapping and in bounds. Preserve unrelated features. The supplied representation determines syntax. Return no explanation or invented physics results. Geometry execution and FEM checks are performed by external tools; never claim verification."
+   },
+   {
+    "role": "user",
+    "content": "Representation: cadquery\nOriginal CAD (line indices are implicit):\nimport math\nimport cadquery as cq\nslope_angle_deg = 45.0\ninner = 10.96\nouter = 27.4\nhalf_w = 10.96\nrun = outer - inner\nrise = run * math.tan(math.radians(slope_angle_deg))\nresult = (\n    cq.Workplane(\"XY\")\n    .polyline([[10.96, 10.96], [27.4, 10.96], [27.4, -10.96], [10.96, -10.96], [10.96, -27.4], [-10.96, -27.4], [-10.96, -10.96], [-27.4, -10.96], [-27.4, 10.96], [-10.96, 10.96], [-10.96, 27.4], [10.96, 27.4]])\n    .close()\n    .extrude(7.4)\n)\nwedge_px = (\n    cq.Workplane(\"XZ\")\n    .polyline([(inner, 0.0), (outer, 0.0), (outer, rise)])\n    .close()\n    .extrude(half_w, both=True)\n)\nwedge_nx = (\n    cq.Workplane(\"XZ\")\n    .polyline([(-inner, 0.0), (-outer, 0.0), (-outer, rise)])\n    .close()\n    .extrude(half_w, both=True)\n)\nwedge_py = (\n    cq.Workplane(\"YZ\")\n    .polyline([(inner, 0.0), (outer, 0.0), (outer, rise)])\n    .close()\n    .extrude(half_w, both=True)\n)\nwedge_ny = (\n    cq.Workplane(\"YZ\")\n    .polyline([(-inner, 0.0), (-outer, 0.0), (-outer, rise)])\n    .close()\n    .extrude(half_w, both=True)\n)\nresult = result.cut(wedge_px).cut(wedge_nx).cut(wedge_py).cut(wedge_ny)\nshow_object(result)Edit instruction:\nRestore the outer halves of all four arms, extending each back to the full outer length and rebuilding them to full thickness; remove the 45\u00b0 upward slopes so every arm has a flat underside and constant thickness to the tip."
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 8192
+ },
+ "usage": {
+  "completion_tokens": 227,
+  "prompt_tokens": 697,
+  "total_tokens": 924
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\"edits\":[{\"start\":3,\"delete\":16,\"insert\":[\"rise = 0.0\", \"result = (\", \"    cq.Workplane(\\\"XY\\\")\", \"    .polyline([[10.96, 10.96], [27.4, 10.96], [27.4, -10.96], [10.96, -10.96], [10.96, -27.4], [-10.96, -27.4], [-10.96, -10.96], [-27.4, -10.96], [-27.4, 10.96], [-10.96, 10.96], [-10.96, 27.4], [10.96, 27.4]])\", \"    .close()\", \"    .extrude(7.4)\", \")\"]}]}\n```"
+}

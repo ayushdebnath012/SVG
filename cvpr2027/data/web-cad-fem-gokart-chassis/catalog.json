@@ -1,0 +1,67 @@
+{
+  "collection": "Go-kart native SolidWorks chassis with original modal/harmonic report",
+  "source": "https://github.com/wingcraft7/go-kart-chassis-fea",
+  "revision": "8c13453f228b45b30b9a79ff31d4326e0edd3b17",
+  "license_notice": "MIT License\n\nCopyright (c) 2026 Pushkal Garg\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+  "date": "2026-10-12",
+  "certified_cases": 0,
+  "locally_generated_cad": 0,
+  "solver_runs": 0,
+  "frontier_model_calls": 0,
+  "engineering_families": 1,
+  "geometry_tasks": 1,
+  "native_cad_plot_reference_candidates": 1,
+  "native_cad_saved_result_candidates": 0,
+  "native_cad": "cad/chassis_2.0_final.SLDPRT",
+  "cad_sha256": "29e0118c5403a1bc533f36ee2da9ce549b418994e02c3cca324245d51c75be3b",
+  "independent_brep_import": false,
+  "source_report": "reports/ANSYS_Analysis_Report.pdf",
+  "modal_reference_Hz": [
+    0,
+    0,
+    0.003,
+    0.004,
+    17.332,
+    23.767,
+    24.903,
+    35.873,
+    39.547,
+    43.561,
+    51.6,
+    54.689,
+    57.331,
+    58.889,
+    62.684,
+    64.075,
+    65.552,
+    67.762,
+    75.103,
+    77.771
+  ],
+  "modal_provenance": "Report physical page5 Table2. Figure titles have mode-index inconsistencies; use frequency labels and validate pairing.",
+  "harmonic_references": [
+    {
+      "quantity": "maximum deformation",
+      "value": 0.00079579,
+      "unit": "m",
+      "frequency_Hz": 40,
+      "provenance": "Report physical page7 Table3 and original deformation image"
+    },
+    {
+      "quantity": "peak equivalent stress",
+      "value": 37248000.0,
+      "unit": "Pa",
+      "frequency_Hz": 50,
+      "provenance": "Report physical page7 Table3 and original stress image"
+    }
+  ],
+  "original_dimensioned_engineering_drawing_verified": false,
+  "limitations": [
+    "No original WBPZ/RST/full Mechanical setup found. Original FEM contours and source tables are references only.",
+    "Reported mesh 184374 nodes/93476 SOLID187 elements; material AISI4130 and 1000N harmonic excitation are reported assumptions, not independently replayed.",
+    "Mode5 table lists17.332Hz, source ANSYS screenshot title says TotalDeformation6 at17.332Hz. Mode index mapping requires review.",
+    "Modal deformation magnitudes are normalization-dependent and must not be treated as physical static displacement targets.",
+    "Fatigue claim of10^-32seconds is not accepted as physical life or crack-initiation ground truth. No raw life calculation or S-N validation found.",
+    "Native SolidWorks file remains opaque to this inspection; no independent geometry-validity claim."
+  ]
+}

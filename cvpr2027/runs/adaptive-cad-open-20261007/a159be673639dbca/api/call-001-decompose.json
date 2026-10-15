@@ -1,0 +1,34 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "Qwen/Qwen3.5-35B-A3B-FP8",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .polyline([[10.96, 10.96], [27.4, 10.96], [27.4, -10.96], [10.96, -10.96], [10.96, -27.4], [-10.96, -27.4], [-10.96, -10.96], [-27.4, -10.96], [-27.4, 10.96], [-10.96, 10.96], [-10.96, 27.4], [10.96, 27.4]])\\n    .close()\\n    .extrude(7.4)\\n)\\nshow_object(result)\", \"instruction\": \"Make the cross thicker to 9.62.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"5ba8ce32057924468f61427d230341ad5964cae0c0a5123f806fa3b9360dd19e\", \"instruction\": \"Make the ring thicker to 3.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .extrude(3.0)\\\"], \\\"start\\\": 9}]}\", \"strategies\": [], \"context\": [\"9:     .extrude(1.2)\"]}, {\"task_id\": \"913a319633d42a242dde880bd3fcf4a180c32f5dc81fe08d9c045027a1ecf639\", \"instruction\": \"Make the ring thicker to 2.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .extrude(2.0)\\\"], \\\"start\\\": 9}]}\", \"strategies\": [], \"context\": [\"9:     .extrude(1.2)\"]}, {\"task_id\": \"11565d8562f22516773b2b91d4d68dec3069e9288fffbabbf3a890997cf9727a\", \"instruction\": \"Make the star thicker to 12.74.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .extrude(12.74)\\\"], \\\"start\\\": 5}]}\", \"strategies\": [], \"context\": [\"5:     .extrude(9.8)\"]}]}"
+   }
+  ],
+  "temperature": 0.6,
+  "top_p": 0.95,
+  "top_k": 20,
+  "max_tokens": 8192
+ },
+ "usage": {
+  "prompt_tokens": 710,
+  "total_tokens": 1318,
+  "completion_tokens": 608,
+  "prompt_tokens_details": null,
+  "completion_tokens_details": {
+   "reasoning_tokens": 479
+  }
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "\n\n{\n  \"steps\": [\n    \"Locate the extrude operation in the code (line 9)\",\n    \"Change the extrude parameter value from 7.4 to 9.62\"\n  ],\n  \"invariants\": [\n    \"Polyline coordinate points must remain unchanged\",\n    \"The close() method must remain present\",\n    \"The workplane creation (XY plane) must remain unchanged\",\n    \"The show_object() call must remain unchanged\"\n  ],\n  \"dependencies\": [\n    [0, 1]\n  ]\n}"
+}

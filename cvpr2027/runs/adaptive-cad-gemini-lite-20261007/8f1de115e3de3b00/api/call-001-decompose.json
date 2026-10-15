@@ -1,0 +1,28 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .polyline([(100.0, 0.0), (100.0, 240.9), (58.7, 348.4902), (58.7, 465.8902), (100.0, 802.2517), (100.0, 970.3517), (123.2, 970.3517), (123.2, 802.2517), (81.9, 465.8902), (81.9, 348.4902), (123.2, 240.9), (123.2, 0.0)])\\n    .close()\\n    .revolve(360, (0, 0, 0), (0, 1, 0))\\n)\\nshow_object(result)\", \"instruction\": \"Rotate the entire part by 90\\u00b0 about the Z axis.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"0586c44a6198606a9bccabc549e241f538398deede5b3d3de6c7a670f0676c73\", \"instruction\": \"Rotate the entire part by 90\\u00b0 about the Z axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.rotate((0,0,0), (0,0,1), 90)\\\"], \\\"start\\\": 11}]}\", \"strategies\": [], \"context\": [\"11: show_object(result)\"]}, {\"task_id\": \"0e81de98e8071d0a6e24449872a89d3aaed2dff9d5989eeed34ea6adf536f5e1\", \"instruction\": \"Rotate the entire part by 90\\u00b0 about the Z axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.rotate((0,0,0), (0,0,1), 90)\\\"], \\\"start\\\": 26}]}\", \"strategies\": [], \"context\": [\"26: show_object(result)\"]}, {\"task_id\": \"045823ba37814163a7da3a249908f3f1a602ddd8805f2652c5201d3e84f5ecca\", \"instruction\": \"Rotate the entire part by 90\\u00b0 about the Y axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.rotate((0,0,0), (0,1,0), 90)\\\"], \\\"start\\\": 11}]}\", \"strategies\": [], \"context\": [\"11: show_object(result)\"]}]}"
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 4096
+ },
+ "usage": {
+  "completion_tokens": 79,
+  "prompt_tokens": 809,
+  "total_tokens": 888
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\n  \"steps\": [\n    \"Rotate the resulting solid part by 90 degrees around the Z axis.\"\n  ],\n  \"invariants\": [\n    \"The original revolved geometry and its dimensions remain unchanged.\",\n    \"The rotation is applied as a final transformation to the solid.\"\n  ],\n  \"dependencies\": []\n}\n```"
+}

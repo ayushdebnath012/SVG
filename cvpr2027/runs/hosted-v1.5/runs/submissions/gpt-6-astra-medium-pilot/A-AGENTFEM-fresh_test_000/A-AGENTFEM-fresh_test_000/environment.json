@@ -1,0 +1,60 @@
+{
+  "command": "python main.py",
+  "versions": {
+    "python": "3.12.14",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "gmsh": "4.15.2",
+    "meshio": "5.3.5",
+    "scikit-fem": "12.0.2"
+  },
+  "units": {
+    "length": "mm",
+    "force": "N",
+    "stress": "MPa",
+    "displacement": "mm"
+  },
+  "model": {
+    "E_MPa": 70000.0,
+    "Poisson_ratio": 0.33,
+    "density_kg_m3": 2700,
+    "gravity": false,
+    "traction_MPa": [
+      0,
+      0,
+      -1.98728
+    ],
+    "support": "All components fixed on every face in z=0",
+    "geometry": "Original single solid, unchanged coordinates and mm units",
+    "elements": "Isoparametric curved 10-node tetrahedra, quadratic displacement; volume integration order 4, seat integration order 5",
+    "solver": "scipy sparse direct SuperLU"
+  },
+  "physical_groups": {
+    "1": "2D fixed foot undersides",
+    "2": "2D loaded top seat z=189",
+    "3": "2D remaining free surfaces",
+    "4": "3D elastic solid"
+  },
+  "extraction": {
+    "seat_mean_displacement_mm": "Integral of -uz over the actual loaded face divided by its integrated area. Traction specified as 1.98728 MPa, rounded source total = 9999.99296 N.",
+    "max_displacement_mm": "Maximum Euclidean displacement at all P2 nodes (vertices and edge nodes); volume quadrature maximum also checked."
+  },
+  "fields_schema": {
+    "node_ids": "Gmsh node tags, matched to FE quadratic DOF coordinate order",
+    "coordinates_mm": "(nnode,3) original coordinates in node_ids order",
+    "displacement_mm": "(nnode,3) ux uy uz",
+    "displacement_magnitude_mm": "(nnode,) norm of displacement",
+    "fixed_mask": "(nnode,) Boolean, clamped nodes",
+    "seat_mask": "(nnode,) Boolean, loaded seat nodes",
+    "reaction_forces_N": "(nnode,3) K u - f; nonzero only on supports up to numerical residual",
+    "applied_forces_N": "(nnode,3) consistent load vector",
+    "gmsh_tetrahedron_ids": "Gmsh volume element tags",
+    "gmsh_tetrahedron_node_ids": "(nelem,10), original Gmsh connectivity using node tags",
+    "skfem_element_vertex_node_ids": "(nelem,4) Gmsh tags of corners in FE order; maps quadrature arrays to mesh by vertex set",
+    "quadrature_coordinates_mm": "(nelem,nquad,3)",
+    "quadrature_stress_MPa": "(nelem,nquad,6) components xx yy zz xy yz xz (tensor shear), not nodally averaged",
+    "quadrature_weights_mm3": "(nelem,nquad) integration weights including Jacobian",
+    "time": "[0] static load case",
+    "coordinate_units,displacement_units,stress_units": "Unicode scalar arrays, no pickle"
+  }
+}

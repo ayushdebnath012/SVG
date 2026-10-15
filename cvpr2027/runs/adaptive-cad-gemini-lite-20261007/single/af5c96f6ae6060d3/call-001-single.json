@@ -1,0 +1,28 @@
+{
+ "kind": "single",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "You edit mechanical CAD. Return only JSON {\"edits\":[{\"start\":0,\"delete\":0,\"insert\":[\"replacement line\"]}]}. Indices are zero-based lines of the ORIGINAL input; operations must be ordered, nonoverlapping and in bounds. Preserve unrelated features. The supplied representation determines syntax. Return no explanation or invented physics results. Geometry execution and FEM checks are performed by external tools; never claim verification."
+   },
+   {
+    "role": "user",
+    "content": "Representation: cadquery\nOriginal CAD (line indices are implicit):\nimport cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(11.4, 32.8)\n    .faces(\">Z\").workplane()\n    .circle(21.3)\n    .extrude(48.8)\n    .faces(\">Z\").workplane()\n    .circle(9.4)\n    .extrude(29.4)\n    .faces(\">Z\").workplane()\n    .circle(7.1)\n    .extrude(6.9)\n    .faces(\">Z\")\n    .chamfer(1.5)\n    .faces(\"<Z\")\n    .faces(\"<Z\").workplane()\n    .hole(4.9)\n)\nshow_object(result)Edit instruction:\nAdd 2 round cross-holes of 8 mm diameter through the middle thicker step of the shaft, both perpendicular to the central axis, at 25 mm and 45 mm from the bottom face of the shaft."
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 8192
+ },
+ "usage": {
+  "completion_tokens": 195,
+  "prompt_tokens": 324,
+  "total_tokens": 519
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\n  \"edits\": [\n    {\n      \"start\": 16,\n      \"delete\": 2,\n      \"insert\": [\n        \"    .faces(\\\"<Z\\\")\",\n        \"    .faces(\\\"<Z\\\").workplane()\",\n        \"    .hole(4.9)\",\n        \"    .faces(\\\"XY\\\")\",\n        \"    .workplane(offset=25)\",\n        \"    .circle(4)\",\n        \"    .extrude(32.8, combine=\\\"cut\\\", both=True)\",\n        \"    .faces(\\\"XY\\\")\",\n        \"    .workplane(offset=45)\",\n        \"    .circle(4)\",\n        \"    .extrude(32.8, combine=\\\"cut\\\", both=True)\"\n      ]\n    }\n  ]\n}\n```"
+}

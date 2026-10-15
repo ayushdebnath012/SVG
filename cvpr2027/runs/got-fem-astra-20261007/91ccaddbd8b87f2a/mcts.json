@@ -1,0 +1,213 @@
+{
+ "id": "91ccaddbd8b87f2a277747864c95f6bb680ff16b289f9fbc3fb493545b4d780c",
+ "source_fem": {
+  "ok": true,
+  "compliance": 1.9100488003002274e-06,
+  "components": 1,
+  "nodes": 14412
+ },
+ "nodes": [
+  {
+   "name": "vanilla",
+   "parent": null,
+   "visits": 2,
+   "value_sum": 2.0,
+   "eval": {
+    "gates": true,
+    "fem": {
+     "ok": true,
+     "compliance": 8.136842397608927e-07,
+     "components": 1,
+     "nodes": 25727
+    },
+    "numbers_ok": null,
+    "changed": true,
+    "error": null,
+    "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(28.0, 28.0, 65.0)\n    .faces(\">Z\").workplane()\n    .center(1.5, 1.5)\n    .polygon(6, 25.0)\n    .cutThruAll()\n    .edges(\"|Z\")\n    .fillet(0.6)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-9.5, -12.5), (0.0, -12.5), (9.5, -12.5)])\n    .hole(2.0)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-12.5, -9.5), (-12.5, 9.5)])\n    .hole(2.0)\n)\nshow_object(result)\n"
+   }
+  },
+  {
+   "name": "alt1",
+   "parent": null,
+   "visits": 2,
+   "value_sum": 2.0,
+   "eval": {
+    "gates": true,
+    "fem": {
+     "ok": true,
+     "compliance": 5.202707267586474e-06,
+     "components": 3,
+     "nodes": 13656
+    },
+    "numbers_ok": null,
+    "changed": true,
+    "error": null,
+    "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(28.0, 28.0, 65.0)\n    .faces(\">Z\").workplane()\n    .center(1.5, 1.5)\n    .polygon(6, 25.0 * 2.0**0.5)\n    .cutThruAll()\n    .edges(\"|Z\")\n    .fillet(0.6)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-9.5, -12.5), (0.0, -12.5), (9.5, -12.5)])\n    .hole(2.0)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-12.5, -9.5), (-12.5, 9.5)])\n    .hole(2.0)\n)\nshow_object(result)\n"
+   }
+  },
+  {
+   "name": "alt2",
+   "parent": null,
+   "visits": 1,
+   "value_sum": 1.0,
+   "eval": {
+    "gates": true,
+    "fem": {
+     "ok": true,
+     "compliance": 5.227383826220655e-06,
+     "components": 3,
+     "nodes": 13641
+    },
+    "numbers_ok": null,
+    "changed": true,
+    "error": null,
+    "code": "import cadquery as cq\nimport math\nresult = (\n    cq.Workplane(\"XY\")\n    .box(28.0, 28.0, 65.0)\n    .faces(\">Z\").workplane()\n    .center(1.5, 1.5)\n    .polyline([\n        (12.5 * 2.0**0.5 * math.cos(math.radians(30.0 + 60.0 * i)),\n         12.5 * 2.0**0.5 * math.sin(math.radians(30.0 + 60.0 * i)))\n        for i in range(6)\n    ])\n    .close()\n    .cutThruAll()\n    .edges(\"|Z\")\n    .fillet(0.6)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-9.5, -12.5), (0.0, -12.5), (9.5, -12.5)])\n    .hole(2.0)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-12.5, -9.5), (-12.5, 9.5)])\n    .hole(2.0)\n)\nshow_object(result)\n"
+   }
+  },
+  {
+   "name": "alt3",
+   "parent": null,
+   "visits": 1,
+   "value_sum": 1.0,
+   "eval": {
+    "gates": true,
+    "fem": {
+     "ok": true,
+     "compliance": 4.145176549982648e-06,
+     "components": 3,
+     "nodes": 11726
+    },
+    "numbers_ok": null,
+    "changed": true,
+    "error": null,
+    "code": "import cadquery as cq\nimport math\nresult = (\n    cq.Workplane(\"XY\")\n    .box(28.0, 28.0, 65.0)\n    .faces(\">Z\").workplane()\n    .center(1.5, 1.5)\n    .polyline([\n        (12.5 * 2.0**0.5 * math.cos(math.radians(45.0 + 60.0 * i)),\n         12.5 * 2.0**0.5 * math.sin(math.radians(45.0 + 60.0 * i)))\n        for i in range(6)\n    ])\n    .close()\n    .cutThruAll()\n    .edges(\"|Z\")\n    .fillet(0.6)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-9.5, -12.5), (0.0, -12.5), (9.5, -12.5)])\n    .hole(2.0)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-12.5, -9.5), (-12.5, 9.5)])\n    .hole(2.0)\n)\nshow_object(result)\n"
+   }
+  },
+  {
+   "name": "mcts1-diversify",
+   "parent": 0,
+   "visits": 1,
+   "value_sum": 1.0,
+   "eval": {
+    "gates": true,
+    "fem": {
+     "ok": true,
+     "compliance": 4.286811576410841e-06,
+     "components": 4,
+     "nodes": 11711
+    },
+    "numbers_ok": null,
+    "changed": true,
+    "error": null,
+    "code": "import cadquery as cq\nimport math\nresult = (\n    cq.Workplane(\"XY\")\n    .box(28.0, 28.0, 65.0)\n    .faces(\">Z\").workplane()\n    .center(1.5, 1.5)\n    .polyline([\n        (12.5 * 2.0**0.5 * math.cos(math.radians(15.0 + 60.0 * i)),\n         12.5 * 2.0**0.5 * math.sin(math.radians(15.0 + 60.0 * i)))\n        for i in range(6)\n    ])\n    .close()\n    .cutThruAll()\n    .edges(\"|Z\")\n    .fillet(0.6)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-9.5, -12.5), (0.0, -12.5), (9.5, -12.5)])\n    .hole(2.0)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-12.5, -9.5), (-12.5, 9.5)])\n    .hole(2.0)\n)\nshow_object(result)\n",
+    "value": 1.0
+   }
+  },
+  {
+   "name": "mcts2-diversify",
+   "parent": 1,
+   "visits": 1,
+   "value_sum": 1.0,
+   "eval": {
+    "gates": true,
+    "fem": {
+     "ok": true,
+     "compliance": 4.630705492816728e-06,
+     "components": 4,
+     "nodes": 11414
+    },
+    "numbers_ok": null,
+    "changed": true,
+    "error": null,
+    "code": "import cadquery as cq\nimport math\nresult = (\n    cq.Workplane(\"XY\")\n    .box(28.0, 28.0, 65.0)\n    .faces(\">Z\").workplane()\n    .center(1.5, 1.5)\n    .polyline([\n        (12.5 * math.sqrt(2.0) * math.cos(math.radians(22.5 + 60.0 * i)),\n         12.5 * math.sqrt(2.0) * math.sin(math.radians(22.5 + 60.0 * i)))\n        for i in range(6)\n    ])\n    .close()\n    .cutThruAll()\n    .edges(\"|Z\")\n    .fillet(0.6)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-9.5, -12.5), (0.0, -12.5), (9.5, -12.5)])\n    .hole(2.0)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-12.5, -9.5), (-12.5, 9.5)])\n    .hole(2.0)\n)\nshow_object(result)\n",
+    "value": 1.0
+   }
+  }
+ ],
+ "candidates": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(28.0, 28.0, 65.0)\n    .faces(\">Z\").workplane()\n    .center(1.5, 1.5)\n    .polygon(6, 25.0)\n    .cutThruAll()\n    .edges(\"|Z\")\n    .fillet(0.6)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-9.5, -12.5), (0.0, -12.5), (9.5, -12.5)])\n    .hole(2.0)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-12.5, -9.5), (-12.5, 9.5)])\n    .hole(2.0)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 8.136842397608927e-07,
+    "components": 1,
+    "nodes": 25727
+   },
+   "consensus": 1,
+   "numbers_ok": null,
+   "changed": true
+  },
+  {
+   "name": "alt1",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(28.0, 28.0, 65.0)\n    .faces(\">Z\").workplane()\n    .center(1.5, 1.5)\n    .polygon(6, 25.0 * 2.0**0.5)\n    .cutThruAll()\n    .edges(\"|Z\")\n    .fillet(0.6)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-9.5, -12.5), (0.0, -12.5), (9.5, -12.5)])\n    .hole(2.0)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-12.5, -9.5), (-12.5, 9.5)])\n    .hole(2.0)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 5.202707267586474e-06,
+    "components": 3,
+    "nodes": 13656
+   },
+   "consensus": 1,
+   "numbers_ok": null,
+   "changed": true
+  },
+  {
+   "name": "alt2",
+   "code": "import cadquery as cq\nimport math\nresult = (\n    cq.Workplane(\"XY\")\n    .box(28.0, 28.0, 65.0)\n    .faces(\">Z\").workplane()\n    .center(1.5, 1.5)\n    .polyline([\n        (12.5 * 2.0**0.5 * math.cos(math.radians(30.0 + 60.0 * i)),\n         12.5 * 2.0**0.5 * math.sin(math.radians(30.0 + 60.0 * i)))\n        for i in range(6)\n    ])\n    .close()\n    .cutThruAll()\n    .edges(\"|Z\")\n    .fillet(0.6)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-9.5, -12.5), (0.0, -12.5), (9.5, -12.5)])\n    .hole(2.0)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-12.5, -9.5), (-12.5, 9.5)])\n    .hole(2.0)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 5.227383826220655e-06,
+    "components": 3,
+    "nodes": 13641
+   },
+   "consensus": 1,
+   "numbers_ok": null,
+   "changed": true
+  },
+  {
+   "name": "alt3",
+   "code": "import cadquery as cq\nimport math\nresult = (\n    cq.Workplane(\"XY\")\n    .box(28.0, 28.0, 65.0)\n    .faces(\">Z\").workplane()\n    .center(1.5, 1.5)\n    .polyline([\n        (12.5 * 2.0**0.5 * math.cos(math.radians(45.0 + 60.0 * i)),\n         12.5 * 2.0**0.5 * math.sin(math.radians(45.0 + 60.0 * i)))\n        for i in range(6)\n    ])\n    .close()\n    .cutThruAll()\n    .edges(\"|Z\")\n    .fillet(0.6)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-9.5, -12.5), (0.0, -12.5), (9.5, -12.5)])\n    .hole(2.0)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-12.5, -9.5), (-12.5, 9.5)])\n    .hole(2.0)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 4.145176549982648e-06,
+    "components": 3,
+    "nodes": 11726
+   },
+   "consensus": 1,
+   "numbers_ok": null,
+   "changed": true
+  },
+  {
+   "name": "mcts1-diversify",
+   "code": "import cadquery as cq\nimport math\nresult = (\n    cq.Workplane(\"XY\")\n    .box(28.0, 28.0, 65.0)\n    .faces(\">Z\").workplane()\n    .center(1.5, 1.5)\n    .polyline([\n        (12.5 * 2.0**0.5 * math.cos(math.radians(15.0 + 60.0 * i)),\n         12.5 * 2.0**0.5 * math.sin(math.radians(15.0 + 60.0 * i)))\n        for i in range(6)\n    ])\n    .close()\n    .cutThruAll()\n    .edges(\"|Z\")\n    .fillet(0.6)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-9.5, -12.5), (0.0, -12.5), (9.5, -12.5)])\n    .hole(2.0)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-12.5, -9.5), (-12.5, 9.5)])\n    .hole(2.0)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 4.286811576410841e-06,
+    "components": 4,
+    "nodes": 11711
+   },
+   "consensus": 1,
+   "numbers_ok": null,
+   "changed": true
+  },
+  {
+   "name": "mcts2-diversify",
+   "code": "import cadquery as cq\nimport math\nresult = (\n    cq.Workplane(\"XY\")\n    .box(28.0, 28.0, 65.0)\n    .faces(\">Z\").workplane()\n    .center(1.5, 1.5)\n    .polyline([\n        (12.5 * math.sqrt(2.0) * math.cos(math.radians(22.5 + 60.0 * i)),\n         12.5 * math.sqrt(2.0) * math.sin(math.radians(22.5 + 60.0 * i)))\n        for i in range(6)\n    ])\n    .close()\n    .cutThruAll()\n    .edges(\"|Z\")\n    .fillet(0.6)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-9.5, -12.5), (0.0, -12.5), (9.5, -12.5)])\n    .hole(2.0)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-12.5, -9.5), (-12.5, 9.5)])\n    .hole(2.0)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 4.630705492816728e-06,
+    "components": 4,
+    "nodes": 11414
+   },
+   "consensus": 1,
+   "numbers_ok": null,
+   "changed": true
+  }
+ ]
+}

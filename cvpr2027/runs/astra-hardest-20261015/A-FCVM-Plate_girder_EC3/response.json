@@ -1,0 +1,36 @@
+{
+  "id": "chatcmpl-EZJGZyhswWTrS8oFTJToHvVwXsVqN",
+  "object": "chat.completion",
+  "created": 1792084247,
+  "model": "gpt-6-astra",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"edits\":[{\"old\":\"def run_ccx(directory, name, buckle, timeout):\\n    deck = \\\"*INCLUDE,INPUT=model.inc\\\\n*STEP\\\\n\\\"\",\"new\":\"def run_ccx(directory, name, buckle, timeout, load_scale=1.):\\n    # Keep load.inc and the independent static solution at reference load.\\n    load_file = \\\"load.inc\\\"\\n    if buckle:\\n        load_file = name + \\\"_load.inc\\\"\\n        lines = (directory / \\\"load.inc\\\").read_text().splitlines()\\n        scaled = []\\n        for line in lines:\\n            if line.strip() and not line.lstrip().startswith(\\\"*\\\"):\\n                node, dof, value = line.split(\\\",\\\")\\n                line = \\\"%s,%s,%.16g\\\" % (node, dof, float(value) * load_scale)\\n            scaled.append(line)\\n        (directory / load_file).write_text(\\\"\\\\n\\\".join(scaled) + \\\"\\\\n\\\")\\n        log(\\\"Buckling conditioning load scale: %.12g; reference factors = scale * solver factors\\\" % load_scale)\\n    deck = \\\"*INCLUDE,INPUT=model.inc\\\\n*STEP\\\\n\\\"\"},{\"old\":\"    deck += \\\"*INCLUDE,INPUT=load.inc\\\\n*NODE FILE\\\\nU\\\\n\\\"\",\"new\":\"    deck += \\\"*INCLUDE,INPUT=%s\\\\n*NODE FILE\\\\nU\\\\n\\\" % load_file\"},{\"old\":\"        proc = subprocess.Popen([\\\"ccx\\\", \\\"-i\\\", name], cwd=directory,\\n                                stdout=out, stderr=subprocess.STDOUT,\\n                                start_new_session=True)\",\"new\":\"        solver_env = os.environ.copy()\\n        solver_env.update({\\\"OMP_NUM_THREADS\\\": \\\"1\\\",\\n                           \\\"OPENBLAS_NUM_THREADS\\\": \\\"1\\\",\\n                           \\\"MKL_NUM_THREADS\\\": \\\"1\\\",\\n                           \\\"CCX_NPROC_EQUATION_SOLVER\\\": \\\"1\\\",\\n                           \\\"CCX_NPROC_STIFFNESS\\\": \\\"2\\\",\\n                           \\\"CCX_NPROC_RESULTS\\\": \\\"2\\\"})\\n        proc = subprocess.Popen([\\\"ccx\\\", \\\"-i\\\", name], cwd=directory,\\n                                stdout=out, stderr=subprocess.STDOUT,\\n                                env=solver_env, start_new_session=True)\"},{\"old\":\"        \\\"threads\\\": 2, \\\"units\\\": \\\"mm, N, MPa\\\",\",\"new\":\"        \\\"threads\\\": 2, \\\"equation_solver_threads\\\": 1,\\n        \\\"buckling_conditioning\\\": \\\"Proportional load reduction to avoid CalculiX issue #74; lambda_reference = load_scale * lambda_solver. Static fields use unscaled loads.\\\",\\n        \\\"units\\\": \\\"mm, N, MPa\\\",\"},{\"old\":\"            rec[\\\"buckling_seconds\\\"] = run_ccx(directory, \\\"buckle\\\", True, allowance)\\n            vals = eigenvalues(directory / \\\"buckle.dat\\\")\\n            pos = np.flatnonzero(np.isfinite(vals) & (vals > 0.))\",\"new\":\"            rec[\\\"buckling_seconds\\\"] = 0.\\n            rec[\\\"conditioning_attempts\\\"] = []\\n            # Issue #74 can skip factors below about one. Move the spectrum\\n            # well above that range without altering the physical load ratios.\\n            for load_scale in (1.e-3, 1.e-4, 1.e-5):\\n                allowance = min(260., remaining() - 95.)\\n                if allowance <= 10.:\\n                    raise RuntimeError(\\\"Insufficient time for conditioned buckling solve\\\")\\n                rec[\\\"buckling_seconds\\\"] += run_ccx(\\n                    directory, \\\"buckle\\\", True, allowance, load_scale)\\n                raw_vals = eigenvalues(directory / \\\"buckle.dat\\\")\\n                raw_pos = raw_vals[np.isfinite(raw_vals) & (raw_vals > 0.)]\\n                rec[\\\"conditioning_attempts\\\"].append({\\n                    \\\"load_scale\\\": load_scale,\\n                    \\\"solver_eigenvalues\\\": raw_vals.tolist()})\\n                if not len(raw_pos):\\n                    raise RuntimeError(\\\"No positive conditioned eigenvalue\\\")\\n                if float(raw_pos.min()) > 10.:\\n                    break\\n            else:\\n                raise RuntimeError(\\\"Buckling spectrum remains too close to the CalculiX exclusion range\\\")\\n            rec[\\\"buckling_load_scale\\\"] = load_scale\\n            rec[\\\"solver_eigenvalues\\\"] = raw_vals.tolist()\\n            vals = load_scale * raw_vals\\n            pos = np.flatnonzero(np.isfinite(vals) & (vals > 0.))\"},{\"old\":\"            \\\"The reported factor is the smallest positive computed factor on the selected mesh. \\\"\",\"new\":\"            \\\"The reported factor is the smallest positive computed factor on the selected mesh, rescaled from proportionally reduced conditioning loads to the original reference load convention. CalculiX uses one equation-solver thread to mitigate solver sensitivity; raw factors and conditioning scales are recorded per mesh. Independent static fields retain the original loads. \\\"\"}],\"reason\":\"Mitigate CalculiX issue #74 with reduced proportional buckling loads and a single equation-solver thread, rescale eigenvalues correctly, retain original-load static fields, and preserve measured refinement history.\"}",
+        "refusal": null,
+        "annotations": []
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 12577,
+    "completion_tokens": 1454,
+    "total_tokens": 14031,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 12574,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 313,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": null
+}

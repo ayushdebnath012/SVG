@@ -1,0 +1,71 @@
+{
+ "id": "677b012f1bb9ddf729a01cc181aaa070849f2e39060421f5f79d8ed527d8eb1a",
+ "source_fem": {
+  "ok": true,
+  "compliance": 7.134847672911635e-07,
+  "components": 1,
+  "nodes": 1116
+ },
+ "candidates": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n)\nresult = result.cut(cq.Workplane(\"XY\").sphere(5.5).translate((0, 0, 15.0)))\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 8.178389673742774e-07,
+    "components": 1,
+    "nodes": 1103
+   },
+   "consensus": 2,
+   "numbers_ok": true,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt1",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n)\nresult = result.cut(cq.Workplane(\"XY\").sphere(5.5).translate((0, 0, 15.0)))\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 8.194059730042113e-07,
+    "components": 1,
+    "nodes": 1108
+   },
+   "consensus": 2,
+   "numbers_ok": true,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt2",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n)\nresult = result.cut(cq.Workplane(\"XY\").sphere(5.5).translate((0, 0, 17.75)))\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 7.143000092310427e-07,
+    "components": 1,
+    "nodes": 1113
+   },
+   "consensus": 1,
+   "numbers_ok": true,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt3",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n)\nresult = result.cut(cq.Workplane(\"XY\").sphere(5.5).translate((0, 0, 19.0)))\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 7.135124177559226e-07,
+    "components": 1,
+    "nodes": 1116
+   },
+   "consensus": 1,
+   "numbers_ok": true,
+   "changed": false,
+   "error": null
+  }
+ ]
+}

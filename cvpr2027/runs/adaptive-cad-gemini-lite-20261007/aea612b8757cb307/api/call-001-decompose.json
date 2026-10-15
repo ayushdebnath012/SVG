@@ -1,0 +1,28 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .cylinder(27.9, 18.8)\\n    .faces(\\\">Z\\\").workplane()\\n    .circle(16.92)\\n    .workplane(offset=9.0)\\n    .circle(1.5)\\n    .loft(combine=True)\\n    .union(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(0, 0, 10.375), rotate=cq.Vector(0, 0, 0.0))\\n            .transformed(offset=cq.Vector(5.64, 0, 0), rotate=cq.Vector(37.1, 0, 0))\\n            .polyline([[0.0, -12.5], [0.0, 12.5], [46.512, 8.938], [64.6, 0.0], [46.512, -8.938]])\\n            .close()\\n            .extrude(7.15)\\n    )\\n    .union(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(0, 0, 10.375), rotate=cq.Vector(0, 0, 180.0))\\n            .transformed(offset=cq.Vector(5.64, 0, 0), rotate=cq.Vector(37.1, 0, 0))\\n            .polyline([[0.0, -12.5], [0.0, 12.5], [46.512, 8.938], [64.6, 0.0], [46.512, -8.938]])\\n            .close()\\n            .extrude(7.15)\\n    )\\n)\\nshow_object(result)\", \"instruction\": \"Set the hub radius equal to half the blade length; the blades, spinner, and hub height stay the same.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"8bb96e6849c0ec861f3423cfb72e8d4fd307c5ad849d27ac1cd7867a220cff8a\", \"instruction\": \"Set the stem radius equal to half the ball radius; the ball, stem height, and axial through-bore stay the same.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"            .cylinder(50.0, 6.25)\\\"], \\\"start\\\": 7}]}\", \"strategies\": [], \"context\": [\"7:             .cylinder(50.0, 4.5)\"]}, {\"task_id\": \"84e3fc394ba2fcfab2d8702d7ccecd3605b03da536fd67c67da6f80f3af590b9\", \"instruction\": \"Set the rib spacing equal to half the base length; the rib count, height, thickness, and base footprint stay the same.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .rarray(46.4, 1, 2, 1)\\\"], \\\"start\\\": 5}]}\", \"strategies\": [], \"context\": [\"5:     .rarray(84.72, 1, 2, 1)\"]}, {\"task_id\": \"266be1f42794bfd7997f7e123d9a826c5cadb3df0c637b920e884c50189fd541\", \"instruction\": \"Set the cylinder length equal to twelve times the cylinder radius; the radius and chamfer stay the same.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .cylinder(60.0, 5.0)\\\"], \\\"start\\\": 3}]}\", \"strategies\": [], \"context\": [\"3:     .cylinder(40.0, 5.0)\"]}]}"
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 4096
+ },
+ "usage": {
+  "completion_tokens": 103,
+  "prompt_tokens": 1044,
+  "total_tokens": 1147
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\n  \"steps\": [\n    \"Modify the base cylinder radius to be half of the blade length parameter/value derived from the polyline dimensions (specifically, half of the blade's span or characteristic length).\"\n  ],\n  \"invariants\": [\n    \"The height of the hub (spinner/cylinder height) remains unchanged.\",\n    \"The blade shape, profile, and extrusion height remain unchanged.\"\n  ],\n  \"dependencies\": []\n}\n```"
+}

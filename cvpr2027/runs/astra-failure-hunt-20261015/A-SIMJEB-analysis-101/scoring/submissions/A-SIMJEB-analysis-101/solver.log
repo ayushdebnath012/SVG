@@ -1,0 +1,195 @@
+INPUT SPECIFICATION /Users/ayushdebnath/SVG/cvpr2027/runs/astra-failure-hunt-20261015/A-SIMJEB-analysis-101/replay/inputs/task.json
+{
+  "task_id": "A-SIMJEB-analysis-101",
+  "track": "A",
+  "tier": "source_backed_pilot",
+  "family": "simjeb-analysis",
+  "title": "GE bracket design 101: four-case static analysis",
+  "physics": [
+    "linear static",
+    "multi-load-case"
+  ],
+  "prompt": "Design task: the GE jet engine bracket. Units: millimetres, newtons, MPa. Material: Ti-6Al-4V (E = 113.8 GPa, nu = 0.342, density 4.43 g/cm^3, yield strength 903 MPa). The bracket is bolted to a flat mounting surface, the plane z = 0, with nothing below it, and carries a clevis for a pin.\nInterfaces: (a) four vertical (+z) bolt holes of diameter 10.3124 mm (0.406 in) at (x, y) = (0.0000, 0.0000); (52.0472, 1.5805); (0.0000, -148.1248); (38.0833, -146.9684); each hole wall must start within 1.0 mm of z = 0 and be at least 5.5 mm long; the bolts are rigid and fully fixed. (b) a clevis of two lugs, each with a bore of diameter 19.1008 mm on the pin axis through (-20.9236, -74.6978, 44.7246) with direction (-0.030352, 0.999539, 0); measured along the axis from that point, the lug bores span 11.112 to 17.463 mm and -17.463 to -11.113 mm; the gap between the lugs must stay empty.\nDesign envelope: x -41 to 72, y -168 to 22, z 0 to 65 mm. Minimum wall / feature thickness 1.27 mm (at most 2 % of the surface may be thinner). One solid.\nLoads, four separate linear static cases, each acting at the point (-21.0359, -75.0647, 44.8010) and spread over the two lug bores (RBE3): (1) vertical: 35,585.77 N along +z; (2) horizontal: 37,809.90 N along -x; (3) diagonal, 42 degrees from vertical: (-28,276.20, 0, 31,403.90) N; (4) torsion: 564,924.20 N mm about +z.\nThe attached STEP is a published competition design. Compute the maximum displacement magnitude for each of the four load cases. Targets are the original published OptiStruct displacement maxima; no locally computed stress target or pass verdict is scored.\n\n\nOutputs:\n- vertical_max_displacement_mm [mm]: maximum displacement magnitude, vertical case\n- horizontal_max_displacement_mm [mm]: maximum displacement magnitude, horizontal case\n- diagonal_max_displacement_mm [mm]: maximum displacement magnitude, diagonal case\n- torsion_max_displacement_mm [mm]: maximum displacement magnitude, torsion case\n\nSubmit results.json containing exactly an outputs object with these numeric keys. Also submit main.py, part.step, mesh.msh, fields.npz, solver.log, refinement.json and environment.json. See candidate README for the artifact contract. Correct numerical answers alone do not establish workflow completion.",
+  "inputs": [
+    {
+      "path": "tasks/A-SIMJEB-analysis-101/bracket.step",
+      "role": "cad",
+      "bytes": 1072017,
+      "sha256": "932392d73590e41fdd532eb451fd4d9b3089197339dfad45c780bc247097db73"
+    }
+  ],
+  "outputs": [
+    {
+      "key": "vertical_max_displacement_mm",
+      "unit": "mm",
+      "definition": "maximum displacement magnitude, vertical case"
+    },
+    {
+      "key": "horizontal_max_displacement_mm",
+      "unit": "mm",
+      "definition": "maximum displacement magnitude, horizontal case"
+    },
+    {
+      "key": "diagonal_max_displacement_mm",
+      "unit": "mm",
+      "definition": "maximum displacement magnitude, diagonal case"
+    },
+    {
+      "key": "torsion_max_displacement_mm",
+      "unit": "mm",
+      "definition": "maximum displacement magnitude, torsion case"
+    }
+  ],
+  "complexity": {
+    "solids": 1,
+    "assembly": false,
+    "mass_kg": 0.644
+  },
+  "source": {
+    "name": "SimJEB: simulated jet engine bracket dataset (Whalen, Beyene, Mueller, CGF 2021) / GE bracket challenge",
+    "url": "https://doi.org/10.7910/DVN/XFUWJG",
+    "license": "Dataverse CC0 / README ODC-By; GE bracket CAD from GrabCAD (non-commercial). Local research use.",
+    "redistributable": false
+  },
+  "status": "active",
+  "engineering_family": "simjeb-bracket",
+  "readiness": {
+    "independently_reproduced": false,
+    "workflow_scoring": "trusted_review_required",
+    "tolerances": "provisional_source_protocol"
+  },
+  "required_artifacts": [
+    "results.json",
+    "main.py",
+    "part.step",
+    "mesh.msh",
+    "fields.npz",
+    "solver.log",
+    "refinement.json",
+    "environment.json"
+  ]
+}
+
+Imported volumes: [(3, 1)]
+Solid volume mm^3: 145383.18939578874
+Level 0: size=3.2, nodes=178615, tet10=102818, fixed nodes=1527, loaded nodes=576, bore triangles=248
+Applied generalized forces:
+[[-8.21565038e-15  3.33066907e-16  3.55857700e+04 -2.24336194e-10
+  -6.52909137e-12  1.13549652e-13]
+ [-3.78099000e+04  4.82947016e-14 -3.54993812e-14  2.08580860e-13
+  -1.84774101e-12  6.66777872e-11]
+ [-2.82762000e+04  3.54716256e-14  3.14039000e+04 -3.61397207e-14
+  -9.56958600e-12  8.26775088e-11]
+ [-1.02318154e-12 -1.37490019e-12 -1.26526394e-16  2.56880194e-12
+   1.97950925e-11  5.64924200e+05]]
+OMP: Warning #179: Function Can't set size of /tmp file failed:
+OMP: Warning #179: Function Can't set size of /tmp file failed:
+
+************************************************************
+
+CalculiX Version 2.23, Copyright(C) 1998-2025 Guido Dhondt
+CalculiX comes with ABSOLUTELY NO WARRANTY. This is free
+software, and you are welcome to redistribute it under
+certain conditions, see gpl.htm
+
+************************************************************
+
+You are using an executable made on Mon Sep 28 09:19:28 2026
+ Decascading the MPC's
+
+ Determining the structure of the matrix:
+ Using up to 2 cpu(s) for setting up the structure of the matrix.
+ number of equations
+ 531264
+ number of nonzero lower triangular matrix elements
+ 19426287
+
+ Using up to 2 cpu(s) for the stress calculation.
+
+ Using up to 2 cpu(s) for the symmetric stiffness/mass contributions.
+
+
+  The numbers below are estimated upper bounds
+
+  number of:
+
+   nodes:       178615
+   elements:       102818
+   one-dimensional elements:            0
+   two-dimensional elements:            0
+   integration points per element:            4
+   degrees of freedom per node:            3
+   layers per element:            1
+
+   distributed facial loads:            0
+   distributed volumetric loads:            0
+   concentrated loads:         6912
+   single point constraints:         4581
+   multiple point constraints:            1
+   terms in all multiple point constraints:            1
+   tie constraints:            0
+   dependent nodes tied by cyclic constraints:            0
+   dependent nodes in pre-tension constraints:            0
+
+   sets:            3
+   terms in all sets:       461575
+
+   materials:            1
+   constants per material and temperature:            2
+   temperature points per material:            1
+   plastic data points per material:            0
+
+   orientations:            0
+   amplitudes:            5
+   data points in all amplitudes:            5
+   print requests:            4
+   transformations:            0
+   property cards:            0
+
+
+ STEP            1
+
+ *WARNING reading *STATIC:
+          the minimum increment    0.0000000000000000     
+          is smaller then 1.e-6 times the 
+          step time;
+          the minimum increment is changed
+          to    9.9999999999999995E-007
+          which is the minimum of the initial
+          increment time and 1.e-6 times the step time
+
+ Static analysis was selected
+
+ *ERROR in e_c3d: nonpositive jacobian
+        determinant in element       96510
+
+ *ERROR in e_c3d: nonpositive jacobian
+        determinant in element       96510
+
+ *ERROR in e_c3d: nonpositive jacobian
+        determinant in element       96510
+
+ *ERROR in e_c3d: nonpositive jacobian
+        determinant in element       96510
+
+ *ERROR in e_c3d: nonpositive jacobian
+        determinant in element       96511
+
+ *ERROR in e_c3d: nonpositive jacobian
+        determinant in element       96511
+
+ *ERROR in e_c3d: nonpositive jacobian
+        determinant in element       96511
+
+ *ERROR in e_c3d: nonpositive jacobian
+        determinant in element       96511
+
+
+Level 0 failed: CalculiX exit 201
+Traceback (most recent call last):
+  File "/Users/ayushdebnath/SVG/cvpr2027/runs/astra-failure-hunt-20261015/A-SIMJEB-analysis-101/replay/submission/main.py", line 267, in <module>
+    main()
+  File "/Users/ayushdebnath/SVG/cvpr2027/runs/astra-failure-hunt-20261015/A-SIMJEB-analysis-101/replay/submission/main.py", line 201, in main
+    raise RuntimeError(f"CalculiX exit {proc.returncode}")
+RuntimeError: CalculiX exit 201
+

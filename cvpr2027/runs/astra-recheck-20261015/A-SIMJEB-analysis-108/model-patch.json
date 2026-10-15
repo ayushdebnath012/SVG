@@ -1,0 +1,21 @@
+{
+  "edits": [
+    {
+      "old": "gmsh.option.setNumber(\"Mesh.SecondOrderLinear\", 0)",
+      "new": "# Keep quadratic displacement interpolation, but use straight-sided geometry.\n        # Projecting midside nodes onto the many small CAD faces inverted tets.\n        gmsh.option.setNumber(\"Mesh.SecondOrderLinear\", 1)"
+    },
+    {
+      "old": "tet = np.vstack(tet)\n        fixed = set()",
+      "new": "tet = np.vstack(tet)\n        corners = xyz[tet[:, :4]]\n        determinants = np.linalg.det(np.stack([\n            corners[:, 1] - corners[:, 0],\n            corners[:, 2] - corners[:, 0],\n            corners[:, 3] - corners[:, 0]], axis=2))\n        if not np.all(determinants > 0):\n            raise RuntimeError(\"Nonpositive straight-sided tetrahedron Jacobian\")\n        # Verify the Gmsh edge ordering used by the C3D10 export below.\n        edges = [(0, 1), (1, 2), (2, 0), (0, 3), (2, 3), (1, 3)]\n        for j, (a, b) in enumerate(edges, 4):\n            midpoint = 0.5 * (corners[:, a] + corners[:, b])\n            if not np.allclose(xyz[tet[:, j]], midpoint, rtol=0, atol=1e-7):\n                raise RuntimeError(\"Unexpected quadratic tetrahedron edge geometry\")\n        primary = np.zeros(len(tags), dtype=bool)\n        primary[np.unique(tet[:, :4])] = True\n        fixed = set()"
+    },
+    {
+      "old": "p = xyz[ids]\n            bolt_surface = False",
+      "new": "# Identify CAD cylinders from their corner nodes. Straight midside\n            # nodes lie on chords, not exactly on the analytic cylinder.\n            corner_ids = ids[primary[ids]]\n            if len(corner_ids) < 3:\n                continue\n            p = xyz[corner_ids]\n            bolt_surface = False"
+    },
+    {
+      "old": "\"method\": \"Quadratic tetrahedra; full 3D linear elasticity; all bolt-wall translations fixed.\",",
+      "new": "\"method\": \"Straight-sided quadratic tetrahedra with validated positive Jacobians; full 3D linear elasticity; all bolt-wall translations fixed. Cylindrical boundaries are faceted, with all corner and midside bolt-wall nodes constrained.\","
+    }
+  ],
+  "reason": "CalculiX failed because CAD-projected quadratic midside nodes produced inverted elements, as confirmed by Gmsh's negative Jacobian warnings. Straight-sided C3D10 geometry removes that inversion mechanism without removing quadratic FEM interpolation. Cylinder recognition now uses corner nodes while retaining all interface nodes for constraints and load transfer; determinant and edge-order checks validate the exported mesh."
+}

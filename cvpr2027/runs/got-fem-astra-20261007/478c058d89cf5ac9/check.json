@@ -1,0 +1,71 @@
+{
+ "id": "478c058d89cf5ac97bcb1e94845069f818c684512641c70d829638087c123632",
+ "source_fem": {
+  "ok": true,
+  "compliance": 8.167877515787312e-07,
+  "components": 1,
+  "nodes": 1104
+ },
+ "candidates": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n)\ndome = cq.Workplane(\"XY\").sphere(5.5, angle1=0, angle2=90).translate((0, 0, 15))\nresult = result.union(dome)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.492690429365164e-06,
+    "components": 1,
+    "nodes": 941
+   },
+   "consensus": 2,
+   "numbers_ok": null,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt1",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n)\ndome = cq.Workplane(\"XY\").sphere(5.5).translate((0, 0, 15.0))\nresult = result.union(dome)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.2294130349323695e-06,
+    "components": 1,
+    "nodes": 944
+   },
+   "consensus": 1,
+   "numbers_ok": null,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt2",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n)\ndome = cq.Workplane(\"XY\").sphere(5.5).translate((0, 0, 15.0))\nupper_half = cq.Workplane(\"XY\").box(11.0, 11.0, 5.5, centered=(True, True, False)).translate((0, 0, 15.0))\ndome = dome.intersect(upper_half)\nresult = result.union(dome)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.4911018759400665e-06,
+    "components": 1,
+    "nodes": 940
+   },
+   "consensus": 2,
+   "numbers_ok": null,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt3",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polygon(6, 15.012)\n    .extrude(15.0)\n    .faces(\">Z\").workplane()\n    .hole(8.0)\n)\ndome_center_z = 15.0 - (5.5**2 - 4.0**2)**0.5\ndome = cq.Workplane(\"XY\").sphere(5.5).translate((0, 0, dome_center_z))\nresult = result.union(dome)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.0488940423024577e-06,
+    "components": 1,
+    "nodes": 1154
+   },
+   "consensus": 1,
+   "numbers_ok": null,
+   "changed": true,
+   "error": null
+  }
+ ]
+}

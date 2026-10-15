@@ -1,0 +1,82 @@
+{
+  "task_id": "A-SIMJEB-analysis-101",
+  "report": "/Users/ayushdebnath/SVG/cvpr2027/runs/astra-recheck2-20261015/A-SIMJEB-analysis-101/README.md",
+  "generation": {
+    "status": "completed",
+    "model": "gpt-6-astra",
+    "usage": {
+      "prompt_tokens": 6110,
+      "completion_tokens": 764,
+      "total_tokens": 6874,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 6107,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 366,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "cost_usd_conservative": 0.1909125,
+    "finish_reason": "stop",
+    "patch_applied": true,
+    "repaired_sha256": "dc755572d234445bc5aed40e9aaed0e76070b3a531f6033873765b29b585a8f3",
+    "elapsed_seconds": 23.6
+  },
+  "status": "numerical_mismatch_adjudication_pending",
+  "protocol": "second medium-reasoning model-authored repair with prior repaired code and sandbox execution feedback, 7000-token cap",
+  "execution": {
+    "exit_code": 0,
+    "elapsed_seconds": 132.04077091700128,
+    "termination_reason": null,
+    "execution_verified": true,
+    "frozen_inputs_unchanged": true
+  },
+  "score_path": "/Users/ayushdebnath/SVG/cvpr2027/runs/astra-recheck2-20261015/A-SIMJEB-analysis-101/scoring/score.json",
+  "results": {
+    "outputs": {
+      "vertical_max_displacement_mm": 2.2144243403144306,
+      "horizontal_max_displacement_mm": 1.8336731466701175,
+      "diagonal_max_displacement_mm": 0.7097077838474819,
+      "torsion_max_displacement_mm": 0.31323370825765223
+    }
+  },
+  "adjudication_note": "Memory-aware second repair completes cleanly in 132 seconds. Three of four displacements still miss provisional published tolerances; torsion passes. Original mesh and memory stops are resolved. Because this family lacks independent reproduction, the numerical mismatch requires setup/reference adjudication before a persistent physics-failure claim.",
+  "score": {
+    "task_id": "A-SIMJEB-analysis-101",
+    "track": "A",
+    "tier": "source_backed_pilot",
+    "family": "simjeb-analysis",
+    "engineering_family": "simjeb-bracket",
+    "independently_reproduced": false,
+    "passed": false,
+    "numerical_passed": false,
+    "numerical_score": 0.25,
+    "workflow_verified": false,
+    "checks": {
+      "diagonal_max_displacement_mm": {
+        "ok": false,
+        "error": 1.030283661151696
+      },
+      "horizontal_max_displacement_mm": {
+        "ok": false,
+        "error": 1.0194309020845447
+      },
+      "vertical_max_displacement_mm": {
+        "ok": false,
+        "error": 1.7096049082593106
+      },
+      "torsion_max_displacement_mm": {
+        "ok": true,
+        "error": 0.08417478761062867
+      }
+    },
+    "submitted_solids": 1,
+    "errors": [
+      "trusted workflow review missing"
+    ]
+  }
+}

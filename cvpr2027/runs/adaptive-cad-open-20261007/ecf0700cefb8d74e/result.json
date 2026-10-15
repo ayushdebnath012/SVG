@@ -1,0 +1,929 @@
+{
+ "task_id": "ecf0700cefb8d74eea64f5a8e7f8258fa030734c47da4a0e06577bca1aa6c021",
+ "status": "UNVERIFIED",
+ "prediction": "\n\n{\"edits\":[{\"start\":6,\"delete\":0,\"insert\":[\"result = result.faces(\\\">Z\\\").workplane().rect(7.0, 3.0).cutBlind(4.34)\"]}]}",
+ "selected_node": null,
+ "bank": [],
+ "pareto": [],
+ "stop": "expansion_limit",
+ "nodes": [
+  {
+   "id": 0,
+   "candidate": "\n\n{\"edits\":[{\"start\":6,\"delete\":0,\"insert\":[\"result = result.faces(\\\">Z\\\").workplane().rect(7.0, 3.0).cutBlind(4.34)\"]}]}",
+   "depth": 0,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 2731.473407371051,
+       "area": 1130.3191978073646,
+       "solids": 1,
+       "faces": 3,
+       "bbox_x": 16.0,
+       "bbox_y": 16.0,
+       "bbox_z": 22.000000000000004
+      }
+     },
+     "constraints": {
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         10.0
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -1.0
+    ],
+    "score": -0.001,
+    "diagnosis": [
+     {
+      "stage": "constraints",
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         10.0
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 3,
+   "visits": 4,
+   "final": null,
+   "edges": [
+    0,
+    1
+   ]
+  },
+  {
+   "id": 1,
+   "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').slot2D(10.0, 3.0).cutBlind(-4.34)\"], \"start\": 6}]}",
+   "depth": 1,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 2613.1684847414,
+       "area": 1204.0717413430068,
+       "solids": 1,
+       "faces": 9,
+       "bbox_x": 16.0000002,
+       "bbox_y": 16.0000002,
+       "bbox_z": 22.000000200000034
+      }
+     },
+     "constraints": {
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         4.34
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -1.0
+    ],
+    "score": -0.001,
+    "diagnosis": [
+     {
+      "stage": "constraints",
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         4.34
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 0,
+   "visits": 2,
+   "final": null,
+   "edges": []
+  },
+  {
+   "id": 2,
+   "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.faces('>Z').workplane().slot2D(10.0, 3.0).cutBlind(-4.34)\"], \"start\": 6}]}",
+   "depth": 1,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 2613.1684847415027,
+       "area": 1204.071741343055,
+       "solids": 1,
+       "faces": 9,
+       "bbox_x": 16.0000002,
+       "bbox_y": 16.0000002,
+       "bbox_z": 22.000000200000038
+      }
+     },
+     "constraints": {
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         4.34
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -1.0
+    ],
+    "score": -0.001,
+    "diagnosis": [
+     {
+      "stage": "constraints",
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         4.34
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 1,
+   "visits": 2,
+   "final": null,
+   "edges": [
+    2
+   ]
+  },
+  {
+   "id": 3,
+   "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').slot2D(10.0, 3.0).cutBlind(-4.34)\"], \"start\": 6}]}",
+   "depth": 2,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 2613.1684847414,
+       "area": 1204.0717413430068,
+       "solids": 1,
+       "faces": 9,
+       "bbox_x": 16.0000002,
+       "bbox_y": 16.0000002,
+       "bbox_z": 22.000000200000034
+      }
+     },
+     "constraints": {
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         4.34
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -1.0
+    ],
+    "score": -0.001,
+    "diagnosis": [
+     {
+      "stage": "constraints",
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         4.34
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 0,
+   "visits": 1,
+   "final": null,
+   "edges": []
+  }
+ ],
+ "edges": [
+  {
+   "parent": 0,
+   "child": 1,
+   "visits": 2,
+   "total": -0.002
+  },
+  {
+   "parent": 0,
+   "child": 2,
+   "visits": 2,
+   "total": -0.002
+  },
+  {
+   "parent": 2,
+   "child": 3,
+   "visits": 1,
+   "total": -0.001
+  }
+ ],
+ "events": [
+  {
+   "event": "decompose",
+   "plan": {
+    "steps": [
+     "Import cadquery library",
+     "Initialize workplane on XY plane",
+     "Sketch circle with radius 8.0 mm",
+     "Extrude sketch to height 22.0 mm with taper 9.293 degrees",
+     "Select the top face of the resulting solid",
+     "Create workplane on selected face centered at bounding box",
+     "Sketch obround slot with length 10.00 mm and width 3.00 mm",
+     "Cut blind recess with depth 4.34 mm",
+     "Display the final object"
+    ],
+    "invariants": [
+     "Base tapered cylinder geometry remains intact except for the cut volume",
+     "Recess is centered relative to the top face bounding box",
+     "Recess depth is strictly 4.34 mm and does not penetrate through",
+     "Slot profile is obround with specified dimensions"
+    ],
+    "dependencies": [
+     [
+      4,
+      3
+     ],
+     [
+      5,
+      4
+     ],
+     [
+      6,
+      5
+     ],
+     [
+      7,
+      6
+     ],
+     [
+      8,
+      7
+     ]
+    ]
+   },
+   "memory_version": "ae93fdb2dc2b92c4b2386c7b85c48a35d44054257e7544e762aa1c1a096db09b",
+   "retrieved": [
+    {
+     "task_id": "82775a49e6f8a863081da34fad847d5f0cf5ca6b0d9dd9c5e57612119703c648",
+     "instruction": "Add a centered hexagonal blind recess on the top face, with a size of 4.00 mm and a depth of 2.00 mm.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').polygon(6,4.00).cutBlind(-2.00)\"], \"start\": 14}]}",
+     "strategies": [],
+     "context": [
+      "14: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "bff43643f4b6d84c46ea74497b5ec503e18f346df2ba6bdcd1564a51a7aeeb6b",
+     "instruction": "Cut a centered obround blind slot into the top face of the flange, with a length of 10.00 mm, a width of 3.30 mm, and a depth of 2.50 mm.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').slot2D(10.00,3.30).cutBlind(-2.50)\"], \"start\": 16}]}",
+     "strategies": [],
+     "context": [
+      "16: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "9dc4ece204d076075016caeb6fbeb264b689de23eb329b46bfcda04d38cc61fc",
+     "instruction": "Cut a centered blind slot into the top face of the flange head, with a slot length of 10.00 mm, a width of 3.00 mm, and a depth of 5.60 mm.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').slot2D(10.00,3.00).cutBlind(-5.60)\"], \"start\": 26}]}",
+     "strategies": [],
+     "context": [
+      "26: show_object(result)"
+     ]
+    }
+   ]
+  },
+  {
+   "event": "initial_state",
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 2731.473407371051,
+       "area": 1130.3191978073646,
+       "solids": 1,
+       "faces": 3,
+       "bbox_x": 16.0,
+       "bbox_y": 16.0,
+       "bbox_z": 22.000000000000004
+      }
+     },
+     "constraints": {
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         3.0,
+         4.34,
+         10.0
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -0.0
+    ],
+    "score": 0.0,
+    "diagnosis": [
+     {
+      "stage": "constraints",
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         3.0,
+         4.34,
+         10.0
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "initial"
+   }
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "constraints",
+     "status": "FAIL",
+     "checks": [
+      {
+       "metric": "instruction_values",
+       "missing": [
+        10.0
+       ],
+       "ok": false
+      },
+      {
+       "metric": "changed_solid",
+       "value": false,
+       "ok": false
+      }
+     ]
+    },
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "No physical contract supplied"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "No perturbation contract supplied"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "82775a49e6f8a863081da34fad847d5f0cf5ca6b0d9dd9c5e57612119703c648",
+     "instruction": "Add a centered hexagonal blind recess on the top face, with a size of 4.00 mm and a depth of 2.00 mm.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').polygon(6,4.00).cutBlind(-2.00)\"], \"start\": 14}]}",
+     "strategies": [],
+     "context": [
+      "14: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "bff43643f4b6d84c46ea74497b5ec503e18f346df2ba6bdcd1564a51a7aeeb6b",
+     "instruction": "Cut a centered obround blind slot into the top face of the flange, with a length of 10.00 mm, a width of 3.30 mm, and a depth of 2.50 mm.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').slot2D(10.00,3.30).cutBlind(-2.50)\"], \"start\": 16}]}",
+     "strategies": [],
+     "context": [
+      "16: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "9dc4ece204d076075016caeb6fbeb264b689de23eb329b46bfcda04d38cc61fc",
+     "instruction": "Cut a centered blind slot into the top face of the flange head, with a slot length of 10.00 mm, a width of 3.00 mm, and a depth of 5.60 mm.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').slot2D(10.00,3.00).cutBlind(-5.60)\"], \"start\": 26}]}",
+     "strategies": [],
+     "context": [
+      "26: show_object(result)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "FAIL",
+   "hypothesis": "Add centered obround blind recess on top face with specified dimensions"
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": true,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "constraints",
+     "status": "FAIL",
+     "checks": [
+      {
+       "metric": "instruction_values",
+       "missing": [
+        10.0
+       ],
+       "ok": false
+      },
+      {
+       "metric": "changed_solid",
+       "value": false,
+       "ok": false
+      }
+     ]
+    },
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "No physical contract supplied"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "No perturbation contract supplied"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "82775a49e6f8a863081da34fad847d5f0cf5ca6b0d9dd9c5e57612119703c648",
+     "instruction": "Add a centered hexagonal blind recess on the top face, with a size of 4.00 mm and a depth of 2.00 mm.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').polygon(6,4.00).cutBlind(-2.00)\"], \"start\": 14}]}",
+     "strategies": [],
+     "context": [
+      "14: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "bff43643f4b6d84c46ea74497b5ec503e18f346df2ba6bdcd1564a51a7aeeb6b",
+     "instruction": "Cut a centered obround blind slot into the top face of the flange, with a length of 10.00 mm, a width of 3.30 mm, and a depth of 2.50 mm.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').slot2D(10.00,3.30).cutBlind(-2.50)\"], \"start\": 16}]}",
+     "strategies": [],
+     "context": [
+      "16: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "9dc4ece204d076075016caeb6fbeb264b689de23eb329b46bfcda04d38cc61fc",
+     "instruction": "Cut a centered blind slot into the top face of the flange head, with a slot length of 10.00 mm, a width of 3.00 mm, and a depth of 5.60 mm.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').slot2D(10.00,3.00).cutBlind(-5.60)\"], \"start\": 26}]}",
+     "strategies": [],
+     "context": [
+      "26: show_object(result)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "FAIL",
+   "hypothesis": "Add centered obround blind recess on top face using slot2D and cutBlind with specified dimensions."
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 2,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "constraints",
+     "status": "FAIL",
+     "checks": [
+      {
+       "metric": "instruction_values",
+       "missing": [
+        10.0
+       ],
+       "ok": false
+      },
+      {
+       "metric": "changed_solid",
+       "value": false,
+       "ok": false
+      }
+     ]
+    },
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "No physical contract supplied"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "No perturbation contract supplied"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "82775a49e6f8a863081da34fad847d5f0cf5ca6b0d9dd9c5e57612119703c648",
+     "instruction": "Add a centered hexagonal blind recess on the top face, with a size of 4.00 mm and a depth of 2.00 mm.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').polygon(6,4.00).cutBlind(-2.00)\"], \"start\": 14}]}",
+     "strategies": [],
+     "context": [
+      "14: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "bff43643f4b6d84c46ea74497b5ec503e18f346df2ba6bdcd1564a51a7aeeb6b",
+     "instruction": "Cut a centered obround blind slot into the top face of the flange, with a length of 10.00 mm, a width of 3.30 mm, and a depth of 2.50 mm.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').slot2D(10.00,3.30).cutBlind(-2.50)\"], \"start\": 16}]}",
+     "strategies": [],
+     "context": [
+      "16: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "9dc4ece204d076075016caeb6fbeb264b689de23eb329b46bfcda04d38cc61fc",
+     "instruction": "Cut a centered blind slot into the top face of the flange head, with a slot length of 10.00 mm, a width of 3.00 mm, and a depth of 5.60 mm.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').slot2D(10.00,3.00).cutBlind(-5.60)\"], \"start\": 26}]}",
+     "strategies": [],
+     "context": [
+      "26: show_object(result)"
+     ]
+    }
+   ],
+   "path": [
+    1
+   ],
+   "status": "FAIL",
+   "hypothesis": "Add a centered obround blind recess on the top face using slot2D and cutBlind without explicit centerOption."
+  },
+  {
+   "event": "backtrack",
+   "to_node": 2
+  },
+  {
+   "event": "expand",
+   "parent": 2,
+   "node": 3,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "constraints",
+     "status": "FAIL",
+     "checks": [
+      {
+       "metric": "instruction_values",
+       "missing": [
+        4.34
+       ],
+       "ok": false
+      },
+      {
+       "metric": "changed_solid",
+       "value": true,
+       "ok": true
+      }
+     ]
+    },
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "No physical contract supplied"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "No perturbation contract supplied"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "82775a49e6f8a863081da34fad847d5f0cf5ca6b0d9dd9c5e57612119703c648",
+     "instruction": "Add a centered hexagonal blind recess on the top face, with a size of 4.00 mm and a depth of 2.00 mm.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').polygon(6,4.00).cutBlind(-2.00)\"], \"start\": 14}]}",
+     "strategies": [],
+     "context": [
+      "14: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "bff43643f4b6d84c46ea74497b5ec503e18f346df2ba6bdcd1564a51a7aeeb6b",
+     "instruction": "Cut a centered obround blind slot into the top face of the flange, with a length of 10.00 mm, a width of 3.30 mm, and a depth of 2.50 mm.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').slot2D(10.00,3.30).cutBlind(-2.50)\"], \"start\": 16}]}",
+     "strategies": [],
+     "context": [
+      "16: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "9dc4ece204d076075016caeb6fbeb264b689de23eb329b46bfcda04d38cc61fc",
+     "instruction": "Cut a centered blind slot into the top face of the flange head, with a slot length of 10.00 mm, a width of 3.00 mm, and a depth of 5.60 mm.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').slot2D(10.00,3.00).cutBlind(-5.60)\"], \"start\": 26}]}",
+     "strategies": [],
+     "context": [
+      "26: show_object(result)"
+     ]
+    }
+   ],
+   "path": [
+    1,
+    2
+   ],
+   "status": "FAIL",
+   "hypothesis": "Add a centered obround blind recess on the top face of the tapered knob with specified dimensions using CadQuery workplane operations."
+  }
+ ],
+ "config": {
+  "algorithm": "mcts",
+  "max_expansions": 4,
+  "max_depth": 3,
+  "width": 2,
+  "max_width": 4,
+  "exploration": 0.7,
+  "seconds": 2400.0
+ },
+ "memory_version": "ae93fdb2dc2b92c4b2386c7b85c48a35d44054257e7544e762aa1c1a096db09b",
+ "stored": null,
+ "seconds": 319.92106995799986,
+ "api": {
+  "mode": "live_astra",
+  "api_calls": 5,
+  "cost_usd": 0.0,
+  "budget_usd": 0.3,
+  "refused": 0
+ },
+ "tool_jobs": 4
+}

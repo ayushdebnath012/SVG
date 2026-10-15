@@ -1,0 +1,26 @@
+{
+ "id": "56b1bd3dd64aecd9d2922429371d80fc7d9a16a1d07953b73752b9c2a12a69e6",
+ "source_fem": {
+  "ok": true,
+  "compliance": 4.837375313402662e-07,
+  "components": 1,
+  "nodes": 6927
+ },
+ "candidates": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(22.9, 26.8)\n    .faces(\"<Z\")\n    .chamfer(1.0)\n    .faces(\">Z\")\n    .faces(\">Z\").workplane()\n    .polarArray(20.9, 0, 360, 6)\n    .hole(3.2)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 12.75), rotate=cq.Vector(0, 0, 0))\n            .cylinder(2.6, 15.4)\n    )\n    .faces(\">Z\").workplane()\n    .hole(11.2)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.0566517114412988e-07,
+    "components": 1,
+    "nodes": 8284
+   },
+   "consensus": 1,
+   "numbers_ok": null,
+   "changed": true,
+   "error": null
+  }
+ ]
+}

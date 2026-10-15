@@ -1,0 +1,28 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .polyline([(10.795, 0.0), (22.0, 0.0), (25.3, 0.0), (25.3, 3.3), (22.0, 3.3), (13.7, 9.4), (22.0, 15.5), (13.7, 21.6), (22.0, 27.7), (13.7, 33.8), (22.0, 39.9), (13.7, 46.0), (22.0, 52.1), (13.7, 58.2), (22.0, 64.3), (13.7, 70.4), (22.0, 76.5), (13.7, 82.6), (22.0, 88.7), (25.3, 92.0), (22.0, 92.0), (10.795, 92.0), (10.795, 0.0)])\\n    .close()\\n    .revolve(360, (0, 0, 0), (0, 1, 0))\\n    .faces(\\\">Y\\\").workplane()\\n    .hole(23.0)\\n    .faces(\\\">Y\\\").workplane()\\n    .polarArray(23.815, 0, 360, 6)\\n    .circle(1.05)\\n    .cutBlind(-3.3)\\n    .faces(\\\"<Y\\\").workplane()\\n    .polarArray(23.815, 0, 360, 6)\\n    .circle(1.05)\\n    .cutBlind(-3.3)\\n)\\nshow_object(result)\", \"instruction\": \"Add a flat annular ring around the mid-height of the bellows, with outer radius 35 mm, inner radius 26 mm, and thickness 6 mm, lying flat against the central waist.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"8999a85957c6200a5511ecd7c9c5c8ef9c906f57edcf4754143ea9b36a2fa948\", \"instruction\": \"Replace the V-grooved rim profile of the pulley with a flat rectangular rim profile of the same outer radius and the same height, keeping the central bore and the six radial spoke openings unchanged.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .polyline([[9.0, -9.25], [50.0, -9.25], [50.0, 9.25], [9.0, 9.25]])\\\"], \\\"start\\\": 3}]}\", \"strategies\": [], \"context\": [\"3:     .polyline([[9.0, -9.25], [19.8, -9.25], [44.5, -9.25], [44.5, -3.75], [50.0, -3.75], [50.0, -1.17], [46.4, 0.0], [50.0, 1.17], [50.0, 3.75], [44.5, 3.75], [44.5, 9.25], [19.8, 9.25], [9.0, 9.25]])\"]}, {\"task_id\": \"9f9217d46396040f81caaed79222d00b1681bf0038010db36311937cb6e87024\", \"instruction\": \"Replace the square outer outline of the flat plate with a round outline of the same outer span and the same thickness, keeping the central round opening, the four corner mounting holes, and the raised ring unchanged.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .cylinder(10.9, 92.5)\\\"], \\\"start\\\": 3}]}\", \"strategies\": [], \"context\": [\"3:     .box(185.0, 185.0, 10.9)\"]}, {\"task_id\": \"f46f23eda5151773ef140fafa39487a4fdd0527ad45ef5bac94a8b1739cd6e9c\", \"instruction\": \"Add a central axial through-hole with a 5.00 mm radius along the main axis of the revolved part.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.cut(cq.Workplane('XZ').cylinder(200.0, 5.0))\\\"], \\\"start\\\": 10}]}\", \"strategies\": [], \"context\": [\"10: show_object(result)\"]}]}"
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 4096
+ },
+ "usage": {
+  "completion_tokens": 127,
+  "prompt_tokens": 1290,
+  "total_tokens": 1417
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\n  \"steps\": [\n    \"Add a flat annular ring around the mid-height of the bellows with outer radius 35 mm, inner radius 26 mm, and thickness 6 mm using a revolved or extruded profile integrated with the main body.\"\n  ],\n  \"invariants\": [\n    \"The central bore hole on face >Y remains unchanged.\",\n    \"The polar arrays of holes on both ends remain unchanged.\",\n    \"The overall convoluted bellows profile remains unchanged except at the mid-height attachment.\"\n  ],\n  \"dependencies\": []\n}\n```"
+}

@@ -1,0 +1,28 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XZ\\\")\\n    .moveTo(0.0, 0.0)\\n    .lineTo(4.0, 0.0)\\n    .lineTo(4.0, 30.0)\\n    .lineTo(6.4, 30.0)\\n    .threePointArc((5.5424, 32.6), (0.0, 35.2))\\n    .close()\\n    .revolve(360, (0, 0, 0), (0, 1, 0))\\n    .edges(\\\"<Y\\\")\\n    .fillet(0.8)\\n)\\nshow_object(result)\", \"instruction\": \"Drill a round axial through-bore down the center of the rivet, 4 mm in diameter, from the flat bottom face up through the rounded head, along the central axis of the rivet.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"e22b14e85e547a8915d47fbedbd302e8ae41b95f6cb473d6a7896b26ae2e2682\", \"instruction\": \"Add a round flat head flange at the wide end of the tapered pin, 16 mm in diameter and 4 mm thick, sitting flush against the wide end face and centered on the pin's central axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"_head = (\\\", \\\"    cq.Workplane('XY')\\\", \\\"    .transformed(offset=cq.Vector(0, 102.0, 0), rotate=cq.Vector(90, 0, 0))\\\", \\\"    .cylinder(4.0, 8.0)\\\", \\\")\\\", \\\"result = result.union(_head)\\\"], \\\"start\\\": 14}]}\", \"strategies\": [], \"context\": [\"14: show_object(result)\"]}, {\"task_id\": \"0ce6e9078aa5f18a6625079ace8965d9ee24d91d9d78b579141fc8757a988b8d\", \"instruction\": \"Drill 12 round drainage through-passages of 24 mm diameter through the flat bottom of the bucket, evenly spaced around the central axis at 55 mm radius.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"import math as _m\\\", \\\"for _i in range(12):\\\", \\\"    _ang = 2 * _m.pi * _i / 12\\\", \\\"    _r = 55.0\\\", \\\"    result = result.cut(\\\", \\\"        cq.Workplane('XY')\\\", \\\"        .transformed(offset=cq.Vector(_r * _m.cos(_ang), 3.4, _r * _m.sin(_ang)), rotate=cq.Vector(90, 0, 0))\\\", \\\"        .cylinder(20.0, 12.0)\\\", \\\"    )\\\"], \\\"start\\\": 24}]}\", \"strategies\": [], \"context\": [\"24: show_object(result)\"]}, {\"task_id\": \"77f57f57bb65c7a6172328ee197a3fe2ad67c9113147c01dc822018726be56de\", \"instruction\": \"Drill a 7 diameter through-hole in the middle of two existing holes along the Z axis.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"result = result.cut(cq.Workplane('XY').cylinder(171.6,3.35))\\\"], \\\"start\\\": 11}]}\", \"strategies\": [], \"context\": [\"11: show_object(result)\"]}]}"
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 4096
+ },
+ "usage": {
+  "completion_tokens": 94,
+  "prompt_tokens": 976,
+  "total_tokens": 1070
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\n  \"steps\": [\n    \"Add a central axial through-hole of 4 mm diameter along the Y axis of the revolved rivet.\"\n  ],\n  \"invariants\": [\n    \"The outer profile, fillet, and overall dimensions of the rivet must remain unchanged.\",\n    \"The through-bore must be centered on the central axis of the rivet.\"\n  ],\n  \"dependencies\": []\n}\n```"
+}

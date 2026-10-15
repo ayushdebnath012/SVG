@@ -1,0 +1,85 @@
+{
+ "source_fem": {
+  "ok": true,
+  "compliance": 4.838795202340949e-07,
+  "components": 1,
+  "nodes": 6993
+ },
+ "nodes": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(29.77, 26.8)\n    .faces(\"<Z\")\n    .chamfer(1.0)\n    .faces(\">Z\")\n    .faces(\">Z\").workplane()\n    .polarArray(20.9, 0, 360, 6)\n    .hole(3.2)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 16.185), rotate=cq.Vector(0, 0, 0))\n            .cylinder(2.6, 15.4)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 31.235), rotate=cq.Vector(0, 0, 0))\n            .cylinder(27.5, 12.0)\n    )\n    .faces(\">Z\").workplane()\n    .hole(11.2)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 4.95251543193795e-07,
+    "components": 1,
+    "nodes": 8134
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 0.5
+  },
+  {
+   "name": "alt1",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(29.77, 26.8)\n    .faces(\"<Z\")\n    .chamfer(1.0)\n    .faces(\">Z\")\n    .faces(\">Z\").workplane()\n    .polarArray(20.9, 0, 360, 6)\n    .hole(3.2)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 16.185), rotate=cq.Vector(0, 0, 0))\n            .cylinder(2.6, 15.4)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 31.235), rotate=cq.Vector(0, 0, 0))\n            .cylinder(27.5, 12.0)\n    )\n    .faces(\">Z\").workplane()\n    .hole(11.2)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 4.950130397012244e-07,
+    "components": 1,
+    "nodes": 8064
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 0.5
+  },
+  {
+   "name": "alt2",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(29.77, 26.8)\n    .translate((0, 0, 3.435))\n    .faces(\"<Z\")\n    .chamfer(1.0)\n    .faces(\">Z\")\n    .faces(\">Z\").workplane()\n    .polarArray(20.9, 0, 360, 6)\n    .hole(3.2)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 19.62), rotate=cq.Vector(0, 0, 0))\n            .cylinder(2.6, 15.4)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 34.67), rotate=cq.Vector(0, 0, 0))\n            .cylinder(27.5, 12.0)\n    )\n    .faces(\">Z\").workplane()\n    .hole(11.2)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 4.958984505756896e-07,
+    "components": 1,
+    "nodes": 8124
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 2,
+   "robustness": 0.0
+  },
+  {
+   "name": "alt3",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(29.77, 26.8)\n    .translate((0, 0, -3.435))\n    .faces(\"<Z\")\n    .chamfer(1.0)\n    .faces(\">Z\")\n    .faces(\">Z\").workplane()\n    .polarArray(20.9, 0, 360, 6)\n    .hole(3.2)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 12.75), rotate=cq.Vector(0, 0, 0))\n            .cylinder(2.6, 15.4)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 27.8), rotate=cq.Vector(0, 0, 0))\n            .cylinder(27.5, 12.0)\n    )\n    .faces(\">Z\").workplane()\n    .hole(11.2)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 4.945837507324161e-07,
+    "components": 1,
+    "nodes": 8050
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 1,
+   "robustness": 0.0
+  },
+  {
+   "name": "rag",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(29.77, 26.8)\n    .faces(\"<Z\")\n    .chamfer(1.0)\n    .faces(\">Z\")\n    .faces(\">Z\").workplane()\n    .polarArray(20.9, 0, 360, 6)\n    .hole(3.2)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 16.185), rotate=cq.Vector(0, 0, 0))\n            .cylinder(2.6, 15.4)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 31.235), rotate=cq.Vector(0, 0, 0))\n            .cylinder(27.5, 12.0)\n    )\n    .faces(\">Z\").workplane()\n    .hole(11.2)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 4.949586928123412e-07,
+    "components": 1,
+    "nodes": 8053
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 0.5
+  }
+ ]
+}

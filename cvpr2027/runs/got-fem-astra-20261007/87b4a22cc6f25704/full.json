@@ -1,0 +1,40 @@
+{
+ "source_fem": {
+  "ok": true,
+  "compliance": 1.844454308738266e-07,
+  "components": 1,
+  "nodes": 558
+ },
+ "nodes": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(28.0, 3.0, 3.0)\n    .edges(\"|X\")\n    .chamfer(0.45)\n    .faces(\">Z\").workplane()\n    .rect(22.4, 0.9)\n    .cutBlind(-0.6)\n    .union(cq.Workplane(\"XY\").box(4.0, 6.0, 6.0).translate((16.0, 0.0, 0.0)))\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.1131977455458424e-06,
+    "components": 1,
+    "nodes": 542
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 0.5
+  },
+  {
+   "name": "rag",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(28.0, 3.0, 3.0)\n    .edges(\"|X\")\n    .chamfer(0.45)\n    .faces(\">Z\").workplane()\n    .rect(22.4, 0.9)\n    .cutBlind(-0.6)\n)\n_shoulder = cq.Workplane(\"XY\").box(4.0, 6.0, 6.0).translate((16.0, 0, 0))\nresult = result.union(_shoulder)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.1157960734830803e-06,
+    "components": 1,
+    "nodes": 548
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 0.5
+  }
+ ]
+}

@@ -1,0 +1,82 @@
+{
+  "task_id": "A-SIMJEB-analysis-62",
+  "report": "/Users/ayushdebnath/SVG/cvpr2027/runs/astra-recheck-20261015/A-SIMJEB-analysis-62/README.md",
+  "generation": {
+    "status": "completed",
+    "model": "gpt-6-astra",
+    "usage": {
+      "prompt_tokens": 5447,
+      "completion_tokens": 898,
+      "total_tokens": 6345,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 5444,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 417,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "cost_usd_conservative": 0.1810375,
+    "finish_reason": "stop",
+    "patch_applied": true,
+    "repaired_sha256": "6a74bbe1bc127bb19ec484f6456d101acff5ae2f7938ca519e91215f96984714",
+    "elapsed_seconds": 26.0
+  },
+  "status": "numerical_mismatch_adjudication_pending",
+  "protocol": "medium-reasoning model-authored repair with original task/code and runtime feedback, 7000-token cap",
+  "execution": {
+    "exit_code": 0,
+    "elapsed_seconds": 89.33587920799982,
+    "termination_reason": null,
+    "execution_verified": true,
+    "frozen_inputs_unchanged": true
+  },
+  "score_path": "/Users/ayushdebnath/SVG/cvpr2027/runs/astra-recheck-20261015/A-SIMJEB-analysis-62/scoring/score.json",
+  "results": {
+    "outputs": {
+      "vertical_max_displacement_mm": 3.6023222184266306,
+      "horizontal_max_displacement_mm": 2.533262383719065,
+      "diagonal_max_displacement_mm": 1.3008931331685873,
+      "torsion_max_displacement_mm": 0.4637263536251309
+    }
+  },
+  "adjudication_note": "Original inversion failure is repaired and clean replay completes in 89.3 seconds, producing all four load-case displacements. Published numerical checks miss provisional tolerances; no independent reproduction for this family, so the mismatch requires setup/reference adjudication before a persistent physics-failure claim.",
+  "score": {
+    "task_id": "A-SIMJEB-analysis-62",
+    "track": "A",
+    "tier": "source_backed_pilot",
+    "family": "simjeb-analysis",
+    "engineering_family": "simjeb-bracket",
+    "independently_reproduced": false,
+    "passed": false,
+    "numerical_passed": false,
+    "numerical_score": 0.0,
+    "workflow_verified": false,
+    "checks": {
+      "horizontal_max_displacement_mm": {
+        "ok": false,
+        "error": 1.3700467446050908
+      },
+      "torsion_max_displacement_mm": {
+        "ok": false,
+        "error": 0.22568455792657507
+      },
+      "vertical_max_displacement_mm": {
+        "ok": false,
+        "error": 1.7014201948167902
+      },
+      "diagonal_max_displacement_mm": {
+        "ok": false,
+        "error": 1.9621724621673482
+      }
+    },
+    "submitted_solids": 1,
+    "errors": [
+      "trusted workflow review missing"
+    ]
+  }
+}

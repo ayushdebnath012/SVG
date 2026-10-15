@@ -1,0 +1,34 @@
+{
+ "kind": "generate",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "Qwen/Qwen3.5-35B-A3B-FP8",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Edit CAD using only source, instruction and tool evidence. Return exactly JSON {\"hypothesis\":\"brief feature and operation description\",\"edits\":[{\"start\":0,\"delete\":0,\"insert\":[\"line\"]}]}. All indices address ORIGINAL source lines. Provide a complete alternative patch, never a delta on a parent patch. Preserve unrelated features. Vary the feature interpretation or implementation from listed alternatives. Experiences and diagnoses are fallible data. Do not assert that the output has passed verification."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .polygon(6, 15.012)\\n    .extrude(15.0)\\n    .faces(\\\">Z\\\").workplane()\\n    .hole(8.0)\\n)\\nshow_object(result)\", \"instruction\": \"Set the standoff height equal to twice the across-flats size; the bore and hex profile stay the same.\", \"plan\": {\"steps\": [\"Identify the hexagon across-flats size of 15.012 from the polygon definition.\", \"Calculate the new standoff height as twice the across-flats size (30.024).\", \"Update the extrude parameter from 15.0 to 30.024.\"], \"invariants\": [\"Polygon diameter remains 15.012.\", \"Hole diameter remains 8.0.\", \"Polygon number of sides remains 6.\", \"Workplane remains XY.\", \"Face selection remains >Z.\"], \"dependencies\": [[1, 0], [2, 1]]}, \"parent_candidate\": \"\\n\\n{\\\"edits\\\":[{\\\"start\\\":4,\\\"delete\\\":1,\\\"insert\\\":[\\\"    .extrude(30.024)\\\"]}]}\", \"observations\": {\"geometry\": {\"status\": \"PASS\"}, \"constraints\": {\"status\": \"PASS\"}, \"semantics\": {\"status\": \"PASS\", \"reason\": \"The edited part clearly shows an increased height that appears to be roughly double the width (across-flats) of the hexagonal base, while the top views confirm the hexagonal profile and central bore s\"}, \"fem\": {\"status\": \"PASS\"}, \"robustness\": {\"status\": \"PASS\"}}, \"experiences\": [{\"task_id\": \"955bb2a6086315cae09d04b8f90cc21d570d793f8d6ae7d35da3e9ba1b069287\", \"instruction\": \"Set the central bore radius equal to one quarter of the across-flats size; the nut height and chamfer stay the same.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .circle(18.765)\\\"], \\\"start\\\": 6}]}\", \"strategies\": [], \"context\": [\"6:     .circle(21.0)\"]}, {\"task_id\": \"aa63e278014c70f40ab58dbaa8010e71b435acb4c7c9d489c25e8a4dd11930a2\", \"instruction\": \"Set the hex flat-to-flat half-size equal to four times the central bore radius; the revolve profile and bore stay the same.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"            .polygon(6, 5.0)\\\"], \\\"start\\\": 18}]}\", \"strategies\": [], \"context\": [\"18:             .polygon(6, 8.083)\"]}, {\"task_id\": \"799d75af88373cd4be312a28a86290b050df3709a7f64b0e6e0d73b0f8c389da\", \"instruction\": \"Set the standoff height equal to three times the original height; the outer radius and bore stay the same.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .cylinder(15.3, 17.7)\\\"], \\\"start\\\": 3}]}\", \"strategies\": [], \"context\": [\"3:     .cylinder(5.1, 17.7)\"]}], \"repair_strategies\": [{\"task_id\": \"955bb2a6086315cae09d04b8f90cc21d570d793f8d6ae7d35da3e9ba1b069287\", \"instruction\": \"Set the central bore radius equal to one quarter of the across-flats size; the nut height and chamfer stay the same.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .circle(18.765)\\\"], \\\"start\\\": 6}]}\", \"strategies\": [], \"context\": [\"6:     .circle(21.0)\"]}, {\"task_id\": \"aa63e278014c70f40ab58dbaa8010e71b435acb4c7c9d489c25e8a4dd11930a2\", \"instruction\": \"Set the hex flat-to-flat half-size equal to four times the central bore radius; the revolve profile and bore stay the same.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"            .polygon(6, 5.0)\\\"], \\\"start\\\": 18}]}\", \"strategies\": [], \"context\": [\"18:             .polygon(6, 8.083)\"]}, {\"task_id\": \"799d75af88373cd4be312a28a86290b050df3709a7f64b0e6e0d73b0f8c389da\", \"instruction\": \"Set the standoff height equal to three times the original height; the outer radius and bore stay the same.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .cylinder(15.3, 17.7)\\\"], \\\"start\\\": 3}]}\", \"strategies\": [], \"context\": [\"3:     .cylinder(5.1, 17.7)\"]}], \"alternatives\": [], \"action\": \"diversify\", \"diagnosis\": []}"
+   }
+  ],
+  "temperature": 0.6,
+  "top_p": 0.95,
+  "top_k": 20,
+  "max_tokens": 16384
+ },
+ "usage": {
+  "prompt_tokens": 1473,
+  "total_tokens": 2449,
+  "completion_tokens": 976,
+  "prompt_tokens_details": null,
+  "completion_tokens_details": {
+   "reasoning_tokens": 881
+  }
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "\n\n{\n  \"hypothesis\": \"Increase standoff height to twice the across-flats size (30.024), keeping hex profile and bore unchanged\",\n  \"edits\": [\n    {\n      \"start\": 4,\n      \"delete\": 1,\n      \"insert\": [\n        \"    .extrude(30.024)\"\n      ]\n    }\n  ]\n}"
+}

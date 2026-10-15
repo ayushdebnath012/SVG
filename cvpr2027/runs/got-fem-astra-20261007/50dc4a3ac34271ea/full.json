@@ -1,0 +1,85 @@
+{
+ "source_fem": {
+  "ok": true,
+  "compliance": 2.87534282761833e-07,
+  "components": 1,
+  "nodes": 547
+ },
+ "nodes": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(18.0, 2.0, 2.6)\n    .edges(\"|X\")\n    .chamfer(0.3)\n    .faces(\">Z\").workplane()\n    .rect(14.4, 0.6)\n    .cutBlind(-0.4)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 3.6360683410156615e-07,
+    "components": 1,
+    "nodes": 534
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "alt1",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(18.0, 2.0, 2.6)\n    .edges(\"|X\")\n    .chamfer(0.3)\n    .faces(\">Z\").workplane()\n    .rect(14.4, 0.6)\n    .cutBlind(-0.4)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 3.6303292189305775e-07,
+    "components": 1,
+    "nodes": 523
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "alt2",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(length=18.0, width=2.0, height=2.6)\n    .edges(\"|X\")\n    .chamfer(0.3)\n    .faces(\">Z\").workplane()\n    .rect(14.4, 0.6)\n    .cutBlind(-0.4)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 3.628621808988365e-07,
+    "components": 1,
+    "nodes": 527
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "alt3",
+   "code": "import cadquery as cq\nbox_height = 2.6\nresult = (\n    cq.Workplane(\"XY\")\n    .box(18.0, 2.0, box_height)\n    .edges(\"|X\")\n    .chamfer(0.3)\n    .faces(\">Z\").workplane()\n    .rect(14.4, 0.6)\n    .cutBlind(-0.4)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 3.6360683622865974e-07,
+    "components": 1,
+    "nodes": 534
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "rag",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(18.0, 2.0, 2.6)\n    .edges(\"|X\")\n    .chamfer(0.3)\n    .faces(\">Z\").workplane()\n    .rect(14.4, 0.6)\n    .cutBlind(-0.4)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 3.6328176331407526e-07,
+    "components": 1,
+    "nodes": 532
+   },
+   "numbers_ok": true,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  }
+ ]
+}

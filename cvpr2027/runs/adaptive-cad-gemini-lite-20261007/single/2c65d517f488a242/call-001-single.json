@@ -1,0 +1,28 @@
+{
+ "kind": "single",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "You edit mechanical CAD. Return only JSON {\"edits\":[{\"start\":0,\"delete\":0,\"insert\":[\"replacement line\"]}]}. Indices are zero-based lines of the ORIGINAL input; operations must be ordered, nonoverlapping and in bounds. Preserve unrelated features. The supplied representation determines syntax. Return no explanation or invented physics results. Geometry execution and FEM checks are performed by external tools; never claim verification."
+   },
+   {
+    "role": "user",
+    "content": "Representation: cadquery\nOriginal CAD (line indices are implicit):\nimport cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .transformed(offset=cq.Vector(0.0, 0.0, -27.55), rotate=cq.Vector(0, 0, 0))\n    .circle(49.8)\n    .extrude(55.1)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, 27.55), rotate=cq.Vector(0, 0, 0))\n            .sphere(49.8)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, -27.55), rotate=cq.Vector(0, 0, 0))\n            .sphere(49.8)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .cylinder(6.4, 58.8)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, 86.47), rotate=cq.Vector(0, 0, 0))\n            .cylinder(24.6, 5.3)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, -86.47), rotate=cq.Vector(0, 0, 0))\n            .cylinder(24.6, 5.3)\n    )\n)\nshow_object(result)Edit instruction:\nReplace the rounded top end of the body with a flat circular cap of the same diameter and 10 mm thickness, leaving the cylindrical middle and the rounded bottom end unchanged."
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 8192
+ },
+ "usage": {
+  "completion_tokens": 172,
+  "prompt_tokens": 540,
+  "total_tokens": 712
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\n  \"edits\": [\n    {\n      \"start\": 8,\n      \"delete\": 7,\n      \"insert\": []\n    },\n    {\n      \"start\": 21,\n      \"delete\": 4,\n      \"insert\": [\n        \"    .union(\",\n        \"        cq.Workplane(\\\"XY\\\")\",\n        \"            .transformed(offset=cq.Vector(0.0, 0.0, 27.55), rotate=cq.Vector(0, 0, 0))\",\n        \"            .circle(49.8)\",\n        \"            .extrude(10.0)\",\n        \"    )\"\n      ]\n    }\n  ]\n}\n```"
+}

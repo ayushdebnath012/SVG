@@ -1,0 +1,32 @@
+{
+  "software": {
+    "python": "3.12.15",
+    "gmsh": "4.15.2",
+    "cadquery": "2.8.0",
+    "skfem": "12.0.2",
+    "meshio": "5.3.5"
+  },
+  "units": {
+    "length": "mm",
+    "stress": "MPa"
+  },
+  "material": {
+    "E": 70000.0,
+    "nu": 0.33,
+    "lambda": 51083.59133126935,
+    "mu": 26315.78947368421
+  },
+  "boundary_conditions": {
+    "fixed": "all displacement components on faces with z\u22480",
+    "pressure": {
+      "magnitude_MPa": 1.98728,
+      "direction": "-z (downward)",
+      "applied_to": "faces with z\u2248max_z"
+    }
+  },
+  "mesh_assumptions": {
+    "element_type": "quadratic tetrahedral (tetra10)",
+    "nominal_size_mm": 9.0,
+    "order": 2
+  }
+}

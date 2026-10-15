@@ -1,0 +1,35 @@
+{
+  "scope": "Source-assisted first-attempt pilot, two existing COMSOL studies; not all 50",
+  "tasks": [
+    "FEMCAD-ADV-011",
+    "FEMCAD-ADV-001"
+  ],
+  "requested_models": [
+    "kimi-k3",
+    "inkling",
+    "deepseek-v4.1-flash"
+  ],
+  "evidence_levels": [
+    "Provider access",
+    "Returned executable code",
+    "Geometry construction and meshing",
+    "Source geometry agreement",
+    "Source physics fidelity",
+    "Solved FEM and numerical agreement"
+  ],
+  "rules": [
+    "No hand-written geometry replacement or candidate repair",
+    "Provider rejection is not model failure",
+    "Missing source dimensions may make exact reconstruction underdetermined",
+    "Meshing success is not FEM correctness",
+    "Public tutorial text and original image supplied; source-assisted evaluation"
+  ],
+  "generation_token_cap_per_request": 8000,
+  "second_configuration": {
+    "model": "deepseek-v4.1-flash",
+    "reasoning_effort": "low",
+    "max_tokens": 24000,
+    "reason": "Original 8000-token responses contained reasoning only; finish_reason=length",
+    "no_candidate_repair": true
+  }
+}

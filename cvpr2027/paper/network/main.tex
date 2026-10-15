@@ -35,15 +35,12 @@
 \def\confName{CVPR}
 \def\confYear{2027}
 
-\title{ReSolve: Instruction-Guided 3D CAD Editing\\with Geometry and View Evaluation}
+\title{ReSolve: Astra-Guided CAD Patch Repair\\with Geometric Verification and Graph Search}
 
 \author{Research working draft}
 
-\input{mechanical-results}
-\input{cuda-results}
-\input{fem-results}
-\input{plan-anchor-results}
-\input{tier-results}
+\input{astra-results}
+\input{pipeline-results}
 
 \begin{document}
 \maketitle
@@ -54,7 +51,7 @@
 \begin{figure*}[t]
 \centering
 \includegraphics[width=0.93\textwidth]{figures/benchcad-reference-pairs.pdf}
-\caption{\textbf{Published mechanical CAD edit pairs held out in the local protocol.} Top: remove the perpendicular end flange while preserving the twisted web and the first-flange holes. Bottom: add a centered blind obround slot to the upper cylindrical shaft section. These are source/released-target illustrations, not learned model predictions. Both views are exported from solids. Learned predictions are evaluated separately in the primary experiment and diagnostic visual/FEM audits.}
+\caption{\textbf{Published mechanical CAD edit pairs held out in the local protocol.} Top: remove the perpendicular end flange while preserving the twisted web and the first-flange holes. Bottom: add a centered blind obround slot to the upper cylindrical shaft section. These are source/released-target illustrations, not predicted outputs. Both views are exported from solids. Candidate patches are evaluated separately with a fixed execution and reference-scoring protocol.}
 \label{fig:benchcad-reference}
 \end{figure*}
 \input{sections/mechanical/related}

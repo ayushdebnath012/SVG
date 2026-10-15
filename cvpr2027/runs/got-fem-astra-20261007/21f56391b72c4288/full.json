@@ -1,0 +1,85 @@
+{
+ "source_fem": {
+  "ok": true,
+  "compliance": 1.1098461615427561e-07,
+  "components": 1,
+  "nodes": 675
+ },
+ "nodes": [
+  {
+   "name": "vanilla",
+   "code": "import math\nimport cadquery as cq\nslope_angle_deg = 45.0\ninner = 10.96\nouter = 27.4\nhalf_w = 10.96\nrun = outer - inner\nrise = run * math.tan(math.radians(slope_angle_deg))\nresult = (\n    cq.Workplane(\"XY\")\n    .polyline([[10.96, 10.96], [27.4, 10.96], [27.4, -10.96], [10.96, -10.96], [10.96, -27.4], [-10.96, -27.4], [-10.96, -10.96], [-27.4, -10.96], [-27.4, 10.96], [-10.96, 10.96], [-10.96, 27.4], [10.96, 27.4]])\n    .close()\n    .extrude(7.4)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.5441766689707958e-08,
+    "components": 1,
+    "nodes": 588
+   },
+   "numbers_ok": null,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "alt1",
+   "code": "import math\nimport cadquery as cq\nslope_angle_deg = 45.0\ninner = 10.96\nouter = 27.4\nhalf_w = 10.96\nrun = outer - inner\nrise = run * math.tan(math.radians(slope_angle_deg))\nresult = (\n    cq.Workplane(\"XY\")\n    .polyline([[10.96, 10.96], [27.4, 10.96], [27.4, -10.96], [10.96, -10.96], [10.96, -27.4], [-10.96, -27.4], [-10.96, -10.96], [-27.4, -10.96], [-27.4, 10.96], [-10.96, 10.96], [-10.96, 27.4], [10.96, 27.4]])\n    .close()\n    .extrude(7.4)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.5448259152126992e-08,
+    "components": 1,
+    "nodes": 590
+   },
+   "numbers_ok": null,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "alt2",
+   "code": "import math\nimport cadquery as cq\nslope_angle_deg = 45.0\ninner = 10.96\nouter = 27.4\nhalf_w = 10.96\nrun = outer - inner\nrise = run * math.tan(math.radians(slope_angle_deg))\nresult = (\n    cq.Workplane(\"XY\")\n    .polyline([[10.96, 10.96], [27.4, 10.96], [27.4, -10.96], [10.96, -10.96], [10.96, -27.4], [-10.96, -27.4], [-10.96, -10.96], [-27.4, -10.96], [-27.4, 10.96], [-10.96, 10.96], [-10.96, 27.4], [10.96, 27.4]])\n    .close()\n    .extrude(7.4)\n)\nwedge_px = (\n    cq.Workplane(\"XZ\")\n    .polyline([(inner, 0.0), (outer, 0.0), (outer, rise)])\n    .close()\n    .extrude(half_w, both=True)\n)\nwedge_nx = (\n    cq.Workplane(\"XZ\")\n    .polyline([(-inner, 0.0), (-outer, 0.0), (-outer, rise)])\n    .close()\n    .extrude(half_w, both=True)\n)\nwedge_py = (\n    cq.Workplane(\"YZ\")\n    .polyline([(inner, 0.0), (outer, 0.0), (outer, rise)])\n    .close()\n    .extrude(half_w, both=True)\n)\nwedge_ny = (\n    cq.Workplane(\"YZ\")\n    .polyline([(-inner, 0.0), (-outer, 0.0), (-outer, rise)])\n    .close()\n    .extrude(half_w, both=True)\n)\n# Leave the full-thickness cross intact; do not subtract the slope wedges.\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.5444428963190946e-08,
+    "components": 1,
+    "nodes": 586
+   },
+   "numbers_ok": null,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  },
+  {
+   "name": "alt3",
+   "code": "import math\nimport cadquery as cq\nslope_angle_deg = 45.0\ninner = 10.96\nouter = 27.4\nhalf_w = 10.96\nrun = outer - inner\nrise = run * math.tan(math.radians(slope_angle_deg))\nresult = (\n    cq.Workplane(\"XY\")\n    .polyline([[10.96, 10.96], [27.4, 10.96], [27.4, -10.96], [10.96, -10.96], [10.96, -27.4], [-10.96, -27.4], [-10.96, -10.96], [-27.4, -10.96], [-27.4, 10.96], [-10.96, 10.96], [-10.96, 27.4], [10.96, 27.4]])\n    .close()\n    .extrude(7.4)\n)\nwedge_px = (\n    cq.Workplane(\"XZ\")\n    .polyline([(inner, 0.0), (outer, 0.0), (outer, rise)])\n    .close()\n    .extrude(half_w, both=True)\n)\nwedge_nx = (\n    cq.Workplane(\"XZ\")\n    .polyline([(-inner, 0.0), (-outer, 0.0), (-outer, rise)])\n    .close()\n    .extrude(half_w, both=True)\n)\nwedge_py = (\n    cq.Workplane(\"YZ\")\n    .polyline([(inner, 0.0), (outer, 0.0), (outer, rise)])\n    .close()\n    .extrude(half_w, both=True)\n)\nwedge_ny = (\n    cq.Workplane(\"YZ\")\n    .polyline([(-inner, 0.0), (-outer, 0.0), (-outer, rise)])\n    .close()\n    .extrude(half_w, both=True)\n)\nresult = result.cut(wedge_px).cut(wedge_nx).cut(wedge_py).cut(wedge_ny)\nfor cx, cy, sx, sy in [\n    ((inner + outer) / 2, 0, run, 2 * half_w),\n    (-(inner + outer) / 2, 0, run, 2 * half_w),\n    (0, (inner + outer) / 2, 2 * half_w, run),\n    (0, -(inner + outer) / 2, 2 * half_w, run),\n]:\n    arm = cq.Workplane(\"XY\").box(sx, sy, 7.4, centered=(True, True, False)).translate((cx, cy, 0))\n    result = result.union(arm)\nresult = result.clean()\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.5420498597540976e-08,
+    "components": 1,
+    "nodes": 581
+   },
+   "numbers_ok": null,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 0.0
+  },
+  {
+   "name": "rag",
+   "code": "import math\nimport cadquery as cq\nslope_angle_deg = 45.0\ninner = 10.96\nouter = 27.4\nhalf_w = 10.96\nrun = outer - inner\nrise = run * math.tan(math.radians(slope_angle_deg))\nresult = (\n    cq.Workplane(\"XY\")\n    .polyline([[10.96, 10.96], [27.4, 10.96], [27.4, -10.96], [10.96, -10.96], [10.96, -27.4], [-10.96, -27.4], [-10.96, -10.96], [-27.4, -10.96], [-27.4, 10.96], [-10.96, 10.96], [-10.96, 27.4], [10.96, 27.4]])\n    .close()\n    .extrude(7.4)\n)\nwedge_px = (\n    cq.Workplane(\"XZ\")\n    .polyline([(inner, 0.0), (outer, 0.0), (outer, rise)])\n    .close()\n    .extrude(half_w, both=True)\n)\nwedge_nx = (\n    cq.Workplane(\"XZ\")\n    .polyline([(-inner, 0.0), (-outer, 0.0), (-outer, rise)])\n    .close()\n    .extrude(half_w, both=True)\n)\nwedge_py = (\n    cq.Workplane(\"YZ\")\n    .polyline([(inner, 0.0), (outer, 0.0), (outer, rise)])\n    .close()\n    .extrude(half_w, both=True)\n)\nwedge_ny = (\n    cq.Workplane(\"YZ\")\n    .polyline([(-inner, 0.0), (-outer, 0.0), (-outer, rise)])\n    .close()\n    .extrude(half_w, both=True)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.543765754844279e-08,
+    "components": 1,
+    "nodes": 585
+   },
+   "numbers_ok": null,
+   "changed": true,
+   "cluster": 0,
+   "robustness": 1.0
+  }
+ ]
+}

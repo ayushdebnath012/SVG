@@ -1,0 +1,27 @@
+{
+  "software": {
+    "python": "3.12.15",
+    "gmsh_api_version": "4.15.2",
+    "skfem_version": "12.0.2",
+    "numpy_version": "2.5.3"
+  },
+  "units": {
+    "length": "mm",
+    "stress": "MPa",
+    "force": "N"
+  },
+  "modeling_assumptions": {
+    "linear_elastic": true,
+    "small_displacements": true,
+    "material": {
+      "E": 70000,
+      "nu": 0.33
+    },
+    "boundary_conditions": {
+      "fixed_bottom": "zero displacement on faces at z=0",
+      "traction_top": {
+        "t_z": -1.98728
+      }
+    }
+  }
+}

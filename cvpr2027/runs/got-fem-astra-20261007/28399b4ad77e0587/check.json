@@ -1,0 +1,71 @@
+{
+ "id": "28399b4ad77e0587e9d1e7d563ec6a3a23aaa3a2fdf42f047fccbd600debb05a",
+ "source_fem": {
+  "ok": true,
+  "compliance": 2.040247005748521e-06,
+  "components": 1,
+  "nodes": 14199
+ },
+ "candidates": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(33.0, 33.0, 83.0)\n    .faces(\">Z\").workplane()\n    .center(1.5, 1.5)\n    .rect(16.5, 16.5)\n    .cutThruAll()\n    .edges(\"|Z\")\n    .fillet(0.6)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-12.0, -15.0), (0.0, -15.0), (12.0, -15.0)])\n    .hole(2.0)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-15.0, -12.0), (-15.0, 0.0), (-15.0, 12.0)])\n    .hole(2.0)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 4.6869001351328295e-07,
+    "components": 1,
+    "nodes": 36910
+   },
+   "consensus": 4,
+   "numbers_ok": null,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt1",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(33.0, 33.0, 83.0)\n    .faces(\">Z\").workplane()\n    .center(1.5, 1.5)\n    .rect(16.5, 16.5)\n    .cutThruAll()\n    .edges(\"|Z\")\n    .fillet(0.6)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-12.0, -15.0), (0.0, -15.0), (12.0, -15.0)])\n    .hole(2.0)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-15.0, -12.0), (-15.0, 0.0), (-15.0, 12.0)])\n    .hole(2.0)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 4.6843874390027683e-07,
+    "components": 1,
+    "nodes": 37053
+   },
+   "consensus": 4,
+   "numbers_ok": null,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt2",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(33.0, 33.0, 83.0)\n    .faces(\">Z\").workplane()\n    .center(1.5, 1.5)\n    .rect(33.0 / 2.0, 33.0 / 2.0)\n    .cutThruAll()\n    .edges(\"|Z\")\n    .fillet(0.6)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-12.0, -15.0), (0.0, -15.0), (12.0, -15.0)])\n    .hole(2.0)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-15.0, -12.0), (-15.0, 0.0), (-15.0, 12.0)])\n    .hole(2.0)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 4.68416460006575e-07,
+    "components": 1,
+    "nodes": 36948
+   },
+   "consensus": 4,
+   "numbers_ok": null,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt3",
+   "code": "import cadquery as cq\ncutout_side = 33.0 / 2.0\nresult = (\n    cq.Workplane(\"XY\")\n    .box(33.0, 33.0, 83.0)\n    .faces(\">Z\").workplane()\n    .center(1.5, 1.5)\n    .rect(cutout_side, cutout_side)\n    .cutThruAll()\n    .edges(\"|Z\")\n    .fillet(0.6)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-12.0, -15.0), (0.0, -15.0), (12.0, -15.0)])\n    .hole(2.0)\n    .faces(\">Z\").workplane()\n    .pushPoints([(-15.0, -12.0), (-15.0, 0.0), (-15.0, 12.0)])\n    .hole(2.0)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 4.6849567243020985e-07,
+    "components": 1,
+    "nodes": 36932
+   },
+   "consensus": 4,
+   "numbers_ok": null,
+   "changed": true,
+   "error": null
+  }
+ ]
+}

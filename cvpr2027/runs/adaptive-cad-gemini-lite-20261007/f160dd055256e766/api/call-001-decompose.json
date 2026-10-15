@@ -1,0 +1,28 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .cylinder(27.9, 18.8)\\n    .faces(\\\">Z\\\").workplane()\\n    .circle(16.92)\\n    .workplane(offset=9.0)\\n    .circle(1.5)\\n    .loft(combine=True)\\n    .union(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(0, 0, 10.375), rotate=cq.Vector(0, 0, 0.0))\\n            .transformed(offset=cq.Vector(5.64, 0, 0), rotate=cq.Vector(37.1, 0, 0))\\n            .polyline([[0.0, -12.5], [0.0, 12.5], [46.512, 8.938], [64.6, 0.0], [46.512, -8.938]])\\n            .close()\\n            .extrude(7.15)\\n    )\\n    .union(\\n        cq.Workplane(\\\"XY\\\")\\n            .transformed(offset=cq.Vector(0, 0, 10.375), rotate=cq.Vector(0, 0, 180.0))\\n            .transformed(offset=cq.Vector(5.64, 0, 0), rotate=cq.Vector(37.1, 0, 0))\\n            .polyline([[0.0, -12.5], [0.0, 12.5], [46.512, 8.938], [64.6, 0.0], [46.512, -8.938]])\\n            .close()\\n            .extrude(7.15)\\n    )\\n)\\nshow_object(result)\", \"instruction\": \"Remove one of the two propeller blades; keep the hub, spinner, and the remaining blade.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"34389cffaa74d42785d5fc2e7745256bfcdf3c7a260c50f8179795d939ba4273\", \"instruction\": \"Remove the two legs on the +X side; only the top and the two -X legs remain.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 10, \\\"insert\\\": [], \\\"start\\\": 4}]}\", \"strategies\": [], \"context\": [\"4:     .union(\", \"5:         cq.Workplane(\\\"XY\\\")\", \"6:             .transformed(offset=cq.Vector(93.75, 57.6, -78.25), rotate=cq.Vector(0, 0, 0))\", \"7:             .box(18.7, 18.7, 143.1)\", \"8:     )\", \"9:     .union(\", \"10:         cq.Workplane(\\\"XY\\\")\", \"11:             .transformed(offset=cq.Vector(93.75, -57.6, -78.25), rotate=cq.Vector(0, 0, 0))\", \"12:             .box(18.7, 18.7, 143.1)\", \"13:     )\"]}, {\"task_id\": \"366be68d56f2f7965a03cd235d109f362c8a6f96b7a1308d4045ee56680b3ded\", \"instruction\": \"Remove one of the two orthogonal slot cuts that form the cross-shaped slot through the middle of the turnbuckle, leaving only a single horizontal slot through the central body. The end loops, end pin holes, and the remaining slot stay unchanged.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 5, \\\"insert\\\": [], \\\"start\\\": 22}]}\", \"strategies\": [], \"context\": [\"22:             .transformed(offset=cq.Vector(0, 0, 0), rotate=cq.Vector(0, 0, 0))\", \"23:             .box(90.0, 35.8, 20.28)\", \"24:     )\", \"25:     .cut(\", \"26:         cq.Workplane(\\\"XY\\\")\"]}, {\"task_id\": \"07fda1263293c8937e9408083c240e7444fd686f3bdbd88e27640b33d4d7b4ca\", \"instruction\": \"Remove all six impeller blades. The back-plate disk, the central hub cylinder, the front ring, and the central bore all stay the same.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 48, \\\"insert\\\": [], \\\"start\\\": 8}]}\", \"strategies\": [], \"context\": [\"8:     )\", \"9:     .union(\", \"10:         cq.Workplane(\\\"XY\\\")\", \"11:             .transformed(offset=cq.Vector(0, 0, 0), rotate=cq.Vector(0, 0, 0.0))\", \"12:             .transformed(offset=cq.Vector(26.346, 0, 1.45), rotate=cq.Vector(0, 0, 0.3))\", \"13:             .polyline([(-13.146, -2.82), (-5.634, 2.585), (15.024, 1.974), (7.512, -3.525)])\", \"14:             .close()\", \"15:             .extrude(17.1)\", \"16:     )\", \"17:     .union(\", \"18:         cq.Workplane(\\\"XY\\\")\", \"19:             .transformed(offset=cq.Vector(0, 0, 0), rotate=cq.Vector(0, 0, 60.0))\"]}]}"
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 4096
+ },
+ "usage": {
+  "completion_tokens": 76,
+  "prompt_tokens": 1522,
+  "total_tokens": 1598
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\n  \"steps\": [\n    \"Identify and remove one of the blade extrusion union operations (rotation at 180.0 degrees).\"\n  ],\n  \"invariants\": [\n    \"The central cylinder hub, spinner loft, and the remaining propeller blade remain unchanged.\"\n  ],\n  \"dependencies\": []\n}\n```"
+}

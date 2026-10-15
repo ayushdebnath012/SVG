@@ -1,0 +1,36 @@
+{
+  "id": "chatcmpl-EZ4SuQoVAbiEQTIhrEBVgpThrDVHT",
+  "object": "chat.completion",
+  "created": 1792027352,
+  "model": "gpt-6-astra",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "def eigenvalues(path):\n    text = Path(path).read_text(errors=\"replace\")\n    number = r\"[-+]?(?:\\d+\\.?\\d*|\\.\\d+)(?:[EeDd][-+]?\\d+)?\"\n    row = re.compile(r\"^\\s*\\d+\\s+(\" + number + r\")\\s*$\")\n    values = []\n    active = False\n    have_rows = False\n\n    for line in text.splitlines():\n        compact = re.sub(r\"\\s+\", \"\", line).upper()\n        if \"BUCKLINGFACTOR\" in compact or (\n            \"MODENO\" in compact and \"BUCKLING\" in compact\n        ):\n            active = True\n            have_rows = False\n            continue\n\n        if not active:\n            continue\n\n        match = row.match(line)\n        if match:\n            values.append(float(re.sub(r\"[Dd]\", \"E\", match.group(1))))\n            have_rows = True\n        elif compact and have_rows:\n            active = False\n            have_rows = False\n\n    if not values:\n        raise RuntimeError(\"No buckling factors found in \" + str(path))\n    return np.asarray(values, dtype=float)",
+        "refusal": null,
+        "annotations": []
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 423,
+    "completion_tokens": 489,
+    "total_tokens": 912,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 234,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": null
+}

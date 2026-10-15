@@ -1,0 +1,25 @@
+{
+  "model": "gpt-6-astra",
+  "sample_selection": "First six distinct geometry IDs in validation tar stream; no label-based selection",
+  "task": "Predict archived per-vertex VonMises median field, in raw stress units (Pa if SI-consistent)",
+  "input": "Full rounded vertex coordinates, tetrahedra, fixed vertex mask, load class, material, two views, published simulation source",
+  "hidden": [
+    "VonMises",
+    "u",
+    "StressTensor"
+  ],
+  "queries": "32 uniformly spaced vertex indices, chosen without inspecting labels",
+  "metrics": [
+    "sample relative L2",
+    "sample MAE",
+    "mean/median/p95/max field summary relative errors",
+    "abstention rate"
+  ],
+  "limitations": [
+    "Six geometry convenience sample, not full benchmark",
+    "Realized stochastic load facets and RNG seeds are absent from H5 inputs",
+    "Current published code is procedural context; dataset generation commit is unverified",
+    "No fresh FEniCSx solve; archived labels are the comparison target"
+  ],
+  "simulation_source_sha256": "038b6210b623c6ac774833cddfbc340809b5e3f5357a772c55b6ff7db59189f6"
+}

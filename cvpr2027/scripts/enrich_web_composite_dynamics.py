@@ -1,0 +1,30 @@
+from pathlib import Path
+import json,numpy as np,hashlib
+R=Path('cvpr2027/data/web-cad-fem-composite-dynamics');p=R/'catalog.json';d=json.loads(p.read_text());docs={x['case']:x for x in json.loads((R/'documentation-manifest.json').read_text()) if 'case'in x}
+descriptions={'lsdyna_bird_strike':'SPH bird impact on curved ribbed composite wing; explicit dynamics and damage.','thermal_solid':'PCB-like layered board with local electronic-block regions; thermal-to-structural loading.','cyclic_symmetry':'Layered curved rotational sector; cyclic-symmetry static structural response.','random_vibration':'Simple sandwich panel; stochastic PSD composite failure analysis.','fatigue':'Simple flat laminate; saved static stress basis for a synthetic fatigue demonstration.'}
+for r in d['records']:
+ r['description']=descriptions[r['id']];r['documentation']=docs[r['id']]['documentation'];r['original_fem_figures']=docs[r['id']]['figures'];r['status']='Candidate, source setup/units/matching/convergence not fully validated'
+ if r['id']=='lsdyna_bird_strike':
+  f=R/'pydpf-composites/lsdyna_bird_strike/UNVERIFIED-lasso-parser-arrays.npz';z=np.load(f)
+  r['exploratory_d3plot_audit']={'reader':'lasso-python 2.0.4','all_arrays_excluded_from_scoring':True,'nodes':len(z['node_ids']),'shell_elements':len(z['element_shell_ids']),'sph_particles':len(z['sph_node_indexes']),'state_labels':z['timesteps'].tolist(),'file':str(f.relative_to(R)),'warnings':['Shell variable count mismatch 260 versus 314.','Plastic strain tensor reshape failure.'],'node_coordinate_convention':'Parser array node_displacement holds state coordinates; initial-state values exactly equal node_coordinates. It must not be treated as a zero-initial displacement vector.','source_maxint':10,'source_neips':16,'source_initial_velocity_keyword_value':125000,'velocity_units_review_pending':True}
+ if r['id']=='random_vibration':r['status']='Parser extraction held: nonfinite and implausible displacement values; all extracted arrays excluded from scoring.'
+ if r['id']=='fatigue':r['status']='Saved static FEM candidate only. Fatigue example uses synthetic loads and a dummy S-N curve; excluded from fatigue-life benchmark.'
+d['geometry_family_count_convention']='Five publisher projects, not five complex industrial CAD tasks. One wing assembly; PCB/sector/panel/flat-plate teaching geometries. Frames, plies, thumbnails, submodel CAD and node rows are not extra tasks.'
+d['potential_reference_metrics']={'thermal_solid':['temperature-field error with confirmed thermal scale, node mapping and exact setup','translation/stress error with source units and recovery convention'],'cyclic_symmetry':['base-sector translation/stress errors with node/sector mapping'],'fatigue':['static translation/stress errors only; dummy fatigue damage excluded'],'lsdyna_bird_strike':['future state-aligned displacement, material-frame ply stress and damage errors after decoder verification'],'random_vibration':['future componentwise statistical PSD errors; no ordinary vector magnitude or tensor rotation for directional RMS values']}
+d['actual_model_scores']=None;d['documentation_license']='Official figures/HTML retain original publisher copyright; local research only. Example-data assets have repository MIT notice.'
+p.write_text(json.dumps(d,indent=2,allow_nan=False)+'\n')
+readme='''# Published CAD + FEM: composite and dynamic examples
+
+Five publisher projects downloaded at the pinned Ansys example-data revision. One ribbed composite-wing assembly adds complex geometry. PCB, curved cyclic sector, sandwich panel and flat laminate add physics variety using simpler geometry.
+
+Original SpaceClaim CAD with serialized ACIS geometry, Workbench archives, solver results, ACP HDF5 definitions and MatML materials are included. Cyclic geometry also has an independently imported valid STEP. Original CAD thumbnails are views, not dimensioned engineering drawings. No CAD creation, source-code execution, new solve or frontier-model call occurred.
+
+Read catalog.json first. Three static RST projects have read-only extracted arrays. Both vibration reader NPZs and the LS-DYNA parser NPZ are explicitly UNVERIFIED and must not enter scoring. Vibration displacement decoding is invalid; LS-DYNA shell layout decoding reported warnings. Preserve original binaries for a compatible independent decoder. Fatigue data provide a static stress basis; published synthetic load series and dummy S-N curve are not physical fatigue-life ground truth.
+
+Before admission: establish exact CAD/result revision matching, source units, loads/constraints, material and layup mappings, stress recovery and mesh convergence. Zero certified admissions. Drawing reconstruction and supplied-CAD FEM tracks remain separate. No model scores have been measured.
+
+Download-manifest.json pins original assets and hashes, including four real Git LFS HDF5 objects (not pointer text). Documentation-manifest.json identifies original publisher figures and URLs. Source assets: repository MIT; retain LICENSE. Official documentation/figures retain their separate copyright, local research copies only. No public release has been made.
+'''
+(R/'README.md').write_text(readme)
+master=Path('cvpr2027/data/web-complex-fem/selected-dataset.json');m=json.loads(master.read_text());m['composite_dynamics_web_extension']={'catalog':str(p),'pdf':'cvpr2027/output/pdf/web-cad-fem-composite-dynamics.pdf','zip':'cvpr2027/output/datasets/web-cad-fem-composite-dynamics.zip','publisher_projects':5,'native_cad_saved_result_candidates':5,'complex_industrial_geometry_candidates':1,'simple_geometry_physics_variety_candidates':4,'readable_static_rst_projects':3,'parser_held_projects':2,'verified_new_dimensioned_engineering_drawings':0,'certified_cases':0,'important_limit':'Wing shell decoding and stochastic vibration extraction held; synthetic fatigue curve excluded from fatigue-life scoring.'};master.write_text(json.dumps(m,indent=2)+'\n')
+print('catalog enriched and master collection registered')

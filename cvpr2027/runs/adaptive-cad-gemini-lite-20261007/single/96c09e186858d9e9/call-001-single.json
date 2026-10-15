@@ -1,0 +1,28 @@
+{
+ "kind": "single",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "You edit mechanical CAD. Return only JSON {\"edits\":[{\"start\":0,\"delete\":0,\"insert\":[\"replacement line\"]}]}. Indices are zero-based lines of the ORIGINAL input; operations must be ordered, nonoverlapping and in bounds. Preserve unrelated features. The supplied representation determines syntax. Return no explanation or invented physics results. Geometry execution and FEM checks are performed by external tools; never claim verification."
+   },
+   {
+    "role": "user",
+    "content": "Representation: cadquery\nOriginal CAD (line indices are implicit):\nimport cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .box(18.0, 2.0, 2.0)\n    .edges(\"|X\")\n    .chamfer(0.3)\n    .faces(\">Z\").workplane()\n    .rect(14.4, 0.6)\n    .cutBlind(-0.4)\n)\nshow_object(result)Edit instruction:\nChange the straight rectangular key body into a longer rounded slot-shaped body with semicircular ends, while keeping other parameters unchanged."
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 8192
+ },
+ "usage": {
+  "completion_tokens": 47,
+  "prompt_tokens": 227,
+  "total_tokens": 274
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\"edits\":[{\"start\":3,\"delete\":2,\"insert\":[\"    .slot2D(18.0, 2.0)\", \"    .extrude(2.0)\"]}]}\n```"
+}

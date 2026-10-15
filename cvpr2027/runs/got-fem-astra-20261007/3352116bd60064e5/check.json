@@ -1,0 +1,71 @@
+{
+ "id": "3352116bd60064e5ed2ed0fa4a455a238be86b8ceed4b40eca9dbe29146b3620",
+ "source_fem": {
+  "ok": true,
+  "compliance": 1.2048479294385767e-06,
+  "components": 1,
+  "nodes": 2020
+ },
+ "candidates": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polyline([(6.16, 0.0), (22.9, 0.0), (10.369, 10.4), (22.615, 20.8), (10.108, 31.2), (21.476, 41.6), (9.847, 52.0), (20.337, 62.4), (6.16, 62.4), (6.16, 0.0)])\n    .close()\n    .revolve(360, (0, 0, 0), (0, 1, 0))\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.3207286571736561e-06,
+    "components": 1,
+    "nodes": 1795
+   },
+   "consensus": 1,
+   "numbers_ok": null,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt1",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polyline([(6.16, 0.0), (22.9, 0.0), (10.369, 10.4), (22.615, 20.8), (10.108, 31.2), (21.476, 41.6), (9.847, 52.0), (20.337, 62.4), (9.586, 72.8), (6.16, 72.8), (6.16, 0.0)])\n    .close()\n    .revolve(360, (0, 0, 0), (0, 1, 0))\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.3012258321218716e-06,
+    "components": 1,
+    "nodes": 1884
+   },
+   "consensus": 3,
+   "numbers_ok": null,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt2",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polyline([(6.16, 0.0), (22.9, 0.0), (10.369, 10.4), (22.615, 20.8), (10.108, 31.2), (21.476, 41.6), (9.847, 52.0), (20.337, 62.4), (9.586, 72.8), (19.197, 83.2), (6.16, 83.2), (6.16, 0.0)])\n    .close()\n    .revolve(360, (0, 0, 0), (0, 1, 0))\n    .intersect(cq.Workplane(\"XY\").box(60, 72.8, 60, centered=(True, False, True)))\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.3129939828881682e-06,
+    "components": 1,
+    "nodes": 1889
+   },
+   "consensus": 3,
+   "numbers_ok": null,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt3",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .polyline([(6.16, 0.0), (22.9, 0.0), (10.369, 10.4), (22.615, 20.8), (10.108, 31.2), (21.476, 41.6), (9.847, 52.0), (20.337, 62.4), (9.586, 72.8), (19.197, 83.2), (6.16, 83.2), (6.16, 0.0)])\n    .close()\n    .revolve(360, (0, 0, 0), (0, 1, 0))\n    .cut(cq.Workplane(\"XY\").box(60, 20, 60, centered=(True, False, True)).translate((0, 72.8, 0)))\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.3086161564694716e-06,
+    "components": 1,
+    "nodes": 1889
+   },
+   "consensus": 3,
+   "numbers_ok": null,
+   "changed": true,
+   "error": null
+  }
+ ]
+}

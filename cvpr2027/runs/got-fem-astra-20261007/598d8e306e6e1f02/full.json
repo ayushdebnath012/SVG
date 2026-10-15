@@ -1,0 +1,99 @@
+{
+ "source_fem": {
+  "ok": false,
+  "error": "ValueError: Unsupported Python construct"
+ },
+ "nodes": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\narm_width = 21.92\narm_length = 16.44\nthickness = 7.4\nhalf_stage = arm_width / 2.0\nouter_extent = half_stage + arm_length\nresult = (\n    cq.Workplane(\"XY\")\n    .polyline([\n        (-half_stage, -outer_extent),\n        (half_stage, -outer_extent),\n        (half_stage, -half_stage),\n        (outer_extent, -half_stage),\n        (outer_extent, half_stage),\n        (half_stage, half_stage),\n        (half_stage, outer_extent),\n        (-half_stage, outer_extent),\n        (-half_stage, half_stage),\n        (-outer_extent, half_stage),\n        (-outer_extent, -half_stage),\n        (-half_stage, -half_stage),\n    ])\n    .close()\n    .extrude(thickness)\n )\nshow_object(result)\n",
+   "gates": false,
+   "fem": {
+    "ok": false,
+    "error": "not executed"
+   },
+   "numbers_ok": null,
+   "changed": null,
+   "cluster": null,
+   "robustness": null
+  },
+  {
+   "name": "alt1",
+   "code": "import cadquery as cq\ndef make_center_stage(stage_size: float, height: float) -> cq.Workplane:\n    \"\"\"Create the square center stage.\n    Args:\n        stage_size: Side length of the center square stage.\n        height: Height of the center stage.\n    Returns:\n        A CadQuery solid for the center stage.\n    \"\"\"\n    return (\n        cq.Workplane(\"XY\")\n        .rect(stage_size, stage_size)\n        .extrude(height)\n    )\ndef make_x_ramp(\n    x_start: float,\n    x_end: float,\n    y_min: float,\n    y_max: float,\n    inner_height: float,\n    inner_on_left: bool,\n) -> cq.Workplane:\n    \"\"\"Create a ramp whose slope changes along the X direction.\n    Args:\n        x_start: Start x-coordinate of the ramp footprint.\n        x_end: End x-coordinate of the ramp footprint.\n        y_min: Minimum y-coordinate of the ramp footprint.\n        y_max: Maximum y-coordinate of the ramp footprint.\n        inner_height: Height at the side connected to the center stage.\n        inner_on_left: True if the higher side is at x_start, otherwise at x_end.\n    Returns:\n        A CadQuery solid for one X-direction ramp.\n    \"\"\"\n    if inner_on_left:\n        profile = [\n            (x_start, 0.0),\n            (x_end, 0.0),\n            (x_start, inner_height),\n        ]\n    else:\n        profile = [\n            (x_start, 0.0),\n            (x_end, 0.0),\n            (x_end, inner_height),\n        ]\n    return (\n        cq.Workplane(\"XZ\")\n        .workplane(offset=y_min)\n        .polyline(profile)\n        .close()\n        .extrude(y_max - y_min)\n    )\ndef make_y_ramp(\n    y_start: float,\n    y_end: float,\n    x_min: float,\n    x_max: float,\n    inner_height: float,\n    inner_on_bottom: bool,\n) -> cq.Workplane:\n    \"\"\"Create a ramp whose slope changes along the Y direction.\n    Args:\n        y_start: Start y-coordinate of the ramp footprint.\n        y_end: End y-coordinate of the ramp footprint.\n        x_min: Minimum x-coordinate of the ramp footprint.\n        x_max: Maximum x-coordinate of the ramp footprint.\n        inner_height: Height at the side connected to the center stage.\n        inner_on_bottom: True if the higher side is at y_start, otherwise at y_end.\n    Returns:\n        A CadQuery solid for one Y-direction ramp.\n    \"\"\"\n    if inner_on_bottom:\n        profile = [\n            (y_start, 0.0),\n            (y_end, 0.0),\n            (y_start, inner_height),\n        ]\n    else:\n        profile = [\n            (y_start, 0.0),\n            (y_end, 0.0),\n            (y_end, inner_height),\n        ]\n    return (\n        cq.Workplane(\"YZ\")\n        .workplane(offset=x_min)\n        .polyline(profile)\n        .close()\n        .extrude(x_max - x_min)\n    )\narm_width = 21.92\narm_length = 16.44\nthickness = 7.4\nhalf_stage = arm_width / 2.0\nouter_extent = half_stage + arm_length\ncross_outline = [\n    (-half_stage, -outer_extent), (half_stage, -outer_extent),\n    (half_stage, -half_stage), (outer_extent, -half_stage),\n    (outer_extent, half_stage), (half_stage, half_stage),\n    (half_stage, outer_extent), (-half_stage, outer_extent),\n    (-half_stage, half_stage), (-outer_extent, half_stage),\n    (-outer_extent, -half_stage), (-half_stage, -half_stage),\n]\nresult = cq.Workplane(\"XY\").polyline(cross_outline).close().extrude(thickness)\nshow_object(result)\n",
+   "gates": false,
+   "fem": {
+    "ok": false,
+    "error": "not executed"
+   },
+   "numbers_ok": null,
+   "changed": null,
+   "cluster": null,
+   "robustness": null
+  },
+  {
+   "name": "alt2",
+   "code": "import cadquery as cq\ndef make_center_stage(stage_size: float, height: float) -> cq.Workplane:\n    \"\"\"Create the square center stage.\n    Args:\n        stage_size: Side length of the center square stage.\n        height: Height of the center stage.\n    Returns:\n        A CadQuery solid for the center stage.\n    \"\"\"\n    return (\n        cq.Workplane(\"XY\")\n        .rect(stage_size, stage_size)\n        .extrude(height)\n    )\ndef make_x_ramp(\n    x_start: float,\n    x_end: float,\n    y_min: float,\n    y_max: float,\n    inner_height: float,\n    inner_on_left: bool,\n) -> cq.Workplane:\n    \"\"\"Create a ramp whose slope changes along the X direction.\n    Args:\n        x_start: Start x-coordinate of the ramp footprint.\n        x_end: End x-coordinate of the ramp footprint.\n        y_min: Minimum y-coordinate of the ramp footprint.\n        y_max: Maximum y-coordinate of the ramp footprint.\n        inner_height: Height at the side connected to the center stage.\n        inner_on_left: True if the higher side is at x_start, otherwise at x_end.\n    Returns:\n        A CadQuery solid for one X-direction ramp.\n    \"\"\"\n    if inner_on_left:\n        profile = [\n            (x_start, 0.0),\n            (x_end, 0.0),\n            (x_start, inner_height),\n        ]\n    else:\n        profile = [\n            (x_start, 0.0),\n            (x_end, 0.0),\n            (x_end, inner_height),\n        ]\n    return (\n        cq.Workplane(\"XZ\")\n        .workplane(offset=y_min)\n        .polyline(profile)\n        .close()\n        .extrude(y_max - y_min)\n    )\ndef make_y_ramp(\n    y_start: float,\n    y_end: float,\n    x_min: float,\n    x_max: float,\n    inner_height: float,\n    inner_on_bottom: bool,\n) -> cq.Workplane:\n    \"\"\"Create a ramp whose slope changes along the Y direction.\n    Args:\n        y_start: Start y-coordinate of the ramp footprint.\n        y_end: End y-coordinate of the ramp footprint.\n        x_min: Minimum x-coordinate of the ramp footprint.\n        x_max: Maximum x-coordinate of the ramp footprint.\n        inner_height: Height at the side connected to the center stage.\n        inner_on_bottom: True if the higher side is at y_start, otherwise at y_end.\n    Returns:\n        A CadQuery solid for one Y-direction ramp.\n    \"\"\"\n    if inner_on_bottom:\n        profile = [\n            (y_start, 0.0),\n            (y_end, 0.0),\n            (y_start, inner_height),\n        ]\n    else:\n        profile = [\n            (y_start, 0.0),\n            (y_end, 0.0),\n            (y_end, inner_height),\n        ]\n    return (\n        cq.Workplane(\"YZ\")\n        .workplane(offset=x_min)\n        .polyline(profile)\n        .close()\n        .extrude(x_max - x_min)\n    )\narm_width = 21.92\narm_length = 16.44\nthickness = 7.4\nhalf_stage = arm_width / 2.0\nouter_extent = half_stage + arm_length\nhorizontal_bar = cq.Workplane(\"XY\").rect(2.0 * outer_extent, arm_width).extrude(thickness)\nvertical_bar = cq.Workplane(\"XY\").rect(arm_width, 2.0 * outer_extent).extrude(thickness)\nresult = horizontal_bar.union(vertical_bar).clean()\nshow_object(result)\n",
+   "gates": false,
+   "fem": {
+    "ok": false,
+    "error": "not executed"
+   },
+   "numbers_ok": null,
+   "changed": null,
+   "cluster": null,
+   "robustness": null
+  },
+  {
+   "name": "alt3",
+   "code": "import cadquery as cq\ndef make_center_stage(stage_size: float, height: float) -> cq.Workplane:\n    \"\"\"Create the square center stage.\n    Args:\n        stage_size: Side length of the center square stage.\n        height: Height of the center stage.\n    Returns:\n        A CadQuery solid for the center stage.\n    \"\"\"\n    return (\n        cq.Workplane(\"XY\")\n        .rect(stage_size, stage_size)\n        .extrude(height)\n    )\ndef make_x_ramp(\n    x_start: float,\n    x_end: float,\n    y_min: float,\n    y_max: float,\n    inner_height: float,\n    inner_on_left: bool,\n) -> cq.Workplane:\n    \"\"\"Create a ramp whose slope changes along the X direction.\n    Args:\n        x_start: Start x-coordinate of the ramp footprint.\n        x_end: End x-coordinate of the ramp footprint.\n        y_min: Minimum y-coordinate of the ramp footprint.\n        y_max: Maximum y-coordinate of the ramp footprint.\n        inner_height: Height at the side connected to the center stage.\n        inner_on_left: True if the higher side is at x_start, otherwise at x_end.\n    Returns:\n        A CadQuery solid for one X-direction ramp.\n    \"\"\"\n    if inner_on_left:\n        profile = [\n            (x_start, 0.0),\n            (x_end, 0.0),\n            (x_start, inner_height),\n        ]\n    else:\n        profile = [\n            (x_start, 0.0),\n            (x_end, 0.0),\n            (x_end, inner_height),\n        ]\n    return (\n        cq.Workplane(\"XZ\")\n        .workplane(offset=y_min)\n        .polyline(profile)\n        .close()\n        .extrude(y_max - y_min)\n    )\ndef make_y_ramp(\n    y_start: float,\n    y_end: float,\n    x_min: float,\n    x_max: float,\n    inner_height: float,\n    inner_on_bottom: bool,\n) -> cq.Workplane:\n    \"\"\"Create a ramp whose slope changes along the Y direction.\n    Args:\n        y_start: Start y-coordinate of the ramp footprint.\n        y_end: End y-coordinate of the ramp footprint.\n        x_min: Minimum x-coordinate of the ramp footprint.\n        x_max: Maximum x-coordinate of the ramp footprint.\n        inner_height: Height at the side connected to the center stage.\n        inner_on_bottom: True if the higher side is at y_start, otherwise at y_end.\n    Returns:\n        A CadQuery solid for one Y-direction ramp.\n    \"\"\"\n    if inner_on_bottom:\n        profile = [\n            (y_start, 0.0),\n            (y_end, 0.0),\n            (y_start, inner_height),\n        ]\n    else:\n        profile = [\n            (y_start, 0.0),\n            (y_end, 0.0),\n            (y_end, inner_height),\n        ]\n    return (\n        cq.Workplane(\"YZ\")\n        .workplane(offset=x_min)\n        .polyline(profile)\n        .close()\n        .extrude(x_max - x_min)\n    )\narm_width = 21.92\narm_length = 16.44\nthickness = 7.4\nhalf_stage = arm_width / 2.0\nouter_extent = half_stage + arm_length\nresult = cq.Workplane(\"XY\").rect(2.0 * outer_extent, 2.0 * outer_extent).extrude(thickness)\ncorner_center = half_stage + arm_length / 2.0\ncorner_cutters = (\n    cq.Workplane(\"XY\")\n    .pushPoints([\n        (-corner_center, -corner_center),\n        (-corner_center, corner_center),\n        (corner_center, -corner_center),\n        (corner_center, corner_center),\n    ])\n    .rect(arm_length, arm_length)\n    .extrude(thickness)\n )\nresult = result.cut(corner_cutters).clean()\nshow_object(result)\n",
+   "gates": false,
+   "fem": {
+    "ok": false,
+    "error": "not executed"
+   },
+   "numbers_ok": null,
+   "changed": null,
+   "cluster": null,
+   "robustness": null
+  },
+  {
+   "name": "mcts1-refine",
+   "code": "import cadquery as cq\narm_width = 21.92\narm_length = 16.44\nthickness = 7.4\nhalf_stage = arm_width / 2.0\nouter_extent = half_stage + arm_length\nresult = (\n    cq.Workplane(\"XY\")\n    .rect(2.0 * outer_extent, arm_width)\n    .extrude(thickness)\n    .union(\n        cq.Workplane(\"XY\")\n        .rect(arm_width, 2.0 * outer_extent)\n        .extrude(thickness)\n    )\n    .clean()\n)\nshow_object(result)\n",
+   "gates": false,
+   "fem": {
+    "ok": false,
+    "error": "not executed"
+   },
+   "numbers_ok": null,
+   "changed": null,
+   "cluster": null,
+   "robustness": null
+  },
+  {
+   "name": "mcts2-refine",
+   "code": "import cadquery as cq\narm_width = 21.92\narm_length = 16.44\nthickness = 7.4\nhalf_stage = arm_width / 2.0\nouter_extent = half_stage + arm_length\ncross_outline = [\n    (-half_stage, -outer_extent),\n    (half_stage, -outer_extent),\n    (half_stage, -half_stage),\n    (outer_extent, -half_stage),\n    (outer_extent, half_stage),\n    (half_stage, half_stage),\n    (half_stage, outer_extent),\n    (-half_stage, outer_extent),\n    (-half_stage, half_stage),\n    (-outer_extent, half_stage),\n    (-outer_extent, -half_stage),\n    (-half_stage, -half_stage),\n]\nresult = cq.Workplane(\"XY\").polyline(cross_outline).close().extrude(thickness)\nshow_object(result)\n",
+   "gates": false,
+   "fem": {
+    "ok": false,
+    "error": "not executed"
+   },
+   "numbers_ok": null,
+   "changed": null,
+   "cluster": null,
+   "robustness": null
+  },
+  {
+   "name": "rag",
+   "code": "import cadquery as cq\ndef make_center_stage(stage_size: float, height: float) -> cq.Workplane:\n    \"\"\"Create the square center stage.\n    Args:\n        stage_size: Side length of the center square stage.\n        height: Height of the center stage.\n    Returns:\n        A CadQuery solid for the center stage.\n    \"\"\"\n    return (\n        cq.Workplane(\"XY\")\n        .rect(stage_size, stage_size)\n        .extrude(height)\n    )\ndef make_x_ramp(\n    x_start: float,\n    x_end: float,\n    y_min: float,\n    y_max: float,\n    inner_height: float,\n    inner_on_left: bool,\n) -> cq.Workplane:\n    \"\"\"Create a ramp whose slope changes along the X direction.\n    Args:\n        x_start: Start x-coordinate of the ramp footprint.\n        x_end: End x-coordinate of the ramp footprint.\n        y_min: Minimum y-coordinate of the ramp footprint.\n        y_max: Maximum y-coordinate of the ramp footprint.\n        inner_height: Height at the side connected to the center stage.\n        inner_on_left: True if the higher side is at x_start, otherwise at x_end.\n    Returns:\n        A CadQuery solid for one X-direction ramp.\n    \"\"\"\n    if inner_on_left:\n        profile = [\n            (x_start, 0.0),\n            (x_end, 0.0),\n            (x_start, inner_height),\n        ]\n    else:\n        profile = [\n            (x_start, 0.0),\n            (x_end, 0.0),\n            (x_end, inner_height),\n        ]\n    return (\n        cq.Workplane(\"XZ\")\n        .workplane(offset=y_min)\n        .polyline(profile)\n        .close()\n        .extrude(y_max - y_min)\n    )\ndef make_y_ramp(\n    y_start: float,\n    y_end: float,\n    x_min: float,\n    x_max: float,\n    inner_height: float,\n    inner_on_bottom: bool,\n) -> cq.Workplane:\n    \"\"\"Create a ramp whose slope changes along the Y direction.\n    Args:\n        y_start: Start y-coordinate of the ramp footprint.\n        y_end: End y-coordinate of the ramp footprint.\n        x_min: Minimum x-coordinate of the ramp footprint.\n        x_max: Maximum x-coordinate of the ramp footprint.\n        inner_height: Height at the side connected to the center stage.\n        inner_on_bottom: True if the higher side is at y_start, otherwise at y_end.\n    Returns:\n        A CadQuery solid for one Y-direction ramp.\n    \"\"\"\n    if inner_on_bottom:\n        profile = [\n            (y_start, 0.0),\n            (y_end, 0.0),\n            (y_start, inner_height),\n        ]\n    else:\n        profile = [\n            (y_start, 0.0),\n            (y_end, 0.0),\n            (y_end, inner_height),\n        ]\n    return (\n        cq.Workplane(\"YZ\")\n        .workplane(offset=x_min)\n        .polyline(profile)\n        .close()\n        .extrude(x_max - x_min)\n    )\narm_width = 21.92\narm_length = 16.44\nthickness = 7.4\nhalf_stage = arm_width / 2.0\nouter_extent = half_stage + arm_length\nresult = (\n    cq.Workplane(\"XY\")\n    .polyline([\n        (-half_stage, -outer_extent),\n        (half_stage, -outer_extent),\n        (half_stage, -half_stage),\n        (outer_extent, -half_stage),\n        (outer_extent, half_stage),\n        (half_stage, half_stage),\n        (half_stage, outer_extent),\n        (-half_stage, outer_extent),\n        (-half_stage, half_stage),\n        (-outer_extent, half_stage),\n        (-outer_extent, -half_stage),\n        (-half_stage, -half_stage),\n    ])\n    .close()\n    .extrude(thickness)\n )\nshow_object(result)\n",
+   "gates": false,
+   "fem": {
+    "ok": false,
+    "error": "not executed"
+   },
+   "numbers_ok": null,
+   "changed": null,
+   "cluster": null,
+   "robustness": null
+  }
+ ]
+}

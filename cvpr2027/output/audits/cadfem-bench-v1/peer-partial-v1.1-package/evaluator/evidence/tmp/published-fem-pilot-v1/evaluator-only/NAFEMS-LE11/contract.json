@@ -1,0 +1,62 @@
+{
+  "case_id": "NAFEMS-LE11",
+  "family": "Thermoelasticity",
+  "source_url": "https://www.seamplex.com/feenox/examples/mechanical.html",
+  "public_training_contamination": "possible",
+  "qois": [
+    {
+      "key": "sigma_zz_at_A",
+      "unit": "MPa",
+      "value": -105.04,
+      "kind": "published_FEM_solver_output",
+      "locator": "Published terminal block in section NAFEMS LE11 cylinder/taper/sphere"
+    }
+  ],
+  "accepted_tolerances": null,
+  "certified_scored_release": false,
+  "independent_baseline_verified": false,
+  "expected_physics": "T(x,y,z) = sqrt(x^2 + y^2) + z\nBC xz     v=0       # displacement vector is [u,v,w]\nBC yz     u=0       # u = displacement in x\nBC xy     w=0       # v = displacement in y\nBC HIH'I' w=0       # w = displacement in z\nE = 210e3*1e6       # mesh is in meters, so E=210e3 MPa -> Pa\nnu = 0.3            # dimensionless\nalpha = 2.3e-4      # in 1/\u00baC as in the problem\n",
+  "expected_formulation": "3D linear thermoelasticity",
+  "original_assets": [
+    {
+      "role": "cad",
+      "path": "cvpr2027/tmp/engineering-fem-crawl/repo/examples/nafems-le11.geo",
+      "sha256": "492deb02ce78af02daff3abb74969c35efeff489a69766307a4b1c0b88590a99",
+      "bytes": 1733
+    },
+    {
+      "role": "results_file",
+      "path": "cvpr2027/tmp/engineering-fem-crawl/mechanical.html",
+      "sha256": "ed2b70c18a89a800be5db34fe597d7765be1e9c2762dce8b78e7f78eac1c0d58",
+      "bytes": 148764
+    },
+    {
+      "role": "drawing",
+      "path": "cvpr2027/tmp/engineering-fem-crawl/repo/examples/nafems-le11-problem.png",
+      "sha256": "80f990fa9037f99a82aac056f2fad84a25db4a87c9ec17d4a4727cd85fcbbf78",
+      "bytes": 49251
+    },
+    {
+      "path": "cvpr2027/tmp/engineering-fem-crawl/repo/examples/nafems-le11.fee",
+      "sha256": "0d1a72db567c8a21140c3803501e5296fe230925c9be7db1245d8589da3ffac1",
+      "bytes": 810,
+      "role": "original_file"
+    },
+    {
+      "path": "cvpr2027/tmp/engineering-fem-crawl/repo/examples/nafems-le11.geo",
+      "sha256": "492deb02ce78af02daff3abb74969c35efeff489a69766307a4b1c0b88590a99",
+      "bytes": 1733,
+      "role": "original_mesh_definition"
+    },
+    {
+      "path": "cvpr2027/tmp/benchmark-audit/init.c",
+      "sha256": "59caecd91af1e8886057026d464afc5fbd7d041ec9c78063a57ceea09e793bc5",
+      "bytes": 29491,
+      "role": "source_solver_temperature_default",
+      "source_url": "https://raw.githubusercontent.com/seamplex/feenox/06965026d6c73919ee02744192ec4b7526bb7e5c/src/pdes/mechanical/init.c",
+      "locator": "Global zero initialization at line 25; T0 override at lines 373-391."
+    }
+  ],
+  "geometry_criteria": "Trusted review of topology, dimensions, units and CAD-to-mesh correspondence.",
+  "convergence_criteria": "Trusted review of at least two distinct refinements and stress recovery; numeric agreement alone does not pass."
+}

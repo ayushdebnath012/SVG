@@ -1,0 +1,65 @@
+from pathlib import Path
+import json,zipfile,hashlib
+from reportlab.platypus import SimpleDocTemplate,Paragraph,Spacer,Image,PageBreak,Table,TableStyle
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.lib import colors
+import pymupdf
+D=Path('cvpr2027/data/web-cad-fem-nonlinear-modal');T=Path('cvpr2027/tmp/cad-fem-morphing-search');O=Path('cvpr2027/output/pdf/web-cad-fem-nonlinear-modal.pdf');cat=json.loads((D/'catalog.json').read_text());styles=getSampleStyleSheet();styles['BodyText'].fontSize=9.5;styles['BodyText'].leading=13;story=[]
+def p(s):story.append(Paragraph(s,styles['BodyText']));story.append(Spacer(1,7))
+def h(s):story.append(Paragraph(s,styles['Heading1']));story.append(Spacer(1,9))
+def img(name,w=460,h=197):story.append(Image(str(T/name),width=w,height=h));story.append(Spacer(1,6))
+def table(rows,widths):
+ t=Table([[Paragraph(str(x),styles['BodyText']) for x in row] for row in rows],colWidths=widths);t.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,0),colors.HexColor('#e2e8f0')),('VALIGN',(0,0),(-1,-1),'TOP'),('TOPPADDING',(0,0),(-1,-1),6),('BOTTOMPADDING',(0,0),(-1,-1),6),('LINEBELOW',(0,0),(-1,-1),.3,colors.lightgrey)]));story.append(t);story.append(Spacer(1,10))
+h('Published spanner CAD + FEM fields')
+p('12 October 2026. Collection extension: five native CAD/field cases and nine STEP/modal-table candidates. One complex wing-box source held separately. No local CAD generation, FEM solves or model calls.')
+img('Spanner-cad.png');p('<b>Original CAD inspection:</b> source fcFEM_Spanner.FCStd Body BREP. One valid solid, 22 faces. This is a shaped mechanical tool; tessellation only, no new geometry.')
+img('fcFEM_Spanner-CCX_Time_1_0_Results.png');p('<b>Published result:</b> original CalculiX VTK contains 949 points and 415 cells with finite displacement, stress, strain, principal-stress and equivalent-plastic-strain fields. The second fcFEM VTK uses the same-sized mesh and contains displacement/stress fields. Two exports are one case.')
+p('Saved maximum displacement magnitudes: CalculiX export 0.01877752412; fcFEM export 0.00064463329047 in source units. They are not interchangeable reference targets: the source parameter file requests incremental displacement. Load stage, output interpretation and material correspondence remain to be checked.')
+p('Source: <link href="https://github.com/HarryvL/fcFEM-basic" color="blue">Harry van Langen, fcFEM-basic</link>. Original native CAD, VTK exports and parameter file retained. Examples are associated with an elastoplastic collapse solver; these snapshots do not establish certified collapse loads.')
+story.append(PageBreak());h('Intersecting tubes CAD + FEM fields')
+img('Tubes-cad.png');p('<b>Original CAD inspection:</b> source Fusion BREP, one valid solid with 10 faces. Native extents: 2400 x 2000 x 2000. The junction geometry provides a different task from the spanner.')
+img('fcFEM_Tubes-ResultMechanical006.png');p('<b>Published FEM fields:</b> 20800 points and 10309 cells. Saved displacement vector/magnitude and six stress components are finite. Original result coordinates match the CAD bounding extent. Four embedded native result objects are also retained.')
+table([['Saved reference','Value / coverage'],['Displacement magnitude maximum','0.0016400098988 (source units)'],['Original fcFEM parameter file','Negative out_disp requests incremental displacement'],['Benchmark admission','Pending load/output/material/unit and replay checks']],[225,280])
+p('Use the source numerical arrays as candidates, with stage interpretation explicit. Do not score this as total displacement until correspondence is verified. No source engineering drawing or mesh-convergence study was verified. No COMSOL dependency.')
+p('Primary source: <link href="https://github.com/HarryvL/fcFEM-basic/tree/main/FreeCAD_Files" color="blue">fcFEM-basic original FreeCAD and VTK examples</link>. Software LGPL declaration and original copyright information retained; source-data scope is recorded separately.')
+story.append(PageBreak());h('Stacked beam: native CAD + saved result series')
+img('Stacked_Beam_Example-cad.png');p('<b>Original CAD inspection:</b> BooleanFragments shape imports as two valid solids, 11 faces; extents 100 x 10 x 20. This is an idealized interface/structural example with simple geometry.')
+img('Stacked_Beam_Example-fem.png');p('<b>Saved reference visualization:</b> displacement magnitudes from the last stored ResultMechanical035 object, at its original mesh coordinates. All 36 stored displacement-magnitude arrays are finite. They remain one engineering case, not 36 tasks.')
+rec=next(r for r in cat['fcfem_records'] if 'Stacked' in r['id']);table([['Original stored object','Nodes','Maximum saved magnitude'],[rec['embedded_results'][0]['object'],rec['embedded_results'][0]['nodes'],f"{rec['embedded_results'][0]['max_displacement']:.8g}"],[rec['embedded_results'][-1]['object'],rec['embedded_results'][-1]['nodes'],f"{rec['embedded_results'][-1]['max_displacement']:.8g}"]],[205,90,210])
+p('Object sequence does not by itself establish time or applied load. Source parameter file requests incremental displacement, and snapshot correspondence needs review. The source native model carries its analysis setup and fields. No solver, macro or downloaded source code was run.')
+p('Primary source: <link href="https://github.com/HarryvL/fcFEM-basic" color="blue">fcFEM-basic</link>. Original dimensioned drawing: not present in the selected source files.')
+story.append(PageBreak());h('Geomechanics examples, labeled separately')
+p('Two additional source cases are idealized soil bodies. They broaden mechanics coverage but are not detailed bulldozer machinery or complex manufactured-part drawings.')
+for name,title,ref in [('Bulldozer_Example','Soil-cutting example','fcFEM_Bulldozer_Example-ResultMechanical008.png'),('Embankment_with_Ditch','Embankment with ditch','fcFEM_Embankment_with_Ditch-ResultMechanical (Phi=10).png')]:
+ p('<b>'+title+'</b>')
+ a=Image(str(T/(name+'-cad.png')),width=240,height=103);b=Image(str(T/ref),width=240,height=103);story.append(Table([[a,b]],colWidths=[250,250]));story.append(Spacer(1,8))
+ if name.startswith('Bulldozer'):p('Original compound: three valid solids. Two published VTK meshes, 1886 and 13895 points, contain finite displacement and stress fields. Mesh refinement/solver-state correspondence must be reviewed; these are not two independent CAD cases.')
+ else:p('Original extruded CAD: one valid solid. Two VTK exports labeled Phi=0 and Phi=10 each have 1420 points and 661 cells. Fields include finite displacement, stress, von Mises, Tresca and equivalent plastic strain. Friction-angle variants remain one case family.')
+p('Across all five native cases: seven original VTK exports and 42 embedded displacement objects, all finite in the audited displacement arrays. CAD validity and field finiteness support inspection; load factors, convergence, units and data-license scope remain admission checks.')
+p('Primary source: <link href="https://github.com/HarryvL/fcFEM-basic" color="blue">Harry van Langen, fcFEM-basic</link>. No local FEM results generated.')
+story.append(PageBreak());h('Nine STEP specimens + published FEM frequencies')
+p('Ke Huang and Jiaying Zhang, Mendeley DOI 10.17632/8jxw5533py.2, CC BY 4.0. Three uniform and six stepped plates are proxies for morphing-wing stiffness distributions, not full wing assemblies.')
+a=Image(str(T/'morphing-Test1-cad.png'),width=240,height=103);b=Image(str(T/'morphing-Test5-cad.png'),width=240,height=103);story.append(Table([[a,b]],colWidths=[250,250]));p('Original CAD inspection: Test1 uniform plate (left), Test5 stepped plate (right). All nine specimen STEP models import as valid solids. Tensile coupon and calibration cube STEP files are excluded from specimen counts.')
+rows=[['Specimen','First FEM model column','First bending Hz','Source cell']]
+for r in sorted(cat['modal_records'],key=lambda r:int(r['id'].split('Test')[1])):
+ v=next(v for v in r['targets'] if v['mode']=='1-B');rows.append([r['id'].split('-')[1],v['model'],v['frequency_hz'],v['cell']])
+table(rows,[75,205,115,110])
+p('Values above are unchanged FEM table entries, not experimental frequencies or proposed model scores. Catalog records 263 finite frequency targets with exact sheet/cell/model/mode labels. All references use the original Modal Test Result sheet. Repeated Thin Shell headers retain their source column identity.')
+p('Original workbooks, 21 Abaqus inputs and 18 Nastran inputs were downloaded with publisher SHA256 verification. No new workbook or model was generated. Material, formulation, nominal/measured dimensions, clamped length and print orientation must be matched before scoring.')
+p('Source inconsistencies: README describes sheets Uniform/Stepped, but the file uses one sheet. Test4 filename says fef50 although table association is fef75. Raw files are preserved; no silent corrections. Modal table targets are scalar references, not saved full nodal mode shapes.')
+p('Sources: <link href="https://data.mendeley.com/datasets/8jxw5533py/2" color="blue">original dataset and downloads</link>; <link href="https://pmc.ncbi.nlm.nih.gov/articles/PMC13333362/" color="blue">data article describing specimens and limitations</link>.')
+story.append(PageBreak());h('Complex wing-box CAD: collected, held from scoring')
+img('held-wing-cad.png',460,173);p('<b>Original IGES inspection:</b> Wing.iges imports as 142 valid faces, no solid/shell. Publisher supplies static/modal results, scripts and a report. CAD topology and dimensions are retained unchanged.')
+source=D/'wingbox/FEA-Analysis/section 5/frequencies.png';story.append(Image(str(source),width=480,height=285));p('<b>Original published FEM screenshot:</b> four modal frequencies and the simulated wing geometry. It is retained as source evidence, not treated as a verified numerical CAD/result pair.')
+p('Imported CAD Y extent is 9430 coordinate units, while README states 10.92 m span. Static macro selects tip Y about 10.92 and comments describe 31.5 m section thickness. Missing import/scaling/setup evidence prevents verified pairing. No raw .rst field file found. Different rounded frequency labels remain unchanged.')
+p('Primary source: <link href="https://github.com/myousufbaig/aerospace-wing-box-fea" color="blue">Muhammad Yousuf Baig, aerospace-wing-box-fea</link> (MIT declaration retained). This source is excluded from the 14-candidate count.')
+p('<b>Admission totals:</b> five native CAD/saved-field cases plus nine CAD/modal-table candidates. Zero newly certified benchmark admissions. No original dimensioned drawings verified, no COMSOL dependency, and no frontier-model accuracy measured.')
+def footer(c,d):c.setFont('Helvetica',8);c.setFillColor(colors.grey);c.drawString(45,25,'Published source assets and reference diagnostics; candidates await benchmark admission');c.drawRightString(550,25,str(d.page))
+SimpleDocTemplate(str(O),pagesize=(595,842),leftMargin=45,rightMargin=45,topMargin=30,bottomMargin=42).build(story,onFirstPage=footer,onLaterPages=footer)
+d=pymupdf.open(O);assert len(d)==6,len(d)
+for i,page in enumerate(d):page.get_pixmap(matrix=pymupdf.Matrix(1.2,1.2)).save(T/f'nonlinear-modal-report-{i+1}.png')
+files=[p for p in D.rglob('*') if p.is_file() and p.name!='package-manifest.json'];manifest=[dict(path=str(p.relative_to(D)),bytes=p.stat().st_size,sha256=hashlib.sha256(p.read_bytes()).hexdigest()) for p in sorted(files)];(D/'package-manifest.json').write_text(json.dumps(manifest,indent=2));files.append(D/'package-manifest.json');out=Path('cvpr2027/output/datasets/web-cad-fem-nonlinear-modal.zip')
+with zipfile.ZipFile(out,'w',zipfile.ZIP_DEFLATED) as z:
+ for p in sorted(files):z.write(p,str(p.relative_to(D)))
+with zipfile.ZipFile(out) as z:assert z.testzip() is None;assert len(z.namelist())==len(set(z.namelist()))
+print('PDF',len(d),'pages; ZIP',len(files),'files',out.stat().st_size,'bytes')

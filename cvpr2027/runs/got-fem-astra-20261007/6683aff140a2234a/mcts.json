@@ -1,0 +1,40 @@
+{
+ "id": "6683aff140a2234a9d4dd2e4afc87039d4a52df1cb69df775a496190c7fae281",
+ "source_fem": {
+  "ok": false,
+  "error": "Exception: Invalid boundary mesh (overlapping facets) on surface 14 surface 16"
+ },
+ "nodes": [
+  {
+   "name": "vanilla",
+   "parent": null,
+   "visits": 1,
+   "value_sum": 1.0,
+   "eval": {
+    "gates": true,
+    "fem": {
+     "ok": false,
+     "error": "Exception: Invalid boundary mesh (overlapping facets) on surface 21 surface 23"
+    },
+    "numbers_ok": null,
+    "changed": true,
+    "error": null,
+    "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .circle(2.0)\n    .extrude(30.0)\n    .faces(\">Z\").workplane()\n    .rect(8.0, 8.0)\n    .extrude(2.4)\n    .edges(\">Z\")\n    .fillet(0.48)\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 31.9), rotate=cq.Vector(0, 0, 0))\n            .box(8.4, 1.0, 2.2)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 0), rotate=cq.Vector(90, 0, 0))\n            .center(2.0, 0.0)\n            .polyline([[0.0, 0.1617], [-0.28, 0.0], [0.0, -0.1617]])\n            .close()\n            .sweep(cq.Wire.makeHelix(0.7, 14.0, 2.0), isFrenet=False)\n    )\n)\nshow_object(result)\n"
+   }
+  }
+ ],
+ "candidates": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .circle(2.0)\n    .extrude(30.0)\n    .faces(\">Z\").workplane()\n    .rect(8.0, 8.0)\n    .extrude(2.4)\n    .edges(\">Z\")\n    .fillet(0.48)\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 31.9), rotate=cq.Vector(0, 0, 0))\n            .box(8.4, 1.0, 2.2)\n    )\n    .cut(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 0), rotate=cq.Vector(90, 0, 0))\n            .center(2.0, 0.0)\n            .polyline([[0.0, 0.1617], [-0.28, 0.0], [0.0, -0.1617]])\n            .close()\n            .sweep(cq.Wire.makeHelix(0.7, 14.0, 2.0), isFrenet=False)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": false,
+    "error": "Exception: Invalid boundary mesh (overlapping facets) on surface 21 surface 23"
+   },
+   "consensus": 1,
+   "numbers_ok": null,
+   "changed": true
+  }
+ ]
+}

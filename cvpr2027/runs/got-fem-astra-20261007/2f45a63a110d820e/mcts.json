@@ -1,0 +1,44 @@
+{
+ "id": "2f45a63a110d820e89c4ff9e5deab7e97668cdb09ae7f54a692b43c7147b6156",
+ "source_fem": {
+  "ok": false,
+  "error": "ValueError: Unanchored disconnected component"
+ },
+ "nodes": [
+  {
+   "name": "vanilla",
+   "parent": null,
+   "visits": 1,
+   "value_sum": 1.0,
+   "eval": {
+    "gates": true,
+    "fem": {
+     "ok": true,
+     "compliance": 3.796630078583037e-06,
+     "components": 1,
+     "nodes": 578
+    },
+    "numbers_ok": null,
+    "changed": true,
+    "error": null,
+    "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .transformed(offset=cq.Vector(0, 0, 10))\n    .cylinder(20.0, 3.0)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 20))\n            .sphere(3.2)\n    )\n)\nshow_object(result)\n"
+   }
+  }
+ ],
+ "candidates": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .transformed(offset=cq.Vector(0, 0, 10))\n    .cylinder(20.0, 3.0)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0, 0, 20))\n            .sphere(3.2)\n    )\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 3.796630078583037e-06,
+    "components": 1,
+    "nodes": 578
+   },
+   "consensus": 1,
+   "numbers_ok": null,
+   "changed": true
+  }
+ ]
+}

@@ -1,0 +1,46 @@
+{
+ "id": "d4b7105feb7f1c04df71739094388abc2a9ac4a09c02663aa61bb87fde52c772",
+ "source_fem": {
+  "ok": true,
+  "compliance": 1.8057747384512057e-07,
+  "components": 1,
+  "nodes": 752
+ },
+ "nodes": [
+  {
+   "name": "vanilla",
+   "parent": null,
+   "visits": 1,
+   "value_sum": 1.0,
+   "eval": {
+    "gates": true,
+    "fem": {
+     "ok": true,
+     "compliance": 1.8542087214831755e-07,
+     "components": 1,
+     "nodes": 2324
+    },
+    "numbers_ok": true,
+    "changed": true,
+    "error": null,
+    "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(41.6, 43.7)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, 20.8), rotate=cq.Vector(0, 0, 0))\n            .sphere(43.7)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, -20.8), rotate=cq.Vector(0, 0, 0))\n            .sphere(43.7)\n    )\n    .cut(cq.Workplane(\"XY\").circle(10.5).extrude(70, both=True))\n)\nshow_object(result)\n"
+   }
+  }
+ ],
+ "candidates": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(41.6, 43.7)\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, 20.8), rotate=cq.Vector(0, 0, 0))\n            .sphere(43.7)\n    )\n    .union(\n        cq.Workplane(\"XY\")\n            .transformed(offset=cq.Vector(0.0, 0.0, -20.8), rotate=cq.Vector(0, 0, 0))\n            .sphere(43.7)\n    )\n    .cut(cq.Workplane(\"XY\").circle(10.5).extrude(70, both=True))\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.8542087214831755e-07,
+    "components": 1,
+    "nodes": 2324
+   },
+   "consensus": 1,
+   "numbers_ok": true,
+   "changed": true
+  }
+ ]
+}

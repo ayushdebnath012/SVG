@@ -1,0 +1,28 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .cylinder(11.4, 32.8)\\n    .faces(\\\">Z\\\").workplane()\\n    .circle(21.3)\\n    .extrude(48.8)\\n    .faces(\\\">Z\\\").workplane()\\n    .circle(9.4)\\n    .extrude(29.4)\\n    .faces(\\\">Z\\\").workplane()\\n    .circle(7.1)\\n    .extrude(6.9)\\n    .faces(\\\">Z\\\")\\n    .chamfer(1.5)\\n    .faces(\\\"<Z\\\")\\n    .faces(\\\"<Z\\\").workplane()\\n    .hole(4.9)\\n)\\nshow_object(result)\", \"instruction\": \"Add 2 round cross-holes of 8 mm diameter through the middle thicker step of the shaft, both perpendicular to the central axis, at 25 mm and 45 mm from the bottom face of the shaft.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"ae2e264afc29dc2ebfa82ea6308be2b29c138f291fbc0afc0ebe017c41bb1462\", \"instruction\": \"Add 4 round cross-holes of 8 mm diameter through the rail along its length, each perpendicular to the rail's long axis, at 20 mm, 50 mm, 80 mm, and 110 mm from one end of the rail.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"for _z in (20.0, 50.0, 80.0, 110.0):\\\", \\\"    result = result.cut(\\\", \\\"        cq.Workplane('XY')\\\", \\\"        .transformed(offset=cq.Vector(0, 0, _z), rotate=cq.Vector(90, 0, 0))\\\", \\\"        .cylinder(40.0, 4.0)\\\", \\\"    )\\\"], \\\"start\\\": 24}]}\", \"strategies\": [], \"context\": [\"24: show_object(result)\"]}, {\"task_id\": \"81d246f67035ae6b92b6704de71c7b836ae2db598854a8890362af4c1afbfa4b\", \"instruction\": \"Drill 6 round through-passages of 2 mm diameter through the bottom flange of the grommet, evenly spaced around the central axis at 8 mm radius.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"import math as _m\\\", \\\"for _i in range(6):\\\", \\\"    _ang = 2 * _m.pi * _i / 6\\\", \\\"    _x = 8.0 * _m.cos(_ang)\\\", \\\"    _z = 8.0 * _m.sin(_ang)\\\", \\\"    result = result.cut(\\\", \\\"        cq.Workplane('XY')\\\", \\\"        .transformed(offset=cq.Vector(_x, 1.65, _z), rotate=cq.Vector(90, 0, 0))\\\", \\\"        .cylinder(6.0, 1.0)\\\", \\\"    )\\\"], \\\"start\\\": 17}]}\", \"strategies\": [], \"context\": [\"17: show_object(result)\"]}, {\"task_id\": \"c55754a70806756e0e489599ba0a4a467c69470d0f70bd35b6ccdffc4ba07b82\", \"instruction\": \"Drill 8 round through-passages of 8 mm diameter through the round base disc, evenly spaced around the central axis at 15 mm radius, parallel to the stem.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 0, \\\"insert\\\": [\\\"import math as _m\\\", \\\"for _i in range(8):\\\", \\\"    _ang = 2 * _m.pi * _i / 8\\\", \\\"    _x = 15.0 * _m.cos(_ang)\\\", \\\"    _y = 15.0 * _m.sin(_ang)\\\", \\\"    result = result.cut(\\\", \\\"        cq.Workplane('XY')\\\", \\\"        .transformed(offset=cq.Vector(_x, _y, 7.0), rotate=cq.Vector(0, 0, 0))\\\", \\\"        .cylinder(20.0, 4.0)\\\", \\\"    )\\\"], \\\"start\\\": 21}]}\", \"strategies\": [], \"context\": [\"21: show_object(result)\"]}]}"
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 4096
+ },
+ "usage": {
+  "completion_tokens": 214,
+  "prompt_tokens": 1174,
+  "total_tokens": 1388
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\n  \"steps\": [\n    \"Identify the middle thicker step of the shaft (formed by the extrusion of radius 21.3 and height 48.8, sitting on top of the base cylinder of height 11.4).\",\n    \"Calculate the Z-coordinates relative to the bottom face of the shaft: 25 mm and 45 mm.\",\n    \"Create two cross-holes of 8 mm diameter (4 mm radius) positioned perpendicularly to the central Z-axis at the specified Z heights.\"\n  ],\n  \"invariants\": [\n    \"The core stepped shaft geometry and its axial through-hole are preserved.\",\n    \"The added cross-holes have an 8 mm diameter.\",\n    \"The cross-holes are positioned at 25 mm and 45 mm from the bottom face.\"\n  ],\n  \"dependencies\": [\n    [0, 1],\n    [1, 2]\n  ]\n}\n```"
+}

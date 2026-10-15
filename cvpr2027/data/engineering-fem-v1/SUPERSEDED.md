@@ -1,0 +1,1 @@
+Superseded by the user requirement to use only existing web data with associated FEM results and complex drawings/geometry. The seven constructed task specifications, analytic reference calculations, and fourteen derived packs are drafts and must not be used as the active benchmark. Use ../web-complex-fem/catalog.json for source discovery. No model trials were run.

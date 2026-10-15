@@ -1,0 +1,861 @@
+{
+ "task_id": "f89859b59987ee9369182ac0c8e910b3678ddb1ac626647e16babb93114b63be",
+ "status": "PASS",
+ "prediction": "{\"edits\": [{\"delete\": 1, \"insert\": [\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\", \"show_object(result)\"], \"start\": 16}]}",
+ "selected_node": 2,
+ "bank": [
+  2
+ ],
+ "pareto": [
+  2
+ ],
+ "stop": "expansion_limit",
+ "nodes": [
+  {
+   "id": 0,
+   "candidate": "```json\n{\"edits\":[{\"start\":2,\"delete\":1,\"insert\":[\"result = (\", \"    cq.Workplane(\\\"YZ\\\")\"]}]}\n```",
+   "depth": 0,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "FAIL",
+      "reason": "SyntaxError: '(' was never closed (<unknown>, line 2)"
+     },
+     "constraints": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -1000.0
+    ],
+    "score": -1.0,
+    "diagnosis": [
+     {
+      "stage": "geometry",
+      "status": "FAIL",
+      "reason": "SyntaxError: '(' was never closed (<unknown>, line 2)"
+     },
+     {
+      "stage": "constraints",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 3,
+   "visits": 4,
+   "final": null,
+   "edges": [
+    0
+   ]
+  },
+  {
+   "id": 1,
+   "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\\nshow_object(result)\"], \"start\": 16}]}",
+   "depth": 1,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "FAIL",
+      "reason": "ValueError: Invalid inserted line"
+     },
+     "constraints": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -1000.0
+    ],
+    "score": -1.0,
+    "diagnosis": [
+     {
+      "stage": "geometry",
+      "status": "FAIL",
+      "reason": "ValueError: Invalid inserted line"
+     },
+     {
+      "stage": "constraints",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 1,
+   "visits": 4,
+   "final": null,
+   "edges": [
+    1
+   ]
+  },
+  {
+   "id": 2,
+   "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\", \"show_object(result)\"], \"start\": 16}]}",
+   "depth": 2,
+   "verdict": {
+    "status": "PASS",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 554990.952129328,
+       "area": 43052.57913716475,
+       "solids": 1,
+       "faces": 4,
+       "bbox_x": 87.4,
+       "bbox_y": 126.44456140495993,
+       "bbox_z": 87.4
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 1.0,
+      "reason": "The part has been successfully rotated by 90 degrees as instructed, and all unrelated features remain unchanged.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-00.png"
+     },
+     "fem": {
+      "status": "PASS",
+      "metrics": {
+       "nodes": 2271,
+       "tetrahedra": 9571,
+       "connected_components": 1,
+       "mesh_volume_mm3": 550139.6689152339,
+       "fixed_nodes": 40,
+       "loaded_facets": 67,
+       "loaded_area_mm2": 2554.9858984363223,
+       "axis": [
+        0.0,
+        0.0,
+        1.0
+       ],
+       "projection_min_mm": -43.7,
+       "projection_max_mm": 43.7,
+       "compliance_N_mm": 1.1243273574159958e-07,
+       "load_weighted_displacement_mm": 1.1243273574159958e-07,
+       "max_displacement_mm": 1.2891619934207144e-07,
+       "strain_energy_N_mm": 5.621636787079991e-08,
+       "vm_p95_MPa": 0.00032879348995059314,
+       "vm_peak_MPa": 0.0006467339099013767,
+       "relative_free_residual": 4.142610071428496e-14,
+       "relative_force_balance_error": 2.1475460638231164e-15,
+       "relative_moment_balance_error": 1.4450577513104477e-15,
+       "relative_energy_error": 2.118849237670277e-15
+      },
+      "checks": [
+       {
+        "metric": "connected_components",
+        "value": 1,
+        "max": 1,
+        "ok": true
+       }
+      ]
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 1.005
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 1.005
+       }
+      ]
+     }
+    },
+    "objectives": [
+     1.0,
+     1.0,
+     -3.0
+    ],
+    "score": 2.097,
+    "diagnosis": [],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 0,
+   "visits": 1,
+   "final": {
+    "status": "PASS",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 554990.952129328,
+       "area": 43052.57913716475,
+       "solids": 1,
+       "faces": 4,
+       "bbox_x": 87.4,
+       "bbox_y": 126.44456140495993,
+       "bbox_z": 87.4
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 1.0,
+      "reason": "The part has been successfully rotated by 90 degrees as instructed, and all unrelated features remain unchanged.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-00.png"
+     },
+     "fem": {
+      "status": "PASS",
+      "metrics": {
+       "nodes": 2272,
+       "tetrahedra": 9577,
+       "connected_components": 1,
+       "mesh_volume_mm3": 550139.6689152338,
+       "fixed_nodes": 40,
+       "loaded_facets": 67,
+       "loaded_area_mm2": 2554.9858984363223,
+       "axis": [
+        0.0,
+        0.0,
+        1.0
+       ],
+       "projection_min_mm": -43.7,
+       "projection_max_mm": 43.7,
+       "compliance_N_mm": 1.1243216353173545e-07,
+       "load_weighted_displacement_mm": 1.1243216353173545e-07,
+       "max_displacement_mm": 1.2891585225315407e-07,
+       "strain_energy_N_mm": 5.6216081765868035e-08,
+       "vm_p95_MPa": 0.00032879588242399173,
+       "vm_peak_MPa": 0.000646732362309775,
+       "relative_free_residual": 4.022762960965215e-14,
+       "relative_force_balance_error": 4.537442936332246e-15,
+       "relative_moment_balance_error": 1.0435309258185543e-15,
+       "relative_energy_error": 5.532578944496589e-15
+      },
+      "checks": [
+       {
+        "metric": "connected_components",
+        "value": 1,
+        "max": 1,
+        "ok": true
+       }
+      ]
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 0.995
+       },
+       {
+        "mesh_scale": 1.25
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 0.995
+       },
+       {
+        "status": "PASS",
+        "metrics": {
+         "nodes": 1928,
+         "tetrahedra": 8009,
+         "connected_components": 1,
+         "mesh_volume_mm3": 548028.7659568292,
+         "fixed_nodes": 23,
+         "loaded_facets": 46,
+         "loaded_area_mm2": 2586.0269746303434,
+         "axis": [
+          0.0,
+          0.0,
+          1.0
+         ],
+         "projection_min_mm": -43.5991427421202,
+         "projection_max_mm": 43.59866221148779,
+         "compliance_N_mm": 1.1843605618334519e-07,
+         "load_weighted_displacement_mm": 1.1843605618334519e-07,
+         "max_displacement_mm": 1.3528782251261015e-07,
+         "strain_energy_N_mm": 5.92180280916729e-08,
+         "vm_p95_MPa": 0.0003406230973273613,
+         "vm_peak_MPa": 0.0006389097943336475,
+         "relative_free_residual": 3.837126495455566e-14,
+         "relative_force_balance_error": 7.337265396577029e-15,
+         "relative_moment_balance_error": 2.1529151684158225e-15,
+         "relative_energy_error": 5.140368148501725e-15
+        },
+        "checks": [
+         {
+          "metric": "connected_components",
+          "value": 1,
+          "max": 1,
+          "ok": true
+         }
+        ]
+       }
+      ]
+     }
+    },
+    "objectives": [
+     1.0,
+     1.0,
+     -3.0
+    ],
+    "score": 2.097,
+    "diagnosis": [],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "final"
+   },
+   "edges": []
+  }
+ ],
+ "edges": [
+  {
+   "parent": 0,
+   "child": 1,
+   "visits": 4,
+   "total": -0.903
+  },
+  {
+   "parent": 1,
+   "child": 2,
+   "visits": 1,
+   "total": 2.097
+  }
+ ],
+ "events": [
+  {
+   "event": "decompose",
+   "plan": {
+    "steps": [
+     "Apply a rotation of 90 degrees about the X axis to the final solid result."
+    ],
+    "invariants": [
+     "The underlying geometry (cylinder, spheres, and cutting cylinder) remains identical.",
+     "The relative positions and dimensions of all features are preserved."
+    ],
+    "dependencies": [
+     [
+      0,
+      0
+     ]
+    ]
+   },
+   "memory_version": "9a22d5771630ad85b745b4443cfc6f9e3e49c79840425738bffc87686e976a96",
+   "retrieved": [
+    {
+     "task_id": "23f67e4f98c458f94cef856db8007bcebd533a6143a9929565fed2a26d7ce0dd",
+     "instruction": "Rotate the entire part by 90 degrees about the X axis.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\"], \"start\": 11}]}",
+     "strategies": [],
+     "context": [
+      "11: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "ab6b79a16fa48fbb56319a4ac5870f5073a5c456dd0d19dbd550948b0b73f341",
+     "instruction": "Rotate the entire part by 90 degrees about the X axis.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\"], \"start\": 7}]}",
+     "strategies": [],
+     "context": [
+      "7: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "b9b1d7365ad9cbdd8c1d9f3cedbfbc263cbdd075dcbe0dc6fe90fff83e53de9e",
+     "instruction": "Rotate the entire part by 90 degrees about the X axis.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\"], \"start\": 12}]}",
+     "strategies": [],
+     "context": [
+      "12: show_object(result)"
+     ]
+    }
+   ]
+  },
+  {
+   "event": "initial_state",
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 554990.952129328,
+       "area": 43052.579137164765,
+       "solids": 1,
+       "faces": 4,
+       "bbox_x": 87.4,
+       "bbox_y": 87.4,
+       "bbox_z": 126.44456140495993
+      }
+     },
+     "constraints": {
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         90.0
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -0.0
+    ],
+    "score": 0.0,
+    "diagnosis": [
+     {
+      "stage": "constraints",
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         90.0
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "initial"
+   }
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "geometry",
+     "status": "FAIL",
+     "reason": "SyntaxError: '(' was never closed (<unknown>, line 2)"
+    },
+    {
+     "stage": "constraints",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "23f67e4f98c458f94cef856db8007bcebd533a6143a9929565fed2a26d7ce0dd",
+     "instruction": "Rotate the entire part by 90 degrees about the X axis.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\"], \"start\": 11}]}",
+     "strategies": [],
+     "context": [
+      "11: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "ab6b79a16fa48fbb56319a4ac5870f5073a5c456dd0d19dbd550948b0b73f341",
+     "instruction": "Rotate the entire part by 90 degrees about the X axis.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\"], \"start\": 7}]}",
+     "strategies": [],
+     "context": [
+      "7: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "b9b1d7365ad9cbdd8c1d9f3cedbfbc263cbdd075dcbe0dc6fe90fff83e53de9e",
+     "instruction": "Rotate the entire part by 90 degrees about the X axis.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\"], \"start\": 12}]}",
+     "strategies": [],
+     "context": [
+      "12: show_object(result)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "FAIL",
+   "hypothesis": "Rotate the final result object by 90 degrees around the X axis using CadQuery's rotate method."
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": true,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "geometry",
+     "status": "FAIL",
+     "reason": "SyntaxError: '(' was never closed (<unknown>, line 2)"
+    },
+    {
+     "stage": "constraints",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "23f67e4f98c458f94cef856db8007bcebd533a6143a9929565fed2a26d7ce0dd",
+     "instruction": "Rotate the entire part by 90 degrees about the X axis.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\"], \"start\": 11}]}",
+     "strategies": [],
+     "context": [
+      "11: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "ab6b79a16fa48fbb56319a4ac5870f5073a5c456dd0d19dbd550948b0b73f341",
+     "instruction": "Rotate the entire part by 90 degrees about the X axis.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\"], \"start\": 7}]}",
+     "strategies": [],
+     "context": [
+      "7: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "b9b1d7365ad9cbdd8c1d9f3cedbfbc263cbdd075dcbe0dc6fe90fff83e53de9e",
+     "instruction": "Rotate the entire part by 90 degrees about the X axis.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\"], \"start\": 12}]}",
+     "strategies": [],
+     "context": [
+      "12: show_object(result)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "FAIL",
+   "hypothesis": "Rotate the entire CadQuery result object by 90 degrees around the X axis before showing it."
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": true,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "geometry",
+     "status": "FAIL",
+     "reason": "SyntaxError: '(' was never closed (<unknown>, line 2)"
+    },
+    {
+     "stage": "constraints",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "23f67e4f98c458f94cef856db8007bcebd533a6143a9929565fed2a26d7ce0dd",
+     "instruction": "Rotate the entire part by 90 degrees about the X axis.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\"], \"start\": 11}]}",
+     "strategies": [],
+     "context": [
+      "11: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "ab6b79a16fa48fbb56319a4ac5870f5073a5c456dd0d19dbd550948b0b73f341",
+     "instruction": "Rotate the entire part by 90 degrees about the X axis.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\"], \"start\": 7}]}",
+     "strategies": [],
+     "context": [
+      "7: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "b9b1d7365ad9cbdd8c1d9f3cedbfbc263cbdd075dcbe0dc6fe90fff83e53de9e",
+     "instruction": "Rotate the entire part by 90 degrees about the X axis.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\"], \"start\": 12}]}",
+     "strategies": [],
+     "context": [
+      "12: show_object(result)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "FAIL",
+   "hypothesis": "Rotate the final result solid by 90 degrees around the X axis using the rotate method."
+  },
+  {
+   "event": "backtrack",
+   "to_node": 1
+  },
+  {
+   "event": "expand",
+   "parent": 1,
+   "node": 2,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "geometry",
+     "status": "FAIL",
+     "reason": "ValueError: Invalid inserted line"
+    },
+    {
+     "stage": "constraints",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "23f67e4f98c458f94cef856db8007bcebd533a6143a9929565fed2a26d7ce0dd",
+     "instruction": "Rotate the entire part by 90 degrees about the X axis.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\"], \"start\": 11}]}",
+     "strategies": [],
+     "context": [
+      "11: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "ab6b79a16fa48fbb56319a4ac5870f5073a5c456dd0d19dbd550948b0b73f341",
+     "instruction": "Rotate the entire part by 90 degrees about the X axis.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\"], \"start\": 7}]}",
+     "strategies": [],
+     "context": [
+      "7: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "b9b1d7365ad9cbdd8c1d9f3cedbfbc263cbdd075dcbe0dc6fe90fff83e53de9e",
+     "instruction": "Rotate the entire part by 90 degrees about the X axis.",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (1, 0, 0), 90)\"], \"start\": 12}]}",
+     "strategies": [],
+     "context": [
+      "12: show_object(result)"
+     ]
+    }
+   ],
+   "path": [
+    0,
+    1
+   ],
+   "status": "PASS",
+   "hypothesis": "Rotate the final result object by 90 degrees about the X axis using CadQuery's rotate method before showing it."
+  },
+  {
+   "event": "final_verification",
+   "node": 2,
+   "status": "PASS"
+  }
+ ],
+ "config": {
+  "algorithm": "mcts",
+  "max_expansions": 4,
+  "max_depth": 3,
+  "width": 2,
+  "max_width": 4,
+  "exploration": 0.7,
+  "seconds": 2400.0
+ },
+ "memory_version": "9a22d5771630ad85b745b4443cfc6f9e3e49c79840425738bffc87686e976a96",
+ "stored": "runs/adaptive-cad-gemini-lite-20261007/memory.jsonl",
+ "seconds": 94.98177125000007,
+ "api": {
+  "mode": "live_astra",
+  "api_calls": 6,
+  "cost_usd": 0.0,
+  "budget_usd": 0.19230769230769232,
+  "refused": 0
+ },
+ "tool_jobs": 7
+}

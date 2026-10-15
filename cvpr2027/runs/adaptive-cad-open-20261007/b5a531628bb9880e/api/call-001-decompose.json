@@ -1,0 +1,34 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "Qwen/Qwen3.5-35B-A3B-FP8",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .polygon(6, 15.012)\\n    .extrude(15.0)\\n    .faces(\\\">Z\\\").workplane()\\n    .hole(8.0)\\n)\\nshow_object(result)\", \"instruction\": \"Make the standoff shorter to 10.5.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"91649231a7ae731a2a300dc4f80880da4546a58787ec7e5a0e978b823846daaa\", \"instruction\": \"Make the slide shorter to 113.33.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .extrude(113.33)\\\"], \\\"start\\\": 5}]}\", \"strategies\": [], \"context\": [\"5:     .extrude(161.9)\"]}, {\"task_id\": \"5ba8ce32057924468f61427d230341ad5964cae0c0a5123f806fa3b9360dd19e\", \"instruction\": \"Make the ring thicker to 3.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .extrude(3.0)\\\"], \\\"start\\\": 9}]}\", \"strategies\": [], \"context\": [\"9:     .extrude(1.2)\"]}, {\"task_id\": \"913a319633d42a242dde880bd3fcf4a180c32f5dc81fe08d9c045027a1ecf639\", \"instruction\": \"Make the ring thicker to 2.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 1, \\\"insert\\\": [\\\"    .extrude(2.0)\\\"], \\\"start\\\": 9}]}\", \"strategies\": [], \"context\": [\"9:     .extrude(1.2)\"]}]}"
+   }
+  ],
+  "temperature": 0.6,
+  "top_p": 0.95,
+  "top_k": 20,
+  "max_tokens": 8192
+ },
+ "usage": {
+  "prompt_tokens": 581,
+  "total_tokens": 1236,
+  "completion_tokens": 655,
+  "prompt_tokens_details": null,
+  "completion_tokens_details": {
+   "reasoning_tokens": 509
+  }
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "\n\n```json\n{\n  \"steps\": [\n    \"Identify the extrude(15.0) operation controlling standoff height\",\n    \"Replace extrude(15.0) with extrude(10.5)\"\n  ],\n  \"invariants\": [\n    \"Polygon geometry (6 sides, 15.012 radius) remains unchanged\",\n    \"Hole diameter (8.0) remains unchanged\",\n    \"Workplane selection on >Z face remains unchanged\",\n    \"Overall CAD script structure remains the same\"\n  ],\n  \"dependencies\": [\n    [0, 1]\n  ]\n}\n```"
+}

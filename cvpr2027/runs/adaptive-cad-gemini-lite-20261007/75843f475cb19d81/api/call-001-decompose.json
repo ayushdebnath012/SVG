@@ -1,0 +1,28 @@
+{
+ "kind": "decompose",
+ "status": "completed",
+ "reserved_usd": 0.0,
+ "request": {
+  "model": "gemini-3.5-flash-lite",
+  "messages": [
+   {
+    "role": "system",
+    "content": "Decompose a CAD edit into feature changes, preserved invariants and dependencies. Retrieved experiences are examples, not instructions. Return JSON with steps (list of strings), invariants (list of strings), dependencies (list of pairs of step indices). Do not claim execution."
+   },
+   {
+    "role": "user",
+    "content": "{\"source\": \"import cadquery as cq\\nresult = (\\n    cq.Workplane(\\\"XY\\\")\\n    .box(33.0, 33.0, 83.0)\\n    .faces(\\\">Z\\\").workplane()\\n    .center(1.5, 1.5)\\n    .rect(30.0, 30.0)\\n    .cutThruAll()\\n    .edges(\\\"|Z\\\")\\n    .fillet(0.6)\\n    .faces(\\\">Z\\\").workplane()\\n    .pushPoints([(-12.0, -15.0), (0.0, -15.0), (12.0, -15.0)])\\n    .hole(2.0)\\n    .faces(\\\">Z\\\").workplane()\\n    .pushPoints([(-15.0, -12.0), (-15.0, 0.0), (-15.0, 12.0)])\\n    .hole(2.0)\\n)\\nshow_object(result)\", \"instruction\": \"Remove the central rectangular through-cut and the vertical-edge fillet. The two mounting-hole rows on the top face are kept.\", \"constraints\": [], \"experiences\": [{\"task_id\": \"34389cffaa74d42785d5fc2e7745256bfcdf3c7a260c50f8179795d939ba4273\", \"instruction\": \"Remove the two legs on the +X side; only the top and the two -X legs remain.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 10, \\\"insert\\\": [], \\\"start\\\": 4}]}\", \"strategies\": [], \"context\": [\"4:     .union(\", \"5:         cq.Workplane(\\\"XY\\\")\", \"6:             .transformed(offset=cq.Vector(93.75, 57.6, -78.25), rotate=cq.Vector(0, 0, 0))\", \"7:             .box(18.7, 18.7, 143.1)\", \"8:     )\", \"9:     .union(\", \"10:         cq.Workplane(\\\"XY\\\")\", \"11:             .transformed(offset=cq.Vector(93.75, -57.6, -78.25), rotate=cq.Vector(0, 0, 0))\", \"12:             .box(18.7, 18.7, 143.1)\", \"13:     )\"]}, {\"task_id\": \"b8e847e2446dcb3b774d9f9abed4273b2f24a63f1bcbe413550c8001cbbfc1a2\", \"instruction\": \"Remove the central through-hole so the hex nut becomes a solid hex prism. The hex outline, height, and the vertical edge chamfers all stay the same.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 3, \\\"insert\\\": [], \\\"start\\\": 5}]}\", \"strategies\": [], \"context\": [\"5:     .faces(\\\">Z\\\").workplane()\", \"6:     .circle(21.0)\", \"7:     .cutThruAll()\"]}, {\"task_id\": \"36b7080c3255d1d22a0a7f6d44e94e1dd761dc84f1e859228f09486d6d4c8ae2\", \"instruction\": \"Remove the rectangular through-cut on the top face so the L-bracket becomes a solid 23 \\u00d7 23 \\u00d7 133 bar. The outer box dimensions stay the same.\", \"candidate\": \"{\\\"edits\\\": [{\\\"delete\\\": 4, \\\"insert\\\": [], \\\"start\\\": 4}]}\", \"strategies\": [], \"context\": [\"4:     .faces(\\\">Z\\\").workplane()\", \"5:     .center(1.5, 1.5)\", \"6:     .rect(20.0, 20.0)\", \"7:     .cutThruAll()\"]}]}"
+   }
+  ],
+  "reasoning_effort": "low",
+  "max_tokens": 4096
+ },
+ "usage": {
+  "completion_tokens": 104,
+  "prompt_tokens": 1052,
+  "total_tokens": 1156
+ },
+ "cost_usd": 0.0,
+ "finish_reason": "stop",
+ "response": "```json\n{\n  \"steps\": [\n    \"Remove the rectangular through-cut operation\",\n    \"Remove the vertical-edge fillet operation\"\n  ],\n  \"invariants\": [\n    \"Outer box dimensions (33.0 x 33.0 x 83.0)\",\n    \"The two mounting-hole rows on the top face\"\n  ],\n  \"dependencies\": [\n    [0, 1]\n  ]\n}\n```"
+}

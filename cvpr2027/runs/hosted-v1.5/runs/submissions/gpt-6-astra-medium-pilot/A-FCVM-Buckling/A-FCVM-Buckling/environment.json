@@ -1,0 +1,59 @@
+{
+  "versions": {
+    "python": "3.12.14",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "skfem": "12.0.2",
+    "gmsh": "4.15.2"
+  },
+  "command": "python main.py",
+  "analysis": "3-D small-strain linear elasticity and initial-stress eigenbuckling",
+  "units": {
+    "length": "mm",
+    "force": "N",
+    "stress": "MPa",
+    "eigenvalue": "dimensionless"
+  },
+  "material": {
+    "E_MPa": 210000.0,
+    "poisson": 0.3
+  },
+  "geometry": "Input STEP unchanged: four shared-interface regions. Tensor-product mesh conforms to all region interfaces; common DOFs ensure full displacement and traction continuity.",
+  "boundary_conditions": {
+    "face_1": "ux=uy=uz=0",
+    "faces_2_7_13_18": "uy=0",
+    "face_9": "traction [-1,0,0] MPa; total [-100,0,0] N"
+  },
+  "formulation": "K from isotropic linear elasticity. Reference stress sigma=C:sym(grad u). G_ab=int sigma_ij (dN_a/dx_i)(dN_b/dx_j) dV for each displacement component. Solve -G phi=mu K phi, lambda=1/mu. Report smallest positive lambda. Dead reference traction, no follower load stiffness or self-weight.",
+  "quantity_extraction": "Four largest positive reciprocal buckling eigenvalues with sparse generalized symmetric ARPACK; smallest positive load factor reported. Mode normalization max absolute displacement component=1. No beam or shell reduction.",
+  "physical_groups": {
+    "volume_1": "main beam x=0..1000",
+    "volume_2": "end central x=1000..1010,z=0..10",
+    "volume_3": "end bottom z=-10..0",
+    "volume_4": "end top z=10..20",
+    "surface_100_plus_face_index": "external faces from faces.json, including support/load faces; internal interfaces not boundary elements"
+  },
+  "field_schema": {
+    "node_ids": "1-based scalar FE DOF number; identical to Gmsh node tags",
+    "coordinates_mm": "(nnode,3), all Q2 nodes",
+    "element_ids": "Gmsh volume element tags, 1-based",
+    "connectivity_hex27": "(nelement,27), Gmsh type 12 node ordering; entries are node_ids",
+    "region_ids": "physical volume group per element",
+    "displacement_mm": "(nnode,3), reference load displacement",
+    "stress_MPa": "(nelement,27,3,3), reference Cauchy stress at Gauss points, no averaging",
+    "strain": "(nelement,27,3,3), infinitesimal strain",
+    "quadrature_coordinates_mm": "(nelement,27,3), locations of stress/strain samples",
+    "quadrature_volume_weights_mm3": "(nelement,27), Jacobian-weighted integration weights",
+    "buckling_modes": "(4,nnode,3), modes sorted ascending load factor",
+    "load_factors": "(4,), dimensionless eigenvalues corresponding to modes",
+    "fixed_dof_mask": "(nnode,3), True at constrained DOFs",
+    "reference_force_N": "consistent surface force vector (nnode,3)",
+    "nodal_residual_N": "K u - f; reactions at constrained DOFs"
+  },
+  "assumptions": [
+    "Exact axis-aligned geometry represented by conforming quadratic solid elements.",
+    "Conventional full 27-point hexahedral integration for stiffness and geometric stiffness.",
+    "Linearized initial-stress buckling, not nonlinear collapse."
+  ],
+  "convergence_relative_change": 7.050569674527107e-05
+}

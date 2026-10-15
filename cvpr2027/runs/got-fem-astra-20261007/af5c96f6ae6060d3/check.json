@@ -1,0 +1,71 @@
+{
+ "id": "af5c96f6ae6060d314007784199307cf2efa0795e02af3bee63e310bf70b8b21",
+ "source_fem": {
+  "ok": true,
+  "compliance": 9.870830121242354e-07,
+  "components": 1,
+  "nodes": 2625
+ },
+ "candidates": [
+  {
+   "name": "vanilla",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(11.4, 32.8)\n    .faces(\">Z\").workplane()\n    .circle(21.3)\n    .extrude(48.8)\n    .faces(\">Z\").workplane()\n    .circle(9.4)\n    .extrude(29.4)\n    .faces(\">Z\").workplane()\n    .circle(7.1)\n    .extrude(6.9)\n    .faces(\">Z\")\n    .chamfer(1.5)\n    .faces(\"<Z\")\n    .faces(\"<Z\").workplane()\n    .hole(4.9)\n)\nresult = result.cut(\n    cq.Workplane(\"XZ\")\n    .pushPoints([(0, 25 - 11.4 / 2), (0, 45 - 11.4 / 2)])\n    .circle(4)\n    .extrude(40, both=True)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.0240552029835552e-06,
+    "components": 1,
+    "nodes": 5310
+   },
+   "consensus": 2,
+   "numbers_ok": true,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt1",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(11.4, 32.8)\n    .faces(\">Z\").workplane()\n    .circle(21.3)\n    .extrude(48.8)\n    .faces(\">Z\").workplane()\n    .circle(9.4)\n    .extrude(29.4)\n    .faces(\">Z\").workplane()\n    .circle(7.1)\n    .extrude(6.9)\n    .faces(\">Z\")\n    .chamfer(1.5)\n    .faces(\"<Z\")\n    .faces(\"<Z\").workplane()\n    .hole(4.9)\n)\nresult = result.cut(\n    cq.Workplane(\"YZ\")\n    .pushPoints([(0, 19.3), (0, 39.3)])\n    .circle(4.0)\n    .extrude(40, both=True)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.0249366817609205e-06,
+    "components": 1,
+    "nodes": 5641
+   },
+   "consensus": 1,
+   "numbers_ok": false,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt2",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(11.4, 32.8)\n    .faces(\">Z\").workplane()\n    .circle(21.3)\n    .extrude(48.8)\n    .faces(\">Z\").workplane()\n    .circle(9.4)\n    .extrude(29.4)\n    .faces(\">Z\").workplane()\n    .circle(7.1)\n    .extrude(6.9)\n    .faces(\">Z\")\n    .chamfer(1.5)\n    .faces(\"<Z\")\n    .faces(\"<Z\").workplane()\n    .hole(4.9)\n)\nresult = result.cut(\n    cq.Workplane(\"XZ\")\n    .pushPoints([(0, 19.3), (0, 39.3)])\n    .circle(4.0)\n    .extrude(40, both=True)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.024021654203076e-06,
+    "components": 1,
+    "nodes": 5315
+   },
+   "consensus": 2,
+   "numbers_ok": false,
+   "changed": true,
+   "error": null
+  },
+  {
+   "name": "alt3",
+   "code": "import cadquery as cq\nresult = (\n    cq.Workplane(\"XY\")\n    .cylinder(11.4, 32.8)\n    .faces(\">Z\").workplane()\n    .circle(21.3)\n    .extrude(48.8)\n    .faces(\">Z\").workplane()\n    .circle(9.4)\n    .extrude(29.4)\n    .faces(\">Z\").workplane()\n    .circle(7.1)\n    .extrude(6.9)\n    .faces(\">Z\")\n    .chamfer(1.5)\n    .faces(\"<Z\")\n    .faces(\"<Z\").workplane()\n    .hole(4.9)\n)\nresult = result.cut(\n    cq.Workplane(\"YZ\").center(0, 19.3).circle(4.0).extrude(40, both=True)\n)\nresult = result.cut(\n    cq.Workplane(\"XZ\").center(0, 39.3).circle(4.0).extrude(40, both=True)\n)\nshow_object(result)\n",
+   "gates": true,
+   "fem": {
+    "ok": true,
+    "compliance": 1.027034300405138e-06,
+    "components": 1,
+    "nodes": 5946
+   },
+   "consensus": 1,
+   "numbers_ok": false,
+   "changed": true,
+   "error": null
+  }
+ ]
+}

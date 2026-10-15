@@ -1,0 +1,743 @@
+{
+ "task_id": "2f45a63a110d820e89c4ff9e5deab7e97668cdb09ae7f54a692b43c7147b6156",
+ "status": "PASS",
+ "prediction": "{\"edits\": [{\"delete\": 5, \"insert\": [], \"start\": 10}]}",
+ "selected_node": 2,
+ "bank": [
+  2
+ ],
+ "pareto": [
+  2
+ ],
+ "stop": "expansion_limit",
+ "nodes": [
+  {
+   "id": 0,
+   "candidate": "```json\n{\"edits\":[{\"start\":8,\"delete\":6,\"insert\":[]}]}\n```",
+   "depth": 0,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "FAIL",
+      "reason": "ValueError: Workplane object must have at least one solid on the stack to union!"
+     },
+     "constraints": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -1000.0
+    ],
+    "score": -1.0,
+    "diagnosis": [
+     {
+      "stage": "geometry",
+      "status": "FAIL",
+      "reason": "ValueError: Workplane object must have at least one solid on the stack to union!"
+     },
+     {
+      "stage": "constraints",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 3,
+   "visits": 4,
+   "final": null,
+   "edges": [
+    0
+   ]
+  },
+  {
+   "id": 1,
+   "candidate": "{\"edits\": [{\"delete\": 6, \"insert\": [], \"start\": 8}]}",
+   "depth": 1,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "FAIL",
+      "reason": "ValueError: Workplane object must have at least one solid on the stack to union!"
+     },
+     "constraints": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -1000.0
+    ],
+    "score": -1.0,
+    "diagnosis": [
+     {
+      "stage": "geometry",
+      "status": "FAIL",
+      "reason": "ValueError: Workplane object must have at least one solid on the stack to union!"
+     },
+     {
+      "stage": "constraints",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 1,
+   "visits": 4,
+   "final": null,
+   "edges": [
+    1
+   ]
+  },
+  {
+   "id": 2,
+   "candidate": "{\"edits\": [{\"delete\": 5, \"insert\": [], \"start\": 10}]}",
+   "depth": 2,
+   "verdict": {
+    "status": "PASS",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 637.0077687677555,
+       "area": 471.0046016681371,
+       "solids": 1,
+       "faces": 3,
+       "bbox_x": 6.4,
+       "bbox_y": 6.4,
+       "bbox_z": 23.2
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 1.0,
+      "reason": "The flat top on the rivet head has been removed to form a complete hemisphere as instructed.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-00.png"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 1.005
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 1.005
+       }
+      ]
+     }
+    },
+    "objectives": [
+     1.0,
+     1.0,
+     -5.0
+    ],
+    "score": 2.095,
+    "diagnosis": [],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 0,
+   "visits": 1,
+   "final": {
+    "status": "PASS",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 637.0077687677555,
+       "area": 471.0046016681371,
+       "solids": 1,
+       "faces": 3,
+       "bbox_x": 6.4,
+       "bbox_y": 6.4,
+       "bbox_z": 23.2
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "PASS",
+      "confidence": 1.0,
+      "reason": "The flat top on the rivet head has been removed to form a complete hemisphere as instructed.",
+      "basis": "Astra rendered-view judgement",
+      "image": "semantic-00.png"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "PASS",
+      "variations": [
+       {
+        "number_scale": 0.995
+       }
+      ],
+      "results": [
+       {
+        "status": "PASS",
+        "number_scale": 0.995
+       }
+      ]
+     }
+    },
+    "objectives": [
+     1.0,
+     1.0,
+     -5.0
+    ],
+    "score": 2.095,
+    "diagnosis": [],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "final"
+   },
+   "edges": []
+  }
+ ],
+ "edges": [
+  {
+   "parent": 0,
+   "child": 1,
+   "visits": 4,
+   "total": -0.9049999999999998
+  },
+  {
+   "parent": 1,
+   "child": 2,
+   "visits": 1,
+   "total": 2.095
+  }
+ ],
+ "events": [
+  {
+   "event": "decompose",
+   "plan": {
+    "steps": [
+     "Remove the box cut operation that truncates the top of the hemisphere."
+    ],
+    "invariants": [
+     "The cylindrical shaft radius remains 3.0 mm.",
+     "The sphere radius remains 3.2 mm."
+    ],
+    "dependencies": []
+   },
+   "memory_version": "621199e6e28aca6c8ac43088aa6c03c4b197a43cfee4e670b4018211f74c4982",
+   "retrieved": [
+    {
+     "task_id": "af4489a210f06ad160e61b923aecd233062a13a682e1fa6745336abe5c4514fc",
+     "instruction": "At the top of the central pillar, remove the 5 mm wide 30\u00b0 chamfer so the entire top surface is flat.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [], \"start\": 0}, {\"delete\": 3, \"insert\": [], \"start\": 2}, {\"delete\": 1, \"insert\": [], \"start\": 33}]}",
+     "strategies": [],
+     "context": [
+      "0: import math",
+      "2: chamfer_length = 5.0",
+      "3: chamfer_angle = 30.0",
+      "4: chamfer_drop = chamfer_length * math.tan(math.radians(chamfer_angle))",
+      "33:     .faces(\">Z\").edges().chamfer(chamfer_length, chamfer_drop)"
+     ]
+    },
+    {
+     "task_id": "d7c336a02e6f76acd6bdf28e0b560dee6b34368f5b799e472d789baee7453a44",
+     "instruction": "Remove the 10.00 mm \u00d7 3.30 mm top-centered blind slot, 2.50 mm deep, from the top face of the flange.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [], \"start\": 16}]}",
+     "strategies": [],
+     "context": [
+      "16: result = result.faces('>Z').workplane(centerOption='CenterOfBoundBox').slot2D(10.00,3.30).cutBlind(-2.50)"
+     ]
+    },
+    {
+     "task_id": "9a235633d921c8947a499a09e1282639bac94bc61688d188c8fb0aa55e1d3337",
+     "instruction": "Widen the upper end of the central lofted body by increasing the top circular profile radius from 2.667 mm to 3.47 mm.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .circle(3.47)\"], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .circle(2.667)"
+     ]
+    }
+   ]
+  },
+  {
+   "event": "initial_state",
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 495.11186061309786,
+       "area": 435.1419984487223,
+       "solids": 2,
+       "faces": 5,
+       "bbox_x": 6.4,
+       "bbox_y": 6.4,
+       "bbox_z": 23.2
+      }
+     },
+     "constraints": {
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -0.0
+    ],
+    "score": 0.0,
+    "diagnosis": [
+     {
+      "stage": "constraints",
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "initial"
+   }
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "geometry",
+     "status": "FAIL",
+     "reason": "ValueError: Workplane object must have at least one solid on the stack to union!"
+    },
+    {
+     "stage": "constraints",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "af4489a210f06ad160e61b923aecd233062a13a682e1fa6745336abe5c4514fc",
+     "instruction": "At the top of the central pillar, remove the 5 mm wide 30\u00b0 chamfer so the entire top surface is flat.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [], \"start\": 0}, {\"delete\": 3, \"insert\": [], \"start\": 2}, {\"delete\": 1, \"insert\": [], \"start\": 33}]}",
+     "strategies": [],
+     "context": [
+      "0: import math",
+      "2: chamfer_length = 5.0",
+      "3: chamfer_angle = 30.0",
+      "4: chamfer_drop = chamfer_length * math.tan(math.radians(chamfer_angle))",
+      "33:     .faces(\">Z\").edges().chamfer(chamfer_length, chamfer_drop)"
+     ]
+    },
+    {
+     "task_id": "9a235633d921c8947a499a09e1282639bac94bc61688d188c8fb0aa55e1d3337",
+     "instruction": "Widen the upper end of the central lofted body by increasing the top circular profile radius from 2.667 mm to 3.47 mm.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .circle(3.47)\"], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .circle(2.667)"
+     ]
+    },
+    {
+     "task_id": "f40ef2d478cf1413031bead757b27bc154f5818c2488ca200eeecbb39a2438f2",
+     "instruction": "The slotted screw is modified with a larger head, increasing the head diameter to 6.5 mm.",
+     "candidate": "```json\n{\"edits\":[{\"start\":6,\"delete\":1,\"insert\":[\"    .circle(3.25)\"]}]}\n```",
+     "strategies": [
+      "diversify: Change the screw head radius from 2.5 to 3.25 to achieve a head diameter of 6.5 mm using a diameter-based construction or directly setting the radius to 3.25.",
+      "diversify: Increase the head diameter of the screw to 6.5 mm by changing the radius in circle() from 2.5 to 3.25.",
+      "diversify: Increase the head diameter of the screw to 6.5 mm by changing the radius in circle() to 3.25.",
+      "diversify: Modify the screw head diameter to 6.5 mm by changing the radius in circle() to 3.25"
+     ],
+     "context": []
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "FAIL",
+   "hypothesis": "Remove the cut operation that truncates the top of the hemisphere."
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": true,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "geometry",
+     "status": "FAIL",
+     "reason": "ValueError: Workplane object must have at least one solid on the stack to union!"
+    },
+    {
+     "stage": "constraints",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "af4489a210f06ad160e61b923aecd233062a13a682e1fa6745336abe5c4514fc",
+     "instruction": "At the top of the central pillar, remove the 5 mm wide 30\u00b0 chamfer so the entire top surface is flat.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [], \"start\": 0}, {\"delete\": 3, \"insert\": [], \"start\": 2}, {\"delete\": 1, \"insert\": [], \"start\": 33}]}",
+     "strategies": [],
+     "context": [
+      "0: import math",
+      "2: chamfer_length = 5.0",
+      "3: chamfer_angle = 30.0",
+      "4: chamfer_drop = chamfer_length * math.tan(math.radians(chamfer_angle))",
+      "33:     .faces(\">Z\").edges().chamfer(chamfer_length, chamfer_drop)"
+     ]
+    },
+    {
+     "task_id": "9a235633d921c8947a499a09e1282639bac94bc61688d188c8fb0aa55e1d3337",
+     "instruction": "Widen the upper end of the central lofted body by increasing the top circular profile radius from 2.667 mm to 3.47 mm.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .circle(3.47)\"], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .circle(2.667)"
+     ]
+    },
+    {
+     "task_id": "f40ef2d478cf1413031bead757b27bc154f5818c2488ca200eeecbb39a2438f2",
+     "instruction": "The slotted screw is modified with a larger head, increasing the head diameter to 6.5 mm.",
+     "candidate": "```json\n{\"edits\":[{\"start\":6,\"delete\":1,\"insert\":[\"    .circle(3.25)\"]}]}\n```",
+     "strategies": [
+      "diversify: Change the screw head radius from 2.5 to 3.25 to achieve a head diameter of 6.5 mm using a diameter-based construction or directly setting the radius to 3.25.",
+      "diversify: Increase the head diameter of the screw to 6.5 mm by changing the radius in circle() from 2.5 to 3.25.",
+      "diversify: Increase the head diameter of the screw to 6.5 mm by changing the radius in circle() to 3.25.",
+      "diversify: Modify the screw head diameter to 6.5 mm by changing the radius in circle() to 3.25"
+     ],
+     "context": []
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "FAIL",
+   "hypothesis": "Remove the cut operation that truncates the top of the hemisphere."
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": true,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "geometry",
+     "status": "FAIL",
+     "reason": "ValueError: Workplane object must have at least one solid on the stack to union!"
+    },
+    {
+     "stage": "constraints",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "af4489a210f06ad160e61b923aecd233062a13a682e1fa6745336abe5c4514fc",
+     "instruction": "At the top of the central pillar, remove the 5 mm wide 30\u00b0 chamfer so the entire top surface is flat.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [], \"start\": 0}, {\"delete\": 3, \"insert\": [], \"start\": 2}, {\"delete\": 1, \"insert\": [], \"start\": 33}]}",
+     "strategies": [],
+     "context": [
+      "0: import math",
+      "2: chamfer_length = 5.0",
+      "3: chamfer_angle = 30.0",
+      "4: chamfer_drop = chamfer_length * math.tan(math.radians(chamfer_angle))",
+      "33:     .faces(\">Z\").edges().chamfer(chamfer_length, chamfer_drop)"
+     ]
+    },
+    {
+     "task_id": "9a235633d921c8947a499a09e1282639bac94bc61688d188c8fb0aa55e1d3337",
+     "instruction": "Widen the upper end of the central lofted body by increasing the top circular profile radius from 2.667 mm to 3.47 mm.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .circle(3.47)\"], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .circle(2.667)"
+     ]
+    },
+    {
+     "task_id": "f40ef2d478cf1413031bead757b27bc154f5818c2488ca200eeecbb39a2438f2",
+     "instruction": "The slotted screw is modified with a larger head, increasing the head diameter to 6.5 mm.",
+     "candidate": "```json\n{\"edits\":[{\"start\":6,\"delete\":1,\"insert\":[\"    .circle(3.25)\"]}]}\n```",
+     "strategies": [
+      "diversify: Change the screw head radius from 2.5 to 3.25 to achieve a head diameter of 6.5 mm using a diameter-based construction or directly setting the radius to 3.25.",
+      "diversify: Increase the head diameter of the screw to 6.5 mm by changing the radius in circle() from 2.5 to 3.25.",
+      "diversify: Increase the head diameter of the screw to 6.5 mm by changing the radius in circle() to 3.25.",
+      "diversify: Modify the screw head diameter to 6.5 mm by changing the radius in circle() to 3.25"
+     ],
+     "context": []
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "FAIL",
+   "hypothesis": "Remove the .cut(...) block entirely to leave the hemisphere intact."
+  },
+  {
+   "event": "backtrack",
+   "to_node": 1
+  },
+  {
+   "event": "expand",
+   "parent": 1,
+   "node": 2,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "geometry",
+     "status": "FAIL",
+     "reason": "ValueError: Workplane object must have at least one solid on the stack to union!"
+    },
+    {
+     "stage": "constraints",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "af4489a210f06ad160e61b923aecd233062a13a682e1fa6745336abe5c4514fc",
+     "instruction": "At the top of the central pillar, remove the 5 mm wide 30\u00b0 chamfer so the entire top surface is flat.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [], \"start\": 0}, {\"delete\": 3, \"insert\": [], \"start\": 2}, {\"delete\": 1, \"insert\": [], \"start\": 33}]}",
+     "strategies": [],
+     "context": [
+      "0: import math",
+      "2: chamfer_length = 5.0",
+      "3: chamfer_angle = 30.0",
+      "4: chamfer_drop = chamfer_length * math.tan(math.radians(chamfer_angle))",
+      "33:     .faces(\">Z\").edges().chamfer(chamfer_length, chamfer_drop)"
+     ]
+    },
+    {
+     "task_id": "9a235633d921c8947a499a09e1282639bac94bc61688d188c8fb0aa55e1d3337",
+     "instruction": "Widen the upper end of the central lofted body by increasing the top circular profile radius from 2.667 mm to 3.47 mm.",
+     "candidate": "{\"edits\": [{\"delete\": 1, \"insert\": [\"    .circle(3.47)\"], \"start\": 5}]}",
+     "strategies": [],
+     "context": [
+      "5:     .circle(2.667)"
+     ]
+    },
+    {
+     "task_id": "f40ef2d478cf1413031bead757b27bc154f5818c2488ca200eeecbb39a2438f2",
+     "instruction": "The slotted screw is modified with a larger head, increasing the head diameter to 6.5 mm.",
+     "candidate": "```json\n{\"edits\":[{\"start\":6,\"delete\":1,\"insert\":[\"    .circle(3.25)\"]}]}\n```",
+     "strategies": [
+      "diversify: Change the screw head radius from 2.5 to 3.25 to achieve a head diameter of 6.5 mm using a diameter-based construction or directly setting the radius to 3.25.",
+      "diversify: Increase the head diameter of the screw to 6.5 mm by changing the radius in circle() from 2.5 to 3.25.",
+      "diversify: Increase the head diameter of the screw to 6.5 mm by changing the radius in circle() to 3.25.",
+      "diversify: Modify the screw head diameter to 6.5 mm by changing the radius in circle() to 3.25"
+     ],
+     "context": []
+    }
+   ],
+   "path": [
+    0,
+    1
+   ],
+   "status": "PASS",
+   "hypothesis": "Remove the cut operation that truncates the top of the hemisphere, leaving a full sphere head."
+  },
+  {
+   "event": "final_verification",
+   "node": 2,
+   "status": "PASS"
+  }
+ ],
+ "config": {
+  "algorithm": "mcts",
+  "max_expansions": 4,
+  "max_depth": 3,
+  "width": 2,
+  "max_width": 4,
+  "exploration": 0.7,
+  "seconds": 2400.0
+ },
+ "memory_version": "621199e6e28aca6c8ac43088aa6c03c4b197a43cfee4e670b4018211f74c4982",
+ "stored": "runs/adaptive-cad-gemini-lite-20261007/memory.jsonl",
+ "seconds": 84.06726958299987,
+ "api": {
+  "mode": "live_astra",
+  "api_calls": 6,
+  "cost_usd": 0.0,
+  "budget_usd": 0.3,
+  "refused": 0
+ },
+ "tool_jobs": 7
+}

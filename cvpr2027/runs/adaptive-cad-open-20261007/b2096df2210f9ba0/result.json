@@ -1,0 +1,666 @@
+{
+ "task_id": "b2096df2210f9ba0d42adf9b729fddc81fa7ff17f085dfbb9fb1d5d54eb02a2e",
+ "status": "UNVERIFIED",
+ "prediction": "\n\n{\n  \"edits\": [\n    {\n      \"start\": 5,\n      \"delete\": 0,\n      \"insert\": [\"    .rotate((0, 0, 0), (1, 1, 0), 60)\"]\n    }\n  ]\n}",
+ "selected_node": null,
+ "bank": [],
+ "pareto": [],
+ "stop": "expansion_limit",
+ "nodes": [
+  {
+   "id": 0,
+   "candidate": "\n\n{\n  \"edits\": [\n    {\n      \"start\": 5,\n      \"delete\": 0,\n      \"insert\": [\"    .rotate((0, 0, 0), (1, 1, 0), 60)\"]\n    }\n  ]\n}",
+   "depth": 0,
+   "verdict": {
+    "status": "UNKNOWN",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 2731.473407371052,
+       "area": 1130.3191978073648,
+       "solids": 1,
+       "faces": 3,
+       "bbox_x": 23.275350517598127,
+       "bbox_y": 23.275350517598127,
+       "bbox_z": 21.73882037315746
+      }
+     },
+     "constraints": {
+      "status": "PASS",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [],
+        "ok": true
+       },
+       {
+        "metric": "changed_solid",
+        "value": true,
+        "ok": true
+       }
+      ]
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "ValueError"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -1.0
+    ],
+    "score": -0.001,
+    "diagnosis": [
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "ValueError"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 3,
+   "visits": 4,
+   "final": null,
+   "edges": [
+    0
+   ]
+  },
+  {
+   "id": 1,
+   "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (1, 1, 0), 60)\\n\"], \"start\": 6}]}",
+   "depth": 1,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "FAIL",
+      "reason": "ValueError: Invalid inserted line"
+     },
+     "constraints": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -1000.0
+    ],
+    "score": -1.0,
+    "diagnosis": [
+     {
+      "stage": "geometry",
+      "status": "FAIL",
+      "reason": "ValueError: Invalid inserted line"
+     },
+     {
+      "stage": "constraints",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 1,
+   "visits": 4,
+   "final": null,
+   "edges": [
+    1
+   ]
+  },
+  {
+   "id": 2,
+   "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate(60, (1, 1, 0), (0, 0, 0))\\n\"], \"start\": 6}]}",
+   "depth": 2,
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "FAIL",
+      "reason": "ValueError: Invalid inserted line"
+     },
+     "constraints": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -1000.0
+    ],
+    "score": -1.0,
+    "diagnosis": [
+     {
+      "stage": "geometry",
+      "status": "FAIL",
+      "reason": "ValueError: Invalid inserted line"
+     },
+     {
+      "stage": "constraints",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "search"
+   },
+   "attempts": 0,
+   "visits": 1,
+   "final": null,
+   "edges": []
+  }
+ ],
+ "edges": [
+  {
+   "parent": 0,
+   "child": 1,
+   "visits": 4,
+   "total": -4.0
+  },
+  {
+   "parent": 1,
+   "child": 2,
+   "visits": 1,
+   "total": -1.0
+  }
+ ],
+ "events": [
+  {
+   "event": "decompose",
+   "plan": {
+    "steps": [
+     "Import cadquery module",
+     "Create workplane on XY plane",
+     "Draw circle with radius 8.0",
+     "Extrude circle to create 3D solid with height 22.0 and taper 9.293",
+     "Rotate the entire part by 60 degrees about axis (1, 1, 0) from origin (0, 0, 0)",
+     "Display the final object"
+    ],
+    "invariants": [
+     "Circle radius remains 8.0",
+     "Extrusion height remains 22.0",
+     "Taper angle remains 9.293",
+     "Base geometry topology is preserved",
+     "Material and color properties unchanged"
+    ],
+    "dependencies": [
+     [
+      3,
+      4
+     ],
+     [
+      4,
+      5
+     ]
+    ]
+   },
+   "memory_version": "36609bbe1360bb1bcce12fc69823b7bcc133a5426c6118839c4e542a87fad260",
+   "retrieved": [
+    {
+     "task_id": "01a06d4bc35c7de625296e2f6d05be1c5c2384d79fedc6d489ae1660be2b6bc7",
+     "instruction": "Rotate the entire part by 60 degrees about the axis (1, 0, 1).",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (1, 0, 1), 60)\"], \"start\": 16}]}",
+     "strategies": [],
+     "context": [
+      "16: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "23d5531a63bd33fa6af40518b7a62a23aa501343fb122f13519cb86b828b5c51",
+     "instruction": "Rotate the entire part by 60 degrees about the axis (1, 1, 0).",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (1, 1, 0), 60)\"], \"start\": 9}]}",
+     "strategies": [],
+     "context": [
+      "9: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "66e8b92a3faced5f76dbda9aa5698a1ae44ac0d16a5cf74ebee0767e7a35f316",
+     "instruction": "Rotate the entire part by 60 degrees about the axis (0, 1, 1).",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (0, 1, 1), 60)\"], \"start\": 17}]}",
+     "strategies": [],
+     "context": [
+      "17: show_object(result)"
+     ]
+    }
+   ]
+  },
+  {
+   "event": "initial_state",
+   "verdict": {
+    "status": "FAIL",
+    "stages": {
+     "geometry": {
+      "status": "PASS",
+      "metrics": {
+       "volume": 2731.473407371051,
+       "area": 1130.3191978073646,
+       "solids": 1,
+       "faces": 3,
+       "bbox_x": 16.0,
+       "bbox_y": 16.0,
+       "bbox_z": 22.000000000000004
+      }
+     },
+     "constraints": {
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         60.0
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     "semantics": {
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     "fem": {
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     "robustness": {
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    },
+    "objectives": [
+     0.0,
+     0.0,
+     -0.0
+    ],
+    "score": 0.0,
+    "diagnosis": [
+     {
+      "stage": "constraints",
+      "status": "FAIL",
+      "checks": [
+       {
+        "metric": "instruction_values",
+        "missing": [
+         60.0
+        ],
+        "ok": false
+       },
+       {
+        "metric": "changed_solid",
+        "value": false,
+        "ok": false
+       }
+      ]
+     },
+     {
+      "stage": "semantics",
+      "status": "UNKNOWN",
+      "reason": "Not evaluated"
+     },
+     {
+      "stage": "fem",
+      "status": "UNKNOWN",
+      "reason": "No physical contract supplied"
+     },
+     {
+      "stage": "robustness",
+      "status": "UNKNOWN",
+      "reason": "No perturbation contract supplied"
+     }
+    ],
+    "tool_version": "03d3bca0ba1fd2c401d33ffa9da42ee7f427d49248c278a40933265a8d85f621",
+    "phase": "initial"
+   }
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "ValueError"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "No physical contract supplied"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "No perturbation contract supplied"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "01a06d4bc35c7de625296e2f6d05be1c5c2384d79fedc6d489ae1660be2b6bc7",
+     "instruction": "Rotate the entire part by 60 degrees about the axis (1, 0, 1).",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (1, 0, 1), 60)\"], \"start\": 16}]}",
+     "strategies": [],
+     "context": [
+      "16: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "23d5531a63bd33fa6af40518b7a62a23aa501343fb122f13519cb86b828b5c51",
+     "instruction": "Rotate the entire part by 60 degrees about the axis (1, 1, 0).",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (1, 1, 0), 60)\"], \"start\": 9}]}",
+     "strategies": [],
+     "context": [
+      "9: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "66e8b92a3faced5f76dbda9aa5698a1ae44ac0d16a5cf74ebee0767e7a35f316",
+     "instruction": "Rotate the entire part by 60 degrees about the axis (0, 1, 1).",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (0, 1, 1), 60)\"], \"start\": 17}]}",
+     "strategies": [],
+     "context": [
+      "17: show_object(result)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "FAIL",
+   "hypothesis": "Rotate the entire part by 60 degrees about axis (1, 1, 0) from origin using post-chain result reassignment"
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": true,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "ValueError"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "No physical contract supplied"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "No perturbation contract supplied"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "01a06d4bc35c7de625296e2f6d05be1c5c2384d79fedc6d489ae1660be2b6bc7",
+     "instruction": "Rotate the entire part by 60 degrees about the axis (1, 0, 1).",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (1, 0, 1), 60)\"], \"start\": 16}]}",
+     "strategies": [],
+     "context": [
+      "16: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "23d5531a63bd33fa6af40518b7a62a23aa501343fb122f13519cb86b828b5c51",
+     "instruction": "Rotate the entire part by 60 degrees about the axis (1, 1, 0).",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (1, 1, 0), 60)\"], \"start\": 9}]}",
+     "strategies": [],
+     "context": [
+      "9: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "66e8b92a3faced5f76dbda9aa5698a1ae44ac0d16a5cf74ebee0767e7a35f316",
+     "instruction": "Rotate the entire part by 60 degrees about the axis (0, 1, 1).",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (0, 1, 1), 60)\"], \"start\": 17}]}",
+     "strategies": [],
+     "context": [
+      "17: show_object(result)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "FAIL",
+   "hypothesis": "Rotate the part by assigning a new result after extrusion using the rotate method with axis (1, 1, 0) and angle 60 degrees"
+  },
+  {
+   "event": "expand",
+   "parent": 0,
+   "node": 1,
+   "merged": true,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "ValueError"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "No physical contract supplied"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "No perturbation contract supplied"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "01a06d4bc35c7de625296e2f6d05be1c5c2384d79fedc6d489ae1660be2b6bc7",
+     "instruction": "Rotate the entire part by 60 degrees about the axis (1, 0, 1).",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (1, 0, 1), 60)\"], \"start\": 16}]}",
+     "strategies": [],
+     "context": [
+      "16: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "23d5531a63bd33fa6af40518b7a62a23aa501343fb122f13519cb86b828b5c51",
+     "instruction": "Rotate the entire part by 60 degrees about the axis (1, 1, 0).",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (1, 1, 0), 60)\"], \"start\": 9}]}",
+     "strategies": [],
+     "context": [
+      "9: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "66e8b92a3faced5f76dbda9aa5698a1ae44ac0d16a5cf74ebee0767e7a35f316",
+     "instruction": "Rotate the entire part by 60 degrees about the axis (0, 1, 1).",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (0, 1, 1), 60)\"], \"start\": 17}]}",
+     "strategies": [],
+     "context": [
+      "17: show_object(result)"
+     ]
+    }
+   ],
+   "path": [
+    0
+   ],
+   "status": "FAIL",
+   "hypothesis": "Apply rotation transform to the completed 3D solid after extrusion"
+  },
+  {
+   "event": "backtrack",
+   "to_node": 1
+  },
+  {
+   "event": "expand",
+   "parent": 1,
+   "node": 2,
+   "merged": false,
+   "strategy": "repair",
+   "diagnosis": [
+    {
+     "stage": "geometry",
+     "status": "FAIL",
+     "reason": "ValueError: Invalid inserted line"
+    },
+    {
+     "stage": "constraints",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "semantics",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "fem",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    },
+    {
+     "stage": "robustness",
+     "status": "UNKNOWN",
+     "reason": "Not evaluated"
+    }
+   ],
+   "retrieved_repairs": [
+    {
+     "task_id": "01a06d4bc35c7de625296e2f6d05be1c5c2384d79fedc6d489ae1660be2b6bc7",
+     "instruction": "Rotate the entire part by 60 degrees about the axis (1, 0, 1).",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (1, 0, 1), 60)\"], \"start\": 16}]}",
+     "strategies": [],
+     "context": [
+      "16: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "23d5531a63bd33fa6af40518b7a62a23aa501343fb122f13519cb86b828b5c51",
+     "instruction": "Rotate the entire part by 60 degrees about the axis (1, 1, 0).",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (1, 1, 0), 60)\"], \"start\": 9}]}",
+     "strategies": [],
+     "context": [
+      "9: show_object(result)"
+     ]
+    },
+    {
+     "task_id": "66e8b92a3faced5f76dbda9aa5698a1ae44ac0d16a5cf74ebee0767e7a35f316",
+     "instruction": "Rotate the entire part by 60 degrees about the axis (0, 1, 1).",
+     "candidate": "{\"edits\": [{\"delete\": 0, \"insert\": [\"result = result.rotate((0, 0, 0), (0, 1, 1), 60)\"], \"start\": 17}]}",
+     "strategies": [],
+     "context": [
+      "17: show_object(result)"
+     ]
+    }
+   ],
+   "path": [
+    0,
+    1
+   ],
+   "status": "FAIL",
+   "hypothesis": "Rotate the entire part by 60 degrees about axis (1, 1, 0) using correct cadquery rotate method signature with angle as first argument"
+  }
+ ],
+ "config": {
+  "algorithm": "mcts",
+  "max_expansions": 4,
+  "max_depth": 3,
+  "width": 2,
+  "max_width": 4,
+  "exploration": 0.7,
+  "seconds": 2400.0
+ },
+ "memory_version": "36609bbe1360bb1bcce12fc69823b7bcc133a5426c6118839c4e542a87fad260",
+ "stored": null,
+ "seconds": 187.27900799999998,
+ "api": {
+  "mode": "live_astra",
+  "api_calls": 6,
+  "cost_usd": 0.0,
+  "budget_usd": 0.23809523809523808,
+  "refused": 0
+ },
+ "tool_jobs": 4
+}
