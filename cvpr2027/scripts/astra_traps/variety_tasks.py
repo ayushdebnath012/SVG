@@ -216,8 +216,8 @@ def answer(txt: str):
     return None
 
 
-def run(budget: float) -> None:
-    key = os.environ.get("OPENAI_API_KEY") or sys.exit("OPENAI_API_KEY unavailable; no calls made")
+def run(budget: float, endpoint: str = "https://api.openai.com/v1/chat/completions", key_env: str = "OPENAI_API_KEY") -> None:
+    key = os.environ.get(key_env) or sys.exit(f"{key_env} unavailable; no calls made")
     rows = [json.loads(l) for l in (OUT / "tasks.jsonl").read_text().splitlines()]
     spent = sum(json.loads(p.read_text()).get("cost_usd", 0) for p in OUT.glob("*/result.json"))
     for t in rows:
@@ -230,7 +230,7 @@ def run(budget: float) -> None:
         d.mkdir(parents=True, exist_ok=True)
         payload = {"model": "gpt-6-astra", "messages": [{"role": "system", "content": SYSTEM}, {"role": "user", "content": t["prompt"]}],
                    "reasoning_effort": "medium", "max_completion_tokens": CAP, "store": False}
-        req = urllib.request.Request("https://api.openai.com/v1/chat/completions", data=json.dumps(payload).encode(),
+        req = urllib.request.Request(endpoint, data=json.dumps(payload).encode(),
                                      headers={"Authorization": "Bearer " + key, "Content-Type": "application/json"})
         t0 = time.time()
         try:
@@ -248,7 +248,8 @@ def run(budget: float) -> None:
         spent += cost
         (d / "response.json").write_text(json.dumps(raw) + "\n")
         (d / "result.json").write_text(json.dumps(dict(status="completed", finish_reason=raw["choices"][0].get("finish_reason"), usage=u,
-                                                       cost_usd=round(cost, 5), seconds=round(time.time() - t0, 1))) + "\n")
+                                                       cost_usd=round(cost, 5), charged_usd=u.get("cost"), endpoint=endpoint,
+                                                       seconds=round(time.time() - t0, 1))) + "\n")
         print(f"END {t['id']} ${cost:.3f} total ${spent:.3f}", flush=True)
 
 
@@ -282,7 +283,9 @@ if __name__ == "__main__":
     ap.add_argument("command", choices=["build", "run", "score"])
     ap.add_argument("--budget-usd", type=float, default=3.0)
     ap.add_argument("--out", type=Path, help="task folder (default runs/astra-variety-20261015)")
+    ap.add_argument("--endpoint", default="https://api.openai.com/v1/chat/completions", help="OpenAI-compatible chat completions URL")
+    ap.add_argument("--key-env", default="OPENAI_API_KEY", help="environment variable holding the key")
     a = ap.parse_args()
     if a.out:
         OUT = a.out.resolve()
-    {"build": build, "run": lambda: run(a.budget_usd), "score": score}[a.command]()
+    {"build": build, "run": lambda: run(a.budget_usd, a.endpoint, a.key_env), "score": score}[a.command]()

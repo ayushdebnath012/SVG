@@ -1,0 +1,135 @@
+{
+  "version": "cadfem-metrics-0.1",
+  "status": "research specification; thresholds require family-level calibration",
+  "headline_metric": "engineering-family macro verified joint success rate",
+  "tracks_reported_separately": [
+    "cad_only",
+    "fem_given_cad",
+    "drawing_to_cad_fem",
+    "edit_cad_fem",
+    "frame_drawing_analysis",
+    "hydraulic_network"
+  ],
+  "geometry": {
+    "default_pose_policy": "fixed",
+    "allowed_opt_in_pose_policy": "translation_and_24_proper_rotations",
+    "allow_scale_fit": false,
+    "allow_reflection": false,
+    "surface_samples_per_solid_union": 20000,
+    "surface_sampling_seed": 7,
+    "tessellation_linear_tolerance_over_reference_diagonal": 0.0001,
+    "surface_f1_threshold_over_reference_diagonal": 0.005,
+    "surface_f1_threshold_status": "diagnostic sampling setting, not a universal engineering tolerance",
+    "voxel_iou_resolutions_for_sensitivity": [
+      32,
+      64,
+      128
+    ],
+    "official_benchcad_comparability": false,
+    "pass_thresholds": {
+      "brep_volume_iou": null,
+      "normalized_chamfer": null,
+      "feature_dimensions": null
+    },
+    "benchcad2_compatibility": {
+      "part_formula": "0.8 * chance_corrected_iou + 0.2 * topology_count_score",
+      "status": "formula helper only; upstream preprocessing not implemented",
+      "use_for_physical_engineering_pass": false,
+      "upstream_evaluator_required_for_comparable_score": true
+    }
+  },
+  "fem": {
+    "common_evaluation_grid_required": true,
+    "evaluator_owned_interpolation_required": true,
+    "integration_weighting": "physical volume/area and time weights; never uniform node-count weighting by default",
+    "primary_field_errors": [
+      "displacement_weighted_relative_l2",
+      "stress_tensor_weighted_relative_l2",
+      "temperature_weighted_rmse",
+      "relative_energy_error_when_applicable"
+    ],
+    "primary_quantities": [
+      "task_published_qois",
+      "maximum_displacement",
+      "weighted_vm_p95_if_reference_exists",
+      "compliance_if_reference_exists"
+    ],
+    "additional_physics": [
+      "reaction_force_and_moment_balance",
+      "dirichlet_residual",
+      "heat_energy_balance",
+      "contact_gap_and_complementarity",
+      "modal_frequency_and_MAC",
+      "buckling_mode_and_factor",
+      "plastic_load_displacement_curve",
+      "fracture_integral_and_crack_path"
+    ],
+    "replace_published_peak_stress_with_p95": false,
+    "convergence_minimum_completed_levels": 3,
+    "timed_out_refinement_counts_as_converged": false,
+    "pass_thresholds": {
+      "relative_displacement_l2": null,
+      "relative_stress_l2": null,
+      "relative_energy_error": null,
+      "equilibrium_residual": null
+    }
+  },
+  "required_joint_gates": [
+    "cad_replay_verified",
+    "cad_valid",
+    "cad_fidelity_verified",
+    "features_and_interfaces_verified",
+    "setup_verified",
+    "mesh_verified",
+    "solver_replay_verified",
+    "qoi_accuracy_verified",
+    "field_accuracy_verified",
+    "convergence_reviewed",
+    "artifact_hashes_verified"
+  ],
+  "gate_authority": "evaluator-owned measurements and hash-bound runner/review evidence, never model assertions",
+  "missing_required_check": "unverified; never a verified pass",
+  "missing_reference_or_ambiguous_task": "reference hold, exclude from capability ranking",
+  "provisional_qoi_only_cases": "diagnostic numerical scores only",
+  "aggregation": {
+    "invalid_cad_similarity_score": 0,
+    "missing_required_outputs_task_success": 0,
+    "primary_macro_unit": "engineering_family",
+    "bootstrap_unit": "source_design_or_family",
+    "repeats_reported_separately": true,
+    "no_best_of_k_without_protocol": true
+  },
+  "implementation": {
+    "available": [
+      "physical_surface_CD_L1_and_CD_L2_squared",
+      "sampled_HD_and_HD95",
+      "surface_F1",
+      "exact_BRep_volume_IoU",
+      "optional_voxel_IoU",
+      "edit_headroom_improvement",
+      "feature_PRF_from_trusted_matching",
+      "operation_recall_from_trusted_execution_traces",
+      "weighted_field_L2_RMSE",
+      "scalar_QoI_abs_relative_log_errors",
+      "linear_energy_error",
+      "force_moment_balance",
+      "MAC",
+      "Richardson_GCI_diagnostic",
+      "joint_gate_combination",
+      "family_macro_aggregation",
+      "BenchCAD2_part_formula_from_trusted_upstream_terms"
+    ],
+    "not_yet_automated": [
+      "feature_extraction_and_matching",
+      "Betti_numbers",
+      "interface_keep_in_keep_out_checks",
+      "non_target_preservation_geometry",
+      "time_series_alignment_and_errors",
+      "contact_residuals",
+      "fracture_metrics",
+      "cross_mesh_field_interpolation",
+      "trusted_workflow_attestation",
+      "assembly_BOM_pose_and_interface_adapter"
+    ]
+  }
+}

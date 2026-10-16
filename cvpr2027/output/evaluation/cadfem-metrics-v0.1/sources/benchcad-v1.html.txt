@@ -1,0 +1,3978 @@
+
+ 
+ 
+ BenchCAD: A Comprehensive, Industry-Standard Benchmark for Programmatic CAD 
+ 
+ 
+ 
+ 
+   
+ 
+  // Restore the saved color scheme preference, or
+  // enact the browser preference if "automatic", 
+  // without expecting DOM load to have completed.
+  //
+  // Also restore any saved readingmode and ToC display preferences.
+  function initializeReadingPreferences() {
+    let saved_theme = localStorage.getItem("ar5iv_theme") || "automatic";
+    if (saved_theme === "automatic") {
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        saved_theme = "dark";
+      }
+    }
+    if (saved_theme == "dark") {
+      document.documentElement.setAttribute("data-theme", "dark");
+    } else {
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+
+    const tocDisplay = localStorage.getItem('arxiv_html_paper_toc_display');
+    if (tocDisplay) {
+      document.documentElement.setAttribute("data-toc-display", tocDisplay);
+    }
+    const readingMode = localStorage.getItem('arxiv_html_paper_reading_mode');
+    if (readingMode) {
+      document.documentElement.setAttribute("data-reading-mode", readingMode);
+    }
+    // Pre-apply spinout-banner dismissal here, before the banner paints, so it
+    // never flashes in only to be hidden later by the deferred arxiv-header.js.
+    // Key matches arxiv-header.js: "arxiv-banner-dismissed:" + data-banner-name.
+    if (localStorage.getItem('arxiv-banner-dismissed:spinout-nonprofit')) {
+      document.documentElement.setAttribute("data-banner-dismissed", "");
+    }
+  }
+  // Run as soon as JS starts, to minimize repainting
+  initializeReadingPreferences();
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  /* Banner pre-dismissal (set above before paint -> no flash-then-hide) and
+     reading-mode chrome hiding. */
+  html[data-banner-dismissed] .ds-announcement { display: none; }
+  html[data-reading-mode="enabled"] .ds-announcement,
+  html[data-reading-mode="enabled"] .ds-site-footer { display: none; }
+  /* Keep the announcement text dark on the Open-Blue band in both colour themes
+     (otherwise it inherits the paper's warm-wash text in dark mode and washes out). */
+  .ds-announcement-text { color: var(--arxiv-ink, #1c1a17); }
+ 
+ 
+ 
+ 
+ 
+   
+     
+       Report GitHub Issue 
+       × 
+     
+
+     
+       Title: 
+       
+
+       Content selection saved. Describe the issue below: 
+
+       Description: 
+       
+     
+
+     
+       Submit without GitHub 
+       Submit in GitHub 
+     
+   
+ 
+     
+     arXiv is now an independent nonprofit! 
+     Learn more 
+     × 
+   
+
+ 
+   
+     
+       Back to arXiv 
+     
+   
+   
+   
+     Why HTML? 
+     
+       
+         
+       
+       Report Issue 
+     
+     
+       
+         
+         
+       
+       Back to Abstract 
+     
+     
+     
+       
+         
+       
+       Download PDF 
+     
+     
+       
+         
+         
+       
+     
+     
+     
+       
+         
+       
+     
+     
+     
+       
+         
+           
+           
+         
+       
+       
+         
+           
+           
+         
+       
+       
+         
+           
+           
+         
+       
+     
+   
+ 
+ 
+ 
+ Abstract 
+ 1  Introduction 
+ 
+ Contributions. 
+ 
+ 2  Related Work 
+ 
+ CAD code-generation models. 
+ CAD evaluation benchmarks. 
+ Position of BenchCAD. 
+ 
+ 3  BenchCAD: Dataset and Tasks 
+ 
+ 3.1  Dataset 
+ 
+ Design principles. 
+ Generation pipeline. 
+ Three released datasets. 
+ 
+ 3.2  Tasks 
+ 
+ Vision2Code . 
+ Code Edit . 
+ Vision QA  and  Code QA . 
+ 
+ 
+ 4  Experiments 
+ 
+ 4.1  Setup 
+ 4.2  Models 
+ 4.3  Evaluation 
+ 4.4  Training 
+ 
+ 5  Results 
+ 
+ 5.1  Overall Performance of 4 Tasks 
+ 
+ Vision2Code . 
+ Code Edit . 
+ Vision QA  and  Code QA . 
+ 
+ 5.2  Error Analysis 
+ 5.3  BenchCAD as a Training Resource for Improving Model Capabilities 
+ 
+ 6  Conclusion 
+ References 
+ A  Limitations 
+ 
+ Standard-parametric coverage is not full industrial CAD. 
+ Standard-anchored does not mean standard-compliant. 
+ Industrial Common Sense Gap measurement. 
+ 
+ B  Extended Related Work: CAD Code-Generation and Editing Benchmarks 
+ 
+ Code generation. 
+ Editing. 
+ 
+ C  Full Comparison Against Prior CAD Code-Generation Work 
+ D  Standard Codes Covered 
+ E  Dataset Generation Details 
+ 
+ Subfamilies. 
+ Difficulty tiers. 
+ Sandbox failure-mode taxonomy. 
+ 
+ F  Model Training 
+ 
+ SFT training mixture. 
+ OOD holdout selection. 
+ SFT training setup. 
+ RL training setup. 
+ Model Generalization. 
+ 
+ G  Full Per-Model Per-Task Results 
+ H  CAD Operational Blindspot: Per-Operation Recall 
+ I  Datasheet for BenchCAD 
+ 
+ Motivation. 
+ Composition. 
+ Collection process. 
+ Preprocessing/cleaning/labeling. 
+ Uses. 
+ Distribution. 
+ Maintenance. 
+ 
+ J  Question Bank Construction 
+ K  QA System Prompts 
+ 
+ K.1  Image-based QA System Prompt 
+ K.2  Code-based QA System Prompt 
+ 
+ L  Code Generation System Prompts 
+ 
+ L.1  Primary Vision-to-CAD System Prompt 
+ L.2  Vision-to-CAD User Prompt 
+ L.3  Cadrille Baseline System Prompt 
+ L.4  Edit-task System Prompt 
+ 
+ M  Rotation-Invariant IoU 
+ N  Edit Protocol 
+ 
+ Pair construction. 
+ Scoring. 
+ Task taxonomy. 
+ Failure taxonomy. 
+ Image-conditioned variant. 
+ Does adding the image really help? 
+ Supplementary results. 
+ 
+ O  Scoring-Protocol Ablations 
+ P  CadQuery Operation Coverage 
+ 
+ Static analysis protocol. 
+ Tier B (sketch+extrude IR works). 
+ CADEvolve caveat. 
+ 
+ Q  Case Study:  motor_end_cap_bore_widen  (Case 167) 
+ 
+ Setup. 
+ Failure pattern (F08, L4: spatial reasoning  + +  code synthesis). 
+ 
+ R  Reproduction 
+ S  Ethical Considerations and Broader Impact 
+ 
+ 
+ 
+ 
+   
+    License: arXiv.org perpetual non-exclusive license
+   
+   
+arXiv:2605.10865v1 [cs.AI] 11 May 2026 
+ 
+ 
+ BenchCAD: A Comprehensive, Industry-Standard Benchmark for Programmatic CAD 
+ 
+ 
+ Haozhe Zhang
+ 
+ Affiliation:  University of Virginia
+ 
+ Email:  hz5sq@virginia.edu 
+ 
+    
+ Kaichen Liu
+ 
+ Affiliation:  University of Virginia
+ 
+ Email:  hanjie@rice.edu 
+ 
+    
+ Miaomiao Chen
+ 
+ Affiliation:  University of Virginia
+ 
+    
+ Lei Li
+ 
+ Affiliation:  University of Virginia
+ 
+    
+ Shaojie Yang
+ 
+ Affiliation:  University of XXX
+ 
+    
+ Cheng Peng
+ 
+ Affiliation:  University of Virginia
+ 
+    
+ Hanjie Chen
+ 
+ Affiliation:  University of Virginia * Equal contribution. † Corresponding authors.
+ 
+ May 2026 
+
+ Abstract 
+    
+ Industrial Computer-Aided Design (CAD) code generation requires models to produce executable parametric programs from visual or textual inputs.
+Beyond recognizing the outer shape of a part, this task involves understanding its 3D structure, inferring engineering parameters, and choosing CAD operations that reflect how the part would be designed and manufactured. Despite the promise of Multimodal large language models (MLLMs) for this task, they are rarely evaluated on whether these capabilities jointly hold in realistic industrial CAD settings. We present BenchCAD, a unified benchmark for industrial CAD reasoning. BenchCAD contains 17,900 execution-verified CadQuery programs across 106 industrial part families, including bevel gears, compression springs, twist drills, and other reusable engineering designs. It evaluates models through visual question answering, code question answering, image-to-code generation, and instruction-guided code editing, enabling fine-grained analysis across perception, parametric abstraction, and executable program synthesis. Across 10+ frontier models, BenchCAD shows that current systems often recover coarse outer geometry but fail to produce faithful parametric CAD programs. Common failures include missing fine 3D structure, misinterpreting industrial design parameters, and replacing essential operations such as sweeps, lofts, and twist-extrudes with simpler sketch-and-extrude patterns. Fine-tuning and reinforcement learning improve in-distribution performance, but generalization to unseen part families remains limited. These results position BenchCAD as a benchmark for measuring and improving the industrial readiness of multimodal CAD automation.
+Released under CC-BY-4.0. 
+ Project page:
+ https://benchcad.github.io/BenchCAD_webpage/ . 
+  
+ 
+ 
+ 1  Introduction 
+
+ 
+ Figure 1:  BenchCAD overview.  BenchCAD is a unified, capability-decomposed evaluation framework for industrial CAD reasoning, consisting of 17,900 expert-verified parametric CadQuery parts ( left ) drawn from 106 industrial families spanning fasteners, transmission components, structural elements, fluid fittings, panels, hardware, and enclosures. The 7-category functional taxonomy ( right ) covers 49% of families anchored to ISO/DIN/EN/ASME/IEC standards, with each part realised as an executable parametric program testable for geometry, parameters, and edits.
+ 
+ 
+ 
+ Multimodal large language models (MLLMs)  ( OpenAI, 2026 ;  Anthropic, 2026 ;  Google DeepMind, 2026 )  now combine visual perception, code generation, and multi-step reasoning in a single interface, performing tasks that previously required dedicated systems.
+A natural next question is whether such models can move beyond recognizing visual content to producing executable programs that define and modify physical objects.
+Computer-aided design (CAD) provides a canonical testbed for this question.
+Unlike a mesh, point cloud, or rendered image, a CAD model is typically an editable parametric program: geometric operations such as extrusion, cutting, sweeping, filleting, and patterning construct a solid object through variables and constraints  ( CadQuery Contributors, 2024 ) .
+A capable CAD agent must therefore connect visual evidence, 3D structure, symbolic operations, and executable program synthesis. 
+ 
+ 
+ Real industrial designs are rarely arbitrary shapes.
+They belong to reusable families such as gears, springs, brackets, fasteners, pipes, and bearings (Fig.  1 ), where small local features and parameter relations decide whether a part is merely visually similar or actually useful as an editable design.
+A spring is not fully specified by its helical silhouette: its end coils, pitch profile, and cross-section encode design intent.
+Similarly, a gear-like outline is insufficient without the correct tooth construction and parameterization.
+ The geometry passes the eye but fails the caliper. 
+ 
+ 
+ Existing evaluations capture only parts of this problem.
+Prior CAD code-generation benchmarks  ( Wu et al., 2021 ;  Khan et al., 2024 ;  Guan et al., 2025 ;  Rukhovich et al., 2025 ;  Kolodiazhnyi et al., 2026 ;  Elistratov et al., 2026 )  score whether a model’s rendered output matches a target shape, typically through a single end-to-end geometric metric such as IoU or Chamfer distance, while program editing  ( Alrashedy and others, 2025 ;  Yuan et al., 2025 )  and design question answering are studied in isolation.
+However, two programs may produce roughly similar outer envelopes while differing substantially in editability, operation choice, and engineering detail, so a single shape-matching score can overestimate capability and obscure which sub-ability — visual perception, parametric abstraction, or code synthesis — drives the remaining gap. 
+ 
+ 
+ This leaves open how to evaluate CAD agents beyond rendered shape fidelity.
+For practical use, the relevant question is not only “does the rendered geometry match?”, but also “does the model understand the operations, parameters, constraints, and editable structure that produced it?”
+We therefore formalize CAD reasoning as a four-level capability hierarchy, from part-level visual recognition to CAD-operation understanding, parametric abstraction, and executable code synthesis (Fig.  3 ).
+This decomposition is important because CAD failures are often compositional: a model may identify the family but pick the wrong operation, infer the rough scale but miss a standard relation, or edit the requested feature while changing unrelated parts. 
+ 
+ 
+ We introduce BenchCAD, a capability-decomposed benchmark for executable, editable, and constraint-aware CAD reasoning.
+BenchCAD contains 17,900 execution-verified CadQuery programs across 106 industrial part families covering twist drills, bevel gears, compression springs, propellers, brackets, flanges, eye bolts, fasteners, and other reusable industrial designs (Fig.  1 ).
+It exercises a substantially broader CadQuery operation surface than prior released corpora, including helical sweeps, lofts, twist-extrudes, and parametric involute-gear construction.
+Rather than sampling unconstrained primitive shapes, BenchCAD instantiates structured part families with meaningful parameter relations and standard-derived dimensions (Fig.  2 ).
+It evaluates three practical CAD-agent workflows through four task families:  Vision2Code  ( img2cq , image-to-code generation from multi-view renders),  Vision QA  and  Code QA  ( qa_img ,  qa_code , design question answering from visual or program inputs), and  Code Edit  ( edit_code , instruction-guided program editing). 
+ 
+ 
+ Across 10+ frontier MLLMs and open CAD-specialized baselines  ( Kolodiazhnyi et al., 2026 ;  Elistratov et al., 2026 ) , BenchCAD reveals a consistent gap between apparent geometric similarity and true parametric understanding: current models often recognize the global part family but miss local engineering details, choose simplified or incorrect CAD operations, or fail to apply localized edits faithfully.
+The matched comparison between image- and code-based QA further shows that visual recognition alone does not imply reliable parametric abstraction.
+Supervised fine-tuning (SFT) and reinforcement learning (RL) on BenchCAD improve operation coverage and executable generation, but substantial out-of-distribution gaps remain, especially for held-out industrial families requiring advanced operations and precise design constraints. 
+ 
+ 
+ Contributions. 
+
+ 
+ (i) We release BenchCAD, a domain-expert-verified benchmark of 17,900 executable CadQuery programs across 106 industrial part families with multi-view renders, design QA pairs, and curated edit examples.
+(ii) We propose a unified CAD-agent evaluation framework covering image-to-code generation, image- and code-based QA, and instruction-guided code editing.
+(iii) We provide a capability-decomposed evaluation of frontier MLLMs and open CAD-specialized models, showing that current systems remain limited by local detail recognition, CAD operation reasoning, parametric abstraction, and edit fidelity.
+All data are anonymously released under  BenchCAD/BenchCAD  on Hugging Face under the CC-BY-4.0 license, and the evaluation code is released under  BenchCAD/BenchCAD-main  on GitHub under the MIT license. 
+ 
+ 
+ 
+ 
+ 2  Related Work 
+
+ 
+ Table 1:  BenchCAD positioning.  Benchmark overview for MLLM CAD capabilities. 
+ 
+ 
+ 
+ 
+ BenchCAD 
+ 
+ Primary purpose 
+ evaluation 
+ 
+ 
+ benchmark 
+ 
+ Industry domain experts checked 
+ Yes 
+ 
+ Named industrial families 
+ 106 
+ 
+ ISO/DIN/EN/ASME/IEC codes 
+ 47 
+ 
+ Verified edit pairs 
+ 748 
+ 
+ Paired numeric-QA items 
+ 2,400 
+ 
+ Capability-decomposed task suite 
+ ✓ 
+ 
+ Rotation + scale-invariant scoring 
+ ✓ 
+ 
+ 
+ 
+ 
+ CAD code-generation models. 
+
+ 
+ Recent work establishes a common SFT + + RL post-training pipeline on procedural sketch-and-extrude corpora.
+DeepCAD  ( Wu et al., 2021 )  and Text2CAD  ( Khan et al., 2024 )  introduced command-sequence corpora; CAD-Coder  ( Guan et al., 2025 )  reformulated the data as CadQuery and added GRPO with a Chamfer reward; the CAD-Recode  ( Rukhovich et al., 2025 ) /cadrille  ( Kolodiazhnyi et al., 2026 ) /CADEvolve  ( Elistratov et al., 2026 )  lineage drove DeepCAD IoU to  ∼ \sim 92% via multi-modal SFT and online RL on 1M–2.7M-script corpora.
+Together they establish CadQuery code as a promising generation target for VLMs.
+Two structural gaps remain: (i) training is dominated by sketch+extrude — helical sweeps and parametric involute-gear construction are absent from every released corpus; and (ii) evaluation lacks family-level taxonomy and standard-table grounding, conflating visual perception, parametric abstraction, and code synthesis into a single end-to-end IoU score. 
+ 
+ 
+ 
+ CAD evaluation benchmarks. 
+
+ 
+ The closest prior CAD code/edit benchmarks — CADPrompt  ( Alrashedy and others, 2025 ) , CAD-Editor  ( Yuan et al., 2025 ) , CADialogue  ( Zhou et al., 2025 ) , and HistCAD  ( Dong and others, 2026 )  — each cover a slice but none combines (i) execution-verified parametric edit pairs, (ii) a non-target preservation metric, and (iii) capability-decomposed sub-tasks. Detailed protocol comparison is in Appendix  B . 
+ 
+ 
+ 
+ Position of BenchCAD. 
+
+ 
+ Rather than another training corpus, BenchCAD provides a unified, capability-decomposed evaluation framework for large-model CAD reasoning. It is the first public CAD benchmark to combine four properties simultaneously: (i)  execution-verified at scale  (17,900 parts); (ii)  standard-anchored  (49% families bound to ISO/DIN/EN/ASME/IEC tables); (iii)  operation-rich  (49 CadQuery operations including  helix ,  twistExtrude ,  polarArray ); (iv)  capability-decomposed  (four tasks with image/code matched-contrast pairs that isolate visual recognition, parametric abstraction, and code synthesis, including the first verified parametric edit task). Table  1  summarises the evaluation-side properties added; full per-axis comparison in Appendix  C . 
+ 
+ 
+ 
+ 
+ 3  BenchCAD: Dataset and Tasks 
+
+ 
+ Figure 2:  BenchCAD generation pipeline and task suite.   Top:  parts originate from industry-standard engineering designs (e.g., DIN 338 twist-drill cross-section), are realised as parameterised 3D geometry that respects standard parameter relations and physical priors, and are emitted as executable CadQuery code with verified geometry.  Bottom:  the four BenchCAD evaluation task categories operationalised on these parts —  img2cq  (image-to-code),  edit_code  (instruction-guided program editing),  qa_img  (image-based design QA), and  qa_code  (code-based design QA). 
+ 
+ 
+ 3.1  Dataset 
+
+ 
+ Design principles. 
+
+ 
+ BenchCAD rests on four principles.
+ (P1) Expert-generated geometry : every family is hand-crafted by domain experts directly from industrial standards, who solve the standard-mandated geometric equations to produce parameterised CAD models that strictly respect engineering conventions and inter-parameter constraints.
+ (P2) Standard-table anchoring : where a part has an industrial counterpart, parameters sample from real specification tables (e.g., ISO 22 V-belt cross-sections, DIN 338 twist-drill diameters, ISO 23509 bevel-gear pitch–module relations; full list in Appendix  D ); 49% of BenchCAD families (52/106) are standard-anchored, drawing from 47 unique ISO/DIN/EN/ASME/IEC codes.
+ (P3) Family-level taxonomy : records are grouped into 106 named families ( coil_spring ,  helical_gear ,  … \ldots ); a family may further branch into  subfamilies  that capture mating or construction variants of the same part type (e.g., male/female fasteners). Each (sub)family is implemented by a small Python module exposing a typed parameter schema, sampler, validator, and deterministic builder — making coverage measurable and per-family analysis trivial (subfamily definition in Appendix  E ).
+ (P4) Operation breadth : BenchCAD exercises a substantially broader CadQuery operation surface than prior released corpora — spanning primitives, 2D sketching, advanced solid ops (helical sweeps, lofts, shells), boolean composition, holes, arrays, and finishing features, including operations ( makeHelix ,  twistExtrude ,  polarArray ) rare or absent in DeepCAD/Fusion360-derived corpora (per-corpus breakdown in Appendix  P ). 
+ 
+ 
+ 
+ Generation pipeline. 
+
+ 
+ Each family supports three difficulty tiers — easy / medium / hard — defined by parameter complexity, where higher tiers expand parameter ranges and activate optional features (full tier definition in Appendix  E ).
+For each family × \times subfamily × \times tier bucket we sample parameters under standard-table constraints, emit the CadQuery program, and sandbox-execute it; programs that fail to compile, exceed a 30 s runtime budget, or produce degenerate (zero or inverted) volume are quarantined (full failure-mode taxonomy in Appendix  E ).
+Every surviving render is then routed past a domain expert for visual sign-off, and only records passing all stages enter the release (17,900 as of May 2026). Figure  2  illustrates the pipeline (top) and the four downstream evaluation tasks (bottom). 
+ 
+ 
+ 
+ Three released datasets. 
+
+ 
+ BenchCAD  contains 17,900 verified CadQuery code parts and serves as the primary evaluation set.  BenchCAD-QA  provides 2,400 paired image/code numeric-QA items.  BenchCAD-Edit  provides 748 curated edit pairs across dimensional, additive, subtractive, and multi-step categories.
+Every release ships a Croissant 1.0 metadata file  ( Akhtar and others, 2024 )  validated by the public checker, anonymously hosted on Hugging Face under  BenchCAD/BenchCAD  with verification-pipeline source under MIT and data under CC-BY-4.0. Full datasheet (Appendix  I ) and per-family schemas accompany the release. 
+ 
+ 
+ 
+ 
+ 3.2  Tasks 
+
+ 
+ BenchCAD evaluates models on four tasks, each targeting a distinct capability:  Vision2Code  (end-to-end synthesis of executable code from images),
+ Edit Code  (instruction-following program editing),  Code QA  (symbolic understanding of CadQuery programs) and  Vision QA  (geometric reasoning from rendered views). 
+ 
+ 
+ Vision2Code . 
+
+ 
+ Models generate executable CadQuery code from four canonical orthographic views. We use IoU between the rendered prediction and the ground-truth occupancy grid as the primary metric. We also report Chamfer distance for geometric error, feature score for fine CAD details, 
+ 
+ 
+ 
+ Code Edit . 
+
+ 
+ Given an original CadQuery program and a natural-language edit instruction, the model must produce a minimally modified program whose rendered solid matches the target. Items cover five edit types T1–T5: literal replacement, chained transformation, relative computation, feature editing, and geometry rebuilding (Table  15 ). We use  Accuracy  as the headline metric, which measures headroom-normalised improvement over the original-to-target gap (Eq. ( 1 )) and controls for varying per-pair difficulty.
+The remaining metrics help disambiguate ties and attribute failures to parametric exactness, geometric closeness, or syntactic execution. 
+ 
+ 
+ Figure 3:  BenchCAD-QA capability hierarchy.  Four-level capabilities (L1 Holistic Visual Recognition  → \to  L4 Spatial/Code Reasoning) with paired  Vision QA  /  Code QA  examples per level. 
+ 
+ 
+ 
+ Vision QA  and  Code QA . 
+
+ 
+ We organise the QA bank along a four-level capability hierarchy (Figure  3 ), from low-level perception at the base to high-level synthesis at the apex:
+ (i) Holistic Visual Recognition,  L 1 L_{1}    — recognize the part family from multi-view renders and integrate views into a coherent volumetric understanding;
+ (ii) CAD Operations Understanding,  L 2 L_{2}  — read CadQuery (or infer from geometry) and map operations to features in the correct execution order;
+ (iii) Industrial Parametric Abstraction,  L 3 L_{3}  — abstract observed geometry into the parametric structure an engineer would write, respecting standard-table relations and engineering conventions;
+ (iv) Compositional Spatial-Code Reasoning,  L 4 L_{4}  — synthesize the preceding capabilities by planning spatially consistent CAD operations, maintaining dependencies across parameters and coordinate frames, and producing syntactically valid, executable parametric code.
+The matched-pair design isolates the source of failure: a large gap between Vision QA and Code QA on identical questions indicates that errors arise primarily from visual recognition rather than reasoning over the queried attribute (the Holistic Spatial and Detailing Deficit, §5.2), whereas low Code QA performance indicates a CAD-operation understanding bottleneck at  L 2 L_{2} . 
+ 
+ 
+ essential-op recall for key operation use, and execution rate for code validity. 
+ 
+ 
+ Question-bank construction, edit-pair protocol, rotation-invariant IoU, and scale-invariance ablation appear in Appendices  J ,  N ,  M , and  O . 
+ 
+ 
+ 
+ 
+ 
+ 4  Experiments 
+
+ 
+ 4.1  Setup 
+
+ 
+ For each task, we include a  blind baseline  that preserves the output format but removes the informative input: black views for  Image-to-Code / Image QA , no code for  Code QA , and unchanged original programs for  Code Edit . These baselines measure gains beyond dataset priors and metric floors.
+and quantify each model’s gain over it across all relevant metrics. 
+ 
+ 
+ 
+ 4.2  Models 
+
+ 
+ Three model classes are evaluated:
+ (i) Frontier proprietary MLLMs:  GPT-4o  ( OpenAI, 2024 ) , GPT-5.3 thinking / non-thinking  ( OpenAI, 2026 ) , Claude Opus 4.7 thinking / non-thinking  ( Anthropic, 2026 ) , Gemini 3.1 Pro thinking / non-thinking  ( Google DeepMind, 2026 ) , OpenAI o3  ( OpenAI, 2025b ) , Moonshot Kimi  ( Moonshot AI, 2025 ) .
+ (ii) Open-source MLLMs / code LLMs:  Qwen3-VL  ( Bai and others, 2025 ) , InternVL3  ( Chen and others, 2025 ) , gpt-oss-120b  ( OpenAI, 2025a ) , nemotron-3-super-120b-a12b  ( Chandiramani and others, 2026 ) .
+ (iii) CAD-specialist lineage:  cadrille-RL  ( Kolodiazhnyi et al., 2026 )  and CADEvolve v3  ( Elistratov et al., 2026 ) . Closed models are queried through their official APIs; open-weights models via OpenRouter  ( OpenRouter, 2024 )  or the official repository. 
+ 
+ 
+ 
+ 4.3  Evaluation 
+
+ 
+ For  Vision2Code  we report  exec_pct , mean voxel  IoU , mean Chamfer distance  CD , mean Hausdorff distance  HD , Feature-F1, essential-op recall  ess , and a composite  total  score (Table  10 ). For  Edit Code , with rendered solid  S g S_{g} , original solid  S o S_{o} , and target solid  S t S_{t} , let  IoU ⁡ ( S a , S b ) \mathrm{IoU}(S_{a},S_{b})  denote the voxel intersection-over-union. Over  n n  edit records, we report normalized accuracy, which controls for pair-specific bias induced by varying original–target IoU: 
+ 
+
+ 
+ 
+ Acc norm = 1 n ​ ∑ i = 1 n clip ⁡ ( IoU ⁡ ( S g i , S t i ) − IoU ⁡ ( S o i , S t i ) 1 − IoU ⁡ ( S o i , S t i ) , 0 , 1 ) . \displaystyle\mathrm{Acc}_{\mathrm{norm}}=\frac{1}{n}\sum_{i=1}^{n}\mathrm{clip}\!\left(\frac{\mathrm{IoU}(S_{g}^{i},S_{t}^{i})-\mathrm{IoU}(S_{o}^{i},S_{t}^{i})}{1-\mathrm{IoU}(S_{o}^{i},S_{t}^{i})},0,1\right). 
+ 
+ (1) 
+ 
+ Accuracy is a headroom-normalised improvement, where  1 1  means the model fully traversed the original-to-target gap, and all records satisfies  IoU ⁡ ( S o i , S t i ) < 0.99 \mathrm{IoU}(S_{o}^{i},S_{t}^{i})<0.99 .
+For Vision QA and Code QA (BenchCAD-QA, 2,400 paired image/code numeric items), accuracy is computed under  ± 5 % \pm 5\%  tolerance for ratios and exact match for integers, broken out along the four-level capability hierarchy (§ 3.2 ). 
+ 
+ 
+ 
+ 4.4  Training 
+
+ 
+ Beyond evaluation, we use BenchCAD as a training resource to test whether its operation breadth and standard-anchored families yield measurable capability gains, and whether these gains transfer beyond the trained families. We train an open Qwen3-VL-2B baseline reported in the bottom block of Table  10 , comparing matched-compute SFT and RL settings that differ only in training data composition.
+ SFT.  We train three variants with the same optimizer, schedule, and held-out evaluation set:  iid  uses BenchCAD plus extrusion-heavy auxiliary data,  ood  follows the same recipe but removes 10 mechanical families, and  baseline  uses no BenchCAD data.
+ RL.  Starting from each SFT checkpoint, we apply an on-policy GRPO-style objective with reward  r = 0.2 ​ ess + 0.8 ​ IoU r{=}0.2\,\mathrm{ess}{+}0.8\,\mathrm{IoU}  and  r = − 1 r{=}-1  for parse errors outputs; the OOD-RL run also excludes the held-out OOD families. We report per-operation recall ablations in Table  11 , with full training details and curves in Appendix  F . 
+ 
+ 
+ 
+ 
+ 5  Results 
+
+ 
+ Our experiments provide a comprehensive and decoupled analysis of BenchCAD across four tasks (Figure  4 ).
+By separating results by modality, task type, and capability axis, and by tracing failures to shared reasoning bottlenecks, we show that BenchCAD is both a challenging evaluation benchmark and a structured training resource for improving CAD reasoning. 
+ 
+ 
+ Figure 4:  Per-model performance across the four BenchCAD task categories 
+(frontier proprietary subset; open-source baselines are reported in Table  2 ).
+Bar style encodes task, color encodes model family, and within-family variants distinguish thinking from non-thinking models.
+Two patterns motivate our subsequent diagnostics: (i) QA-img consistently underperforms QA-code, highlighting the difficulty of holistic spatial recognition from visual evidence; and (ii) CodeEdit trails CodeGen across all models, indicating that instruction-guided modification of existing CAD programs remains harder than greenfield generation.
+ 
+ 
+ 
+ 5.1  Overall Performance of 4 Tasks 
+
+ 
+ Table 2:  Main evaluation on BenchCAD-QA ( qa_img  modality), by capability axis.  Given multi-view renders, models answer visual CAD questions; closed-source MLLMs outperform the open-source MLLMs but remain weak on operation understanding and parametric abstraction. 
+ 
+ 
+ 
+ Model 
+ 
+ 
+ Holistic Visual 
+ Recognition 
+ 
+ 
+ 
+ CAD Operation 
+ Understanding 
+ 
+ 
+ 
+ Industrial Parametric 
+ Abstraction 
+ 
+ 
+ 
+ Spatial 
+ Reasoning 
+ 
+ 
+ 
+ Total 
+ score 
+ 
+ 
+ 
+ 
+ opus-4.7 
+ 0.699 
+ 0.464 
+ 0.426 
+ 0.668 
+ 0.526 
+ 
+ opus-4.7-thinking 
+ 0.715 
+ 0.485 
+ 0.421 
+ 0.614 
+ 0.530 
+ 
+ gemini-3.1-pro 
+ 0.750 
+ 0.462 
+ 0.536 
+ 0.688 
+ 0.587 
+ 
+ gemini-3.1-pro-thinking 
+ 0.722 
+ 0.426 
+ 0.551 
+ 0.669 
+ 0.576 
+ 
+ gpt-4o 
+ 0.599 
+ 0.408 
+ 0.431 
+ 0.396 
+ 0.464 
+ 
+ gpt-5.3-chat-latest 
+ 0.636 
+ 0.423 
+ 0.488 
+ 0.548 
+ 0.513 
+ 
+ gpt-5.3-thinking 
+ 0.650 
+ 0.429 
+ 0.482 
+ 0.534 
+ 0.514 
+ 
+ moonshot-v1-128k 
+ 0.556 
+ 0.387 
+ 0.427 
+ 0.334 
+ 0.442 
+ 
+ moonshot-v1-8k-vision 
+ 0.600 
+ 0.246 
+ 0.465 
+ 0.181 
+ 0.447 
+ 
+ openai-o3 
+ 0.328 
+ 0.188 
+ 0.398 
+ 0.560 
+ 0.327 
+ 
+ blank image (baseline) 
+ 0.376 
+ 0.325 
+ 0.418 
+ 0.296 
+ 0.375 
+ 
+ 
+ 
+ 
+ Vision2Code . 
+
+ 
+ The unified leaderboard (Table  10 , Appendix  G ) shows two patterns:
+(i) the specialist CAD lineage transferred from DeepCAD scores well on IoU but underperforms on non-extrude operations;
+(ii) frontier MLLMs cap mid-range (gemini-3.1-pro-thinking total 0.318) and exhibit non-monotonic thinking-mode behaviour (Table  18 ). 
+ 
+ 
+ 
+ Code Edit . 
+
+ 
+ Table  3  reports the BenchCAD-Edit leaderboard using mean-normalized improvement as the headline metric, which discounts the varying difficulty of each edit pair. Overall scores show a clear gap between model families, but the per-type breakdown in Fig.  5  reveals a more diagnostic pattern: simple API-level edits are nearly solved by modern models, while compositional edits remain difficult. Replacing the textual instruction with a target render collapses every model to near-zero, since a render specifies geometry but not numbers; augmenting the text instruction with the original four-view image barely moves the aggregate and even hurts the strongest thinking model (Fig. 10 ), indicating that the textual instruction does the heavy lifting and the visual signal is at best a clarifier. The error analysis below ties each regime to specific failure modes; per-model F-code distributions, the full L1–L4 attribution, and the image-conditioned variant are deferred to Appendix  N . 
+ 
+ 
+ 
+ Vision QA  and  Code QA . 
+
+ 
+ Table  2  shows that Vision QA remains challenging for current frontier MLLMs: models can often recognize global part shapes, but struggle to infer the underlying CAD operations and parametric design intent. Direct access to CadQuery code substantially improves performance, with the best Code QA models reaching total scores around 0.838 compared with 0.587 for Vision QA. This modality gap indicates that explicit programs make geometric and parametric information easier to extract than rendered images. However, Spatial / Code Reasoning remains weaker even with code access, showing that the benchmark still requires precise spatial and operational reasoning beyond surface-level parsing. Full Code QA results are reported in Appendix  G . 
+ 
+ 
+ 
+ 
+ 
+ 
+ Figure 5:  BenchCAD-Edit by task type. 
+ 
+ 
+ 
+ 
+ 
+ Model 
+ Thinking 
+ Acc. 
+ 
+ 
+ 
+ GPT-5.3 
+ ✓ 
+ 0.865 
+ 
+ Claude Opus 4.7 
+ ✓ 
+ 0.853 
+ 
+ Gemini 3.1 Pro 
+ ✓ 
+ 0.837 
+ 
+ Claude Opus 4.7 
+ – 
+ 0.811 
+ 
+ Gemini 3.1 Pro 
+ – 
+ 0.795 
+ 
+ GPT-5.3 
+ – 
+ 0.740 
+ 
+ OpenAI o3 
+ ✓ 
+ 0.708 
+ 
+ GPT-4o 
+ – 
+ 0.615 
+ 
+ Nemotron-3 120B 
+ – 
+ 0.608 
+ 
+ GPT-oss 120B 
+ – 
+ 0.561 
+ 
+ Baseline (no change) 
+ – 
+ 0.000 
+ 
+ 
+ Table 3:  BenchCAD-Edit Accuracy. 
+ 
+ 
+ 
+ 
+ 
+ 5.2  Error Analysis 
+
+ 
+ Across tasks, we find that many failures share common causes. Most can be attributed to deficiencies in three core capabilities. 
+ 
+ 
+ Holistic Spatial Recognition. 
+Visual recognition failures occur along two axes: detailed feature counting and spatial grounding. 
+ 
+ 
+ A hex-head bolt (Figure  6 A) illustrates a fine-detail failure.
+GPT-5.3 recovers the overall bolt body, but fails to capture fine-grained details such as the thread structure and the chamfer on the top face.
+The generated part is therefore visually similar at a coarse level but misses small, human-obvious CAD features. Consistently, GPT-5.3-chat fails to identify the number of chamfer operations in the corresponding vision QA ( L 1 L_{1} ) on chamfer number which indicates an visual recognition problem. 
+ 
+ 
+ A bearing retainer cap (Figure  6 B) exposes a global spatial-frame failure.
+The model captures several fine-grained features but fails to infer the correct extrusion direction: the generated code extrudes from the XY plane rather than the target XZ plane. This error is common for geometries generated based on XZ and YZ workplanes. It is partially diagnosed by the substantially higher 24-axis rotation-invariant IoU compared with the single-axis IoU, suggesting that the predicted shape is geometrically similar but expressed in the wrong spatial frame (Appendix  M ).
+The same example also reveals parametric-abstraction failures across multiple features. 
+ 
+ 
+ Figure 6:  Examples of failures in codegen.  Zoom-in for more details. 
+ 
+ 
+ Operation understanding.  A twisted bracket (Figure  6 C) is generated as two mutually perpendicular brackets without twisted connection; the requisite twist-extrusion is absent from the emitted program entirely.
+The model recognizes the holistic spatial (L1) but fails to map the visible torsion to the corresponding CAD operation, exposing an Op Vocabulary Gap (Appendix  H ) at the operation-understanding layer. 
+ 
+ 
+ Industrial Parametric abstraction. 
+A standardized DIN 2095 coil spring (Figure  6 D) exposes a parametric-abstraction failure.
+The standard requires closed and ground ends: the coil pitch is locally reduced near both terminals, causing the end turns to flatten into planar bearing surfaces.
+The model recognizes the spring and the coil pitch is not a circle, and emits a helical sweep, but collapses this end-specific pitch variation into a uniform helix with an incorrect cross-section.
+It therefore captures the coarse family and operation (L1 & L2) while missing the standard-driven parameterization that an engineer would explicitly encode.
+This failure highlights why BenchCAD anchors its families to engineering standards: the benchmark tests not only whether models can name a part or invoke the right CAD operation, but whether they can recover the industrialized structured design rules underlying real parametric CAD. 
+ 
+ 
+ Together, these cases show how our layered framework turns  Vision2Code  errors from an opaque “wrong code” label into level-specific diagnostics: the bracket fails at  L 2 L_{2} , while the spring succeeds at  L 1 L_{1} – L 2 L_{2}  but fails at  L 3 L_{3} .
+Without per-level attribution these distinctions collapse into a single low IoU score, and the corresponding improving signal — which level to strengthen — is lost. 
+ 
+ 
+ 
+ 5.3  BenchCAD as a Training Resource for Improving Model Capabilities 
+
+ 
+ BenchCAD is not only an evaluation benchmark but also a useful training resource. Our Qwen3-VL-2B trained on BenchCAD achieves the best in-distribution code-generation result, with a CodeGen score of 0.7631 in Table  10 . Even when 10 mechanical families are held out, IID-SFT+RL transfers non-trivially to unseen OOD families, suggesting reusable CAD priors beyond family-level memorization. BenchCAD training also broadens the generated operation vocabulary, improving use of advanced operations such as  revolve ,  sweep ,  loft , and  fillet  (Table  11 ). However, the substantial IID/OOD gap shows that generalization to novel mechanical families remains an open challenge (Appendix  F ). 
+ 
+ 
+ 
+ 
+ 6  Conclusion 
+
+ 
+ BenchCAD is a unified, capability-decomposed evaluation framework for large-model CAD reasoning, anchored in industrial-standard part families and operation-rich CadQuery code.
+Across 10+ frontier models, the benchmark reveals three systematic diagnostic phenomena — the  Holistic Spatial and Detailing Deficit  ( ∼ \sim 15–20 pt code–image QA gap),  Industrial Common Sense Gap  ( ∼ \sim 64% of nominally successful edits silently corrupt unrelated features), and the  CAD Operational Blindspot  (matched-compute SFT on sketch+extrude data alone yields zero recall on essential operations).
+Together, these findings map both the current state of frontier capability and the focused improvements needed to reach industry-grade CAD generation.
+Limitations, the open BenchCAD-trained baseline recipe, and full per-model results are in Appendix  A , § 4.4 , and Appendix  G .
+The dataset and Croissant 1.0 metadata are released under CC-BY-4.0 on Hugging Face, and the evaluation harness is released under the MIT license on GitHub. 
+ 
+ 
+ 
+ Acknowledgments and Disclosure of Funding 
+
+ 
+ [Anonymised for submission. Restore acknowledgments and funding disclosure for camera-ready.] 
+ 
+ 
+ 
+ References 
+
+ 
+ Akhtar  et al.  (2024) 
+ M. Akhtar  et al. 
+ 
+ Croissant: a metadata format for ML-ready datasets .
+ 
+ In  Advances in Neural Information Processing Systems (NeurIPS) Datasets and Benchmarks Track ,
+ 
+ Cited by:  §3.1 .
+ 
+ Alrashedy  et al.  (2025) 
+ K. Alrashedy  et al. 
+ 
+ CAD-CodeVerify: self-verification of vision-language models on CAD code generation .
+ 
+ In  International Conference on Learning Representations (ICLR) ,
+ 
+ Cited by:  Table 4 ,
+ §1 ,
+ §2 .
+ 
+ Anthropic (2026) 
+ Anthropic 
+ 
+ Claude Opus 4.7 System Card .
+ 
+ Note:  Accessed 2026-05-07 
+ 
+ External Links:  Link 
+ 
+ Cited by:  §1 ,
+ §4.2 .
+ 
+ Bai  et al.  (2025) 
+ S. Bai  et al. 
+ 
+ Qwen3-VL Technical Report .
+ 
+ External Links:  2511.21631 
+ 
+ Cited by:  Appendix F ,
+ §4.2 .
+ 
+ CadQuery Contributors (2024) 
+ CadQuery Contributors 
+ 
+ CadQuery: a python parametric CAD scripting framework based on OCCT .
+ 
+ Note:  https://github.com/CadQuery/cadquery 
+ 
+ Cited by:  §1 .
+ 
+ Chandiramani  et al.  (2026) 
+ A. Chandiramani  et al. 
+ 
+ Nemotron 3 Super: Open, Efficient Mixture-of-Experts Hybrid Mamba-Attention Model .
+ 
+ External Links:  2604.12374 
+ 
+ Cited by:  §4.2 .
+ 
+ Chen  et al.  (2025) 
+ Z. Chen  et al. 
+ 
+ InternVL3: Exploring Advanced Training and Test-Time Recipes for Open-Source Multimodal Models .
+ 
+ External Links:  2504.10479 
+ 
+ Cited by:  §4.2 .
+ 
+ Dong  et al.  (2026) 
+ X. Dong  et al. 
+ 
+ HistCAD: geometrically constrained parametric history-based CAD dataset .
+ 
+ External Links:  2602.19171 
+ 
+ Cited by:  §2 .
+ 
+ Elistratov  et al.  (2026) 
+ M. Elistratov, M. Barannikov, G. Ivanov, V. Khrulkov, A. Konushin, A. Kuznetsov, and D. Zhemchuzhnikov 
+ 
+ CADEvolve: creating realistic CAD via program evolution .
+ 
+ External Links:  2602.16317 
+ 
+ Cited by:  Appendix B ,
+ Appendix B ,
+ Table 4 ,
+ Table 10 ,
+ §1 ,
+ §1 ,
+ §2 ,
+ §4.2 .
+ 
+ Google DeepMind (2026) 
+ Google DeepMind 
+ 
+ Gemini 3.1 Pro Model Card .
+ 
+ Note:  Accessed 2026-05-07 
+ 
+ External Links:  Link 
+ 
+ Cited by:  §1 ,
+ §4.2 .
+ 
+ Guan  et al.  (2025) 
+ Y. Guan, X. Ge, S. Yang, W. Yang, Z. Wei, C. Cui, C. Tang, L. Zhang, and Y. Zhuang 
+ 
+ CAD-Coder: text-to-CAD generation with chain-of-thought and geometric reward .
+ 
+ In  Advances in Neural Information Processing Systems (NeurIPS) ,
+ 
+ External Links:  2505.19713 
+ 
+ Cited by:  Appendix B ,
+ Appendix B ,
+ Table 4 ,
+ §1 ,
+ §2 .
+ 
+ Khan  et al.  (2024) 
+ M. S. Khan, S. Sinha, T. A. M. Uddin, D. Stricker, S. A. Ali, and M. Z. Afzal 
+ 
+ Text2CAD: generating sequential CAD models from beginner-to-expert level text prompts .
+ 
+ In  Advances in Neural Information Processing Systems (NeurIPS) Datasets and Benchmarks Track ,
+ 
+ Cited by:  Appendix B ,
+ Appendix B ,
+ Table 4 ,
+ §1 ,
+ §2 .
+ 
+ Kolodiazhnyi  et al.  (2026) 
+ K. Kolodiazhnyi, D. Rukhovich, and D. Aouada 
+ 
+ cadrille: multi-modal CAD reconstruction with online reinforcement learning .
+ 
+ In  International Conference on Learning Representations (ICLR) ,
+ 
+ Cited by:  Appendix B ,
+ Appendix B ,
+ Table 4 ,
+ Table 10 ,
+ §1 ,
+ §1 ,
+ §2 ,
+ §4.2 .
+ 
+ Moonshot AI (2025) 
+ Moonshot AI 
+ 
+ Kimi K2 and Kimi-Latest vision-language models .
+ 
+ Note:  API endpoints  kimi-latest  and  moonshot-v1-*-vision-preview ; accessed 2026-05-07 
+ 
+ External Links:  Link 
+ 
+ Cited by:  §4.2 .
+ 
+ OpenAI (2024) 
+ OpenAI 
+ 
+ GPT-4o System Card .
+ 
+ External Links:  2410.21276 
+ 
+ Cited by:  §4.2 .
+ 
+ OpenAI (2025a) 
+ OpenAI 
+ 
+ gpt-oss-120b & gpt-oss-20b Model Card .
+ 
+ External Links:  2508.10925 
+ 
+ Cited by:  §4.2 .
+ 
+ OpenAI (2025b) 
+ OpenAI 
+ 
+ OpenAI o3 and o4-mini System Card .
+ 
+ Note:  Accessed 2026-05-07 
+ 
+ External Links:  Link 
+ 
+ Cited by:  §4.2 .
+ 
+ OpenAI (2026) 
+ OpenAI 
+ 
+ GPT-5.3 Instant System Card .
+ 
+ Note:  Accessed 2026-05-07 
+ 
+ External Links:  Link 
+ 
+ Cited by:  §1 ,
+ §4.2 .
+ 
+ OpenRouter (2024) 
+ OpenRouter 
+ 
+ OpenRouter: A Unified Interface for LLMs .
+ 
+ Note:  Accessed 2026-05-07 
+ 
+ External Links:  Link 
+ 
+ Cited by:  §4.2 .
+ 
+ Qwen Team (2024) 
+ Qwen Team 
+ 
+ Qwen2-VL: enhancing vision-language model’s perception of the world at any resolution .
+ 
+ External Links:  2409.12191 
+ 
+ Cited by:  Appendix B ,
+ NeurIPS Paper Checklist .
+ 
+ Rukhovich  et al.  (2025) 
+ D. Rukhovich, K. Kolodiazhnyi, and D. Aouada 
+ 
+ CAD-Recode: reverse engineering CAD code from point clouds .
+ 
+ In  IEEE/CVF International Conference on Computer Vision (ICCV) ,
+ 
+ Cited by:  Appendix B ,
+ Appendix B ,
+ Table 4 ,
+ §1 ,
+ §2 .
+ 
+ Willis  et al.  (2021) 
+ K. D. D. Willis, Y. Pu, J. Luo, H. Chu, T. Du, J. G. Lambourne, A. Solar-Lezama, and W. Matusik 
+ 
+ Fusion 360 Gallery: a dataset and environment for programmatic CAD construction from human design sequences .
+ 
+ In  ACM Transactions on Graphics (SIGGRAPH) ,
+ 
+ Cited by:  Appendix P ,
+ Table 4 ,
+ NeurIPS Paper Checklist .
+ 
+ Wu  et al.  (2021) 
+ R. Wu, C. Xiao, and C. Zheng 
+ 
+ DeepCAD: a deep generative network for computer-aided design models .
+ 
+ Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV) .
+ 
+ Cited by:  Appendix P ,
+ Appendix B ,
+ Appendix B ,
+ Table 4 ,
+ NeurIPS Paper Checklist ,
+ §1 ,
+ §2 .
+ 
+ Yuan  et al.  (2025) 
+ Y. Yuan, S. Sun, Q. Liu, and J. Bian 
+ 
+ CAD-Editor: a locate-then-infill framework with automated training data synthesis for text-based CAD editing .
+ 
+ In  International Conference on Machine Learning (ICML) ,
+ 
+ External Links:  2502.03997 
+ 
+ Cited by:  §1 ,
+ §2 .
+ 
+ Zhou  et al.  (2025) 
+ J. Zhou, J. D. Camba, and P. Company 
+ 
+ CADialogue: a multimodal LLM-powered conversational assistant for intuitive parametric CAD modeling .
+ 
+ Computer-Aided Design .
+ 
+ External Links:  Document 
+ 
+ Cited by:  §2 .
+ 
+ 
+ 
+ 
+ Appendix A  Limitations 
+
+ 
+ Standard-parametric coverage is not full industrial CAD. 
+
+ 
+ BenchCAD parts are generated from expert-authored standard-parametric families, not extracted from real engineering repositories.
+We mitigate this by (i) anchoring 49% of families to published ISO/DIN/EN/ASME/IEC specification tables and (ii) including verified Fusion360 Gallery and DeepCAD subsets for OOD comparison, but our parts do not capture the full diversity of proprietary industrial design (e.g. hand-drawn manufacturing tolerances, undocumented design intent, assembly information). 
+ 
+ 
+ 
+ Standard-anchored does not mean standard-compliant. 
+
+ 
+ A family declared as  standard = "ISO 23509"  samples within ISO parameter ranges and enforces inter-parameter relations from the standard, but does not validate against the full set of manufacturing tolerances or material specifications mandated by that standard. 
+ 
+ 
+ 
+ Industrial Common Sense Gap measurement. 
+
+ 
+ Our non-target preservation metric uses voxel IoU on the spatial complement of the targeted feature; this captures most leakage modes but can miss small parametric shifts whose voxel footprint is subthreshold.
+§ N  discusses the protocol, including a complementary -AST diff metric we report alongside. 
+ 
+ 
+ 
+ 
+ Appendix B  Extended Related Work: CAD Code-Generation and Editing Benchmarks 
+
+ 
+ Code generation. 
+
+ 
+ DeepCAD  [ Wu et al., 2021 ]  introduces a 178K-model corpus of Onshape parts encoded as discrete operation tokens; Text2CAD  [ Khan et al., 2024 ]  extends DeepCAD with 660K natural-language annotations across four abstraction levels. CAD-Coder  [ Guan et al., 2025 ]  reformulates the same data as CadQuery Python source and applies SFT + + GRPO with chain-of-thought and Chamfer reward (mean CD  6.54 × 10 − 3 6.54{\times}10^{-3}  on Text2CAD). The CAD-Recode  [ Rukhovich et al., 2025 ] /cadrille  [ Kolodiazhnyi et al., 2026 ] /CADEvolve  [ Elistratov et al., 2026 ]  lineage shares a Qwen2-VL-2B backbone: CAD-Recode fine-tunes on 1M sketch-and-extrude scripts; cadrille adds multi-modal inputs and Dr.CPPO online RL with piecewise IoU reward (DeepCAD IoU 92.2, Fusion360 IoU 84.6, 0.0% invalidity); CADEvolve expands the corpus to  ∼ \sim 1.3M scripts via an LLM-driven evolutionary loop covering extrude/revolve/loft/sweep/fillet/chamfer/shell/Boolean/patterns — broadening the operation distribution but still without helical sweeps or parametric involute-gear construction. The CADEvolve Hugging Face release contains only sentence embeddings ( .npy ), not the source code, so its full operation surface is not directly auditable; the public GitHub repo ships only  46 46  hand-written seed programs. 
+ 
+ 
+ 
+ Editing. 
+
+ 
+ DeepCAD  [ Wu et al., 2021 ]  introduces a 178K-model corpus of Onshape parts encoded as discrete operation tokens; Text2CAD  [ Khan et al., 2024 ]  extends DeepCAD with 660K natural-language annotations across four abstraction levels. CAD-Coder  [ Guan et al., 2025 ]  reformulates the same data as CadQuery Python source and applies SFT + + GRPO with chain-of-thought and Chamfer reward (mean CD  6.54 × 10 − 3 6.54{\times}10^{-3}  on Text2CAD). The CAD-Recode  [ Rukhovich et al., 2025 ] /cadrille  [ Kolodiazhnyi et al., 2026 ] /CADEvolve  [ Elistratov et al., 2026 ]  lineage shares a Qwen2-VL-2B  [ Qwen Team, 2024 ]  backbone: CAD-Recode fine-tunes on 1M sketch-and-extrude scripts; cadrille adds multi-modal inputs and Dr.CPPO online RL with piecewise IoU reward (DeepCAD IoU 92.2, Fusion360 IoU 84.6, 0.0% invalidity); CADEvolve expands the corpus to  ∼ \sim 1.3M scripts via an LLM-driven evolutionary loop covering extrude/revolve/loft/sweep/fillet/chamfer/shell/Boolean/patterns — broadening the operation distribution but still without helical sweeps or parametric involute-gear construction. The CADEvolve Hugging Face release contains only sentence embeddings ( .npy ), not the source code, so its full operation surface is not directly auditable; the public GitHub repo ships only  46 46  hand-written seed programs. 
+ 
+ 
+ 
+ 
+ Appendix C  Full Comparison Against Prior CAD Code-Generation Work 
+
+ 
+ Table  4  provides the full per-axis comparison referenced in § 2 , including all evaluation-side properties (#Industrial families, #Std codes, #Distinct CQ ops, Adv ops, Edit / QA tasks, #Eval models) across DeepCAD, Fusion360 Gallery, Text2CAD, CADPrompt, CAD-Coder, CAD-Recode, cadrille, and CADEvolve. 
+ 
+ 
+ Table 4:  BenchCAD versus prior CAD code-generation work.  BenchCAD is a  unified, capability-decomposed evaluation framework  for large-model CAD reasoning, distinct in purpose from the CadQuery-VLM lineage (CAD-Recode, cadrille, CADEvolve), which releases training corpora alongside small fine-tuned models (Qwen 1.5B–2B) saturating  ∼ \sim 92% IoU on legacy sketch+extrude splits.  Type:   C+M  = corpus+model,  D  = dataset,  B  = benchmark.  #Fam.  = named industrial part families.  #Std  = distinct ISO/DIN/EN/ASME/IEC specification codes.  Op surface :  narrow  = sketch+extrude IR or a small CadQuery subset;  broad  = wide CadQuery API including advanced solid ops (precise per-corpus counts and protocol in App.  P ).  Adv  = all four advanced operation families (helix, loft/sweep, twist-extrude, parametric involute-gear) exercised.  ✓ \checkmark  = supported, p. = partial, – = absent. 
+ 
+ 
+ 
+ Benchmark 
+ Yr 
+ Type 
+ #Sam. 
+ #Fam. 
+ #Std 
+ Op surface 
+ Adv 
+ Edit 
+ QA 
+ 
+ 
+ 
+ DeepCAD  [ Wu et al., 2021 ] 
+ ’21 
+ C+M 
+ 178K 
+ – 
+ 0 
+ narrow 
+ – 
+ – 
+ – 
+ 
+ Fusion360 G.  [ Willis et al., 2021 ] 
+ ’21 
+ D 
+ 8K 
+ – 
+ 0 
+ narrow 
+ – 
+ – 
+ – 
+ 
+ Text2CAD  [ Khan et al., 2024 ] 
+ ’24 
+ C+M 
+ 170K 
+ – 
+ 0 
+ narrow 
+ – 
+ – 
+ – 
+ 
+ CADPrompt  [ Alrashedy and others, 2025 ] 
+ ’25 
+ B 
+ 200 
+ – 
+ 0 
+ broad 
+ p. 
+ – 
+ – 
+ 
+ CAD-Coder  [ Guan et al., 2025 ] 
+ ’25 
+ C+M 
+ 163K 
+ – 
+ 0 
+ narrow 
+ – 
+ p. 
+ – 
+ 
+ CAD-Recode  [ Rukhovich et al., 2025 ] 
+ ’25 
+ C+M 
+ 1M+7K 
+ – 
+ 0 
+ narrow 
+ – 
+ p. 
+ seq. 
+ 
+ cadrille  [ Kolodiazhnyi et al., 2026 ] 
+ ’26 
+ C+M 
+ 1M+7K 
+ – 
+ 0 
+ narrow 
+ – 
+ – 
+ – 
+ 
+ CADEvolve  [ Elistratov et al., 2026 ] 
+ ’26 
+ C+M 
+ 1.3M 
+ – 
+ 0 
+ broad 
+ p. 
+ – 
+ – 
+ 
+ BenchCAD (ours) 
+ ’26 
+ D+B 
+ 17,900 
+ 106 
+ 43 
+ broad + 
+ ✓ \checkmark 
+ ✓ \checkmark 
+ ✓ \checkmark 
+ 
+ 
+ 
+ 
+ 
+ Appendix D  Standard Codes Covered 
+
+ 
+ Table  5  reports the standards grounding of BenchCAD.
+Nearly half of all families, 52/106 (49%), are tied to ISO, DIN, EN, ASME, or IEC specification tables, so their dimensions are sampled from real engineering ranges rather than arbitrary shapes.
+The remaining 54 custom families cover bespoke industrial parts without a formal standard, while still using analogous proportional design rules. 
+ 
+ 
+ Table 5:  Standard-anchored families.  49% of BenchCAD families (52/106) bind their parameters to ISO/DIN/EN/ASME/IEC specification tables, sampling at values drawn from real engineering ranges rather than arbitrary geometry. The bottom row counts the 54 custom families covering bespoke industrial parts (twisted brackets, lobed knobs, etc.) governed by analogous proportional rules without formal standards. 
+ 
+ 
+ 
+ Standard 
+ Codes covered (sample) 
+ #Codes 
+ #Fam. 
+ 
+ ISO 
+ 22, 53, 113, 272, 606, 1234, 2339 … 
+ 17 
+ 18 
+ 
+ DIN 
+ 315, 338, 471/472, 580, 660, 705, 950, 2095, … 
+ 21 
+ 21 
+ 
+ EN 
+ 10034, 10056, 10219, 10279 
+ 4 
+ 5 
+ 
+ ASME 
+ B1.20.1, B16.5, B16.9 
+ 3 
+ 5 
+ 
+ IEC 
+ 60072-1, 60086 
+ 2 
+ 2 
+ 
+ Total standard-anchored 
+ 
+ 47 
+ 52 (49%) 
+ 
+ Custom (no formal standard) 
+ 
+ – 
+ 54 
+ 
+ 
+ 
+ 
+ 
+ Appendix E  Dataset Generation Details 
+
+ 
+ Subfamilies. 
+
+ 
+ A family may further branch into one or more  subfamilies  that capture mating, assembly, or construction variants of the same part type — for instance, a threaded-fastener family may split into male ( bolt ) and female ( nut ) subfamilies that share the same thread/pitch parameter table but differ in build chain; a retaining-ring family may split into internal (groove inside a bore) and external (groove on a shaft) variants; a thread family may split into single- and multi-start helices. Subfamilies reuse their parent family’s parameter schema and standard-table anchoring, but specify their own deterministic builder. They are sampled and rendered independently, so a single named family in the per-family analysis can contribute several subfamily × \times tier buckets to the verified release. 
+ 
+ 
+ 
+ Difficulty tiers. 
+
+ 
+ Each (sub)family exposes three tiers —  easy  /  medium  /  hard  — defined by parameter complexity. Easy uses default parameter ranges with optional features disabled (e.g., a coil spring with constant pitch and no end treatment). Medium expands parameter ranges and enables a subset of optional features. Hard activates all optional features and uses extreme but still standard-compliant parameter ranges (e.g., variable pitch with closed-and-ground spring ends), exercising the more advanced construction operations of the family. Sampling is balanced approximately uniformly across tiers within each (sub)family. 
+ 
+ 
+ 
+ Sandbox failure-mode taxonomy. 
+
+ 
+ Each generated CadQuery program is executed in a sandbox subprocess; records hitting any of the following are quarantined and excluded from the release: (i)  parse / import error  — the program fails Python parsing or CadQuery API resolution; (ii)  runtime exception  — a CadQuery call raises (e.g., on a non-positive radius or an empty selector); (iii)  timeout  — execution exceeds a 30 s wall-clock budget, typically caused by pathological boolean or sweep construction; (iv)  degenerate volume  — the resulting solid has  ≤ 10 − 6 \leq 10^{-6}  mm 3  volume or an inverted (negative-determinant) transformation chain. Programs surviving all four checks are rendered into multi-view images and routed past a domain expert for visual sign-off; only records passing every stage enter the release. 
+ 
+ 
+ 
+ 
+ Appendix F  Model Training 
+
+ 
+ SFT training mixture. 
+
+ 
+ (1)  iid : BenchCAD (all 106 families) + extrusion-heavy data (text2cad, cad-recode);
+(2)  ood : same recipe, 10 mechanical families held out;
+(3)  baseline : text2cad + cad-recode only (no BenchCAD).
+Mixing 33% BenchCAD / 67% HQ for (1)/(2); 100% HQ for (3). Backbone Qwen3-VL-2B. 
+ 
+ 
+ 
+ OOD holdout selection. 
+
+ 
+ We hold out 10 CAD families sampled uniformly at random from BenchCAD families that are sufficiently represented and the operations are covered in the iid but not in the baseline. 
+ 
+ 
+ 
+ SFT training setup. 
+
+ 
+ We fine-tune Qwen3-VL-2B-Instruct  [ Bai and others, 2025 ]  under a standard supervised code-generation setup. Inputs consist of one rendered view and a textual instruction, and targets are CadQuery programs.We use AdamW with learning rate  2 × 10 − 4 2{\times}10^{-4} , cosine decay,  2 2 k warmup steps, weight decay  0.01 0.01  with bf16 precision. The training evaluation curve (n=30) shows significant gap between model with OOD holdouts and model trained on all family (Fig  7 ). 
+ 
+ 
+ 
+ RL training setup. 
+
+ 
+ We initialize RL from the matching SFT checkpoint: IID-SFT uses the full BenchCAD training set, whereas OOD-SFT excludes the held-out OOD families. RL is trained with a top- N N  GRPO-style objective without advantage normalization on a mixed prompt pool from BenchCAD, DeepCAD, and Fusion360; in the OOD setting, the held-out families remain excluded. Rewards combine geometric fidelity with an essential-operation term when available. We use learning rate  2 × 10 − 5 2{\times}10^{-5} , 16 rollouts per prompt, and batch size 128. 
+ 
+ 
+ Table 6:  IID–OOD generalization under SFT and RL. 
+We report geometric fidelity, execution rate, essential-operation score, and the final score. The 106 families are seperated into two family group IID and OOD. The iid-rl(D) trained on all dataset (IID + OOD) demonstrates the highest performances on both IID and OOD family. 
+ 
+ 
+ 
+ Checkpoint 
+ Split 
+ IoU ↑ \uparrow 
+ Exec. ↑ \uparrow 
+ Ess. ↑ \uparrow 
+ Score ↑ \uparrow 
+ 
+ 
+ 
+ ood-sft (A) 
+ IID 
+ 0.577 
+ 94.6% 
+ 0.789 
+ 0.6064 
+ 
+ OOD 
+ 0.397 
+ 89.8% 
+ 0.305 
+ 0.3776 
+ 
+ ood-rl (B) 
+ IID 
+ 0.757 
+ 99.1% 
+ 0.865 
+ 0.7467 
+ 
+ OOD 
+ 0.464 
+ 100.0% 
+ 0.339 
+ 0.4604 
+ 
+ iid-sft (C) 
+ IID 
+ 0.640 
+ 87.3% 
+ 0.857 
+ 0.6225 
+ 
+ OOD 
+ 0.635 
+ 96.6% 
+ 0.983 
+ 0.6920 
+ 
+ iid-rl (D) 
+ IID 
+ 0.753 
+ 98.9% 
+ 0.883 
+ 0.7635 
+ 
+ OOD 
+ 0.761 
+ 99.6% 
+ 0.989 
+ 0.8214   ⋆ \star 
+ 
+ 
+ 
+ 
+ 
+ Model Generalization. 
+
+ 
+ We report the full training results in Table  6  and the corresponding operation-level recall in Table  11 .
+Compared with the pretrained baseline, both IID- and OOD-family SFT substantially improve the use of advanced CadQuery operations, indicating that BenchCAD provides effective supervision for operation-level CAD synthesis.
+Applying RL on top of the OOD-SFT checkpoint further improves both IID and held-out OOD performance, suggesting that geometry-based optimization improves executable fidelity beyond supervised imitation.
+However, the IID-trained SFT model obtains the strongest OOD score overall, indicating that broad family coverage during supervised training remains a key driver of generalization to unseen mechanical designs. 
+ 
+ 
+ Figure 7:  The generalisation gap on BenchCAD.  Qwen3-VL-2B trained on three data mixtures, evaluated on the BenchCAD validation set throughout training.
+ (a) OOD IoU vs. training step.  The IID-trained run (green) climbs highest; the OOD run (red, trained without the held-out family slice) plateaus mid-range; the baseline (grey, no BenchCAD) stays near the floor.
+ (b) OOD essential-op pass rate.  IID reaches the highest rate, OOD plateaus mid-range, baseline stays at  ∼ \sim 0% — the  CAD Operational Blindspot .
+The deficit is not optimisation budget, not backbone capacity, and not training-corpus operation coverage alone — it is the fundamental difficulty of constructing industry-grade parametric CAD code on  unseen  family distributions. 
+ 
+ 
+ 
+ 
+ Appendix G  Full Per-Model Per-Task Results 
+
+ 
+ Table  7  reports the dataset composition; Table  8  maps each task to its sub-capability subset; Tables  2  and  9  report the per-model QA leaderboard (Vision QA / Code QA); Table  12  stratifies  img2cq  by family difficulty. The unified Vision2Code leaderboard (Table  10 ) is in the main body. 
+ 
+ 
+ Table 7:  BenchCAD dataset composition.  Three released datasets: the verified CadQuery code core (17,900 parts spanning 106 families, each with parametric source, executable STEP, four canonical-view renders, parameter JSON, and op list), the paired QA bank (2,400 questions evaluated under both visual and code conditioning), and the Edit subset (748 before/after pairs). 
+ 
+ 
+ 
+ Dataset 
+ #Records 
+ #Families 
+ GT artefacts 
+ 
+ 
+ 
+ BenchCAD 
+ 17,900 
+ 106 
+ code  ⋅ \cdot  STEP  ⋅ \cdot  4 views  ⋅ \cdot  params  ⋅ \cdot  ops 
+ 
+ BenchCAD-QA (paired img/code) 
+ 2,400  × 2 \times 2 
+ 106 
+ question  + +  gold answer 
+ 
+ BenchCAD-Edit 
+ 748 
+ 106 
+ before/after  + +  NL instruction 
+ 
+ 
+ 
+ 
+ Table 8:  Capability decomposition.  BenchCAD’s five tasks exercise known subsets of the four-level capability hierarchy:  L 1 L_{1}  Holistic Visual and Cadquery Code Recognition (recognise + integrate multi-view),  L 2 L_{2}  CAD Operations Understanding (understanding code, map ops to features),  L 3 L_{3}  Industrial Parametric Abstraction (parameter structure, standard conventions from industry domain knowledge), and  L 4 L_{4}  Spatial/Code Reasoning (compose all into executable program). Score differences across paired tasks (e.g.  qa_img − - qa_code ) directly diagnose which level is the bottleneck. “part.” indicates partial coverage. 
+ 
+ 
+ 
+ Task 
+ Input  → \to  Output 
+ L 1 L_{1}  Vis 
+ L 1 L_{1}  Code 
+ L 2 L_{2}  Op 
+ L 3 L_{3}  Param 
+ L 4 L_{4}  Synth 
+ 
+ 
+ 
+ img2cq 
+ 4 views  → \to  code 
+ ✓ 
+ - 
+ ✓ 
+ ✓ 
+ part. 
+ 
+ qa_img 
+ 4 views  + +  Q  → \to  text 
+ ✓ 
+ - 
+ ✓ 
+ ✓ 
+ ✓ 
+ 
+ qa_code 
+ code  + +  Q  → \to  text 
+ - 
+ ✓ 
+ ✓ 
+ ✓ 
+ ✓ 
+ 
+ edit_img 
+ views  + +  code  → \to  code 
+ ✓ 
+ ✓ 
+ ✓ 
+ ✓ 
+ ✓ 
+ 
+ edit_code 
+ code  + +  instr  → \to  code 
+ - 
+ ✓ 
+ ✓ 
+ ✓ 
+ part. 
+ 
+ 
+ 
+ 
+ Table 9:  Main evaluation on BenchCAD-QA ( qa_code  modality), by capability axis.  Per-model accuracy on the code-conditioned QA bank across the same four capability axes as Table  2 . The two tables share questions and capability-axis definitions; only the conditioning modality differs (rendered images vs. source CadQuery). Score differences across the matched pair isolate the cost of replacing direct code access with visual recognition — the  Holistic Spatial and Detailing Deficit . 
+ 
+ 
+ 
+ Model 
+ 
+ 
+ Cadquery Code 
+ Recognition  ↑ \uparrow 
+ 
+ 
+ 
+ CAD Operation 
+ Understanding  ↑ \uparrow 
+ 
+ 
+ 
+ Industrial Parametric 
+ Abstraction  ↑ \uparrow 
+ 
+ 
+ 
+ Spatial 
+ Reasoning  ↑ \uparrow 
+ 
+ 
+ 
+ Total 
+ score  ↑ \uparrow 
+ 
+ 
+ 
+ 
+ opus-4.7 
+ 0.868 
+ 0.800 
+ 0.793 
+ 0.595 
+ 0.801 
+ 
+ opus-4.7-thinking 
+ 0.891 
+ 0.781 
+ 0.851 
+ 0.632 
+ 0.829 
+ 
+ gemini-3.1-pro 
+ 0.914 
+ 0.782 
+ 0.867 
+ 0.537 
+ 0.836 
+ 
+ gemini-3.1-pro-thinking 
+ 0.907 
+ 0.783 
+ 0.876 
+ 0.537 
+ 0.838 
+ 
+ gpt-4o 
+ 0.865 
+ 0.593 
+ 0.732 
+ 0.688 
+ 0.726 
+ 
+ gpt-5.3-chat-latest 
+ 0.879 
+ 0.805 
+ 0.815 
+ 0.731 
+ 0.823 
+ 
+ gpt-5.3-thinking 
+ 0.885 
+ 0.802 
+ 0.811 
+ 0.730 
+ 0.821 
+ 
+ moonshot-v1-128k-v 
+ 0.842 
+ 0.551 
+ 0.692 
+ 0.792 
+ 0.700 
+ 
+ moonshot-v1-8k-v 
+ 0.772 
+ 0.603 
+ 0.555 
+ 0.536 
+ 0.620 
+ 
+ openai-o3 
+ 0.804 
+ 0.701 
+ 0.689 
+ 0.492 
+ 0.708 
+ 
+ google-gemma-4-31b-it 
+ 0.791 
+ 0.674 
+ 0.606 
+ 0.528 
+ 0.664 
+ 
+ openai-gpt-oss-120b 
+ 0.790 
+ 0.732 
+ 0.656 
+ 0.379 
+ 0.689 
+ 
+ nvidia-nemotron-3-120b 
+ 0.771 
+ 0.660 
+ 0.661 
+ 0.293 
+ 0.671 
+ 
+ blank code (baseline) 
+ 0.040 
+ 0.257 
+ 0.290 
+ 0.420 
+ 0.223 
+ 
+ 
+ 
+ 
+ Table 10:  Vision2Code unified leaderboard on  BenchCAD .  Specialist CAD lineage, frontier MLLMs, and our open Qwen3-VL-2B baseline.
+Best per block in  bold . 
+ 
+ 
+ 
+ Model 
+ IoU  ↑ \uparrow 
+ CD  ↓ \downarrow 
+ ess_score  ↑ \uparrow 
+ exec_pct  ↑ \uparrow 
+ total  ↑ \uparrow 
+ 
+ Specialist CAD lineage ( ∼ \sim 2B) 
+ 
+ Cadrille-RL  [ Kolodiazhnyi et al., 2026 ] 
+ 0.0683 
+ 0.3507 
+ 0.3118 
+ 91.2 
+ 0.3382 
+ 
+ CADEvolve v3  [ Elistratov et al., 2026 ] 
+ 0.7497 
+ 0.0080 
+ 0.3715 
+ 92.7 
+ 0.6014 
+ 
+ Frontier MLLMs 
+ 
+ gpt-4o 
+ 0.1884 
+ 0.0623 
+ 0.4680 
+ 87.0 
+ 0.2274 
+ 
+ gpt-5.3 (no thinking) 
+ 0.1952 
+ 0.0594 
+ 0.4940 
+ 69.5 
+ 0.2160 
+ 
+ gpt-5.3 (thinking) 
+ 0.2072 
+ 0.0566 
+ 0.4550 
+ 67.5 
+ 0.2120 
+ 
+ claude-sonnet-4.6 (no thinking) 
+ 0.2380 
+ 0.0320 
+ 0.5060 
+ 85.4 
+ 0.3510 
+ 
+ claude-sonnet-4.6 (thinking-high) 
+ 0.2420 
+ 0.0220 
+ – 
+ 90.0 
+ 0.3850 
+ 
+ claude-opus-4.7 (no thinking) 
+ 0.2740 
+ 0.0210 
+ 0.4770 
+ 94.0 
+ 0.3830 
+ 
+ claude-opus-4.7 (thinking) 
+ 0.2670 
+ 0.0240 
+ 0.4710 
+ 90.4 
+ 0.3780 
+ 
+ gemini-3.1-pro (no thinking) 
+ 0.2560 
+ 0.0400 
+ 0.3780 
+ 74.0 
+ 0.3290 
+ 
+ gemini-3.1-pro (thinking) 
+ 0.2790 
+ 0.0250 
+ 0.5670 
+ 79.8 
+ 0.3970 
+ 
+ openai/o3 
+ 0.5004 
+ 0.0143 
+ 0.4440 
+ 5.6 
+ 0.1081 
+ 
+ moonshot-v1-128k 
+ 0.1530 
+ 0.0572 
+ 0.1922 
+ 10.5 
+ 0.0612 
+ 
+ moonshot-v1-8k 
+ 0.2421 
+ 0.0577 
+ 0.1792 
+ 9.0 
+ 0.0604 
+ 
+ Ours — Qwen3-VL-2B 
+ 
+ qwen3-2b-sft-ood 
+ 0.5630 
+ 0.0174 
+ 0.7380 
+ 94.2 
+ 0.5877 
+ 
+ qwen3-2b-sft-iid 
+ 0.6400 
+ 0.0108 
+ 0.8710 
+ 88.1 
+ 0.6282 
+ 
+ qwen3-2b-rl-ood 
+ 0.7140 
+ 0.0047 
+ 0.8100 
+ 99.1 
+ 0.7231 
+ 
+ qwen3-2b-rl-iid 
+ 0.7520 
+ 0.0041 
+ 0.8920 
+ 98.9 
+ 0.7682 
+ 
+ qwen3-2b (baseline) 
+ 0.0032 
+ 0.3652 
+ 0.0042 
+ 14.6 
+ 0.0084 
+ 
+ gpt-4o (black img) 
+ 0.0802 
+ 0.1011 
+ 0.2244 
+ 87.0 
+ 0.1102 
+ 
+ 
+ 
+ 
+ Table  11  reports the recall of operations for training models. 
+ 
+ 
+ Table 11:  Per-operation recall after BenchCAD training. 
+We compare the pretrained baseline, OOD-family SFT, and IID SFT on Vision2Code operation recall. BenchCAD training substantially improves recall on BenchCAD-distinguishing operations, especially  revolve ,  fillet ,  loft ,  sweep , and array-based operations. 
+ 
+ 
+ 
+ Operation 
+ baseline 
+ ood-sft 
+ iid-sft 
+ | GT | |\text{GT}| 
+ 
+ Basic ops (shared with prior corpora: cad-recode / text2cad) 
+ 
+ extrude 
+ 100.0 
+ 91.7 
+ 95.8 
+ 48 
+ 
+ cut 
+ 87.2 
+ 70.2 
+ 89.4 
+ 94 
+ 
+ union 
+ 91.7 
+ 41.7 
+ 79.2 
+ 48 
+ 
+ circle 
+ 82.8 
+ 79.3 
+ 96.6 
+ 58 
+ 
+ cylinder 
+ 5.9 
+ 88.2 
+ 94.1 
+ 34 
+ 
+ box 
+ 2.6 
+ 84.6 
+ 92.3 
+ 78 
+ 
+ rect 
+ 5.0 
+ 65.0 
+ 90.0 
+ 40 
+ 
+ workplane 
+ 0.0 
+ 77.4 
+ 88.7 
+ 106 
+ 
+ Advanced ops (BenchCAD-distinguishing) 
+ 
+ hole 
+ 0.0 
+ 82.8 
+ 93.1 
+ 58 
+ 
+ chamfer 
+ 0.0 
+ 85.3 
+ 85.3 
+ 68 
+ 
+ revolve 
+ 0.0 
+ 54.8 
+ 93.5 
+ 62 
+ 
+ fillet 
+ 0.0 
+ 25.0 
+ 87.5 
+ 16 
+ 
+ loft 
+ 0.0 
+ 22.2 
+ 77.8 
+ 18 
+ 
+ rarray 
+ 0.0 
+ 77.8 
+ 100.0 
+ 18 
+ 
+ sweep 
+ 0.0 
+ 25.0 
+ 75.0 
+ 16 
+ 
+ polarArray 
+ 0.0 
+ 33.3 
+ 83.3 
+ 12 
+ 
+ shell 
+ 0.0 
+ 80.0 
+ 100.0 
+ 10 
+ 
+ sweep+helix 
+ 0.0 
+ 100.0 
+ 50.0 
+ 4 
+ 
+ twistExtrude 
+ 0.0 
+ 100.0 
+ 100.0 
+ 2 
+ 
+ Macro recall  (16 ops) 
+ 17.5% 
+ 59.9% 
+ 84.0% 
+ — 
+ 
+ Exec rate 
+ 90.0% 
+ 94.0% 
+ 99.0% 
+ — 
+ 
+ 
+ 
+ 
+ Table 12:  The Family Cliff.   img2cq  pass rate (%) split by family difficulty tier. Even the strongest reasoning model collapses on
+the hard tier, exhibiting a  > > 45-point gap from easy. The 26 hard-tier families exercise advanced operations (helical sweeps, twist-extrusion,
+lofted Booleans) and parametric constraints (gear module–tooth–pitch consistency, spring free-length–turn-count coupling) that no evaluated model
+reliably preserves. 
+ 
+ 
+ 
+ Model 
+ Easy 
+ Medium 
+ Hard 
+ Δ \Delta  E–H 
+ 
+ 
+ 
+ claude-opus-4.7 
+ 57.1 
+ 62.5 
+ 45.5 
+ +11.7 
+ 
+ gpt-4o 
+ 38.8 
+ 47.6 
+ 40.4 
+ − - 1.5 
+ 
+ gpt-5.3 (thinking) 
+ 27.4 
+ 35.7 
+ 30.9 
+ − - 3.5 
+ 
+ gpt-5.3 (no thinking) 
+ 29.9 
+ 30.1 
+ 27.0 
+ +2.8 
+ 
+ gemini-2.5-pro 
+ 22.0 
+ 28.1 
+ 20.2 
+ +1.8 
+ 
+ gpt-5.2 
+ 11.5 
+ 26.3 
+ 18.6 
+ − - 7.1 
+ 
+ qwen3-VL-32B-Instruct 
+ 35.3 
+ 18.8 
+ 0.0 
+ +35.3 
+ 
+ Moonshot-v1-32k-vp 
+ 9.5 
+ 13.1 
+ 7.8 
+ +1.7 
+ 
+ Moonshot-v1-8k-vp 
+ 4.8 
+ 7.1 
+ 2.9 
+ +1.9 
+ 
+ Moonshot-v1-128k-vp 
+ 0.0 
+ 8.5 
+ 3.8 
+ − - 3.8 
+ 
+ 
+ 
+ 
+ 
+ Appendix H  CAD Operational Blindspot: Per-Operation Recall 
+
+ 
+ Table  13  reports operation-level recall on Vision2Code.
+While both models recover common sketch-and-extrude patterns such as  extrude ,  circle ,  rect , and  workplane , recall remains much lower for industrially important operations such as  chamfer ,  revolve ,  threePointArc ,  shell , and counterbored holes.
+This gap suggests that models often approximate the final geometry with simpler primitives instead of recovering the intended parametric construction.
+Thinking mode improves several planning-heavy operations, including  loft ,  polygon ,  fillet , and  rarray , but degrades common boolean and scaffolding operations such as  cut ,  cutBlind ,  workplane ,  sweep ,  box , and  union .
+The resulting drop in macro recall and execution rate indicates that inference-time reasoning introduces a synthesis–execution trade-off rather than a uniform improvement. 
+ 
+ 
+ Table 13:  Per-operation recall on Vision2Code. 
+We compare gpt-5.3 with gpt-5.3-thinking on operation-level recall and execution rate.
+Thinking mode slightly lowers overall recall and executability, despite improving a few planning-heavy operations such as  loft ,  polygon , and  fillet . 
+ 
+ 
+ 
+ Operation 
+ gpt-5.3 
+ gpt-5.3-thk 
+ | GT | |\text{GT}| 
+ 
+ Basic ops (shared with prior corpora: cad-recode / text2cad) 
+ 
+ extrude 
+ 83.3 
+ 84.4 
+ 90 
+ 
+ cut 
+ 44.1 
+ 32.2 
+ 59 
+ 
+ union 
+ 65.3 
+ 59.7 
+ 72 
+ 
+ circle 
+ 78.7 
+ 77.3 
+ 75 
+ 
+ cylinder 
+ 4.5 
+ 7.6 
+ 66 
+ 
+ box 
+ 42.3 
+ 34.6 
+ 78 
+ 
+ rect 
+ 63.0 
+ 65.2 
+ 46 
+ 
+ workplane 
+ 86.3 
+ 77.4 
+ 124 
+ 
+ Advanced ops (BenchCAD-distinguishing) 
+ 
+ hole 
+ 60.2 
+ 55.4 
+ 83 
+ 
+ chamfer 
+ 8.6 
+ 4.3 
+ 70 
+ 
+ cutThruAll 
+ 16.2 
+ 10.8 
+ 37 
+ 
+ revolve 
+ 14.3 
+ 10.7 
+ 28 
+ 
+ fillet 
+ 0.0 
+ 12.0 
+ 25 
+ 
+ cutBlind 
+ 36.8 
+ 26.3 
+ 19 
+ 
+ loft 
+ 5.9 
+ 23.5 
+ 17 
+ 
+ threePointArc 
+ 6.2 
+ 0.0 
+ 16 
+ 
+ rarray 
+ 7.1 
+ 14.3 
+ 14 
+ 
+ sweep 
+ 53.8 
+ 46.2 
+ 13 
+ 
+ polygon 
+ 54.5 
+ 72.7 
+ 11 
+ 
+ makeHelix 
+ 12.5 
+ 12.5 
+ 8 
+ 
+ slot2D 
+ 25.0 
+ 25.0 
+ 8 
+ 
+ polarArray 
+ 20.0 
+ 20.0 
+ 5 
+ 
+ shell 
+ 25.0 
+ 0.0 
+ 4 
+ 
+ mirrorY 
+ 0.0 
+ 0.0 
+ 4 
+ 
+ sphere 
+ 100.0 
+ 100.0 
+ 4 
+ 
+ cboreHole 
+ 0.0 
+ 0.0 
+ 3 
+ 
+ radiusArc 
+ 33.3 
+ 0.0 
+ 3 
+ 
+ Macro recall  (advanced, 19 ops) 
+ 25.2% 
+ 22.8% 
+ — 
+ 
+ Macro recall  (all, 27 ops) 
+ 35.1% 
+ 32.3% 
+ — 
+ 
+ Exec rate 
+ 69.5% 
+ 67.5% 
+ — 
+ 
+ 
+ 
+ 
+ 
+ Appendix I  Datasheet for BenchCAD 
+
+ 
+ We follow the datasheet template of Gebru et al. (2021); responses below are condensed for the appendix and reproduced in full as a separate Croissant 1.0 metadata file shipped with the dataset release. 
+ 
+ 
+ Motivation. 
+
+ 
+ For what purpose was the dataset created?  BenchCAD was created to evaluate the parametric-CAD capabilities of large vision-language and code-language models along three sub-capabilities (visual perception, parametric abstraction, code synthesis) on industrially representative part families with execution-verified ground truth.
+ Who created the dataset and on behalf of which entity?  The authors. (Anonymised for double-blind submission.)
+ Who funded the dataset?  The authors’ individual funds. (Anonymised.) 
+ 
+ 
+ 
+ Composition. 
+
+ 
+ What do the instances represent?  Each instance is a parametric CAD part: an executable CadQuery Python program, the resulting STEP file, four canonical-view PNG renders, a parameter JSON, and an op-list JSON.
+ How many instances are there in total?  17,900 verified parts in BenchCAD, 2,400 paired QA questions in BenchCAD-QA (each evaluated under both visual and code conditioning, yielding 4,800 records), and 748 curated edit pairs in BenchCAD-Edit.
+ Does the dataset contain all possible instances?  No — BenchCAD samples a subset of all the industry CAD generation part familys, and sampled a subset of parameter space per family; the schema permits unbounded sampling under the documented constraints.
+ Is there a label/target?  The CadQuery source code, STEP, parameters, and op list jointly serve as ground truth; for QA tasks, gold answers are derived deterministically from parameters; for edit tasks, target code and target STEP are paired with the original. 
+ 
+ 
+ 
+ Collection process. 
+
+ 
+ How was the data acquired?  Procedurally generated by the BenchCAD generation pipeline (§ 3 ); the only human-in-the-loop component is edit-pair curation by the authors. 
+ 
+ 
+ Who was involved in data collection?  The authors.
+ Were any ethical review processes conducted?  Not applicable; no human-subjects data. 
+ 
+ 
+ 
+ Preprocessing/cleaning/labeling. 
+
+ 
+ Was preprocessing/cleaning done?  Verification (sandbox execution + non-degenerate volume + 30 s timeout, followed by domain-expert visual sign-off) is the sole filter applied to BenchCAD.
+The Fusion360 and DeepCAD subsets undergo additional curation: parsing failures and parts whose reconstruction yields invalid geometry are excluded.
+ Was the raw data saved?  Yes; the unverified pre-filter output is retained for analysis and is available on request. 
+ 
+ 
+ 
+ Uses. 
+
+ 
+ Has the dataset been used for any tasks already?  The five tasks defined in § 3.2 .
+ Is there anything that prevents responsible reuse?  The dataset contains no PII, no copyrighted source designs, and no safety-sensitive specifications.
+The standard-anchored families reference public ISO/DIN/EN/ASME/IEC standard codes by number and name; we do not redistribute the standard documents themselves. 
+ 
+ 
+ 
+ Distribution. 
+
+ 
+ Will the dataset be distributed?  Yes, on Hugging Face under  BenchCAD/BenchCAD .
+ When?  On submission acceptance (or on arXiv release if earlier).
+ Under what licence?  CC-BY-4.0 for data; MIT for code (evaluation harness).
+ Are there restrictions?  Standard CC-BY-4.0 attribution. 
+ 
+ 
+ 
+ Maintenance. 
+
+ 
+ Who will support the dataset?  The authors via the GitHub issue tracker and Hugging Face dataset card.
+ How will errata be communicated?  Versioned releases on Hugging Face with changelogs in the dataset card. 
+ 
+ 
+ 
+ 
+ Appendix J  Question Bank Construction 
+
+ 
+ The numeric-QA tasks ( qa_img ,  qa_code ) draw from a per-family question bank constructed in three steps. (1) For each family, a domain-knowledge author writes 6–12 question  templates  parameterised by the family’s exposed parameters — e.g. for  involute_gear :  “what is the ratio of root-to-tip diameter?” ,  “how many teeth does the visible gear have?” .
+Templates are typed (ratio, integer count, ordinal) and constrained to be scale-invariant. (2) Templates are instantiated per-record by deterministic substitution of the verified parameter values, yielding a gold answer alongside each question. (3) A second author reviews each instantiation for ambiguity and visibility (a question must be answerable from the four canonical views with no occluded features).
+The final bank contains 2,400 unique (question, gold answer) pairs sampled across 17,900 records — each evaluated under both visual ( qa_img ) and code ( qa_code ) conditioning, yielding 4,800 total QA records.
+The composition is approximately 60% ratio, 35% integer count, and 5% ordinal. We release the question-template source code so that the bank can be regenerated under alternative parameter samples. 
+ 
+ 
+ 
+ Appendix K  QA System Prompts 
+
+ 
+ To ensure reproducibility, we provide the exact system prompts used in our QA evaluation.
+All models are evaluated with the same prompt template. The model is required to output
+only a JSON array of numbers, which enables automatic numeric grading. For binary
+questions, we encode “yes” as 1 and “no” as 0. 
+ 
+ 
+ K.1  Image-based QA System Prompt 
+
+ 
+ 
+ QA_IMG_SYSTEM_PROMPT 
+ 
+ 
+ You are an expert CAD engineer. You will be shown a
+ DIAGONAL_VIEW_LAYOUT . You will be given a list of numeric
+questions about the part. Answer each with a single number. 
+ Rules: 
+ 
+ •  
+ 
+ Output ONLY a JSON array of numbers, one per question, in the same order. 
+ 
+ •  
+ 
+ No text, no keys, no explanation. Just the array. 
+ 
+ •  
+ 
+ For yes/no questions, use 1 for yes and 0 for no. 
+ 
+ •  
+ 
+ For count questions, use an integer, e.g., 12, not “twelve”. 
+ 
+ •  
+ 
+ For ratio questions, use a decimal, e.g., 2.5. 
+ 
+ •  
+ 
+ For dimensional questions, answer in whatever consistent unit the code uses;
+the scale is arbitrary and the grader compares numeric magnitude. 
+ 
+ 
+ Example input: 
+["How many teeth?", "What is the module?"]
+ 
+ Example output: 
+[20, 2.5]
+ 
+ 
+ 
+ 
+ 
+ K.2  Code-based QA System Prompt 
+
+ 
+ 
+ QA_CODE_SYSTEM_PROMPT 
+ 
+ 
+ You are an expert CAD engineer. You will be shown CadQuery Python code for a
+mechanical part. You will be given a list of numeric questions about the part
+this code produces. 
+ Rules: 
+ 
+ •  
+ 
+ Output ONLY a JSON array of numbers, one per question, in the same order. 
+ 
+ •  
+ 
+ No text, no keys, no explanation. Just the array. 
+ 
+ •  
+ 
+ For yes/no questions, use 1 for yes and 0 for no. 
+ 
+ •  
+ 
+ For count questions, use an integer, e.g., 12, not “twelve”. 
+ 
+ •  
+ 
+ For ratio questions, use a decimal, e.g., 2.5. 
+ 
+ •  
+ 
+ For dimensional questions, answer using the same scale as the numeric
+literals in the code. 
+ 
+ 
+ Example input code:  The code creates a gear with 20 teeth and module 2.5. 
+ Example input questions: 
+["How many teeth in the gear?", "What is the module?"]
+ 
+ Example output: 
+[20, 2.5]
+ 
+ 
+ 
+ 
+ 
+ 
+ Appendix L  Code Generation System Prompts 
+
+ 
+ To ensure reproducibility, we provide the exact prompts used for code generation.
+The model is given a normalized four-view composite render of an industrial part and
+is asked to generate executable CadQuery Python code. All generated code is evaluated
+under the same execution protocol:  cadquery  is pre-imported as  cq ,
+and the final reconstructed solid must be stored in  result . 
+ 
+ 
+ L.1  Primary Vision-to-CAD System Prompt 
+
+ 
+ 
+ SYSTEM_PROMPT 
+ 
+ 
+ Generate CadQuery Python code from a  DIAGONAL_VIEW_LAYOUT . 
+ Renders are normalized: bbox centered at  [0.5,0.5,0.5] , longest side maps to  [0,1] .
+Match the orientation exactly—do not rotate or remap axes. World XYZ in your code must match world XYZ in the renders. 
+ 
+ •  
+ 
+ cadquery  is pre-imported as  cq ; no imports, no  show_object . 
+ 
+ •  
+ 
+ Store final solid in  result . 
+ 
+ •  
+ 
+ Output ONLY code, no explanation or markdown. 
+ 
+ 
+ 
+ 
+ 
+ 
+ L.2  Vision-to-CAD User Prompt 
+
+ 
+ 
+ USER_PROMPT 
+ 
+ 
+ Generate CadQuery code to recreate this industrial part shown in the 4-view composite render. 
+ 
+ 
+ 
+ 
+ L.3  Cadrille Baseline System Prompt 
+
+ 
+ 
+ CADRILLE_SYSTEM_PROMPT 
+ 
+ 
+ You are a CadQuery expert. Given a normalized  DIAGONAL_VIEW_LAYOUT . 
+ Write CadQuery Python code that reproduces the geometry. Output ONLY Python code. 
+ 
+ 
+ 
+ 
+ L.4  Edit-task System Prompt 
+
+ 
+ 
+ EDIT_CODE_SYSTEM_PROMPT 
+ 
+ 
+ You are an expert CAD engineer. You will be given: 
+ 
+ 1.  
+ 
+ A CadQuery Python script that builds a parametric mechanical part. 
+ 
+ 2.  
+ 
+ A natural-language edit instruction describing a change to one specific feature. 
+ 
+ 
+ Your task: return the script with the MINIMAL edit that achieves the requested feature change. Only the feature(s) the instruction explicitly mentions should change; every other feature, dimension, and detail must stay exactly as in the original. 
+ Rules: 
+ 
+ •  
+ 
+ Output ONLY executable Python code, no explanation, no markdown fences. 
+ 
+ •  
+ 
+ Make the smallest set of changes that realize the instruction. Do NOT touch unrelated literals, operations, or structure. 
+ 
+ •  
+ 
+ Do NOT refactor, rename variables, reorder operations, or add/remove imports. 
+ 
+ •  
+ 
+ If the instruction adds a new feature: append the operation in the most natural place; keep the rest of the chain intact. 
+ 
+ •  
+ 
+ If the instruction removes a feature: delete just that operation block; do not rewrite surrounding code. 
+ 
+ •  
+ 
+ If the instruction modifies a dimension/parameter: update only the literal(s) that depend on it (and, if present, the matching parameter comment). 
+ 
+ 
+ 
+ 
+ 
+ 
+ EDIT_IMG_GT_SYSTEM_PROMPT 
+ 
+ 
+ You are an expert CAD engineer. You will be given: 
+ 
+ 1.  
+ 
+ A CadQuery Python script that builds a parametric mechanical part(CURRENT state). 
+ 
+ 2.  
+ 
+ A 2 × \times 2 composite image of the TARGET geometry from 4 diagonal viewpoints. 
+ 
+ 
+ Your task: return the script with the MINIMAL edit that transforms the CURRENT geometry (described by the code) into the TARGET geometry (shown in the image). The image is the only specification of the desired change, there is NO text instruction. Compare the code’s geometry against the image and infer which single feature differs.
+Only the feature(s) that differ between code and image should change; every other feature, dimension, and detail must stay exactly as in the original code. 
+ Rules: 
+ 
+ •  
+ 
+ Output ONLY executable Python code, no explanation, no markdown fences. 
+ 
+ •  
+ 
+ Make the smallest set of changes that realize the visual difference. Do NOT touch unrelated literals, operations, or structure. 
+ 
+ •  
+ 
+ Do NOT refactor, rename variables, reorder operations, or add/remove imports. 
+ 
+ •  
+ 
+ If the target image shows a new feature that is absent in the code: append the operation in the most natural place; keep the rest of the chain intact. 
+ 
+ •  
+ 
+ If the target image shows a feature removed: delete just that operation block; do not rewrite surrounding code. 
+ 
+ •  
+ 
+ If a dimension/parameter has changed: update only the literal(s) that control that dimension (and the matching parameter comment if present). 
+ 
+ 
+ 
+ 
+ 
+ 
+ EDIT_CODE_IMG_SYSTEM_PROMPT (Ablation) 
+ 
+ 
+ You are an expert CAD engineer. You will be given: 
+ 
+ 1.  
+ 
+ A CadQuery Python script that builds a parametric mechanical part. 
+ 
+ 2.  
+ 
+ A natural-language edit instruction describing a change to one specific feature. 
+ 
+ 3.  
+ 
+ A 2 × \times 2 composite image of the part from 4 diagonal viewpoints (CURRENT state) as an additional visual reference for the script. 
+ 
+ 
+ Your task: return the script with the MINIMAL edit that achieves the
+requested feature change. Only the feature(s) the instruction explicitly
+mentions should change; every other feature, dimension, and detail must
+stay exactly as in the original. 
+ Rules: 
+ 
+ •  
+ 
+ Output ONLY executable Python code, no explanation, no markdown fences. 
+ 
+ •  
+ 
+ Make the smallest set of changes that realize the instruction. Do NOT touch unrelated literals, operations, or structure. 
+ 
+ •  
+ 
+ Do NOT refactor, rename variables, reorder operations, or add/remove imports. 
+ 
+ •  
+ 
+ If the instruction adds a new feature: append the operation in the most natural place; keep the rest of the chain intact. 
+ 
+ •  
+ 
+ If the instruction removes a feature: delete just that operation block; do not rewrite surrounding code. 
+ 
+ •  
+ 
+ If the instruction modifies a dimension/parameter: update only the literal(s) that depend on it (and, if present, the matching parameter comment). 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Appendix M  Rotation-Invariant IoU 
+
+ 
+ We compute IoU under a configurable rotation-invariant protocol, taking the maximum over either the 6-element face-up cube symmetry group or the full 24-element cube rotation group. Before voxelization, each part is normalized by centering it at the origin and scaling it by the largest semi-axis of its bounding box. For each candidate rotation  g ∈ G g\in G , we rotate the predicted voxel grid  V ^ \hat{V}  and compute its overlap with the reference voxel grid  V V ; the reported score is 
+ 
+
+ 
+ 
+ max g ∈ G ⁡ IoU ⁡ ( g ⋅ V ^ , V ) . \max_{g\in G}\mathrm{IoU}(g\cdot\hat{V},V). 
+ 
+ 
+ This metric is used diagnostically rather than as the primary score: a large gain from standard IoU to 24-rotation IoU indicates that the model may have generated the right geometry on the wrong construction plane. This failure is partly induced by a workplane prior: in online database, and manufacturing-oriented modeling workflows, parts are commonly initialized on the  XY  plane as the default sketching or setup plane. As a result, models may over-prefer  XY -based constructions even when the target geometry is defined on  XZ  or  YZ . Consistent with this interpretation, Table  14  shows substantially larger rotation-IoU gains for  XZ / YZ  ground-truth parts than for  XY  parts. 
+ 
+ 
+ Table 14:  Effect of rotation-invariant IoU by GT base plane. 
+For GPT-4o, we report  Δ = IoU rot24 − IoU single ​ - ​ axis \Delta=\mathrm{IoU}_{\mathrm{rot24}}-\mathrm{IoU}_{\mathrm{single\text{-}axis}}  over 164 valid 24-IoU samples with extrusion. Larger  Δ \Delta  indicates cases where the generated shape is geometrically similar but expressed in a mismatched coordinate frame. 
+ 
+ 
+ 
+ GT base plane 
+ n n 
+ Mean  Δ \Delta 
+ Max  Δ \Delta 
+ 
+ 
+ 
+ XY 
+ 70 
+ 0.0463 
+ 0.5907 
+ 
+ XZ 
+ 40 
+ 0.2305 
+ 0.8031 
+ 
+ YZ 
+ 54 
+ 0.2140 
+ 0.7053 
+ 
+ 
+ 
+ 
+ 
+ Appendix N  Edit Protocol 
+
+ 
+ Pair construction. 
+
+ 
+ The 748 BenchCAD-Edit pairs are drawn balanced across 106 families and four edit categories (balanced across dimensional, additive, subtractive, and multi-step categories).
+For each pair, we (i) start from a verified BenchCAD record, (ii) apply a parameter or op-list edit yielding a target part, (iii) verify the target satisfies the same verification pipeline, (iv) write a natural-language instruction by template ( “increase the bore diameter to 12 mm” ) reviewed for unambiguity by a second author, and (v) cross-validate by running two strong models and inspecting any unexpected failure modes.
+Pairs where models systematically disagree on instruction interpretation are revised or removed. 
+ 
+ 
+ 
+ Scoring. 
+
+ 
+ See Eq.  1  for metric definitions (normalised IoU used in edit-task score). The non-target preservation check is computed on the spatial complement of the bounding region of the targeted feature (precomputed bounding-box annotation per pair). 
+ 
+ 
+ 
+ Task taxonomy. 
+
+ 
+ The five edit task types (T1–T5) are defined in Table  15 . Difficulty rises monotonically with the structural complexity of the minimal correct diff, from a single literal swap (T1) to coordinated multi-block restructures (T5). The T1–T5 axis is orthogonal to the dimensional/additive/subtractive/multi-step categorisation used in the main paper: T1 and T3 are predominantly dimensional, T2 and T4 cover additive/subtractive, and T5 spans the multi-step regime. 
+ 
+ 
+ Table 15:  BenchCAD-Edit task taxonomy.  The 748 edit pairs are stratified into five task types T1–T5 by the structural form of the minimal correct diff. Difficulty rises monotonically from T1 (one-literal swap) to T5 (multi-block restructure with trig or coordinated sub-feature changes). 
+ 
+ 
+ 
+ 
+ 
+ Code 
+ 
+ 
+ 
+ Name 
+ 
+ 
+ 
+ Definition 
+ 
+ 
+ 
+ Diff signature 
+ 
+ 
+ 
+ Example instruction 
+ 
+ 
+ 
+ 
+ 
+ 
+ T1  (n=180) 
+ 
+ 
+ 
+ literal_replace 
+ 
+ 
+ 
+ Replace a single numeric literal that the instruction names explicitly ( from X to Y ). 
+ 
+ 
+ 
+ one literal swap; equal lines added/removed 
+ 
+ 
+ 
+ “Increase the cylinder radius from 4.5 to 5.85.” 
+ 
+ 
+ 
+ 
+ T2  (n=104) 
+ 
+ 
+ 
+ chain_transform 
+ 
+ 
+ 
+ Append a single chainable whole-part transform (rotate / mirror / array). 
+ 
+ 
+ 
+ one  result = result.<op>(...)  line appended 
+ 
+ 
+ 
+ “Rotate the entire part by 90 degrees about the X axis.” 
+ 
+ 
+ 
+ 
+ T3  (n=111) 
+ 
+ 
+ 
+ relative_compute 
+ 
+ 
+ 
+ Read an existing literal and derive another value (ratio, percentage,  2 × 2\times ,  1 / 4 1/4 ). 
+ 
+ 
+ 
+ one literal swap, value derived from another literal 
+ 
+ 
+ 
+ “Set the central bore diameter equal to twice the hub-cylinder height.” 
+ 
+ 
+ 
+ 
+ T4  (n=199) 
+ 
+ 
+ 
+ feature_edit 
+ 
+ 
+ 
+ Add or delete a single CSG sub-block (hole, slot, recess, chamfer, fillet, boss). 
+ 
+ 
+ 
+ one 3–7 line CSG block inserted or removed 
+ 
+ 
+ 
+ “Drill a 6 diameter through-hole along the Z axis.” 
+ 
+ 
+ 
+ 
+ T5  (n=154) 
+ 
+ 
+ 
+ geometry_rebuild 
+ 
+ 
+ 
+ Non-trivial restructure: trig-derived slopes/chamfers/lofts, or paragraph-style rebuilds where two or more sub-features change in concert. 
+ 
+ 
+ 
+ multi-block rewrite, trig in code, paragraph instruction 
+ 
+ 
+ 
+ “Replace the ramped arms and raised center with a single flat cross-shaped solid of uniform thickness.” 
+ 
+ 
+ 
+ 
+ 
+ 
+ Failure taxonomy. 
+
+ 
+ Every failing prediction is bucketed into one of eight semantic failure modes F01–F08 (Table  16 , Fig  8 ), each mapped to one of the four capability layers L1–L4: F01–F03 isolate L1  Holistic Visual Understanding  (wrong value, wrong instance, wrong placement), F04–F06 isolate L2  CAD Operations Comprehension  (wrong axis, wrong selector, near no-op), F07 isolates L3  Industrial Parametric Abstraction  (incomplete multi-instance update), and F08 isolates L4  Spatial Reasoning  + +  Code Synthesis  (compositional geometry mismatch). Each label combines an automatic detection cue — execution status, generated-vs-original/target IoU thresholds, and topology checks with a hand audit by the authors against the predicted code and rendered geometry; the rule set and L-mapping are fixed across all ten models reported, and  ok  (strict pass) and  exec_fail  are tracked separately as the non-failure and gross-execution categories. 
+ 
+ 
+ Table 16:  Failure-mode taxonomy (F-codes).  Eight semantic failure modes used in the per-model failure analysis (Fig.  8 ). Each F-code is mapped to one capability layer: L1  Holistic Visual Understanding , L2  CAD Operations Comprehension , L3  Industrial Parametric Abstraction , L4  Spatial Reasoning  + +  Code Synthesis . Hand-labelled on the failing predictions of every BenchCAD-Edit run. 
+ 
+ 
+ 
+ 
+ 
+ Code 
+ 
+ 
+ 
+ Name 
+ 
+ 
+ 
+ Definition 
+ 
+ 
+ 
+ Detection cue 
+ 
+ 
+ 
+ Representative failure 
+ 
+ 
+ 
+ 
+ 
+ 
+ F01  (L1) 
+ 
+ 
+ 
+ wrong_param_value 
+ 
+ 
+ 
+ Right operation, wrong numerical value: dim, diameter, radius, length, or angle written off-target; geometry shape-correct but a single number misses. 
+ 
+ 
+ 
+ IoU gen ≥ 0.9 \mathrm{IoU}_{\text{gen}}\geq 0.9 , output differs from target by a single literal. 
+ 
+ 
+ 
+ Model writes radius  5.6 5.6  when prompt asks for  5.85 5.85 ; cylinder topology unchanged. 
+ 
+ 
+ 
+ 
+ F02  (L1) 
+ 
+ 
+ 
+ wrong_feature_instance 
+ 
+ 
+ 
+ Among multiple similar features (front vs. back ring, two legs, several circles), the model edits the wrong one or perturbs a neighbour. 
+ 
+ 
+ 
+ IoU gen \mathrm{IoU}_{\text{gen}}  swings markedly above OR below baseline; topology preserved. 
+ 
+ 
+ 
+ Edit asks to enlarge the rear bore; model enlarges the front bore. 
+ 
+ 
+ 
+ 
+ F03  (L1) 
+ 
+ 
+ 
+ wrong_placement 
+ 
+ 
+ 
+ Right operation and value, but feature placed at slightly wrong coordinate, face, or orientation. 
+ 
+ 
+ 
+ IoU gen ≥ 0.95 \mathrm{IoU}_{\text{gen}}\geq 0.95 , small rigid offset against target. 
+ 
+ 
+ 
+ Hole drilled  2 2  mm off-centre on a face whose origin the model misread. 
+ 
+ 
+ 
+ 
+ F04  (L2) 
+ 
+ 
+ 
+ wrong_axis_or_direction 
+ 
+ 
+ 
+ Rotation, mirror, or extrude direction wrong: rotate axis tuple permuted, mirror plane misidentified, sweep tangent flipped. 
+ 
+ 
+ 
+ status==ok ; rotated/mirrored bbox mismatches target axis. 
+ 
+ 
+ 
+ gpt-4o rotate:  rotate((axis), (origin), deg)  with first two args swapped. 
+ 
+ 
+ 
+ 
+ F05  (L2) 
+ 
+ 
+ 
+ wrong_selector_or_face 
+ 
+ 
+ 
+ .faces() / .edges()  selector returns wrong subset:  >Y  chosen on a Z-up part, OR-selector returns multi-face, lofted-face selector silently misses. 
+ 
+ 
+ 
+ status==ok ; operation applied to wrong topology vs. target. 
+ 
+ 
+ 
+ Chamfer applied to all top edges instead of the single outer rim. 
+ 
+ 
+ 
+ 
+ F06  (L2) 
+ 
+ 
+ 
+ near_no_op_under_edit 
+ 
+ 
+ 
+ Output  ≈ \approx  original: comment-only edit, deleted wrong line, retained the feature meant to be removed, or applied the edit with no observable geometric effect. 
+ 
+ 
+ 
+ | IoU gen − IoU orig | < 0.005 |\mathrm{IoU}_{\text{gen}}-\mathrm{IoU}_{\text{orig}}|<0.005 . 
+ 
+ 
+ 
+ claude-opus-4-7 (no-think): on  49 % 49\%  of the failed records that rewrites the original byte-for-byte. 
+ 
+ 
+ 
+ 
+ F07  (L3) 
+ 
+ 
+ 
+ incomplete_multi_update 
+ 
+ 
+ 
+ Edit requires updating multiple symmetric or repeated instances (helical-sweep points, replicated bolts/legs); model updates only a subset. 
+ 
+ 
+ 
+ IoU gen \mathrm{IoU}_{\text{gen}}  plateaus below  1.0 1.0  across attempts; partial symmetry break. 
+ 
+ 
+ 
+ Cross-parameter dim asks to scale all four legs; model scales only two. 
+ 
+ 
+ 
+ 
+ F08  (L4) 
+ 
+ 
+ 
+ compositional_geometry_mismatch 
+ 
+ 
+ 
+ Composite or structural shape (slope strip, loft, sweep cross-section, multi-feature reorganisation) is partially right but does not match GT topology. 
+ 
+ 
+ 
+ status==ok ;  IoU gen ∈ [ 0.4 , 0.95 ] \mathrm{IoU}_{\text{gen}}\in[0.4,0.95]  on a T5-style edit. 
+ 
+ 
+ 
+ Slope edit produces a chamfer of correct angle but along the wrong face strip. 
+ 
+ 
+ 
+ 
+ 
+ Figure 8:  Per-model failure-mode distribution on BenchCAD-Edit.  Each
+horizontal bar disaggregates one model’s predictions into  ok ,
+ exec_fail , and the eight semantic failure modes F01–F08 defined in
+Table  16 ; segments are coloured by the underlying
+capability layer (sand  = =  L1  Holistic Visual Understanding , sage  = = 
+L2  CAD Operations Comprehension , purple  = =  L3  Industrial
+Parametric Abstraction , orange  = =  L4  Spatial Reasoning  + +  Code
+Synthesis ), so the L-mass within each bar reads off directly. Models are
+ordered by  ok  rate. The mass shifts systematically across model
+generations: older or smaller-capacity systems concentrate failures in the L2
+band (F04–F06) and incur a non-trivial  exec_fail  tail; recent large
+models without explicit reasoning largely close the L2 gap and leave residual
+mass on L1 (F01–F03); reasoning-tier closed models flatten L1 and L2 alike
+but expose an L3–L4 ceiling (F07–F08) on multi-instance and T5-style
+coordinated edits, indicating that thinking lifts capability up the
+L-hierarchy rather than uniformly reducing all error types. 
+ 
+ 
+ Figure 9:  Per-model failure-layer distribution on BenchCAD-Edit.  Each pie shows one model’s failures aggregated by capability layer L1–L4 (collapsing the eight F-codes via the mapping in Table  16 : F01–F03  → \to  L1, F04–F06  → \to  L2, F07  → \to  L3, F08  → \to  L4) and re-normalised so L1 + + L2 + + L3 + + L4  = 100 % =100\%  — i.e. the pies show the  shape  of each model’s failure mode mix, independent of how often it fails overall; the title above each pie reports the absolute L-fail rate (% of all predictions) so that scale is preserved. Models are arranged in order of increasing total L-fail rate (least-broken first). The mass shifts systematically along the L-axis across model generations: older or smaller-capacity systems concentrate failures in L2 (CAD-API misuse) and incur a non-trivial  exec_fail  tail (counted separately, not shown); recent large models without explicit reasoning largely close the L2 gap and leave residual mass on L1 (visual/detail mistakes); reasoning-tier closed models flatten L1 and L2 alike but expose an L3–L4 ceiling on multi-instance and T5-style coordinated edits, indicating that thinking lifts capability up the L-hierarchy rather than uniformly reducing all error types. 
+ 
+ 
+ Figure 10:  BenchCAD-Edit under three input protocols, by
+task type.  Three protocols on the same  100 100 -pair subset, four OpenAI models.  text : original code  + +  NL instruction (main bench,  EDIT_CODE_SYSTEM_PROMPT ).  ablation : original code  + +  NL instruction  + +  a four-view render of the original part ( EDIT_IMG_SYSTEM_PROMPT , App.  L.4 ).  image-only : original code  + +  four-view render of the target solid, no NL instruction ( EDIT_IMG_GT_SYSTEM_PROMPT , App.  L.4 ). Bars are  mean_norm  (Eq. ( 1 )) per task type. Four findings. (1)  Adding the original image to a text instruction barely helps and sometimes hurts : three of four models stay within  ± 2 \pm 2  pt of text-only on the aggregate, indicating the NL instruction already supplies most of the signal and the visual reference adds little new information. (2)  The one consistent winner is  o3  ( + 7 +7  pt over text-only on aggregate, with the largest lift on T5), suggesting that for an instruction-following reasoning model the image disambiguates ambiguous referents that text alone leaves vague. (3)  gpt-5.3-thinking  is hurt by the image  ( − 8 -8  pt on T1 and  − 20 -20  pt on T5 vs. text-only); the thinking process appears to over-interpret the redundant visual signal, which is consistent with the same model being the worst image-only performer. (4)  Text-only is the ceiling; image-only is the floor : removing the NL instruction collapses every model to  0.04 0.04 – 0.34 0.34   mean_norm  because a render shows what the part should look like but never tells the model that a radius is  5.85 5.85 , so dimensional edits (T1, T3) drop to near-zero, T5 floors at  0 0 , and only T2/T4 (add/remove a feature) retain weak signal. Net: the textual instruction does the heavy lifting and sets the upper bound; the original image is at best a clarifier ( o3 ) and at worst a distractor for thinking models; image-only is a strict lower bound that primarily probes feature-presence reasoning rather than parametric exactness. 
+ 
+ 
+ 
+ Image-conditioned variant. 
+
+ 
+ To probe whether the textual instruction itself is a confound, i.e. whether models succeed because the instruction states the change explicitly rather than because they reason about the geometry, we additionally evaluate an image-conditioned setting in which the natural-language instruction is replaced by a four-view render of the target solid ( EDIT_IMG_GT_SYSTEM_PROMPT , App.  L.4 ); the model receives the original code and must infer the edit visually. Across the four OpenAI models we tested,  mean_norm  drops by  0.40 0.40 – 0.85 0.85  pt at every task type (Fig.  10 ). The dominant failure mode is that a render specifies geometry but not numbers: the model can usually tell whether a feature is added or removed (T2/T4 retain weak signal), but cannot recover the exact dimension a textual “from  X X  to  Y Y ” would have stated, so dimensional edits (T1, T3) collapse to near-zero and trig-driven rebuilds (T5) floor uniformly at  0 0 . Image-only conditioning is therefore a strict lower bound on the text protocol and, in its current form, primarily isolates feature-presence reasoning rather than parametric exactness. 
+ 
+ 
+ 
+ Does adding the image really help? 
+
+ 
+ If image-only is a lower bound, the more interesting question is whether  augmenting  the text instruction with the same four-view render of the original part ( EDIT_IMG_SYSTEM_PROMPT , App.  L.4 ) gives the model usable extra signal. We rerun the same four models in this third protocol and find the answer is mostly no. Three of the four models stay within  ± 2 \pm 2  pt of text-only on the aggregate (Fig.  10 , ablation bars), so the NL instruction already supplies most of the signal and the visual reference adds little new information. The two exceptions are diagnostic:  o3  gains  ∼ 7 \sim 7  pt on aggregate, with the largest lift on T5, suggesting that for an instruction-following reasoning model the image disambiguates ambiguous referents ( the longer end ,  the central pillar ) that text alone leaves vague;  gpt-5.3-thinking   loses   7 7  pt on T1 and  20 20  pt on T5, mirroring its weak image-only performance and consistent with the thinking process over-interpreting a redundant visual signal. Net: the textual instruction does the heavy lifting and sets the upper bound; the original image is at best a clarifier and at worst a distractor for thinking models. 
+ 
+ 
+ 
+ Supplementary results. 
+
+ 
+ Figure  8  reports failure attributes of all 748 eidt-pairs from 10 LLMs.
+Figure  9  disaggregates per-model failures into the L1–L4 buckets defined in Figure  3 . Figure  10  reports the parallel image-based setting (target render in lieu of an NL instruction) broken down by T1–T5. 
+ 
+ 
+ 
+ 
+ Appendix O  Scoring-Protocol Ablations 
+
+ 
+ Table 17:  Scoring-protocol ablations.  (i)  24-axial vs. single-axis IoU : comparing the cube-symmetry-group IoU (max over 24 rotations) to the standard axis-aligned IoU isolates wrong-plane errors — when 24-axial  > >  single-axis on the same prediction, the geometry is correct but emitted on the wrong base workplane (§ 5.2 ). (ii)  Single image vs. multi-view input : collapsing the four canonical orthographic views into a single front view removes the multi-view evidence the model relies on for depth and back-side features.
+ 
+ 
+ 
+ 
+ Variant 
+ total 
+ Δ \Delta 
+ 
+ IoU scoring protocol (Vision2Code, fixed model output) 
+ 
+ 24-axial rotation-invariant IoU 
+ 0.308 
+ 0.068 
+ 
+ single-axis IoU (axis-aligned only, default) 
+ 0.240 
+ ref 
+ 
+ Visual input - view count (Vision2Code, single model) 
+ 
+ 4-view canonical orthographic (default) 
+ 0.240 
+ ref 
+ 
+ single front view only 
+ 0.215 
+ -0.025 
+ 
+ 
+ 
+ 
+ Table  17  reports two scoring-protocol ablations on the Vision2Code task. (i) The  24-axial vs. single-axis IoU  contrast quantifies how much credit is recovered by accounting for wrong-plane outputs (§ 5.2 ,  L 1 L_{1}  spatial-anchoring failure mode): when the gap is large, the model’s geometry is approximately correct but emitted on a non-canonical workplane. (ii) The  single-view vs. multi-view  contrast quantifies how much of a model’s score is driven by the four-view evidence specifically, isolating the cost of removing back-side and depth cues from the perception input. 
+ 
+ 
+ Table  18  reports an image-resolution ablation on the Vision2Code task, split by reasoning mode. (i) For the no-thinking model, increasing
+input resolution from 256 to 768 px lifts total score from 0.305 to 0.341 (best at 768 px), with IoU rising from 0.117 to a peak of 0.150 at 512 px (0.142 at 768
+px): when more pixels are available, the VLM resolves geometry that is sub-pixel at coarse scales and emits it as correct code. (ii) For the thinking model, the
+same increase is non-monotonic — IoU and total peak at the mid-resolution (512 px: 0.180 and 0.333) and then collapse at 768 px (IoU 0.117, total 0.275) — isolating
+an over-elaboration regime in which high-resolution visual detail amplifies into globally incorrect reasoning chains. 
+ 
+ 
+ Table 18:  Visual resolution ablations.  Vision2Code task score on BenchCAD across different input image resolutions. Best per block in  bold . 
+ 
+ 
+ 
+ Model 
+ size (px) 
+ IoU ↑ \uparrow 
+ CD ↓ \downarrow 
+ op_F1 ↑ \uparrow 
+ ess_score ↑ \uparrow 
+ total ↑ \uparrow 
+ 
+ 
+ 
+ gpt-5.3-chat 
+ 256 
+ 0.117 
+ 0.123 
+ 0.494 
+ 0.73 
+ 0.305 
+ 
+ 512 
+ 0.150 
+ 0.181 
+ 0.499 
+ 0.63 
+ 0.296 
+ 
+ 768 
+ 0.142 
+ 0.115 
+ 0.492 
+ 0.82 
+ 0.341 
+ 
+ gpt-5.3-thinking 
+ 256 
+ 0.166 
+ 0.158 
+ 0.496 
+ 0.76 
+ 0.330 
+ 
+ 512 
+ 0.180 
+ 0.186 
+ 0.500 
+ 0.73 
+ 0.333 
+ 
+ 768 
+ 0.117 
+ 0.152 
+ 0.464 
+ 0.67 
+ 0.275 
+ 
+ 
+ 
+ 
+ 
+ Appendix P  CadQuery Operation Coverage 
+
+ 
+ Table 19:  Per-category CadQuery operation coverage.  Distinct CadQuery method invocations per category in BenchCAD vs. the closest prior CadQuery corpus (CADEvolve), measured by the unified static-analysis rule (App.  P ). CADEvolve releases only  46 46  hand-written seed programs as source code (the expanded  ∼ \sim 1.3 1.3 M corpus is shipped only as embeddings); its column is therefore a lower bound. Saturation curves and full op lists for all corpora (CAD-Recode, cadrille, GenCAD-Code, CADPrompt) are in App.  P . 
+ 
+ 
+ 
+ Category 
+ BenchCAD 
+ CADEvolve 
+ Examples (BenchCAD) 
+ 
+ 
+ 
+ Primitives 
+ 4 
+ 1 
+ box, cylinder, sphere, makeTorus 
+ 
+ 2D sketch profile 
+ 15 
+ 13 
+ circle, ellipse, spline, slot2D, threePointArc 
+ 
+ Solid-forming 
+ 6 
+ 3 
+ extrude, revolve, sweep, loft, twistExtrude 
+ 
+ Advanced path 
+ 3 
+ 0 
+ makeHelix, makeLine, assembleEdges 
+ 
+ Boolean 
+ 5 
+ 3 
+ cut, cutBlind, cutThruAll, union, intersect 
+ 
+ Hole features 
+ 3 
+ 3 
+ hole, cboreHole, cskHole 
+ 
+ Finishing 
+ 2 
+ 1 
+ fillet, chamfer 
+ 
+ Arrays / Mirrors 
+ 4 
+ 3 
+ polarArray, rarray, mirrorX, mirrorY 
+ 
+ Transforms 
+ 3 
+ 3 
+ transformed, rotate, workplane 
+ 
+ Sketch builder API 
+ 1 
+ 0 
+ placeSketch 
+ 
+ Total 
+ 46 
+ 30 
+ 
+ 
+ 
+ 
+ 
+ Table  19  reports the per-category breakdown. 
+ 
+ 
+ Static analysis protocol. 
+
+ 
+ For each released CadQuery corpus we extract distinct method invocations using the regex  \ \backslash .([A-Za-z_]\w*)(  on the  .py  text. We then EXCLUDE three groups: (a) class/type names ( Workplane ,  Vector ,  Wire ,  Solid ,  Sketch ,  Compound ,  Edge ,  Face ,  Plane ,  Location ,  Shape ,  Edges ,  Vertices ); (b) selectors / accessors that do not modify geometry ( face ,  faces ,  edges ,  vertices ,  wires ,  val ,  vals ,  first ,  last ,  tag ,  newObject ,  copyWorkplane ,  plane ); and (c) Python stdlib / numpy / utility helpers ( append ,  join ,  format ,  sin ,  cos ,  multiply , …). The same EXCLUDE list is applied uniformly across BenchCAD, CADEvolve seeds, CAD-Recode/cadrille, GenCAD-Code, and CADPrompt. Saturation curves: CAD-Recode at  1,274 1{,}274   .py  (op count constant from  200 200  files onward); GenCAD-Code at  2,000 2{,}000  streamed samples (constant from  100 100  samples onward). 
+ 
+ 
+ 
+ Tier B (sketch+extrude IR works). 
+
+ 
+ DeepCAD, Fusion360 Gallery, and Text2CAD release a tokenized intermediate representation rather than executable CadQuery, so the CadQuery static-analysis rule does not apply directly. We instead report the IR’s primitive-token alphabet: DeepCAD encodes parts as { L ,  A ,  C ,  EXT } plus two control tokens { SOL ,  EOS } ( Wu et al. [2021] , Sec. 3); Fusion360 Gallery r1.0.1 specifies  8 8  sketch curve types ( SketchLine ,  SketchArc ,  SketchCircle ,  ConicCurve ,  Ellipse ,  EllipticalArc ,  FittedSpline ,  FixedSpline ) plus extrude with  4 4  boolean variants  [ Willis et al., 2021 ] ; Text2CAD reuses the CAD-SIGNet tokenizer ( ∼ \sim 17 17 -token alphabet over end-of-X markers, quantized coords, and  4 4  extrude booleans). These counts are not directly comparable to method counts on CadQuery  .py  releases; in Table  4  we accordingly summarize each work as  narrow  (sketch+extrude IR or a small CadQuery subset) or  broad  (wide CadQuery API). 
+ 
+ 
+ 
+ CADEvolve caveat. 
+
+ 
+ CADEvolve’s Hugging Face release ( kulibinai/cadevolve ,  ∼ \sim 2 2 M rows,  4.7 4.7  GB) contains only  .npy  sentence embeddings keyed by component name, not Python source. The full  ∼ \sim 1.3 1.3 M expanded scripts are referenced in the paper but are not part of the public release. We therefore report CADEvolve’s operation count from the  46 46  hand-written seed programs in  evolution/cadquery_examples.txt  of the GitHub repo  zhemdi/CADEvolve , yielding  30 30  distinct ops — a strict lower bound on the full evolved corpus. 
+ 
+ 
+ 
+ 
+ Appendix Q  Case Study:  motor_end_cap_bore_widen  (Case 167) 
+
+ 
+ Setup. 
+
+ 
+ Instruction:  “Add a central cylindrical through-cut with a  20.00 20.00  mm radius through the flange.” 
+Baseline IoU(orig, GT)  = 0.941 =0.941 . Three of the four 2026 frontier models we tested return  identical  STEP outputs at IoU(gen, GT)  = 0.961 =0.961  — the cut takes effect on the base flange but  not  on the upper boss, because the cut operation is placed in the middle of the build chain instead of as a final  result.cut(…) . 
+ 
+ 
+ 
+ 
+ 
+ Original.  Motor end cap with  32.9 32.9  mm shaft hole through the flange and a  35.6 35.6  mm-radius solid boss on top. 
+ 
+ 
+ Ground truth.  Same part with the central  20 20  mm-radius cylindrical bore extended through both the flange and the boss. 
+ 
+ Figure 11:  Case 167: original vs. ground-truth target.  The intended edit pierces every layer of the build chain. 
+ 
+ 
+ 
+ Ground truth (IoU  = =  1.0) 
+ 
+ 
+ ⬇ 
+ result   =   ( 
+ 
+      cq . Workplane ( "XY" ) 
+ 
+      . cylinder (19.9,   69.6)              #   base   flange 
+ 
+      . faces ( ">Z" ). workplane () 
+ 
+      . hole (32.9)                        #   original   shaft   hole 
+ 
+      . faces ( ">Z" ). workplane () 
+ 
+      . circle (35.6). extrude (10.4)        #   upper   boss   (sits   on   flange) 
+ 
+      . edges ( ">Z" ). chamfer (1.1) 
+ 
+      . edges ( "<Z" ). fillet (1.3) 
+ 
+      . faces ( ">Z" ). workplane () 
+ 
+      . polarArray (39.79,   0,   360,   6) 
+ 
+      . hole (4.2)                         #   6   vent   holes 
+ 
+ ) 
+ 
+ #   ---   the   edit:   a   final   cylinder   cut   on   the   assembled   solid 
+ 
+ result = result.cut(cq.Workplane(’XY’).cylinder(100.0, 20.0)) 
+ 
+ show_object ( result ) 
+ 
+ 
+ 
+ 
+ 
+ Idea.  Build the whole part first, then  .cut  a  r = 20 r{=}20  cylinder of height  100 100   after  the build chain closes. The oversized height ( ≫ 30 100\!\gg\!30 ) guarantees the cut pierces both the  19.9 19.9  mm flange and the  10.4 10.4  mm boss in one call. 
+ 
+ 
+ 
+ GPT-5.3 (IoU  = =  0.961) 
+ 
+ 
+ ⬇ 
+ result   =   ( 
+ 
+      cq . Workplane ( "XY" ) 
+ 
+      . cylinder (19.9,   69.6) 
+ 
+      . faces ( ">Z" ). workplane () 
+ 
+      . hole (32.9) 
+ 
+      . faces ( ">Z" ). workplane () 
+ 
+      .hole(40.0)                        ← \ \leftarrow\  cuts only the flange 
+ 
+      . faces ( ">Z" ). workplane () 
+ 
+      . circle (35.6). extrude (10.4)        ← \ \leftarrow\  boss now seals the cut 
+ 
+      . edges ( ">Z" ). chamfer (1.1) 
+ 
+      . edges ( "<Z" ). fillet (1.3) 
+ 
+      . faces ( ">Z" ). workplane () 
+ 
+      . polarArray (39.79,   0,   360,   6) 
+ 
+      . hole (4.2) 
+ 
+ ) 
+ 
+ show_object ( result ) 
+ 
+ 
+ 
+ 
+ 
+ Bug.   .hole(40.0)  is inserted between the shaft hole and the boss  union . It cuts a  40 40  mm-diameter through-hole on the flange’s top face only; CadQuery’s  .hole()  does  not  retroactively pierce a primitive  .union -ed in afterwards. The boss is solid in its central  40 40  mm region. 
+ 
+ 
+ 
+ GPT-5.3 thinking (IoU  = =  0.961) 
+ 
+ 
+ ⬇ 
+ result   =   ( 
+ 
+      cq . Workplane ( "XY" ) 
+ 
+      . cylinder (19.9,   69.6) 
+ 
+      . faces ( ">Z" ). workplane () 
+ 
+      .hole(40.0)                        ← \ \leftarrow\  rewrote orig 32.9 to 40 
+ 
+      . faces ( ">Z" ). workplane () 
+ 
+      .hole(32.9)                        ← \ \leftarrow\  redundant: 32.9 sub of 40 
+ 
+      . faces ( ">Z" ). workplane () 
+ 
+      . circle (35.6). extrude (10.4)        ← \ \leftarrow\  boss seals it again 
+ 
+      ... 
+ 
+ ) 
+ 
+ 
+ 
+ 
+ 
+ Bug.  Two violations of the minimal-edit rule  plus  the same boss-seal problem: (i) modifies the existing  .hole(32.9)  (should stay) and (ii) re-adds a redundant  .hole(32.9)  that is fully contained inside the new  40 40  hole, hence a no-op. The geometric outcome is identical to GPT-5.3 above. 
+ 
+ 
+ 
+ Gemini 3.1  (IoU  = =  0.961) 
+ 
+ 
+ ⬇ 
+ result   =   ( 
+ 
+      cq . Workplane ( "XY" ) 
+ 
+      . cylinder (19.9,   69.6) 
+ 
+      . faces ( ">Z" ). workplane () 
+ 
+      .hole(40.0)                        ← \ \leftarrow\  replaced orig hole, in-place 
+ 
+      . faces ( ">Z" ). workplane () 
+ 
+      . circle (35.6). extrude (10.4)        ← \ \leftarrow\  same boss-seal failure 
+ 
+      . edges ( ">Z" ). chamfer (1.1) 
+ 
+      . edges ( "<Z" ). fillet (1.3) 
+ 
+      . faces ( ">Z" ). workplane () 
+ 
+      . polarArray (39.79,   0,   360,   6) 
+ 
+      . hole (4.2) 
+ 
+ ) 
+ 
+ show_object ( result ) 
+ 
+ 
+ 
+ 
+ 
+ Bug.  The most concise of the three wrong rewrites: directly bumps the existing shaft hole from  32.9 32.9  to  40 40 . Same structural error: cut applied before the boss is added, so the boss reseals the central column. 
+ 
+ 
+ 
+ Failure pattern (F08, L4: spatial reasoning  + +  code synthesis). 
+
+ 
+ All three  IoU = 0.961 \mathrm{IoU}\!=\!0.961  models produce the  identical  STEP file: the bore is widened to  40 40  mm in the  19.9 19.9  mm flange but the  10.4 10.4  mm-tall boss above it remains a solid plug. They mistake  .hole(d)  (a workplane-local cut on the current solid) for a global through-cut. The correct CadQuery idiom is to apply a final  result.cut(cq.Workplane(…).cylinder(big_h, r)) , which pierces every layer regardless of when each layer joined the build chain. 
+ 
+ 
+ 
+ 
+ Appendix R  Reproduction 
+
+ 
+ BenchCAD provides three independently runnable benchmarks:
+ CodeEdit/ ,  CodeGen/ , and  CodeQA/ , all under a unified
+Python 3.11 environment managed by  uv . After running  uv sync  and
+adding the required model API keys to  .env , the full benchmark can be
+reproduced with
+ uv run python run_all.py --config prod . Each task can also be executed
+individually with its own  main.py  and configuration file. Benchmark data
+is downloaded from the Hugging Face dataset  BenchCAD/BenchCAD , and each
+task includes a small  test_data/  split for smoke testing. Model names,
+decoding options, and output directories are specified in YAML configuration
+files. We use deterministic decoding where supported and report the same task
+metrics as in the main paper: normalized voxel IoU for CodeEdit, voxel IoU for
+CodeGen, and mean symmetric ratio accuracy for CodeQA. 
+ 
+ 
+ 
+ 
+ Appendix S  Ethical Considerations and Broader Impact 
+
+ 
+ BenchCAD contains procedurally generated parametric CAD parts and references public engineering standards by code and name.
+The dataset contains no personal data, no proprietary designs, and no safety-sensitive specifications.
+Potential risks of CAD-capable models more broadly — e.g. accelerated reverse-engineering of regulated components — are not specific to BenchCAD and are best addressed at the model-deployment layer rather than the benchmark layer.
+We see no negative societal impact specific to this work that is not already present in the underlying open-source CAD ecosystem. 
+ 
+ 
+ 
+ 
+ 
+ NeurIPS Paper Checklist 
+
+ 
+ 
+ 1.  
+ 
+ Claims 
+ 
+ 
+ 
+ Question: Do the main claims made in the abstract and introduction accurately reflect the paper’s contributions and scope? 
+ 
+ 
+ 
+ Answer:  [Yes]  
+ 
+ 
+ 
+ Justification: The abstract and § 1  state three contributions (BenchCAD dataset and CadGen pipeline; capability-decomposed task suite including the first verified parametric edit task; the Holistic Spatial and Detailing Deficit / CAD Operational Blindspot / Industrial Common Sense and Parametric Abstraction Gap diagnostics). Each claim is substantiated in § 3 –§ 5  with experimental results on 10+ models. 
+ 
+ 2.  
+ 
+ Limitations 
+ 
+ 
+ 
+ Question: Does the paper discuss the limitations of the work performed by the authors? 
+ 
+ 
+ 
+ Answer:  [Yes]  
+ 
+ 
+ 
+ Justification: Appendix  A  is a dedicated Limitations section discussing the standard-parametric-vs-industrial-CAD gap, the standard-anchored-vs-compliant distinction, and the bounded scope of the Industrial Common Sense Gap measurement. 
+ 
+ 3.  
+ 
+ Theory assumptions and proofs 
+ 
+ 
+ 
+ Question: For each theoretical result, does the paper provide the full set of assumptions and a complete (and correct) proof? 
+ 
+ 
+ 
+ Answer:  [N/A]  
+ 
+ 
+ 
+ Justification: The paper presents an empirical benchmark and dataset; it makes no theoretical claims requiring proofs. 
+ 
+ 4.  
+ 
+ Experimental result reproducibility 
+ 
+ 
+ 
+ Question: Does the paper fully disclose all the information needed to reproduce the main experimental results of the paper to the extent that it affects the main claims and/or conclusions of the paper (regardless of whether the code and data are provided or not)? 
+ 
+ 
+ 
+ Answer:  [Yes]  
+ 
+ 
+ 
+ Justification: § 4  lists the 10+ evaluated models, decoding settings, and per-task scoring; Appendix  F  provides the reproduction recipe (data fetch command, runner invocation, adapter wrappers, training config). Dataset, code, and baseline checkpoint are released under permissive licences. 
+ 
+ 5.  
+ 
+ Open access to data and code 
+ 
+ 
+ 
+ Question: Does the paper provide open access to the data and code, with sufficient instructions to faithfully reproduce the main experimental results, as described in supplemental material? 
+ 
+ 
+ 
+ Answer:  [Yes]  
+ 
+ 
+ 
+ Justification: All BenchCAD splits are released on Hugging Face ( BenchCAD/BenchCAD  under CC-BY-4.0; the evaluation harness is released under MIT. Appendix  F  gives exact commands. 
+ 
+ 6.  
+ 
+ Experimental setting/details 
+ 
+ 
+ 
+ Question: Does the paper specify all the training and test details (e.g., data splits, hyperparameters, how they were chosen, type of optimizer) necessary to understand the results? 
+ 
+ 
+ 
+ Answer:  [Yes]  
+ 
+ 
+ 
+ Justification: § 4.1  specifies the evaluation settings; § 4.4  specifies the open BenchCAD-trained baseline’s training recipe (Qwen3-VL-2B; SFT three splits + GRPO). Appendix  F  provides the runner commands and points to the released training config. 
+ 
+ 7.  
+ 
+ Experiment statistical significance 
+ 
+ 
+ 
+ Question: Does the paper report error bars suitably and correctly defined or other appropriate information about the statistical significance of the experiments? 
+ 
+ 
+ 
+ Answer:  [No]  
+ 
+ 
+ 
+ Justification: All reported numbers are single-seed evaluations due to the cost of running 10+ models including proprietary APIs. We report per-family stratification (Table  12 ) so variance can be assessed across difficulty tiers. Future releases will include multi-seed error bars for the open BenchCAD-trained baseline. 
+ 
+ 8.  
+ 
+ Experiments compute resources 
+ 
+ 
+ 
+ Question: For each experiment, does the paper provide sufficient information on the computer resources (type of compute workers, memory, time of execution) needed to reproduce the experiments? 
+ 
+ 
+ 
+ Answer:  [Yes]  
+ 
+ 
+ 
+ Justification: § 4.1  describes inference compute; § 4.4  describes baseline training; Appendix  F  provides the runner invocation. 
+ 
+ 9.  
+ 
+ Code of ethics 
+ 
+ 
+ 
+ Question: Does the research conducted in the paper conform, in every respect, with the NeurIPS Code of Ethics? 
+ 
+ 
+ 
+ Answer:  [Yes]  
+ 
+ 
+ 
+ Justification: The dataset is procedurally generated, contains no PII or proprietary designs, and references public engineering standards by code only. No human-subjects data is collected. 
+ 
+ 10.  
+ 
+ Broader impacts 
+ 
+ 
+ 
+ Question: Does the paper discuss both potential positive societal impacts and negative societal impacts of the work performed? 
+ 
+ 
+ 
+ Answer:  [Yes]  
+ 
+ 
+ 
+ Justification: Appendix  S  discusses the dataset’s lack of personal or proprietary content, the potential dual-use risk inherent to any improved CAD-capable model, and the absence of negative impacts specific to BenchCAD beyond those of the broader open-source CAD ecosystem. 
+ 
+ 11.  
+ 
+ Safeguards 
+ 
+ 
+ 
+ Question: Does the paper describe safeguards that have been put in place for responsible release of data or models that have a high risk for misuse? 
+ 
+ 
+ 
+ Answer:  [N/A]  
+ 
+ 
+ 
+ Justification: BenchCAD contains expert-authored parametric CAD parts referencing public engineering standards. The released open baseline (Qwen3-VL-2B) poses no high-risk misuse potential beyond what is already available in open-source CAD ecosystems. 
+ 
+ 12.  
+ 
+ Licenses for existing assets 
+ 
+ 
+ 
+ Question: Are the creators or original owners of assets used in the paper properly credited and are the license and terms of use explicitly mentioned and properly respected? 
+ 
+ 
+ 
+ Answer:  [Yes]  
+ 
+ 
+ 
+ Justification: We credit DeepCAD  [ Wu et al., 2021 ] , Fusion360 Gallery  [ Willis et al., 2021 ] , Qwen2-VL  [ Qwen Team, 2024 ] , and the cadrille/CADEvolve checkpoints with explicit licence statements. Re-distribution of derived data complies with the source licences. 
+ 
+ 13.  
+ 
+ New assets 
+ 
+ 
+ 
+ Question: Are new assets introduced in the paper well documented and is the documentation provided alongside the assets? 
+ 
+ 
+ 
+ Answer:  [Yes]  
+ 
+ 
+ 
+ Justification: BenchCAD ships with a Croissant 1.0 metadata file (validated by the public Croissant checker), per-family parameter schemas, dataset card, and the datasheet of Appendix  I . The CadGen pipeline and evaluation harness include README, environment specification, and reproduction commands. 
+ 
+ 14.  
+ 
+ Crowdsourcing and research with human subjects 
+ 
+ 
+ 
+ Question: For crowdsourcing experiments and research with human subjects, does the paper include the full text of instructions given to participants and screenshots, if applicable, as well as details about compensation (if any)? 
+ 
+ 
+ 
+ Answer:  [Yes]  
+ 
+ 
+ 
+ Justification: BenchCAD does not involve human-subjects evaluation; the dataset is procedurally generated and all reported metrics are computed by automated execution and verification pipelines. 
+ 
+ 15.  
+ 
+ Institutional review board (IRB) approvals or equivalent for research with human subjects 
+ 
+ 
+ 
+ Question: Does the paper describe potential risks incurred by study participants, whether such risks were disclosed to the subjects, and whether Institutional Review Board (IRB) approvals (or an equivalent approval/review based on the requirements of your country or institution) were obtained? 
+ 
+ 
+ 
+ Answer:  [N/A]  
+ 
+ 
+ 
+ Justification: The only human-subjects component is paid professional CAD engineers scoring CAD samples on a standard consulting basis; no personal data is collected and no risk to participants beyond ordinary professional work. IRB review is not required by the authors’ institutions for this engagement type. 
+ 
+ 16.  
+ 
+ Declaration of LLM usage 
+ 
+ 
+ 
+ Question: Does the paper describe the usage of LLMs if it is an important, original, or non-standard component of the core methods in this research? 
+ 
+ 
+ 
+ Answer:  [Yes]  
+ 
+ 
+ 
+ Justification: LLMs are the evaluated subjects, not core method components. Where LLMs assist in dataset construction (e.g., GPT-5-mini in CADEvolve’s evolutionary expansion, used here only as a transfer baseline), this is described in § 4.4 . The CadGen procedural pipeline contains no LLM in the loop. LLM use in writing assistance is incidental. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+   
+    Experimental support, please
+     view the build logs 
+    for errors. Generated by
+     
+       
+        L
+         A 
+        T
+         E 
+       
+       xml 
+       
+     .
+   
+   
+     Instructions for reporting errors 
+     We are continuing to improve HTML versions of papers, and your feedback helps enhance accessibility and mobile
+      support. To report errors in the HTML that will help us improve conversion and rendering, choose any of the
+      methods listed below: 
+     
+       Click the "Report Issue"  ( 
+             
+           )  button, located in the page header. 
+     
+     Tip:  You can select the relevant text first, to include it in your report. 
+     Our team has already identified  the following issues . We appreciate your time reviewing and reporting rendering errors we
+      may not have found yet. Your efforts will help us improve the HTML versions for all readers, because disability
+      should not be a barrier to accessing research. Thank you for your continued support in championing open access for
+      all. 
+     Have a free development cycle? Help support accessibility at arXiv! Our collaborators at LaTeXML maintain a  list of packages that need conversion , and welcome  developer contributions . 
+   
+ 
+   
+     
+       
+        We gratefully acknowledge support from
+        our  major funders ,
+         member institutions ,  ,
+        and all contributors.
+       
+       
+         About 
+         · 
+         Help 
+         · 
+         Contact 
+         · 
+         Subscribe 
+         · 
+         Copyright 
+         · 
+         Privacy 
+         · 
+         Accessibility 
+         · 
+         Operational Status  (opens in new tab) 
+       
+     
+
+     
+       Major funding support from 
+       
+         
+           
+         
+         
+           
+         
+         
+           
+         
+       
+     
+   
+ 
+   
+     
+       
+     
+   
+ 
+ 

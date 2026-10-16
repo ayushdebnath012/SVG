@@ -1,6 +1,8 @@
 """One medium-reasoning model-authored repair; numerical references never sent."""
 from pathlib import Path
 import sys,json,hashlib,urllib.request,urllib.error,time,ast,re,signal
+from cadfem_api_route import load_route, read_credential, budget_status, redact
+route=load_route()
 ROOT=Path(__file__).resolve().parents[1];PKG=ROOT.parent/'cadfem-bench-v1.7';tid=sys.argv[1];OUT=ROOT/'runs/astra-hardest-20261015'/tid;OUT.mkdir(parents=True,exist_ok=True)
 if (OUT/'dispatch.json').exists():raise SystemExit('No duplicate dispatch')
 prev=ROOT/'runs/astra-recheck-format-20261015'/tid
@@ -22,23 +24,25 @@ system='You are repairing your CAD+FEM solver code after execution feedback. Ret
 prompt='ORIGINAL TASK:\n'+t['prompt']+'\nRUNTIME: Python numpy/scipy/gmsh/cadquery/meshio/skfem and ccx (CalculiX 2.23). CADFEM_INPUT_DIR contains '+json.dumps([Path(i['path']).name for i in t['inputs']])+'. Write into CADFEM_OUTPUT_DIR. No internet, evaluator access, FreeCAD or ANSYS. 600 seconds, two CPU threads, 6000 MB RAM. Full script will be rerun cleanly on the same input. main.py is preserved by evaluator. Never fabricate convergence.\nFEEDBACK:\n'+feedback+'\n'+'\n'.join(logs)+'\nCURRENT_CODE:\n'+source
 cap=9000;bound=len((system+prompt).encode())+512;maximum=2*bound*12.5/1e6+cap*50/1e6
 ledger=ROOT/'output/datasets/cadfem-challenge-trials/astra-hardest-20261015.json';d=json.loads(ledger.read_text());assert d['session_cost_upper_bound_usd']+maximum<=d['budget_usd'],(maximum,d['session_cost_upper_bound_usd'])
+assert ledger.resolve()==(ROOT.parent/route['budget_ledger']).resolve()
+budget_status(route,maximum)
 payload={'model':'gpt-6-astra','messages':[{'role':'system','content':system},{'role':'user','content':prompt}],'reasoning_effort':'medium','max_completion_tokens':cap,'store':False}
 (OUT/'request.json').write_text(json.dumps(payload,indent=2)+'\n');(OUT/'protocol.json').write_text(json.dumps({'task_id':tid,'prior_run':str(prev),'reasoning':'medium','output_token_cap':cap,'input_bound_bytes_plus_framing':bound,'call_cost_upper_bound_including_possible_cache_write':maximum,'budget_usd':5,'reference_answers_disclosed':False,'method':'model-authored repair with explicit solver-diagnostic feedback, hidden reference; not a fresh unassisted trial','source_sha256':hashlib.sha256(source.encode()).hexdigest()},indent=2)+'\n')
-key=None
-for line in (ROOT.parent/'.env.svg_new').read_text().splitlines():
- n,sep,v=line.strip().removeprefix('export ').partition('=')
- if sep and n=='OPENAI_API_KEY_SVG_NEW':key=v.strip().strip('\"').strip("'")
-assert key
+key=read_credential(route)
+protocol=json.loads((OUT/'protocol.json').read_text())
+protocol.update(provider=route['provider'],base_url=route['base_url'],automatic_retries=0,
+                fallback_to_direct_openai=False,budget_ledger=route['budget_ledger'])
+(OUT/'protocol.json').write_text(json.dumps(protocol,indent=2)+'\n')
 (OUT/'dispatch.json').write_text(json.dumps({'started':time.time()})+'\n');start=time.time();r={}
 def global_timeout(signum,frame):raise TimeoutError('API global deadline exceeded')
 signal.signal(signal.SIGALRM,global_timeout);signal.alarm(360)
 try:
- req=urllib.request.Request('https://api.openai.com/v1/chat/completions',data=json.dumps(payload).encode(),headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'})
+ req=urllib.request.Request(route['base_url']+'/chat/completions',data=json.dumps(payload).encode(),headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'})
  with urllib.request.urlopen(req,timeout=600) as response:raw=json.load(response)
  (OUT/'response.json').write_text(json.dumps(raw,indent=2)+'\n');c=raw['choices'][0];txt=c['message'].get('content') or '';(OUT/'response.txt').write_text(txt)
  u=raw.get('usage') or {};det=u.get('prompt_tokens_details') or {};cached=det.get('cached_tokens',0) or 0;writes=det.get('cache_write_tokens',0) or 0
  cost=((u.get('prompt_tokens',0)-cached)*12.5+cached+writes*12.5+u.get('completion_tokens',0)*50)/1e6
- r.update(status='completed',model=raw.get('model'),usage=u,cost_usd_conservative=cost,finish_reason=c['finish_reason'])
+ r.update(status='completed',provider=route['provider'],model=raw.get('model'),usage=u,cost_usd_conservative=cost,finish_reason=c['finish_reason'])
  if c['finish_reason']=='stop':
   txt=txt.strip()
   if txt.startswith('```') and txt.endswith('```'):txt='\n'.join(txt.splitlines()[1:-1])
@@ -49,7 +53,7 @@ try:
    repaired=repaired.replace(edit['old'],edit['new'],1)
   ast.parse(repaired);(OUT/'submission').mkdir(exist_ok=True);(OUT/'submission/main.py').write_text(repaired)
   (OUT/'model-patch.json').write_text(json.dumps(patch,indent=2)+'\n');r.update(patch_applied=True,repaired_sha256=hashlib.sha256(repaired.encode()).hexdigest())
-except urllib.error.HTTPError as e:r.update(status='api_error',http_status=e.code,error=re.sub(r'sk-[A-Za-z0-9_-]+','[REDACTED]',e.read().decode(errors='replace').replace(key,'[REDACTED]'))[:500])
-except Exception as e:r.update(status='repair_or_client_error',error_type=type(e).__name__,error=str(e)[:150])
+except urllib.error.HTTPError as e:r.update(status='api_error',http_status=e.code,error=redact(e.read().decode(errors='replace'),key)[:500])
+except Exception as e:r.update(status='repair_or_client_error',error_type=type(e).__name__,error=redact(str(e),key)[:150])
 signal.alarm(0)
 r['elapsed_seconds']=round(time.time()-start,1);(OUT/'generation.json').write_text(json.dumps(r,indent=2)+'\n');print(json.dumps(r))

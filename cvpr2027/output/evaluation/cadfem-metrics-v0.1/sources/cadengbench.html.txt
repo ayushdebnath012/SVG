@@ -1,0 +1,5339 @@
+
+ 
+ 
+ CADEngBench: It Looks Like CAD, but Does It Work?Evaluating Parametric Design, Assembly Reasoning, and Physics Simulation 
+ 
+ 
+ 
+   
+ 
+  // Restore the saved color scheme preference, or
+  // enact the browser preference if "automatic", 
+  // without expecting DOM load to have completed.
+  //
+  // Also restore any saved readingmode and ToC display preferences.
+  function initializeReadingPreferences() {
+    let saved_theme = localStorage.getItem("ar5iv_theme") || "automatic";
+    if (saved_theme === "automatic") {
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        saved_theme = "dark";
+      }
+    }
+    if (saved_theme == "dark") {
+      document.documentElement.setAttribute("data-theme", "dark");
+    } else {
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+
+    const tocDisplay = localStorage.getItem('arxiv_html_paper_toc_display');
+    if (tocDisplay) {
+      document.documentElement.setAttribute("data-toc-display", tocDisplay);
+    }
+    const readingMode = localStorage.getItem('arxiv_html_paper_reading_mode');
+    if (readingMode) {
+      document.documentElement.setAttribute("data-reading-mode", readingMode);
+    }
+    // Pre-apply spinout-banner dismissal here, before the banner paints, so it
+    // never flashes in only to be hidden later by the deferred arxiv-header.js.
+    // Key matches arxiv-header.js: "arxiv-banner-dismissed:" + data-banner-name.
+    if (localStorage.getItem('arxiv-banner-dismissed:spinout-nonprofit')) {
+      document.documentElement.setAttribute("data-banner-dismissed", "");
+    }
+  }
+  // Run as soon as JS starts, to minimize repainting
+  initializeReadingPreferences();
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  /* Banner pre-dismissal (set above before paint -> no flash-then-hide) and
+     reading-mode chrome hiding. */
+  html[data-banner-dismissed] .ds-announcement { display: none; }
+  html[data-reading-mode="enabled"] .ds-announcement,
+  html[data-reading-mode="enabled"] .ds-site-footer { display: none; }
+  /* Print keeps the reader header's logo, not its controls: the theme's own print rule
+     (header, nav { display: none }) sits in a layer that its header layer outranks. */
+  @media print { .arxiv-html-header .html-header-nav { display: none; } }
+  /* Keep the announcement text dark on the Open-Blue band in both colour themes
+     (otherwise it inherits the paper's warm-wash text in dark mode and washes out). */
+  .ds-announcement-text { color: var(--arxiv-ink, #1c1a17); }
+ 
+ 
+ 
+ 
+ 
+   
+     
+       Report GitHub Issue 
+       × 
+     
+
+     
+       Title: 
+       
+
+       Content selection saved. Describe the issue below: 
+
+       Description: 
+       
+     
+
+     
+       Submit without GitHub 
+       Submit in GitHub 
+     
+   
+ 
+     
+     arXiv is now an independent nonprofit! 
+     Learn more 
+     × 
+   
+
+ 
+   
+     
+       Back to arXiv 
+     
+   
+   
+   
+     Why HTML? 
+     
+       
+         
+       
+       Report Issue 
+     
+     
+       
+         
+         
+       
+       Back to Abstract 
+     
+     
+     
+       
+         
+       
+       Download PDF 
+     
+     
+       
+         
+         
+       
+     
+     
+     
+       
+         
+       
+     
+     
+     
+       
+         
+           
+           
+         
+       
+       
+         
+           
+           
+         
+       
+       
+         
+           
+           
+         
+       
+     
+   
+ 
+ 
+ 
+ Abstract 
+ Introduction 
+ Related Work and Evaluation Gap 
+ 
+ CAD data and representations. 
+ LLM-generated and text-to-CAD. 
+ CAD evaluation and editing. 
+ Assembly and physics. 
+ Evaluation gap. 
+ 
+ Benchmark Design 
+ 
+ Layered Evaluation Design 
+ 
+ Dataset Construction 
+ 
+ Compiling Source CAD into Evaluation Tasks 
+ Parametric and Assembly Tracks 
+ 
+ CADEngBench-P : Parametric Generation, Editing, and FEA 
+ 
+ L0: Program and Solid Validity 
+ L1: Engineering Requirements and DFM 
+ L2-Z (Zero-to-CAD): Parametric Perturbations 
+ L2-E (Edit): Functional-Design Edits 
+ L3: CalculiX FEA Across Parameter Changes 
+ 
+ CADEngBench-A : Joint Grounding and Motion 
+ 
+ A0: Dataset Integrity 
+ A1: Joint and B-Rep Entity Retrieval 
+ A2: Joint Frame and Motion 
+ 
+ Evaluation Metrics 
+ 
+ CADEngBench-P . 
+ CADEngBench-A . 
+ 
+ Experimental Protocol 
+ Results and Analysis 
+ 
+ Generation and Editing 
+ Physics Verification 
+ Complex Assembly Behaviour 
+ 
+ Limitations and Future Work 
+ Conclusion 
+ References 
+ A  Dataset Construction 
+ 
+ A.1  Source Datasets and Task Units 
+ A.2  Selection and Coverage 
+ A.3  Annotation and Evidence Binding 
+ 
+ Public and scoring data. 
+ 
+ 
+ B  Prompt and Output Specifications 
+ 
+ B.1  Annotation Prompts 
+ B.2  P Zero-to-CAD Requests 
+ B.3  Representative Zero-to-CAD User Requests 
+ B.4  P Functional-Edit Requests 
+ B.5  A Joint-Grounding and Kinematics Requests 
+ 
+ C  CADEngBench-P  Evaluation 
+ 
+ C.1  Inputs, Scores, and Failure Categories 
+ C.2  L0 and L1: Executability and Requirements 
+ C.3  L2-Z: Operational Parameterization 
+ C.4  L2-E: Targeted Functional Editing 
+ 
+ D  Physical Verification with CalculiX 
+ 
+ D.1  Analysis Specification 
+ D.2  Meshing and Numerical Validation 
+ D.3  Structural Response Comparison 
+ 
+ E  Assembly Joint Families 
+ F  CADEngBench-A  Evaluation 
+ 
+ F.1  Assembly Evaluation Records 
+ F.2  A1: Exact Joint and Entity Retrieval 
+ F.3  A2: Joint Frame and Executed Motion 
+ 
+ End-to-end scoring. 
+ 
+ 
+ G  Benchmarking Protocol 
+ H  Stage-Wise Parametric CAD Examples 
+ I  Pin-Slot Joint Case Study 
+ J  Statistical Analysis 
+ 
+ J.1  Confidence Intervals 
+ J.2  Paired Model Comparisons 
+ 
+ Supplementary References 
+ 
+ 
+ 
+ 
+   
+    License: arXiv.org perpetual non-exclusive license
+   
+   
+arXiv:2608.09296v1 [cs.AI] 10 Aug 2026 
+ 
+ 
+ CADEngBench : It Looks Like CAD, but Does It Work?
+ Evaluating Parametric Design, Assembly Reasoning, and Physics Simulation 
+ 
+ 
+ Harmanjot Singh
+ 
+    
+ Abhra Dubey
+ 
+    
+ Jorge Alejandro Amador Herrera \corresponding 
+ 
+
+ Abstract 
+    
+ This supplement provides the full methodological and experimental details for
+ CADEngBench . It describes dataset selection and annotation, model inputs and
+outputs, layer-specific scoring rules, evaluation methodologies,
+model configurations, uncertainty estimates, and worked examples. 
+  
+ 
+ 
+    
+ 
+ Mohamed Bin Zayed University of Artificial Intelligence 
+ Abu Dhabi, UAE 
+ {harmanjot.singh,
+abhra.dubey,
+jorge.herrera}@mbzuai.ac.ae 
+ 
+  
+ 
+ 
+ Introduction 
+
+ 
+ An AI-generated part can look correct even when its program fails, a
+named dimension controls the wrong feature, an edit damages a mounting hole,
+or its simulated response differs from the reference. An assembly prediction
+can likewise identify a plausible region while selecting entities that do not
+recover the recorded mating relation. Image comparison misses these failures
+because CAD is both geometry and an executable engineering model. 
+ 
+ 
+ A parametric program maps design parameters to a B-Rep solid,
+ C : 𝜽 ↦ B C:\boldsymbol{\theta}\mapsto B . Testing only
+ B = C ⁡ ( 𝜽 0 ) B=C(\boldsymbol{\theta}_{0})  does not establish whether
+ 𝜽 \boldsymbol{\theta}  controls the intended feature. For bodies  B A B_{A}  and
+ B B B_{B} , an assembly hypothesis  h = ( j , e A , e B ) h=(j,e_{A},e_{B})  must select a joint family  j j 
+and exact mating entities  e A ∈ ℰ ⁡ ( B A ) e_{A}\in\mathcal{E}(B_{A})  and
+ e B ∈ ℰ ⁡ ( B B ) e_{B}\in\mathcal{E}(B_{B}) . An FEA comparison must evaluate the generated and
+reference responses under the same material, supports, loads, and analysis
+contract. Shape similarity establishes none of these properties. 
+ 
+ 
+ Recent work addresses construction histories, executable programs,
+editing, manufacturability, assembly, and physics-aware agents
+ ( Wu, Xiao, and Zheng 2021 ;  Willis et al. 2021 ;  Khan et al. 2024 ;  Xie and Ju 2025 ;  Dong, Li, and
+Wu 2026 ;  Son et al. 2026 ) . Existing CAD benchmarks measure
+different stages with heterogeneous data and outputs. A generation score does
+not reveal whether the result remains editable, recovers the recorded assembly
+relation, or matches the reference structural response. 
+ 
+ 
+ CADEngBench  evaluates these capabilities in two separate tracks
+(Figure  1 ).  CADEngBench-P  executes and measures parts, applies
+controlled parameter changes and edits, and runs FEA where a reference analysis
+is available.  CADEngBench-A  evaluates joint and entity retrieval, frame estimation,
+and motion on supplied body pairs. Measurements, entity IDs, meshes, and solver
+outputs support each verdict. The tracks remain separate:  CADEngBench-P  evaluates
+single parts, while  CADEngBench-A  evaluates assembly relations and motion. 
+ 
+ 
+ We make four key contributions: 
+ 
+ •  
+ 
+ We develop a two-track benchmark for engineering-grade CAD:
+ CADEngBench-P  provides 600 zero-to-CAD and functional-editing tasks, while  CADEngBench-A  provides 150 assembly pairs. 
+ 
+ •  
+ 
+ We develop an evaluation hierarchy that moves beyond
+nominal shape similarity to test B-Rep validity, engineering
+and DFM requirements, operational parameterization, functional edits, and
+preservation of non-target design properties. 
+ 
+ •  
+ 
+ We introduce assembly evaluation in which models
+must retrieve the exact mating faces or edges, predict the joint, and demonstrate motion through kinematic simulation. 
+ 
+ •  
+ 
+ We introduce FEA-based physics verification across parameter
+changes using CalculiX to compare stress, deformation,
+compliance, and stress concentration across parametric design families. 
+ 
+ 
+ 
+ 
+ Figure 1:  From generated shape to engineering checks.   CADEngBench-P 
+constructs, varies, edits, and simulates executable parts;  CADEngBench-A  grounds
+relations in exact B-Rep entities and conditionally checks motion. 
+ 
+ 
+ 
+ Related Work and Evaluation Gap 
+
+ 
+ CAD data and representations. 
+
+ 
+ ABC provides large-scale B-Reps, while DeepCAD and Fusion 360 Gallery made
+ordered sketch–feature histories available for generation and reconstruction
+ ( Koch et al. 2019 ;  Wu, Xiao, and Zheng 2021 ;  Willis et al. 2021 ) . These works established CAD as an
+executable sequence, but evaluate single parts at one final state. 
+ 
+ 
+ 
+ LLM-generated and text-to-CAD. 
+
+ 
+ Text2CAD conditions construction sequences on descriptions; newer language
+and vision-language systems generate executable CAD programs from text,
+images, or geometric observations
+ ( Khan et al. 2024 ;  Xie and Ju 2025 ;  Doris et al. 2025 ;  Ataei et al. 2026 ;  Pyatov et al. 2026 ;  Elistratov et al. 2026 ;  Li et al. 2026b ) . These methods make text-to-CAD
+more capable and scalable, but execution or geometric similarity does not
+establish correct parameter, editing, assembly, or physical behavior. 
+ 
+ 
+ 
+ CAD evaluation and editing. 
+
+ 
+ CADBench and Text2CAD-Bench broaden multimodal and text-conditioned generation;
+BenchCAD introduces industrial part families and executable code editing;
+CADTests checks prompt requirements through executable assertions
+ ( Zhang et al. 2026 ;  Doris et al. 2026 ;  Wang et al. 2026 ;  Mallis et al. 2026 ) . HistCAD tests whether dimensional edits
+preserve sketch constraints, while MUSE emphasizes functional,
+manufacturable, and assemblable specifications
+ ( Dong et al. 2026 ;  Dong, Li, and
+Wu 2026 ) . Interactive systems also
+study tool-mediated or multimodal editing
+ ( Perrett, Bouchard, and
+McCarthy 2026 ;  Hu et al. 2026 ) . These benchmarks add engineering
+evidence, but cover discrete subsets of the CAD workflow. 
+ 
+ 
+ 
+ Assembly and physics. 
+
+ 
+ AutoMate and JoinABLe predict pairwise mates from B-Rep geometry; ArtiCAD,
+AssemblyBench, and sequence planners evaluate articulation, assembly order, or
+feasible trajectories
+ ( Jones et al. 2021 ;  Willis et al. 2022 ;  Shui et al. 2026 ;  Li et al. 2026 ;  Tian et al. 2022 ;  Tian et al. 2024 ) .
+Physics-aware CAD agents use FEA as generation or refinement feedback
+ ( Ballegeer and Benoit 2026 ;  Son et al. 2026 ;  Berger et al. 2026 ) .
+These directions evaluate assembly or physics separately from executable
+parametric generation. 
+ 
+ 
+ 
+ Evaluation gap. 
+
+ 
+ Most CAD benchmarks stop at one boundary: one-value shape generation, local
+editing, joint retrieval, or FEA feedback. They do not test whether executable
+CAD survives parameter changes and edits, or whether assembly predictions
+identify exact B-Rep entities and produce valid motion. As
+Table  1  shows,  CADEngBench  connects these checks in two
+complementary tracks and reports each failure separately. 
+ 
+ 
+ 
+ 
+ 
+ Work 
+ Exec. 
+ Param. 
+ Edit 
+ Eng./DFM 
+ B-Rep entities 
+ Motion 
+ FEA 
+ 
+ 
+ 
+ DeepCAD / Fusion 360 Gallery 
+ E 
+ – 
+ – 
+ – 
+ – 
+ – 
+ – 
+ 
+ HistCAD 
+ E 
+ E 
+ E 
+ – 
+ – 
+ – 
+ – 
+ 
+ BenchCAD / CADTests 
+ E 
+ – 
+ E 
+ E 
+ – 
+ – 
+ – 
+ 
+ CADBench / Text2CAD-Bench 
+ E 
+ – 
+ – 
+ – 
+ – 
+ – 
+ – 
+ 
+ MUSE 
+ E 
+ D 
+ – 
+ E 
+ D 
+ – 
+ – 
+ 
+ AutoMate / JoinABLe 
+ – 
+ – 
+ – 
+ – 
+ E 
+ D 
+ – 
+ 
+ ArtiCAD / AssemblyBench 
+ E 
+ – 
+ – 
+ – 
+ – 
+ E 
+ – 
+ 
+ FEA-feedback CAD agents 
+ E 
+ – 
+ D 
+ E 
+ – 
+ – 
+ E 
+ 
+ CADEngBench 
+ E 
+ E 
+ E 
+ E 
+ E 
+ E 
+ E 
+ 
+ 
+ Table 1:  Evaluated capabilities in related work.  E means an evaluated
+task, D means the capability is demonstrated or represented but not scored,
+and – means out of scope. Grouped rows show the union of the named works. 
+ 
+ 
+ 
+ 
+ Benchmark Design 
+
+ 
+ Layered Evaluation Design 
+
+ 
+ CADEngBench  follows each model output through progressively stronger
+engineering checks. In  CADEngBench-P , a generated program advances from execution
+and geometry to requirements, parameter behavior, and matched FEA; functional
+editing is evaluated separately on supplied CAD. In  CADEngBench-A , ranked joint
+predictions progress from exact B-Rep entity retrieval to frame and motion
+verification. Layer-wise scores reveal where an apparently valid artifact
+stops behaving as an engineering model. 
+ 
+ 
+ 
+ 
+ Dataset Construction 
+
+ 
+ Compiling Source CAD into Evaluation Tasks 
+
+ 
+ CADEngBench  compiles source CAD into evidence-backed tasks:
+public briefs, views, and editable inputs paired with executable checks.
+CadQuery programs and Fusion histories are replayed to recover
+B-Reps, parameters, operations, interfaces etc. Fusion body pairs are decomposed into B-Reps; faces and edges are indexed; and
+recorded joints are bound to entities, frames, and motion
+(Figure  2 ). 
+ 
+ 
+ An engineering LLM and a VLM propose complementary functional and visual
+context. A deterministic compiler retains only claims grounded in source
+metadata, B-Rep measurements, or labeled benchmark scenarios, then emits
+prompts and executable predicates. 
+ 
+ 
+ 
+ Parametric and Assembly Tracks 
+
+ 
+ CADEngBench-P  contains 300 parts, each used for both generation and editing: 159
+BenchCAD CadQuery programs
+ ( Zhang et al. 2026 )  and 141 Fusion
+360 Reconstruction items  ( Willis et al. 2021 ) . Their
+operations span sketches and extrusions, primitives, booleans, holes etc. The set
+has 100 easy, medium, and hard parts, covering 102 BenchCAD families, 55 CAD
+operations, and 12 edit types. Each task includes
+a brief, views, requirements, one public parameter, and hidden checks for
+features that must be preserved. L0–L2 apply wherever their source checks can
+be derived; 164 parts also have an L3 FEA test. 
+ 
+ 
+ CADEngBench-A  contains 150 body pairs from Fusion 360 assembly-joint data
+ ( Jones et al. 2021 )  and covers
+rigid, revolute, slider, cylindrical, pin-slot, planar, and ball relations.
+Models receive both bodies, multiview renders, and indexed B-Rep faces and
+edges. The recorded joint type, selected entities, and joint frame are hidden.
+Graph, body, and source-pair separation prevents identity overlap. 
+ 
+ 
+ Figure 2:  Dataset construction and coverage. 
+ (a)   CADEngBench-P  replays BenchCAD programs and Fusion histories, derives
+B-Reps and behavioral evidence, and adds engineering/visual annotations.
+ (b)   CADEngBench-A  rebuilds Fusion body pairs, labels B-Rep candidates, and
+records grounded joints, frames, and motion evidence. 
+ 
+ 
+ 
+ 
+ CADEngBench-P : Parametric Generation, Editing, and FEA 
+
+ 
+ The model converts an engineering brief, reference views, parameters,
+and requirements into an executable CadQuery program. In the editing task, it
+receives source CAD and a functional-edit request while specified non-target
+features must remain unchanged. L0 and L1 evaluate the generated part at its
+default parameters; L2-Z tests its behavior under parameter changes; L2-E tests
+the functional edit and preservation of geometry; and L3 applies CalculiX FEA
+to generated parts with a predefined physics test. 
+ 
+ 
+ L0: Program and Solid Validity 
+
+ 
+ L0 tests whether the LLM-generated output is usable CAD. The CadQuery must execute, create at least
+one valid B-Rep solid, export to STEP, and successfully re-import the exported STEP. All checks must
+pass; rendering quality is not scored. 
+ 
+ 
+ 
+ L1: Engineering Requirements and DFM 
+
+ 
+ L1 tests whether the valid solid satisfies the engineering zero-to-CAD task. Source geometry provides
+checks for dimensions, feature counts, interfaces, and item-specific
+requirements. Applicable DFM checks require a 1.0 mm minimum wall, a
+2.0 mm minimum hole diameter, and hole depth/diameter  ≤ 8 \leq 8 . These are
+general geometry screens, not manufacturing certification, and run only when
+the relevant feature is present. 
+ 
+ 
+ 
+ L2-Z (Zero-to-CAD): Parametric Perturbations 
+
+ 
+ L2-Z tests parametric integrity: whether a declared parameter
+controls the intended geometry. For item  i i , the evaluator selects one
+parameter  θ \theta  and a fixed set of values  Θ i \Theta_{i}  containing its default,
+intermediate, and valid boundary settings. It calls the same submitted
+ build(params)  function at every setting.
+A parameter state passes only if it produces a valid solid, satisfies its parameter-to-geometry relation, and preserves protected properties.For part  C i ​ ( θ ) C_{i}(\theta) , values
+ Θ i \Theta_{i} , and checks  ℛ i \mathcal{R}_{i} : 
+ 
+
+ 
+ 
+ L ​ 2 ​ Z i = ⋀ θ ∈ Θ i [ b i ​ ( θ ) ∧ g i ​ ( C i ​ ( θ ) , θ ) ∧ ⋀ r ∈ ℛ i r ⁡ ( C i ​ ( θ ) ) ] , L2Z_{i}=\bigwedge_{\theta\in\Theta_{i}}\left[b_{i}(\theta)\wedge g_{i}(C_{i}(\theta),\theta)\wedge\bigwedge_{r\in\mathcal{R}_{i}}r(C_{i}(\theta))\right], 
+ 
+ (1) 
+ 
+ Here  b i b_{i}  checks rebuild validity,  g i g_{i}  checks the measured
+parameter-to-geometry relation, and each  r r  checks one protected invariant.
+L2-Z detects parameters that are ignored, connected
+to the wrong feature, or unintentionally coupled to other dimensions. 
+ 
+ 
+ 
+ L2-E (Edit): Functional-Design Edits 
+
+ 
+ L2-E tests controlled modification of existing CAD rather than generation from
+scratch. The LLM receives a source-native CAD artifact and one functional-edit
+instruction. The edited
+part  C i E C_{i}^{E}  must execute, achieve the requested change, and preserve every
+specified non-target property: 
+ 
+
+ 
+ 
+ L ​ 2 ​ E i = T i ​ ( C i E ) ∧ ⋀ r ∈ ℛ i E r ⁡ ( C i E ) . L2E_{i}=T_{i}(C_{i}^{E})\wedge\bigwedge_{r\in\mathcal{R}_{i}^{E}}r(C_{i}^{E}). 
+ 
+ (2) 
+ 
+ where  T i T_{i}  is a hidden B-Rep measurement that verifies the requested outcome
+and  ℛ i E \mathcal{R}_{i}^{E}  contains hidden preservation checks for geometry that
+should not change. Evaluation compares measured CAD properties rather than
+source-code text, so a different implementation can pass if it performs the
+correct edit without collateral changes. 
+ 
+ 
+ 
+ L3: CalculiX FEA Across Parameter Changes 
+
+ 
+ L3 compares generated and reference CAD under the same linear-static material,
+supports, and loads. Its 164 parts cover linear-FEA families: axial tension (89), cantilever loading
+(31), and restrained-body acceleration (44). For each matched parameter state,
+the evaluator rebuilds both solids, locates the prescribed support and loading
+regions, exports STEP, and creates quadratic tetrahedral meshes in Gmsh
+ ( Geuzaine and Remacle 2009 ) , then solves them in CalculiX
+ ( Dhondt 2004 ) . It rejects invalid selectors or meshes and
+requires finite stress and displacement fields from the solver. 
+ 
+ 
+ For every parameter state, L3 compares the generated and reference FEA using
+95th-percentile von Mises stress, maximum displacement, and
+either normalized compliance or stress concentration, depending on the load
+case. For FEA quantity  q q , we measure their multiplicative difference as: 
+ 
+
+ 
+ 
+ δ i ​ q ​ ( θ ) = | log ⁡ q ⁡ ( C i ​ ( θ ) ) + ϵ q q ⁡ ( R i ​ ( θ ) ) + ϵ q | , Δ i ​ q = max θ ∈ Θ i ⁡ δ i ​ q ​ ( θ ) , \delta_{iq}(\theta)=\left|\log\frac{q(C_{i}(\theta))+\epsilon_{q}}{q(R_{i}(\theta))+\epsilon_{q}}\right|,\qquad\Delta_{iq}=\max_{\theta\in\Theta_{i}}\delta_{iq}(\theta), 
+ 
+ (3) 
+ 
+ where  C i ​ ( θ ) C_{i}(\theta)  and  R i ​ ( θ ) R_{i}(\theta)  are the generated and reference designs,
+ ϵ q \epsilon_{q}  stabilizes values near zero, and  Δ i ​ q \Delta_{iq}  is the worst
+disagreement across the parameter family. A family passes only if every state
+produces valid boundary conditions, mesh, and CalculiX solution, satisfies the
+engineering limits, and remains within all FEA comparison tolerances. L3
+therefore validates physically consistent CAD. 
+ 
+ 
+ Figure 3:  One parameter value can hide an incorrect dependency. 
+The generated program couples cone base and bolt circle to a flange-radius
+parameter (a). All states solve (b), but minimum-radius stress is  3.43 3.43  versus
+ 1.15 1.15  MPa (c); the family trajectories expose the resulting failure (d). 
+ 
+ 
+ 
+ 
+ CADEngBench-A : Joint Grounding and Motion 
+
+ 
+ A0: Dataset Integrity 
+
+ 
+ A0 verifies item identity, candidate IDs, source provenance, split separation,
+and that hidden joint data are absent from model inputs. It is a dataset check,
+not a model score. 
+ 
+ 
+ 
+ A1: Joint and B-Rep Entity Retrieval 
+
+ 
+ A1 receives two bodies, multiview images, and indexed B-Rep face/edge
+candidates with stable IDs. The model returns up to three hypotheses, each
+containing a joint family, one entity from Body A, one from Body B, and a
+confidence. A strict JSON parser rejects unknown or wrong-body IDs; exact
+role-aware matching compares each hypothesis with accepted source entity pairs.
+Typed match requires the joint family and entity pair in the same hypothesis.
+Equivalent source entities count as correct; a miss means the recorded relation
+was not retrieved. 
+ 
+ 
+ 
+ A2: Joint Frame and Motion 
+
+ 
+ A2 conditions on the rank-1 A1 hypothesis and predicts its joint origin and
+family-specific axes or directions in Body A’s coordinate frame. The origin
+must match the source within 1% of body size and each direction within
+ 5 ∘ 5^{\circ} . The frame becomes a URDF joint executed in PyBullet; compound
+revolute/prismatic constraints represent cylindrical, planar, and pin-slot
+motion. Scripted tests require allowed motion without forbidden translation or
+rotation. Hidden annotations never repair an incorrect A1 prediction. 
+ 
+ 
+ 
+ 
+ Evaluation Metrics 
+
+ 
+ CADEngBench-P . 
+
+ 
+ L0  measures executable, valid CAD.
+ L1  additionally requires all applicable engineering and DFM checks.
+ L2-Z  tests whether parameter changes rebuild correctly, modify the
+intended feature, and preserve protected geometry.
+ L2-E  requires a requested functional edit without unintended changes.
+ L3 reach  records whether matched generated/reference FEA can be run,
+while  L3 pair pass  additionally requires valid simulation and
+agreement in structural behavior. 
+ 
+ 
+ 
+ CADEngBench-A . 
+
+ 
+ Valid  checks the output schema and entity identifiers.
+ Entity@ k k  requires the correct B-Rep entity pair within the top  k k 
+predictions;  Typed@ k k  also requires the correct joint family and body
+ordering.  MRR  (Mean Reciprocal Rank) rewards earlier fully correct
+predictions.  A2 E2E  (End-to-End) requires a correct rank-1 joint, joint frame, and
+allowed and blocked motion. The two tracks are reported separately. 
+ 
+ 
+ 
+ 
+ Experimental Protocol 
+
+ 
+ We evaluate eight multimodal, code-capable models: GPT-5.2
+ ( OpenAI 2025 ) , Claude Sonnet 4.5  ( Anthropic 2025 ) ,
+Gemini 3 Flash  ( Google 2025 ) , GLM-4.6V
+ ( Z.ai 2025 ) , Kimi K2.5  ( Moonshot AI 2026 ) ,
+Mistral Medium 3.5  ( Mistral AI 2026 ) , Llama 4 Maverick
+ ( Meta AI 2025 ) , and Qwen3.5-35B-A3B  ( Qwen Team 2026 ) .
+Each model receives identical track-specific inputs and produces one response
+per task without retries. 
+ 
+ 
+ In  CADEngBench-P , L0, L1, and L2-E evaluate all 300 items; L2-Z reports the
+evaluable denominator for each model (287–300). L3 evaluates 164 eligible
+parts across available parameter states, including complete seven-state
+families for 18 parts. In  CADEngBench-A , 30 items were used for evaluator
+development and excluded from comparison; all reported results use the
+remaining 120 items. 
+ 
+ 
+ Confidence intervals use 10,000 item-clustered bootstrap samples. Pairwise
+L0–L2 comparisons use exact McNemar tests with Holm correction. Model
+identifiers, inference settings, confidence intervals, and detailed result
+slices are provided in the supplement. 
+ 
+ 
+ 
+ 
+ (a) Parametric construction, editing, and physics ( CADEngBench-P )
+ 
+
+ 
+ 
+ 
+ 
+ Zero-to-CAD 
+ Edit 
+ L3 physics 
+ 
+ System 
+ L0 (%) 
+ L1 (%) 
+ L2-Z (%;  N s N_{s} ) 
+ L2-E (%) 
+ Reach (%; parts/164) 
+ Pair pass (%; pass/ N s N_{s} ) 
+ 
+ GPT-5.2 
+ 41.3 
+ 22.0 
+ 31.6 (291) 
+ 70.3 
+ 37.8 (62/164) 
+ 32.8 (65/198) 
+ 
+ Claude 4.5 
+ 58.0 
+ 28.3 
+ 41.4  (290) 
+ 66.7 
+ 54.3  (89/164) 
+ 35.8 (101/282) 
+ 
+ Gemini 3 Flash 
+ 52.7 
+ 30.0 
+ 39.8 (289) 
+ 72.3 
+ 46.3 (76/164) 
+ 46.3  (119/257) 
+ 
+ GLM-4.6V 
+ 47.3 
+ 13.3 
+ 30.7 (287) 
+ 59.3 
+ 44.5 (73/164) 
+ 27.0 (64/237) 
+ 
+ Kimi K2.5 
+ 53.3 
+ 24.3 
+ 41.0 (288) 
+ 67.0 
+ 51.8 (85/164) 
+ 34.8 (94/270) 
+ 
+ Mistral 3.5 
+ 29.3 
+ 8.3 
+ 16.5 (297) 
+ 68.3 
+ 26.8 (44/164) 
+ 34.5 (49/142) 
+ 
+ Llama 4 Maverick 
+ 48.0 
+ 12.7 
+ 34.0 (288) 
+ 60.7 
+ 47.6 (78/164) 
+ 27.5 (71/258) 
+ 
+ Qwen3.5-35B 
+ 13.3 
+ 5.0 
+ 6.3 (300) 
+ 61.7 
+ 15.9 (26/164) 
+ 36.6 (30/82) 
+ 
+ 
+ (b) Assembly relation and geometric grounding ( CADEngBench-A )
+ 
+
+ 
+ 
+ 
+ 
+ Output 
+ Grounded retrieval 
+ Kinematics 
+ 
+ System 
+ Valid (%) 
+ Entity@1 (%) 
+ Typed@1 (%) 
+ Typed@3 (%) 
+ MRR 
+ A2 E2E (%; pass/120) 
+ 
+ 
+ 
+ GPT-5.2 
+ 100.0 
+ 61.7 
+ 12.5 
+ 30.0 
+ .197 
+ 11.7 (14) 
+ 
+ Claude 4.5 
+ 100.0 
+ 57.5 
+ 14.2 
+ 32.5 
+ .221 
+ 12.5 (15) 
+ 
+ Gemini 3 Flash 
+ 100.0 
+ 62.5 
+ 23.3 
+ 41.7 
+ .310 
+ 15.8  (19) 
+ 
+ GLM-4.6V 
+ 99.2 
+ 50.0 
+ 10.0 
+ 27.5 
+ .174 
+ 8.3 (10) 
+ 
+ Kimi K2.5 
+ 78.3 
+ 56.7 
+ 15.0 
+ 32.5 
+ .228 
+ 7.5 (9) 
+ 
+ Mistral 3.5 
+ 100.0 
+ 52.5 
+ 15.8 
+ 25.8 
+ .200 
+ 14.2 (17) 
+ 
+ Llama 4 Maverick 
+ 100.0 
+ 55.8 
+ 14.2 
+ 26.7 
+ .192 
+ 10.8 (13) 
+ 
+ Qwen3.5-35B 
+ 100.0 
+ 55.0 
+ 14.2 
+ 24.2 
+ .190 
+ 10.8 (13) 
+ 
+ 
+ Table 2:  Primary model results.  P uses 300 tasks except L2-Z, where
+ N s N_{s}  is the number of evaluable items. L3 reach uses 164 parts; pair pass uses
+only comparable generated/reference state pairs. A uses 120
+tasks per system; A2 E2E includes all stages. Entity ignores joint type, while
+Typed requires the recorded joint family and body roles 
+ 
+ 
+ 
+ Results and Analysis 
+
+ 
+ Capability profile. 
+We benchmark eight leading multimodal models across parametric CAD generation,
+functional editing, FEA-based physics verification, and assembly reasoning.
+Table  2  reveals substantial variation across both models and
+evaluation stages, with no model performing best throughout the benchmark.
+Gemini leads engineering-requirement satisfaction, functional editing, matched
+FEA, and assembly retrieval, whereas Claude leads executability, parametric
+behavior, and L3 simulation reach. 
+ 
+ 
+ The contrasts are sharper beyond the leading systems. Qwen reaches the fewest
+L3 cases but has the second-highest FEA pass rate once a comparable simulation
+exists. Mistral ranks seventh on L2-Z but second on A2, while Kimi ranks second
+and last, respectively. Consequently, generation and editing ranks are only
+weakly associated ( ρ s = 0.214 \rho_{s}=0.214 ), and parametric construction and assembly
+motion ranks are nearly unrelated ( ρ s = 0.048 \rho_{s}=0.048 ). 
+ 
+ 
+ We therefore analyze where performance separates: first  CADEngBench-P 
+construction and editing, then physics verification, and finally  CADEngBench-A 
+grounding and motion. 
+ 
+ 
+      
+ 
+ 
+      
+ 
+ Figure 4:  Cross-track model performance. 
+A near-zero rank association shows that parametric construction and assembly motion
+favor different models. 
+ 
+    
+ 
+ 
+ Generation and Editing 
+
+ 
+ Execution as an entry condition.  Across all eight systems,
+1,030/2,400 generated programs pass L0, but only 432 of those also pass L1.
+Thus, 58.1% of executable outputs violate at least one stated engineering or
+DFM requirement. Claude leads L0 and L2-Z, while Gemini leads L1, but
+Holm-corrected McNemar tests do not separate either point estimate from the
+next-best system. Executability therefore substantially overstates how often
+generated CAD satisfies its engineering brief. 
+ 
+ 
+ CAD Editing.  Among 2,330 item–model pairs scoreable under both protocols, 1,071
+pass only editing, compared with 231 that pass only generation; 468 pass both
+and 560 pass neither. The 4.64 × \times  edit-only asymmetry explains the
+25.5–55.4 point gaps in Figure  5 , but it is not uniform
+over edit structure. 
+ 
+ 
+        
+ 
+ 
+        
+ 
+ Figure 5:  Editing and generation comparison. 
+Rates use only items that can be scored for both tasks. 
+ 
+      
+ 
+ 
+ Fusion 360 items are grouped by their
+ construction-history structure  (Figure  6 ), not by the primitive being edited.
+The five groups record whether the source creates one or multiple
+bodies and whether subsequent features join or cut existing solids. The actual
+edited quantity remains either an extrusion distance or a sketch-profile
+radius. 
+ 
+ 
+ A single independent-body addition passes in 247/248 cases, whereas histories
+involving joins, cuts, or multiple bodies pass in only 40.2–45.8% of cases (Figure  6 ). Editability, therefore, deteriorates strongly when an edit becomes structurally coupled to the existing
+CAD model.. Functional-edit L2 also falls from
+these slices show that the remaining difficulty is not merely parsing an edit
+request; it is changing operation history while preserving dependent geometry.
+Aggregate edit scores can consequently hide a large gap between isolated
+feature insertion and edits that interact with existing construction history. 
+ 
+ 
+        
+ 
+ 
+        
+ 
+ Figure 6:  Functional editing breaking.  Filled dots pool item–model outcomes; open dots show individual
+systems. 
+ 
+      
+ 
+ 
+ 
+ Physics Verification 
+
+ 
+ Figure 7:  L3 failures at every FEA stage. 
+Each of 1,809 model–part–parameter-state attempts is assigned its first
+terminal outcome; 83 gray cases lack a comparable generated/reference pair. 
+ 
+ 
+ Critically, a successful solve does not establish correct physics. Models that
+produce more valid CAD by passing all previous evaluation layers reach more L3 cases ( ρ s = 0.976 \rho_{s}=0.976 ), but reach is
+unrelated to agreement with the reference FEA ( ρ s = 0.024 \rho_{s}=0.024 ). CalculiX
+itself fails in only 5 of 1,809 attempts. In contrast, 573 attempts fail before
+the solve because meshing or boundary-condition assignment fails, and 554
+solve but violate engineering limits or disagree with the reference stress or
+deformation. L3 therefore tests the complete simulation and its structural
+result, not solver completion alone. Moreover, 22/435 matched cases change
+verdict away from the default parameter value, so testing only one design
+state can hide physics failures. 
+ 
+ 
+ 
+ Complex Assembly Behaviour 
+
+ 
+        
+ 
+ 
+        
+ 
+ Figure 8:  Joint grounding varies by joint family.  Dots show
+mean Typed@3; lines show the range across systems. Family counts  n n  may overlap because a pair may contain multiple recorded joint families. 
+ 
+      
+ 
+ 
+ We also found that ill-formed predictions often describe the wrong connection. A
+correct B-Rep entity pair is ranked first in 542/960 requests, but only 143
+also identify the joint family and body ordering. Thus, just 26.4% of correct
+rank-1 entity localizations specify the full joint. Revolute and cylindrical
+joints are easier than slider, planar, and pin-slot joints
+(Figure  8 ). 
+ 
+ 
+ The joint frame is a further bottleneck: 110 of 142 correct rank-1 joints place
+it within tolerance, and only 11.5% of all requests pass end to end. Every
+correctly specified ideal joint completes its requested motion, indicating
+that errors arise mainly in entity selection, joint classification, and frame
+placement rather than motion execution. 
+ 
+ 
+ Revolute, cylindrical, and ball joints score highest because each resolves to one geometrically distinctive mating surface (a shaft in a bore, a spherical contact), making both localization and typing easy. Rigid joints score lower despite having zero degrees of freedom: two rigidly connected bodies often admit several plausible flat mating faces, so a model can correctly infer no relative motion, yet still select a different face pair than ground truth, failing the stricter Typed metric. Pin-slot falls to 0% for a different reason: it is a compound constraint coupling rotation with translation along a slot axis, so a model attending to only one half of the motion misclassifies it as revolute or slider, a “correct entity, wrong type” error consistent with the Entity-to-Typed collapse reported above. With the smallest sample of any family ( n = 6 n=6 ), a handful of such errors is enough to zero out the score. 
+ 
+ 
+ 
+ 
+ Limitations and Future Work 
+
+ 
+ Our benchmarking framework is limited by the information available in its source CAD.
+Materials, tolerances, operating conditions, and design intent are sometimes
+incomplete; LLM annotations cannot make them authoritative.
+Consequently, L1 evaluates measurable engineering and DFM requirements rather
+than certifying manufacturability.  CADEngBench-P  also tests one parameter and one
+bounded edit per item. Future versions should incorporate expert-annotated
+requirements, coupled parameters, and sequential edits. 
+ 
+ 
+ CADEngBench-A  evaluates recorded joints between body pairs rather than complete
+assemblies. It therefore does not measure whether a model can recover an entire
+assembly structure. A natural extension is to organize verified pairwise
+relations into multi-body assembly graphs and evaluate graph-level joint
+consistency and connectivity. 
+ 
+ 
+ L3 covers standardized linear-FEA of isolated parts.
+Future work should expand its physics coverage to buckling, thermal and
+nonlinear analysis, contact and assembly-level mechanics, and fluid or coupled
+multiphysics problems. 
+ 
+ 
+ 
+ Conclusion 
+
+ 
+ CADEngBench  evaluates CAD beyond appearance and executability through
+engineering requirements, parameter behavior, controlled edits, matched FEA,
+and assembly grounding. Across the eight evaluated systems, performance is only
+weakly aligned across these capabilities; no single score describes the full
+profile. 
+ 
+ 
+ The benchmark exposes failures that surface checks miss: executable code
+can violate design intent, generated parameter families can diverge from the
+reference structural response, and plausible assembly predictions can fail to
+recover the recorded mating relation.  CADEngBench  therefore treats CAD as an
+engineering artifact rather than a plausible shape. 
+ 
+ 
+ 
+ References 
+
+ 
+      
+ Anthropic (2025) 
+ 
+Anthropic. 2025.
+
+ 
+ Introducing Claude Sonnet 4.5.
+
+ 
+ https://www.anthropic.com/news/claude-sonnet-4-5 .
+
+ 
+ Accessed 2026.
+
+ 
+      
+ Ataei et al. (2026) 
+ 
+Ataei, M.; Askari, F.; Malekshan, K. R.; and Jayaraman, P. K. 2026.
+
+ 
+ Zero-to-CAD: Agentic Synthesis of Interpretable CAD Programs at
+Million-Scale Without Real Data.
+
+ 
+ arXiv:2604.24479.
+
+ 
+      
+ Ballegeer and Benoit (2026) 
+ 
+Ballegeer, M.; and Benoit, D. F. 2026.
+
+ 
+ BenDFM: A Taxonomy and Synthetic CAD Dataset for Manufacturability
+Assessment in Sheet Metal Bending.
+
+ 
+ arXiv:2603.13102.
+
+ 
+      
+ Berger et al. (2026) 
+ 
+Berger, E.; Usama, M.; Mehlstäubl, J.; Saske, B.; and Paetzold-Byhain, K.
+2026.
+
+ 
+ Physics-in-the-Loop: A Hybrid Agentic Architecture for Validated CAD
+Engineering Design.
+
+ 
+ arXiv:2605.19717.
+
+ 
+      
+ Dhondt (2004) 
+ 
+Dhondt, G. 2004.
+
+ 
+ The Finite Element Method for Three-Dimensional
+Thermomechanical Applications .
+
+ 
+ Wiley.
+
+ 
+      
+ Dong et al. (2026) 
+ 
+Dong, X.; Li, C.; Zheng, P.; Han, C.; Jing, J.; Shen, H.; Song, Y.; and Yang,
+Z. 2026.
+
+ 
+ HistCAD: A Constraint-Aware Parametric History-Based CAD
+Representation, Dataset, and Benchmark with Industrial Complexity.
+
+ 
+ arXiv:2602.19171.
+
+ 
+      
+ Dong, Li, and
+Wu (2026) 
+ 
+Dong, X.; Li, Z.; and Wu, X.-M. 2026.
+
+ 
+ MUSE: Benchmarking Manufacturable, Functional, and Assemblable
+Text-to-CAD Generation.
+
+ 
+ arXiv:2605.28579.
+
+ 
+      
+ Doris et al. (2025) 
+ 
+Doris, A. C.; Alam, M. F.; Nobari, A. H.; and Ahmed, F. 2025.
+
+ 
+ CAD-Coder: An Open-Source Vision-Language Model for Computer-Aided
+Design Code Generation.
+
+ 
+ arXiv:2505.14646.
+
+ 
+      
+ Doris et al. (2026) 
+ 
+Doris, A. C.; Sony, J. T.; Nehme, G.; Syla, E.; Nobari, A. H.; and Ahmed, F.
+2026.
+
+ 
+ CADBench: A Multimodal Benchmark for AI-Assisted CAD Program
+Generation.
+
+ 
+ arXiv:2605.10873.
+
+ 
+      
+ Elistratov et al. (2026) 
+ 
+Elistratov, M.; Barannikov, M.; Ivanov, G.; Khrulkov, V.; Konushin, A.;
+Kuznetsov, A.; and Zhemchuzhnikov, D. 2026.
+
+ 
+ CADEvolve: Creating Realistic CAD via Program Evolution.
+
+ 
+ arXiv:2602.16317.
+
+ 
+      
+ Geuzaine and Remacle (2009) 
+ 
+Geuzaine, C.; and Remacle, J.-F. 2009.
+
+ 
+ Gmsh: A Three-Dimensional Finite Element Mesh Generator with Built-In
+Pre- and Post-Processing Facilities.
+
+ 
+ International Journal for Numerical Methods in Engineering ,
+79(11): 1309–1331.
+
+ 
+      
+ Google (2025) 
+ 
+Google. 2025.
+
+ 
+ Gemini 3 Flash: Frontier Intelligence Built for Speed.
+
+ 
+ https://blog.google/products-and-platforms/products/gemini/gemini-3-flash/ .
+
+ 
+ Accessed 2026.
+
+ 
+      
+ Hu et al. (2026) 
+ 
+Hu, T.; Ai, J.; Wen, L.; Li, X.; Zou, S.; Li, S.; Deng, N.; Cai, X.; Zhou, H.;
+Cai, P.; Fu, D.; Yang, Y.; Zhang, H.; Shi, B.; and Yang, X. 2026.
+
+ 
+ IterCAD: An Iterative Multimodal Agent for Visually-Grounded CAD
+Generation and Editing.
+
+ 
+ arXiv:2606.13368.
+
+ 
+      
+ Jones et al. (2021) 
+ 
+Jones, B.; Hildreth, D.; Chen, D.; Baran, I.; Kim, V. G.; and Schulz, A. 2021.
+
+ 
+ AutoMate: A Dataset and Learning Approach for Automatic Mating of CAD
+Assemblies.
+
+ 
+ arXiv:2105.12238.
+
+ 
+      
+ Khan et al. (2024) 
+ 
+Khan, M. S.; Sinha, S.; Sheikh, T. U.; Stricker, D.; Ali, S. A.; and Afzal,
+M. Z. 2024.
+
+ 
+ Text2CAD: Generating Sequential CAD Models from Beginner-to-Expert
+Level Text Prompts.
+
+ 
+ arXiv:2409.17106.
+
+ 
+      
+ Koch et al. (2019) 
+ 
+Koch, S.; Matveev, A.; Jiang, Z.; Williams, F.; Artemov, A.; Burnaev, E.;
+Alexa, M.; Zorin, D.; and Panozzo, D. 2019.
+
+ 
+ ABC: A Big CAD Model Dataset For Geometric Deep Learning.
+
+ 
+ arXiv:1812.06216.
+
+ 
+      
+ Li et al. (2026a) 
+ 
+Li, D.; Zhang, J.; Egger, B.; Chatterjee, M.; Lohit, S.; Marks, T. K.; and
+Cherian, A. 2026a.
+
+ 
+ AssemblyBench: Physics-Aware Assembly of Complex Industrial Objects.
+
+ 
+ arXiv:2605.12845.
+
+ 
+      
+ Li et al. (2026b) 
+ 
+Li, J.; Zhang, Q.; Chen, Q.; Qiu, G.; Lou, Y.; and Zhou, X. 2026b.
+
+ 
+ Towards High-Fidelity CAD Generation via LLM-Driven Program
+Generation and Text-Based B-Rep Primitive Grounding.
+
+ 
+ arXiv:2603.11831.
+
+ 
+      
+ Mallis et al. (2026) 
+ 
+Mallis, D.; Wang, M.; Karadeniz, A. S.; Ricci, E.; Kacem, A.; and Aouada, D.
+2026.
+
+ 
+ Text-to-CAD Evaluation with CADTests.
+
+ 
+ arXiv:2605.07807.
+
+ 
+      
+ Meta AI (2025) 
+ 
+Meta AI. 2025.
+
+ 
+ Llama 4 Maverick Model Card.
+
+ 
+ https://huggingface.co/meta-llama/Llama-4-Maverick-17B-128E-Instruct .
+
+ 
+ Accessed 2026.
+
+ 
+      
+ Mistral AI (2026) 
+ 
+Mistral AI. 2026.
+
+ 
+ Mistral Medium 3.5.
+
+ 
+ https://docs.mistral.ai/models/overview .
+
+ 
+ Model documentation; accessed 2026.
+
+ 
+      
+ Moonshot AI (2026) 
+ 
+Moonshot AI. 2026.
+
+ 
+ Kimi K2.5: Visual Agentic Intelligence.
+
+ 
+ arXiv:2602.02276.
+
+ 
+      
+ OpenAI (2025) 
+ 
+OpenAI. 2025.
+
+ 
+ Introducing GPT-5.2.
+
+ 
+ https://openai.com/index/introducing-gpt-5-2/ .
+
+ 
+ Accessed 2026.
+
+ 
+      
+ Perrett, Bouchard, and
+McCarthy (2026) 
+ 
+Perrett, T.; Bouchard, M.; and McCarthy, W. 2026.
+
+ 
+ neuralCAD-Edit: An Expert Benchmark for Multimodal-Instructed 3D CAD
+Model Editing.
+
+ 
+ arXiv:2604.16170.
+
+ 
+      
+ Pyatov et al. (2026) 
+ 
+Pyatov, V.; Bobrovskikh, G.; Galochkin, S.; Boldyrev, N.; Voynov, O.; Filippov,
+A.; Ferrer, G.; Wonka, P.; and Burnaev, E. 2026.
+
+ 
+ CADFS: A Big CAD Program Dataset and Framework for Computer-Aided
+Design with Large Language Models.
+
+ 
+ arXiv:2605.01925.
+
+ 
+      
+ Qwen Team (2026) 
+ 
+Qwen Team. 2026.
+
+ 
+ Qwen3.5-35B-A3B Model Card.
+
+ 
+ https://huggingface.co/Qwen/Qwen3.5-35B-A3B .
+
+ 
+ Accessed 2026.
+
+ 
+      
+ Shui et al. (2026) 
+ 
+Shui, Y.; Guan, Y.; Zhang, Z.; Hu, J.; Zhang, J.; Xu, D.; and Yu, Q. 2026.
+
+ 
+ ArtiCAD: Articulated CAD Assembly Design via Multi-Agent Code
+Generation.
+
+ 
+ arXiv:2604.10992.
+
+ 
+      
+ Son et al. (2026) 
+ 
+Son, G.; Park, J.; Park, S.; Ahn, S.; and Yu, Y. 2026.
+
+ 
+ Self-Improving CAD Generation Agents with Finite Element Analysis as
+Feedback.
+
+ 
+ arXiv:2605.17448.
+
+ 
+      
+ Tian et al. (2024) 
+ 
+Tian, Y.; Willis, K. D. D.; Omari, B. A.; Luo, J.; Ma, P.; Li, Y.; Javid, F.;
+Gu, E.; Jacob, J.; Sueda, S.; Li, H.; Chitta, S.; and Matusik, W. 2024.
+
+ 
+ ASAP: Automated Sequence Planning for Complex Robotic Assembly with
+Physical Feasibility.
+
+ 
+ arXiv:2309.16909.
+
+ 
+      
+ Tian et al. (2022) 
+ 
+Tian, Y.; Xu, J.; Li, Y.; Luo, J.; Sueda, S.; Li, H.; Willis, K. D. D.; and
+Matusik, W. 2022.
+
+ 
+ Assemble Them All: Physics-Based Planning for Generalizable Assembly
+by Disassembly.
+
+ 
+ arXiv:2211.03977.
+
+ 
+      
+ Wang et al. (2026) 
+ 
+Wang, L.; Meng, H.; Xiang, Z.; Liu, J.; Zhou, P.; Chen, L.; and Tang, Y. 2026.
+
+ 
+ Text2CAD-Bench: A Benchmark for LLM-based Text-to-Parametric CAD
+Generation.
+
+ 
+ arXiv:2605.18430.
+
+ 
+      
+ Willis et al. (2022) 
+ 
+Willis, K. D. D.; Jayaraman, P. K.; Chu, H.; Tian, Y.; Li, Y.; Grandi, D.;
+Sanghi, A.; Tran, L.; Lambourne, J. G.; Solar-Lezama, A.; and Matusik, W.
+2022.
+
+ 
+ JoinABLe: Learning Bottom-up Assembly of Parametric CAD Joints.
+
+ 
+ arXiv:2111.12772.
+
+ 
+      
+ Willis et al. (2021) 
+ 
+Willis, K. D. D.; Pu, Y.; Luo, J.; Chu, H.; Du, T.; Lambourne, J. G.;
+Solar-Lezama, A.; and Matusik, W. 2021.
+
+ 
+ Fusion 360 Gallery: A Dataset and Environment for Programmatic CAD
+Construction from Human Design Sequences.
+
+ 
+ arXiv:2010.02392.
+
+ 
+      
+ Wu, Xiao, and Zheng (2021) 
+ 
+Wu, R.; Xiao, C.; and Zheng, C. 2021.
+
+ 
+ DeepCAD: A Deep Generative Network for Computer-Aided Design Models.
+
+ 
+ arXiv:2105.09492.
+
+ 
+      
+ Xie and Ju (2025) 
+ 
+Xie, H.; and Ju, F. 2025.
+
+ 
+ Text-to-CadQuery: A New Paradigm for CAD Generation with Scalable
+Large Model Capabilities.
+
+ 
+ arXiv:2505.06507.
+
+ 
+      
+ Z.ai (2025) 
+ 
+Z.ai. 2025.
+
+ 
+ GLM-4.6V Model Documentation.
+
+ 
+ https://docs.bigmodel.cn/cn/guide/models/vlm/glm-4.6v .
+
+ 
+ Accessed 2026.
+
+ 
+      
+ Zhang et al. (2026) 
+ 
+Zhang, H.; Liu, K.; Chen, M.; Li, L.; Yang, S.; Peng, C.; and Chen, H. 2026.
+
+ 
+ BenchCAD: A Comprehensive, Industry-Standard Benchmark for
+Programmatic CAD.
+
+ 
+ arXiv:2605.10865.
+
+ 
+    
+ 
+ 
+ 
+ 
+ Technical Supplement 
+ 
+ 
+ Appendix A  Dataset Construction 
+
+ 
+ A.1  Source Datasets and Task Units 
+
+ 
+ CADEngBench-P  contains two source-derived subsets totaling 300 single parts. Each part defines one zero-to-CAD request and one
+separate functional-edit request, yielding 600 tasks.  CADEngBench-P -BenchCAD is a 159-part selection from BenchCAD that
+provides executable CadQuery programs  ( Zhang et al. 2026 ) , whereas the  CADEngBench-P -Fusion360 is a 141-part selection from the Reconstruction subset of the Autodesk Fusion 360 Gallery Dataset that provides replayable construction histories and B-Rep geometry  ( Willis et al. 2021 ) . The two sources therefore, share an
+executable geometric evaluation but retain source-native editing representations. 
+ 
+ 
+ CADEngBench-A  is derived from the Autodesk Fusion 360 Gallery Assembly-Joint dataset, release  j1.0.0 , introduced with AutoMate  ( Jones et al. 2021 ) . We select 150 assembly body pairs with source-recorded joint
+relations, B-Rep graphs, candidate face and edge labels, joint frames, and kinematic motion semantics. Thirty A pairs were used
+to test prompts, parsers, and evaluator execution. They were excluded from
+model comparison; all reported model comparisons use the remaining 120 pairs. 
+ 
+ 
+ Figure 1:  Additional  CADEngBench-P  examples.  The gallery contains
+operation-rich BenchCAD parts and parts reconstructed from Fusion 360 histories.
+All renders use source B-Reps 
+ 
+ 
+ Figure 2:  Additional  CADEngBench-A  body pairs.  Each cell shows the two
+unassembled source bodies for one task. Joint labels, mating entities, and
+frames are withheld from the model. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Subset 
+ 
+ Items 
+ Tasks 
+ Reported items 
+ 
+ 
+ Source evidence used for construction 
+ 
+ 
+ 
+ 
+ 
+ 
+ P-BenchCAD 
+ 
+ 159 
+ 318 
+ 159 
+ 
+ 
+ Executable CadQuery; operation history; source parameters; part family;
+difficulty; standard metadata; source B-Rep 
+ 
+ 
+ 
+ 
+ P-Fusion 360 
+ 
+ 141 
+ 282 
+ 141 
+ 
+ 
+ Replayable sketch/extrude history; operation and parameter index; source
+B-Rep; multiview renders 
+ 
+ 
+ 
+ 
+ A-Core 
+ 
+ 150 
+ 150 
+ 120 
+ 
+ 
+ Two source bodies; B-Rep graphs; stable candidate IDs; recorded joint
+alternatives; origin, axes, and motion semantics 
+ 
+ 
+ 
+ Table 1:  Dataset composition and source evidence.  Each P part defines
+independent generation and editing tasks. A results use the same 120 evaluation
+pairs for every model. 
+ 
+ 
+ 
+ A.2  Selection and Coverage 
+
+ 
+ P selection balances 100 easy, 100 medium, and 100 hard parts using
+source structure and annotation completeness. The
+resulting set covers 102 BenchCAD families, 55 CAD operations, 45
+source-declared standard labels, and 12 edit types. Every part exposes one public
+parameter with a measured geometric effect; 164 parts additionally support
+a complete L3 analysis. 
+ 
+ 
+ A selection is stratified by joint family and structural complexity without
+using model outputs. The 150 pairs comprise 296 bodies and 17,244 indexed candidate faces or edges. They include 88 single-joint items, 46 items with
+2–4 recorded joints, 13 with 5–10, and 3 with at least 11. 
+ 
+ 
+ The complete set is covered by seven joint families: rigid, revolute, slider, cylindrical, pin-slot, planar, and ball
+relations. Family counts may overlap because one pair can contain several
+recorded alternatives. The source records provide positive joint alternatives rather than an
+exhaustive catalogue of every mechanically feasible relation. The absence of a
+relation is not treated as a verified negative example. 
+ 
+ 
+ 
+ A.3  Annotation and Evidence Binding 
+
+ 
+ An engineering LLM proposes part identity, function, interfaces,
+material/process context, loading context, and a functional edit. A visual VLM
+independently describes global form, visible features, affordances, and
+informative views. These annotations help construct the dataset’s task descriptions but are not reference answers.
+A proposed annotation: dimension, feature, or edit is retained for
+scoring only when source metadata, deterministic replay, or a B-Rep
+measurement provides an executable check. 
+ 
+ 
+ Because the source CAD does not provide verified operating conditions, L3 uses explicitly benchmark-assigned
+analysis cases. Each case supplies numeric material properties, support and loading regions, and limits that are applied
+identically to the reference and generated geometry. These cases support controlled comparison and are not claims
+about the part’s original service conditions. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Task information 
+ 
+ 
+ 
+ Evidence binding 
+ 
+ 
+ 
+ Resulting benchmark use 
+ 
+ 
+ 
+ 
+ 
+ 
+ Part identity, function, and interfaces 
+ 
+ 
+ 
+ LLM/VLM proposals checked against source metadata, views, feature counts, and
+B-Rep measurements 
+ 
+ 
+ 
+ Public brief and views; measurable dimensions and features become L1 or
+preservation checks 
+ 
+ 
+ 
+ 
+ Named parameter and valid range 
+ 
+ 
+ 
+ Source CadQuery binding or replayable Fusion history, followed by test rebuilds 
+ 
+ 
+ 
+ Public parameter manifest; L2-Z checks the measured parameter-to-geometry
+relation at every state 
+ 
+ 
+ 
+ 
+ Functional edit 
+ 
+ 
+ 
+ Model-assisted proposal bound to a native parameter or operation pointer 
+ 
+ 
+ 
+ Public edit request; L2-E checks a target measurement and protected
+non-target properties 
+ 
+ 
+ 
+ 
+ Material and manufacturing context 
+ 
+ 
+ 
+ Source label when available, otherwise a non-authoritative model-assisted
+description constrained by measurable geometry 
+ 
+ 
+ 
+ Task context and applicable geometry-based L1/DFM checks; no manufacturing
+certification is inferred 
+ 
+ 
+ 
+ 
+ Physical analysis case 
+ 
+ 
+ 
+ Benchmark-assigned numerical material, regions, loading, and limits 
+ 
+ 
+ 
+ Disclosed L3 setup applied identically to reference and candidate geometry 
+ 
+ 
+ 
+ 
+ Assembly relation 
+ 
+ 
+ 
+ Source-recorded joint converted to role-aware candidate entity pairs and a
+joint frame 
+ 
+ 
+ 
+ Hidden A1 entity/type references and A2 frame and motion checks 
+ 
+ 
+ 
+ 
+ Standards label 
+ 
+ 
+ 
+ Copied from source metadata 
+ 
+ 
+ 
+ Provenance and task context only; not independent standards certification 
+ 
+ 
+ 
+ Table 2:  Task information and evidence binding.  Model-assisted
+proposals affect scoring only after they are connected to source evidence or a
+defined numerical analysis. 
+ 
+ 
+ Public and scoring data. 
+
+ 
+ Each released task contains the evidence needed to produce a response:
+briefs, views, named parameters, source CAD for editing, or indexed assembly
+entities as applicable. Source relations, target measurements, protected
+properties, and executable predicates remain scoring data. Section
+ B  specifies the exact model-facing requests; Sections
+ C – F  define how the withheld references are
+used. 
+ 
+ 
+ 
+ 
+ 
+ Appendix B  Prompt and Output Specifications 
+
+ 
+ This section documents the instructions, task inputs, and required output
+formats used throughout the benchmark. For each task, the model receives a
+fixed system prompt together with item-specific evidence, such as an
+engineering brief, CAD views, named parameters, or indexed B-Rep entities.
+The following examples show how this evidence is presented and how model
+responses must be structured for executable evaluation. 
+ 
+ 
+ B.1  Annotation Prompts 
+
+ 
+ 
+ System Prompt: Engineering Scenario Annotator 
+ 
+ 
+ ⬇ 
+ ###   Role   and   output 
+ 
+ You   are   the   compact   engineering - scenario   author   for   CADEngBench - P . 
+ 
+ Return   one   JSON   record .   Every   field   is   consumed   by   a   benchmark   prompt   or   a   deterministic   manufacturing   or   physics   interface . 
+ 
+ 
+ 
+ ###   Scenario   construction 
+ 
+ Use   the   supplied   geometry ,   source   labels ,   and   fixed   edit   target   to   author   one   plausible   benchmark   scenario .   State   a   recognizable   part ,   application ,   function ,   one   or   two   physical   interfaces ,   a   material   and   manufacturing   route ,   one   compact   operating   load   case ,   and   why   the   fixed   edit   matters .   This   is   benchmark - authored   engineering   context ,   not   a   claim   about   the   source   author ’ s   intent . 
+ 
+ 
+ 
+ ###   Material   and   process 
+ 
+ Material   and   process :   prefer   source - explicit   values .   Otherwise   select   a   plausible   family   and   a   short   conventional   specification   or   process   variant .   Use   ‘ unspecified ‘   when   a   defensible   choice   is   unavailable .   Never   claim   compliance ,   test   success ,   or   source   intent . 
+ 
+ 
+ 
+ ###   Standards 
+ 
+ Standards :   copy   supplied   standard   IDs   when   relevant .   You   may   propose   at   most   one   additional   widely   recognized   candidate ,   but   never   invent   clauses ,   dimensions ,   ratings ,   or   a   compliance   verdict .   An   empty   list   is   valid . 
+ 
+ 
+ 
+ ###   Load   case 
+ 
+ Load   case :   provide   one   conservative   numerical   design   condition   with   the   required   unit   pairing :   force / N ,   torque / N_mm ,   pressure / MPa ,   or   temperature / degC .   Name   concise   application   and   constraint   regions .   Use   ‘ not_applicable ‘,   null   magnitude ,   and   not - applicable   enums   only   when   no   physical   condition   is   defensible .   The   value   is   a   benchmark   scenario   assumption ,   not   verified   service   performance . 
+ 
+ 
+ 
+ ###   Style   and   field   rules 
+ 
+ Write   short   professional   phrases .   Do   not   use   Markdown ,   labels ,   paths ,   source   IDs ,   placeholders ,   narratives ,   explanations ,   alternatives ,   confidence   prose ,   or   self - check   text .   Do   not   repeat   the   fixed   edit   value ,   parameter   range ,   measurement   method ,   relations ,   or   acceptance   criteria ;   deterministic   code   supplies   them .   Use   only   schema   fields   and   keep   every   text   value   under   18   words . 
+ 
+ 
+ 
+ -   Write   the   design   goal   and   engineering   objective   as   complete   engineering   outcomes   of   at   least   four   words . 
+ 
+ -   Keep   all   dimensions ,   magnitudes ,   and   units   exclusively   in   ‘ load_case ‘;   qualitative   fields   must   contain   no   digits . 
+ 
+ -   Keep   standard   identifiers   exclusively   in   ‘ standards ‘.   Never   put   a   standard ,   size ,   class ,   schedule ,   rating ,   or   compliance   claim   in   the   goal ,   operating   condition ,   objective ,   interface ,   freedom ,   or   non - requirement   fields . 
+ 
+ -   Write   design   freedom   and   non - requirements   as   ordinary   language ,   never   parameter   names ,   feature   IDs ,   hashes ,   underscores ,   or   colon - delimited   source   tokens . 
+ 
+ -   Use   one   material   specification   and   one   process   variant ,   or   ‘ unspecified ‘;   never   provide   alternatives   such   as   " grade   A   or   grade   B ". 
+ 
+ -   Format   standard   IDs   conventionally   with   spaces   and   hyphens ,   for   example   ‘ ISO   2768-1‘,   not   underscore - separated   identifiers . 
+ 
+ 
+ 
+ ###   Retry   corrections 
+ 
+ Inputs   may   contain   ‘ retry_correction ‘   after   a   rejected   candidate .   Follow   every   listed   correction   while   independently   rewriting   the   full   record .   Do   not   mention   the   rejection   or   copy   the   correction   text   into   the   output . 
+ 
+ 
+ 
+ ###   Examples 
+ 
+ Compact   style   example ,   not   values   to   copy :   mounting   flange ;   machine   guard   interface ;   aluminum   alloy ;   three - axis   milling ;   static   force   applied   at   the   guard   interface   and   constrained   at   mounting   holes ;   improve   fastener   clearance   while   retaining   location . 
+ 
+ 
+ 
+ -   Reject :   goal   ‘ torque   transmission ‘.   Prefer :   ‘ improve   reliable   torque   transfer   during   manual   actuation ‘. 
+ 
+ -   Reject :   goal   ‘ maintain   ASME   B16 .5   Class   150   compliance ‘.   Prefer :   ‘ preserve   compatible   pressure - fitting   interface   geometry ‘. 
+ 
+ -   Reject :   design   freedom   ‘ cylinder_arg_0 ‘.   Prefer :   ‘ retain   all   non - target   interface   geometry ‘. 
+ 
+ 
+ 
+ 
+ 
+ 
+ System Prompt: Visual Geometry and Affordance Annotator 
+ 
+ 
+ ⬇ 
+ ###   Role   and   output 
+ 
+ You   are   the   compact   visual   geometry   and   affordance   grounder   for   CADEngBench - P . 
+ 
+ Inspect   only   the   supplied   renders   and   public   geometry   facts . 
+ 
+ Return   one   JSON   object   used   directly   in   the   zero - to - CAD   prompt   and   visual - asset   selection . 
+ 
+ 
+ 
+ ###   Geometry   and   affordance   evidence 
+ 
+ Describe   the   global   form ,   at   most   six   reconstructive   features ,   and   at   most   three   visually   supported   physical   affordances .   An   affordance   is   a   visible   geometric   capability   such   as   mounting ,   locating ,   gripping ,   sealing ,   transmitting   motion   or   load ,   or   protecting   another   component .   It   is   a   visual   hypothesis ,   not   source   intent . 
+ 
+ 
+ 
+ ###   Evidence   limits 
+ 
+ Ground   every   feature   and   affordance   to   one   or   two   supplied   view   IDs .   Encode   evidence   quality   only   with   ‘ visible ‘,   ‘ partial ‘,   or   ‘ occluded ‘.   Do   not   infer   material   grade ,   manufacturing   process ,   operating   load ,   standards   compliance ,   hidden   geometry ,   or   exact   dimensions   from   appearance . 
+ 
+ 
+ 
+ ###   Output   style 
+ 
+ Use   short   professional   phrases .   JSON   field   values   must   not   contain   Markdown ,   headings ,   paths ,   fact   IDs ,   detector   prose ,   uncertainty   prose ,   alternatives ,   summaries ,   or   self - check   text .   Put   view   IDs   only   in   ‘ view_ids ‘.   Use   only   schema   fields   and   keep   every   description   under   18   words . 
+ 
+ 
+ 
+ ###   Example 
+ 
+ Compact   style   example ,   not   values   to   copy :   thin   plate   with   raised   boss ;   four   openings   around   the   boss ;   mounting   affordance   through   the   opening   pattern ;   visible   in   both   isometric   views . 
+ 
+ 
+ 
+ 
+ 
+ 
+ B.2  P Zero-to-CAD Requests 
+
+ 
+ 
+ System Prompt: Parametric Zero-to-CAD Generation 
+ 
+ 
+ ⬇ 
+ ###   Role 
+ 
+ You   are   an   engineering   CAD   co - engineer   working   in   a   sandboxed   Python   environment . 
+ 
+ 
+ 
+ ###   Task   and   evidence 
+ 
+ Build   the   requested   single - part   model   as   executable   CadQuery   Python .   The   user   prompt   is   the   complete   public   task   specification .   Treat   the   textual   requirements   as   authoritative   for   numeric   dimensions ,   declared   functional   relationships ,   material / process   context ,   and   deliverables .   When   provided ,   the   two   canonical   isometric   renders   clarify   global   form   and   feature   arrangement ;   they   do   not   reveal   an   intended   construction   history . 
+ 
+ 
+ 
+ ###   Construction   constraints 
+ 
+ Work   from   the   engineering   outcome ,   not   from   a   presumed   source   model .   Use   any   valid   parametric   construction   strategy   that   satisfies   the   stated   requirements .   Do   not   use   network   access ,   reference   CAD ,   meshes ,   STEP / B - Rep   input ,   source   histories ,   hidden   benchmark   artifacts ,   or   unavailable   files .   Do   not   claim   unstated   standards   compliance ,   load   ratings ,   material   grades ,   or   process   capability . 
+ 
+ 
+ 
+ 
+ ⬇ 
+ ###   Required   parametric   interface 
+ 
+ Write   a   complete   submission . py   that   follows   the   required   CadQuery   interface   below .   DEFAULT_PARAMS   contains   independently   editable   public   values .   PARAMETER_MANIFEST   maps   each   public   parameter   ID   to   the   code   parameter   that   implements   it .   Where   the   task   states   equality ,   symmetry ,   or   repeated - feature   requirements ,   implement   the   relationship   in   code   through   shared   named   parameters   or   derived   values .   Do   not   invent   additional   hidden   constraints .   build ( params = None )   must   return   the   final   CadQuery   workplane . 
+ 
+ 
+ 
+ ###   Required   source   structure 
+ 
+ Follow   this   source   structure   exactly .   The   user   prompt   supplies   the   literal   DEFAULT_PARAMS   and   PARAMETER_MANIFEST   entries ;   reproduce   those   entries   without   adding   construction - only   values .   Define   build   exactly   once   with   the   signature   below ,   assign   result   exactly   once   at   top   level ,   and   perform   exactly   one   STEP   export   at   top   level   after   result   is   assigned : 
+ 
+ 
+ 
+ 
+ ⬇ 
+ 
+ 
+ ###   Required   CadQuery   program   structure 
+ 
+ import   cadquery   as   cq 
+ 
+ 
+ 
+ DEFAULT_PARAMS   =   { 
+ 
+      #   Exact   entries   supplied   by   the   user   prompt. 
+ 
+ } 
+ 
+ 
+ 
+ PARAMETER_MANIFEST   =   { 
+ 
+      #   Exact   entries   supplied   by   the   user   prompt. 
+ 
+ } 
+ 
+ 
+ 
+ def   build ( params = None ): 
+ 
+      p   =   dict ( DEFAULT_PARAMS ) 
+ 
+      if   params : 
+ 
+          p . update ( params ) 
+ 
+      #   Construct   the   requested   model   using   p   values. 
+ 
+      return   model 
+ 
+ 
+ 
+ result   =   build () 
+ 
+ cq . exporters . export ( result ,   "model.step" ) 
+ 
+ 
+ 
+ 
+ ⬇ 
+ 
+ 
+ ###   Sandbox   constraints 
+ 
+ Do   not   export   from   inside   build .   Do   not   call   globals ,   locals ,   eval ,   exec ,   open ,   file   readers ,   network   APIs ,   subprocesses ,   or   dynamic   import   functions .   Permitted   import   roots   are   cadquery ,   math ,   typing ,   collections ,   itertools ,   and   functools .   Avoid   bare   except   handlers   and   do   not   catch   BaseException ,   SystemExit ,   KeyboardInterrupt ,   or   GeneratorExit . 
+ 
+ 
+ 
+ ###   Output 
+ 
+ Return   only   the   requested   program   artifact .   Do   not   include   a   verbal   explanation ,   chain - of - thought ,   or   a   reconstruction   of   any   unavailable   construction   history . 
+ 
+ 
+ 
+ 
+ 
+ 
+ B.3  Representative Zero-to-CAD User Requests 
+
+ 
+ 
+ BenchCAD Request: Parallel Key 
+ 
+ 
+ ⬇ 
+ ###   Design   request 
+ 
+ Design   an   editable   parametric   CAD   model   of   a   parallel   key   for   a   transmission   shaft   interface . 
+ 
+ 
+ 
+ -   Goal :   increase   shaft - diameter   clearance . 
+ 
+ -   Required   form :   elongated   rectangular   prism   with   chamfered   ends   and   a   longitudinal   groove . 
+ 
+ -   Output :   one   solid   within   a   nominal   envelope   of   23.55   x   2.36   x   2.36   mm . 
+ 
+ 
+ 
+ ###   Visible   geometry 
+ 
+ -   Chamfered   rectangular   body   visible   in   ‘ orbit_000 ‘   and   ‘ orbit_045 ‘. 
+ 
+ -   Longitudinal   top   groove   visible   in   ‘ orbit_045 ‘   and   ‘ orbit_135 ‘. 
+ 
+ -   Flat   bottom   and   side   faces   with   a   uniform   section   along   the   length . 
+ 
+ 
+ 
+ ###   Engineering   context 
+ 
+ -   Function :   transmit   torque   between   a   shaft   and   hub . 
+ 
+ -   Interface :   fit   within   a   shaft   keyway . 
+ 
+ -   Affordances :   locating   through   the   groove ;   mounting   through   flat   faces ;   load   transfer   through   the   prismatic   body . 
+ 
+ -   Material   and   process :   unspecified . 
+ 
+ -   DFM   priorities :   minimum   wall   thickness   and   minimum   hole   geometry . 
+ 
+ 
+ 
+ ###   Parametric   requirements 
+ 
+ -   Design   freedom :   clearance   increase   only . 
+ 
+ -   Preserve   torque   capacity . 
+ 
+ Use   named   parameters   for   the   declared   dimensions   and   preserve   the   supplied   deterministic   relations . 
+ 
+ 
+ 
+ 
+ 
+ 
+ Fusion Request: Cylindrical Support 
+ 
+ 
+ ⬇ 
+ ###   Design   request 
+ 
+ Design   an   editable   parametric   CAD   model   of   a   cylindrical   support   column   for   an   industrial   machinery   base . 
+ 
+ 
+ 
+ -   Goal :   increase   axial   load   capacity . 
+ 
+ -   Required   form :   solid   right   circular   cylinder   with   uniform   diameter   and   flat   ends . 
+ 
+ -   Output :   one   solid   within   a   nominal   envelope   of   30.0   x   300.0   x   30.0   mm . 
+ 
+ 
+ 
+ ###   Visible   geometry 
+ 
+ -   Continuous   cylindrical   outer   surface   visible   in   ‘ orbit_045 ‘   and   ‘ orbit_270 ‘. 
+ 
+ -   Flat   circular   end   faces   visible   in   ‘ orbit_090 ‘   and   ‘ orbit_270 ‘. 
+ 
+ 
+ 
+ ###   Engineering   context 
+ 
+ -   Function :   transfer   vertical   compressive   load   from   the   machine   to   its   foundation . 
+ 
+ -   Interface :   base - plate   mounting   surface . 
+ 
+ -   Affordances :   cylindrical   press - fit   or   bearing   surface   and   flat   axial   locating   face . 
+ 
+ -   Design   condition :   2.5   MPa   axial   pressure   with   the   base   interface   constrained   under   static   loading . 
+ 
+ -   Material   and   process :   unspecified . 
+ 
+ -   DFM   priorities :   minimum   wall   thickness   and   minimum   hole   geometry . 
+ 
+ 
+ 
+ ###   Parametric   requirements 
+ 
+ -   Preserve   the   base   footprint   and   hole   locations . 
+ 
+ -   Surface   finish   is   not   evaluated . 
+ 
+ Use   named   parameters   for   the   declared   dimensions   and   preserve   the   supplied   deterministic   relations . 
+ 
+ 
+ 
+ 
+ 
+ 
+ B.4  P Functional-Edit Requests 
+
+ 
+ 
+ System Prompt: BenchCAD Edit 
+ 
+ 
+ ⬇ 
+ ###   Role 
+ 
+ You   are   an   AI   CAD   co - engineer   completing   a   source - native   engineering   edit . 
+ 
+ 
+ 
+ ###   Edit   requirements 
+ 
+ -   Use   only   the   supplied   task   evidence . 
+ 
+ -   Implement   the   requested   change   while   preserving   all   non - target   construction   data   and   public   invariants . 
+ 
+ -   Do   not   redesign ,   simplify ,   or   approximate   the   part . 
+ 
+ -   Preserve   the   original   source   except   for   the   smallest   source - native   edit   needed   to   satisfy   the   instruction . 
+ 
+ 
+ 
+ ###   Evaluation   and   output 
+ 
+ The   benchmark   evaluates   the   returned   artifact   deterministically   and   does   not   use   an   LLM   judge . 
+ 
+ Return   only   the   complete   edited   executable   Python   source ,   with   no   Markdown   fences   or   prose . 
+ 
+ 
+ 
+ 
+ 
+ 
+ System Prompt: Fusion-History Edit 
+ 
+ 
+ ⬇ 
+ ###   Role 
+ 
+ You   are   an   AI   CAD   co - engineer   completing   a   source - native   engineering   edit . 
+ 
+ 
+ 
+ ###   Edit   requirements 
+ 
+ -   Use   only   the   supplied   task   evidence . 
+ 
+ -   Implement   the   requested   change   while   preserving   all   non - target   construction   data   and   public   invariants . 
+ 
+ -   Do   not   redesign ,   simplify ,   or   approximate   the   part . 
+ 
+ -   Identify   the   source   JSON   pointer   from   the   supplied   editable - parameter   index . 
+ 
+ -   Express   its   replacement   in   the   declared   source - native   unit . 
+ 
+ -   Treat   the   index   as   exact   pointers   and   values   into   the   hash - bound   native   history ,   not   an   approximate   reconstruction . 
+ 
+ 
+ 
+ ###   Evaluation   and   output 
+ 
+ The   benchmark   evaluates   the   returned   artifact   deterministically   and   does   not   use   an   LLM   judge . 
+ 
+ Return   one   JSON   object   matching   the   bounded   Fusion   patch   schema ,   with   no   Markdown   fences   or   prose . 
+ 
+ 
+ 
+ 
+ 
+ 
+ Edit Representations 
+ 
+ 
+ BenchCAD editing returns a complete executable Python/CadQuery program.
+Fusion editing returns one bounded JSON patch against a public editable
+parameter index. The five Fusion edit-operation groups reported in the main
+paper describe how the patched operation combines with prior geometry; they
+are not the set of primitive CAD commands. 
+ 
+ 
+ 
+ 
+ Deterministic Edit Scoring Paths 
+ 
+ 
+ BenchCAD:  source CadQuery  + +  request
+ → \rightarrow  complete edited CadQuery  → \rightarrow  execute and measure. 
+ Fusion:  source history  + +  editable index  + +  request
+ → \rightarrow  one bounded JSON patch  → \rightarrow  replay and measure. 
+ Both paths require the requested target and every protected non-target
+property to pass. 
+ 
+ 
+ 
+ 
+ B.5  A Joint-Grounding and Kinematics Requests 
+
+ 
+ 
+ System Prompt: A1 Joint Grounding 
+ 
+ 
+ ⬇ 
+ ###   Task 
+ 
+ You   are   ranking   plausible   parametric   joint   hypotheses   between   two   isolated   CAD   bodies   for   CADEngBench - A . 
+ 
+ 
+ 
+ ###   Source   relations 
+ 
+ The   source   dataset   consolidates   alternative   joints   observed   for   identical   pairs   of   parts   across   different   assemblies .   These   are   known   positive   configurations ,   not   simultaneous   constraints   and   not   an   exhaustive   list   of   every   mechanically   possible   joint .   Do   not   predict   how   many   source   records   exist . 
+ 
+ 
+ 
+ ###   Available   evidence 
+ 
+ Use   only   the   supplied   standardized   views ,   public   geometry ,   and   candidate   registry .   Candidate   atlases   color - highlight   face   candidates   and   mark   edge   candidates   with   an   X   at   their   key   point .   The   legend   prints   the   exact   candidate   ID   accepted   by   the   output   schema . 
+ 
+ 
+ 
+ ###   Candidate   selection 
+ 
+ -   Identify   likely   mating   features   on   both   bodies   from   the   clean   views   and   highlighted   atlases . 
+ 
+ -   Verify   candidate   IDs   and   analytic   geometry   in   the   registry . 
+ 
+ -   Compare   geometry   type ,   direction ,   radius   when   applicable ,   scale ,   and   adjacency . 
+ 
+ -   Prefer   axis - defining   cylindrical   faces   or   circular   edges   over   incidental   planar   caps . 
+ 
+ -   For   planar   motion ,   prefer   the   functional   planar   face . 
+ 
+ -   Infer   the   permitted   relative   degrees   of   freedom   before   assigning   the   joint   family . 
+ 
+ -   Use   the   available   ranks   for   meaningful   uncertainty   in   entity   selection   and   joint   family . 
+ 
+ 
+ 
+ Return   up   to   three   distinct   hypotheses   in   descending   order   of   plausibility .   Each   hypothesis   must   use   exactly   one   candidate   ID   from   body_a   and   one   from   body_b .   Rank   1   must   be   your   best   hypothesis .   Never   invent   candidate   IDs ,   body   IDs ,   geometry ,   or   hidden   source   facts . 
+ 
+ 
+ 
+ ###   Allowed   joint   families 
+ 
+ -   RigidJointType :   no   relative   translation   or   rotation . 
+ 
+ -   RevoluteJointType :   rotation   about   one   axis . 
+ 
+ -   SliderJointType :   translation   along   one   axis . 
+ 
+ -   CylindricalJointType :   translation   and   rotation   along / about   one   shared   axis . 
+ 
+ -   PlanarJointType :   two   translations   in   a   plane   and   rotation   normal   to   it . 
+ 
+ -   BallJointType :   rotation   about   a   shared   point   in   three   rotational   directions . 
+ 
+ -   PinSlotJointType :   translation   along   a   slot   direction   plus   rotation   about   the   pin   axis . 
+ 
+ 
+ 
+ ###   Output 
+ 
+ Return   one   JSON   object   matching   the   supplied   output   schema .   Do   not   include   prose   or   hidden   reasoning . 
+ 
+ 
+ 
+ 
+ 
+ 
+ A1 User Template 
+ 
+ 
+ ⬇ 
+ ###   Assembly   item 
+ 
+ Joint   set :   {{ assembly_id }} 
+ 
+ Body   A :   {{ body_a_id }} 
+ 
+ Body   B :   {{ body_b_id }} 
+ 
+ 
+ 
+ ###   Request 
+ 
+ Inspect   the   attached   standardized   clean   views ,   color - highlighted   candidate   atlases ,   public   geometry ,   and   candidate   registry .   Rank   up   to   three   distinct   plausible   joint   hypotheses .   These   hypotheses   are   alternatives ;   they   are   not   a   prediction   of   simultaneous   constraints   or   source - record   count . 
+ 
+ 
+ 
+ ###   Output 
+ 
+ Ground   each   hypothesis   in   the   exact   highlighted   candidate   IDs   and   their   analytic   geometry .   Use   the   available   ranks   to   represent   genuine   entity - pair   uncertainty   as   well   as   joint - family   uncertainty .   If   no   defensible   hypothesis   can   be   formed ,   return   an   abstention   reason .   Return   JSON   only . 
+ 
+ 
+ 
+ 
+ 
+ 
+ System Prompt: A2 Joint Frame and Motion 
+ 
+ 
+ ⬇ 
+ ###   Task 
+ 
+ Predict   the   kinematic   frame   and   relative   placement   for   one   selected   joint   hypothesis . 
+ 
+ 
+ 
+ ###   Evidence   and   coordinates 
+ 
+ The   request   supplies   the   same   isolated   CAD   evidence   used   for   A1   plus   one   selected   ranked   joint   hypothesis .   Use   Body   A ’ s   original   local   CAD   coordinate   frame   and   centimeters .   Do   not   use   normalized - view   coordinates . 
+ 
+ 
+ 
+ ###   Output   constraints 
+ 
+ Return   strict   JSON   matching   the   supplied   schema .   Direction   vectors   and   the   rotation   quaternion   must   be   unit   length .   Quaternion   order   is   [ x ,   y ,   z ,   w ].   Axis   signs   are   physically   equivalent   for   scoring ,   but   the   relative   rotation   is   not .   Supply   only   the   motion - direction   keys   required   for   the   selected   Fusion   joint   family .   For   a   rigid   joint ,   use   an   empty   motion_directions_body_a   object   and   null   joint   origin . 
+ 
+ 
+ 
+ ###   Abstention 
+ 
+ If   the   geometry   does   not   support   a   defensible   pose ,   return   pose :   null   and   a   structured   abstention .   Do   not   invent   source   limits ,   offsets ,   or   hidden   assembly   metadata . 
+ 
+ 
+ 
+ 
+ 
+ 
+ A2 User Template 
+ 
+ 
+ ⬇ 
+ ###   Selected   joint 
+ 
+ Joint   set :   {{ assembly_id }} 
+ 
+ Selected   A1   rank :   {{ selected_rank }} 
+ 
+ Selected   joint   type :   {{ joint_type }} 
+ 
+ Body   A   candidate :   {{ body_a_candidate_id }} 
+ 
+ Body   B   candidate :   {{ body_b_candidate_id }} 
+ 
+ 
+ 
+ ###   Request 
+ 
+ Using   the   attached   clean   views ,   candidate   atlases ,   public   geometry ,   and   candidate 
+ 
+ registry ,   predict : 
+ 
+ -   the   joint   origin   in   Body   A   local   coordinates ,   in   centimeters ; 
+ 
+ -   the   required   motion   directions   in   Body   A   local   coordinates ; 
+ 
+ -   the   rigid   transform   from   Body   B   coordinates   into   Body   A   coordinates ,   represented 
+ 
+    by   translation   in   centimeters   and   quaternion   [ x ,   y ,   z ,   w ]. 
+ 
+ 
+ 
+ ###   Output 
+ 
+ Return   JSON   only . 
+ 
+ 
+ 
+ 
+ 
+ 
+ Output Contracts 
+ 
+ 
+ A1 returns up to three ranked hypotheses with joint family, Body A and
+Body B candidate IDs, and confidence. A2 conditions on the selected rank-1
+hypothesis and returns its joint origin, family-specific direction fields,
+and the relative Body-B-to-Body-A translation and unit quaternion, all in
+Body A coordinates. Exact JSON schemas are released beside the
+prompts. 
+ Scoring path.  A1 checks schema, ownership, entity pair, and
+role-aware joint type. A2 validates the kinematic record, scores the joint
+frame and relative placement, and authorizes PyBullet execution only after
+those geometric checks pass. The simulator then tests allowed and blocked
+motion. 
+ 
+ 
+ 
+ 
+ 
+ Appendix C  CADEngBench-P  Evaluation 
+
+ 
+ C.1  Inputs, Scores, and Failure Categories 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ Layer 
+ 
+ 
+ 
+ Evaluator input 
+ 
+ 
+ 
+ Required evidence 
+ 
+ 
+ 
+ Terminal failure 
+ 
+ 
+ 
+ 
+ 
+ 
+ L0 
+ 
+ 
+ 
+ Submitted CadQuery program and public parameters 
+ 
+ 
+ 
+ Process result, B-Rep solid, STEP export, independent STEP re-import 
+ 
+ 
+ 
+ Syntax/runtime error; timeout; no solid; invalid B-Rep; export or re-import
+failure 
+ 
+ 
+ 
+ 
+ L1 
+ 
+ 
+ 
+ L0 solid and applicable requirement cards 
+ 
+ 
+ 
+ B-Rep dimensions, feature/interface predicates, DFM measurements 
+ 
+ 
+ 
+ Any applicable engineering or DFM predicate fails 
+ 
+ 
+ 
+ 
+ L2-Z 
+ 
+ 
+ 
+ Same submitted  build(params)  and a parameter-state set 
+ 
+ 
+ 
+ Fresh rebuild per state; parameter-to-geometry measurement; protected
+properties 
+ 
+ 
+ 
+ Any state does not rebuild, changes the wrong feature/direction,
+or violates a protected property 
+ 
+ 
+ 
+ 
+ L2-E 
+ 
+ 
+ 
+ Source CAD, one edit instruction, target measurement, preservation
+checks 
+ 
+ 
+ 
+ Edited source replay; hidden target measurement; protected
+non-target measurements 
+ 
+ 
+ 
+ Output invalid; target not achieved; or collateral
+change detected 
+ 
+ 
+ 
+ 
+ L3 
+ 
+ 
+ 
+ Generated/reference state, analysis card, material, selectors, mesh
+profile, and response limits 
+ 
+ 
+ 
+ Matched Gmsh/CalculiX outputs and derived
+structural quantities 
+ 
+ 
+ 
+ First failure among rebuild, mesh, selector, solve,
+numerical validity, requirement, or FEA agreement 
+ 
+ 
+ 
+ Table 3:  CADEngBench-P  evaluation stages.  Each stage records the first
+failure and the evidence used to determine its score. 
+ 
+ 
+ 
+ C.2  L0 and L1: Executability and Requirements 
+
+ 
+ L0 runs the submitted program in an isolated process, calls
+ build(params) , validates every returned solid, exports STEP, and
+re-imports that STEP with OpenCascade. Re-import is not a second quality
+metric: it checks that the result is a portable CAD solid rather than an
+in-memory object that cannot survive exchange.
+This executable-artifact emphasis complements sequence- and program-level CAD
+evaluation in DeepCAD, Text2CAD, and BenchCAD
+ ( Wu, Xiao, and Zheng 2021 ;  Khan et al. 2024 ;  Zhang et al. 2026 ) . 
+ 
+ 
+ L1 runs only after an L0 solid exists. Each public requirement is linked to a
+deterministic measurement on the re-imported B-Rep. The current registry
+checks solid count, bounding dimensions, and cylindrical-opening groups,
+including count, diameter, depth, location, and axis where those quantities
+are supported by the source record. A requirement without a valid binding is
+reported as unscorable rather than accepted. 
+ 
+ 
+ The DFM component contains two geometry-based screens. Minimum wall thickness
+uses a certified global-thickness extractor; cylindrical-hole geometry checks
+minimum diameter and maximum depth-to-diameter ratio. The benchmark limits are
+1.0 mm, 2.0 mm, and 8, respectively. A DFM family produces pass/fail only
+when applicability, a finite threshold, threshold provenance, and a certified
+extractor are present. Otherwise it remains diagnostic. These checks do not
+evaluate tooling access, undercuts, draft, tolerances, surface finish, CAM, or
+process certification. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ L1 check 
+ 
+ 
+ 
+ B-Rep measurement 
+ 
+ 
+ 
+ Pass condition 
+ 
+ 
+ 
+ Recorded failure 
+ 
+ 
+ 
+ 
+ 
+ 
+ Solid topology 
+ 
+ 
+ 
+ Valid-solid flag and number of solids 
+ 
+ 
+ 
+ Valid B-Rep with the required solid count 
+ 
+ 
+ 
+ Invalid topology or missing/extra body 
+ 
+ 
+ 
+ 
+ Overall dimensions 
+ 
+ 
+ 
+ OpenCascade bounding-box lengths, with fixed axes or free axis permutation 
+ 
+ 
+ 
+ Every dimension lies within its source-derived tolerance 
+ 
+ 
+ 
+ Size or aspect mismatch 
+ 
+ 
+ 
+ 
+ Cylindrical openings 
+ 
+ 
+ 
+ Recognized internal cylindrical faces grouped by diameter, depth, axis, and
+center 
+ 
+ 
+ 
+ Required group count and geometric attributes match 
+ 
+ 
+ 
+ Missing, extra, misplaced, or incorrectly sized opening 
+ 
+ 
+ 
+ 
+ Minimum wall 
+ 
+ 
+ 
+ Certified global minimum-thickness estimate 
+ 
+ 
+ 
+ t min ≥ 1.0 t_{\min}\geq 1.0  mm when applicable 
+ 
+ 
+ 
+ Thin region or unscorable extractor 
+ 
+ 
+ 
+ 
+ Hole geometry 
+ 
+ 
+ 
+ Minimum cylindrical-hole diameter and maximum  d depth / d hole d_{\mathrm{depth}}/d_{\mathrm{hole}} 
+ 
+ 
+ 
+ d hole ≥ 2.0 d_{\mathrm{hole}}\geq 2.0  mm and ratio  ≤ 8 \leq 8  when applicable 
+ 
+ 
+ 
+ Undersized/deep hole, missing required holes, or unscorable recognizer 
+ 
+ 
+ 
+ Table 4:  L1 engineering and DFM checks.  All measurements are made on
+the exported and independently re-imported B-Rep. 
+ 
+ 
+ Algorithm 1    L0/L1 evaluation 
+ 
+ 
+               0: 
+              
+             submission  P P , public defaults  θ 0 \theta_{0} , checks  𝒬 i \mathcal{Q}_{i} 
+
+ 
+ 
+               1: 
+              
+             Run  B ← P . build ​ ( θ 0 ) B\leftarrow P.\texttt{build}(\theta_{0})  in a clean process
+
+ 
+ 
+               2: 
+              
+              if  execution fails or  B B  has no valid solid  then 
+
+
+
+ 
+ 
+               3: 
+              
+               return  L0 fail
+
+ 
+ 
+               4: 
+              
+              end   if 
+ 
+ 
+               5: 
+              
+             Export  B B  to STEP and independently re-import it
+
+ 
+ 
+               6: 
+              
+              if  export, re-import, or B-Rep validity fails  then 
+
+
+
+ 
+ 
+               7: 
+              
+               return  L0 fail
+
+ 
+ 
+               8: 
+              
+              end   if 
+ 
+ 
+               9: 
+              
+             Evaluate every applicable  q ⁡ ( B ) q(B)  for  q ∈ 𝒬 i q\in\mathcal{Q}_{i} 
+
+ 
+ 
+               10: 
+              
+              return  L0 pass and L1 pass iff all  q ⁡ ( B ) q(B)  pass
+
+ 
+ 
+ 
+ 
+ 
+ C.3  L2-Z: Operational Parameterization 
+
+ 
+ L2-Z asks whether the public parameter is operational, not merely declared in
+source code. The evaluator reuses one submission and rebuilds it at default,
+intermediate, and valid boundary values. OpenCascade measurements check that
+the named feature changes in the required direction while unrelated
+properties remain invariant. This catches ignored parameters, parameters
+bound to the wrong feature, and unintended coupling between dimensions. 
+ 
+ 
+ 
+ C.4  L2-E: Targeted Functional Editing 
+
+ 
+ L2-E is a separate task with source CAD supplied to the model. BenchCAD
+submissions edit native CadQuery; Fusion submissions return one schema-bound
+JSON patch that is replayed against the original construction history. A
+hidden B-Rep or parameter measurement verifies the requested effect, while
+preservation checks protect solid count, non-target parameters, and
+item-specific geometry. Code-text similarity is not scored. 
+ 
+ 
+ 
+          
+ 
+ Algorithm 2    L2-Z parameter-family evaluation 
+ 
+          
+ 
+ 
+ 
+                   0: 
+                  
+                 build function  P P , values  Θ i \Theta_{i} , target relation  g i g_{i} ,
+protected checks  ℛ i \mathcal{R}_{i} 
+
+ 
+ 
+                   1: 
+                  
+                  for  each  θ ∈ Θ i \theta\in\Theta_{i}   do 
+
+
+
+ 
+ 
+                   2: 
+                  
+                  Run  B θ ← P . build ​ ( θ ) B_{\theta}\leftarrow P.\texttt{build}(\theta) 
+
+ 
+ 
+                   3: 
+                  
+                   if   B θ B_{\theta}  is not a valid re-importable solid  then 
+
+
+
+ 
+ 
+                   4: 
+                  
+                    return  fail: rebuild
+
+ 
+ 
+                   5: 
+                  
+                   end   if 
+ 
+ 
+                   6: 
+                  
+                  Measure target feature and evaluate  g i ​ ( B θ , θ ) g_{i}(B_{\theta},\theta) 
+
+ 
+ 
+                   7: 
+                  
+                  Evaluate every protected property  r ⁡ ( B θ ) r(B_{\theta}) 
+
+ 
+ 
+                   8: 
+                  
+                   if  target relation or preservation fails  then 
+
+
+
+ 
+ 
+                   9: 
+                  
+                    return  fail
+
+ 
+ 
+                   10: 
+                  
+                   end   if 
+ 
+ 
+                   11: 
+                  
+                  end   for 
+ 
+ 
+                   12: 
+                  
+                  return  pass
+
+ 
+ 
+ 
+        
+ 
+ 
+          
+ 
+ Algorithm 3    L2-E source-CAD edit evaluation 
+ 
+          
+ 
+ 
+ 
+                   0: 
+                  
+                 source CAD  S i S_{i} , edit  E i E_{i} , target  T i T_{i} , checks  ℛ i E \mathcal{R}_{i}^{E} 
+
+ 
+ 
+                   1: 
+                  
+                 Apply  E i E_{i}  through the source representation
+
+ 
+ 
+                   2: 
+                  
+                  if  schema, replay, solid, or STEP validation fails  then 
+
+
+
+ 
+ 
+                   3: 
+                  
+                   return  fail: invalid edit
+
+ 
+ 
+                   4: 
+                  
+                  end   if 
+ 
+ 
+                   5: 
+                  
+                 Measure target outcome  T i ​ ( C i E ) T_{i}(C_{i}^{E}) 
+
+ 
+ 
+                   6: 
+                  
+                 Evaluate every  r ⁡ ( C i E ) r(C_{i}^{E})  for  r ∈ ℛ i E r\in\mathcal{R}_{i}^{E} 
+
+ 
+ 
+                   7: 
+                  
+                  if  target or preservation fails  then 
+
+
+
+ 
+ 
+                   8: 
+                  
+                   return  fail
+
+ 
+ 
+                   9: 
+                  
+                  end   if 
+ 
+ 
+                   10: 
+                  
+                  return  pass
+
+ 
+ 
+ 
+        
+ 
+ 
+ 
+        
+ 
+ 
+ 
+ 
+ 
+ 
+ Failure evidence 
+ 
+ 
+ 
+ Interpretation 
+ 
+ 
+ 
+ 
+ 
+ 
+ Rebuild failure 
+ 
+ 
+ 
+ Parameter state or edit no longer creates usable CAD 
+ 
+ 
+ 
+ 
+ Target relation failure 
+ 
+ 
+ 
+ Declared parameter/edit does not control the named
+feature as requested 
+ 
+ 
+ 
+ 
+ Preservation failure 
+ 
+ 
+ 
+ Non-target geometry changes as a side effect 
+ 
+ 
+ 
+ 
+ Strict item pass 
+ 
+ 
+ 
+ Every tested state or every target/protection check passes 
+ 
+ 
+ 
+ 
+        
+ 
+ Table 5:  Interpretation of L2 failure records. 
+ 
+      
+ 
+ 
+ 
+ 
+ Appendix D  Physical Verification with CalculiX 
+
+ 
+ D.1  Analysis Specification 
+
+ 
+ CalculiX solves a supplied finite-element model. Each L3-eligible part has a
+benchmark card specifying a linear-elastic material, analysis
+family, deterministic support/load selectors, numeric load control,
+engineering limits, and matched-response tolerances. Generated and reference
+solids receive the same card at the same parameter state. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Scenario family 
+ 
+ 
+ 
+ Mesh and boundary conditions 
+ 
+ 
+ 
+ Applied condition 
+ 
+ 
+ 
+ Compared quantities 
+ 
+ 
+ 
+ 
+ 
+ 
+ Axial tension 
+ n = 89 n=89 
+ 
+ 
+ 
+ 
+ 
+ 
+ One end fixed; axial surface force on the opposite end 
+ 
+ 
+ 
+ σ 95 \sigma_{95} , normalized maximum displacement, normalized compliance 
+ 
+ 
+ 
+ 
+ Cantilever transverse 
+ n = 31 n=31 
+ 
+ 
+ 
+ 
+ 
+ 
+ One end fixed; transverse surface force on the opposite end 
+ 
+ 
+ 
+ σ 95 \sigma_{95} , normalized maximum displacement, normalized compliance 
+ 
+ 
+ 
+ 
+ Restrained body acceleration 
+ n = 44 n=44 
+ 
+ 
+ 
+ 
+ 
+ 
+ Mounting region fixed; acceleration applied throughout the solid 
+ 
+ 
+ 
+ σ 95 \sigma_{95} , normalized maximum displacement, stress concentration 
+ 
+ 
+ 
+ Table 6:  L3 linear-static scenario families.  Dark blue marks fixed
+surfaces, light blue marks loaded surfaces, and red arrows show the applied
+force or acceleration. 
+ 
+ 
+ Surface-load cases use  E = 70,000 E=70{,}000  MPa,  ν = 0.33 \nu=0.33 , yield strength
+250 MPa, and safety factor 2.0. Body-acceleration cases additionally use
+density  2.7 × 10 − 9 2.7\times 10^{-9}  tonne/mm 3 . These common values isolate geometry
+and response differences; they do not claim the source part was designed in
+that material. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Analysis-card field 
+ 
+ 
+ 
+ Concrete example 
+ 
+ 
+ 
+ Evaluator use 
+ 
+ 
+ 
+ 
+ 
+ 
+ Model 
+ 
+ 
+ 
+ One solid in millimetres; linear static; small deformation 
+ 
+ 
+ 
+ Validates the geometry and selects the CalculiX deck and output checks 
+ 
+ 
+ 
+ 
+ Material and load 
+ 
+ 
+ 
+ Isotropic  E = 70,000 E=70{,}000  MPa,  ν = 0.33 \nu=0.33 ; allowable
+ σ = 125 \sigma=125  MPa; fixed resultant force of 19.9 kN 
+ 
+ 
+ 
+ Defines constitutive behavior, the absolute stress limit, and load magnitude 
+ 
+ 
+ 
+ 
+ Boundary selectors 
+ 
+ 
+ 
+ Opposite planar regions at the minimum and maximum
+ z z  extents; normal alignment  ≥ 0.98 \geq 0.98 
+ 
+ 
+ 
+ Re-identifies support and load surfaces on both reference and generated solids 
+ 
+ 
+ 
+ 
+ Mesh and numerics 
+ 
+ 
+ 
+ Gmsh algorithm 10; C3D10 tetrahedra; SICN  ≥ 0.02 \geq 0.02 ;
+at most 250k elements; equilibrium error  ≤ 5 × 10 − 5 \leq 5{\times}10^{-5} 
+ 
+ 
+ 
+ Controls discretization and rejects incomplete, poor-quality, or
+incorrectly loaded solves 
+ 
+ 
+ 
+ 
+ Response limits 
+ 
+ 
+ 
+ σ 95 ≤ 125 \sigma_{95}\leq 125  MPa; normalized displacement
+ ≤ 0.02 \leq 0.02 ; candidate/reference ratios  ≤ 1.25 \leq 1.25 
+ 
+ 
+ 
+ Separates solver completion from engineering-limit and matched-response passes 
+ 
+ 
+ 
+ Table 7:  Contents of an L3 analysis card.  Values shown are from
+ p_benchcad_000333 ; the released card for each eligible part stores
+the corresponding selectors, loading, mesh controls, and limits. 
+ 
+ 
+ 
+ 
+ D.2  Meshing and Numerical Validation 
+
+ 
+ Both solids are exported to STEP, meshed in Gmsh with quadratic tetrahedra,
+and converted to CalculiX input decks  ( Geuzaine and Remacle 2009 ;  Dhondt 2004 ) . Selector checks must identify nonempty, correctly
+oriented support and load regions after every rebuild. CalculiX completion is
+followed by finite-output, equilibrium, and load-control checks before any
+engineering or matched-response score is computed. 
+ 
+ 
+ Algorithm 4    L3 matched-physics evaluation 
+ 
+ 
+               0: 
+              
+             candidate/reference programs  C i , R i C_{i},R_{i} , states  Θ i \Theta_{i} ,
+analysis card  A i A_{i} 
+
+ 
+ 
+               1: 
+              
+              for  each  θ ∈ Θ i \theta\in\Theta_{i}   do 
+
+
+
+ 
+ 
+               2: 
+              
+              Rebuild  C i ​ ( θ ) C_{i}(\theta)  and  R i ​ ( θ ) R_{i}(\theta)  and export STEP
+
+ 
+ 
+               3: 
+              
+              Locate support/load regions defined by  A i A_{i} 
+
+ 
+ 
+               4: 
+              
+               if  rebuild or selector validation fails  then 
+
+
+
+ 
+ 
+               5: 
+              
+               Record the first terminal failure;  continue 
+
+ 
+ 
+               6: 
+              
+               end   if 
+ 
+ 
+               7: 
+              
+              Mesh both solids with the same Gmsh profile
+
+ 
+ 
+               8: 
+              
+              Run matched CalculiX linear-static solves
+
+ 
+ 
+               9: 
+              
+               if  mesh, solve, finite-output, or equilibrium check fails  then 
+
+
+
+ 
+ 
+               10: 
+              
+               Record the first terminal failure;  continue 
+
+ 
+ 
+               11: 
+              
+               end   if 
+ 
+ 
+               12: 
+              
+              Extract stress, displacement, compliance/concentration
+
+ 
+ 
+               13: 
+              
+              Check absolute engineering limits and matched-response tolerances
+
+ 
+ 
+               14: 
+              
+              end   for 
+ 
+ 
+               15: 
+              
+             Family pass iff every comparable state passes every required check
+
+ 
+ 
+ 
+ 
+ 
+ D.3  Structural Response Comparison 
+
+ 
+ Stress uses the 95th percentile of finite nodal von Mises values to reduce
+single-node singularity sensitivity. Displacement is normalized by
+characteristic length. Surface-load cases also compare normalized compliance;
+body-acceleration cases compare a regularized stress-concentration measure.
+For quantity  q q , 
+ 
+
+ 
+ 
+ δ q ​ ( θ ) = | log ⁡ q ⁡ ( C i ​ ( θ ) ) + ϵ q q ⁡ ( R i ​ ( θ ) ) + ϵ q | . \delta_{q}(\theta)=\left|\log\frac{q(C_{i}(\theta))+\epsilon_{q}}{q(R_{i}(\theta))+\epsilon_{q}}\right|. 
+ 
+ (1) 
+ 
+ Surface-load response limits use
+ δ q ≤ log ⁡ ( 1.25 ) = 0.2231 \delta_{q}\leq\log(1.25)=0.2231 . Body-acceleration cases use 1.25 for
+normalized displacement and 1.5 for stress and concentration. Absolute gates
+also require stress utilization at most 1.0 and normalized displacement at
+most 0.02. A solver can therefore finish and still fail either an engineering
+limit or matched FEA agreement. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Gate 
+ 
+ 
+ 
+ Limit 
+ 
+ 
+ 
+ Purpose 
+ 
+ 
+ 
+ 
+ 
+ 
+ Stress utilization 
+ 
+ 
+ 
+ ≤ 1.0 \leq 1.0 
+ 
+ 
+ 
+ Absolute allowable-stress screen 
+ 
+ 
+ 
+ 
+ Normalized displacement 
+ 
+ 
+ 
+ ≤ 0.02 \leq 0.02 
+ 
+ 
+ 
+ Absolute deformation screen 
+ 
+ 
+ 
+ 
+ Surface response ratio 
+ 
+ 
+ 
+ within  [ 0.8 , 1.25 ] [0.8,1.25] 
+ 
+ 
+ 
+ Stress, displacement,
+compliance agreement 
+ 
+ 
+ 
+ 
+ Body displacement ratio 
+ 
+ 
+ 
+ within  [ 0.8 , 1.25 ] [0.8,1.25] 
+ 
+ 
+ 
+ Deformation agreement 
+ 
+ 
+ 
+ 
+ Body stress/concentration 
+ 
+ 
+ 
+ within  [ 2 / 3 , 1.5 ] [2/3,1.5] 
+ 
+ 
+ 
+ Stress-field agreement 
+ 
+ 
+ 
+ Table 8:  L3 acceptance limits.  Ratio intervals are equivalent to the
+symmetric log-error thresholds in the released profiles. 
+ 
+ 
+ 
+ 
+ Appendix E  Assembly Joint Families 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ Family 
+ 
+ 
+ 
+ Representative pair 
+ 
+ 
+ 
+ Joint frame and allowed motion 
+ 
+ 
+ 
+ Executed constraints 
+ 
+ 
+ 
+ 
+ 
+ 
+ Rigid 
+ 
+ 
+ 
+ 
+ 
+ 
+ No motion frame; zero degrees of freedom 
+ 
+ 
+ 
+ Fixed joint; block all relative translation and rotation 
+ 
+ 
+ 
+ 
+ Revolute 
+ 
+ 
+ 
+ 
+ 
+ 
+ Origin and rotation axis; allow rotation about that axis 
+ 
+ 
+ 
+ Revolute joint; block translation and off-axis rotation 
+ 
+ 
+ 
+ 
+ Slider 
+ 
+ 
+ 
+ 
+ 
+ 
+ Origin and slide direction; allow translation along that direction 
+ 
+ 
+ 
+ Prismatic joint; block transverse translation and every rotation 
+ 
+ 
+ 
+ 
+ Cylindrical 
+ 
+ 
+ 
+ 
+ 
+ 
+ Origin with coaxial rotation and slide directions; allow both motions 
+ 
+ 
+ 
+ Revolute–prismatic compound; block transverse and off-axis motion 
+ 
+ 
+ 
+ 
+ Pin-slot 
+ 
+ 
+ 
+ 
+ 
+ 
+ Origin, pin axis, and slot direction; allow pin rotation and slot translation 
+ 
+ 
+ 
+ Prismatic–revolute compound; block transverse translation and off-axis
+rotation 
+ 
+ 
+ 
+ 
+ Planar 
+ 
+ 
+ 
+ 
+ 
+ 
+ Origin, plane normal, and two in-plane directions; allow two translations and
+normal-axis rotation 
+ 
+ 
+ 
+ Two-prismatic–one-revolute compound; block normal translation and
+in-plane-axis rotation 
+ 
+ 
+ 
+ 
+ Ball 
+ 
+ 
+ 
+ 
+ 
+ 
+ Origin and three orthogonal rotation directions; allow rotation about all
+three axes 
+ 
+ 
+ 
+ Spherical joint; block translation of the joint center 
+ 
+ 
+ 
+ Table 9:  Assembly joint families and kinematic contracts.  Each
+render shows a representative source-derived body pair in its assembled pose.
+Teal and gold identify the two bodies, dark outlines mark the selected B-Rep
+entities, blue arrows denote translation, and orange arrows denote rotation. 
+ 
+ 
+ 
+ Appendix F  CADEngBench-A  Evaluation 
+
+ 
+ CADEngBench-A  evaluates an assembly relation in two stages. A1 asks the model to
+rank a joint family together with one indexed B-Rep entity from each source
+body. A2 then checks the frame and relative placement predicted for the
+rank-1 relation and executes its allowed and blocked motion. A2 end-to-end is
+reported over all 120 evaluation pairs: an A1 error is an A2 failure and does
+not proceed to simulation. 
+ 
+ 
+ F.1  Assembly Evaluation Records 
+
+ 
+ Each task contains two unassembled source bodies from the Fusion 360 Assembly
+Joint dataset. Every body is decomposed into indexed B-Rep faces and edges,
+and a candidate atlas presents their stable IDs, analytic geometry types,
+geometric statistics, and rendered locations. These public records let the
+model refer to exact geometry without revealing the assembled pose. 
+ 
+ 
+ The evaluator retains the source-recorded joint family, Body-A and Body-B
+entities, joint frame, and relative placement. Matching is  role-aware :
+an entity assigned to Body A cannot be exchanged with one from Body B. When
+multiple source records identify geometrically equivalent candidates, their
+verified IDs form an accepted alternative set. These are known-positive
+relations rather than an exhaustive catalogue of every mechanically feasible
+joint for the two bodies. The construction follows entity-grounded assembly
+learning in AutoMate and JoinABLe and adds explicit frame and executed-motion
+checks
+ ( Jones et al. 2021 ;  Willis et al. 2022 ;  Li et al. 2026 ) . 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Artifact 
+ 
+ 
+ 
+ Model input 
+ 
+ 
+ 
+ Hidden reference 
+ 
+ 
+ 
+ Evaluator use 
+ 
+ 
+ 
+ 
+ 
+ 
+ Body pair 
+ 
+ 
+ 
+ STEP/OBJ geometry and isolated-body views 
+ 
+ 
+ 
+ Source body identities
+and assembly context 
+ 
+ 
+ 
+ Defines the request without revealing the assembled
+pose 
+ 
+ 
+ 
+ 
+ B-Rep atlas 
+ 
+ 
+ 
+ Stable candidate IDs, descriptors, and rendered locations 
+ 
+ 
+ 
+ Accepted role-aware and source-equivalent entity pairs 
+ 
+ 
+ 
+ Validates IDs and
+scores geometric retrieval 
+ 
+ 
+ 
+ 
+ Joint record 
+ 
+ 
+ 
+ Seven-family vocabulary 
+ 
+ 
+ 
+ Recorded family and Body-A/Body-B
+entities 
+ 
+ 
+ 
+ Scores Entity@ k k  and Typed@ k k 
+ 
+ 
+ 
+ 
+ Frame record 
+ 
+ 
+ 
+ Required family-specific output fields 
+ 
+ 
+ 
+ Origin, directions,
+relative translation, and relative rotation in Body-A coordinates 
+ 
+ 
+ 
+ Validates
+the predicted frame and placement 
+ 
+ 
+ 
+ 
+ Motion contract 
+ 
+ 
+ 
+ Definitions of allowed and blocked degrees of freedom 
+ 
+ 
+ 
+ Family-specific simulator adapter and tolerances 
+ 
+ 
+ 
+ Executes the rank-1 joint
+in PyBullet 
+ 
+ 
+ 
+ Table 10:  Assembly evaluation records.  Public artifacts define the
+model request; source-derived records provide the references used by A1 and
+A2. 
+ 
+ 
+ 
+ F.2  A1: Exact Joint and Entity Retrieval 
+
+ 
+ A1 asks the model to return up to three alternatives in descending confidence.
+Each hypothesis  h k = ( j k , e k A , e k B , s k ) h_{k}=(j_{k},e_{k}^{A},e_{k}^{B},s_{k})  contains a joint family, one
+candidate ID from each body, and a confidence score.  Valid  requires
+strict first-pass schema-valid JSON, the correct assembly ID, consecutive
+ranks starting at one, recognized joint families, unique hypotheses,
+confidence values in  [ 0 , 1 ] [0,1] , and candidate IDs that exist on the declared
+body side. An abstention is valid only when the hypothesis list is empty.
+Syntax-only recovery is recorded separately and does not repair semantic
+errors. 
+ 
+ 
+ Entity@ k k  passes when an accepted Body-A/Body-B entity pair appears
+within the first  k k  hypotheses, independent of its predicted family.
+ Typed@ k k  additionally requires that the family and entity pair match
+the same source-recorded relation.  MRR  is the reciprocal rank of the
+first typed-correct hypothesis. A family-only prediction, swapped body roles,
+or two individually plausible but incorrectly paired entities does not pass. 
+ 
+ 
+ Algorithm 5    A1 role-aware joint retrieval 
+ 
+ 
+               0: 
+              
+             ranked hypotheses  H H , Body A/B atlases, accepted source relations
+
+ 
+ 
+               1: 
+              
+             Validate the response schema, assembly ID, ranks, vocabulary, and IDs
+
+ 
+ 
+               2: 
+              
+              if  the response is invalid  then 
+
+
+
+ 
+ 
+               3: 
+              
+               return  Valid fail and zero retrieval credit
+
+ 
+ 
+               4: 
+              
+              end   if 
+ 
+ 
+               5: 
+              
+              for   k = 1 , … , min ⁡ ( 3 , | H | ) k=1,\ldots,\min(3,|H|)   do 
+
+
+
+ 
+ 
+               6: 
+              
+              Parse family  j k j_{k} , entities  e k A , e k B e_{k}^{A},e_{k}^{B} , confidence  s k s_{k} 
+
+ 
+ 
+               7: 
+              
+              Compare  ( e k A , e k B ) (e_{k}^{A},e_{k}^{B})  with accepted role-aware entity pairs
+
+ 
+ 
+               8: 
+              
+              Record Entity@ k k ; also require  j k j_{k}  for Typed@ k k 
+
+ 
+ 
+               9: 
+              
+              end   for 
+ 
+ 
+               10: 
+              
+             Compute reciprocal rank of the first fully typed-correct hypothesis
+
+ 
+ 
+ 
+ 
+ 
+ F.3  A2: Joint Frame and Executed Motion 
+
+ 
+ A2 evaluates the model’s rank-1 A1 prediction without replacing it with the
+reference relation. The output specifies the joint origin, family-specific
+axes or directions, and the relative Body-B-to-Body-A translation and unit
+quaternion. Rigid joints omit the origin and motion directions; every
+non-rigid family requires an origin and the fields listed in
+Table  9 . The evaluator first checks this geometric
+frame and relative placement. A typed-correct prediction with a well-formed,
+mechanically representable frame may be converted to a PyBullet joint and
+tested for motion even when a frame-error tolerance is exceeded. Such a
+prediction remains an A2 E2E failure. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Gate 
+ 
+ 
+ 
+ Quantity checked 
+ 
+ 
+ 
+ Pass condition 
+ 
+ 
+ 
+ Failure outcome 
+ 
+ 
+ 
+ 
+ 
+ 
+ A1 grounding 
+ 
+ 
+ 
+ Rank-1 family and role-aware entity pair 
+ 
+ 
+ 
+ Typed-correct
+rank-1 hypothesis 
+ 
+ 
+ 
+ A2 E2E fail; simulation not authorized 
+ 
+ 
+ 
+ 
+ Representation 
+ 
+ 
+ 
+ Required fields; vector and quaternion norms 
+ 
+ 
+ 
+ Family fields
+present; norm error  ≤ 10 − 3 \leq 10^{-3} 
+ 
+ 
+ 
+ Invalid frame record 
+ 
+ 
+ 
+ 
+ Joint origin 
+ 
+ 
+ 
+ Euclidean origin error normalized by Body-A bounding-box
+diagonal 
+ 
+ 
+ 
+ ≤ 1 % \leq 1\% 
+ 
+ 
+ 
+ Frame failure; simulation may proceed if representable 
+ 
+ 
+ 
+ 
+ Relative pose 
+ 
+ 
+ 
+ Translation error normalized by the larger body diagonal;
+quaternion angular error 
+ 
+ 
+ 
+ Translation  ≤ 1 % \leq 1\% ; rotation  ≤ 5 ∘ \leq 5^{\circ} 
+ 
+ 
+ 
+ Placement failure 
+ 
+ 
+ 
+ 
+ Directions 
+ 
+ 
+ 
+ Sign-invariant angular error for each required axis or direction 
+ 
+ 
+ 
+ ≤ 5 ∘ \leq 5^{\circ} 
+ 
+ 
+ 
+ Frame failure 
+ 
+ 
+ 
+ 
+ Allowed motion 
+ 
+ 
+ 
+ Prescribed joint coordinate and motion-axis agreement 
+ 
+ 
+ 
+ Coordinate error  ≤ 10 − 6 \leq 10^{-6} ; axis dot product  > 0.999999 >0.999999 
+ 
+ 
+ 
+ Motion failure 
+ 
+ 
+ 
+ 
+ Stability 
+ 
+ 
+ 
+ Drift during a 240-step hold 
+ 
+ 
+ 
+ Drift  < 10 − 5 <10^{-5} 
+ 
+ 
+ 
+ Stability failure 
+ 
+ 
+ 
+ 
+ Blocked motion 
+ 
+ 
+ 
+ Leakage under off-axis force or torque 
+ 
+ 
+ 
+ Direct drift
+ < 10 − 4 <10^{-4} ; compound normalized leakage  < 10 − 3 <10^{-3} 
+ 
+ 
+ 
+ Constraint failure 
+ 
+ 
+ 
+ Table 11:  A2 evaluation gates.  Body-size normalization makes frame
+thresholds comparable across differently scaled parts. Motion thresholds are
+applied after the predicted joint is instantiated. 
+ 
+ 
+ For simulation, Body A is fixed and the predicted Body-B placement is used
+unchanged. PyBullet runs with zero gravity, a  1 / 240 1/240  s timestep, and 240
+steps. Direct revolute or prismatic joints use 100 solver iterations;
+cylindrical, planar, pin-slot, and spherical adapters use 200. Allowed-motion
+probes prescribe  0.25 0.25  rad rotation or  0.01 0.01  m translation, clamped inside
+recorded source limits. Ball joints are tested about all three predicted axes.
+Where applicable, unintended rotation must remain below  10 − 7 10^{-7} . 
+ 
+ 
+ Blocked-motion probes apply off-axis forces and torques instead of trusting
+the declared joint type. Direct fixtures use 20 N and 10 N m. Compound and
+spherical adapters scale the perturbation using the moving body’s mass and
+principal inertia, then compare constrained leakage with the corresponding
+unconstrained motion. Collision contacts are retained as diagnostics but do
+not determine the score by themselves. 
+ 
+ 
+ End-to-end scoring. 
+
+ 
+ Every one of the 120 evaluation pairs remains in the A2 E2E denominator. An
+incorrect A1 relation, malformed frame, frame or placement error, simulator
+failure, or failed motion probe produces an A2 E2E failure. The number of
+executed simulations therefore measures how many predictions reached the
+simulation gate, not A2 accuracy; a representable frame may be simulated while
+remaining an E2E failure. 
+ 
+ 
+ Algorithm 6    A2 conditional frame and motion evaluation 
+ 
+ 
+                 0: 
+                
+               rank-1 A1 hypothesis, predicted record
+ F = ( o , D , t B → A , q B → A ) F=(o,D,t_{B\rightarrow A},q_{B\rightarrow A}) , source bodies
+
+ 
+ 
+                 1: 
+                
+                if  rank-1 family/entity relation is not fully correct  then 
+
+
+
+ 
+ 
+                 2: 
+                
+                 return  A2 E2E fail; do not authorize simulation
+
+ 
+ 
+                 3: 
+                
+                end   if 
+ 
+ 
+                 4: 
+                
+               Validate required fields, body frame, unit vectors, and unit quaternion
+
+ 
+ 
+                 5: 
+                
+               Compare origin, directions, relative translation, and relative rotation
+
+ 
+ 
+                 6: 
+                
+                if  the predicted joint is malformed or mechanically unrepresentable  then 
+
+
+
+ 
+ 
+                 7: 
+                
+                 return  A2 E2E fail; do not authorize simulation
+
+ 
+ 
+                 8: 
+                
+                end   if 
+ 
+ 
+                 9: 
+                
+               Build the predicted joint in Body A coordinates
+
+ 
+ 
+                 10: 
+                
+               Execute allowed-motion, stability, and blocked-motion probes
+
+ 
+ 
+                 11: 
+                
+                return  pass iff frame thresholds and all motion probes pass
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Appendix G  Benchmarking Protocol 
+
+ 
+ Within each track, every system receives the same public item evidence, system
+instructions, and output schema. Evaluation is one-shot: each model produces
+one response for each task, with no semantic retry or manual repair.
+Malformed responses, timeouts, and build failures are retained as failures. 
+ 
+ 
+ CADEngBench-P  reports results over all 300 parts. For  CADEngBench-A , 30 of the 150
+body pairs were used to test prompts, parsers, and evaluator execution before
+the model comparison. These pairs were then excluded; every reported
+ CADEngBench-A  result uses the same remaining 120 pairs. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Reported name 
+ 
+ 
+ 
+ Model identifier 
+ 
+ 
+ 
+ Access route 
+ 
+ 
+ 
+ Reasoning 
+ 
+ 
+ 
+ Temp. 
+ 
+ 
+ 
+ Top- p p 
+ 
+ 
+ 
+ P output cap 
+ 
+ 
+ 
+ 
+ 
+ 
+ GPT-5.2 
+ 
+ 
+ 
+ gpt-5.2-2025-12-11 
+ 
+ 
+ 
+ OpenAI API 
+ 
+ 
+ 
+ None 
+ 
+ 
+ 
+ 0 
+ 
+ 
+ 
+ 1.0 
+ 
+ 
+ 
+ 16,384 
+ 
+ 
+ 
+ 
+ Claude 4.5 
+ 
+ 
+ 
+ claude-sonnet-4-5-20250929 
+ 
+ 
+ 
+ Anthropic API via LiteLLM 
+ 
+ 
+ 
+ None 
+ 
+ 
+ 
+ 0 
+ 
+ 
+ 
+ default 
+ 
+ 
+ 
+ 16,384 
+ 
+ 
+ 
+ 
+ Gemini 3 Flash 
+ 
+ 
+ 
+ gemini-3-flash-preview 
+ 
+ 
+ 
+ Google API 
+ 
+ 
+ 
+ Minimal 
+ 
+ 
+ 
+ 1.0 
+ 
+ 
+ 
+ 1.0 
+ 
+ 
+ 
+ 16,384 
+ 
+ 
+ 
+ 
+ GLM-4.6V 
+ 
+ 
+ 
+ z-ai/glm-4.6v 
+ 
+ 
+ 
+ OpenRouter / Novita 
+ 
+ 
+ 
+ None 
+ 
+ 
+ 
+ 0 
+ 
+ 
+ 
+ 1.0 
+ 
+ 
+ 
+ 16,384 
+ 
+ 
+ 
+ 
+ Kimi K2.5 
+ 
+ 
+ 
+ moonshotai/kimi-k2.5 
+ 
+ 
+ 
+ OpenRouter / DigitalOcean 
+ 
+ 
+ 
+ None 
+ 
+ 
+ 
+ 0 
+ 
+ 
+ 
+ 1.0 
+ 
+ 
+ 
+ 16,384 
+ 
+ 
+ 
+ 
+ Mistral 3.5 
+ 
+ 
+ 
+ mistral-medium-3-5 
+ 
+ 
+ 
+ Mistral API 
+ 
+ 
+ 
+ None 
+ 
+ 
+ 
+ 0 
+ 
+ 
+ 
+ 1.0 
+ 
+ 
+ 
+ 16,384 
+ 
+ 
+ 
+ 
+ Llama 4 Maverick 
+ 
+ 
+ 
+ meta-llama/llama-4-maverick 
+ 
+ 
+ 
+ OpenRouter / DeepInfra FP8 
+ 
+ 
+ 
+ None 
+ 
+ 
+ 
+ 0 
+ 
+ 
+ 
+ 1.0 
+ 
+ 
+ 
+ 16,384 
+ 
+ 
+ 
+ 
+ Qwen3.5-35B 
+ 
+ 
+ 
+ qwen/qwen3.5-35b-a3b-20260224 
+ 
+ 
+ 
+ OpenRouter FP8 
+ 
+ 
+ 
+ None 
+ 
+ 
+ 
+ 0.7 
+ 
+ 
+ 
+ 0.8 
+ 
+ 
+ 
+ 32,768 
+ 
+ 
+ 
+ Table 12:  Model versions and P generation settings. 
+ 
+ 
+ All scoring is performed after generation with a common evaluator for every
+model. P programs execute in isolated CadQuery processes and their B-Reps are
+measured with OpenCascade. L3 uses Gmsh 4.15.2, CalculiX 2.21, and quadratic
+C3D10 tetrahedra. For A2, a valid rank-1 joint prediction is instantiated on
+the source bodies and its allowed and blocked motions are executed in
+PyBullet. 
+ 
+ 
+ 
+ Appendix H  Stage-Wise Parametric CAD Examples 
+
+ 
+ These five observed submissions illustrate the sequential parametric-CAD
+evaluation path. The cards are ordered
+by the earliest failed gate: L0 establishes that an executable CAD artifact
+exists; L1 checks its default geometry and engineering requirements; L2-Z
+tests whether its named parameters control the intended geometry; and L3
+compares its FEA behavior with the parameter-matched reference. 
+ 
+ 
+ 
+ L0 Execution Failure 
+ 
+ 
+ 
+ Public task geometry; no candidate solid was produced 
+ 
+ 
+ Kimi K2.5    p_benchcad_000038
+ 
+ Path:   FAIL  L0   N/R  L1–L3 
+ 
+ 
+ 
+ 
+ 
+ Static program contract 
+ 
+ 
+ 
+ PASS 
+ 
+ 
+ 
+ 
+ Fresh-process execution 
+ 
+ 
+ 
+ FAIL :
+ BRep_API: command not done 
+ 
+ 
+ 
+ 
+ STEP and B-Rep checks 
+ 
+ 
+ 
+ Not reached 
+ 
+ 
+ 
+ The response has the required program interface, but its CadQuery construction
+raises an OpenCascade error. No geometry exists for requirements, parameter
+replay, or FEA. 
+ 
+ 
+ 
+ 
+ 
+ L1 Requirement Failure 
+ 
+ 
+ 
+ Llama 4 Maverick candidate 
+ 
+ 
+ Llama 4 Maverick    p_benchcad_000068
+ 
+ Path:   PASS  L0   FAIL  L1 (first)   FAIL  L2-Z   N/R  L3 
+ L0 exports one valid STEP solid with the expected global envelope. L1 then
+recognizes none of four required 5.42 mm openings and only one of two required
+11.56 mm openings. The DFM feature-count check therefore observes one of six
+required cylindrical openings. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ L2-Z Parameter-Response Failure 
+ 
+ 
+ 
+ Gemini 3 Flash candidate 
+ 
+ 
+ Gemini 3 Flash    p_benchcad_000062
+ 
+ Path:   PASS  L0–L1   FAIL  L2-Z   N/R  L3 
+ The default solid executes and satisfies its L1 checks. L2-Z then replays six
+values of  chamfer_arg_0 . Every build returns the same geometry
+fingerprint and volume, so the declared parameter does not control the
+requested chamfer. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ L3 FEA Comparison Failure 
+ 
+ 
+ 
+ Gemini 3 Flash candidate 
+ 
+ 
+ Gemini 3 Flash    p_benchcad_000258
+ 
+ Path:   PASS  L0–L2-Z   FAIL  L3 (0/3) 
+ All three parameter states rebuild, mesh, and solve under the matched axial
+tension case. The candidate nevertheless produces only about 61% of the
+reference stress and 51% of its normalized displacement. Solver completion
+alone therefore does not satisfy L3. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Complete L0–L3 Pass 
+ 
+ 
+ 
+ GPT-5.2 candidate 
+ 
+ 
+ GPT-5.2    p_benchcad_000393
+ 
+ Path:   PASS  L0–L3 (7/7) 
+ The program exports a valid solid, satisfies the default requirements, and
+changes the named dimension in every replayed state. All seven matched
+cantilever cases also mesh and solve, with stress and normalized displacement
+remaining within the reference tolerances. 
+ 
+ 
+ 
+ 
+ 
+ 
+ Successful execution does not establish that the requested
+features exist; correct default geometry does not establish that the program
+is genuinely parametric; and a valid parameterized family can still produce
+an incorrect structural response. The benchmark therefore applies the layers
+as a gated hierarchy: a submission receives credit at a stage only after
+satisfying the prerequisites needed to interpret that result. This prevents
+an incidental downstream success from masking an upstream failure, while
+locating the earliest unsupported capability. 
+ 
+ 
+ 
+ Appendix I  Pin-Slot Joint Case Study 
+
+ 
+ Assembly performance varies sharply by relation family. Mean Typed@3 is
+59.9% on 29 revolute items and 49.4% on 21 cylindrical items, but only
+10.0% on planar and 0/6 on pin-slot for every tested model. These slices
+overlap when a pair records multiple families. The shared pin-slot zero is a
+useful diagnostic observation, but six items are too few to support a broad
+claim about all pin-slot assemblies. 
+ 
+ 
+      
+ 
+ 
+      
+ 
+ Figure 3:  From B-Rep retrieval to executed motion. 
+ (a)  Dots are model means and lines are model ranges; family slices
+overlap when a pair has multiple source-recorded families.
+ (b–c)  Most end-to-end loss occurs before an authorized simulation. 
+ 
+    
+ 
+ 
+      
+ 
+ 
+      
+ 
+ Figure 4:  Pin-slot grounding and motion. 
+The joint must bind the pin and slot entities and recover both motion
+components; selecting only a rotation axis or only a translation direction is
+incomplete. 
+ 
+    
+ 
+ 
+ 
+ Pin-Slot Evaluation Requirements 
+ 
+ 
+ Revolute and cylindrical interfaces often expose a dominant shared
+axis. Pin-slot instead combines entity grounding with two linked motion
+semantics: translation along the slot and rotation about the pin. The
+aggregate results show that this slice was unresolved in the reported
+evaluation; the visual identifies the geometric and kinematic information
+required by a correct prediction. 
+ 
+ 
+ 
+ 
+ Appendix J  Statistical Analysis 
+
+ 
+ J.1  Confidence Intervals 
+
+ 
+ Each reported pass rate is an estimate from a finite collection of CAD tasks.
+The confidence intervals below quantify how sensitive that estimate is to the
+particular benchmark items included. For example, a cell reported as
+ 41.3 ​ [ 35.7 , 47.0 ] 41.3\,[35.7,47.0]  contains the observed pass rate followed by its 95%
+bootstrap interval. A narrower interval indicates a more stable estimate
+across resampled task sets. 
+ 
+ 
+ The evaluated population differs by metric. L0, L1, and L2-E use all 300 P
+parts. L2-Z reports its model-specific evaluable denominator (287–300
+parts). L3 pair pass includes only parameter states for which both the
+generated and reference designs produce comparable FEA results, so it is
+reported together with L3 reach. Every A model is evaluated on the same 120
+body pairs. 
+ 
+ 
+ For P, we draw 10,000 bootstrap samples, stratified by source dataset and
+clustered by part (seed 20260726). Clustering keeps all parameter states and
+checks derived from one part in the same resample. For A, we draw 2,000
+samples grouped by reconstructed assembly graph, so related body pairs are
+not treated as independent tasks. The resulting intervals measure uncertainty
+from benchmark composition. They do not measure variation across repeated
+model generations because each model produced one response per request. 
+ 
+ 
+ 
+          
+ 
+ 
+ 
+ 
+ System 
+ L0 
+ L1 
+ L2-Z 
+ L2-E 
+ L3 pair pass 
+ 
+ 
+ 
+ GPT-5.2 
+ 41.3 [35.7, 47.0] 
+ 22.0 [17.3, 26.7] 
+ 31.6 [26.3, 37.2] 
+ 70.3 [65.3, 75.0] 
+ 32.8 [20.2, 46.0] 
+ 
+ Claude 4.5 
+ 58.0 [52.3, 63.3] 
+ 28.3 [23.3, 33.7] 
+ 41.4 [35.7, 46.9] 
+ 66.7 [61.3, 71.7] 
+ 35.8 [25.3, 46.7] 
+ 
+ Gemini 3 Flash 
+ 52.7 [47.0, 58.3] 
+ 30.0 [25.0, 35.3] 
+ 39.8 [34.3, 45.6] 
+ 72.3 [67.0, 77.3] 
+ 46.3 [34.4, 58.0] 
+ 
+ GLM-4.6V 
+ 47.3 [41.7, 53.0] 
+ 13.3 [9.7, 17.3] 
+ 30.7 [25.4, 36.1] 
+ 59.3 [54.0, 64.3] 
+ 27.0 [16.3, 38.4] 
+ 
+ Kimi K2.5 
+ 53.3 [47.7, 59.0] 
+ 24.3 [19.7, 29.3] 
+ 41.0 [35.2, 46.7] 
+ 67.0 [61.7, 72.0] 
+ 34.8 [24.0, 45.8] 
+ 
+ Mistral 3.5 
+ 29.3 [24.3, 34.7] 
+ 8.3 [5.3, 11.7] 
+ 16.5 [12.4, 20.9] 
+ 68.3 [63.0, 73.3] 
+ 34.5 [20.5, 48.9] 
+ 
+ Llama 4 Maverick 
+ 48.0 [42.7, 53.7] 
+ 12.7 [9.0, 16.3] 
+ 34.0 [28.6, 39.5] 
+ 60.7 [55.3, 66.0] 
+ 27.5 [16.9, 38.8] 
+ 
+ Qwen3.5-35B 
+ 13.3 [9.7, 17.3] 
+ 5.0 [2.7, 7.7] 
+ 6.3 [3.7, 9.3] 
+ 61.7 [56.3, 66.7] 
+ 36.6 [16.9, 56.6] 
+ 
+ 
+ 
+          
+ 
+ Table 13:  P estimates with 95% item-clustered bootstrap
+intervals.  Cells show percent [lower, upper]. L3 is conditional pair pass. 
+ 
+        
+ 
+ 
+          
+ 
+ 
+ 
+ 
+ System 
+ Typed@1 
+ Typed@3 
+ MRR 
+ 
+ 
+ 
+ GPT-5.2 
+ 12.5 [6.9, 19.0] 
+ 30.0 [21.4, 38.8] 
+ .197 [.137, .256] 
+ 
+ Claude 4.5 
+ 14.2 [7.8, 20.5] 
+ 32.5 [24.2, 41.2] 
+ .221 [.160, .285] 
+ 
+ Gemini 3 Flash 
+ 23.3 [15.8, 31.4] 
+ 41.7 [32.3, 51.6] 
+ .310 [.232, .390] 
+ 
+ GLM-4.6V 
+ 10.0 [5.1, 15.9] 
+ 27.5 [19.5, 36.1] 
+ .174 [.116, .233] 
+ 
+ Kimi K2.5 
+ 15.0 [8.8, 21.8] 
+ 32.5 [24.0, 41.2] 
+ .228 [.164, .297] 
+ 
+ Mistral 3.5 
+ 15.8 [9.2, 23.0] 
+ 25.8 [17.9, 34.2] 
+ .200 [.133, .276] 
+ 
+ Llama 4 Maverick 
+ 14.2 [8.2, 20.7] 
+ 26.7 [18.9, 34.7] 
+ .192 [.130, .260] 
+ 
+ Qwen3.5-35B 
+ 14.2 [8.1, 20.9] 
+ 24.2 [16.2, 31.9] 
+ .190 [.127, .263] 
+ 
+ 
+ 
+          
+ 
+ Table 14:  A estimates with 95% grouped-bootstrap intervals. 
+Typed metrics are percentages; MRR is on  [ 0 , 1 ] [0,1] . 
+ 
+        
+ 
+ 
+ 
+ 
+ J.2  Paired Model Comparisons 
+
+ 
+ Confidence intervals describe uncertainty in each model’s score, but they do
+not directly test whether two models differ. Because every system is evaluated
+on the same tasks, L0–L2 comparisons use an exact McNemar test on paired
+binary outcomes. The test considers the discordant items: cases where Model A
+passes and Model B fails, and cases where Model B passes and Model A fails. A
+difference is supported when these two counts are sufficiently imbalanced,
+rather than merely when the aggregate percentages differ. 
+ 
+ 
+ Eight models yield 28 pairwise comparisons for each metric. We therefore
+apply Holm correction separately within each metric to control false
+discoveries from multiple testing. Table  15  reports how
+many of the 28 comparisons remain significant at  α = 0.05 \alpha=0.05  after this
+correction; it does not report the magnitude of the score differences. 
+ 
+ 
+ No L3 pairwise comparison survives correction. L3 uses a smaller,
+model-dependent set of comparable FEA states, so this result indicates
+insufficient evidence for a corrected pairwise difference, not equivalent
+structural behavior across models. A results use the grouped-bootstrap
+intervals above. Joint-family slices remain descriptive because one body pair
+may contain more than one recorded family. 
+ 
+ 
+        
+ 
+ 
+ 
+ 
+ Metric 
+ Significant pairs 
+ All pairs 
+ 
+ 
+ 
+ L0 
+ 17 
+ 28 
+ 
+ L1 
+ 18 
+ 28 
+ 
+ L2-Z 
+ 16 
+ 28 
+ 
+ L2-E 
+ 12 
+ 28 
+ 
+ L3 pair pass 
+ 0 
+ 28 
+ 
+ 
+ 
+        
+ 
+ Table 15:  Holm-corrected paired comparisons at  α = 0.05 \alpha=0.05 .  Each
+row contains all  ( 8 2 ) = 28 \binom{8}{2}=28  model pairs. 
+ 
+      
+ 
+ 
+ 
+ 
+ Supplementary References 
+
+ 
+      
+ Dhondt (2004) 
+ 
+Dhondt, G. 2004.
+
+ 
+ The Finite Element Method for Three-Dimensional
+Thermomechanical Applications .
+
+ 
+ Wiley.
+
+ 
+      
+ Geuzaine and Remacle (2009) 
+ 
+Geuzaine, C.; and Remacle, J.-F. 2009.
+
+ 
+ Gmsh: A Three-Dimensional Finite Element Mesh Generator with Built-In
+Pre- and Post-Processing Facilities.
+
+ 
+ International Journal for Numerical Methods in Engineering ,
+79(11): 1309–1331.
+
+ 
+      
+ Jones et al. (2021) 
+ 
+Jones, B.; Hildreth, D.; Chen, D.; Baran, I.; Kim, V. G.; and Schulz, A. 2021.
+
+ 
+ AutoMate: A Dataset and Learning Approach for Automatic Mating of CAD
+Assemblies.
+
+ 
+ arXiv:2105.12238.
+
+ 
+      
+ Khan et al. (2024) 
+ 
+Khan, M. S.; Sinha, S.; Sheikh, T. U.; Stricker, D.; Ali, S. A.; and Afzal,
+M. Z. 2024.
+
+ 
+ Text2CAD: Generating Sequential CAD Models from Beginner-to-Expert
+Level Text Prompts.
+
+ 
+ arXiv:2409.17106.
+
+ 
+      
+ Li et al. (2026) 
+ 
+Li, D.; Zhang, J.; Egger, B.; Chatterjee, M.; Lohit, S.; Marks, T. K.; and
+Cherian, A. 2026.
+
+ 
+ AssemblyBench: Physics-Aware Assembly of Complex Industrial Objects.
+
+ 
+ arXiv:2605.12845.
+
+ 
+      
+ Willis et al. (2022) 
+ 
+Willis, K. D. D.; Jayaraman, P. K.; Chu, H.; Tian, Y.; Li, Y.; Grandi, D.;
+Sanghi, A.; Tran, L.; Lambourne, J. G.; Solar-Lezama, A.; and Matusik, W.
+2022.
+
+ 
+ JoinABLe: Learning Bottom-up Assembly of Parametric CAD Joints.
+
+ 
+ arXiv:2111.12772.
+
+ 
+      
+ Willis et al. (2021) 
+ 
+Willis, K. D. D.; Pu, Y.; Luo, J.; Chu, H.; Du, T.; Lambourne, J. G.;
+Solar-Lezama, A.; and Matusik, W. 2021.
+
+ 
+ Fusion 360 Gallery: A Dataset and Environment for Programmatic CAD
+Construction from Human Design Sequences.
+
+ 
+ arXiv:2010.02392.
+
+ 
+      
+ Wu, Xiao, and Zheng (2021) 
+ 
+Wu, R.; Xiao, C.; and Zheng, C. 2021.
+
+ 
+ DeepCAD: A Deep Generative Network for Computer-Aided Design Models.
+
+ 
+ arXiv:2105.09492.
+
+ 
+      
+ Zhang et al. (2026) 
+ 
+Zhang, H.; Liu, K.; Chen, M.; Li, L.; Yang, S.; Peng, C.; and Chen, H. 2026.
+
+ 
+ BenchCAD: A Comprehensive, Industry-Standard Benchmark for
+Programmatic CAD.
+
+ 
+ arXiv:2605.10865.
+
+ 
+    
+ 
+ 
+ 
+ 
+ 
+ 
+   
+    Experimental support, please
+     view the build logs 
+    for errors. Generated by
+     
+       
+        L
+         A 
+        T
+         E 
+       
+       xml 
+       
+     .
+   
+   
+     Instructions for reporting errors 
+     We are continuing to improve HTML versions of papers, and your feedback helps enhance accessibility and mobile
+      support. To report errors in the HTML that will help us improve conversion and rendering, choose any of the
+      methods listed below: 
+     
+       Click the "Report Issue"  ( 
+             
+           )  button, located in the page header. 
+     
+     Tip:  You can select the relevant text first, to include it in your report. 
+     Our team has already identified  the following issues . We appreciate your time reviewing and reporting rendering errors we
+      may not have found yet. Your efforts will help us improve the HTML versions for all readers, because disability
+      should not be a barrier to accessing research. Thank you for your continued support in championing open access for
+      all. 
+     Have a free development cycle? Help support accessibility at arXiv! Our collaborators at LaTeXML maintain a  list of packages that need conversion , and welcome  developer contributions . 
+   
+ 
+   
+     
+       
+        We gratefully acknowledge support from
+        our  major funders ,
+         member institutions ,  ,
+        and all contributors.
+       
+       
+         About 
+         · 
+         Help 
+         · 
+         Contact 
+         · 
+         Subscribe 
+         · 
+         Copyright 
+         · 
+         Privacy 
+         · 
+         Accessibility 
+         · 
+         Operational Status  (opens in new tab) 
+       
+     
+
+     
+       Major funding support from 
+       
+         
+           
+         
+         
+           
+         
+         
+           
+         
+       
+     
+   
+ 
+   
+     
+       
+     
+   
+ 
+ 
