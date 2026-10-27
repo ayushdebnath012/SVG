@@ -55,16 +55,17 @@ Invalid candidate geometry receives zero CAD success/IoU credit in aggregate rep
 ### 3.2 Pose, scale and sampling
 
 - Default: compare in the task's physical coordinate frame and units.
-- If the drawing leaves pose unspecified, an evaluator-authorized rigid transform may align the candidate. The initial implementation supports translation plus the 24 proper axis rotations, matching the old rigging task's permitted pose convention.
+- If the drawing leaves pose unspecified, an evaluator-authorized rigid transform may align the candidate. The initial implementation supports translation plus the 24 proper axis rotations, matching the old rigging task's permitted pose convention. Translation starts from centre-of-mass alignment and is refined by point-to-plane least squares over pairs within a cut-off that shrinks from 10x to 1x the F1 threshold. Bounding-box centres are not used: one extra 20 mm boss shifted a bounding-box-centred plate by 10 mm and cut its IoU from 0.987 to 0.82.
 - Never optimize scale or reflection for the engineering grade. A scaled part can have a plausible silhouette and a different stiffness, mass or stress.
 - Edited parts remain in their specified datum frame; alignment must not undo an explicitly requested move/rotation or conceal an edit of the wrong component.
 - Record the selected transform. Loads, constraints, vectors, tensors and interfaces must be transformed consistently by trusted adapters before any field comparison. A CAD alignment alone does not validate FEM setup.
 - Sample both surfaces uniformly by triangle area, initially 20,000 points each, fixed seed 7, tessellation tolerance `1e-4 D_ref`, where `D_ref` is the reference bounding-box diagonal. There is no per-candidate normalization.
-- Nearest-neighbor sample metrics have a sampling/tessellation floor. Run identity and CAD-reexport baselines plus sample-count sensitivity before setting thresholds. Small critical features need local measurements even when globally undersampled.
+- Each sample's distance is measured to the other part's tessellated surface (exact point-to-triangle), not to the other part's nearest sample. Point-to-point distances between two independent samplings have a sampling floor that dominated real errors: an identical plate built with different CAD operations scored CD_L1 0.48 mm and F1 0.69 at 20,000 points, worse than a plate with a 1 mm hole error (0.24 mm, F1 0.89). With point-to-surface distances the identical plate scores 0 and F1 1, and the wrong hole scores HD 1.000 mm. The remaining floor is the tessellation chord error, below `1e-4 D_ref` per surface. Run identity and CAD-reexport baselines before setting thresholds. Small critical features need local measurements even when globally undersampled.
+- STEP files are read with every root shape; a multi-body file is not reduced to its first body.
 
 ### 3.3 Chamfer and Hausdorff distance
 
-Let `P` be predicted surface samples, `Q` reference samples, and `d(p,Q)=min_q ||p-q||_2`.
+Let `P` be predicted surface samples, `Q` reference samples, `S_P` and `S_Q` the tessellated surfaces, and `d(p,S_Q)=min_{x in S_Q} ||p-x||_2`. In the formulas below `d(p,Q)` means `d(p,S_Q)` and `d(q,P)` means `d(q,S_P)`. The point-cloud helper `surface_metrics` keeps the point-to-point convention for inputs that have no surface.
 
 ```
 CD_L1 = 0.5 * (mean_p d(p,Q) + mean_q d(q,P))
@@ -237,7 +238,7 @@ Log input/cached/output/reasoning tokens, API spend, solver CPU/wall time, peak 
 - Regression checks: `cvpr2027/tests/test_cadfem_metrics.py`.
 - Sources: `sources.json` in this directory, with downloaded research snapshots under `sources/`.
 
-Available: physical surface distances/F1, BREP/optional voxel IoU, edit improvement, feature-count PRF helper, executed-operation recall helper, BenchCAD 2 part-formula helper from supplied trusted measurements, weighted field L2/RMSE, scalar errors, small linear energy norm, force/moment balance, MAC, convergence diagnostics, conservative joint-gate handling and family aggregation.
+Available: physical point-to-surface distances/F1, BREP/optional voxel IoU, edit improvement, feature-count PRF helper, executed-operation recall helper, BenchCAD 2 part-formula helper from supplied trusted measurements, weighted field L2/RMSE, scalar errors, small linear energy norm, force/moment balance, MAC, convergence diagnostics, conservative joint-gate handling and family aggregation.
 
 Not yet automatic: extracting engineering features/topology/interfaces, protected-ROI preservation, cross-mesh registration/interpolation, advanced contact/fracture/transient adapters and trusted full-workflow verification. The profile leaves pass thresholds null until calibration. This specification does not certify the existing 54 tasks under the new metric, and does not relabel historical Astra failures.
 
@@ -261,6 +262,6 @@ Common-grid NPZs contain `evaluation_points` (identical physical query points), 
 
 ## 11. Existing-run demonstration
 
-`demo-existing-astra-geometry.json` evaluates the already-existing Astra B-FEMCAD-067 STEP against its reference. Exact solid IoU is effectively 1.0, but finite point-cloud nearest-neighbor distances remain nonzero because equivalent STEP surfaces can be tessellated/sampled differently. This is not evidence of a dimensional CAD failure. Do not threshold Chamfer/F1 before sampling-floor calibration; compare surface-aware distances where practical. The 5,000-point demonstration is not the configured 20,000-point evaluation.
+`demo-existing-astra-geometry.json` evaluates the already-existing Astra B-FEMCAD-067 STEP against its reference at the configured 20,000 points. Exact solid IoU is 1.0, point-to-surface CD_L1, Hausdorff and HD95 are below 1e-12 mm, and F1 is 1.0. The first version of this demonstration (5,000 points, point-to-point) reported CD_L1 2.84 mm and F1 0.22 for the same exact match; that was sampling noise, corrected on 26 October 2026.
 
 `demo-existing-astra-scorecard.json` combines this diagnostic with its existing published-temperature comparison. It deliberately leaves missing workflow/field/convergence reviews unverified. No new model inference or solver rerun was performed for this demonstration.

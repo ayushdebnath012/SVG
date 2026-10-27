@@ -25,14 +25,21 @@ def positive(value, name):
 
 
 def surface_metrics(pred, ref, reference_diagonal, threshold_fraction=.005):
-    """Symmetric nearest-neighbor point metrics, no independent rescaling/alignment."""
+    """Symmetric nearest-neighbor metrics between two point clouds, no rescaling/alignment.
+
+    Point-to-point distances between independent samplings carry a sampling floor; CAD
+    geometry_metrics uses exact point-to-surface distances instead."""
     p, q = finite(pred), finite(ref)
     if p.ndim != 2 or q.ndim != 2 or p.shape[1] != 3 or q.shape[1] != 3:
         raise ValueError("Surface point clouds must be N x 3")
+    return distance_summary(cKDTree(q).query(p)[0], cKDTree(p).query(q)[0], reference_diagonal, threshold_fraction)
+
+
+def distance_summary(dp, dq, reference_diagonal, threshold_fraction=.005):
+    """Chamfer/Hausdorff/F1 from directional distances: predicted->reference dp, reference->predicted dq."""
+    dp, dq = finite(dp, "dp"), finite(dq, "dq")
     scale = positive(reference_diagonal, "reference_diagonal")
     tau = positive(threshold_fraction, "threshold_fraction") * scale
-    dp = cKDTree(q).query(p)[0]
-    dq = cKDTree(p).query(q)[0]
     precision, recall = float(np.mean(dp <= tau)), float(np.mean(dq <= tau))
     cd = .5 * (dp.mean() + dq.mean())
     cd2 = .5 * (np.mean(dp**2) + np.mean(dq**2))
@@ -43,7 +50,7 @@ def surface_metrics(pred, ref, reference_diagonal, threshold_fraction=.005):
             "surface_precision": precision, "surface_recall": recall,
             "surface_f1": 2*precision*recall/(precision+recall) if precision+recall else 0.,
             "surface_threshold_physical": tau, "surface_threshold_fraction": threshold_fraction,
-            "predicted_samples": len(p), "reference_samples": len(q)}
+            "predicted_samples": len(dp), "reference_samples": len(dq)}
 
 
 def edit_headroom(iou_prediction_target, iou_original_target):
@@ -217,9 +224,74 @@ def proper_rotations():
             if np.linalg.det(m)>.5:yield m
 
 
-def sample_surface(shape, n, tolerance, seed):
+def closest_points_on_triangles(p, a, b, c):
+    """Exact closest point on triangle (a_i,b_i,c_i) to p_i, row-wise (Ericson, Real-Time Collision Detection, 5.1.5)."""
+    dot=lambda x,y:np.einsum('ij,ij->i',x,y)
+    ab,ac,bc=b-a,c-a,c-b
+    d1,d2=dot(ab,p-a),dot(ac,p-a);d3,d4=dot(ab,p-b),dot(ac,p-b);d5,d6=dot(ab,p-c),dot(ac,p-c)
+    va,vb,vc=d3*d6-d5*d4,d5*d2-d1*d6,d1*d4-d3*d2
+    safe=lambda x:np.where(x==0,1.,x)
+    denom=safe(va+vb+vc)
+    out=a+ab*(vb/denom)[:,None]+ac*(vc/denom)[:,None]  # face interior
+    # Voronoi regions, lowest priority first so the earlier tests of the reference algorithm win.
+    for mask,point in [
+        ((va<=0)&(d4-d3>=0)&(d5-d6>=0),lambda:b+bc*((d4-d3)/safe((d4-d3)+(d5-d6)))[:,None]),
+        ((vb<=0)&(d2>=0)&(d6<=0),lambda:a+ac*(d2/safe(d2-d6))[:,None]),
+        ((d6>=0)&(d5<=d6),lambda:c),
+        ((vc<=0)&(d1>=0)&(d3<=0),lambda:a+ab*(d1/safe(d1-d3))[:,None]),
+        ((d3>=0)&(d4<=d3),lambda:b),
+        ((d1<=0)&(d2<=0),lambda:a)]:
+        out=np.where(mask[:,None],point(),out)
+    return out
+
+
+class TriangleSurface:
+    """Tessellated surface for exact point-to-surface distance.
+
+    Long triangles are bisected so every triangle lies within `reach` of its centroid; a point's
+    nearest centroid then bounds which triangles can hold its closest point, so pruning is exact."""
+    def __init__(self, triangles, max_edge, max_triangles=3_000_000):
+        tri=finite(triangles,"triangles")
+        if tri.ndim!=3 or tri.shape[1:]!=(3,3):raise ValueError("Triangles must be T x 3 x 3")
+        tri=tri[np.linalg.norm(np.cross(tri[:,1]-tri[:,0],tri[:,2]-tri[:,0]),axis=1)>0]
+        if not len(tri):raise ValueError("Empty tessellation")
+        max_edge=positive(max_edge,"max_edge")
+        while True:
+            edges=np.linalg.norm(tri[:,[1,2,0]]-tri,axis=2)  # edge k joins vertex k to vertex k+1
+            k=edges.argmax(1);long=edges[np.arange(len(tri)),k]>max_edge
+            if not long.any():break
+            t,k=tri[long],k[long];i=np.arange(len(t))
+            v0,v1,v2=t[i,k],t[i,(k+1)%3],t[i,(k+2)%3];mid=(v0+v1)/2
+            tri=np.concatenate([tri[~long],np.stack([v0,mid,v2],1),np.stack([mid,v1,v2],1)])
+            if len(tri)>max_triangles:raise ValueError("Tessellation too large for exact distance evaluation")
+        self.triangles=tri;centroids=tri.mean(1)
+        self.reach=float(np.linalg.norm(tri-centroids[:,None],axis=2).max())
+        normal=np.cross(tri[:,1]-tri[:,0],tri[:,2]-tri[:,0]);self.normals=normal/np.linalg.norm(normal,axis=1)[:,None]
+        self.tree=cKDTree(centroids)
+
+    def closest(self, points, max_pairs=2_000_000):
+        """Distances, closest surface points and the unit normals of the triangles holding them."""
+        q=finite(points,"points")
+        nearest=self.tree.query(q)[0]+self.reach  # a centroid lies on the surface, so the answer is no farther
+        counts=self.tree.query_ball_point(q,nearest,return_length=True)
+        distance=np.empty(len(q));closest=np.empty_like(q);normal=np.empty_like(q);start=0
+        while start<len(q):
+            stop=start+max(1,int(np.searchsorted(np.cumsum(counts[start:]),max_pairs)))
+            lists=self.tree.query_ball_point(q[start:stop],nearest[start:stop])
+            n=np.fromiter(map(len,lists),int,len(lists));owner=np.repeat(np.arange(len(n)),n)
+            index=np.concatenate(lists).astype(int);t=self.triangles[index];x=q[start:stop][owner]
+            cp=closest_points_on_triangles(x,t[:,0],t[:,1],t[:,2]);d2=((cp-x)**2).sum(1)
+            first=np.lexsort((d2,owner))[np.r_[0,np.cumsum(n)[:-1]]]
+            distance[start:stop]=np.sqrt(d2[first]);closest[start:stop]=cp[first];normal[start:stop]=self.normals[index[first]];start=stop
+        return distance,closest,normal
+
+
+def tessellation(shape, tolerance):
     vertices,faces=shape.tessellate(tolerance)
-    v=np.array([x.toTuple() for x in vertices]);tri=v[np.asarray(faces)]
+    return np.array([x.toTuple() for x in vertices])[np.asarray(faces)]
+
+
+def sample_triangles(tri, n, seed):
     areas=np.linalg.norm(np.cross(tri[:,1]-tri[:,0],tri[:,2]-tri[:,0]),axis=1)/2
     if areas.sum()<=0:raise ValueError("Empty tessellation")
     rng=np.random.default_rng(seed);chosen=tri[rng.choice(len(tri),n,p=areas/areas.sum())]
@@ -227,39 +299,90 @@ def sample_surface(shape, n, tolerance, seed):
     return (1-a[:,None])*chosen[:,0]+(a*(1-b))[:,None]*chosen[:,1]+(a*b)[:,None]*chosen[:,2]
 
 
+def surface_for(tri):
+    """Exact-distance surface; bisection length from the part's own size bounds the triangle count."""
+    extent=tri.reshape(-1,3).max(0)-tri.reshape(-1,3).min(0)
+    return TriangleSurface(tri,float(np.linalg.norm(extent))/100)
+
+
+def read_step(path):
+    """Every root of the STEP file (cq.importers.importStep(...).val() kept only the first body)."""
+    import cadquery as cq
+    from OCP.STEPControl import STEPControl_Reader
+    reader=STEPControl_Reader()
+    if int(reader.ReadFile(str(path)))!=1:raise ValueError("Unreadable STEP")
+    reader.TransferRoots();one=reader.OneShape()
+    if one.IsNull():raise ValueError("Empty STEP")
+    shape=cq.Shape.cast(one)
+    if not shape.isValid() or not shape.Solids() or shape.Volume()<=0:raise ValueError("Invalid or empty BRep")
+    return shape
+
+
+def centre_of_mass(shape):
+    from OCP.BRepGProp import BRepGProp
+    from OCP.GProp import GProp_GProps
+    props=GProp_GProps();BRepGProp.VolumeProperties_s(shape.wrapped,props);c=props.CentreOfMass()
+    return np.array([c.X(),c.Y(),c.Z()])
+
+
+def fit_pose(pred, ref, points, target, pred_tri, ref_surface, threshold, subsample=4000, iterations=30):
+    """Best of 24 proper axis rotations about centre-of-mass alignment, then robust translation refinement.
+
+    Bounding-box centres let one extra or missing feature shift the whole part; centre of mass moves far
+    less. The refinement solves point-to-plane least squares over pairs within a cut-off that starts at
+    10x the F1 threshold and shrinks to it, so pairs on an extra/missing feature drop out as the fit tightens."""
+    cp,cr=centre_of_mass(pred),centre_of_mass(ref)
+    P,Q=points[:subsample],target[:subsample];tree=cKDTree(Q);best=None
+    for m in proper_rotations():
+        p=P@m.T+cr-m@cp
+        distance=float(tree.query(p)[0].mean()+cKDTree(p).query(Q)[0].mean())
+        if best is None or distance<best[0]:best=(distance,m)
+    rotation=best[1];P=P@rotation.T;translation=cr-rotation@cp
+    candidate=surface_for(pred_tri@rotation.T)
+    def residuals(t):
+        dp,on_ref,n_ref=ref_surface.closest(P+t);dq,on_candidate,n_candidate=candidate.closest(Q-t)
+        d=np.r_[dp,dq];v=np.r_[on_ref-(P+t),Q-(on_candidate+t)]  # moving the candidate by v closes each pair
+        return d,v,np.r_[n_ref,n_candidate],float(np.mean(np.minimum(d,threshold)))
+    d,v,n,score=residuals(translation);cutoff=max(10*threshold,2.5*float(np.median(d)));steps=0
+    for _ in range(iterations):
+        keep=d<=cutoff
+        if keep.any():
+            nk=n[keep];step=np.linalg.lstsq(nk.T@nk,nk.T@np.einsum('ij,ij->i',nk,v[keep]),rcond=1e-9)[0]
+            trial=residuals(translation+step)
+            if trial[3]<score:translation=translation+step;d,v,n,score=trial;steps+=1
+        else:step=np.zeros(3)
+        if cutoff==threshold and np.linalg.norm(step)<1e-4*threshold:break
+        cutoff=max(threshold,.6*cutoff)
+    return rotation,translation,steps
+
+
 def geometry_metrics(candidate, reference, *, samples=20000, pose="fixed", voxel_resolution=0, threshold_fraction=.005):
     import cadquery as cq
     if samples<100:raise ValueError("At least 100 samples required")
-    def read(path):
-        shape=cq.importers.importStep(str(path)).val()
-        if not shape.isValid() or not shape.Solids() or shape.Volume()<=0:raise ValueError("Invalid or empty BRep")
-        return shape
-    ref=read(reference);bbox=ref.BoundingBox();diagonal=math.sqrt(bbox.xlen**2+bbox.ylen**2+bbox.zlen**2)
+    if pose not in ('fixed','translation_and_24_proper_rotations'):raise ValueError("Unsupported pose policy")
+    ref=read_step(reference);bbox=ref.BoundingBox();diagonal=math.sqrt(bbox.xlen**2+bbox.ylen**2+bbox.zlen**2)
     report={"metric_version":"cadfem-metrics-0.1","workflow_verified":None,"candidate_valid":False,
             "pose_policy":pose,"rescaling_permitted":False,"reference_diagonal":diagonal,
-            "reference_solids":len(ref.Solids()),"physical_units":"must match task/reference STEP import units"}
-    try:pred=read(candidate)
+            "reference_solids":len(ref.Solids()),"physical_units":"must match task/reference STEP import units",
+            "distance_convention":"area-sampled points to the other part's tessellated surface (exact point-to-triangle)"}
+    try:pred=read_step(candidate)
     except Exception as error:report['error']=str(error);return report
     report['candidate_valid']=True;report['candidate_solids']=len(pred.Solids())
-    points=sample_surface(pred,samples,diagonal*1e-4,7);target=sample_surface(ref,samples,diagonal*1e-4,7)
-    rotation=np.eye(3);translation=np.zeros(3)
+    pred_tri,ref_tri=tessellation(pred,diagonal*1e-4),tessellation(ref,diagonal*1e-4)
+    points,target=sample_triangles(pred_tri,samples,7),sample_triangles(ref_tri,samples,7)
+    ref_surface=surface_for(ref_tri);rotation=np.eye(3);translation=np.zeros(3)
     if pose=='translation_and_24_proper_rotations':
-        box=pred.BoundingBox();cp=np.array([(box.xmin+box.xmax)/2,(box.ymin+box.ymax)/2,(box.zmin+box.zmax)/2])
-        cr=np.array([(bbox.xmin+bbox.xmax)/2,(bbox.ymin+bbox.ymax)/2,(bbox.zmin+bbox.zmax)/2])
-        tree=cKDTree(target);best=None
-        for m in proper_rotations():
-            t=cr-m@cp;p=points@m.T+t
-            distance=float(tree.query(p)[0].mean()+cKDTree(p).query(target)[0].mean())
-            if best is None or distance<best[0]:best=(distance,m,t)
-        _,rotation,translation=best
-    elif pose!='fixed':raise ValueError("Unsupported pose policy")
+        rotation,translation,steps=fit_pose(pred,ref,points,target,pred_tri,ref_surface,threshold_fraction*diagonal)
+        report['pose_fit']={"initial_translation":"centre_of_mass","translation_refinement_steps":steps}
     transform=np.eye(4);transform[:3,:3]=rotation;transform[:3,3]=translation
     from OCP.gp import gp_Trsf
     from OCP.BRepBuilderAPI import BRepBuilderAPI_Transform
     rigid=gp_Trsf()
     rigid.SetValues(*[float(x) for x in transform[:3,:].ravel()])
     moved=cq.Shape.cast(BRepBuilderAPI_Transform(pred.wrapped,rigid,True).Shape())
-    report.update(surface_metrics(points@rotation.T+translation,target,diagonal,threshold_fraction))
+    dp=ref_surface.closest(points@rotation.T+translation)[0]
+    dq=surface_for(pred_tri@rotation.T+translation).closest(target)[0]
+    report.update(distance_summary(dp,dq,diagonal,threshold_fraction))
     report['candidate_to_reference_transform']=transform.tolist()
     a,b=moved.Volume(),ref.Volume();intersection=moved.intersect(ref).Volume()
     if not -1e-7*max(a,b)<=intersection<=min(a,b)+1e-7*max(a,b):raise ValueError("Invalid Boolean intersection volume")

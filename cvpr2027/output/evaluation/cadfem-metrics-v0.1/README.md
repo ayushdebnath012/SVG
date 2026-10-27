@@ -10,4 +10,4 @@ See [EVALUATION_SPEC.md](EVALUATION_SPEC.md) for definitions, primary sources, t
 
 Implementation: `cvpr2027/scripts/cadfem_metrics.py`; policy: `cvpr2027/configs/cadfem-metrics-v0.1.json`.
 
-All **20 regression tests passed**. See [verification.json](verification.json), [sources.json](sources.json), and the existing-artifact demonstration JSON files. No model API calls or new solver trials were performed. This is not a full regrade of the frozen dataset.
+All **25 regression tests passed**. Corrected 26 October 2026: CAD surface distances are now point-to-surface (point-to-point sampling noise had scored an exact part below a wrong one), pose search aligns centres of mass with a robust translation refinement, and every body of a multi-body STEP is read. See [verification.json](verification.json), [sources.json](sources.json), and the existing-artifact demonstration JSON files. No model API calls or new solver trials were performed. This is not a full regrade of the frozen dataset.

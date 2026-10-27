@@ -13,11 +13,14 @@
   "geometry": {
     "default_pose_policy": "fixed",
     "allowed_opt_in_pose_policy": "translation_and_24_proper_rotations",
+    "pose_translation": "centre-of-mass alignment, then point-to-plane least squares over pairs within a cut-off shrinking from 10x to 1x the F1 threshold",
     "allow_scale_fit": false,
     "allow_reflection": false,
     "surface_samples_per_solid_union": 20000,
     "surface_sampling_seed": 7,
     "tessellation_linear_tolerance_over_reference_diagonal": 0.0001,
+    "surface_distance": "area-sampled points to the other part's tessellated surface (exact point-to-triangle), not point-to-point",
+    "step_import": "all root shapes of the STEP file",
     "surface_f1_threshold_over_reference_diagonal": 0.005,
     "surface_f1_threshold_status": "diagnostic sampling setting, not a universal engineering tolerance",
     "voxel_iou_resolutions_for_sensitivity": [
@@ -101,7 +104,7 @@
   },
   "implementation": {
     "available": [
-      "physical_surface_CD_L1_and_CD_L2_squared",
+      "physical_point_to_surface_CD_L1_and_CD_L2_squared",
       "sampled_HD_and_HD95",
       "surface_F1",
       "exact_BRep_volume_IoU",

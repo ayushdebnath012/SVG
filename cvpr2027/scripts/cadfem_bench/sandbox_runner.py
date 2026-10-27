@@ -63,10 +63,11 @@ def replay(package,job,backend,runtime,image,wall,cpu,ram_mb):
  if inventory(job/'inputs')!=rec['inputs'] or inventory(job/'submission')!=rec['submission']:raise ValueError('frozen inputs or code changed')
  env={'PATH':str(runtime.parent)+':/usr/bin:/bin','TZ':'UTC','LANG':'en_US.UTF-8','OMP_NUM_THREADS':'2','OPENBLAS_NUM_THREADS':'2','VECLIB_MAXIMUM_THREADS':'2','TMPDIR':str(job/'tmp'),'XDG_CACHE_HOME':str(job/'cache'),'CADFEM_INPUT_DIR':str(job/'inputs'),'CADFEM_OUTPUT_DIR':str(job/'outputs')}
  sandbox_info={};profile=None;name=None
+ # -E -s rather than -I: -I also implies -P, which drops submission/ from sys.path and breaks helper-module imports.
  if backend=='macos':
   if platform.system()!='Darwin' or not Path('/usr/bin/sandbox-exec').exists():raise RuntimeError('macOS sandbox unavailable; refusing unsandboxed execution')
   profile,base=mac_profile(job,runtime,package);(job/'profile.sb').write_text(profile)
-  cmd=['/usr/bin/sandbox-exec','-f',str(job/'profile.sb'),str(runtime),'-I','-B',str(job/'submission/main.py')]
+  cmd=['/usr/bin/sandbox-exec','-f',str(job/'profile.sb'),str(runtime),'-E','-s','-B',str(job/'submission/main.py')]
   sandbox_info={'backend':'macos-seatbelt','python_sha256':sha(runtime.resolve()),'runtime_prefix':str(runtime.parent.parent),'base_prefix':base,'network':'denied','write_access':'outputs/tmp/cache only','data_read_policy':'home data denied except runtime/job; package explicitly denied; system data outside home readable','profile_sha256':hashlib.sha256(profile.encode()).hexdigest()}
  elif backend=='docker':
   if not shutil.which('docker'):raise RuntimeError('Docker unavailable; refusing unsandboxed execution')
@@ -74,7 +75,7 @@ def replay(package,job,backend,runtime,image,wall,cpu,ram_mb):
   check=subprocess.run(['docker','image','inspect',image,'--format','{{.Id}}'],capture_output=True,text=True,timeout=20)
   if check.returncode:raise RuntimeError('pinned runtime image must already be installed; no automatic pull')
   name='cadfem-'+hashlib.sha256(str(job).encode()).hexdigest()[:16]
-  cmd=['docker','run','--rm','--name',name,'--network','none','--read-only','--cap-drop','ALL','--security-opt','no-new-privileges','--pids-limit','128','--memory',str(ram_mb)+'m','--cpus','2','--user',str(os.getuid())+':'+str(os.getgid()),'--tmpfs','/tmp:rw,nosuid,nodev,size=128m','--mount','type=bind,src='+str(job/'inputs')+',dst=/work/inputs,readonly','--mount','type=bind,src='+str(job/'submission')+',dst=/work/submission,readonly','--mount','type=bind,src='+str(job/'outputs')+',dst=/work/outputs','--workdir','/work/outputs','--env','CADFEM_INPUT_DIR=/work/inputs','--env','CADFEM_OUTPUT_DIR=/work/outputs',image,'python','-I','-B','/work/submission/main.py']
+  cmd=['docker','run','--rm','--name',name,'--network','none','--read-only','--cap-drop','ALL','--security-opt','no-new-privileges','--pids-limit','128','--memory',str(ram_mb)+'m','--cpus','2','--user',str(os.getuid())+':'+str(os.getgid()),'--tmpfs','/tmp:rw,nosuid,nodev,size=128m','--mount','type=bind,src='+str(job/'inputs')+',dst=/work/inputs,readonly','--mount','type=bind,src='+str(job/'submission')+',dst=/work/submission,readonly','--mount','type=bind,src='+str(job/'outputs')+',dst=/work/outputs','--workdir','/work/outputs','--env','CADFEM_INPUT_DIR=/work/inputs','--env','CADFEM_OUTPUT_DIR=/work/outputs',image,'python','-E','-s','-B','/work/submission/main.py']
   sandbox_info={'backend':'docker','image':image,'image_id':check.stdout.strip(),'network':'none','root':'readonly','memory_mb':ram_mb,'pids':128}
  else:raise ValueError('unsupported sandbox backend')
  def limits():

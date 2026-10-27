@@ -93,6 +93,23 @@ class MetricTests(unittest.TestCase):
     def test_weighted_stress_percentile(self):
         self.assertEqual(m.weighted_quantile([1,100],[99,1],.95),1)
 
+    def test_closest_point_on_triangle_matches_independent_formula(self):
+        def segment(p,a,b):
+            t=np.clip((p-a)@(b-a)/((b-a)@(b-a)),0,1);return np.linalg.norm(p-(a+t*(b-a)))
+        def distance(p,a,b,c):
+            n=np.cross(b-a,c-a);x=p-((p-a)@n)/(n@n)*n
+            inside=all(np.cross(v1-v0,x-v0)@n>=0 for v0,v1 in ((a,b),(b,c),(c,a)))
+            return np.linalg.norm(p-x) if inside else min(segment(p,a,b),segment(p,b,c),segment(p,c,a))
+        rng=np.random.default_rng(3);a,b,c=(rng.normal(size=(2000,3)) for _ in range(3));p=rng.normal(scale=2,size=(2000,3))
+        got=np.linalg.norm(m.closest_points_on_triangles(p,a,b,c)-p,axis=1)
+        self.assertTrue(np.allclose(got,[distance(*x) for x in zip(p,a,b,c)],atol=1e-12))
+
+    def test_surface_pruning_is_exact(self):
+        rng=np.random.default_rng(5);tri=rng.uniform(0,10,size=(40,3,3));tri[:,:,2]*=.1
+        surface=m.TriangleSurface(tri,1.5);p=rng.uniform(-5,15,size=(300,3))
+        brute=np.min([np.linalg.norm(m.closest_points_on_triangles(p,*[np.repeat(t[None,k],len(p),0) for k in range(3)])-p,axis=1) for t in tri],axis=0)
+        self.assertTrue(np.allclose(surface.closest(p)[0],brute,atol=1e-9))
+
     def test_cube_rotations(self):
         rotations=list(m.proper_rotations());self.assertEqual(len(rotations),24)
         self.assertTrue(all(np.isclose(np.linalg.det(x),1) for x in rotations))
@@ -130,7 +147,44 @@ class GeometryTests(unittest.TestCase):
             self.assertAlmostEqual(a['brep_volume_iou'],0)
             self.assertAlmostEqual(b['brep_volume_iou'],1,places=7)
             c=m.geometry_metrics(p/'ref.step',p/'ref.step',samples=500,voxel_resolution=6)
-            self.assertAlmostEqual(c['voxel_iou'],1);self.assertEqual(c['cd_l1'],0)
+            self.assertAlmostEqual(c['voxel_iou'],1);self.assertLess(c['cd_l1'],1e-9)
+
+    def test_correct_part_outscores_wrong_part(self):
+        # Point-to-point sampling once scored an identical plate (built another way) below a wrong hole.
+        import cadquery as cq
+        with tempfile.TemporaryDirectory() as tmp:
+            p=Path(tmp)
+            ref=cq.Workplane('XY').box(100,60,20).faces('>Z').workplane().hole(12).val()
+            same=cq.Workplane('XY').rect(100,60).extrude(10,both=True).cut(cq.Workplane('XY').circle(6).extrude(10,both=True)).val()
+            wrong=cq.Workplane('XY').box(100,60,20).faces('>Z').workplane().hole(14).val()
+            for name,shape in (('ref',ref),('same',same),('wrong',wrong)):cq.exporters.export(shape,str(p/(name+'.step')))
+            good=m.geometry_metrics(p/'same.step',p/'ref.step',samples=5000)
+            bad=m.geometry_metrics(p/'wrong.step',p/'ref.step',samples=5000)
+            self.assertLess(good['cd_l1'],.01);self.assertEqual(good['surface_f1'],1)
+            self.assertGreater(bad['cd_l1'],10*good['cd_l1']);self.assertLess(bad['surface_f1'],good['surface_f1'])
+            self.assertGreater(bad['hausdorff'],.9)
+
+    def test_extra_feature_does_not_shift_pose(self):
+        import cadquery as cq
+        with tempfile.TemporaryDirectory() as tmp:
+            p=Path(tmp);plate=cq.Workplane('XY').box(100,60,20)
+            boss=plate.faces('>X').workplane().circle(5).extrude(20).val()
+            cq.exporters.export(plate.val(),str(p/'plate.step'));cq.exporters.export(boss,str(p/'boss.step'))
+            cq.exporters.export(boss.rotate((0,0,0),(0,0,1),90).translate((7,-3,0)),str(p/'moved.step'))
+            fixed=m.geometry_metrics(p/'boss.step',p/'plate.step',samples=4000)
+            posed=m.geometry_metrics(p/'moved.step',p/'plate.step',samples=4000,pose='translation_and_24_proper_rotations')
+            self.assertAlmostEqual(posed['brep_volume_iou'],fixed['brep_volume_iou'],places=3)
+
+    def test_multi_root_step_keeps_every_body(self):
+        import cadquery as cq
+        from OCP.STEPControl import STEPControl_Writer,STEPControl_AsIs
+        with tempfile.TemporaryDirectory() as tmp:
+            p=Path(tmp);a=cq.Workplane('XY').box(10,10,10).val();b=a.translate((30,0,0))
+            writer=STEPControl_Writer()
+            for shape in (a,b):writer.Transfer(shape.wrapped,STEPControl_AsIs)
+            writer.Write(str(p/'roots.step'));cq.exporters.export(cq.Compound.makeCompound([a,b]),str(p/'compound.step'))
+            r=m.geometry_metrics(p/'roots.step',p/'compound.step',samples=1000)
+            self.assertEqual(r['candidate_solids'],2);self.assertAlmostEqual(r['brep_volume_iou'],1,places=7)
 
 
 if __name__=='__main__':unittest.main()

@@ -1,21 +1,27 @@
 {
-  "date": "2026-10-16",
+  "date": "2026-10-26",
   "tests": {
     "command": "cvpr2027/tmp/cq-env/bin/python -m unittest discover -s cvpr2027/tests -p test_cadfem_metrics.py -v",
-    "passed": 20,
+    "passed": 25,
     "failed": 0,
-    "duration_seconds": 2.845
+    "duration_seconds": 5.249
   },
   "api_calls": 0,
   "frozen_dataset_modified": false,
   "status": "diagnostic implementation, calibration and pending adapters required for full evaluation",
   "files_sha256": {
-    "cvpr2027/scripts/cadfem_metrics.py": "5f55516b45842e6d895628d91cb8f31a207f8c3b386d1301d0f3d48e777d2181",
-    "cvpr2027/tests/test_cadfem_metrics.py": "54a6804f6981d47787580c4c44240baa2061674fe1106d003bdba5b99cf0557b",
-    "cvpr2027/configs/cadfem-metrics-v0.1.json": "94ed9fa81caafa1c6b7c6777a142d04c21399c0399c36fe5d6d9a10381824774",
-    "cvpr2027/output/evaluation/cadfem-metrics-v0.1/EVALUATION_SPEC.md": "6dbf31e1749d000364c83dca791ea4d49e47d50aacc4baa94d92e677713f8e7b",
+    "cvpr2027/scripts/cadfem_metrics.py": "fb38b26fa6c13af83adfa900c20750637526aa194466cb9af8b368a80e3ec9dc",
+    "cvpr2027/tests/test_cadfem_metrics.py": "f880c95dc54e460cb16d5146ff720c11219f3217dba6c2f84bc5c5366e5160dc",
+    "cvpr2027/configs/cadfem-metrics-v0.1.json": "b7e3945af988d00905be91edce97e3631590e4e05e0243d4060ad0a8fd4fbe52",
+    "cvpr2027/output/evaluation/cadfem-metrics-v0.1/EVALUATION_SPEC.md": "0f0877afef8b62b679663a38169e31f24a36dbf91a9471e9be821909400ce9e0",
     "cvpr2027/output/evaluation/cadfem-metrics-v0.1/sources.json": "389c562a13d3916fe8ada862d744e32c59ff4d95cbbf9203d8da78cf70165957",
-    "cvpr2027/output/evaluation/cadfem-metrics-v0.1/demo-existing-astra-geometry.json": "5da823ead12363c8a9fdef91f97b1b1d2ce2cea9362df68653b5f687b0c648b2",
+    "cvpr2027/output/evaluation/cadfem-metrics-v0.1/demo-existing-astra-geometry.json": "fada5d2e32692c36382d6d3c479969382ffe0cb2fc660e059f0ceb3779e3d1ec",
     "cvpr2027/output/evaluation/cadfem-metrics-v0.1/demo-existing-astra-scorecard.json": "66d644d388ab9bd3b28b39143b9b2e153f1c522a148a098de64afc30dcee5202"
-  }
+  },
+  "corrections_2026_10_26": [
+    "CAD surface distances are point-to-surface (exact point-to-triangle); point-to-point sampling noise had scored an identical plate (CD 0.48 mm, F1 0.69) below a 1 mm hole error (CD 0.24 mm, F1 0.89).",
+    "Pose search aligns centres of mass, not bounding-box centres, then refines translation by trimmed point-to-plane least squares; an extra 20 mm boss no longer shifts the part (IoU 0.82 -> 0.987).",
+    "STEP import keeps every root shape; a two-root file previously kept one body (IoU 0.5 for an identical part).",
+    "demo-existing-astra-geometry.json regenerated at the configured 20,000 samples."
+  ]
 }
